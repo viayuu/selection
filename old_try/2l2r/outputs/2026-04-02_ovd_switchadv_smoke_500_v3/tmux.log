@@ -1,0 +1,45 @@
+Traceback (most recent call last):
+  File "2l2r/run_l2r.py", line 3773, in <module>
+    main()
+  File "2l2r/run_l2r.py", line 3769, in main
+    run_experiment(args, output_dir=output_dir)
+  File "2l2r/run_l2r.py", line 3064, in run_experiment
+    batch_outputs = model.forward_with_details(batch_samples)
+  File "/public/home/zhoucl/shiys/2l2r/model.py", line 861, in forward_with_details
+    candidate_logits = self._candidate_alt_logits(
+  File "/public/home/zhoucl/shiys/2l2r/model.py", line 616, in _candidate_alt_logits
+    phi = self.problem_candidate_phi_nets[problem](fused.reshape(base_problem.shape[0] * len(candidate_arms), -1))
+  File "/public/home/zhoucl/anaconda3/envs/easynco_zhoucl/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1614, in __getattr__
+    raise AttributeError("'{}' object has no attribute '{}'".format(
+AttributeError: 'OneVsDefaultCoupledAdvantageRanker' object has no attribute 'problem_candidate_phi_nets'
+
+ERROR conda.cli.main_run:execute(47): `conda run python 2l2r/run_l2r.py --loss-name one_vs_default_switch_advantage --max-samples-per-problem 500 --epochs 5 --batch-size 32 --eval-batch-size 64 --lr 1e-4 --device cuda --disable-progress --output-dir 2l2r/outputs/2026-04-02_ovd_switchadv_smoke_500_v3` failed. (See above for error)
+[03:52:55] 开始构建共享数据集
+[03:52:55] 扫描结果目录: /public/home/zhoucl/shiys/EasyNCO/results/test
+[03:52:55] 已找到最新 runs 数量: 20
+[03:52:55] 开始解析原始 .pt 数据集路径
+[03:52:55] TSP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_tsp_uniform/test_tsp100_nums10000_uniform.pt
+[03:52:55] CVRP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_vrp_uniform/test_vrp100_capacity50_nums10000_uniform.pt
+[03:52:55] 开始加载原始实例张量
+[03:52:55] 实例加载完成: tsp=10000, cvrp=10000
+[03:52:55] 开始聚合问题 tsp，候选方法数=12
+[03:52:56] tsp 可用实例数=500
+[03:52:57] 问题 tsp 聚合完成，当前累计样本数=500
+[03:52:57] 开始聚合问题 cvrp，候选方法数=8
+[03:52:58] cvrp 可用实例数=500
+[03:52:59] 问题 cvrp 聚合完成，当前累计样本数=1000
+[03:52:59] 全部样本构建完成，最终样本数=1000
+[03:52:59] 数据集构建完成，样本总数=1000
+[03:52:59] 开始做 train/val/test 分层切分
+[03:52:59] 数据切分完成: train=700, val=150, test=150
+[03:52:59] 训练集 baseline 拟合完成 | single_best_global=pointerformer | single_best_per_problem={'cvrp': 'lehd', 'tsp': 'icam'}
+[03:52:59] 训练集 hardness 参考均值 | cvrp=0.005709 | tsp=0.001280
+[03:52:59] cvrp one-vs-default candidates = ['icam', 'elg', 'omni']
+[03:52:59] cvrp one-vs-default gain priors = icam:0.7402, elg:0.7108, omni:0.3355
+[03:52:59] tsp one-vs-default candidates = ['lehd', 'pointerformer', 'elg', 'difusco']
+[03:52:59] tsp one-vs-default gain priors = lehd:0.7609, pointerformer:0.5055, difusco:0.4727, elg:0.3876
+[03:52:59] val 参考 baseline 已计算 | sbp_tsp_cost=7.736413 | sbp_cvrp_cost=16.259549
+[03:53:00] 模型构造完成: OneVsDefaultCoupledAdvantageRanker
+[03:53:00] switch advantage threshold grid = [0.0, 0.1, 0.2, 0.3, 0.5, 0.8, 1.0, 1.5, 2.0]
+[03:53:00] 开始监督排序训练: epochs=5 | batch_size=32 | loss=one_vs_default_switch_advantage | hard_alpha=2.0 | prior=none | switch_scale=1.0 | select_by=gain_vs_single_best_per_problem
+

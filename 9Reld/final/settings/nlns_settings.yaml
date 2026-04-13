@@ -1,0 +1,94 @@
+# https://hydra.cc/docs/configure_hydra/intro/
+
+# NLNS has three modes, you can modify the mode via the parameter 'phase' in 'env'.
+#  - 'train'
+#  - 'test_batch'
+#  - 'test_single'
+#    - 'batch_size' in configs.yaml must be 1 in 'test_single' mode.
+#    - Because each instance is processed individually, with just one instance in each batch.
+# 
+# 'problem' in configs.yaml must be 'cvrpnlns', because NLNS uses a specific environment class.
+
+env:
+  _target_: EasyNCO.methods.envs.CVRPEnv
+  problem_size: ${scale}
+
+
+model:
+  _target_: EasyNCO.neural_solvers.methods.NLNSPolicy
+  env_name: ${problem}
+  pointer_hidden_size: 128
+  # For critic_net training in 'train' mode.
+  critic_train: True
+  critic_lr: 5e-4
+  critic_max_grad_norm: 2
+
+initialization:
+  _target_: EasyNCO.neural_solvers.methods.NLNSInitialization
+
+iteration:
+  _target_: EasyNCO.neural_solvers.methods.NLNSIteration
+  batch_size: ${batch_size}
+  episodes: ${episodes}
+
+module:
+  _target_: EasyNCO.phases.ARREINFORCELightning
+  method_name: ${model}
+  baseline: 'critic'
+  problem_size: ${scale}
+  batch_size: ${batch_size}
+  episodes: ${episodes}
+  val_episode: ${val_episode}
+  optimizer_type: 'Adam' # 'Adam', 'AdamW'
+  scheduler_type: null #'ExponentialLR', 'MultiStepLR'
+  optimizer_params: {
+    'optimizer': {
+        'lr': 1e-4,
+        'weight_decay': 1e-6
+    },
+#    'scheduler': {
+#        'milestones': [501,],
+#        'gamma': 0.1
+#    }
+  }
+  decoder_strategy: ${decoder_strategy}
+  every_n_steps_output: 1 # output log every n steps (i.e., batch)
+  iteration_params:
+    max_steps: 1000
+    nlns_phase: 'test_batch' # 'train', 'test_batch', 'test_single'
+    split_delivery: False
+    tool_params: {
+      round: False,
+      # train
+      destroy_procedure: 'P',
+      destruction_p: 0.3,
+      # test_batch
+      adaptive_search: True,
+      # test_single
+      timelimit_batch: 10000000,
+      lns_reheating_nb: 5,
+      lns_batch_size: 5,
+      Z_param: 0.8,
+      T_min: 10,
+    }
+
+model_checkpoint:
+  #_target_: lightning.pytorch.callbacks.ModelCheckpoint
+  _target_: EasyNCO.utils.utils.CustomModelCheckpoint
+  dirpath: checkpoints
+  filename: ${model}_${problem}${scale}_{epoch:02d}
+  save_top_k: ${save_top_k}
+  every_n_epochs: ${every_n_epochs}
+
+trainer:
+  _target_: lightning.pytorch.Trainer
+  max_epochs: ${max_epochs} # max epochs
+  reload_dataloaders_every_n_epochs: 1 # RL: 1, SL: 0
+  log_every_n_steps: ${log_every_n_steps} # log every n steps
+  precision: ${precision}
+  enable_progress_bar: ${enable_progress_bar} # disable progress bar
+  gradient_clip_val: 1.0
+
+test_loader:
+  model_dirpath: pretrained
+  model_filename: nlns_cvrp100

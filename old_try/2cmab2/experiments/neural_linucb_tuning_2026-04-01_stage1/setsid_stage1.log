@@ -1,0 +1,2209 @@
+======================================================================
+[2026-04-01 18:43:36] START s1_00_baseline_default
+out_dir=/public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_00_baseline_default
+extra_args=--reward-mode linear_zero_one --alpha 1.0 --train-every 100 --representation-steps 10 --representation-buffer-size 5000 --representation-batch-size 512 --linear-head-buffer-size 10000 --initial-pulls 2 --no-freeze-encoder
+======================================================================
+[18:43:37] 实验开始，输出目录: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_00_baseline_default
+[18:43:37] 开始构建共享数据集
+[18:43:37] 扫描结果目录: /public/home/zhoucl/shiys/EasyNCO/results/test
+[18:43:37] 已找到最新 runs 数量: 20
+[18:43:37] 开始解析原始 .pt 数据集路径
+[18:43:37] TSP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_tsp_uniform/test_tsp100_nums10000_uniform.pt
+[18:43:37] CVRP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_vrp_uniform/test_vrp100_capacity50_nums10000_uniform.pt
+[18:43:37] 开始加载原始实例张量
+[18:43:37] 实例加载完成: tsp=10000, cvrp=10000
+[18:43:37] 开始聚合问题 tsp，候选方法数=12
+[18:43:38] tsp 可用实例数=1000
+[18:43:40] 问题 tsp 聚合完成，当前累计样本数=1000
+[18:43:40] 开始聚合问题 cvrp，候选方法数=8
+[18:43:40] cvrp 可用实例数=1000
+[18:43:43] 问题 cvrp 聚合完成，当前累计样本数=2000
+[18:43:43] 全部样本构建完成，最终样本数=2000
+[18:43:43] 数据集构建完成，样本总数=2000
+[18:43:43] 开始做 train/val/test 分层切分
+[18:43:43] 数据切分完成: train=1400, val=300, test=300
+[18:43:43] 开始构造 selector: neural_linucb
+[18:43:43] selector 构造完成: NeuralLinUCB
+[18:43:43] 已开启 checkpoint 自动保存: 每 500 个 step 保存一次
+[18:43:43] 已开启周期性验证: 每 500 个 step 在 val 集评测一次
+[18:43:43] 开始训练 epoch 1/1 [NeuralLinUCB]
+[18:44:05] checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_00_baseline_default/checkpoints/step_0000500.pt
+[18:44:08] step=500 | periodic val_greedy | mean_reward=0.844264 | top1=0.270000 | mean_regret=0.045314 | mean_cost=11.714234 || val_ucb: mean_reward=0.843312 | top1=0.260000 | mean_regret=0.046151 | mean_cost=11.715071
+[18:44:56] checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_00_baseline_default/checkpoints/step_0001000.pt
+[18:44:58] step=1000 | periodic val_greedy | mean_reward=0.844264 | top1=0.270000 | mean_regret=0.045314 | mean_cost=11.714234 || val_ucb: mean_reward=0.842835 | top1=0.193333 | mean_regret=0.046455 | mean_cost=11.715374
+[18:45:56] 完成训练 epoch 1/1 [NeuralLinUCB]
+[18:45:56] 最终 checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_00_baseline_default/checkpoints/final.pt
+[18:45:56] 开始 selector 验证/测试评测
+[18:45:56] 在 val 集上评测 (300 实例, mode=greedy)...
+[18:45:57]     已评测 200/300...
+[18:45:58]     已评测 300/300...
+[18:45:58] val 评测完成 | mode=greedy | mean_reward=0.844264 | top1_accuracy=0.270000 | mean_regret=0.045314 | mean_cost=11.714234
+[18:45:58] 在 test 集上评测 (300 实例, mode=greedy)...
+[18:45:59]     已评测 200/300...
+[18:45:59]     已评测 300/300...
+[18:45:59] test 评测完成 | mode=greedy | mean_reward=0.836732 | top1_accuracy=0.250000 | mean_regret=0.052169 | mean_cost=11.758403
+[18:45:59] 在 val 集上评测 (300 实例, mode=ucb)...
+[18:46:00]     已评测 200/300...
+[18:46:01]     已评测 300/300...
+[18:46:01] val 评测完成 | mode=ucb | mean_reward=0.849026 | top1_accuracy=0.320000 | mean_regret=0.048934 | mean_cost=11.717854
+[18:46:01] 在 test 集上评测 (300 实例, mode=ucb)...
+[18:46:02]     已评测 200/300...
+[18:46:02]     已评测 300/300...
+[18:46:02] test 评测完成 | mode=ucb | mean_reward=0.844784 | top1_accuracy=0.300000 | mean_regret=0.047859 | mean_cost=11.754093
+[18:46:02] selector 验证/测试评测完成
+[18:46:02] 开始计算 baseline 对比
+[18:46:02] baseline 对比完成
+[18:46:02] 
+======================================================================
+  评测结果 | NeuralLinUCB | mode=greedy
+======================================================================
+
+  ALL (300 实例):
+    mean_reward:    0.8367
+    mean_rank:      2.46
+    top1_hit_rate:    0.2467  (74/300)
+    top2_hit_rate:    0.5333  (160/300)
+    top3_hit_rate:    0.7833  (235/300)
+    regret:         0.0522
+    mean_cost:      11.7584  (模型选择)
+    oracle_cost:    11.7062  (每个实例选最好的)
+
+  TSP (150 实例):
+    mean_reward:    0.8439
+    mean_rank:      2.72
+    top1_hit_rate:    0.1200  (18/150)
+    top2_hit_rate:    0.4467  (67/150)
+    top3_hit_rate:    0.7467  (112/150)
+    regret:         0.0114
+    mean_cost:      7.7543  (模型选择)
+    oracle_cost:    7.7429  (每个实例选最好的)
+
+  CVRP (150 实例):
+    mean_reward:    0.8295
+    mean_rank:      2.19
+    top1_hit_rate:    0.3733  (56/150)
+    top2_hit_rate:    0.6200  (93/150)
+    top3_hit_rate:    0.8200  (123/150)
+    regret:         0.0929
+    mean_cost:      15.7625  (模型选择)
+    oracle_cost:    15.6696  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (150 实例):
+    oracle mean_cost:                7.7429  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.7543
+    single_best_per_problem:         7.7526
+    single_best_global:              7.7543
+    random mean_cost:                11.5910  (均匀随机的期望)
+
+  CVRP (150 实例):
+    oracle mean_cost:                15.6696  (每实例选最好的, 上界)
+    模型选择 mean_cost:              15.7625
+    single_best_per_problem:         15.7625
+    single_best_global:              15.7625
+    random mean_cost:                18.1112  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (150 实例):
+     8(pointerformer   ):   150 次 (100.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):   150 次 (100.0%)
+
+  ALL (300 实例):
+     0(lehd            ):   150 次 ( 50.0%)
+     8(pointerformer   ):   150 次 ( 50.0%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     8(pointerformer   )      150     7.7543       0.8439     0.1200       2.72
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )      150    15.7625       0.8295     0.3733       2.19
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    55 次 ( 36.7%)
+     3(icam            ):    46 次 ( 30.7%)
+     1(elg             ):    21 次 ( 14.0%)
+     8(pointerformer   ):    19 次 ( 12.7%)
+     9(difusco         ):     9 次 (  6.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    56 次 ( 37.3%)
+     1(elg             ):    50 次 ( 33.3%)
+     3(icam            ):    38 次 ( 25.3%)
+     7(omni            ):     6 次 (  4.0%)
+
+[18:46:02] 
+======================================================================
+  评测结果 | NeuralLinUCB | mode=ucb
+======================================================================
+
+  ALL (300 实例):
+    mean_reward:    0.8448
+    mean_rank:      2.37
+    top1_hit_rate:    0.2500  (75/300)
+    top2_hit_rate:    0.5767  (173/300)
+    top3_hit_rate:    0.8200  (246/300)
+    regret:         0.0479
+    mean_cost:      11.7541  (模型选择)
+    oracle_cost:    11.7062  (每个实例选最好的)
+
+  TSP (150 实例):
+    mean_reward:    0.8591
+    mean_rank:      2.55
+    top1_hit_rate:    0.1800  (27/150)
+    top2_hit_rate:    0.5333  (80/150)
+    top3_hit_rate:    0.7600  (114/150)
+    regret:         0.0100
+    mean_cost:      7.7529  (模型选择)
+    oracle_cost:    7.7429  (每个实例选最好的)
+
+  CVRP (150 实例):
+    mean_reward:    0.8305
+    mean_rank:      2.19
+    top1_hit_rate:    0.3200  (48/150)
+    top2_hit_rate:    0.6200  (93/150)
+    top3_hit_rate:    0.8800  (132/150)
+    regret:         0.0857
+    mean_cost:      15.7553  (模型选择)
+    oracle_cost:    15.6696  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (150 实例):
+    oracle mean_cost:                7.7429  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.7529
+    single_best_per_problem:         7.7526
+    single_best_global:              7.7543
+    random mean_cost:                11.5910  (均匀随机的期望)
+
+  CVRP (150 实例):
+    oracle mean_cost:                15.6696  (每实例选最好的, 上界)
+    模型选择 mean_cost:              15.7553
+    single_best_per_problem:         15.7625
+    single_best_global:              15.7625
+    random mean_cost:                18.1112  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):     3 次 (  2.0%)
+     3(icam            ):   132 次 ( 88.0%)
+     8(pointerformer   ):    15 次 ( 10.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    33 次 ( 22.0%)
+     1(elg             ):   108 次 ( 72.0%)
+     3(icam            ):     9 次 (  6.0%)
+
+  ALL (300 实例):
+     0(lehd            ):    36 次 ( 12.0%)
+     1(elg             ):   108 次 ( 36.0%)
+     3(icam            ):   141 次 ( 47.0%)
+     8(pointerformer   ):    15 次 (  5.0%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )        3     7.6616       0.9091     0.3333       2.00
+     3(icam            )      132     7.7604       0.8647     0.1894       2.49
+     8(pointerformer   )       15     7.7055       0.8000     0.0667       3.20
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )       33    15.7563       0.8009     0.3636       2.39
+     1(elg             )      108    15.7404       0.8413     0.3148       2.11
+     3(icam            )        9    15.9294       0.8095     0.2222       2.33
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    55 次 ( 36.7%)
+     3(icam            ):    46 次 ( 30.7%)
+     1(elg             ):    21 次 ( 14.0%)
+     8(pointerformer   ):    19 次 ( 12.7%)
+     9(difusco         ):     9 次 (  6.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    56 次 ( 37.3%)
+     1(elg             ):    50 次 ( 33.3%)
+     3(icam            ):    38 次 ( 25.3%)
+     7(omni            ):     6 次 (  4.0%)
+
+[18:46:02] 开始写出结果文件到: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_00_baseline_default
+[18:46:02] 结果文件写出完成
+{
+  "count": 300,
+  "mean_reward": 0.8367316017316017,
+  "top1_accuracy": 0.25,
+  "mean_regret": 0.05216928005218506,
+  "mean_cost": 11.758403371175131
+}
+
+结果已保存到: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_00_baseline_default/summary.json
+[2026-04-01 18:46:02] END   s1_00_baseline_default
+
+======================================================================
+[2026-04-01 18:46:02] START s1_01_less_rep_fit
+out_dir=/public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_01_less_rep_fit
+extra_args=--reward-mode linear_zero_one --alpha 1.0 --train-every 200 --representation-steps 2 --representation-buffer-size 2000 --representation-batch-size 256 --linear-head-buffer-size 10000 --initial-pulls 5 --no-freeze-encoder
+======================================================================
+[18:46:04] 实验开始，输出目录: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_01_less_rep_fit
+[18:46:04] 开始构建共享数据集
+[18:46:04] 扫描结果目录: /public/home/zhoucl/shiys/EasyNCO/results/test
+[18:46:04] 已找到最新 runs 数量: 20
+[18:46:04] 开始解析原始 .pt 数据集路径
+[18:46:04] TSP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_tsp_uniform/test_tsp100_nums10000_uniform.pt
+[18:46:04] CVRP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_vrp_uniform/test_vrp100_capacity50_nums10000_uniform.pt
+[18:46:04] 开始加载原始实例张量
+[18:46:04] 实例加载完成: tsp=10000, cvrp=10000
+[18:46:04] 开始聚合问题 tsp，候选方法数=12
+[18:46:05] tsp 可用实例数=1000
+[18:46:07] 问题 tsp 聚合完成，当前累计样本数=1000
+[18:46:07] 开始聚合问题 cvrp，候选方法数=8
+[18:46:07] cvrp 可用实例数=1000
+[18:46:09] 问题 cvrp 聚合完成，当前累计样本数=2000
+[18:46:09] 全部样本构建完成，最终样本数=2000
+[18:46:10] 数据集构建完成，样本总数=2000
+[18:46:10] 开始做 train/val/test 分层切分
+[18:46:10] 数据切分完成: train=1400, val=300, test=300
+[18:46:10] 开始构造 selector: neural_linucb
+[18:46:10] selector 构造完成: NeuralLinUCB
+[18:46:10] 已开启 checkpoint 自动保存: 每 500 个 step 保存一次
+[18:46:10] 已开启周期性验证: 每 500 个 step 在 val 集评测一次
+[18:46:10] 开始训练 epoch 1/1 [NeuralLinUCB]
+[18:46:19] checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_01_less_rep_fit/checkpoints/step_0000500.pt
+[18:46:21] step=500 | periodic val_greedy | mean_reward=0.853333 | top1=0.340000 | mean_regret=0.048314 | mean_cost=11.717233 || val_ucb: mean_reward=0.853333 | top1=0.340000 | mean_regret=0.048314 | mean_cost=11.717233
+[18:46:39] checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_01_less_rep_fit/checkpoints/step_0001000.pt
+[18:46:41] step=1000 | periodic val_greedy | mean_reward=0.853333 | top1=0.340000 | mean_regret=0.048314 | mean_cost=11.717233 || val_ucb: mean_reward=0.853333 | top1=0.340000 | mean_regret=0.048314 | mean_cost=11.717233
+[18:46:59] 完成训练 epoch 1/1 [NeuralLinUCB]
+[18:46:59] 最终 checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_01_less_rep_fit/checkpoints/final.pt
+[18:46:59] 开始 selector 验证/测试评测
+[18:46:59] 在 val 集上评测 (300 实例, mode=greedy)...
+[18:47:00]     已评测 200/300...
+[18:47:01]     已评测 300/300...
+[18:47:01] val 评测完成 | mode=greedy | mean_reward=0.853333 | top1_accuracy=0.340000 | mean_regret=0.048314 | mean_cost=11.717233
+[18:47:01] 在 test 集上评测 (300 实例, mode=greedy)...
+[18:47:02]     已评测 200/300...
+[18:47:02]     已评测 300/300...
+[18:47:02] test 评测完成 | mode=greedy | mean_reward=0.843506 | top1_accuracy=0.280000 | mean_regret=0.047527 | mean_cost=11.753761
+[18:47:02] 在 val 集上评测 (300 实例, mode=ucb)...
+[18:47:03]     已评测 200/300...
+[18:47:03]     已评测 300/300...
+[18:47:03] val 评测完成 | mode=ucb | mean_reward=0.841515 | top1_accuracy=0.256667 | mean_regret=0.049046 | mean_cost=11.717965
+[18:47:03] 在 test 集上评测 (300 实例, mode=ucb)...
+[18:47:04]     已评测 200/300...
+[18:47:05]     已评测 300/300...
+[18:47:05] test 评测完成 | mode=ucb | mean_reward=0.836840 | top1_accuracy=0.240000 | mean_regret=0.048275 | mean_cost=11.754509
+[18:47:05] selector 验证/测试评测完成
+[18:47:05] 开始计算 baseline 对比
+[18:47:05] baseline 对比完成
+[18:47:05] 
+======================================================================
+  评测结果 | NeuralLinUCB | mode=greedy
+======================================================================
+
+  ALL (300 实例):
+    mean_reward:    0.8435
+    mean_rank:      2.36
+    top1_hit_rate:    0.2267  (68/300)
+    top2_hit_rate:    0.5867  (176/300)
+    top3_hit_rate:    0.8267  (248/300)
+    regret:         0.0475
+    mean_cost:      11.7538  (模型选择)
+    oracle_cost:    11.7062  (每个实例选最好的)
+
+  TSP (150 实例):
+    mean_reward:    0.8661
+    mean_rank:      2.47
+    top1_hit_rate:    0.2000  (30/150)
+    top2_hit_rate:    0.5733  (86/150)
+    top3_hit_rate:    0.7600  (114/150)
+    regret:         0.0097
+    mean_cost:      7.7526  (模型选择)
+    oracle_cost:    7.7429  (每个实例选最好的)
+
+  CVRP (150 实例):
+    mean_reward:    0.8210
+    mean_rank:      2.25
+    top1_hit_rate:    0.2533  (38/150)
+    top2_hit_rate:    0.6000  (90/150)
+    top3_hit_rate:    0.8933  (134/150)
+    regret:         0.0854
+    mean_cost:      15.7550  (模型选择)
+    oracle_cost:    15.6696  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (150 实例):
+    oracle mean_cost:                7.7429  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.7526
+    single_best_per_problem:         7.7526
+    single_best_global:              7.7543
+    random mean_cost:                11.5910  (均匀随机的期望)
+
+  CVRP (150 实例):
+    oracle mean_cost:                15.6696  (每实例选最好的, 上界)
+    模型选择 mean_cost:              15.7550
+    single_best_per_problem:         15.7625
+    single_best_global:              15.7625
+    random mean_cost:                18.1112  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (150 实例):
+     3(icam            ):   150 次 (100.0%)
+
+  CVRP (150 实例):
+     3(icam            ):   150 次 (100.0%)
+
+  ALL (300 实例):
+     3(icam            ):   300 次 (100.0%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     3(icam            )      150     7.7526       0.8661     0.2000       2.47
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     3(icam            )      150    15.7550       0.8210     0.2533       2.25
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    55 次 ( 36.7%)
+     3(icam            ):    46 次 ( 30.7%)
+     1(elg             ):    21 次 ( 14.0%)
+     8(pointerformer   ):    19 次 ( 12.7%)
+     9(difusco         ):     9 次 (  6.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    56 次 ( 37.3%)
+     1(elg             ):    50 次 ( 33.3%)
+     3(icam            ):    38 次 ( 25.3%)
+     7(omni            ):     6 次 (  4.0%)
+
+[18:47:05] 
+======================================================================
+  评测结果 | NeuralLinUCB | mode=ucb
+======================================================================
+
+  ALL (300 实例):
+    mean_reward:    0.8368
+    mean_rank:      2.44
+    top1_hit_rate:    0.2067  (62/300)
+    top2_hit_rate:    0.5433  (163/300)
+    top3_hit_rate:    0.8167  (245/300)
+    regret:         0.0483
+    mean_cost:      11.7545  (模型选择)
+    oracle_cost:    11.7062  (每个实例选最好的)
+
+  TSP (150 实例):
+    mean_reward:    0.8527
+    mean_rank:      2.62
+    top1_hit_rate:    0.1600  (24/150)
+    top2_hit_rate:    0.4867  (73/150)
+    top3_hit_rate:    0.7400  (111/150)
+    regret:         0.0112
+    mean_cost:      7.7541  (模型选择)
+    oracle_cost:    7.7429  (每个实例选最好的)
+
+  CVRP (150 实例):
+    mean_reward:    0.8210
+    mean_rank:      2.25
+    top1_hit_rate:    0.2533  (38/150)
+    top2_hit_rate:    0.6000  (90/150)
+    top3_hit_rate:    0.8933  (134/150)
+    regret:         0.0854
+    mean_cost:      15.7550  (模型选择)
+    oracle_cost:    15.6696  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (150 实例):
+    oracle mean_cost:                7.7429  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.7541
+    single_best_per_problem:         7.7526
+    single_best_global:              7.7543
+    random mean_cost:                11.5910  (均匀随机的期望)
+
+  CVRP (150 实例):
+    oracle mean_cost:                15.6696  (每实例选最好的, 上界)
+    模型选择 mean_cost:              15.7550
+    single_best_per_problem:         15.7625
+    single_best_global:              15.7625
+    random mean_cost:                18.1112  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (150 实例):
+     3(icam            ):    86 次 ( 57.3%)
+     8(pointerformer   ):    64 次 ( 42.7%)
+
+  CVRP (150 实例):
+     3(icam            ):   150 次 (100.0%)
+
+  ALL (300 实例):
+     3(icam            ):   236 次 ( 78.7%)
+     8(pointerformer   ):    64 次 ( 21.3%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     3(icam            )       86     7.7564       0.8647     0.1977       2.49
+     8(pointerformer   )       64     7.7509       0.8366     0.1094       2.80
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     3(icam            )      150    15.7550       0.8210     0.2533       2.25
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    55 次 ( 36.7%)
+     3(icam            ):    46 次 ( 30.7%)
+     1(elg             ):    21 次 ( 14.0%)
+     8(pointerformer   ):    19 次 ( 12.7%)
+     9(difusco         ):     9 次 (  6.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    56 次 ( 37.3%)
+     1(elg             ):    50 次 ( 33.3%)
+     3(icam            ):    38 次 ( 25.3%)
+     7(omni            ):     6 次 (  4.0%)
+
+[18:47:05] 开始写出结果文件到: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_01_less_rep_fit
+[18:47:05] 结果文件写出完成
+{
+  "count": 300,
+  "mean_reward": 0.8435064935064935,
+  "top1_accuracy": 0.28,
+  "mean_regret": 0.04752662658691406,
+  "mean_cost": 11.75376071770986
+}
+
+结果已保存到: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_01_less_rep_fit/summary.json
+[2026-04-01 18:47:05] END   s1_01_less_rep_fit
+
+======================================================================
+[2026-04-01 18:47:05] START s1_02_more_explore
+out_dir=/public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_02_more_explore
+extra_args=--reward-mode linear_zero_one --alpha 2.0 --train-every 200 --representation-steps 2 --representation-buffer-size 2000 --representation-batch-size 256 --linear-head-buffer-size 10000 --initial-pulls 5 --no-freeze-encoder
+======================================================================
+[18:47:07] 实验开始，输出目录: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_02_more_explore
+[18:47:07] 开始构建共享数据集
+[18:47:07] 扫描结果目录: /public/home/zhoucl/shiys/EasyNCO/results/test
+[18:47:07] 已找到最新 runs 数量: 20
+[18:47:07] 开始解析原始 .pt 数据集路径
+[18:47:07] TSP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_tsp_uniform/test_tsp100_nums10000_uniform.pt
+[18:47:07] CVRP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_vrp_uniform/test_vrp100_capacity50_nums10000_uniform.pt
+[18:47:07] 开始加载原始实例张量
+[18:47:07] 实例加载完成: tsp=10000, cvrp=10000
+[18:47:07] 开始聚合问题 tsp，候选方法数=12
+[18:47:07] tsp 可用实例数=1000
+[18:47:10] 问题 tsp 聚合完成，当前累计样本数=1000
+[18:47:10] 开始聚合问题 cvrp，候选方法数=8
+[18:47:10] cvrp 可用实例数=1000
+[18:47:12] 问题 cvrp 聚合完成，当前累计样本数=2000
+[18:47:12] 全部样本构建完成，最终样本数=2000
+[18:47:12] 数据集构建完成，样本总数=2000
+[18:47:12] 开始做 train/val/test 分层切分
+[18:47:12] 数据切分完成: train=1400, val=300, test=300
+[18:47:12] 开始构造 selector: neural_linucb
+[18:47:13] selector 构造完成: NeuralLinUCB
+[18:47:13] 已开启 checkpoint 自动保存: 每 500 个 step 保存一次
+[18:47:13] 已开启周期性验证: 每 500 个 step 在 val 集评测一次
+[18:47:13] 开始训练 epoch 1/1 [NeuralLinUCB]
+[18:47:21] checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_02_more_explore/checkpoints/step_0000500.pt
+[18:47:24] step=500 | periodic val_greedy | mean_reward=0.853333 | top1=0.340000 | mean_regret=0.048314 | mean_cost=11.717233 || val_ucb: mean_reward=0.839957 | top1=0.306667 | mean_regret=0.046077 | mean_cost=11.714996
+[18:47:42] checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_02_more_explore/checkpoints/step_0001000.pt
+[18:47:45] step=1000 | periodic val_greedy | mean_reward=0.849242 | top1=0.306667 | mean_regret=0.047508 | mean_cost=11.716427 || val_ucb: mean_reward=0.842121 | top1=0.286667 | mean_regret=0.048408 | mean_cost=11.717327
+[18:48:03] 完成训练 epoch 1/1 [NeuralLinUCB]
+[18:48:03] 最终 checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_02_more_explore/checkpoints/final.pt
+[18:48:03] 开始 selector 验证/测试评测
+[18:48:03] 在 val 集上评测 (300 实例, mode=greedy)...
+[18:48:04]     已评测 200/300...
+[18:48:04]     已评测 300/300...
+[18:48:04] val 评测完成 | mode=greedy | mean_reward=0.843485 | top1_accuracy=0.250000 | mean_regret=0.049038 | mean_cost=11.717957
+[18:48:04] 在 test 集上评测 (300 实例, mode=greedy)...
+[18:48:05]     已评测 200/300...
+[18:48:06]     已评测 300/300...
+[18:48:06] test 评测完成 | mode=greedy | mean_reward=0.838658 | top1_accuracy=0.233333 | mean_regret=0.048134 | mean_cost=11.754368
+[18:48:06] 在 val 集上评测 (300 实例, mode=ucb)...
+[18:48:07]     已评测 200/300...
+[18:48:07]     已评测 300/300...
+[18:48:07] val 评测完成 | mode=ucb | mean_reward=0.851602 | top1_accuracy=0.293333 | mean_regret=0.047339 | mean_cost=11.716258
+[18:48:07] 在 test 集上评测 (300 实例, mode=ucb)...
+[18:48:08]     已评测 200/300...
+[18:48:08]     已评测 300/300...
+[18:48:08] test 评测完成 | mode=ucb | mean_reward=0.841991 | top1_accuracy=0.276667 | mean_regret=0.050665 | mean_cost=11.756899
+[18:48:08] selector 验证/测试评测完成
+[18:48:08] 开始计算 baseline 对比
+[18:48:08] baseline 对比完成
+[18:48:08] 
+======================================================================
+  评测结果 | NeuralLinUCB | mode=greedy
+======================================================================
+
+  ALL (300 实例):
+    mean_reward:    0.8387
+    mean_rank:      2.42
+    top1_hit_rate:    0.2100  (63/300)
+    top2_hit_rate:    0.5567  (167/300)
+    top3_hit_rate:    0.8333  (250/300)
+    regret:         0.0481
+    mean_cost:      11.7544  (模型选择)
+    oracle_cost:    11.7062  (每个实例选最好的)
+
+  TSP (150 实例):
+    mean_reward:    0.8564
+    mean_rank:      2.58
+    top1_hit_rate:    0.1667  (25/150)
+    top2_hit_rate:    0.5133  (77/150)
+    top3_hit_rate:    0.7733  (116/150)
+    regret:         0.0109
+    mean_cost:      7.7538  (模型选择)
+    oracle_cost:    7.7429  (每个实例选最好的)
+
+  CVRP (150 实例):
+    mean_reward:    0.8210
+    mean_rank:      2.25
+    top1_hit_rate:    0.2533  (38/150)
+    top2_hit_rate:    0.6000  (90/150)
+    top3_hit_rate:    0.8933  (134/150)
+    regret:         0.0854
+    mean_cost:      15.7550  (模型选择)
+    oracle_cost:    15.6696  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (150 实例):
+    oracle mean_cost:                7.7429  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.7538
+    single_best_per_problem:         7.7526
+    single_best_global:              7.7543
+    random mean_cost:                11.5910  (均匀随机的期望)
+
+  CVRP (150 实例):
+    oracle mean_cost:                15.6696  (每实例选最好的, 上界)
+    模型选择 mean_cost:              15.7550
+    single_best_per_problem:         15.7625
+    single_best_global:              15.7625
+    random mean_cost:                18.1112  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (150 实例):
+     3(icam            ):    51 次 ( 34.0%)
+     8(pointerformer   ):    99 次 ( 66.0%)
+
+  CVRP (150 实例):
+     3(icam            ):   150 次 (100.0%)
+
+  ALL (300 实例):
+     3(icam            ):   201 次 ( 67.0%)
+     8(pointerformer   ):    99 次 ( 33.0%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     3(icam            )       51     7.7579       0.8708     0.2353       2.42
+     8(pointerformer   )       99     7.7516       0.8489     0.1313       2.66
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     3(icam            )      150    15.7550       0.8210     0.2533       2.25
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    55 次 ( 36.7%)
+     3(icam            ):    46 次 ( 30.7%)
+     1(elg             ):    21 次 ( 14.0%)
+     8(pointerformer   ):    19 次 ( 12.7%)
+     9(difusco         ):     9 次 (  6.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    56 次 ( 37.3%)
+     1(elg             ):    50 次 ( 33.3%)
+     3(icam            ):    38 次 ( 25.3%)
+     7(omni            ):     6 次 (  4.0%)
+
+[18:48:08] 
+======================================================================
+  评测结果 | NeuralLinUCB | mode=ucb
+======================================================================
+
+  ALL (300 实例):
+    mean_reward:    0.8420
+    mean_rank:      2.39
+    top1_hit_rate:    0.2467  (74/300)
+    top2_hit_rate:    0.5600  (168/300)
+    top3_hit_rate:    0.8133  (244/300)
+    regret:         0.0507
+    mean_cost:      11.7569  (模型选择)
+    oracle_cost:    11.7062  (每个实例选最好的)
+
+  TSP (150 实例):
+    mean_reward:    0.8564
+    mean_rank:      2.58
+    top1_hit_rate:    0.1533  (23/150)
+    top2_hit_rate:    0.5400  (81/150)
+    top3_hit_rate:    0.7467  (112/150)
+    regret:         0.0103
+    mean_cost:      7.7532  (模型选择)
+    oracle_cost:    7.7429  (每个实例选最好的)
+
+  CVRP (150 实例):
+    mean_reward:    0.8276
+    mean_rank:      2.21
+    top1_hit_rate:    0.3400  (51/150)
+    top2_hit_rate:    0.5800  (87/150)
+    top3_hit_rate:    0.8800  (132/150)
+    regret:         0.0910
+    mean_cost:      15.7606  (模型选择)
+    oracle_cost:    15.6696  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (150 实例):
+    oracle mean_cost:                7.7429  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.7532
+    single_best_per_problem:         7.7526
+    single_best_global:              7.7543
+    random mean_cost:                11.5910  (均匀随机的期望)
+
+  CVRP (150 实例):
+    oracle mean_cost:                15.6696  (每实例选最好的, 上界)
+    模型选择 mean_cost:              15.7606
+    single_best_per_problem:         15.7625
+    single_best_global:              15.7625
+    random mean_cost:                18.1112  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):     6 次 (  4.0%)
+     1(elg             ):     9 次 (  6.0%)
+     3(icam            ):    60 次 ( 40.0%)
+     8(pointerformer   ):    75 次 ( 50.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    49 次 ( 32.7%)
+     1(elg             ):    53 次 ( 35.3%)
+     3(icam            ):    48 次 ( 32.0%)
+
+  ALL (300 实例):
+     0(lehd            ):    55 次 ( 18.3%)
+     1(elg             ):    62 次 ( 20.7%)
+     3(icam            ):   108 次 ( 36.0%)
+     8(pointerformer   ):    75 次 ( 25.0%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )        6     7.7928       0.8939     0.3333       2.17
+     1(elg             )        9     7.7998       0.8182     0.0000       3.00
+     3(icam            )       60     7.7078       0.8644     0.1833       2.49
+     8(pointerformer   )       75     7.7808       0.8515     0.1333       2.63
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )       49    15.8056       0.8105     0.3878       2.33
+     1(elg             )       53    15.7241       0.8356     0.3396       2.15
+     3(icam            )       48    15.7550       0.8363     0.2917       2.15
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    55 次 ( 36.7%)
+     3(icam            ):    46 次 ( 30.7%)
+     1(elg             ):    21 次 ( 14.0%)
+     8(pointerformer   ):    19 次 ( 12.7%)
+     9(difusco         ):     9 次 (  6.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    56 次 ( 37.3%)
+     1(elg             ):    50 次 ( 33.3%)
+     3(icam            ):    38 次 ( 25.3%)
+     7(omni            ):     6 次 (  4.0%)
+
+[18:48:08] 开始写出结果文件到: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_02_more_explore
+[18:48:08] 结果文件写出完成
+{
+  "count": 300,
+  "mean_reward": 0.8386580086580087,
+  "top1_accuracy": 0.23333333333333334,
+  "mean_regret": 0.04813388665517171,
+  "mean_cost": 11.754367977778116
+}
+
+结果已保存到: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_02_more_explore/summary.json
+[2026-04-01 18:48:09] END   s1_02_more_explore
+
+======================================================================
+[2026-04-01 18:48:09] START s1_03_less_explore
+out_dir=/public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_03_less_explore
+extra_args=--reward-mode linear_zero_one --alpha 0.5 --train-every 200 --representation-steps 2 --representation-buffer-size 2000 --representation-batch-size 256 --linear-head-buffer-size 10000 --initial-pulls 5 --no-freeze-encoder
+======================================================================
+[18:48:11] 实验开始，输出目录: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_03_less_explore
+[18:48:11] 开始构建共享数据集
+[18:48:11] 扫描结果目录: /public/home/zhoucl/shiys/EasyNCO/results/test
+[18:48:11] 已找到最新 runs 数量: 20
+[18:48:11] 开始解析原始 .pt 数据集路径
+[18:48:11] TSP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_tsp_uniform/test_tsp100_nums10000_uniform.pt
+[18:48:11] CVRP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_vrp_uniform/test_vrp100_capacity50_nums10000_uniform.pt
+[18:48:11] 开始加载原始实例张量
+[18:48:11] 实例加载完成: tsp=10000, cvrp=10000
+[18:48:11] 开始聚合问题 tsp，候选方法数=12
+[18:48:11] tsp 可用实例数=1000
+[18:48:13] 问题 tsp 聚合完成，当前累计样本数=1000
+[18:48:13] 开始聚合问题 cvrp，候选方法数=8
+[18:48:14] cvrp 可用实例数=1000
+[18:48:16] 问题 cvrp 聚合完成，当前累计样本数=2000
+[18:48:16] 全部样本构建完成，最终样本数=2000
+[18:48:16] 数据集构建完成，样本总数=2000
+[18:48:16] 开始做 train/val/test 分层切分
+[18:48:16] 数据切分完成: train=1400, val=300, test=300
+[18:48:16] 开始构造 selector: neural_linucb
+[18:48:17] selector 构造完成: NeuralLinUCB
+[18:48:17] 已开启 checkpoint 自动保存: 每 500 个 step 保存一次
+[18:48:17] 已开启周期性验证: 每 500 个 step 在 val 集评测一次
+[18:48:17] 开始训练 epoch 1/1 [NeuralLinUCB]
+[18:48:25] checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_03_less_explore/checkpoints/step_0000500.pt
+[18:48:27] step=500 | periodic val_greedy | mean_reward=0.836991 | top1=0.373333 | mean_regret=0.045489 | mean_cost=11.714409 || val_ucb: mean_reward=0.836991 | top1=0.373333 | mean_regret=0.045489 | mean_cost=11.714409
+[18:48:45] checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_03_less_explore/checkpoints/step_0001000.pt
+[18:48:47] step=1000 | periodic val_greedy | mean_reward=0.836991 | top1=0.373333 | mean_regret=0.045489 | mean_cost=11.714409 || val_ucb: mean_reward=0.836991 | top1=0.373333 | mean_regret=0.045489 | mean_cost=11.714409
+[18:49:05] 完成训练 epoch 1/1 [NeuralLinUCB]
+[18:49:05] 最终 checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_03_less_explore/checkpoints/final.pt
+[18:49:05] 开始 selector 验证/测试评测
+[18:49:05] 在 val 集上评测 (300 实例, mode=greedy)...
+[18:49:06]     已评测 200/300...
+[18:49:06]     已评测 300/300...
+[18:49:06] val 评测完成 | mode=greedy | mean_reward=0.836991 | top1_accuracy=0.373333 | mean_regret=0.045489 | mean_cost=11.714409
+[18:49:06] 在 test 集上评测 (300 实例, mode=greedy)...
+[18:49:07]     已评测 200/300...
+[18:49:08]     已评测 300/300...
+[18:49:08] test 评测完成 | mode=greedy | mean_reward=0.834004 | top1_accuracy=0.370000 | mean_regret=0.052171 | mean_cost=11.758405
+[18:49:08] 在 val 集上评测 (300 实例, mode=ucb)...
+[18:49:08]     已评测 200/300...
+[18:49:09]     已评测 300/300...
+[18:49:09] val 评测完成 | mode=ucb | mean_reward=0.836991 | top1_accuracy=0.373333 | mean_regret=0.045489 | mean_cost=11.714409
+[18:49:09] 在 test 集上评测 (300 实例, mode=ucb)...
+[18:49:10]     已评测 200/300...
+[18:49:10]     已评测 300/300...
+[18:49:10] test 评测完成 | mode=ucb | mean_reward=0.834004 | top1_accuracy=0.370000 | mean_regret=0.052171 | mean_cost=11.758405
+[18:49:10] selector 验证/测试评测完成
+[18:49:10] 开始计算 baseline 对比
+[18:49:10] baseline 对比完成
+[18:49:10] 
+======================================================================
+  评测结果 | NeuralLinUCB | mode=greedy
+======================================================================
+
+  ALL (300 实例):
+    mean_reward:    0.8340
+    mean_rank:      2.48
+    top1_hit_rate:    0.3167  (95/300)
+    top2_hit_rate:    0.5500  (165/300)
+    top3_hit_rate:    0.7367  (221/300)
+    regret:         0.0522
+    mean_cost:      11.7584  (模型选择)
+    oracle_cost:    11.7062  (每个实例选最好的)
+
+  TSP (150 实例):
+    mean_reward:    0.8385
+    mean_rank:      2.78
+    top1_hit_rate:    0.2600  (39/150)
+    top2_hit_rate:    0.4800  (72/150)
+    top3_hit_rate:    0.6533  (98/150)
+    regret:         0.0114
+    mean_cost:      7.7543  (模型选择)
+    oracle_cost:    7.7429  (每个实例选最好的)
+
+  CVRP (150 实例):
+    mean_reward:    0.8295
+    mean_rank:      2.19
+    top1_hit_rate:    0.3733  (56/150)
+    top2_hit_rate:    0.6200  (93/150)
+    top3_hit_rate:    0.8200  (123/150)
+    regret:         0.0929
+    mean_cost:      15.7625  (模型选择)
+    oracle_cost:    15.6696  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (150 实例):
+    oracle mean_cost:                7.7429  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.7543
+    single_best_per_problem:         7.7526
+    single_best_global:              7.7543
+    random mean_cost:                11.5910  (均匀随机的期望)
+
+  CVRP (150 实例):
+    oracle mean_cost:                15.6696  (每实例选最好的, 上界)
+    模型选择 mean_cost:              15.7625
+    single_best_per_problem:         15.7625
+    single_best_global:              15.7625
+    random mean_cost:                18.1112  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):   150 次 (100.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):   150 次 (100.0%)
+
+  ALL (300 实例):
+     0(lehd            ):   300 次 (100.0%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )      150     7.7543       0.8385     0.2600       2.78
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )      150    15.7625       0.8295     0.3733       2.19
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    55 次 ( 36.7%)
+     3(icam            ):    46 次 ( 30.7%)
+     1(elg             ):    21 次 ( 14.0%)
+     8(pointerformer   ):    19 次 ( 12.7%)
+     9(difusco         ):     9 次 (  6.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    56 次 ( 37.3%)
+     1(elg             ):    50 次 ( 33.3%)
+     3(icam            ):    38 次 ( 25.3%)
+     7(omni            ):     6 次 (  4.0%)
+
+[18:49:10] 
+======================================================================
+  评测结果 | NeuralLinUCB | mode=ucb
+======================================================================
+
+  ALL (300 实例):
+    mean_reward:    0.8340
+    mean_rank:      2.48
+    top1_hit_rate:    0.3167  (95/300)
+    top2_hit_rate:    0.5500  (165/300)
+    top3_hit_rate:    0.7367  (221/300)
+    regret:         0.0522
+    mean_cost:      11.7584  (模型选择)
+    oracle_cost:    11.7062  (每个实例选最好的)
+
+  TSP (150 实例):
+    mean_reward:    0.8385
+    mean_rank:      2.78
+    top1_hit_rate:    0.2600  (39/150)
+    top2_hit_rate:    0.4800  (72/150)
+    top3_hit_rate:    0.6533  (98/150)
+    regret:         0.0114
+    mean_cost:      7.7543  (模型选择)
+    oracle_cost:    7.7429  (每个实例选最好的)
+
+  CVRP (150 实例):
+    mean_reward:    0.8295
+    mean_rank:      2.19
+    top1_hit_rate:    0.3733  (56/150)
+    top2_hit_rate:    0.6200  (93/150)
+    top3_hit_rate:    0.8200  (123/150)
+    regret:         0.0929
+    mean_cost:      15.7625  (模型选择)
+    oracle_cost:    15.6696  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (150 实例):
+    oracle mean_cost:                7.7429  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.7543
+    single_best_per_problem:         7.7526
+    single_best_global:              7.7543
+    random mean_cost:                11.5910  (均匀随机的期望)
+
+  CVRP (150 实例):
+    oracle mean_cost:                15.6696  (每实例选最好的, 上界)
+    模型选择 mean_cost:              15.7625
+    single_best_per_problem:         15.7625
+    single_best_global:              15.7625
+    random mean_cost:                18.1112  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):   150 次 (100.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):   150 次 (100.0%)
+
+  ALL (300 实例):
+     0(lehd            ):   300 次 (100.0%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )      150     7.7543       0.8385     0.2600       2.78
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )      150    15.7625       0.8295     0.3733       2.19
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    55 次 ( 36.7%)
+     3(icam            ):    46 次 ( 30.7%)
+     1(elg             ):    21 次 ( 14.0%)
+     8(pointerformer   ):    19 次 ( 12.7%)
+     9(difusco         ):     9 次 (  6.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    56 次 ( 37.3%)
+     1(elg             ):    50 次 ( 33.3%)
+     3(icam            ):    38 次 ( 25.3%)
+     7(omni            ):     6 次 (  4.0%)
+
+[18:49:10] 开始写出结果文件到: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_03_less_explore
+[18:49:10] 结果文件写出完成
+{
+  "count": 300,
+  "mean_reward": 0.834004329004329,
+  "top1_accuracy": 0.37,
+  "mean_regret": 0.0521710459391276,
+  "mean_cost": 11.758405137062073
+}
+
+结果已保存到: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_03_less_explore/summary.json
+[2026-04-01 18:49:11] END   s1_03_less_explore
+
+======================================================================
+[2026-04-01 18:49:11] START s1_04_full_linear_history
+out_dir=/public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_04_full_linear_history
+extra_args=--reward-mode linear_zero_one --alpha 2.0 --train-every 200 --representation-steps 2 --representation-buffer-size 2000 --representation-batch-size 256 --linear-head-buffer-size 0 --initial-pulls 5 --no-freeze-encoder
+======================================================================
+[18:49:12] 实验开始，输出目录: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_04_full_linear_history
+[18:49:12] 开始构建共享数据集
+[18:49:12] 扫描结果目录: /public/home/zhoucl/shiys/EasyNCO/results/test
+[18:49:12] 已找到最新 runs 数量: 20
+[18:49:12] 开始解析原始 .pt 数据集路径
+[18:49:12] TSP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_tsp_uniform/test_tsp100_nums10000_uniform.pt
+[18:49:12] CVRP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_vrp_uniform/test_vrp100_capacity50_nums10000_uniform.pt
+[18:49:12] 开始加载原始实例张量
+[18:49:13] 实例加载完成: tsp=10000, cvrp=10000
+[18:49:13] 开始聚合问题 tsp，候选方法数=12
+[18:49:13] tsp 可用实例数=1000
+[18:49:15] 问题 tsp 聚合完成，当前累计样本数=1000
+[18:49:15] 开始聚合问题 cvrp，候选方法数=8
+[18:49:15] cvrp 可用实例数=1000
+[18:49:18] 问题 cvrp 聚合完成，当前累计样本数=2000
+[18:49:18] 全部样本构建完成，最终样本数=2000
+[18:49:18] 数据集构建完成，样本总数=2000
+[18:49:18] 开始做 train/val/test 分层切分
+[18:49:18] 数据切分完成: train=1400, val=300, test=300
+[18:49:18] 开始构造 selector: neural_linucb
+[18:49:19] selector 构造完成: NeuralLinUCB
+[18:49:19] 已开启 checkpoint 自动保存: 每 500 个 step 保存一次
+[18:49:19] 已开启周期性验证: 每 500 个 step 在 val 集评测一次
+[18:49:19] 开始训练 epoch 1/1 [NeuralLinUCB]
+[18:49:27] checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_04_full_linear_history/checkpoints/step_0000500.pt
+[18:49:29] step=500 | periodic val_greedy | mean_reward=0.839459 | top1=0.356667 | mean_regret=0.046365 | mean_cost=11.715284 || val_ucb: mean_reward=0.829589 | top1=0.350000 | mean_regret=0.059159 | mean_cost=11.728078
+[18:49:47] checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_04_full_linear_history/checkpoints/step_0001000.pt
+[18:49:49] step=1000 | periodic val_greedy | mean_reward=0.837446 | top1=0.376667 | mean_regret=0.045711 | mean_cost=11.714630 || val_ucb: mean_reward=0.830909 | top1=0.316667 | mean_regret=0.048586 | mean_cost=11.717505
+[18:50:08] 完成训练 epoch 1/1 [NeuralLinUCB]
+[18:50:08] 最终 checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_04_full_linear_history/checkpoints/final.pt
+[18:50:08] 开始 selector 验证/测试评测
+[18:50:08] 在 val 集上评测 (300 实例, mode=greedy)...
+[18:50:09]     已评测 200/300...
+[18:50:09]     已评测 300/300...
+[18:50:09] val 评测完成 | mode=greedy | mean_reward=0.843355 | top1_accuracy=0.366667 | mean_regret=0.044954 | mean_cost=11.713873
+[18:50:09] 在 test 集上评测 (300 实例, mode=greedy)...
+[18:50:10]     已评测 200/300...
+[18:50:11]     已评测 300/300...
+[18:50:11] test 评测完成 | mode=greedy | mean_reward=0.834805 | top1_accuracy=0.366667 | mean_regret=0.053465 | mean_cost=11.759699
+[18:50:11] 在 val 集上评测 (300 实例, mode=ucb)...
+[18:50:11]     已评测 200/300...
+[18:50:12]     已评测 300/300...
+[18:50:12] val 评测完成 | mode=ucb | mean_reward=0.837597 | top1_accuracy=0.330000 | mean_regret=0.048962 | mean_cost=11.717881
+[18:50:12] 在 test 集上评测 (300 实例, mode=ucb)...
+[18:50:13]     已评测 200/300...
+[18:50:13]     已评测 300/300...
+[18:50:13] test 评测完成 | mode=ucb | mean_reward=0.842597 | top1_accuracy=0.350000 | mean_regret=0.043836 | mean_cost=11.750070
+[18:50:13] selector 验证/测试评测完成
+[18:50:13] 开始计算 baseline 对比
+[18:50:13] baseline 对比完成
+[18:50:13] 
+======================================================================
+  评测结果 | NeuralLinUCB | mode=greedy
+======================================================================
+
+  ALL (300 实例):
+    mean_reward:    0.8348
+    mean_rank:      2.47
+    top1_hit_rate:    0.3133  (94/300)
+    top2_hit_rate:    0.5533  (166/300)
+    top3_hit_rate:    0.7433  (223/300)
+    regret:         0.0535
+    mean_cost:      11.7597  (模型选择)
+    oracle_cost:    11.7062  (每个实例选最好的)
+
+  TSP (150 实例):
+    mean_reward:    0.8448
+    mean_rank:      2.71
+    top1_hit_rate:    0.2667  (40/150)
+    top2_hit_rate:    0.5000  (75/150)
+    top3_hit_rate:    0.6733  (101/150)
+    regret:         0.0113
+    mean_cost:      7.7542  (模型选择)
+    oracle_cost:    7.7429  (每个实例选最好的)
+
+  CVRP (150 实例):
+    mean_reward:    0.8248
+    mean_rank:      2.23
+    top1_hit_rate:    0.3600  (54/150)
+    top2_hit_rate:    0.6067  (91/150)
+    top3_hit_rate:    0.8133  (122/150)
+    regret:         0.0956
+    mean_cost:      15.7652  (模型选择)
+    oracle_cost:    15.6696  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (150 实例):
+    oracle mean_cost:                7.7429  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.7542
+    single_best_per_problem:         7.7526
+    single_best_global:              7.7543
+    random mean_cost:                11.5910  (均匀随机的期望)
+
+  CVRP (150 实例):
+    oracle mean_cost:                15.6696  (每实例选最好的, 上界)
+    模型选择 mean_cost:              15.7652
+    single_best_per_problem:         15.7625
+    single_best_global:              15.7625
+    random mean_cost:                18.1112  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):   125 次 ( 83.3%)
+     3(icam            ):    25 次 ( 16.7%)
+
+  CVRP (150 实例):
+     0(lehd            ):   127 次 ( 84.7%)
+     3(icam            ):    23 次 ( 15.3%)
+
+  ALL (300 实例):
+     0(lehd            ):   252 次 ( 84.0%)
+     3(icam            ):    48 次 ( 16.0%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )      125     7.7498       0.8367     0.2640       2.80
+     3(icam            )       25     7.7763       0.8855     0.2800       2.26
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )      127    15.7170       0.8256     0.3701       2.22
+     3(icam            )       23    16.0317       0.8199     0.3043       2.26
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    55 次 ( 36.7%)
+     3(icam            ):    46 次 ( 30.7%)
+     1(elg             ):    21 次 ( 14.0%)
+     8(pointerformer   ):    19 次 ( 12.7%)
+     9(difusco         ):     9 次 (  6.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    56 次 ( 37.3%)
+     1(elg             ):    50 次 ( 33.3%)
+     3(icam            ):    38 次 ( 25.3%)
+     7(omni            ):     6 次 (  4.0%)
+
+[18:50:13] 
+======================================================================
+  评测结果 | NeuralLinUCB | mode=ucb
+======================================================================
+
+  ALL (300 实例):
+    mean_reward:    0.8426
+    mean_rank:      2.41
+    top1_hit_rate:    0.3067  (92/300)
+    top2_hit_rate:    0.5567  (167/300)
+    top3_hit_rate:    0.7767  (233/300)
+    regret:         0.0438
+    mean_cost:      11.7501  (模型选择)
+    oracle_cost:    11.7062  (每个实例选最好的)
+
+  TSP (150 实例):
+    mean_reward:    0.8442
+    mean_rank:      2.71
+    top1_hit_rate:    0.2267  (34/150)
+    top2_hit_rate:    0.4800  (72/150)
+    top3_hit_rate:    0.6800  (102/150)
+    regret:         0.0099
+    mean_cost:      7.7528  (模型选择)
+    oracle_cost:    7.7429  (每个实例选最好的)
+
+  CVRP (150 实例):
+    mean_reward:    0.8410
+    mean_rank:      2.11
+    top1_hit_rate:    0.3867  (58/150)
+    top2_hit_rate:    0.6333  (95/150)
+    top3_hit_rate:    0.8733  (131/150)
+    regret:         0.0778
+    mean_cost:      15.7474  (模型选择)
+    oracle_cost:    15.6696  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (150 实例):
+    oracle mean_cost:                7.7429  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.7528
+    single_best_per_problem:         7.7526
+    single_best_global:              7.7543
+    random mean_cost:                11.5910  (均匀随机的期望)
+
+  CVRP (150 实例):
+    oracle mean_cost:                15.6696  (每实例选最好的, 上界)
+    模型选择 mean_cost:              15.7474
+    single_best_per_problem:         15.7625
+    single_best_global:              15.7625
+    random mean_cost:                18.1112  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    95 次 ( 63.3%)
+     1(elg             ):    10 次 (  6.7%)
+     3(icam            ):    44 次 ( 29.3%)
+     8(pointerformer   ):     1 次 (  0.7%)
+
+  CVRP (150 实例):
+     0(lehd            ):    50 次 ( 33.3%)
+     1(elg             ):    40 次 ( 26.7%)
+     3(icam            ):    60 次 ( 40.0%)
+
+  ALL (300 实例):
+     0(lehd            ):   145 次 ( 48.3%)
+     1(elg             ):    50 次 ( 16.7%)
+     3(icam            ):   104 次 ( 34.7%)
+     8(pointerformer   ):     1 次 (  0.3%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )       95     7.7555       0.8411     0.2737       2.75
+     1(elg             )       10     7.7134       0.7545     0.0000       3.70
+     3(icam            )       44     7.7719       0.8698     0.1818       2.43
+     8(pointerformer   )        1     7.0405       0.9091     0.0000       2.00
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )       50    15.8676       0.8343     0.4400       2.16
+     1(elg             )       40    15.8610       0.8464     0.3750       2.08
+     3(icam            )       60    15.5715       0.8429     0.3500       2.10
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    55 次 ( 36.7%)
+     3(icam            ):    46 次 ( 30.7%)
+     1(elg             ):    21 次 ( 14.0%)
+     8(pointerformer   ):    19 次 ( 12.7%)
+     9(difusco         ):     9 次 (  6.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    56 次 ( 37.3%)
+     1(elg             ):    50 次 ( 33.3%)
+     3(icam            ):    38 次 ( 25.3%)
+     7(omni            ):     6 次 (  4.0%)
+
+[18:50:13] 开始写出结果文件到: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_04_full_linear_history
+[18:50:13] 结果文件写出完成
+{
+  "count": 300,
+  "mean_reward": 0.8348051948051947,
+  "top1_accuracy": 0.36666666666666664,
+  "mean_regret": 0.05346515973409017,
+  "mean_cost": 11.759699250857036
+}
+
+结果已保存到: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_04_full_linear_history/summary.json
+[2026-04-01 18:50:14] END   s1_04_full_linear_history
+
+======================================================================
+[2026-04-01 18:50:14] START s1_05_autosaea_reward
+out_dir=/public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_05_autosaea_reward
+extra_args=--reward-mode autosaea --alpha 2.0 --train-every 200 --representation-steps 2 --representation-buffer-size 2000 --representation-batch-size 256 --linear-head-buffer-size 10000 --initial-pulls 5 --no-freeze-encoder
+======================================================================
+[18:50:15] 实验开始，输出目录: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_05_autosaea_reward
+[18:50:15] 开始构建共享数据集
+[18:50:15] 扫描结果目录: /public/home/zhoucl/shiys/EasyNCO/results/test
+[18:50:15] 已找到最新 runs 数量: 20
+[18:50:15] 开始解析原始 .pt 数据集路径
+[18:50:15] TSP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_tsp_uniform/test_tsp100_nums10000_uniform.pt
+[18:50:15] CVRP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_vrp_uniform/test_vrp100_capacity50_nums10000_uniform.pt
+[18:50:15] 开始加载原始实例张量
+[18:50:16] 实例加载完成: tsp=10000, cvrp=10000
+[18:50:16] 开始聚合问题 tsp，候选方法数=12
+[18:50:16] tsp 可用实例数=1000
+[18:50:18] 问题 tsp 聚合完成，当前累计样本数=1000
+[18:50:18] 开始聚合问题 cvrp，候选方法数=8
+[18:50:19] cvrp 可用实例数=1000
+[18:50:21] 问题 cvrp 聚合完成，当前累计样本数=2000
+[18:50:21] 全部样本构建完成，最终样本数=2000
+[18:50:21] 数据集构建完成，样本总数=2000
+[18:50:21] 开始做 train/val/test 分层切分
+[18:50:21] 数据切分完成: train=1400, val=300, test=300
+[18:50:21] 开始构造 selector: neural_linucb
+[18:50:22] selector 构造完成: NeuralLinUCB
+[18:50:22] 已开启 checkpoint 自动保存: 每 500 个 step 保存一次
+[18:50:22] 已开启周期性验证: 每 500 个 step 在 val 集评测一次
+[18:50:22] 开始训练 epoch 1/1 [NeuralLinUCB]
+[18:50:30] checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_05_autosaea_reward/checkpoints/step_0000500.pt
+[18:50:32] step=500 | periodic val_greedy | mean_reward=0.865417 | top1=0.350000 | mean_regret=0.048166 | mean_cost=11.717085 || val_ucb: mean_reward=0.848472 | top1=0.293333 | mean_regret=0.057145 | mean_cost=11.726064
+[18:50:50] checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_05_autosaea_reward/checkpoints/step_0001000.pt
+[18:50:52] step=1000 | periodic val_greedy | mean_reward=0.847639 | top1=0.340000 | mean_regret=0.045818 | mean_cost=11.714738 || val_ucb: mean_reward=0.842639 | top1=0.313333 | mean_regret=0.059952 | mean_cost=11.728871
+[18:51:10] 完成训练 epoch 1/1 [NeuralLinUCB]
+[18:51:10] 最终 checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_05_autosaea_reward/checkpoints/final.pt
+[18:51:10] 开始 selector 验证/测试评测
+[18:51:10] 在 val 集上评测 (300 实例, mode=greedy)...
+[18:51:11]     已评测 200/300...
+[18:51:11]     已评测 300/300...
+[18:51:11] val 评测完成 | mode=greedy | mean_reward=0.850278 | top1_accuracy=0.320000 | mean_regret=0.046190 | mean_cost=11.715109
+[18:51:11] 在 test 集上评测 (300 实例, mode=greedy)...
+[18:51:12]     已评测 200/300...
+[18:51:13]     已评测 300/300...
+[18:51:13] test 评测完成 | mode=greedy | mean_reward=0.858889 | top1_accuracy=0.320000 | mean_regret=0.051250 | mean_cost=11.757484
+[18:51:13] 在 val 集上评测 (300 实例, mode=ucb)...
+[18:51:14]     已评测 200/300...
+[18:51:14]     已评测 300/300...
+[18:51:14] val 评测完成 | mode=ucb | mean_reward=0.828611 | top1_accuracy=0.200000 | mean_regret=0.061383 | mean_cost=11.730302
+[18:51:14] 在 test 集上评测 (300 实例, mode=ucb)...
+[18:51:15]     已评测 200/300...
+[18:51:15]     已评测 300/300...
+[18:51:15] test 评测完成 | mode=ucb | mean_reward=0.831806 | top1_accuracy=0.233333 | mean_regret=0.064932 | mean_cost=11.771166
+[18:51:15] selector 验证/测试评测完成
+[18:51:15] 开始计算 baseline 对比
+[18:51:16] baseline 对比完成
+[18:51:16] 
+======================================================================
+  评测结果 | NeuralLinUCB | mode=greedy
+======================================================================
+
+  ALL (300 实例):
+    mean_reward:    0.8589
+    mean_rank:      2.40
+    top1_hit_rate:    0.3000  (90/300)
+    top2_hit_rate:    0.5633  (169/300)
+    top3_hit_rate:    0.7800  (234/300)
+    regret:         0.0512
+    mean_cost:      11.7575  (模型选择)
+    oracle_cost:    11.7062  (每个实例选最好的)
+
+  TSP (150 实例):
+    mean_reward:    0.8661
+    mean_rank:      2.61
+    top1_hit_rate:    0.2200  (33/150)
+    top2_hit_rate:    0.5067  (76/150)
+    top3_hit_rate:    0.7400  (111/150)
+    regret:         0.0097
+    mean_cost:      7.7526  (模型选择)
+    oracle_cost:    7.7429  (每个实例选最好的)
+
+  CVRP (150 实例):
+    mean_reward:    0.8517
+    mean_rank:      2.19
+    top1_hit_rate:    0.3800  (57/150)
+    top2_hit_rate:    0.6200  (93/150)
+    top3_hit_rate:    0.8200  (123/150)
+    regret:         0.0928
+    mean_cost:      15.7623  (模型选择)
+    oracle_cost:    15.6696  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (150 实例):
+    oracle mean_cost:                7.7429  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.7526
+    single_best_per_problem:         7.7526
+    single_best_global:              7.7543
+    random mean_cost:                11.5910  (均匀随机的期望)
+
+  CVRP (150 实例):
+    oracle mean_cost:                15.6696  (每实例选最好的, 上界)
+    模型选择 mean_cost:              15.7623
+    single_best_per_problem:         15.7625
+    single_best_global:              15.7625
+    random mean_cost:                18.1112  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    89 次 ( 59.3%)
+     8(pointerformer   ):    61 次 ( 40.7%)
+
+  CVRP (150 实例):
+     0(lehd            ):   146 次 ( 97.3%)
+     3(icam            ):     4 次 (  2.7%)
+
+  ALL (300 实例):
+     0(lehd            ):   235 次 ( 78.3%)
+     3(icam            ):     4 次 (  1.3%)
+     8(pointerformer   ):    61 次 ( 20.3%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )       89     7.7622       0.8558     0.2697       2.73
+     8(pointerformer   )       61     7.7386       0.8811     0.1475       2.43
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )      146    15.7553       0.8527     0.3767       2.18
+     3(icam            )        4    16.0184       0.8125     0.5000       2.50
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    55 次 ( 36.7%)
+     3(icam            ):    46 次 ( 30.7%)
+     1(elg             ):    21 次 ( 14.0%)
+     8(pointerformer   ):    19 次 ( 12.7%)
+     9(difusco         ):     9 次 (  6.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    56 次 ( 37.3%)
+     1(elg             ):    50 次 ( 33.3%)
+     3(icam            ):    38 次 ( 25.3%)
+     7(omni            ):     6 次 (  4.0%)
+
+[18:51:16] 
+======================================================================
+  评测结果 | NeuralLinUCB | mode=ucb
+======================================================================
+
+  ALL (300 实例):
+    mean_reward:    0.8318
+    mean_rank:      2.64
+    top1_hit_rate:    0.2200  (66/300)
+    top2_hit_rate:    0.4767  (143/300)
+    top3_hit_rate:    0.7033  (211/300)
+    regret:         0.0649
+    mean_cost:      11.7712  (模型选择)
+    oracle_cost:    11.7062  (每个实例选最好的)
+
+  TSP (150 实例):
+    mean_reward:    0.8528
+    mean_rank:      2.77
+    top1_hit_rate:    0.1733  (26/150)
+    top2_hit_rate:    0.4600  (69/150)
+    top3_hit_rate:    0.6733  (101/150)
+    regret:         0.0119
+    mean_cost:      7.7548  (模型选择)
+    oracle_cost:    7.7429  (每个实例选最好的)
+
+  CVRP (150 实例):
+    mean_reward:    0.8108
+    mean_rank:      2.51
+    top1_hit_rate:    0.2667  (40/150)
+    top2_hit_rate:    0.4933  (74/150)
+    top3_hit_rate:    0.7333  (110/150)
+    regret:         0.1180
+    mean_cost:      15.7876  (模型选择)
+    oracle_cost:    15.6696  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (150 实例):
+    oracle mean_cost:                7.7429  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.7548
+    single_best_per_problem:         7.7526
+    single_best_global:              7.7543
+    random mean_cost:                11.5910  (均匀随机的期望)
+
+  CVRP (150 实例):
+    oracle mean_cost:                15.6696  (每实例选最好的, 上界)
+    模型选择 mean_cost:              15.7876
+    single_best_per_problem:         15.7625
+    single_best_global:              15.7625
+    random mean_cost:                18.1112  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    22 次 ( 14.7%)
+     1(elg             ):    35 次 ( 23.3%)
+     8(pointerformer   ):    93 次 ( 62.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    48 次 ( 32.0%)
+     1(elg             ):    49 次 ( 32.7%)
+     3(icam            ):    19 次 ( 12.7%)
+     7(omni            ):    34 次 ( 22.7%)
+
+  ALL (300 实例):
+     0(lehd            ):    70 次 ( 23.3%)
+     1(elg             ):    84 次 ( 28.0%)
+     3(icam            ):    19 次 (  6.3%)
+     7(omni            ):    34 次 ( 11.3%)
+     8(pointerformer   ):    93 次 ( 31.0%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )       22     7.7557       0.8750     0.3636       2.50
+     1(elg             )       35     7.7344       0.7940     0.1143       3.47
+     8(pointerformer   )       93     7.7622       0.8696     0.1505       2.56
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )       48    15.6956       0.8464     0.3542       2.23
+     1(elg             )       49    16.1341       0.8571     0.3469       2.14
+     3(icam            )       19    15.5657       0.8355     0.2632       2.32
+     7(omni            )       34    15.5419       0.6801     0.0294       3.56
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    55 次 ( 36.7%)
+     3(icam            ):    46 次 ( 30.7%)
+     1(elg             ):    21 次 ( 14.0%)
+     8(pointerformer   ):    19 次 ( 12.7%)
+     9(difusco         ):     9 次 (  6.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    56 次 ( 37.3%)
+     1(elg             ):    50 次 ( 33.3%)
+     3(icam            ):    38 次 ( 25.3%)
+     7(omni            ):     6 次 (  4.0%)
+
+[18:51:16] 开始写出结果文件到: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_05_autosaea_reward
+[18:51:16] 结果文件写出完成
+{
+  "count": 300,
+  "mean_reward": 0.8588888888888888,
+  "top1_accuracy": 0.32,
+  "mean_regret": 0.051249667803446454,
+  "mean_cost": 11.75748375892639
+}
+
+结果已保存到: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_05_autosaea_reward/summary.json
+[2026-04-01 18:51:16] END   s1_05_autosaea_reward
+
+======================================================================
+[2026-04-01 18:51:16] START s1_06_freeze_graph_encoder
+out_dir=/public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_06_freeze_graph_encoder
+extra_args=--reward-mode linear_zero_one --alpha 2.0 --train-every 200 --representation-steps 2 --representation-buffer-size 2000 --representation-batch-size 256 --linear-head-buffer-size 10000 --initial-pulls 5 --freeze-encoder
+======================================================================
+[18:51:18] 实验开始，输出目录: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_06_freeze_graph_encoder
+[18:51:18] 开始构建共享数据集
+[18:51:18] 扫描结果目录: /public/home/zhoucl/shiys/EasyNCO/results/test
+[18:51:18] 已找到最新 runs 数量: 20
+[18:51:18] 开始解析原始 .pt 数据集路径
+[18:51:18] TSP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_tsp_uniform/test_tsp100_nums10000_uniform.pt
+[18:51:18] CVRP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_vrp_uniform/test_vrp100_capacity50_nums10000_uniform.pt
+[18:51:18] 开始加载原始实例张量
+[18:51:18] 实例加载完成: tsp=10000, cvrp=10000
+[18:51:18] 开始聚合问题 tsp，候选方法数=12
+[18:51:18] tsp 可用实例数=1000
+[18:51:20] 问题 tsp 聚合完成，当前累计样本数=1000
+[18:51:20] 开始聚合问题 cvrp，候选方法数=8
+[18:51:21] cvrp 可用实例数=1000
+[18:51:23] 问题 cvrp 聚合完成，当前累计样本数=2000
+[18:51:23] 全部样本构建完成，最终样本数=2000
+[18:51:23] 数据集构建完成，样本总数=2000
+[18:51:23] 开始做 train/val/test 分层切分
+[18:51:23] 数据切分完成: train=1400, val=300, test=300
+[18:51:23] 开始构造 selector: neural_linucb
+[18:51:24] selector 构造完成: NeuralLinUCB
+[18:51:24] 已开启 checkpoint 自动保存: 每 500 个 step 保存一次
+[18:51:24] 已开启周期性验证: 每 500 个 step 在 val 集评测一次
+[18:51:24] 开始训练 epoch 1/1 [NeuralLinUCB]
+[18:51:31] checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_06_freeze_graph_encoder/checkpoints/step_0000500.pt
+[18:51:34] step=500 | periodic val_greedy | mean_reward=0.844264 | top1=0.270000 | mean_regret=0.045314 | mean_cost=11.714234 || val_ucb: mean_reward=0.832251 | top1=0.223333 | mean_regret=0.072963 | mean_cost=11.741882
+[18:51:49] checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_06_freeze_graph_encoder/checkpoints/step_0001000.pt
+[18:51:52] step=1000 | periodic val_greedy | mean_reward=0.844264 | top1=0.270000 | mean_regret=0.045314 | mean_cost=11.714234 || val_ucb: mean_reward=0.855584 | top1=0.330000 | mean_regret=0.048845 | mean_cost=11.717764
+[18:52:07] 完成训练 epoch 1/1 [NeuralLinUCB]
+[18:52:07] 最终 checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_06_freeze_graph_encoder/checkpoints/final.pt
+[18:52:07] 开始 selector 验证/测试评测
+[18:52:07] 在 val 集上评测 (300 实例, mode=greedy)...
+[18:52:08]     已评测 200/300...
+[18:52:08]     已评测 300/300...
+[18:52:08] val 评测完成 | mode=greedy | mean_reward=0.844264 | top1_accuracy=0.270000 | mean_regret=0.045314 | mean_cost=11.714234
+[18:52:08] 在 test 集上评测 (300 实例, mode=greedy)...
+[18:52:09]     已评测 200/300...
+[18:52:10]     已评测 300/300...
+[18:52:10] test 评测完成 | mode=greedy | mean_reward=0.836732 | top1_accuracy=0.250000 | mean_regret=0.052169 | mean_cost=11.758403
+[18:52:10] 在 val 集上评测 (300 实例, mode=ucb)...
+[18:52:11]     已评测 200/300...
+[18:52:11]     已评测 300/300...
+[18:52:11] val 评测完成 | mode=ucb | mean_reward=0.831126 | top1_accuracy=0.260000 | mean_regret=0.049809 | mean_cost=11.718729
+[18:52:11] 在 test 集上评测 (300 实例, mode=ucb)...
+[18:52:12]     已评测 200/300...
+[18:52:12]     已评测 300/300...
+[18:52:12] test 评测完成 | mode=ucb | mean_reward=0.832013 | top1_accuracy=0.270000 | mean_regret=0.049208 | mean_cost=11.755442
+[18:52:12] selector 验证/测试评测完成
+[18:52:12] 开始计算 baseline 对比
+[18:52:12] baseline 对比完成
+[18:52:12] 
+======================================================================
+  评测结果 | NeuralLinUCB | mode=greedy
+======================================================================
+
+  ALL (300 实例):
+    mean_reward:    0.8367
+    mean_rank:      2.46
+    top1_hit_rate:    0.2467  (74/300)
+    top2_hit_rate:    0.5333  (160/300)
+    top3_hit_rate:    0.7833  (235/300)
+    regret:         0.0522
+    mean_cost:      11.7584  (模型选择)
+    oracle_cost:    11.7062  (每个实例选最好的)
+
+  TSP (150 实例):
+    mean_reward:    0.8439
+    mean_rank:      2.72
+    top1_hit_rate:    0.1200  (18/150)
+    top2_hit_rate:    0.4467  (67/150)
+    top3_hit_rate:    0.7467  (112/150)
+    regret:         0.0114
+    mean_cost:      7.7543  (模型选择)
+    oracle_cost:    7.7429  (每个实例选最好的)
+
+  CVRP (150 实例):
+    mean_reward:    0.8295
+    mean_rank:      2.19
+    top1_hit_rate:    0.3733  (56/150)
+    top2_hit_rate:    0.6200  (93/150)
+    top3_hit_rate:    0.8200  (123/150)
+    regret:         0.0929
+    mean_cost:      15.7625  (模型选择)
+    oracle_cost:    15.6696  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (150 实例):
+    oracle mean_cost:                7.7429  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.7543
+    single_best_per_problem:         7.7526
+    single_best_global:              7.7543
+    random mean_cost:                11.5910  (均匀随机的期望)
+
+  CVRP (150 实例):
+    oracle mean_cost:                15.6696  (每实例选最好的, 上界)
+    模型选择 mean_cost:              15.7625
+    single_best_per_problem:         15.7625
+    single_best_global:              15.7625
+    random mean_cost:                18.1112  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (150 实例):
+     8(pointerformer   ):   150 次 (100.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):   150 次 (100.0%)
+
+  ALL (300 实例):
+     0(lehd            ):   150 次 ( 50.0%)
+     8(pointerformer   ):   150 次 ( 50.0%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     8(pointerformer   )      150     7.7543       0.8439     0.1200       2.72
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )      150    15.7625       0.8295     0.3733       2.19
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    55 次 ( 36.7%)
+     3(icam            ):    46 次 ( 30.7%)
+     1(elg             ):    21 次 ( 14.0%)
+     8(pointerformer   ):    19 次 ( 12.7%)
+     9(difusco         ):     9 次 (  6.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    56 次 ( 37.3%)
+     1(elg             ):    50 次 ( 33.3%)
+     3(icam            ):    38 次 ( 25.3%)
+     7(omni            ):     6 次 (  4.0%)
+
+[18:52:12] 
+======================================================================
+  评测结果 | NeuralLinUCB | mode=ucb
+======================================================================
+
+  ALL (300 实例):
+    mean_reward:    0.8320
+    mean_rank:      2.50
+    top1_hit_rate:    0.2267  (68/300)
+    top2_hit_rate:    0.5433  (163/300)
+    top3_hit_rate:    0.7800  (234/300)
+    regret:         0.0492
+    mean_cost:      11.7554  (模型选择)
+    oracle_cost:    11.7062  (每个实例选最好的)
+
+  TSP (150 实例):
+    mean_reward:    0.8355
+    mean_rank:      2.81
+    top1_hit_rate:    0.1667  (25/150)
+    top2_hit_rate:    0.4733  (71/150)
+    top3_hit_rate:    0.6600  (99/150)
+    regret:         0.0146
+    mean_cost:      7.7575  (模型选择)
+    oracle_cost:    7.7429  (每个实例选最好的)
+
+  CVRP (150 实例):
+    mean_reward:    0.8286
+    mean_rank:      2.20
+    top1_hit_rate:    0.2867  (43/150)
+    top2_hit_rate:    0.6133  (92/150)
+    top3_hit_rate:    0.9000  (135/150)
+    regret:         0.0838
+    mean_cost:      15.7534  (模型选择)
+    oracle_cost:    15.6696  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (150 实例):
+    oracle mean_cost:                7.7429  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.7575
+    single_best_per_problem:         7.7526
+    single_best_global:              7.7543
+    random mean_cost:                11.5910  (均匀随机的期望)
+
+  CVRP (150 实例):
+    oracle mean_cost:                15.6696  (每实例选最好的, 上界)
+    模型选择 mean_cost:              15.7534
+    single_best_per_problem:         15.7625
+    single_best_global:              15.7625
+    random mean_cost:                18.1112  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    50 次 ( 33.3%)
+     1(elg             ):    48 次 ( 32.0%)
+     3(icam            ):    29 次 ( 19.3%)
+     7(omni            ):     1 次 (  0.7%)
+     8(pointerformer   ):    22 次 ( 14.7%)
+
+  CVRP (150 实例):
+     0(lehd            ):    19 次 ( 12.7%)
+     1(elg             ):    35 次 ( 23.3%)
+     3(icam            ):    96 次 ( 64.0%)
+
+  ALL (300 实例):
+     0(lehd            ):    69 次 ( 23.0%)
+     1(elg             ):    83 次 ( 27.7%)
+     3(icam            ):   125 次 ( 41.7%)
+     7(omni            ):     1 次 (  0.3%)
+     8(pointerformer   ):    22 次 (  7.3%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )       50     7.7854       0.8573     0.3000       2.57
+     1(elg             )       48     7.7761       0.7992     0.1042       3.21
+     3(icam            )       29     7.7565       0.8480     0.0690       2.67
+     7(omni            )        1     7.4676       0.6364     0.0000       5.00
+     8(pointerformer   )       22     7.6679       0.8574     0.1364       2.57
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )       19    16.2330       0.8647     0.5263       1.95
+     1(elg             )       35    15.8126       0.8327     0.3143       2.17
+     3(icam            )       96    15.6369       0.8199     0.2292       2.26
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    55 次 ( 36.7%)
+     3(icam            ):    46 次 ( 30.7%)
+     1(elg             ):    21 次 ( 14.0%)
+     8(pointerformer   ):    19 次 ( 12.7%)
+     9(difusco         ):     9 次 (  6.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    56 次 ( 37.3%)
+     1(elg             ):    50 次 ( 33.3%)
+     3(icam            ):    38 次 ( 25.3%)
+     7(omni            ):     6 次 (  4.0%)
+
+[18:52:12] 开始写出结果文件到: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_06_freeze_graph_encoder
+[18:52:12] 结果文件写出完成
+{
+  "count": 300,
+  "mean_reward": 0.8367316017316017,
+  "top1_accuracy": 0.25,
+  "mean_regret": 0.05216928005218506,
+  "mean_cost": 11.758403371175131
+}
+
+结果已保存到: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_06_freeze_graph_encoder/summary.json
+[2026-04-01 18:52:13] END   s1_06_freeze_graph_encoder
+
+======================================================================
+[2026-04-01 18:52:13] START s1_07_low_lr
+out_dir=/public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_07_low_lr
+extra_args=--reward-mode linear_zero_one --alpha 2.0 --lr 3e-4 --train-every 200 --representation-steps 2 --representation-buffer-size 2000 --representation-batch-size 256 --linear-head-buffer-size 10000 --initial-pulls 5 --no-freeze-encoder
+======================================================================
+[18:52:14] 实验开始，输出目录: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_07_low_lr
+[18:52:14] 开始构建共享数据集
+[18:52:14] 扫描结果目录: /public/home/zhoucl/shiys/EasyNCO/results/test
+[18:52:14] 已找到最新 runs 数量: 20
+[18:52:14] 开始解析原始 .pt 数据集路径
+[18:52:14] TSP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_tsp_uniform/test_tsp100_nums10000_uniform.pt
+[18:52:14] CVRP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_vrp_uniform/test_vrp100_capacity50_nums10000_uniform.pt
+[18:52:14] 开始加载原始实例张量
+[18:52:14] 实例加载完成: tsp=10000, cvrp=10000
+[18:52:14] 开始聚合问题 tsp，候选方法数=12
+[18:52:15] tsp 可用实例数=1000
+[18:52:17] 问题 tsp 聚合完成，当前累计样本数=1000
+[18:52:17] 开始聚合问题 cvrp，候选方法数=8
+[18:52:17] cvrp 可用实例数=1000
+[18:52:20] 问题 cvrp 聚合完成，当前累计样本数=2000
+[18:52:20] 全部样本构建完成，最终样本数=2000
+[18:52:20] 数据集构建完成，样本总数=2000
+[18:52:20] 开始做 train/val/test 分层切分
+[18:52:20] 数据切分完成: train=1400, val=300, test=300
+[18:52:20] 开始构造 selector: neural_linucb
+[18:52:20] selector 构造完成: NeuralLinUCB
+[18:52:20] 已开启 checkpoint 自动保存: 每 500 个 step 保存一次
+[18:52:20] 已开启周期性验证: 每 500 个 step 在 val 集评测一次
+[18:52:20] 开始训练 epoch 1/1 [NeuralLinUCB]
+[18:52:29] checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_07_low_lr/checkpoints/step_0000500.pt
+[18:52:31] step=500 | periodic val_greedy | mean_reward=0.836991 | top1=0.373333 | mean_regret=0.045489 | mean_cost=11.714409 || val_ucb: mean_reward=0.848810 | top1=0.383333 | mean_regret=0.044089 | mean_cost=11.713008
+[18:52:49] checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_07_low_lr/checkpoints/step_0001000.pt
+[18:52:52] step=1000 | periodic val_greedy | mean_reward=0.836991 | top1=0.373333 | mean_regret=0.045489 | mean_cost=11.714409 || val_ucb: mean_reward=0.845195 | top1=0.306667 | mean_regret=0.051001 | mean_cost=11.719920
+[18:53:10] 完成训练 epoch 1/1 [NeuralLinUCB]
+[18:53:10] 最终 checkpoint 已保存: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_07_low_lr/checkpoints/final.pt
+[18:53:10] 开始 selector 验证/测试评测
+[18:53:10] 在 val 集上评测 (300 实例, mode=greedy)...
+[18:53:11]     已评测 200/300...
+[18:53:11]     已评测 300/300...
+[18:53:11] val 评测完成 | mode=greedy | mean_reward=0.829784 | top1_accuracy=0.276667 | mean_regret=0.049915 | mean_cost=11.718834
+[18:53:11] 在 test 集上评测 (300 实例, mode=greedy)...
+[18:53:12]     已评测 200/300...
+[18:53:13]     已评测 300/300...
+[18:53:13] test 评测完成 | mode=greedy | mean_reward=0.835368 | top1_accuracy=0.296667 | mean_regret=0.047508 | mean_cost=11.753742
+[18:53:13] 在 val 集上评测 (300 实例, mode=ucb)...
+[18:53:13]     已评测 200/300...
+[18:53:14]     已评测 300/300...
+[18:53:14] val 评测完成 | mode=ucb | mean_reward=0.819913 | top1_accuracy=0.290000 | mean_regret=0.063202 | mean_cost=11.732121
+[18:53:14] 在 test 集上评测 (300 实例, mode=ucb)...
+[18:53:15]     已评测 200/300...
+[18:53:15]     已评测 300/300...
+[18:53:15] test 评测完成 | mode=ucb | mean_reward=0.820952 | top1_accuracy=0.263333 | mean_regret=0.061256 | mean_cost=11.767490
+[18:53:15] selector 验证/测试评测完成
+[18:53:15] 开始计算 baseline 对比
+[18:53:15] baseline 对比完成
+[18:53:15] 
+======================================================================
+  评测结果 | NeuralLinUCB | mode=greedy
+======================================================================
+
+  ALL (300 实例):
+    mean_reward:    0.8354
+    mean_rank:      2.46
+    top1_hit_rate:    0.2500  (75/300)
+    top2_hit_rate:    0.5467  (164/300)
+    top3_hit_rate:    0.8000  (240/300)
+    regret:         0.0475
+    mean_cost:      11.7537  (模型选择)
+    oracle_cost:    11.7062  (每个实例选最好的)
+
+  TSP (150 实例):
+    mean_reward:    0.8479
+    mean_rank:      2.67
+    top1_hit_rate:    0.2467  (37/150)
+    top2_hit_rate:    0.4867  (73/150)
+    top3_hit_rate:    0.7000  (105/150)
+    regret:         0.0103
+    mean_cost:      7.7532  (模型选择)
+    oracle_cost:    7.7429  (每个实例选最好的)
+
+  CVRP (150 实例):
+    mean_reward:    0.8229
+    mean_rank:      2.24
+    top1_hit_rate:    0.2533  (38/150)
+    top2_hit_rate:    0.6067  (91/150)
+    top3_hit_rate:    0.9000  (135/150)
+    regret:         0.0847
+    mean_cost:      15.7543  (模型选择)
+    oracle_cost:    15.6696  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (150 实例):
+    oracle mean_cost:                7.7429  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.7532
+    single_best_per_problem:         7.7526
+    single_best_global:              7.7543
+    random mean_cost:                11.5910  (均匀随机的期望)
+
+  CVRP (150 实例):
+    oracle mean_cost:                15.6696  (每实例选最好的, 上界)
+    模型选择 mean_cost:              15.7543
+    single_best_per_problem:         15.7625
+    single_best_global:              15.7625
+    random mean_cost:                18.1112  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):   110 次 ( 73.3%)
+     3(icam            ):    40 次 ( 26.7%)
+
+  CVRP (150 实例):
+     0(lehd            ):    12 次 (  8.0%)
+     3(icam            ):   138 次 ( 92.0%)
+
+  ALL (300 实例):
+     0(lehd            ):   122 次 ( 40.7%)
+     3(icam            ):   178 次 ( 59.3%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )      110     7.7689       0.8413     0.2727       2.75
+     3(icam            )       40     7.7101       0.8659     0.1750       2.48
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )       12    16.2127       0.8452     0.3333       2.08
+     3(icam            )      138    15.7144       0.8209     0.2464       2.25
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    55 次 ( 36.7%)
+     3(icam            ):    46 次 ( 30.7%)
+     1(elg             ):    21 次 ( 14.0%)
+     8(pointerformer   ):    19 次 ( 12.7%)
+     9(difusco         ):     9 次 (  6.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    56 次 ( 37.3%)
+     1(elg             ):    50 次 ( 33.3%)
+     3(icam            ):    38 次 ( 25.3%)
+     7(omni            ):     6 次 (  4.0%)
+
+[18:53:15] 
+======================================================================
+  评测结果 | NeuralLinUCB | mode=ucb
+======================================================================
+
+  ALL (300 实例):
+    mean_reward:    0.8210
+    mean_rank:      2.59
+    top1_hit_rate:    0.2133  (64/300)
+    top2_hit_rate:    0.5300  (159/300)
+    top3_hit_rate:    0.7600  (228/300)
+    regret:         0.0613
+    mean_cost:      11.7675  (模型选择)
+    oracle_cost:    11.7062  (每个实例选最好的)
+
+  TSP (150 实例):
+    mean_reward:    0.8333
+    mean_rank:      2.83
+    top1_hit_rate:    0.1267  (19/150)
+    top2_hit_rate:    0.4933  (74/150)
+    top3_hit_rate:    0.7200  (108/150)
+    regret:         0.0230
+    mean_cost:      7.7659  (模型选择)
+    oracle_cost:    7.7429  (每个实例选最好的)
+
+  CVRP (150 实例):
+    mean_reward:    0.8086
+    mean_rank:      2.34
+    top1_hit_rate:    0.3000  (45/150)
+    top2_hit_rate:    0.5667  (85/150)
+    top3_hit_rate:    0.8000  (120/150)
+    regret:         0.0995
+    mean_cost:      15.7691  (模型选择)
+    oracle_cost:    15.6696  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (150 实例):
+    oracle mean_cost:                7.7429  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.7659
+    single_best_per_problem:         7.7526
+    single_best_global:              7.7543
+    random mean_cost:                11.5910  (均匀随机的期望)
+
+  CVRP (150 实例):
+    oracle mean_cost:                15.6696  (每实例选最好的, 上界)
+    模型选择 mean_cost:              15.7691
+    single_best_per_problem:         15.7625
+    single_best_global:              15.7625
+    random mean_cost:                18.1112  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    44 次 ( 29.3%)
+     1(elg             ):     7 次 (  4.7%)
+     3(icam            ):    59 次 ( 39.3%)
+     7(omni            ):    10 次 (  6.7%)
+     8(pointerformer   ):    22 次 ( 14.7%)
+     9(difusco         ):     8 次 (  5.3%)
+
+  CVRP (150 实例):
+     0(lehd            ):    48 次 ( 32.0%)
+     1(elg             ):     1 次 (  0.7%)
+     3(icam            ):    88 次 ( 58.7%)
+     7(omni            ):    13 次 (  8.7%)
+
+  ALL (300 实例):
+     0(lehd            ):    92 次 ( 30.7%)
+     1(elg             ):     8 次 (  2.7%)
+     3(icam            ):   147 次 ( 49.0%)
+     7(omni            ):    23 次 (  7.7%)
+     8(pointerformer   ):    22 次 (  7.3%)
+     9(difusco         ):     8 次 (  2.7%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )       44     7.7420       0.8605     0.2273       2.53
+     1(elg             )        7     7.6931       0.8766     0.0000       2.36
+     3(icam            )       59     7.7625       0.8629     0.1186       2.51
+     7(omni            )       10     7.8786       0.5818     0.0000       5.60
+     8(pointerformer   )       22     7.7157       0.8430     0.0909       2.73
+     9(difusco         )        8     7.9828       0.7159     0.0000       4.12
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )       48    15.8897       0.8095     0.3750       2.33
+     1(elg             )        1    17.4274       1.0000     1.0000       1.00
+     3(icam            )       88    15.7278       0.8295     0.2841       2.19
+     7(omni            )       13    15.4763       0.6484     0.0769       3.46
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    55 次 ( 36.7%)
+     3(icam            ):    46 次 ( 30.7%)
+     1(elg             ):    21 次 ( 14.0%)
+     8(pointerformer   ):    19 次 ( 12.7%)
+     9(difusco         ):     9 次 (  6.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    56 次 ( 37.3%)
+     1(elg             ):    50 次 ( 33.3%)
+     3(icam            ):    38 次 ( 25.3%)
+     7(omni            ):     6 次 (  4.0%)
+
+[18:53:15] 开始写出结果文件到: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_07_low_lr
+[18:53:15] 结果文件写出完成
+{
+  "count": 300,
+  "mean_reward": 0.8353679653679654,
+  "top1_accuracy": 0.2966666666666667,
+  "mean_regret": 0.047507586479187014,
+  "mean_cost": 11.753741677602132
+}
+
+结果已保存到: /public/home/zhoucl/shiys/2cmab2/outputs/tuning_2026-04-01_stage1/s1_07_low_lr/summary.json
+[2026-04-01 18:53:16] END   s1_07_low_lr
+
+[2026-04-01 18:53:16] ALL DONE

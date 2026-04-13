@@ -1,0 +1,72 @@
+from EasyNCO.neural_solvers.methods.t2t.tsp_t2t import TSPT2TPolicy
+from EasyNCO.neural_solvers.methods.t2t.mis_t2t import MIST2TPolicy
+
+class T2TPolicy:
+    def __init__(self,
+                 env_name,
+                 n_layers,
+                 hidden_dim,
+                 aggregation,
+                 diffusion_type,
+                 diffusion_schedule,
+                 diffusion_steps,
+                 sparse_factor,
+                 use_activation_checkpoint,
+                 parallel_sampling,
+                 sequential_sampling,
+                 inference_diffusion_steps,
+                 inference_schedule,
+                 inference_trick,
+                 norm,
+                 rewrite,
+                 rewrite_steps,
+                 rewrite_ratio,
+                 rewrite_inference_steps,
+                 node_feature_only=False,
+                 ):
+        if env_name == 'tsp':
+            self.model = TSPT2TPolicy(
+                env_name,
+                n_layers,
+                hidden_dim,
+                aggregation,
+                diffusion_type,
+                diffusion_schedule,
+                diffusion_steps,
+                sparse_factor,
+                use_activation_checkpoint,
+                parallel_sampling,
+                sequential_sampling,
+                inference_diffusion_steps,
+                inference_schedule,
+                inference_trick,
+                norm,
+                rewrite,
+                rewrite_steps,
+                rewrite_ratio,
+                rewrite_inference_steps,
+                node_feature_only=False
+            )
+        elif env_name == 'mis':
+            self.model = MIST2TPolicy(
+                env_name,
+                n_layers,
+                hidden_dim,
+                aggregation,
+                diffusion_type,
+                diffusion_schedule,
+                diffusion_steps,
+                sparse_factor,
+                use_activation_checkpoint,
+                parallel_sampling,
+                sequential_sampling,
+                inference_diffusion_steps,
+                inference_schedule,
+                inference_trick,
+                norm,
+                rewrite,
+                rewrite_steps,
+                rewrite_ratio,
+                rewrite_inference_steps,
+                node_feature_only=True
+            )

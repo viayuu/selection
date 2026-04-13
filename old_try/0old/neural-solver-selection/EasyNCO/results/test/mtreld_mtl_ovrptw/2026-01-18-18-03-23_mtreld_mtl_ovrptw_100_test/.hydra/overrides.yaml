@@ -1,0 +1,14 @@
+- settings=mtreld_mtl_settings
+- mode=test
+- model=mtreld_mtl
+- problem=ovrptw
+- scale=100
+- cuda=[0]
+- test_data_path=mt/OVRPTW/ovrptw100_uniform.pkl
+- settings.test_loader.model_dirpath=pretrained/pretrained/reld_mtl
+- settings.test_loader.model_filename=epoch-5000.pt
+- episodes=1000
+- batch_size=100
+- ++settings.env.aug_factor=8
+- ++settings.module.decoder_strategy=greedy
+- ++settings.module.test_data_params.mode=1

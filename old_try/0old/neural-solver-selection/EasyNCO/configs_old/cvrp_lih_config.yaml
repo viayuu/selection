@@ -1,0 +1,100 @@
+# @package _global_
+
+
+defaults:
+  - _self_
+
+env:
+  _target_: EasyNCO.methods.envs.CVRPImproveEnv
+  problem_size: 50
+  pomo_size: 1
+  method_name: 'lih'
+
+
+val_env:
+  _target_: EasyNCO.methods.envs.CVRPImproveEnv
+  problem_size: ${env.problem_size}
+  pomo_size: ${env.problem_size}
+  method_name: 'lih'
+
+model:
+  _target_: EasyNCO.methods.main_loop.LIHPolicy
+  env_name: 'cvrp_improve'
+  num_heads: 1
+  qkv_dim: 128
+  num_encoder_layers: 3
+  normalization: 'batch'
+  feedforward_hidden: 512
+
+
+
+module:
+  _target_: EasyNCO.phases.train.rl.REINFORCELightning
+  baseline: 'critic'
+  problem_size: ${env.problem_size}
+  batch_size: 250
+  episodes: 1000
+  first_mode: 'random'
+  aug_type: 'pomo_aug'
+  aug_factor: 1
+  optimizer_params: {'optimizer': {
+        'lr': 1e-4,
+        'weight_decay': 1e-6
+    },
+#    'scheduler': {
+#        'milestones': [501,],
+#        'gamma': 0.1
+#    }
+  }
+  improve: True
+  T: 1000 # total_step_num 360/480  test 1000,3000,5000
+  n_step_return: 10  # n_step_ppo 10/12
+  test_strategy: 'sampling'
+
+#The most important hyperparameter to use is `reload_dataloaders_every_n_epochs`.
+#This allows for datasets to be re-created on the run and distributed by Lightning across
+#devices on each epoch. Setting to a value different than 1 may lead to overfitting to a
+#specific (such as the initial) data distribution.
+trainer:
+  _target_: EasyNCO.phases.train.rl.RLTrainer
+  max_epochs: 5
+  reload_dataloaders_every_n_epochs: 1
+  log_every_n_steps: 1
+  accelerator: 'gpu'
+  num_nodes: 1 # Number of gpu nodes for distributed training
+
+
+# https://www.tensorflow.org/tensorboard/
+#Solve the error: ImportError: cannot import name ‘notf‘ from ‘tensorboard.compat‘
+#Solution: Uninstall tensorflow and tensorboard(including all affiliated libraries)
+# and only install tensorboard if you are using pytorch.
+logger:
+  _target_: lightning.pytorch.loggers.TensorBoardLogger
+  save_dir: "tensorboard_log/"
+  name: null
+  log_graph: False
+  default_hp_metric: True
+  prefix: ""
+
+
+model_checkpoint:
+  _target_: lightning.pytorch.callbacks.ModelCheckpoint
+  dirpath: 'checkpoints_debug/'
+  filename: 'pomo-{epoch:02d}'
+  save_top_k: -1 # 保存所有检查点
+  every_n_epochs: 1 # 每1轮保存一次,
+
+test_loader:
+  model_dirpath: '/phases/train/outputs/LIH_model/cvrp_model/'
+  model_filename: 'cvrp50.pt'
+  data_path: '/data/datasets/test_dataset_tsp_uniform/test_tsp100_nums10000_uniform.pt'
+#  test_params: {
+#                 'test_episodes': 1000,
+#                 'test_batch_size': 100,
+#                 'test_strategy': 'greedy',
+#                 'aug_factor': 1,
+#                 'T' : 1000,
+#  }
+
+#custom_progressBar:
+#  _target_: EasyNCO.phases.single_obj.CustomProgressBar

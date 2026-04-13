@@ -1,0 +1,94 @@
+# @package _global_
+
+defaults:
+  - _self_
+
+model:
+  _target_: EasyNCO.methods.operators.neural_operators.LEHDPolicy
+  phase: 'train'
+  problem_type: 'tsp'
+  layer_num: 6
+  node_dim: 2
+  embed_dim: 128
+  num_heads: 8
+  qkv_dim: 16
+  feedforward_hidden: 512
+  normalization: None
+  multihead_bias: False
+
+
+module:
+  _target_: EasyNCO.phases.train.sl.SUPERVISELightning
+  problem_type: ${model.problem_type}
+  problem_size: 100
+  batch_size: 1024
+  train_episodes: ${module.batch_size} * 10
+  optimizer_params: {'optimizer': {
+        'lr': 1e-4,
+        #'weight_decay': 1e-6
+    },
+    'scheduler': {
+        'milestones': None,
+        'gamma': 0.97
+    }
+  }
+
+#The most important hyperparameter to use is `reload_dataloaders_every_n_epochs`.
+#This allows for datasets to be re-created on the run and distributed by Lightning across
+#devices on each epoch. Setting to a value different than 1 may lead to overfitting to a
+#specific (such as the initial) data distribution.
+trainer:
+  _target_: EasyNCO.phases.train.sl.SLTrainer
+  max_epochs: 5
+  reload_dataloaders_every_n_epochs: 1
+  log_every_n_steps: 1
+  accelerator: 'gpu'
+  num_nodes: 1 # Number of gpu nodes for distributed training
+
+
+# https://www.tensorflow.org/tensorboard/
+#Solve the error: ImportError: cannot import name ‘notf‘ from ‘tensorboard.compat‘
+#Solution: Uninstall tensorflow and tensorboard(including all affiliated libraries)
+# and only reinstall tensorboard if you are using pytorch.
+logger:
+  _target_: lightning.pytorch.loggers.TensorBoardLogger
+  save_dir: "tensorboard_log/"
+  name: null
+  log_graph: False
+  default_hp_metric: True
+  prefix: ""
+
+model_checkpoint:
+  _target_: lightning.pytorch.callbacks.ModelCheckpoint
+  dirpath: 'checkpoints_debug/'
+  filename: 'lehd-{epoch:02d}'
+  save_top_k: -1 # save all checkpoints
+  every_n_epochs: 1 # save it every epoch
+
+saved_ckpt: null  #${root_dir}/checkpoints_debug/am-epoch=04.ckpt
+
+tester:
+  _target_: EasyNCO.phases.eval.EVALUATELightning
+
+test_loader:
+  model_dirpath : "/phases/train/outputs/2024-11-09/22-17-46/checkpoints_debug/"
+  model_filename: 'lehd-epoch=04.ckpt'
+  data_dict : {
+                      use_customized_data : False,
+                      data_path : "/data/datasets/test_dataset_tsp_uniform/test_tsp200_nums128_uniform.pt"
+  }
+  test_params: {
+                 'test_episodes' : 10000,
+                 'test_batch_size' : 1000,
+                 'test_strategy' : 'greedy',
+                 'augmentation' : {
+                                    'enable' : False,
+                                    'aug_factor' : 1
+                 }
+  }
+
+test_env:
+  _target_: EasyNCO.methods.envs.TSPEnv
+  problem_size: 100
+  pomo_size: 4
+  method_name: 'lehd'

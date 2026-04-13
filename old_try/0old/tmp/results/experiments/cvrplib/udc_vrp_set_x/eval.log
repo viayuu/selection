@@ -1,0 +1,320 @@
+[2026-01-21 18:49:34,510][EasyNCO.utils.utils][INFO] - sandbox: False
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - sandbox_test_batch: {'_target_': 'EasyNCO.sandbox.test_batch.BQTestBatch'}
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - mode: test
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - model: udc
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - problem: cvrp
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - scale: 1000
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - num_job: 20
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - num_machine: 20
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - decoder_strategy: greedy
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - cuda: [0]
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - max_epochs: 5
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - batch_size: 1
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - episodes: 10
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - val_episode: 128
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - val_data_path: test_dataset_tsp_uniform/test_tsp200_nums128_uniform.pt
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - test_data_path: cvrplib/Vrp-Set-X
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - train_data_path: None
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - varying_data_params: {'scale_range': None, 'distribution_list': ['uniform', 'cluster'], 'capacity_range': None}
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - seed: 1234
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - disable_gpu: False
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - strategy: auto
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - matmul_precision: medium
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - precision: 32-true
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - enable_progress_bar: False
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - log_every_n_steps: 1
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - ckpt_path: None
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - save_top_k: -1
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - every_n_epochs: 1
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - dir: ./results/experiments/cvrplib/udc_vrp_set_x
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - logger: {'_target_': 'lightning.pytorch.loggers.TensorBoardLogger', 'save_dir': 'tensorboard', 'name': None, 'log_graph': False, 'default_hp_metric': True, 'prefix': ''}
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - settings.env: {'_target_': 'EasyNCO.neural_solvers.envs.CVRPEnv', 'problem_size': '${scale}', 'sub_problem_size': 100, 'aug_factor': 50, 'sample_size': 2, 'method_name': 'udc'}
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - settings.model: {'_target_': 'EasyNCO.neural_solvers.methods.UDCPolicy', 'env_name': '${problem}', 'num_heads': 8, 'qkv_dim': 16, 'num_encoder_layers': 6, 'feedforward_hidden': 512, 'feats': 3}
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - settings.initialization: {'_target_': 'EasyNCO.neural_solvers.methods.UDCInitialization'}
+[2026-01-21 18:49:34,511][EasyNCO.utils.utils][INFO] - settings.iteration: {'_target_': 'EasyNCO.neural_solvers.methods.UDCIteration'}
+[2026-01-21 18:49:34,512][EasyNCO.utils.utils][INFO] - settings.module: {'_target_': 'EasyNCO.phases.ARREINFORCELightning', 'method_name': '${model}', 'baseline': 'shared', 'problem_size': '${scale}', 'batch_size': '${batch_size}', 'episodes': '${episodes}', 'val_episode': '${val_episode}', 'optimizer_type': 'Adam', 'scheduler_type': None, 'optimizer_params': {'optimizer': {'lr': 0.0001, 'weight_decay': 0}, 'scheduler': {'milestones': [3001], 'gamma': 0.1}}, 'decoder_strategy': '${decoder_strategy}', 'every_n_steps_output': 100, 'train_data_params': {'problem_size_low': 500, 'problem_size_high': 1000}, 'test_data_params': {'graph': True, 'udc_flag': True}, 'val_data_params': {'graph': True, 'udc_flag': True}, 'initialization_params': {'optimizer_t': {'lr': 0.0001, 'weight_decay': 0}, 'pomo_size': 2}, 'iteration_params': {'udc_batch_size': 8, 'max_steps': 2}}
+[2026-01-21 18:49:34,512][EasyNCO.utils.utils][INFO] - settings.model_checkpoint: {'_target_': 'EasyNCO.utils.utils.CustomModelCheckpoint', 'dirpath': 'checkpoints', 'filename': '${model}_${problem}${scale}_{epoch:02d}', 'save_top_k': '${save_top_k}', 'every_n_epochs': '${every_n_epochs}'}
+[2026-01-21 18:49:34,512][EasyNCO.utils.utils][INFO] - settings.test_loader: {'model_dirpath': 'pretrained', 'model_filename': 'udc_cvrp_best.ckpt'}
+[2026-01-21 18:49:35,240][torch.distributed.nn.jit.instantiator][INFO] - Created a temporary directory at /tmp/tmphr8g6u1r
+[2026-01-21 18:49:35,240][torch.distributed.nn.jit.instantiator][INFO] - Writing /tmp/tmphr8g6u1r/_remote_module_non_scriptable.py
+[2026-01-21 18:55:23,298][EasyNCO.utils.utils][INFO] - sandbox: False
+[2026-01-21 18:55:23,298][EasyNCO.utils.utils][INFO] - sandbox_test_batch: {'_target_': 'EasyNCO.sandbox.test_batch.BQTestBatch'}
+[2026-01-21 18:55:23,298][EasyNCO.utils.utils][INFO] - mode: test
+[2026-01-21 18:55:23,298][EasyNCO.utils.utils][INFO] - model: udc
+[2026-01-21 18:55:23,298][EasyNCO.utils.utils][INFO] - problem: cvrp
+[2026-01-21 18:55:23,298][EasyNCO.utils.utils][INFO] - scale: 1000
+[2026-01-21 18:55:23,298][EasyNCO.utils.utils][INFO] - num_job: 20
+[2026-01-21 18:55:23,298][EasyNCO.utils.utils][INFO] - num_machine: 20
+[2026-01-21 18:55:23,298][EasyNCO.utils.utils][INFO] - decoder_strategy: greedy
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - cuda: [0]
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - max_epochs: 5
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - batch_size: 1
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - episodes: 10
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - val_episode: 128
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - val_data_path: test_dataset_tsp_uniform/test_tsp200_nums128_uniform.pt
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - test_data_path: cvrplib/Vrp-Set-X
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - train_data_path: None
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - varying_data_params: {'scale_range': None, 'distribution_list': ['uniform', 'cluster'], 'capacity_range': None}
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - seed: 1234
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - disable_gpu: False
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - strategy: auto
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - matmul_precision: medium
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - precision: 32-true
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - enable_progress_bar: False
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - log_every_n_steps: 1
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - ckpt_path: None
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - save_top_k: -1
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - every_n_epochs: 1
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - dir: ./results/experiments/cvrplib/udc_vrp_set_x
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - logger: {'_target_': 'lightning.pytorch.loggers.TensorBoardLogger', 'save_dir': 'tensorboard', 'name': None, 'log_graph': False, 'default_hp_metric': True, 'prefix': ''}
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - settings.env: {'_target_': 'EasyNCO.neural_solvers.envs.CVRPEnv', 'problem_size': '${scale}', 'sub_problem_size': 100, 'aug_factor': 50, 'sample_size': 2, 'method_name': 'udc'}
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - settings.model: {'_target_': 'EasyNCO.neural_solvers.methods.UDCPolicy', 'env_name': '${problem}', 'num_heads': 8, 'qkv_dim': 16, 'num_encoder_layers': 6, 'feedforward_hidden': 512, 'feats': 3}
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - settings.initialization: {'_target_': 'EasyNCO.neural_solvers.methods.UDCInitialization'}
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - settings.iteration: {'_target_': 'EasyNCO.neural_solvers.methods.UDCIteration'}
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - settings.module: {'_target_': 'EasyNCO.phases.ARREINFORCELightning', 'method_name': '${model}', 'baseline': 'shared', 'problem_size': '${scale}', 'batch_size': '${batch_size}', 'episodes': '${episodes}', 'val_episode': '${val_episode}', 'optimizer_type': 'Adam', 'scheduler_type': None, 'optimizer_params': {'optimizer': {'lr': 0.0001, 'weight_decay': 0}, 'scheduler': {'milestones': [3001], 'gamma': 0.1}}, 'decoder_strategy': '${decoder_strategy}', 'every_n_steps_output': 100, 'train_data_params': {'problem_size_low': 500, 'problem_size_high': 1000}, 'test_data_params': {'graph': True, 'udc_flag': True}, 'val_data_params': {'graph': True, 'udc_flag': True}, 'initialization_params': {'optimizer_t': {'lr': 0.0001, 'weight_decay': 0}, 'pomo_size': 2}, 'iteration_params': {'udc_batch_size': 8, 'max_steps': 2}}
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - settings.model_checkpoint: {'_target_': 'EasyNCO.utils.utils.CustomModelCheckpoint', 'dirpath': 'checkpoints', 'filename': '${model}_${problem}${scale}_{epoch:02d}', 'save_top_k': '${save_top_k}', 'every_n_epochs': '${every_n_epochs}'}
+[2026-01-21 18:55:23,299][EasyNCO.utils.utils][INFO] - settings.test_loader: {'model_dirpath': 'pretrained', 'model_filename': 'udc_cvrp_best.ckpt'}
+[2026-01-21 18:55:28,600][torch.distributed.nn.jit.instantiator][INFO] - Created a temporary directory at /tmp/tmppkcovlce
+[2026-01-21 18:55:28,600][torch.distributed.nn.jit.instantiator][INFO] - Writing /tmp/tmppkcovlce/_remote_module_non_scriptable.py
+[2026-01-21 18:55:29,762][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  1, score:21397.000, aug_score:17404.000
+[2026-01-21 18:55:29,965][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  2, score:21397.000, aug_score:16554.000
+[2026-01-21 18:55:29,966][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   1/100(1.00%)  Time Est.: Elapsed[0.02m], Remain[1.67m]
+[2026-01-21 18:55:29,966][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[100], Name[	X-n120-k6], Completed   1/100(1.00%), Score: 21397.0000, Augmented Score: 16554.0000, Gap: 60.4935%, Augmented Gap: 24.1674%
+[2026-01-21 18:55:29,966][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 21397.0000, Avg Augmented: 16554.0000
+[2026-01-21 18:55:29,966][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 60.4935%, Avg Augmented: 24.1674%, Std: 0.0000%, Std Augmented: 0.0000%
+[2026-01-21 18:55:29,966][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 18:55:30,481][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  1, score:31219.000, aug_score:30009.000
+[2026-01-21 18:55:30,702][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  2, score:30333.000, aug_score:28369.000
+[2026-01-21 18:55:30,702][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   2/100(2.00%)  Time Est.: Elapsed[0.03m], Remain[1.43m]
+[2026-01-21 18:55:30,702][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[100], Name[	X-n459-k26], Completed   2/100(2.00%), Score: 30333.0000, Augmented Score: 28369.0000, Gap: 25.6597%, Augmented Gap: 17.5235%
+[2026-01-21 18:55:30,702][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 25865.0000, Avg Augmented: 22461.5000
+[2026-01-21 18:55:30,702][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 43.0766%, Avg Augmented: 20.8455%, Std: 17.4169%, Std Augmented: 3.3220%
+[2026-01-21 18:55:30,702][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 18:55:31,061][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  1, score:44846.000, aug_score:37104.000
+[2026-01-21 18:55:31,272][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  2, score:44846.000, aug_score:37104.000
+[2026-01-21 18:55:31,272][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   3/100(3.00%)  Time Est.: Elapsed[0.04m], Remain[1.25m]
+[2026-01-21 18:55:31,272][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[100], Name[	X-n237-k14], Completed   3/100(3.00%), Score: 44846.0000, Augmented Score: 37104.0000, Gap: 65.8383%, Augmented Gap: 37.2088%
+[2026-01-21 18:55:31,272][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 32192.0000, Avg Augmented: 27342.3333
+[2026-01-21 18:55:31,272][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 50.6639%, Avg Augmented: 26.2999%, Std: 17.8147%, Std Augmented: 8.1767%
+[2026-01-21 18:55:31,272][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 18:55:31,644][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  1, score:70007.000, aug_score:67533.000
+[2026-01-21 18:55:31,875][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  2, score:66202.000, aug_score:65810.000
+[2026-01-21 18:55:31,875][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   4/100(4.00%)  Time Est.: Elapsed[0.05m], Remain[1.17m]
+[2026-01-21 18:55:31,875][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[100], Name[	X-n200-k36], Completed   4/100(4.00%), Score: 66202.0000, Augmented Score: 65810.0000, Gap: 13.0151%, Augmented Gap: 12.3459%
+[2026-01-21 18:55:31,875][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 40694.5000, Avg Augmented: 36959.2500
+[2026-01-21 18:55:31,875][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 41.2517%, Avg Augmented: 22.8114%, Std: 22.4453%, Std Augmented: 9.3088%
+[2026-01-21 18:55:31,875][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - sandbox: False
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - sandbox_test_batch: {'_target_': 'EasyNCO.sandbox.test_batch.BQTestBatch'}
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - mode: test
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - model: udc
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - problem: cvrp
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - scale: 1000
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - num_job: 20
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - num_machine: 20
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - decoder_strategy: greedy
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - cuda: [0]
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - max_epochs: 5
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - batch_size: 1
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - episodes: 10
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - val_episode: 128
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - val_data_path: test_dataset_tsp_uniform/test_tsp200_nums128_uniform.pt
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - test_data_path: cvrplib/Vrp-Set-X
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - train_data_path: None
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - varying_data_params: {'scale_range': None, 'distribution_list': ['uniform', 'cluster'], 'capacity_range': None}
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - seed: 1234
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - disable_gpu: False
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - strategy: auto
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - matmul_precision: medium
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - precision: 32-true
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - enable_progress_bar: False
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - log_every_n_steps: 1
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - ckpt_path: None
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - save_top_k: -1
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - every_n_epochs: 1
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - dir: ./results/experiments/cvrplib/udc_vrp_set_x
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - logger: {'_target_': 'lightning.pytorch.loggers.TensorBoardLogger', 'save_dir': 'tensorboard', 'name': None, 'log_graph': False, 'default_hp_metric': True, 'prefix': ''}
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - settings.env: {'_target_': 'EasyNCO.neural_solvers.envs.CVRPEnv', 'problem_size': '${scale}', 'sub_problem_size': 100, 'aug_factor': 50, 'sample_size': 2, 'method_name': 'udc'}
+[2026-01-21 18:57:16,313][EasyNCO.utils.utils][INFO] - settings.model: {'_target_': 'EasyNCO.neural_solvers.methods.UDCPolicy', 'env_name': '${problem}', 'num_heads': 8, 'qkv_dim': 16, 'num_encoder_layers': 6, 'feedforward_hidden': 512, 'feats': 3}
+[2026-01-21 18:57:16,314][EasyNCO.utils.utils][INFO] - settings.initialization: {'_target_': 'EasyNCO.neural_solvers.methods.UDCInitialization'}
+[2026-01-21 18:57:16,314][EasyNCO.utils.utils][INFO] - settings.iteration: {'_target_': 'EasyNCO.neural_solvers.methods.UDCIteration'}
+[2026-01-21 18:57:16,314][EasyNCO.utils.utils][INFO] - settings.module: {'_target_': 'EasyNCO.phases.ARREINFORCELightning', 'method_name': '${model}', 'baseline': 'shared', 'problem_size': '${scale}', 'batch_size': '${batch_size}', 'episodes': '${episodes}', 'val_episode': '${val_episode}', 'optimizer_type': 'Adam', 'scheduler_type': None, 'optimizer_params': {'optimizer': {'lr': 0.0001, 'weight_decay': 0}, 'scheduler': {'milestones': [3001], 'gamma': 0.1}}, 'decoder_strategy': '${decoder_strategy}', 'every_n_steps_output': 100, 'train_data_params': {'problem_size_low': 500, 'problem_size_high': 1000}, 'test_data_params': {'graph': True, 'udc_flag': True}, 'val_data_params': {'graph': True, 'udc_flag': True}, 'initialization_params': {'optimizer_t': {'lr': 0.0001, 'weight_decay': 0}, 'pomo_size': 2}, 'iteration_params': {'udc_batch_size': 8, 'max_steps': 2}}
+[2026-01-21 18:57:16,314][EasyNCO.utils.utils][INFO] - settings.model_checkpoint: {'_target_': 'EasyNCO.utils.utils.CustomModelCheckpoint', 'dirpath': 'checkpoints', 'filename': '${model}_${problem}${scale}_{epoch:02d}', 'save_top_k': '${save_top_k}', 'every_n_epochs': '${every_n_epochs}'}
+[2026-01-21 18:57:16,314][EasyNCO.utils.utils][INFO] - settings.test_loader: {'model_dirpath': 'pretrained', 'model_filename': 'udc_cvrp_best.ckpt'}
+[2026-01-21 18:57:16,936][torch.distributed.nn.jit.instantiator][INFO] - Created a temporary directory at /tmp/tmpo6n9rorw
+[2026-01-21 18:57:16,936][torch.distributed.nn.jit.instantiator][INFO] - Writing /tmp/tmpo6n9rorw/_remote_module_non_scriptable.py
+[2026-01-21 18:57:18,083][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  1, score:21397.000, aug_score:17404.000
+[2026-01-21 18:57:18,287][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  2, score:21397.000, aug_score:16554.000
+[2026-01-21 18:57:18,287][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   1/100(1.00%)  Time Est.: Elapsed[0.02m], Remain[1.65m]
+[2026-01-21 18:57:18,287][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[100], Name[	X-n120-k6], Completed   1/100(1.00%), Score: 21397.0000, Augmented Score: 16554.0000, Gap: 60.4935%, Augmented Gap: 24.1674%
+[2026-01-21 18:57:18,287][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 21397.0000, Avg Augmented: 16554.0000
+[2026-01-21 18:57:18,288][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 60.4935%, Avg Augmented: 24.1674%, Std: 0.0000%, Std Augmented: 0.0000%
+[2026-01-21 18:57:18,288][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 18:57:18,804][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  1, score:31219.000, aug_score:30009.000
+[2026-01-21 18:57:19,026][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  2, score:30333.000, aug_score:28369.000
+[2026-01-21 18:57:19,026][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   2/100(2.00%)  Time Est.: Elapsed[0.03m], Remain[1.42m]
+[2026-01-21 18:57:19,026][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[100], Name[	X-n459-k26], Completed   2/100(2.00%), Score: 30333.0000, Augmented Score: 28369.0000, Gap: 25.6597%, Augmented Gap: 17.5235%
+[2026-01-21 18:57:19,026][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 25865.0000, Avg Augmented: 22461.5000
+[2026-01-21 18:57:19,026][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 43.0766%, Avg Augmented: 20.8455%, Std: 17.4169%, Std Augmented: 3.3220%
+[2026-01-21 18:57:19,026][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 18:57:19,385][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  1, score:44846.000, aug_score:37104.000
+[2026-01-21 18:57:19,595][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  2, score:44846.000, aug_score:37104.000
+[2026-01-21 18:57:19,595][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   3/100(3.00%)  Time Est.: Elapsed[0.04m], Remain[1.24m]
+[2026-01-21 18:57:19,596][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[100], Name[	X-n237-k14], Completed   3/100(3.00%), Score: 44846.0000, Augmented Score: 37104.0000, Gap: 65.8383%, Augmented Gap: 37.2088%
+[2026-01-21 18:57:19,596][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 32192.0000, Avg Augmented: 27342.3333
+[2026-01-21 18:57:19,596][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 50.6639%, Avg Augmented: 26.2999%, Std: 17.8147%, Std Augmented: 8.1767%
+[2026-01-21 18:57:19,596][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 18:57:19,967][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  1, score:70007.000, aug_score:67533.000
+[2026-01-21 18:57:20,197][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  2, score:66202.000, aug_score:65810.000
+[2026-01-21 18:57:20,198][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   4/100(4.00%)  Time Est.: Elapsed[0.05m], Remain[1.16m]
+[2026-01-21 18:57:20,198][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[100], Name[	X-n200-k36], Completed   4/100(4.00%), Score: 66202.0000, Augmented Score: 65810.0000, Gap: 13.0151%, Augmented Gap: 12.3459%
+[2026-01-21 18:57:20,198][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 40694.5000, Avg Augmented: 36959.2500
+[2026-01-21 18:57:20,198][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 41.2517%, Avg Augmented: 22.8114%, Std: 22.4453%, Std Augmented: 9.3088%
+[2026-01-21 18:57:20,198][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 18:57:51,307][EasyNCO.utils.utils][INFO] - sandbox: False
+[2026-01-21 18:57:51,307][EasyNCO.utils.utils][INFO] - sandbox_test_batch: {'_target_': 'EasyNCO.sandbox.test_batch.BQTestBatch'}
+[2026-01-21 18:57:51,307][EasyNCO.utils.utils][INFO] - mode: test
+[2026-01-21 18:57:51,307][EasyNCO.utils.utils][INFO] - model: udc
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - problem: cvrp
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - scale: 1000
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - num_job: 20
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - num_machine: 20
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - decoder_strategy: greedy
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - cuda: [0]
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - max_epochs: 5
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - batch_size: 1
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - episodes: 10
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - val_episode: 128
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - val_data_path: test_dataset_tsp_uniform/test_tsp200_nums128_uniform.pt
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - test_data_path: cvrplib/Vrp-Set-X
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - train_data_path: None
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - varying_data_params: {'scale_range': None, 'distribution_list': ['uniform', 'cluster'], 'capacity_range': None}
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - seed: 1234
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - disable_gpu: False
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - strategy: auto
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - matmul_precision: medium
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - precision: 32-true
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - enable_progress_bar: False
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - log_every_n_steps: 1
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - ckpt_path: None
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - save_top_k: -1
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - every_n_epochs: 1
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - dir: ./results/experiments/cvrplib/udc_vrp_set_x
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - logger: {'_target_': 'lightning.pytorch.loggers.TensorBoardLogger', 'save_dir': 'tensorboard', 'name': None, 'log_graph': False, 'default_hp_metric': True, 'prefix': ''}
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - settings.env: {'_target_': 'EasyNCO.neural_solvers.envs.CVRPEnv', 'problem_size': '${scale}', 'sub_problem_size': 100, 'aug_factor': 50, 'sample_size': 2, 'method_name': 'udc'}
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - settings.model: {'_target_': 'EasyNCO.neural_solvers.methods.UDCPolicy', 'env_name': '${problem}', 'num_heads': 8, 'qkv_dim': 16, 'num_encoder_layers': 6, 'feedforward_hidden': 512, 'feats': 3}
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - settings.initialization: {'_target_': 'EasyNCO.neural_solvers.methods.UDCInitialization'}
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - settings.iteration: {'_target_': 'EasyNCO.neural_solvers.methods.UDCIteration'}
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - settings.module: {'_target_': 'EasyNCO.phases.ARREINFORCELightning', 'method_name': '${model}', 'baseline': 'shared', 'problem_size': '${scale}', 'batch_size': '${batch_size}', 'episodes': '${episodes}', 'val_episode': '${val_episode}', 'optimizer_type': 'Adam', 'scheduler_type': None, 'optimizer_params': {'optimizer': {'lr': 0.0001, 'weight_decay': 0}, 'scheduler': {'milestones': [3001], 'gamma': 0.1}}, 'decoder_strategy': '${decoder_strategy}', 'every_n_steps_output': 100, 'train_data_params': {'problem_size_low': 500, 'problem_size_high': 1000}, 'test_data_params': {'graph': True, 'udc_flag': True}, 'val_data_params': {'graph': True, 'udc_flag': True}, 'initialization_params': {'optimizer_t': {'lr': 0.0001, 'weight_decay': 0}, 'pomo_size': 2}, 'iteration_params': {'udc_batch_size': 8, 'max_steps': 2}}
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - settings.model_checkpoint: {'_target_': 'EasyNCO.utils.utils.CustomModelCheckpoint', 'dirpath': 'checkpoints', 'filename': '${model}_${problem}${scale}_{epoch:02d}', 'save_top_k': '${save_top_k}', 'every_n_epochs': '${every_n_epochs}'}
+[2026-01-21 18:57:51,308][EasyNCO.utils.utils][INFO] - settings.test_loader: {'model_dirpath': 'pretrained', 'model_filename': 'udc_cvrp_best.ckpt'}
+[2026-01-21 18:57:51,930][torch.distributed.nn.jit.instantiator][INFO] - Created a temporary directory at /tmp/tmpaeumu4f4
+[2026-01-21 18:57:51,930][torch.distributed.nn.jit.instantiator][INFO] - Writing /tmp/tmpaeumu4f4/_remote_module_non_scriptable.py
+[2026-01-21 18:57:53,066][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  1, score:21397.000, aug_score:17404.000
+[2026-01-21 18:57:53,270][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  2, score:21397.000, aug_score:16554.000
+[2026-01-21 18:57:53,270][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   1/100(1.00%)  Time Est.: Elapsed[0.02m], Remain[1.66m]
+[2026-01-21 18:57:53,270][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[100], Name[	X-n120-k6], Completed   1/100(1.00%), Score: 21397.0000, Augmented Score: 16554.0000, Gap: 60.4935%, Augmented Gap: 24.1674%
+[2026-01-21 18:57:53,270][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 21397.0000, Avg Augmented: 16554.0000
+[2026-01-21 18:57:53,270][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 60.4935%, Avg Augmented: 24.1674%, Std: 0.0000%, Std Augmented: 0.0000%
+[2026-01-21 18:57:53,270][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 18:57:53,790][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  1, score:31219.000, aug_score:30009.000
+[2026-01-21 18:57:54,012][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  2, score:30333.000, aug_score:28369.000
+[2026-01-21 18:57:54,012][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   2/100(2.00%)  Time Est.: Elapsed[0.03m], Remain[1.43m]
+[2026-01-21 18:57:54,012][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[100], Name[	X-n459-k26], Completed   2/100(2.00%), Score: 30333.0000, Augmented Score: 28369.0000, Gap: 25.6597%, Augmented Gap: 17.5235%
+[2026-01-21 18:57:54,012][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 25865.0000, Avg Augmented: 22461.5000
+[2026-01-21 18:57:54,012][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 43.0766%, Avg Augmented: 20.8455%, Std: 17.4169%, Std Augmented: 3.3220%
+[2026-01-21 18:57:54,012][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 18:57:54,374][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  1, score:44846.000, aug_score:37104.000
+[2026-01-21 18:57:54,585][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  2, score:44846.000, aug_score:37104.000
+[2026-01-21 18:57:54,585][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   3/100(3.00%)  Time Est.: Elapsed[0.04m], Remain[1.25m]
+[2026-01-21 18:57:54,585][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[100], Name[	X-n237-k14], Completed   3/100(3.00%), Score: 44846.0000, Augmented Score: 37104.0000, Gap: 65.8383%, Augmented Gap: 37.2088%
+[2026-01-21 18:57:54,585][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 32192.0000, Avg Augmented: 27342.3333
+[2026-01-21 18:57:54,585][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 50.6639%, Avg Augmented: 26.2999%, Std: 17.8147%, Std Augmented: 8.1767%
+[2026-01-21 18:57:54,585][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 18:57:54,959][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  1, score:70007.000, aug_score:67533.000
+[2026-01-21 18:57:55,190][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  2, score:66202.000, aug_score:65810.000
+[2026-01-21 18:57:55,190][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   4/100(4.00%)  Time Est.: Elapsed[0.05m], Remain[1.17m]
+[2026-01-21 18:57:55,191][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[100], Name[	X-n200-k36], Completed   4/100(4.00%), Score: 66202.0000, Augmented Score: 65810.0000, Gap: 13.0151%, Augmented Gap: 12.3459%
+[2026-01-21 18:57:55,191][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 40694.5000, Avg Augmented: 36959.2500
+[2026-01-21 18:57:55,191][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 41.2517%, Avg Augmented: 22.8114%, Std: 22.4453%, Std Augmented: 9.3088%
+[2026-01-21 18:57:55,191][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - sandbox: False
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - sandbox_test_batch: {'_target_': 'EasyNCO.sandbox.test_batch.BQTestBatch'}
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - mode: test
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - model: udc
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - problem: cvrp
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - scale: 1000
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - num_job: 20
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - num_machine: 20
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - decoder_strategy: greedy
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - cuda: [0]
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - max_epochs: 5
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - batch_size: 1
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - episodes: 10
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - val_episode: 128
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - val_data_path: test_dataset_tsp_uniform/test_tsp200_nums128_uniform.pt
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - test_data_path: cvrplib/Vrp-Set-X
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - train_data_path: None
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - varying_data_params: {'scale_range': None, 'distribution_list': ['uniform', 'cluster'], 'capacity_range': None}
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - seed: 1234
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - disable_gpu: False
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - strategy: auto
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - matmul_precision: medium
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - precision: 32-true
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - enable_progress_bar: False
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - log_every_n_steps: 1
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - ckpt_path: None
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - save_top_k: -1
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - every_n_epochs: 1
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - dir: ./results/experiments/cvrplib/udc_vrp_set_x
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - logger: {'_target_': 'lightning.pytorch.loggers.TensorBoardLogger', 'save_dir': 'tensorboard', 'name': None, 'log_graph': False, 'default_hp_metric': True, 'prefix': ''}
+[2026-01-21 18:59:45,389][EasyNCO.utils.utils][INFO] - settings.env: {'_target_': 'EasyNCO.neural_solvers.envs.CVRPEnv', 'problem_size': '${scale}', 'sub_problem_size': 100, 'aug_factor': 1, 'sample_size': 2, 'method_name': 'udc'}
+[2026-01-21 18:59:45,390][EasyNCO.utils.utils][INFO] - settings.model: {'_target_': 'EasyNCO.neural_solvers.methods.UDCPolicy', 'env_name': '${problem}', 'num_heads': 8, 'qkv_dim': 16, 'num_encoder_layers': 6, 'feedforward_hidden': 512, 'feats': 3}
+[2026-01-21 18:59:45,390][EasyNCO.utils.utils][INFO] - settings.initialization: {'_target_': 'EasyNCO.neural_solvers.methods.UDCInitialization'}
+[2026-01-21 18:59:45,390][EasyNCO.utils.utils][INFO] - settings.iteration: {'_target_': 'EasyNCO.neural_solvers.methods.UDCIteration'}
+[2026-01-21 18:59:45,390][EasyNCO.utils.utils][INFO] - settings.module: {'_target_': 'EasyNCO.phases.ARREINFORCELightning', 'method_name': '${model}', 'baseline': 'shared', 'problem_size': '${scale}', 'batch_size': '${batch_size}', 'episodes': '${episodes}', 'val_episode': '${val_episode}', 'optimizer_type': 'Adam', 'scheduler_type': None, 'optimizer_params': {'optimizer': {'lr': 0.0001, 'weight_decay': 0}, 'scheduler': {'milestones': [3001], 'gamma': 0.1}}, 'decoder_strategy': '${decoder_strategy}', 'every_n_steps_output': 100, 'train_data_params': {'problem_size_low': 500, 'problem_size_high': 1000}, 'test_data_params': {'graph': True, 'udc_flag': True}, 'val_data_params': {'graph': True, 'udc_flag': True}, 'initialization_params': {'optimizer_t': {'lr': 0.0001, 'weight_decay': 0}, 'pomo_size': 2}, 'iteration_params': {'udc_batch_size': 8, 'max_steps': 2}}
+[2026-01-21 18:59:45,390][EasyNCO.utils.utils][INFO] - settings.model_checkpoint: {'_target_': 'EasyNCO.utils.utils.CustomModelCheckpoint', 'dirpath': 'checkpoints', 'filename': '${model}_${problem}${scale}_{epoch:02d}', 'save_top_k': '${save_top_k}', 'every_n_epochs': '${every_n_epochs}'}
+[2026-01-21 18:59:45,390][EasyNCO.utils.utils][INFO] - settings.test_loader: {'model_dirpath': 'pretrained', 'model_filename': 'udc_cvrp_best.ckpt'}
+[2026-01-21 18:59:46,026][torch.distributed.nn.jit.instantiator][INFO] - Created a temporary directory at /tmp/tmpflp5zor2
+[2026-01-21 18:59:46,026][torch.distributed.nn.jit.instantiator][INFO] - Writing /tmp/tmpflp5zor2/_remote_module_non_scriptable.py
+[2026-01-21 18:59:47,169][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  1, score:21394.000, aug_score:21394.000
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - sandbox: False
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - sandbox_test_batch: {'_target_': 'EasyNCO.sandbox.test_batch.BQTestBatch'}
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - mode: test
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - model: udc
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - problem: cvrp
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - scale: 50
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - num_job: 20
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - num_machine: 20
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - decoder_strategy: greedy
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - cuda: [0]
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - max_epochs: 5
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - batch_size: 1
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - episodes: 10
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - val_episode: 128
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - val_data_path: test_dataset_tsp_uniform/test_tsp200_nums128_uniform.pt
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - test_data_path: cvrplib/Vrp-Set-X
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - train_data_path: None
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - varying_data_params: {'scale_range': None, 'distribution_list': ['uniform', 'cluster'], 'capacity_range': None}
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - seed: 1234
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - disable_gpu: False
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - strategy: auto
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - matmul_precision: medium
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - precision: 32-true
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - enable_progress_bar: False
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - log_every_n_steps: 1
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - ckpt_path: None
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - save_top_k: -1
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - every_n_epochs: 1
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - dir: ./results/experiments/cvrplib/udc_vrp_set_x
+[2026-01-21 19:01:04,179][EasyNCO.utils.utils][INFO] - logger: {'_target_': 'lightning.pytorch.loggers.TensorBoardLogger', 'save_dir': 'tensorboard', 'name': None, 'log_graph': False, 'default_hp_metric': True, 'prefix': ''}
+[2026-01-21 19:01:04,180][EasyNCO.utils.utils][INFO] - settings.env: {'_target_': 'EasyNCO.neural_solvers.envs.CVRPEnv', 'problem_size': '${scale}', 'sub_problem_size': 100, 'aug_factor': 1, 'sample_size': 2, 'method_name': 'udc'}
+[2026-01-21 19:01:04,180][EasyNCO.utils.utils][INFO] - settings.model: {'_target_': 'EasyNCO.neural_solvers.methods.UDCPolicy', 'env_name': '${problem}', 'num_heads': 8, 'qkv_dim': 16, 'num_encoder_layers': 6, 'feedforward_hidden': 512, 'feats': 3}
+[2026-01-21 19:01:04,180][EasyNCO.utils.utils][INFO] - settings.initialization: {'_target_': 'EasyNCO.neural_solvers.methods.UDCInitialization'}
+[2026-01-21 19:01:04,180][EasyNCO.utils.utils][INFO] - settings.iteration: {'_target_': 'EasyNCO.neural_solvers.methods.UDCIteration'}
+[2026-01-21 19:01:04,180][EasyNCO.utils.utils][INFO] - settings.module: {'_target_': 'EasyNCO.phases.ARREINFORCELightning', 'method_name': '${model}', 'baseline': 'shared', 'problem_size': '${scale}', 'batch_size': '${batch_size}', 'episodes': '${episodes}', 'val_episode': '${val_episode}', 'optimizer_type': 'Adam', 'scheduler_type': None, 'optimizer_params': {'optimizer': {'lr': 0.0001, 'weight_decay': 0}, 'scheduler': {'milestones': [3001], 'gamma': 0.1}}, 'decoder_strategy': '${decoder_strategy}', 'every_n_steps_output': 100, 'train_data_params': {'problem_size_low': 500, 'problem_size_high': 1000}, 'test_data_params': {'graph': True, 'udc_flag': True}, 'val_data_params': {'graph': True, 'udc_flag': True}, 'initialization_params': {'optimizer_t': {'lr': 0.0001, 'weight_decay': 0}, 'pomo_size': 2}, 'iteration_params': {'udc_batch_size': 8, 'max_steps': 2}}
+[2026-01-21 19:01:04,180][EasyNCO.utils.utils][INFO] - settings.model_checkpoint: {'_target_': 'EasyNCO.utils.utils.CustomModelCheckpoint', 'dirpath': 'checkpoints', 'filename': '${model}_${problem}${scale}_{epoch:02d}', 'save_top_k': '${save_top_k}', 'every_n_epochs': '${every_n_epochs}'}
+[2026-01-21 19:01:04,180][EasyNCO.utils.utils][INFO] - settings.test_loader: {'model_dirpath': 'pretrained', 'model_filename': 'udc_cvrp_best.ckpt'}
+[2026-01-21 19:01:04,873][torch.distributed.nn.jit.instantiator][INFO] - Created a temporary directory at /tmp/tmpf6fk20l9
+[2026-01-21 19:01:04,873][torch.distributed.nn.jit.instantiator][INFO] - Writing /tmp/tmpf6fk20l9/_remote_module_non_scriptable.py
+[2026-01-21 19:01:06,014][EasyNCO.neural_solvers.methods.udc.iteration][INFO] - iter  1, score:21394.000, aug_score:21394.000

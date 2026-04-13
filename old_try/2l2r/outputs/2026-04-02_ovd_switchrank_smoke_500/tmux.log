@@ -1,0 +1,188 @@
+[02:40:53] 开始构建共享数据集
+[02:40:53] 扫描结果目录: /public/home/zhoucl/shiys/EasyNCO/results/test
+[02:40:53] 已找到最新 runs 数量: 20
+[02:40:53] 开始解析原始 .pt 数据集路径
+[02:40:53] TSP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_tsp_uniform/test_tsp100_nums10000_uniform.pt
+[02:40:53] CVRP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_vrp_uniform/test_vrp100_capacity50_nums10000_uniform.pt
+[02:40:53] 开始加载原始实例张量
+[02:40:53] 实例加载完成: tsp=10000, cvrp=10000
+[02:40:53] 开始聚合问题 tsp，候选方法数=12
+[02:40:53] tsp 可用实例数=500
+[02:40:55] 问题 tsp 聚合完成，当前累计样本数=500
+[02:40:55] 开始聚合问题 cvrp，候选方法数=8
+[02:40:55] cvrp 可用实例数=500
+[02:40:56] 问题 cvrp 聚合完成，当前累计样本数=1000
+[02:40:56] 全部样本构建完成，最终样本数=1000
+[02:40:56] 数据集构建完成，样本总数=1000
+[02:40:56] 开始做 train/val/test 分层切分
+[02:40:56] 数据切分完成: train=700, val=150, test=150
+[02:40:56] 训练集 baseline 拟合完成 | single_best_global=pointerformer | single_best_per_problem={'cvrp': 'lehd', 'tsp': 'icam'}
+[02:40:56] 训练集 hardness 参考均值 | cvrp=0.005709 | tsp=0.001280
+[02:40:56] cvrp one-vs-default candidates = ['icam', 'elg', 'omni']
+[02:40:56] cvrp one-vs-default gain priors = icam:0.7402, elg:0.7108, omni:0.3355
+[02:40:56] tsp one-vs-default candidates = ['lehd', 'pointerformer', 'elg', 'difusco']
+[02:40:56] tsp one-vs-default gain priors = lehd:0.7609, pointerformer:0.5055, difusco:0.4727, elg:0.3876
+[02:40:56] val 参考 baseline 已计算 | sbp_tsp_cost=7.736413 | sbp_cvrp_cost=16.259549
+[02:40:58] 模型构造完成: OneVsDefaultSwitchRanker
+[02:40:58] switch prob threshold grid = [0.3, 0.4, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9]
+[02:40:58] 开始监督排序训练: epochs=5 | batch_size=32 | loss=one_vs_default_switch_rank | hard_alpha=2.0 | prior=none | switch_scale=1.0 | select_by=gain_vs_single_best_per_problem
+[02:41:12] epoch=1 | step=20 | batch=20/22 | loss=1.315913 | mean_loss=1.369288 | mean_sample_weight=12.6527 | switch_pos_rate=0.250000
+[02:41:12]     gate_loss=0.673728 | rank_loss=0.642185 | mean_switch_prob=0.520849 | rank_pairs=30
+[02:41:12] epoch=1 | step=22 | batch=22/22 | loss=1.336652 | mean_loss=1.366363 | mean_sample_weight=10.2022 | switch_pos_rate=0.357143
+[02:41:12]     gate_loss=0.686855 | rank_loss=0.649797 | mean_switch_prob=0.520959 | rank_pairs=44
+[02:41:12] 完成 epoch 1/5 | train_mean_loss=1.366363 | pair_count=932 | mean_epoch_sample_weight=9.6118
+[02:41:12] checkpoint 已保存: 2l2r/outputs/2026-04-02_ovd_switchrank_smoke_500/checkpoints/epoch_0001.pt
+[02:41:13] val switch 阈值搜索完成 | cvrp=0.6000 | tsp=0.5000
+[02:41:13] epoch=1 | val | tsp_cost=7.736413 | cvrp_cost=16.259549 | gain_vs_sbp_macro=+0.000000
+[02:41:13] 发现新的 best val | metric=gain_vs_single_best_per_problem | selection_score=0.000000 | overall_mean_cost=11.997981 | checkpoint=2l2r/outputs/2026-04-02_ovd_switchrank_smoke_500/checkpoints/best.pt
+[02:41:15] epoch=2 | step=42 | batch=20/22 | loss=1.208464 | mean_loss=1.306366 | mean_sample_weight=7.3930 | switch_pos_rate=0.406250
+[02:41:15]     gate_loss=0.689034 | rank_loss=0.519430 | mean_switch_prob=0.534734 | rank_pairs=52
+[02:41:16] epoch=2 | step=44 | batch=22/22 | loss=1.295932 | mean_loss=1.304348 | mean_sample_weight=11.0538 | switch_pos_rate=0.285714
+[02:41:16]     gate_loss=0.687676 | rank_loss=0.608256 | mean_switch_prob=0.530217 | rank_pairs=33
+[02:41:16] 完成 epoch 2/5 | train_mean_loss=1.304348 | pair_count=932 | mean_epoch_sample_weight=9.6118
+[02:41:16] checkpoint 已保存: 2l2r/outputs/2026-04-02_ovd_switchrank_smoke_500/checkpoints/epoch_0002.pt
+[02:41:16] val switch 阈值搜索完成 | cvrp=0.6000 | tsp=0.5000
+[02:41:16] epoch=2 | val | tsp_cost=7.736413 | cvrp_cost=16.259549 | gain_vs_sbp_macro=+0.000000
+[02:41:16] val 未提升 | metric=gain_vs_single_best_per_problem | best_selection_score=0.000000 | current_selection_score=0.000000 | best_cost=11.997981 | current_cost=11.997981 | patience=1/5
+[02:41:19] epoch=3 | step=64 | batch=20/22 | loss=1.292223 | mean_loss=1.207114 | mean_sample_weight=9.1343 | switch_pos_rate=0.281250
+[02:41:19]     gate_loss=0.665769 | rank_loss=0.626454 | mean_switch_prob=0.546156 | rank_pairs=30
+[02:41:19] epoch=3 | step=66 | batch=22/22 | loss=1.048666 | mean_loss=1.215634 | mean_sample_weight=8.4404 | switch_pos_rate=0.214286
+[02:41:19]     gate_loss=0.715029 | rank_loss=0.333637 | mean_switch_prob=0.540196 | rank_pairs=27
+[02:41:19] 完成 epoch 3/5 | train_mean_loss=1.215634 | pair_count=932 | mean_epoch_sample_weight=9.6118
+[02:41:19] checkpoint 已保存: 2l2r/outputs/2026-04-02_ovd_switchrank_smoke_500/checkpoints/epoch_0003.pt
+[02:41:21] val switch 阈值搜索完成 | cvrp=0.6000 | tsp=0.5000
+[02:41:21] epoch=3 | val | tsp_cost=7.736080 | cvrp_cost=16.259549 | gain_vs_sbp_macro=+0.000167
+[02:41:22] 发现新的 best val | metric=gain_vs_single_best_per_problem | selection_score=0.000167 | overall_mean_cost=11.997814 | checkpoint=2l2r/outputs/2026-04-02_ovd_switchrank_smoke_500/checkpoints/best.pt
+[02:41:39] epoch=4 | step=86 | batch=20/22 | loss=1.660229 | mean_loss=1.150341 | mean_sample_weight=7.0206 | switch_pos_rate=0.343750
+[02:41:39]     gate_loss=0.695048 | rank_loss=0.965181 | mean_switch_prob=0.565080 | rank_pairs=41
+[02:41:40] epoch=4 | step=88 | batch=22/22 | loss=0.927804 | mean_loss=1.154345 | mean_sample_weight=7.6033 | switch_pos_rate=0.285714
+[02:41:40]     gate_loss=0.685155 | rank_loss=0.242648 | mean_switch_prob=0.561561 | rank_pairs=36
+[02:41:40] 完成 epoch 4/5 | train_mean_loss=1.154345 | pair_count=932 | mean_epoch_sample_weight=9.6118
+[02:41:40] checkpoint 已保存: 2l2r/outputs/2026-04-02_ovd_switchrank_smoke_500/checkpoints/epoch_0004.pt
+[02:41:44] val switch 阈值搜索完成 | cvrp=0.6500 | tsp=0.5500
+[02:41:44] epoch=4 | val | tsp_cost=7.736413 | cvrp_cost=16.259549 | gain_vs_sbp_macro=+0.000000
+[02:41:44] val 未提升 | metric=gain_vs_single_best_per_problem | best_selection_score=0.000167 | current_selection_score=0.000000 | best_cost=11.997814 | current_cost=11.997981 | patience=1/5
+[02:42:01] epoch=5 | step=108 | batch=20/22 | loss=0.964615 | mean_loss=1.153620 | mean_sample_weight=10.7427 | switch_pos_rate=0.406250
+[02:42:01]     gate_loss=0.657796 | rank_loss=0.306819 | mean_switch_prob=0.567300 | rank_pairs=63
+[02:42:02] epoch=5 | step=110 | batch=22/22 | loss=0.931997 | mean_loss=1.130201 | mean_sample_weight=17.6777 | switch_pos_rate=0.321429
+[02:42:02]     gate_loss=0.680971 | rank_loss=0.251026 | mean_switch_prob=0.574663 | rank_pairs=44
+[02:42:02] 完成 epoch 5/5 | train_mean_loss=1.130201 | pair_count=932 | mean_epoch_sample_weight=9.6118
+[02:42:02] checkpoint 已保存: 2l2r/outputs/2026-04-02_ovd_switchrank_smoke_500/checkpoints/epoch_0005.pt
+[02:42:05] val switch 阈值搜索完成 | cvrp=0.6500 | tsp=0.5500
+[02:42:05] epoch=5 | val | tsp_cost=7.736413 | cvrp_cost=16.259549 | gain_vs_sbp_macro=+0.000000
+[02:42:05] val 未提升 | metric=gain_vs_single_best_per_problem | best_selection_score=0.000167 | current_selection_score=0.000000 | best_cost=11.997814 | current_cost=11.997981 | patience=2/5
+[02:42:05] 最终 checkpoint 已保存: 2l2r/outputs/2026-04-02_ovd_switchrank_smoke_500/checkpoints/final.pt
+[02:42:05] 载入 best checkpoint 做最终评测: 2l2r/outputs/2026-04-02_ovd_switchrank_smoke_500/checkpoints/best.pt
+[02:42:09] 最终评测前重新用 val 搜索 switch threshold | cvrp=0.6000 | tsp=0.5000
+[02:42:09] 在 val 集上评测 (150 实例)...
+[02:42:12]     已评测 150/150...
+[02:42:12] val 评测完成 | mean_reward=0.846061 | top1_accuracy=0.340000 | mean_regret=0.037550 | mean_cost=11.997814
+[02:42:12] 在 test 集上评测 (150 实例)...
+[02:42:14]     已评测 150/150...
+[02:42:14] test 评测完成 | mean_reward=0.833896 | top1_accuracy=0.326667 | mean_regret=0.047525 | mean_cost=11.752711
+[02:42:14] 开始计算 baseline 对比
+[02:42:14] baseline 对比完成
+[02:42:14] 
+======================================================================
+  评测结果 | OneVsDefaultSwitchRanker
+======================================================================
+
+  ALL (150 实例):
+    mean_reward:    0.8339
+    mean_rank:      2.50
+    top1_hit_rate:    0.2733  (41/150)
+    top2_hit_rate:    0.5667  (85/150)
+    top3_hit_rate:    0.7267  (109/150)
+    regret:         0.0475
+    mean_cost:      11.7527  (模型选择)
+    oracle_cost:    11.7052  (每个实例选最好的)
+
+  TSP (75 实例):
+    mean_reward:    0.8297
+    mean_rank:      2.87
+    top1_hit_rate:    0.1600  (12/75)
+    top2_hit_rate:    0.4800  (36/75)
+    top3_hit_rate:    0.6267  (47/75)
+    regret:         0.0137
+    mean_cost:      7.8057  (模型选择)
+    oracle_cost:    7.7920  (每个实例选最好的)
+
+  CVRP (75 实例):
+    mean_reward:    0.8381
+    mean_rank:      2.13
+    top1_hit_rate:    0.3867  (29/75)
+    top2_hit_rate:    0.6533  (49/75)
+    top3_hit_rate:    0.8267  (62/75)
+    regret:         0.0813
+    mean_cost:      15.6997  (模型选择)
+    oracle_cost:    15.6183  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (75 实例):
+    oracle mean_cost:                7.7920  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.8057
+    single_best_per_problem:         7.8054
+    gain vs single_best_per_problem: -0.0004
+    single_best_global:              7.8007
+    random mean_cost:                10.7566  (均匀随机的期望)
+
+  CVRP (75 实例):
+    oracle mean_cost:                15.6183  (每实例选最好的, 上界)
+    模型选择 mean_cost:              15.6997
+    single_best_per_problem:         15.6997
+    gain vs single_best_per_problem: +0.0000
+    single_best_global:              15.6997
+    random mean_cost:                18.3355  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (75 实例):
+     0(lehd            ):    27 次 ( 36.0%)
+     3(icam            ):    48 次 ( 64.0%)
+
+  CVRP (75 实例):
+     0(lehd            ):    75 次 (100.0%)
+
+  ALL (150 实例):
+     0(lehd            ):   102 次 ( 68.0%)
+     3(icam            ):    48 次 ( 32.0%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )       27     7.7883       0.8367     0.1852       2.80
+     3(icam            )       48     7.8155       0.8258     0.1458       2.92
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )       75    15.6997       0.8381     0.3867       2.13
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (75 实例):
+     0(lehd            ):    28 次 ( 37.3%)
+     8(pointerformer   ):    21 次 ( 28.0%)
+     3(icam            ):    17 次 ( 22.7%)
+     1(elg             ):     7 次 (  9.3%)
+     9(difusco         ):     2 次 (  2.7%)
+
+  CVRP (75 实例):
+     0(lehd            ):    29 次 ( 38.7%)
+     3(icam            ):    27 次 ( 36.0%)
+     1(elg             ):    16 次 ( 21.3%)
+     7(omni            ):     3 次 (  4.0%)
+
+[02:42:14] summary 已写出: 2l2r/outputs/2026-04-02_ovd_switchrank_smoke_500/summary.json
+

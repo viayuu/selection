@@ -1,0 +1,283 @@
+[19:18:31] 实验开始，输出目录: /public/home/zhoucl/shiys/2cmab2/outputs/2026-04-02-nss_neural_ucb_diag_smoke
+[19:18:31] 开始构建共享数据集 | data_source=nss | arm数=9
+[19:18:31] 使用 NSS 数据源: /public/home/zhoucl/shiys/9nss论文/neural-solver-selection/datasets
+[19:18:31] 开始构建 NSS train split
+[19:18:31] NSS split=train problem=tsp 原始样本数=10000，实际使用=50
+[19:18:33] NSS split=train problem=cvrp 原始样本数=10000，实际使用=50
+[19:18:34] 开始构建 NSS val split
+[19:18:34] NSS split=val problem=tsp 原始样本数=1000，实际使用=50
+[19:18:34] NSS split=val problem=cvrp 原始样本数=1000，实际使用=50
+[19:18:35] 开始构建 NSS test split
+[19:18:35] NSS split=test problem=tsp 原始样本数=1000，实际使用=50
+[19:18:35] NSS split=test problem=cvrp 原始样本数=1000，实际使用=50
+[19:18:36] NSS 数据集构建完成: train=100, val=100, test=100
+[19:18:36] 数据集构建完成，样本总数=300
+[19:18:36] 检测到数据源自带 train/val/test split，直接使用预定义划分
+[19:18:36] 数据切分完成: train=100, val=100, test=100
+[19:18:36] 开始构造 selector: neural_ucb_diag
+[19:18:36] selector 构造完成: NeuralUCBDiag
+[19:18:36] 已开启周期性验证: 每 100 个 step 在 val 集评测一次
+[19:18:36] 开始训练 epoch 1/1 [NeuralUCBDiag]
+[19:18:53] step=100 | periodic val_greedy | mean_reward=0.516667 | top1=0.210000 | mean_regret=0.304356 | mean_cost=13.471063 || val_ucb: mean_reward=0.478333 | top1=0.120000 | mean_regret=0.330755 | mean_cost=13.497461
+[19:18:53] best checkpoint 已刷新: step=100 | metric=val_greedy.overall.mean_cost=13.471063 | path=/public/home/zhoucl/shiys/2cmab2/outputs/2026-04-02-nss_neural_ucb_diag_smoke/checkpoints/best.pt
+[19:18:53] 完成训练 epoch 1/1 [NeuralUCBDiag]
+[19:18:53] 最终评测前已恢复 best checkpoint: step=100 | metric=val_greedy.overall.mean_cost=13.471063 | path=/public/home/zhoucl/shiys/2cmab2/outputs/2026-04-02-nss_neural_ucb_diag_smoke/checkpoints/best.pt
+[19:18:53] 开始 selector 验证/测试评测
+[19:18:53] 在 val 集上评测 (100 实例, mode=greedy)...
+[19:18:53]     已评测 100/100...
+[19:18:53] val 评测完成 | mode=greedy | mean_reward=0.516667 | top1_accuracy=0.210000 | mean_regret=0.304356 | mean_cost=13.471063
+[19:18:53] 在 test 集上评测 (100 实例, mode=greedy)...
+[19:18:54]     已评测 100/100...
+[19:18:54] test 评测完成 | mode=greedy | mean_reward=0.577500 | top1_accuracy=0.260000 | mean_regret=0.238687 | mean_cost=12.950007
+[19:18:54] 在 val 集上评测 (100 实例, mode=ucb)...
+[19:18:58]     已评测 100/100...
+[19:18:58] val 评测完成 | mode=ucb | mean_reward=0.478333 | top1_accuracy=0.120000 | mean_regret=0.330755 | mean_cost=13.497461
+[19:18:58] 在 test 集上评测 (100 实例, mode=ucb)...
+[19:19:03]     已评测 100/100...
+[19:19:03] test 评测完成 | mode=ucb | mean_reward=0.527500 | top1_accuracy=0.190000 | mean_regret=0.283991 | mean_cost=12.995312
+[19:19:03] selector 验证/测试评测完成
+[19:19:03] 开始计算 baseline 对比
+[19:19:03] baseline 对比完成
+[19:19:03] 
+======================================================================
+  评测结果 | NeuralUCBDiag | mode=greedy
+======================================================================
+
+  ALL (100 实例):
+    mean_reward:    0.5775
+    mean_rank:      3.17
+    top1_hit_rate:    0.2600  (26/100)
+    top2_hit_rate:    0.4800  (48/100)
+    top3_hit_rate:    0.6100  (61/100)
+    regret:         0.2387
+    mean_cost:      12.9500  (模型选择)
+    oracle_cost:    12.7113  (每个实例选最好的)
+
+  TSP (50 实例):
+    mean_reward:    0.5200
+    mean_rank:      3.88
+    top1_hit_rate:    0.1600  (8/50)
+    top2_hit_rate:    0.3800  (19/50)
+    top3_hit_rate:    0.5200  (26/50)
+    regret:         0.1449
+    mean_cost:      7.9682  (模型选择)
+    oracle_cost:    7.8233  (每个实例选最好的)
+
+  CVRP (50 实例):
+    mean_reward:    0.6350
+    mean_rank:      2.46
+    top1_hit_rate:    0.3600  (18/50)
+    top2_hit_rate:    0.5800  (29/50)
+    top3_hit_rate:    0.7000  (35/50)
+    regret:         0.3325
+    mean_cost:      17.9318  (模型选择)
+    oracle_cost:    17.5994  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (50 实例):
+    oracle mean_cost:                7.8233  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.9682
+    single_best_per_problem:         7.9523
+    single_best_global:              7.9523
+    random mean_cost:                7.9362  (均匀随机的期望)
+
+  CVRP (50 实例):
+    oracle mean_cost:                17.5994  (每实例选最好的, 上界)
+    模型选择 mean_cost:              17.9318
+    single_best_per_problem:         17.8273
+    single_best_global:              17.8273
+    random mean_cost:                18.2806  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (50 实例):
+     0(bq              ):    14 次 ( 28.0%)
+     2(lehd            ):    36 次 ( 72.0%)
+
+  CVRP (50 实例):
+     0(bq              ):    15 次 ( 30.0%)
+     2(lehd            ):    31 次 ( 62.0%)
+     7(omni            ):     4 次 (  8.0%)
+
+  ALL (100 实例):
+     0(bq              ):    29 次 ( 29.0%)
+     2(lehd            ):    67 次 ( 67.0%)
+     7(omni            ):     4 次 (  4.0%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(bq              )       14     6.3180       0.6667     0.2857       3.00
+     2(lehd            )       36     8.6099       0.4630     0.1111       4.22
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(bq              )       15    14.7716       0.5667     0.4667       2.73
+     2(lehd            )       31    20.6754       0.7016     0.3548       2.19
+     7(omni            )        4     8.5198       0.3750     0.0000       3.50
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (50 实例):
+     0(bq              ):    15 次 ( 30.0%)
+     2(lehd            ):     9 次 ( 18.0%)
+     6(difusco500      ):     9 次 ( 18.0%)
+     3(t2t             ):     7 次 ( 14.0%)
+     1(elg             ):     5 次 ( 10.0%)
+     4(t2t500          ):     4 次 (  8.0%)
+     5(difusco         ):     1 次 (  2.0%)
+
+  CVRP (50 实例):
+     7(omni            ):    16 次 ( 32.0%)
+     0(bq              ):    13 次 ( 26.0%)
+     2(lehd            ):    11 次 ( 22.0%)
+     1(elg             ):     7 次 ( 14.0%)
+     8(mvmoe           ):     3 次 (  6.0%)
+
+[19:19:03] 
+======================================================================
+  评测结果 | NeuralUCBDiag | mode=ucb
+======================================================================
+
+  ALL (100 实例):
+    mean_reward:    0.5275
+    mean_rank:      3.30
+    top1_hit_rate:    0.1900  (19/100)
+    top2_hit_rate:    0.3900  (39/100)
+    top3_hit_rate:    0.5100  (51/100)
+    regret:         0.2840
+    mean_cost:      12.9953  (模型选择)
+    oracle_cost:    12.7113  (每个实例选最好的)
+
+  TSP (50 实例):
+    mean_reward:    0.5900
+    mean_rank:      3.46
+    top1_hit_rate:    0.1600  (8/50)
+    top2_hit_rate:    0.3800  (19/50)
+    top3_hit_rate:    0.5000  (25/50)
+    regret:         0.0871
+    mean_cost:      7.9103  (模型选择)
+    oracle_cost:    7.8233  (每个实例选最好的)
+
+  CVRP (50 实例):
+    mean_reward:    0.4650
+    mean_rank:      3.14
+    top1_hit_rate:    0.2200  (11/50)
+    top2_hit_rate:    0.4000  (20/50)
+    top3_hit_rate:    0.5200  (26/50)
+    regret:         0.4809
+    mean_cost:      18.0803  (模型选择)
+    oracle_cost:    17.5994  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (50 实例):
+    oracle mean_cost:                7.8233  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.9103
+    single_best_per_problem:         7.9523
+    single_best_global:              7.9523
+    random mean_cost:                7.9362  (均匀随机的期望)
+
+  CVRP (50 实例):
+    oracle mean_cost:                17.5994  (每实例选最好的, 上界)
+    模型选择 mean_cost:              18.0803
+    single_best_per_problem:         17.8273
+    single_best_global:              17.8273
+    random mean_cost:                18.2806  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (50 实例):
+     0(bq              ):     1 次 (  2.0%)
+     2(lehd            ):     5 次 ( 10.0%)
+     3(t2t             ):     1 次 (  2.0%)
+     4(t2t500          ):    18 次 ( 36.0%)
+     5(difusco         ):     4 次 (  8.0%)
+     6(difusco500      ):    21 次 ( 42.0%)
+
+  CVRP (50 实例):
+     0(bq              ):    15 次 ( 30.0%)
+     1(elg             ):     2 次 (  4.0%)
+     2(lehd            ):    25 次 ( 50.0%)
+     8(mvmoe           ):     8 次 ( 16.0%)
+
+  ALL (100 实例):
+     0(bq              ):    16 次 ( 16.0%)
+     1(elg             ):     2 次 (  2.0%)
+     2(lehd            ):    30 次 ( 30.0%)
+     3(t2t             ):     1 次 (  1.0%)
+     4(t2t500          ):    18 次 ( 18.0%)
+     5(difusco         ):     4 次 (  4.0%)
+     6(difusco500      ):    21 次 ( 21.0%)
+     8(mvmoe           ):     8 次 (  8.0%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(bq              )        1     8.8868       1.0000     1.0000       1.00
+     2(lehd            )        5     8.4730       0.4333     0.2000       4.40
+     3(t2t             )        1    11.3314       0.5000     0.0000       4.00
+     4(t2t500          )       18     8.3255       0.6574     0.1111       3.06
+     5(difusco         )        4     8.9937       0.4167     0.0000       4.50
+     6(difusco500      )       21     7.0047       0.5873     0.1905       3.48
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(bq              )       15    15.9624       0.4333     0.3333       3.27
+     1(elg             )        2    26.1915       0.3750     0.0000       3.50
+     2(lehd            )       25    19.1679       0.5900     0.2400       2.64
+     8(mvmoe           )        8    16.6247       0.1562     0.0000       4.38
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (50 实例):
+     0(bq              ):    15 次 ( 30.0%)
+     2(lehd            ):     9 次 ( 18.0%)
+     6(difusco500      ):     9 次 ( 18.0%)
+     3(t2t             ):     7 次 ( 14.0%)
+     1(elg             ):     5 次 ( 10.0%)
+     4(t2t500          ):     4 次 (  8.0%)
+     5(difusco         ):     1 次 (  2.0%)
+
+  CVRP (50 实例):
+     7(omni            ):    16 次 ( 32.0%)
+     0(bq              ):    13 次 ( 26.0%)
+     2(lehd            ):    11 次 ( 22.0%)
+     1(elg             ):     7 次 ( 14.0%)
+     8(mvmoe           ):     3 次 (  6.0%)
+
+[19:19:03] 开始写出结果文件到: /public/home/zhoucl/shiys/2cmab2/outputs/2026-04-02-nss_neural_ucb_diag_smoke
+[19:19:03] 结果文件写出完成
+{
+  "count": 100,
+  "mean_reward": 0.5775,
+  "top1_accuracy": 0.26,
+  "mean_regret": 0.23868673481402466,
+  "mean_cost": 12.95000705242157
+}
+
+结果已保存到: /public/home/zhoucl/shiys/2cmab2/outputs/2026-04-02-nss_neural_ucb_diag_smoke/summary.json
+

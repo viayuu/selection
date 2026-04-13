@@ -1,0 +1,12 @@
+- mode=test
+- model=dact
+- problem=tsp
+- scale=50
+- decoder_strategy=greedy
+- test_data_path=tsplib/tsplib
+- settings=dact_settings
+- varying_data_params.scale_range=[0,99]
+- settings.env._target_=EasyNCO.neural_solvers.envs.TSPEnv
+- settings.test_loader.model_dirpath=pretrained
+- settings.test_loader.model_filename=dact_tsp50.ckpt
+- settings.module.iteration_params.max_steps=1

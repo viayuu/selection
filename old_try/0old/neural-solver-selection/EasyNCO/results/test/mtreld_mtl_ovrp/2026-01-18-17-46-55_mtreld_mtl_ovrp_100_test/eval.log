@@ -1,0 +1,82 @@
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - mode: test
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - model: mtreld_mtl
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - problem: ovrp
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - scale: 100
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - num_job: 20
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - num_machine: 20
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - decoder_strategy: greedy
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - cuda: [0]
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - max_epochs: 90
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - batch_size: 100
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - episodes: 1000
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - val_episode: 128
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - val_data_path: cvrplib_data/datasets/Vrp-Set-XXL
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - test_data_path: mt/OVRP/ovrp100_uniform.pkl
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - train_data_path: None
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - varying_data_params: {'distribution_list': ['uniform'], 'use_triangular_capacity': True, 'triangular_params': [3, 6, 25]}
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - seed: 1234
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - disable_gpu: False
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - strategy: auto
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - matmul_precision: medium
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - precision: 32-true
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - enable_progress_bar: False
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - log_every_n_steps: 1
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - ckpt_path: None
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - save_top_k: -1
+[2026-01-18 17:46:55,540][EasyNCO.utils.utils][INFO] - every_n_epochs: 1
+[2026-01-18 17:46:55,541][EasyNCO.utils.utils][INFO] - dir: ./results/test/mtreld_mtl_ovrp/2026-01-18-17-46-55_mtreld_mtl_ovrp_100_test
+[2026-01-18 17:46:55,541][EasyNCO.utils.utils][INFO] - logger: {'_target_': 'lightning.pytorch.loggers.TensorBoardLogger', 'save_dir': 'tensorboard', 'name': None, 'log_graph': False, 'default_hp_metric': True, 'prefix': ''}
+[2026-01-18 17:46:55,541][EasyNCO.utils.utils][INFO] - settings.env: {'test_problem': 'OVRP', '_target_': 'EasyNCO.neural_solvers.envs.MVRPEnv', 'problem_size': '${scale}', 'pomo_size': '${scale}', 'mode': 1, 'aug_type': 'pomo_aug', 'aug_factor': 8, 'train_problems': ['VRPB', 'CVRP', 'OVRP', 'VRPTW', 'OVRPTW', 'VRPL', 'OVRPL']}
+[2026-01-18 17:46:55,541][EasyNCO.utils.utils][INFO] - settings.model: {'_target_': 'EasyNCO.neural_solvers.methods.mtreld_mtl.policy.MTReLDMTLPolicy', 'embedding_dim': 128, 'ff_hidden_dim': 512, 'num_heads': 8, 'qkv_dim': 16, 'encoder_layer_num': 6, 'normalization': 'none', 'norm_loc': 'norm_last', 'logit_clipping': 10, 'ffidt': True}
+[2026-01-18 17:46:55,541][EasyNCO.utils.utils][INFO] - settings.initialization: {'_target_': 'EasyNCO.neural_solvers.methods.pomo.initialization.POMOInitialization'}
+[2026-01-18 17:46:55,541][EasyNCO.utils.utils][INFO] - settings.iteration: {'_target_': 'EasyNCO.neural_solvers.pipeline.NoIteration'}
+[2026-01-18 17:46:55,541][EasyNCO.utils.utils][INFO] - settings.module: {'_target_': 'EasyNCO.phases.ARREINFORCELightning', 'method_name': '${model}', 'baseline': 'shared', 'problem_size': '${scale}', 'batch_size': '${batch_size}', 'episodes': '${episodes}', 'val_episode': '${val_episode}', 'decoder_strategy': 'greedy', 'optimizer_params': {'optimizer': {'lr': 0.0001, 'weight_decay': 1e-06}, 'scheduler': {'milestones': [4501], 'gamma': 0.1}}, 'test_data_params': {'mode': 1}}
+[2026-01-18 17:46:55,541][EasyNCO.utils.utils][INFO] - settings.model_checkpoint: {'_target_': 'EasyNCO.utils.utils.CustomModelCheckpoint', 'dirpath': 'checkpoints', 'filename': '${model}_${problem}${scale}_{epoch:02d}', 'save_top_k': '${save_top_k}', 'every_n_epochs': '${every_n_epochs}'}
+[2026-01-18 17:46:55,541][EasyNCO.utils.utils][INFO] - settings.test_loader: {'model_dirpath': 'pretrained/pretrained/reld_mtl', 'model_filename': 'epoch-5000.pt'}
+[2026-01-18 17:46:56,361][EasyNCO.utils.utils][INFO] - 🔥 Loaded ReLD author format: model_state_dict found with 68 parameters
+[2026-01-18 17:46:56,377][torch.distributed.nn.jit.instantiator][INFO] - Created a temporary directory at /tmp/tmpxyxorpdd
+[2026-01-18 17:46:56,377][torch.distributed.nn.jit.instantiator][INFO] - Writing /tmp/tmpxyxorpdd/_remote_module_non_scriptable.py
+[2026-01-18 17:46:57,942][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> 100/1000(10.00%)  Time Est.: Elapsed[0.02m], Remain[0.20m]
+[2026-01-18 17:46:57,942][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[mtvrp], Size[100], Completed 100/1000(10.00%), Score: 10.2680, Augmented Score: 10.1220
+[2026-01-18 17:46:57,942][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.2680, Avg Augmented: 10.1220
+[2026-01-18 17:46:57,942][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-18 17:46:58,849][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> 200/1000(20.00%)  Time Est.: Elapsed[0.04m], Remain[0.15m]
+[2026-01-18 17:46:58,849][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[mtvrp], Size[100], Completed 200/1000(20.00%), Score: 10.2698, Augmented Score: 10.1516
+[2026-01-18 17:46:58,849][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.2689, Avg Augmented: 10.1368
+[2026-01-18 17:46:58,849][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-18 17:46:59,756][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> 300/1000(30.00%)  Time Est.: Elapsed[0.05m], Remain[0.12m]
+[2026-01-18 17:46:59,756][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[mtvrp], Size[100], Completed 300/1000(30.00%), Score: 10.0960, Augmented Score: 9.9590
+[2026-01-18 17:46:59,756][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.2113, Avg Augmented: 10.0775
+[2026-01-18 17:46:59,756][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-18 17:47:00,663][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> 400/1000(40.00%)  Time Est.: Elapsed[0.07m], Remain[0.10m]
+[2026-01-18 17:47:00,663][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[mtvrp], Size[100], Completed 400/1000(40.00%), Score: 10.1482, Augmented Score: 9.9989
+[2026-01-18 17:47:00,663][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.1955, Avg Augmented: 10.0579
+[2026-01-18 17:47:00,663][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-18 17:47:01,569][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> 500/1000(50.00%)  Time Est.: Elapsed[0.08m], Remain[0.08m]
+[2026-01-18 17:47:01,569][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[mtvrp], Size[100], Completed 500/1000(50.00%), Score: 10.2588, Augmented Score: 10.1362
+[2026-01-18 17:47:01,569][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.2082, Avg Augmented: 10.0735
+[2026-01-18 17:47:01,569][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-18 17:47:02,476][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> 600/1000(60.00%)  Time Est.: Elapsed[0.10m], Remain[0.07m]
+[2026-01-18 17:47:02,476][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[mtvrp], Size[100], Completed 600/1000(60.00%), Score: 10.2399, Augmented Score: 10.1074
+[2026-01-18 17:47:02,476][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.2135, Avg Augmented: 10.0792
+[2026-01-18 17:47:02,476][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-18 17:47:03,382][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> 700/1000(70.00%)  Time Est.: Elapsed[0.11m], Remain[0.05m]
+[2026-01-18 17:47:03,382][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[mtvrp], Size[100], Completed 700/1000(70.00%), Score: 10.3225, Augmented Score: 10.1768
+[2026-01-18 17:47:03,382][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.2290, Avg Augmented: 10.0931
+[2026-01-18 17:47:03,382][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-18 17:47:04,289][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> 800/1000(80.00%)  Time Est.: Elapsed[0.13m], Remain[0.03m]
+[2026-01-18 17:47:04,289][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[mtvrp], Size[100], Completed 800/1000(80.00%), Score: 10.1193, Augmented Score: 9.9939
+[2026-01-18 17:47:04,289][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.2153, Avg Augmented: 10.0807
+[2026-01-18 17:47:04,289][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-18 17:47:05,196][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> 900/1000(90.00%)  Time Est.: Elapsed[0.14m], Remain[0.02m]
+[2026-01-18 17:47:05,196][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[mtvrp], Size[100], Completed 900/1000(90.00%), Score: 10.1519, Augmented Score: 10.0054
+[2026-01-18 17:47:05,196][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.2083, Avg Augmented: 10.0723
+[2026-01-18 17:47:05,197][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-18 17:47:06,104][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> 1000/1000(100.00%)  Time Est.: Elapsed[0.16m], Remain[0.00m]
+[2026-01-18 17:47:06,105][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[mtvrp], Size[100], Completed 1000/1000(100.00%), Score: 10.0506, Augmented Score: 9.9166
+[2026-01-18 17:47:06,105][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.1925, Avg Augmented: 10.0568
+[2026-01-18 17:47:06,105][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-18 17:47:06,108][EasyNCO.phases.rl.ar_reinforce][INFO] - Total Testing Time: 9.4938 seconds, 0.1582 minutes, 0.0026 hours
+[2026-01-18 17:47:06,108][EasyNCO.phases.rl.ar_reinforce][INFO] - Avg Time per Episode: 0.0095 seconds (Episode: 1000)
+[2026-01-18 17:47:06,108][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval Done ==> Tested 1000/1000(100.00%)  Time Est.: Elapsed[0.16m], Remain[0.00m]
+[2026-01-18 17:47:06,108][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval Done ==> Problem[mtvrp], Score Summary: Avg: 10.1925, Avg Augmented: 10.0568

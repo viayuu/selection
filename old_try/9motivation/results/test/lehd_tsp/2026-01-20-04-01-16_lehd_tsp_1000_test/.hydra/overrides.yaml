@@ -1,0 +1,14 @@
+- mode=test
+- model=lehd
+- problem=tsp
+- scale=1000
+- decoder_strategy=greedy
+- test_data_path=test_dataset_tsp_uniform/test_tsp1000_nums128_uniform.pt
+- settings=lehd_settings
+- settings.test_loader.model_dirpath=pretrained
+- settings.test_loader.model_filename=lehd_tsp100.ckpt
+- ++settings.env.aug_factor=1
+- seed=1234
+- cuda=[0]
+- episodes=128
+- batch_size=1

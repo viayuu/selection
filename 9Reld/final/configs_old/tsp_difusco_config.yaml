@@ -1,0 +1,89 @@
+# @package _global_
+
+defaults:
+  - _self_
+
+model:
+  _target_: EasyNCO.methods.operators.neural_operators.TSPDiffusionPolicy
+  problem_type: 'tsp'
+  n_layers: 12
+  hidden_dim: 256
+  aggregation: 'sum'
+  diffusion_type: 'categorical'
+  diffusion_schedule: 'linear'
+  diffusion_steps: 1000
+  sparse_factor: -1
+  node_feature_only: False
+  use_activation_checkpoint: False
+  parallel_sampling: 1
+  sequential_sampling: 1
+  inference_diffusion_steps: 50
+  inference_schedule: 'cosine'
+  inference_trick: 'ddim'
+
+
+module:
+  _target_: EasyNCO.phases.train.sl.SUPERVISELightningNAR
+  problem_type: ${model.problem_type}
+  problem_size: 100
+  batch_size: 16
+  episodes: 160
+  optimizer_params: {'optimizer': {
+        'lr': 1e-4,
+        #'weight_decay': 1e-6
+    },
+    'scheduler': {
+        'milestones': None,
+        'gamma': 0.97
+    }}
+
+
+#The most important hyperparameter to use is `reload_dataloaders_every_n_epochs`.
+#This allows for datasets to be re-created on the run and distributed by Lightning across
+#devices on each epoch. Setting to a value different than 1 may lead to overfitting to a
+#specific (such as the initial) data distribution.
+trainer:
+  _target_: EasyNCO.phases.train.sl.SLTrainer
+  max_epochs: 5
+  reload_dataloaders_every_n_epochs: 1
+  log_every_n_steps: 1
+  accelerator: 'gpu'
+  num_nodes: 1 # Number of gpu nodes for distributed training
+
+
+# https://www.tensorflow.org/tensorboard/
+#Solve the error: ImportError: cannot import name ‘notf‘ from ‘tensorboard.compat‘
+#Solution: Uninstall tensorflow and tensorboard(including all affiliated libraries)
+# and only reinstall tensorboard if you are using pytorch.
+logger:
+  _target_: lightning.pytorch.loggers.TensorBoardLogger
+  save_dir: "tensorboard_log/"
+  name: null
+  log_graph: False
+  default_hp_metric: True
+  prefix: ""
+
+model_checkpoint:
+  _target_: lightning.pytorch.callbacks.ModelCheckpoint
+  dirpath: 'checkpoints_debug/'
+  filename: 'difusco-{epoch:02d}'
+  save_top_k: -1 # save all checkpoints
+  every_n_epochs: 1 # save it every epoch
+
+saved_ckpt: null  #${root_dir}/checkpoints_debug/am-epoch=04.ckpt
+
+tester:
+  _target_: EasyNCO.phases.eval.EVALUATELightning
+
+test_loader:
+  model_dirpath : "/methods/operators/neural_operators/difusco/models/"
+  model_filename: 'tsp100_categorical.ckpt'
+  heatmap_path: '/phases/train/sl/heatmap/'
+  data_path : "/data/datasets/test_dataset_tsp_uniform/re_generate_test_TSP100_0423_n1w.txt"
+  test_params: {
+                 'test_episodes' : 160,
+                 'test_batch_size' : 16,
+                 'test_strategy' : 'greedy',
+                 'aug_factor' : 1,
+  }
+

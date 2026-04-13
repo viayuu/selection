@@ -1,0 +1,14 @@
+- mode=test
+- model=elg
+- problem=tsp
+- scale=1000
+- decoder_strategy=greedy
+- test_data_path=cross_distribution/tsp1000_explosion.pkl
+- settings=elg_settings
+- settings.test_loader.model_dirpath=pretrained
+- settings.test_loader.model_filename=elg_tsp100.ckpt
+- ++settings.env.aug_factor=8
+- seed=1234
+- cuda=[0]
+- episodes=100
+- batch_size=1

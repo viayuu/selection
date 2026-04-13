@@ -1,0 +1,97 @@
+# @package _global_
+
+# path to root directory
+# this requires PROJECT_ROOT environment variable to exist
+# you can replace it with "." if you want the root to be the current working directory
+root_dir: .
+
+# path to data directory
+data_dir: ${paths.root_dir}/data
+
+# path to logging directory
+log_dir: ${paths.root_dir}/logs
+
+# path to output directory, created dynamically by hydra
+# path generation pattern is specified in `configs/hydra/default.yaml`
+# use it to store all files generated during the run, like ckpts and metrics
+output_dir: ${hydra:runtime.output_dir}
+
+# path to working directory
+work_dir: ${hydra:runtime.cwd}
+
+defaults:
+  - _self_
+
+env:
+  _target_: EasyNCO.methods.envs.TSPEnv
+  problem_size: 20
+  pomo_size: 1 # In AM mode, pomo_size must be 1, because the model does not support multiple solutions
+
+model:
+  _target_: EasyNCO.methods.operators.neural_operators.AttentionModelPolicy
+  env_name: 'tsp'
+  num_heads: 8
+  qkv_dim: 16
+  num_encoder_layers: 3
+  normalization: 'batch'
+  feedforward_hidden: 512
+  logit_clipping: 10
+  use_graph_mean: True
+  am_mode: True
+  first_placeholder: True
+
+# baseline can be 'warmup' or 'rollout',
+# the difference is whether to use the exponential moving average of the reward as the baseline in the first epoch
+module:
+  _target_: EasyNCO.phases.train.rl.REINFORCELightning
+  baseline: 'warmup'
+  problem_size: ${env.problem_size}
+  batch_size: 128
+  train_episodes: 1280
+  first_mode: 'placeholder'
+  optimizer_params: {'optimizer': {
+        'lr': 1e-4,
+        #'weight_decay': 1e-6
+    },
+#    'scheduler': {
+#        'milestones': [501,],
+#        'gamma': 0.1
+#    }
+  }
+  val_data_size: 10000
+  val_batch_size: 5000
+
+#The most important hyperparameter to use is `reload_dataloaders_every_n_epochs`.
+#This allows for datasets to be re-created on the run and distributed by Lightning across
+#devices on each epoch. Setting to a value different than 1 may lead to overfitting to a
+#specific (such as the initial) data distribution.
+trainer:
+  _target_: EasyNCO.phases.train.rl.RLTrainer
+  max_epochs: 5
+  reload_dataloaders_every_n_epochs: 1
+  log_every_n_steps: 1
+  accelerator: 'gpu'
+  num_nodes: 1 # Number of gpu nodes for distributed training
+
+
+# https://www.tensorflow.org/tensorboard/
+#Solve the error: ImportError: cannot import name ‘notf‘ from ‘tensorboard.compat‘
+#Solution: Uninstall tensorflow and tensorboard(including all affiliated libraries)
+# and only reinstall tensorboard if you are using pytorch.
+logger:
+  _target_: lightning.pytorch.loggers.TensorBoardLogger
+  save_dir: "tensorboard_log/"
+  name: null
+  log_graph: False
+  default_hp_metric: True
+  prefix: ""
+
+
+model_checkpoint:
+  _target_: lightning.pytorch.callbacks.ModelCheckpoint
+  dirpath: 'checkpoints_debug/'
+  filename: 'am-{epoch:02d}'
+  save_top_k: -1 # save all checkpoints
+  every_n_epochs: 1 # save it every epoch
+
+saved_ckpt: null  #${root_dir}/checkpoints_debug/am-epoch=04.ckpt

@@ -1,0 +1,87 @@
+# https://hydra.cc/docs/configure_hydra/intro/
+env:
+  _target_: EasyNCO.neural_solvers.envs.JSSPEnv
+#  problem_size: ${scale}
+  time_low: &time_low 1
+  time_high: &time_high 99
+  method_name: ${model}
+  num_job: ${num_job}
+  num_machine: ${num_machine}
+
+
+model:
+  _target_: EasyNCO.neural_solvers.methods.L2SPolicy
+  in_dim: 3
+  hidden_dim: 128
+  embedding_l: 4
+  policy_l: 4
+  embedding_type: 'gin+dghan' #'gin', 'dghan', 'gin+dghan'
+  num_heads: 1 # dghan parameters
+  dropout: 0. # dghan parameters
+
+
+initialization:
+  _target_: EasyNCO.neural_solvers.methods.L2SInitialization
+
+iteration:
+  _target_: EasyNCO.neural_solvers.methods.L2SIteration
+
+
+module:
+  _target_: EasyNCO.phases.ARREINFORCELightning #
+  method_name: ${model}
+  baseline: 'shared'
+  problem_size: ${scale}
+  num_job: ${num_job}
+  num_machine: ${num_machine}
+  batch_size: ${batch_size}
+  episodes: ${episodes}
+  optimizer_type: 'Adam' # 'Adam', 'AdamW'
+  scheduler_type: null #'ExponentialLR', 'MultiStepLR'
+  optimizer_params: {
+    'optimizer': {
+        'lr': 5e-5,
+#        'weight_decay': 1e-6
+    },
+#    'scheduler': {
+#        'milestones': [501,],
+#        'gamma': 0.1
+#    }
+  }
+  decoder_strategy: ${decoder_strategy}
+  every_n_steps_output: 2 # output log every n steps (i.e., batch)
+  improve: True
+
+  initialization_params:
+    init_type: 'fdd-divide-mwkr'  #'plist', 'spt', 'fdd-divide-mwkr'
+  iteration_params:
+    n_step_return: 10
+    reward_type: 'l2s'
+    max_steps: 500  #500
+  train_data_params:
+    time_low: *time_low
+    time_high: *time_high
+  test_data_params:
+    time_low: *time_low
+    time_high: *time_high
+
+model_checkpoint:
+  #_target_: lightning.pytorch.callbacks.ModelCheckpoint
+  _target_: EasyNCO.utils.utils.CustomModelCheckpoint
+  dirpath: checkpoints
+  filename: ${model}_${problem}${scale}_{epoch:02d}
+  save_top_k: ${save_top_k}
+  every_n_epochs: ${every_n_epochs}
+
+trainer:
+  _target_: lightning.pytorch.Trainer
+  max_epochs: ${max_epochs} # max epochs
+  reload_dataloaders_every_n_epochs: 1 # RL: 1, SL: 0
+  log_every_n_steps: ${log_every_n_steps} # log every n steps
+  precision: ${precision}
+  enable_progress_bar: ${enable_progress_bar} # disable progress bar
+#  gradient_clip_val: 1.0
+
+test_loader:
+  model_dirpath: pretrained    #./results/train/pomo_cvrp/2025-05-21-10-05-48_pomo_cvrp_100_train
+  model_filename: l2s_jssp10×10.ckpt                          #${model}_${problem}${scale}_epoch=04.ckpt

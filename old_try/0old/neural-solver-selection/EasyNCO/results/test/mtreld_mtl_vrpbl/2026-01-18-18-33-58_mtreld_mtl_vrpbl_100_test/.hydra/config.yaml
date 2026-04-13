@@ -1,0 +1,110 @@
+mode: test
+model: mtreld_mtl
+problem: vrpbl
+scale: 100
+num_job: 20
+num_machine: 20
+decoder_strategy: greedy
+cuda:
+- 0
+max_epochs: 90
+batch_size: 100
+episodes: 1000
+val_episode: 128
+val_data_path: cvrplib_data/datasets/Vrp-Set-XXL
+test_data_path: mt/VRPBL/vrpbl100_uniform.pkl
+train_data_path: null
+varying_data_params:
+  distribution_list:
+  - uniform
+  use_triangular_capacity: true
+  triangular_params:
+  - 3
+  - 6
+  - 25
+seed: 2024
+disable_gpu: false
+strategy: auto
+matmul_precision: highest
+precision: 32-true
+enable_progress_bar: false
+log_every_n_steps: 1
+ckpt_path: null
+save_top_k: -1
+every_n_epochs: 1
+dir: ./results/${mode}/${model}_${problem}/${now:%Y-%m-%d}-${now:%H-%M-%S}_${model}_${problem}_${scale}_${mode}
+logger:
+  _target_: lightning.pytorch.loggers.TensorBoardLogger
+  save_dir: tensorboard
+  name: null
+  log_graph: false
+  default_hp_metric: true
+  prefix: ''
+settings:
+  env:
+    _target_: EasyNCO.neural_solvers.envs.MVRPEnv
+    problem_size: ${scale}
+    pomo_size: ${scale}
+    mode: 1
+    aug_type: pomo_aug
+    aug_factor: 8
+    train_problems:
+    - VRPB
+    - CVRP
+    - OVRP
+    - VRPTW
+    - OVRPTW
+    - VRPL
+    - OVRPL
+    test_problem: ${problem}
+  model:
+    _target_: EasyNCO.neural_solvers.methods.mtreld_mtl.policy.MTReLDMTLPolicy
+    embedding_dim: 128
+    ff_hidden_dim: 512
+    num_heads: 8
+    qkv_dim: 16
+    encoder_layer_num: 6
+    normalization: none
+    norm_loc: norm_last
+    logit_clipping: 10
+    ffidt: true
+  initialization:
+    _target_: EasyNCO.neural_solvers.methods.pomo.initialization.POMOInitialization
+  iteration:
+    _target_: EasyNCO.neural_solvers.pipeline.NoIteration
+  module:
+    _target_: EasyNCO.phases.ARREINFORCELightning
+    method_name: ${model}
+    baseline: shared
+    problem_size: ${scale}
+    batch_size: ${batch_size}
+    episodes: ${episodes}
+    val_episode: ${val_episode}
+    decoder_strategy: greedy
+    optimizer_params:
+      optimizer:
+        lr: 0.0001
+        weight_decay: 1.0e-06
+      scheduler:
+        milestones:
+        - 4501
+        gamma: 0.1
+    test_data_params:
+      mode: 1
+  model_checkpoint:
+    _target_: EasyNCO.utils.utils.CustomModelCheckpoint
+    dirpath: checkpoints
+    filename: ${model}_${problem}${scale}_{epoch:02d}
+    save_top_k: ${save_top_k}
+    every_n_epochs: ${every_n_epochs}
+  trainer:
+    _target_: lightning.pytorch.Trainer
+    max_epochs: ${max_epochs}
+    reload_dataloaders_every_n_epochs: 1
+    log_every_n_steps: ${log_every_n_steps}
+    precision: ${precision}
+    enable_progress_bar: ${enable_progress_bar}
+    gradient_clip_val: 1.0
+  test_loader:
+    model_dirpath: pretrained/pretrained/reld_mtl
+    model_filename: epoch-5000.pt

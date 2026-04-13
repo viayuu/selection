@@ -1,0 +1,50 @@
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - sandbox: False
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - sandbox_test_batch: {'_target_': 'EasyNCO.sandbox.test_batch.BQTestBatch'}
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - mode: test
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - model: omni
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - problem: tsp
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - scale: 50
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - num_job: 20
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - num_machine: 20
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - decoder_strategy: greedy
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - cuda: [0]
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - max_epochs: 5
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - batch_size: 1
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - episodes: 10
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - val_episode: 128
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - val_data_path: test_dataset_tsp_uniform/test_tsp200_nums128_uniform.pt
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - test_data_path: tsplib/tsplib
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - train_data_path: None
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - varying_data_params: {'scale_range': None, 'distribution_list': ['uniform', 'cluster'], 'capacity_range': [50, 100]}
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - seed: 1234
+[2026-01-18 22:04:16,254][EasyNCO.utils.utils][INFO] - disable_gpu: False
+[2026-01-18 22:04:16,255][EasyNCO.utils.utils][INFO] - strategy: auto
+[2026-01-18 22:04:16,255][EasyNCO.utils.utils][INFO] - matmul_precision: medium
+[2026-01-18 22:04:16,255][EasyNCO.utils.utils][INFO] - precision: 32-true
+[2026-01-18 22:04:16,255][EasyNCO.utils.utils][INFO] - enable_progress_bar: False
+[2026-01-18 22:04:16,255][EasyNCO.utils.utils][INFO] - log_every_n_steps: 1
+[2026-01-18 22:04:16,255][EasyNCO.utils.utils][INFO] - ckpt_path: None
+[2026-01-18 22:04:16,255][EasyNCO.utils.utils][INFO] - save_top_k: -1
+[2026-01-18 22:04:16,255][EasyNCO.utils.utils][INFO] - every_n_epochs: 1
+[2026-01-18 22:04:16,255][EasyNCO.utils.utils][INFO] - dir: ./results/test/omni_tsp/2026-01-18-22-04-16_omni_tsp_50_test
+[2026-01-18 22:04:16,255][EasyNCO.utils.utils][INFO] - logger: {'_target_': 'lightning.pytorch.loggers.TensorBoardLogger', 'save_dir': 'tensorboard', 'name': None, 'log_graph': False, 'default_hp_metric': True, 'prefix': ''}
+[2026-01-18 22:04:16,255][EasyNCO.utils.utils][INFO] - settings.env: {'_target_': 'EasyNCO.neural_solvers.envs.TSPEnv', 'problem_size': '${scale}', 'pomo_size': '${scale}', 'aug_type': 'pomo_aug', 'aug_factor': 8}
+[2026-01-18 22:04:16,255][EasyNCO.utils.utils][INFO] - settings.model: {'_target_': 'EasyNCO.neural_solvers.methods.OMNI_POMO_Policy', 'env_name': '${problem}', 'num_heads': 8, 'qkv_dim': 16, 'num_encoder_layers': 6, 'normalization': 'batch_no_track', 'feedforward_hidden': 512, 'logit_clipping': 10, 'use_graph_mean': False, 'am_mode': False, 'first_placeholder': False, 'first_mode': 'random'}
+[2026-01-18 22:04:16,255][EasyNCO.utils.utils][INFO] - settings.initialization: {'_target_': 'EasyNCO.neural_solvers.methods.OMNIInitialization'}
+[2026-01-18 22:04:16,255][EasyNCO.utils.utils][INFO] - settings.fine_tune_initialization: {'_target_': 'EasyNCO.neural_solvers.methods.POMOInitialization'}
+[2026-01-18 22:04:16,255][EasyNCO.utils.utils][INFO] - settings.iteration: {'_target_': 'EasyNCO.neural_solvers.pipeline.NoIteration'}
+[2026-01-18 22:04:16,255][EasyNCO.utils.utils][INFO] - settings.module: {'_target_': 'EasyNCO.phases.ARREINFORCELightning', 'method_name': '${model}', 'baseline': 'shared', 'problem_size': '${scale}', 'batch_size': '${batch_size}', 'episodes': '${episodes}', 'aug_type': 'pomo_aug', 'optimizer_type': 'Adam', 'scheduler_type': None, 'optimizer_params': {'optimizer': {'lr': 0.0001, 'weight_decay': 1e-06}}, 'decoder_strategy': '${decoder_strategy}', 'every_n_steps_output': 2, 'mode': '${mode}', 'fine_tune': {'enable': False, 'fine_tune_episodes': 1000, 'k': 1, 'augmentation_enable': False, 'fine_tune_batch_size': 10, 'optimizer': {'lr': 1e-05, 'weight_decay': 1e-06}}, 'initialization_params': {'meta_params': {'meta_method': 'maml_fomaml', 'data_type': 'size_distribution', 'switch_epochs': 50000, 'B': 1, 'k': 1, 'meta_batch_size': 64, 'update_weight': 100, 'sch_epoch': 225000, 'solver': 'lkh3_offline', 'beta': 0.9}}}
+[2026-01-18 22:04:16,255][EasyNCO.utils.utils][INFO] - settings.model_checkpoint: {'_target_': 'EasyNCO.utils.utils.CustomModelCheckpoint', 'dirpath': 'checkpoints', 'filename': '${model}_${problem}${scale}_{epoch:02d}', 'save_top_k': '${save_top_k}', 'every_n_epochs': '${every_n_epochs}'}
+[2026-01-18 22:04:16,255][EasyNCO.utils.utils][INFO] - settings.test_loader: {'model_dirpath': 'pretrained', 'model_filename': 'omni_tsp_maml_fomaml.ckpt'}
+[2026-01-18 22:04:18,824][torch.distributed.nn.jit.instantiator][INFO] - Created a temporary directory at /tmp/tmp44_hvr8a
+[2026-01-18 22:04:18,824][torch.distributed.nn.jit.instantiator][INFO] - Writing /tmp/tmp44_hvr8a/_remote_module_non_scriptable.py
+[2026-01-18 22:04:23,398][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   1/ 70(1.43%)  Time Est.: Elapsed[0.07m], Remain[5.02m]
+[2026-01-18 22:04:23,408][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[tsp], Size[159], Name[u159], Completed   1/ 70(1.43%), Score: 42510.1758, Augmented Score: 42453.6484, Gap: 1.0223%, Augmented Gap: 0.8879%
+[2026-01-18 22:04:23,408][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 0.0000, Avg Augmented: 0.0000
+[2026-01-18 22:04:23,408][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 1.0223%, Avg Augmented: 0.8879%, Std: 0.0000%, Std Augmented: 0.0000%
+[2026-01-18 22:04:23,408][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-18 22:04:29,638][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   2/ 70(2.86%)  Time Est.: Elapsed[0.18m], Remain[6.01m]
+[2026-01-18 22:04:29,638][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[tsp], Size[442], Name[pcb442], Completed   2/ 70(2.86%), Score: 54720.2539, Augmented Score: 54541.5547, Gap: 7.7637%, Augmented Gap: 7.4118%
+[2026-01-18 22:04:29,639][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 0.0000, Avg Augmented: 0.0000
+[2026-01-18 22:04:29,639][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.3930%, Avg Augmented: 4.1499%, Std: 3.3707%, Std Augmented: 3.2619%
+[2026-01-18 22:04:29,639][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================

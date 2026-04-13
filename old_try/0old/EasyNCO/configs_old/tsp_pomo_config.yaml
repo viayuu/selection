@@ -1,0 +1,90 @@
+# @package _global_
+
+
+defaults:
+  - _self_
+
+env:
+  _target_: EasyNCO.methods.envs.TSPEnv
+  problem_size: 100
+  pomo_size: ${env.problem_size}
+
+val_env:
+  _target_: EasyNCO.methods.envs.TSPEnv
+  problem_size: 100
+  pomo_size: ${env.problem_size}
+
+model:
+  _target_: EasyNCO.methods.operators.neural_operators.POMOPolicy
+  env_name: 'tsp'
+  num_heads: 8
+  qkv_dim: 16
+  num_encoder_layers: 6
+  normalization: 'instance'
+  feedforward_hidden: 512
+  logit_clipping: 10
+  use_graph_mean: False
+  am_mode: False
+  first_placeholder: False
+
+
+module:
+  _target_: EasyNCO.phases.train.rl.REINFORCELightning
+  baseline: 'shared'
+  problem_size: ${env.problem_size}
+  batch_size: 128
+  episodes: 1280
+  first_mode: 'random'
+  aug_type: 'pomo_aug'
+  aug_factor: 1
+  optimizer_params: {'optimizer': {
+        'lr': 1e-4,
+        'weight_decay': 1e-6
+    },
+#    'scheduler': {
+#        'milestones': [501,],
+#        'gamma': 0.1
+#    }
+  }
+  test_strategy: 'sampling'
+
+# The most important hyperparameter to use is `reload_dataloaders_every_n_epochs`.
+# This allows for datasets to be re-created on the run and distributed by Lightning across devices on each epoch.
+# Setting to a value different than 1 may lead to overfitting to a specific (such as the initial) data distribution.
+trainer:
+  _target_: EasyNCO.phases.train.rl.RLTrainer
+  max_epochs: 200
+  reload_dataloaders_every_n_epochs: 1
+  log_every_n_steps: 1
+  accelerator: 'gpu'
+
+
+# https://www.tensorflow.org/tensorboard/
+# Solve the error: ImportError: cannot import name ‘notf‘ from ‘tensorboard.compat‘
+# Solution: Uninstall tensorflow and tensorboard(including all affiliated libraries) and only install tensorboard if you are using pytorch.
+logger:
+  _target_: lightning.pytorch.loggers.TensorBoardLogger
+  save_dir: "tensorboard_log/"
+  name: null
+  log_graph: False
+  default_hp_metric: True
+  prefix: ""
+
+
+model_checkpoint:
+  _target_: lightning.pytorch.callbacks.ModelCheckpoint
+  dirpath: 'checkpoints/'
+  filename: 'pomo-{epoch:02d}'
+  save_top_k: -1 # save all ckpt files
+  every_n_epochs: 1 # save model every epoch
+
+test_loader:
+  model_dirpath: '/phases/train/outputs/2024-12-10/16-49-38/checkpoints_debug/'
+  model_filename: 'pomo-epoch=04.ckpt'
+  data_path: '/data/datasets/test_dataset_tsp_uniform/test_tsp100_nums10000_uniform.pt'
+  test_params: {
+                 'test_episodes': 1000,
+                 'test_batch_size': 100,
+                 'test_strategy': 'greedy',
+                 'aug_factor': 1
+  }

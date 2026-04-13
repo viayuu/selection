@@ -1,0 +1,79 @@
+# https://hydra.cc/docs/configure_hydra/intro/
+env:
+  _target_: EasyNCO.neural_solvers.envs.CVRPEnv
+  problem_size: ${scale}
+  sub_problem_size: 100
+  aug_factor: 1
+  sample_size: 2 # only used for training, it is replaced by the aug_factor in test
+  method_name: "udc"
+
+model:
+  _target_: EasyNCO.neural_solvers.methods.UDCPolicy
+  env_name: ${problem}
+  num_heads: 8
+  qkv_dim: 16
+  num_encoder_layers: 6
+  feedforward_hidden: 512
+  feats: 3
+
+initialization:
+  _target_: EasyNCO.neural_solvers.methods.UDCInitialization
+
+iteration:
+  _target_: EasyNCO.neural_solvers.methods.UDCIteration
+
+module:
+  _target_: EasyNCO.phases.ARREINFORCELightning #
+  method_name: ${model}
+  baseline: 'shared'
+  problem_size: ${scale}
+  batch_size: ${batch_size}
+  episodes: ${episodes}
+  val_episode: ${val_episode}
+  optimizer_type: 'Adam' # 'Adam', 'AdamW'
+  scheduler_type: null #'ExponentialLR', 'MultiStepLR'
+  optimizer_params:
+    {
+      "optimizer": { "lr": 1e-4, "weight_decay": 0 },
+      "scheduler": { "milestones": [3001], "gamma": 0.1 },
+    }
+  decoder_strategy: ${decoder_strategy}
+  every_n_steps_output: 100 # output log every n steps (i.e., batch)
+  train_data_params:
+      problem_size_low: 500
+      problem_size_high: 1000
+  test_data_params:
+      graph: True
+      udc_flag: True
+  val_data_params:
+      graph: True
+      udc_flag: True
+  initialization_params:
+    optimizer_t:
+      lr: 1e-4
+      weight_decay: 0
+    pomo_size: 2
+  iteration_params:
+    udc_batch_size: 8
+    max_steps: 2 # max steps for each episode, used for iteration
+
+model_checkpoint:
+  #_target_: lightning.pytorch.callbacks.ModelCheckpoint
+  _target_: EasyNCO.utils.utils.CustomModelCheckpoint
+  dirpath: checkpoints
+  filename: ${model}_${problem}${scale}_{epoch:02d}
+  save_top_k: ${save_top_k}
+  every_n_epochs: ${every_n_epochs}
+
+trainer:
+  _target_: lightning.pytorch.Trainer
+  max_epochs: ${max_epochs} # max epochs
+  reload_dataloaders_every_n_epochs: 1 # RL: 1, SL: 0
+  log_every_n_steps: ${log_every_n_steps} # log every n steps
+  precision: ${precision}
+  enable_progress_bar: ${enable_progress_bar} # disable progress bar
+  gradient_clip_val: 1.0
+
+test_loader:
+  model_dirpath: pretrained
+  model_filename: ${model}_${problem}_best.ckpt

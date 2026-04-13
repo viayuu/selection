@@ -1,0 +1,283 @@
+[2026-03-11 16:09:26,263][EasyNCO.utils.utils][INFO] - sandbox: False
+[2026-03-11 16:09:26,263][EasyNCO.utils.utils][INFO] - sandbox_test_batch: {'_target_': 'EasyNCO.sandbox.test_batch.BQTestBatch'}
+[2026-03-11 16:09:26,263][EasyNCO.utils.utils][INFO] - mode: test
+[2026-03-11 16:09:26,263][EasyNCO.utils.utils][INFO] - model: lehd
+[2026-03-11 16:09:26,263][EasyNCO.utils.utils][INFO] - problem: tsp
+[2026-03-11 16:09:26,263][EasyNCO.utils.utils][INFO] - scale: 200
+[2026-03-11 16:09:26,273][EasyNCO.utils.utils][INFO] - num_job: 20
+[2026-03-11 16:09:26,273][EasyNCO.utils.utils][INFO] - num_machine: 20
+[2026-03-11 16:09:26,273][EasyNCO.utils.utils][INFO] - decoder_strategy: greedy
+[2026-03-11 16:09:26,273][EasyNCO.utils.utils][INFO] - cuda: [0]
+[2026-03-11 16:09:26,273][EasyNCO.utils.utils][INFO] - max_epochs: 5
+[2026-03-11 16:09:26,274][EasyNCO.utils.utils][INFO] - batch_size: 8
+[2026-03-11 16:09:26,274][EasyNCO.utils.utils][INFO] - episodes: 128
+[2026-03-11 16:09:26,274][EasyNCO.utils.utils][INFO] - val_episode: 128
+[2026-03-11 16:09:26,274][EasyNCO.utils.utils][INFO] - val_data_path: test_dataset_tsp_uniform/test_tsp200_nums128_uniform.pt
+[2026-03-11 16:09:26,274][EasyNCO.utils.utils][INFO] - test_data_path: test_dataset_tsp_uniform/test_tsp200_nums128_uniform.pt
+[2026-03-11 16:09:26,274][EasyNCO.utils.utils][INFO] - train_data_path: None
+[2026-03-11 16:09:26,274][EasyNCO.utils.utils][INFO] - varying_data_params: {'scale_range': None, 'distribution_list': ['uniform', 'cluster'], 'capacity_range': [50, 100]}
+[2026-03-11 16:09:26,274][EasyNCO.utils.utils][INFO] - seed: 1234
+[2026-03-11 16:09:26,274][EasyNCO.utils.utils][INFO] - disable_gpu: False
+[2026-03-11 16:09:26,274][EasyNCO.utils.utils][INFO] - strategy: auto
+[2026-03-11 16:09:26,274][EasyNCO.utils.utils][INFO] - matmul_precision: medium
+[2026-03-11 16:09:26,274][EasyNCO.utils.utils][INFO] - precision: 32-true
+[2026-03-11 16:09:26,274][EasyNCO.utils.utils][INFO] - enable_progress_bar: False
+[2026-03-11 16:09:26,274][EasyNCO.utils.utils][INFO] - log_every_n_steps: 1
+[2026-03-11 16:09:26,274][EasyNCO.utils.utils][INFO] - ckpt_path: None
+[2026-03-11 16:09:26,274][EasyNCO.utils.utils][INFO] - save_top_k: -1
+[2026-03-11 16:09:26,274][EasyNCO.utils.utils][INFO] - every_n_epochs: 1
+[2026-03-11 16:09:26,275][EasyNCO.utils.utils][INFO] - dir: ./results/test/lehd_tsp/2026-03-11-16-09-26_lehd_tsp_200_test
+[2026-03-11 16:09:26,275][EasyNCO.utils.utils][INFO] - logger: {'_target_': 'lightning.pytorch.loggers.TensorBoardLogger', 'save_dir': 'tensorboard', 'name': None, 'log_graph': False, 'default_hp_metric': True, 'prefix': ''}
+[2026-03-11 16:09:26,275][EasyNCO.utils.utils][INFO] - settings.env: {'_target_': 'EasyNCO.neural_solvers.envs.TSPEnv', 'problem_size': '${scale}', 'pomo_size': 1, 'aug_type': 'pomo_aug', 'aug_factor': 1, 'method_name': '${model}', 'use_flag_to_indicate_depot': True}
+[2026-03-11 16:09:26,275][EasyNCO.utils.utils][INFO] - settings.model: {'_target_': 'EasyNCO.neural_solvers.methods.LEHDPolicy', 'env_name': '${problem}', 'phase': '${mode}', 'layer_num': 6, 'node_dim': 2, 'embed_dim': 128, 'num_heads': 8, 'qkv_dim': 16, 'feedforward_hidden': 512, 'normalization': 'None', 'first_mode': 'random'}
+[2026-03-11 16:09:26,275][EasyNCO.utils.utils][INFO] - settings.initialization: {'_target_': 'EasyNCO.neural_solvers.methods.LEHDInitialization'}
+[2026-03-11 16:09:26,275][EasyNCO.utils.utils][INFO] - settings.iteration: {'_target_': 'EasyNCO.neural_solvers.methods.LEHDIteration'}
+[2026-03-11 16:09:26,275][EasyNCO.utils.utils][INFO] - settings.module: {'_target_': 'EasyNCO.phases.ARREINFORCELightning', 'method_name': '${model}', 'baseline': 'shared', 'problem_size': '${scale}', 'batch_size': '${batch_size}', 'episodes': '${episodes}', 'val_episode': '${val_episode}', 'optimizer_type': 'Adam', 'scheduler_type': None, 'optimizer_params': {'optimizer': {'lr': 0.0001, 'weight_decay': 1e-06}}, 'decoder_strategy': '${decoder_strategy}', 'every_n_steps_output': 100, 'iteration_params': {'max_steps': 10}}
+[2026-03-11 16:09:26,275][EasyNCO.utils.utils][INFO] - settings.model_checkpoint: {'_target_': 'EasyNCO.utils.utils.CustomModelCheckpoint', 'dirpath': 'checkpoints', 'filename': '${model}_${problem}${scale}_{epoch:02d}', 'save_top_k': '${save_top_k}', 'every_n_epochs': '${every_n_epochs}'}
+[2026-03-11 16:09:26,275][EasyNCO.utils.utils][INFO] - settings.test_loader: {'model_dirpath': 'pretrained', 'model_filename': 'lehd_tsp100.ckpt'}
+[2026-03-11 16:09:27,536][torch.distributed.nn.jit.instantiator][INFO] - Created a temporary directory at /tmp/tmpcmi2jfwr
+[2026-03-11 16:09:27,536][torch.distributed.nn.jit.instantiator][INFO] - Writing /tmp/tmpcmi2jfwr/_remote_module_non_scriptable.py
+[2026-03-11 16:09:32,741][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC start, initial length: 10.746353149414062
+[2026-03-11 16:09:34,809][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step0, length 10.743400573730469
+[2026-03-11 16:09:37,429][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step1, length 10.735116004943848
+[2026-03-11 16:09:38,324][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step2, length 10.732345581054688
+[2026-03-11 16:09:41,439][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step3, length 10.721166610717773
+[2026-03-11 16:09:43,920][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step4, length 10.707420349121094
+[2026-03-11 16:09:46,218][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step5, length 10.704816818237305
+[2026-03-11 16:09:47,988][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step6, length 10.704474449157715
+[2026-03-11 16:09:49,724][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step7, length 10.701709747314453
+[2026-03-11 16:09:52,064][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step8, length 10.697576522827148
+[2026-03-11 16:09:53,860][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step9, length 10.693757057189941
+[2026-03-11 16:09:53,864][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   8/128(6.25%)  Time Est.: Elapsed[0.43m], Remain[6.43m]
+[2026-03-11 16:09:53,864][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[tsp], Size[200], Completed   8/128(6.25%), Score: 10.6938, Augmented Score: 10.6938
+[2026-03-11 16:09:53,864][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.6938, Avg Augmented: 10.6938
+[2026-03-11 16:09:53,865][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-03-11 16:09:56,816][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC start, initial length: 10.744897842407227
+[2026-03-11 16:09:56,950][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step0, length 10.744897842407227
+[2026-03-11 16:09:58,532][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step1, length 10.734220504760742
+[2026-03-11 16:10:00,580][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step2, length 10.72201156616211
+[2026-03-11 16:10:01,122][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step3, length 10.72201156616211
+[2026-03-11 16:10:01,704][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step4, length 10.72201156616211
+[2026-03-11 16:10:02,901][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step5, length 10.721929550170898
+[2026-03-11 16:10:04,369][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step6, length 10.719924926757812
+[2026-03-11 16:10:06,761][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step7, length 10.71584415435791
+[2026-03-11 16:10:08,702][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step8, length 10.715303421020508
+[2026-03-11 16:10:10,745][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step9, length 10.709617614746094
+[2026-03-11 16:10:10,748][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  16/128(12.50%)  Time Est.: Elapsed[0.71m], Remain[4.97m]
+[2026-03-11 16:10:10,748][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[tsp], Size[200], Completed  16/128(12.50%), Score: 10.7096, Augmented Score: 10.7096
+[2026-03-11 16:10:10,748][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.7017, Avg Augmented: 10.7017
+[2026-03-11 16:10:10,748][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-03-11 16:10:13,785][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC start, initial length: 10.809218406677246
+[2026-03-11 16:10:16,137][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step0, length 10.794294357299805
+[2026-03-11 16:10:16,271][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step1, length 10.794294357299805
+[2026-03-11 16:10:17,577][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step2, length 10.792243957519531
+[2026-03-11 16:10:17,908][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step3, length 10.791847229003906
+[2026-03-11 16:10:18,083][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step4, length 10.791847229003906
+[2026-03-11 16:10:18,751][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step5, length 10.791847229003906
+[2026-03-11 16:10:21,278][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step6, length 10.78614616394043
+[2026-03-11 16:10:22,992][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step7, length 10.776006698608398
+[2026-03-11 16:10:24,640][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step8, length 10.768756866455078
+[2026-03-11 16:10:27,097][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step9, length 10.759302139282227
+[2026-03-11 16:10:27,099][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  24/128(18.75%)  Time Est.: Elapsed[0.98m], Remain[4.26m]
+[2026-03-11 16:10:27,100][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[tsp], Size[200], Completed  24/128(18.75%), Score: 10.7593, Augmented Score: 10.7593
+[2026-03-11 16:10:27,100][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.7209, Avg Augmented: 10.7209
+[2026-03-11 16:10:27,100][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-03-11 16:10:29,749][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC start, initial length: 10.750103950500488
+[2026-03-11 16:10:30,670][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step0, length 10.74937629699707
+[2026-03-11 16:10:33,048][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step1, length 10.710066795349121
+[2026-03-11 16:10:34,864][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step2, length 10.707972526550293
+[2026-03-11 16:10:37,643][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step3, length 10.67237663269043
+[2026-03-11 16:10:39,720][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step4, length 10.669853210449219
+[2026-03-11 16:10:41,967][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step5, length 10.669853210449219
+[2026-03-11 16:10:44,746][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step6, length 10.662996292114258
+[2026-03-11 16:10:45,615][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step7, length 10.662997245788574
+[2026-03-11 16:10:46,431][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step8, length 10.662997245788574
+[2026-03-11 16:10:48,655][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step9, length 10.662997245788574
+[2026-03-11 16:10:48,658][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  32/128(25.00%)  Time Est.: Elapsed[1.34m], Remain[4.03m]
+[2026-03-11 16:10:48,658][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[tsp], Size[200], Completed  32/128(25.00%), Score: 10.6630, Augmented Score: 10.6630
+[2026-03-11 16:10:48,658][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.7064, Avg Augmented: 10.7064
+[2026-03-11 16:10:48,659][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-03-11 16:10:51,842][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC start, initial length: 10.935661315917969
+[2026-03-11 16:10:54,097][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step0, length 10.868616104125977
+[2026-03-11 16:10:56,317][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step1, length 10.863143920898438
+[2026-03-11 16:10:56,485][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step2, length 10.862732887268066
+[2026-03-11 16:10:57,007][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step3, length 10.862732887268066
+[2026-03-11 16:10:57,444][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step4, length 10.862732887268066
+[2026-03-11 16:10:58,745][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step5, length 10.862732887268066
+[2026-03-11 16:11:01,319][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step6, length 10.859804153442383
+[2026-03-11 16:11:02,608][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step7, length 10.859804153442383
+[2026-03-11 16:11:04,347][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step8, length 10.852785110473633
+[2026-03-11 16:11:04,616][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step9, length 10.852668762207031
+[2026-03-11 16:11:04,619][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  40/128(31.25%)  Time Est.: Elapsed[1.61m], Remain[3.54m]
+[2026-03-11 16:11:04,619][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[tsp], Size[200], Completed  40/128(31.25%), Score: 10.8527, Augmented Score: 10.8527
+[2026-03-11 16:11:04,619][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.7357, Avg Augmented: 10.7357
+[2026-03-11 16:11:04,620][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-03-11 16:11:07,726][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC start, initial length: 10.812456130981445
+[2026-03-11 16:11:08,552][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step0, length 10.798460960388184
+[2026-03-11 16:11:09,706][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step1, length 10.794525146484375
+[2026-03-11 16:11:12,009][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step2, length 10.784815788269043
+[2026-03-11 16:11:13,058][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step3, length 10.77981948852539
+[2026-03-11 16:11:15,009][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step4, length 10.777981758117676
+[2026-03-11 16:11:17,034][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step5, length 10.773550033569336
+[2026-03-11 16:11:18,402][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step6, length 10.764015197753906
+[2026-03-11 16:11:20,379][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step7, length 10.758613586425781
+[2026-03-11 16:11:22,376][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step8, length 10.757621765136719
+[2026-03-11 16:11:24,208][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step9, length 10.756998062133789
+[2026-03-11 16:11:24,211][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  48/128(37.50%)  Time Est.: Elapsed[1.93m], Remain[3.22m]
+[2026-03-11 16:11:24,212][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[tsp], Size[200], Completed  48/128(37.50%), Score: 10.7570, Augmented Score: 10.7570
+[2026-03-11 16:11:24,212][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.7392, Avg Augmented: 10.7392
+[2026-03-11 16:11:24,212][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-03-11 16:11:26,892][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC start, initial length: 10.891180038452148
+[2026-03-11 16:11:27,389][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step0, length 10.891180038452148
+[2026-03-11 16:11:29,676][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step1, length 10.847372055053711
+[2026-03-11 16:11:31,595][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step2, length 10.84022045135498
+[2026-03-11 16:11:32,893][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step3, length 10.833761215209961
+[2026-03-11 16:11:35,025][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step4, length 10.833761215209961
+[2026-03-11 16:11:37,738][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step5, length 10.823103904724121
+[2026-03-11 16:11:40,184][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step6, length 10.820230484008789
+[2026-03-11 16:11:41,999][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step7, length 10.818169593811035
+[2026-03-11 16:11:44,620][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step8, length 10.813879013061523
+[2026-03-11 16:11:44,947][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step9, length 10.81387996673584
+[2026-03-11 16:11:44,950][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  56/128(43.75%)  Time Est.: Elapsed[2.28m], Remain[2.93m]
+[2026-03-11 16:11:44,950][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[tsp], Size[200], Completed  56/128(43.75%), Score: 10.8139, Augmented Score: 10.8139
+[2026-03-11 16:11:44,950][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.7499, Avg Augmented: 10.7499
+[2026-03-11 16:11:44,951][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-03-11 16:11:48,279][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC start, initial length: 10.765819549560547
+[2026-03-11 16:11:51,364][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step0, length 10.751350402832031
+[2026-03-11 16:11:51,885][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step1, length 10.751178741455078
+[2026-03-11 16:11:53,573][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step2, length 10.74911117553711
+[2026-03-11 16:11:56,209][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step3, length 10.748575210571289
+[2026-03-11 16:11:56,846][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step4, length 10.748575210571289
+[2026-03-11 16:11:57,427][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step5, length 10.74848461151123
+[2026-03-11 16:11:58,240][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step6, length 10.746894836425781
+[2026-03-11 16:12:00,407][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step7, length 10.73977279663086
+[2026-03-11 16:12:02,178][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step8, length 10.739484786987305
+[2026-03-11 16:12:04,660][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step9, length 10.733922958374023
+[2026-03-11 16:12:04,662][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  64/128(50.00%)  Time Est.: Elapsed[2.61m], Remain[2.61m]
+[2026-03-11 16:12:04,663][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[tsp], Size[200], Completed  64/128(50.00%), Score: 10.7339, Augmented Score: 10.7339
+[2026-03-11 16:12:04,663][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.7479, Avg Augmented: 10.7479
+[2026-03-11 16:12:04,663][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-03-11 16:12:07,653][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC start, initial length: 10.753320693969727
+[2026-03-11 16:12:09,354][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step0, length 10.742756843566895
+[2026-03-11 16:12:11,590][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step1, length 10.732650756835938
+[2026-03-11 16:12:11,857][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step2, length 10.732650756835938
+[2026-03-11 16:12:13,854][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step3, length 10.729126930236816
+[2026-03-11 16:12:16,182][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step4, length 10.718402862548828
+[2026-03-11 16:12:16,240][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step5, length 10.718402862548828
+[2026-03-11 16:12:16,343][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step6, length 10.718403816223145
+[2026-03-11 16:12:16,764][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step7, length 10.718403816223145
+[2026-03-11 16:12:17,687][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step8, length 10.718202590942383
+[2026-03-11 16:12:20,446][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step9, length 10.718202590942383
+[2026-03-11 16:12:20,449][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  72/128(56.25%)  Time Est.: Elapsed[2.87m], Remain[2.23m]
+[2026-03-11 16:12:20,449][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[tsp], Size[200], Completed  72/128(56.25%), Score: 10.7182, Augmented Score: 10.7182
+[2026-03-11 16:12:20,450][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.7446, Avg Augmented: 10.7446
+[2026-03-11 16:12:20,450][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-03-11 16:12:23,122][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC start, initial length: 10.724878311157227
+[2026-03-11 16:12:25,616][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step0, length 10.709100723266602
+[2026-03-11 16:12:27,660][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step1, length 10.696903228759766
+[2026-03-11 16:12:29,934][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step2, length 10.688105583190918
+[2026-03-11 16:12:31,511][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step3, length 10.679616928100586
+[2026-03-11 16:12:32,345][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step4, length 10.679616928100586
+[2026-03-11 16:12:35,001][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step5, length 10.679616928100586
+[2026-03-11 16:12:35,699][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step6, length 10.679616928100586
+[2026-03-11 16:12:36,308][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step7, length 10.679616928100586
+[2026-03-11 16:12:38,680][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step8, length 10.676288604736328
+[2026-03-11 16:12:39,955][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step9, length 10.676158905029297
+[2026-03-11 16:12:39,957][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  80/128(62.50%)  Time Est.: Elapsed[3.20m], Remain[1.92m]
+[2026-03-11 16:12:39,957][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[tsp], Size[200], Completed  80/128(62.50%), Score: 10.6762, Augmented Score: 10.6762
+[2026-03-11 16:12:39,958][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.7378, Avg Augmented: 10.7378
+[2026-03-11 16:12:39,958][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-03-11 16:12:42,688][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC start, initial length: 10.78967571258545
+[2026-03-11 16:12:43,711][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step0, length 10.786592483520508
+[2026-03-11 16:12:44,966][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step1, length 10.778100967407227
+[2026-03-11 16:12:45,805][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step2, length 10.774942398071289
+[2026-03-11 16:12:47,362][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step3, length 10.771255493164062
+[2026-03-11 16:12:47,550][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step4, length 10.771255493164062
+[2026-03-11 16:12:47,786][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step5, length 10.771255493164062
+[2026-03-11 16:12:49,883][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step6, length 10.771255493164062
+[2026-03-11 16:12:50,988][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step7, length 10.767597198486328
+[2026-03-11 16:12:52,511][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step8, length 10.759442329406738
+[2026-03-11 16:12:53,079][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step9, length 10.759442329406738
+[2026-03-11 16:12:53,083][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  88/128(68.75%)  Time Est.: Elapsed[3.42m], Remain[1.55m]
+[2026-03-11 16:12:53,083][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[tsp], Size[200], Completed  88/128(68.75%), Score: 10.7594, Augmented Score: 10.7594
+[2026-03-11 16:12:53,083][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.7397, Avg Augmented: 10.7397
+[2026-03-11 16:12:53,083][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-03-11 16:12:55,606][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC start, initial length: 10.904701232910156
+[2026-03-11 16:12:58,075][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step0, length 10.892080307006836
+[2026-03-11 16:12:58,928][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step1, length 10.891641616821289
+[2026-03-11 16:12:59,237][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step2, length 10.891236305236816
+[2026-03-11 16:13:02,079][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step3, length 10.890252113342285
+[2026-03-11 16:13:03,833][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step4, length 10.888181686401367
+[2026-03-11 16:13:05,137][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step5, length 10.874650001525879
+[2026-03-11 16:13:05,915][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step6, length 10.87436294555664
+[2026-03-11 16:13:06,101][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step7, length 10.87436294555664
+[2026-03-11 16:13:07,136][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step8, length 10.873544692993164
+[2026-03-11 16:13:10,193][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step9, length 10.855090141296387
+[2026-03-11 16:13:10,196][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  96/128(75.00%)  Time Est.: Elapsed[3.70m], Remain[1.23m]
+[2026-03-11 16:13:10,196][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[tsp], Size[200], Completed  96/128(75.00%), Score: 10.8551, Augmented Score: 10.8551
+[2026-03-11 16:13:10,196][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.7493, Avg Augmented: 10.7493
+[2026-03-11 16:13:10,197][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-03-11 16:13:12,982][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC start, initial length: 10.916034698486328
+[2026-03-11 16:13:13,519][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step0, length 10.916034698486328
+[2026-03-11 16:13:16,329][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step1, length 10.836627006530762
+[2026-03-11 16:13:19,141][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step2, length 10.829334259033203
+[2026-03-11 16:13:21,817][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step3, length 10.823678970336914
+[2026-03-11 16:13:23,743][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step4, length 10.823100090026855
+[2026-03-11 16:13:23,894][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step5, length 10.823100090026855
+[2026-03-11 16:13:25,890][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step6, length 10.820045471191406
+[2026-03-11 16:13:27,635][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step7, length 10.818361282348633
+[2026-03-11 16:13:29,120][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step8, length 10.8163480758667
+[2026-03-11 16:13:31,652][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step9, length 10.8163480758667
+[2026-03-11 16:13:31,656][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> 104/128(81.25%)  Time Est.: Elapsed[4.06m], Remain[0.94m]
+[2026-03-11 16:13:31,657][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[tsp], Size[200], Completed 104/128(81.25%), Score: 10.8163, Augmented Score: 10.8163
+[2026-03-11 16:13:31,657][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.7545, Avg Augmented: 10.7545
+[2026-03-11 16:13:31,657][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-03-11 16:13:34,666][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC start, initial length: 10.726228713989258
+[2026-03-11 16:13:35,225][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step0, length 10.726228713989258
+[2026-03-11 16:13:35,305][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step1, length 10.726228713989258
+[2026-03-11 16:13:37,007][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step2, length 10.701857566833496
+[2026-03-11 16:13:37,799][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step3, length 10.701271057128906
+[2026-03-11 16:13:38,342][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step4, length 10.701271057128906
+[2026-03-11 16:13:40,804][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step5, length 10.691987991333008
+[2026-03-11 16:13:43,673][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step6, length 10.686141967773438
+[2026-03-11 16:13:45,047][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step7, length 10.681442260742188
+[2026-03-11 16:13:46,988][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step8, length 10.675556182861328
+[2026-03-11 16:13:49,079][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step9, length 10.675556182861328
+[2026-03-11 16:13:49,082][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> 112/128(87.50%)  Time Est.: Elapsed[4.35m], Remain[0.62m]
+[2026-03-11 16:13:49,082][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[tsp], Size[200], Completed 112/128(87.50%), Score: 10.6756, Augmented Score: 10.6756
+[2026-03-11 16:13:49,082][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.7489, Avg Augmented: 10.7489
+[2026-03-11 16:13:49,083][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-03-11 16:13:51,634][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC start, initial length: 10.875181198120117
+[2026-03-11 16:13:53,335][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step0, length 10.868570327758789
+[2026-03-11 16:13:53,520][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step1, length 10.868570327758789
+[2026-03-11 16:13:54,232][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step2, length 10.86829662322998
+[2026-03-11 16:13:54,755][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step3, length 10.868115425109863
+[2026-03-11 16:13:55,232][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step4, length 10.868115425109863
+[2026-03-11 16:13:55,450][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step5, length 10.868115425109863
+[2026-03-11 16:13:55,719][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step6, length 10.868115425109863
+[2026-03-11 16:13:56,660][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step7, length 10.868115425109863
+[2026-03-11 16:13:58,491][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step8, length 10.851011276245117
+[2026-03-11 16:14:01,025][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step9, length 10.828397750854492
+[2026-03-11 16:14:01,026][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> 120/128(93.75%)  Time Est.: Elapsed[4.55m], Remain[0.30m]
+[2026-03-11 16:14:01,027][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[tsp], Size[200], Completed 120/128(93.75%), Score: 10.8284, Augmented Score: 10.8284
+[2026-03-11 16:14:01,027][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.7542, Avg Augmented: 10.7542
+[2026-03-11 16:14:01,027][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-03-11 16:14:03,897][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC start, initial length: 10.597681045532227
+[2026-03-11 16:14:06,128][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step0, length 10.595090866088867
+[2026-03-11 16:14:06,169][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step1, length 10.59508991241455
+[2026-03-11 16:14:07,485][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step2, length 10.589763641357422
+[2026-03-11 16:14:08,459][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step3, length 10.588911056518555
+[2026-03-11 16:14:09,647][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step4, length 10.585285186767578
+[2026-03-11 16:14:12,291][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step5, length 10.58250617980957
+[2026-03-11 16:14:14,614][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step6, length 10.571065902709961
+[2026-03-11 16:14:17,148][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step7, length 10.554110527038574
+[2026-03-11 16:14:19,221][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step8, length 10.55411148071289
+[2026-03-11 16:14:19,289][EasyNCO.neural_solvers.methods.lehd.iteration][INFO] - RRC step9, length 10.55411148071289
+[2026-03-11 16:14:19,291][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> 128/128(100.00%)  Time Est.: Elapsed[4.85m], Remain[0.00m]
+[2026-03-11 16:14:19,292][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[tsp], Size[200], Completed 128/128(100.00%), Score: 10.5541, Augmented Score: 10.5541
+[2026-03-11 16:14:19,292][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 10.7417, Avg Augmented: 10.7417
+[2026-03-11 16:14:19,293][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-03-11 16:14:19,301][EasyNCO.phases.rl.ar_reinforce][INFO] - Total Testing Time: 291.1456 seconds, 4.8524 minutes, 0.0809 hours
+[2026-03-11 16:14:19,301][EasyNCO.phases.rl.ar_reinforce][INFO] - Avg Time per Episode: 2.2746 seconds (Episode: 128)
+[2026-03-11 16:14:19,301][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval Done ==> Tested 128/128(100.00%)  Time Est.: Elapsed[4.85m], Remain[0.00m]
+[2026-03-11 16:14:19,302][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval Done ==> Problem[tsp], Score Summary: Avg: 10.7417, Avg Augmented: 10.7417

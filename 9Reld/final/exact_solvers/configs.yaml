@@ -1,0 +1,54 @@
+hydra:
+  output_subdir: null  
+  run:
+    dir: ./EasyNCO/exact_solvers/results_${solver}_${ptype}/${now:%Y-%m-%d}-${now:%H-%M-%S}
+
+
+SEED: 1234
+
+solver: "gurobi" # choices=['lkh', 'hgs', 'eax', 'ortools', 'pyvrp', 'cplex', 'gurobi']
+
+SPECIAL: null # special setting for LKH, it is only used in CVRP
+MAX_TRIALS: 1000 # max number of trials for LKH
+RUNS: 1 # number of runs for LKH
+CANDIDATE_SET_TYPE: ALPHA # candidate set type for LKH, choices=['POPMUSIC', 'ALPHA', 'DELAUNAY', 'NEAREST-NEIGHBOR']
+TRACE_LEVEL: 1 # trace level for LKH, choices=[0,1,2,3,4]
+
+time_threshold: 10 # time limit for HGS
+
+trials: 3 # number of trials for EAX
+population: 300 # The count of candidate solutions maintained per generational iteration for EAX
+offspring: 30 # The number of offspring for EAX
+
+ortools_num_vehicles: 6 # number of vehicles for ortools (CVRP)
+ortools_time_limit: 10 # time limit in seconds for ortools
+
+pyvrp_num_vehicles: 10 # number of vehicles for pyvrp (CVRP)
+pyvrp_stop: 'MaxRuntime' # stopping criterion for pyvrp, choices=['MaxRuntime', 'MaxIterations']
+pyvrp_MaxRuntime: 10 # max runtime in seconds for pyvrp
+pyvrp_MaxIterations: 10 # max iterations for pyvrp
+
+cplex_num_vehicles: 6 # number of vehicles for cplex (CVRP)
+cplex_time_limit: 10 # time limit in seconds for cplex
+cplex_gap: 0.01 # MIP gap for cplex, e.g
+cplex_threads: 2 # number of threads for cplex, 0 means using all available threads
+
+gurobi_num_vehicles: 6 # number of vehicles for gurobi (CVRP)
+gurobi_time_limit: 10 # time limit in seconds for gurobi
+gurobi_gap: 0.01 # MIP gap for gurobi, e.g
+gurobi_threads: 2 # number of threads for gurobi, 0 means using all available threads
+
+ptype: "cvrp" # choices=['tsp', 'cvrp', 'atsp']
+problem_number: 10 # number of problem instances
+problem_scale: 20 # number of nodes
+batch_size: 5 # batch size for dataloader
+demand_scale: 1 # Expand demand values, transform demand into integers, it is only used in CVRP
+int_coord_scale: 100 # Expand coordinate values, transform coordinates into integers
+int_matrix_scale: 100 # For ATSP problem: Expand edge weight values, transform edge weight into integers
+capacity: 50 # vehicle capacity, it is only used in CVRP
+
+device: 'cpu' # choices=['cpu', 'gpu']
+save_as_txt: True # whether to save the results as txt files
+solver_mode: "multi" # choices=['single', 'multi'], 'single' means solving one instance each time, 'multi' means solving a batch of instances each time
+cpus: 4 # multiprocess, cpu number
+delete: False # whether to delete intermediate files, including .par,.tsp,.vrp

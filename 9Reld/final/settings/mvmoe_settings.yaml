@@ -1,0 +1,79 @@
+env:
+  _target_: EasyNCO.methods.envs.MVRPEnv
+  problem_size: ${scale}
+  pomo_size: ${scale}
+  mode: 1
+  aug_type: pomo_aug # 'pomo_aug'/'rotate'/'reflect'/'mix'/'noise'
+  aug_factor: 1
+  train_problems: [ "VRPB", "CVRP", "OVRP", "VRPTW", "OVRPTW","VRPL", "OVRPL",]
+#                   "VRPBL","OVRPB","VRPBTW", "VRPLTW","OVRPBL", "OVRPBTW", "OVRPLTW", "VRPBLTW", "OVRPBLTW" ]
+  test_problem:  ${problem}
+
+
+
+model:
+  _target_: EasyNCO.neural_solvers.methods.MoEPolicy
+  embedding_dim: 128
+  ff_hidden_dim: 512
+  num_heads: 8
+  qkv_dim: 16
+  encoder_layer_num: 6
+  normalization: 'instance'
+  norm_loc: 'norm_last'
+  logit_clipping: 10
+  MoE_param: {
+      'light': False, #轻量化版
+      'expert_loc': ['Enc0', 'Enc1', 'Enc2', 'Enc3', 'Enc4', 'Enc5', 'Dec'],
+      'num_experts': 4,
+      'topk': 2,
+      'routing_level': 'node',
+      'routing_method': 'input_choice'
+  }
+
+initialization:
+  _target_: EasyNCO.neural_solvers.methods.POMOInitialization
+
+iteration:
+  _target_: EasyNCO.neural_solvers.pipeline.NoIteration
+
+module:
+  _target_: EasyNCO.phases.ARREINFORCELightning #
+  method_name: ${model}
+  baseline: 'shared'
+  problem_size: ${scale}
+  batch_size: ${batch_size}
+  episodes: ${episodes}
+  val_episode: ${val_episode}
+
+  optimizer_params: {'optimizer': {
+        'lr': 1e-4,
+        'weight_decay': 1e-6,
+    },
+    'scheduler': {
+        'milestones': [4501,],
+        'gamma': 0.1
+    }
+  }
+
+model_checkpoint:
+  #_target_: lightning.pytorch.callbacks.ModelCheckpoint
+  _target_: EasyNCO.utils.utils.CustomModelCheckpoint
+  dirpath: checkpoints
+  filename: ${model}_${problem}${scale}_{epoch:02d}
+  save_top_k: ${save_top_k}
+  every_n_epochs: ${every_n_epochs}
+
+trainer:
+  _target_: lightning.pytorch.Trainer
+  max_epochs: ${max_epochs} # max epochs
+  reload_dataloaders_every_n_epochs: 1 # RL: 1, SL: 0
+  log_every_n_steps: ${log_every_n_steps} # log every n steps
+  precision: ${precision}
+  enable_progress_bar: ${enable_progress_bar} # disable progress bar
+  gradient_clip_val: 1.0
+
+
+
+test_loader:
+  model_dirpath: /pretrained
+  model_filename: mvmoe_mvrp100.ckpt

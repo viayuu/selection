@@ -1,0 +1,544 @@
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - sandbox: False
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - sandbox_test_batch: {'_target_': 'EasyNCO.sandbox.test_batch.BQTestBatch'}
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - mode: test
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - model: icam
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - problem: cvrp
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - scale: 100
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - num_job: 20
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - num_machine: 20
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - decoder_strategy: greedy
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - cuda: [0]
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - max_epochs: 5
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - batch_size: 1
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - episodes: 10000
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - val_episode: 128
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - val_data_path: test_dataset_tsp_uniform/test_tsp200_nums128_uniform.pt
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - test_data_path: cvrplib/Vrp-Set-X
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - train_data_path: None
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - varying_data_params: {'scale_range': None, 'distribution_list': ['uniform', 'cluster'], 'capacity_range': None}
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - seed: 1234
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - disable_gpu: False
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - strategy: auto
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - matmul_precision: medium
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - precision: 32-true
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - enable_progress_bar: False
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - log_every_n_steps: 1
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - ckpt_path: None
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - save_top_k: -1
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - every_n_epochs: 1
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - dir: ./results/experiments/cvrplib/icam_vrp_set_x
+[2026-01-21 17:29:42,380][EasyNCO.utils.utils][INFO] - logger: {'_target_': 'lightning.pytorch.loggers.TensorBoardLogger', 'save_dir': 'tensorboard', 'name': None, 'log_graph': False, 'default_hp_metric': True, 'prefix': ''}
+[2026-01-21 17:29:42,381][EasyNCO.utils.utils][INFO] - settings.env: {'_target_': 'EasyNCO.neural_solvers.envs.CVRPEnv', 'problem_size': '${scale}', 'pomo_size': '${scale}', 'aug_type': 'pomo_aug', 'method_name': '${model}', 'aug_factor': 8}
+[2026-01-21 17:29:42,381][EasyNCO.utils.utils][INFO] - settings.model: {'_target_': 'EasyNCO.neural_solvers.methods.ICAMPolicy', 'env_name': '${problem}', 'num_heads': 8, 'qkv_dim': 16, 'num_encoder_layers': 12, 'normalization': 'instance', 'feedforward_hidden': 512, 'logit_clipping': 50, 'use_graph_mean': False, 'am_mode': False, 'first_placeholder': False, 'first_mode': 'random'}
+[2026-01-21 17:29:42,381][EasyNCO.utils.utils][INFO] - settings.initialization: {'_target_': 'EasyNCO.neural_solvers.methods.ICAMInitialization'}
+[2026-01-21 17:29:42,381][EasyNCO.utils.utils][INFO] - settings.iteration: {'_target_': 'EasyNCO.neural_solvers.pipeline.NoIteration'}
+[2026-01-21 17:29:42,381][EasyNCO.utils.utils][INFO] - settings.module: {'_target_': 'EasyNCO.phases.ARREINFORCELightning', 'method_name': '${model}', 'baseline': 'shared', 'problem_size': '${scale}', 'batch_size': '${batch_size}', 'episodes': '${episodes}', 'val_episode': '${val_episode}', 'optimizer_type': 'Adam', 'scheduler_type': None, 'optimizer_params': {'optimizer': {'lr': 0.0001, 'weight_decay': 1e-06}}, 'decoder_strategy': '${decoder_strategy}', 'every_n_steps_output': 100}
+[2026-01-21 17:29:42,381][EasyNCO.utils.utils][INFO] - settings.model_checkpoint: {'_target_': 'EasyNCO.utils.utils.CustomModelCheckpoint', 'dirpath': 'checkpoints', 'filename': '${model}_${problem}${scale}_{epoch:02d}', 'save_top_k': '${save_top_k}', 'every_n_epochs': '${every_n_epochs}'}
+[2026-01-21 17:29:42,381][EasyNCO.utils.utils][INFO] - settings.test_loader: {'model_dirpath': 'pretrained', 'model_filename': 'icam_cvrp_best.ckpt'}
+[2026-01-21 17:29:43,113][torch.distributed.nn.jit.instantiator][INFO] - Created a temporary directory at /tmp/tmpfia3wvk8
+[2026-01-21 17:29:43,113][torch.distributed.nn.jit.instantiator][INFO] - Writing /tmp/tmpfia3wvk8/_remote_module_non_scriptable.py
+[2026-01-21 17:29:44,588][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   1/100(1.00%)  Time Est.: Elapsed[0.02m], Remain[1.90m]
+[2026-01-21 17:29:44,590][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[119], Name[	X-n120-k6], Completed   1/100(1.00%), Score: 13730.0000, Augmented Score: 13657.0000, Gap: 2.9853%, Augmented Gap: 2.4377%
+[2026-01-21 17:29:44,590][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 13730.0000, Avg Augmented: 13657.0000
+[2026-01-21 17:29:44,590][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 2.9853%, Avg Augmented: 2.4377%, Std: 0.0000%, Std Augmented: 0.0000%
+[2026-01-21 17:29:44,590][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:29:46,358][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   2/100(2.00%)  Time Est.: Elapsed[0.05m], Remain[2.38m]
+[2026-01-21 17:29:46,359][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[458], Name[	X-n459-k26], Completed   2/100(2.00%), Score: 25813.0000, Augmented Score: 25582.0000, Gap: 6.9348%, Augmented Gap: 5.9779%
+[2026-01-21 17:29:46,359][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 19771.5000, Avg Augmented: 19619.5000
+[2026-01-21 17:29:46,359][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9601%, Avg Augmented: 4.2078%, Std: 1.9748%, Std Augmented: 1.7701%
+[2026-01-21 17:29:46,359][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:29:47,150][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   3/100(3.00%)  Time Est.: Elapsed[0.06m], Remain[2.00m]
+[2026-01-21 17:29:47,151][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[236], Name[	X-n237-k14], Completed   3/100(3.00%), Score: 28309.0000, Augmented Score: 28204.0000, Gap: 4.6853%, Augmented Gap: 4.2970%
+[2026-01-21 17:29:47,151][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 22617.3333, Avg Augmented: 22481.0000
+[2026-01-21 17:29:47,151][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.8685%, Avg Augmented: 4.2375%, Std: 1.6176%, Std Augmented: 1.4459%
+[2026-01-21 17:29:47,152][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:29:47,889][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   4/100(4.00%)  Time Est.: Elapsed[0.07m], Remain[1.78m]
+[2026-01-21 17:29:47,890][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[199], Name[	X-n200-k36], Completed   4/100(4.00%), Score: 61479.0000, Augmented Score: 61016.0000, Gap: 4.9524%, Augmented Gap: 4.1620%
+[2026-01-21 17:29:47,890][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 32332.7500, Avg Augmented: 32114.7500
+[2026-01-21 17:29:47,890][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.8895%, Avg Augmented: 4.2187%, Std: 1.4013%, Std Augmented: 1.2526%
+[2026-01-21 17:29:47,890][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:29:51,550][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   5/100(5.00%)  Time Est.: Elapsed[0.14m], Remain[2.57m]
+[2026-01-21 17:29:51,551][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[732], Name[	X-n733-k159], Completed   5/100(5.00%), Score: 142083.0000, Augmented Score: 141682.0000, Gap: 4.3293%, Augmented Gap: 4.0349%
+[2026-01-21 17:29:51,551][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 54282.8000, Avg Augmented: 54028.2000
+[2026-01-21 17:29:51,552][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.7774%, Avg Augmented: 4.1819%, Std: 1.2733%, Std Augmented: 1.1228%
+[2026-01-21 17:29:51,552][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:29:55,205][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   6/100(6.00%)  Time Est.: Elapsed[0.20m], Remain[3.07m]
+[2026-01-21 17:29:55,206][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[800], Name[	X-n801-k40], Completed   6/100(6.00%), Score: 76561.0000, Augmented Score: 76290.0000, Gap: 4.4332%, Augmented Gap: 4.0635%
+[2026-01-21 17:29:55,206][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 57995.8333, Avg Augmented: 57738.5000
+[2026-01-21 17:29:55,206][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.7201%, Avg Augmented: 4.1622%, Std: 1.1694%, Std Augmented: 1.0259%
+[2026-01-21 17:29:55,206][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:29:57,591][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   7/100(7.00%)  Time Est.: Elapsed[0.24m], Remain[3.13m]
+[2026-01-21 17:29:57,593][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[535], Name[	X-n536-k96], Completed   7/100(7.00%), Score: 100613.0000, Augmented Score: 100244.0000, Gap: 6.0804%, Augmented Gap: 5.6913%
+[2026-01-21 17:29:57,593][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 64084.0000, Avg Augmented: 63810.7143
+[2026-01-21 17:29:57,593][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9144%, Avg Augmented: 4.3806%, Std: 1.1827%, Std Augmented: 1.0901%
+[2026-01-21 17:29:57,593][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:29:58,786][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   8/100(8.00%)  Time Est.: Elapsed[0.26m], Remain[2.94m]
+[2026-01-21 17:29:58,787][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[316], Name[	X-n317-k53], Completed   8/100(8.00%), Score: 80201.0000, Augmented Score: 79949.0000, Gap: 2.3559%, Augmented Gap: 2.0343%
+[2026-01-21 17:29:58,787][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 66098.6250, Avg Augmented: 65828.0000
+[2026-01-21 17:29:58,788][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.5946%, Avg Augmented: 4.0873%, Std: 1.3928%, Std Augmented: 1.2814%
+[2026-01-21 17:29:58,788][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:01,912][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>   9/100(9.00%)  Time Est.: Elapsed[0.31m], Remain[3.11m]
+[2026-01-21 17:30:01,913][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[654], Name[	X-n655-k131], Completed   9/100(9.00%), Score: 109891.0000, Augmented Score: 109490.0000, Gap: 2.9135%, Augmented Gap: 2.5379%
+[2026-01-21 17:30:01,913][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 70964.4444, Avg Augmented: 70679.3333
+[2026-01-21 17:30:01,913][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.4078%, Avg Augmented: 3.9152%, Std: 1.4154%, Std Augmented: 1.3025%
+[2026-01-21 17:30:01,913][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:02,583][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  10/100(10.00%)  Time Est.: Elapsed[0.32m], Remain[2.87m]
+[2026-01-21 17:30:02,584][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[175], Name[	X-n176-k26], Completed  10/100(10.00%), Score: 54172.0000, Augmented Score: 53355.0000, Gap: 13.3021%, Augmented Gap: 11.5933%
+[2026-01-21 17:30:02,584][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 69285.2000, Avg Augmented: 68946.9000
+[2026-01-21 17:30:02,584][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.2972%, Avg Augmented: 4.6830%, Std: 2.9871%, Std Augmented: 2.6140%
+[2026-01-21 17:30:02,584][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:04,224][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  11/100(11.00%)  Time Est.: Elapsed[0.35m], Remain[2.80m]
+[2026-01-21 17:30:04,225][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[448], Name[	X-n449-k29], Completed  11/100(11.00%), Score: 56723.0000, Augmented Score: 56609.0000, Gap: 2.6977%, Augmented Gap: 2.4913%
+[2026-01-21 17:30:04,225][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 68143.1818, Avg Augmented: 67825.2727
+[2026-01-21 17:30:04,225][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0609%, Avg Augmented: 4.4837%, Std: 2.9445%, Std Augmented: 2.5707%
+[2026-01-21 17:30:04,225][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:06,091][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  12/100(12.00%)  Time Est.: Elapsed[0.38m], Remain[2.77m]
+[2026-01-21 17:30:06,092][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[501], Name[	X-n502-k39], Completed  12/100(12.00%), Score: 72094.0000, Augmented Score: 71440.0000, Gap: 4.1430%, Augmented Gap: 3.1982%
+[2026-01-21 17:30:06,092][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 68472.4167, Avg Augmented: 68126.5000
+[2026-01-21 17:30:06,092][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9844%, Avg Augmented: 4.3766%, Std: 2.8305%, Std Augmented: 2.4868%
+[2026-01-21 17:30:06,092][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:07,436][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  13/100(13.00%)  Time Est.: Elapsed[0.40m], Remain[2.68m]
+[2026-01-21 17:30:07,437][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[335], Name[	X-n336-k84], Completed  13/100(13.00%), Score: 147005.0000, Augmented Score: 145937.0000, Gap: 5.6746%, Augmented Gap: 4.9069%
+[2026-01-21 17:30:07,437][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 74513.3846, Avg Augmented: 74111.9231
+[2026-01-21 17:30:07,438][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0375%, Avg Augmented: 4.4174%, Std: 2.7257%, Std Augmented: 2.3934%
+[2026-01-21 17:30:07,438][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:11,333][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  14/100(14.00%)  Time Est.: Elapsed[0.46m], Remain[2.86m]
+[2026-01-21 17:30:11,334][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[765], Name[	X-n766-k71], Completed  14/100(14.00%), Score: 122177.0000, Augmented Score: 121295.0000, Gap: 6.7822%, Augmented Gap: 6.0113%
+[2026-01-21 17:30:11,335][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 77917.9286, Avg Augmented: 77482.1429
+[2026-01-21 17:30:11,335][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.1621%, Avg Augmented: 4.5313%, Std: 2.6647%, Std Augmented: 2.3426%
+[2026-01-21 17:30:11,335][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:12,738][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  15/100(15.00%)  Time Est.: Elapsed[0.49m], Remain[2.77m]
+[2026-01-21 17:30:12,739][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[358], Name[	X-n359-k29], Completed  15/100(15.00%), Score: 52337.0000, Augmented Score: 52249.0000, Gap: 1.6154%, Augmented Gap: 1.4445%
+[2026-01-21 17:30:12,739][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 76212.5333, Avg Augmented: 75799.9333
+[2026-01-21 17:30:12,740][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9257%, Avg Augmented: 4.3255%, Std: 2.7221%, Std Augmented: 2.3906%
+[2026-01-21 17:30:12,740][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:13,745][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  16/100(16.00%)  Time Est.: Elapsed[0.51m], Remain[2.65m]
+[2026-01-21 17:30:13,746][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[283], Name[	X-n284-k15], Completed  16/100(16.00%), Score: 21508.0000, Augmented Score: 21508.0000, Gap: 6.3384%, Augmented Gap: 6.3384%
+[2026-01-21 17:30:13,746][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 72793.5000, Avg Augmented: 72406.6875
+[2026-01-21 17:30:13,746][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0140%, Avg Augmented: 4.4513%, Std: 2.6578%, Std Augmented: 2.3654%
+[2026-01-21 17:30:13,746][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:14,392][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  17/100(17.00%)  Time Est.: Elapsed[0.52m], Remain[2.52m]
+[2026-01-21 17:30:14,393][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[147], Name[	X-n148-k46], Completed  17/100(17.00%), Score: 46191.0000, Augmented Score: 45653.0000, Gap: 6.3133%, Augmented Gap: 5.0750%
+[2026-01-21 17:30:14,393][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 71228.6471, Avg Augmented: 70832.9412
+[2026-01-21 17:30:14,393][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0904%, Avg Augmented: 4.4880%, Std: 2.5965%, Std Augmented: 2.2994%
+[2026-01-21 17:30:14,393][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:15,284][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  18/100(18.00%)  Time Est.: Elapsed[0.53m], Remain[2.42m]
+[2026-01-21 17:30:15,285][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[260], Name[	X-n261-k13], Completed  18/100(18.00%), Score: 27365.0000, Augmented Score: 27242.0000, Gap: 3.0386%, Augmented Gap: 2.5755%
+[2026-01-21 17:30:15,285][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 68791.7778, Avg Augmented: 68411.2222
+[2026-01-21 17:30:15,285][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9764%, Avg Augmented: 4.3817%, Std: 2.5667%, Std Augmented: 2.2772%
+[2026-01-21 17:30:15,285][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:15,745][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  19/100(19.00%)  Time Est.: Elapsed[0.54m], Remain[2.30m]
+[2026-01-21 17:30:15,746][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[133], Name[	X-n134-k13], Completed  19/100(19.00%), Score: 11666.0000, Augmented Score: 11471.0000, Gap: 6.8706%, Augmented Gap: 5.0843%
+[2026-01-21 17:30:15,746][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 65785.1579, Avg Augmented: 65414.3684
+[2026-01-21 17:30:15,746][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0761%, Avg Augmented: 4.4187%, Std: 2.5338%, Std Augmented: 2.2220%
+[2026-01-21 17:30:15,747][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:16,833][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  20/100(20.00%)  Time Est.: Elapsed[0.56m], Remain[2.23m]
+[2026-01-21 17:30:16,834][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[293], Name[	X-n294-k50], Completed  20/100(20.00%), Score: 49197.0000, Augmented Score: 48800.0000, Gap: 4.3171%, Augmented Gap: 3.4753%
+[2026-01-21 17:30:16,834][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 64955.7500, Avg Augmented: 64583.6500
+[2026-01-21 17:30:16,834][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0382%, Avg Augmented: 4.3715%, Std: 2.4752%, Std Augmented: 2.1755%
+[2026-01-21 17:30:16,834][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:19,572][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  21/100(21.00%)  Time Est.: Elapsed[0.60m], Remain[2.27m]
+[2026-01-21 17:30:19,573][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[585], Name[	X-n586-k159], Completed  21/100(21.00%), Score: 200493.0000, Augmented Score: 200461.0000, Gap: 5.3474%, Augmented Gap: 5.3306%
+[2026-01-21 17:30:19,573][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 71409.9048, Avg Augmented: 71054.0000
+[2026-01-21 17:30:19,573][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0529%, Avg Augmented: 4.4172%, Std: 2.4165%, Std Augmented: 2.1328%
+[2026-01-21 17:30:19,573][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:20,701][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  22/100(22.00%)  Time Est.: Elapsed[0.62m], Remain[2.20m]
+[2026-01-21 17:30:20,703][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[265], Name[	X-n266-k58], Completed  22/100(22.00%), Score: 79222.0000, Augmented Score: 78662.0000, Gap: 4.9604%, Augmented Gap: 4.2184%
+[2026-01-21 17:30:20,703][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 71765.0000, Avg Augmented: 71399.8182
+[2026-01-21 17:30:20,703][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0487%, Avg Augmented: 4.4082%, Std: 2.3610%, Std Augmented: 2.0842%
+[2026-01-21 17:30:20,703][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:21,311][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  23/100(23.00%)  Time Est.: Elapsed[0.63m], Remain[2.11m]
+[2026-01-21 17:30:21,312][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[152], Name[	X-n153-k22], Completed  23/100(23.00%), Score: 24128.0000, Augmented Score: 23629.0000, Gap: 13.7041%, Augmented Gap: 11.3525%
+[2026-01-21 17:30:21,312][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 69693.8261, Avg Augmented: 69322.8261
+[2026-01-21 17:30:21,312][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.4250%, Avg Augmented: 4.7101%, Std: 2.9064%, Std Augmented: 2.4821%
+[2026-01-21 17:30:21,312][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:22,323][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  24/100(24.00%)  Time Est.: Elapsed[0.65m], Remain[2.05m]
+[2026-01-21 17:30:22,324][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[269], Name[	X-n270-k35], Completed  24/100(24.00%), Score: 36516.0000, Augmented Score: 36419.0000, Gap: 3.4711%, Augmented Gap: 3.1963%
+[2026-01-21 17:30:22,324][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 68311.4167, Avg Augmented: 67951.8333
+[2026-01-21 17:30:22,324][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.3436%, Avg Augmented: 4.6470%, Std: 2.8719%, Std Augmented: 2.4486%
+[2026-01-21 17:30:22,324][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:27,712][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  25/100(25.00%)  Time Est.: Elapsed[0.74m], Remain[2.21m]
+[2026-01-21 17:30:27,712][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[915], Name[	X-n916-k207], Completed  25/100(25.00%), Score: 343682.0000, Augmented Score: 343682.0000, Gap: 4.4058%, Augmented Gap: 4.4058%
+[2026-01-21 17:30:27,712][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 79326.2400, Avg Augmented: 78981.0400
+[2026-01-21 17:30:27,713][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.3061%, Avg Augmented: 4.6374%, Std: 2.8199%, Std Augmented: 2.3996%
+[2026-01-21 17:30:27,713][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:28,830][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  26/100(26.00%)  Time Est.: Elapsed[0.76m], Remain[2.15m]
+[2026-01-21 17:30:28,832][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[246], Name[	X-n247-k50], Completed  26/100(26.00%), Score: 41396.0000, Augmented Score: 41338.0000, Gap: 11.0586%, Augmented Gap: 10.9030%
+[2026-01-21 17:30:28,832][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 77867.3846, Avg Augmented: 77533.2308
+[2026-01-21 17:30:28,832][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.5273%, Avg Augmented: 4.8784%, Std: 2.9782%, Std Augmented: 2.6435%
+[2026-01-21 17:30:28,832][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:31,617][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  27/100(27.00%)  Time Est.: Elapsed[0.80m], Remain[2.17m]
+[2026-01-21 17:30:31,619][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[612], Name[	X-n613-k62], Completed  27/100(27.00%), Score: 61669.0000, Augmented Score: 61476.0000, Gap: 3.5844%, Augmented Gap: 3.2603%
+[2026-01-21 17:30:31,619][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 77267.4444, Avg Augmented: 76938.5185
+[2026-01-21 17:30:31,619][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.4554%, Avg Augmented: 4.8184%, Std: 2.9455%, Std Augmented: 2.6121%
+[2026-01-21 17:30:31,619][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:35,365][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  28/100(28.00%)  Time Est.: Elapsed[0.87m], Remain[2.23m]
+[2026-01-21 17:30:35,366][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[782], Name[	X-n783-k48], Completed  28/100(28.00%), Score: 75072.0000, Augmented Score: 74801.0000, Gap: 3.7107%, Augmented Gap: 3.3363%
+[2026-01-21 17:30:35,366][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 77189.0357, Avg Augmented: 76862.1786
+[2026-01-21 17:30:35,366][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.3931%, Avg Augmented: 4.7655%, Std: 2.9105%, Std Augmented: 2.5797%
+[2026-01-21 17:30:35,366][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:36,421][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  29/100(29.00%)  Time Est.: Elapsed[0.88m], Remain[2.16m]
+[2026-01-21 17:30:36,422][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[302], Name[	X-n303-k21], Completed  29/100(29.00%), Score: 22597.0000, Augmented Score: 22485.0000, Gap: 3.9612%, Augmented Gap: 3.4459%
+[2026-01-21 17:30:36,422][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 75306.5517, Avg Augmented: 74987.1034
+[2026-01-21 17:30:36,422][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.3437%, Avg Augmented: 4.7200%, Std: 2.8718%, Std Augmented: 2.5462%
+[2026-01-21 17:30:36,422][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:37,323][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  30/100(30.00%)  Time Est.: Elapsed[0.90m], Remain[2.10m]
+[2026-01-21 17:30:37,324][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[218], Name[	X-n219-k73], Completed  30/100(30.00%), Score: 118470.0000, Augmented Score: 118470.0000, Gap: 0.7441%, Augmented Gap: 0.7441%
+[2026-01-21 17:30:37,324][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 76745.3333, Avg Augmented: 76436.5333
+[2026-01-21 17:30:37,325][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.1904%, Avg Augmented: 4.5875%, Std: 2.9417%, Std Augmented: 2.6032%
+[2026-01-21 17:30:37,325][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:38,418][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  31/100(31.00%)  Time Est.: Elapsed[0.92m], Remain[2.04m]
+[2026-01-21 17:30:38,419][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[330], Name[	X-n331-k15], Completed  31/100(31.00%), Score: 32426.0000, Augmented Score: 31722.0000, Gap: 4.2570%, Augmented Gap: 1.9934%
+[2026-01-21 17:30:38,419][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 75315.6774, Avg Augmented: 74994.1290
+[2026-01-21 17:30:38,419][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.1603%, Avg Augmented: 4.5038%, Std: 2.8986%, Std Augmented: 2.6015%
+[2026-01-21 17:30:38,419][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:39,818][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  32/100(32.00%)  Time Est.: Elapsed[0.94m], Remain[2.00m]
+[2026-01-21 17:30:39,820][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[400], Name[	X-n401-k29], Completed  32/100(32.00%), Score: 67718.0000, Augmented Score: 67532.0000, Gap: 2.3642%, Augmented Gap: 2.0830%
+[2026-01-21 17:30:39,820][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 75078.2500, Avg Augmented: 74760.9375
+[2026-01-21 17:30:39,820][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0729%, Avg Augmented: 4.4281%, Std: 2.8941%, Std Augmented: 2.5950%
+[2026-01-21 17:30:39,820][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:40,521][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  33/100(33.00%)  Time Est.: Elapsed[0.95m], Remain[1.93m]
+[2026-01-21 17:30:40,523][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[203], Name[	X-n204-k19], Completed  33/100(33.00%), Score: 20240.0000, Augmented Score: 20188.0000, Gap: 3.4500%, Augmented Gap: 3.1843%
+[2026-01-21 17:30:40,523][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 73416.4848, Avg Augmented: 73107.2121
+[2026-01-21 17:30:40,523][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0237%, Avg Augmented: 4.3904%, Std: 2.8635%, Std Augmented: 2.5642%
+[2026-01-21 17:30:40,523][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:41,943][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  34/100(34.00%)  Time Est.: Elapsed[0.98m], Remain[1.89m]
+[2026-01-21 17:30:41,945][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[383], Name[	X-n384-k52], Completed  34/100(34.00%), Score: 67987.0000, Augmented Score: 67877.0000, Gap: 3.1043%, Augmented Gap: 2.9375%
+[2026-01-21 17:30:41,945][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 73256.7941, Avg Augmented: 72953.3824
+[2026-01-21 17:30:41,945][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9672%, Avg Augmented: 4.3477%, Std: 2.8396%, Std Augmented: 2.5382%
+[2026-01-21 17:30:41,945][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:42,560][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  35/100(35.00%)  Time Est.: Elapsed[0.99m], Remain[1.83m]
+[2026-01-21 17:30:42,561][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[185], Name[	X-n186-k15], Completed  35/100(35.00%), Score: 24938.0000, Augmented Score: 24770.0000, Gap: 3.2843%, Augmented Gap: 2.5885%
+[2026-01-21 17:30:42,561][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 71876.2571, Avg Augmented: 71576.7143
+[2026-01-21 17:30:42,561][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9192%, Avg Augmented: 4.2974%, Std: 2.8128%, Std Augmented: 2.5187%
+[2026-01-21 17:30:42,561][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:47,895][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  36/100(36.00%)  Time Est.: Elapsed[1.07m], Remain[1.91m]
+[2026-01-21 17:30:47,896][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[1000], Name[	X-n1001-k43], Completed  36/100(36.00%), Score: 74604.0000, Augmented Score: 74514.0000, Gap: 3.1083%, Augmented Gap: 2.9839%
+[2026-01-21 17:30:47,896][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 71952.0278, Avg Augmented: 71658.3056
+[2026-01-21 17:30:47,897][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.8689%, Avg Augmented: 4.2610%, Std: 2.7894%, Std Augmented: 2.4929%
+[2026-01-21 17:30:47,897][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:50,502][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  37/100(37.00%)  Time Est.: Elapsed[1.12m], Remain[1.90m]
+[2026-01-21 17:30:50,503][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[598], Name[	X-n599-k92], Completed  37/100(37.00%), Score: 113192.0000, Augmented Score: 113054.0000, Gap: 4.3716%, Augmented Gap: 4.2443%
+[2026-01-21 17:30:50,503][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 73066.6216, Avg Augmented: 72777.1081
+[2026-01-21 17:30:50,503][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.8554%, Avg Augmented: 4.2605%, Std: 2.7526%, Std Augmented: 2.4590%
+[2026-01-21 17:30:50,503][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:53,577][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  38/100(38.00%)  Time Est.: Elapsed[1.17m], Remain[1.91m]
+[2026-01-21 17:30:53,579][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[715], Name[	X-n716-k35], Completed  38/100(38.00%), Score: 45864.0000, Augmented Score: 45380.0000, Gap: 5.7432%, Augmented Gap: 4.6273%
+[2026-01-21 17:30:53,579][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 72350.7632, Avg Augmented: 72056.1316
+[2026-01-21 17:30:53,579][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.8788%, Avg Augmented: 4.2702%, Std: 2.7198%, Std Augmented: 2.4271%
+[2026-01-21 17:30:53,579][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:30:57,413][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  39/100(39.00%)  Time Est.: Elapsed[1.23m], Remain[1.93m]
+[2026-01-21 17:30:57,414][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[748], Name[	X-n749-k98], Completed  39/100(39.00%), Score: 80831.0000, Augmented Score: 80448.0000, Gap: 4.6099%, Augmented Gap: 4.1142%
+[2026-01-21 17:30:57,414][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 72568.2051, Avg Augmented: 72271.3077
+[2026-01-21 17:30:57,414][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.8719%, Avg Augmented: 4.2662%, Std: 2.6851%, Std Augmented: 2.3959%
+[2026-01-21 17:30:57,414][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:02,718][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  40/100(40.00%)  Time Est.: Elapsed[1.32m], Remain[1.98m]
+[2026-01-21 17:31:02,719][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[978], Name[	X-n979-k58], Completed  40/100(40.00%), Score: 125071.0000, Augmented Score: 124341.0000, Gap: 5.1229%, Augmented Gap: 4.5093%
+[2026-01-21 17:31:02,719][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 73880.7750, Avg Augmented: 73573.0500
+[2026-01-21 17:31:02,719][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.8782%, Avg Augmented: 4.2722%, Std: 2.6516%, Std Augmented: 2.3661%
+[2026-01-21 17:31:02,719][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:05,179][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  41/100(41.00%)  Time Est.: Elapsed[1.36m], Remain[1.96m]
+[2026-01-21 17:31:05,181][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[523], Name[	X-n524-k153], Completed  41/100(41.00%), Score: 172547.0000, Augmented Score: 172416.0000, Gap: 11.6137%, Augmented Gap: 11.5290%
+[2026-01-21 17:31:05,181][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 76287.2683, Avg Augmented: 75983.8537
+[2026-01-21 17:31:05,181][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0424%, Avg Augmented: 4.4492%, Std: 2.8176%, Std Augmented: 2.5913%
+[2026-01-21 17:31:05,181][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:06,828][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  42/100(42.00%)  Time Est.: Elapsed[1.39m], Remain[1.92m]
+[2026-01-21 17:31:06,829][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[428], Name[	X-n429-k61], Completed  42/100(42.00%), Score: 67822.0000, Augmented Score: 67593.0000, Gap: 3.6257%, Augmented Gap: 3.2758%
+[2026-01-21 17:31:06,829][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 76085.7143, Avg Augmented: 75784.0714
+[2026-01-21 17:31:06,830][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0087%, Avg Augmented: 4.4213%, Std: 2.7923%, Std Augmented: 2.5665%
+[2026-01-21 17:31:06,830][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:11,872][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  43/100(43.00%)  Time Est.: Elapsed[1.47m], Remain[1.95m]
+[2026-01-21 17:31:11,874][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[956], Name[	X-n957-k87], Completed  43/100(43.00%), Score: 88934.0000, Augmented Score: 87994.0000, Gap: 4.0590%, Augmented Gap: 2.9591%
+[2026-01-21 17:31:11,874][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 76384.5116, Avg Augmented: 76068.0233
+[2026-01-21 17:31:11,874][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9866%, Avg Augmented: 4.3873%, Std: 2.7633%, Std Augmented: 2.5460%
+[2026-01-21 17:31:11,874][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:12,761][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  44/100(44.00%)  Time Est.: Elapsed[1.49m], Remain[1.89m]
+[2026-01-21 17:31:12,762][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[232], Name[	X-n233-k16], Completed  44/100(44.00%), Score: 20163.0000, Augmented Score: 19857.0000, Gap: 4.8518%, Augmented Gap: 3.2605%
+[2026-01-21 17:31:12,762][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 75106.7500, Avg Augmented: 74790.5000
+[2026-01-21 17:31:12,762][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9836%, Avg Augmented: 4.3617%, Std: 2.7318%, Std Augmented: 2.5225%
+[2026-01-21 17:31:12,762][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:13,446][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  45/100(45.00%)  Time Est.: Elapsed[1.50m], Remain[1.83m]
+[2026-01-21 17:31:13,448][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[189], Name[	X-n190-k8], Completed  45/100(45.00%), Score: 17597.0000, Augmented Score: 17597.0000, Gap: 3.6337%, Augmented Gap: 3.6337%
+[2026-01-21 17:31:13,448][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 73828.7556, Avg Augmented: 73519.5333
+[2026-01-21 17:31:13,448][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9536%, Avg Augmented: 4.3455%, Std: 2.7086%, Std Augmented: 2.4967%
+[2026-01-21 17:31:13,448][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:13,887][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  46/100(46.00%)  Time Est.: Elapsed[1.51m], Remain[1.77m]
+[2026-01-21 17:31:13,888][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[100], Name[	X-n101-k25], Completed  46/100(46.00%), Score: 29538.0000, Augmented Score: 29302.0000, Gap: 7.0566%, Augmented Gap: 6.2013%
+[2026-01-21 17:31:13,888][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 72865.9130, Avg Augmented: 72558.2826
+[2026-01-21 17:31:13,888][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9993%, Avg Augmented: 4.3859%, Std: 2.6965%, Std Augmented: 2.4842%
+[2026-01-21 17:31:13,888][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:18,152][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  47/100(47.00%)  Time Est.: Elapsed[1.58m], Remain[1.78m]
+[2026-01-21 17:31:18,153][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[894], Name[	X-n895-k37], Completed  47/100(47.00%), Score: 56197.0000, Augmented Score: 56197.0000, Gap: 4.3390%, Augmented Gap: 4.3390%
+[2026-01-21 17:31:18,153][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 72511.2553, Avg Augmented: 72210.1702
+[2026-01-21 17:31:18,153][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9852%, Avg Augmented: 4.3849%, Std: 2.6693%, Std Augmented: 2.4576%
+[2026-01-21 17:31:18,153][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:23,217][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  48/100(48.00%)  Time Est.: Elapsed[1.66m], Remain[1.80m]
+[2026-01-21 17:31:23,218][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[935], Name[	X-n936-k151], Completed  48/100(48.00%), Score: 153317.0000, Augmented Score: 153136.0000, Gap: 15.5235%, Augmented Gap: 15.3871%
+[2026-01-21 17:31:23,218][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 74194.7083, Avg Augmented: 73896.1250
+[2026-01-21 17:31:23,218][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.2048%, Avg Augmented: 4.6141%, Std: 3.0401%, Std Augmented: 2.8954%
+[2026-01-21 17:31:23,218][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:24,015][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  49/100(49.00%)  Time Est.: Elapsed[1.68m], Remain[1.74m]
+[2026-01-21 17:31:24,016][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[222], Name[	X-n223-k34], Completed  49/100(49.00%), Score: 41511.0000, Augmented Score: 41511.0000, Gap: 2.6560%, Augmented Gap: 2.6560%
+[2026-01-21 17:31:24,016][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 73527.6939, Avg Augmented: 73235.2041
+[2026-01-21 17:31:24,017][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.1528%, Avg Augmented: 4.5741%, Std: 3.0305%, Std Augmented: 2.8790%
+[2026-01-21 17:31:24,017][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:26,321][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  50/100(50.00%)  Time Est.: Elapsed[1.71m], Remain[1.71m]
+[2026-01-21 17:31:26,323][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[560], Name[	X-n561-k42], Completed  50/100(50.00%), Score: 44185.0000, Augmented Score: 43878.0000, Gap: 3.4366%, Augmented Gap: 2.7179%
+[2026-01-21 17:31:26,323][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 72940.8400, Avg Augmented: 72648.0600
+[2026-01-21 17:31:26,323][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.1184%, Avg Augmented: 4.5370%, Std: 3.0096%, Std Augmented: 2.8619%
+[2026-01-21 17:31:26,323][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:28,893][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  51/100(51.00%)  Time Est.: Elapsed[1.76m], Remain[1.69m]
+[2026-01-21 17:31:28,894][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[626], Name[	X-n627-k43], Completed  51/100(51.00%), Score: 65319.0000, Augmented Score: 65319.0000, Gap: 5.0753%, Augmented Gap: 5.0753%
+[2026-01-21 17:31:28,894][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 72791.3922, Avg Augmented: 72504.3529
+[2026-01-21 17:31:28,894][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.1176%, Avg Augmented: 4.5475%, Std: 2.9800%, Std Augmented: 2.8347%
+[2026-01-21 17:31:28,894][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:29,936][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  52/100(52.00%)  Time Est.: Elapsed[1.77m], Remain[1.64m]
+[2026-01-21 17:31:29,937][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[297], Name[	X-n298-k31], Completed  52/100(52.00%), Score: 35317.0000, Augmented Score: 34982.0000, Gap: 3.1726%, Augmented Gap: 2.1939%
+[2026-01-21 17:31:29,937][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 72070.7308, Avg Augmented: 71782.7692
+[2026-01-21 17:31:29,937][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0802%, Avg Augmented: 4.5023%, Std: 2.9632%, Std Augmented: 2.8259%
+[2026-01-21 17:31:29,937][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:31,222][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  53/100(53.00%)  Time Est.: Elapsed[1.80m], Remain[1.59m]
+[2026-01-21 17:31:31,224][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[366], Name[	X-n367-k17], Completed  53/100(53.00%), Score: 25135.0000, Augmented Score: 24571.0000, Gap: 10.1736%, Augmented Gap: 7.7014%
+[2026-01-21 17:31:31,224][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 71185.1509, Avg Augmented: 70891.9811
+[2026-01-21 17:31:31,224][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.1763%, Avg Augmented: 4.5626%, Std: 3.0158%, Std Augmented: 2.8327%
+[2026-01-21 17:31:31,224][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:32,649][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  54/100(54.00%)  Time Est.: Elapsed[1.82m], Remain[1.55m]
+[2026-01-21 17:31:32,650][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[350], Name[	X-n351-k40], Completed  54/100(54.00%), Score: 28118.0000, Augmented Score: 27987.0000, Gap: 8.5805%, Augmented Gap: 8.0746%
+[2026-01-21 17:31:32,650][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 70387.6111, Avg Augmented: 70097.4444
+[2026-01-21 17:31:32,650][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.2393%, Avg Augmented: 4.6277%, Std: 3.0228%, Std Augmented: 2.8460%
+[2026-01-21 17:31:32,650][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:33,675][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  55/100(55.00%)  Time Est.: Elapsed[1.84m], Remain[1.50m]
+[2026-01-21 17:31:33,676][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[279], Name[	X-n280-k17], Completed  55/100(55.00%), Score: 34926.0000, Augmented Score: 34852.0000, Gap: 4.2474%, Augmented Gap: 4.0265%
+[2026-01-21 17:31:33,676][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 69742.8545, Avg Augmented: 69456.6182
+[2026-01-21 17:31:33,676][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.2213%, Avg Augmented: 4.6167%, Std: 2.9982%, Std Augmented: 2.8212%
+[2026-01-21 17:31:33,676][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:34,748][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  56/100(56.00%)  Time Est.: Elapsed[1.86m], Remain[1.46m]
+[2026-01-21 17:31:34,749][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[307], Name[	X-n308-k13], Completed  56/100(56.00%), Score: 27607.0000, Augmented Score: 27225.0000, Gap: 6.7597%, Augmented Gap: 5.2825%
+[2026-01-21 17:31:34,750][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 68990.4286, Avg Augmented: 68702.4821
+[2026-01-21 17:31:34,750][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.2488%, Avg Augmented: 4.6286%, Std: 2.9782%, Std Augmented: 2.7973%
+[2026-01-21 17:31:34,750][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:35,472][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  57/100(57.00%)  Time Est.: Elapsed[1.87m], Remain[1.41m]
+[2026-01-21 17:31:35,473][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[171], Name[	X-n172-k51], Completed  57/100(57.00%), Score: 47829.0000, Augmented Score: 47631.0000, Gap: 4.8721%, Augmented Gap: 4.4379%
+[2026-01-21 17:31:35,473][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 68619.1754, Avg Augmented: 68332.8070
+[2026-01-21 17:31:35,473][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.2422%, Avg Augmented: 4.6253%, Std: 2.9524%, Std Augmented: 2.7727%
+[2026-01-21 17:31:35,473][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:36,330][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  58/100(58.00%)  Time Est.: Elapsed[1.88m], Remain[1.36m]
+[2026-01-21 17:31:36,331][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[255], Name[	X-n256-k16], Completed  58/100(58.00%), Score: 20069.0000, Augmented Score: 19758.0000, Gap: 6.5290%, Augmented Gap: 4.8782%
+[2026-01-21 17:31:36,332][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 67782.1034, Avg Augmented: 67495.3103
+[2026-01-21 17:31:36,332][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.2643%, Avg Augmented: 4.6296%, Std: 2.9316%, Std Augmented: 2.7489%
+[2026-01-21 17:31:36,332][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:37,290][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  59/100(59.00%)  Time Est.: Elapsed[1.90m], Remain[1.32m]
+[2026-01-21 17:31:37,291][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[274], Name[	X-n275-k28], Completed  59/100(59.00%), Score: 22233.0000, Augmented Score: 21947.0000, Gap: 4.6505%, Augmented Gap: 3.3043%
+[2026-01-21 17:31:37,291][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 67010.0847, Avg Augmented: 66723.3051
+[2026-01-21 17:31:37,291][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.2539%, Avg Augmented: 4.6072%, Std: 2.9078%, Std Augmented: 2.7309%
+[2026-01-21 17:31:37,292][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:38,391][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  60/100(60.00%)  Time Est.: Elapsed[1.92m], Remain[1.28m]
+[2026-01-21 17:31:38,392][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[288], Name[	X-n289-k60], Completed  60/100(60.00%), Score: 99872.0000, Augmented Score: 99688.0000, Gap: 4.9616%, Augmented Gap: 4.7682%
+[2026-01-21 17:31:38,392][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 67557.7833, Avg Augmented: 67272.7167
+[2026-01-21 17:31:38,392][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.2491%, Avg Augmented: 4.6099%, Std: 2.8837%, Std Augmented: 2.7081%
+[2026-01-21 17:31:38,392][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:42,745][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  61/100(61.00%)  Time Est.: Elapsed[1.99m], Remain[1.27m]
+[2026-01-21 17:31:42,746][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[855], Name[	X-n856-k95], Completed  61/100(61.00%), Score: 92950.0000, Augmented Score: 92498.0000, Gap: 4.4793%, Augmented Gap: 3.9712%
+[2026-01-21 17:31:42,746][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 67974.0492, Avg Augmented: 67686.2459
+[2026-01-21 17:31:42,747][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.2365%, Avg Augmented: 4.5994%, Std: 2.8616%, Std Augmented: 2.6871%
+[2026-01-21 17:31:42,747][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:44,018][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  62/100(62.00%)  Time Est.: Elapsed[2.01m], Remain[1.23m]
+[2026-01-21 17:31:44,019][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[312], Name[	X-n313-k71], Completed  62/100(62.00%), Score: 98539.0000, Augmented Score: 97255.0000, Gap: 4.7808%, Augmented Gap: 3.4155%
+[2026-01-21 17:31:44,019][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 68467.0323, Avg Augmented: 68163.1613
+[2026-01-21 17:31:44,020][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.2291%, Avg Augmented: 4.5803%, Std: 2.8390%, Std Augmented: 2.6695%
+[2026-01-21 17:31:44,020][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:45,141][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  63/100(63.00%)  Time Est.: Elapsed[2.03m], Remain[1.19m]
+[2026-01-21 17:31:45,142][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[326], Name[	X-n327-k20], Completed  63/100(63.00%), Score: 28909.0000, Augmented Score: 28722.0000, Gap: 5.0015%, Augmented Gap: 4.3222%
+[2026-01-21 17:31:45,142][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 67839.1270, Avg Augmented: 67537.1111
+[2026-01-21 17:31:45,142][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.2255%, Avg Augmented: 4.5762%, Std: 2.8165%, Std Augmented: 2.6484%
+[2026-01-21 17:31:45,142][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:45,632][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  64/100(64.00%)  Time Est.: Elapsed[2.04m], Remain[1.15m]
+[2026-01-21 17:31:45,633][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[124], Name[	X-n125-k30], Completed  64/100(64.00%), Score: 59472.0000, Augmented Score: 58166.0000, Gap: 7.0815%, Augmented Gap: 4.7300%
+[2026-01-21 17:31:45,633][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 67708.3906, Avg Augmented: 67390.6875
+[2026-01-21 17:31:45,633][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.2545%, Avg Augmented: 4.5786%, Std: 2.8039%, Std Augmented: 2.6277%
+[2026-01-21 17:31:45,633][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:47,799][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  65/100(65.00%)  Time Est.: Elapsed[2.07m], Remain[1.12m]
+[2026-01-21 17:31:47,801][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[572], Name[	X-n573-k30], Completed  65/100(65.00%), Score: 55188.0000, Augmented Score: 54090.0000, Gap: 8.9101%, Augmented Gap: 6.7432%
+[2026-01-21 17:31:47,801][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 67515.7692, Avg Augmented: 67186.0615
+[2026-01-21 17:31:47,801][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.3107%, Avg Augmented: 4.6119%, Std: 2.8184%, Std Augmented: 2.6210%
+[2026-01-21 17:31:47,801][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:49,038][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  66/100(66.00%)  Time Est.: Elapsed[2.09m], Remain[1.08m]
+[2026-01-21 17:31:49,039][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[343], Name[	X-n344-k43], Completed  66/100(66.00%), Score: 43573.0000, Augmented Score: 43379.0000, Gap: 3.6219%, Augmented Gap: 3.1605%
+[2026-01-21 17:31:49,039][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 67153.0000, Avg Augmented: 66825.3485
+[2026-01-21 17:31:49,039][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.2851%, Avg Augmented: 4.5899%, Std: 2.8046%, Std Augmented: 2.6071%
+[2026-01-21 17:31:49,039][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:50,144][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  67/100(67.00%)  Time Est.: Elapsed[2.11m], Remain[1.04m]
+[2026-01-21 17:31:50,145][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[321], Name[	X-n322-k28], Completed  67/100(67.00%), Score: 31169.0000, Augmented Score: 30732.0000, Gap: 4.4748%, Augmented Gap: 3.0100%
+[2026-01-21 17:31:50,145][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 66615.9254, Avg Augmented: 66286.6418
+[2026-01-21 17:31:50,145][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.2730%, Avg Augmented: 4.5663%, Std: 2.7853%, Std Augmented: 2.5946%
+[2026-01-21 17:31:50,145][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:50,671][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  68/100(68.00%)  Time Est.: Elapsed[2.12m], Remain[1.00m]
+[2026-01-21 17:31:50,672][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[142], Name[	X-n143-k7], Completed  68/100(68.00%), Score: 16025.0000, Augmented Score: 15980.0000, Gap: 2.0701%, Augmented Gap: 1.7834%
+[2026-01-21 17:31:50,672][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 65871.9412, Avg Augmented: 65546.8382
+[2026-01-21 17:31:50,673][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.2259%, Avg Augmented: 4.5254%, Std: 2.7915%, Std Augmented: 2.5972%
+[2026-01-21 17:31:50,673][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:51,658][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  69/100(69.00%)  Time Est.: Elapsed[2.14m], Remain[0.96m]
+[2026-01-21 17:31:51,659][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[250], Name[	X-n251-k28], Completed  69/100(69.00%), Score: 39529.0000, Augmented Score: 39529.0000, Gap: 2.1844%, Augmented Gap: 2.1844%
+[2026-01-21 17:31:51,659][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 65490.1594, Avg Augmented: 65169.7681
+[2026-01-21 17:31:51,659][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.1819%, Avg Augmented: 4.4915%, Std: 2.7949%, Std Augmented: 2.5934%
+[2026-01-21 17:31:51,659][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:53,679][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  70/100(70.00%)  Time Est.: Elapsed[2.17m], Remain[0.93m]
+[2026-01-21 17:31:53,681][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[479], Name[	X-n480-k70], Completed  70/100(70.00%), Score: 92588.0000, Augmented Score: 92377.0000, Gap: 3.5093%, Augmented Gap: 3.2734%
+[2026-01-21 17:31:53,681][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 65877.2714, Avg Augmented: 65558.4429
+[2026-01-21 17:31:53,681][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.1580%, Avg Augmented: 4.4741%, Std: 2.7820%, Std Augmented: 2.5789%
+[2026-01-21 17:31:53,681][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:31:56,720][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  71/100(71.00%)  Time Est.: Elapsed[2.22m], Remain[0.91m]
+[2026-01-21 17:31:56,721][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[700], Name[	X-n701-k44], Completed  71/100(71.00%), Score: 83727.0000, Augmented Score: 83711.0000, Gap: 2.2021%, Augmented Gap: 2.1825%
+[2026-01-21 17:31:56,721][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 66128.6761, Avg Augmented: 65814.1127
+[2026-01-21 17:31:56,722][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.1163%, Avg Augmented: 4.4418%, Std: 2.7842%, Std Augmented: 2.5749%
+[2026-01-21 17:31:56,722][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:00,826][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  72/100(72.00%)  Time Est.: Elapsed[2.29m], Remain[0.89m]
+[2026-01-21 17:32:00,827][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[875], Name[	X-n876-k59], Completed  72/100(72.00%), Score: 103004.0000, Augmented Score: 102951.0000, Gap: 3.7312%, Augmented Gap: 3.6778%
+[2026-01-21 17:32:00,827][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 66640.8333, Avg Augmented: 66329.9028
+[2026-01-21 17:32:00,828][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0971%, Avg Augmented: 4.4312%, Std: 2.7695%, Std Augmented: 2.5585%
+[2026-01-21 17:32:00,828][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:02,528][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  73/100(73.00%)  Time Est.: Elapsed[2.32m], Remain[0.86m]
+[2026-01-21 17:32:02,529][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[375], Name[	X-n376-k94], Completed  73/100(73.00%), Score: 149548.0000, Augmented Score: 149134.0000, Gap: 1.2423%, Augmented Gap: 0.9620%
+[2026-01-21 17:32:02,530][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 67776.5479, Avg Augmented: 67464.2055
+[2026-01-21 17:32:02,530][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0443%, Avg Augmented: 4.3837%, Std: 2.7868%, Std Augmented: 2.5727%
+[2026-01-21 17:32:02,530][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:05,228][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  74/100(74.00%)  Time Est.: Elapsed[2.36m], Remain[0.83m]
+[2026-01-21 17:32:05,229][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[640], Name[	X-n641-k35], Completed  74/100(74.00%), Score: 65900.0000, Augmented Score: 65701.0000, Gap: 3.4797%, Augmented Gap: 3.1672%
+[2026-01-21 17:32:05,229][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 67751.1892, Avg Augmented: 67440.3784
+[2026-01-21 17:32:05,229][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0231%, Avg Augmented: 4.3672%, Std: 2.7738%, Std Augmented: 2.5591%
+[2026-01-21 17:32:05,229][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:05,797][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  75/100(75.00%)  Time Est.: Elapsed[2.37m], Remain[0.79m]
+[2026-01-21 17:32:05,799][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[166], Name[	X-n167-k10], Completed  75/100(75.00%), Score: 21189.0000, Augmented Score: 21177.0000, Gap: 3.0744%, Augmented Gap: 3.0160%
+[2026-01-21 17:32:05,799][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 67130.3600, Avg Augmented: 66823.5333
+[2026-01-21 17:32:05,799][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9972%, Avg Augmented: 4.3492%, Std: 2.7643%, Std Augmented: 2.5467%
+[2026-01-21 17:32:05,799][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:07,902][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  76/100(76.00%)  Time Est.: Elapsed[2.41m], Remain[0.76m]
+[2026-01-21 17:32:07,904][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[468], Name[	X-n469-k138], Completed  76/100(76.00%), Score: 236225.0000, Augmented Score: 234986.0000, Gap: 6.4921%, Augmented Gap: 5.9335%
+[2026-01-21 17:32:07,904][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 69355.2895, Avg Augmented: 69036.1974
+[2026-01-21 17:32:07,904][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0168%, Avg Augmented: 4.3701%, Std: 2.7513%, Std Augmented: 2.5363%
+[2026-01-21 17:32:07,904][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:09,752][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  77/100(77.00%)  Time Est.: Elapsed[2.44m], Remain[0.73m]
+[2026-01-21 17:32:09,753][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[512], Name[	X-n513-k21], Completed  77/100(77.00%), Score: 25491.0000, Augmented Score: 25266.0000, Gap: 5.3304%, Augmented Gap: 4.4006%
+[2026-01-21 17:32:09,753][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 68785.6234, Avg Augmented: 68467.7532
+[2026-01-21 17:32:09,753][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0209%, Avg Augmented: 4.3705%, Std: 2.7336%, Std Augmented: 2.5198%
+[2026-01-21 17:32:09,753][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:10,394][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  78/100(78.00%)  Time Est.: Elapsed[2.45m], Remain[0.69m]
+[2026-01-21 17:32:10,396][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[180], Name[	X-n181-k23], Completed  78/100(78.00%), Score: 25984.0000, Augmented Score: 25984.0000, Gap: 1.6231%, Augmented Gap: 1.6231%
+[2026-01-21 17:32:10,396][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 68236.8846, Avg Augmented: 67923.0897
+[2026-01-21 17:32:10,396][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9773%, Avg Augmented: 4.3352%, Std: 2.7428%, Std Augmented: 2.5226%
+[2026-01-21 17:32:10,396][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:10,778][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  79/100(79.00%)  Time Est.: Elapsed[2.46m], Remain[0.65m]
+[2026-01-21 17:32:10,779][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[105], Name[	X-n106-k14], Completed  79/100(79.00%), Score: 27186.0000, Augmented Score: 27080.0000, Gap: 3.1257%, Augmented Gap: 2.7236%
+[2026-01-21 17:32:10,779][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 67717.2532, Avg Augmented: 67406.0886
+[2026-01-21 17:32:10,779][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9539%, Avg Augmented: 4.3148%, Std: 2.7332%, Std Augmented: 2.5131%
+[2026-01-21 17:32:10,779][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:11,320][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  80/100(80.00%)  Time Est.: Elapsed[2.46m], Remain[0.62m]
+[2026-01-21 17:32:11,321][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[161], Name[	X-n162-k11], Completed  80/100(80.00%), Score: 14656.0000, Augmented Score: 14558.0000, Gap: 3.6639%, Augmented Gap: 2.9707%
+[2026-01-21 17:32:11,321][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 67053.9875, Avg Augmented: 66745.4875
+[2026-01-21 17:32:11,321][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9378%, Avg Augmented: 4.2980%, Std: 2.7199%, Std Augmented: 2.5018%
+[2026-01-21 17:32:11,321][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:12,078][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  81/100(81.00%)  Time Est.: Elapsed[2.48m], Remain[0.58m]
+[2026-01-21 17:32:12,079][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[194], Name[	X-n195-k51], Completed  81/100(81.00%), Score: 46476.0000, Augmented Score: 46420.0000, Gap: 5.0899%, Augmented Gap: 4.9633%
+[2026-01-21 17:32:12,079][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 66799.9383, Avg Augmented: 66494.5556
+[2026-01-21 17:32:12,079][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9397%, Avg Augmented: 4.3062%, Std: 2.7031%, Std Augmented: 2.4874%
+[2026-01-21 17:32:12,079][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:13,505][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  82/100(82.00%)  Time Est.: Elapsed[2.50m], Remain[0.55m]
+[2026-01-21 17:32:13,506][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[410], Name[	X-n411-k19], Completed  82/100(82.00%), Score: 21541.0000, Augmented Score: 21541.0000, Gap: 9.2786%, Augmented Gap: 9.2786%
+[2026-01-21 17:32:13,506][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 66248.0000, Avg Augmented: 65946.3415
+[2026-01-21 17:32:13,506][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9926%, Avg Augmented: 4.3669%, Std: 2.7284%, Std Augmented: 2.5317%
+[2026-01-21 17:32:13,506][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:15,081][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  83/100(83.00%)  Time Est.: Elapsed[2.53m], Remain[0.52m]
+[2026-01-21 17:32:15,082][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[438], Name[	X-n439-k37], Completed  83/100(83.00%), Score: 38657.0000, Augmented Score: 38632.0000, Gap: 6.2268%, Augmented Gap: 6.1581%
+[2026-01-21 17:32:15,082][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 65915.5783, Avg Augmented: 65617.2530
+[2026-01-21 17:32:15,082][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0074%, Avg Augmented: 4.3885%, Std: 2.7153%, Std Augmented: 2.5240%
+[2026-01-21 17:32:15,082][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:15,539][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  84/100(84.00%)  Time Est.: Elapsed[2.53m], Remain[0.48m]
+[2026-01-21 17:32:15,540][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[138], Name[	X-n139-k10], Completed  84/100(84.00%), Score: 13798.0000, Augmented Score: 13798.0000, Gap: 1.5305%, Augmented Gap: 1.5305%
+[2026-01-21 17:32:15,541][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 65295.1310, Avg Augmented: 65000.3571
+[2026-01-21 17:32:15,541][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9661%, Avg Augmented: 4.3544%, Std: 2.7253%, Std Augmented: 2.5280%
+[2026-01-21 17:32:15,541][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:16,339][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  85/100(85.00%)  Time Est.: Elapsed[2.55m], Remain[0.45m]
+[2026-01-21 17:32:16,340][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[208], Name[	X-n209-k16], Completed  85/100(85.00%), Score: 31402.0000, Augmented Score: 31353.0000, Gap: 2.4335%, Augmented Gap: 2.2736%
+[2026-01-21 17:32:16,340][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 64896.3882, Avg Augmented: 64604.5059
+[2026-01-21 17:32:16,340][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9363%, Avg Augmented: 4.3300%, Std: 2.7229%, Std Augmented: 2.5230%
+[2026-01-21 17:32:16,340][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:20,956][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  86/100(86.00%)  Time Est.: Elapsed[2.63m], Remain[0.43m]
+[2026-01-21 17:32:20,958][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[836], Name[	X-n837-k142], Completed  86/100(86.00%), Score: 200720.0000, Augmented Score: 200497.0000, Gap: 3.6044%, Augmented Gap: 3.4893%
+[2026-01-21 17:32:20,958][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 66475.7326, Avg Augmented: 66184.6512
+[2026-01-21 17:32:20,958][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9208%, Avg Augmented: 4.3202%, Std: 2.7108%, Std Augmented: 2.5099%
+[2026-01-21 17:32:20,958][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:22,917][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  87/100(87.00%)  Time Est.: Elapsed[2.66m], Remain[0.40m]
+[2026-01-21 17:32:22,919][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[419], Name[	X-n420-k130], Completed  87/100(87.00%), Score: 113628.0000, Augmented Score: 113073.0000, Gap: 5.4083%, Augmented Gap: 4.8934%
+[2026-01-21 17:32:22,919][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 67017.7126, Avg Augmented: 66723.5977
+[2026-01-21 17:32:22,919][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9264%, Avg Augmented: 4.3268%, Std: 2.6957%, Std Augmented: 2.4962%
+[2026-01-21 17:32:22,919][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:27,251][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  88/100(88.00%)  Time Est.: Elapsed[2.73m], Remain[0.37m]
+[2026-01-21 17:32:27,252][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[818], Name[	X-n819-k171], Completed  88/100(88.00%), Score: 167196.0000, Augmented Score: 166928.0000, Gap: 5.7393%, Augmented Gap: 5.5698%
+[2026-01-21 17:32:27,252][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 68156.1023, Avg Augmented: 67862.2841
+[2026-01-21 17:32:27,252][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9356%, Avg Augmented: 4.3409%, Std: 2.6817%, Std Augmented: 2.4855%
+[2026-01-21 17:32:27,252][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:27,944][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  89/100(89.00%)  Time Est.: Elapsed[2.74m], Remain[0.34m]
+[2026-01-21 17:32:27,945][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[213], Name[	X-n214-k11], Completed  89/100(89.00%), Score: 11375.0000, Augmented Score: 11326.0000, Gap: 4.7808%, Augmented Gap: 4.3294%
+[2026-01-21 17:32:27,945][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 67518.1124, Avg Augmented: 67227.0449
+[2026-01-21 17:32:27,945][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9339%, Avg Augmented: 4.3408%, Std: 2.6667%, Std Augmented: 2.4715%
+[2026-01-21 17:32:27,945][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:29,381][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  90/100(90.00%)  Time Est.: Elapsed[2.77m], Remain[0.31m]
+[2026-01-21 17:32:29,382][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[392], Name[	X-n393-k38], Completed  90/100(90.00%), Score: 39580.0000, Augmented Score: 39239.0000, Gap: 3.4501%, Augmented Gap: 2.5588%
+[2026-01-21 17:32:29,382][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 67207.6889, Avg Augmented: 66916.0667
+[2026-01-21 17:32:29,383][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9174%, Avg Augmented: 4.3210%, Std: 2.6564%, Std Augmented: 2.4648%
+[2026-01-21 17:32:29,383][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:29,902][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  91/100(91.00%)  Time Est.: Elapsed[2.77m], Remain[0.27m]
+[2026-01-21 17:32:29,904][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[156], Name[	X-n157-k13], Completed  91/100(91.00%), Score: 18558.0000, Augmented Score: 18224.0000, Gap: 9.9668%, Augmented Gap: 7.9877%
+[2026-01-21 17:32:29,904][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 66673.0769, Avg Augmented: 66380.9890
+[2026-01-21 17:32:29,904][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9729%, Avg Augmented: 4.3613%, Std: 2.6937%, Std Augmented: 2.4809%
+[2026-01-21 17:32:29,904][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:31,817][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  92/100(92.00%)  Time Est.: Elapsed[2.81m], Remain[0.24m]
+[2026-01-21 17:32:31,818][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[490], Name[	X-n491-k59], Completed  92/100(92.00%), Score: 68522.0000, Augmented Score: 68217.0000, Gap: 3.0669%, Augmented Gap: 2.6082%
+[2026-01-21 17:32:31,818][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 66693.1739, Avg Augmented: 66400.9457
+[2026-01-21 17:32:31,818][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9522%, Avg Augmented: 4.3422%, Std: 2.6863%, Std Augmented: 2.4740%
+[2026-01-21 17:32:31,818][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:33,919][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  93/100(93.00%)  Time Est.: Elapsed[2.84m], Remain[0.21m]
+[2026-01-21 17:32:33,921][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[547], Name[	X-n548-k50], Completed  93/100(93.00%), Score: 88459.0000, Augmented Score: 88230.0000, Gap: 2.0288%, Augmented Gap: 1.7647%
+[2026-01-21 17:32:33,921][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 66927.2151, Avg Augmented: 66635.6667
+[2026-01-21 17:32:33,921][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9207%, Avg Augmented: 4.3145%, Std: 2.6887%, Std Augmented: 2.4750%
+[2026-01-21 17:32:33,921][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:34,324][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  94/100(94.00%)  Time Est.: Elapsed[2.85m], Remain[0.18m]
+[2026-01-21 17:32:34,325][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[114], Name[	X-n115-k10], Completed  94/100(94.00%), Score: 13924.0000, Augmented Score: 13592.0000, Gap: 9.2335%, Augmented Gap: 6.6290%
+[2026-01-21 17:32:34,325][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 66363.3511, Avg Augmented: 66071.3723
+[2026-01-21 17:32:34,325][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9666%, Avg Augmented: 4.3391%, Std: 2.7108%, Std Augmented: 2.4732%
+[2026-01-21 17:32:34,325][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:37,479][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  95/100(95.00%)  Time Est.: Elapsed[2.90m], Remain[0.15m]
+[2026-01-21 17:32:37,481][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[669], Name[	X-n670-k130], Completed  95/100(95.00%), Score: 162709.0000, Augmented Score: 161421.0000, Gap: 11.1917%, Augmented Gap: 10.3115%
+[2026-01-21 17:32:37,481][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 67377.5158, Avg Augmented: 67075.0526
+[2026-01-21 17:32:37,481][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0321%, Avg Augmented: 4.4020%, Std: 2.7703%, Std Augmented: 2.5346%
+[2026-01-21 17:32:37,481][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:38,391][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  96/100(96.00%)  Time Est.: Elapsed[2.92m], Remain[0.12m]
+[2026-01-21 17:32:38,392][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[241], Name[	X-n242-k48], Completed  96/100(96.00%), Score: 85437.0000, Augmented Score: 84993.0000, Gap: 3.2459%, Augmented Gap: 2.7093%
+[2026-01-21 17:32:38,392][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 67565.6354, Avg Augmented: 67261.6979
+[2026-01-21 17:32:38,392][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0135%, Avg Augmented: 4.3844%, Std: 2.7618%, Std Augmented: 2.5272%
+[2026-01-21 17:32:38,392][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:38,796][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  97/100(97.00%)  Time Est.: Elapsed[2.92m], Remain[0.09m]
+[2026-01-21 17:32:38,797][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[109], Name[	X-n110-k13], Completed  97/100(97.00%), Score: 15098.0000, Augmented Score: 15091.0000, Gap: 0.8483%, Augmented Gap: 0.8015%
+[2026-01-21 17:32:38,797][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 67024.7320, Avg Augmented: 66723.8557
+[2026-01-21 17:32:38,797][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9706%, Avg Augmented: 4.3474%, Std: 2.7795%, Std Augmented: 2.5400%
+[2026-01-21 17:32:38,797][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:39,581][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  98/100(98.00%)  Time Est.: Elapsed[2.94m], Remain[0.06m]
+[2026-01-21 17:32:39,582][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[227], Name[	X-n228-k23], Completed  98/100(98.00%), Score: 28266.0000, Augmented Score: 27492.0000, Gap: 9.8050%, Augmented Gap: 6.7982%
+[2026-01-21 17:32:39,582][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 66629.2347, Avg Augmented: 66323.5306
+[2026-01-21 17:32:39,582][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0199%, Avg Augmented: 4.3724%, Std: 2.8077%, Std Augmented: 2.5390%
+[2026-01-21 17:32:39,582][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:42,555][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==>  99/100(99.00%)  Time Est.: Elapsed[2.99m], Remain[0.03m]
+[2026-01-21 17:32:42,556][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[684], Name[	X-n685-k75], Completed  99/100(99.00%), Score: 71245.0000, Augmented Score: 70917.0000, Gap: 4.4572%, Augmented Gap: 3.9762%
+[2026-01-21 17:32:42,556][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 66675.8586, Avg Augmented: 66369.9293
+[2026-01-21 17:32:42,556][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 5.0142%, Avg Augmented: 4.3684%, Std: 2.7940%, Std Augmented: 2.5265%
+[2026-01-21 17:32:42,556][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:43,000][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> 100/100(100.00%)  Time Est.: Elapsed[2.99m], Remain[0.00m]
+[2026-01-21 17:32:43,002][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Problem[cvrp], Size[128], Name[	X-n129-k18], Completed 100/100(100.00%), Score: 29447.0000, Augmented Score: 29321.0000, Gap: 1.7519%, Augmented Gap: 1.3165%
+[2026-01-21 17:32:43,002][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Score Summary: Avg: 66303.5700, Avg Augmented: 65999.4400
+[2026-01-21 17:32:43,002][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval ==> Gap Summary: Avg: 4.9816%, Avg Augmented: 4.3379%, Std: 2.7989%, Std Augmented: 2.5321%
+[2026-01-21 17:32:43,002][EasyNCO.phases.rl.ar_reinforce][INFO] - ============================================================================
+[2026-01-21 17:32:43,007][EasyNCO.phases.rl.ar_reinforce][INFO] - Total Testing Time: 179.5672 seconds, 2.9928 minutes, 0.0499 hours
+[2026-01-21 17:32:43,007][EasyNCO.phases.rl.ar_reinforce][INFO] - Avg Time per Episode: 1.7957 seconds (Episode: 100)
+[2026-01-21 17:32:43,007][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval Done ==> Tested 100/100(100.00%)  Time Est.: Elapsed[2.99m], Remain[0.00m]
+[2026-01-21 17:32:43,007][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval Done ==> Problem[cvrp], Score Summary: Avg: 66303.5700, Avg Augmented: 65999.4400
+[2026-01-21 17:32:43,007][EasyNCO.phases.rl.ar_reinforce][INFO] - Eval Done ==> Problem[cvrp], Gap Summary: Avg: 4.9816%, Avg Augmented: 4.3379%, Std: 2.7989%, Std Augmented: 2.5321%

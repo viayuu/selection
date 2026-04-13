@@ -1,0 +1,15 @@
+[eval] checkpoint=0online/outputs/smoke_kroA100/selector_best.pt
+[eval] instance=kroA100 problem_size=100 path=EasyNCO/data/datasets/tsplib/tsplib/kroA100.tsp
+[eval] init_zoo=lehd operator_zoo=two_opt
+[eval] augmentations=identity,rotate,reflect,mix eval_aug_size=2
+[solver_load] lehd: EasyNCO/pretrained/lehd_tsp100.ckpt missing=0 unexpected=0
+[eval:eval_original] batch=0001 items=1/1 avg_init=5.4135 avg_final=5.4135 avg_reward=0.0000 elapsed=0.64s
+[eval] original init_dist=lehd:1.00
+[eval] original op_dist=two_opt:1.00
+[eval] original trace=0online/outputs/smoke_kroA100_eval2/original_instance_actions.jsonl
+[eval:eval_augmented] batch=0001 items=1/2 avg_init=5.4135 avg_final=5.4135 avg_reward=0.0000 elapsed=0.67s
+[eval:eval_augmented] batch=0002 items=2/2 avg_init=5.4609 avg_final=5.4609 avg_reward=0.0000 elapsed=1.34s
+[eval] augmented init_dist=lehd:1.00
+[eval] augmented op_dist=two_opt:1.00
+[eval] augmented trace=0online/outputs/smoke_kroA100_eval2/augmented_instance_actions.jsonl
+[eval] outputs=0online/outputs/smoke_kroA100_eval2

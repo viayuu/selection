@@ -1,0 +1,56 @@
+[10:54:37] 实验开始，输出目录: /public/home/zhoucl/shiys/2cmab2/outputs/2026-04-02-10-54-04_nss_neural_linucb_server
+[10:54:37] 开始构建共享数据集 | data_source=nss | arm数=9
+[10:54:37] 使用 NSS 数据源: /public/home/zhoucl/shiys/9nss论文/neural-solver-selection/datasets
+[10:54:37] 开始构建 NSS train split
+[10:54:38] NSS split=train problem=tsp 原始样本数=10000，实际使用=10000
+[10:55:47] NSS split=train problem=cvrp 原始样本数=10000，实际使用=10000
+[10:57:03] 开始构建 NSS val split
+[10:57:03] NSS split=val problem=tsp 原始样本数=1000，实际使用=1000
+[10:57:11] NSS split=val problem=cvrp 原始样本数=1000，实际使用=1000
+[10:57:20] 开始构建 NSS test split
+[10:57:20] NSS split=test problem=tsp 原始样本数=1000，实际使用=1000
+[10:57:27] NSS split=test problem=cvrp 原始样本数=1000，实际使用=1000
+[10:57:36] NSS 数据集构建完成: train=20000, val=2000, test=2000
+[10:57:36] 数据集构建完成，样本总数=24000
+[10:57:36] 检测到数据源自带 train/val/test split，直接使用预定义划分
+[10:57:36] 数据切分完成: train=20000, val=2000, test=2000
+[10:57:36] 开始构造 selector: neural_linucb
+[10:57:37] selector 构造完成: NeuralLinUCB
+[10:57:37] 已开启 checkpoint 自动保存: 每 1000 个 step 保存一次
+[10:57:37] 已开启周期性验证: 每 1000 个 step 在 val 集评测一次
+[10:57:37] 开始训练 epoch 1/1 [NeuralLinUCB]
+Traceback (most recent call last):
+  File "2cmab2/run_offline.py", line 2160, in <module>
+    main()
+  File "2cmab2/run_offline.py", line 2151, in main
+    results = run_experiment(args, output_dir=output_dir)
+  File "2cmab2/run_offline.py", line 1718, in run_experiment
+    train_trace = _train_sample_bandit(
+  File "2cmab2/run_offline.py", line 1378, in _train_sample_bandit
+    selector.update(sample, arm, float(sample.rewards[arm]))
+  File "/public/home/zhoucl/shiys/2cmab2/neural_linucb.py", line 647, in update
+    train_stats = self.fit_representation()
+  File "/public/home/zhoucl/shiys/2cmab2/neural_linucb.py", line 736, in fit_representation
+    phi = self._encode_record_batch(batch_records)
+  File "/public/home/zhoucl/shiys/2cmab2/neural_linucb.py", line 496, in _encode_record_batch
+    base = self.context_encoder.encode_samples(samples).to(self.device)
+  File "/public/home/zhoucl/shiys/2cmab2/encoders.py", line 436, in encode_samples
+    encoded = self.graph_encoder.encode_problem(batch_nodes, problem=problem, mask=mask)
+  File "/public/home/zhoucl/shiys/2cmab2/encoders.py", line 373, in encode_problem
+    graph_emb = self.cvrp_encoder(batch_nodes[:, :, :3], mask)
+  File "/public/home/zhoucl/anaconda3/envs/easynco_zhoucl/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/public/home/zhoucl/shiys/2cmab2/encoders.py", line 114, in forward
+    _graph_emb, out, mask = block(out, mask, i)
+  File "/public/home/zhoucl/anaconda3/envs/easynco_zhoucl/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/public/home/zhoucl/shiys/2cmab2/encoders.py", line 174, in forward
+    score_embs = self.layer_score(embs, mask)
+  File "/public/home/zhoucl/anaconda3/envs/easynco_zhoucl/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1501, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/public/home/zhoucl/shiys/2cmab2/encoders.py", line 217, in forward
+    out_concat = multi_head_attention(q, k, v, rank2_ninf_mask=mask)
+  File "/public/home/zhoucl/shiys/2cmab2/encoders.py", line 251, in multi_head_attention
+    assert not score_scaled.isinf().all(dim=-1).any(), "All the valid nodes are filtered! Check the pooling operation."
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 870.00 MiB (GPU 0; 23.59 GiB total capacity; 14.46 GiB already allocated; 528.50 MiB free; 15.32 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+ERROR conda.cli.main_run:execute(47): `conda run python 2cmab2/run_offline.py --data-source nss --method neural_linucb --epochs 1 --eval-every-steps 1000 --eval-log-every 500 --checkpoint-every 0 --checkpoint-every-steps 1000 --disable-progress --no-quiet --output-dir /public/home/zhoucl/shiys/2cmab2/outputs/2026-04-02-10-54-04_nss_neural_linucb_server` failed. (See above for error)

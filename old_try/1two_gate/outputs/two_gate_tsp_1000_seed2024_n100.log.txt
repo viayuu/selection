@@ -1,0 +1,181 @@
+[config] {
+  "seed": 2024,
+  "device": "cuda:0",
+  "problem_size": 100,
+  "batch_size": 64,
+  "train_steps": 1000,
+  "lr": 0.001,
+  "log_every": 20,
+  "eval_every": 100,
+  "eval_batches": 3,
+  "train_dists": [
+    "gaussian",
+    "uniform"
+  ],
+  "eval_dist": "gaussian",
+  "eval_seed": 2025,
+  "eval_data_path": null,
+  "gmm_no_cov": false,
+  "gmm_var_lower": 1.0,
+  "gmm_var_upper": 100.0,
+  "gmm_num_modes_lower": 0,
+  "gmm_num_modes_upper": 15,
+  "gmm_center_lower": 0.0,
+  "gmm_center_upper": 100.0,
+  "init_zoo": [
+    "lehd",
+    "elg",
+    "difusco"
+  ],
+  "iter_zoo": [
+    "none",
+    "rrc_lehd",
+    "two_opt"
+  ],
+  "pomo_size": null,
+  "decoder_strategy": "greedy",
+  "rrc_steps": 10,
+  "dact_steps": 50,
+  "lih_steps": 50,
+  "model_dir": "model",
+  "pomo_ckpt": null,
+  "am_ckpt": null,
+  "lehd_ckpt": null,
+  "elg_ckpt": null,
+  "difusco_ckpt": null,
+  "dact_ckpt": null,
+  "lih_ckpt": null,
+  "add_two_opt": false,
+  "two_opt_iters": 200,
+  "load_path": null,
+  "only_eval": false,
+  "baseline": "critic",
+  "critic_coef": 0.5
+}
+[log_path] my/outputs/two_gate_tsp_seed2024_n100.log.txt
+[solver_load] lehd: model/lehd_tsp100.ckpt missing=0 unexpected=0
+[solver_load] elg: model/elg_tsp100.ckpt missing=0 unexpected=0
+[solver_load] difusco: model/difusco_tsp100.ckpt missing=0 unexpected=0
+[solver_load] rrc_lehd(policy): model/lehd_tsp100.ckpt missing=0 unexpected=0
+[train step      1] loss=13.6247 len0=6.8721 len1=6.7805 adv=-7.4716±1.1346 critic_mse=58.7220 entropy=2.1092 gate1=(lehd:0.36, elg:0.14, difusco:0.50) gate2=(none:0.52, rrc_lehd_10:0.23, two_opt_200:0.25)
+[config] {
+  "seed": 2024,
+  "device": "cuda:0",
+  "problem_size": 100,
+  "batch_size": 64,
+  "train_steps": 1000,
+  "lr": 0.001,
+  "log_every": 20,
+  "eval_every": 100,
+  "eval_batches": 3,
+  "train_dists": [
+    "gaussian",
+    "uniform"
+  ],
+  "eval_dist": "gaussian",
+  "eval_seed": 2025,
+  "eval_data_path": null,
+  "gmm_no_cov": false,
+  "gmm_var_lower": 1.0,
+  "gmm_var_upper": 100.0,
+  "gmm_num_modes_lower": 0,
+  "gmm_num_modes_upper": 15,
+  "gmm_center_lower": 0.0,
+  "gmm_center_upper": 100.0,
+  "init_zoo": [
+    "lehd",
+    "elg",
+    "difusco"
+  ],
+  "iter_zoo": [
+    "none",
+    "rrc_lehd",
+    "two_opt"
+  ],
+  "pomo_size": null,
+  "decoder_strategy": "greedy",
+  "rrc_steps": 10,
+  "dact_steps": 50,
+  "lih_steps": 50,
+  "model_dir": "model",
+  "pomo_ckpt": null,
+  "am_ckpt": null,
+  "lehd_ckpt": null,
+  "elg_ckpt": null,
+  "difusco_ckpt": null,
+  "dact_ckpt": null,
+  "lih_ckpt": null,
+  "add_two_opt": false,
+  "two_opt_iters": 200,
+  "load_path": null,
+  "only_eval": false,
+  "baseline": "critic",
+  "critic_coef": 0.5
+}
+[log_path] my/outputs/two_gate_tsp_seed2024_n100.log.txt
+[solver_load] lehd: model/lehd_tsp100.ckpt missing=0 unexpected=0
+[solver_load] elg: model/elg_tsp100.ckpt missing=0 unexpected=0
+[solver_load] difusco: model/difusco_tsp100.ckpt missing=0 unexpected=0
+[solver_load] rrc_lehd(policy): model/lehd_tsp100.ckpt missing=0 unexpected=0
+[train step      1] loss=13.6247 len0=6.8721 len1=6.7805 adv=-7.4716±1.1346 critic_mse=58.7220 entropy=2.1092 gate1=(lehd:0.36, elg:0.14, difusco:0.50) gate2=(none:0.52, rrc_lehd_10:0.23, two_opt_200:0.25)
+[train step     20] loss=0.6497 len0=6.8144 len1=6.8144 adv=-1.0394±1.2425 critic_mse=2.3982 entropy=0.7601 gate1=(lehd:0.75, elg:0.14, difusco:0.11) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step     40] loss=0.7224 len0=6.7160 len1=6.7160 adv=-0.2134±1.1106 critic_mse=1.2814 entropy=0.8177 gate1=(lehd:0.39, elg:0.58, difusco:0.03) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step     60] loss=0.6579 len0=6.4459 len1=6.4459 adv=0.3308±1.1911 critic_mse=1.5872 entropy=0.4862 gate1=(lehd:0.83, elg:0.16, difusco:0.02) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step     80] loss=0.6725 len0=6.8378 len1=6.8378 adv=-0.0129±1.1376 critic_mse=1.3444 entropy=0.0397 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    100] loss=0.6823 len0=6.8242 len1=6.8242 adv=-0.2137±1.1118 critic_mse=1.3685 entropy=0.0429 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[eval step    100] mean_len=5.7592 best=5.7592 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    120] loss=0.6225 len0=6.5983 len1=6.5983 adv=0.0726±1.0748 critic_mse=1.2446 entropy=0.0079 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    140] loss=0.6218 len0=6.4941 len1=6.4941 adv=0.2699±1.0409 critic_mse=1.2433 entropy=0.0038 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    160] loss=0.4564 len0=6.6986 len1=6.6986 adv=-0.0864±0.9113 critic_mse=0.9130 entropy=0.0141 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    180] loss=0.4369 len0=6.8458 len1=6.8458 adv=-0.3368±0.7820 critic_mse=0.8738 entropy=0.0040 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    200] loss=0.2160 len0=6.7484 len1=6.7484 adv=-0.0173±0.5855 critic_mse=0.4318 entropy=0.0037 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[eval step    200] mean_len=5.7592 best=5.7592 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    220] loss=0.1367 len0=6.8139 len1=6.8139 adv=-0.1452±0.4447 critic_mse=0.2737 entropy=0.0042 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    240] loss=0.1713 len0=6.8342 len1=6.8342 adv=0.3027±0.4680 critic_mse=0.3425 entropy=0.0036 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    260] loss=0.1878 len0=6.7530 len1=6.7530 adv=0.0181±0.5381 critic_mse=0.3761 entropy=0.0074 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    280] loss=0.1365 len0=6.7103 len1=6.7103 adv=-0.1156±0.4338 critic_mse=0.2731 entropy=0.0124 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    300] loss=-0.0170 len0=6.6806 len1=6.6806 adv=0.0086±0.3564 critic_mse=0.1713 entropy=0.0197 gate1=(lehd:0.98, elg:0.02, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[eval step    300] mean_len=5.7592 best=5.7592 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    320] loss=0.1369 len0=6.4434 len1=6.4434 adv=0.1431±0.4304 critic_mse=0.2735 entropy=0.0062 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    340] loss=0.1354 len0=6.9876 len1=6.9876 adv=0.2492±0.4220 critic_mse=0.2708 entropy=0.0026 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    360] loss=0.1359 len0=6.7643 len1=6.7643 adv=0.2330±0.3897 critic_mse=0.2717 entropy=0.0019 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    380] loss=0.0717 len0=6.7825 len1=6.7825 adv=-0.0802±0.3053 critic_mse=0.1435 entropy=0.0038 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    400] loss=0.1236 len0=6.8303 len1=6.8303 adv=-0.0370±0.3787 critic_mse=0.2473 entropy=0.0065 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[eval step    400] mean_len=5.7592 best=5.7592 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    420] loss=0.0700 len0=6.6588 len1=6.6588 adv=0.0535±0.2890 critic_mse=0.1400 entropy=0.0071 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    440] loss=0.0674 len0=6.6029 len1=6.6029 adv=-0.1966±0.2644 critic_mse=0.1355 entropy=0.0178 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    460] loss=0.0951 len0=6.9883 len1=6.9883 adv=-0.3203±0.2835 critic_mse=0.1923 entropy=0.0249 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    480] loss=0.0952 len0=6.6259 len1=6.6259 adv=-0.1176±0.2897 critic_mse=0.1570 entropy=0.0214 gate1=(lehd:0.98, elg:0.02, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    500] loss=0.1852 len0=6.8306 len1=6.8306 adv=-0.0164±0.3522 critic_mse=0.2182 entropy=0.0161 gate1=(lehd:0.98, elg:0.02, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[eval step    500] mean_len=5.7592 best=5.7592 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    520] loss=0.0763 len0=6.6439 len1=6.6439 adv=0.0741±0.3073 critic_mse=0.1526 entropy=0.0189 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    540] loss=0.0745 len0=6.7752 len1=6.7752 adv=-0.1418±0.2674 critic_mse=0.1504 entropy=0.0180 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    560] loss=0.0832 len0=6.9310 len1=6.9310 adv=-0.1587±0.2748 critic_mse=0.1659 entropy=0.0084 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    580] loss=0.0612 len0=6.7159 len1=6.7159 adv=-0.0757±0.2210 critic_mse=0.1229 entropy=0.0090 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    600] loss=0.0524 len0=6.7503 len1=6.7503 adv=0.1569±0.2091 critic_mse=0.1045 entropy=0.0122 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[eval step    600] mean_len=5.7592 best=5.7592 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    620] loss=0.0607 len0=6.5836 len1=6.5836 adv=0.1208±0.2200 critic_mse=0.1211 entropy=0.0083 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    640] loss=0.0737 len0=6.8056 len1=6.8056 adv=-0.1889±0.2169 critic_mse=0.1482 entropy=0.0157 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    660] loss=0.0599 len0=6.6782 len1=6.6782 adv=0.1002±0.2341 critic_mse=0.1192 entropy=0.0170 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    680] loss=0.0560 len0=6.8766 len1=6.8766 adv=-0.1250±0.2385 critic_mse=0.1118 entropy=0.0150 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    700] loss=0.0698 len0=6.7762 len1=6.7762 adv=-0.1569±0.2312 critic_mse=0.1409 entropy=0.0472 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[eval step    700] mean_len=5.7592 best=5.7592 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    720] loss=0.0705 len0=6.6228 len1=6.6228 adv=0.0110±0.2246 critic_mse=0.1414 entropy=0.0422 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:1.00, rrc_lehd_10:0.00, two_opt_200:0.00)
+[train step    740] loss=0.0628 len0=6.7463 len1=6.7458 adv=-0.0624±0.2241 critic_mse=0.1416 entropy=0.0698 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:0.98, rrc_lehd_10:0.02, two_opt_200:0.00)
+[train step    760] loss=0.0752 len0=6.5954 len1=6.4936 adv=0.0562±0.2149 critic_mse=0.1502 entropy=0.0158 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:0.00, rrc_lehd_10:1.00, two_opt_200:0.00)
+[train step    780] loss=0.0594 len0=6.7465 len1=6.6291 adv=0.2341±0.1328 critic_mse=0.1189 entropy=0.0007 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:0.00, rrc_lehd_10:1.00, two_opt_200:0.00)
+[train step    800] loss=0.0885 len0=6.7041 len1=6.6206 adv=-0.1666±0.2400 critic_mse=0.1769 entropy=0.0006 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:0.00, rrc_lehd_10:1.00, two_opt_200:0.00)
+[eval step    800] mean_len=5.6610 best=5.6610 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:0.00, rrc_lehd_10:1.00, two_opt_200:0.00)
+[train step    820] loss=0.0616 len0=6.6239 len1=6.5652 adv=-0.1128±0.1739 critic_mse=0.1232 entropy=0.0006 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:0.00, rrc_lehd_10:1.00, two_opt_200:0.00)
+[train step    840] loss=0.0362 len0=6.5056 len1=6.4505 adv=0.0849±0.1561 critic_mse=0.0723 entropy=0.0006 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:0.00, rrc_lehd_10:1.00, two_opt_200:0.00)
+[train step    860] loss=0.0408 len0=6.7608 len1=6.6757 adv=-0.0567±0.1612 critic_mse=0.0816 entropy=0.0004 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:0.00, rrc_lehd_10:1.00, two_opt_200:0.00)
+[train step    880] loss=0.0755 len0=6.6144 len1=6.5854 adv=-0.1074±0.1790 critic_mse=0.1511 entropy=0.0005 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:0.00, rrc_lehd_10:1.00, two_opt_200:0.00)
+[train step    900] loss=0.0536 len0=6.6683 len1=6.5843 adv=-0.0730±0.1696 critic_mse=0.1073 entropy=0.0004 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:0.00, rrc_lehd_10:1.00, two_opt_200:0.00)
+[eval step    900] mean_len=5.6610 best=5.6610 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:0.00, rrc_lehd_10:1.00, two_opt_200:0.00)
+[train step    920] loss=0.0473 len0=6.9112 len1=6.8518 adv=-0.0251±0.1423 critic_mse=0.0947 entropy=0.0004 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:0.00, rrc_lehd_10:1.00, two_opt_200:0.00)
+[train step    940] loss=0.0410 len0=6.5849 len1=6.5269 adv=-0.1040±0.1444 critic_mse=0.0820 entropy=0.0004 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:0.00, rrc_lehd_10:1.00, two_opt_200:0.00)
+[train step    960] loss=0.0308 len0=6.5088 len1=6.4842 adv=-0.0030±0.1103 critic_mse=0.0615 entropy=0.0006 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:0.00, rrc_lehd_10:1.00, two_opt_200:0.00)
+[train step    980] loss=0.0447 len0=6.6113 len1=6.5643 adv=-0.0321±0.1455 critic_mse=0.0895 entropy=0.0006 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:0.00, rrc_lehd_10:1.00, two_opt_200:0.00)
+[train step   1000] loss=0.0319 len0=6.7756 len1=6.7401 adv=-0.0065±0.1108 critic_mse=0.0638 entropy=0.0006 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:0.00, rrc_lehd_10:1.00, two_opt_200:0.00)
+[eval step   1000] mean_len=5.6610 best=5.6610 gate1=(lehd:1.00, elg:0.00, difusco:0.00) gate2=(none:0.00, rrc_lehd_10:1.00, two_opt_200:0.00)
+[saved] my/outputs/two_gate_tsp_seed2024_n100.pt

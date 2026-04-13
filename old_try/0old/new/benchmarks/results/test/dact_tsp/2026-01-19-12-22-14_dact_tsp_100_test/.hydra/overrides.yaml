@@ -1,0 +1,10 @@
+- mode=test
+- model=dact
+- problem=tsp
+- decoder_strategy=greedy
+- test_data_path=test_dataset_tsp_uniform/test_tsp100_nums10000_uniform.pt
+- settings=dact_settings
+- settings.env._target_=EasyNCO.neural_solvers.envs.TSPEnv
+- settings.test_loader.model_dirpath=pretrained
+- settings.test_loader.model_filename=dact_tsp100.ckpt
+- settings.module.iteration_params.max_steps=1

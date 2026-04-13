@@ -1,0 +1,118 @@
+# https://hydra.cc/docs/configure_hydra/intro/
+env:
+  _target_: EasyNCO.neural_solvers.envs.DUMMYEnv
+  problem_size: ${scale}
+  pomo_size: 1
+
+
+
+model:
+  _target_: EasyNCO.neural_solvers.methods.GLOPPolicy
+  problem: ${problem}
+  global_params:
+    width: 1
+    n_subset: 1
+    revision_lens: [ 100,50,20 ]
+    iter: [ 10,10,5 ]
+  upper:
+    units: 48
+    feats: 3
+    k_sparse_cvrp_leq1000: 100
+    k_sparse_cvrp_gt1000: 200
+    k_sparse_pctsp_leq500: 50
+    k_sparse_pctsp_leq1000: 100
+    k_sparse_pctsp_gt1000: 200
+    edge_feats: 2
+    depth: 12
+  lower:
+    env_name: "tsp"
+    num_heads: 8
+    qkv_dim: 16
+    num_encoder_layers: 6
+    normalization: "batch"
+    feedforward_hidden: 512
+    logit_clipping: 10
+    use_graph_mean: true
+    am_mode: false
+    first_placeholder: true
+    sub_glop: true
+    bias: false
+    bias_k: false
+    bias_v: false
+    bias_combine: false
+  atsp_lower:
+    embedding_dim: 256
+    num_heads: 16
+    qkv_dim: 16
+    num_encoder_layers: 5
+    logit_clipping: 10
+    ms_hidden_dim: 16
+    feedforward_hidden: 512
+
+
+
+initialization:
+  _target_: EasyNCO.neural_solvers.methods.GLOPInitialization
+  problem: ${problem}
+
+
+iteration:
+  _target_: EasyNCO.neural_solvers.methods.GLOPIteration
+  problem: ${problem}
+  lower_model_decoder_strategy: ${decoder_strategy}
+  lower_env:
+    _target_: EasyNCO.neural_solvers.envs.TSPEnv
+    problem_size: ${scale}
+    pomo_size: 2
+    aug_type: pomo_aug # 'pomo_aug'/'rotate'/'reflect'/'mix'/'noise'
+    aug_factor: 4
+  lower_env_atsp:
+    _target_: EasyNCO.neural_solvers.envs.ASHPPEnv
+    problem_size: {scale}
+    pomo_size: 500
+
+module:
+  _target_: EasyNCO.phases.ARREINFORCELightning #
+  method_name: ${model}
+  problem: ${problem}
+  baseline: 'shared'
+  problem_size: ${scale}
+  batch_size: ${batch_size}
+  episodes: ${episodes}
+  val_episode: ${val_episode}
+  optimizer_type: 'Adam' # 'Adam', 'AdamW'
+  scheduler_type: null #'ExponentialLR', 'MultiStepLR'
+
+  optimizer_params: {
+    'optimizer': {
+        'lr': 1e-4,
+        'weight_decay': 1e-6
+    },
+#    'scheduler': {
+#        'milestones': [501,],
+#        'gamma': 0.1
+#    }
+  }
+  decoder_strategy: ${decoder_strategy}
+  every_n_steps_output: 100 # output log every n steps (i.e., batch)
+
+model_checkpoint:
+  #_target_: lightning.pytorch.callbacks.ModelCheckpoint
+  _target_: EasyNCO.utils.utils.CustomModelCheckpoint
+  dirpath: checkpoints
+  filename: ${model}_${problem}${scale}_{epoch:02d}
+  save_top_k: ${save_top_k}
+  every_n_epochs: ${every_n_epochs}
+
+trainer:
+  _target_: lightning.pytorch.Trainer
+  max_epochs: ${max_epochs} # max epochs
+  reload_dataloaders_every_n_epochs: 1 # RL: 1, SL: 0
+  log_every_n_steps: ${log_every_n_steps} # log every n steps
+  precision: ${precision}
+  enable_progress_bar: ${enable_progress_bar} # disable progress bar
+  gradient_clip_val: 1.0
+
+test_loader:
+  model_dirpath: pretrained
+  model_filename: glop_policy_cvrp_1000.pt

@@ -1,0 +1,53 @@
+10:39:15 | epoch=1 | TRAIN[0] | TSP | select arm=0(lehd) | reason=warm_start
+     0(lehd            ): pulls=   0 | mean=+0.1150 | bonus=6.0089 | score=+6.1239 | raw=+6.1239 <--
+     1(elg             ): pulls=   0 | mean=+0.1373 | bonus=5.9717 | score=+6.1090 | raw=+6.1090
+     2(invit           ): pulls=   0 | mean=+0.1394 | bonus=6.0279 | score=+6.1673 | raw=+6.1673
+     3(icam            ): pulls=   0 | mean=+0.1173 | bonus=6.0880 | score=+6.2053 | raw=+6.2053
+     4(dact            ): pulls=   0 | mean=+0.1372 | bonus=5.9574 | score=+6.0946 | raw=+6.0946
+     5(lih             ): pulls=   0 | mean=+0.1056 | bonus=6.0092 | score=+6.1148 | raw=+6.1148
+     6(udc             ): pulls=   0 | mean=+0.1323 | bonus=5.9733 | score=+6.1056 | raw=+6.1056
+     7(omni            ): pulls=   0 | mean=+0.1290 | bonus=5.9745 | score=+6.1036 | raw=+6.1036
+     8(pointerformer   ): pulls=   0 | mean=+0.1557 | bonus=5.9849 | score=+6.1405 | raw=+6.1405
+     9(difusco         ): pulls=   0 | mean=+0.1083 | bonus=5.9950 | score=+6.1032 | raw=+6.1032
+    10(t2t             ): pulls=   0 | mean=+0.1063 | bonus=6.0179 | score=+6.1242 | raw=+6.1242
+    11(glop            ): pulls=   0 | mean=+0.1247 | bonus=6.0499 | score=+6.1746 | raw=+6.1746
+10:40:24 | t=1 | UPDATE | problem=TSP | uid=tsp:9164 | global_index=9164 | arm=0(lehd)
+    outcome: reward=0.6364 | selected_cost=8.1014 | best_cost=8.0706 | regret=0.0308
+    result: record_global_index=9164 | name=None | aug_score=8.1014
+    arm_stats: global_pulls=1 | problem_arm_pulls=1 | avg_reward=0.6364 | problem_arm_avg_reward=0.6364
+    state: history=1 | U_norm=1555.9658 | U_mean=1.000149 | U_min=1.000000 | U_max=25.355906
+10:40:24 | t=1 | TRAIN | module=reward_net | trigger=warmup(<= 240)
+    optimize: epochs=5 | steps=5 | batch_size=1 | replay=balanced_problem_arm | history=1 | lr=0.001
+    loss: avg=0.058988 | min=0.000039 | max=0.271788 | last=0.000039
+    state: U_norm=1555.9658 | U_mean=1.000149 | U_min=1.000000 | U_max=25.355906
+10:41:58 | epoch=1 | TRAIN[1] | TSP | select arm=1(elg) | reason=warm_start
+     0(lehd            ): pulls=   1 | mean=+0.6667 | bonus=3.5746 | score=+4.2412 | raw=+4.2412 | p_mean_reward=0.6364
+     1(elg             ): pulls=   0 | mean=+0.6850 | bonus=3.5902 | score=+4.2752 | raw=+4.2752 <--
+     2(invit           ): pulls=   0 | mean=+0.6881 | bonus=3.5822 | score=+4.2703 | raw=+4.2703
+     3(icam            ): pulls=   0 | mean=+0.6779 | bonus=3.6536 | score=+4.3315 | raw=+4.3315
+     4(dact            ): pulls=   0 | mean=+0.6799 | bonus=3.5736 | score=+4.2535 | raw=+4.2535
+     5(lih             ): pulls=   0 | mean=+0.6596 | bonus=3.6238 | score=+4.2834 | raw=+4.2834
+     6(udc             ): pulls=   0 | mean=+0.6776 | bonus=3.6051 | score=+4.2827 | raw=+4.2827
+     7(omni            ): pulls=   0 | mean=+0.6766 | bonus=3.5959 | score=+4.2726 | raw=+4.2726
+     8(pointerformer   ): pulls=   0 | mean=+0.6981 | bonus=3.5975 | score=+4.2956 | raw=+4.2956
+     9(difusco         ): pulls=   0 | mean=+0.6580 | bonus=3.6066 | score=+4.2646 | raw=+4.2646
+    10(t2t             ): pulls=   0 | mean=+0.6586 | bonus=3.6276 | score=+4.2862 | raw=+4.2862
+    11(glop            ): pulls=   0 | mean=+0.6786 | bonus=3.6411 | score=+4.3197 | raw=+4.3197
+10:45:01 | t=2 | UPDATE | problem=TSP | uid=tsp:7783 | global_index=7783 | arm=1(elg)
+    outcome: reward=0.8182 | selected_cost=8.2021 | best_cost=8.1822 | regret=0.0199
+    result: record_global_index=7783 | name=None | aug_score=8.2021
+    arm_stats: global_pulls=1 | problem_arm_pulls=1 | avg_reward=0.8182 | problem_arm_avg_reward=0.8182
+    state: history=2 | U_norm=1558.3175 | U_mean=1.000292 | U_min=1.000000 | U_max=48.517235
+10:45:01 | t=2 | TRAIN | module=reward_net | trigger=warmup(<= 240)
+    optimize: epochs=16 | steps=16 | batch_size=2 | replay=balanced_problem_arm | history=2 | lr=0.001
+    loss: avg=0.005975 | min=0.000013 | max=0.017747 | last=0.000013
+    state: U_norm=1558.3175 | U_mean=1.000292 | U_min=1.000000 | U_max=48.517235
+10:45:51 | epoch=1 | TRAIN[2] | CVRP | select arm=2(invit) | reason=warm_start
+     0(lehd            ): pulls=   0 | mean=+0.6639 | bonus=3.1103 | score=+3.7741 | raw=+3.7741
+     1(elg             ): pulls=   0 | mean=+0.6782 | bonus=3.1030 | score=+3.7812 | raw=+3.7812
+     2(invit           ): pulls=   0 | mean=+0.6768 | bonus=3.1206 | score=+3.7974 | raw=+3.7974 <--
+     3(icam            ): pulls=   0 | mean=+0.6662 | bonus=3.1973 | score=+3.8634 | raw=+3.8634
+     4(dact            ): pulls=   0 | mean=+0.6735 | bonus=3.1178 | score=+3.7913 | raw=+3.7913
+     5(lih             ): pulls=   0 | mean=+0.6519 | bonus=3.1683 | score=+3.8202 | raw=+3.8202
+     6(udc             ): pulls=   0 | mean=+0.6714 | bonus=3.1522 | score=+3.8236 | raw=+3.8236
+     7(omni            ): pulls=   0 | mean=+0.6701 | bonus=3.1382 | score=+3.8083 | raw=+3.8083

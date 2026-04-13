@@ -1,0 +1,75 @@
+# https://hydra.cc/docs/configure_hydra/intro/
+env:
+  _target_: EasyNCO.neural_solvers.envs.CVRPEnv # or EasyNCO.methods.envs.TSPEnv
+  problem_size: ${scale}
+  pomo_size: ${scale}
+  aug_type: pomo_aug # 'pomo_aug' or 'invit_aug'
+  aug_factor: 1
+  method_name: ${model}
+
+model:
+  _target_: EasyNCO.neural_solvers.methods.DACTPolicy
+  env_name: ${problem}
+  num_heads: 4
+  qkv_dim: 16
+  num_encoder_layers: 3
+  normalization: 'layer' # 'batch', 'layer', 'instance' or null (i.e., None)
+  feedforward_hidden: 64
+  logit_clipping: 6.0
+  problem_size: ${scale}
+  first_mode: 'random' # random or placeholder
+
+initialization:
+  _target_: EasyNCO.neural_solvers.methods.DACTInitialization
+
+iteration:
+  _target_: EasyNCO.neural_solvers.methods.DACTIteration
+
+
+module:
+  _target_: EasyNCO.phases.ARREINFORCELightning #
+  method_name: ${model}
+  baseline: 'critic'
+  problem_size: ${scale}
+  batch_size: ${batch_size}
+  episodes: ${episodes}
+  aug_type: 'pomo_aug' # 'pomo_aug' or 'invit_aug'
+  optimizer_type: 'Adam' # 'Adam', 'AdamW'
+  scheduler_type: null #'ExponentialLR', 'MultiStepLR'
+  optimizer_params: {
+    'optimizer': {
+        'lr': 1e-4,
+        'weight_decay': 1e-6
+    },
+#    'scheduler': {
+#        'milestones': [501,],
+#        'gamma': 0.1
+#    }
+  }
+  decoder_strategy: ${decoder_strategy}
+  every_n_steps_output: 2 # output log every n steps (i.e., batch)
+  improve: True
+  iteration_params:
+    max_steps: 1000
+
+
+model_checkpoint:
+  #_target_: lightning.pytorch.callbacks.ModelCheckpoint
+  _target_: EasyNCO.utils.utils.CustomModelCheckpoint
+  dirpath: checkpoints
+  filename: ${model}_${problem}${scale}_{epoch:02d}
+  save_top_k: ${save_top_k}
+  every_n_epochs: ${every_n_epochs}
+
+trainer:
+  _target_: lightning.pytorch.Trainer
+  max_epochs: ${max_epochs} # max epochs
+  reload_dataloaders_every_n_epochs: 1 # RL: 1, SL: 0
+  log_every_n_steps: ${log_every_n_steps} # log every n steps
+  precision: ${precision}
+  enable_progress_bar: ${enable_progress_bar} # disable progress bar
+  gradient_clip_val: 1.0
+
+test_loader:
+  model_dirpath: pretrained
+  model_filename: ${model}_${problem}${scale}.ckpt

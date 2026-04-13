@@ -1,0 +1,18 @@
+[eval] checkpoint=0new/operator_policy/outputs/new/selector_best.pt
+[eval] problem_size=500 dataset=EasyNCO/data/datasets/test_dataset_tsp_uniform/test_tsp500_nums128_uniform.pt
+[eval] dataset_size=128 target_items=128
+[eval] selector_device=cuda:0 easynco_solver_device=cuda:0 dact_solver_device=cuda:0
+[eval] init_zoo=lehd,elg,difusco operator_zoo=two_opt,lehd_rrc_step,dact_2opt_step
+[warn] checkpoint was trained at problem_size=100 but is now evaluated at problem_size=500
+[eval] enabled_easynco_runtime_patches=special_selected,TSPEnv,ARInitialization,ELGInitialization,POMOInitialization,LEHDPolicy.forward,LEHDDecoder
+[solver_load] lehd: EasyNCO/pretrained/lehd_tsp100.ckpt missing=0 unexpected=0
+[solver_load] elg: EasyNCO/pretrained/elg_tsp100.ckpt missing=0 unexpected=0
+[solver_load] difusco: EasyNCO/pretrained/difusco_tsp100.ckpt missing=0 unexpected=0
+[solver_load] lehd_rrc_step: EasyNCO/pretrained/lehd_tsp100.ckpt missing=0 unexpected=0
+[solver_load] dact_2opt_step: EasyNCO/pretrained/dact_tsp100.ckpt missing=0 unexpected=0
+[eval] solver_zoo_ready init=3 operators=3 elapsed=2.82s
+[eval] data loader ready, starting evaluation
+[eval] batch=0001 items=8/128 avg_init=17.9102 avg_final=16.5898 improve=1.3205 elapsed=252.81s
+[eval] batch=0010 items=80/128 avg_init=17.8953 avg_final=16.6066 improve=1.2887 elapsed=2376.55s
+[eval] done final=16.6008 improvement=1.2870 elapsed=3895.53s
+[eval] outputs=/public/home/zhoucl/shiys/new/0new/operator_policy/outputs/new/eval_tsp500_uniform

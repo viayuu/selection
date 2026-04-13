@@ -1,0 +1,75 @@
+# https://hydra.cc/docs/configure_hydra/intro/
+
+defaults:
+  - _self_
+  - settings: lih_settings # lehd_settings  flexible_composition
+
+hydra:
+  run:
+    dir: ${dir}
+
+sandbox: False # True or False, if True, use the sandbox test function
+sandbox_test_batch:
+  _target_: EasyNCO.sandbox.test_batch.BQTestBatch
+
+mode: 'train' # train or test
+model: 'lih'
+problem: 'tsp'
+scale: 50   # jssp/fjsp:job×machine 20×20, routing: n nodes
+num_job: 20
+num_machine: 20
+decoder_strategy: greedy # train: sampling, test: greedy
+cuda: [0] # CUDA device IDs to use for training or testing, e.g. [0, 1] for multi-GPU training
+max_epochs: 5 # max epochs for training
+
+batch_size: 10
+episodes: 10
+
+# A example of data path: test_dataset_vrp_uniform/test_vrp100_capacity50_nums10000_uniform.pt
+# test_dataset_mis/er_test/*gpickle
+# test_dataset_tsp_uniform/test_tsp100_nums10000_uniform.pt
+# re_generate_test_TSP100_0423_n1w.txt
+val_episode: 128 # number of episodes for validation
+val_data_path: test_dataset_tsp_uniform/test_tsp200_nums128_uniform.pt  # validation data path
+test_data_path: test_dataset_tsp_uniform/test_tsp1000_nums128_uniform.pt # test data path
+train_data_path: null
+varying_data_params: {
+  "scale_range": null,
+  "distribution_list": ["uniform", "cluster"],
+  "capacity_range": [50, 100],
+}
+
+# Optional arguments
+# Note that most of the hyperparameters related to the Trainer are provided within Hydra files.
+# initialization
+seed: 1234
+disable_gpu: False # disable GPU training, i.e. use CPU only
+strategy: "auto" # strategy for lighting
+matmul_precision: "medium" # precision for matmul
+precision: '32-true' # precision for training (32-true, 16-mixed .,etc.)
+enable_progress_bar: False # if False, disable progress bar
+log_every_n_steps: 1 # log every n steps
+
+# fit
+ckpt_path: null # Path/URL of the checkpoint from which training is resumed.
+
+# settings of saving trained model
+save_top_k: -1 # save all checkpoints, you can set to 1 to save the best one
+every_n_epochs: 1 # save checkpoint every n epochs
+
+#dir: ./results/${mode}_tsplib/${model}_${problem}_${varying_data_params.scale_range[1]}/${now:%Y-%m-%d}-${now:%H-%M-%S}_${model}_${problem}_${scale}_${mode}
+dir: ./results/${mode}/${model}_${problem}/${now:%Y-%m-%d}-${now:%H-%M-%S}_${model}_${problem}_${scale}_${mode}
+
+# https://www.tensorflow.org/tensorboard/
+# Solve the error: ImportError: cannot import name ‘notf‘ from ‘tensorboard.compat‘
+# Solution: Uninstall tensorflow and tensorboard(including all affiliated libraries) and only install tensorboard if you are using pytorch.
+logger:
+  _target_: lightning.pytorch.loggers.TensorBoardLogger
+  save_dir: tensorboard
+  name: null
+  log_graph: False
+  default_hp_metric: True
+  prefix: ""
+
+
+

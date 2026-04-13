@@ -1,0 +1,122 @@
+# @package _global_
+
+
+defaults:
+  - _self_
+
+env100:
+  _target_: EasyNCO.methods.envs.TSPEnv
+  problem_size: 100
+  pomo_size: 2
+  aug_type: 'pomo_aug'
+  aug_factor: 4
+
+env50:
+  _target_: EasyNCO.methods.envs.TSPEnv
+  problem_size: 50
+  pomo_size: 2
+  aug_type: 'pomo_aug'
+  aug_factor: 4
+env20:
+  _target_: EasyNCO.methods.envs.TSPEnv
+  problem_size: 20
+  pomo_size: 2
+  aug_type: 'pomo_aug'
+  aug_factor: 4
+
+
+revision_model:
+  _target_: EasyNCO.methods.operators.neural_operators.AttentionModelPolicy
+  env_name: 'tsp'
+  num_heads: 8
+  qkv_dim: 16
+  num_encoder_layers: 6
+  normalization: 'batch'
+  feedforward_hidden: 512
+  logit_clipping: 10
+  use_graph_mean: True
+  am_mode: False
+  first_placeholder: True
+  sub_glop: True
+
+
+module:
+  _target_: EasyNCO.phases.train.rl.REINFORCELightning
+  baseline: 'shared'
+  problem_size: 1000
+  batch_size: 10
+  episodes: 100
+  first_mode: 'random'
+  test_strategy: "greedy"
+  model_name: "glop"
+  glop_params: {
+                  'main_problem': "TSP",
+                  'width': 10,
+                  'revision_lens': [ 100,50,20 ],
+                  'iter': [ 20,25,5 ],
+  }
+  optimizer_params: {'optimizer': {
+        'lr': 1e-4,
+        'weight_decay': 1e-6
+    },
+#    'scheduler': {
+#        'milestones': [501,],
+#        'gamma': 0.1
+#    }
+  }
+
+#The most important hyperparameter to use is `reload_dataloaders_every_n_epochs`.
+#This allows for datasets to be re-created on the run and distributed by Lightning across
+#devices on each epoch. Setting to a value different than 1 may lead to overfitting to a
+#specific (such as the initial) data distribution.
+trainer:
+  _target_: EasyNCO.phases.train.rl.RLTrainer
+  max_epochs: 5
+  reload_dataloaders_every_n_epochs: 1
+  log_every_n_steps: 1
+  accelerator: 'gpu'
+  num_nodes: 1 # Number of gpu nodes for distributed training
+
+
+# https://www.tensorflow.org/tensorboard/
+#Solve the error: ImportError: cannot import name ‘notf‘ from ‘tensorboard.compat‘
+#Solution: Uninstall tensorflow and tensorboard(including all affiliated libraries)
+# and only install tensorboard if you are using pytorch.
+logger:
+  _target_: lightning.pytorch.loggers.TensorBoardLogger
+  save_dir: "tensorboard_log/"
+  name: null
+  log_graph: False
+  default_hp_metric: True
+  prefix: ""
+
+
+model_checkpoint:
+  _target_: lightning.pytorch.callbacks.ModelCheckpoint
+  dirpath: 'checkpoints_debug/'
+  filename: 'glop_test_tsp-{epoch:02d}'
+  save_top_k: -1 # 保存所有检查点
+  every_n_epochs: 1 # 每1轮保存一次,
+
+test_loader:
+  revision_path: {
+                    re100_path: "/pretrain/glop_revision/revision_100.pth",
+                    re50_path: "/pretrain/glop_revision/revision_50.pth",
+                    re20_path: "/pretrain/glop_revision/revision_20.pth"
+  }
+
+
+  data_path: '/data/glop_test_data/tsp/tsp1000_test.pkl'
+#500:'/data/glop_test_data/tsp/tsp500_test.pkl'
+#1000:'/data/glop_test_data/tsp/tsp1000_test.pkl'
+#10000:'/data/glop_test_data/tsp/tsp10000_test.pkl'
+#100000:'/data/glop_test_data/tsp/tsp100000_test.pkl'
+#  test_params: {
+#                 'test_episodes': 1000,
+#                 'test_batch_size': 1,
+#                 'test_strategy': 'greedy',
+#                 'aug_factor': 1
+#  }
+
+#custom_progressBar:
+#  _target_: EasyNCO.phases.single_obj.CustomProgressBar

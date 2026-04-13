@@ -1,0 +1,85 @@
+# @package _global_
+
+
+defaults:
+  - _self_
+
+env:
+  _target_: EasyNCO.methods.envs.TSPEnv
+  problem_size: 200
+  pomo_size: ${env.problem_size}
+#  aug_type: 'pomo_aug'
+#  aug_factor: 8
+
+model:
+  _target_: EasyNCO.methods.operators.neural_operators.PointerformerPolicy
+  embedding_dim: 128
+  input_dim: 24
+  num_heads: 8
+  num_encoder_layers: 6
+  intermediate_dim: 512
+  add_init_projection: True
+  tanh_clipping: 50
+  multi_pointer: 8
+  multi_pointer_level: 1
+  add_more_query: True
+  env_name: "tsp"
+
+
+module:
+  _target_: EasyNCO.phases.train.rl.REINFORCELightning
+  baseline: 'shared'
+  problem_size: ${env.problem_size}
+  batch_size: 10
+  episodes: 12800
+  first_mode: 'random'
+  ad_divide_std: True
+  optimizer_params: {'optimizer': {
+        'lr': 1e-4,
+        'weight_decay': 1e-6
+    },
+#    'scheduler': {
+#        'milestones': [501,],
+#        'gamma': 0.1
+#    }
+  }
+  test_strategy: 'greedy'
+
+#The most important hyperparameter to use is `reload_dataloaders_every_n_epochs`.
+#This allows for datasets to be re-created on the run and distributed by Lightning across
+#devices on each epoch. Setting to a value different than 1 may lead to overfitting to a
+#specific (such as the initial) data distribution.
+trainer:
+  _target_: EasyNCO.phases.train.rl.RLTrainer
+  max_epochs: 5
+  reload_dataloaders_every_n_epochs: 1
+  log_every_n_steps: 1
+  accelerator: 'gpu'
+  num_nodes: 1 # Number of gpu nodes for distributed training
+
+
+# https://www.tensorflow.org/tensorboard/
+#Solve the error: ImportError: cannot import name ‘notf‘ from ‘tensorboard.compat‘
+#Solution: Uninstall tensorflow and tensorboard(including all affiliated libraries)
+# and only install tensorboard if you are using pytorch.
+logger:
+  _target_: lightning.pytorch.loggers.TensorBoardLogger
+  save_dir: "tensorboard_log/"
+  name: null
+  log_graph: False
+  default_hp_metric: True
+  prefix: ""
+
+
+model_checkpoint:
+  _target_: lightning.pytorch.callbacks.ModelCheckpoint
+  dirpath: 'checkpoints_debug/'
+  filename: 'pomo-{epoch:02d}'
+  save_top_k: -1 # 保存所有检查点
+  every_n_epochs: 1 # 每1轮保存一次,
+
+test_loader:
+  model_dirpath: '/pretrain/pointerformer/'
+  model_filename: 'tsp200_pointerformer.ckpt'
+  data_path: '/data/datasets/test_dataset_tsp_uniform/test_tsp200_nums128_uniform.pt'
+

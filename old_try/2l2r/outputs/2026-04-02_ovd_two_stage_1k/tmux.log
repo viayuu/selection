@@ -1,0 +1,200 @@
+[01:34:39] 开始构建共享数据集
+[01:34:39] 扫描结果目录: /public/home/zhoucl/shiys/EasyNCO/results/test
+[01:34:39] 已找到最新 runs 数量: 20
+[01:34:39] 开始解析原始 .pt 数据集路径
+[01:34:39] TSP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_tsp_uniform/test_tsp100_nums10000_uniform.pt
+[01:34:39] CVRP 数据集: /public/home/zhoucl/shiys/EasyNCO/data/datasets/test_dataset_vrp_uniform/test_vrp100_capacity50_nums10000_uniform.pt
+[01:34:39] 开始加载原始实例张量
+[01:34:39] 实例加载完成: tsp=10000, cvrp=10000
+[01:34:39] 开始聚合问题 tsp，候选方法数=12
+[01:34:39] tsp 可用实例数=1000
+[01:34:42] 问题 tsp 聚合完成，当前累计样本数=1000
+[01:34:42] 开始聚合问题 cvrp，候选方法数=8
+[01:34:42] cvrp 可用实例数=1000
+[01:34:44] 问题 cvrp 聚合完成，当前累计样本数=2000
+[01:34:44] 全部样本构建完成，最终样本数=2000
+[01:34:44] 数据集构建完成，样本总数=2000
+[01:34:44] 开始做 train/val/test 分层切分
+[01:34:44] 数据切分完成: train=1400, val=300, test=300
+[01:34:44] 训练集 baseline 拟合完成 | single_best_global=pointerformer | single_best_per_problem={'cvrp': 'lehd', 'tsp': 'icam'}
+[01:34:44] 训练集 hardness 参考均值 | cvrp=0.005717 | tsp=0.001161
+[01:34:44] cvrp one-vs-default candidates = ['icam', 'elg', 'omni']
+[01:34:44] cvrp one-vs-default gain priors = icam:0.7745, elg:0.7163, omni:0.3372
+[01:34:44] tsp one-vs-default candidates = ['lehd', 'pointerformer', 'elg', 'difusco', 'omni']
+[01:34:44] tsp one-vs-default gain priors = lehd:0.7269, pointerformer:0.6142, difusco:0.4802, elg:0.4389, omni:0.0881
+[01:34:44] val 参考 baseline 已计算 | sbp_tsp_cost=7.787271 | sbp_cvrp_cost=15.640104
+[01:34:45] 模型构造完成: OneVsDefaultTwoStageRanker
+[01:34:45] 开始监督排序训练: epochs=8 | batch_size=32 | loss=one_vs_default_two_stage | hard_alpha=2.0 | prior=none | switch_scale=1.0 | select_by=gain_vs_single_best_per_problem
+[01:34:51] epoch=1 | step=20 | batch=20/44 | loss=1.519388 | mean_loss=1.390126 | mean_sample_weight=1.6084 | switch_pos_rate=0.312500
+[01:35:03] epoch=1 | step=40 | batch=40/44 | loss=1.489053 | mean_loss=1.393556 | mean_sample_weight=1.5735 | switch_pos_rate=0.375000
+[01:35:06] epoch=1 | step=44 | batch=44/44 | loss=1.191442 | mean_loss=1.387196 | mean_sample_weight=1.4176 | switch_pos_rate=0.250000
+[01:35:06] 完成 epoch 1/8 | train_mean_loss=1.387196 | pair_count=0 | mean_epoch_sample_weight=1.5114
+[01:35:06] checkpoint 已保存: 2l2r/outputs/2026-04-02_ovd_two_stage_1k/checkpoints/epoch_0001.pt
+[01:35:06] 在 val 集上评测 (300 实例)...
+[01:35:13]     已评测 300/300...
+[01:35:13] val 评测完成 | mean_reward=0.857143 | top1_accuracy=0.420000 | mean_regret=0.044768 | mean_cost=11.713688
+[01:35:13] epoch=1 | val | tsp_cost=7.787271 | cvrp_cost=15.640104 | gain_vs_sbp_macro=+0.000000
+[01:35:13] 发现新的 best val | metric=gain_vs_single_best_per_problem | selection_score=0.000000 | overall_mean_cost=11.713688 | checkpoint=2l2r/outputs/2026-04-02_ovd_two_stage_1k/checkpoints/best.pt
+[01:35:29] epoch=2 | step=64 | batch=20/44 | loss=1.490375 | mean_loss=1.323438 | mean_sample_weight=1.5785 | switch_pos_rate=0.375000
+[01:35:34] epoch=2 | step=84 | batch=40/44 | loss=1.362533 | mean_loss=1.300911 | mean_sample_weight=1.6098 | switch_pos_rate=0.406250
+[01:35:35] epoch=2 | step=88 | batch=44/44 | loss=1.064348 | mean_loss=1.296817 | mean_sample_weight=1.4067 | switch_pos_rate=0.250000
+[01:35:35] 完成 epoch 2/8 | train_mean_loss=1.296817 | pair_count=0 | mean_epoch_sample_weight=1.5114
+[01:35:35] checkpoint 已保存: 2l2r/outputs/2026-04-02_ovd_two_stage_1k/checkpoints/epoch_0002.pt
+[01:35:35] 在 val 集上评测 (300 实例)...
+[01:35:36]     已评测 300/300...
+[01:35:36] val 评测完成 | mean_reward=0.857143 | top1_accuracy=0.420000 | mean_regret=0.044768 | mean_cost=11.713688
+[01:35:36] epoch=2 | val | tsp_cost=7.787271 | cvrp_cost=15.640104 | gain_vs_sbp_macro=+0.000000
+[01:35:36] val 未提升 | metric=gain_vs_single_best_per_problem | best_selection_score=0.000000 | current_selection_score=0.000000 | best_cost=11.713688 | current_cost=11.713688 | patience=1/5
+[01:35:51] epoch=3 | step=108 | batch=20/44 | loss=1.195032 | mean_loss=1.259075 | mean_sample_weight=1.3916 | switch_pos_rate=0.187500
+[01:36:09] epoch=3 | step=128 | batch=40/44 | loss=1.333865 | mean_loss=1.253776 | mean_sample_weight=1.5040 | switch_pos_rate=0.312500
+[01:36:10] epoch=3 | step=132 | batch=44/44 | loss=1.218373 | mean_loss=1.256813 | mean_sample_weight=1.8387 | switch_pos_rate=0.541667
+[01:36:10] 完成 epoch 3/8 | train_mean_loss=1.256813 | pair_count=0 | mean_epoch_sample_weight=1.5114
+[01:36:10] checkpoint 已保存: 2l2r/outputs/2026-04-02_ovd_two_stage_1k/checkpoints/epoch_0003.pt
+[01:36:10] 在 val 集上评测 (300 实例)...
+[01:36:11]     已评测 300/300...
+[01:36:11] val 评测完成 | mean_reward=0.857143 | top1_accuracy=0.420000 | mean_regret=0.044768 | mean_cost=11.713688
+[01:36:11] epoch=3 | val | tsp_cost=7.787271 | cvrp_cost=15.640104 | gain_vs_sbp_macro=+0.000000
+[01:36:11] val 未提升 | metric=gain_vs_single_best_per_problem | best_selection_score=0.000000 | current_selection_score=0.000000 | best_cost=11.713688 | current_cost=11.713688 | patience=2/5
+[01:36:15] epoch=4 | step=152 | batch=20/44 | loss=0.905282 | mean_loss=1.238894 | mean_sample_weight=1.1878 | switch_pos_rate=0.125000
+[01:36:21] epoch=4 | step=172 | batch=40/44 | loss=1.316366 | mean_loss=1.246883 | mean_sample_weight=1.5622 | switch_pos_rate=0.250000
+[01:36:24] epoch=4 | step=176 | batch=44/44 | loss=1.418713 | mean_loss=1.253472 | mean_sample_weight=1.5557 | switch_pos_rate=0.333333
+[01:36:24] 完成 epoch 4/8 | train_mean_loss=1.253472 | pair_count=0 | mean_epoch_sample_weight=1.5114
+[01:36:24] checkpoint 已保存: 2l2r/outputs/2026-04-02_ovd_two_stage_1k/checkpoints/epoch_0004.pt
+[01:36:24] 在 val 集上评测 (300 实例)...
+[01:36:30]     已评测 300/300...
+[01:36:30] val 评测完成 | mean_reward=0.857143 | top1_accuracy=0.420000 | mean_regret=0.044768 | mean_cost=11.713688
+[01:36:30] epoch=4 | val | tsp_cost=7.787271 | cvrp_cost=15.640104 | gain_vs_sbp_macro=+0.000000
+[01:36:30] val 未提升 | metric=gain_vs_single_best_per_problem | best_selection_score=0.000000 | current_selection_score=0.000000 | best_cost=11.713688 | current_cost=11.713688 | patience=3/5
+[01:36:47] epoch=5 | step=196 | batch=20/44 | loss=1.299096 | mean_loss=1.262483 | mean_sample_weight=1.4894 | switch_pos_rate=0.281250
+[01:36:52] epoch=5 | step=216 | batch=40/44 | loss=1.564067 | mean_loss=1.253103 | mean_sample_weight=1.8704 | switch_pos_rate=0.468750
+[01:36:53] epoch=5 | step=220 | batch=44/44 | loss=1.411402 | mean_loss=1.253671 | mean_sample_weight=1.6273 | switch_pos_rate=0.375000
+[01:36:53] 完成 epoch 5/8 | train_mean_loss=1.253671 | pair_count=0 | mean_epoch_sample_weight=1.5114
+[01:36:53] checkpoint 已保存: 2l2r/outputs/2026-04-02_ovd_two_stage_1k/checkpoints/epoch_0005.pt
+[01:36:53] 在 val 集上评测 (300 实例)...
+[01:36:54]     已评测 300/300...
+[01:36:54] val 评测完成 | mean_reward=0.857143 | top1_accuracy=0.420000 | mean_regret=0.044768 | mean_cost=11.713688
+[01:36:54] epoch=5 | val | tsp_cost=7.787271 | cvrp_cost=15.640104 | gain_vs_sbp_macro=+0.000000
+[01:36:54] val 未提升 | metric=gain_vs_single_best_per_problem | best_selection_score=0.000000 | current_selection_score=0.000000 | best_cost=11.713688 | current_cost=11.713688 | patience=4/5
+[01:37:03] epoch=6 | step=240 | batch=20/44 | loss=1.024818 | mean_loss=1.222720 | mean_sample_weight=1.2244 | switch_pos_rate=0.187500
+[01:37:20] epoch=6 | step=260 | batch=40/44 | loss=1.194042 | mean_loss=1.255099 | mean_sample_weight=1.2625 | switch_pos_rate=0.281250
+[01:37:24] epoch=6 | step=264 | batch=44/44 | loss=0.811771 | mean_loss=1.247926 | mean_sample_weight=1.0306 | switch_pos_rate=0.083333
+[01:37:24] 完成 epoch 6/8 | train_mean_loss=1.247926 | pair_count=0 | mean_epoch_sample_weight=1.5114
+[01:37:24] checkpoint 已保存: 2l2r/outputs/2026-04-02_ovd_two_stage_1k/checkpoints/epoch_0006.pt
+[01:37:24] 在 val 集上评测 (300 实例)...
+[01:37:30]     已评测 300/300...
+[01:37:30] val 评测完成 | mean_reward=0.857143 | top1_accuracy=0.420000 | mean_regret=0.044768 | mean_cost=11.713688
+[01:37:30] epoch=6 | val | tsp_cost=7.787271 | cvrp_cost=15.640104 | gain_vs_sbp_macro=+0.000000
+[01:37:30] val 未提升 | metric=gain_vs_single_best_per_problem | best_selection_score=0.000000 | current_selection_score=0.000000 | best_cost=11.713688 | current_cost=11.713688 | patience=5/5
+[01:37:30] 触发早停，结束训练
+[01:37:30] 最终 checkpoint 已保存: 2l2r/outputs/2026-04-02_ovd_two_stage_1k/checkpoints/final.pt
+[01:37:30] 载入 best checkpoint 做最终评测: 2l2r/outputs/2026-04-02_ovd_two_stage_1k/checkpoints/best.pt
+[01:37:32] 在 val 集上评测 (300 实例)...
+[01:37:38]     已评测 300/300...
+[01:37:38] val 评测完成 | mean_reward=0.857143 | top1_accuracy=0.420000 | mean_regret=0.044768 | mean_cost=11.713688
+[01:37:38] 在 test 集上评测 (300 实例)...
+[01:37:44]     已评测 300/300...
+[01:37:44] test 评测完成 | mean_reward=0.847792 | top1_accuracy=0.340000 | mean_regret=0.051304 | mean_cost=11.757538
+[01:37:44] 开始计算 baseline 对比
+[01:37:44] baseline 对比完成
+[01:37:44] 
+======================================================================
+  评测结果 | OneVsDefaultTwoStageRanker
+======================================================================
+
+  ALL (300 实例):
+    mean_reward:    0.8478
+    mean_rank:      2.33
+    top1_hit_rate:    0.2867  (86/300)
+    top2_hit_rate:    0.5967  (179/300)
+    top3_hit_rate:    0.7900  (237/300)
+    regret:         0.0513
+    mean_cost:      11.7575  (模型选择)
+    oracle_cost:    11.7062  (每个实例选最好的)
+
+  TSP (150 实例):
+    mean_reward:    0.8661
+    mean_rank:      2.47
+    top1_hit_rate:    0.2000  (30/150)
+    top2_hit_rate:    0.5733  (86/150)
+    top3_hit_rate:    0.7600  (114/150)
+    regret:         0.0097
+    mean_cost:      7.7526  (模型选择)
+    oracle_cost:    7.7429  (每个实例选最好的)
+
+  CVRP (150 实例):
+    mean_reward:    0.8295
+    mean_rank:      2.19
+    top1_hit_rate:    0.3733  (56/150)
+    top2_hit_rate:    0.6200  (93/150)
+    top3_hit_rate:    0.8200  (123/150)
+    regret:         0.0929
+    mean_cost:      15.7625  (模型选择)
+    oracle_cost:    15.6696  (每个实例选最好的)
+
+======================================================================
+  Baseline 对比 (在同一 test 集上)
+======================================================================
+
+  TSP (150 实例):
+    oracle mean_cost:                7.7429  (每实例选最好的, 上界)
+    模型选择 mean_cost:              7.7526
+    single_best_per_problem:         7.7526
+    gain vs single_best_per_problem: +0.0000
+    single_best_global:              7.7543
+    random mean_cost:                11.5910  (均匀随机的期望)
+
+  CVRP (150 实例):
+    oracle mean_cost:                15.6696  (每实例选最好的, 上界)
+    模型选择 mean_cost:              15.7625
+    single_best_per_problem:         15.7625
+    gain vs single_best_per_problem: +0.0000
+    single_best_global:              15.7625
+    random mean_cost:                18.1112  (均匀随机的期望)
+
+======================================================================
+  各臂选择分布
+======================================================================
+
+  TSP (150 实例):
+     3(icam            ):   150 次 (100.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):   150 次 (100.0%)
+
+  ALL (300 实例):
+     0(lehd            ):   150 次 ( 50.0%)
+     3(icam            ):   150 次 ( 50.0%)
+
+======================================================================
+  各臂被选后的真实效果
+======================================================================
+
+  TSP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     3(icam            )      150     7.7526       0.8661     0.2000       2.47
+
+  CVRP:
+    arm                   count  mean_cost  mean_reward  top1_rate  mean_rank
+    ────────────────────────────────────────────────────────────────────
+     0(lehd            )      150    15.7625       0.8295     0.3733       2.19
+
+======================================================================
+  Oracle 最优臂分布 (test 集上哪个方法最常是最优的)
+======================================================================
+
+  TSP (150 实例):
+     0(lehd            ):    55 次 ( 36.7%)
+     3(icam            ):    46 次 ( 30.7%)
+     1(elg             ):    21 次 ( 14.0%)
+     8(pointerformer   ):    19 次 ( 12.7%)
+     9(difusco         ):     9 次 (  6.0%)
+
+  CVRP (150 实例):
+     0(lehd            ):    56 次 ( 37.3%)
+     1(elg             ):    50 次 ( 33.3%)
+     3(icam            ):    38 次 ( 25.3%)
+     7(omni            ):     6 次 (  4.0%)
+
+[01:37:44] summary 已写出: 2l2r/outputs/2026-04-02_ovd_two_stage_1k/summary.json
+

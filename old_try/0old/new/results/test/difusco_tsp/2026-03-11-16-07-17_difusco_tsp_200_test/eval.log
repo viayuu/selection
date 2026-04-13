@@ -1,0 +1,38 @@
+[2026-03-11 16:07:18,107][EasyNCO.utils.utils][INFO] - sandbox: False
+[2026-03-11 16:07:18,108][EasyNCO.utils.utils][INFO] - sandbox_test_batch: {'_target_': 'EasyNCO.sandbox.test_batch.BQTestBatch'}
+[2026-03-11 16:07:18,108][EasyNCO.utils.utils][INFO] - mode: test
+[2026-03-11 16:07:18,108][EasyNCO.utils.utils][INFO] - model: difusco
+[2026-03-11 16:07:18,108][EasyNCO.utils.utils][INFO] - problem: tsp
+[2026-03-11 16:07:18,108][EasyNCO.utils.utils][INFO] - scale: 200
+[2026-03-11 16:07:18,109][EasyNCO.utils.utils][INFO] - num_job: 20
+[2026-03-11 16:07:18,109][EasyNCO.utils.utils][INFO] - num_machine: 20
+[2026-03-11 16:07:18,109][EasyNCO.utils.utils][INFO] - decoder_strategy: greedy
+[2026-03-11 16:07:18,109][EasyNCO.utils.utils][INFO] - cuda: [0]
+[2026-03-11 16:07:18,109][EasyNCO.utils.utils][INFO] - max_epochs: 5
+[2026-03-11 16:07:18,109][EasyNCO.utils.utils][INFO] - batch_size: 16
+[2026-03-11 16:07:18,110][EasyNCO.utils.utils][INFO] - episodes: 128
+[2026-03-11 16:07:18,110][EasyNCO.utils.utils][INFO] - val_episode: 128
+[2026-03-11 16:07:18,110][EasyNCO.utils.utils][INFO] - val_data_path: test_dataset_tsp_uniform/test_tsp200_nums128_uniform.pt
+[2026-03-11 16:07:18,110][EasyNCO.utils.utils][INFO] - test_data_path: test_dataset_tsp_uniform/test_tsp200_nums128_uniform.pt
+[2026-03-11 16:07:18,110][EasyNCO.utils.utils][INFO] - train_data_path: None
+[2026-03-11 16:07:18,111][EasyNCO.utils.utils][INFO] - varying_data_params: {'scale_range': None, 'distribution_list': ['uniform', 'cluster'], 'capacity_range': [50, 100]}
+[2026-03-11 16:07:18,111][EasyNCO.utils.utils][INFO] - seed: 1234
+[2026-03-11 16:07:18,111][EasyNCO.utils.utils][INFO] - disable_gpu: False
+[2026-03-11 16:07:18,111][EasyNCO.utils.utils][INFO] - strategy: auto
+[2026-03-11 16:07:18,111][EasyNCO.utils.utils][INFO] - matmul_precision: medium
+[2026-03-11 16:07:18,112][EasyNCO.utils.utils][INFO] - precision: 32-true
+[2026-03-11 16:07:18,112][EasyNCO.utils.utils][INFO] - enable_progress_bar: False
+[2026-03-11 16:07:18,112][EasyNCO.utils.utils][INFO] - log_every_n_steps: 1
+[2026-03-11 16:07:18,112][EasyNCO.utils.utils][INFO] - ckpt_path: None
+[2026-03-11 16:07:18,112][EasyNCO.utils.utils][INFO] - save_top_k: -1
+[2026-03-11 16:07:18,113][EasyNCO.utils.utils][INFO] - every_n_epochs: 1
+[2026-03-11 16:07:18,113][EasyNCO.utils.utils][INFO] - dir: ./results/test/difusco_tsp/2026-03-11-16-07-17_difusco_tsp_200_test
+[2026-03-11 16:07:18,113][EasyNCO.utils.utils][INFO] - logger: {'_target_': 'lightning.pytorch.loggers.TensorBoardLogger', 'save_dir': 'tensorboard', 'name': None, 'log_graph': False, 'default_hp_metric': True, 'prefix': ''}
+[2026-03-11 16:07:18,113][EasyNCO.utils.utils][INFO] - settings.env: {'_target_': 'EasyNCO.neural_solvers.envs.TSPEnv', 'problem_size': '${scale}', 'pomo_size': 1, 'aug_type': 'pomo_aug', 'aug_factor': 1, 'use_graph': True, 'env_name': '${problem}'}
+[2026-03-11 16:07:18,114][EasyNCO.utils.utils][INFO] - settings.model: {'_target_': 'EasyNCO.neural_solvers.methods.DIFUSCOPolicy', 'env_name': '${problem}', 'n_layers': 12, 'hidden_dim': 256, 'aggregation': 'sum', 'diffusion_type': 'gaussian', 'diffusion_schedule': 'linear', 'diffusion_steps': 1000, 'sparse_factor': -1, 'node_feature_only': True, 'use_activation_checkpoint': False, 'parallel_sampling': 1, 'sequential_sampling': 1, 'inference_diffusion_steps': 20, 'inference_schedule': 'cosine', 'inference_trick': 'ddim'}
+[2026-03-11 16:07:18,114][EasyNCO.utils.utils][INFO] - settings.initialization: {'_target_': 'EasyNCO.neural_solvers.methods.DIFUSCOInitialization'}
+[2026-03-11 16:07:18,114][EasyNCO.utils.utils][INFO] - settings.iteration: {'_target_': 'EasyNCO.neural_solvers.methods.DIFUSCOIteration'}
+[2026-03-11 16:07:18,114][EasyNCO.utils.utils][INFO] - settings.module: {'_target_': 'EasyNCO.phases.ARREINFORCELightning', 'problem': '${problem}', 'method_name': '${model}', 'baseline': None, 'problem_size': '${scale}', 'batch_size': '${batch_size}', 'episodes': '${episodes}', 'val_episode': '${val_episode}', 'optimizer_type': 'Adam', 'scheduler_type': None, 'optimizer_params': {'optimizer': {'lr': 0.0001, 'weight_decay': 1e-06}}, 'decoder_strategy': '${decoder_strategy}', 'every_n_steps_output': 100, 'initialization_params': {'heatmap_path': None}, 'iteration_params': {'max_steps': 10}, 'train_data_params': {'graph': True}, 'test_data_params': {'graph': True}}
+[2026-03-11 16:07:18,115][EasyNCO.utils.utils][INFO] - settings.model_checkpoint: {'_target_': 'lightning.pytorch.callbacks.ModelCheckpoint', 'dirpath': 'checkpoints', 'filename': '${model}_${problem}${scale}_{epoch:02d}', 'save_top_k': '${save_top_k}', 'every_n_epochs': '${every_n_epochs}'}
+[2026-03-11 16:07:18,115][EasyNCO.utils.utils][INFO] - settings.test_loader: {'model_dirpath': 'pretrained', 'model_filename': 'difusco_tsp100.ckpt'}
+[2026-03-11 16:07:19,344][EasyNCO.utils.utils][INFO] - Shape mismatch for model.out.2.weight: model torch.Size([1, 256, 1, 1]), ckpt torch.Size([2, 256, 1, 1])

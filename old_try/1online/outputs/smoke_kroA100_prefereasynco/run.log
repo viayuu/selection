@@ -1,0 +1,41 @@
+[run] seed=2024 device=cpu instance=kroA100 problem_size=100 aug_batch_size=2 rollout_steps=2
+[run] init_zoo=lehd operator_zoo=two_opt augmentations=identity,rotate,reflect,mix mix_prop=0.5
+[run] eval_aug_size=2 eval_batch_size=1 easynco_solver_device=cpu dact_solver_device=cpu
+[run] output_dir=0online/outputs/smoke_kroA100_prefereasynco
+[solver_load] lehd: EasyNCO/pretrained/lehd_tsp100.ckpt missing=0 unexpected=0
+[run] solver_zoo_ready init=1 operators=1 elapsed=3.73s
+[run] training started
+[train:init] step=00001 batch=2 n=100 device=cpu select_t=0.04s init_mean_entropy=0.0000
+[solver:init] name=lehd count=2 start
+[solver:init] name=lehd count=2 done elapsed=0.61s
+[solver:init] all done elapsed=0.61s
+[train:reset] step=00001 reset_t=0.61s init_len=5.4559
+[train:rollout] step=00001 iter=01/02 current=5.4559 best=5.4559 reward_mean=0.0000
+[train:rollout] step=00001 iter=02/02 current=5.4559 best=5.4559 reward_mean=0.0000
+[train:done] step=00001 total_t=1.30s rollout_t=0.58s opt_t=0.06s loss=-0.0000 init=5.4559 final=5.4559 improve=0.0000 reward_mean=0.0000 baseline=0.0000 entropy=0.0000
+[train:trace] step=00001 jsonl=0online/outputs/smoke_kroA100_prefereasynco/train_traces/step_000001.jsonl
+[train:trace] step=00001 step_summary=0online/outputs/smoke_kroA100_prefereasynco/train_traces/step_000001_step_summary.json
+[train] step=000001 loss=-0.0000 init=5.4559 final=5.4559 improve=0.0000 reward_mean=0.0000 entropy=0.0000
+[train] step=000001 init_dist=lehd:1.00
+[train] step=000001 op_dist=two_opt:1.00
+[train] step=000001 trace=0online/outputs/smoke_kroA100_prefereasynco/train_traces/step_000001.jsonl
+[train] step=000001 step_summary=0online/outputs/smoke_kroA100_prefereasynco/train_traces/step_000001_step_summary.json
+[save] wrote checkpoint and metrics snapshot -> 0online/outputs/smoke_kroA100_prefereasynco/latest_metrics.json
+[eval] step=000001 starting original evaluation
+[eval:eval_original] batch=0001 items=1/1 avg_init=5.4135 avg_final=5.4135 avg_reward=0.0000 elapsed=0.79s
+[eval] step=000001 mode=original init=5.4135 final=5.4135 improve=0.0000 reward_mean=0.0000
+[eval] step=000001 mode=original init_dist=lehd:1.00
+[eval] step=000001 mode=original op_dist=two_opt:1.00
+[eval] step=000001 mode=original trace=0online/outputs/smoke_kroA100_prefereasynco/eval_traces/original_step_000001.jsonl
+[eval] step=000001 mode=original step_summary=0online/outputs/smoke_kroA100_prefereasynco/eval_traces/original_step_000001_step_summary.json
+[eval] step=000001 starting augmented evaluation
+[eval:eval_augmented] batch=0001 items=1/2 avg_init=5.4135 avg_final=5.4135 avg_reward=0.0000 elapsed=0.73s
+[eval:eval_augmented] batch=0002 items=2/2 avg_init=5.3385 avg_final=5.3385 avg_reward=0.0000 elapsed=1.58s
+[eval] step=000001 mode=augmented init=5.3385 final=5.3385 improve=0.0000 reward_mean=0.0000
+[eval] step=000001 mode=augmented init_dist=lehd:1.00
+[eval] step=000001 mode=augmented op_dist=two_opt:1.00
+[eval] step=000001 mode=augmented trace=0online/outputs/smoke_kroA100_prefereasynco/eval_traces/augmented_step_000001.jsonl
+[eval] step=000001 mode=augmented step_summary=0online/outputs/smoke_kroA100_prefereasynco/eval_traces/augmented_step_000001_step_summary.json
+[ckpt] saved new best 0online/outputs/smoke_kroA100_prefereasynco/selector_best.pt final=5.4135
+[save] wrote eval snapshot -> 0online/outputs/smoke_kroA100_prefereasynco/latest_metrics.json
+[run] training finished elapsed=7.61s

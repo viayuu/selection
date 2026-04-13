@@ -1,0 +1,22 @@
+% !Mode:: "TeX:UTF-8"
+% !TEX program  = xelatex
+
+\begin{中文摘要}{组合优化问题；算子选择；上下文老虎机；旅行商问题；车辆路径问题}
+现有神经组合优化方法在不同实例上的表现具有互补性，即没有一种方法在所有实例上全部优于其它方法。
+因此，与其继续追求一个在所有情形下都占优的单一方法，更值得研究的问题是：给定一个实例，应该选择哪一种方法。本文聚焦旅行商问题（TSP）和容量约束车辆路径问题（CVRP）的初始化阶段，考察在固定候选方法池中，如何依据实例特征做一次算子选择，以提高求解效果。
+在比较双门控强化学习、步级算子选择等决策建模方式后，本文将这一任务表述为初始化选择的上下文老虎机问题，并采用“离线全信息结果生成数据、在线部分反馈方式更新”的训练设置。
+为了达到这一目标，本文在Neural-LinUCB 框架下实现了面向TSP 与 CVRP 的统一选择模型。
+模型将实例的图编码、手工统计特征与候选方法的可学习嵌入融合为动作条件表征，
+通过按问题拆分的浅层 UCB 头同时利用与探索。
+在合成混合数据集上，
+Neural-LinUCB 在 TSP 与 CVRP 上分别取得 7.94 和 18.28 的 mean length，
+均优于 SingleBest 基线（对应 7.96 和 18.42）。
+\end{中文摘要}
+
+\begin{英文摘要}{combinatorial optimization problems; operator selection; contextual bandits; traveling salesman problem; vehicle routing problem}
+Existing neural combinatorial optimization methods are complementary across instances: no single method consistently outperforms all others on every instance. Rather than continuing to pursue one method that dominates in all cases, a more useful question is which method should be selected for a given instance. This thesis focuses on the initialization stage of the Traveling Salesman Problem (TSP) and the Capacitated Vehicle Routing Problem (CVRP), and studies how to make a one-shot operator selection from a fixed candidate pool based on instance features in order to improve solution quality.
+After comparing alternative decision formulations, including multi-gate reinforcement learning and step-level operator selection, the task is formulated as an initialization-only contextual bandit problem, with offline full-information results used to construct the data and online partial-feedback updates used during training. To address this task, this thesis implements a unified selector for TSP and CVRP under the Neural-LinUCB framework.
+The model combines graph encodings of instances, hand-crafted statistical features, and learnable embeddings of candidate methods into an action-conditioned representation, and uses problem-specific shallow UCB heads to balance exploitation and exploration.
+On the mixed synthetic dataset, Neural-LinUCB achieves mean lengths of 7.94 on TSP and 18.28 on CVRP, outperforming the SingleBest baseline values of 7.96 and 18.42.
+\end{英文摘要}
+\cleardoublepage
