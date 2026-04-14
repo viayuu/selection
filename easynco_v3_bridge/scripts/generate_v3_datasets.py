@@ -21,6 +21,7 @@ if str(BRIDGE_ROOT.parent) not in sys.path:
 from config import (
     ATSP_SPECS,
     BRIDGE_ROOT,
+    default_mvrp_demand_scaler,
     EASYNCO_ROOT,
     MANIFEST_ROOT,
     MVRP_MODE,
@@ -54,6 +55,13 @@ def seed_everything(seed: int) -> None:
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
+
+
+def stable_text_offset(text: str) -> int:
+    value = 0
+    for idx, ch in enumerate(text):
+        value += (idx + 1) * ord(ch)
+    return value
 
 
 def copy_file(src: Path, dst: Path, force: bool) -> None:
@@ -120,6 +128,8 @@ def generate_atsp(force: bool, spec_override: Optional[Dict[int, int]] = None) -
         "problem": "atsp",
         "source": "EasyNCO.data.ATSPGenerator",
         "seed": SEED,
+        "min_scale": min(specs),
+        "max_scale": max(specs),
         "shards": [],
     }
 
@@ -202,6 +212,8 @@ def generate_mvrp(
         "source": "EasyNCO.data.MVRPGenerator",
         "seed": SEED,
         "mode": mode,
+        "min_scale": min(specs),
+        "max_scale": max(specs),
         "variants": {},
     }
 
@@ -213,10 +225,13 @@ def generate_mvrp(
             "source": "EasyNCO.data.MVRPGenerator",
             "seed": SEED,
             "mode": mode,
+            "min_scale": min(specs),
+            "max_scale": max(specs),
             "shards": [],
         }
         for scale, count in sorted(specs.items()):
-            seed_everything(SEED + scale + len(variant))
+            demand_scaler = default_mvrp_demand_scaler(scale)
+            seed_everything(SEED + scale * 1000 + stable_text_offset(variant))
             output_path = variant_root / f"{variant_dir_name(variant)}{scale}_nums{count}.pkl"
             if not output_path.exists() or force:
                 loader = MVRPGenerator(
@@ -224,6 +239,7 @@ def generate_mvrp(
                     problem_size=scale,
                     batch_size=min(count, 128),
                     device="cpu",
+                    demand_scaler=demand_scaler,
                     train_problems=[variant],
                     mode=mode,
                 )
@@ -236,6 +252,7 @@ def generate_mvrp(
                 {
                     "scale": scale,
                     "num_instances": count,
+                    "demand_scaler": demand_scaler,
                     "relative_path": relative_to_datasets(output_path),
                     "format": "variant_pickle",
                 }

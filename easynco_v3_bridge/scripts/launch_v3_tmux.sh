@@ -42,6 +42,11 @@ case "${1:-}" in
       "v3_mvrp_labels" \
       "python \"$ROOT/scripts/prepare_v3_checkpoints.py\" && python \"$ROOT/scripts/build_label_jobs.py\" && python \"$ROOT/scripts/run_label_queue.py\" --groups mvrp"
     ;;
+  monitor)
+    start_session \
+      "v3_monitor" \
+      "while true; do python \"$ROOT/scripts/monitor_v3.py\" | tee \"$ROOT/logs/v3_monitor_last.json\"; sleep 120; done"
+    ;;
   deploy-now)
     start_session \
       "v3_prepare_data" \
@@ -49,6 +54,9 @@ case "${1:-}" in
     start_session \
       "v3_nss_labels" \
       "python \"$ROOT/scripts/build_label_jobs.py\" && python \"$ROOT/scripts/run_label_queue.py\" --groups nss"
+    start_session \
+      "v3_monitor" \
+      "while true; do python \"$ROOT/scripts/monitor_v3.py\" | tee \"$ROOT/logs/v3_monitor_last.json\"; sleep 120; done"
     ;;
   *)
     cat <<'EOF'
@@ -57,12 +65,14 @@ Usage:
   launch_v3_tmux.sh nss-labels
   launch_v3_tmux.sh atsp-labels
   launch_v3_tmux.sh mvrp-labels
+  launch_v3_tmux.sh monitor
   launch_v3_tmux.sh deploy-now
 
 Notes:
   - deploy-now starts two background sessions:
     1. dataset/checkpoint preparation
     2. TSP/CVRP NSS label jobs
+    3. monitor loop
   - ATSP and MVRP label queues should be started after their datasets are ready.
 EOF
     exit 1

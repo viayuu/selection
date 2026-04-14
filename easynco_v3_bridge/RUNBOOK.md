@@ -9,6 +9,7 @@ These scripts follow the V3 plan:
 - do not modify `EasyNCO`
 - copy `NSS` train datasets for `TSP` and base `CVRP`
 - generate `ATSP` and non-base `MVRP` variant datasets by calling existing `EasyNCO` generators
+- use dense NSS-style scale coverage for `ATSP` and non-base `MVRP` variants
 - rerun labels with `EasyNCO`
 - keep labels `init-only`
 
@@ -54,13 +55,13 @@ Copy `NSS` train datasets:
 python /public/home/zhoucl/shiys/easynco_v3_bridge/scripts/generate_v3_datasets.py copy-nss
 ```
 
-Generate `ATSP` shards:
+Generate dense `ATSP` shards:
 
 ```bash
 python /public/home/zhoucl/shiys/easynco_v3_bridge/scripts/generate_v3_datasets.py generate-atsp
 ```
 
-Generate non-base `MVRP` variant shards:
+Generate dense non-base `MVRP` variant shards:
 
 ```bash
 python /public/home/zhoucl/shiys/easynco_v3_bridge/scripts/generate_v3_datasets.py generate-mvrp --mode 1
@@ -150,4 +151,7 @@ python /public/home/zhoucl/shiys/easynco_v3_bridge/scripts/status_v3.py
 ## Notes
 
 - Base `CVRP` is handled by copied `NSS` data, so the `MVRP` generator only covers the 15 non-base variants here.
+- `ATSP` now uses a dense integer scale grid from `20..100` with `10000` total instances.
+- Each non-base `MVRP` variant now uses a dense integer scale grid from `50..100` with `10000` total instances per variant.
+- The label bridge now pins one checkpoint per method instead of switching checkpoints by scale.
 - `PCTSP` is not part of the first selector release under strict `init-only`, so dataset generation support is optional and no label jobs are included for it by default.

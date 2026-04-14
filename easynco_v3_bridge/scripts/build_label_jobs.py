@@ -22,6 +22,7 @@ from config import (
     MVRP_MODEL_OVERRIDES,
     MVRP_MODE,
     MVRP_SPECS,
+    MVRP_VARIANT_GROUPS,
     MVRP_VARIANTS,
     NSS_COPY_MANIFEST,
     NSS_COPY_DATASET_NAMES,
@@ -38,6 +39,14 @@ def write_shell_script(path: Path, commands: List[str]) -> None:
     content = ["#!/usr/bin/env bash", "set -euo pipefail", ""] + commands + [""]
     path.write_text("\n".join(content), encoding="utf-8")
     path.chmod(0o755)
+
+
+def compatible_batch_size(preferred: int, episodes: int) -> int:
+    upper = max(1, min(preferred, episodes))
+    for candidate in range(upper, 0, -1):
+        if episodes % candidate == 0:
+            return candidate
+    return 1
 
 
 def build_nss_jobs() -> List[Dict]:
@@ -89,7 +98,8 @@ def build_atsp_jobs() -> List[Dict]:
     jobs = []
     for method in ATSP_METHODS:
         for scale, count in sorted(ATSP_SPECS.items()):
-            spec = ATSP_MODEL_OVERRIDES[method][scale]
+            spec = ATSP_MODEL_OVERRIDES[method]
+            batch_size = compatible_batch_size(spec["batch_size"], count)
             result_dir = RESULTS_ROOT / "label_v3" / f"{method}_atsp" / f"scale_{scale}"
             jobs.append(
                 {
@@ -107,7 +117,7 @@ def build_atsp_jobs() -> List[Dict]:
                         f"model={method}",
                         "problem=atsp",
                         f"scale={scale}",
-                        f"batch_size={spec['batch_size']}",
+                        f"batch_size={batch_size}",
                         f"episodes={count}",
                         "decoder_strategy=greedy",
                         "cuda=[0]",
@@ -118,10 +128,10 @@ def build_atsp_jobs() -> List[Dict]:
                     ]
                     + (
                         [
-                            "settings.env.pomo_size=20",
-                            "settings.module.initialization_params.pomo_size=20",
+                            f"settings.env.pomo_size={scale}",
+                            f"settings.module.initialization_params.pomo_size={scale}",
                         ]
-                        if method == "matnet" and scale == 20
+                        if method == "matnet"
                         else []
                     )
                     + (
@@ -140,7 +150,7 @@ def build_mvrp_jobs() -> List[Dict]:
         variant_lower = variant_dir_name(variant)
         for method in MVRP_METHODS:
             for scale, count in sorted(MVRP_SPECS.items()):
-                spec = MVRP_MODEL_OVERRIDES[method][scale]
+                spec = MVRP_MODEL_OVERRIDES[method]
                 result_dir = RESULTS_ROOT / "label_v3" / f"{method}_{variant_lower}" / f"scale_{scale}"
                 jobs.append(
                     {
@@ -196,6 +206,22 @@ def write_command_collections(jobs: List[Dict]) -> None:
     )
 
 
+def write_parallel_mvrp_manifests(jobs: List[Dict]) -> None:
+    mvrp_jobs = [job for job in jobs if job["group"] == "mvrp"]
+    for method in MVRP_METHODS:
+        for group_name, variants in MVRP_VARIANT_GROUPS:
+            variant_tokens = {f"_{variant_dir_name(variant)}_" for variant in variants}
+            subset = []
+            for job in mvrp_jobs:
+                if not job["name"].startswith(f"{method}_"):
+                    continue
+                if any(token in job["name"] for token in variant_tokens):
+                    subset.append(job)
+            subset_path = MANIFEST_ROOT / f"mvrp_{method}_{group_name}.json"
+            with subset_path.open("w", encoding="utf-8") as f:
+                json.dump(subset, f, ensure_ascii=False, indent=2)
+
+
 def main() -> None:
     ensure_layout()
     jobs = build_nss_jobs() + build_atsp_jobs() + build_mvrp_jobs()
@@ -203,6 +229,7 @@ def main() -> None:
     with jobs_path.open("w", encoding="utf-8") as f:
         json.dump(jobs, f, ensure_ascii=False, indent=2)
     write_command_collections(jobs)
+    write_parallel_mvrp_manifests(jobs)
     print(f"Wrote {len(jobs)} jobs to {jobs_path}")
 
 

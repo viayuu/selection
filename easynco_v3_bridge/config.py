@@ -28,17 +28,54 @@ DEFAULT_GPU = "0"
 SEED = 20260414
 MVRP_MODE = 1
 
+
+def build_dense_scale_specs(min_scale: int, max_scale: int, total_instances: int):
+    scales = list(range(min_scale, max_scale + 1))
+    if not scales:
+        raise ValueError("Scale range must be non-empty.")
+    if total_instances < len(scales):
+        raise ValueError(
+            f"Total instances ({total_instances}) must be >= number of scales ({len(scales)})."
+        )
+    base = total_instances // len(scales)
+    remainder = total_instances % len(scales)
+    return {
+        scale: base + (1 if idx < remainder else 0)
+        for idx, scale in enumerate(scales)
+    }
+
+
+def default_mvrp_demand_scaler(problem_size: int) -> int:
+    anchors = (
+        (20, 30),
+        (50, 40),
+        (100, 50),
+        (1000, 200),
+        (2000, 300),
+        (5000, 300),
+        (7000, 300),
+    )
+    if problem_size <= anchors[0][0]:
+        return anchors[0][1]
+    for (left_scale, left_value), (right_scale, right_value) in zip(anchors, anchors[1:]):
+        if left_scale <= problem_size <= right_scale:
+            ratio = (problem_size - left_scale) / float(right_scale - left_scale)
+            return int(round(left_value + ratio * (right_value - left_value)))
+    return anchors[-1][1]
+
 NSS_DATASETS = ("TSPtrain", "CVRPtrain")
 NSS_COPY_DATASET_NAMES = {
     "TSPtrain": "TSPtrain_v3copy",
     "CVRPtrain": "CVRPtrain_v3copy",
 }
 
-ATSP_SPECS = {
-    20: 2500,
-    50: 3500,
-    100: 4000,
-}
+ATSP_SCALE_RANGE = (20, 100)
+ATSP_TOTAL_INSTANCES = 10000
+ATSP_SPECS = build_dense_scale_specs(
+    min_scale=ATSP_SCALE_RANGE[0],
+    max_scale=ATSP_SCALE_RANGE[1],
+    total_instances=ATSP_TOTAL_INSTANCES,
+)
 
 PCTSP_SPECS = {
     20: 2000,
@@ -66,10 +103,15 @@ MVRP_VARIANTS = (
     "OVRPBLTW",
 )
 
-MVRP_SPECS = {
-    50: 5000,
-    100: 5000,
-}
+MVRP_SCALE_RANGE = (50, 100)
+MVRP_TOTAL_INSTANCES = 10000
+MVRP_SPECS = build_dense_scale_specs(
+    min_scale=MVRP_SCALE_RANGE[0],
+    max_scale=MVRP_SCALE_RANGE[1],
+    total_instances=MVRP_TOTAL_INSTANCES,
+)
+
+ACTIVE_EXPERIMENT_GROUPS = ("atsp", "mvrp")
 
 NSS_TSP_METHODS = (
     "pointerformer",
@@ -97,100 +139,51 @@ NSS_CVRP_METHODS = (
     "omni",
 )
 
+NSS_PROGRESS_EXPECTED = {
+    "TSPtrain_v3copy": len(NSS_TSP_METHODS),
+    "CVRPtrain_v3copy": len(NSS_CVRP_METHODS),
+}
+
 ATSP_METHODS = ("matnet", "matpoenet", "glop")
 MVRP_METHODS = ("mtpomo", "mvmoe")
+MVRP_VARIANT_GROUPS = (
+    ("part1", MVRP_VARIANTS[:8]),
+    ("part2", MVRP_VARIANTS[8:]),
+)
 
 ATSP_MODEL_OVERRIDES = {
     "matnet": {
-        20: {
-            "settings": "matnet_settings",
-            "model_dirpath": "pretrained/matnet_pretrain",
-            "model_filename": "matnet_atsp20.ckpt",
-            "batch_size": 4,
-        },
-        50: {
-            "settings": "matnet_settings",
-            "model_dirpath": "pretrained/matnet_pretrain",
-            "model_filename": "matnet_atsp50.ckpt",
-            "batch_size": 4,
-        },
-        100: {
-            "settings": "matnet_settings",
-            "model_dirpath": "pretrained/matnet_pretrain",
-            "model_filename": "matnet_atsp100.ckpt",
-            "batch_size": 4,
-        },
+        "settings": "matnet_settings",
+        "model_dirpath": "pretrained/matnet_pretrain",
+        "model_filename": "matnet_atsp100.ckpt",
+        "batch_size": 4,
     },
     "matpoenet": {
-        20: {
-            "settings": "matpoenet_settings",
-            "model_dirpath": "pretrained/matpoenet",
-            "model_filename": "MatNet-POE_mix.pt",
-            "batch_size": 4,
-        },
-        50: {
-            "settings": "matpoenet_settings",
-            "model_dirpath": "pretrained/matpoenet",
-            "model_filename": "MatNet-POE_mix.pt",
-            "batch_size": 4,
-        },
-        100: {
-            "settings": "matpoenet_settings",
-            "model_dirpath": "pretrained/matpoenet",
-            "model_filename": "MatNet-POE_mix.pt",
-            "batch_size": 4,
-        },
+        "settings": "matpoenet_settings",
+        "model_dirpath": "pretrained/matpoenet",
+        "model_filename": "MatNet-POE_mix.pt",
+        "batch_size": 4,
     },
     "glop": {
-        20: {
-            "settings": "glop_settings",
-            "model_dirpath": "pretrained/glop",
-            "model_filename": "glop_policy_atsp.pt",
-            "batch_size": 1,
-        },
-        50: {
-            "settings": "glop_settings",
-            "model_dirpath": "pretrained/glop",
-            "model_filename": "glop_policy_atsp.pt",
-            "batch_size": 1,
-        },
-        100: {
-            "settings": "glop_settings",
-            "model_dirpath": "pretrained/glop",
-            "model_filename": "glop_policy_atsp.pt",
-            "batch_size": 1,
-        },
+        "settings": "glop_settings",
+        "model_dirpath": "pretrained/glop",
+        "model_filename": "glop_policy_atsp.pt",
+        "batch_size": 1,
     },
 }
 
 MVRP_MODEL_OVERRIDES = {
     "mtpomo": {
-        50: {
-            "settings": "mtpomo_settings",
-            "model_dirpath": "pretrained/mtpomo/mtpomo",
-            "model_filename": "mtpomo_mvrp_50.ckpt",
-            "batch_size": 64,
-        },
-        100: {
-            "settings": "mtpomo_settings",
-            "model_dirpath": "pretrained/mtpomo/mtpomo",
-            "model_filename": "mtpomo_mvrp_100.ckpt",
-            "batch_size": 64,
-        },
+        "settings": "mtpomo_settings",
+        "model_dirpath": "pretrained/mtpomo/mtpomo",
+        "model_filename": "mtpomo_mvrp_100.ckpt",
+        "batch_size": 64,
     },
     "mvmoe": {
-        50: {
-            "settings": "mvmoe_settings",
-            "model_dirpath": "pretrained/mvmoe/mvmoe",
-            "model_filename": "mvmoe_mvrp50.ckpt",
-            "batch_size": 64,
-        },
-        100: {
-            "settings": "mvmoe_settings",
-            "model_dirpath": "pretrained/mvmoe/mvmoe",
-            "model_filename": "mvmoe_mvrp100.ckpt",
-            "batch_size": 64,
-        },
+        "settings": "mvmoe_settings",
+        "model_dirpath": "pretrained/mvmoe/mvmoe",
+        "model_filename": "mvmoe_mvrp100.ckpt",
+        "batch_size": 64,
     },
 }
 
