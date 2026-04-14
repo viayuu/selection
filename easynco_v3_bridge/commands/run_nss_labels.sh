@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+(cd /public/home/zhoucl/shiys/EasyNCO && python run_nss_eval_suite.py --cuda '[0]' --manifest /public/home/zhoucl/shiys/EasyNCO/data/datasets/offline_init_v3/nss_copy/manifest.json --datasets TSPtrain_v3copy --methods pointerformer,invit,elg,lehd,icam,lih,dact,udc,omni,difusco,t2t,glop)
+(cd /public/home/zhoucl/shiys/EasyNCO && python run_nss_eval_suite.py --cuda '[0]' --manifest /public/home/zhoucl/shiys/EasyNCO/data/datasets/offline_init_v3/nss_copy/manifest.json --datasets CVRPtrain_v3copy --methods invit,elg,lehd,icam,lih,dact,udc,omni)
