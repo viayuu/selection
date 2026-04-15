@@ -24,7 +24,9 @@ def cvrp_solution_heatmap(problem, main_net, n_subset,k_sparse=None,Train_flag=F
     '''
     problem=problem.squeeze()
     problem_size=problem.shape[0]-1
-    capacity=capacity_mapping[problem_size]
+    # NSS varying-size CVRP data is already normalized with capacity 1.0, so we
+    # fall back to 1.0 when the heatmap code sees an unseen problem size.
+    capacity=capacity_mapping.get(problem_size, 1.0)
     coors=problem[:,0:2]
     demands=problem[:,2]*capacity
     if Train_flag:
