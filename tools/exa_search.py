@@ -62,9 +62,40 @@ import argparse
 import json
 import os
 import sys
+import typing as _typing
 from typing import Any
 
+import requests
+
 _INSTALL_MESSAGE = "exa-py not found. Install it with: pip install exa-py"
+_EXA_BASE_URL = "https://api.exa.ai"
+_INTEGRATION_HEADER = "auto-claude-code-research-in-sleep"
+
+if not hasattr(_typing, "Annotated"):
+    try:
+        from typing_extensions import Annotated as _Annotated
+    except ImportError:
+        _Annotated = None
+    if _Annotated is not None:
+        _typing.Annotated = _Annotated
+
+
+def _get_api_key() -> str:
+    api_key = os.getenv("EXA_API_KEY", "").strip()
+    if not api_key:
+        raise RuntimeError(
+            "EXA_API_KEY environment variable is required. "
+            "Get your key from: https://exa.ai"
+        )
+    return api_key
+
+
+def _exa_headers() -> dict[str, str]:
+    return {
+        "x-api-key": _get_api_key(),
+        "Content-Type": "application/json",
+        "x-exa-integration": _INTEGRATION_HEADER,
+    }
 
 
 def _get_client() -> Any:
@@ -74,16 +105,52 @@ def _get_client() -> Any:
     except ImportError:
         raise RuntimeError(_INSTALL_MESSAGE)
 
-    api_key = os.getenv("EXA_API_KEY", "").strip()
-    if not api_key:
-        raise RuntimeError(
-            "EXA_API_KEY environment variable is required. "
-            "Get your key from: https://exa.ai"
-        )
-
-    client = Exa(api_key=api_key)
-    client.headers["x-exa-integration"] = "auto-claude-code-research-in-sleep"
+    client = Exa(api_key=_get_api_key())
+    client.headers["x-exa-integration"] = _INTEGRATION_HEADER
     return client
+
+
+def _nest_content_fields(options: dict[str, Any]) -> dict[str, Any]:
+    nested: dict[str, Any] = {}
+    for field in (
+        "text",
+        "summary",
+        "highlights",
+        "context",
+        "subpages",
+        "subpage_target",
+        "livecrawl",
+        "livecrawl_timeout",
+        "extras",
+    ):
+        if field in options:
+            nested[field] = options.pop(field)
+    options["contents"] = nested
+    return options
+
+
+def _to_camel_case(value: Any) -> Any:
+    if isinstance(value, list):
+        return [_to_camel_case(v) for v in value]
+    if not isinstance(value, dict):
+        return value
+    converted: dict[str, Any] = {}
+    for key, item in value.items():
+        parts = key.split("_")
+        camel = parts[0] + "".join(part[:1].upper() + part[1:] for part in parts[1:])
+        converted[camel] = _to_camel_case(item)
+    return converted
+
+
+def _http_post(endpoint: str, payload: dict[str, Any]) -> dict[str, Any]:
+    response = requests.post(
+        f"{_EXA_BASE_URL}{endpoint}",
+        headers=_exa_headers(),
+        data=json.dumps(payload),
+        timeout=120,
+    )
+    response.raise_for_status()
+    return response.json()
 
 
 def _parse_list(value: str | None) -> list[str] | None:
@@ -153,8 +220,6 @@ def search(
     user_location: str | None = None,
 ) -> dict[str, Any]:
     """Search the web via Exa and return structured results."""
-    client = _get_client()
-
     kwargs: dict[str, Any] = {
         "query": query,
         "num_results": max_results,
@@ -180,15 +245,37 @@ def search(
     if user_location:
         kwargs["user_location"] = user_location
 
-    response = client.search_and_contents(**kwargs)
-
-    return {
-        "mode": "search",
-        "query": query,
-        "type": search_type,
-        "returned": len(response.results),
-        "data": [_process_result(r, content_mode) for r in response.results],
-    }
+    try:
+        client = _get_client()
+        response = client.search_and_contents(**kwargs)
+        return {
+            "mode": "search",
+            "query": query,
+            "type": search_type,
+            "returned": len(response.results),
+            "data": [_process_result(r, content_mode) for r in response.results],
+        }
+    except Exception:
+        payload = _to_camel_case(_nest_content_fields(dict(kwargs)))
+        data = _http_post("/search", payload)
+        return {
+            "mode": "search",
+            "query": query,
+            "type": data.get("resolvedSearchType", search_type),
+            "returned": len(data.get("results", [])),
+            "data": [
+                {
+                    "title": result.get("title") or "No Title",
+                    "url": result.get("url") or "",
+                    **({"published_date": result.get("publishedDate")} if result.get("publishedDate") else {}),
+                    **({"author": result.get("author")} if result.get("author") else {}),
+                    **({"highlights": result.get("highlights")} if content_mode == "highlights" and result.get("highlights") else {}),
+                    **({"text": result.get("text")} if content_mode == "text" and result.get("text") else {}),
+                    **({"summary": result.get("summary")} if content_mode == "summary" and result.get("summary") else {}),
+                }
+                for result in data.get("results", [])
+            ],
+        }
 
 
 def find_similar(
