@@ -36,13 +36,15 @@ def should_skip(job: dict) -> bool:
 
 
 def run_job(job: dict, dry_run: bool, continue_on_error: bool) -> None:
-    cmd = job["command"]
+    cmd = list(job["command"])
     cwd = job["cwd"]
     log_path = Path(job["log_path"])
     log_path.parent.mkdir(parents=True, exist_ok=True)
     if should_skip(job):
         print(f"SKIP {job['name']} (output already complete)")
         return
+    if cmd and cmd[0] == "python":
+        cmd[0] = sys.executable
     print(f"RUN  {job['name']}")
     print("     ", " ".join(cmd))
     if dry_run:

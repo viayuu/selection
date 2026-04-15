@@ -59,6 +59,40 @@ This is the cleanest design that incorporates the most valuable lessons from:
 
 while still remaining experimentally realistic.
 
+## Double-Check Adjustment
+
+After a final consistency check, the main idea itself remains reasonable and does **not** need to be changed.  
+The only adjustment worth making is to separate:
+
+- the **core method that should be implemented first**
+- the **full extension version**
+
+to avoid over-designing v1.
+
+### Core method
+
+The first implementation should contain only:
+
+1. unified raw instance schema
+2. hierarchical graph-native encoder
+3. explicit problem descriptor
+4. solver descriptor
+5. masked `(instance, solver)` scorer
+
+This is already enough to test the main claim:
+
+- unified cross-problem solver selection should be modeled as masked compatibility ranking
+
+### Full extension
+
+Only after the core method is stable should we add:
+
+1. solver-conditioned interaction
+2. shared/private/semantic experts
+3. stronger imbalance-specific training tricks
+
+So the final report still recommends the same direction, but the implementation order is now more disciplined.
+
 ## Problem Anchor
 
 Construct one supervised selector that can choose among heterogeneous solver entries across multiple routing problems, instead of training one selector per problem.
