@@ -8,6 +8,11 @@
   - `train / val / test / lib`
   - `TSPtrain = 10000`
   - `CVRPtrain = 10000`
+   - `TSPval = 10000`
+  - `CVRPval = 1000`
+   - `TSPtest = 1000`
+  - `CVRPtest = 1000`
+  - lib数据集是为了测试模型在ood的泛化能力
 
 - `ATSP`
   - `ATSPtrain / ATSPval / ATSPtest`
@@ -44,7 +49,7 @@
 
 ## 每个数据集的目录结构
 
-每个数据集目录遵循相同的类 NSS 结构：
+每个数据集目录遵循相同的结构：
 
 - `dataset.pkl`
   - 合并后的实例列表
