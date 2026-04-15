@@ -7,23 +7,24 @@
 
 这项工作的重点不是设计一个新的 `TSP` 或 `CVRP` solver，而是把已有 solver 看成候选方法池，对每个实例做 solver selection。
 
-与 NSS（论文见Neural Solver Selection for Combinatorial Optimization.md，代码见参考文献/nss代码） 不同，当前目标不是“每个问题单独训练一个 selector”，而是训练一个**跨问题共享**的 selector，在统一框架下同时支持 `TSP / CVRP / ATSP / 15 种 MVRP 变体` 共 18 个问题。
+与 NSS（论文见Neural Solver Selection for Combinatorial Optimization.md，代码见literature/nss代码） 不同在于，nss是对tsp和cvrp问题分别训练一个selector模型，而当前目标不是“每个问题单独训练一个 selector”，而是训练一个**跨问题共享**的 selector，在统一框架下同时支持 `TSP / CVRP / ATSP / 15 种 MVRP 变体` 共 18 个问题。
 
 这个问题的难点有三个（我暂时能想到的，你可以扩展）。
 第一，不同问题支持的方法的数量不一样且不同（例如，tsp支持的方法很多，而mvrp支持的方法很少），面临方法分布不平衡的问题；并且不同问题间的方法可能存在交叉（例如tsp和cvrp问题都支持lehd方法）。我暂时的思路是使用mask掩码排除不支持的方法。
 二是如何区分实例属于什么问题，例如mvrp中，某些变体问题的输入格式和cvrp完全相同，当模型接到一个实例输入时，无法区分他是什么问题
 第三，如何统一表示不同问题的实例，同时又能识别不同问题的结构差异。
-对于问题二和问题三，导师给我的建议是可以参考URS论文和CoEKS论文，你可以参考，也可以进一步自己搜索扩展。
+
+重点：对于问题二和问题三，导师给我的建议是可以参考URS论文和CoEKS论文，你可以参考，也可以进一步自己搜索扩展。可以参考推荐算法他们是怎么解决用户适配和输出不均衡问题的，不一定局限于组合优化领域的论文!
 
 
 ## 背景
 
-- **领域**: 组合优化 / neural solver selection / routing
+- **领域**: 组合优化 / 推荐算法 / routing
 - **子方向**: 多问题统一的监督学习 solver selector
 - **已读关键论文**:
-  - `NSS (Neural Solver Selection for Combinatorial Optimization)`（论文见Neural Solver Selection for Combinatorial Optimization.md，代码见参考文献/nss代码）
-  - `URS`（论文见参考文献/urs.md，代码见参考文献/URS代码）
-  - `CoEKS`(论文见参考文献/CoEKS.md，代码你可以自己拉) 对应的跨问题专家化思路
+  - `NSS (Neural Solver Selection for Combinatorial Optimization)`（论文见Neural Solver Selection for Combinatorial Optimization.md，代码见literature/nss代码）
+  - `URS`（论文见literature/urs.md，代码见literature/URS代码）
+  - `CoEKS`(论文见literature/CoEKS.md，代码你可以自己拉) 对应的跨问题专家化思路
 ## 约束条件
 
 - **算力**:
