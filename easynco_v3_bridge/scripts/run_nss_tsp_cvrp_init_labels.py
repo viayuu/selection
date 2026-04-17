@@ -103,6 +103,8 @@ def build_command(args: argparse.Namespace) -> List[str]:
         command.extend(["--sample-size", str(args.sample_size)])
     if args.max_runs > 0:
         command.extend(["--max-runs", str(args.max_runs)])
+    if args.status_csv:
+        command.extend(["--status-csv", args.status_csv])
     if args.stop_on_error:
         command.append("--stop-on-error")
     return command
@@ -115,6 +117,7 @@ def main() -> int:
     parser.add_argument("--datasets", default="")
     parser.add_argument("--sample-size", type=int, default=0)
     parser.add_argument("--max-runs", type=int, default=0)
+    parser.add_argument("--status-csv", default="")
     parser.add_argument("--archive-status", action="store_true")
     parser.add_argument("--stop-on-error", action="store_true")
     parser.add_argument("--dry-run", action="store_true")

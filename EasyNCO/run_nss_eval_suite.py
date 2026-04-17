@@ -389,6 +389,7 @@ def main():
     parser.add_argument("--max-runs", type=int, default=0)
     parser.add_argument("--stop-on-error", action="store_true")
     parser.add_argument("--skip-lib-unstarted", action="store_true")
+    parser.add_argument("--status-csv", default="")
     args = parser.parse_args()
 
     manifest = load_manifest(args.manifest)
@@ -411,7 +412,9 @@ def main():
             key: value for key, value in base_runs.items() if key[0] not in excluded_methods
         }
 
-    status_csv = os.path.join(args.easy_root, "results", "nss_eval", "运行清单.csv")
+    status_csv = args.status_csv or os.path.join(
+        args.easy_root, "results", "nss_eval", "运行清单.csv"
+    )
     status_rows = load_existing_status_rows(status_csv)
     latest_status = build_latest_status_map(status_rows)
     executed = 0
