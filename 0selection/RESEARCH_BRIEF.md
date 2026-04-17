@@ -11,7 +11,7 @@
 
 这个问题的难点有三个（我暂时能想到的，你可以扩展）。
 第一，不同问题支持的方法的数量不一样且不同（例如，tsp支持的方法很多，而mvrp支持的方法很少），面临方法分布不平衡的问题；并且不同问题间的方法可能存在交叉（例如tsp和cvrp问题都支持lehd方法）。我暂时的思路是使用mask掩码排除不支持的方法。
-二是如何区分实例属于什么问题，例如mvrp中，某些变体问题的输入格式和cvrp完全相同，当模型接到一个实例输入时，无法区分他是什么问题
+第二是如何区分实例属于什么问题，例如mvrp中，某些变体问题（OVRP）的输入格式和cvrp完全相同，当模型接到一个实例输入时，无法区分他是什么问题
 第三，如何统一表示不同问题的实例，同时又能识别不同问题的结构差异。
 
 重点：对于问题二和问题三，导师给我的建议是可以参考URS论文和CoEKS论文，你可以参考，也可以进一步自己搜索扩展。可以参考推荐算法他们是怎么解决用户适配和输出不均衡问题的，不一定局限于组合优化领域的论文!
@@ -24,7 +24,7 @@
 - **已读关键论文**:
   - `NSS (Neural Solver Selection for Combinatorial Optimization)`（论文见Neural Solver Selection for Combinatorial Optimization.md，代码见literature/nss代码）
   - `URS`（论文见literature/urs.md，代码见literature/URS代码）
-  - `CoEKS`(论文见literature/CoEKS.md，代码你可以自己拉) 对应的跨问题专家化思路
+  - `CoEKS`(论文见literature/CoEKS.md，代码见literature/CoEKS代码) 对应的跨问题专家化思路
 ## 约束条件
 
 - **算力**:
@@ -35,10 +35,8 @@
   - ICML
 
 ## 期望方向
-- [x] 改进现有方法：统一监督学习的多问题 neural solver selector
-
-## 领域知识
-
+- 改进现有方法：统一监督学习的多问题 neural solver selector
+- 在NSS论文的做法基础上改，并且在写代码的时候，将NSS的代码复制一份到shiys根目录，然后在他的基础上改。
 
 ## 非目标
 - 不把 `time` 作为当前阶段的监督目标，只考虑cost
