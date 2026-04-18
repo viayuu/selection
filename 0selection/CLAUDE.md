@@ -1,6 +1,6 @@
 - wandb: true
 - wandb_project: selector
-- wandb_entity: jkds
+- wandb_entity: yjkds-southern-university-of-science-technology
 
 GPU 环境
 - 这台机器有直接 GPU 访问（不需要 SSH）
