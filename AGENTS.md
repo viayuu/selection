@@ -8,7 +8,7 @@ GPU 环境
 - 实验环境：`easynco_zhoucl`
 - 任何命令都在 conda activate easynco_zhoucl 环境中执行
 - 激活前任何 Python 命令：`conda activate easynco_zhoucl`
-- 代码目录：`/public/home/zhoucl/shiys`
+- 代码目录：`/public/home/zhoucl/shiys/0selection`
 
 当前目录（0selection文件夹）结构说明
 
