@@ -79,18 +79,13 @@ def evaluate_problem(model, problem: str, split: str, device, audit: dict,
     # Oracle ranking (best first)
     true_rank = np.argsort(costs, axis=1)
     best_idx = true_rank[:, 0]
-    top1 = float((pred == best_idx).mean())
-    if K_p >= 2:
-        in_top2 = np.isin(np.arange(N), np.where(pred == true_rank[:, 0])[0]) | \
-                  np.isin(np.arange(N), np.where(pred == true_rank[:, 1])[0])
-        top2 = float(in_top2.mean())
-    else:
-        top2 = top1
-    if K_p >= 3:
-        in_top3 = in_top2 | np.isin(np.arange(N), np.where(pred == true_rank[:, 2])[0])
-        top3 = float(in_top3.mean())
-    else:
-        top3 = top2
+    # Per-instance rank of the SELECTOR'S PICK within the oracle ordering (0 = best).
+    # This matches the 观测指标/观测指标.md definition of top-k accuracy.
+    inv_rank = np.argsort(true_rank, axis=1)                       # (N, K_p)
+    pick_rank = inv_rank[np.arange(N), pred]                       # (N,)
+    top1 = float((pick_rank == 0).mean())
+    top2 = float((pick_rank < min(2, K_p)).mean()) if K_p >= 2 else top1
+    top3 = float((pick_rank < min(3, K_p)).mean()) if K_p >= 3 else top2
 
     sel_costs = costs[np.arange(N), pred]
     mean_cost = float(sel_costs.mean())

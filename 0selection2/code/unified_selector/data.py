@@ -21,6 +21,23 @@ from .registry import (
 DATA_ROOT = Path(__file__).resolve().parents[2] / "data"
 
 
+def augment_xy_by_8_fold(xy: torch.Tensor, aug_idx: int) -> torch.Tensor:
+    """Apply the standard 8-fold POMO/NSS geometric augmentation on [0,1]^2 coords."""
+    x = xy[..., 0:1]
+    y = xy[..., 1:2]
+    variants = (
+        torch.cat([x, y], dim=-1),
+        torch.cat([1 - x, y], dim=-1),
+        torch.cat([x, 1 - y], dim=-1),
+        torch.cat([1 - x, 1 - y], dim=-1),
+        torch.cat([y, x], dim=-1),
+        torch.cat([1 - y, x], dim=-1),
+        torch.cat([y, 1 - x], dim=-1),
+        torch.cat([1 - y, 1 - x], dim=-1),
+    )
+    return variants[int(aug_idx) % 8]
+
+
 def _coord_dist_code(problem: str, inst_idx: int, split: str, n: int) -> int:
     """MVRP coord distribution code.  For non-MVRP return 4 ("other").
     For MVRP: per README.md, train has ~uniform 2503/2499, val/test 250 each.
@@ -38,7 +55,7 @@ def _coord_dist_code(problem: str, inst_idx: int, split: str, n: int) -> int:
 class UnifiedProblemDataset(Dataset):
     """One-problem dataset: loads instances + labels for a single problem × split."""
 
-    def __init__(self, problem: str, split: str):
+    def __init__(self, problem: str, split: str, coord_augment: int = 0):
         self.problem = problem
         self.split = split
         d = DATA_ROOT / f"{problem}{split}"
@@ -53,14 +70,20 @@ class UnifiedProblemDataset(Dataset):
         self.cbits = constraint_bits(problem)
         self.pid = P2I[problem]
         self.K_p = len(self.pool_order)
-        self.N = len(self.instances)
+        self.base_N = len(self.instances)
+        self.coord_augment = int(coord_augment) if split == "train" and problem != "ATSP" else 0
+        if self.coord_augment not in (0, 1, 8):
+            raise ValueError(f"coord_augment must be one of {{0,1,8}}, got {self.coord_augment}")
+        self.N = self.base_N * (self.coord_augment if self.coord_augment > 1 else 1)
 
     def __len__(self):
         return self.N
 
     def __getitem__(self, idx):
-        inst = self.instances[idx]
-        lbl = self.labels[str(idx)]
+        base_idx = idx % self.base_N if self.coord_augment > 1 else idx
+        aug_idx = idx // self.base_N if self.coord_augment > 1 else 0
+        inst = self.instances[base_idx]
+        lbl = self.labels[str(base_idx)]
         costs = torch.tensor(lbl["cost"][:self.K_p], dtype=torch.float32)   # (K_p,)
         ind = int(lbl["ind"])                                                # scalar
         p = self.problem
@@ -120,7 +143,10 @@ class UnifiedProblemDataset(Dataset):
             mat = None
             n = node.shape[0]
         # Coord dist code
-        cd = _coord_dist_code(p, idx, self.split, self.N)
+        if kind == "coord" and self.coord_augment > 1:
+            node = node.clone()
+            node[:, 0:2] = augment_xy_by_8_fold(node[:, 0:2], aug_idx)
+        cd = _coord_dist_code(p, base_idx, self.split, self.base_N)
         return {
             "problem_id": self.pid,
             "problem_name": p,

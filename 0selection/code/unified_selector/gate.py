@@ -13,7 +13,7 @@ from torch.utils.data import DataLoader
 
 from .registry import PROBLEMS, P2I
 from .data import UnifiedProblemDataset, collate_single_problem
-from .model import UnifiedSelector
+from .model import UnifiedSelector, _migrate_state_dict
 
 
 @torch.no_grad()
@@ -34,16 +34,20 @@ def gather_all(model, problem, split, device, audit):
     return torch.cat(all_logits_pool, dim=0), torch.cat(all_costs, dim=0), sbs_idx
 
 
-def calibrate_gating(model, device, audit, train_fraction_for_gate: float = 0.2, gate_grid_n: int = 40):
-    """For each problem, find per-problem gating margin gamma that minimizes train mean cost
-    when using `argmax if margin > gamma else SBS`. Return dict problem -> gamma."""
+def calibrate_gating(model, device, audit, train_fraction_for_gate: float = 0.2, gate_grid_n: int = 40,
+                     split: str = "train", max_per_problem: int = 2000):
+    """For each problem, find per-problem gating margin gamma that minimizes mean cost on the
+    calibration `split` (default: 'train' subset for speed).  When the caller wants a true
+    val-calibrated gate (e.g. in multiseed.py), pass split='val'.
+    Returns dict problem -> {'gamma', 'calib_mean_cost', 'calib_split'}.
+    """
     gammas = {}
-    # Use a subset of train for calibration; eval on val.
     for p in PROBLEMS:
-        log_p_pool, costs, sbs_idx = gather_all(model, p, "train", device, audit)
-        n = min(int(train_fraction_for_gate * len(costs)), 2000)
-        log_p_pool = log_p_pool[:n]
-        costs = costs[:n]
+        log_p_pool, costs, sbs_idx = gather_all(model, p, split, device, audit)
+        if split == "train":
+            n = min(int(train_fraction_for_gate * len(costs)), max_per_problem)
+            log_p_pool = log_p_pool[:n]
+            costs = costs[:n]
         best_idx = log_p_pool.argmax(dim=1)
         best_cost = costs.gather(1, best_idx.unsqueeze(1)).squeeze(1)
         sbs_cost = costs[:, sbs_idx]
@@ -57,7 +61,7 @@ def calibrate_gating(model, device, audit, train_fraction_for_gate: float = 0.2,
             if pred_cost < best_cost_mean:
                 best_cost_mean = pred_cost
                 best_gamma = float(g)
-        gammas[p] = {"gamma": best_gamma, "train_calib_mean_cost": best_cost_mean}
+        gammas[p] = {"gamma": best_gamma, "calib_mean_cost": best_cost_mean, "calib_split": split}
     return gammas
 
 
@@ -112,10 +116,14 @@ def main():
     device = torch.device(args.device)
     ckpt = torch.load(args.ckpt, map_location=device, weights_only=False)
     cfg = ckpt.get("args", {})
+    has_bias = "problem_solver_bias" in ckpt["model"]
     model = UnifiedSelector(d=cfg.get("d",128), depth=cfg.get("depth",4),
                             dropout=cfg.get("dropout",0.1),
-                            use_mvrp_factorized=not cfg.get("no_fact", False)).to(device)
-    model.load_state_dict(ckpt["model"])
+                            use_mvrp_factorized=not cfg.get("no_fact", False),
+                            use_problem_solver_bias=has_bias).to(device)
+    missing, unexpected = model.load_state_dict(_migrate_state_dict(ckpt["model"]), strict=False)
+    if missing or unexpected:
+        print(f"[gate:load] missing={missing} unexpected={unexpected}")
     model.eval()
 
     print("[gate] calibrating gammas on train subset...")

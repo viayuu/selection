@@ -31,13 +31,28 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 from .registry import PROBLEMS, P2I, problem_to_pool_mask
-from .data import UnifiedProblemDataset, collate_single_problem
-from .model import UnifiedSelector
+from .data import UnifiedProblemDataset, collate_single_problem, augment_xy_by_8_fold
+from .model import UnifiedSelector, remap_legacy_state_dict, shortlist_from_support
+
+
+def apply_meta_only(batch, meta_only: bool):
+    if not meta_only:
+        return batch
+    if batch["kind"] == "coord":
+        batch["node"] = torch.zeros_like(batch["node"])
+    elif batch["kind"] == "matrix":
+        batch["matrix"] = torch.zeros_like(batch["matrix"])
+    return batch
 
 
 @torch.no_grad()
 def evaluate_problem(model, problem: str, split: str, device, audit: dict,
-                     gate_gamma: Optional[float] = None) -> dict:
+                     gate_gamma: Optional[float] = None,
+                     meta_only: bool = False,
+                     tta: int = 1,
+                     use_support_head: bool = False,
+                     support_threshold: float = 0.5,
+                     support_topk: int = 3) -> dict:
     ds = UnifiedProblemDataset(problem, split)
     dl = DataLoader(ds, batch_size=32, shuffle=False, num_workers=0,
                     collate_fn=collate_single_problem)
@@ -48,14 +63,51 @@ def evaluate_problem(model, problem: str, split: str, device, audit: dict,
 
     all_costs = []
     all_pred = []        # selector's chosen index within pool
-    all_log_p = []
+    all_score = []
+    all_shortlist = []
     for b in dl:
         for k, v in b.items():
             if torch.is_tensor(v):
                 b[k] = v.to(device)
-        logits = model(b)                                          # (B, M_global)
-        log_p = F.log_softmax(logits, dim=1)
-        log_p_pool = log_p[:, b["pool_ids"]]                       # (B, K_p)
+        b = apply_meta_only(b, meta_only)
+        if tta > 1 and b["kind"] == "coord":
+            logits = None
+            support_logits = None
+            n_tta = min(max(1, tta), 8)
+            for aug_idx in range(n_tta):
+                aug_b = dict(b)
+                aug_node = b["node"].clone()
+                aug_node[:, :, 0:2] = augment_xy_by_8_fold(aug_node[:, :, 0:2], aug_idx)
+                aug_b["node"] = aug_node
+                if use_support_head:
+                    cur, cur_support = model(aug_b, return_support=True)
+                else:
+                    cur = model(aug_b)
+                    cur_support = None
+                logits = cur if logits is None else (logits + cur)
+                if cur_support is not None:
+                    support_logits = cur_support if support_logits is None else (support_logits + cur_support)
+            logits = logits / float(n_tta)
+            if support_logits is not None:
+                support_logits = support_logits / float(n_tta)
+        else:
+            if use_support_head:
+                logits, support_logits = model(b, return_support=True)
+            else:
+                logits = model(b)                                      # (B, M_global)
+                support_logits = None
+        logits_pool = logits[:, b["pool_ids"]]                         # (B, K_p)
+        if support_logits is not None:
+            support_pool = support_logits[:, b["pool_ids"]] if support_logits.dim() == 2 else support_logits[:, :, b["pool_ids"]]
+        else:
+            support_pool = None
+        effective_logits_pool, shortlist, _ = shortlist_from_support(
+            logits_pool,
+            support_pool,
+            threshold=support_threshold,
+            topk=support_topk,
+        )
+        log_p_pool = F.log_softmax(effective_logits_pool, dim=1)
         if gate_gamma is not None:
             # SBS gate: if log_p_pool[:, sbs_idx] > -gamma (i.e. p >= exp(-gamma)) -> force pick SBS
             max_lp = log_p_pool.max(dim=1).values
@@ -68,29 +120,24 @@ def evaluate_problem(model, problem: str, split: str, device, audit: dict,
         else:
             pred = log_p_pool.argmax(dim=1)
         all_pred.append(pred.cpu().numpy())
-        all_log_p.append(log_p_pool.cpu().numpy())
+        all_score.append(effective_logits_pool.cpu().numpy())
+        if shortlist is not None:
+            all_shortlist.append(shortlist.cpu().numpy())
         all_costs.append(b["costs"].cpu().numpy())
 
     pred = np.concatenate(all_pred)
-    log_p = np.concatenate(all_log_p)                              # (N, K_p)
+    score = np.concatenate(all_score)                              # (N, K_p)
     costs = np.concatenate(all_costs)                              # (N, K_p)
+    shortlist = np.concatenate(all_shortlist) if all_shortlist else None
     N = costs.shape[0]
 
     # Oracle ranking (best first)
     true_rank = np.argsort(costs, axis=1)
     best_idx = true_rank[:, 0]
     top1 = float((pred == best_idx).mean())
-    if K_p >= 2:
-        in_top2 = np.isin(np.arange(N), np.where(pred == true_rank[:, 0])[0]) | \
-                  np.isin(np.arange(N), np.where(pred == true_rank[:, 1])[0])
-        top2 = float(in_top2.mean())
-    else:
-        top2 = top1
-    if K_p >= 3:
-        in_top3 = in_top2 | np.isin(np.arange(N), np.where(pred == true_rank[:, 2])[0])
-        top3 = float(in_top3.mean())
-    else:
-        top3 = top2
+    pred_rank = np.argsort(-score, axis=1)
+    top2 = float(np.any(pred[:, None] == true_rank[:, :min(2, K_p)], axis=1).mean())
+    top3 = float(np.any(pred[:, None] == true_rank[:, :min(3, K_p)], axis=1).mean())
 
     sel_costs = costs[np.arange(N), pred]
     mean_cost = float(sel_costs.mean())
@@ -110,6 +157,34 @@ def evaluate_problem(model, problem: str, split: str, device, audit: dict,
 
     # Arm distribution: selector picks per method (frequency)
     arm_dist = {n: float((pred == k).mean()) for k, n in enumerate(pool_names)}
+    final_arm_coverage = float(np.mean([v > 0 for v in arm_dist.values()]))
+    pick_entropy = float(-(np.array(list(arm_dist.values())) * np.log(np.array(list(arm_dist.values())) + 1e-12)).sum() / np.log(max(2, K_p)))
+    zero_pick_count = int(sum(v <= 0 for v in arm_dist.values()))
+    hidden_winners = [n for n in pool_names if method_top1[n] > 0 and arm_dist[n] <= 0]
+    hidden_winner_count = len(hidden_winners)
+    hidden_winner_mass = float(sum(method_top1[n] for n in hidden_winners))
+    oracle_support_mass_recall = float(1.0 - hidden_winner_mass)
+
+    if shortlist is not None:
+        support_top1_recall = float(shortlist[np.arange(N), best_idx].mean())
+        top3_idx = true_rank[:, :min(3, K_p)]
+        support_top3_recall = float(np.take_along_axis(shortlist.astype(np.float32), top3_idx, axis=1).max(axis=1).mean())
+        support_dist = {n: float(shortlist[:, k].mean()) for k, n in enumerate(pool_names)}
+        support_arm_coverage = float(np.mean([v > 0 for v in support_dist.values()]))
+        support_entropy = float(-(np.array(list(support_dist.values())) * np.log(np.array(list(support_dist.values())) + 1e-12)).sum() / np.log(max(2, K_p)))
+        support_hidden_winners = [n for n in pool_names if method_top1[n] > 0 and support_dist[n] <= 0]
+        support_hidden_winner_count = len(support_hidden_winners)
+        support_hidden_winner_mass = float(sum(method_top1[n] for n in support_hidden_winners))
+        support_oracle_mass_recall = float(1.0 - support_hidden_winner_mass)
+    else:
+        support_top1_recall = None
+        support_top3_recall = None
+        support_dist = None
+        support_arm_coverage = None
+        support_entropy = None
+        support_hidden_winner_count = None
+        support_hidden_winner_mass = None
+        support_oracle_mass_recall = None
 
     sbs_name = pool_names[sbs_idx]
     sbs_cost = method_mean[sbs_name]
@@ -126,6 +201,21 @@ def evaluate_problem(model, problem: str, split: str, device, audit: dict,
         beat_top1=beat_top1, lose_top1=lose_top1,
         beat_mean_cost=beat_mc, lose_mean_cost=lose_mc,
         arm_distribution=arm_dist,
+        final_arm_coverage=final_arm_coverage,
+        pick_entropy=pick_entropy,
+        zero_pick_count=zero_pick_count,
+        hidden_winners=hidden_winners,
+        hidden_winner_count=hidden_winner_count,
+        hidden_winner_mass=hidden_winner_mass,
+        oracle_support_mass_recall=oracle_support_mass_recall,
+        support_distribution=support_dist,
+        support_top1_recall=support_top1_recall,
+        support_top3_recall=support_top3_recall,
+        support_arm_coverage=support_arm_coverage,
+        support_entropy=support_entropy,
+        support_hidden_winner_count=support_hidden_winner_count,
+        support_hidden_winner_mass=support_hidden_winner_mass,
+        support_oracle_mass_recall=support_oracle_mass_recall,
     )
 
 
@@ -253,6 +343,7 @@ def main():
     ap.add_argument("--audit", default="code/unified_selector/runs/audit.json")
     ap.add_argument("--gate", default=None, help="Path to gate/gate.json with per-problem gamma")
     ap.add_argument("--device", default="cuda:0")
+    ap.add_argument("--tta", type=int, default=1, help="Average logits over up to 8 coord augmentations at eval time.")
     args = ap.parse_args()
 
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
@@ -261,13 +352,32 @@ def main():
     ckpt = torch.load(args.ckpt, map_location=args.device)
     model_args = ckpt.get("args", {})
     has_bias = "problem_solver_bias" in ckpt["model"]
+    meta_only = bool(model_args.get("meta_only", False))
     model = UnifiedSelector(
         d=model_args.get("d", 128), depth=model_args.get("depth", 4),
         dropout=model_args.get("dropout", 0.1),
         use_mvrp_factorized=not model_args.get("no_fact", False),
         use_problem_solver_bias=has_bias,
+        use_problem_film=bool(model_args.get("problem_film", False)),
+        use_size_feature=bool(model_args.get("size_feature", False)),
+        rich_pool=bool(model_args.get("rich_pool", False)),
+        use_global_stats=bool(model_args.get("global_stats", False)),
+        use_manual_features=bool(model_args.get("manual_features", False)),
+        use_constraint_experts=bool(model_args.get("constraint_experts", False)),
+        use_problem_residual_head=bool(model_args.get("problem_residual_head", False)),
+        use_problem_adapter=bool(model_args.get("problem_adapter", False)),
+        use_support_head=bool(model_args.get("support_head", False)),
+        support_hidden=int(model_args.get("support_hidden", 128)),
+        support_generators=int(model_args.get("support_generators", 1)),
+        adapter_hidden=int(model_args.get("adapter_hidden", 64)),
+        coord_hier_pool=bool(model_args.get("coord_hier_pool", False)),
+        coord_downsample_ratio=float(model_args.get("coord_downsample_ratio", 0.8)),
+        deep_encoder_overhaul=bool(model_args.get("deep_encoder_overhaul", False)),
+        encoder_rezero=bool(model_args.get("encoder_rezero", False)),
+        encoder_constraint_experts=bool(model_args.get("encoder_constraint_experts", False)),
+        encoder_constraint_hidden=int(model_args.get("encoder_constraint_hidden", 128)),
     ).to(args.device)
-    missing, unexpected = model.load_state_dict(ckpt["model"], strict=False)
+    missing, unexpected = model.load_state_dict(remap_legacy_state_dict(ckpt["model"]), strict=False)
     if missing or unexpected:
         print(f"[load] missing={missing} unexpected={unexpected}")
     model.eval()
@@ -275,11 +385,22 @@ def main():
     gate_cfg = None
     if args.gate:
         gate_cfg = json.loads(Path(args.gate).read_text())
+        if "gammas" in gate_cfg:
+            gate_cfg = gate_cfg["gammas"]
 
     per_p: Dict[str, dict] = {}
+    use_support_head = bool(model_args.get("support_head", False))
+    support_threshold = float(model_args.get("support_threshold", 0.5))
+    support_topk = int(model_args.get("support_topk", 3))
     for p in PROBLEMS:
         g = gate_cfg.get(p, {}).get("gamma") if gate_cfg else None
-        per_p[p] = evaluate_problem(model, p, args.split, args.device, audit, gate_gamma=g)
+        per_p[p] = evaluate_problem(
+            model, p, args.split, args.device, audit,
+            gate_gamma=g, meta_only=meta_only, tta=args.tta,
+            use_support_head=use_support_head,
+            support_threshold=support_threshold,
+            support_topk=support_topk,
+        )
         r = per_p[p]
         print(f"  {p:>10}: top1={r['top1']:.3f} mc={r['mean_cost']:.4f} (sbs={r['sbs_cost']:.4f}) "
               f"vs_sbs={r['vs_sbs_pct']:+.2f}% beats_top1={len(r['beat_top1'])}/{r['K_p']} "
@@ -292,7 +413,21 @@ def main():
         macro_vbs_gap_closed_pct=float(np.mean([r["vbs_gap_closed_pct"] for r in per_p.values()])),
         n_problems_beat_sbs=int(sum(1 for r in per_p.values() if r["vs_sbs_pct"] < 0)),
         n_problems_match_sbs=int(sum(1 for r in per_p.values() if abs(r["vs_sbs_pct"]) < 0.02)),
+        macro_final_arm_coverage=float(np.mean([r["final_arm_coverage"] for r in per_p.values()])),
+        macro_pick_entropy=float(np.mean([r["pick_entropy"] for r in per_p.values()])),
+        macro_zero_pick_count=float(np.mean([r["zero_pick_count"] for r in per_p.values()])),
+        macro_hidden_winner_count=float(np.mean([r["hidden_winner_count"] for r in per_p.values()])),
+        macro_hidden_winner_mass=float(np.mean([r["hidden_winner_mass"] for r in per_p.values()])),
+        macro_oracle_support_mass_recall=float(np.mean([r["oracle_support_mass_recall"] for r in per_p.values()])),
     )
+    if use_support_head:
+        macro["macro_support_top1_recall"] = float(np.mean([r["support_top1_recall"] for r in per_p.values()]))
+        macro["macro_support_top3_recall"] = float(np.mean([r["support_top3_recall"] for r in per_p.values()]))
+        macro["macro_support_arm_coverage"] = float(np.mean([r["support_arm_coverage"] for r in per_p.values()]))
+        macro["macro_support_entropy"] = float(np.mean([r["support_entropy"] for r in per_p.values()]))
+        macro["macro_support_hidden_winner_count"] = float(np.mean([r["support_hidden_winner_count"] for r in per_p.values()]))
+        macro["macro_support_hidden_winner_mass"] = float(np.mean([r["support_hidden_winner_mass"] for r in per_p.values()]))
+        macro["macro_support_oracle_mass_recall"] = float(np.mean([r["support_oracle_mass_recall"] for r in per_p.values()]))
     (out / f"analysis_{args.split}.json").write_text(
         json.dumps({"per_problem": per_p, "macro": macro}, indent=2))
     print(f"\nMacro [{args.split}]: top1={macro['macro_top1']:.4f} top2={macro['macro_top2']:.4f} "

@@ -9,6 +9,7 @@ Usage:
     python3 research_wiki.py slug "<paper title>" --author "<last name>" --year 2025
     python3 research_wiki.py add_edge <wiki_root> --from <node_id> --to <node_id> --type <edge_type> --evidence "<text>"
     python3 research_wiki.py rebuild_query_pack <wiki_root> [--max-chars 8000]
+    python3 research_wiki.py lint <wiki_root>
     python3 research_wiki.py stats <wiki_root>
     python3 research_wiki.py log <wiki_root> "<message>"
 """
@@ -18,8 +19,31 @@ import json
 import os
 import re
 import sys
+from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
+
+try:
+    import yaml
+except ImportError:  # pragma: no cover - fallback is line-based
+    yaml = None
+
+
+FRONTMATTER_RE = re.compile(r"^---\n(.*?)\n---\n?", re.S)
+HEADING_RE = re.compile(r"^(#{1,6})\s+(.+)$", re.M)
+PAPER_REQUIRED_SECTIONS = [
+    "One-line thesis",
+    "Problem / Gap",
+    "Method",
+    "Key Results",
+    "Assumptions",
+    "Limitations / Failure Modes",
+    "Reusable Ingredients",
+    "Open Questions",
+    "Claims",
+    "Connections",
+    "Relevance to This Project",
+]
 
 
 def slugify(title: str, author_last: str = "", year: int = 0) -> str:
@@ -257,6 +281,426 @@ def append_log(wiki_root: str, message: str):
         log_path.write_text(f"# Research Wiki Log\n\n{entry}")
 
 
+def _parse_inline_list(value: str):
+    value = value.strip()
+    if not value.startswith("[") or not value.endswith("]"):
+        return value
+
+    inner = value[1:-1].strip()
+    if not inner:
+        return []
+
+    parts = [p.strip() for p in re.split(r',(?=(?:[^"]*"[^"]*")*[^"]*$)', inner)]
+    cleaned = []
+    for part in parts:
+        if not part:
+            continue
+        cleaned.append(part.strip().strip('"').strip("'"))
+    return cleaned
+
+
+def _parse_frontmatter_text(frontmatter_text: str):
+    if yaml is not None:
+        try:
+            data = yaml.safe_load(frontmatter_text)
+            if isinstance(data, dict):
+                return data
+        except Exception:
+            pass
+
+    data = {}
+    for raw_line in frontmatter_text.splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or ":" not in line:
+            continue
+        key, value = line.split(":", 1)
+        key = key.strip()
+        value = value.strip()
+        if value.lower() == "null":
+            data[key] = None
+        elif value.isdigit():
+            data[key] = int(value)
+        elif value.startswith("[") and value.endswith("]"):
+            data[key] = _parse_inline_list(value)
+        else:
+            data[key] = value.strip('"').strip("'")
+    return data
+
+
+def _load_page(path: Path, entity_type: str):
+    text = path.read_text()
+    meta = {}
+    body = text
+
+    match = FRONTMATTER_RE.match(text)
+    if match:
+        meta = _parse_frontmatter_text(match.group(1)) or {}
+        body = text[match.end():]
+
+    sections = {}
+    matches = list(HEADING_RE.finditer(body))
+    for idx, heading_match in enumerate(matches):
+        heading = heading_match.group(2).strip()
+        start = heading_match.end()
+        end = matches[idx + 1].start() if idx + 1 < len(matches) else len(body)
+        content = body[start:end].strip()
+        sections[heading] = content
+
+    return {
+        "path": path,
+        "type": meta.get("type", entity_type),
+        "node_id": meta.get("node_id", ""),
+        "meta": meta,
+        "body": body,
+        "sections": sections,
+    }
+
+
+def _load_pages(wiki_root: str):
+    root = Path(wiki_root)
+    pages = []
+    for entity_type in ["papers", "ideas", "experiments", "claims"]:
+        entity_dir = root / entity_type
+        if not entity_dir.exists():
+            continue
+        singular = entity_type[:-1] if entity_type.endswith("s") else entity_type
+        for path in sorted(entity_dir.glob("*.md")):
+            pages.append(_load_page(path, singular))
+    return pages
+
+
+def _load_edges(wiki_root: str):
+    edges_path = Path(wiki_root) / "graph" / "edges.jsonl"
+    if not edges_path.exists():
+        return []
+
+    edges = []
+    for line in edges_path.read_text().splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            edges.append(json.loads(line))
+        except json.JSONDecodeError:
+            continue
+    return edges
+
+
+def _parse_timestamp(value: str):
+    if not value:
+        return None
+    value = value.strip()
+    try:
+        if value.endswith("Z"):
+            return datetime.strptime(value, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+        return datetime.fromisoformat(value)
+    except ValueError:
+        try:
+            return datetime.strptime(value, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+        except ValueError:
+            return None
+
+
+def _find_implicit_edges(pages, edge_triplets):
+    implicit_inspired = []
+    implicit_gap = []
+
+    for page in pages:
+        if page["type"] != "idea" or not page["node_id"]:
+            continue
+
+        based_on = page["meta"].get("based_on") or []
+        target_gaps = page["meta"].get("target_gaps") or []
+
+        for paper_id in based_on:
+            if (page["node_id"], paper_id, "inspired_by") not in edge_triplets:
+                implicit_inspired.append((page["node_id"], paper_id))
+
+        for gap_id in target_gaps:
+            gap_raw = str(gap_id)
+            gap_node = gap_raw if gap_raw.startswith("gap:") else f"gap:{gap_raw}"
+            if (
+                (page["node_id"], gap_raw, "addresses_gap") not in edge_triplets
+                and (page["node_id"], gap_node, "addresses_gap") not in edge_triplets
+            ):
+                implicit_gap.append((page["node_id"], gap_raw))
+
+    return implicit_inspired, implicit_gap
+
+
+def lint_wiki(wiki_root: str):
+    """Run health checks and write LINT_REPORT.md."""
+    root = Path(wiki_root)
+    pages = _load_pages(wiki_root)
+    edges = _load_edges(wiki_root)
+    edge_triplets = {
+        (edge.get("from", ""), edge.get("to", ""), edge.get("type", ""))
+        for edge in edges
+    }
+
+    node_lookup = {
+        page["node_id"]: page for page in pages
+        if page["node_id"]
+    }
+    adjacency = defaultdict(int)
+    for edge in edges:
+        if edge.get("from") in node_lookup:
+            adjacency[edge["from"]] += 1
+        if edge.get("to") in node_lookup:
+            adjacency[edge["to"]] += 1
+
+    orphan_pages = [
+        page for page in pages
+        if page["node_id"] and adjacency[page["node_id"]] == 0
+    ]
+    orphan_pages.sort(key=lambda page: (page["type"], page["node_id"]))
+
+    now = datetime.now(timezone.utc)
+    stale_claims = []
+    for page in pages:
+        if page["type"] != "claim":
+            continue
+        status = str(page["meta"].get("status", "")).strip().lower()
+        if status != "reported":
+            continue
+        ts = (
+            _parse_timestamp(page["meta"].get("updated_at"))
+            or _parse_timestamp(page["meta"].get("created_at"))
+            or datetime.fromtimestamp(page["path"].stat().st_mtime, tz=timezone.utc)
+        )
+        age_days = (now - ts).days
+        if age_days > 14:
+            stale_claims.append((page, age_days))
+
+    supported_targets = defaultdict(int)
+    invalidated_targets = defaultdict(int)
+    for edge in edges:
+        if edge.get("type") == "supports":
+            supported_targets[edge.get("to", "")] += 1
+        elif edge.get("type") == "invalidates":
+            invalidated_targets[edge.get("to", "")] += 1
+
+    contradictions = []
+    for page in pages:
+        if page["type"] != "claim" or not page["node_id"]:
+            continue
+        if supported_targets[page["node_id"]] and invalidated_targets[page["node_id"]]:
+            contradictions.append(page)
+
+    paper_pairs_with_edges = set()
+    for edge in edges:
+        from_id = edge.get("from", "")
+        to_id = edge.get("to", "")
+        if from_id.startswith("paper:") and to_id.startswith("paper:"):
+            paper_pairs_with_edges.add(tuple(sorted((from_id, to_id))))
+
+    paper_pages = [page for page in pages if page["type"] == "paper" and page["node_id"]]
+    missing_connections = []
+    for idx, left in enumerate(paper_pages):
+        left_tags = set(left["meta"].get("tags") or [])
+        for right in paper_pages[idx + 1:]:
+            right_tags = set(right["meta"].get("tags") or [])
+            shared_tags = sorted(left_tags & right_tags)
+            if len(shared_tags) < 2:
+                continue
+            pair_key = tuple(sorted((left["node_id"], right["node_id"])))
+            if pair_key in paper_pairs_with_edges:
+                continue
+            missing_connections.append({
+                "left": left,
+                "right": right,
+                "shared_tags": shared_tags,
+            })
+    missing_connections.sort(
+        key=lambda item: (-len(item["shared_tags"]), item["left"]["node_id"], item["right"]["node_id"])
+    )
+
+    tested_ideas = set()
+    for edge in edges:
+        edge_type = edge.get("type", "")
+        from_id = edge.get("from", "")
+        to_id = edge.get("to", "")
+        if edge_type == "tested_by" and from_id.startswith("idea:"):
+            tested_ideas.add(from_id)
+        if edge_type in {"supports", "invalidates"} and to_id.startswith("idea:"):
+            tested_ideas.add(to_id)
+
+    dead_ideas = [
+        page for page in pages
+        if page["type"] == "idea"
+        and str(page["meta"].get("stage", "")).strip().lower() == "proposed"
+        and page["node_id"] not in tested_ideas
+    ]
+    dead_ideas.sort(key=lambda page: page["node_id"])
+
+    sparse_pages = []
+    for page in pages:
+        if page["type"] == "paper":
+            missing_sections = [
+                section for section in PAPER_REQUIRED_SECTIONS
+                if not page["sections"].get(section, "").strip()
+            ]
+            if len(missing_sections) >= 3:
+                sparse_pages.append((page, missing_sections))
+        else:
+            empty_sections = [
+                heading for heading, content in page["sections"].items()
+                if not content.strip()
+            ]
+            if len(empty_sections) >= 3:
+                sparse_pages.append((page, empty_sections))
+    sparse_pages.sort(key=lambda item: (-len(item[1]), item[0]["node_id"]))
+
+    implicit_inspired, implicit_gap = _find_implicit_edges(pages, edge_triplets)
+
+    report_lines = [
+        "# Research Wiki Lint Report",
+        "",
+        f"Generated: `{now.strftime('%Y-%m-%dT%H:%M:%SZ')}`",
+        f"Wiki root: `{root}`",
+        "",
+        "## Summary",
+        "",
+        "| Check | Count | Notes |",
+        "| --- | ---: | --- |",
+        f"| Orphan pages | {len(orphan_pages)} | Graph-connected node pages with zero in/out edges |",
+        f"| Stale claims | {len(stale_claims)} | `status: reported` older than 14 days |",
+        f"| Contradictions | {len(contradictions)} | Claims with both `supports` and `invalidates` evidence |",
+        f"| Missing connections | {len(missing_connections)} | Paper pairs with 2+ shared tags but no graph relation |",
+        f"| Dead ideas | {len(dead_ideas)} | `stage: proposed` ideas with no experiment linkage |",
+        f"| Sparse pages | {len(sparse_pages)} | Pages missing 3+ required/expected sections |",
+        "",
+    ]
+
+    if not edges:
+        report_lines.extend([
+            "## Global Observation",
+            "",
+            "- `graph/edges.jsonl` is currently empty. That makes every node page orphaned and leaves idea/paper relationships implicit instead of materialized.",
+            f"- The frontmatter already exposes at least {len(implicit_inspired)} candidate `inspired_by` edges and {len(implicit_gap)} candidate `addresses_gap` edges that could be backfilled automatically.",
+            "",
+        ])
+
+    report_lines.extend([
+        "## 1. Orphan Pages",
+        "",
+    ])
+    if orphan_pages:
+        grouped_orphans = defaultdict(list)
+        for page in orphan_pages:
+            grouped_orphans[page["type"]].append(page["node_id"])
+        for entity_type in ["paper", "idea", "experiment", "claim"]:
+            ids = grouped_orphans.get(entity_type, [])
+            if ids:
+                report_lines.append(f"- `{entity_type}` ({len(ids)}): " + ", ".join(f"`{node_id}`" for node_id in ids))
+        if implicit_inspired or implicit_gap:
+            report_lines.append("- Suggested fix: backfill graph edges from idea frontmatter before curating higher-order relationships.")
+    else:
+        report_lines.append("- No orphan pages found.")
+    report_lines.append("")
+
+    report_lines.extend([
+        "## 2. Stale Claims",
+        "",
+    ])
+    if stale_claims:
+        for page, age_days in stale_claims:
+            report_lines.append(f"- `{page['node_id']}` — {age_days} days since last update.")
+    else:
+        report_lines.append("- No stale claims found.")
+    report_lines.append("")
+
+    report_lines.extend([
+        "## 3. Contradictions",
+        "",
+    ])
+    if contradictions:
+        for page in contradictions:
+            report_lines.append(
+                f"- `{page['node_id']}` has both `supports` ({supported_targets[page['node_id']]}) and `invalidates` ({invalidated_targets[page['node_id']]}) edges."
+            )
+    else:
+        report_lines.append("- No contradictory claim evidence found.")
+    report_lines.append("")
+
+    report_lines.extend([
+        "## 4. Missing Connections",
+        "",
+    ])
+    if missing_connections:
+        report_lines.extend([
+            "| Pair | Shared tags | Suggested review |",
+            "| --- | --- | --- |",
+        ])
+        for item in missing_connections:
+            left = item["left"]["node_id"]
+            right = item["right"]["node_id"]
+            shared = ", ".join(f"`{tag}`" for tag in item["shared_tags"])
+            report_lines.append(
+                f"| `{left}` ↔ `{right}` | {shared} | Consider adding `extends`, `supersedes`, or `contradicts` after manual review. |"
+            )
+    else:
+        report_lines.append("- No missing paper-to-paper relationship candidates found.")
+    report_lines.append("")
+
+    report_lines.extend([
+        "## 5. Dead Ideas",
+        "",
+    ])
+    if dead_ideas:
+        for page in dead_ideas:
+            title = page["meta"].get("title", page["path"].stem)
+            report_lines.append(f"- `{page['node_id']}` — {title}")
+        report_lines.extend([
+            "- Suggested fix: attach `tested_by` / experiment evidence for active pilots, or archive/subsume legacy proposals that are no longer live.",
+        ])
+    else:
+        report_lines.append("- No untested proposed ideas found.")
+    report_lines.append("")
+
+    report_lines.extend([
+        "## 6. Sparse Pages",
+        "",
+    ])
+    if sparse_pages:
+        report_lines.append("_Paper pages are checked against the research-wiki paper schema; other entities are checked for explicitly empty headings._")
+        report_lines.append("")
+        report_lines.extend([
+            "| Page | Missing section count | Missing sections |",
+            "| --- | ---: | --- |",
+        ])
+        for page, missing_sections in sparse_pages:
+            preview = ", ".join(f"`{section}`" for section in missing_sections[:6])
+            if len(missing_sections) > 6:
+                preview += ", ..."
+            report_lines.append(
+                f"| `{page['node_id']}` | {len(missing_sections)} | {preview} |"
+            )
+    else:
+        report_lines.append("- No sparse pages found.")
+    report_lines.append("")
+
+    report_lines.extend([
+        "## Suggested Fix Order",
+        "",
+        f"1. Backfill the {len(implicit_inspired)} implicit `inspired_by` edges and {len(implicit_gap)} implicit `addresses_gap` edges already present in idea frontmatter.",
+        "2. Normalize gap node references before adding gap edges. Current frontmatter uses bare IDs such as `G1`; the skill spec prefers canonical IDs like `gap:G1`.",
+        "3. Convert legacy proposal pages that are only kept for context from `stage: proposed` to an archived/subsumed state so they stop surfacing as dead ideas.",
+        "4. Expand the core paper pages first (`gao2025_nss`, `zhou2025_urs`, `yu2026_coeks`) so the wiki has at least a few fully populated anchors before filling the long tail.",
+    ])
+
+    report_path = root / "LINT_REPORT.md"
+    report_path.write_text("\n".join(report_lines).rstrip() + "\n")
+
+    print(f"Lint report written to {report_path}")
+    print(f"Orphan pages: {len(orphan_pages)}")
+    print(f"Stale claims: {len(stale_claims)}")
+    print(f"Contradictions: {len(contradictions)}")
+    print(f"Missing connections: {len(missing_connections)}")
+    print(f"Dead ideas: {len(dead_ideas)}")
+    print(f"Sparse pages: {len(sparse_pages)}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="ARIS Research Wiki utilities")
     subparsers = parser.add_subparsers(dest="command")
@@ -284,6 +728,10 @@ def main():
     p_qp.add_argument("wiki_root")
     p_qp.add_argument("--max-chars", type=int, default=8000)
 
+    # lint
+    p_lint = subparsers.add_parser("lint")
+    p_lint.add_argument("wiki_root")
+
     # stats
     p_stats = subparsers.add_parser("stats")
     p_stats.add_argument("wiki_root")
@@ -303,6 +751,8 @@ def main():
         add_edge(args.wiki_root, args.from_id, args.to_id, args.edge_type, args.evidence)
     elif args.command == "rebuild_query_pack":
         rebuild_query_pack(args.wiki_root, args.max_chars)
+    elif args.command == "lint":
+        lint_wiki(args.wiki_root)
     elif args.command == "stats":
         get_stats(args.wiki_root)
     elif args.command == "log":

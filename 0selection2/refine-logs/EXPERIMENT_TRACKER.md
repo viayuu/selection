@@ -14,6 +14,9 @@
 | R3-CE seed 0 | pending | 1 | 5 | — | — | — | **C3** loss ablation |
 | R3-Pairwise seed 0 | pending | 1 | 5 | — | — | — | **C3** loss ablation |
 | R3-GapReg seed 0 | pending | 1 | 5 | — | — | — | **C3** loss ablation |
+| R16 — multigen shortlist sanity | **done** | 1 | 0.1 | 0.04 | **Pivot** | test `macro_top1=0.5317`, `macro_vs_sbs=-0.109%` | shortlist collapsed to near all-ones; no gain over `R12` |
+| R17 — multigen + support-budget sanity | **done** | 1 | 0.1 | 0.04 | **Fail** | test `macro_top1=0.5066`, `macro_vs_sbs=+0.044%` | shortlist became sparse but over-corrected and hurt cost |
+| R18 — winner-margin sanity | **done** | 1 | 0.1 | 0.04 | **Pivot** | test `macro_top1=0.5321`, `macro_vs_sbs=-0.117%` | almost ties `R12`, but no real breakthrough |
 | **Total** | | | **58 + 2 contingency** | | | | |
 
 **Legend**

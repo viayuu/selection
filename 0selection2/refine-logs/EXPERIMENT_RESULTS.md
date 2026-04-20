@@ -84,3 +84,20 @@ Expected completion: ~50 min each.
 - **Next step**: after extended R1 + nofact finish, launch R3 loss ablations (CE / pairwise) and R4 compositional zero-shot (train 11 MVRP, hold out OVRPBL / VRPBLTW / OVRPBTW / OVRPLTW).
 
 **Bottom line for the user's original question** — *"can the basic approach actually hit the goal with not-too-bad performance?"* — **YES**. After 2 epochs (9 min on a single 3090), the unified selector already essentially matches SBS on macro mean cost (+0.16%, well within the Pivot tier), beats SBS on TSP, and thoroughly dominates the metadata-only baseline. With the extended 10-epoch training still running, the expectation is macro_vs_sbs drops negative.
+
+## Post-Bridge Effect-Focused Runs (2026-04-19)
+
+These runs were executed after the new selector-effect literature pass and are **not** part of the original claim plan. They were used to probe specific failure modes:
+
+| Run | Purpose | Test result | Verdict |
+|-----|---------|-------------|---------|
+| `R16_multigen_support_sanity_seed2` | multi-generator shortlist retrieval on top of best `R12` backbone | `macro_top1 = 0.5317`, `macro_vs_sbs = -0.109%` | negative / no gain |
+| `R17_multigen_budget_support_sanity_seed2` | force sparse shortlist via budget regularization | `macro_top1 = 0.5066`, `macro_vs_sbs = +0.044%` | fail |
+| `R18_margin_sanity_seed2` | winner-vs-competitor margin sharpening on top of `R12` backbone | `macro_top1 = 0.5321`, `macro_vs_sbs = -0.117%` | neutral / tie |
+
+Key interpretation:
+
+- naive shortlist retrieval tends to collapse into “select everything”
+- hard sparsity control hurts too much
+- direct margin sharpening is stable but not enough by itself
+- the best completed line still remains `R12_init_gaprank_manual_adapter_soft_risk_seed2`
