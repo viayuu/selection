@@ -15,6 +15,7 @@ from pathlib import Path
 
 import numpy as np
 import torch
+import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
 from .registry import PROBLEMS, P2I, M_GLOBAL as M_GLOBAL_CHECK
@@ -55,6 +56,101 @@ def to_device(batch, device):
         else:
             out[k] = v
     return out
+
+
+def compute_loss_for_problem(model, batch, p, args, audit, teachers, base_model=None):
+    """Forward + all loss terms for one problem batch. Returns scalar loss.
+
+    This extracts the loss body that used to live inline in the block training
+    loop so round_robin / task_accum schedulers can share it. The caller is
+    responsible for autocast / opt.zero_grad / backward / step.
+    """
+    logits = model(batch)
+    pool_ids = batch["pool_ids"]
+    if args.loss == "combined":
+        sbs_idx = audit[p]["sbs_pool_idx"]
+        loss = combined_cost_loss(logits, pool_ids, batch["costs"],
+                                   sbs_pool_idx=sbs_idx, tau=0.07)
+    elif args.loss == "gap_rank":
+        sbs_idx = audit[p]["sbs_pool_idx"]
+        loss = gap_regression_rank_loss(
+            logits, pool_ids, batch["costs"],
+            sbs_pool_idx=sbs_idx, gap_reference=args.gap_reference,
+            gap_cap=args.gap_cap, huber_delta=args.huber_delta,
+            w_reg=args.reg_weight, w_pair=args.pairwise_weight,
+            pair_sample_topk=args.pair_sample_topk,
+        )
+    else:
+        soft = regret_soft_targets(batch["costs"], tau=args.tau)
+        oracle_idx = batch["costs"].argmin(dim=1) if (args.focal_gamma > 0 or args.hard_upweight != 1.0) else None
+        loss = masked_listwise_ce(logits, pool_ids, soft,
+                                   focal_gamma=args.focal_gamma,
+                                   hard_upweight=args.hard_upweight,
+                                   oracle_idx_pool=oracle_idx)
+    if args.winner_margin_weight > 0:
+        loss = loss + args.winner_margin_weight * winner_margin_loss(
+            logits, pool_ids, batch["costs"],
+            base_margin=args.winner_margin_base,
+            gap_scale=args.winner_margin_gap_scale,
+        )
+    if args.plackett_luce:
+        logits_pool = logits[:, pool_ids]
+        loss_pl = plackett_luce_loss(logits_pool, batch["costs"], top_k=args.pl_topk)
+        if args.pl_only:
+            loss = args.pl_weight * loss_pl
+        else:
+            loss = loss + args.pl_weight * loss_pl
+    if args.diversity_weight > 0:
+        logits_pool = logits[:, pool_ids]
+        loss = loss + args.diversity_weight * diversity_entropy_penalty(logits_pool)
+    # Distillation (R18-era teachers)
+    if teachers is not None and p in teachers:
+        with torch.no_grad():
+            t_logits_pool_list = []
+            for t_model, kind in teachers[p]:
+                if kind == "specialist":
+                    t_logits_pool = t_model(batch)
+                else:
+                    t_logits_pool = t_model(batch)[:, pool_ids]
+                t_logits_pool_list.append(t_logits_pool)
+            t_probs = torch.stack([torch.softmax(l / args.distill_tau, dim=1)
+                                    for l in t_logits_pool_list], dim=0).mean(0)
+        s_logp = torch.log_softmax(logits[:, pool_ids] / args.distill_tau, dim=1)
+        kl = -(t_probs * s_logp).sum(dim=1).mean() * (args.distill_tau ** 2)
+        loss = loss + args.distill_weight * kl
+    # Base-KL trust region (R41B): soft regularization toward frozen base model
+    if args.base_kl_weight > 0 and base_model is not None:
+        with torch.no_grad():
+            base_logits = base_model(batch)
+        tau = args.base_kl_tau
+        base_p = torch.softmax(base_logits[:, pool_ids] / tau, dim=1)
+        new_logp = torch.log_softmax(logits[:, pool_ids] / tau, dim=1)
+        per_sample_kl = -(base_p * new_logp).sum(dim=1) * (tau ** 2)
+        with torch.no_grad():
+            base_pick = base_p.argmax(dim=1)
+            true_rank = torch.argsort(batch["costs"], dim=1)
+            inv_rank = torch.argsort(true_rank, dim=1)
+            base_pick_rank = inv_rank.gather(1, base_pick.unsqueeze(1)).squeeze(1)
+            is_base_correct = (base_pick_rank == 0).float()
+        kl_w = (args.base_kl_weight_correct * is_base_correct
+                + args.base_kl_weight_wrong * (1.0 - is_base_correct))
+        loss = loss + args.base_kl_weight * (kl_w * per_sample_kl).mean()
+    return loss
+
+
+def _encoder_grad_vector(model):
+    """Concatenate flattened gradients of encoder parameters for grad-conflict probe.
+    Returns None if no encoder grad is populated.
+    """
+    pieces = []
+    for name, p in model.named_parameters():
+        if p.grad is None:
+            continue
+        if ("coord_enc" in name) or ("matrix_enc" in name):
+            pieces.append(p.grad.detach().flatten())
+    if not pieces:
+        return None
+    return torch.cat(pieces)
 
 
 def evaluate(model, loaders_val, device, tau: float, audit_vbs_sbs: dict):
@@ -132,6 +228,10 @@ def main():
                     help="Fraction of tokens kept after each hierarchical block.")
     ap.add_argument("--local-head", action="store_true",
                     help="Add per-problem local MLP head blended with global head.")
+    ap.add_argument("--freeze-except-local-head", action="store_true",
+                    help="Freeze all params except local_head (for R41-style warm-start from R18).")
+    ap.add_argument("--freeze-encoder", action="store_true",
+                    help="Freeze only encoder / matrix_encoder; keep head + local_head + solver_emb trainable.")
     # Early-stopping flags (R40 plan)
     ap.add_argument("--early-stop-cold-epoch", type=int, default=10,
                     help="T1: at/after this epoch, if val top1 < --early-stop-cold-floor, stop.")
@@ -143,6 +243,33 @@ def main():
                     help="T3 patience: epochs with <=0.002 gain vs best before aborting.")
     ap.add_argument("--early-stop-wall-hours", type=float, default=12.0,
                     help="T4: hard wall-clock limit in hours; training stops after this.")
+    # R40D/E/R41B task scheduler + trust-region flags
+    ap.add_argument("--task-schedule", choices=["block", "round_robin", "task_accum"],
+                    default="block",
+                    help="Training loop: 'block' = legacy, full loader per problem then next "
+                         "(R18/R40 default). 'round_robin' = one mini-batch per problem per step. "
+                         "'task_accum' = accumulate 18-problem losses then single opt.step.")
+    ap.add_argument("--grad-probe", action="store_true",
+                    help="Record encoder-gradient cosine between TSP vs {CVRP,VRPBTW,OVRPBLTW}.")
+    ap.add_argument("--grad-probe-every", type=int, default=500)
+    ap.add_argument("--residual-adapter", action="store_true",
+                    help="Residual-adapter mode for LocalProblemHead: delta zero-init, "
+                         "per-problem α init σ≈0.02, logits = base + (α·0.2)·delta. "
+                         "Falls back to legacy convex blend when off.")
+    ap.add_argument("--base-kl-weight", type=float, default=0.0,
+                    help="Trust-region KL to frozen base model. 0 = off.")
+    ap.add_argument("--base-kl-ckpt", type=str, default=None,
+                    help="Path to frozen base ckpt for trust-region KL. Defaults to --resume-from.")
+    ap.add_argument("--base-kl-tau", type=float, default=2.0)
+    ap.add_argument("--base-kl-weight-correct", type=float, default=1.0,
+                    help="Sample weight for base-KL on instances where base was correct (oracle).")
+    ap.add_argument("--base-kl-weight-wrong", type=float, default=0.2,
+                    help="Sample weight for base-KL on instances where base was wrong.")
+    ap.add_argument("--hard-weight-zero-pick", type=float, default=1.0,
+                    help="(reserved for future use; currently unused) multiplier for instances "
+                         "whose oracle arm is not in base-support.")
+    ap.add_argument("--hard-weight-base-wrong", type=float, default=1.0,
+                    help="(reserved) multiplier for instances where base is wrong.")
     ap.add_argument("--dropout", type=float, default=0.1)
     ap.add_argument("--problem-dropout", type=float, default=0.25)
     ap.add_argument("--no-fact", action="store_true")
@@ -268,7 +395,8 @@ def main():
                             encoder_layer_num=args.encoder_layer_num,
                             heads=args.heads,
                             downsample_ratio=args.downsample_ratio,
-                            local_head=args.local_head).to(device)
+                            local_head=args.local_head,
+                            residual_adapter=args.residual_adapter).to(device)
     model.set_prob_dropout(args.problem_dropout)
 
     if args.resume_from:
@@ -277,7 +405,64 @@ def main():
         missing, unexpected = model.load_state_dict(sd, strict=False)
         print(f"[resume] loaded {args.resume_from} (missing={len(missing)} unexpected={len(unexpected)})")
 
-    opt = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=args.wd, betas=(0.9, 0.95))
+    # Frozen base model for trust-region KL (R41B). Loaded only when --base-kl-weight > 0.
+    base_model = None
+    if args.base_kl_weight > 0:
+        base_path = args.base_kl_ckpt or args.resume_from
+        if base_path is None:
+            raise ValueError("--base-kl-weight > 0 requires --base-kl-ckpt or --resume-from")
+        bck = torch.load(base_path, map_location=device, weights_only=False)
+        bcfg = bck.get("args", {})
+        base_model = UnifiedSelector(
+            d=bcfg.get("d", args.d), depth=bcfg.get("depth", args.depth),
+            dropout=bcfg.get("dropout", 0.1),
+            use_mvrp_factorized=not bcfg.get("no_fact", False),
+            use_problem_solver_bias="problem_solver_bias" in bck["model"],
+            use_film=bcfg.get("use_film", False),
+            use_arm_attn=bcfg.get("use_arm_attn", False),
+            use_coe=bcfg.get("use_coe", False),
+            arm_attn_heads=bcfg.get("arm_attn_heads", 4),
+            coe_experts=bcfg.get("coe_experts", None),
+            encoder_type=bcfg.get("encoder_type", "standard"),
+            rezero=bcfg.get("rezero", False),
+            block_num=bcfg.get("block_num", 2),
+            encoder_layer_num=bcfg.get("encoder_layer_num", 2),
+            heads=bcfg.get("heads", 4),
+            downsample_ratio=bcfg.get("downsample_ratio", 0.8),
+            local_head=False,
+        ).to(device)
+        base_model.load_state_dict(_migrate_state_dict(bck["model"]), strict=False)
+        base_model.eval()
+        for p_ in base_model.parameters():
+            p_.requires_grad = False
+        print(f"[base-kl] loaded frozen base {base_path} (weight={args.base_kl_weight}, tau={args.base_kl_tau})")
+
+    if args.freeze_except_local_head:
+        n_frozen = n_train = 0
+        for name, p in model.named_parameters():
+            if "local_head" in name:
+                p.requires_grad = True
+                n_train += p.numel()
+            else:
+                p.requires_grad = False
+                n_frozen += p.numel()
+        print(f"[freeze] {n_frozen:,} params frozen, {n_train:,} params trainable (local_head only)")
+        opt = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad],
+                                lr=args.lr, weight_decay=args.wd, betas=(0.9, 0.95))
+    elif args.freeze_encoder:
+        n_frozen = n_train = 0
+        for name, p in model.named_parameters():
+            if "encoder" in name:
+                p.requires_grad = False
+                n_frozen += p.numel()
+            else:
+                p.requires_grad = True
+                n_train += p.numel()
+        print(f"[freeze] {n_frozen:,} params frozen (encoder only), {n_train:,} params trainable (heads + solver_emb + local_head)")
+        opt = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad],
+                                lr=args.lr, weight_decay=args.wd, betas=(0.9, 0.95))
+    else:
+        opt = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=args.wd, betas=(0.9, 0.95))
     # Mixed-precision scaler — only enabled when --amp is set.
     scaler = torch.cuda.amp.GradScaler(enabled=args.amp)
 
@@ -352,103 +537,168 @@ def main():
     # Early-stopping state (R40 plan)
     top1_history: list[float] = []         # one entry per eval
     stop_reason: str | None = None
+    # Task-scheduler diagnostics (R40D/R40E plan §1.c/1.d)
+    last_seen_step = {p: 0 for p in PROBLEMS}
+    grad_vecs: dict[str, torch.Tensor] = {}   # encoder-grad vectors keyed by problem
+    grad_cos_history: list[dict] = []
+    probe_targets = ["CVRP", "VRPBTW", "OVRPBLTW"]
+
+    def _prepare_batch(batch):
+        batch = to_device(batch, device)
+        if args.meta_only and batch["kind"] == "coord":
+            batch["node"] = torch.zeros_like(batch["node"])
+        elif args.meta_only and batch["kind"] == "matrix":
+            batch["matrix"] = torch.zeros_like(batch["matrix"])
+        return batch
+
+    def _forward_loss(batch, p):
+        """One forward pass under autocast producing the scalar loss."""
+        with torch.cuda.amp.autocast(enabled=args.amp):
+            return compute_loss_for_problem(model, batch, p, args, audit, teachers, base_model)
+
+    def _apply_single_step(batch, p, step_counter, loss_ema_val):
+        """Legacy / round-robin single optimizer step for one (batch, problem)."""
+        loss = _forward_loss(batch, p)
+        for g in opt.param_groups:
+            g["lr"] = lr_at(step_counter)
+        opt.zero_grad()
+        scaler.scale(loss).backward()
+        # Encoder-grad probe (cosine between task gradients).
+        # Capture BEFORE unscale_; scaling is the same for all tasks so cosine is invariant.
+        if args.grad_probe:
+            gvec = _encoder_grad_vector(model)
+            if gvec is not None:
+                grad_vecs[p] = gvec.detach().clone()
+        scaler.unscale_(opt)
+        torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+        scaler.step(opt)
+        scaler.update()
+        # EMA update
+        if ema_state is not None:
+            with torch.no_grad():
+                for k, v in model.state_dict().items():
+                    if k in ema_state:
+                        ema_state[k].mul_(args.ema_decay).add_(v.detach(), alpha=(1.0 - args.ema_decay))
+        loss_val = float(loss.item())
+        loss_ema_val = loss_val if loss_ema_val is None else 0.98 * loss_ema_val + 0.02 * loss_val
+        new_step = step_counter + 1
+        last_seen_step[p] = new_step
+        # Periodic logging + grad-cosine probe.
+        if new_step % args.log_every == 0:
+            msg = f"ep{epoch} step{new_step} prob={p} lr={lr_at(new_step):.2e} loss={loss_val:.4f} ema={loss_ema_val:.4f}"
+            print(msg, flush=True)
+            if args.wandb:
+                import wandb
+                wandb.log({"train/loss": loss_val, "train/loss_ema": loss_ema_val,
+                           "train/lr": lr_at(new_step), "step": new_step,
+                           f"train_per_problem/{p}": loss_val})
+        if args.grad_probe and (new_step % args.grad_probe_every == 0):
+            cos_row = {"step": new_step}
+            gtsp = grad_vecs.get("TSP")
+            if gtsp is not None:
+                gtsp_f = gtsp.float()
+                for other in probe_targets:
+                    go = grad_vecs.get(other)
+                    if go is None:
+                        continue
+                    cos = float(F.cosine_similarity(
+                        gtsp_f.unsqueeze(0), go.float().unsqueeze(0), dim=1).item())
+                    cos_row[f"TSP_{other}"] = cos
+                    if args.wandb:
+                        import wandb
+                        wandb.log({f"grad_cos/TSP_{other}": cos, "step": new_step})
+            if len(cos_row) > 1:
+                grad_cos_history.append(cos_row)
+        return new_step, loss_ema_val
+
     for epoch in range(args.epochs):
-        # Stream each problem sequentially — load, train one epoch's worth, drop.
-        # Optional: only train selected problems (tail fine-tune).
         epoch_problems = [p for p in problems_train if (not args.only_problems or p in args.only_problems)]
         epoch_order = epoch_problems.copy(); random.shuffle(epoch_order)
-        for p in epoch_order:
-            n_passes = int(PROBLEM_WEIGHT.get(p, 1.0)) if args.oversample else 1
-            if args.oversample_families and p in args.oversample_families:
-                n_passes = max(n_passes, args.oversample_weight)
-            for _pass in range(n_passes):
-                loader = _stream_train_loader(p)
-                for batch in loader:
-                    batch = to_device(batch, device)
-                    if args.meta_only and batch["kind"] == "coord":
-                        batch["node"] = torch.zeros_like(batch["node"])
-                    elif args.meta_only and batch["kind"] == "matrix":
-                        batch["matrix"] = torch.zeros_like(batch["matrix"])
 
-                    with torch.cuda.amp.autocast(enabled=args.amp):
-                        logits = model(batch)
-                        if args.loss == "combined":
-                            sbs_idx = audit[p]["sbs_pool_idx"]
-                            loss = combined_cost_loss(logits, batch["pool_ids"], batch["costs"],
-                                                       sbs_pool_idx=sbs_idx, tau=0.07)
-                        elif args.loss == "gap_rank":
-                            sbs_idx = audit[p]["sbs_pool_idx"]
-                            loss = gap_regression_rank_loss(
-                                logits, batch["pool_ids"], batch["costs"],
-                                sbs_pool_idx=sbs_idx, gap_reference=args.gap_reference,
-                                gap_cap=args.gap_cap, huber_delta=args.huber_delta,
-                                w_reg=args.reg_weight, w_pair=args.pairwise_weight,
-                                pair_sample_topk=args.pair_sample_topk,
-                            )
-                        else:
-                            soft = regret_soft_targets(batch["costs"], tau=args.tau)
-                            oracle_idx = batch["costs"].argmin(dim=1) if (args.focal_gamma > 0 or args.hard_upweight != 1.0) else None
-                            loss = masked_listwise_ce(logits, batch["pool_ids"], soft,
-                                                       focal_gamma=args.focal_gamma,
-                                                       hard_upweight=args.hard_upweight,
-                                                       oracle_idx_pool=oracle_idx)
-                        # Optional cost-aware winner margin (push oracle above competitor)
-                        if args.winner_margin_weight > 0:
-                            loss = loss + args.winner_margin_weight * winner_margin_loss(
-                                logits, batch["pool_ids"], batch["costs"],
-                                base_margin=args.winner_margin_base,
-                                gap_scale=args.winner_margin_gap_scale,
-                            )
-                        # Plackett-Luce listwise ranking loss (NSS-style, effective for tie-breaking)
-                        if args.plackett_luce:
-                            logits_pool = logits[:, batch["pool_ids"]]
-                            loss_pl = plackett_luce_loss(logits_pool, batch["costs"], top_k=args.pl_topk)
-                            if args.pl_only:
-                                loss = args.pl_weight * loss_pl
-                            else:
-                                loss = loss + args.pl_weight * loss_pl
-                        # Diversity entropy penalty (prevent arm collapse)
-                        if args.diversity_weight > 0:
-                            logits_pool = logits[:, batch["pool_ids"]]
-                            loss = loss + args.diversity_weight * diversity_entropy_penalty(logits_pool)
-                        # Distillation term (optional).
-                        if teachers is not None and p in teachers:
-                            pool_ids = batch["pool_ids"]
-                            with torch.no_grad():
-                                t_logits_pool_list = []
-                                for t_model, kind in teachers[p]:
-                                    if kind == "specialist":
-                                        t_logits_pool = t_model(batch)            # already (B, K_p) on pool order
-                                    else:
-                                        t_logits_pool = t_model(batch)[:, pool_ids]
-                                    t_logits_pool_list.append(t_logits_pool)
-                                t_probs = torch.stack([torch.softmax(l / args.distill_tau, dim=1)
-                                                        for l in t_logits_pool_list], dim=0).mean(0)
-                            s_logp = torch.log_softmax(logits[:, pool_ids] / args.distill_tau, dim=1)
-                            kl = -(t_probs * s_logp).sum(dim=1).mean() * (args.distill_tau ** 2)
-                            loss = loss + args.distill_weight * kl
-                    for g in opt.param_groups:
-                        g["lr"] = lr_at(step)
-                    opt.zero_grad()
-                    scaler.scale(loss).backward()
-                    scaler.unscale_(opt)
-                    torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-                    scaler.step(opt)
-                    scaler.update()
-                    # EMA update
-                    if ema_state is not None:
-                        with torch.no_grad():
-                            for k, v in model.state_dict().items():
-                                if k in ema_state:
-                                    ema_state[k].mul_(args.ema_decay).add_(v.detach(), alpha=(1.0 - args.ema_decay))
-                    loss_ema = loss.item() if loss_ema is None else 0.98 * loss_ema + 0.02 * loss.item()
-                    step += 1
-                    if step % args.log_every == 0:
-                        msg = f"ep{epoch} step{step} prob={p} lr={lr_at(step):.2e} loss={loss.item():.4f} ema={loss_ema:.4f}"
-                        print(msg, flush=True)
-                        if args.wandb:
-                            import wandb; wandb.log({"train/loss": loss.item(), "train/loss_ema": loss_ema, "train/lr": lr_at(step), "step": step})
-                del loader  # free per-problem train dataset memory
+        if args.task_schedule == "block":
+            # Legacy behaviour — train one problem's loader to completion then move on.
+            for p in epoch_order:
+                n_passes = int(PROBLEM_WEIGHT.get(p, 1.0)) if args.oversample else 1
+                if args.oversample_families and p in args.oversample_families:
+                    n_passes = max(n_passes, args.oversample_weight)
+                for _pass in range(n_passes):
+                    loader = _stream_train_loader(p)
+                    for batch in loader:
+                        batch = _prepare_batch(batch)
+                        step, loss_ema = _apply_single_step(batch, p, step, loss_ema)
+                    del loader
+
+        elif args.task_schedule == "round_robin":
+            # R40D / R41B — one mini-batch per problem per global step, fresh shuffle each cycle.
+            loaders = {p: _stream_train_loader(p) for p in epoch_problems}
+            iters = {p: iter(loaders[p]) for p in epoch_problems}
+            steps_per_epoch = min(len(loaders[p]) for p in epoch_problems)
+            for cycle in range(steps_per_epoch):
+                order = list(epoch_problems)
+                random.shuffle(order)
+                for p in order:
+                    try:
+                        batch = next(iters[p])
+                    except StopIteration:
+                        iters[p] = iter(loaders[p])
+                        batch = next(iters[p])
+                    batch = _prepare_batch(batch)
+                    step, loss_ema = _apply_single_step(batch, p, step, loss_ema)
+            for ld in loaders.values():
+                del ld
+
+        elif args.task_schedule == "task_accum":
+            # R40E — accumulate 18 per-problem losses before a single opt.step().
+            loaders = {p: _stream_train_loader(p) for p in epoch_problems}
+            iters = {p: iter(loaders[p]) for p in epoch_problems}
+            steps_per_epoch = min(len(loaders[p]) for p in epoch_problems)
+            denom = float(len(epoch_problems))
+            for cycle in range(steps_per_epoch):
+                for g in opt.param_groups:
+                    g["lr"] = lr_at(step)
+                opt.zero_grad()
+                losses_this_step = []
+                order = list(epoch_problems)
+                random.shuffle(order)
+                for p in order:
+                    try:
+                        batch = next(iters[p])
+                    except StopIteration:
+                        iters[p] = iter(loaders[p])
+                        batch = next(iters[p])
+                    batch = _prepare_batch(batch)
+                    loss_p = _forward_loss(batch, p) / denom
+                    scaler.scale(loss_p).backward()
+                    losses_this_step.append((p, float(loss_p.item()) * denom))
+                    last_seen_step[p] = step + 1
+                if args.grad_probe:
+                    gvec = _encoder_grad_vector(model)
+                    if gvec is not None:
+                        grad_vecs["__accum__"] = gvec.detach().clone()
+                scaler.unscale_(opt)
+                torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                scaler.step(opt)
+                scaler.update()
+                if ema_state is not None:
+                    with torch.no_grad():
+                        for k, v in model.state_dict().items():
+                            if k in ema_state:
+                                ema_state[k].mul_(args.ema_decay).add_(v.detach(), alpha=(1.0 - args.ema_decay))
+                mean_loss = float(np.mean([l for _, l in losses_this_step]))
+                loss_ema = mean_loss if loss_ema is None else 0.98 * loss_ema + 0.02 * mean_loss
+                step += 1
+                if step % args.log_every == 0:
+                    print(f"ep{epoch} step{step} accum mean_loss={mean_loss:.4f} ema={loss_ema:.4f} "
+                          f"lr={lr_at(step):.2e}", flush=True)
+                    if args.wandb:
+                        import wandb
+                        wandb.log({"train/loss": mean_loss, "train/loss_ema": loss_ema,
+                                   "train/lr": lr_at(step), "step": step,
+                                   **{f"train_per_problem/{p}": l for p, l in losses_this_step}})
+            for ld in loaders.values():
+                del ld
+        else:
+            raise ValueError(f"unknown --task-schedule {args.task_schedule}")
 
         if (epoch + 1) % args.eval_every_epoch == 0 or epoch == args.epochs - 1:
             per_p, macro = evaluate(model, val_loaders, device, args.tau, audit)
@@ -459,7 +709,15 @@ def main():
                 if p in args.hold_out: mark = " [HELD-OUT]"
                 print(f"   {p:>10}: top1={r['top1']:.3f} mean_cost={r['mean_cost']:.4f} (sbs={r['sbs']:.4f}) vs_sbs={r['vs_sbs_pct']:+.2f}%{mark}")
             # Save per-epoch
-            (save_dir / f"eval_epoch{epoch}.json").write_text(json.dumps({"per_problem": per_p, "macro": macro}, indent=2))
+            eval_payload = {"per_problem": per_p, "macro": macro}
+            eval_payload["last_seen"] = {
+                p: {"last_step": last_seen_step.get(p, 0),
+                    "steps_since_last_seen": step - last_seen_step.get(p, 0)}
+                for p in PROBLEMS
+            }
+            if args.grad_probe and grad_cos_history:
+                eval_payload["grad_cos_recent"] = grad_cos_history[-20:]
+            (save_dir / f"eval_epoch{epoch}.json").write_text(json.dumps(eval_payload, indent=2))
             if args.wandb:
                 import wandb
                 wandb.log({"val/macro_top1": macro["macro_top1"], "val/macro_vs_sbs_pct": macro["macro_vs_sbs_pct"], "val/macro_vbs_closed": macro["macro_vbs_gap_closed_pct"], "epoch": epoch})
@@ -520,6 +778,9 @@ def main():
         "stop_reason": stop_reason,
         "epochs_run": len(top1_history),
         "top1_history": top1_history,
+        "task_schedule": args.task_schedule,
+        "last_seen_step": last_seen_step,
+        "grad_cos_history": grad_cos_history,
     }, indent=2))
 
 

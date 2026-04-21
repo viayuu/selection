@@ -198,14 +198,18 @@ class CoordEncoder(nn.Module):
         relation = relation.masked_fill(eye, 0.0)
         return [dist, demand_gap, relation]
 
-    def forward(self, node, node_mask):
-        # node: (B, N, d_in) — features may have d_in < d_in_max; pad right with zeros
+    def _prepare_node(self, node: torch.Tensor) -> torch.Tensor:
         B, N, d_in = node.shape
         if d_in < self.d_in_max:
             pad = torch.zeros(B, N, self.d_in_max - d_in, device=node.device, dtype=node.dtype)
             node = torch.cat([node, pad], dim=-1)
         elif d_in > self.d_in_max:
             node = node[..., :self.d_in_max]
+        return node
+
+    def forward_tokens(self, node, node_mask):
+        node = self._prepare_node(node)
+        B = node.shape[0]
         x = self.in_proj(node)
         if self.hier_pool:
             graph_terms = []
@@ -227,7 +231,7 @@ class CoordEncoder(nn.Module):
             pooled = self.final_pool_proj(torch.cat([mean, maxv], dim=-1))
             graph_terms.append(pooled)
             pooled = torch.stack(graph_terms, dim=0).mean(dim=0)
-            return pooled
+            return pooled, x, cur_mask
         # key_padding_mask: True where PAD
         kpm = ~node_mask
         if self.deep_mbm:
@@ -249,6 +253,10 @@ class CoordEncoder(nn.Module):
             x_std = torch.sqrt((centered.pow(2).sum(dim=1) / m.sum(dim=1).clamp_min(1.0)).clamp_min(1e-8))
             depot = x[:, 0]
             pooled = self.pool_proj(torch.cat([pooled, x_max, x_std, depot], dim=-1))
+        return pooled, x, node_mask
+
+    def forward(self, node, node_mask):
+        pooled, _, _ = self.forward_tokens(node, node_mask)
         return pooled
 
 
@@ -381,6 +389,78 @@ class MatrixEncoder(nn.Module):
                 nn.Linear(d, d), nn.GELU(),
                 nn.LayerNorm(d),
             )
+
+    def build_node_features(self, mat, node_mask):
+        B, N, _ = mat.shape
+        feats = mat.new_zeros(B, N, 10)
+        mask = node_mask.bool()
+        for i in range(B):
+            n = int(mask[i].sum().item())
+            m = mat[i, :n, :n].clamp(min=0, max=1e3)
+            eye = torch.eye(n, dtype=torch.bool, device=m.device)
+            masked = m.masked_fill(eye, float("inf"))
+            row_mean = m.mean(dim=1)
+            col_mean = m.mean(dim=0)
+            row_std = m.std(dim=1, unbiased=False)
+            col_std = m.std(dim=0, unbiased=False)
+            near_out = masked.min(dim=1).values if n > 1 else m.new_zeros(n)
+            near_in = masked.min(dim=0).values if n > 1 else m.new_zeros(n)
+            asym = (m - m.t()).abs().mean(dim=1)
+            diag = m.diag()
+            feats_i = torch.stack([
+                row_mean,
+                col_mean,
+                row_std,
+                col_std,
+                near_out,
+                near_in,
+                asym,
+                diag,
+                row_mean - col_mean,
+                near_out - near_in,
+            ], dim=-1)
+            feats[i, :n] = feats_i
+        return feats, mask
+
+    def forward_tokens(self, mat, node_mask):
+        B, N, _ = mat.shape
+        if self.deep_mbm:
+            feats, mask = self.build_node_features(mat, node_mask)
+            cond_vec = []
+            bias0 = mat.new_ones(B, N, N)
+            bias1 = mat.new_ones(B, N, N)
+            bias2 = mat.new_ones(B, N, N)
+            for i in range(B):
+                n = int(mask[i].sum().item())
+                cur = mat[i, :n, :n].clamp(min=0, max=1e3)
+                cond_i = torch.zeros(K_CBITS + D_COORD + 2, device=mat.device, dtype=mat.dtype)
+                cond_i[K_CBITS + D_COORD] = 0.0
+                cond_i[K_CBITS + D_COORD + 1] = 1.0
+                cond_vec.append(cond_i)
+                vmax = cur.max().clamp_min(1e-6)
+                bias0[i, :n, :n] = cur / vmax
+                bias1[i, :n, :n] = cur.t() / vmax
+                asym = (cur - cur.t()).abs()
+                bias2[i, :n, :n] = asym / asym.max().clamp_min(1e-6)
+                eye = torch.eye(n, dtype=torch.bool, device=mat.device)
+                bias0[i, :n, :n].masked_fill_(eye, 0.0)
+                bias1[i, :n, :n].masked_fill_(eye, 0.0)
+                bias2[i, :n, :n].masked_fill_(eye, 0.0)
+            cond = torch.stack(cond_vec, dim=0)
+            x = self.in_proj(feats)
+            for layer in self.layers:
+                x = layer(x, mask, [bias0, bias1, bias2], cond)
+            neg_inf = torch.full_like(x, float("-inf"))
+            mean = (x * mask.unsqueeze(-1).float()).sum(dim=1) / mask.unsqueeze(-1).float().sum(dim=1).clamp_min(1.0)
+            maxv = torch.where(mask.unsqueeze(-1), x, neg_inf).max(dim=1).values
+            pooled = self.out_proj(torch.cat([mean, maxv], dim=-1))
+            return pooled, x, mask
+
+        feats, mask = self.build_node_features(mat, node_mask)
+        scale = feats.abs().mean(dim=(0, 1), keepdim=True) + 1e-6
+        x = self.proj(feats / scale)
+        pooled = (x * mask.unsqueeze(-1).float()).sum(dim=1) / mask.unsqueeze(-1).float().sum(dim=1).clamp_min(1.0)
+        return pooled, x, mask
 
     def forward(self, mat, node_mask):
         # mat: (B, N, N), node_mask: (B, N). Use only valid n subrange.
@@ -692,6 +772,14 @@ class UnifiedSelector(nn.Module):
             mixed = (expert_delta * expert_weights.unsqueeze(-1)).sum(dim=1) / expert_weights.sum(dim=1, keepdim=True).clamp_min(1.0)
             h = self.encoder_constraint_ln(h + mixed)
         return h
+
+    def encode_instance_with_tokens(self, batch):
+        if batch["kind"] == "coord":
+            _, token_x, token_mask = self.coord_enc.forward_tokens(batch["node"], batch["node_mask"])
+        else:
+            _, token_x, token_mask = self.matrix_enc.forward_tokens(batch["matrix"], batch["node_mask"])
+        h = self.encode_instance(batch)
+        return h, token_x, token_mask
 
     def compute_global_stats(self, batch):
         if batch["kind"] == "coord":

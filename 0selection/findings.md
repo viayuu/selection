@@ -14,12 +14,18 @@ Lightweight log of concrete findings from the fresh auto-review loop. One line p
 - [R3] confirmed: regret invariant across all interventions — base 1.007 %, method 1.007–1.015 % (metric: relative SBS-oracle gap %).
 - [R40-setup] infra: rebuilt `code/unified_selector/runs/audit.json` from `data/*/raw_label.pkl` (per-problem SBS pool idx + SBS/VBS means on train/val/test); added `code/unified_selector/build_audit.py`.
 - [R40-setup] fix: NSS `HierarchicalBlock` produced `-inf` features on padded positions (`new_x += top_scores` where masked scores are `-inf`) → NaN propagated through next attention. Patched: zero scores for padded positions, hard-zero padded rows after each block (metric: 1-epoch full-data smoke macro_top1 = 0.4955, no NaN).
+- [R40A] negative: NSS hierarchical encoder (d=128, block_num=2, encoder_layer_num=2, ReZero, PL loss, lr 5e-5, cosine 600k, 50-epoch budget) reaches R18 parity after 1 epoch (val top1 0.5189 vs R18's 0.5193) then **diverges** via catastrophic TSP forgetting (TSP top1 0.725 → 0.647 → 0.211 across ep1-4). T2 early-stop fires at ep4. Gate (val ≥ 0.529) NOT passed. Root cause: cross-problem gradient conflict when training 18 heterogeneous problems with a single shared head.
+- [R40A] fix: LocalProblemHead AMP dtype mismatch (`out` allocated from h as fp32 but `local` produced as fp16 under autocast); patched by allocating `out` from `local`.
+- [R40C] negative: NSS hierarchical encoder + LocalProblemHead from scratch (d=128, block_num=2, local head per problem) — local head prevents TSP forgetting for 3 epochs but catastrophic forgetting delayed-hits by ep5 (TSP 0.709 → 0.412). Peak val top1 = 0.5133 at ep2, below R18 (0.5193). Gate not passed.
+- [R41] partial: Loading R18 base + adding LocalProblemHead (freeze all except local_head) beats R18 on val by +0.004 (peak ep2 val = 0.5234), but on test bootstrap the Δ = +0.0024 [−0.0034, +0.0085], p(Δ>0) = 0.786 — **NOT significant**. Per-problem: CVRP +0.014, OVRPTW +0.030, VRPBL +0.022 gains but OVRPL −0.026, OVRPB −0.008 regressions (val→test shrinkage confirmed again). First experiment since R3 to produce ANY positive test Δ from a train-time method, but below pre-reg 0.005 threshold.
+- [infra] GPU1 being shared with another project's training job (0selection2 R26d, PID 1979615); my background runs (R41 ep4+, R42 ep1+) got silently OOM-killed at 10 GB usage mark. Rerunning requires a sole GPU slot or smaller batch.
 
 ## Constraints carried forward
 
 - Do NOT re-run exploratory test-set grid sweeps — they inflate Δ by ~5× compared with val-locked numbers.
 - Do NOT treat val-win configurations as implying test-win — the pattern failed at R1, R2, R3 repeatedly.
 - Do NOT attempt further global post-hoc correction on the R18 base — the gross decomposition proves the cancellation is structural to this class of method.
+- Do NOT train NSS hierarchical encoder from scratch on 18 problems without per-problem gradient isolation — catastrophic TSP forgetting is the dominant failure mode; local head alone delays but does not prevent it.
 - A genuine method-improvement paper would need a new base policy (train-time collapse prevention, e.g., CQR-style distribution regularization) and is out of scope for this diagnostic paper.
 
 ## Terminal state
@@ -27,3 +33,26 @@ Lightweight log of concrete findings from the fresh auto-review loop. One line p
 - Loop terminated at Round 3 with oracle-pro score 8.5/10 and verdict "Stop the loop. Write the diagnostic paper."
 - Six claims in `CLAIMS_FROM_RESULTS.md` all `supported` at `high` confidence, `integrity_status = unavailable` (provisional).
 - Next workflow: `/paper-plan` → `/paper-write` over the six claims + Method Description in `review-stage/AUTO_REVIEW.md`.
+
+## 2026-04-21 R40D / R40E / R41B / R42S（reviewer §1.1/§1.2/§3/§4 修复后）
+
+- [R40D/E] positive: round_robin 和 task_accum 两种 scheduler 都阻止了 R40A/C 的 TSP 灾难性遗忘 (TSP ep0 = 0.705, ep3 task_accum 仍 0.705, 无崩塌) — confirms reviewer §1 was correct (bug was blockwise scheduler, not NSS architecture).
+- [R40D/E] negative: but both schedulers can't push NSS from-scratch above SBS-picking trivial solution (macro_top1 stuck at 0.50-0.51, vs R18 0.5166 test). Supervision signal insufficient to escape SBS fixpoint when network is randomly initialized.
+- [R41B] partial: R18 + residual adapter (zero-init delta, per-problem α=σ(-3.89)) + base-KL trust region (τ=2.0, correct-weight=1.0, wrong-weight=0.2) — val macro_top1 0.5206 (+0.0013 over R18), test macro_top1 0.5197 (+0.0031, 95% CI [-0.0010, +0.0072], p=0.928). Non-sig but tightest CI / highest p since R3.
+- [R41B] zero-pick insight: rescue only on VRPBL (127 rescues from 463 zp); all other problems have rescue=0. Net rescue-harm = -559 (harm dominates). Residual adapter moves logits smoothly across all problems, not targeted zero-pick fixes.
+- [R42S] partial: KEEP_SBS + full-pool reranker — val 0.5277, test +0.0017 vs SBS (95% CI [-0.0043, +0.0077], p=0.712, non-sig). TSP +0.026 / OVRPBTW +0.046 / OVRPBLTW +0.022 / VRPBL +0.021 wins but VRPLTW -0.043 / VRPBLTW -0.028 cancellations (val 1k insufficient to lock per-problem θ).
+- [infra] cgroup mem limit: docker container has 20 GB memcg limit; 3 concurrent training processes OOM-kill at 5-6 GB each + R27a (2.5 GB) + buffers (~1 GB). Forced sequential execution: R40E (killed early) → R41B → R40D.
+- [infra] wandb dual-credential bug: .netrc has fengguangwuliang account (no project permission); WANDB_API_KEY env has yjkds. Launch scripts must explicitly `export WANDB_API_KEY='...'`.
+
+## Constraints carried forward (追加)
+- Do NOT run 3+ training processes concurrently under current cgroup (20 GB limit).
+- Do NOT train NSS from scratch on 18-problem mix with argmin supervision — it collapses to SBS-picking even with correct scheduler. If pushing beyond R18 via new encoder, need ranking-style loss or per-problem curriculum.
+- Do NOT expect residual-adapter fine-tuning alone to cross 95% CI on Δ at single seed — need 3+ seeds averaged.
+
+## 2026-04-21 R40D completed — first significant positive result since R3
+
+- [R40D] POSITIVE (FIRST SIGNIFICANT): NSS hierarchical encoder from scratch with round_robin scheduler achieves test macro_top1 = 0.5226 vs R18 0.5166 (Δ = +0.0060, 95% CI [+0.0001, +0.0118], p(Δ>0) = 0.977, significant = YES). Best at ep6 (val = 0.5248). This is the first method to cross 95% threshold. Per-problem: OVRPTW +0.055, OVRPBTW +0.022, CVRP +0.018, VRPBL/OVRPB/OVRPBL +0.008-0.014. Losses: OVRPLTW -0.014, OVRP -0.010. TSP nearly unchanged (-0.003).
+- [R40D] KEY VALIDATION: reviewer §1.1 confirmed — TSP collapse was the scheduler bug, not NSS architecture. Fixed train.py with --task-schedule round_robin → NSS no longer collapses (TSP 0.705 → 0.744 across ep0-3, not 0.73 → 0.21 as in R40A/C).
+- [R40D] CONFIG that works: standard mixed-loss (regret_soft + listwise_ce + plackett_luce pl_weight=0.3 pl_topk=3), no aug_8fold, lr=5e-5 cosine_total=80000, batch_per_problem=16, warmup=3000. Did NOT need the curriculum / PCGrad / MGDA / uncertainty-weighting that reviewer §2 mentioned as fallbacks.
+- [R40D] POST-peak degradation: macro_top1 peaked at ep6 (0.5248), regressed ep7 (0.5194), ep8 (0.5169). LR was already at min (3e-6) by ep6 so not a scheduler issue. Suggests overfit post-peak. Future runs should cut epochs=7 with `--early-stop-plateau 2`.
+- [R40D] the +0.0060 gain does NOT come from zero-pick rescue (264 rescues vs 1437 harms = net -1173). Instead, R40D shifts per-arm distribution within R18's support set; improvements come from arm rank reordering, not new arm discovery.

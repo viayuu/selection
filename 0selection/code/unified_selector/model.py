@@ -356,9 +356,14 @@ class HierarchicalCoordEncoder(nn.Module):
 class LocalProblemHead(nn.Module):
     """Per-problem MLP head. 18 independent 2-layer MLPs, one per problem.
     Outputs (B, M_GLOBAL) with logits filled at the pool-ids positions.
+
+    If `zero_init=True`, the final linear of each per-problem MLP is zero-init
+    so delta starts at 0 — used for residual-adapter mode where the total
+    logits must equal the frozen base at step 0.
     """
 
-    def __init__(self, d: int = 128, hidden: int = 256, dropout: float = 0.1):
+    def __init__(self, d: int = 128, hidden: int = 256, dropout: float = 0.1,
+                 zero_init: bool = False):
         super().__init__()
         self.pool_lens = [len(POOLS[p]) for p in PROBLEMS]
         self.heads = nn.ModuleList([
@@ -368,6 +373,11 @@ class LocalProblemHead(nn.Module):
             )
             for K_p in self.pool_lens
         ])
+        if zero_init:
+            for seq in self.heads:
+                last = seq[-1]
+                nn.init.zeros_(last.weight)
+                nn.init.zeros_(last.bias)
         for i, p in enumerate(PROBLEMS):
             ids = torch.tensor([S2I[s] for s in POOLS[p]], dtype=torch.long)
             self.register_buffer(f"pool_ids_{i}", ids, persistent=False)
@@ -376,7 +386,7 @@ class LocalProblemHead(nn.Module):
         B = h.shape[0]
         local = self.heads[problem_id](h)
         pool_ids = getattr(self, f"pool_ids_{problem_id}")
-        out = h.new_zeros(B, M_GLOBAL)
+        out = local.new_zeros(B, M_GLOBAL)
         out[:, pool_ids] = local
         return out
 
@@ -397,7 +407,9 @@ class UnifiedSelector(nn.Module):
                  encoder_layer_num: int = 2,
                  heads: int = 4,
                  downsample_ratio: float = 0.8,
-                 local_head: bool = False):
+                 local_head: bool = False,
+                 residual_adapter: bool = False,
+                 residual_scale: float = 0.2):
         super().__init__()
         self.d = d
         self.head_hidden = head_hidden
@@ -455,12 +467,25 @@ class UnifiedSelector(nn.Module):
         self.use_problem_solver_bias = use_problem_solver_bias
         if use_problem_solver_bias:
             self.problem_solver_bias = nn.Parameter(torch.zeros(len(PROBLEMS), M_GLOBAL))
-        # Per-problem local head (R40C): each problem gets its own K_p-way MLP.
-        # Blended with global head via a learnable sigmoid gate (init 0.5).
+        # Per-problem local head: each problem gets its own K_p-way MLP.
+        # Two blend modes:
+        #   residual_adapter=False (legacy R40C/R41): convex blend
+        #       logits = lam * global + (1-lam) * local,  lam init σ(0)=0.5, per-problem
+        #   residual_adapter=True (R41B / adapter): additive residual
+        #       logits = global + (lam * residual_scale) * delta,  lam init σ(-3.89)≈0.02
+        #       delta head is zero-init, so logits == global at step 0.
         self.use_local_head = local_head
+        self.residual_adapter = residual_adapter
+        self.residual_scale = residual_scale
         if local_head:
-            self.local_head = LocalProblemHead(d=d, hidden=head_hidden, dropout=dropout)
-            self.local_head_logit = nn.Parameter(torch.zeros(1))  # sigmoid(0) = 0.5
+            self.local_head = LocalProblemHead(d=d, hidden=head_hidden, dropout=dropout,
+                                                zero_init=residual_adapter)
+            if residual_adapter:
+                init_val = math.log(0.02 / (1.0 - 0.02))  # ≈ -3.89 → σ ≈ 0.02
+            else:
+                init_val = 0.0
+            self.local_head_logit = nn.Parameter(
+                torch.full((len(PROBLEMS),), init_val, dtype=torch.float32))
         self.use_fact = use_mvrp_factorized
         if use_mvrp_factorized:
             self.W_c = nn.Linear(K_CBITS, d, bias=False)
@@ -565,12 +590,15 @@ class UnifiedSelector(nn.Module):
             vd_s = v_s * d_e.unsqueeze(1)     # (B, M, d)  interaction
             z_fact = torch.cat([v_s, d_s, vd_s], dim=-1)  # (B, M, 3d)
             logits = logits + self.fact_head(z_fact).squeeze(-1)
-        # Per-problem local head blend (R40C): λ·global + (1−λ)·local_scattered
+        # Per-problem local head blend
         if self.use_local_head:
             pid = batch["problem_id"]
             local_logits = self.local_head(h, pid)                       # (B, M_GLOBAL)
-            lam = torch.sigmoid(self.local_head_logit)
-            logits = lam * logits + (1.0 - lam) * local_logits
+            lam = torch.sigmoid(self.local_head_logit[pid])              # per-problem scalar
+            if self.residual_adapter:
+                logits = logits + (lam * self.residual_scale) * local_logits
+            else:
+                logits = lam * logits + (1.0 - lam) * local_logits
         # Apply availability mask: unavailable solvers -> -inf
         mask = batch["mask"]   # (B, M) {0,1}
         logits = logits + torch.log(mask.clamp_min(1e-30))
