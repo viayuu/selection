@@ -262,19 +262,28 @@ def assemble_tensors(enc_dict, vote, cost, inst_feats, arm_stats, audit, device,
 #  Loss helpers
 # ---------------------------------------------------------------------------
 
-def pairwise_cost_loss(arm_scores, costs):
-    """For each instance, softplus(score_j - score_i) weighted by (cost_j - cost_i)_+ where i better than j."""
+def pairwise_cost_loss(arm_scores, costs, gap_min: float = 0.0):
+    """Gap-weighted pairwise hinge so score_i > score_j when cost_i < cost_j.
+
+    costs[b, k] = tour cost (lower is better).
+    For pair (i, j):
+        diff_cost  = cost_i - cost_j      ; NEGATIVE when i better
+        diff_score = score_i - score_j    ; we want POSITIVE when i better
+        gap        = (cost_j - cost_i) / best_cost_in_instance  ; POSITIVE when i better
+    Include a pair in the loss iff gap > gap_min (skip near-ties).
+    Weight each included pair by gap (reviewer's 'gap-weighted pairwise').
+    Minimize softplus(-(score_i - score_j)) -> drives score_i to exceed score_j.
+    """
     B, K_p = arm_scores.shape
-    diff_cost = costs.unsqueeze(2) - costs.unsqueeze(1)   # (B, K_p, K_p), pos means j worse
-    diff_score = arm_scores.unsqueeze(2) - arm_scores.unsqueeze(1)  # (B, K_p, K_p)
-    # Only pairs where j strictly worse than i
-    mask = (diff_cost > 0).float()
-    # softplus(diff_score) encourages diff_score <= 0 (i.e., score_i >= score_j when i is better)
-    # Wait — diff_score = score_i - score_j; we want score_i > score_j so softplus(-(score_i-score_j)) = softplus(score_j-score_i)
+    diff_cost = costs.unsqueeze(2) - costs.unsqueeze(1)     # (B, K_p, K_p): pos means i worse
+    diff_score = arm_scores.unsqueeze(2) - arm_scores.unsqueeze(1)
+    best_cost = costs.min(dim=1, keepdim=True).values.clamp_min(1e-9)  # (B, 1)
+    gap = (-diff_cost) / best_cost.unsqueeze(2)             # (B, K_p, K_p): pos when i better
+    mask = (gap > gap_min).float()
+    weight = gap.clamp_min(0.0) * mask
     pair = F.softplus(-diff_score)
-    denom = mask.sum().clamp_min(1.0)
-    loss = (pair * mask).sum() / denom
-    return loss
+    denom = weight.sum().clamp_min(1.0)
+    return (pair * weight).sum() / denom
 
 
 def kl_to_base_softmax(arm_scores, base_logits, tau=2.0):
@@ -348,24 +357,73 @@ def infer_all(model, data_t):
     return out
 
 
-def fit_thresholds(val_scores, val_data, grid):
-    """Per-problem threshold θ[p] that maximizes val top1."""
+FAMILY_OF = {
+    "TSP": "TSP", "ATSP": "ATSP", "CVRP": "CVRP",
+    **{p: "MVRP" for p in PROBLEMS[3:]},
+}
+
+
+def fit_thresholds(val_scores, val_data, grid, scope: str = "problem"):
+    """Find θ that maximizes val top1.  scope: 'problem' (18 θ) or 'family' (4 θ) or 'global' (1 θ).
+
+    Returns dict {problem_name -> {'theta': float, 'val_top1': float}} so apply_thresholds is uniform.
+    In 'family' mode, all problems within a family share the same θ (chosen to maximize the family's
+    pooled-instance top1, which averages down the per-problem θ noise).
+    """
     thresholds = {}
-    for p in PROBLEMS:
-        arm_sc = val_scores[p]["arm_scores"].numpy()
-        keep_sc = val_scores[p]["keep_score"].numpy()
-        costs = val_data[p]["costs"].cpu().numpy()
-        oracle = val_data[p]["oracle"].cpu().numpy()
-        sbs_idx = val_data[p]["sbs_idx"]
+    if scope == "problem":
+        for p in PROBLEMS:
+            arm_sc = val_scores[p]["arm_scores"].numpy()
+            keep_sc = val_scores[p]["keep_score"].numpy()
+            oracle = val_data[p]["oracle"].cpu().numpy()
+            sbs_idx = val_data[p]["sbs_idx"]
+            best = None
+            for theta in grid:
+                margin = keep_sc - arm_sc.max(axis=1)
+                keep = margin >= theta
+                pick = np.where(keep, sbs_idx, arm_sc.argmax(axis=1))
+                top1 = float((pick == oracle).mean())
+                if best is None or top1 > best[0]:
+                    best = (top1, float(theta))
+            thresholds[p] = {"theta": best[1], "val_top1": best[0]}
+        return thresholds
+
+    # 'family' or 'global': group problems together and share θ
+    if scope == "global":
+        groups = {"ALL": list(PROBLEMS)}
+    else:  # family
+        groups = {}
+        for p in PROBLEMS:
+            groups.setdefault(FAMILY_OF[p], []).append(p)
+
+    for gname, members in groups.items():
         best = None
         for theta in grid:
-            margin = keep_sc - arm_sc.max(axis=1)
-            keep = margin >= theta
-            pick = np.where(keep, sbs_idx, arm_sc.argmax(axis=1))
-            top1 = float((pick == oracle).mean())
+            hits, total = 0, 0
+            for p in members:
+                arm_sc = val_scores[p]["arm_scores"].numpy()
+                keep_sc = val_scores[p]["keep_score"].numpy()
+                oracle = val_data[p]["oracle"].cpu().numpy()
+                sbs_idx = val_data[p]["sbs_idx"]
+                margin = keep_sc - arm_sc.max(axis=1)
+                keep = margin >= theta
+                pick = np.where(keep, sbs_idx, arm_sc.argmax(axis=1))
+                hits += int((pick == oracle).sum())
+                total += len(oracle)
+            top1 = hits / max(total, 1)
             if best is None or top1 > best[0]:
                 best = (top1, float(theta))
-        thresholds[p] = {"theta": best[1], "val_top1": best[0]}
+        # Backfill per-problem val_top1 under the chosen θ
+        for p in members:
+            arm_sc = val_scores[p]["arm_scores"].numpy()
+            keep_sc = val_scores[p]["keep_score"].numpy()
+            oracle = val_data[p]["oracle"].cpu().numpy()
+            sbs_idx = val_data[p]["sbs_idx"]
+            margin = keep_sc - arm_sc.max(axis=1)
+            keep = margin >= best[1]
+            pick = np.where(keep, sbs_idx, arm_sc.argmax(axis=1))
+            p_top1 = float((pick == oracle).mean())
+            thresholds[p] = {"theta": best[1], "val_top1": p_top1, "family": gname}
     return thresholds
 
 
@@ -441,6 +499,10 @@ def main():
                     help="rand, base_correct, base_wrong, hard (zp/high-regret) fractions.")
     # Threshold grid
     ap.add_argument("--threshold-grid", type=str, default="-0.5,0.5,21")
+    ap.add_argument("--threshold-scope", choices=["problem", "family", "global"], default="problem",
+                    help="Per-problem (18 θ), per-family (4 θ: TSP/ATSP/CVRP/MVRP), or single global θ.")
+    ap.add_argument("--pairwise-gap-min", type=float, default=0.0,
+                    help="Minimum gap (pct of best cost) for a pair to enter pairwise loss. 0.001 = 0.1%% filter.")
     ap.add_argument("--n-boot", type=int, default=10000)
     # W&B
     ap.add_argument("--wandb", action="store_true")
@@ -548,7 +610,7 @@ def main():
                                              inst_feats, pool_h, cbits)
                     scores = torch.cat([keep_sc.unsqueeze(1), arm_sc], dim=1)  # (B, K_p+1)
                     ce = F.cross_entropy(scores, target)
-                    pw = pairwise_cost_loss(arm_sc, costs)
+                    pw = pairwise_cost_loss(arm_sc, costs, gap_min=args.pairwise_gap_min)
                     kl = kl_to_base_softmax(arm_sc, base_logits_pool, tau=args.kl_tau)
                     loss_p = (args.keep_ce_weight * ce
                               + args.pairwise_cost_weight * pw
@@ -571,7 +633,7 @@ def main():
         val_scores = infer_all(model, val_t)
         grid_lo, grid_hi, grid_n = args.threshold_grid.split(",")
         grid = np.linspace(float(grid_lo), float(grid_hi), int(grid_n))
-        thresholds = fit_thresholds(val_scores, val_t, grid)
+        thresholds = fit_thresholds(val_scores, val_t, grid, scope=args.threshold_scope)
         val_macro = float(np.mean([thresholds[p]["val_top1"] for p in PROBLEMS]))
         print(f"[ep{ep}] val_macro_top1 = {val_macro:.4f}")
         if args.wandb:

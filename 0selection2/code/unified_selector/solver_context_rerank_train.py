@@ -12,6 +12,8 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader, WeightedRandomSampler
 
 from .data import UnifiedProblemDataset, collate_single_problem
+from .eval_log import format_eval_block
+from .model import load_partial_state_dict
 from .registry import PROBLEMS, M_GLOBAL
 from .rerank_train import (
     set_seed,
@@ -567,6 +569,15 @@ def evaluate_checkpoint(tag: str, save_dir: Path, base_model, reranker, device: 
             base_topk=args.base_topk, support_topk=args.support_candidate_topk,
             full_pool=args.full_pool, support_feature_mode=args.support_feature_mode,
         )
+        print(
+            format_eval_block(
+                f"[{split} {tag}]",
+                out["macro"],
+                out["per_problem"],
+                problem_order=PROBLEMS,
+            ),
+            flush=True,
+        )
         (save_dir / f"analysis_{split}_{tag}.json").write_text(json.dumps(out, indent=2))
         if tag == "best_top1_safe":
             (save_dir / f"analysis_{split}.json").write_text(json.dumps(out, indent=2))
@@ -702,8 +713,12 @@ def main():
     if args.init_reranker_ckpt:
         init_ckpt = torch.load(args.init_reranker_ckpt, map_location=args.device)
         init_state = init_ckpt.get("reranker", init_ckpt)
-        missing, unexpected = reranker.load_state_dict(init_state, strict=False)
-        print(f"[init reranker] loaded {args.init_reranker_ckpt} missing={missing} unexpected={unexpected}", flush=True)
+        missing, unexpected, skipped, remapped = load_partial_state_dict(reranker, init_state)
+        print(
+            f"[init reranker] loaded {args.init_reranker_ckpt} missing={missing} unexpected={unexpected} "
+            f"skipped={skipped} remapped={remapped}",
+            flush=True,
+        )
     opt = torch.optim.AdamW(reranker.parameters(), lr=args.lr, weight_decay=args.wd)
 
     winner_weights = {}
@@ -838,12 +853,13 @@ def main():
             cost_slack=args.cost_slack,
         )
         print(
-            f"[eval epoch {epoch}] macro_top1={macro['macro_top1']:.4f} "
-            f"vs_sbs={macro['macro_vs_sbs_pct']:+.3f}% "
-            f"fixable_recovery={macro['macro_fixable_recovery_rate']:.4f} "
-            f"safe_harm={macro['macro_safe_harm_rate']:.4f} "
-            f"hidden_mass={macro['macro_hidden_winner_mass']:.4f} "
-            f"score={score:.6f}",
+            format_eval_block(
+                f"[eval epoch {epoch}]",
+                macro,
+                val_out["per_problem"],
+                problem_order=PROBLEMS,
+                extra_macro_fields=[("score", f"{score:.6f}")],
+            ),
             flush=True,
         )
         payload = {

@@ -90,6 +90,21 @@ class UnifiedProblemDataset(Dataset):
         self.pid = P2I[problem]
         self.K_p = len(self.pool_order)
         self.N = len(self.instances)
+        # Raw cost vectors in raw_label.pkl are ordered by sorted(results/result_*.txt)
+        # filenames — which may include solvers beyond POOLS[problem] (e.g. additional
+        # baselines added after R18 training).  Build a per-problem gather index so
+        # raw_cost[cost_gather_idx] aligns with POOLS[problem] order.
+        results_dir = d / "results"
+        if results_dir.exists():
+            solver_files = sorted(f.name for f in results_dir.iterdir() if f.name.startswith("result_") and f.name.endswith(".txt"))
+            solver_names = [f[len("result_"):-len(".txt")] for f in solver_files]
+            try:
+                self.cost_gather_idx = [solver_names.index(s) for s in POOLS[problem]]
+            except ValueError as e:
+                raise RuntimeError(f"data alignment error: POOL solver missing in {results_dir}: {e}")
+        else:
+            # Fallback: assume first K_p of raw cost == POOLS order (legacy data layout).
+            self.cost_gather_idx = list(range(self.K_p))
 
     def __len__(self):
         return self.N
@@ -97,7 +112,8 @@ class UnifiedProblemDataset(Dataset):
     def __getitem__(self, idx):
         inst = self.instances[idx]
         lbl = self.labels[str(idx)]
-        costs = torch.tensor(lbl["cost"][:self.K_p], dtype=torch.float32)   # (K_p,)
+        raw_cost = lbl["cost"]
+        costs = torch.tensor([raw_cost[j] for j in self.cost_gather_idx], dtype=torch.float32)  # (K_p,), POOLS order
         ind = int(lbl["ind"])                                                # scalar
         p = self.problem
         if p == "TSP":

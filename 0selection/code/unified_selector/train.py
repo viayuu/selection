@@ -67,14 +67,22 @@ def compute_loss_for_problem(model, batch, p, args, audit, teachers, base_model=
     """
     logits = model(batch)
     pool_ids = batch["pool_ids"]
+    # R43 Balanced Softmax / logit adjustment on the pool slice.
+    # logits_for_ce substitutes into the base-CE path; does NOT replace `logits`
+    # (other losses like PL / distill continue using the un-adjusted logits).
+    logits_for_ce = logits
+    if args.balanced_softmax_weight > 0 and getattr(model, "balanced_softmax_logprior", None) is not None:
+        pid_int = int(batch["problem_id"]) if not isinstance(batch["problem_id"], torch.Tensor) else int(batch["problem_id"][0].item())
+        lp = model.balanced_softmax_logprior[pid_int]              # (M_GLOBAL,)
+        logits_for_ce = logits - args.balanced_softmax_weight * lp.unsqueeze(0)
     if args.loss == "combined":
         sbs_idx = audit[p]["sbs_pool_idx"]
-        loss = combined_cost_loss(logits, pool_ids, batch["costs"],
+        loss = combined_cost_loss(logits_for_ce, pool_ids, batch["costs"],
                                    sbs_pool_idx=sbs_idx, tau=0.07)
     elif args.loss == "gap_rank":
         sbs_idx = audit[p]["sbs_pool_idx"]
         loss = gap_regression_rank_loss(
-            logits, pool_ids, batch["costs"],
+            logits_for_ce, pool_ids, batch["costs"],
             sbs_pool_idx=sbs_idx, gap_reference=args.gap_reference,
             gap_cap=args.gap_cap, huber_delta=args.huber_delta,
             w_reg=args.reg_weight, w_pair=args.pairwise_weight,
@@ -83,7 +91,7 @@ def compute_loss_for_problem(model, batch, p, args, audit, teachers, base_model=
     else:
         soft = regret_soft_targets(batch["costs"], tau=args.tau)
         oracle_idx = batch["costs"].argmin(dim=1) if (args.focal_gamma > 0 or args.hard_upweight != 1.0) else None
-        loss = masked_listwise_ce(logits, pool_ids, soft,
+        loss = masked_listwise_ce(logits_for_ce, pool_ids, soft,
                                    focal_gamma=args.focal_gamma,
                                    hard_upweight=args.hard_upweight,
                                    oracle_idx_pool=oracle_idx)
@@ -135,6 +143,23 @@ def compute_loss_for_problem(model, batch, p, args, audit, teachers, base_model=
         kl_w = (args.base_kl_weight_correct * is_base_correct
                 + args.base_kl_weight_wrong * (1.0 - is_base_correct))
         loss = loss + args.base_kl_weight * (kl_w * per_sample_kl).mean()
+    # R43 support-KL regularizer: batch-pooled predicted distribution over pool should
+    # track the oracle-mass distribution over pool. Pushes arms the oracle visits to get
+    # nontrivial predicted mass (counters argmax collapse into 3-4 arms per problem).
+    if args.support_kl_weight > 0:
+        logits_pool = logits[:, pool_ids]                        # (B, K_p)
+        pred_mass = torch.softmax(logits_pool, dim=1).mean(dim=0)    # (K_p,)
+        oracle_local = batch["costs"].argmin(dim=1)                  # (B,) pool-local idx
+        oracle_mass = torch.zeros_like(pred_mass)
+        oracle_mass.scatter_add_(0, oracle_local, torch.ones_like(oracle_local, dtype=pred_mass.dtype))
+        oracle_mass = oracle_mass / oracle_mass.sum().clamp_min(1e-6)
+        with torch.no_grad():
+            target = oracle_mass.clamp_min(1e-6)
+            target = target / target.sum()
+        # KL(pred || target) encourages pred to match target support
+        loss_supp = (pred_mass.clamp_min(1e-9) *
+                     (pred_mass.clamp_min(1e-9).log() - target.log())).sum()
+        loss = loss + args.support_kl_weight * loss_supp
     return loss
 
 
@@ -354,6 +379,21 @@ def main():
                     help=">0 enables cost-aware winner margin loss on top of --loss.")
     ap.add_argument("--winner-margin-base", type=float, default=0.05)
     ap.add_argument("--winner-margin-gap-scale", type=float, default=2.0)
+    # R43: anti-collapse loss + problem-arm bias + behavior embedding
+    ap.add_argument("--use-problem-arm-bias", action="store_true",
+                    help="Add a learnable (len(PROBLEMS), M_GLOBAL) bias to logits (init 0).")
+    ap.add_argument("--use-behavior-emb", action="store_true",
+                    help="Add a (P, M, D) frozen behaviour embedding (oracle-hit rate etc.) with a learnable 1-dim projection.")
+    ap.add_argument("--behavior-npz", type=str, default=None,
+                    help="npz file containing key 'behavior' of shape (P, M, D). Required if --use-behavior-emb.")
+    ap.add_argument("--behavior-dim", type=int, default=3,
+                    help="Number of behaviour channels (must match --behavior-npz).")
+    ap.add_argument("--balanced-softmax-weight", type=float, default=0.0,
+                    help="Coefficient τ applied to log π[p, a] in Balanced Softmax / logit adjustment.")
+    ap.add_argument("--balanced-softmax-npz", type=str, default=None,
+                    help="npz file containing key 'log_prior' of shape (P, M). Required if --balanced-softmax-weight > 0.")
+    ap.add_argument("--support-kl-weight", type=float, default=0.0,
+                    help="Weight of KL(predicted_mass || oracle_mass) over pool (reviewer §3 anti-collapse regularizer).")
     args = ap.parse_args()
 
     set_seed(args.seed)
@@ -396,8 +436,33 @@ def main():
                             heads=args.heads,
                             downsample_ratio=args.downsample_ratio,
                             local_head=args.local_head,
-                            residual_adapter=args.residual_adapter).to(device)
+                            residual_adapter=args.residual_adapter,
+                            use_problem_arm_bias=args.use_problem_arm_bias,
+                            use_behavior_emb=args.use_behavior_emb,
+                            behavior_dim=args.behavior_dim).to(device)
     model.set_prob_dropout(args.problem_dropout)
+
+    # R43 behaviour embedding: load precomputed (P, M, behavior_dim) features from npz.
+    if args.use_behavior_emb:
+        if not args.behavior_npz:
+            raise SystemExit("--use-behavior-emb requires --behavior-npz PATH.")
+        import numpy as _np
+        beh = _np.load(args.behavior_npz)["behavior"]           # shape: (P, M, D)
+        beh_t = torch.from_numpy(beh).float()
+        model.copy_arm_behavior(beh_t)
+        print(f"[R43] loaded behavior embedding: shape {tuple(beh_t.shape)} mean={beh_t.mean():.4f}")
+
+    # R43 balanced-softmax prior: per-(problem, arm) oracle frequency on train split.
+    # Loaded once and cached on device for use inside compute_loss_for_problem.
+    model.balanced_softmax_logprior = None
+    if args.balanced_softmax_weight > 0:
+        if not args.balanced_softmax_npz:
+            raise SystemExit("--balanced-softmax-weight > 0 requires --balanced-softmax-npz PATH.")
+        import numpy as _np
+        lp = _np.load(args.balanced_softmax_npz)["log_prior"]   # shape: (P, M)
+        model.balanced_softmax_logprior = torch.from_numpy(lp).float().to(device)
+        print(f"[R43] loaded balanced-softmax log_prior: shape {lp.shape}, "
+              f"min={lp.min():.3f} max={lp.max():.3f}")
 
     if args.resume_from:
         ck = torch.load(args.resume_from, map_location=device, weights_only=False)

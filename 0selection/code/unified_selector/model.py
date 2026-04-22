@@ -409,7 +409,10 @@ class UnifiedSelector(nn.Module):
                  downsample_ratio: float = 0.8,
                  local_head: bool = False,
                  residual_adapter: bool = False,
-                 residual_scale: float = 0.2):
+                 residual_scale: float = 0.2,
+                 use_problem_arm_bias: bool = False,
+                 use_behavior_emb: bool = False,
+                 behavior_dim: int = 3):
         super().__init__()
         self.d = d
         self.head_hidden = head_hidden
@@ -497,6 +500,29 @@ class UnifiedSelector(nn.Module):
         # Problem-ID dropout for anti-leakage ablation
         self.prob_dropout_p = 0.0  # set externally
 
+        # R43 additions: per-(problem, arm) learnable bias + static behaviour embedding.
+        # Both are zero-init (or bias-init) so step-0 logits == pre-R43 logits.
+        self.use_problem_arm_bias = use_problem_arm_bias
+        if use_problem_arm_bias:
+            self.problem_arm_bias = nn.Parameter(torch.zeros(len(PROBLEMS), M_GLOBAL))
+        self.use_behavior_emb = use_behavior_emb
+        self.behavior_dim = behavior_dim
+        if use_behavior_emb:
+            # (len(PROBLEMS), M_GLOBAL, behavior_dim) — filled via copy_arm_behavior(...)
+            self.register_buffer("arm_behavior",
+                                  torch.zeros(len(PROBLEMS), M_GLOBAL, behavior_dim))
+            self.behavior_proj = nn.Linear(behavior_dim, 1, bias=False)
+            nn.init.zeros_(self.behavior_proj.weight)   # zero-init → logits unchanged at step 0
+
+    def copy_arm_behavior(self, tensor: torch.Tensor):
+        """Copy a precomputed (len(PROBLEMS), M_GLOBAL, behavior_dim) tensor into the buffer."""
+        assert self.use_behavior_emb, "use_behavior_emb must be True to populate arm_behavior."
+        assert tensor.shape == self.arm_behavior.shape, \
+            f"behavior shape mismatch: got {tuple(tensor.shape)} vs {tuple(self.arm_behavior.shape)}"
+        with torch.no_grad():
+            self.arm_behavior.copy_(tensor.to(self.arm_behavior.device,
+                                               dtype=self.arm_behavior.dtype))
+
     def set_prob_dropout(self, p: float):
         self.prob_dropout_p = float(p)
 
@@ -579,6 +605,17 @@ class UnifiedSelector(nn.Module):
         if self.use_problem_solver_bias:
             pid = batch["problem_id"]
             logits = logits + self.problem_solver_bias[pid]  # (M,) broadcast over B
+        # R43 per-(problem, arm) bias (learnable, zero-init)
+        if self.use_problem_arm_bias:
+            pid_b = torch.full((B,), batch["problem_id"], dtype=torch.long, device=h.device) \
+                if not isinstance(batch["problem_id"], torch.Tensor) else batch["problem_id"]
+            logits = logits + self.problem_arm_bias[pid_b]   # (B, M)
+        # R43 static behaviour embedding (projection weight zero-init, frozen features).
+        if self.use_behavior_emb:
+            pid_b = torch.full((B,), batch["problem_id"], dtype=torch.long, device=h.device) \
+                if not isinstance(batch["problem_id"], torch.Tensor) else batch["problem_id"]
+            beh = self.arm_behavior[pid_b]                   # (B, M, behavior_dim)
+            logits = logits + self.behavior_proj(beh).squeeze(-1)
         # MVRP factorization add-on (applied only for MVRP problems)
         if self.use_fact and batch["problem_id"] >= 3:
             v = batch["cbits"]                # (B, K_CBITS)

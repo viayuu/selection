@@ -10,7 +10,7 @@ BATCH_PER_PROBLEM instances.  An optional interleaved schedule is available
 to reduce cross-problem forgetting during long runs.
 """
 from __future__ import annotations
-import argparse, json, math, pickle, random, time
+import argparse, contextlib, json, math, pickle, random, time
 from pathlib import Path
 
 import numpy as np
@@ -20,9 +20,10 @@ from torch.utils.data import DataLoader, WeightedRandomSampler
 
 from .registry import PROBLEMS, P2I
 from .data import UnifiedProblemDataset, collate_single_problem, DATA_ROOT
+from .eval_log import format_eval_block
 from .model import (
     UnifiedSelector,
-    remap_legacy_state_dict,
+    load_partial_state_dict,
     regret_soft_targets,
     masked_listwise_ce,
     masked_ranking_loss,
@@ -46,6 +47,25 @@ PROBLEM_WEIGHT = {
 
 def set_seed(seed: int):
     random.seed(seed); np.random.seed(seed); torch.manual_seed(seed); torch.cuda.manual_seed_all(seed)
+
+
+def configure_torch_runtime():
+    """Enable safe CUDA throughput optimizations for training."""
+    if torch.cuda.is_available():
+        torch.backends.cuda.matmul.allow_tf32 = True
+        torch.backends.cudnn.allow_tf32 = True
+        torch.backends.cudnn.benchmark = True
+    try:
+        torch.set_float32_matmul_precision("high")
+    except Exception:
+        pass
+
+
+def make_autocast(device: torch.device, enabled: bool, dtype_name: str):
+    if not enabled or device.type != "cuda":
+        return contextlib.nullcontext()
+    dtype = torch.float16 if dtype_name == "fp16" else torch.bfloat16
+    return torch.autocast(device_type="cuda", dtype=dtype)
 
 
 def apply_meta_only(batch, meta_only: bool):
@@ -105,6 +125,66 @@ def build_oracle_support_stats(ds: UnifiedProblemDataset, smoothing: float = 0.0
     }
 
 
+def build_winner_balanced_sample_weights(ds: UnifiedProblemDataset, smoothing: float = 0.01,
+                                         class_balance_power: float = 0.5) -> torch.Tensor:
+    support = build_oracle_support_stats(ds, smoothing=smoothing, class_balance_power=class_balance_power)
+    class_w = support["winner_weights"]
+    weights = []
+    for i in range(ds.base_N):
+        costs = torch.tensor(ds.labels[str(i)]["cost"][:ds.K_p], dtype=torch.float32)
+        winner = int(costs.argmin().item())
+        weights.append(float(class_w[winner].item()))
+    weights = torch.tensor(weights, dtype=torch.double)
+    if ds.coord_augment > 1:
+        weights = weights.repeat(ds.coord_augment)
+    return weights
+
+
+def build_teacher_model(ckpt_path: str, device: torch.device):
+    ckpt = torch.load(ckpt_path, map_location=device, weights_only=False)
+    args = ckpt.get("args", {})
+    teacher = UnifiedSelector(
+        d=args.get("d", 128),
+        depth=args.get("depth", 4),
+        dropout=args.get("dropout", 0.1),
+        use_mvrp_factorized=not args.get("no_fact", False),
+        use_problem_solver_bias="problem_solver_bias" in ckpt["model"],
+        use_problem_film=bool(args.get("problem_film", False)),
+        use_size_feature=bool(args.get("size_feature", False)),
+        rich_pool=bool(args.get("rich_pool", False)),
+        use_global_stats=bool(args.get("global_stats", False)),
+        use_manual_features=bool(args.get("manual_features", False)),
+        use_constraint_experts=bool(args.get("constraint_experts", False)),
+        use_problem_residual_head=bool(args.get("problem_residual_head", False)),
+        use_problem_adapter=bool(args.get("problem_adapter", False)),
+        use_support_head=bool(args.get("support_head", False)),
+        support_hidden=int(args.get("support_hidden", 128)),
+        support_generators=int(args.get("support_generators", 1)),
+        adapter_hidden=int(args.get("adapter_hidden", 64)),
+        coord_hier_pool=bool(args.get("coord_hier_pool", False)),
+        coord_downsample_ratio=float(args.get("coord_downsample_ratio", 0.8)),
+        deep_encoder_overhaul=bool(args.get("deep_encoder_overhaul", False)),
+        expanded_mbm=bool(args.get("expanded_mbm", False)),
+        encoder_rezero=bool(args.get("encoder_rezero", False)),
+        encoder_constraint_experts=bool(args.get("encoder_constraint_experts", False)),
+        encoder_constraint_hidden=int(args.get("encoder_constraint_hidden", 128)),
+        solver_query_scorer=bool(args.get("solver_query_scorer", False)),
+        full_pool_set_scorer=bool(args.get("full_pool_set_scorer", False)),
+        hidden_local_head=bool(args.get("hidden_local_weight", 0.0) > 0),
+        hidden_local_inference_weight=float(args.get("hidden_local_inference_weight", 0.0)),
+    ).to(device)
+    missing, unexpected, skipped, remapped = load_partial_state_dict(teacher, ckpt["model"])
+    if missing or unexpected or skipped or remapped:
+        print(
+            f"[teacher] loaded {ckpt_path} missing={missing} unexpected={unexpected} "
+            f"skipped={skipped} remapped={remapped}"
+        )
+    teacher.eval()
+    for p in teacher.parameters():
+        p.requires_grad = False
+    return teacher
+
+
 def to_device(batch, device):
     out = {}
     for k, v in batch.items():
@@ -125,11 +205,18 @@ def evaluate(model, problems_val, batch_per_problem: int, num_workers: int, devi
     with torch.no_grad():
         for p in problems_val:
             ds = UnifiedProblemDataset(p, "val", coord_augment=0)
-            loader = DataLoader(
-                ds, batch_size=batch_per_problem, shuffle=False, num_workers=num_workers,
-                collate_fn=collate_single_problem, drop_last=False,
-                persistent_workers=(num_workers > 0),
+            loader_kwargs = dict(
+                batch_size=batch_per_problem,
+                shuffle=False,
+                num_workers=num_workers,
+                collate_fn=collate_single_problem,
+                drop_last=False,
+                pin_memory=(device.type == "cuda"),
             )
+            if num_workers > 0:
+                loader_kwargs["persistent_workers"] = True
+                loader_kwargs["prefetch_factor"] = 2
+            loader = DataLoader(ds, **loader_kwargs)
             top1 = top2 = top3 = n_tot = 0
             cost_sum = 0.0
             support_top1 = support_top3 = 0.0
@@ -257,12 +344,15 @@ def main():
     ap.add_argument("--eval-every-epoch", type=int, default=1)
     ap.add_argument("--log-every", type=int, default=50)
     ap.add_argument("--device", type=str, default="cuda:0")
+    ap.add_argument("--amp", action="store_true",
+                    help="Enable CUDA mixed-precision autocast + GradScaler.")
+    ap.add_argument("--amp-dtype", choices=["fp16", "bf16"], default="fp16")
     ap.add_argument("--num-workers", type=int, default=2)
     ap.add_argument("--coord-augment", type=int, default=0,
                     help="Coordinate augmentation multiplier for train split. Supports 0/1/8.")
     ap.add_argument("--overfit", type=int, default=0, help="If >0, use first N instances of each problem and train for more epochs.")
     ap.add_argument("--meta-only", action="store_true", help="Zero-out instance features (R2 baseline).")
-    ap.add_argument("--loss", choices=["soft", "rank", "combined", "soft_risk", "gap_rank"], default="soft")
+    ap.add_argument("--loss", choices=["soft", "rank", "combined", "soft_risk", "gap_rank", "nuc_pair_gap_hidden"], default="soft")
     ap.add_argument("--rank-topk", type=int, default=3)
     ap.add_argument("--gap-reference", choices=["sbs", "best"], default="sbs")
     ap.add_argument("--gap-cap", type=float, default=0.25)
@@ -302,12 +392,28 @@ def main():
                     help="Downsample ratio for hierarchical coordinate pooling.")
     ap.add_argument("--deep-encoder-overhaul", action="store_true",
                     help="Use hierarchical MBM/ReZero encoder upgrades inspired by URS + CoEKS.")
+    ap.add_argument("--expanded-mbm", action="store_true",
+                    help="Expand MBM relation branches and feed explicit problem/constraint conditioning into the encoder.")
     ap.add_argument("--encoder-rezero", action="store_true",
                     help="Enable ReZero residual scaling in the deep encoder overhaul.")
     ap.add_argument("--encoder-constraint-experts", action="store_true",
                     help="Apply shallow constraint-expert FFN residuals inside the encoder.")
     ap.add_argument("--encoder-constraint-hidden", type=int, default=128)
+    ap.add_argument("--solver-query-scorer", action="store_true",
+                    help="Use solver-conditioned cross-attention over instance tokens before scoring.")
+    ap.add_argument("--full-pool-set-scorer", action="store_true",
+                    help="Run a lightweight set transformer over full-pool solver states.")
+    ap.add_argument("--hidden-local-weight", type=float, default=0.0,
+                    help="Auxiliary rare/hidden winner activation loss weight.")
+    ap.add_argument("--hidden-local-prior-thr", type=float, default=0.08,
+                    help="Only solver arms with oracle prior <= this threshold enter the hidden-local target set.")
+    ap.add_argument("--hidden-local-gain-pct", type=float, default=0.10,
+                    help="Minimum gain over the SBS solver for a hidden-local positive label.")
+    ap.add_argument("--hidden-local-inference-weight", type=float, default=0.0,
+                    help="Add hidden-local logits directly into the final score at inference/training time.")
     ap.add_argument("--oversample", action="store_true", help="Apply PROBLEM_WEIGHT oversampling.")
+    ap.add_argument("--winner-balanced-sampling", action="store_true",
+                    help="Apply per-problem oracle-winner-balanced sampling on the train split.")
     ap.add_argument("--hard-case-alpha", type=float, default=0.0,
                     help="Extra sampling mass for instances where the per-instance oracle is not the SBS solver.")
     ap.add_argument("--hard-case-beta", type=float, default=0.0,
@@ -361,13 +467,27 @@ def main():
                     help="If >0, only keep this many problems resident at once under grouped_interleaved.")
     ap.add_argument("--max-batches-per-problem", type=int, default=0,
                     help="If >0, cap the number of train batches drawn per problem in each epoch. Useful for quick pilots.")
+    ap.add_argument("--freeze-problem-solver-bias-epochs", type=int, default=0,
+                    help="Freeze problem_solver_bias for the first N epochs so experts/encoder carry the early signal.")
+    ap.add_argument("--problem-solver-bias-l2", type=float, default=0.0,
+                    help="Optional L2 penalty on problem_solver_bias to avoid collapsing onto priors.")
+    ap.add_argument("--base-distill-ckpt", type=str, default="",
+                    help="Optional teacher/base checkpoint for decisive-sample KL distillation.")
+    ap.add_argument("--base-distill-weight", type=float, default=0.0,
+                    help="KL distillation weight on base-correct decisive samples.")
+    ap.add_argument("--base-distill-gap-pct", type=float, default=0.10,
+                    help="Minimum oracle winner vs runner-up gain (percent) required to apply teacher distillation.")
+    ap.add_argument("--base-distill-temperature", type=float, default=1.0,
+                    help="Temperature for teacher-student KL distillation.")
     args = ap.parse_args()
 
     set_seed(args.seed)
+    configure_torch_runtime()
     save_dir = Path(args.save_dir); save_dir.mkdir(parents=True, exist_ok=True)
     (save_dir / "args.json").write_text(json.dumps(vars(args), indent=2))
 
     device = torch.device(args.device)
+    autocast_enabled = bool(args.amp and device.type == "cuda")
     problems_train = [p for p in PROBLEMS if p not in args.hold_out]
     problems_val_all = PROBLEMS
     print(f"[train] train problems: {problems_train}")
@@ -386,7 +506,14 @@ def main():
             ds.base_N = args.overfit
             ds.N = ds.base_N * (ds.coord_augment if ds.coord_augment > 1 else 1)
         sampler = None
-        weights = build_hard_case_weights(
+        weights = None
+        if args.winner_balanced_sampling:
+            weights = build_winner_balanced_sample_weights(
+                ds,
+                smoothing=args.support_prior_smoothing,
+                class_balance_power=args.winner_balance_power,
+            )
+        hard_weights = build_hard_case_weights(
             ds,
             sbs_pool_idx=audit[problem]["sbs_pool_idx"],
             alpha=args.hard_case_alpha,
@@ -394,20 +521,33 @@ def main():
             gamma=args.hard_case_gamma,
             ambiguity_eps=args.ambiguity_eps,
         )
+        if hard_weights is not None:
+            weights = hard_weights if weights is None else (weights * hard_weights)
         if weights is not None:
             sampler = WeightedRandomSampler(weights, num_samples=len(ds), replacement=True)
-        return DataLoader(
-            ds,
+        loader_kwargs = dict(
             batch_size=args.batch_per_problem,
             shuffle=(sampler is None),
             sampler=sampler,
             num_workers=args.num_workers,
             collate_fn=collate_single_problem,
             drop_last=True,
+            pin_memory=(device.type == "cuda"),
         )
+        if args.num_workers > 0:
+            loader_kwargs["persistent_workers"] = True
+            loader_kwargs["prefetch_factor"] = 2
+        return DataLoader(ds, **loader_kwargs)
 
     oracle_support = {}
-    if args.winner_ce_weight > 0 or args.winner_margin_weight > 0 or args.support_match_weight > 0 or (args.support_head and args.support_loss_weight > 0):
+    if (
+        args.winner_ce_weight > 0
+        or args.winner_margin_weight > 0
+        or args.support_match_weight > 0
+        or (args.support_head and args.support_loss_weight > 0)
+        or args.hidden_local_weight > 0
+        or args.winner_balanced_sampling
+    ):
         for p in problems_train:
             oracle_support[p] = build_oracle_support_stats_from_labels(
                 p,
@@ -434,17 +574,28 @@ def main():
                             coord_hier_pool=args.coord_hier_pool,
                             coord_downsample_ratio=args.coord_downsample_ratio,
                             deep_encoder_overhaul=args.deep_encoder_overhaul,
+                            expanded_mbm=args.expanded_mbm,
                             encoder_rezero=args.encoder_rezero,
                             encoder_constraint_experts=args.encoder_constraint_experts,
-                            encoder_constraint_hidden=args.encoder_constraint_hidden).to(device)
+                            encoder_constraint_hidden=args.encoder_constraint_hidden,
+                            solver_query_scorer=args.solver_query_scorer,
+                            full_pool_set_scorer=args.full_pool_set_scorer,
+                            hidden_local_head=args.hidden_local_weight > 0,
+                            hidden_local_inference_weight=args.hidden_local_inference_weight).to(device)
     if args.init_ckpt:
         init = torch.load(args.init_ckpt, map_location=device, weights_only=False)
-        missing, unexpected = model.load_state_dict(remap_legacy_state_dict(init["model"]), strict=False)
+        missing, unexpected, skipped, remapped = load_partial_state_dict(model, init["model"])
         print(f"[train] initialized from {args.init_ckpt}")
         if missing:
             print(f"[train] missing keys: {missing}")
         if unexpected:
             print(f"[train] unexpected keys: {unexpected}")
+        if skipped:
+            print(f"[train] skipped mismatched keys: {skipped}")
+        if remapped:
+            print(f"[train] solver-remapped keys: {remapped}")
+    if args.freeze_problem_solver_bias_epochs > 0 and hasattr(model, "problem_solver_bias"):
+        model.problem_solver_bias.requires_grad_(False)
     if args.freeze_backbone:
         trainable_prefixes = (
             "solver_emb",
@@ -479,8 +630,12 @@ def main():
                 sbs_pool_idx = audit[problem]["sbs_pool_idx"]
                 sbs_global = audit[problem]["pool_global_ids"][sbs_pool_idx]
                 model.problem_solver_bias[pid, sbs_global] = args.sbs_bias_init
+    teacher_model = None
+    if args.base_distill_weight > 0 and args.base_distill_ckpt:
+        teacher_model = build_teacher_model(args.base_distill_ckpt, device)
 
     opt = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=args.wd, betas=(0.9, 0.95))
+    scaler = torch.cuda.amp.GradScaler(enabled=autocast_enabled and args.amp_dtype == "fp16")
 
     def lr_at(step):
         if step < args.warmup_steps:
@@ -505,107 +660,179 @@ def main():
     loss_ema = None
     t0 = time.time()
     for epoch in range(args.epochs):
+        if args.freeze_problem_solver_bias_epochs > 0 and hasattr(model, "problem_solver_bias"):
+            if epoch == args.freeze_problem_solver_bias_epochs:
+                model.problem_solver_bias.requires_grad_(True)
+                print(f"[train] unfroze problem_solver_bias at epoch {epoch}")
+
         def train_one_batch(problem, batch):
             nonlocal step, loss_ema
             batch = to_device(batch, device)
             batch = apply_meta_only(batch, args.meta_only)
-            if args.support_head:
-                logits, support_logits = model(batch, return_support=True)
-            else:
-                logits = model(batch)
-                support_logits = None
-            logits_pool = logits[:, batch["pool_ids"]]
-            aux_winner = logits.new_tensor(0.0)
-            aux_margin = logits.new_tensor(0.0)
-            aux_support = logits.new_tensor(0.0)
-            aux_shortlist = logits.new_tensor(0.0)
-            if args.winner_ce_weight > 0 or args.support_match_weight > 0:
-                winner = batch["costs"].argmin(dim=1)
-                support = oracle_support[problem]
-                if args.winner_ce_weight > 0:
-                    class_w = support["winner_weights"].to(device)
-                    aux_winner = F.cross_entropy(logits_pool, winner, weight=class_w)
-                if args.support_match_weight > 0:
-                    mean_pred = torch.softmax(logits_pool, dim=1).mean(dim=0).clamp_min(1e-8)
+            with make_autocast(device, autocast_enabled, args.amp_dtype):
+                need_aux = args.hidden_local_weight > 0
+                if args.support_head and need_aux:
+                    logits, support_logits, aux = model(batch, return_support=True, return_aux=True)
+                elif args.support_head:
+                    logits, support_logits = model(batch, return_support=True)
+                    aux = {}
+                elif need_aux:
+                    logits, aux = model(batch, return_aux=True)
+                    support_logits = None
+                else:
+                    logits = model(batch)
+                    support_logits = None
+                    aux = {}
+                logits_pool = logits[:, batch["pool_ids"]]
+                aux_winner = logits.new_tensor(0.0)
+                aux_margin = logits.new_tensor(0.0)
+                aux_support = logits.new_tensor(0.0)
+                aux_shortlist = logits.new_tensor(0.0)
+                aux_hidden = logits.new_tensor(0.0)
+                aux_distill = logits.new_tensor(0.0)
+                if args.winner_ce_weight > 0 or args.support_match_weight > 0:
+                    winner = batch["costs"].argmin(dim=1)
+                    support = oracle_support[problem]
+                    if args.winner_ce_weight > 0:
+                        class_w = support["winner_weights"].to(device)
+                        aux_winner = F.cross_entropy(logits_pool, winner, weight=class_w)
+                    if args.support_match_weight > 0:
+                        mean_pred = torch.softmax(logits_pool, dim=1).mean(dim=0).clamp_min(1e-8)
+                        prior = support["winner_prior"].to(device)
+                        aux_support = F.kl_div(mean_pred.log(), prior, reduction="batchmean")
+                if args.winner_margin_weight > 0:
+                    class_w = oracle_support[problem]["winner_weights"].to(device) if problem in oracle_support else None
+                    aux_margin = winner_margin_loss(
+                        logits,
+                        batch["pool_ids"],
+                        batch["costs"],
+                        base_margin=args.winner_margin_base,
+                        gap_scale=args.winner_margin_gap_scale,
+                        class_weight=class_w,
+                    )
+                if args.loss == "combined":
+                    sbs_idx = audit[problem]["sbs_pool_idx"]
+                    loss = combined_cost_loss(logits, batch["pool_ids"], batch["costs"],
+                                              sbs_pool_idx=sbs_idx, tau=0.07)
+                elif args.loss == "soft_risk":
+                    sbs_idx = audit[problem]["sbs_pool_idx"]
+                    loss = soft_sbs_risk_loss(
+                        logits, batch["pool_ids"], batch["costs"],
+                        sbs_pool_idx=sbs_idx, tau=args.tau,
+                        w_ce=args.soft_ce_weight, w_risk=args.risk_weight,
+                        risk_cap=args.risk_cap,
+                        w_switch_hinge=args.switch_hinge_weight,
+                        switch_gap=args.switch_gap,
+                        switch_margin=args.switch_margin,
+                    )
+                elif args.loss in {"gap_rank", "nuc_pair_gap_hidden"}:
+                    sbs_idx = audit[problem]["sbs_pool_idx"]
+                    loss = gap_regression_rank_loss(
+                        logits, batch["pool_ids"], batch["costs"],
+                        sbs_pool_idx=sbs_idx,
+                        gap_reference=args.gap_reference,
+                        gap_cap=args.gap_cap,
+                        huber_delta=args.huber_delta,
+                        w_reg=args.reg_weight,
+                        w_pair=args.pairwise_weight,
+                        pair_sample_topk=args.pair_sample_topk,
+                    )
+                elif args.loss == "rank":
+                    loss = masked_ranking_loss(
+                        logits, batch["pool_ids"], batch["costs"],
+                        rank_topk=args.rank_topk,
+                    )
+                else:
+                    soft = regret_soft_targets(batch["costs"], tau=args.tau)
+                    loss = masked_listwise_ce(logits, batch["pool_ids"], soft)
+                if args.support_head and args.support_loss_weight > 0:
+                    solver_pos_weight = oracle_support[problem]["winner_weights"].to(device) if problem in oracle_support else None
+                    support_pool = support_logits[:, batch["pool_ids"]] if support_logits.dim() == 2 else support_logits[:, :, batch["pool_ids"]]
+                    aux_shortlist = support_asymmetric_bce_loss(
+                        support_pool,
+                        batch["costs"],
+                        eps=args.support_eps,
+                        topk=args.support_topk,
+                        gamma_neg=args.support_focal_gamma_neg,
+                        pos_weight=args.support_pos_weight,
+                        solver_pos_weight=solver_pos_weight,
+                        diversity_weight=args.support_diversity_weight,
+                        budget_weight=args.support_budget_weight,
+                        target_mode=args.support_target_mode,
+                    )
+                if args.hidden_local_weight > 0:
+                    hidden_logits = aux.get("hidden_logits")
+                    if hidden_logits is None:
+                        raise RuntimeError("hidden_local_weight > 0 but model did not return hidden_logits")
+                    hidden_pool = hidden_logits[:, batch["pool_ids"]]
+                    support = oracle_support[problem]
+                    winner = batch["costs"].argmin(dim=1)
                     prior = support["winner_prior"].to(device)
-                    aux_support = F.kl_div(mean_pred.log(), prior, reduction="batchmean")
-            if args.winner_margin_weight > 0:
-                class_w = oracle_support[problem]["winner_weights"].to(device) if problem in oracle_support else None
-                aux_margin = winner_margin_loss(
-                    logits,
-                    batch["pool_ids"],
-                    batch["costs"],
-                    base_margin=args.winner_margin_base,
-                    gap_scale=args.winner_margin_gap_scale,
-                    class_weight=class_w,
+                    winner_prior = prior.gather(0, winner)
+                    winner_cost = batch["costs"].gather(1, winner.unsqueeze(1)).squeeze(1)
+                    sbs_idx = audit[problem]["sbs_pool_idx"]
+                    sbs_cost = batch["costs"][:, sbs_idx]
+                    winner_gain = ((sbs_cost - winner_cost) / (sbs_cost.abs() + 1e-9)) * 100.0
+                    active = (winner_prior <= args.hidden_local_prior_thr) & (winner_gain >= args.hidden_local_gain_pct)
+                    hidden_target = torch.zeros_like(hidden_pool)
+                    hidden_src = active.to(dtype=hidden_target.dtype).unsqueeze(1)
+                    hidden_target.scatter_(1, winner.unsqueeze(1), hidden_src)
+                    pos_weight = (1.0 / winner_prior.clamp_min(1e-3)).clamp_max(10.0)
+                    pos_weight = pos_weight.where(active, torch.ones_like(pos_weight))
+                    bce = F.binary_cross_entropy_with_logits(hidden_pool, hidden_target, reduction="none")
+                    weight = torch.ones_like(hidden_pool)
+                    weight.scatter_(1, winner.unsqueeze(1), pos_weight.to(dtype=weight.dtype).unsqueeze(1))
+                    aux_hidden = (bce * weight).mean()
+                if teacher_model is not None and args.base_distill_weight > 0:
+                    with torch.no_grad():
+                        with make_autocast(device, autocast_enabled, args.amp_dtype):
+                            teacher_logits = teacher_model(batch)
+                    teacher_pool = teacher_logits[:, batch["pool_ids"]]
+                    teacher_pred = teacher_pool.argmax(dim=1)
+                    winner = batch["costs"].argmin(dim=1)
+                    top2 = batch["costs"].topk(k=min(2, batch["costs"].shape[1]), largest=False).values
+                    if top2.shape[1] > 1:
+                        decisive_gain = ((top2[:, 1] - top2[:, 0]) / (top2[:, 0].abs() + 1e-9)) * 100.0
+                    else:
+                        decisive_gain = torch.full_like(top2[:, 0], float("inf"))
+                    distill_mask = (teacher_pred == winner) & (decisive_gain >= args.base_distill_gap_pct)
+                    if distill_mask.any():
+                        T = args.base_distill_temperature
+                        student_logp = F.log_softmax(logits_pool[distill_mask] / T, dim=1)
+                        teacher_p = F.softmax(teacher_pool[distill_mask] / T, dim=1)
+                        aux_distill = F.kl_div(student_logp, teacher_p, reduction="batchmean") * (T ** 2)
+                loss = (
+                    loss
+                    + args.winner_ce_weight * aux_winner
+                    + args.winner_margin_weight * aux_margin
+                    + args.support_match_weight * aux_support
+                    + args.support_loss_weight * aux_shortlist
+                    + args.hidden_local_weight * aux_hidden
+                    + args.base_distill_weight * aux_distill
                 )
-            if args.loss == "combined":
-                sbs_idx = audit[problem]["sbs_pool_idx"]
-                loss = combined_cost_loss(logits, batch["pool_ids"], batch["costs"],
-                                          sbs_pool_idx=sbs_idx, tau=0.07)
-            elif args.loss == "soft_risk":
-                sbs_idx = audit[problem]["sbs_pool_idx"]
-                loss = soft_sbs_risk_loss(
-                    logits, batch["pool_ids"], batch["costs"],
-                    sbs_pool_idx=sbs_idx, tau=args.tau,
-                    w_ce=args.soft_ce_weight, w_risk=args.risk_weight,
-                    risk_cap=args.risk_cap,
-                    w_switch_hinge=args.switch_hinge_weight,
-                    switch_gap=args.switch_gap,
-                    switch_margin=args.switch_margin,
-                )
-            elif args.loss == "gap_rank":
-                sbs_idx = audit[problem]["sbs_pool_idx"]
-                loss = gap_regression_rank_loss(
-                    logits, batch["pool_ids"], batch["costs"],
-                    sbs_pool_idx=sbs_idx,
-                    gap_reference=args.gap_reference,
-                    gap_cap=args.gap_cap,
-                    huber_delta=args.huber_delta,
-                    w_reg=args.reg_weight,
-                    w_pair=args.pairwise_weight,
-                    pair_sample_topk=args.pair_sample_topk,
-                )
-            elif args.loss == "rank":
-                loss = masked_ranking_loss(
-                    logits, batch["pool_ids"], batch["costs"],
-                    rank_topk=args.rank_topk,
-                )
-            else:
-                soft = regret_soft_targets(batch["costs"], tau=args.tau)
-                loss = masked_listwise_ce(logits, batch["pool_ids"], soft)
-            if args.support_head and args.support_loss_weight > 0:
-                solver_pos_weight = oracle_support[problem]["winner_weights"].to(device) if problem in oracle_support else None
-                support_pool = support_logits[:, batch["pool_ids"]] if support_logits.dim() == 2 else support_logits[:, :, batch["pool_ids"]]
-                aux_shortlist = support_asymmetric_bce_loss(
-                    support_pool,
-                    batch["costs"],
-                    eps=args.support_eps,
-                    topk=args.support_topk,
-                    gamma_neg=args.support_focal_gamma_neg,
-                    pos_weight=args.support_pos_weight,
-                    solver_pos_weight=solver_pos_weight,
-                    diversity_weight=args.support_diversity_weight,
-                    budget_weight=args.support_budget_weight,
-                    target_mode=args.support_target_mode,
-                )
-            loss = (
-                loss
-                + args.winner_ce_weight * aux_winner
-                + args.winner_margin_weight * aux_margin
-                + args.support_match_weight * aux_support
-                + args.support_loss_weight * aux_shortlist
-            )
+                if args.problem_solver_bias_l2 > 0 and hasattr(model, "problem_solver_bias"):
+                    loss = loss + args.problem_solver_bias_l2 * model.problem_solver_bias.pow(2).mean()
             for g in opt.param_groups:
                 g["lr"] = lr_at(step)
-            opt.zero_grad()
-            loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-            opt.step()
+            opt.zero_grad(set_to_none=True)
+            if scaler.is_enabled():
+                scaler.scale(loss).backward()
+                scaler.unscale_(opt)
+                torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                scaler.step(opt)
+                scaler.update()
+            else:
+                loss.backward()
+                torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                opt.step()
             loss_ema = loss.item() if loss_ema is None else 0.98 * loss_ema + 0.02 * loss.item()
             step += 1
             if step % args.log_every == 0:
                 msg = f"ep{epoch} step{step} prob={problem} lr={lr_at(step):.2e} loss={loss.item():.4f} ema={loss_ema:.4f}"
+                if args.hidden_local_weight > 0:
+                    msg += f" hidden={aux_hidden.item():.4f}"
+                if teacher_model is not None and args.base_distill_weight > 0:
+                    msg += f" distill={aux_distill.item():.4f}"
                 print(msg, flush=True)
                 if args.wandb:
                     import wandb
@@ -649,7 +876,7 @@ def main():
                         try:
                             batch = next(iterators[p])
                         except StopIteration:
-                            iterators[p] = iter(_stream_train_loader(p))
+                            iterators[p] = iter(train_loaders[p])
                             batch = next(iterators[p])
                         train_one_batch(p, batch)
                         seen_batches[p] += 1
@@ -665,7 +892,7 @@ def main():
                         try:
                             batch = next(iterators[p])
                         except StopIteration:
-                            iterators[p] = iter(_stream_train_loader(p))
+                            iterators[p] = iter(train_loaders[p])
                             batch = next(iterators[p])
                         train_one_batch(p, batch)
                         seen_batches[p] += 1
@@ -681,12 +908,17 @@ def main():
                 support_threshold=args.support_threshold,
                 support_topk=args.support_topk,
             )
-            print(f"[eval epoch {epoch}] macro_top1={macro['macro_top1']:.4f} vs_sbs={macro['macro_vs_sbs_pct']:+.3f}% vbs_closed={macro['macro_vbs_gap_closed_pct']:+.2f}%")
-            for p in PROBLEMS:
-                r = per_p[p]
-                mark = ""
-                if p in args.hold_out: mark = " [HELD-OUT]"
-                print(f"   {p:>10}: top1={r['top1']:.3f} mean_cost={r['mean_cost']:.4f} (sbs={r['sbs']:.4f}) vs_sbs={r['vs_sbs_pct']:+.2f}%{mark}")
+            marks = {p: " [HELD-OUT]" for p in args.hold_out}
+            print(
+                format_eval_block(
+                    f"[eval epoch {epoch}]",
+                    macro,
+                    per_p,
+                    problem_order=PROBLEMS,
+                    marks=marks,
+                ),
+                flush=True,
+            )
             # Save per-epoch
             (save_dir / f"eval_epoch{epoch}.json").write_text(json.dumps({"per_problem": per_p, "macro": macro}, indent=2))
             if args.wandb:

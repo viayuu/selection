@@ -13,7 +13,8 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
 from .data import UnifiedProblemDataset, collate_single_problem
-from .model import UnifiedSelector, remap_legacy_state_dict
+from .eval_log import format_eval_block
+from .model import UnifiedSelector, load_partial_state_dict
 from .registry import PROBLEMS
 
 
@@ -124,11 +125,16 @@ def build_base_model(base_ckpt: str, device: str):
         coord_hier_pool=bool(args.get("coord_hier_pool", False)),
         coord_downsample_ratio=float(args.get("coord_downsample_ratio", 0.8)),
         deep_encoder_overhaul=bool(args.get("deep_encoder_overhaul", False)),
+        expanded_mbm=bool(args.get("expanded_mbm", False)),
         encoder_rezero=bool(args.get("encoder_rezero", False)),
         encoder_constraint_experts=bool(args.get("encoder_constraint_experts", False)),
         encoder_constraint_hidden=int(args.get("encoder_constraint_hidden", 128)),
+        solver_query_scorer=bool(args.get("solver_query_scorer", False)),
+        full_pool_set_scorer=bool(args.get("full_pool_set_scorer", False)),
+        hidden_local_head=bool(args.get("hidden_local_weight", 0.0) > 0),
+        hidden_local_inference_weight=float(args.get("hidden_local_inference_weight", 0.0)),
     ).to(device)
-    missing, unexpected = model.load_state_dict(remap_legacy_state_dict(ckpt["model"]), strict=False)
+    missing, unexpected, skipped, remapped = load_partial_state_dict(model, ckpt["model"])
     if any(k.startswith("support_problem_heads.") for k in missing):
         for name, param in model.named_parameters():
             if name.startswith("support_problem_heads."):
@@ -137,8 +143,8 @@ def build_base_model(base_ckpt: str, device: str):
         for name, param in model.named_parameters():
             if name.startswith("support_constraint_expert_heads."):
                 nn.init.zeros_(param)
-    if missing or unexpected:
-        print(f"[load base] missing={missing} unexpected={unexpected}")
+    if missing or unexpected or skipped or remapped:
+        print(f"[load base] missing={missing} unexpected={unexpected} skipped={skipped} remapped={remapped}")
     model.eval()
     for p in model.parameters():
         p.requires_grad = False
@@ -383,6 +389,14 @@ def build_candidate_set(base_model: UnifiedSelector, batch, problem_stats: dict,
         "top_idx": top_idx,
         "cand_base": cand_base,
         "cand_prob": cand_prob,
+        "cand_support_max": cand_support_max,
+        "cand_support_per_gen": cand_support_per_gen.transpose(1, 2).contiguous(),
+        "cand_support_src": support_src,
+        "cand_rescued_src": rescued_src,
+        "cand_rank_frac": rank_frac,
+        "cand_is_sbs": is_sbs,
+        "cand_base_delta_sbs": base_delta_sbs,
+        "cand_prob_delta_sbs": prob_delta_sbs,
         "cand_gap_target": cand_gap_target,
         "cand_oracle_prior": oracle_prior,
         "cand_hidden_flag": hidden_flag,
@@ -842,6 +856,15 @@ def evaluate_checkpoint(tag: str, save_dir: Path, base_model, reranker, device: 
             full_pool=args.full_pool,
             support_feature_mode=args.support_feature_mode,
         )
+        print(
+            format_eval_block(
+                f"[{split} {tag}]",
+                out["macro"],
+                out["per_problem"],
+                problem_order=PROBLEMS,
+            ),
+            flush=True,
+        )
         (save_dir / f"analysis_{split}_{tag}.json").write_text(json.dumps(out, indent=2))
         if tag == "best_top1_safe":
             (save_dir / f"analysis_{split}.json").write_text(json.dumps(out, indent=2))
@@ -1020,12 +1043,13 @@ def main():
             cost_slack=args.cost_slack,
         )
         print(
-            f"[eval epoch {epoch}] macro_top1={macro['macro_top1']:.4f} "
-            f"vs_sbs={macro['macro_vs_sbs_pct']:+.3f}% "
-            f"fixable_recovery={macro['macro_fixable_recovery_rate']:.4f} "
-            f"safe_harm={macro['macro_safe_harm_rate']:.4f} "
-            f"hidden_mass={macro['macro_hidden_winner_mass']:.4f} "
-            f"score={score:.6f}",
+            format_eval_block(
+                f"[eval epoch {epoch}]",
+                macro,
+                val_out["per_problem"],
+                problem_order=PROBLEMS,
+                extra_macro_fields=[("score", f"{score:.6f}")],
+            ),
             flush=True,
         )
 

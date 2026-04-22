@@ -1,10 +1,13 @@
 """Problem / solver registry for the unified selector.
 
-18 problems × union of 18 global solvers. Per-problem mask tells which
-solvers are in the candidate pool, plus the order in which raw_label.pkl's
-`cost` vector lists them (= sorted filenames of results/result_*.txt).
+The candidate pools must match the current dataset labels exactly.
+Instead of freezing an old handcrafted solver list, we discover each
+problem's pool from ``data/<problem>train/results/result_*.txt`` and fall
+back to a known-safe default only when those files are unavailable.
 """
 from __future__ import annotations
+import re
+from pathlib import Path
 
 # All 18 problems in a canonical order (index = problem_id).
 PROBLEMS = [
@@ -16,25 +19,41 @@ PROBLEMS = [
 ]
 P2I = {p: i for i, p in enumerate(PROBLEMS)}
 
-# Union solver vocabulary (index = solver_id). sorted alphabetically.
-GLOBAL_SOLVERS = [
-    "DACT", "DIFUSCO", "ELG", "GLOP", "ICAM", "INVIT", "LEHD", "LIH",
-    "MATNET", "MATPOENET", "MTPOMO", "MVMOE", "OMNI",
-    "RELD_CVRP", "RELD_MOEL", "RELD_MTL", "T2T", "UDC",
-]
-S2I = {s: i for i, s in enumerate(GLOBAL_SOLVERS)}
-M_GLOBAL = len(GLOBAL_SOLVERS)  # = 18
+DATA_ROOT = Path(__file__).resolve().parents[2] / "data"
+
+# Safe fallback pools that match the current checked-in dataset layout.
+_FALLBACK_POOLS = {
+    "TSP": ["BQ", "DIFUSCO", "DIFUSCO500", "ELG", "LEHD", "OMNI", "T2T", "T2T500"],
+    "CVRP": ["BQ", "ELG", "ICAM", "LEHD", "MVMOE", "MoSES_CaDA", "MoSES_RF", "OMNI", "RELD_CVRP", "RouteFinder"],
+    "ATSP": ["GLOP", "ICAM_ATSP", "MATNET", "MATPOENET", "UNICO_MatPOENet"],
+}
+for _mvrp in PROBLEMS[3:]:
+    _FALLBACK_POOLS[_mvrp] = ["MTPOMO", "MVMOE", "MoSES_CaDA", "MoSES_RF", "RELD_MOEL", "RELD_MTL", "RouteFinder"]
+
+
+def _strip_result_name(name: str) -> str:
+    return re.sub(r"^result_|\.txt$", "", name)
+
+
+def _discover_pools() -> dict[str, list[str]]:
+    pools: dict[str, list[str]] = {}
+    for problem in PROBLEMS:
+        result_dir = DATA_ROOT / f"{problem}train" / "results"
+        files = sorted(result_dir.glob("result_*.txt")) if result_dir.exists() else []
+        if not files:
+            return dict(_FALLBACK_POOLS)
+        pools[problem] = [_strip_result_name(path.name) for path in files]
+    return pools
+
 
 # Per-problem pool — ORDER MATCHES the raw_label.pkl cost vector
 # (which follows sorted(result_*.txt) filenames).
-POOLS = {
-    "TSP":  ["DACT","DIFUSCO","ELG","GLOP","INVIT","LEHD","LIH","OMNI","T2T","UDC"],
-    "CVRP": ["DACT","ELG","GLOP","ICAM","INVIT","LEHD","OMNI","RELD_CVRP","UDC"],
-    "ATSP": ["GLOP","MATNET","MATPOENET"],
-}
-# All MVRP variants share the same 4-method pool
-for mvrp in PROBLEMS[3:]:
-    POOLS[mvrp] = ["MTPOMO","MVMOE","RELD_MOEL","RELD_MTL"]
+POOLS = _discover_pools()
+
+# Union solver vocabulary (index = solver_id). Sorted for stable IDs.
+GLOBAL_SOLVERS = sorted({solver for pool in POOLS.values() for solver in pool})
+S2I = {s: i for i, s in enumerate(GLOBAL_SOLVERS)}
+M_GLOBAL = len(GLOBAL_SOLVERS)
 
 # Constraint-bit vector (K=5): C, O, B, L, TW.  C=always-on routing constraint for VRP/MVRP; TSP/ATSP C=0.
 CONSTRAINT_BITS = ["C", "O", "B", "L", "TW"]

@@ -255,14 +255,36 @@ def main():
 
     ckpt = torch.load(args.ckpt, map_location=args.device)
     model_args = ckpt.get("args", {})
-    has_bias = "problem_solver_bias" in ckpt["model"]
+    state = ckpt["model"]
+    has_bias = "problem_solver_bias" in state
+    has_problem_arm_bias = "problem_arm_bias" in state
+    has_behavior_emb = "arm_behavior" in state
+    has_arm_attn = any(k.startswith("arm_attn.") for k in state)
+    has_coe = any(k.startswith("coe.") for k in state)
+    has_local_head = any(k.startswith("local_head.") for k in state)
     model = UnifiedSelector(
-        d=model_args.get("d", 128), depth=model_args.get("depth", 4),
+        d=model_args.get("d", 128),
+        depth=model_args.get("depth", 4),
         dropout=model_args.get("dropout", 0.1),
         use_mvrp_factorized=not model_args.get("no_fact", False),
         use_problem_solver_bias=has_bias,
+        use_film=model_args.get("use_film", False),
+        use_arm_attn=has_arm_attn or model_args.get("use_arm_attn", False),
+        use_coe=has_coe or model_args.get("use_coe", False),
+        arm_attn_heads=model_args.get("arm_attn_heads", 4),
+        coe_experts=model_args.get("coe_experts", None),
+        encoder_type=model_args.get("encoder_type", "standard"),
+        rezero=model_args.get("rezero", False),
+        block_num=model_args.get("block_num", 2),
+        encoder_layer_num=model_args.get("encoder_layer_num", 2),
+        heads=model_args.get("heads", 4),
+        downsample_ratio=model_args.get("downsample_ratio", 0.8),
+        local_head=has_local_head or model_args.get("local_head", False),
+        residual_adapter=model_args.get("residual_adapter", False),
+        use_problem_arm_bias=has_problem_arm_bias,
+        use_behavior_emb=has_behavior_emb,
     ).to(args.device)
-    missing, unexpected = model.load_state_dict(ckpt["model"], strict=False)
+    missing, unexpected = model.load_state_dict(state, strict=False)
     if missing or unexpected:
         print(f"[load] missing={missing} unexpected={unexpected}")
     model.eval()

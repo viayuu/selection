@@ -56,3 +56,28 @@ Lightweight log of concrete findings from the fresh auto-review loop. One line p
 - [R40D] CONFIG that works: standard mixed-loss (regret_soft + listwise_ce + plackett_luce pl_weight=0.3 pl_topk=3), no aug_8fold, lr=5e-5 cosine_total=80000, batch_per_problem=16, warmup=3000. Did NOT need the curriculum / PCGrad / MGDA / uncertainty-weighting that reviewer §2 mentioned as fallbacks.
 - [R40D] POST-peak degradation: macro_top1 peaked at ep6 (0.5248), regressed ep7 (0.5194), ep8 (0.5169). LR was already at min (3e-6) by ep6 so not a scheduler issue. Suggests overfit post-peak. Future runs should cut epochs=7 with `--early-stop-plateau 2`.
 - [R40D] the +0.0060 gain does NOT come from zero-pick rescue (264 rescues vs 1437 harms = net -1173). Instead, R40D shifts per-arm distribution within R18's support set; improvements come from arm rank reordering, not new arm discovery.
+
+## 2026-04-21 R42S_fixpair — pairwise sign fixed + family-level θ
+
+- [R42S_fixpair] NEGATIVE: fixing the pairwise_cost_loss sign bug (L265-274 pre: mask picked i-worse-than-j then softplus pushed score_i > score_j; post: mask picks i-better-than-j, gap-weighted) pushed val 0.5229 (up from 0.5277 — wait, v1 was higher val) but test Δ vs SBS = **-0.0002** [-0.0093, +0.0090], p=0.481, NON-SIGNIFICANT. Versus buggy R42S (+0.0017 non-sig), the fix made test Δ WORSE, not better.
+- [R42S_fixpair] WHY: I switched threshold scope from per-problem to family-level (4 θ for TSP/ATSP/CVRP/MVRP). Result: 17/18 problems got θ=+0.400 (MVRP-family saturation point → "mostly keep SBS"); only TSP picked θ=-0.150. The family-θ collapsed MVRP to near-SBS, so CVRP -0.034, OVRPB -0.038, OVRPTW -0.028, OVRPL -0.027 lost.
+- [R42S_fixpair] PER-PROBLEM WINS (even under bad θ): TSP +0.021, OVRPBTW +0.041, OVRPBLTW +0.031, OVRPBL +0.024, VRPBL +0.023 — clustered in TSP + hard-MVRP combinations. Hard-MVRP (B+L+TW mix) benefits from reranker but basic CVRP/VRPTW loses.
+- [R42S_fixpair] CONCLUSION: (a) pairwise sign was indeed a bug — but not the dominant factor in R42S_v1's near-zero Δ. (b) family-θ = wrong abstraction for MVRP. Need per-problem θ with shrinkage OR problem-specific KL-to-base weight. (c) Reranker architecture itself is NOT disqualified — several problems have robust +0.02-+0.04 gains, matching R40D's per-problem signal pattern.
+- [R42S_fixpair] NEXT: R42S_v2 with per-problem θ (accept 1k sample noise) + stronger KL (0.3 → 0.5) to prevent CVRP/OVRPB/OVRPTW/OVRPL drift. Queue on GPU1 after seed1 completes.
+
+## Constraints carried forward (追加)
+- Do NOT use family-level threshold for MVRP family — problem-specific optima disagree. Per-problem θ is the right abstraction even at 1k val noise.
+
+## 2026-04-21 19:00+ CRITICAL data-alignment bug discovered + fixed
+
+- [DATA DRIFT] at 17:46 today `raw_label.pkl` for every non-TSP problem was silently regenerated. New solver results were appended alphabetically: CVRP/MVRP got MoSES_CaDA, MoSES_RF, RouteFinder; ATSP got ICAM_ATSP, UNICO_MatPOENet. Before the change CVRPtest cost_len=9=len(POOLS["CVRP"]); after the change cost_len=12 but POOLS was NOT updated. TSP was untouched (results/ unchanged).
+- [DATA DRIFT] impact: `data.py:100 costs = lbl["cost"][:K_p]` assumes the first K_p raw cost entries = POOLS[problem] order. After the alphabetical expansion this is violated — e.g. for CVRP raw_cost[6..8] moved from (OMNI, RELD_CVRP, UDC) to (MoSES_CaDA, MoSES_RF, OMNI). Consequence: R18 macro_top1 on test appeared to drop 0.5166 → 0.2432 purely from misaligned labels; ATSP "top1" fell to 0.152 because the model still picks arm-1=MATNET (global) but arm-1 now indexes ICAM_ATSP's cost column. TSP unaffected (data untouched).
+- [DATA DRIFT] fix: patch `data.py` to build `cost_gather_idx = [sorted(results/result_*.txt).index(s) for s in POOLS[problem]]` and use that index to gather raw costs into POOLS order. Same patch applied to `tools/dump_behavior_to_npz.py` and `tools/ceiling_lightgbm.py`. Post-patch verification: R18 test macro_top1 = 0.5167 (matches prior 0.5166 to rounding).
+- [DATA DRIFT] fallout: (a) R40D seed0 ckpt (pre-drift, Apr-21 02:58) still valid; test_eval reruns at 0.5226 ✅. (b) R42S_fixpair ckpt + report (pre-drift 13:28) still valid. (c) behavior_emb.npz + balanced_softmax_prior.npz (14:36 on OLD raw_label) — columns already in POOLS order, still valid. (d) Ceiling LightGBM (17:35) pre-drift, valid. (e) R40D seed1 (trained 17:52-17:57) + R40D seed2 (trained 17:57-18:16) + R43 v1 (18:43-19:17) — ALL trained on misaligned labels. Quarantined into `*_INVALID_pre_data_fix/` and retrained from scratch post patch.
+- [DATA DRIFT] lesson: raw_label.pkl is NOT a stable artefact; results/result_*.txt set is the source of truth. Never trust positional-index alignment — always rebuild the index from `sorted(results/result_*.txt)`.
+
+## 2026-04-21 19:18 R43 + R40D seed1 re-launched concurrently post data patch
+
+- [R43 v2] cuda:0, uses behavior_emb + balanced_softmax_prior + support-KL + problem-arm-bias. Flags: `--use-problem-arm-bias --use-behavior-emb --behavior-dim 3 --balanced-softmax-weight 1.0 --support-kl-weight 0.2`. Gate: Δ vs R40D seed0 ≥ +0.003; support_size per problem ≥ 120%; zero-pick rescue ≥ 500.
+- [R40D seed1 v2] cuda:1, flags match seed0 exactly. Gate: test Δ vs R18 ≥ +0.0035 (60% of seed0's +0.0060, allowing variance).
+
