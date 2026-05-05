@@ -15,16 +15,8 @@ import math
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.utils.checkpoint import checkpoint
 
-from .registry import PROBLEMS, P2I, M_GLOBAL, K_CBITS, D_COORD, GLOBAL_SOLVERS
-
-
-LEGACY_GLOBAL_SOLVERS = [
-    "DACT", "DIFUSCO", "ELG", "GLOP", "ICAM", "INVIT", "LEHD", "LIH",
-    "MATNET", "MATPOENET", "MTPOMO", "MVMOE", "OMNI",
-    "RELD_CVRP", "RELD_MOEL", "RELD_MTL", "T2T", "UDC",
-]
+from .registry import PROBLEMS, P2I, M_GLOBAL, K_CBITS, D_COORD
 
 
 def remap_legacy_state_dict(state: dict[str, torch.Tensor]) -> dict[str, torch.Tensor]:
@@ -40,78 +32,11 @@ def remap_legacy_state_dict(state: dict[str, torch.Tensor]) -> dict[str, torch.T
     return upgraded
 
 
-def _infer_solver_vocab_from_state(state: dict[str, torch.Tensor]) -> list[str] | None:
-    emb = state.get("solver_emb.weight")
-    if emb is None or emb.ndim != 2:
-        return None
-    if emb.shape[0] == len(GLOBAL_SOLVERS):
-        return list(GLOBAL_SOLVERS)
-    if emb.shape[0] == len(LEGACY_GLOBAL_SOLVERS):
-        return list(LEGACY_GLOBAL_SOLVERS)
-    return None
-
-
-def _remap_solver_axis_tensor(dst: torch.Tensor, src: torch.Tensor,
-                              dst_vocab: list[str], src_vocab: list[str],
-                              axis: int) -> torch.Tensor:
-    out = dst.clone()
-    dst_index = {name: i for i, name in enumerate(dst_vocab)}
-    for src_i, solver in enumerate(src_vocab):
-        dst_i = dst_index.get(solver)
-        if dst_i is None:
-            continue
-        dst_sel = [slice(None)] * out.ndim
-        src_sel = [slice(None)] * src.ndim
-        dst_sel[axis] = dst_i
-        src_sel[axis] = src_i
-        out[tuple(dst_sel)] = src[tuple(src_sel)]
-    return out
-
-
-def load_partial_state_dict(model: nn.Module, state: dict[str, torch.Tensor]):
-    """Load checkpoint weights while tolerating solver-vocabulary shape changes."""
-    state = remap_legacy_state_dict(state)
-    model_state = model.state_dict()
-    src_vocab = _infer_solver_vocab_from_state(state)
-    filtered: dict[str, torch.Tensor] = {}
-    skipped: list[str] = []
-    remapped: list[str] = []
-    unexpected: list[str] = []
-
-    for key, value in state.items():
-        if key not in model_state:
-            unexpected.append(key)
-            continue
-        target = model_state[key]
-        if target.shape == value.shape:
-            filtered[key] = value
-            continue
-        if src_vocab is not None:
-            if key == "solver_emb.weight" and target.ndim == 2 and value.ndim == 2:
-                filtered[key] = _remap_solver_axis_tensor(target, value, GLOBAL_SOLVERS, src_vocab, axis=0)
-                remapped.append(key)
-                continue
-            if key == "problem_solver_bias" and target.ndim == 2 and value.ndim == 2:
-                filtered[key] = _remap_solver_axis_tensor(target, value, GLOBAL_SOLVERS, src_vocab, axis=1)
-                remapped.append(key)
-                continue
-            if key == "support_generator_solver_bias" and target.ndim == 2 and value.ndim == 2:
-                filtered[key] = _remap_solver_axis_tensor(target, value, GLOBAL_SOLVERS, src_vocab, axis=1)
-                remapped.append(key)
-                continue
-        skipped.append(key)
-
-    missing, unexpected_load = model.load_state_dict(filtered, strict=False)
-    unexpected.extend(list(unexpected_load))
-    return list(missing), unexpected, skipped, remapped
-
-
 class MixedBiasEncoderBlock(nn.Module):
     """Three-branch mixed-bias attention with optional ReZero residual scaling."""
 
     def __init__(self, d: int, heads: int = 4, dropout: float = 0.1,
                  condition_dim: int = K_CBITS + D_COORD + 2,
-                 num_bias: int = 3,
                  use_rezero: bool = False):
         super().__init__()
         if d % heads != 0:
@@ -119,26 +44,25 @@ class MixedBiasEncoderBlock(nn.Module):
         self.d = d
         self.heads = heads
         self.dh = d // heads
-        self.num_bias = num_bias
         self.use_rezero = use_rezero
         self.norm1 = nn.LayerNorm(d)
         self.norm2 = nn.LayerNorm(d)
         self.q_proj = nn.Linear(d, d)
         self.k_proj = nn.Linear(d, d)
         self.v_proj = nn.Linear(d, d)
-        self.out_proj = nn.Linear(num_bias * d, d)
+        self.out_proj = nn.Linear(3 * d, d)
         self.ffn = nn.Sequential(
             nn.Linear(d, 4 * d),
             nn.GELU(),
             nn.Dropout(dropout),
             nn.Linear(4 * d, d),
         )
-        self.attn_drop = nn.Dropout(dropout, inplace=True)
+        self.attn_drop = nn.Dropout(dropout)
         self.ffn_drop = nn.Dropout(dropout)
         self.alpha_net = nn.Sequential(
             nn.Linear(condition_dim, max(16, d // 2)),
             nn.GELU(),
-            nn.Linear(max(16, d // 2), num_bias * heads),
+            nn.Linear(max(16, d // 2), 3 * heads),
         )
         if use_rezero:
             self.rezero_attn = nn.Parameter(torch.zeros(1))
@@ -150,26 +74,23 @@ class MixedBiasEncoderBlock(nn.Module):
     def _attend(self, x: torch.Tensor, mask: torch.Tensor,
                 biases: list[torch.Tensor], cond_vec: torch.Tensor) -> torch.Tensor:
         bsz, n_nodes, _ = x.shape
-        mask = mask.to(torch.bool)
         x = self.norm1(x)
         q = self.q_proj(x).view(bsz, n_nodes, self.heads, self.dh).transpose(1, 2)
         k = self.k_proj(x).view(bsz, n_nodes, self.heads, self.dh).transpose(1, 2)
         v = self.v_proj(x).view(bsz, n_nodes, self.heads, self.dh).transpose(1, 2)
         base = torch.matmul(q, k.transpose(-2, -1)) / math.sqrt(self.dh)
-        alpha = F.softplus(self.alpha_net(cond_vec)).view(bsz, self.num_bias, self.heads, 1, 1) + 1e-3
+        alpha = F.softplus(self.alpha_net(cond_vec)).view(bsz, 3, self.heads, 1, 1) + 1e-3
         key_mask = (~mask).unsqueeze(1).unsqueeze(2)
         query_mask = mask.unsqueeze(-1).to(x.dtype)
         outs = []
         for idx, bias in enumerate(biases):
             bias = bias.unsqueeze(1).to(base.dtype)
             score = base - alpha[:, idx] * bias
-            score.masked_fill_(key_mask, float("-inf"))
+            score = score.masked_fill(key_mask, float("-inf"))
             attn = torch.softmax(score, dim=-1)
-            del score
-            attn = torch.nan_to_num(attn, nan=0.0, posinf=0.0, neginf=0.0)
+            attn = torch.where(torch.isnan(attn), torch.zeros_like(attn), attn)
             attn = self.attn_drop(attn)
             out = torch.matmul(attn, v).transpose(1, 2).contiguous().view(bsz, n_nodes, self.d)
-            del attn
             outs.append(out * query_mask)
         return self.out_proj(torch.cat(outs, dim=-1))
 
@@ -188,17 +109,13 @@ class CoordEncoder(nn.Module):
     def __init__(self, d_in_max: int = 8, d: int = 128, depth: int = 4, heads: int = 4,
                  dropout: float = 0.1, rich_pool: bool = False,
                  hier_pool: bool = False, downsample_ratio: float = 0.8,
-                 deep_mbm: bool = False, use_rezero: bool = False,
-                 condition_dim: int = K_CBITS + D_COORD + 2,
-                 expanded_mbm: bool = False):
+                 deep_mbm: bool = False, use_rezero: bool = False):
         super().__init__()
         self.d_in_max = d_in_max
         self.d = d
         self.rich_pool = rich_pool
         self.hier_pool = hier_pool
         self.deep_mbm = deep_mbm
-        self.expanded_mbm = expanded_mbm
-        self.condition_dim = condition_dim
         self.in_proj = nn.Linear(d_in_max, d)
         if hier_pool:
             n_blocks = 2
@@ -210,8 +127,6 @@ class CoordEncoder(nn.Module):
                     d=d, heads=heads, depth=max(1, bd), dropout=dropout,
                     downsample_ratio=downsample_ratio,
                     deep_mbm=deep_mbm,
-                    condition_dim=condition_dim,
-                    expanded_mbm=expanded_mbm,
                     use_rezero=use_rezero,
                 )
                 for bd in block_depths
@@ -224,14 +139,7 @@ class CoordEncoder(nn.Module):
         else:
             if deep_mbm:
                 self.layers = nn.ModuleList([
-                    MixedBiasEncoderBlock(
-                        d=d,
-                        heads=heads,
-                        dropout=dropout,
-                        condition_dim=condition_dim,
-                        num_bias=9 if expanded_mbm else 3,
-                        use_rezero=use_rezero,
-                    )
+                    MixedBiasEncoderBlock(d=d, heads=heads, dropout=dropout, use_rezero=use_rezero)
                     for _ in range(depth)
                 ])
             else:
@@ -267,8 +175,7 @@ class CoordEncoder(nn.Module):
         return cond
 
     @staticmethod
-    def build_biases(node: torch.Tensor, node_mask: torch.Tensor,
-                     batch: dict | None = None, expanded: bool = False) -> list[torch.Tensor]:
+    def build_biases(node: torch.Tensor, node_mask: torch.Tensor) -> list[torch.Tensor]:
         xy = node[..., :2]
         dist = torch.cdist(xy, xy, p=2)
         valid = node_mask.unsqueeze(1) & node_mask.unsqueeze(2)
@@ -289,47 +196,7 @@ class CoordEncoder(nn.Module):
         relation = relation.masked_fill(~valid, 1.0)
         eye = torch.eye(n_nodes, device=node.device, dtype=torch.bool).unsqueeze(0)
         relation = relation.masked_fill(eye, 0.0)
-        if not expanded:
-            return [dist, demand_gap, relation]
-
-        is_depot = node[..., 3] > 0.5 if node.shape[-1] > 3 else torch.zeros_like(node[..., 0], dtype=torch.bool)
-        depot_pair = (is_depot.unsqueeze(1) | is_depot.unsqueeze(2)).to(dist.dtype)
-        depot_rel = (1.0 - depot_pair).masked_fill(~valid, 1.0).masked_fill(eye, 0.0)
-
-        if node.shape[-1] > 2:
-            demand = node[..., 2]
-            sign = (demand >= 0).to(dist.dtype)
-            demand_sign = (sign.unsqueeze(1) - sign.unsqueeze(2)).abs().masked_fill(~valid, 0.0)
-        else:
-            demand_sign = torch.zeros_like(dist)
-
-        if node.shape[-1] > 4:
-            route_feat = node[..., 4]
-            route_rel = (route_feat.unsqueeze(1) - route_feat.unsqueeze(2)).abs()
-            route_rel = route_rel / route_rel.masked_select(valid).amax().clamp_min(1e-6)
-        else:
-            route_rel = torch.zeros_like(dist)
-
-        if node.shape[-1] > 7:
-            tw_start = node[..., 6]
-            tw_end = node[..., 7]
-            overlap = (torch.minimum(tw_end.unsqueeze(1), tw_end.unsqueeze(2)) - torch.maximum(tw_start.unsqueeze(1), tw_start.unsqueeze(2))).clamp_min(0.0)
-            max_width = (tw_end - tw_start).clamp_min(0.0).amax().clamp_min(1e-6)
-            tw_overlap = (1.0 - overlap / max_width).masked_fill(~valid, 1.0).masked_fill(eye, 0.0)
-            tw_mid = 0.5 * (tw_start + tw_end)
-            tw_slack = (tw_mid.unsqueeze(1) - tw_mid.unsqueeze(2)).abs()
-            tw_slack = tw_slack / tw_slack.masked_select(valid).amax().clamp_min(1e-6)
-        else:
-            tw_overlap = torch.zeros_like(dist)
-            tw_slack = torch.zeros_like(dist)
-
-        if batch is not None:
-            open_flag = batch["cbits"][:, 1].to(dist.dtype).view(-1, 1, 1)
-            open_route = (depot_pair * open_flag).masked_fill(~valid, 0.0).masked_fill(eye, 0.0)
-        else:
-            open_route = torch.zeros_like(dist)
-
-        return [dist, depot_rel, relation, demand_gap, demand_sign, route_rel, tw_overlap, tw_slack, open_route]
+        return [dist, demand_gap, relation]
 
     def _prepare_node(self, node: torch.Tensor) -> torch.Tensor:
         B, N, d_in = node.shape
@@ -340,7 +207,7 @@ class CoordEncoder(nn.Module):
             node = node[..., :self.d_in_max]
         return node
 
-    def forward_tokens(self, node, node_mask, batch: dict | None = None, condition_vec: torch.Tensor | None = None):
+    def forward_tokens(self, node, node_mask):
         node = self._prepare_node(node)
         B = node.shape[0]
         x = self.in_proj(node)
@@ -348,8 +215,8 @@ class CoordEncoder(nn.Module):
             graph_terms = []
             cur_x, cur_mask = x, node_mask
             cur_idx = torch.arange(node.shape[1], device=node.device, dtype=torch.long).unsqueeze(0).expand(B, -1)
-            cond_vec = condition_vec if condition_vec is not None else self.build_condition_vec(node)
-            biases = self.build_biases(node, node_mask, batch=batch, expanded=self.expanded_mbm) if self.deep_mbm else None
+            cond_vec = self.build_condition_vec(node)
+            biases = self.build_biases(node, node_mask) if self.deep_mbm else None
             for block in self.blocks:
                 graph_emb, cur_x, cur_mask, cur_idx = block(
                     cur_x, cur_mask, raw_node=node, cond_vec=cond_vec, full_biases=biases,
@@ -368,19 +235,11 @@ class CoordEncoder(nn.Module):
         # key_padding_mask: True where PAD
         kpm = ~node_mask
         if self.deep_mbm:
-            cond_vec = condition_vec if condition_vec is not None else self.build_condition_vec(node)
-            biases = self.build_biases(node, node_mask, batch=batch, expanded=self.expanded_mbm)
+            cond_vec = self.build_condition_vec(node)
+            biases = self.build_biases(node, node_mask)
             for layer in self.layers:
-                if self.training and torch.is_grad_enabled():
-                    x = checkpoint(
-                        lambda inp, layer=layer, node_mask=node_mask, biases=biases, cond_vec=cond_vec: layer(inp, node_mask, biases, cond_vec),
-                        x,
-                        use_reentrant=False,
-                    )
-                else:
-                    x = layer(x, node_mask, biases, cond_vec)
+                x = layer(x, node_mask, biases, cond_vec)
         else:
-            kpm = kpm.to(torch.bool)
             for layer in self.layers:
                 x = layer(x, src_key_padding_mask=kpm)
         x = self.out_norm(x)
@@ -396,29 +255,20 @@ class CoordEncoder(nn.Module):
             pooled = self.pool_proj(torch.cat([pooled, x_max, x_std, depot], dim=-1))
         return pooled, x, node_mask
 
-    def forward(self, node, node_mask, batch: dict | None = None, condition_vec: torch.Tensor | None = None):
-        pooled, _, _ = self.forward_tokens(node, node_mask, batch=batch, condition_vec=condition_vec)
+    def forward(self, node, node_mask):
+        pooled, _, _ = self.forward_tokens(node, node_mask)
         return pooled
 
 
 class CoordHierPoolBlock(nn.Module):
     def __init__(self, d: int, heads: int, depth: int, dropout: float, downsample_ratio: float,
-                 deep_mbm: bool = False, use_rezero: bool = False,
-                 condition_dim: int = K_CBITS + D_COORD + 2,
-                 expanded_mbm: bool = False):
+                 deep_mbm: bool = False, use_rezero: bool = False):
         super().__init__()
         self.downsample_ratio = downsample_ratio
         self.deep_mbm = deep_mbm
         if deep_mbm:
             self.layers = nn.ModuleList([
-                MixedBiasEncoderBlock(
-                    d=d,
-                    heads=heads,
-                    dropout=dropout,
-                    condition_dim=condition_dim,
-                    num_bias=9 if expanded_mbm else 3,
-                    use_rezero=use_rezero,
-                )
+                MixedBiasEncoderBlock(d=d, heads=heads, dropout=dropout, use_rezero=use_rezero)
                 for _ in range(depth)
             ])
         else:
@@ -490,7 +340,6 @@ class CoordHierPoolBlock(nn.Module):
                 cond_vec: torch.Tensor | None = None,
                 full_biases: list[torch.Tensor] | None = None,
                 node_indices: torch.Tensor | None = None):
-        mask = mask.to(torch.bool)
         kpm = ~mask
         if self.deep_mbm:
             cur_biases = []
@@ -503,14 +352,7 @@ class CoordHierPoolBlock(nn.Module):
                     gathered.append(sub.unsqueeze(0))
                 cur_biases.append(torch.cat(gathered, dim=0))
             for layer in self.layers:
-                if self.training and torch.is_grad_enabled():
-                    x = checkpoint(
-                        lambda inp, layer=layer, mask=mask, cur_biases=cur_biases, cond_vec=cond_vec: layer(inp, mask, cur_biases, cond_vec),
-                        x,
-                        use_reentrant=False,
-                    )
-                else:
-                    x = layer(x, mask, cur_biases, cond_vec)
+                x = layer(x, mask, cur_biases, cond_vec)
         else:
             for layer in self.layers:
                 x = layer(x, src_key_padding_mask=kpm)
@@ -523,12 +365,9 @@ class MatrixEncoder(nn.Module):
     """Simple ATSP matrix encoder: summary features + MLP.  Pilot-level; MatNet-proper can replace later."""
 
     def __init__(self, d: int = 128, depth: int = 2, heads: int = 4,
-                 dropout: float = 0.1, deep_mbm: bool = False, use_rezero: bool = False,
-                 condition_dim: int = K_CBITS + D_COORD + 2,
-                 expanded_mbm: bool = False):
+                 dropout: float = 0.1, deep_mbm: bool = False, use_rezero: bool = False):
         super().__init__()
         self.deep_mbm = deep_mbm
-        self.expanded_mbm = expanded_mbm
         # Stats: mean, std, max, min, skew, symmetry_ratio, row_entropy_mean, col_entropy_mean, TI-violation-rate, diag_max
         if deep_mbm:
             self.in_proj = nn.Sequential(
@@ -536,14 +375,7 @@ class MatrixEncoder(nn.Module):
                 nn.Linear(d, d), nn.GELU(),
             )
             self.layers = nn.ModuleList([
-                MixedBiasEncoderBlock(
-                    d=d,
-                    heads=heads,
-                    dropout=dropout,
-                    condition_dim=condition_dim,
-                    num_bias=6 if expanded_mbm else 3,
-                    use_rezero=use_rezero,
-                )
+                MixedBiasEncoderBlock(d=d, heads=heads, dropout=dropout, use_rezero=use_rezero)
                 for _ in range(depth)
             ])
             self.out_proj = nn.Sequential(
@@ -590,7 +422,7 @@ class MatrixEncoder(nn.Module):
             feats[i, :n] = feats_i
         return feats, mask
 
-    def forward_tokens(self, mat, node_mask, batch: dict | None = None, condition_vec: torch.Tensor | None = None):
+    def forward_tokens(self, mat, node_mask):
         B, N, _ = mat.shape
         if self.deep_mbm:
             feats, mask = self.build_node_features(mat, node_mask)
@@ -598,16 +430,10 @@ class MatrixEncoder(nn.Module):
             bias0 = mat.new_ones(B, N, N)
             bias1 = mat.new_ones(B, N, N)
             bias2 = mat.new_ones(B, N, N)
-            bias3 = mat.new_zeros(B, N, N)
-            bias4 = mat.new_zeros(B, N, N)
-            bias5 = mat.new_zeros(B, N, N)
             for i in range(B):
                 n = int(mask[i].sum().item())
                 cur = mat[i, :n, :n].clamp(min=0, max=1e3)
-                if condition_vec is not None:
-                    cond_i = condition_vec[i]
-                else:
-                    cond_i = torch.zeros(K_CBITS + D_COORD + 2, device=mat.device, dtype=mat.dtype)
+                cond_i = torch.zeros(K_CBITS + D_COORD + 2, device=mat.device, dtype=mat.dtype)
                 cond_i[K_CBITS + D_COORD] = 0.0
                 cond_i[K_CBITS + D_COORD + 1] = 1.0
                 cond_vec.append(cond_i)
@@ -616,35 +442,14 @@ class MatrixEncoder(nn.Module):
                 bias1[i, :n, :n] = cur.t() / vmax
                 asym = (cur - cur.t()).abs()
                 bias2[i, :n, :n] = asym / asym.max().clamp_min(1e-6)
-                if self.expanded_mbm:
-                    masked = cur.masked_fill(torch.eye(n, dtype=torch.bool, device=mat.device), float("inf"))
-                    nearest_out = masked.min(dim=1).values
-                    nearest_in = masked.min(dim=0).values
-                    bias3[i, :n, :n] = (nearest_out.unsqueeze(1) - nearest_out.unsqueeze(0)).abs() / nearest_out.abs().max().clamp_min(1e-6)
-                    bias4[i, :n, :n] = (nearest_in.unsqueeze(1) - nearest_in.unsqueeze(0)).abs() / nearest_in.abs().max().clamp_min(1e-6)
-                    row_mean = cur.mean(dim=1)
-                    col_mean = cur.mean(dim=0)
-                    bias5[i, :n, :n] = (row_mean.unsqueeze(1) - col_mean.unsqueeze(0)).abs() / cur.abs().mean().clamp_min(1e-6)
                 eye = torch.eye(n, dtype=torch.bool, device=mat.device)
                 bias0[i, :n, :n].masked_fill_(eye, 0.0)
                 bias1[i, :n, :n].masked_fill_(eye, 0.0)
                 bias2[i, :n, :n].masked_fill_(eye, 0.0)
-                if self.expanded_mbm:
-                    bias3[i, :n, :n].masked_fill_(eye, 0.0)
-                    bias4[i, :n, :n].masked_fill_(eye, 0.0)
-                    bias5[i, :n, :n].masked_fill_(eye, 0.0)
-            cond = torch.stack(cond_vec, dim=0) if condition_vec is None else condition_vec
+            cond = torch.stack(cond_vec, dim=0)
             x = self.in_proj(feats)
-            biases = [bias0, bias1, bias2] + ([bias3, bias4, bias5] if self.expanded_mbm else [])
             for layer in self.layers:
-                if self.training and torch.is_grad_enabled():
-                    x = checkpoint(
-                        lambda inp, layer=layer, mask=mask, biases=biases, cond=cond: layer(inp, mask, biases, cond),
-                        x,
-                        use_reentrant=False,
-                    )
-                else:
-                    x = layer(x, mask, biases, cond)
+                x = layer(x, mask, [bias0, bias1, bias2], cond)
             neg_inf = torch.full_like(x, float("-inf"))
             mean = (x * mask.unsqueeze(-1).float()).sum(dim=1) / mask.unsqueeze(-1).float().sum(dim=1).clamp_min(1.0)
             maxv = torch.where(mask.unsqueeze(-1), x, neg_inf).max(dim=1).values
@@ -715,14 +520,7 @@ class MatrixEncoder(nn.Module):
             cond = torch.stack(cond_vec, dim=0)
             x = self.in_proj(x)
             for layer in self.layers:
-                if self.training and torch.is_grad_enabled():
-                    x = checkpoint(
-                        lambda inp, layer=layer, mask=mask, bias0=bias0, bias1=bias1, bias2=bias2, cond=cond: layer(inp, mask, [bias0, bias1, bias2], cond),
-                        x,
-                        use_reentrant=False,
-                    )
-                else:
-                    x = layer(x, mask, [bias0, bias1, bias2], cond)
+                x = layer(x, mask, [bias0, bias1, bias2], cond)
             neg_inf = torch.full_like(x, float("-inf"))
             mean = (x * mask.unsqueeze(-1).float()).sum(dim=1) / mask.unsqueeze(-1).float().sum(dim=1).clamp_min(1.0)
             maxv = torch.where(mask.unsqueeze(-1), x, neg_inf).max(dim=1).values
@@ -771,39 +569,21 @@ class UnifiedSelector(nn.Module):
                  coord_hier_pool: bool = False,
                  coord_downsample_ratio: float = 0.8,
                  deep_encoder_overhaul: bool = False,
-                 expanded_mbm: bool = False,
                  encoder_rezero: bool = False,
                  encoder_constraint_experts: bool = False,
-                 encoder_constraint_hidden: int = 128,
-                 solver_query_scorer: bool = False,
-                 full_pool_set_scorer: bool = False,
-                 hidden_local_head: bool = False,
-                 hidden_local_inference_weight: float = 0.0):
+                 encoder_constraint_hidden: int = 128):
         super().__init__()
         self.d = d
-        self.expanded_mbm = expanded_mbm
-        self.use_solver_query_scorer = solver_query_scorer
-        self.use_full_pool_set_scorer = full_pool_set_scorer
-        self.use_hidden_local_head = hidden_local_head
-        self.hidden_local_inference_weight = hidden_local_inference_weight
-        cond_dim = K_CBITS + D_COORD + 2 + len(PROBLEMS) + 3
-        if use_global_stats:
-            cond_dim += 16
-        if use_manual_features:
-            cond_dim += 32
         self.coord_enc = CoordEncoder(
             d_in_max=d_coord_in, d=d, depth=depth, dropout=dropout,
             rich_pool=rich_pool, hier_pool=coord_hier_pool,
             downsample_ratio=coord_downsample_ratio,
             deep_mbm=deep_encoder_overhaul,
-            condition_dim=cond_dim,
-            expanded_mbm=expanded_mbm,
             use_rezero=encoder_rezero,
         )
         self.matrix_enc = MatrixEncoder(
             d=d, depth=max(2, depth // 2), heads=4, dropout=dropout,
             deep_mbm=deep_encoder_overhaul, use_rezero=encoder_rezero,
-            condition_dim=cond_dim, expanded_mbm=expanded_mbm,
         )
         self.deep_encoder_overhaul = deep_encoder_overhaul
         # Metadata
@@ -864,35 +644,9 @@ class UnifiedSelector(nn.Module):
             self.encoder_constraint_ln = nn.LayerNorm(d)
         # Solver embeddings (global vocabulary)
         self.solver_emb = nn.Embedding(M_GLOBAL, d)
-        self.cond_dim = cond_dim
-        if solver_query_scorer:
-            self.cond_to_hidden = nn.Sequential(
-                nn.Linear(cond_dim, d),
-                nn.GELU(),
-                nn.LayerNorm(d),
-            )
-            self.solver_query_proj = nn.Sequential(
-                nn.Linear(3 * d, d),
-                nn.GELU(),
-                nn.LayerNorm(d),
-            )
-            self.solver_cross_attn = nn.MultiheadAttention(d, num_heads=4, dropout=dropout, batch_first=True)
-            self.solver_query_ln = nn.LayerNorm(d)
-            if full_pool_set_scorer:
-                self.solver_set_layers = nn.ModuleList([
-                    nn.TransformerEncoderLayer(
-                        d_model=d, nhead=4, dim_feedforward=2 * d,
-                        dropout=dropout, batch_first=True, norm_first=True, activation="gelu",
-                    )
-                    for _ in range(2)
-                ])
-                self.solver_set_ln = nn.LayerNorm(d)
-            pair_in_dim = 6 * d
-        else:
-            pair_in_dim = 4 * d
         # Head MLP on pair features
         self.head = nn.Sequential(
-            nn.Linear(pair_in_dim, head_hidden), nn.GELU(),
+            nn.Linear(4*d, head_hidden), nn.GELU(),
             nn.Dropout(dropout),
             nn.Linear(head_hidden, 1),
         )
@@ -901,7 +655,7 @@ class UnifiedSelector(nn.Module):
         if use_support_head:
             self.support_heads = nn.ModuleList([
                 nn.Sequential(
-                    nn.Linear(pair_in_dim, support_hidden), nn.GELU(),
+                    nn.Linear(4 * d, support_hidden), nn.GELU(),
                     nn.Dropout(dropout),
                     nn.Linear(support_hidden, 1),
                 )
@@ -917,7 +671,7 @@ class UnifiedSelector(nn.Module):
         if use_problem_residual_head:
             self.problem_heads = nn.ModuleList([
                 nn.Sequential(
-                    nn.Linear(pair_in_dim, head_hidden), nn.GELU(),
+                    nn.Linear(4*d, head_hidden), nn.GELU(),
                     nn.Dropout(dropout),
                     nn.Linear(head_hidden, 1),
                 )
@@ -926,7 +680,7 @@ class UnifiedSelector(nn.Module):
             if use_support_head:
                 self.support_problem_heads = nn.ModuleList([
                     nn.Sequential(
-                        nn.Linear(pair_in_dim, support_hidden), nn.GELU(),
+                        nn.Linear(4 * d, support_hidden), nn.GELU(),
                         nn.Dropout(dropout),
                         nn.Linear(support_hidden, 1),
                     )
@@ -936,7 +690,7 @@ class UnifiedSelector(nn.Module):
         if use_constraint_experts:
             self.constraint_expert_heads = nn.ModuleList([
                 nn.Sequential(
-                    nn.Linear(pair_in_dim, head_hidden), nn.GELU(),
+                    nn.Linear(4*d, head_hidden), nn.GELU(),
                     nn.Dropout(dropout),
                     nn.Linear(head_hidden, 1),
                 )
@@ -945,19 +699,12 @@ class UnifiedSelector(nn.Module):
             if use_support_head:
                 self.support_constraint_expert_heads = nn.ModuleList([
                     nn.Sequential(
-                        nn.Linear(pair_in_dim, support_hidden), nn.GELU(),
+                        nn.Linear(4 * d, support_hidden), nn.GELU(),
                         nn.Dropout(dropout),
                         nn.Linear(support_hidden, 1),
                     )
-                for _ in range(8)
+                    for _ in range(8)
                 ])
-        if hidden_local_head:
-            self.hidden_local_head = nn.Sequential(
-                nn.Linear(pair_in_dim, head_hidden),
-                nn.GELU(),
-                nn.Dropout(dropout),
-                nn.Linear(head_hidden, 1),
-            )
         # Problem × solver learned bias table (init 0) — captures per-problem solver priors.
         self.use_problem_solver_bias = use_problem_solver_bias
         if use_problem_solver_bias:
@@ -985,36 +732,11 @@ class UnifiedSelector(nn.Module):
             batch["cbits"].to(device=device, dtype=dtype),
         ], dim=1)
 
-    def build_explicit_condition(self, batch) -> torch.Tensor:
-        if batch["kind"] == "coord":
-            dev = batch["node"].device
-            dtype = batch["node"].dtype
-            B = batch["node"].shape[0]
-        else:
-            dev = batch["matrix"].device
-            dtype = batch["matrix"].dtype
-            B = batch["matrix"].shape[0]
-        pid = torch.full((B,), batch["problem_id"], dtype=torch.long, device=dev)
-        pid_oh = F.one_hot(pid, num_classes=len(PROBLEMS)).to(dtype)
-        coord_oh = F.one_hot(batch["coord_dist"], num_classes=D_COORD).to(dtype)
-        kind = torch.zeros(B, 2, device=dev, dtype=dtype)
-        kind[:, 0] = 1.0 if batch["kind"] == "coord" else 0.0
-        kind[:, 1] = 1.0 if batch["kind"] == "matrix" else 0.0
-        n = batch["n"].float().to(device=dev, dtype=dtype).unsqueeze(-1)
-        size = torch.cat([torch.log1p(n) / 5.0, n / 256.0, (n >= 100).to(dtype)], dim=-1)
-        parts = [pid_oh, batch["cbits"].to(device=dev, dtype=dtype), coord_oh, kind, size]
-        if self.use_global_stats:
-            parts.append(self.compute_global_stats(batch).to(dtype))
-        if self.use_manual_features:
-            parts.append(self.compute_manual_features(batch).to(dtype))
-        return torch.cat(parts, dim=1)
-
     def encode_instance(self, batch):
-        cond_vec = self.build_explicit_condition(batch) if self.expanded_mbm else None
         if batch["kind"] == "coord":
-            g = self.coord_enc(batch["node"], batch["node_mask"], batch=batch, condition_vec=cond_vec)   # (B, d)
+            g = self.coord_enc(batch["node"], batch["node_mask"])   # (B, d)
         else:
-            g = self.matrix_enc.forward_tokens(batch["matrix"], batch["node_mask"], batch=batch, condition_vec=cond_vec)[0] if self.deep_encoder_overhaul else self.matrix_enc(batch["matrix"], batch["node_mask"])
+            g = self.matrix_enc(batch["matrix"], batch["node_mask"])
         B = g.shape[0]
         pid = torch.full((B,), batch["problem_id"], dtype=torch.long, device=g.device)
         prob_vec = self.prob_emb(pid)
@@ -1052,11 +774,10 @@ class UnifiedSelector(nn.Module):
         return h
 
     def encode_instance_with_tokens(self, batch):
-        cond_vec = self.build_explicit_condition(batch) if self.expanded_mbm else None
         if batch["kind"] == "coord":
-            _, token_x, token_mask = self.coord_enc.forward_tokens(batch["node"], batch["node_mask"], batch=batch, condition_vec=cond_vec)
+            _, token_x, token_mask = self.coord_enc.forward_tokens(batch["node"], batch["node_mask"])
         else:
-            _, token_x, token_mask = self.matrix_enc.forward_tokens(batch["matrix"], batch["node_mask"], batch=batch, condition_vec=cond_vec)
+            _, token_x, token_mask = self.matrix_enc.forward_tokens(batch["matrix"], batch["node_mask"])
         h = self.encode_instance(batch)
         return h, token_x, token_mask
 
@@ -1336,11 +1057,7 @@ class UnifiedSelector(nn.Module):
         return torch.stack(feats, dim=0)
 
     def compute_pair_features(self, batch):
-        if self.use_solver_query_scorer:
-            h, token_x, token_mask = self.encode_instance_with_tokens(batch)
-        else:
-            h = self.encode_instance(batch)  # (B, d)
-            token_x = token_mask = None
+        h = self.encode_instance(batch)  # (B, d)
         B = h.shape[0]
         M = M_GLOBAL
         # Solver embeddings
@@ -1348,48 +1065,22 @@ class UnifiedSelector(nn.Module):
         # Pair features: (B, M, 4d)
         h_exp = h.unsqueeze(1).expand(B, M, self.d)
         e_exp = e.unsqueeze(0).expand(B, M, self.d)
-        aux = {}
-        if self.use_solver_query_scorer:
-            cond_h = self.cond_to_hidden(self.build_explicit_condition(batch)).unsqueeze(1).expand(B, M, self.d)
-            query = self.solver_query_proj(torch.cat([h_exp, e_exp, cond_h], dim=-1))
-            attn_out, _ = self.solver_cross_attn(query, token_x, token_x, key_padding_mask=(~token_mask).to(torch.bool))
-            solver_state = self.solver_query_ln(query + attn_out)
-            if self.use_full_pool_set_scorer:
-                mask = (~batch["mask"].bool()).to(torch.bool)
-                for layer in self.solver_set_layers:
-                    solver_state = layer(solver_state, src_key_padding_mask=mask)
-                solver_state = self.solver_set_ln(solver_state)
-            z = torch.cat([
-                h_exp,
-                e_exp,
-                solver_state,
-                h_exp * e_exp,
-                (solver_state - e_exp).abs(),
-                solver_state * e_exp,
-            ], dim=-1)
-            aux["solver_state"] = solver_state
-        else:
-            z = torch.cat([h_exp, e_exp, h_exp * e_exp, (h_exp - e_exp).abs()], dim=-1)
-        return z, e_exp, aux
+        z = torch.cat([h_exp, e_exp, h_exp * e_exp, (h_exp - e_exp).abs()], dim=-1)
+        return z, e_exp
 
-    def forward(self, batch, return_support: bool = False, return_aux: bool = False):
+    def forward(self, batch, return_support: bool = False):
         """Compute logits over all M_GLOBAL solvers (unavailable get -inf via mask)."""
-        z, e_exp, aux = self.compute_pair_features(batch)
+        z, e_exp = self.compute_pair_features(batch)
         logits = self.head(z).squeeze(-1)  # (B, M)
         B = logits.shape[0]
         dtype = logits.dtype
         device = logits.device
         support_logits = None
-        hidden_logits = None
         if self.use_support_head:
             support_logits = torch.stack(
                 [head(z).squeeze(-1) for head in self.support_heads],
                 dim=1,
             )  # (B, G, M)
-        if self.use_hidden_local_head:
-            hidden_logits = self.hidden_local_head(z).squeeze(-1)
-            if self.hidden_local_inference_weight != 0:
-                logits = logits + self.hidden_local_inference_weight * hidden_logits
         if self.use_problem_residual_head:
             logits = logits + self.problem_heads[batch["problem_id"]](z).squeeze(-1)
             if support_logits is not None:
@@ -1428,16 +1119,10 @@ class UnifiedSelector(nn.Module):
             if self.support_generators > 1:
                 support_logits = support_logits + self.support_generator_solver_bias.unsqueeze(0)
             support_logits = support_logits + torch.log(mask.clamp_min(1e-30)).unsqueeze(1)
-        if return_support or return_aux:
+        if return_support:
             if support_logits is not None and self.support_generators == 1:
                 support_logits = support_logits.squeeze(1)
-            aux = dict(aux)
-            aux["hidden_logits"] = hidden_logits
-            if return_support and return_aux:
-                return logits, support_logits, aux
-            if return_support:
-                return logits, support_logits
-            return logits, aux
+            return logits, support_logits
         return logits
 
 

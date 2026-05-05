@@ -58,7 +58,18 @@ class UnifiedProblemDataset(Dataset):
     def __init__(self, problem: str, split: str, coord_augment: int = 0):
         self.problem = problem
         self.split = split
-        d = DATA_ROOT / f"{problem}{split}"
+        split_key = str(split)
+        split_upper = split_key.upper()
+        if split_upper == "TSPLIB":
+            if problem != "TSP":
+                raise ValueError("TSPLIB split is only valid for problem='TSP'")
+            d = DATA_ROOT / "TSPLIB"
+        elif split_upper == "CVRPLIB":
+            if problem != "CVRP":
+                raise ValueError("CVRPLIB split is only valid for problem='CVRP'")
+            d = DATA_ROOT / "CVRPLIB"
+        else:
+            d = DATA_ROOT / f"{problem}{split}"
         with open(d / "dataset.pkl", "rb") as f:
             self.instances = pickle.load(f)
         with open(d / "raw_label.pkl", "rb") as f:

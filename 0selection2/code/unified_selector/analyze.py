@@ -30,7 +30,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-from .registry import PROBLEMS, P2I, problem_to_pool_mask
+from .registry import PROBLEMS, P2I, POOLS, problem_to_pool_mask
 from .data import UnifiedProblemDataset, collate_single_problem, augment_xy_by_8_fold
 from .model import UnifiedSelector, remap_legacy_state_dict, shortlist_from_support
 
@@ -56,10 +56,22 @@ def evaluate_problem(model, problem: str, split: str, device, audit: dict,
     ds = UnifiedProblemDataset(problem, split)
     dl = DataLoader(ds, batch_size=32, shuffle=False, num_workers=0,
                     collate_fn=collate_single_problem)
-    pool_names = audit[problem]["pool"]
-    pool_ids = audit[problem]["pool_global_ids"]
-    sbs_idx = audit[problem]["sbs_pool_idx"]
-    K_p = len(pool_names)
+    pool_names = list(POOLS[problem])
+    K_p = ds.K_p
+    if len(pool_names) != K_p:
+        pool_names = pool_names[:K_p]
+
+    # The legacy audit file may belong to an older label space.  For analysis on
+    # the current dataset, derive SBS from the current split labels instead of
+    # trusting historical pool metadata.
+    gate_sbs_idx = None
+    if gate_gamma is not None:
+        ref_costs = []
+        for i in range(ds.base_N):
+            ref_costs.append(np.asarray(ds.labels[str(i)]["cost"][:K_p], dtype=np.float32))
+        if ref_costs:
+            ref_costs = np.stack(ref_costs, axis=0)
+            gate_sbs_idx = int(ref_costs.mean(axis=0).argmin())
 
     all_costs = []
     all_pred = []        # selector's chosen index within pool
@@ -108,15 +120,13 @@ def evaluate_problem(model, problem: str, split: str, device, audit: dict,
             topk=support_topk,
         )
         log_p_pool = F.log_softmax(effective_logits_pool, dim=1)
-        if gate_gamma is not None:
-            # SBS gate: if log_p_pool[:, sbs_idx] > -gamma (i.e. p >= exp(-gamma)) -> force pick SBS
-            max_lp = log_p_pool.max(dim=1).values
+        if gate_gamma is not None and gate_sbs_idx is not None:
             # Alternative: margin-based gate — if best beats SBS by <gamma (log-prob), pick SBS.
             best_idx = log_p_pool.argmax(dim=1)
-            sbs_lp = log_p_pool[:, sbs_idx]
+            sbs_lp = log_p_pool[:, gate_sbs_idx]
             best_lp = log_p_pool.gather(1, best_idx.unsqueeze(1)).squeeze(1)
             low_conf = (best_lp - sbs_lp) < gate_gamma
-            pred = torch.where(low_conf, torch.full_like(best_idx, sbs_idx), best_idx)
+            pred = torch.where(low_conf, torch.full_like(best_idx, gate_sbs_idx), best_idx)
         else:
             pred = log_p_pool.argmax(dim=1)
         all_pred.append(pred.cpu().numpy())
@@ -186,6 +196,7 @@ def evaluate_problem(model, problem: str, split: str, device, audit: dict,
         support_hidden_winner_mass = None
         support_oracle_mass_recall = None
 
+    sbs_idx = int(np.argmin([method_mean[n] for n in pool_names]))
     sbs_name = pool_names[sbs_idx]
     sbs_cost = method_mean[sbs_name]
     vbs_mean = float(costs.min(axis=1).mean())
@@ -338,12 +349,14 @@ def fig_loss_curve(train_log_path: Path, out: Path):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--ckpt", required=True)
-    ap.add_argument("--split", choices=["val", "test"], default="val")
+    ap.add_argument("--split", choices=["val", "test", "TSPLIB", "CVRPLIB"], default="val")
     ap.add_argument("--out", required=True)
     ap.add_argument("--audit", default="code/unified_selector/runs/audit.json")
     ap.add_argument("--gate", default=None, help="Path to gate/gate.json with per-problem gamma")
     ap.add_argument("--device", default="cuda:0")
     ap.add_argument("--tta", type=int, default=1, help="Average logits over up to 8 coord augmentations at eval time.")
+    ap.add_argument("--problems", nargs="*", default=None,
+                    help="Optional subset of problems to analyze, e.g. --problems TSP or --problems CVRP.")
     args = ap.parse_args()
 
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
@@ -388,11 +401,20 @@ def main():
         if "gammas" in gate_cfg:
             gate_cfg = gate_cfg["gammas"]
 
+    if args.problems:
+        problems = args.problems
+    elif args.split == "TSPLIB":
+        problems = ["TSP"]
+    elif args.split == "CVRPLIB":
+        problems = ["CVRP"]
+    else:
+        problems = PROBLEMS
+
     per_p: Dict[str, dict] = {}
     use_support_head = bool(model_args.get("support_head", False))
     support_threshold = float(model_args.get("support_threshold", 0.5))
     support_topk = int(model_args.get("support_topk", 3))
-    for p in PROBLEMS:
+    for p in problems:
         g = gate_cfg.get(p, {}).get("gamma") if gate_cfg else None
         per_p[p] = evaluate_problem(
             model, p, args.split, args.device, audit,
@@ -433,7 +455,7 @@ def main():
     print(f"\nMacro [{args.split}]: top1={macro['macro_top1']:.4f} top2={macro['macro_top2']:.4f} "
           f"top3={macro['macro_top3']:.4f} vs_sbs={macro['macro_vs_sbs_pct']:+.3f}% "
           f"vbs_closed={macro['macro_vbs_gap_closed_pct']:+.2f}% "
-          f"beat={macro['n_problems_beat_sbs']}/18 match={macro['n_problems_match_sbs']}/18")
+          f"beat={macro['n_problems_beat_sbs']}/{len(per_p)} match={macro['n_problems_match_sbs']}/{len(per_p)}")
 
     # Figures
     fig_top1_vs_methods(per_p, out / f"top1_vs_single_methods_{args.split}.png")
