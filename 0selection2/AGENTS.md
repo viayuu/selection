@@ -4,7 +4,7 @@
 
 GPU 环境
 - 这台机器有直接 GPU 访问（不需要 SSH）
-- GPU：2x RTX 3090 24GB
+- GPU：2x RTX 3090 24GB，都可以使用
 - 实验环境：`easynco_zhoucl`
 - 任何命令都在 conda activate easynco_zhoucl 环境中执行
 - 激活前任何 Python 命令：`conda activate easynco_zhoucl`
