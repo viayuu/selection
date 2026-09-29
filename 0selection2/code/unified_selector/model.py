@@ -16,7 +16,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from .registry import PROBLEMS, P2I, M_GLOBAL, K_CBITS, D_COORD
+from .registry import PROBLEMS, P2I, M_GLOBAL, K_CBITS, D_COORD, K_PROBLEM_DESC
 
 
 def remap_legacy_state_dict(state: dict[str, torch.Tensor]) -> dict[str, torch.Tensor]:
@@ -571,7 +571,9 @@ class UnifiedSelector(nn.Module):
                  deep_encoder_overhaul: bool = False,
                  encoder_rezero: bool = False,
                  encoder_constraint_experts: bool = False,
-                 encoder_constraint_hidden: int = 128):
+                 encoder_constraint_hidden: int = 128,
+                 use_problem_descriptor: bool = False,
+                 use_descriptor_solver_bias: bool = False):
         super().__init__()
         self.d = d
         self.coord_enc = CoordEncoder(
@@ -586,8 +588,17 @@ class UnifiedSelector(nn.Module):
             deep_mbm=deep_encoder_overhaul, use_rezero=encoder_rezero,
         )
         self.deep_encoder_overhaul = deep_encoder_overhaul
-        # Metadata
+        # Metadata.  The descriptor path is the zero-shot-friendly alternative
+        # to discrete problem IDs: new tasks can populate the descriptor slots
+        # without adding a new embedding row.
+        self.use_problem_descriptor = use_problem_descriptor
         self.prob_emb = nn.Embedding(len(PROBLEMS), d)
+        if use_problem_descriptor:
+            self.problem_desc_proj = nn.Sequential(
+                nn.Linear(K_PROBLEM_DESC, d),
+                nn.GELU(),
+                nn.LayerNorm(d),
+            )
         self.cbits_proj = nn.Linear(K_CBITS, d, bias=False)
         self.coord_dist_emb = nn.Embedding(D_COORD, d)
         self.use_size_feature = use_size_feature
@@ -614,21 +625,33 @@ class UnifiedSelector(nn.Module):
         self.metadata_ln = nn.LayerNorm(d)
         self.use_problem_film = use_problem_film
         if use_problem_film:
-            self.problem_film_gain = nn.Embedding(len(PROBLEMS), d)
-            self.problem_film_shift = nn.Embedding(len(PROBLEMS), d)
-            nn.init.zeros_(self.problem_film_gain.weight)
-            nn.init.zeros_(self.problem_film_shift.weight)
+            if use_problem_descriptor:
+                self.problem_film = nn.Linear(K_PROBLEM_DESC, 2 * d)
+                nn.init.zeros_(self.problem_film.weight)
+                nn.init.zeros_(self.problem_film.bias)
+            else:
+                self.problem_film_gain = nn.Embedding(len(PROBLEMS), d)
+                self.problem_film_shift = nn.Embedding(len(PROBLEMS), d)
+                nn.init.zeros_(self.problem_film_gain.weight)
+                nn.init.zeros_(self.problem_film_shift.weight)
             self.film_ln = nn.LayerNorm(d)
         self.use_problem_adapter = use_problem_adapter
         if use_problem_adapter:
-            self.problem_adapters = nn.ModuleList([
-                nn.Sequential(
-                    nn.Linear(d, adapter_hidden),
+            if use_problem_descriptor:
+                self.problem_desc_adapter = nn.Sequential(
+                    nn.Linear(2 * d, adapter_hidden),
                     nn.GELU(),
                     nn.Linear(adapter_hidden, d),
                 )
-                for _ in range(len(PROBLEMS))
-            ])
+            else:
+                self.problem_adapters = nn.ModuleList([
+                    nn.Sequential(
+                        nn.Linear(d, adapter_hidden),
+                        nn.GELU(),
+                        nn.Linear(adapter_hidden, d),
+                    )
+                    for _ in range(len(PROBLEMS))
+                ])
             self.adapter_ln = nn.LayerNorm(d)
         self.encoder_constraint_experts = encoder_constraint_experts
         if encoder_constraint_experts:
@@ -709,6 +732,15 @@ class UnifiedSelector(nn.Module):
         self.use_problem_solver_bias = use_problem_solver_bias
         if use_problem_solver_bias:
             self.problem_solver_bias = nn.Parameter(torch.zeros(len(PROBLEMS), M_GLOBAL))
+        self.use_descriptor_solver_bias = bool(use_problem_descriptor and use_descriptor_solver_bias)
+        if self.use_descriptor_solver_bias:
+            self.desc_solver_bias = nn.Sequential(
+                nn.Linear(K_PROBLEM_DESC, d),
+                nn.GELU(),
+                nn.Linear(d, M_GLOBAL),
+            )
+            nn.init.zeros_(self.desc_solver_bias[-1].weight)
+            nn.init.zeros_(self.desc_solver_bias[-1].bias)
         self.use_fact = use_mvrp_factorized
         if use_mvrp_factorized:
             self.W_c = nn.Linear(K_CBITS, d, bias=False)
@@ -739,10 +771,16 @@ class UnifiedSelector(nn.Module):
             g = self.matrix_enc(batch["matrix"], batch["node_mask"])
         B = g.shape[0]
         pid = torch.full((B,), batch["problem_id"], dtype=torch.long, device=g.device)
-        prob_vec = self.prob_emb(pid)
-        if self.training and self.prob_dropout_p > 0:
-            drop = (torch.rand(B, device=g.device) < self.prob_dropout_p).float().unsqueeze(-1)
-            prob_vec = prob_vec * (1 - drop)
+        desc_vec = None
+        if self.use_problem_descriptor:
+            desc = batch["problem_desc"].to(device=g.device, dtype=g.dtype)
+            desc_vec = self.problem_desc_proj(desc)
+            prob_vec = desc_vec
+        else:
+            prob_vec = self.prob_emb(pid)
+            if self.training and self.prob_dropout_p > 0:
+                drop = (torch.rand(B, device=g.device) < self.prob_dropout_p).float().unsqueeze(-1)
+                prob_vec = prob_vec * (1 - drop)
         cbits_vec = self.cbits_proj(batch["cbits"])
         cd_vec = self.coord_dist_emb(batch["coord_dist"])
         h = g + prob_vec + cbits_vec + cd_vec
@@ -761,11 +799,19 @@ class UnifiedSelector(nn.Module):
             h = h + self.manual_proj(self.compute_manual_features(batch))
         h = self.metadata_ln(h)
         if self.use_problem_film:
-            gain = self.problem_film_gain(pid)
-            shift = self.problem_film_shift(pid)
+            if self.use_problem_descriptor:
+                gain, shift = self.problem_film(batch["problem_desc"].to(device=h.device, dtype=h.dtype)).chunk(2, dim=-1)
+            else:
+                gain = self.problem_film_gain(pid)
+                shift = self.problem_film_shift(pid)
             h = self.film_ln(h * (1.0 + gain) + shift)
         if self.use_problem_adapter:
-            h = self.adapter_ln(h + self.problem_adapters[batch["problem_id"]](h))
+            if self.use_problem_descriptor:
+                if desc_vec is None:
+                    desc_vec = self.problem_desc_proj(batch["problem_desc"].to(device=h.device, dtype=h.dtype))
+                h = self.adapter_ln(h + self.problem_desc_adapter(torch.cat([h, desc_vec], dim=-1)))
+            else:
+                h = self.adapter_ln(h + self.problem_adapters[batch["problem_id"]](h))
         if self.encoder_constraint_experts:
             expert_weights = self.constraint_weight_vector(batch, dtype=h.dtype, device=h.device)
             expert_delta = torch.stack([ffn(h) for ffn in self.encoder_constraint_ffns], dim=1)
@@ -1101,8 +1147,10 @@ class UnifiedSelector(nn.Module):
         if self.use_problem_solver_bias:
             pid = batch["problem_id"]
             logits = logits + self.problem_solver_bias[pid]  # (M,) broadcast over B
+        if self.use_descriptor_solver_bias:
+            logits = logits + self.desc_solver_bias(batch["problem_desc"].to(device=device, dtype=dtype))
         # MVRP factorization add-on (applied only for MVRP problems)
-        if self.use_fact and batch["problem_id"] >= 3:
+        if self.use_fact and (self.use_problem_descriptor or batch["problem_id"] >= 3):
             v = batch["cbits"]                # (B, K_CBITS)
             cd = batch["coord_dist"]          # (B,)
             v_e = self.W_c(v)                 # (B, d)
@@ -1111,7 +1159,15 @@ class UnifiedSelector(nn.Module):
             d_s = d_e.unsqueeze(1) * e_exp    # (B, M, d)
             vd_s = v_s * d_e.unsqueeze(1)     # (B, M, d)  interaction
             z_fact = torch.cat([v_s, d_s, vd_s], dim=-1)  # (B, M, 3d)
-            logits = logits + self.fact_head(z_fact).squeeze(-1)
+            fact_logits = self.fact_head(z_fact).squeeze(-1)
+            if self.use_problem_descriptor:
+                desc = batch["problem_desc"].to(device=device, dtype=dtype)
+                # Apply the factorized MVRP-style add-on only when extra routing
+                # constraints beyond plain CVRP are present (O/B/BP/L/TW/MD).
+                gate = ((v[:, 1:].sum(dim=1) + desc[:, 3] + desc[:, 6]) > 0).to(dtype).unsqueeze(-1)
+                logits = logits + gate * fact_logits
+            else:
+                logits = logits + fact_logits
         # Apply availability mask: unavailable solvers -> -inf
         mask = batch["mask"]   # (B, M) {0,1}
         logits = logits + torch.log(mask.clamp_min(1e-30))

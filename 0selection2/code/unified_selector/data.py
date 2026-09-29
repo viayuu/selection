@@ -15,7 +15,7 @@ from torch.utils.data import Dataset
 
 from .registry import (
     PROBLEMS, P2I, POOLS, S2I, M_GLOBAL, K_CBITS, D_COORD,
-    problem_to_pool_mask, constraint_bits, is_mvrp,
+    problem_to_pool_mask, constraint_bits, problem_descriptor, is_mvrp,
 )
 
 DATA_ROOT = Path(__file__).resolve().parents[2] / "data"
@@ -79,6 +79,7 @@ class UnifiedProblemDataset(Dataset):
         del raw
         self.pool_order, self.mask = problem_to_pool_mask(problem)  # len==M_GLOBAL mask; pool_order = cost-slot positions
         self.cbits = constraint_bits(problem)
+        self.problem_desc = problem_descriptor(problem)
         self.pid = P2I[problem]
         self.K_p = len(self.pool_order)
         self.base_N = len(self.instances)
@@ -165,6 +166,7 @@ class UnifiedProblemDataset(Dataset):
             "node": node,     # (n, d_in) or None
             "matrix": mat,    # (n, n) or None
             "cbits": torch.tensor(self.cbits, dtype=torch.float32),
+            "problem_desc": torch.tensor(self.problem_desc, dtype=torch.float32),
             "coord_dist": cd,
             "pool_global_ids": torch.tensor(self.pool_order, dtype=torch.long),  # (K_p,)
             "mask": torch.tensor(self.mask, dtype=torch.float32),                # (M_global,)
@@ -183,6 +185,7 @@ def collate_single_problem(batch: List[dict]):
     B = len(batch)
     K_p = batch[0]["pool_global_ids"].shape[0]
     cbits = torch.stack([b["cbits"] for b in batch])
+    problem_desc = torch.stack([b["problem_desc"] for b in batch])
     cd    = torch.tensor([b["coord_dist"] for b in batch], dtype=torch.long)
     pool_ids = batch[0]["pool_global_ids"].clone()
     mask = torch.stack([b["mask"] for b in batch])
@@ -202,7 +205,7 @@ def collate_single_problem(batch: List[dict]):
         return {
             "problem_id": pid, "kind": kind,
             "node": node, "node_mask": node_mask, "d_in": d_in,
-            "cbits": cbits, "coord_dist": cd,
+            "cbits": cbits, "problem_desc": problem_desc, "coord_dist": cd,
             "pool_ids": pool_ids, "mask": mask, "costs": costs, "ind": ind, "n": n_arr,
         }
     else:  # matrix (ATSP)
@@ -216,6 +219,6 @@ def collate_single_problem(batch: List[dict]):
         return {
             "problem_id": pid, "kind": kind,
             "matrix": mat, "node_mask": node_mask,
-            "cbits": cbits, "coord_dist": cd,
+            "cbits": cbits, "problem_desc": problem_desc, "coord_dist": cd,
             "pool_ids": pool_ids, "mask": mask, "costs": costs, "ind": ind, "n": n_arr,
         }

@@ -18,7 +18,7 @@ import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader, WeightedRandomSampler
 
-from .registry import PROBLEMS, P2I
+from .registry import PROBLEMS, P2I, problem_descriptor
 from .data import UnifiedProblemDataset, collate_single_problem, DATA_ROOT
 from .model import (
     UnifiedSelector,
@@ -257,6 +257,61 @@ def chunked_problem_order(problems, group_size: int):
     return [probs[i:i + group_size] for i in range(0, len(probs), group_size)]
 
 
+def warmstart_descriptor_modules(model: UnifiedSelector, init_state: dict, device,
+                                 steps: int, lr: float, problems=None) -> None:
+    """Fit descriptor-conditioned modules to old problem-ID priors.
+
+    This preserves much of the R25 behavior on the 18 seen problems while
+    removing the hard dependency on discrete problem IDs for zero-shot use.
+    """
+    if steps <= 0 or not getattr(model, "use_problem_descriptor", False):
+        return
+    params = []
+    targets = {}
+    problems = list(problems or PROBLEMS)
+    problem_rows = torch.tensor([P2I[p] for p in problems], dtype=torch.long, device=device)
+    desc = torch.tensor([problem_descriptor(p) for p in problems], dtype=torch.float32, device=device)
+    if hasattr(model, "problem_desc_proj") and "prob_emb.weight" in init_state:
+        params.extend(model.problem_desc_proj.parameters())
+        targets["prob_emb"] = init_state["prob_emb.weight"].to(device=device, dtype=torch.float32)[problem_rows]
+    if hasattr(model, "desc_solver_bias") and "problem_solver_bias" in init_state:
+        params.extend(model.desc_solver_bias.parameters())
+        targets["solver_bias"] = init_state["problem_solver_bias"].to(device=device, dtype=torch.float32)[problem_rows]
+    if not params or not targets:
+        return
+    opt = torch.optim.AdamW(params, lr=lr, weight_decay=0.0)
+    last = None
+    was_training = model.training
+    model.train()
+    for _ in range(int(steps)):
+        loss = desc.new_tensor(0.0)
+        if "prob_emb" in targets:
+            loss = loss + F.mse_loss(model.problem_desc_proj(desc), targets["prob_emb"])
+        if "solver_bias" in targets:
+            loss = loss + F.mse_loss(model.desc_solver_bias(desc), targets["solver_bias"])
+        opt.zero_grad()
+        loss.backward()
+        opt.step()
+        last = float(loss.detach().cpu().item())
+    if not was_training:
+        model.eval()
+    print(
+        f"[descriptor-warmstart] problems={problems} steps={steps} lr={lr:.2e} final_loss={last:.6f}",
+        flush=True,
+    )
+
+
+def macro_from_per_problem(per_p: dict, problems: list[str]) -> dict:
+    vals = [per_p[p] for p in problems if p in per_p]
+    if not vals:
+        return {"macro_top1": 0.0, "macro_vs_sbs_pct": 0.0, "macro_vbs_gap_closed_pct": 0.0}
+    return {
+        "macro_top1": sum(v["top1"] for v in vals) / len(vals),
+        "macro_vs_sbs_pct": sum(v["vs_sbs_pct"] for v in vals) / len(vals),
+        "macro_vbs_gap_closed_pct": sum(v["vbs_gap_closed_pct"] for v in vals) / len(vals),
+    }
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--epochs", type=int, default=20)
@@ -277,6 +332,8 @@ def main():
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--hold-out", type=str, nargs="*", default=[],
                     help="MVRP bitvector-based problems to hold out (for zero-shot exp).")
+    ap.add_argument("--eval-holdout", action="store_true",
+                    help="Also evaluate held-out problems during training. Disabled by default to avoid model-selection leakage.")
     ap.add_argument("--audit", type=str, default="code/unified_selector/runs/audit.json")
     ap.add_argument("--wandb", action="store_true")
     ap.add_argument("--wandb-project", type=str, default="selector")
@@ -307,6 +364,13 @@ def main():
     ap.add_argument("--switch-gap", type=float, default=0.001)
     ap.add_argument("--switch-margin", type=float, default=0.10)
     ap.add_argument("--no-problem-solver-bias", action="store_true")
+    ap.add_argument("--problem-descriptor", action="store_true",
+                    help="Use zero-shot-friendly problem descriptors instead of discrete problem-ID embeddings.")
+    ap.add_argument("--descriptor-solver-bias", action="store_true",
+                    help="Generate a solver bias from the problem descriptor instead of a problem-id table.")
+    ap.add_argument("--descriptor-warmstart-steps", type=int, default=0,
+                    help="If >0 with --init-ckpt, fit descriptor modules to old problem-ID priors before training.")
+    ap.add_argument("--descriptor-warmstart-lr", type=float, default=1e-2)
     ap.add_argument("--problem-film", action="store_true",
                     help="Apply problem-conditioned FiLM after shared instance encoding.")
     ap.add_argument("--size-feature", action="store_true",
@@ -398,7 +462,7 @@ def main():
 
     device = torch.device(args.device)
     problems_train = [p for p in PROBLEMS if p not in args.hold_out]
-    problems_val_all = PROBLEMS
+    problems_val_all = PROBLEMS if (not args.hold_out or args.eval_holdout) else problems_train
     print(f"[train] train problems: {problems_train}")
     print(f"[train] held-out: {args.hold_out}")
 
@@ -466,15 +530,26 @@ def main():
                             deep_encoder_overhaul=args.deep_encoder_overhaul,
                             encoder_rezero=args.encoder_rezero,
                             encoder_constraint_experts=args.encoder_constraint_experts,
-                            encoder_constraint_hidden=args.encoder_constraint_hidden).to(device)
+                            encoder_constraint_hidden=args.encoder_constraint_hidden,
+                            use_problem_descriptor=args.problem_descriptor,
+                            use_descriptor_solver_bias=args.descriptor_solver_bias).to(device)
     if args.init_ckpt:
         init = torch.load(args.init_ckpt, map_location=device, weights_only=False)
-        missing, unexpected = model.load_state_dict(remap_legacy_state_dict(init["model"]), strict=False)
+        init_state = remap_legacy_state_dict(init["model"])
+        missing, unexpected = model.load_state_dict(init_state, strict=False)
         print(f"[train] initialized from {args.init_ckpt}")
         if missing:
             print(f"[train] missing keys: {missing}")
         if unexpected:
             print(f"[train] unexpected keys: {unexpected}")
+        warmstart_descriptor_modules(
+            model,
+            init_state,
+            device,
+            steps=args.descriptor_warmstart_steps,
+            lr=args.descriptor_warmstart_lr,
+            problems=problems_train,
+        )
     if args.freeze_backbone:
         trainable_prefixes = (
             "solver_emb",
@@ -487,6 +562,9 @@ def main():
             "problem_heads",
             "constraint_expert_heads",
             "problem_adapters",
+            "problem_desc_proj",
+            "problem_desc_adapter",
+            "desc_solver_bias",
             "adapter_ln",
             "problem_solver_bias",
             "fact_head",
@@ -711,27 +789,55 @@ def main():
                 support_threshold=args.support_threshold,
                 support_topk=args.support_topk,
             )
-            print(f"[eval epoch {epoch}] macro_top1={macro['macro_top1']:.4f} vs_sbs={macro['macro_vs_sbs_pct']:+.3f}% vbs_closed={macro['macro_vbs_gap_closed_pct']:+.2f}%")
+            macro_seen = macro_from_per_problem(per_p, problems_train)
+            macro_holdout = macro_from_per_problem(per_p, args.hold_out)
+            print(
+                f"[eval epoch {epoch}] seen_top1={macro_seen['macro_top1']:.4f} "
+                f"seen_vs_sbs={macro_seen['macro_vs_sbs_pct']:+.3f}% "
+                f"heldout_top1={macro_holdout['macro_top1']:.4f} "
+                f"heldout_vs_sbs={macro_holdout['macro_vs_sbs_pct']:+.3f}% "
+                f"all_top1={macro['macro_top1']:.4f} all_vs_sbs={macro['macro_vs_sbs_pct']:+.3f}%"
+            )
             for p in PROBLEMS:
+                if p not in per_p:
+                    continue
                 r = per_p[p]
                 mark = ""
                 if p in args.hold_out: mark = " [HELD-OUT]"
                 print(f"   {p:>10}: top1={r['top1']:.3f} mean_cost={r['mean_cost']:.4f} (sbs={r['sbs']:.4f}) vs_sbs={r['vs_sbs_pct']:+.2f}%{mark}")
             # Save per-epoch
-            (save_dir / f"eval_epoch{epoch}.json").write_text(json.dumps({"per_problem": per_p, "macro": macro}, indent=2))
+            (save_dir / f"eval_epoch{epoch}.json").write_text(json.dumps({
+                "per_problem": per_p,
+                "macro": macro,
+                "macro_seen": macro_seen,
+                "macro_holdout": macro_holdout,
+                "selection_metric": "macro_seen.macro_vs_sbs_pct",
+            }, indent=2))
             if args.wandb:
                 import wandb
                 wandb.log({"val/macro_top1": macro["macro_top1"], "val/macro_vs_sbs_pct": macro["macro_vs_sbs_pct"], "val/macro_vbs_closed": macro["macro_vbs_gap_closed_pct"], "epoch": epoch})
                 for p, r in per_p.items():
                     wandb.log({f"val_{p}/top1": r["top1"], f"val_{p}/mean_cost": r["mean_cost"], f"val_{p}/vs_sbs_pct": r["vs_sbs_pct"], "epoch": epoch})
-            if macro["macro_vs_sbs_pct"] < best_macro_vs_sbs:
-                best_macro_vs_sbs = macro["macro_vs_sbs_pct"]
-                torch.save({"model": model.state_dict(), "args": vars(args), "macro": macro}, save_dir / "best.pt")
-                print(f"   -> saved best checkpoint (macro_vs_sbs={best_macro_vs_sbs:+.3f}%)")
+            if macro_seen["macro_vs_sbs_pct"] < best_macro_vs_sbs:
+                best_macro_vs_sbs = macro_seen["macro_vs_sbs_pct"]
+                torch.save({
+                    "model": model.state_dict(),
+                    "args": vars(args),
+                    "macro": macro,
+                    "macro_seen": macro_seen,
+                    "macro_holdout": macro_holdout,
+                    "selection_metric": "macro_seen.macro_vs_sbs_pct",
+                }, save_dir / "best.pt")
+                print(f"   -> saved best checkpoint (seen_macro_vs_sbs={best_macro_vs_sbs:+.3f}%)")
 
     elapsed = time.time() - t0
-    print(f"[done] {args.epochs} epochs in {elapsed/60:.1f} min, best macro_vs_sbs={best_macro_vs_sbs:+.3f}%")
-    (save_dir / "summary.json").write_text(json.dumps({"elapsed_sec": elapsed, "best_macro_vs_sbs_pct": best_macro_vs_sbs}, indent=2))
+    print(f"[done] {args.epochs} epochs in {elapsed/60:.1f} min, best seen_macro_vs_sbs={best_macro_vs_sbs:+.3f}%")
+    (save_dir / "summary.json").write_text(json.dumps({
+        "elapsed_sec": elapsed,
+        "best_seen_macro_vs_sbs_pct": best_macro_vs_sbs,
+        "selection_metric": "macro_seen.macro_vs_sbs_pct",
+        "hold_out": args.hold_out,
+    }, indent=2))
 
 
 if __name__ == "__main__":

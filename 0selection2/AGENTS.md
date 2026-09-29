@@ -5,12 +5,12 @@
 GPU 环境
 - 这台机器有直接 GPU 访问（不需要 SSH）
 - GPU：2x RTX 3090 24GB，都可以使用
-- 实验环境：`easynco_zhoucl`
-- 任何命令都在 conda activate easynco_zhoucl 环境中执行
-- 激活前任何 Python 命令：`conda activate easynco_zhoucl`
+- 实验环境：`easynco`
+- 任何命令都在 conda activate easynco 环境中执行
+- 激活前任何 Python 命令：`conda activate easynco`
 - 代码目录：`/public/home/zhoucl/shiys/0selection`
 
-当前目录（0selection文件夹）结构说明
+当前目录（0selection2文件夹）结构说明
 
 你永远不用看、不要关注的文件/文件夹：无
 

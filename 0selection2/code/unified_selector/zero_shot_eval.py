@@ -20,7 +20,7 @@ from torch.utils.data import DataLoader, Dataset
 
 from .data import augment_xy_by_8_fold
 from .model import UnifiedSelector, remap_legacy_state_dict, shortlist_from_support
-from .registry import D_COORD, GLOBAL_SOLVERS, K_CBITS, M_GLOBAL, P2I, PROBLEMS, S2I
+from .registry import D_COORD, GLOBAL_SOLVERS, K_CBITS, M_GLOBAL, P2I, PROBLEMS, S2I, problem_descriptor
 
 
 ZERO13_PROBLEMS = [
@@ -163,6 +163,7 @@ class ZeroShotProblemDataset(Dataset):
         self.proxy = proxy_problem(problem, proxy_strategy)
         self.proxy_pid = P2I[self.proxy]
         self.cbits = zero_constraint_bits(problem)
+        self.problem_desc = problem_descriptor(problem)
         self.solver_ids = solver_alias_ids(reld_alias)
         self.feature_mode = feature_mode
         d = self.bundle_root / "data" / f"{problem}test"
@@ -199,6 +200,7 @@ class ZeroShotProblemDataset(Dataset):
             "node": node,
             "matrix": mat,
             "cbits": torch.tensor(self.cbits, dtype=torch.float32),
+            "problem_desc": torch.tensor(self.problem_desc, dtype=torch.float32),
             "coord_dist": D_COORD - 1,
             "pool_global_ids": torch.tensor(self.solver_ids, dtype=torch.long),
             "mask": mask,
@@ -213,6 +215,7 @@ def collate_zero(batch: List[dict]) -> dict:
     pid = batch[0]["problem_id"]
     pool_ids = batch[0]["pool_global_ids"].clone()
     cbits = torch.stack([b["cbits"] for b in batch])
+    problem_desc = torch.stack([b["problem_desc"] for b in batch])
     cd = torch.tensor([b["coord_dist"] for b in batch], dtype=torch.long)
     mask = torch.stack([b["mask"] for b in batch])
     costs = torch.stack([b["costs"] for b in batch])
@@ -222,6 +225,7 @@ def collate_zero(batch: List[dict]) -> dict:
         "problem_id": pid,
         "kind": kind,
         "cbits": cbits,
+        "problem_desc": problem_desc,
         "coord_dist": cd,
         "pool_ids": pool_ids,
         "mask": mask,
@@ -289,6 +293,8 @@ def load_model(ckpt_path: Path, device: str) -> tuple[UnifiedSelector, dict, boo
         encoder_rezero=bool(model_args.get("encoder_rezero", False)),
         encoder_constraint_experts=bool(model_args.get("encoder_constraint_experts", False)),
         encoder_constraint_hidden=int(model_args.get("encoder_constraint_hidden", 128)),
+        use_problem_descriptor=bool(model_args.get("problem_descriptor", False)),
+        use_descriptor_solver_bias=bool(model_args.get("descriptor_solver_bias", False)),
     ).to(device)
     missing, unexpected = model.load_state_dict(remap_legacy_state_dict(ckpt["model"]), strict=False)
     if missing or unexpected:

@@ -389,6 +389,8 @@ def main():
         encoder_rezero=bool(model_args.get("encoder_rezero", False)),
         encoder_constraint_experts=bool(model_args.get("encoder_constraint_experts", False)),
         encoder_constraint_hidden=int(model_args.get("encoder_constraint_hidden", 128)),
+        use_problem_descriptor=bool(model_args.get("problem_descriptor", False)),
+        use_descriptor_solver_bias=bool(model_args.get("descriptor_solver_bias", False)),
     ).to(args.device)
     missing, unexpected = model.load_state_dict(remap_legacy_state_dict(ckpt["model"]), strict=False)
     if missing or unexpected:
