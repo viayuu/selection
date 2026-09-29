@@ -26,6 +26,10 @@ def build_small_params(args):
         support_hidden=args.support_hidden,
         support_score_weight=args.support_score_weight if args.support_branch else 0.0,
         support_score_mode=args.support_score_mode,
+        solver_feature_spec=None if args.no_solver_features else params["solver_feature_spec"],
+        solver_feature_weight=args.solver_feature_weight,
+        solver_feature_hidden=args.solver_feature_hidden,
+        sdpa=args.sdpa,
     )
     return params
 
@@ -37,6 +41,7 @@ def main():
     parser.add_argument("--num-workers", type=int, default=0)
     parser.add_argument("--amp", action="store_true")
     parser.add_argument("--amp-dtype", choices=["fp16", "bf16"], default="fp16")
+    parser.add_argument("--sdpa", action="store_true")
     parser.add_argument("--problems", default="")
     parser.add_argument("--d", type=int, default=128)
     parser.add_argument("--heads", type=int, default=4)
@@ -45,6 +50,9 @@ def main():
     parser.add_argument("--encoder-layers", type=int, default=4)
     parser.add_argument("--set-layers", type=int, default=2)
     parser.add_argument("--query-num", type=int, default=4)
+    parser.add_argument("--no-solver-features", action="store_true")
+    parser.add_argument("--solver-feature-weight", type=float, default=0.3)
+    parser.add_argument("--solver-feature-hidden", type=int, default=128)
     parser.add_argument("--support-branch", action="store_true")
     parser.add_argument("--support-generators", type=int, default=4)
     parser.add_argument("--support-hidden", type=int, default=128)

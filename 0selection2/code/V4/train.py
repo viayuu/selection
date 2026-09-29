@@ -13,6 +13,7 @@ from code.unified_selector.data import UnifiedProblemDataset, collate_single_pro
 from code.unified_selector.registry import PROBLEMS
 
 from .V4Model import ProblemToSolverSelector, get_default_model_params
+from .tensor_loader import TensorBatchLoader, make_tensor_loader
 
 
 def set_seed(seed):
@@ -36,7 +37,9 @@ def to_device(batch, device):
     return {k: (v.to(device, non_blocking=True) if torch.is_tensor(v) else v) for k, v in batch.items()}
 
 
-def make_loader(problem, split, batch_size, num_workers, coord_augment=0, shuffle=True):
+def make_loader(problem, split, batch_size, num_workers, coord_augment=0, shuffle=True, cache_device=None):
+    if cache_device is not None:
+        return make_tensor_loader(problem, split, batch_size, shuffle, cache_device, coord_augment)
     dataset = UnifiedProblemDataset(problem, split, coord_augment=coord_augment)
     return DataLoader(
         dataset,
@@ -258,10 +261,10 @@ def support_branch_loss(
 
     loss = bce_loss + diversity_weight * div_loss + budget_weight * budget_loss
     return loss, {
-        "support": float(loss.detach().cpu()),
-        "support_bce": float(bce_loss.detach().cpu()),
-        "support_div": float(div_loss.detach().cpu()),
-        "support_budget": float(budget_loss.detach().cpu()),
+        "support": loss.detach(),
+        "support_bce": bce_loss.detach(),
+        "support_div": div_loss.detach(),
+        "support_budget": budget_loss.detach(),
     }
 
 
@@ -359,24 +362,24 @@ def selector_loss(out, costs, class_weight, args, sbs_idx=None):
         )
         loss = loss + args.support_loss_weight * support
     parts = {
-        "ce": ce.item(),
-        "pair": pair.item(),
-        "gap": gap.item(),
-        "pre": pre.item(),
-        "topk_ce": topk_ce.item(),
-        "div": div.item(),
-        "risk": risk.item(),
+        "ce": ce.detach(),
+        "pair": pair.detach(),
+        "gap": gap.detach(),
+        "pre": pre.detach(),
+        "topk_ce": topk_ce.detach(),
+        "div": div.detach(),
+        "risk": risk.detach(),
     }
     parts.update(support_parts)
     return loss, parts
 
 
 @torch.no_grad()
-def evaluate(model, problems, split, batch_size, num_workers, device):
+def evaluate(model, problems, split, batch_size, num_workers, device, cache_device=None):
     model.eval()
     per_problem = {}
     for problem in problems:
-        loader = make_loader(problem, split, batch_size, num_workers, coord_augment=0, shuffle=False)
+        loader = make_loader(problem, split, batch_size, num_workers, coord_augment=0, shuffle=False, cache_device=cache_device)
         comp = {
             "final": {"top1": 0, "top2": 0, "top3": 0, "cost_sum": 0.0},
             "base": {"top1": 0, "top2": 0, "top3": 0, "cost_sum": 0.0},
@@ -448,7 +451,11 @@ def evaluate(model, problems, split, batch_size, num_workers, device):
                 support_union_size_sum += support_stats["union_size"] * costs.size(0)
                 s_seen = support_stats["arm_seen"]
                 support_arm_seen = s_seen if support_arm_seen is None else (support_arm_seen | s_seen)
-        sbs, vbs = get_split_sbs_vbs(problem, split)
+        if isinstance(loader, TensorBatchLoader):
+            costs_np = loader.batch["costs"].cpu().numpy()
+            sbs, vbs = float(costs_np.mean(axis=0).min()), float(costs_np.min(axis=1).mean())
+        else:
+            sbs, vbs = get_split_sbs_vbs(problem, split)
         mean_cost = comp["final"]["cost_sum"] / max(1, n_total)
         per_problem[problem] = dict(
             top1=comp["final"]["top1"] / n_total,
@@ -577,6 +584,10 @@ def build_model(args):
         support_main_utility_weight=args.support_main_utility_weight,
         support_main_pre_weight=args.support_main_pre_weight,
         support_main_gap_weight=args.support_main_gap_weight,
+        solver_feature_spec=None if args.no_solver_features else params["solver_feature_spec"],
+        solver_feature_weight=args.solver_feature_weight,
+        solver_feature_hidden=args.solver_feature_hidden,
+        sdpa=args.sdpa,
     )
     return ProblemToSolverSelector(**params), params
 
@@ -598,6 +609,12 @@ def main():
     parser.add_argument("--resume", default="")
     parser.add_argument("--amp", action="store_true")
     parser.add_argument("--amp-dtype", choices=["fp16", "bf16"], default="fp16")
+    parser.add_argument("--sdpa", action="store_true")
+    parser.add_argument("--cache-gpu", action="store_true")
+    parser.add_argument("--wandb", action="store_true")
+    parser.add_argument("--wandb-mode", choices=["online", "offline"], default="online")
+    parser.add_argument("--wandb-project", default="selector")
+    parser.add_argument("--wandb-entity", default="yjkds-southern-university-of-science-technology")
     parser.add_argument("--d", type=int, default=128)
     parser.add_argument("--heads", type=int, default=4)
     parser.add_argument("--ff-hidden", type=int, default=512)
@@ -605,6 +622,9 @@ def main():
     parser.add_argument("--encoder-layers", type=int, default=4)
     parser.add_argument("--set-layers", type=int, default=2)
     parser.add_argument("--query-num", type=int, default=4)
+    parser.add_argument("--no-solver-features", action="store_true", help="Use ID-only solver embeddings (legacy V4)")
+    parser.add_argument("--solver-feature-weight", type=float, default=0.3)
+    parser.add_argument("--solver-feature-hidden", type=int, default=128)
     parser.add_argument("--dropout", type=float, default=0.1)
     parser.add_argument("--rezero", action="store_true")
     parser.add_argument("--ce-weight", type=float, default=0.35)
@@ -662,8 +682,9 @@ def main():
         start_epoch = int(ckpt.get("epoch", -1)) + 1
         best_score = float(ckpt.get("best_score", best_score))
 
+    cache_device = args.device if args.cache_gpu else None
     train_loaders = {
-        p: make_loader(p, "train", args.batch_per_problem, args.num_workers, args.coord_augment, shuffle=True)
+        p: make_loader(p, "train", args.batch_per_problem, args.num_workers, args.coord_augment, shuffle=True, cache_device=cache_device)
         for p in problems
     }
     class_weights = build_winner_weights(problems) if args.winner_balance else {p: None for p in problems}
@@ -676,6 +697,20 @@ def main():
     print(f"[train] {model_name}")
     print(f"[train] problems={problems}")
     print(f"[train] model_params={model_params}")
+    wandb_run = None
+    if args.wandb:
+        import wandb
+        wandb_run = wandb.init(
+            project=args.wandb_project, entity=args.wandb_entity, name=save_dir.name,
+            config=config, dir=str(save_dir), mode=args.wandb_mode,
+        )
+
+    def track_eval(tag, per_problem, macro):
+        if wandb_run is not None:
+            metrics = {f"{tag}/{k}": v for k, v in macro.items()}
+            for problem, result in per_problem.items():
+                metrics.update({f"{tag}/{problem}/{k}": v for k, v in result.items() if isinstance(v, (int, float))})
+            wandb_run.log(metrics, step=global_step)
 
     def save_checkpoint(name, epoch, macro, score):
         torch.save(
@@ -694,6 +729,8 @@ def main():
     scaler = torch.cuda.amp.GradScaler(enabled=args.amp)
     global_step = 0
     start = time.time()
+    last_log_time = start
+    interval_examples = 0
     for epoch in range(start_epoch, args.epochs):
         meter = []
         part_meter = {
@@ -735,19 +772,32 @@ def main():
                 scaler.step(optimizer)
                 scaler.update()
                 global_step += 1
-                meter.append(float(loss.detach().cpu()))
+                meter.append(loss.detach())
+                interval_examples += batch["costs"].size(0)
                 for k, v in parts.items():
                     part_meter[k].append(v)
                 if global_step % args.log_every == 0:
-                    msg = " ".join([f"{k}={np.mean(v):.4f}" for k, v in part_meter.items() if v])
+                    keys = [k for k, v in part_meter.items() if v]
+                    means = torch.stack([torch.stack(meter).mean()] + [torch.stack(part_meter[k]).mean() for k in keys]).float().cpu().tolist()
+                    stats = dict(zip(["loss"] + keys, means))
+                    now = time.time()
+                    throughput = interval_examples / max(now - last_log_time, 1.0e-9)
+                    peak_gb = torch.cuda.max_memory_allocated() / 2**30 if str(args.device).startswith("cuda") else 0.0
+                    msg = " ".join(f"{k}={stats[k]:.4f}" for k in keys)
                     print(
-                        f"ep{epoch:03d} step{global_step:06d} loss={np.mean(meter):.4f} "
-                        f"{msg} time={(time.time() - start) / 60:.1f}m"
+                        f"ep{epoch:03d} step{global_step:06d} loss={stats['loss']:.4f} "
+                        f"{msg} samples/s={throughput:.0f} peak_GiB={peak_gb:.2f} time={(now - start) / 60:.1f}m"
                     )
+                    if wandb_run is not None:
+                        wandb_run.log({**{f"train/{k}": v for k, v in stats.items()}, "epoch": epoch,
+                                       "train/lr": optimizer.param_groups[0]["lr"],
+                                       "speed/samples_per_sec": throughput, "gpu/peak_memory_gib": peak_gb}, step=global_step)
+                    last_log_time, interval_examples = now, 0
 
         if epoch % args.eval_every == 0:
-            per_problem, macro = evaluate(model, problems, "val", args.batch_per_problem, args.num_workers, args.device)
+            per_problem, macro = evaluate(model, problems, "val", args.batch_per_problem, args.num_workers, args.device, cache_device)
             print_eval(f"eval epoch {epoch}", per_problem, macro)
+            track_eval("val", per_problem, macro)
             (save_dir / f"eval_epoch{epoch}.json").write_text(json.dumps({"per_problem": per_problem, "macro": macro}, indent=2))
             score = macro["macro_top1"] - 0.25 * max(0.0, macro["macro_vs_sbs_pct"])
             if score > best_score:
@@ -790,16 +840,18 @@ def main():
         save_dir / "last.pt",
     )
 
-    per_problem, macro = evaluate(model, problems, "test", args.batch_per_problem, args.num_workers, args.device)
+    per_problem, macro = evaluate(model, problems, "test", args.batch_per_problem, args.num_workers, args.device, cache_device)
     print_eval("test last", per_problem, macro)
+    track_eval("test_last", per_problem, macro)
     (save_dir / "test_last.json").write_text(json.dumps({"per_problem": per_problem, "macro": macro}, indent=2))
 
     best_path = save_dir / "best.pt"
     if best_path.exists():
         best_ckpt = torch.load(best_path, map_location=args.device)
         model.load_state_dict(best_ckpt["model"])
-        per_problem, macro = evaluate(model, problems, "test", args.batch_per_problem, args.num_workers, args.device)
+        per_problem, macro = evaluate(model, problems, "test", args.batch_per_problem, args.num_workers, args.device, cache_device)
         print_eval("test best", per_problem, macro)
+        track_eval("test_best", per_problem, macro)
         (save_dir / "test_best.json").write_text(
             json.dumps(
                 {
@@ -816,8 +868,9 @@ def main():
         if ckpt_path.exists():
             ckpt = torch.load(ckpt_path, map_location=args.device)
             model.load_state_dict(ckpt["model"])
-            per_problem, macro = evaluate(model, problems, "test", args.batch_per_problem, args.num_workers, args.device)
+            per_problem, macro = evaluate(model, problems, "test", args.batch_per_problem, args.num_workers, args.device, cache_device)
             print_eval(f"test {ckpt_name}", per_problem, macro)
+            track_eval(f"test_{ckpt_name}", per_problem, macro)
             (save_dir / f"test_{ckpt_name}.json").write_text(
                 json.dumps(
                     {
@@ -829,6 +882,10 @@ def main():
                     indent=2,
                 )
             )
+
+
+    if wandb_run is not None:
+        wandb_run.finish()
 
 
 if __name__ == "__main__":

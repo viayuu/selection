@@ -12,6 +12,8 @@ from code.unified_selector.registry import (
     PROBLEMS,
 )
 
+from .solver_features import SOLVER_FEATURE_DIM, build_solver_features, get_solver_feature_spec
+
 
 def _reshape_by_heads(x, head_num):
     batch, token, _ = x.size()
@@ -65,10 +67,11 @@ class FeedForward(nn.Module):
 
 
 class MultiHeadAttention(nn.Module):
-    def __init__(self, embedding_dim, head_num, qkv_dim, dropout):
+    def __init__(self, embedding_dim, head_num, qkv_dim, dropout, sdpa=False):
         super().__init__()
         self.head_num = head_num
         self.qkv_dim = qkv_dim
+        self.sdpa = sdpa
         self.Wq = nn.Linear(embedding_dim, head_num * qkv_dim, bias=False)
         self.Wk = nn.Linear(embedding_dim, head_num * qkv_dim, bias=False)
         self.Wv = nn.Linear(embedding_dim, head_num * qkv_dim, bias=False)
@@ -79,6 +82,18 @@ class MultiHeadAttention(nn.Module):
         q = _reshape_by_heads(self.Wq(q_input), self.head_num)
         k = _reshape_by_heads(self.Wk(k_input), self.head_num)
         v = _reshape_by_heads(self.Wv(v_input), self.head_num)
+        if self.sdpa:
+            bias = attn_bias.to(q.dtype) if attn_bias is not None else None
+            if key_mask is not None:
+                if bias is None:
+                    bias = torch.zeros_like(key_mask[:, None, None, :], dtype=q.dtype)
+                bias = bias.masked_fill(~key_mask[:, None, None, :], _mask_value(q))
+            out = F.scaled_dot_product_attention(
+                q, k, v, attn_mask=bias,
+                dropout_p=self.dropout.p if self.training else 0.0,
+            )
+            out = out.transpose(1, 2).reshape(q_input.size(0), q_input.size(1), self.head_num * self.qkv_dim)
+            return self.out(out)
         score = torch.matmul(q, k.transpose(2, 3)) / math.sqrt(self.qkv_dim)
         if attn_bias is not None:
             score = score + attn_bias
@@ -94,7 +109,7 @@ class EncoderLayer(nn.Module):
     def __init__(self, **params):
         super().__init__()
         d = params["embedding_dim"]
-        self.attn = MultiHeadAttention(d, params["head_num"], params["qkv_dim"], params["dropout"])
+        self.attn = MultiHeadAttention(d, params["head_num"], params["qkv_dim"], params["dropout"], params.get("sdpa", False))
         self.add_norm_1 = AddAndNorm(d, rezero=params.get("rezero", False))
         self.ffn = FeedForward(d, params["ff_hidden_dim"], params["dropout"])
         self.add_norm_2 = AddAndNorm(d, rezero=params.get("rezero", False))
@@ -295,11 +310,27 @@ class SolverMemoryEncoder(nn.Module):
             nn.Linear(2 * d, d),
         )
         self.norm = nn.LayerNorm(d)
+        self.solver_feature_weight = float(params.get("solver_feature_weight", 0.3))
+        self.register_buffer("solver_features", None)
+        self.feature_mlp = None
+        spec = params.get("solver_feature_spec")
+        if spec is not None:
+            self.solver_features = build_solver_features(spec)
+            hidden = params.get("solver_feature_hidden", 128)
+            self.feature_mlp = nn.Sequential(
+                nn.Linear(SOLVER_FEATURE_DIM, hidden),
+                nn.GELU(),
+                nn.Linear(hidden, d),
+                nn.LayerNorm(d),
+            )
 
     def forward(self, solver_ids, pid, cond):
         batch_size = cond.size(0)
         solver_ids = solver_ids.to(cond.device)
-        solver = self.solver_emb(solver_ids)[None, :, :].expand(batch_size, -1, -1)
+        solver = self.solver_emb(solver_ids)
+        if self.feature_mlp is not None and self.solver_feature_weight != 0.0:
+            solver = solver + self.solver_feature_weight * self.feature_mlp(self.solver_features[solver_ids])
+        solver = solver[None, :, :].expand(batch_size, -1, -1)
         problem = self.problem_emb(pid)[:, None, :].expand_as(solver)
         arm_idx = pid[:, None] * M_GLOBAL + solver_ids[None, :]
         arm = self.arm_emb(arm_idx)
@@ -515,4 +546,8 @@ def get_default_model_params():
         support_main_utility_weight=0.0,
         support_main_pre_weight=0.0,
         support_main_gap_weight=0.0,
+        solver_feature_spec=get_solver_feature_spec(),
+        solver_feature_weight=0.3,
+        solver_feature_hidden=128,
+        sdpa=False,
     )

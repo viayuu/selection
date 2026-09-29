@@ -28,6 +28,8 @@ exec > >(tee -a "$LOG") 2>&1
   --encoder-layers ${ENCODER_LAYERS:-4} \
   --set-layers ${SET_LAYERS:-2} \
   --query-num ${QUERY_NUM:-4} \
+  --solver-feature-weight ${SOLVER_FEATURE_WEIGHT:-0.3} \
+  --solver-feature-hidden ${SOLVER_FEATURE_HIDDEN:-128} \
   --dropout ${DROPOUT:-0.1} \
   --ce-weight ${CE_WEIGHT:-0.35} \
   --pair-weight ${PAIR_WEIGHT:-0.30} \
