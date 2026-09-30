@@ -131,6 +131,7 @@ class ConditionEncoder(nn.Module):
         self.stats_proj = nn.Linear(params["stats_dim"], d)
         self.n_proj = nn.Linear(1, d)
         self.norm = nn.LayerNorm(d)
+        self.use_coord_dist = not params.get("ignore_coord_dist", False)
 
     def forward(self, batch, stats, kind_id):
         batch_size = stats.size(0)
@@ -140,7 +141,7 @@ class ConditionEncoder(nn.Module):
         kind = torch.full((batch_size,), kind_id, dtype=torch.long, device=device)
         cond = (
             self.problem_emb(pid)
-            + self.coord_dist_emb(batch["coord_dist"])
+            + (self.coord_dist_emb(batch["coord_dist"]) if self.use_coord_dist else 0.0)
             + self.kind_emb(kind)
             + self.cbits_proj(batch["cbits"])
             + self.desc_proj(batch["problem_desc"])
@@ -165,12 +166,14 @@ class InstanceEncoder(nn.Module):
         self.layers = nn.ModuleList([EncoderLayer(**params) for _ in range(params["encoder_layer_num"])])
         self.coord_bias_scale = nn.Parameter(torch.ones(params["head_num"]))
         self.matrix_bias_scale = nn.Parameter(torch.ones(params["head_num"]))
-        self.summary_proj = nn.Sequential(
-            nn.Linear(3 * d, d),
-            nn.GELU(),
-            nn.Linear(d, d),
-        )
-        self.norm = nn.LayerNorm(d)
+        self.node_only = params.get("node_only", False)
+        if not self.node_only:
+            self.summary_proj = nn.Sequential(
+                nn.Linear(3 * d, d),
+                nn.GELU(),
+                nn.Linear(d, d),
+            )
+            self.norm = nn.LayerNorm(d)
 
     def _pad_node(self, node):
         if node.size(-1) < 8:
@@ -289,6 +292,8 @@ class InstanceEncoder(nn.Module):
             token = layer(token, mask=mask, attn_bias=bias)
 
         node_out = token[:, special_count:, :]
+        if self.node_only:
+            return node_out, node_mask
         mean = _masked_mean(node_out, node_mask)
         maxv = _masked_max(node_out, node_mask)
         h_cls = self.norm(token[:, 0, :] + self.summary_proj(torch.cat([token[:, 0, :], mean, maxv], dim=-1)))
@@ -519,6 +524,26 @@ class ProblemToSolverSelector(nn.Module):
             "support_logits": support_logits,
             "support_score": support_score,
         }
+
+
+def make_selector(params):
+    if params.get("architecture", "legacy") == "dual_stream":
+        from .dual_stream import DualStreamSelector
+        return DualStreamSelector(**params)
+    return ProblemToSolverSelector(**params)
+
+
+def score_components(out):
+    scores = {"final": out["logits"]}
+    for name, key in (("base", "base_logits"), ("pre", "pre_score"), ("utility", "utility")):
+        if key in out:
+            scores[name] = out[key]
+    if "pred_gap" in out:
+        scores["gap"] = -out["pred_gap"]
+    if out.get("support_logits") is not None:
+        support = out["support_logits"]
+        scores["support_g0"] = support[:, 0] if support.dim() == 3 else support
+    return scores
 
 
 def get_default_model_params():

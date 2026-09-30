@@ -9,7 +9,7 @@ from torch.utils.data import DataLoader
 from code.unified_selector.data import UnifiedProblemDataset, collate_single_problem
 from code.unified_selector.registry import POOLS, PROBLEMS
 
-from .V4Model import ProblemToSolverSelector
+from .V4Model import make_selector, score_components
 
 
 def to_device(batch, device):
@@ -32,7 +32,7 @@ def make_loader(problem, split, batch_size, num_workers):
 def load_model(ckpt_path, device):
     ckpt = torch.load(ckpt_path, map_location=device)
     model_params = ckpt["args"]["model_params"]
-    model = ProblemToSolverSelector(**model_params).to(device)
+    model = make_selector(model_params).to(device)
     model.load_state_dict(ckpt["model"])
     model.eval()
     return model, ckpt
@@ -73,12 +73,7 @@ def _init_comp():
 def evaluate_problem(model, problem, split, batch_size, num_workers, device, support_mask_sweep=False):
     ds, dl = make_loader(problem, split, batch_size, num_workers)
     pool_names = list(POOLS[problem])
-    comp = {
-        "final": _init_comp(),
-        "pre": _init_comp(),
-        "gap": _init_comp(),
-        "utility": _init_comp(),
-    }
+    comp = {}
     n_total = 0
     all_costs = []
     pick_count = None
@@ -90,12 +85,7 @@ def evaluate_problem(model, problem, split, batch_size, num_workers, device, sup
         for batch in dl:
             batch = to_device(batch, device)
             out = model(batch)
-            scores = {
-                "final": out["logits"],
-                "pre": out["pre_score"],
-                "gap": -out["pred_gap"],
-                "utility": out["utility"],
-            }
+            scores = score_components(out)
             if out.get("support_logits") is not None:
                 support_logits = out["support_logits"]
                 if support_logits.dim() == 2:
@@ -113,6 +103,8 @@ def evaluate_problem(model, problem, split, batch_size, num_workers, device, sup
             costs = batch["costs"]
             true_rank = torch.argsort(costs, dim=1)
             best = true_rank[:, 0]
+            if model.params.get("native_winner", False):
+                best = batch["ind"]
             for name, score in scores.items():
                 if name not in comp:
                     comp[name] = _init_comp()
@@ -184,9 +176,6 @@ def macro_row(per_problem):
         "oracle_cost": float(np.mean([v["oracle_cost"] for v in vals])),
         "vs_sbs_pct": float(np.mean([v["vs_sbs_pct"] for v in vals])),
         "vs_oracle_pct": float(np.mean([v["vs_oracle_pct"] for v in vals])),
-        "top1_pre": float(np.mean([v["top1_pre"] for v in vals])),
-        "top1_gap": float(np.mean([v["top1_gap"] for v in vals])),
-        "top1_utility": float(np.mean([v["top1_utility"] for v in vals])),
     }
     if all("support_top1_recall" in v for v in vals):
         row["support_top1_recall"] = float(np.mean([v["support_top1_recall"] for v in vals]))
@@ -220,7 +209,7 @@ def table_line(row, bold=False):
 def write_report(payload, out_dir):
     per_problem = payload["per_problem"]
     lines = [
-        "# V4 R31c Test Evaluation",
+        "# V4 Test Evaluation",
         "",
         f"- Checkpoint: `{payload['ckpt']}`",
         f"- Split: `{payload['split']}`",
@@ -288,26 +277,27 @@ def write_report(payload, out_dir):
             )
         for _, text in sorted(rows, reverse=True):
             lines.append(text)
-    lines += [
-        "",
-        "## Component Diagnostics",
-        "",
-        "| Problem | final top1 | pre top1 | gap top1 | utility top1 |",
-        "| -------- | ---------: | ---------: | ---------: | ---------: |",
-        f"| **ALL** | **{payload['all']['top1']:.4f}** | **{payload['all']['top1_pre']:.4f}** | **{payload['all']['top1_gap']:.4f}** | **{payload['all']['top1_utility']:.4f}** |",
-    ]
-    for problem in PROBLEMS:
-        if problem in per_problem:
-            r = per_problem[problem]
-            lines.append(
-                f"| {problem} | {r['top1']:.3f} | {r['top1_pre']:.3f} | "
-                f"{r['top1_gap']:.3f} | {r['top1_utility']:.3f} |"
-            )
+    if "top1_pre" in payload["all"]:
+        lines += [
+            "", "## Component Diagnostics", "",
+            "| Problem | final top1 | pre top1 | gap top1 | utility top1 |",
+            "| -------- | ---------: | ---------: | ---------: | ---------: |",
+            f"| **ALL** | **{payload['all']['top1']:.4f}** | **{payload['all']['top1_pre']:.4f}** | **{payload['all']['top1_gap']:.4f}** | **{payload['all']['top1_utility']:.4f}** |",
+        ]
+        for problem in PROBLEMS:
+            if problem in per_problem:
+                r = per_problem[problem]
+                lines.append(
+                    f"| {problem} | {r['top1']:.3f} | {r['top1_pre']:.3f} | "
+                    f"{r['top1_gap']:.3f} | {r['top1_utility']:.3f} |"
+                )
     lines.append("")
     (out_dir / "test_summary.md").write_text("\n".join(lines))
 
 
 def main():
+    from .train import configure_torch
+    configure_torch()
     parser = argparse.ArgumentParser()
     parser.add_argument("--ckpt", required=True)
     parser.add_argument("--out", required=True)
@@ -333,10 +323,10 @@ def main():
             support_mask_sweep=args.support_mask_sweep,
         )
         per_problem[problem] = r
+        components = f" pre={r['top1_pre']:.3f} gap={r['top1_gap']:.3f} util={r['top1_utility']:.3f}" if "top1_pre" in r else ""
         print(
             f"{problem:>10}: top1={r['top1']:.3f} top2={r['top2']:.3f} top3={r['top3']:.3f} "
-            f"mean_cost={r['mean_cost']:.4f} vs_sbs={r['vs_sbs_pct']:+.3f}% "
-            f"pre={r['top1_pre']:.3f} gap={r['top1_gap']:.3f} util={r['top1_utility']:.3f}"
+            f"mean_cost={r['mean_cost']:.4f} vs_sbs={r['vs_sbs_pct']:+.3f}%{components}"
         )
     all_row = macro_row(per_problem)
     payload = {

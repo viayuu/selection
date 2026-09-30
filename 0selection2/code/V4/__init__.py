@@ -1,2 +1,1 @@
-"""V4 selector: R31c problem-to-solver attention with solver-set refinement."""
-
+"""V4 selectors: legacy solver-set refinement and dual-stream joint encoding."""

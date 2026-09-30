@@ -12,8 +12,9 @@ from torch.utils.data import DataLoader
 from code.unified_selector.data import UnifiedProblemDataset, collate_single_problem
 from code.unified_selector.registry import PROBLEMS
 
-from .V4Model import ProblemToSolverSelector, get_default_model_params
+from .V4Model import get_default_model_params, make_selector, score_components
 from .tensor_loader import TensorBatchLoader, make_tensor_loader
+from .training_monitor import capture_rng, restore_rng, plot_history
 
 
 def set_seed(seed):
@@ -39,7 +40,9 @@ def to_device(batch, device):
 
 def make_loader(problem, split, batch_size, num_workers, coord_augment=0, shuffle=True, cache_device=None):
     if cache_device is not None:
-        return make_tensor_loader(problem, split, batch_size, shuffle, cache_device, coord_augment)
+        loader = make_tensor_loader(problem, split, batch_size, shuffle, cache_device, coord_augment)
+        loader.drop_last = split == "train" and shuffle
+        return loader
     dataset = UnifiedProblemDataset(problem, split, coord_augment=coord_augment)
     return DataLoader(
         dataset,
@@ -47,7 +50,7 @@ def make_loader(problem, split, batch_size, num_workers, coord_augment=0, shuffl
         shuffle=shuffle,
         num_workers=num_workers,
         collate_fn=collate_single_problem,
-        drop_last=(split == "train"),
+        drop_last=(split == "train" and shuffle),
         pin_memory=(num_workers > 0),
         persistent_workers=False,
     )
@@ -75,14 +78,15 @@ def build_sbs_indices(problems, split="train"):
     return indices
 
 
-def build_winner_weights(problems, max_weight=3.0):
+def build_winner_weights(problems, max_weight=3.0, native_winner=False):
     weights = {}
     for problem in problems:
         ds = UnifiedProblemDataset(problem, "train", coord_augment=0)
         counts = np.zeros(ds.K_p, dtype=np.float64)
         for i in range(ds.base_N):
-            c = np.asarray(ds.labels[str(i)]["cost"][: ds.K_p], dtype=np.float32)
-            counts[int(c.argmin())] += 1
+            label = ds.labels[str(i)]
+            winner = int(label["ind"]) if native_winner else int(np.asarray(label["cost"][: ds.K_p], dtype=np.float32).argmin())
+            counts[winner] += 1
         positive = counts[counts > 0]
         mean_freq = positive.mean() if len(positive) else 1.0
         w = np.sqrt(mean_freq / np.maximum(counts, 1.0))
@@ -149,8 +153,16 @@ def ranked_topk_ce_loss(logits, costs, rank_weights):
     return total / max(denom, 1.0e-9)
 
 
-def sequential_topk_ce_loss(logits, costs, rank_weights):
+def winner_first_rank(costs, winner=None):
     rank = costs.argsort(dim=1)
+    if winner is not None:
+        rest = rank[rank != winner[:, None]].reshape(len(costs), costs.size(1) - 1)
+        rank = torch.cat([winner[:, None], rest], dim=1)
+    return rank
+
+
+def sequential_topk_ce_loss(logits, costs, rank_weights, winner=None):
+    rank = winner_first_rank(costs, winner)
     available = torch.ones_like(logits, dtype=torch.bool)
     total = logits.sum() * 0
     denom = 0.0
@@ -176,6 +188,16 @@ def risk_loss(score, costs):
     pred_cost = (prob * costs).sum(dim=1)
     best = costs.min(dim=1).values
     return ((pred_cost - best) / best.abs().clamp_min(1.0e-9)).clamp(max=1.0).mean()
+
+
+def winner_pair_loss(score, costs, winner, margin_scale=0.01):
+    """Compare the winner to every strictly worse arm, including the runner-up."""
+    best_cost = costs.gather(1, winner[:, None])
+    gain = (costs - best_cost) / best_cost.abs().clamp_min(1e-9)
+    valid = gain > 0
+    weight = (gain / margin_scale).clamp(0.1, 5.0)
+    margin = score.gather(1, winner[:, None]) - score
+    return (F.softplus(-margin) * weight)[valid].mean() if valid.any() else score.sum() * 0
 
 
 def support_targets_from_costs(costs, eps=0.01, topk=3):
@@ -324,20 +346,31 @@ def support_recall_stats(support_logits, costs, topk=3):
     }
 
 
-def selector_loss(out, costs, class_weight, args, sbs_idx=None):
+def selector_loss(out, costs, class_weight, args, sbs_idx=None, winner=None):
     logits = out["logits"]
-    winner = costs.argmin(dim=1)
+    winner = costs.argmin(dim=1) if winner is None else winner
+    if getattr(args, "loss_mode", "original") != "original":
+        ce = F.cross_entropy(logits, winner)
+        if args.loss_mode == "ce":
+            return args.ce_weight * ce, {"ce": ce.detach()}
+        pair = winner_pair_loss(logits, costs, winner, args.cost_scale)
+        risk = risk_loss(logits, costs) / args.cost_scale
+        loss = args.ce_weight * ce + args.pair_weight * pair + args.risk_weight * risk
+        return loss, {"ce": ce.detach(), "pair": pair.detach(), "risk": risk.detach()}
     ce = F.cross_entropy(logits, winner, weight=class_weight)
     pair = top_focused_pair_loss(logits, costs, sbs_idx=sbs_idx) if args.top_focused_pair else pairwise_order_loss(logits, costs)
     rank_weights = parse_rank_weights(args.topk_ce_rank_weights)
     if args.topk_ce_mode == "sequential":
-        topk_ce = sequential_topk_ce_loss(logits, costs, rank_weights)
+        topk_ce = sequential_topk_ce_loss(logits, costs, rank_weights, winner if getattr(args, "native_winner", False) else None)
     else:
         topk_ce = ranked_topk_ce_loss(logits, costs, rank_weights)
+    risk = risk_loss(logits, costs)
+    if getattr(args, "architecture", "legacy") == "dual_stream":
+        loss = args.ce_weight * ce + args.pair_weight * pair + args.topk_ce_weight * topk_ce + args.risk_weight * risk
+        return loss, {"ce": ce.detach(), "pair": pair.detach(), "topk_ce": topk_ce.detach(), "risk": risk.detach()}
     gap = gap_loss(out["pred_gap"], costs)
     pre = F.cross_entropy(out["pre_score"], winner, weight=class_weight)
     div = query_diversity_loss(out["query_logits"])
-    risk = risk_loss(logits, costs)
     loss = (
         args.ce_weight * ce
         + args.pair_weight * pair
@@ -376,19 +409,14 @@ def selector_loss(out, costs, class_weight, args, sbs_idx=None):
 
 @torch.no_grad()
 def evaluate(model, problems, split, batch_size, num_workers, device, cache_device=None):
+    was_training = model.training
     model.eval()
     per_problem = {}
     for problem in problems:
         loader = make_loader(problem, split, batch_size, num_workers, coord_augment=0, shuffle=False, cache_device=cache_device)
-        comp = {
-            "final": {"top1": 0, "top2": 0, "top3": 0, "cost_sum": 0.0},
-            "base": {"top1": 0, "top2": 0, "top3": 0, "cost_sum": 0.0},
-            "pre": {"top1": 0, "top2": 0, "top3": 0, "cost_sum": 0.0},
-            "gap": {"top1": 0, "top2": 0, "top3": 0, "cost_sum": 0.0},
-            "utility": {"top1": 0, "top2": 0, "top3": 0, "cost_sum": 0.0},
-            "support_g0": {"top1": 0, "top2": 0, "top3": 0, "cost_sum": 0.0},
-        }
+        comp = {}
         n_total = 0
+        ce_sum = tie_sum = 0.0
         pick_count = None
         support_top1 = 0.0
         support_top3 = 0.0
@@ -408,22 +436,18 @@ def evaluate(model, problems, split, batch_size, num_workers, device, cache_devi
         for batch in loader:
             batch = to_device(batch, device)
             out = model(batch)
-            scores = {
-                "final": out["logits"],
-                "base": out.get("base_logits", out["logits"]),
-                "pre": out["pre_score"],
-                "gap": -out["pred_gap"],
-                "utility": out["utility"],
-            }
-            if out.get("support_logits") is not None:
-                support_logits = out["support_logits"]
-                if support_logits.dim() == 2:
-                    support_logits = support_logits[:, None, :]
-                scores["support_g0"] = support_logits[:, 0]
+            scores = score_components(out)
             costs = batch["costs"]
             true_rank = torch.argsort(costs, dim=1)
             best = true_rank[:, 0]
+            if model.params.get("native_winner", False):
+                best = batch["ind"]
+            ce_sum += F.cross_entropy(out["logits"], best, reduction="sum").item()
+            pred_cost = costs.gather(1, out["logits"].argmax(1)[:, None]).squeeze(1)
+            tie_sum += pred_cost.eq(costs.min(1).values).sum().item()
             for name, score in scores.items():
+                comp.setdefault(name, {"top1": 0, "top2": 0, "top3": 0, "cost_sum": 0.0})
+                std_meter.setdefault(name, [])
                 pred_rank = torch.argsort(-score, dim=1)
                 pred = pred_rank[:, 0]
                 comp[name]["top1"] += (pred == best).sum().item()
@@ -431,12 +455,9 @@ def evaluate(model, problems, split, batch_size, num_workers, device, cache_devi
                 comp[name]["top3"] += (pred_rank[:, : min(3, score.size(1))] == best[:, None]).any(dim=1).sum().item()
                 comp[name]["cost_sum"] += costs.gather(1, pred[:, None]).sum().item()
                 std_meter[name].append(score.std(dim=1).mean().item())
-            corr_meter["pre_final"].append(score_correlation(scores["pre"], scores["final"]))
-            corr_meter["gap_final"].append(score_correlation(scores["gap"], scores["final"]))
-            corr_meter["utility_final"].append(score_correlation(scores["utility"], scores["final"]))
-            corr_meter["base_final"].append(score_correlation(scores["base"], scores["final"]))
-            if "support_g0" in scores:
-                corr_meter["support_g0_final"].append(score_correlation(scores["support_g0"], scores["final"]))
+            for name, score in scores.items():
+                if name != "final":
+                    corr_meter[f"{name}_final"].append(score_correlation(score, scores["final"]))
             n_total += costs.size(0)
             pred = torch.argsort(-scores["final"], dim=1)[:, 0]
             cur = torch.bincount(pred.detach().cpu(), minlength=scores["final"].size(1)).float()
@@ -458,6 +479,8 @@ def evaluate(model, problems, split, batch_size, num_workers, device, cache_devi
             sbs, vbs = get_split_sbs_vbs(problem, split)
         mean_cost = comp["final"]["cost_sum"] / max(1, n_total)
         per_problem[problem] = dict(
+            ce=ce_sum / n_total,
+            top1_tie_aware=tie_sum / n_total,
             top1=comp["final"]["top1"] / n_total,
             top2=comp["final"]["top2"] / n_total,
             top3=comp["final"]["top3"] / n_total,
@@ -486,27 +509,20 @@ def evaluate(model, problems, split, batch_size, num_workers, device, cache_devi
         for name, values in std_meter.items():
             per_problem[problem][f"std_{name}"] = float(np.mean(values)) if values else 0.0
         for name, values in corr_meter.items():
-            per_problem[problem][f"corr_{name}"] = float(np.mean(values)) if values else 0.0
+            if values:
+                per_problem[problem][f"corr_{name}"] = float(np.mean(values))
     macro = dict(
+        macro_ce=float(np.mean([v["ce"] for v in per_problem.values()])),
+        macro_top1_tie_aware=float(np.mean([v["top1_tie_aware"] for v in per_problem.values()])),
         macro_top1=float(np.mean([v["top1"] for v in per_problem.values()])),
         macro_top2=float(np.mean([v["top2"] for v in per_problem.values()])),
         macro_top3=float(np.mean([v["top3"] for v in per_problem.values()])),
         macro_vs_sbs_pct=float(np.mean([v["vs_sbs_pct"] for v in per_problem.values()])),
         macro_vbs_gap_closed_pct=float(np.mean([v["vbs_gap_closed_pct"] for v in per_problem.values()])),
-        macro_top1_pre=float(np.mean([v["top1_pre"] for v in per_problem.values()])),
-        macro_top1_gap=float(np.mean([v["top1_gap"] for v in per_problem.values()])),
-        macro_top1_utility=float(np.mean([v["top1_utility"] for v in per_problem.values()])),
-        macro_top1_base=float(np.mean([v["top1_base"] for v in per_problem.values()])),
-        macro_top1_support_g0=float(np.mean([v["top1_support_g0"] for v in per_problem.values()])),
-        macro_vs_sbs_pct_pre=float(np.mean([v["vs_sbs_pct_pre"] for v in per_problem.values()])),
-        macro_vs_sbs_pct_gap=float(np.mean([v["vs_sbs_pct_gap"] for v in per_problem.values()])),
-        macro_vs_sbs_pct_utility=float(np.mean([v["vs_sbs_pct_utility"] for v in per_problem.values()])),
-        macro_corr_pre_final=float(np.mean([v["corr_pre_final"] for v in per_problem.values()])),
-        macro_corr_gap_final=float(np.mean([v["corr_gap_final"] for v in per_problem.values()])),
-        macro_corr_utility_final=float(np.mean([v["corr_utility_final"] for v in per_problem.values()])),
-        macro_corr_base_final=float(np.mean([v["corr_base_final"] for v in per_problem.values()])),
-        macro_corr_support_g0_final=float(np.mean([v["corr_support_g0_final"] for v in per_problem.values()])),
     )
+    for key in next(iter(per_problem.values())):
+        if key.startswith(("top1_", "vs_sbs_pct_", "corr_")):
+            macro[f"macro_{key}"] = float(np.mean([v[key] for v in per_problem.values()]))
     if all("support_top1_recall" in v for v in per_problem.values()):
         macro.update(
             macro_support_top1_recall=float(np.mean([v["support_top1_recall"] for v in per_problem.values()])),
@@ -517,7 +533,7 @@ def evaluate(model, problems, split, batch_size, num_workers, device, cache_devi
             macro_support_avg_shortlist=float(np.mean([v["support_avg_shortlist"] for v in per_problem.values()])),
             macro_support_arm_coverage=float(np.mean([v["support_arm_coverage"] for v in per_problem.values()])),
         )
-    model.train()
+    model.train(was_training)
     return per_problem, macro
 
 
@@ -532,14 +548,15 @@ def print_eval(tag, per_problem, macro):
         if "macro_support_top1_recall" in macro
         else ""
     )
-    print(
-        f"          components: pre_top1={macro['macro_top1_pre']:.4f} "
-        f"gap_top1={macro['macro_top1_gap']:.4f} utility_top1={macro['macro_top1_utility']:.4f} "
-        f"base_top1={macro['macro_top1_base']:.4f}{support_g0_msg} "
-        f"corr(pre/final)={macro['macro_corr_pre_final']:+.3f} "
-        f"corr(gap/final)={macro['macro_corr_gap_final']:+.3f} "
-        f"corr(util/final)={macro['macro_corr_utility_final']:+.3f}"
-    )
+    if "macro_top1_pre" in macro:
+        print(
+            f"          components: pre_top1={macro['macro_top1_pre']:.4f} "
+            f"gap_top1={macro['macro_top1_gap']:.4f} utility_top1={macro['macro_top1_utility']:.4f} "
+            f"base_top1={macro['macro_top1_base']:.4f}{support_g0_msg} "
+            f"corr(pre/final)={macro['macro_corr_pre_final']:+.3f} "
+            f"corr(gap/final)={macro['macro_corr_gap_final']:+.3f} "
+            f"corr(util/final)={macro['macro_corr_utility_final']:+.3f}"
+        )
     if "macro_support_top1_recall" in macro:
         print(
             f"          support: g0@1={macro['macro_support_g0_top1_recall']:.4f} "
@@ -552,10 +569,10 @@ def print_eval(tag, per_problem, macro):
         )
     for p in per_problem:
         r = per_problem[p]
+        components = f" pre={r['top1_pre']:.3f} gap={r['top1_gap']:.3f} util={r['top1_utility']:.3f}" if "top1_pre" in r else ""
         print(
             f"{p:>10}: top1={r['top1']:.3f} mean_cost={r['mean_cost']:.4f} "
-            f"(sbs={r['sbs']:.4f}) vs_sbs={r['vs_sbs_pct']:+.2f}% "
-            f"pre={r['top1_pre']:.3f} gap={r['top1_gap']:.3f} util={r['top1_utility']:.3f}"
+            f"(sbs={r['sbs']:.4f}) vs_sbs={r['vs_sbs_pct']:+.2f}%{components}"
         )
 
 
@@ -588,13 +605,19 @@ def build_model(args):
         solver_feature_weight=args.solver_feature_weight,
         solver_feature_hidden=args.solver_feature_hidden,
         sdpa=args.sdpa,
+        architecture=getattr(args, "architecture", "legacy"),
+        joint_layer_num=getattr(args, "joint_layers", 2),
+        ignore_coord_dist=getattr(args, "ignore_coord_dist", False),
+        native_winner=getattr(args, "native_winner", False),
     )
-    return ProblemToSolverSelector(**params), params
+    return make_selector(params), params
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--save-dir", required=True)
+    parser.add_argument("--architecture", choices=["legacy", "dual_stream"], default="legacy")
+    parser.add_argument("--joint-layers", type=int, default=2)
     parser.add_argument("--epochs", type=int, default=30)
     parser.add_argument("--batch-per-problem", type=int, default=128)
     parser.add_argument("--lr", type=float, default=2.0e-4)
@@ -607,6 +630,19 @@ def main():
     parser.add_argument("--log-every", type=int, default=50)
     parser.add_argument("--problems", default="")
     parser.add_argument("--resume", default="")
+    parser.add_argument("--ignore-coord-dist", action="store_true")
+    parser.add_argument("--native-winner", action="store_true")
+    parser.add_argument("--loss-mode", choices=["original", "ce", "winner_cost"], default="original")
+    parser.add_argument("--cost-scale", type=float, default=0.01)
+    parser.add_argument("--lr-schedule", choices=["constant", "plateau"], default="constant")
+    parser.add_argument("--warmup-epochs", type=int, default=0)
+    parser.add_argument("--lr-patience", type=int, default=3)
+    parser.add_argument("--min-lr", type=float, default=2e-6)
+    parser.add_argument("--early-stop-patience", type=int, default=0)
+    parser.add_argument("--min-updates", type=int, default=0)
+    parser.add_argument("--min-delta", type=float, default=0.001)
+    parser.add_argument("--train-eval-every", type=int, default=0)
+    parser.add_argument("--skip-test", action="store_true", help="Select the experiment on validation before testing")
     parser.add_argument("--amp", action="store_true")
     parser.add_argument("--amp-dtype", choices=["fp16", "bf16"], default="fp16")
     parser.add_argument("--sdpa", action="store_true")
@@ -659,6 +695,20 @@ def main():
     parser.add_argument("--support-budget-weight", type=float, default=0.02)
     parser.add_argument("--support-target-mode", choices=["legacy", "rank_partition"], default="rank_partition")
     args = parser.parse_args()
+    if args.cost_scale <= 0:
+        parser.error("cost-scale must be positive")
+    if args.loss_mode != "original" and args.architecture != "dual_stream":
+        parser.error("simplified losses currently require dual_stream (no unused auxiliary heads)")
+
+    if args.architecture == "dual_stream":
+        if args.no_solver_features:
+            parser.error("dual_stream requires the fixed solver feature table")
+        args.support_branch = args.support_g0_as_main = False
+        args.support_generators = 0
+        for name in ("gap_weight", "pre_ce_weight", "query_div_weight", "support_loss_weight",
+                     "gap_score_weight", "pre_score_weight", "support_score_weight",
+                     "support_main_utility_weight", "support_main_pre_weight", "support_main_gap_weight"):
+            setattr(args, name, 0.0)
 
     set_seed(args.seed)
     configure_torch()
@@ -669,7 +719,16 @@ def main():
     model, model_params = build_model(args)
     model.to(args.device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=args.wd)
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+        optimizer, mode="max", factor=0.5, patience=args.lr_patience,
+        threshold=args.min_delta, threshold_mode="abs", min_lr=args.min_lr,
+    ) if args.lr_schedule == "plateau" else None
+    scaler = torch.cuda.amp.GradScaler(enabled=args.amp)
     start_epoch = 0
+    global_step = successful_updates = 0
+    stop_best, stale_evals = -1e9, 0
+    resume_rng = None
+    winner_weight_policy = "native" if args.native_winner else "fp32_argmin"
     best_score = -1.0e9
     best_top1 = -1.0e9
     best_top3_safe = -1.0e9
@@ -677,23 +736,46 @@ def main():
     if args.resume:
         ckpt = torch.load(args.resume, map_location=args.device)
         model.load_state_dict(ckpt["model"])
+        winner_weight_policy = ckpt.get("winner_weight_policy", "fp32_argmin")
         if "optimizer" in ckpt:
             optimizer.load_state_dict(ckpt["optimizer"])
         start_epoch = int(ckpt.get("epoch", -1)) + 1
         best_score = float(ckpt.get("best_score", best_score))
+        best_top1 = ckpt.get("best_top1", best_top1)
+        best_top3_safe = ckpt.get("best_top3_safe", best_top3_safe)
+        best_cost = ckpt.get("best_cost", best_cost)
+        resume_macro = ckpt.get("macro", {})
+        best_top1 = max(best_top1, resume_macro.get("macro_top1", -1e9))
+        best_cost = min(best_cost, resume_macro.get("macro_vs_sbs_pct", 1e9))
+        if "macro_top3" in resume_macro:
+            best_top3_safe = max(best_top3_safe, resume_macro["macro_top3"] - 0.25 * max(0.0, resume_macro["macro_vs_sbs_pct"]))
+        global_step = ckpt.get("global_step", 0)
+        successful_updates = ckpt.get("successful_updates", global_step)
+        stop_best, stale_evals = ckpt.get("stop_best", -1e9), ckpt.get("stale_evals", 0)
+        if scheduler is not None and ckpt.get("scheduler") is not None:
+            scheduler.load_state_dict(ckpt["scheduler"])
+        if "scaler" in ckpt:
+            scaler.load_state_dict(ckpt["scaler"])
+        resume_rng = ckpt.get("rng")
 
+    history = json.loads((save_dir / "history.json").read_text()) if args.resume and (save_dir / "history.json").exists() else []
+    if history and max(r["epoch"] for r in history) >= start_epoch:
+        raise ValueError("History is newer than the resume checkpoint; resume last.pt or use a new save-dir")
     cache_device = args.device if args.cache_gpu else None
     train_loaders = {
         p: make_loader(p, "train", args.batch_per_problem, args.num_workers, args.coord_augment, shuffle=True, cache_device=cache_device)
         for p in problems
     }
-    class_weights = build_winner_weights(problems) if args.winner_balance else {p: None for p in problems}
+    class_weights = build_winner_weights(problems, native_winner=winner_weight_policy == "native") if args.winner_balance else {p: None for p in problems}
     sbs_indices = build_sbs_indices(problems, split="train")
 
     config = vars(args)
     config["model_params"] = model_params
+    config["winner_weight_policy"] = winner_weight_policy
     (save_dir / "args.json").write_text(json.dumps(config, indent=2))
     model_name = "V4 R32a R31c + R25-style support branch" if args.support_branch else "V4 R31c multi-query problem-to-solver attention + solver-set transformer"
+    if args.architecture == "dual_stream":
+        model_name = "V4 dual-stream joint encoder + instance-query solver decoder (logits only)"
     print(f"[train] {model_name}")
     print(f"[train] problems={problems}")
     print(f"[train] model_params={model_params}")
@@ -704,6 +786,8 @@ def main():
             project=args.wandb_project, entity=args.wandb_entity, name=save_dir.name,
             config=config, dir=str(save_dir), mode=args.wandb_mode,
         )
+    if resume_rng is not None:
+        restore_rng(resume_rng)
 
     def track_eval(tag, per_problem, macro):
         if wandb_run is not None:
@@ -720,18 +804,34 @@ def main():
                 "args": config,
                 "epoch": epoch,
                 "macro": macro,
-                "best_score": score,
+                "best_score": best_score,
+                "selection_score": score,
+                "best_top1": best_top1,
+                "best_top3_safe": best_top3_safe,
+                "best_cost": best_cost,
+                "global_step": global_step,
+                "successful_updates": successful_updates,
+                "winner_weight_policy": winner_weight_policy,
+                "scheduler": scheduler.state_dict() if scheduler is not None else None,
+                "scaler": scaler.state_dict(),
+                "rng": capture_rng(),
+                "stop_best": stop_best,
+                "stale_evals": stale_evals,
             },
             save_dir / name,
         )
 
     amp_dtype = torch.float16 if args.amp_dtype == "fp16" else torch.bfloat16
-    scaler = torch.cuda.amp.GradScaler(enabled=args.amp)
-    global_step = 0
     start = time.time()
     last_log_time = start
     interval_examples = 0
     for epoch in range(start_epoch, args.epochs):
+        if epoch < args.warmup_epochs:
+            for group in optimizer.param_groups:
+                group["lr"] = args.lr * (epoch + 1) / args.warmup_epochs
+        epoch_lr = optimizer.param_groups[0]["lr"]
+        gradient_norms = []
+        updates_before = successful_updates
         meter = []
         part_meter = {
             k: []
@@ -764,13 +864,17 @@ def main():
                 batch = to_device(batch, args.device)
                 with torch.cuda.amp.autocast(enabled=args.amp, dtype=amp_dtype):
                     out = model(batch)
-                    loss, parts = selector_loss(out, batch["costs"], weight, args, sbs_idx=sbs_indices.get(problem))
+                    loss, parts = selector_loss(out, batch["costs"], weight, args, sbs_idx=sbs_indices.get(problem),
+                                                winner=batch["ind"] if args.native_winner else None)
                 optimizer.zero_grad(set_to_none=True)
                 scaler.scale(loss).backward()
                 scaler.unscale_(optimizer)
-                torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                old_scale = scaler.get_scale()
                 scaler.step(optimizer)
                 scaler.update()
+                successful_updates += int(scaler.get_scale() >= old_scale)
+                gradient_norms.append(grad_norm.detach())
                 global_step += 1
                 meter.append(loss.detach())
                 interval_examples += batch["costs"].size(0)
@@ -794,51 +898,75 @@ def main():
                                        "speed/samples_per_sec": throughput, "gpu/peak_memory_gib": peak_gb}, step=global_step)
                     last_log_time, interval_examples = now, 0
 
-        if epoch % args.eval_every == 0:
+        train_stats = {"loss": torch.stack(meter).mean().item()}
+        train_stats.update({k: torch.stack(v).mean().item() for k, v in part_meter.items() if v})
+        norms = torch.stack(gradient_norms)
+        train_stats["grad_norm"] = norms[torch.isfinite(norms)].mean().item() if torch.isfinite(norms).any() else None
+        train_stats["skipped_updates"] = len(meter) - (successful_updates - updates_before)
+        print(f"[epoch done {epoch}] loss={train_stats['loss']:.5f} lr={epoch_lr:.2g} "
+              f"updates={successful_updates} skipped={train_stats['skipped_updates']} grad={train_stats['grad_norm']}")
+        record = dict(epoch=epoch, step=global_step, updates=successful_updates, lr=epoch_lr, train=train_stats)
+        should_stop = False
+        if epoch % args.eval_every == 0 or epoch == args.epochs - 1:
             per_problem, macro = evaluate(model, problems, "val", args.batch_per_problem, args.num_workers, args.device, cache_device)
             print_eval(f"eval epoch {epoch}", per_problem, macro)
             track_eval("val", per_problem, macro)
             (save_dir / f"eval_epoch{epoch}.json").write_text(json.dumps({"per_problem": per_problem, "macro": macro}, indent=2))
             score = macro["macro_top1"] - 0.25 * max(0.0, macro["macro_vs_sbs_pct"])
-            if score > best_score:
-                best_score = score
+            record["val"] = macro
+            if score > stop_best + args.min_delta:
+                stop_best, stale_evals = score, 0
+            else:
+                stale_evals += 1
+            if scheduler is not None and epoch + 1 >= args.warmup_epochs:
+                scheduler.step(score)
+            should_stop = bool(args.early_stop_patience and stale_evals >= args.early_stop_patience
+                               and successful_updates >= args.min_updates)
+            top3_safe_score = macro["macro_top3"] - 0.25 * max(0.0, macro["macro_vs_sbs_pct"])
+            improve_score = score > best_score
+            improve_top1 = macro["macro_top1"] > best_top1
+            improve_top3 = top3_safe_score > best_top3_safe
+            improve_cost = macro["macro_vs_sbs_pct"] < best_cost
+            best_score = max(best_score, score)
+            best_top1 = max(best_top1, macro["macro_top1"])
+            best_top3_safe = max(best_top3_safe, top3_safe_score)
+            best_cost = min(best_cost, macro["macro_vs_sbs_pct"])
+            if improve_score:
                 save_checkpoint("best.pt", epoch, macro, best_score)
                 print(f"[save] best.pt epoch={epoch} score={score:.4f}")
-            if macro["macro_top1"] > best_top1:
-                best_top1 = macro["macro_top1"]
+            if improve_top1:
                 save_checkpoint("best_top1.pt", epoch, macro, best_top1)
                 print(f"[save] best_top1.pt epoch={epoch} top1={best_top1:.4f}")
-            top3_safe_score = macro["macro_top3"] - 0.25 * max(0.0, macro["macro_vs_sbs_pct"])
-            if top3_safe_score > best_top3_safe:
-                best_top3_safe = top3_safe_score
+            if improve_top3:
                 save_checkpoint("best_top3_safe.pt", epoch, macro, best_top3_safe)
                 print(f"[save] best_top3_safe.pt epoch={epoch} score={best_top3_safe:.4f}")
-            if macro["macro_vs_sbs_pct"] < best_cost:
-                best_cost = macro["macro_vs_sbs_pct"]
+            if improve_cost:
                 save_checkpoint("best_cost.pt", epoch, macro, best_cost)
                 print(f"[save] best_cost.pt epoch={epoch} vs_sbs={best_cost:+.3f}%")
-            torch.save(
-                {
-                    "model": model.state_dict(),
-                    "optimizer": optimizer.state_dict(),
-                    "args": config,
-                    "epoch": epoch,
-                    "macro": macro,
-                    "best_score": best_score,
-                },
-                save_dir / "last.pt",
-            )
+        if args.train_eval_every and ((epoch + 1) % args.train_eval_every == 0 or should_stop or epoch == args.epochs - 1):
+            train_problem, train_macro = evaluate(model, problems, "train", args.batch_per_problem,
+                                                  args.num_workers, args.device, cache_device)
+            print_eval(f"train_eval epoch {epoch}", train_problem, train_macro)
+            track_eval("train_eval", train_problem, train_macro)
+            record["train_eval"] = train_macro
+            (save_dir / f"train_eval_epoch{epoch}.json").write_text(json.dumps({"per_problem": train_problem, "macro": train_macro}, indent=2))
+        history.append(record)
+        if wandb_run is not None:
+            wandb_run.log({**{f"epoch_train/{k}": v for k, v in train_stats.items()},
+                           "train/successful_updates": successful_updates, "train/amp_scale": scaler.get_scale()}, step=global_step)
+        (save_dir / "history.json").write_text(json.dumps(history, indent=2))
+        save_checkpoint("last.pt", epoch, record.get("val", {}), best_score)
+        if (epoch + 1) % 5 == 0 or should_stop or epoch == args.epochs - 1:
+            plot_history(history, save_dir)
+        if should_stop:
+            print(f"[early stop] epoch={epoch} stale_evals={stale_evals} successful_updates={successful_updates}")
+            break
 
-    torch.save(
-        {
-            "model": model.state_dict(),
-            "optimizer": optimizer.state_dict(),
-            "args": config,
-            "epoch": args.epochs - 1,
-            "best_score": best_score,
-        },
-        save_dir / "last.pt",
-    )
+    if args.skip_test:
+        print("[done] validation-selected checkpoints saved; test deferred until experiment selection")
+        if wandb_run is not None:
+            wandb_run.finish()
+        return
 
     per_problem, macro = evaluate(model, problems, "test", args.batch_per_problem, args.num_workers, args.device, cache_device)
     print_eval("test last", per_problem, macro)
