@@ -71,6 +71,10 @@ def _init_comp():
 
 
 def evaluate_problem(model, problem, split, batch_size, num_workers, device, support_mask_sweep=False):
+    if model.params.get("architecture") == "performance":
+        from .performance_evaluation import evaluate_performance
+        per_problem, _ = evaluate_performance(model, [problem], split, batch_size, num_workers, device)
+        return per_problem[problem]
     ds, dl = make_loader(problem, split, batch_size, num_workers)
     pool_names = list(POOLS[problem])
     comp = {}
@@ -182,7 +186,8 @@ def macro_row(per_problem):
         row["support_top3_recall"] = float(np.mean([v["support_top3_recall"] for v in vals]))
         row["support_avg_shortlist"] = float(np.mean([v["support_avg_shortlist"] for v in vals]))
         row["support_arm_coverage"] = float(np.mean([v["support_arm_coverage"] for v in vals]))
-    for key in sorted({k for v in vals for k in v if k.startswith(("top1_", "top2_", "top3_", "mean_cost_", "vs_sbs_pct_"))}):
+    for key in sorted({k for v in vals for k, value in v.items() if isinstance(value, (int, float, np.number))
+                       and k.startswith(("top1_", "top2_", "top3_", "mean_cost_", "vs_sbs_pct_"))}):
         row[key] = float(np.mean([v[key] for v in vals if key in v]))
     return row
 
@@ -209,7 +214,7 @@ def table_line(row, bold=False):
 def write_report(payload, out_dir):
     per_problem = payload["per_problem"]
     lines = [
-        "# V4 Test Evaluation",
+        f"# V4 {payload['split']} Evaluation",
         "",
         f"- Checkpoint: `{payload['ckpt']}`",
         f"- Split: `{payload['split']}`",

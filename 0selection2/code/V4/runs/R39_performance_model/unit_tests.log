@@ -1,0 +1,32 @@
+/public/home/shiys/0selection2/code/V4/evaluate.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  ckpt = torch.load(ckpt_path, map_location=device)
+/public/home/shiys/0selection2/code/V4/train.py:750: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=args.amp)
+/public/home/shiys/0selection2/code/V4/train.py:889: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=args.amp, dtype=amp_dtype):
+/public/home/shiys/0selection2/code/V4/train.py:761: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  ckpt = torch.load(args.resume, map_location=args.device)
+----------------------------------------------------------------------
+Ran 49 tests in 2.380s
+
+OK
+[unit test] macro_top1=0.0000 top2=0.5000 top3=0.5000 vs_sbs=+13.242% vbs_closed=-39.72%
+      ATSP: top1=0.000 mean_cost=1.6986 (sbs=1.5000) vs_sbs=+13.24%
+[train] V4 dual-stream joint encoder + instance-query solver decoder (logits only)
+[train] problems=['TSP']
+[train] model_params={}
+[epoch done 0] loss=0.24260 lr=0.0002 updates=1 skipped=0 grad=0.0824957937002182
+[eval epoch 0] macro_top1=0.6000 top2=0.9000 top3=1.0000 vs_sbs=-0.200% vbs_closed=+20.00%
+[save] best.pt epoch=0 score=0.6000
+[save] best_top1.pt epoch=0 top1=0.6000
+[save] best_top3_safe.pt epoch=0 score=1.0000
+[save] best_cost.pt epoch=0 vs_sbs=-0.200%
+[epoch done 1] loss=0.24258 lr=0.0002 updates=2 skipped=0 grad=0.08244629204273224
+[eval epoch 1] macro_top1=0.6000 top2=0.9000 top3=1.0000 vs_sbs=-0.200% vbs_closed=+20.00%
+[done] validation-selected checkpoints saved; test deferred until experiment selection
+[train] V4 dual-stream joint encoder + instance-query solver decoder (logits only)
+[train] problems=['TSP']
+[train] model_params={}
+[epoch done 2] loss=0.24255 lr=0.0002 updates=3 skipped=0 grad=0.08239679038524628
+[eval epoch 2] macro_top1=0.6000 top2=0.9000 top3=1.0000 vs_sbs=-0.200% vbs_closed=+20.00%
+[done] validation-selected checkpoints saved; test deferred until experiment selection
