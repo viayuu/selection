@@ -1,0 +1,65 @@
+{
+  "seed": 2,
+  "selector_training": false,
+  "problems": [
+    "TSP",
+    "CVRP",
+    "ATSP",
+    "OVRP",
+    "VRPB",
+    "VRPL",
+    "VRPTW",
+    "OVRPTW",
+    "OVRPB",
+    "OVRPL",
+    "VRPBL",
+    "VRPBTW",
+    "VRPLTW",
+    "OVRPBL",
+    "OVRPBTW",
+    "OVRPLTW",
+    "VRPBLTW",
+    "OVRPBLTW"
+  ],
+  "fixed_checkpoints": {
+    "R34": "code/V4/runs/R34_winner_cost_seed2_4090/best.pt",
+    "R39A": "code/V4/runs/R39_performance_model/winner_cost_seed2/best.pt",
+    "R40A": "code/V4/runs/R40_discriminative_training/dual_stream_seed2/best.pt",
+    "R40B": "code/V4/runs/R40_discriminative_training/direct_seed2/best.pt"
+  },
+  "checkpoint_rule": "historical minimum validation macro_vs_sbs_pct; no reselection",
+  "label_rule": "native ind",
+  "cost_dtype": "raw FP64, not recast cached FP32",
+  "inference_dtype": "FP32; historical SDPA/TF32 settings",
+  "augmentation": false,
+  "drop_tail": false,
+  "decision": "classification logits argmax for all four models",
+  "geometry_normalization": "checkpoint buffers only",
+  "sbs_definition": "best fixed solver by evaluation split mean cost, same historical metric convention",
+  "macro_definition": "arithmetic mean of 18 per-problem metrics, including percentages",
+  "sample_lock_before_test": true,
+  "repeats": {
+    "deterministic": 2,
+    "stochastic_seeds": [
+      2,
+      3,
+      4
+    ]
+  },
+  "tie_rtol": 1e-06,
+  "tie_atol": 1e-06,
+  "old_gap_boundaries_pct": [
+    0.1,
+    0.5
+  ],
+  "source_hashes": {
+    "V4Model.py": "50bff946ab08cc38d66d41d86f76fa016dcd064624d4aefd1d5168a30e3b3aea",
+    "dual_stream.py": "cab910fe482e21c0e330d8f865aa3ade5d111096a6c3dee2827711dca96d61e5",
+    "direct_selector.py": "7d8352408cda03113bce2f25c35e9d998868f5e8c66993992306b2c6f3014df7",
+    "local_geometry.py": "5cecafaf06e39595b847438d2e974ededf086954cab95ff83d232875f86fd581",
+    "solver_features.py": "a6720bd42b5678566ceb71c6d76e20c3e7e792b36feafbe957f917e412223053",
+    "r41_frozen_evaluation.py": "5b600e44e463d7fe9ec57df67d53c317d56ea0e255ce40ed54f63264e8d1cddc",
+    "r41_label_stability.py": "9879e3aa042a8c10d391682852da6da767f2e49366bb0c262955bc5b5221af9d"
+  },
+  "timestamp": "2026-10-01 00:33:14 +0800"
+}

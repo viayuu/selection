@@ -1,0 +1,49 @@
+{
+  "audit_skill": "experiment-audit",
+  "verdict": "WARN",
+  "overall_verdict": "warn",
+  "integrity_status": "warn",
+  "reason_code": "historical_provenance_incomplete",
+  "summary": "Concrete frozen test and RELD pair records verified; original solver bindings and early source snapshots remain incomplete. No complete-pool stability claim.",
+  "agent_id": "01a0f345-9d96-7e91-9b4b-4d7f1346684c",
+  "verdict_id": "01a0f345-9d96-7e91-9b4b-4d7f1346684c",
+  "executor_model": "codex",
+  "executor_family": "openai",
+  "reviewer_model": "inherited_codex",
+  "reviewer_family": "openai",
+  "reviewer_reasoning": "ultra",
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "date": "2026-10-01",
+  "generated_at": "2026-09-30T17:23:59Z",
+  "trace_path": ".aris/traces/experiment-audit/2026-10-01_r41/",
+  "audited_input_hashes": {
+    "code/V4/r41_frozen_evaluation.py": "f32e63d1ce66e1f03b2a14e082eb705ccd1deb0d4a5f600371777f277d4a898e",
+    "code/V4/r41_label_stability.py": "9ddb41353f9cac356941733b965f9dcb34f3062ca04d27ee4ce7295c02c63257",
+    "code/V4/r41_analysis.py": "2b152049bb19c8a3c4d6ad625f8703d75ec3db3322b046bce25f052e67b51eda",
+    "code/V4/test_r41.py": "fe1ef8378be9a8a6d0ae92676d7fb8233803edfa40d49c6213c7cd0d65e25e13",
+    "code/V4/runs/R41_signal_audit/test_results.json": "930ee8ffa92e61116d21934b9ee46576d9e2b06d6c4dba8dd8a873333ff85c9b",
+    "code/V4/runs/R41_signal_audit/frozen_checkpoints.json": "7cab78b3988f59dc3151a8e9315b7929651c1365a434de57648693a4b8c1d3d6",
+    "code/V4/runs/R41_signal_audit/protocol.json": "16852ca9588da24503ded86c33e260557a4d96626011a4a92783c1df5bff9b65",
+    "code/V4/runs/R41_signal_audit/solver_manifest.json": "ed79f826115357516850236b455177fe1a448049fb11044f67b13fc64b5261a0",
+    "code/V4/runs/R41_signal_audit/repeated_costs.npz": "a6d4f1cdcce7d7eefd5b3f283216d4d3ff38d6d47bf6740a5ee6cfd33c519c3c"
+  },
+  "checks": {
+    "gt_provenance": {"status": "warn", "details": "Original dataset labels verified; historical solver generation bindings incomplete."},
+    "score_normalization": {"status": "pass", "details": "Dataset SBS/Oracle denominators and per-problem macro aggregation."},
+    "result_existence": {"status": "pass", "details": "72000 frozen test selections independently recomputed."},
+    "dead_code": {"status": "pass", "details": "Reported metrics traceable to executed calculations."},
+    "scope": {"status": "pass", "qualification": "Single-seed frozen models; partial two-solver stability audit."},
+    "eval_type": "real_gt"
+  },
+  "claims": [
+    {"id": "frozen_test_comparison", "impact": "supported_with_single_seed_qualification"},
+    {"id": "reld_head_pair_stability", "impact": "supported_for_pinned_sample_and_configuration"},
+    {"id": "full_pool_stability", "impact": "unsupported_not_claimed"},
+    {"id": "project_top1_ceiling", "impact": "unsupported_not_claimed"}
+  ],
+  "historical_source_snapshots_missing": true,
+  "snapshot_scope": "selected source files, not complete dependency closure",
+  "validation_defects_remediated": true,
+  "no_blocking_corruption_found": true
+}
