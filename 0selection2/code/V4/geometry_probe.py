@@ -1,9 +1,10 @@
-"""R37: paired full-TSP continuation with zero versus real local geometry."""
+"""Paired TSP geometry probes: R37 full tuning or R38 frozen-base tuning."""
 
 import argparse
 import copy
 import json
 import math
+import shutil
 import sys
 import time
 from contextlib import redirect_stderr, redirect_stdout
@@ -27,6 +28,11 @@ from .tsp_learnability import BASE, fit_args, gap_and_regret, raw_tsp
 ROOT = Path("code/V4/runs/R37_tsp_local_geometry")
 METRICS = ("ce", "top1", "mean_cost", "vs_sbs_pct", "actual_regret_pct",
            "gap_gt_0_1_top1", "gap_gt_0_1_actual_regret_pct", "gap_gt_0_5_top1", "gap_gt_0_5_actual_regret_pct")
+PROB_METRICS = ("expected_mean_cost", "expected_regret_pct")
+
+
+def original_state(model):
+    return {name: value for name, value in model.state_dict().items() if "geometry_residual." not in name}
 
 
 def lr_factor(update, budget, warmup=50):
@@ -87,6 +93,10 @@ def metrics_from_logits(logits, raw):
     result = dict(n=len(pred), ce=float(F.cross_entropy(logits, winner)), mean_cost=mean_cost,
                   sbs=sbs, vs_sbs_pct=(mean_cost / sbs - 1) * 100, actual_regret_pct=float(regret.mean()),
                   **{f"top{k}": float((rank[:, :k] == raw["winner"][:, None]).any(1).mean()) for k in (1, 2, 3)})
+    probability = logits.double().softmax(1).numpy()
+    best = costs.min(1)
+    result["expected_mean_cost"] = float((probability * costs).sum(1).mean())
+    result["expected_regret_pct"] = float((probability * ((costs - best[:, None]) / best[:, None] * 100)).sum(1).mean())
     for threshold, suffix in ((.1, "0_1"), (.5, "0_5")):
         mask = gap > threshold
         result[f"gap_gt_{suffix}_n"] = int(mask.sum())
@@ -110,7 +120,7 @@ def evaluate(model, loader, raw, path):
     return result
 
 
-def initialize(checkpoint, mode, stats, seed, device):
+def initialize(checkpoint, mode, stats, seed, device, freeze_base=False):
     set_seed(seed)
     params = copy.deepcopy(checkpoint["args"]["model_params"])
     params.update(local_geometry=True, geometry_mode=mode)
@@ -124,9 +134,12 @@ def initialize(checkpoint, mode, stats, seed, device):
     module.std.copy_(torch.tensor(stats["std"], device=device))
     new_ids = {id(p) for p in module.parameters()}
     original = [p for p in model.parameters() if id(p) not in new_ids]
-    optimizer = torch.optim.AdamW([dict(params=original, lr=2e-5, initial_lr=2e-5, name="base"),
-                                  dict(params=list(module.parameters()), lr=2e-4, initial_lr=2e-4, name="geometry")],
-                                 weight_decay=1e-4)
+    if freeze_base:
+        for parameter in original:
+            parameter.requires_grad_(False)
+    groups = [] if freeze_base else [dict(params=original, lr=2e-5, initial_lr=2e-5, name="base")]
+    groups.append(dict(params=list(module.parameters()), lr=2e-4, initial_lr=2e-4, name="geometry"))
+    optimizer = torch.optim.AdamW(groups, weight_decay=1e-4)
     scaler = torch.amp.GradScaler("cuda", enabled=str(device).startswith("cuda"))
     return model, optimizer, scaler, params
 
@@ -140,7 +153,8 @@ def run_one(mode, seed, args, checkpoint, stats, loaders, raw, baseline):
 
 
 def _run_one(mode, seed, args, checkpoint, stats, loaders, raw, baseline, directory):
-    model, optimizer, scaler, params = initialize(checkpoint, mode, stats, seed, args.device)
+    model, optimizer, scaler, params = initialize(checkpoint, mode, stats, seed, args.device, args.freeze_base)
+    base_hash = state_hash(original_state(model))
     schedule = batch_schedule(loaders["train"].size, args.batch_size, args.updates, task_seed(seed, "TSP"))
     torch.save(schedule, directory / "batch_indices.pt")
     streams = TaskRandomStreams(seed, ["TSP"])
@@ -149,7 +163,10 @@ def _run_one(mode, seed, args, checkpoint, stats, loaders, raw, baseline, direct
                   new_branch_initial_hash=state_hash(model.instance_encoder.geometry_residual.state_dict()),
                   batch_hash=state_hash(schedule), dropout_rng_initial_hash=state_hash(streams.states["TSP"]),
                   optimizer_restored=False, optimizer_initial_state_count=len(optimizer.state), loss=vars(fit_args("winner_cost")),
-                  dropout=params["dropout"], branch_dropout=0., weight_decay=1e-4, base_lr=2e-5, new_lr=2e-4,
+                  dropout=params["dropout"], branch_dropout=0., weight_decay=1e-4,
+                  freeze_base=args.freeze_base, original_state_initial_hash=base_hash,
+                  trainable_parameters=sum(p.numel() for p in model.parameters() if p.requires_grad),
+                  base_lr=0. if args.freeze_base else 2e-5, new_lr=2e-4,
                   warmup_updates=50, schedule="cosine after warmup to 10% initial lr", amp_dtype="float16",
                   scaler_initial=scaler.state_dict(), grad_clip=1., batch_size=args.batch_size, updates=args.updates,
                   eval_interval=50, coord_augment=0, native_winner=True, sampling="natural shuffled full passes with R34 drop-tail",
@@ -161,13 +178,19 @@ def _run_one(mode, seed, args, checkpoint, stats, loaders, raw, baseline, direct
     if args.wandb:
         import wandb
         wandb_run = wandb.init(project="selector", entity="yjkds-southern-university-of-science-technology",
-                               name="R37_" + directory.name, config=config, dir=str(directory), mode="offline")
+                               name=("R38_" if args.freeze_base else "R37_") + directory.name,
+                               config=config, dir=str(directory), mode="offline")
     print(f"[start] {directory.name} updates={args.updates} batch={args.batch_size} optimizer=fresh "
-          f"base_lr=2e-5 geometry_lr=2e-4 model_hash={config['model_initial_hash']}", flush=True)
+          f"base_frozen={args.freeze_base} base_lr={config['base_lr']:g} geometry_lr=2e-4 "
+          f"model_hash={config['model_initial_hash']}", flush=True)
 
     def evaluate_and_save(update):
         record = dict(updates=update, skipped=skipped, elapsed_seconds=time.monotonic() - start,
                       lr_by_group={g["name"]: g["lr"] for g in optimizer.param_groups})
+        if args.freeze_base:
+            record["original_state_hash"] = state_hash(original_state(model))
+            if record["original_state_hash"] != base_hash:
+                raise RuntimeError("Frozen original parameters/buffers changed")
         for split, loader in loaders.items():
             prediction = directory / f"predictions_{split}_u{update:04d}.npz"
             record[split] = evaluate(model, loader, raw[split], prediction)
@@ -177,6 +200,7 @@ def _run_one(mode, seed, args, checkpoint, stats, loaders, raw, baseline, direct
             r = record[split]
             print(f"[{split} updates {update:04d}] top1={r['top1']:.4f} ce={r['ce']:.6f} mean_cost={r['mean_cost']:.6f} "
                   f"vs_sbs={r['vs_sbs_pct']:+.4f}% regret={r['actual_regret_pct']:.4f}% "
+                  f"expected_regret={r['expected_regret_pct']:.4f}% "
                   f"gap>0.1_top1={r['gap_gt_0_1_top1']:.4f} gap>0.5_top1={r['gap_gt_0_5_top1']:.4f}", flush=True)
         record["elapsed_seconds"] = time.monotonic() - start
         history.append(record)
@@ -184,7 +208,8 @@ def _run_one(mode, seed, args, checkpoint, stats, loaders, raw, baseline, direct
         torch.save(dict(model=model.state_dict(), optimizer=optimizer.state_dict(), scaler=scaler.state_dict(),
                         args=config, updates=update, metrics=record, rng=capture_rng(), task_rng=streams.states), directory / "last.pt")
         if wandb_run:
-            wandb_run.log({f"{split}/{key}": record[split][key] for split in ("train", "val") for key in METRICS}, step=update)
+            wandb_run.log({f"{split}/{key}": record[split][key] for split in ("train", "val")
+                           for key in METRICS + PROB_METRICS}, step=update)
         model.train()
 
     evaluate_and_save(0)
@@ -206,10 +231,13 @@ def _run_one(mode, seed, args, checkpoint, stats, loaders, raw, baseline, direct
                 recent = traces[-50:]
                 print(f"[train updates {update:04d}] loss={np.mean([v['loss'] for v in recent]):.5f} "
                       f"grad={np.mean([v['grad_norm'] for v in recent]):.4f} skipped_total={skipped} "
-                      f"lr_base={optimizer.param_groups[0]['lr']:.3g} elapsed={time.monotonic() - start:.1f}s", flush=True)
+                      f"lr_{optimizer.param_groups[-1]['name']}={optimizer.param_groups[-1]['lr']:.3g} "
+                      f"elapsed={time.monotonic() - start:.1f}s", flush=True)
                 evaluate_and_save(update)
     result = dict(name=directory.name, mode=mode, seed=seed, updates=args.updates, skipped=skipped,
-                  final=history[-1], last5={split: {key: float(np.mean([h[split][key] for h in history[-5:]])) for key in METRICS}
+                  freeze_base=args.freeze_base,
+                  final=history[-1], last5={split: {key: float(np.mean([h[split][key] for h in history[-5:]]))
+                                                  for key in METRICS + PROB_METRICS}
                                           for split in ("train", "val")}, elapsed_seconds=time.monotonic() - start)
     dump(directory / "result.json", result)
     if wandb_run:
@@ -231,6 +259,8 @@ def main():
     parser.add_argument("--seeds", default="2,3,4")
     parser.add_argument("--wandb", action="store_true")
     parser.add_argument("--continue-queue", action="store_true")
+    parser.add_argument("--freeze-base", action="store_true")
+    parser.add_argument("--geometry-cache", type=Path, help="Reuse an identical prior probe's train-only geometry statistics/cache")
     args = parser.parse_args()
     if args.updates <= 50:
         raise ValueError("Cosine continuation requires a budget above warmup")
@@ -239,8 +269,16 @@ def main():
     torch.set_num_threads(1)
     source = Path(__file__).parent
     paths = [args.base, *(source / p for p in ("V4Model.py", "dual_stream.py", "solver_features.py", "local_geometry.py",
-                                             "geometry_probe.py", "tensor_loader.py", "multitask_probe.py")),
+                                             "geometry_probe.py", "tensor_loader.py", "multitask_probe.py", "train.py",
+                                             "training_monitor.py", "tsp_learnability.py")),
              *(DATA_ROOT / f"TSP{s}" / p for s in ("train", "val") for p in ("dataset.pkl", "raw_label.pkl"))]
+    if args.geometry_cache:
+        reference = json.loads((args.geometry_cache / "manifest.json").read_text())["file_sha256"]
+        cache_inputs = [args.base, *(DATA_ROOT / f"TSP{s}" / p for s in ("train", "val")
+                                    for p in ("dataset.pkl", "raw_label.pkl"))]
+        if any(reference.get(str(p)) != file_hash(p) for p in cache_inputs):
+            raise ValueError("Geometry reference and current checkpoint/data differ")
+        paths.extend(args.geometry_cache / p for p in ("geometry_stats.json", "node_geometry_train.pt", "node_geometry_val.pt"))
     hashes = {str(p): file_hash(p) for p in paths}
     manifest_path = args.root / "manifest.json"
     if manifest_path.exists():
@@ -253,7 +291,10 @@ def main():
     raw = {split: raw_tsp(split) for split in ("train", "val")}
     loaders = {split: make_loader("TSP", split, args.batch_size, 0, shuffle=False, cache_device=args.device) for split in ("train", "val")}
     stats_path = args.root / "geometry_stats.json"
-    if args.continue_queue and stats_path.exists():
+    if args.geometry_cache or (args.continue_queue and stats_path.exists()):
+        if args.geometry_cache:
+            for filename in ("geometry_stats.json", "node_geometry_train.pt", "node_geometry_val.pt"):
+                shutil.copy2(args.geometry_cache / filename, args.root / filename)
         stats = json.loads(stats_path.read_text())
         for split, loader in loaders.items():
             loader.batch["node_geom"] = torch.load(args.root / f"node_geometry_{split}.pt", weights_only=True).to(args.device)
@@ -283,7 +324,7 @@ def main():
     dump(args.root / "verification.json", dict(inputs_and_source_unchanged=unchanged, test_read=False))
     if not all(unchanged.values()):
         raise RuntimeError("R37 inputs changed while experiments were running")
-    print("[R37 training complete]", args.root, flush=True)
+    print("[geometry probe training complete]", args.root, flush=True)
 
 
 if __name__ == "__main__":
