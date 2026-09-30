@@ -32,7 +32,7 @@ class TensorBatchLoader:
                 if not torch.is_tensor(value) or key == "pool_ids":
                     batch[key] = value
                     continue
-                if key in ("node", "node_mask"):
+                if key in ("node", "node_mask", "node_geom"):
                     value = value[:, :max_n]
                 elif key == "matrix":
                     value = value[:, :max_n, :max_n]

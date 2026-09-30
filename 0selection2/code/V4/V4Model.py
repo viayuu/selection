@@ -159,6 +159,9 @@ class InstanceEncoder(nn.Module):
         d = params["embedding_dim"]
         self.params = params
         self.coord_proj = nn.Linear(8, d)
+        if params.get("local_geometry", False):
+            from .local_geometry import GeometryResidual
+            self.geometry_residual = GeometryResidual(d, params.get("geometry_mode", "real"))
         self.matrix_proj = nn.Linear(8, d)
         self.cls_token = nn.Parameter(torch.randn(1, 1, d) * 0.02)
         self.stats_token_proj = nn.Linear(params["stats_dim"], d)
@@ -272,6 +275,8 @@ class InstanceEncoder(nn.Module):
             stats = self._coord_stats(node, node_mask)
             cond, pid = self.condition_encoder(batch, stats, kind_id=0)
             node_token = self.coord_proj(node)
+            if hasattr(self, "geometry_residual"):
+                node_token = node_token + self.geometry_residual(node, node_mask, batch["n"], batch.get("node_geom"))
             bias = self._coord_bias(node, node_mask, special_count)
         else:
             node_mask = batch["node_mask"]

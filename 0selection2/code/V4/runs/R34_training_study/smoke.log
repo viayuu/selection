@@ -1,0 +1,19 @@
+/public/home/shiys/0selection2/code/V4/train.py:725: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=args.amp)
+[cache] ATSP/train: 10000 instances, 384.5 MiB on cuda:0
+/public/home/shiys/0selection2/code/V4/train.py:853: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=args.amp, dtype=amp_dtype):
+[train] V4 dual-stream joint encoder + instance-query solver decoder (logits only)
+[train] problems=['ATSP']
+[train] model_params={'embedding_dim': 16, 'head_num': 2, 'qkv_dim': 8, 'ff_hidden_dim': 32, 'head_hidden_dim': 32, 'encoder_layer_num': 1, 'solver_set_layer_num': 2, 'query_num': 4, 'dropout': 0.1, 'stats_dim': 12, 'rezero': False, 'gap_score_weight': 0.0, 'pre_score_weight': 0.0, 'support_branch': False, 'support_generators': 0, 'support_hidden': 128, 'support_score_weight': 0.0, 'support_score_mode': 'g0', 'support_g0_as_main': False, 'support_feature_to_token': True, 'support_main_utility_weight': 0.0, 'support_main_pre_weight': 0.0, 'support_main_gap_weight': 0.0, 'solver_feature_spec': {'feature_dim': 34, 'index_base': 0, 'feature_order': ['构造式', '扩散式', '坐标与节点属性', '成本矩阵', '图与边', 'MHA／Transformer', 'GNN', '矩阵双流注意力', '静态编码复用', '动态状态更新', '动态局部更新', '迭代去噪', '实例条件', '属性条件', '约束条件', '元学习任务条件', 'FFN 专家', 'LoRA 专家', '监督学习', '强化学习', '扩散训练', '单任务', '多任务', '元学习', '子问题重编码', '重解码器', '梯度引导搜索', '全局—局部双策略', '近邻成本输入', '伪 one-hot 输入', '统一矩阵表示', '全局分区与局部重构', '解码器 FFN 残差', '全局属性嵌入'], 'solver_active_indices': {'BQ': [0, 2, 5, 9, 18, 21, 24], 'LEHD': [0, 2, 5, 9, 18, 21, 25], 'DIFUSCO': [1, 4, 6, 11, 20, 21], 'DIFUSCO500': [1, 4, 6, 11, 20, 21], 'T2T': [1, 4, 6, 11, 20, 21, 26], 'T2T500': [1, 4, 6, 11, 20, 21, 26], 'ELG': [0, 2, 5, 8, 10, 19, 21, 27], 'OMNI': [0, 2, 5, 8, 15, 19, 23], 'ICAM': [0, 2, 5, 8, 12, 19, 21], 'ICAM_ATSP': [0, 3, 7, 8, 12, 19, 21, 28], 'MATNET': [0, 3, 7, 8, 19, 21], 'MATPOENET': [0, 3, 7, 8, 19, 21, 29], 'UNICO_MatPOENet': [0, 3, 7, 8, 19, 22, 29, 30], 'GLOP': [0, 3, 4, 6, 7, 19, 31], 'MTPOMO': [0, 2, 5, 8, 13, 19, 22], 'MVMOE': [0, 2, 5, 8, 13, 16, 19, 22], 'RELD_CVRP': [0, 2, 5, 8, 19, 21, 32], 'RELD_MTL': [0, 2, 5, 8, 13, 19, 22, 32], 'RELD_MOEL': [0, 2, 5, 8, 13, 16, 19, 22, 32], 'RouteFinder': [0, 2, 5, 8, 13, 19, 22, 33], 'MoSES_RF': [0, 2, 5, 8, 13, 17, 22, 33], 'MoSES_CaDA': [0, 2, 5, 8, 14, 17, 22]}, 'solver_names': ['BQ', 'DIFUSCO', 'DIFUSCO500', 'ELG', 'GLOP', 'ICAM', 'ICAM_ATSP', 'LEHD', 'MATNET', 'MATPOENET', 'MTPOMO', 'MVMOE', 'MoSES_CaDA', 'MoSES_RF', 'OMNI', 'RELD_CVRP', 'RELD_MOEL', 'RELD_MTL', 'RouteFinder', 'T2T', 'T2T500', 'UNICO_MatPOENet']}, 'solver_feature_weight': 0.3, 'solver_feature_hidden': 16, 'sdpa': True, 'architecture': 'dual_stream', 'joint_layer_num': 1, 'ignore_coord_dist': True, 'native_winner': True}
+[epoch done 0] loss=1.64835 lr=0.0002 updates=15 skipped=0 grad=1.0249098539352417
+[cache] ATSP/val: 1000 instances, 38.4 MiB on cuda:0
+[eval epoch 0] macro_top1=0.4800 top2=0.7820 top3=0.7850 vs_sbs=-0.000% vbs_closed=+0.00%
+      ATSP: top1=0.480 mean_cost=1.6735 (sbs=1.6735) vs_sbs=-0.00%
+[save] best.pt epoch=0 score=0.4800
+[save] best_top1.pt epoch=0 top1=0.4800
+[save] best_top3_safe.pt epoch=0 score=0.7850
+[save] best_cost.pt epoch=0 vs_sbs=-0.000%
+[train_eval epoch 0] macro_top1=0.4694 top2=0.7753 top3=0.7774 vs_sbs=+0.000% vbs_closed=-0.00%
+      ATSP: top1=0.469 mean_cost=1.6795 (sbs=1.6795) vs_sbs=+0.00%
+[done] validation-selected checkpoints saved; test deferred until experiment selection

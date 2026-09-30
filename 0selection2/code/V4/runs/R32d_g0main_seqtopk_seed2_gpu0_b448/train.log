@@ -1,0 +1,1028 @@
++ /public/home/zhoucl/anaconda3/envs/easynco_zhoucl/bin/python -m code.V4.train --save-dir code/V4/runs/R32d_g0main_seqtopk_seed2_gpu0_b448 --epochs 30 --batch-per-problem 448 --num-workers 0 --lr 2e-4 --wd 1e-4 --coord-augment 0 --d 128 --heads 4 --ff-hidden 512 --encoder-layers 4 --set-layers 2 --query-num 4 --dropout 0.1 --ce-weight 0.35 --pair-weight 0.30 --gap-weight 0.20 --pre-ce-weight 0.10 --top-focused-pair --topk-ce-weight 0.08 --topk-ce-rank-weights 1.0,0.4,0.2 --topk-ce-mode sequential --query-div-weight 0.03 --risk-weight 0.02 --gap-score-weight 0.25 --pre-score-weight 0.25 --support-branch --support-generators 4 --support-hidden 128 --support-score-weight 0.0 --support-score-mode g0 --support-g0-as-main --no-support-feature-token --support-main-utility-weight 0.0 --support-main-pre-weight 0.0 --support-main-gap-weight 0.0 --support-loss-weight 0.20 --support-eps 0.01 --support-topk 3 --support-focal-gamma-neg 4.0 --support-pos-weight 2.0 --support-diversity-weight 0.05 --support-budget-weight 0.02 --support-target-mode rank_partition --winner-balance --amp --amp-dtype fp16 --log-every 50 --eval-every 1 --seed 2 --device cuda:0
+[train] V4 R32a R31c + R25-style support branch
+[train] problems=['TSP', 'CVRP', 'ATSP', 'OVRP', 'VRPB', 'VRPL', 'VRPTW', 'OVRPTW', 'OVRPB', 'OVRPL', 'VRPBL', 'VRPBTW', 'VRPLTW', 'OVRPBL', 'OVRPBTW', 'OVRPLTW', 'VRPBLTW', 'OVRPBLTW']
+[train] model_params={'embedding_dim': 128, 'head_num': 4, 'qkv_dim': 32, 'ff_hidden_dim': 512, 'head_hidden_dim': 256, 'encoder_layer_num': 4, 'solver_set_layer_num': 2, 'query_num': 4, 'dropout': 0.1, 'stats_dim': 12, 'rezero': False, 'gap_score_weight': 0.25, 'pre_score_weight': 0.25, 'support_branch': True, 'support_generators': 4, 'support_hidden': 128, 'support_score_weight': 0.0, 'support_score_mode': 'g0', 'support_g0_as_main': True, 'support_feature_to_token': False, 'support_main_utility_weight': 0.0, 'support_main_pre_weight': 0.0, 'support_main_gap_weight': 0.0}
+ep000 step000050 loss=1.0882 ce=1.7824 pair=0.1616 gap=0.0072 pre=1.7789 topk_ce=1.6330 div=0.1651 risk=0.0955 support=0.4953 support_bce=0.4783 support_div=0.2710 support_budget=0.1758 time=0.2m
+ep000 step000100 loss=1.0268 ce=1.6905 pair=0.1382 gap=0.0063 pre=1.7074 topk_ce=1.4988 div=0.1632 risk=0.0770 support=0.4767 support_bce=0.4600 support_div=0.2640 support_budget=0.1710 time=0.4m
+ep000 step000150 loss=0.9863 ce=1.6288 pair=0.1260 gap=0.0057 pre=1.6461 topk_ce=1.4223 div=0.1571 risk=0.0682 support=0.4642 support_bce=0.4482 support_div=0.2543 support_budget=0.1627 time=0.5m
+ep000 step000200 loss=0.9708 ce=1.6067 pair=0.1210 gap=0.0053 pre=1.6208 topk_ce=1.3945 div=0.1505 risk=0.0633 support=0.4583 support_bce=0.4428 support_div=0.2463 support_budget=0.1568 time=0.7m
+ep000 step000250 loss=0.9529 ce=1.5794 pair=0.1164 gap=0.0051 pre=1.5919 topk_ce=1.3634 div=0.1438 risk=0.0605 support=0.4520 support_bce=0.4371 support_div=0.2379 support_budget=0.1510 time=0.9m
+ep000 step000300 loss=0.9405 ce=1.5601 pair=0.1137 gap=0.0048 pre=1.5731 topk_ce=1.3429 div=0.1362 risk=0.0587 support=0.4470 support_bce=0.4324 support_div=0.2334 support_budget=0.1472 time=1.0m
+ep000 step000350 loss=0.9350 ce=1.5522 pair=0.1122 gap=0.0046 pre=1.5646 topk_ce=1.3341 div=0.1291 risk=0.0571 support=0.4448 support_bce=0.4304 support_div=0.2294 support_budget=0.1444 time=1.2m
+[eval epoch 0] macro_top1=0.3986 top2=0.7483 top3=0.8668 vs_sbs=+0.031% vbs_closed=-7.83%
+          components: pre_top1=0.3831 gap_top1=0.3663 utility_top1=0.2518 base_top1=0.3359 support_g0_top1=0.3986 corr(pre/final)=+0.984 corr(gap/final)=+0.912 corr(util/final)=+0.453
+          support: g0@1=0.3986 u1@1=0.7116 u2@1=0.8879 u3@1=0.9629 top3_recall=1.0000 avg_shortlist=4.79 arm_coverage=0.7734
+       TSP: top1=0.290 mean_cost=7.9953 (sbs=7.9578) vs_sbs=+0.47% pre=0.290 gap=0.182 util=0.062
+      CVRP: top1=0.281 mean_cost=18.4167 (sbs=18.2943) vs_sbs=+0.67% pre=0.299 gap=0.219 util=0.025
+      ATSP: top1=0.459 mean_cost=1.6741 (sbs=1.6735) vs_sbs=+0.04% pre=0.435 gap=0.336 util=0.055
+      OVRP: top1=0.291 mean_cost=7.4630 (sbs=7.4617) vs_sbs=+0.02% pre=0.313 gap=0.302 util=0.061
+      VRPB: top1=0.504 mean_cost=9.3403 (sbs=9.3403) vs_sbs=+0.00% pre=0.413 gap=0.438 util=0.413
+      VRPL: top1=0.297 mean_cost=12.4054 (sbs=12.4072) vs_sbs=-0.01% pre=0.292 gap=0.207 util=0.220
+     VRPTW: top1=0.259 mean_cost=18.6156 (sbs=18.6571) vs_sbs=-0.22% pre=0.260 gap=0.259 util=0.157
+    OVRPTW: top1=0.448 mean_cost=10.0606 (sbs=10.0484) vs_sbs=+0.12% pre=0.476 gap=0.476 util=0.476
+     OVRPB: top1=0.545 mean_cost=6.3220 (sbs=6.3220) vs_sbs=+0.00% pre=0.545 gap=0.442 util=0.423
+     OVRPL: top1=0.349 mean_cost=7.4389 (sbs=7.4376) vs_sbs=+0.02% pre=0.340 gap=0.300 util=0.198
+     VRPBL: top1=0.528 mean_cost=9.3593 (sbs=9.3593) vs_sbs=+0.00% pre=0.386 gap=0.528 util=0.386
+    VRPBTW: top1=0.331 mean_cost=19.7261 (sbs=19.6697) vs_sbs=+0.29% pre=0.301 gap=0.356 util=0.120
+    VRPLTW: top1=0.309 mean_cost=18.2838 (sbs=18.5091) vs_sbs=-1.22% pre=0.309 gap=0.314 util=0.243
+    OVRPBL: top1=0.555 mean_cost=6.3103 (sbs=6.3103) vs_sbs=+0.00% pre=0.555 gap=0.484 util=0.211
+   OVRPBTW: top1=0.461 mean_cost=10.5068 (sbs=10.5068) vs_sbs=-0.00% pre=0.452 gap=0.461 util=0.452
+   OVRPLTW: top1=0.472 mean_cost=10.1354 (sbs=10.1272) vs_sbs=+0.08% pre=0.432 gap=0.494 util=0.434
+   VRPBLTW: top1=0.347 mean_cost=19.5198 (sbs=19.5198) vs_sbs=-0.00% pre=0.335 gap=0.347 util=0.126
+  OVRPBLTW: top1=0.449 mean_cost=10.5733 (sbs=10.5412) vs_sbs=+0.30% pre=0.462 gap=0.449 util=0.471
+[save] best.pt epoch=0 score=0.3910
+[save] best_top1.pt epoch=0 top1=0.3986
+[save] best_top3_safe.pt epoch=0 score=0.8592
+[save] best_cost.pt epoch=0 vs_sbs=+0.031%
+ep001 step000400 loss=0.9936 ce=1.6792 pair=0.1012 gap=0.0029 pre=1.6785 topk_ce=1.4317 div=0.0725 risk=0.0461 support=0.4472 support_bce=0.4339 support_div=0.2110 support_budget=0.1351 time=1.5m
+ep001 step000450 loss=0.8859 ce=1.4808 pair=0.0991 gap=0.0032 pre=1.4956 topk_ce=1.2509 div=0.0674 risk=0.0481 support=0.4232 support_bce=0.4107 support_div=0.2011 support_budget=0.1243 time=1.6m
+ep001 step000500 loss=0.8825 ce=1.4744 pair=0.0987 gap=0.0032 pre=1.4868 topk_ce=1.2476 div=0.0666 risk=0.0471 support=0.4239 support_bce=0.4116 support_div=0.1975 support_budget=0.1220 time=1.8m
+ep001 step000550 loss=0.8824 ce=1.4729 pair=0.0997 gap=0.0032 pre=1.4867 topk_ce=1.2504 div=0.0636 risk=0.0473 support=0.4237 support_bce=0.4113 support_div=0.1994 support_budget=0.1232 time=2.0m
+ep001 step000600 loss=0.8810 ce=1.4712 pair=0.0986 gap=0.0032 pre=1.4863 topk_ce=1.2481 div=0.0604 risk=0.0467 support=0.4232 support_bce=0.4108 support_div=0.1986 support_budget=0.1230 time=2.1m
+ep001 step000650 loss=0.8814 ce=1.4729 pair=0.0982 gap=0.0032 pre=1.4865 topk_ce=1.2472 div=0.0589 risk=0.0462 support=0.4232 support_bce=0.4109 support_div=0.1975 support_budget=0.1226 time=2.3m
+ep001 step000700 loss=0.8808 ce=1.4724 pair=0.0982 gap=0.0032 pre=1.4843 topk_ce=1.2459 div=0.0570 risk=0.0464 support=0.4230 support_bce=0.4107 support_div=0.1971 support_budget=0.1223 time=2.5m
+ep001 step000750 loss=0.8773 ce=1.4667 pair=0.0976 gap=0.0031 pre=1.4773 topk_ce=1.2419 div=0.0551 risk=0.0461 support=0.4219 support_bce=0.4096 support_div=0.1966 support_budget=0.1219 time=2.6m
+[eval epoch 1] macro_top1=0.4089 top2=0.7401 top3=0.8673 vs_sbs=-0.083% vbs_closed=-3.29%
+          components: pre_top1=0.3900 gap_top1=0.3716 utility_top1=0.2264 base_top1=0.3744 support_g0_top1=0.4089 corr(pre/final)=+0.981 corr(gap/final)=+0.960 corr(util/final)=+0.311
+          support: g0@1=0.4089 u1@1=0.7691 u2@1=0.9084 u3@1=0.9513 top3_recall=0.9965 avg_shortlist=4.35 arm_coverage=0.7907
+       TSP: top1=0.299 mean_cost=7.9846 (sbs=7.9578) vs_sbs=+0.34% pre=0.188 gap=0.047 util=0.062
+      CVRP: top1=0.281 mean_cost=18.4167 (sbs=18.2943) vs_sbs=+0.67% pre=0.285 gap=0.252 util=0.025
+      ATSP: top1=0.493 mean_cost=1.6687 (sbs=1.6735) vs_sbs=-0.29% pre=0.512 gap=0.495 util=0.067
+      OVRP: top1=0.358 mean_cost=7.4568 (sbs=7.4617) vs_sbs=-0.06% pre=0.246 gap=0.196 util=0.055
+      VRPB: top1=0.504 mean_cost=9.3403 (sbs=9.3403) vs_sbs=+0.00% pre=0.504 gap=0.504 util=0.419
+      VRPL: top1=0.292 mean_cost=12.4078 (sbs=12.4072) vs_sbs=+0.00% pre=0.210 gap=0.255 util=0.213
+     VRPTW: top1=0.257 mean_cost=18.4371 (sbs=18.6571) vs_sbs=-1.18% pre=0.280 gap=0.275 util=0.154
+    OVRPTW: top1=0.441 mean_cost=10.0644 (sbs=10.0484) vs_sbs=+0.16% pre=0.476 gap=0.489 util=0.279
+     OVRPB: top1=0.545 mean_cost=6.3220 (sbs=6.3220) vs_sbs=+0.00% pre=0.545 gap=0.465 util=0.423
+     OVRPL: top1=0.349 mean_cost=7.4389 (sbs=7.4376) vs_sbs=+0.02% pre=0.349 gap=0.377 util=0.198
+     VRPBL: top1=0.528 mean_cost=9.3593 (sbs=9.3593) vs_sbs=+0.00% pre=0.528 gap=0.528 util=0.386
+    VRPBTW: top1=0.368 mean_cost=19.6746 (sbs=19.6697) vs_sbs=+0.02% pre=0.316 gap=0.355 util=0.119
+    VRPLTW: top1=0.309 mean_cost=18.2838 (sbs=18.5091) vs_sbs=-1.22% pre=0.279 gap=0.284 util=0.130
+    OVRPBL: top1=0.555 mean_cost=6.3103 (sbs=6.3103) vs_sbs=+0.00% pre=0.555 gap=0.555 util=0.400
+   OVRPBTW: top1=0.461 mean_cost=10.5068 (sbs=10.5068) vs_sbs=-0.00% pre=0.473 gap=0.461 util=0.341
+   OVRPLTW: top1=0.494 mean_cost=10.1272 (sbs=10.1272) vs_sbs=-0.00% pre=0.437 gap=0.366 util=0.435
+   VRPBLTW: top1=0.347 mean_cost=19.5198 (sbs=19.5198) vs_sbs=-0.00% pre=0.347 gap=0.313 util=0.134
+  OVRPBLTW: top1=0.479 mean_cost=10.5450 (sbs=10.5412) vs_sbs=+0.04% pre=0.490 gap=0.471 util=0.236
+[save] best.pt epoch=1 score=0.4089
+[save] best_top1.pt epoch=1 top1=0.4089
+[save] best_top3_safe.pt epoch=1 score=0.8673
+[save] best_cost.pt epoch=1 vs_sbs=-0.083%
+ep002 step000800 loss=0.9583 ce=1.6337 pair=0.1036 gap=0.0032 pre=1.5640 topk_ce=1.3255 div=0.0583 risk=0.0353 support=0.4495 support_bce=0.4370 support_div=0.2020 support_budget=0.1174 time=2.9m
+ep002 step000850 loss=0.8640 ce=1.4523 pair=0.0921 gap=0.0029 pre=1.4446 topk_ce=1.2130 div=0.0440 risk=0.0407 support=0.4190 support_bce=0.4072 support_div=0.1888 support_budget=0.1170 time=3.1m
+ep002 step000900 loss=0.8681 ce=1.4557 pair=0.0929 gap=0.0029 pre=1.4603 topk_ce=1.2246 div=0.0440 risk=0.0413 support=0.4202 support_bce=0.4083 support_div=0.1906 support_budget=0.1181 time=3.3m
+ep002 step000950 loss=0.8644 ce=1.4481 pair=0.0924 gap=0.0029 pre=1.4535 topk_ce=1.2225 div=0.0433 risk=0.0407 support=0.4201 support_bce=0.4081 support_div=0.1920 support_budget=0.1183 time=3.5m
+ep002 step001000 loss=0.8579 ce=1.4374 pair=0.0911 gap=0.0028 pre=1.4424 topk_ce=1.2126 div=0.0418 risk=0.0403 support=0.4179 support_bce=0.4060 support_div=0.1907 support_budget=0.1171 time=3.7m
+ep002 step001050 loss=0.8548 ce=1.4317 pair=0.0905 gap=0.0028 pre=1.4368 topk_ce=1.2089 div=0.0423 risk=0.0399 support=0.4174 support_bce=0.4056 support_div=0.1911 support_budget=0.1168 time=3.8m
+ep002 step001100 loss=0.8526 ce=1.4283 pair=0.0897 gap=0.0028 pre=1.4333 topk_ce=1.2062 div=0.0414 risk=0.0393 support=0.4171 support_bce=0.4052 support_div=0.1904 support_budget=0.1161 time=4.0m
+ep002 step001150 loss=0.8487 ce=1.4217 pair=0.0889 gap=0.0028 pre=1.4275 topk_ce=1.1998 div=0.0407 risk=0.0389 support=0.4159 support_bce=0.4041 support_div=0.1895 support_budget=0.1155 time=4.2m
+[eval epoch 2] macro_top1=0.4209 top2=0.7707 top3=0.8796 vs_sbs=-0.479% vbs_closed=+5.84%
+          components: pre_top1=0.3852 gap_top1=0.3852 utility_top1=0.2451 base_top1=0.3810 support_g0_top1=0.4209 corr(pre/final)=+0.963 corr(gap/final)=+0.902 corr(util/final)=+0.351
+          support: g0@1=0.4209 u1@1=0.7023 u2@1=0.9213 u3@1=0.9639 top3_recall=0.9995 avg_shortlist=4.69 arm_coverage=0.9296
+       TSP: top1=0.223 mean_cost=7.9847 (sbs=7.9578) vs_sbs=+0.34% pre=0.218 gap=0.106 util=0.062
+      CVRP: top1=0.222 mean_cost=18.4390 (sbs=18.2943) vs_sbs=+0.79% pre=0.213 gap=0.046 util=0.025
+      ATSP: top1=0.721 mean_cost=1.6381 (sbs=1.6735) vs_sbs=-2.12% pre=0.735 gap=0.702 util=0.076
+      OVRP: top1=0.315 mean_cost=7.4600 (sbs=7.4617) vs_sbs=-0.02% pre=0.340 gap=0.304 util=0.152
+      VRPB: top1=0.504 mean_cost=9.3402 (sbs=9.3403) vs_sbs=-0.00% pre=0.504 gap=0.517 util=0.413
+      VRPL: top1=0.303 mean_cost=12.4064 (sbs=12.4072) vs_sbs=-0.01% pre=0.251 gap=0.201 util=0.175
+     VRPTW: top1=0.354 mean_cost=18.1152 (sbs=18.6571) vs_sbs=-2.90% pre=0.325 gap=0.335 util=0.126
+    OVRPTW: top1=0.483 mean_cost=10.0520 (sbs=10.0484) vs_sbs=+0.04% pre=0.398 gap=0.477 util=0.381
+     OVRPB: top1=0.544 mean_cost=6.3218 (sbs=6.3220) vs_sbs=-0.00% pre=0.540 gap=0.554 util=0.423
+     OVRPL: top1=0.353 mean_cost=7.4382 (sbs=7.4376) vs_sbs=+0.01% pre=0.356 gap=0.294 util=0.178
+     VRPBL: top1=0.532 mean_cost=9.3614 (sbs=9.3593) vs_sbs=+0.02% pre=0.506 gap=0.519 util=0.383
+    VRPBTW: top1=0.343 mean_cost=19.3702 (sbs=19.6697) vs_sbs=-1.52% pre=0.327 gap=0.343 util=0.118
+    VRPLTW: top1=0.331 mean_cost=18.0828 (sbs=18.5091) vs_sbs=-2.30% pre=0.213 gap=0.295 util=0.159
+    OVRPBL: top1=0.543 mean_cost=6.3103 (sbs=6.3103) vs_sbs=+0.00% pre=0.473 gap=0.501 util=0.334
+   OVRPBTW: top1=0.492 mean_cost=10.5047 (sbs=10.5068) vs_sbs=-0.02% pre=0.483 gap=0.493 util=0.452
+   OVRPLTW: top1=0.480 mean_cost=10.1337 (sbs=10.1272) vs_sbs=+0.06% pre=0.375 gap=0.454 util=0.447
+   VRPBLTW: top1=0.351 mean_cost=19.3091 (sbs=19.5198) vs_sbs=-1.08% pre=0.266 gap=0.316 util=0.127
+  OVRPBLTW: top1=0.483 mean_cost=10.5510 (sbs=10.5412) vs_sbs=+0.09% pre=0.411 gap=0.476 util=0.381
+[save] best.pt epoch=2 score=0.4209
+[save] best_top1.pt epoch=2 top1=0.4209
+[save] best_top3_safe.pt epoch=2 score=0.8796
+[save] best_cost.pt epoch=2 vs_sbs=-0.479%
+ep003 step001200 loss=0.7817 ce=1.3156 pair=0.0722 gap=0.0026 pre=1.3233 topk_ce=1.0863 div=0.0259 risk=0.0321 support=0.3921 support_bce=0.3818 support_div=0.1645 support_budget=0.1037 time=4.5m
+ep003 step001250 loss=0.8204 ce=1.3764 pair=0.0811 gap=0.0026 pre=1.3811 topk_ce=1.1543 div=0.0345 risk=0.0342 support=0.4080 support_bce=0.3966 support_div=0.1826 support_budget=0.1102 time=4.6m
+ep003 step001300 loss=0.8279 ce=1.3889 pair=0.0814 gap=0.0025 pre=1.3940 topk_ce=1.1687 div=0.0338 risk=0.0334 support=0.4112 support_bce=0.3998 support_div=0.1847 support_budget=0.1111 time=4.8m
+ep003 step001350 loss=0.8305 ce=1.3928 pair=0.0824 gap=0.0026 pre=1.3996 topk_ce=1.1712 div=0.0340 risk=0.0341 support=0.4118 support_bce=0.4004 support_div=0.1844 support_budget=0.1108 time=5.0m
+ep003 step001400 loss=0.8314 ce=1.3934 pair=0.0826 gap=0.0025 pre=1.4019 topk_ce=1.1749 div=0.0331 risk=0.0339 support=0.4128 support_bce=0.4013 support_div=0.1851 support_budget=0.1113 time=5.2m
+ep003 step001450 loss=0.8292 ce=1.3904 pair=0.0820 gap=0.0025 pre=1.3983 topk_ce=1.1696 div=0.0329 risk=0.0337 support=0.4117 support_bce=0.4003 support_div=0.1844 support_budget=0.1109 time=5.3m
+ep003 step001500 loss=0.8259 ce=1.3850 pair=0.0813 gap=0.0025 pre=1.3928 topk_ce=1.1649 div=0.0322 risk=0.0332 support=0.4108 support_bce=0.3994 support_div=0.1836 support_budget=0.1102 time=5.5m
+ep003 step001550 loss=0.8267 ce=1.3860 pair=0.0819 gap=0.0025 pre=1.3933 topk_ce=1.1668 div=0.0317 risk=0.0334 support=0.4110 support_bce=0.3996 support_div=0.1836 support_budget=0.1101 time=5.7m
+[eval epoch 3] macro_top1=0.4193 top2=0.7633 top3=0.8789 vs_sbs=-0.423% vbs_closed=-2.41%
+          components: pre_top1=0.3918 gap_top1=0.3836 utility_top1=0.2646 base_top1=0.3783 support_g0_top1=0.4193 corr(pre/final)=+0.977 corr(gap/final)=+0.877 corr(util/final)=+0.357
+          support: g0@1=0.4193 u1@1=0.6806 u2@1=0.9350 u3@1=0.9794 top3_recall=0.9997 avg_shortlist=4.71 arm_coverage=0.9240
+       TSP: top1=0.299 mean_cost=7.9776 (sbs=7.9578) vs_sbs=+0.25% pre=0.308 gap=0.057 util=0.063
+      CVRP: top1=0.239 mean_cost=18.3813 (sbs=18.2943) vs_sbs=+0.48% pre=0.251 gap=0.214 util=0.151
+      ATSP: top1=0.756 mean_cost=1.6378 (sbs=1.6735) vs_sbs=-2.13% pre=0.774 gap=0.666 util=0.239
+      OVRP: top1=0.357 mean_cost=7.4557 (sbs=7.4617) vs_sbs=-0.08% pre=0.299 gap=0.195 util=0.152
+      VRPB: top1=0.492 mean_cost=9.3684 (sbs=9.3403) vs_sbs=+0.30% pre=0.403 gap=0.516 util=0.340
+      VRPL: top1=0.246 mean_cost=12.4428 (sbs=12.4072) vs_sbs=+0.29% pre=0.226 gap=0.254 util=0.234
+     VRPTW: top1=0.360 mean_cost=18.1162 (sbs=18.6571) vs_sbs=-2.90% pre=0.315 gap=0.323 util=0.132
+    OVRPTW: top1=0.479 mean_cost=10.0548 (sbs=10.0484) vs_sbs=+0.06% pre=0.492 gap=0.478 util=0.380
+     OVRPB: top1=0.516 mean_cost=6.3356 (sbs=6.3220) vs_sbs=+0.22% pre=0.496 gap=0.464 util=0.423
+     OVRPL: top1=0.365 mean_cost=7.4392 (sbs=7.4376) vs_sbs=+0.02% pre=0.381 gap=0.296 util=0.275
+     VRPBL: top1=0.466 mean_cost=9.3938 (sbs=9.3593) vs_sbs=+0.37% pre=0.441 gap=0.512 util=0.386
+    VRPBTW: top1=0.338 mean_cost=19.4602 (sbs=19.6697) vs_sbs=-1.07% pre=0.299 gap=0.373 util=0.110
+    VRPLTW: top1=0.350 mean_cost=17.9380 (sbs=18.5091) vs_sbs=-3.09% pre=0.328 gap=0.337 util=0.123
+    OVRPBL: top1=0.489 mean_cost=6.3237 (sbs=6.3103) vs_sbs=+0.21% pre=0.498 gap=0.468 util=0.400
+   OVRPBTW: top1=0.486 mean_cost=10.5073 (sbs=10.5068) vs_sbs=+0.01% pre=0.340 gap=0.461 util=0.452
+   OVRPLTW: top1=0.473 mean_cost=10.1387 (sbs=10.1272) vs_sbs=+0.11% pre=0.453 gap=0.487 util=0.432
+   VRPBLTW: top1=0.342 mean_cost=19.3882 (sbs=19.5198) vs_sbs=-0.67% pre=0.297 gap=0.340 util=0.153
+  OVRPBLTW: top1=0.494 mean_cost=10.5432 (sbs=10.5412) vs_sbs=+0.02% pre=0.451 gap=0.463 util=0.317
+ep004 step001600 loss=0.8159 ce=1.3675 pair=0.0791 gap=0.0024 pre=1.3726 topk_ce=1.1578 div=0.0263 risk=0.0297 support=0.4092 support_bce=0.3977 support_div=0.1850 support_budget=0.1116 time=6.0m
+ep004 step001650 loss=0.8168 ce=1.3719 pair=0.0778 gap=0.0024 pre=1.3816 topk_ce=1.1471 div=0.0270 risk=0.0312 support=0.4072 support_bce=0.3960 support_div=0.1810 support_budget=0.1086 time=6.1m
+ep004 step001700 loss=0.8219 ce=1.3808 pair=0.0782 gap=0.0024 pre=1.3866 topk_ce=1.1574 div=0.0266 risk=0.0307 support=0.4098 support_bce=0.3986 support_div=0.1809 support_budget=0.1078 time=6.3m
+ep004 step001750 loss=0.8178 ce=1.3734 pair=0.0779 gap=0.0024 pre=1.3800 topk_ce=1.1529 div=0.0256 risk=0.0310 support=0.4083 support_bce=0.3972 support_div=0.1799 support_budget=0.1068 time=6.5m
+ep004 step001800 loss=0.8171 ce=1.3719 pair=0.0783 gap=0.0024 pre=1.3782 topk_ce=1.1510 div=0.0253 risk=0.0310 support=0.4085 support_bce=0.3973 support_div=0.1798 support_budget=0.1069 time=6.6m
+ep004 step001850 loss=0.8160 ce=1.3696 pair=0.0780 gap=0.0024 pre=1.3769 topk_ce=1.1502 div=0.0245 risk=0.0308 support=0.4085 support_bce=0.3974 support_div=0.1796 support_budget=0.1068 time=6.8m
+ep004 step001900 loss=0.8140 ce=1.3664 pair=0.0778 gap=0.0024 pre=1.3727 topk_ce=1.1474 div=0.0245 risk=0.0308 support=0.4080 support_bce=0.3969 support_div=0.1793 support_budget=0.1065 time=7.0m
+ep004 step001950 loss=0.8105 ce=1.3606 pair=0.0771 gap=0.0024 pre=1.3669 topk_ce=1.1412 div=0.0238 risk=0.0305 support=0.4069 support_bce=0.3958 support_div=0.1783 support_budget=0.1061 time=7.1m
+[eval epoch 4] macro_top1=0.4427 top2=0.7853 top3=0.8909 vs_sbs=-0.593% vbs_closed=+11.51%
+          components: pre_top1=0.4299 gap_top1=0.3966 utility_top1=0.2701 base_top1=0.4052 support_g0_top1=0.4427 corr(pre/final)=+0.981 corr(gap/final)=+0.872 corr(util/final)=+0.433
+          support: g0@1=0.4427 u1@1=0.7832 u2@1=0.9414 u3@1=0.9715 top3_recall=0.9996 avg_shortlist=4.71 arm_coverage=0.9375
+       TSP: top1=0.313 mean_cost=7.9519 (sbs=7.9578) vs_sbs=-0.07% pre=0.305 gap=0.068 util=0.101
+      CVRP: top1=0.299 mean_cost=18.3638 (sbs=18.2943) vs_sbs=+0.38% pre=0.298 gap=0.118 util=0.101
+      ATSP: top1=0.647 mean_cost=1.6598 (sbs=1.6735) vs_sbs=-0.82% pre=0.657 gap=0.601 util=0.262
+      OVRP: top1=0.356 mean_cost=7.4562 (sbs=7.4617) vs_sbs=-0.07% pre=0.350 gap=0.304 util=0.204
+      VRPB: top1=0.532 mean_cost=9.3435 (sbs=9.3403) vs_sbs=+0.03% pre=0.515 gap=0.501 util=0.361
+      VRPL: top1=0.304 mean_cost=12.4076 (sbs=12.4072) vs_sbs=+0.00% pre=0.267 gap=0.285 util=0.182
+     VRPTW: top1=0.380 mean_cost=18.0848 (sbs=18.6571) vs_sbs=-3.07% pre=0.333 gap=0.330 util=0.176
+    OVRPTW: top1=0.486 mean_cost=10.0470 (sbs=10.0484) vs_sbs=-0.01% pre=0.492 gap=0.465 util=0.322
+     OVRPB: top1=0.551 mean_cost=6.3247 (sbs=6.3220) vs_sbs=+0.04% pre=0.541 gap=0.491 util=0.426
+     OVRPL: top1=0.380 mean_cost=7.4363 (sbs=7.4376) vs_sbs=-0.02% pre=0.349 gap=0.327 util=0.212
+     VRPBL: top1=0.536 mean_cost=9.3566 (sbs=9.3593) vs_sbs=-0.03% pre=0.533 gap=0.527 util=0.407
+    VRPBTW: top1=0.385 mean_cost=19.3358 (sbs=19.6697) vs_sbs=-1.70% pre=0.400 gap=0.394 util=0.105
+    VRPLTW: top1=0.392 mean_cost=17.8321 (sbs=18.5091) vs_sbs=-3.66% pre=0.390 gap=0.374 util=0.196
+    OVRPBL: top1=0.531 mean_cost=6.3107 (sbs=6.3103) vs_sbs=+0.01% pre=0.506 gap=0.535 util=0.422
+   OVRPBTW: top1=0.512 mean_cost=10.4988 (sbs=10.5068) vs_sbs=-0.08% pre=0.455 gap=0.509 util=0.452
+   OVRPLTW: top1=0.494 mean_cost=10.1277 (sbs=10.1272) vs_sbs=+0.00% pre=0.496 gap=0.474 util=0.434
+   VRPBLTW: top1=0.378 mean_cost=19.2114 (sbs=19.5198) vs_sbs=-1.58% pre=0.371 gap=0.368 util=0.126
+  OVRPBLTW: top1=0.493 mean_cost=10.5367 (sbs=10.5412) vs_sbs=-0.04% pre=0.481 gap=0.468 util=0.373
+[save] best.pt epoch=4 score=0.4427
+[save] best_top1.pt epoch=4 top1=0.4427
+[save] best_top3_safe.pt epoch=4 score=0.8909
+[save] best_cost.pt epoch=4 vs_sbs=-0.593%
+ep005 step002000 loss=0.8310 ce=1.3982 pair=0.0780 gap=0.0022 pre=1.4072 topk_ce=1.1681 div=0.0184 risk=0.0310 support=0.4124 support_bce=0.4012 support_div=0.1809 support_budget=0.1072 time=7.4m
+ep005 step002050 loss=0.8065 ce=1.3532 pair=0.0750 gap=0.0023 pre=1.3636 topk_ce=1.1369 div=0.0195 risk=0.0290 support=0.4074 support_bce=0.3964 support_div=0.1778 support_budget=0.1039 time=7.6m
+ep005 step002100 loss=0.7993 ce=1.3422 pair=0.0739 gap=0.0023 pre=1.3510 topk_ce=1.1228 div=0.0190 risk=0.0286 support=0.4043 support_bce=0.3936 support_div=0.1742 support_budget=0.1027 time=7.8m
+ep005 step002150 loss=0.8050 ce=1.3509 pair=0.0751 gap=0.0023 pre=1.3604 topk_ce=1.1327 div=0.0192 risk=0.0283 support=0.4069 support_bce=0.3960 support_div=0.1765 support_budget=0.1040 time=8.0m
+ep005 step002200 loss=0.7980 ce=1.3397 pair=0.0738 gap=0.0023 pre=1.3482 topk_ce=1.1213 div=0.0189 risk=0.0280 support=0.4044 support_bce=0.3936 support_div=0.1750 support_budget=0.1024 time=8.1m
+ep005 step002250 loss=0.7994 ce=1.3420 pair=0.0737 gap=0.0023 pre=1.3504 topk_ce=1.1240 div=0.0183 risk=0.0278 support=0.4052 support_bce=0.3943 support_div=0.1760 support_budget=0.1033 time=8.3m
+ep005 step002300 loss=0.8002 ce=1.3431 pair=0.0742 gap=0.0023 pre=1.3519 topk_ce=1.1250 div=0.0182 risk=0.0282 support=0.4054 support_bce=0.3945 support_div=0.1760 support_budget=0.1034 time=8.5m
+ep005 step002350 loss=0.8016 ce=1.3460 pair=0.0743 gap=0.0023 pre=1.3543 topk_ce=1.1268 div=0.0183 risk=0.0284 support=0.4053 support_bce=0.3944 support_div=0.1763 support_budget=0.1036 time=8.6m
+[eval epoch 5] macro_top1=0.4542 top2=0.7937 top3=0.9024 vs_sbs=-0.851% vbs_closed=+21.13%
+          components: pre_top1=0.4214 gap_top1=0.4294 utility_top1=0.2443 base_top1=0.4082 support_g0_top1=0.4542 corr(pre/final)=+0.976 corr(gap/final)=+0.956 corr(util/final)=+0.193
+          support: g0@1=0.4542 u1@1=0.7874 u2@1=0.9415 u3@1=0.9720 top3_recall=0.9991 avg_shortlist=4.76 arm_coverage=0.9454
+       TSP: top1=0.338 mean_cost=7.9265 (sbs=7.9578) vs_sbs=-0.39% pre=0.333 gap=0.138 util=0.097
+      CVRP: top1=0.304 mean_cost=18.3281 (sbs=18.2943) vs_sbs=+0.18% pre=0.279 gap=0.206 util=0.153
+      ATSP: top1=0.772 mean_cost=1.6356 (sbs=1.6735) vs_sbs=-2.27% pre=0.771 gap=0.771 util=0.194
+      OVRP: top1=0.362 mean_cost=7.4555 (sbs=7.4617) vs_sbs=-0.08% pre=0.349 gap=0.365 util=0.178
+      VRPB: top1=0.552 mean_cost=9.3342 (sbs=9.3403) vs_sbs=-0.07% pre=0.472 gap=0.518 util=0.319
+      VRPL: top1=0.314 mean_cost=12.4078 (sbs=12.4072) vs_sbs=+0.01% pre=0.307 gap=0.249 util=0.254
+     VRPTW: top1=0.402 mean_cost=17.9738 (sbs=18.6571) vs_sbs=-3.66% pre=0.365 gap=0.358 util=0.121
+    OVRPTW: top1=0.482 mean_cost=10.0466 (sbs=10.0484) vs_sbs=-0.02% pre=0.394 gap=0.464 util=0.203
+     OVRPB: top1=0.552 mean_cost=6.3230 (sbs=6.3220) vs_sbs=+0.02% pre=0.551 gap=0.552 util=0.407
+     OVRPL: top1=0.365 mean_cost=7.4367 (sbs=7.4376) vs_sbs=-0.01% pre=0.359 gap=0.365 util=0.283
+     VRPBL: top1=0.551 mean_cost=9.3534 (sbs=9.3593) vs_sbs=-0.06% pre=0.551 gap=0.538 util=0.432
+    VRPBTW: top1=0.413 mean_cost=19.1557 (sbs=19.6697) vs_sbs=-2.61% pre=0.319 gap=0.426 util=0.122
+    VRPLTW: top1=0.390 mean_cost=17.7721 (sbs=18.5091) vs_sbs=-3.98% pre=0.345 gap=0.396 util=0.158
+    OVRPBL: top1=0.532 mean_cost=6.3090 (sbs=6.3103) vs_sbs=-0.02% pre=0.530 gap=0.524 util=0.489
+   OVRPBTW: top1=0.498 mean_cost=10.5024 (sbs=10.5068) vs_sbs=-0.04% pre=0.404 gap=0.479 util=0.305
+   OVRPLTW: top1=0.484 mean_cost=10.1280 (sbs=10.1272) vs_sbs=+0.01% pre=0.486 gap=0.491 util=0.241
+   VRPBLTW: top1=0.382 mean_cost=19.0699 (sbs=19.5198) vs_sbs=-2.30% pre=0.349 gap=0.396 util=0.177
+  OVRPBLTW: top1=0.483 mean_cost=10.5399 (sbs=10.5412) vs_sbs=-0.01% pre=0.421 gap=0.493 util=0.265
+[save] best.pt epoch=5 score=0.4542
+[save] best_top1.pt epoch=5 top1=0.4542
+[save] best_top3_safe.pt epoch=5 score=0.9024
+[save] best_cost.pt epoch=5 vs_sbs=-0.851%
+ep006 step002400 loss=0.8105 ce=1.3643 pair=0.0723 gap=0.0021 pre=1.3641 topk_ce=1.1466 div=0.0171 risk=0.0273 support=0.4084 support_bce=0.3976 support_div=0.1757 support_budget=0.1018 time=8.9m
+ep006 step002450 loss=0.7895 ce=1.3259 pair=0.0710 gap=0.0022 pre=1.3316 topk_ce=1.1124 div=0.0170 risk=0.0265 support=0.4028 support_bce=0.3920 support_div=0.1751 support_budget=0.1013 time=9.1m
+ep006 step002500 loss=0.7856 ce=1.3205 pair=0.0700 gap=0.0022 pre=1.3264 topk_ce=1.1005 div=0.0166 risk=0.0258 support=0.4014 support_bce=0.3908 support_div=0.1733 support_budget=0.0996 time=9.3m
+ep006 step002550 loss=0.7871 ce=1.3227 pair=0.0705 gap=0.0022 pre=1.3277 topk_ce=1.1059 div=0.0163 risk=0.0260 support=0.4019 support_bce=0.3912 support_div=0.1744 support_budget=0.0999 time=9.4m
+ep006 step002600 loss=0.7861 ce=1.3212 pair=0.0703 gap=0.0021 pre=1.3265 topk_ce=1.1024 div=0.0157 risk=0.0258 support=0.4018 support_bce=0.3911 support_div=0.1744 support_budget=0.1000 time=9.6m
+ep006 step002650 loss=0.7897 ce=1.3267 pair=0.0710 gap=0.0021 pre=1.3326 topk_ce=1.1088 div=0.0152 risk=0.0256 support=0.4033 support_bce=0.3925 support_div=0.1751 support_budget=0.1005 time=9.8m
+ep006 step002700 loss=0.7864 ce=1.3217 pair=0.0703 gap=0.0022 pre=1.3275 topk_ce=1.1026 div=0.0148 risk=0.0257 support=0.4020 support_bce=0.3913 support_div=0.1739 support_budget=0.0999 time=9.9m
+ep006 step002750 loss=0.7863 ce=1.3215 pair=0.0703 gap=0.0021 pre=1.3280 topk_ce=1.1022 div=0.0146 risk=0.0258 support=0.4017 support_bce=0.3910 support_div=0.1739 support_budget=0.0998 time=10.1m
+[eval epoch 6] macro_top1=0.4552 top2=0.7971 top3=0.9047 vs_sbs=-0.902% vbs_closed=+20.63%
+          components: pre_top1=0.4394 gap_top1=0.4137 utility_top1=0.2663 base_top1=0.4139 support_g0_top1=0.4552 corr(pre/final)=+0.982 corr(gap/final)=+0.933 corr(util/final)=+0.244
+          support: g0@1=0.4552 u1@1=0.8170 u2@1=0.9433 u3@1=0.9728 top3_recall=0.9997 avg_shortlist=4.71 arm_coverage=0.9613
+       TSP: top1=0.339 mean_cost=7.9246 (sbs=7.9578) vs_sbs=-0.42% pre=0.288 gap=0.088 util=0.108
+      CVRP: top1=0.324 mean_cost=18.3218 (sbs=18.2943) vs_sbs=+0.15% pre=0.325 gap=0.166 util=0.175
+      ATSP: top1=0.770 mean_cost=1.6356 (sbs=1.6735) vs_sbs=-2.27% pre=0.777 gap=0.735 util=0.350
+      OVRP: top1=0.334 mean_cost=7.4587 (sbs=7.4617) vs_sbs=-0.04% pre=0.328 gap=0.340 util=0.230
+      VRPB: top1=0.549 mean_cost=9.3397 (sbs=9.3403) vs_sbs=-0.01% pre=0.518 gap=0.504 util=0.404
+      VRPL: top1=0.290 mean_cost=12.4144 (sbs=12.4072) vs_sbs=+0.06% pre=0.287 gap=0.252 util=0.203
+     VRPTW: top1=0.414 mean_cost=17.9666 (sbs=18.6571) vs_sbs=-3.70% pre=0.369 gap=0.356 util=0.148
+    OVRPTW: top1=0.480 mean_cost=10.0472 (sbs=10.0484) vs_sbs=-0.01% pre=0.491 gap=0.476 util=0.258
+     OVRPB: top1=0.546 mean_cost=6.3237 (sbs=6.3220) vs_sbs=+0.03% pre=0.548 gap=0.516 util=0.413
+     OVRPL: top1=0.362 mean_cost=7.4361 (sbs=7.4376) vs_sbs=-0.02% pre=0.375 gap=0.369 util=0.247
+     VRPBL: top1=0.536 mean_cost=9.3592 (sbs=9.3593) vs_sbs=-0.00% pre=0.539 gap=0.529 util=0.432
+    VRPBTW: top1=0.408 mean_cost=19.1284 (sbs=19.6697) vs_sbs=-2.75% pre=0.394 gap=0.421 util=0.151
+    VRPLTW: top1=0.452 mean_cost=17.6585 (sbs=18.5091) vs_sbs=-4.60% pre=0.458 gap=0.413 util=0.184
+    OVRPBL: top1=0.520 mean_cost=6.3117 (sbs=6.3103) vs_sbs=+0.02% pre=0.517 gap=0.519 util=0.500
+   OVRPBTW: top1=0.502 mean_cost=10.5020 (sbs=10.5068) vs_sbs=-0.05% pre=0.459 gap=0.482 util=0.352
+   OVRPLTW: top1=0.482 mean_cost=10.1276 (sbs=10.1272) vs_sbs=+0.00% pre=0.485 gap=0.436 util=0.239
+   VRPBLTW: top1=0.393 mean_cost=19.0054 (sbs=19.5198) vs_sbs=-2.64% pre=0.367 gap=0.417 util=0.174
+  OVRPBLTW: top1=0.492 mean_cost=10.5402 (sbs=10.5412) vs_sbs=-0.01% pre=0.384 gap=0.427 util=0.226
+[save] best.pt epoch=6 score=0.4552
+[save] best_top1.pt epoch=6 top1=0.4552
+[save] best_top3_safe.pt epoch=6 score=0.9047
+[save] best_cost.pt epoch=6 vs_sbs=-0.902%
+ep007 step002800 loss=0.7774 ce=1.3018 pair=0.0698 gap=0.0020 pre=1.3057 topk_ce=1.1028 div=0.0143 risk=0.0237 support=0.4038 support_bce=0.3931 support_div=0.1749 support_budget=0.0975 time=10.4m
+ep007 step002850 loss=0.7740 ce=1.3009 pair=0.0693 gap=0.0021 pre=1.3051 topk_ce=1.0822 div=0.0119 risk=0.0250 support=0.3977 support_bce=0.3874 support_div=0.1689 support_budget=0.0966 time=10.5m
+ep007 step002900 loss=0.7823 ce=1.3154 pair=0.0695 gap=0.0021 pre=1.3200 topk_ce=1.0954 div=0.0114 risk=0.0248 support=0.4008 support_bce=0.3903 support_div=0.1713 support_budget=0.0982 time=10.7m
+ep007 step002950 loss=0.7809 ce=1.3131 pair=0.0692 gap=0.0021 pre=1.3170 topk_ce=1.0939 div=0.0117 risk=0.0246 support=0.4006 support_bce=0.3900 support_div=0.1716 support_budget=0.0978 time=10.9m
+ep007 step003000 loss=0.7819 ce=1.3152 pair=0.0689 gap=0.0021 pre=1.3194 topk_ce=1.0941 div=0.0113 risk=0.0244 support=0.4009 support_bce=0.3903 support_div=0.1719 support_budget=0.0979 time=11.0m
+ep007 step003050 loss=0.7810 ce=1.3138 pair=0.0687 gap=0.0021 pre=1.3184 topk_ce=1.0930 div=0.0112 risk=0.0243 support=0.4006 support_bce=0.3900 support_div=0.1716 support_budget=0.0977 time=11.2m
+ep007 step003100 loss=0.7808 ce=1.3137 pair=0.0687 gap=0.0021 pre=1.3184 topk_ce=1.0915 div=0.0109 risk=0.0248 support=0.4000 support_bce=0.3895 support_div=0.1711 support_budget=0.0976 time=11.4m
+ep007 step003150 loss=0.7811 ce=1.3139 pair=0.0689 gap=0.0021 pre=1.3187 topk_ce=1.0926 div=0.0108 risk=0.0246 support=0.4004 support_bce=0.3899 support_div=0.1714 support_budget=0.0977 time=11.6m
+[eval epoch 7] macro_top1=0.4599 top2=0.7983 top3=0.9081 vs_sbs=-0.929% vbs_closed=+22.29%
+          components: pre_top1=0.4178 gap_top1=0.3930 utility_top1=0.2487 base_top1=0.4139 support_g0_top1=0.4599 corr(pre/final)=+0.975 corr(gap/final)=+0.896 corr(util/final)=+0.157
+          support: g0@1=0.4599 u1@1=0.8417 u2@1=0.9496 u3@1=0.9753 top3_recall=0.9996 avg_shortlist=4.48 arm_coverage=0.9296
+       TSP: top1=0.338 mean_cost=7.9357 (sbs=7.9578) vs_sbs=-0.28% pre=0.331 gap=0.074 util=0.077
+      CVRP: top1=0.298 mean_cost=18.3247 (sbs=18.2943) vs_sbs=+0.17% pre=0.264 gap=0.127 util=0.090
+      ATSP: top1=0.780 mean_cost=1.6358 (sbs=1.6735) vs_sbs=-2.25% pre=0.776 gap=0.576 util=0.339
+      OVRP: top1=0.354 mean_cost=7.4562 (sbs=7.4617) vs_sbs=-0.07% pre=0.315 gap=0.218 util=0.231
+      VRPB: top1=0.550 mean_cost=9.3350 (sbs=9.3403) vs_sbs=-0.06% pre=0.544 gap=0.503 util=0.413
+      VRPL: top1=0.319 mean_cost=12.4045 (sbs=12.4072) vs_sbs=-0.02% pre=0.285 gap=0.220 util=0.180
+     VRPTW: top1=0.410 mean_cost=17.9286 (sbs=18.6571) vs_sbs=-3.90% pre=0.384 gap=0.383 util=0.088
+    OVRPTW: top1=0.488 mean_cost=10.0478 (sbs=10.0484) vs_sbs=-0.01% pre=0.389 gap=0.461 util=0.198
+     OVRPB: top1=0.555 mean_cost=6.3218 (sbs=6.3220) vs_sbs=-0.00% pre=0.530 gap=0.503 util=0.413
+     OVRPL: top1=0.366 mean_cost=7.4366 (sbs=7.4376) vs_sbs=-0.01% pre=0.379 gap=0.350 util=0.278
+     VRPBL: top1=0.540 mean_cost=9.3553 (sbs=9.3593) vs_sbs=-0.04% pre=0.502 gap=0.500 util=0.432
+    VRPBTW: top1=0.391 mean_cost=19.1203 (sbs=19.6697) vs_sbs=-2.79% pre=0.328 gap=0.451 util=0.133
+    VRPLTW: top1=0.472 mean_cost=17.6471 (sbs=18.5091) vs_sbs=-4.66% pre=0.417 gap=0.421 util=0.140
+    OVRPBL: top1=0.526 mean_cost=6.3104 (sbs=6.3103) vs_sbs=+0.00% pre=0.518 gap=0.515 util=0.524
+   OVRPBTW: top1=0.505 mean_cost=10.5030 (sbs=10.5068) vs_sbs=-0.04% pre=0.447 gap=0.476 util=0.292
+   OVRPLTW: top1=0.485 mean_cost=10.1268 (sbs=10.1272) vs_sbs=-0.00% pre=0.408 gap=0.442 util=0.232
+   VRPBLTW: top1=0.411 mean_cost=18.9868 (sbs=19.5198) vs_sbs=-2.73% pre=0.324 gap=0.417 util=0.156
+  OVRPBLTW: top1=0.490 mean_cost=10.5389 (sbs=10.5412) vs_sbs=-0.02% pre=0.380 gap=0.437 util=0.260
+[save] best.pt epoch=7 score=0.4599
+[save] best_top1.pt epoch=7 top1=0.4599
+[save] best_top3_safe.pt epoch=7 score=0.9081
+[save] best_cost.pt epoch=7 vs_sbs=-0.929%
+ep008 step003200 loss=0.7777 ce=1.3088 pair=0.0673 gap=0.0021 pre=1.3152 topk_ce=1.0891 div=0.0107 risk=0.0241 support=0.3979 support_bce=0.3873 support_div=0.1730 support_budget=0.0981 time=11.9m
+ep008 step003250 loss=0.7672 ce=1.2920 pair=0.0659 gap=0.0021 pre=1.2971 topk_ce=1.0677 div=0.0092 risk=0.0239 support=0.3948 support_bce=0.3846 support_div=0.1672 support_budget=0.0943 time=12.0m
+ep008 step003300 loss=0.7772 ce=1.3073 pair=0.0676 gap=0.0020 pre=1.3127 topk_ce=1.0874 div=0.0098 risk=0.0239 support=0.3993 support_bce=0.3888 support_div=0.1713 support_budget=0.0965 time=12.2m
+ep008 step003350 loss=0.7749 ce=1.3036 pair=0.0674 gap=0.0020 pre=1.3095 topk_ce=1.0822 div=0.0093 risk=0.0236 support=0.3987 support_bce=0.3883 support_div=0.1704 support_budget=0.0961 time=12.4m
+ep008 step003400 loss=0.7749 ce=1.3039 pair=0.0673 gap=0.0020 pre=1.3098 topk_ce=1.0823 div=0.0090 risk=0.0239 support=0.3984 support_bce=0.3880 support_div=0.1696 support_budget=0.0957 time=12.5m
+ep008 step003450 loss=0.7753 ce=1.3046 pair=0.0673 gap=0.0020 pre=1.3099 topk_ce=1.0831 div=0.0088 risk=0.0239 support=0.3984 support_bce=0.3880 support_div=0.1699 support_budget=0.0959 time=12.7m
+ep008 step003500 loss=0.7746 ce=1.3031 pair=0.0676 gap=0.0020 pre=1.3093 topk_ce=1.0815 div=0.0088 risk=0.0240 support=0.3981 support_bce=0.3878 support_div=0.1691 support_budget=0.0955 time=12.8m
+ep008 step003550 loss=0.7774 ce=1.3076 pair=0.0679 gap=0.0020 pre=1.3141 topk_ce=1.0868 div=0.0087 risk=0.0239 support=0.3993 support_bce=0.3889 support_div=0.1701 support_budget=0.0961 time=13.0m
+[eval epoch 8] macro_top1=0.4551 top2=0.8018 top3=0.9071 vs_sbs=-0.843% vbs_closed=+19.48%
+          components: pre_top1=0.4438 gap_top1=0.4212 utility_top1=0.3021 base_top1=0.4313 support_g0_top1=0.4551 corr(pre/final)=+0.979 corr(gap/final)=+0.936 corr(util/final)=+0.362
+          support: g0@1=0.4551 u1@1=0.8211 u2@1=0.9421 u3@1=0.9723 top3_recall=0.9996 avg_shortlist=4.54 arm_coverage=0.9058
+       TSP: top1=0.336 mean_cost=7.9297 (sbs=7.9578) vs_sbs=-0.35% pre=0.343 gap=0.250 util=0.098
+      CVRP: top1=0.320 mean_cost=18.3267 (sbs=18.2943) vs_sbs=+0.18% pre=0.312 gap=0.166 util=0.182
+      ATSP: top1=0.679 mean_cost=1.6567 (sbs=1.6735) vs_sbs=-1.01% pre=0.671 gap=0.670 util=0.347
+      OVRP: top1=0.352 mean_cost=7.4567 (sbs=7.4617) vs_sbs=-0.07% pre=0.355 gap=0.287 util=0.247
+      VRPB: top1=0.548 mean_cost=9.3353 (sbs=9.3403) vs_sbs=-0.05% pre=0.533 gap=0.508 util=0.460
+      VRPL: top1=0.318 mean_cost=12.4037 (sbs=12.4072) vs_sbs=-0.03% pre=0.323 gap=0.230 util=0.251
+     VRPTW: top1=0.425 mean_cost=17.9335 (sbs=18.6571) vs_sbs=-3.88% pre=0.407 gap=0.380 util=0.227
+    OVRPTW: top1=0.487 mean_cost=10.0481 (sbs=10.0484) vs_sbs=-0.00% pre=0.472 gap=0.485 util=0.265
+     OVRPB: top1=0.547 mean_cost=6.3238 (sbs=6.3220) vs_sbs=+0.03% pre=0.542 gap=0.540 util=0.405
+     OVRPL: top1=0.368 mean_cost=7.4355 (sbs=7.4376) vs_sbs=-0.03% pre=0.363 gap=0.323 util=0.267
+     VRPBL: top1=0.538 mean_cost=9.3575 (sbs=9.3593) vs_sbs=-0.02% pre=0.523 gap=0.535 util=0.438
+    VRPBTW: top1=0.412 mean_cost=19.1274 (sbs=19.6697) vs_sbs=-2.76% pre=0.410 gap=0.440 util=0.221
+    VRPLTW: top1=0.428 mean_cost=17.6925 (sbs=18.5091) vs_sbs=-4.41% pre=0.446 gap=0.420 util=0.222
+    OVRPBL: top1=0.519 mean_cost=6.3100 (sbs=6.3103) vs_sbs=-0.00% pre=0.481 gap=0.510 util=0.503
+   OVRPBTW: top1=0.514 mean_cost=10.5019 (sbs=10.5068) vs_sbs=-0.05% pre=0.484 gap=0.506 util=0.396
+   OVRPLTW: top1=0.491 mean_cost=10.1283 (sbs=10.1272) vs_sbs=+0.01% pre=0.456 gap=0.476 util=0.312
+   VRPBLTW: top1=0.414 mean_cost=18.9942 (sbs=19.5198) vs_sbs=-2.69% pre=0.384 gap=0.407 util=0.301
+  OVRPBLTW: top1=0.496 mean_cost=10.5362 (sbs=10.5412) vs_sbs=-0.05% pre=0.484 gap=0.449 util=0.296
+ep009 step003600 loss=0.7766 ce=1.3089 pair=0.0665 gap=0.0020 pre=1.3139 topk_ce=1.0797 div=0.0085 risk=0.0228 support=0.3984 support_bce=0.3879 support_div=0.1713 support_budget=0.0971 time=13.3m
+ep009 step003650 loss=0.7787 ce=1.3107 pair=0.0673 gap=0.0020 pre=1.3157 topk_ce=1.0888 div=0.0080 risk=0.0229 support=0.3998 support_bce=0.3893 support_div=0.1720 support_budget=0.0966 time=13.5m
+ep009 step003700 loss=0.7700 ce=1.2963 pair=0.0663 gap=0.0020 pre=1.2999 topk_ce=1.0751 div=0.0078 risk=0.0233 support=0.3964 support_bce=0.3860 support_div=0.1694 support_budget=0.0948 time=13.6m
+ep009 step003750 loss=0.7713 ce=1.2981 pair=0.0664 gap=0.0020 pre=1.3025 topk_ce=1.0763 div=0.0077 risk=0.0230 support=0.3976 support_bce=0.3873 support_div=0.1695 support_budget=0.0946 time=13.8m
+ep009 step003800 loss=0.7772 ce=1.3077 pair=0.0675 gap=0.0020 pre=1.3144 topk_ce=1.0864 div=0.0076 risk=0.0238 support=0.3989 support_bce=0.3885 support_div=0.1699 support_budget=0.0952 time=14.0m
+ep009 step003850 loss=0.7744 ce=1.3031 pair=0.0671 gap=0.0020 pre=1.3092 topk_ce=1.0823 div=0.0075 risk=0.0236 support=0.3981 support_bce=0.3877 support_div=0.1694 support_budget=0.0948 time=14.2m
+ep009 step003900 loss=0.7738 ce=1.3020 pair=0.0671 gap=0.0020 pre=1.3076 topk_ce=1.0813 div=0.0075 risk=0.0235 support=0.3982 support_bce=0.3879 support_div=0.1694 support_budget=0.0949 time=14.3m
+ep009 step003950 loss=0.7732 ce=1.3010 pair=0.0669 gap=0.0020 pre=1.3065 topk_ce=1.0807 div=0.0073 risk=0.0234 support=0.3980 support_bce=0.3877 support_div=0.1690 support_budget=0.0947 time=14.5m
+[eval epoch 9] macro_top1=0.4563 top2=0.8006 top3=0.9058 vs_sbs=-0.875% vbs_closed=+17.44%
+          components: pre_top1=0.4451 gap_top1=0.4266 utility_top1=0.2728 base_top1=0.4268 support_g0_top1=0.4563 corr(pre/final)=+0.984 corr(gap/final)=+0.899 corr(util/final)=+0.222
+          support: g0@1=0.4563 u1@1=0.8534 u2@1=0.9468 u3@1=0.9772 top3_recall=0.9999 avg_shortlist=4.76 arm_coverage=0.9762
+       TSP: top1=0.325 mean_cost=7.9414 (sbs=7.9578) vs_sbs=-0.21% pre=0.322 gap=0.103 util=0.076
+      CVRP: top1=0.309 mean_cost=18.3266 (sbs=18.2943) vs_sbs=+0.18% pre=0.303 gap=0.185 util=0.147
+      ATSP: top1=0.759 mean_cost=1.6411 (sbs=1.6735) vs_sbs=-1.94% pre=0.751 gap=0.709 util=0.346
+      OVRP: top1=0.362 mean_cost=7.4553 (sbs=7.4617) vs_sbs=-0.09% pre=0.362 gap=0.359 util=0.286
+      VRPB: top1=0.546 mean_cost=9.3423 (sbs=9.3403) vs_sbs=+0.02% pre=0.536 gap=0.545 util=0.409
+      VRPL: top1=0.296 mean_cost=12.4138 (sbs=12.4072) vs_sbs=+0.05% pre=0.293 gap=0.248 util=0.260
+     VRPTW: top1=0.426 mean_cost=17.9101 (sbs=18.6571) vs_sbs=-4.00% pre=0.420 gap=0.410 util=0.159
+    OVRPTW: top1=0.493 mean_cost=10.0461 (sbs=10.0484) vs_sbs=-0.02% pre=0.492 gap=0.488 util=0.247
+     OVRPB: top1=0.552 mean_cost=6.3253 (sbs=6.3220) vs_sbs=+0.05% pre=0.544 gap=0.538 util=0.408
+     OVRPL: top1=0.365 mean_cost=7.4365 (sbs=7.4376) vs_sbs=-0.01% pre=0.366 gap=0.367 util=0.296
+     VRPBL: top1=0.521 mean_cost=9.3671 (sbs=9.3593) vs_sbs=+0.08% pre=0.497 gap=0.541 util=0.435
+    VRPBTW: top1=0.409 mean_cost=19.0996 (sbs=19.6697) vs_sbs=-2.90% pre=0.384 gap=0.434 util=0.172
+    VRPLTW: top1=0.443 mean_cost=17.6724 (sbs=18.5091) vs_sbs=-4.52% pre=0.454 gap=0.410 util=0.190
+    OVRPBL: top1=0.515 mean_cost=6.3168 (sbs=6.3103) vs_sbs=+0.10% pre=0.492 gap=0.508 util=0.513
+   OVRPBTW: top1=0.505 mean_cost=10.5057 (sbs=10.5068) vs_sbs=-0.01% pre=0.495 gap=0.510 util=0.305
+   OVRPLTW: top1=0.473 mean_cost=10.1374 (sbs=10.1272) vs_sbs=+0.10% pre=0.440 gap=0.454 util=0.222
+   VRPBLTW: top1=0.423 mean_cost=19.0075 (sbs=19.5198) vs_sbs=-2.62% pre=0.405 gap=0.395 util=0.200
+  OVRPBLTW: top1=0.492 mean_cost=10.5390 (sbs=10.5412) vs_sbs=-0.02% pre=0.456 gap=0.475 util=0.239
+ep010 step004000 loss=0.7597 ce=1.2794 pair=0.0647 gap=0.0019 pre=1.2851 topk_ce=1.0567 div=0.0067 risk=0.0226 support=0.3920 support_bce=0.3819 support_div=0.1642 support_budget=0.0934 time=14.8m
+ep010 step004050 loss=0.7720 ce=1.2990 pair=0.0662 gap=0.0019 pre=1.3076 topk_ce=1.0775 div=0.0065 risk=0.0232 support=0.3974 support_bce=0.3871 support_div=0.1682 support_budget=0.0951 time=15.0m
+ep010 step004100 loss=0.7693 ce=1.2939 pair=0.0658 gap=0.0019 pre=1.3028 topk_ce=1.0740 div=0.0071 risk=0.0228 support=0.3971 support_bce=0.3867 support_div=0.1691 support_budget=0.0949 time=15.1m
+ep010 step004150 loss=0.7689 ce=1.2936 pair=0.0659 gap=0.0019 pre=1.3018 topk_ce=1.0727 div=0.0071 risk=0.0230 support=0.3966 support_bce=0.3863 support_div=0.1684 support_budget=0.0945 time=15.3m
+ep010 step004200 loss=0.7728 ce=1.2995 pair=0.0669 gap=0.0019 pre=1.3080 topk_ce=1.0793 div=0.0072 risk=0.0230 support=0.3985 support_bce=0.3881 support_div=0.1699 support_budget=0.0952 time=15.5m
+ep010 step004250 loss=0.7721 ce=1.2986 pair=0.0668 gap=0.0019 pre=1.3071 topk_ce=1.0786 div=0.0070 risk=0.0232 support=0.3977 support_bce=0.3874 support_div=0.1690 support_budget=0.0950 time=15.6m
+ep010 step004300 loss=0.7714 ce=1.2974 pair=0.0665 gap=0.0019 pre=1.3054 topk_ce=1.0782 div=0.0070 risk=0.0231 support=0.3977 support_bce=0.3873 support_div=0.1687 support_budget=0.0947 time=15.8m
+ep010 step004350 loss=0.7705 ce=1.2961 pair=0.0665 gap=0.0019 pre=1.3031 topk_ce=1.0769 div=0.0068 risk=0.0231 support=0.3972 support_bce=0.3869 support_div=0.1686 support_budget=0.0946 time=16.0m
+[eval epoch 10] macro_top1=0.4607 top2=0.8016 top3=0.9066 vs_sbs=-0.913% vbs_closed=+21.80%
+          components: pre_top1=0.4571 gap_top1=0.4264 utility_top1=0.2810 base_top1=0.4367 support_g0_top1=0.4607 corr(pre/final)=+0.980 corr(gap/final)=+0.913 corr(util/final)=+0.265
+          support: g0@1=0.4607 u1@1=0.8483 u2@1=0.9405 u3@1=0.9680 top3_recall=0.9997 avg_shortlist=4.52 arm_coverage=0.9444
+       TSP: top1=0.342 mean_cost=7.9290 (sbs=7.9578) vs_sbs=-0.36% pre=0.346 gap=0.216 util=0.117
+      CVRP: top1=0.323 mean_cost=18.3129 (sbs=18.2943) vs_sbs=+0.10% pre=0.288 gap=0.213 util=0.209
+      ATSP: top1=0.761 mean_cost=1.6393 (sbs=1.6735) vs_sbs=-2.05% pre=0.761 gap=0.733 util=0.342
+      OVRP: top1=0.357 mean_cost=7.4564 (sbs=7.4617) vs_sbs=-0.07% pre=0.356 gap=0.311 util=0.274
+      VRPB: top1=0.547 mean_cost=9.3369 (sbs=9.3403) vs_sbs=-0.04% pre=0.549 gap=0.510 util=0.458
+      VRPL: top1=0.323 mean_cost=12.4027 (sbs=12.4072) vs_sbs=-0.04% pre=0.301 gap=0.282 util=0.205
+     VRPTW: top1=0.432 mean_cost=17.9196 (sbs=18.6571) vs_sbs=-3.95% pre=0.429 gap=0.402 util=0.194
+    OVRPTW: top1=0.505 mean_cost=10.0464 (sbs=10.0484) vs_sbs=-0.02% pre=0.496 gap=0.472 util=0.217
+     OVRPB: top1=0.546 mean_cost=6.3237 (sbs=6.3220) vs_sbs=+0.03% pre=0.565 gap=0.541 util=0.418
+     OVRPL: top1=0.363 mean_cost=7.4363 (sbs=7.4376) vs_sbs=-0.02% pre=0.354 gap=0.350 util=0.273
+     VRPBL: top1=0.540 mean_cost=9.3569 (sbs=9.3593) vs_sbs=-0.03% pre=0.533 gap=0.524 util=0.435
+    VRPBTW: top1=0.403 mean_cost=19.0997 (sbs=19.6697) vs_sbs=-2.90% pre=0.423 gap=0.436 util=0.199
+    VRPLTW: top1=0.443 mean_cost=17.6815 (sbs=18.5091) vs_sbs=-4.47% pre=0.437 gap=0.396 util=0.199
+    OVRPBL: top1=0.515 mean_cost=6.3113 (sbs=6.3103) vs_sbs=+0.02% pre=0.537 gap=0.509 util=0.522
+   OVRPBTW: top1=0.498 mean_cost=10.5072 (sbs=10.5068) vs_sbs=+0.00% pre=0.477 gap=0.465 util=0.304
+   OVRPLTW: top1=0.471 mean_cost=10.1322 (sbs=10.1272) vs_sbs=+0.05% pre=0.489 gap=0.463 util=0.228
+   VRPBLTW: top1=0.419 mean_cost=19.0009 (sbs=19.5198) vs_sbs=-2.66% pre=0.393 gap=0.394 util=0.221
+  OVRPBLTW: top1=0.504 mean_cost=10.5381 (sbs=10.5412) vs_sbs=-0.03% pre=0.493 gap=0.458 util=0.243
+[save] best.pt epoch=10 score=0.4607
+[save] best_top1.pt epoch=10 top1=0.4607
+ep011 step004400 loss=0.7645 ce=1.2845 pair=0.0662 gap=0.0019 pre=1.2867 topk_ce=1.0768 div=0.0062 risk=0.0230 support=0.3964 support_bce=0.3862 support_div=0.1658 support_budget=0.0928 time=16.3m
+ep011 step004450 loss=0.7625 ce=1.2821 pair=0.0659 gap=0.0019 pre=1.2853 topk_ce=1.0690 div=0.0060 risk=0.0227 support=0.3949 support_bce=0.3847 support_div=0.1672 support_budget=0.0938 time=16.4m
+ep011 step004500 loss=0.7640 ce=1.2851 pair=0.0656 gap=0.0019 pre=1.2892 topk_ce=1.0688 div=0.0057 risk=0.0225 support=0.3958 support_bce=0.3855 support_div=0.1670 support_budget=0.0936 time=16.6m
+ep011 step004550 loss=0.7662 ce=1.2883 pair=0.0659 gap=0.0019 pre=1.2942 topk_ce=1.0731 div=0.0058 risk=0.0227 support=0.3963 support_bce=0.3861 support_div=0.1675 support_budget=0.0938 time=16.8m
+ep011 step004600 loss=0.7669 ce=1.2898 pair=0.0660 gap=0.0019 pre=1.2949 topk_ce=1.0731 div=0.0058 risk=0.0228 support=0.3963 support_bce=0.3861 support_div=0.1672 support_budget=0.0935 time=16.9m
+ep011 step004650 loss=0.7670 ce=1.2905 pair=0.0659 gap=0.0019 pre=1.2950 topk_ce=1.0728 div=0.0056 risk=0.0228 support=0.3961 support_bce=0.3859 support_div=0.1670 support_budget=0.0935 time=17.1m
+ep011 step004700 loss=0.7654 ce=1.2879 pair=0.0656 gap=0.0019 pre=1.2924 topk_ce=1.0699 div=0.0055 risk=0.0228 support=0.3957 support_bce=0.3855 support_div=0.1668 support_budget=0.0933 time=17.2m
+ep011 step004750 loss=0.7650 ce=1.2872 pair=0.0656 gap=0.0019 pre=1.2915 topk_ce=1.0694 div=0.0054 risk=0.0227 support=0.3956 support_bce=0.3854 support_div=0.1666 support_budget=0.0933 time=17.4m
+[eval epoch 11] macro_top1=0.4604 top2=0.8012 top3=0.9106 vs_sbs=-0.913% vbs_closed=+22.17%
+          components: pre_top1=0.4378 gap_top1=0.4474 utility_top1=0.3024 base_top1=0.4317 support_g0_top1=0.4604 corr(pre/final)=+0.976 corr(gap/final)=+0.958 corr(util/final)=+0.402
+          support: g0@1=0.4604 u1@1=0.8494 u2@1=0.9439 u3@1=0.9721 top3_recall=0.9994 avg_shortlist=4.72 arm_coverage=0.9375
+       TSP: top1=0.346 mean_cost=7.9260 (sbs=7.9578) vs_sbs=-0.40% pre=0.335 gap=0.323 util=0.172
+      CVRP: top1=0.326 mean_cost=18.3355 (sbs=18.2943) vs_sbs=+0.23% pre=0.323 gap=0.260 util=0.220
+      ATSP: top1=0.737 mean_cost=1.6375 (sbs=1.6735) vs_sbs=-2.15% pre=0.717 gap=0.738 util=0.321
+      OVRP: top1=0.361 mean_cost=7.4554 (sbs=7.4617) vs_sbs=-0.08% pre=0.357 gap=0.294 util=0.298
+      VRPB: top1=0.548 mean_cost=9.3359 (sbs=9.3403) vs_sbs=-0.05% pre=0.546 gap=0.531 util=0.452
+      VRPL: top1=0.319 mean_cost=12.4025 (sbs=12.4072) vs_sbs=-0.04% pre=0.288 gap=0.306 util=0.254
+     VRPTW: top1=0.448 mean_cost=17.9057 (sbs=18.6571) vs_sbs=-4.03% pre=0.446 gap=0.437 util=0.216
+    OVRPTW: top1=0.484 mean_cost=10.0458 (sbs=10.0484) vs_sbs=-0.03% pre=0.467 gap=0.465 util=0.266
+     OVRPB: top1=0.551 mean_cost=6.3234 (sbs=6.3220) vs_sbs=+0.02% pre=0.548 gap=0.551 util=0.416
+     OVRPL: top1=0.369 mean_cost=7.4356 (sbs=7.4376) vs_sbs=-0.03% pre=0.368 gap=0.376 util=0.302
+     VRPBL: top1=0.541 mean_cost=9.3542 (sbs=9.3593) vs_sbs=-0.05% pre=0.497 gap=0.544 util=0.407
+    VRPBTW: top1=0.404 mean_cost=19.1053 (sbs=19.6697) vs_sbs=-2.87% pre=0.385 gap=0.424 util=0.208
+    VRPLTW: top1=0.450 mean_cost=17.6657 (sbs=18.5091) vs_sbs=-4.56% pre=0.442 gap=0.421 util=0.211
+    OVRPBL: top1=0.519 mean_cost=6.3103 (sbs=6.3103) vs_sbs=+0.00% pre=0.509 gap=0.513 util=0.485
+   OVRPBTW: top1=0.505 mean_cost=10.5055 (sbs=10.5068) vs_sbs=-0.01% pre=0.445 gap=0.488 util=0.395
+   OVRPLTW: top1=0.489 mean_cost=10.1290 (sbs=10.1272) vs_sbs=+0.02% pre=0.406 gap=0.496 util=0.290
+   VRPBLTW: top1=0.397 mean_cost=19.0539 (sbs=19.5198) vs_sbs=-2.39% pre=0.342 gap=0.392 util=0.223
+  OVRPBLTW: top1=0.493 mean_cost=10.5384 (sbs=10.5412) vs_sbs=-0.03% pre=0.460 gap=0.494 util=0.308
+[save] best_top3_safe.pt epoch=11 score=0.9106
+ep012 step004800 loss=0.7714 ce=1.2953 pair=0.0661 gap=0.0018 pre=1.2999 topk_ce=1.0875 div=0.0046 risk=0.0217 support=0.4014 support_bce=0.3908 support_div=0.1719 support_budget=0.0962 time=17.7m
+ep012 step004850 loss=0.7672 ce=1.2903 pair=0.0657 gap=0.0019 pre=1.2942 topk_ce=1.0757 div=0.0046 risk=0.0224 support=0.3970 support_bce=0.3867 support_div=0.1678 support_budget=0.0939 time=17.9m
+ep012 step004900 loss=0.7646 ce=1.2868 pair=0.0652 gap=0.0019 pre=1.2912 topk_ce=1.0680 div=0.0047 risk=0.0224 support=0.3958 support_bce=0.3856 support_div=0.1673 support_budget=0.0933 time=18.0m
+ep012 step004950 loss=0.7647 ce=1.2875 pair=0.0651 gap=0.0019 pre=1.2917 topk_ce=1.0671 div=0.0048 risk=0.0225 support=0.3952 support_bce=0.3850 support_div=0.1669 support_budget=0.0929 time=18.2m
+ep012 step005000 loss=0.7662 ce=1.2899 pair=0.0653 gap=0.0019 pre=1.2939 topk_ce=1.0698 div=0.0047 risk=0.0223 support=0.3960 support_bce=0.3858 support_div=0.1670 support_budget=0.0928 time=18.4m
+ep012 step005050 loss=0.7640 ce=1.2858 pair=0.0652 gap=0.0019 pre=1.2912 topk_ce=1.0669 div=0.0047 risk=0.0225 support=0.3949 support_bce=0.3847 support_div=0.1662 support_budget=0.0926 time=18.5m
+ep012 step005100 loss=0.7660 ce=1.2887 pair=0.0655 gap=0.0019 pre=1.2944 topk_ce=1.0708 div=0.0047 risk=0.0225 support=0.3960 support_bce=0.3858 support_div=0.1672 support_budget=0.0932 time=18.7m
+[eval epoch 12] macro_top1=0.4618 top2=0.8025 top3=0.9085 vs_sbs=-0.926% vbs_closed=+22.63%
+          components: pre_top1=0.4504 gap_top1=0.4435 utility_top1=0.3047 base_top1=0.4352 support_g0_top1=0.4618 corr(pre/final)=+0.980 corr(gap/final)=+0.959 corr(util/final)=+0.394
+          support: g0@1=0.4618 u1@1=0.8567 u2@1=0.9423 u3@1=0.9696 top3_recall=0.9993 avg_shortlist=4.48 arm_coverage=0.9603
+       TSP: top1=0.332 mean_cost=7.9240 (sbs=7.9578) vs_sbs=-0.42% pre=0.322 gap=0.317 util=0.193
+      CVRP: top1=0.346 mean_cost=18.3187 (sbs=18.2943) vs_sbs=+0.13% pre=0.346 gap=0.251 util=0.229
+      ATSP: top1=0.740 mean_cost=1.6461 (sbs=1.6735) vs_sbs=-1.64% pre=0.740 gap=0.654 util=0.344
+      OVRP: top1=0.347 mean_cost=7.4577 (sbs=7.4617) vs_sbs=-0.05% pre=0.329 gap=0.283 util=0.280
+      VRPB: top1=0.550 mean_cost=9.3340 (sbs=9.3403) vs_sbs=-0.07% pre=0.545 gap=0.525 util=0.464
+      VRPL: top1=0.312 mean_cost=12.4057 (sbs=12.4072) vs_sbs=-0.01% pre=0.278 gap=0.286 util=0.221
+     VRPTW: top1=0.426 mean_cost=17.9171 (sbs=18.6571) vs_sbs=-3.97% pre=0.419 gap=0.430 util=0.188
+    OVRPTW: top1=0.477 mean_cost=10.0472 (sbs=10.0484) vs_sbs=-0.01% pre=0.459 gap=0.489 util=0.272
+     OVRPB: top1=0.554 mean_cost=6.3217 (sbs=6.3220) vs_sbs=-0.00% pre=0.547 gap=0.550 util=0.428
+     OVRPL: top1=0.366 mean_cost=7.4359 (sbs=7.4376) vs_sbs=-0.02% pre=0.353 gap=0.377 util=0.273
+     VRPBL: top1=0.546 mean_cost=9.3546 (sbs=9.3593) vs_sbs=-0.05% pre=0.544 gap=0.528 util=0.436
+    VRPBTW: top1=0.431 mean_cost=19.0840 (sbs=19.6697) vs_sbs=-2.98% pre=0.380 gap=0.442 util=0.182
+    VRPLTW: top1=0.458 mean_cost=17.6462 (sbs=18.5091) vs_sbs=-4.66% pre=0.435 gap=0.447 util=0.217
+    OVRPBL: top1=0.526 mean_cost=6.3088 (sbs=6.3103) vs_sbs=-0.02% pre=0.514 gap=0.554 util=0.508
+   OVRPBTW: top1=0.513 mean_cost=10.5003 (sbs=10.5068) vs_sbs=-0.06% pre=0.508 gap=0.472 util=0.396
+   OVRPLTW: top1=0.484 mean_cost=10.1260 (sbs=10.1272) vs_sbs=-0.01% pre=0.482 gap=0.476 util=0.288
+   VRPBLTW: top1=0.412 mean_cost=18.9792 (sbs=19.5198) vs_sbs=-2.77% pre=0.415 gap=0.429 util=0.255
+  OVRPBLTW: top1=0.493 mean_cost=10.5367 (sbs=10.5412) vs_sbs=-0.04% pre=0.492 gap=0.473 util=0.310
+[save] best.pt epoch=12 score=0.4618
+[save] best_top1.pt epoch=12 top1=0.4618
+ep013 step005150 loss=0.7555 ce=1.2747 pair=0.0625 gap=0.0018 pre=1.2756 topk_ce=1.0530 div=0.0035 risk=0.0149 support=0.3903 support_bce=0.3792 support_div=0.1829 support_budget=0.0998 time=18.9m
+ep013 step005200 loss=0.7572 ce=1.2717 pair=0.0651 gap=0.0018 pre=1.2759 topk_ce=1.0644 div=0.0043 risk=0.0223 support=0.3945 support_bce=0.3843 support_div=0.1679 support_budget=0.0926 time=19.1m
+ep013 step005250 loss=0.7567 ce=1.2733 pair=0.0638 gap=0.0019 pre=1.2775 topk_ce=1.0571 div=0.0044 risk=0.0219 support=0.3933 support_bce=0.3832 support_div=0.1647 support_budget=0.0909 time=19.3m
+ep013 step005300 loss=0.7572 ce=1.2743 pair=0.0637 gap=0.0019 pre=1.2781 topk_ce=1.0580 div=0.0042 risk=0.0220 support=0.3932 support_bce=0.3832 support_div=0.1647 support_budget=0.0911 time=19.4m
+ep013 step005350 loss=0.7620 ce=1.2815 pair=0.0648 gap=0.0019 pre=1.2858 topk_ce=1.0668 div=0.0042 risk=0.0220 support=0.3958 support_bce=0.3857 support_div=0.1667 support_budget=0.0925 time=19.7m
+ep013 step005400 loss=0.7590 ce=1.2764 pair=0.0645 gap=0.0019 pre=1.2808 topk_ce=1.0620 div=0.0041 risk=0.0220 support=0.3945 support_bce=0.3844 support_div=0.1654 support_budget=0.0917 time=19.8m
+ep013 step005450 loss=0.7602 ce=1.2785 pair=0.0648 gap=0.0019 pre=1.2830 topk_ce=1.0641 div=0.0041 risk=0.0220 support=0.3948 support_bce=0.3847 support_div=0.1659 support_budget=0.0918 time=20.0m
+ep013 step005500 loss=0.7596 ce=1.2779 pair=0.0646 gap=0.0019 pre=1.2821 topk_ce=1.0614 div=0.0040 risk=0.0220 support=0.3946 support_bce=0.3844 support_div=0.1657 support_budget=0.0917 time=20.1m
+[eval epoch 13] macro_top1=0.4505 top2=0.7931 top3=0.8998 vs_sbs=-0.811% vbs_closed=+17.08%
+          components: pre_top1=0.4286 gap_top1=0.4350 utility_top1=0.2754 base_top1=0.4246 support_g0_top1=0.4505 corr(pre/final)=+0.967 corr(gap/final)=+0.969 corr(util/final)=+0.333
+          support: g0@1=0.4505 u1@1=0.8392 u2@1=0.9403 u3@1=0.9706 top3_recall=0.9994 avg_shortlist=4.68 arm_coverage=0.9478
+       TSP: top1=0.345 mean_cost=7.9396 (sbs=7.9578) vs_sbs=-0.23% pre=0.346 gap=0.346 util=0.112
+      CVRP: top1=0.255 mean_cost=18.3352 (sbs=18.2943) vs_sbs=+0.22% pre=0.241 gap=0.208 util=0.096
+      ATSP: top1=0.784 mean_cost=1.6362 (sbs=1.6735) vs_sbs=-2.23% pre=0.767 gap=0.754 util=0.214
+      OVRP: top1=0.342 mean_cost=7.4580 (sbs=7.4617) vs_sbs=-0.05% pre=0.323 gap=0.278 util=0.250
+      VRPB: top1=0.547 mean_cost=9.3422 (sbs=9.3403) vs_sbs=+0.02% pre=0.519 gap=0.549 util=0.376
+      VRPL: top1=0.322 mean_cost=12.4039 (sbs=12.4072) vs_sbs=-0.03% pre=0.258 gap=0.296 util=0.172
+     VRPTW: top1=0.395 mean_cost=18.0041 (sbs=18.6571) vs_sbs=-3.50% pre=0.354 gap=0.368 util=0.234
+    OVRPTW: top1=0.495 mean_cost=10.0504 (sbs=10.0484) vs_sbs=+0.02% pre=0.479 gap=0.463 util=0.268
+     OVRPB: top1=0.539 mean_cost=6.3277 (sbs=6.3220) vs_sbs=+0.09% pre=0.546 gap=0.543 util=0.427
+     OVRPL: top1=0.364 mean_cost=7.4350 (sbs=7.4376) vs_sbs=-0.03% pre=0.366 gap=0.386 util=0.270
+     VRPBL: top1=0.531 mean_cost=9.3600 (sbs=9.3593) vs_sbs=+0.01% pre=0.531 gap=0.549 util=0.429
+    VRPBTW: top1=0.370 mean_cost=19.2463 (sbs=19.6697) vs_sbs=-2.15% pre=0.337 gap=0.369 util=0.179
+    VRPLTW: top1=0.446 mean_cost=17.6626 (sbs=18.5091) vs_sbs=-4.57% pre=0.404 gap=0.417 util=0.205
+    OVRPBL: top1=0.512 mean_cost=6.3131 (sbs=6.3103) vs_sbs=+0.05% pre=0.479 gap=0.505 util=0.475
+   OVRPBTW: top1=0.501 mean_cost=10.5064 (sbs=10.5068) vs_sbs=-0.00% pre=0.463 gap=0.480 util=0.369
+   OVRPLTW: top1=0.470 mean_cost=10.1369 (sbs=10.1272) vs_sbs=+0.10% pre=0.479 gap=0.458 util=0.290
+   VRPBLTW: top1=0.405 mean_cost=19.0648 (sbs=19.5198) vs_sbs=-2.33% pre=0.393 gap=0.370 util=0.291
+  OVRPBLTW: top1=0.486 mean_cost=10.5447 (sbs=10.5412) vs_sbs=+0.03% pre=0.429 gap=0.491 util=0.301
+ep014 step005550 loss=0.8161 ce=1.3728 pair=0.0685 gap=0.0020 pre=1.3799 topk_ce=1.1796 div=0.0030 risk=0.0243 support=0.4085 support_bce=0.3984 support_div=0.1643 support_budget=0.0948 time=20.4m
+ep014 step005600 loss=0.7672 ce=1.2894 pair=0.0662 gap=0.0019 pre=1.2942 topk_ce=1.0790 div=0.0037 risk=0.0229 support=0.3970 support_bce=0.3866 support_div=0.1688 support_budget=0.0948 time=20.6m
+ep014 step005650 loss=0.7630 ce=1.2828 pair=0.0658 gap=0.0019 pre=1.2876 topk_ce=1.0683 div=0.0037 risk=0.0223 support=0.3958 support_bce=0.3855 support_div=0.1682 support_budget=0.0935 time=20.7m
+ep014 step005700 loss=0.7594 ce=1.2768 pair=0.0651 gap=0.0019 pre=1.2813 topk_ce=1.0630 div=0.0038 risk=0.0222 support=0.3942 support_bce=0.3841 support_div=0.1666 support_budget=0.0929 time=20.9m
+ep014 step005750 loss=0.7621 ce=1.2814 pair=0.0654 gap=0.0019 pre=1.2864 topk_ce=1.0671 div=0.0038 risk=0.0220 support=0.3957 support_bce=0.3854 support_div=0.1671 support_budget=0.0931 time=21.0m
+ep014 step005800 loss=0.7593 ce=1.2773 pair=0.0645 gap=0.0019 pre=1.2822 topk_ce=1.0614 div=0.0037 risk=0.0220 support=0.3942 support_bce=0.3840 support_div=0.1658 support_budget=0.0921 time=21.2m
+ep014 step005850 loss=0.7590 ce=1.2766 pair=0.0645 gap=0.0019 pre=1.2816 topk_ce=1.0609 div=0.0037 risk=0.0220 support=0.3941 support_bce=0.3840 support_div=0.1660 support_budget=0.0920 time=21.4m
+ep014 step005900 loss=0.7600 ce=1.2786 pair=0.0647 gap=0.0019 pre=1.2836 topk_ce=1.0615 div=0.0037 risk=0.0221 support=0.3944 support_bce=0.3842 support_div=0.1664 support_budget=0.0923 time=21.5m
+[eval epoch 14] macro_top1=0.4647 top2=0.8028 top3=0.9126 vs_sbs=-0.921% vbs_closed=+23.04%
+          components: pre_top1=0.4273 gap_top1=0.4422 utility_top1=0.2685 base_top1=0.4345 support_g0_top1=0.4647 corr(pre/final)=+0.967 corr(gap/final)=+0.925 corr(util/final)=+0.298
+          support: g0@1=0.4647 u1@1=0.8679 u2@1=0.9492 u3@1=0.9741 top3_recall=0.9999 avg_shortlist=4.39 arm_coverage=0.9048
+       TSP: top1=0.352 mean_cost=7.9212 (sbs=7.9578) vs_sbs=-0.46% pre=0.350 gap=0.267 util=0.171
+      CVRP: top1=0.333 mean_cost=18.3115 (sbs=18.2943) vs_sbs=+0.09% pre=0.324 gap=0.255 util=0.171
+      ATSP: top1=0.752 mean_cost=1.6365 (sbs=1.6735) vs_sbs=-2.21% pre=0.767 gap=0.731 util=0.185
+      OVRP: top1=0.359 mean_cost=7.4565 (sbs=7.4617) vs_sbs=-0.07% pre=0.353 gap=0.297 util=0.304
+      VRPB: top1=0.546 mean_cost=9.3366 (sbs=9.3403) vs_sbs=-0.04% pre=0.517 gap=0.531 util=0.402
+      VRPL: top1=0.326 mean_cost=12.4013 (sbs=12.4072) vs_sbs=-0.05% pre=0.271 gap=0.295 util=0.210
+     VRPTW: top1=0.427 mean_cost=17.9639 (sbs=18.6571) vs_sbs=-3.72% pre=0.383 gap=0.427 util=0.118
+    OVRPTW: top1=0.507 mean_cost=10.0458 (sbs=10.0484) vs_sbs=-0.03% pre=0.436 gap=0.470 util=0.253
+     OVRPB: top1=0.550 mean_cost=6.3239 (sbs=6.3220) vs_sbs=+0.03% pre=0.546 gap=0.558 util=0.422
+     OVRPL: top1=0.366 mean_cost=7.4360 (sbs=7.4376) vs_sbs=-0.02% pre=0.373 gap=0.354 util=0.298
+     VRPBL: top1=0.547 mean_cost=9.3542 (sbs=9.3593) vs_sbs=-0.05% pre=0.501 gap=0.552 util=0.408
+    VRPBTW: top1=0.412 mean_cost=19.1220 (sbs=19.6697) vs_sbs=-2.78% pre=0.359 gap=0.434 util=0.147
+    VRPLTW: top1=0.467 mean_cost=17.6415 (sbs=18.5091) vs_sbs=-4.69% pre=0.407 gap=0.456 util=0.159
+    OVRPBL: top1=0.525 mean_cost=6.3088 (sbs=6.3103) vs_sbs=-0.02% pre=0.528 gap=0.522 util=0.478
+   OVRPBTW: top1=0.512 mean_cost=10.5042 (sbs=10.5068) vs_sbs=-0.02% pre=0.438 gap=0.473 util=0.356
+   OVRPLTW: top1=0.479 mean_cost=10.1328 (sbs=10.1272) vs_sbs=+0.06% pre=0.424 gap=0.463 util=0.261
+   VRPBLTW: top1=0.406 mean_cost=19.0182 (sbs=19.5198) vs_sbs=-2.57% pre=0.317 gap=0.397 util=0.225
+  OVRPBLTW: top1=0.498 mean_cost=10.5388 (sbs=10.5412) vs_sbs=-0.02% pre=0.397 gap=0.477 util=0.265
+[save] best.pt epoch=14 score=0.4647
+[save] best_top1.pt epoch=14 top1=0.4647
+[save] best_top3_safe.pt epoch=14 score=0.9126
+ep015 step005950 loss=0.7401 ce=1.2585 pair=0.0576 gap=0.0020 pre=1.2641 topk_ce=0.9787 div=0.0026 risk=0.0198 support=0.3836 support_bce=0.3739 support_div=0.1595 support_budget=0.0869 time=21.8m
+ep015 step006000 loss=0.7631 ce=1.2806 pair=0.0652 gap=0.0018 pre=1.2895 topk_ce=1.0747 div=0.0039 risk=0.0219 support=0.3974 support_bce=0.3872 support_div=0.1665 support_budget=0.0911 time=22.0m
+ep015 step006050 loss=0.7607 ce=1.2786 pair=0.0649 gap=0.0019 pre=1.2865 topk_ce=1.0660 div=0.0038 risk=0.0227 support=0.3941 support_bce=0.3840 support_div=0.1645 support_budget=0.0908 time=22.2m
+ep015 step006100 loss=0.7599 ce=1.2771 pair=0.0650 gap=0.0019 pre=1.2854 topk_ce=1.0637 div=0.0039 risk=0.0223 support=0.3943 support_bce=0.3842 support_div=0.1653 support_budget=0.0913 time=22.3m
+ep015 step006150 loss=0.7589 ce=1.2755 pair=0.0648 gap=0.0019 pre=1.2826 topk_ce=1.0625 div=0.0039 risk=0.0221 support=0.3943 support_bce=0.3842 support_div=0.1653 support_budget=0.0914 time=22.5m
+ep015 step006200 loss=0.7585 ce=1.2748 pair=0.0646 gap=0.0018 pre=1.2821 topk_ce=1.0627 div=0.0039 risk=0.0221 support=0.3939 support_bce=0.3839 support_div=0.1646 support_budget=0.0909 time=22.7m
+ep015 step006250 loss=0.7628 ce=1.2824 pair=0.0652 gap=0.0018 pre=1.2883 topk_ce=1.0685 div=0.0039 risk=0.0221 support=0.3956 support_bce=0.3855 support_div=0.1659 support_budget=0.0920 time=22.8m
+ep015 step006300 loss=0.7613 ce=1.2804 pair=0.0649 gap=0.0018 pre=1.2854 topk_ce=1.0655 div=0.0039 risk=0.0221 support=0.3947 support_bce=0.3846 support_div=0.1656 support_budget=0.0919 time=23.0m
+[eval epoch 15] macro_top1=0.4438 top2=0.7767 top3=0.8962 vs_sbs=-0.710% vbs_closed=+17.63%
+          components: pre_top1=0.4152 gap_top1=0.4274 utility_top1=0.2702 base_top1=0.4241 support_g0_top1=0.4438 corr(pre/final)=+0.970 corr(gap/final)=+0.958 corr(util/final)=+0.242
+          support: g0@1=0.4438 u1@1=0.8252 u2@1=0.9454 u3@1=0.9766 top3_recall=0.9998 avg_shortlist=4.71 arm_coverage=0.9365
+       TSP: top1=0.347 mean_cost=7.9345 (sbs=7.9578) vs_sbs=-0.29% pre=0.326 gap=0.324 util=0.144
+      CVRP: top1=0.287 mean_cost=18.3174 (sbs=18.2943) vs_sbs=+0.13% pre=0.238 gap=0.202 util=0.174
+      ATSP: top1=0.759 mean_cost=1.6410 (sbs=1.6735) vs_sbs=-1.95% pre=0.713 gap=0.706 util=0.402
+      OVRP: top1=0.328 mean_cost=7.4588 (sbs=7.4617) vs_sbs=-0.04% pre=0.352 gap=0.281 util=0.291
+      VRPB: top1=0.549 mean_cost=9.3370 (sbs=9.3403) vs_sbs=-0.04% pre=0.547 gap=0.523 util=0.379
+      VRPL: top1=0.310 mean_cost=12.4041 (sbs=12.4072) vs_sbs=-0.03% pre=0.265 gap=0.298 util=0.203
+     VRPTW: top1=0.375 mean_cost=18.0409 (sbs=18.6571) vs_sbs=-3.30% pre=0.346 gap=0.371 util=0.113
+    OVRPTW: top1=0.491 mean_cost=10.0410 (sbs=10.0484) vs_sbs=-0.07% pre=0.430 gap=0.499 util=0.244
+     OVRPB: top1=0.541 mean_cost=6.3247 (sbs=6.3220) vs_sbs=+0.04% pre=0.552 gap=0.555 util=0.447
+     OVRPL: top1=0.363 mean_cost=7.4356 (sbs=7.4376) vs_sbs=-0.03% pre=0.372 gap=0.332 util=0.301
+     VRPBL: top1=0.541 mean_cost=9.3557 (sbs=9.3593) vs_sbs=-0.04% pre=0.534 gap=0.532 util=0.449
+    VRPBTW: top1=0.337 mean_cost=19.3096 (sbs=19.6697) vs_sbs=-1.83% pre=0.315 gap=0.392 util=0.121
+    VRPLTW: top1=0.410 mean_cost=17.7416 (sbs=18.5091) vs_sbs=-4.15% pre=0.375 gap=0.403 util=0.126
+    OVRPBL: top1=0.523 mean_cost=6.3093 (sbs=6.3103) vs_sbs=-0.02% pre=0.513 gap=0.535 util=0.484
+   OVRPBTW: top1=0.508 mean_cost=10.5008 (sbs=10.5068) vs_sbs=-0.06% pre=0.443 gap=0.462 util=0.349
+   OVRPLTW: top1=0.491 mean_cost=10.1281 (sbs=10.1272) vs_sbs=+0.01% pre=0.425 gap=0.463 util=0.251
+   VRPBLTW: top1=0.336 mean_cost=19.3035 (sbs=19.5198) vs_sbs=-1.11% pre=0.316 gap=0.343 util=0.119
+  OVRPBLTW: top1=0.492 mean_cost=10.5391 (sbs=10.5412) vs_sbs=-0.02% pre=0.411 gap=0.473 util=0.267
+ep016 step006350 loss=0.7735 ce=1.2948 pair=0.0689 gap=0.0018 pre=1.3042 topk_ce=1.1120 div=0.0041 risk=0.0246 support=0.3962 support_bce=0.3859 support_div=0.1681 support_budget=0.0946 time=23.3m
+ep016 step006400 loss=0.7645 ce=1.2849 pair=0.0662 gap=0.0018 pre=1.2893 topk_ce=1.0742 div=0.0039 risk=0.0224 support=0.3956 support_bce=0.3854 support_div=0.1673 support_budget=0.0930 time=23.5m
+ep016 step006450 loss=0.7587 ce=1.2768 pair=0.0647 gap=0.0018 pre=1.2815 topk_ce=1.0589 div=0.0038 risk=0.0224 support=0.3932 support_bce=0.3831 support_div=0.1645 support_budget=0.0914 time=23.6m
+ep016 step006500 loss=0.7638 ce=1.2847 pair=0.0653 gap=0.0018 pre=1.2900 topk_ce=1.0695 div=0.0037 risk=0.0222 support=0.3953 support_bce=0.3852 support_div=0.1659 support_budget=0.0926 time=23.8m
+ep016 step006550 loss=0.7621 ce=1.2821 pair=0.0649 gap=0.0018 pre=1.2869 topk_ce=1.0663 div=0.0036 risk=0.0220 support=0.3951 support_bce=0.3850 support_div=0.1658 support_budget=0.0921 time=24.0m
+ep016 step006600 loss=0.7575 ce=1.2743 pair=0.0643 gap=0.0018 pre=1.2786 topk_ce=1.0594 div=0.0036 risk=0.0218 support=0.3935 support_bce=0.3834 support_div=0.1651 support_budget=0.0914 time=24.2m
+ep016 step006650 loss=0.7579 ce=1.2750 pair=0.0641 gap=0.0018 pre=1.2803 topk_ce=1.0601 div=0.0036 risk=0.0218 support=0.3936 support_bce=0.3835 support_div=0.1651 support_budget=0.0916 time=24.4m
+ep016 step006700 loss=0.7588 ce=1.2765 pair=0.0643 gap=0.0018 pre=1.2816 topk_ce=1.0607 div=0.0036 risk=0.0217 support=0.3940 support_bce=0.3839 support_div=0.1656 support_budget=0.0918 time=24.5m
+[eval epoch 16] macro_top1=0.4625 top2=0.7962 top3=0.9146 vs_sbs=-0.903% vbs_closed=+21.74%
+          components: pre_top1=0.4240 gap_top1=0.4401 utility_top1=0.2814 base_top1=0.4349 support_g0_top1=0.4625 corr(pre/final)=+0.971 corr(gap/final)=+0.953 corr(util/final)=+0.256
+          support: g0@1=0.4625 u1@1=0.8281 u2@1=0.9508 u3@1=0.9786 top3_recall=0.9999 avg_shortlist=4.64 arm_coverage=0.9286
+       TSP: top1=0.358 mean_cost=7.9237 (sbs=7.9578) vs_sbs=-0.43% pre=0.351 gap=0.299 util=0.183
+      CVRP: top1=0.342 mean_cost=18.3142 (sbs=18.2943) vs_sbs=+0.11% pre=0.312 gap=0.260 util=0.187
+      ATSP: top1=0.782 mean_cost=1.6352 (sbs=1.6735) vs_sbs=-2.29% pre=0.775 gap=0.761 util=0.347
+      OVRP: top1=0.358 mean_cost=7.4575 (sbs=7.4617) vs_sbs=-0.06% pre=0.331 gap=0.289 util=0.302
+      VRPB: top1=0.542 mean_cost=9.3400 (sbs=9.3403) vs_sbs=-0.00% pre=0.437 gap=0.529 util=0.386
+      VRPL: top1=0.328 mean_cost=12.4014 (sbs=12.4072) vs_sbs=-0.05% pre=0.257 gap=0.281 util=0.227
+     VRPTW: top1=0.422 mean_cost=17.9648 (sbs=18.6571) vs_sbs=-3.71% pre=0.387 gap=0.422 util=0.146
+    OVRPTW: top1=0.508 mean_cost=10.0456 (sbs=10.0484) vs_sbs=-0.03% pre=0.450 gap=0.482 util=0.242
+     OVRPB: top1=0.541 mean_cost=6.3253 (sbs=6.3220) vs_sbs=+0.05% pre=0.556 gap=0.533 util=0.486
+     OVRPL: top1=0.361 mean_cost=7.4362 (sbs=7.4376) vs_sbs=-0.02% pre=0.378 gap=0.351 util=0.340
+     VRPBL: top1=0.545 mean_cost=9.3545 (sbs=9.3593) vs_sbs=-0.05% pre=0.464 gap=0.528 util=0.453
+    VRPBTW: top1=0.394 mean_cost=19.1257 (sbs=19.6697) vs_sbs=-2.77% pre=0.378 gap=0.421 util=0.181
+    VRPLTW: top1=0.445 mean_cost=17.6670 (sbs=18.5091) vs_sbs=-4.55% pre=0.427 gap=0.424 util=0.151
+    OVRPBL: top1=0.511 mean_cost=6.3121 (sbs=6.3103) vs_sbs=+0.03% pre=0.532 gap=0.519 util=0.495
+   OVRPBTW: top1=0.496 mean_cost=10.5112 (sbs=10.5068) vs_sbs=+0.04% pre=0.465 gap=0.484 util=0.342
+   OVRPLTW: top1=0.480 mean_cost=10.1322 (sbs=10.1272) vs_sbs=+0.05% pre=0.350 gap=0.482 util=0.202
+   VRPBLTW: top1=0.413 mean_cost=19.0215 (sbs=19.5198) vs_sbs=-2.55% pre=0.354 gap=0.389 util=0.173
+  OVRPBLTW: top1=0.499 mean_cost=10.5384 (sbs=10.5412) vs_sbs=-0.03% pre=0.428 gap=0.467 util=0.222
+[save] best_top3_safe.pt epoch=16 score=0.9146
+ep017 step006750 loss=0.7527 ce=1.2632 pair=0.0652 gap=0.0019 pre=1.2676 topk_ce=1.0578 div=0.0036 risk=0.0233 support=0.3933 support_bce=0.3832 support_div=0.1657 support_budget=0.0905 time=24.8m
+ep017 step006800 loss=0.7478 ce=1.2587 pair=0.0628 gap=0.0018 pre=1.2626 topk_ce=1.0414 div=0.0035 risk=0.0218 support=0.3895 support_bce=0.3796 support_div=0.1619 support_budget=0.0895 time=25.0m
+ep017 step006850 loss=0.7529 ce=1.2660 pair=0.0638 gap=0.0018 pre=1.2704 topk_ce=1.0529 div=0.0034 risk=0.0216 support=0.3927 support_bce=0.3827 support_div=0.1642 support_budget=0.0908 time=25.1m
+ep017 step006900 loss=0.7550 ce=1.2695 pair=0.0640 gap=0.0018 pre=1.2738 topk_ce=1.0564 div=0.0033 risk=0.0216 support=0.3934 support_bce=0.3834 support_div=0.1643 support_budget=0.0912 time=25.3m
+ep017 step006950 loss=0.7529 ce=1.2666 pair=0.0634 gap=0.0018 pre=1.2709 topk_ce=1.0514 div=0.0032 risk=0.0215 support=0.3924 support_bce=0.3824 support_div=0.1637 support_budget=0.0907 time=25.5m
+ep017 step007000 loss=0.7534 ce=1.2670 pair=0.0636 gap=0.0018 pre=1.2713 topk_ce=1.0536 div=0.0032 risk=0.0214 support=0.3930 support_bce=0.3830 support_div=0.1642 support_budget=0.0911 time=25.7m
+ep017 step007050 loss=0.7562 ce=1.2718 pair=0.0639 gap=0.0018 pre=1.2763 topk_ce=1.0581 div=0.0031 risk=0.0215 support=0.3936 support_bce=0.3836 support_div=0.1646 support_budget=0.0910 time=25.8m
+ep017 step007100 loss=0.7543 ce=1.2689 pair=0.0637 gap=0.0018 pre=1.2735 topk_ce=1.0543 div=0.0031 risk=0.0216 support=0.3927 support_bce=0.3827 support_div=0.1641 support_budget=0.0907 time=26.0m
+[eval epoch 17] macro_top1=0.4669 top2=0.8064 top3=0.9138 vs_sbs=-0.939% vbs_closed=+22.13%
+          components: pre_top1=0.4530 gap_top1=0.4541 utility_top1=0.3165 base_top1=0.4479 support_g0_top1=0.4669 corr(pre/final)=+0.975 corr(gap/final)=+0.960 corr(util/final)=+0.416
+          support: g0@1=0.4669 u1@1=0.8481 u2@1=0.9528 u3@1=0.9779 top3_recall=0.9999 avg_shortlist=4.55 arm_coverage=0.9444
+       TSP: top1=0.344 mean_cost=7.9323 (sbs=7.9578) vs_sbs=-0.32% pre=0.349 gap=0.336 util=0.176
+      CVRP: top1=0.307 mean_cost=18.3049 (sbs=18.2943) vs_sbs=+0.06% pre=0.263 gap=0.248 util=0.184
+      ATSP: top1=0.784 mean_cost=1.6361 (sbs=1.6735) vs_sbs=-2.24% pre=0.784 gap=0.774 util=0.299
+      OVRP: top1=0.361 mean_cost=7.4569 (sbs=7.4617) vs_sbs=-0.06% pre=0.357 gap=0.292 util=0.327
+      VRPB: top1=0.540 mean_cost=9.3404 (sbs=9.3403) vs_sbs=+0.00% pre=0.524 gap=0.553 util=0.489
+      VRPL: top1=0.318 mean_cost=12.4038 (sbs=12.4072) vs_sbs=-0.03% pre=0.280 gap=0.296 util=0.240
+     VRPTW: top1=0.468 mean_cost=17.9049 (sbs=18.6571) vs_sbs=-4.03% pre=0.442 gap=0.462 util=0.263
+    OVRPTW: top1=0.504 mean_cost=10.0476 (sbs=10.0484) vs_sbs=-0.01% pre=0.507 gap=0.485 util=0.250
+     OVRPB: top1=0.551 mean_cost=6.3261 (sbs=6.3220) vs_sbs=+0.07% pre=0.544 gap=0.550 util=0.478
+     OVRPL: top1=0.368 mean_cost=7.4348 (sbs=7.4376) vs_sbs=-0.04% pre=0.358 gap=0.352 util=0.309
+     VRPBL: top1=0.532 mean_cost=9.3577 (sbs=9.3593) vs_sbs=-0.02% pre=0.518 gap=0.549 util=0.460
+    VRPBTW: top1=0.427 mean_cost=19.0966 (sbs=19.6697) vs_sbs=-2.91% pre=0.403 gap=0.434 util=0.266
+    VRPLTW: top1=0.454 mean_cost=17.6419 (sbs=18.5091) vs_sbs=-4.69% pre=0.454 gap=0.458 util=0.256
+    OVRPBL: top1=0.516 mean_cost=6.3163 (sbs=6.3103) vs_sbs=+0.10% pre=0.512 gap=0.525 util=0.513
+   OVRPBTW: top1=0.519 mean_cost=10.5000 (sbs=10.5068) vs_sbs=-0.06% pre=0.512 gap=0.481 util=0.380
+   OVRPLTW: top1=0.488 mean_cost=10.1297 (sbs=10.1272) vs_sbs=+0.02% pre=0.450 gap=0.495 util=0.238
+   VRPBLTW: top1=0.422 mean_cost=18.9972 (sbs=19.5198) vs_sbs=-2.68% pre=0.414 gap=0.417 util=0.299
+  OVRPBLTW: top1=0.501 mean_cost=10.5344 (sbs=10.5412) vs_sbs=-0.06% pre=0.483 gap=0.466 util=0.270
+[save] best.pt epoch=17 score=0.4669
+[save] best_top1.pt epoch=17 top1=0.4669
+[save] best_cost.pt epoch=17 vs_sbs=-0.939%
+ep018 step007150 loss=0.7410 ce=1.2460 pair=0.0628 gap=0.0018 pre=1.2496 topk_ce=1.0344 div=0.0035 risk=0.0223 support=0.3871 support_bce=0.3772 support_div=0.1623 support_budget=0.0898 time=26.3m
+ep018 step007200 loss=0.7555 ce=1.2708 pair=0.0634 gap=0.0018 pre=1.2753 topk_ce=1.0570 div=0.0032 risk=0.0213 support=0.3936 support_bce=0.3835 support_div=0.1654 support_budget=0.0906 time=26.4m
+ep018 step007250 loss=0.7535 ce=1.2676 pair=0.0630 gap=0.0018 pre=1.2713 topk_ce=1.0535 div=0.0031 risk=0.0211 support=0.3932 support_bce=0.3831 support_div=0.1644 support_budget=0.0903 time=26.6m
+ep018 step007300 loss=0.7555 ce=1.2698 pair=0.0639 gap=0.0018 pre=1.2746 topk_ce=1.0592 div=0.0031 risk=0.0212 support=0.3943 support_bce=0.3842 support_div=0.1656 support_budget=0.0909 time=26.8m
+ep018 step007350 loss=0.7550 ce=1.2700 pair=0.0633 gap=0.0018 pre=1.2744 topk_ce=1.0573 div=0.0030 risk=0.0212 support=0.3933 support_bce=0.3832 support_div=0.1647 support_budget=0.0904 time=27.0m
+ep018 step007400 loss=0.7540 ce=1.2680 pair=0.0634 gap=0.0018 pre=1.2726 topk_ce=1.0553 div=0.0030 risk=0.0213 support=0.3929 support_bce=0.3829 support_div=0.1647 support_budget=0.0906 time=27.1m
+ep018 step007450 loss=0.7557 ce=1.2707 pair=0.0639 gap=0.0018 pre=1.2750 topk_ce=1.0584 div=0.0029 risk=0.0214 support=0.3935 support_bce=0.3835 support_div=0.1650 support_budget=0.0909 time=27.3m
+ep018 step007500 loss=0.7543 ce=1.2685 pair=0.0636 gap=0.0018 pre=1.2730 topk_ce=1.0558 div=0.0029 risk=0.0213 support=0.3931 support_bce=0.3830 support_div=0.1647 support_budget=0.0906 time=27.5m
+[eval epoch 18] macro_top1=0.4615 top2=0.8024 top3=0.9117 vs_sbs=-0.931% vbs_closed=+21.04%
+          components: pre_top1=0.4504 gap_top1=0.4528 utility_top1=0.2953 base_top1=0.4442 support_g0_top1=0.4615 corr(pre/final)=+0.976 corr(gap/final)=+0.959 corr(util/final)=+0.278
+          support: g0@1=0.4615 u1@1=0.8507 u2@1=0.9516 u3@1=0.9788 top3_recall=0.9997 avg_shortlist=4.50 arm_coverage=0.9524
+       TSP: top1=0.356 mean_cost=7.9263 (sbs=7.9578) vs_sbs=-0.40% pre=0.340 gap=0.312 util=0.159
+      CVRP: top1=0.306 mean_cost=18.3404 (sbs=18.2943) vs_sbs=+0.25% pre=0.276 gap=0.242 util=0.091
+      ATSP: top1=0.769 mean_cost=1.6393 (sbs=1.6735) vs_sbs=-2.04% pre=0.780 gap=0.754 util=0.372
+      OVRP: top1=0.348 mean_cost=7.4578 (sbs=7.4617) vs_sbs=-0.05% pre=0.352 gap=0.288 util=0.341
+      VRPB: top1=0.547 mean_cost=9.3356 (sbs=9.3403) vs_sbs=-0.05% pre=0.557 gap=0.548 util=0.396
+      VRPL: top1=0.298 mean_cost=12.4086 (sbs=12.4072) vs_sbs=+0.01% pre=0.270 gap=0.297 util=0.257
+     VRPTW: top1=0.449 mean_cost=17.9091 (sbs=18.6571) vs_sbs=-4.01% pre=0.432 gap=0.455 util=0.235
+    OVRPTW: top1=0.492 mean_cost=10.0510 (sbs=10.0484) vs_sbs=+0.03% pre=0.481 gap=0.491 util=0.267
+     OVRPB: top1=0.547 mean_cost=6.3237 (sbs=6.3220) vs_sbs=+0.03% pre=0.542 gap=0.553 util=0.447
+     OVRPL: top1=0.364 mean_cost=7.4365 (sbs=7.4376) vs_sbs=-0.01% pre=0.361 gap=0.369 util=0.330
+     VRPBL: top1=0.548 mean_cost=9.3541 (sbs=9.3593) vs_sbs=-0.06% pre=0.524 gap=0.558 util=0.429
+    VRPBTW: top1=0.415 mean_cost=19.0759 (sbs=19.6697) vs_sbs=-3.02% pre=0.396 gap=0.454 util=0.223
+    VRPLTW: top1=0.463 mean_cost=17.6404 (sbs=18.5091) vs_sbs=-4.69% pre=0.452 gap=0.458 util=0.211
+    OVRPBL: top1=0.513 mean_cost=6.3119 (sbs=6.3103) vs_sbs=+0.03% pre=0.532 gap=0.528 util=0.492
+   OVRPBTW: top1=0.506 mean_cost=10.5009 (sbs=10.5068) vs_sbs=-0.06% pre=0.445 gap=0.478 util=0.361
+   OVRPLTW: top1=0.474 mean_cost=10.1335 (sbs=10.1272) vs_sbs=+0.06% pre=0.472 gap=0.489 util=0.227
+   VRPBLTW: top1=0.429 mean_cost=18.9769 (sbs=19.5198) vs_sbs=-2.78% pre=0.425 gap=0.414 util=0.213
+  OVRPBLTW: top1=0.483 mean_cost=10.5415 (sbs=10.5412) vs_sbs=+0.00% pre=0.470 gap=0.463 util=0.265
+ep019 step007550 loss=0.7428 ce=1.2510 pair=0.0609 gap=0.0018 pre=1.2599 topk_ce=1.0307 div=0.0030 risk=0.0212 support=0.3868 support_bce=0.3771 support_div=0.1582 support_budget=0.0856 time=27.8m
+ep019 step007600 loss=0.7574 ce=1.2737 pair=0.0640 gap=0.0018 pre=1.2807 topk_ce=1.0594 div=0.0030 risk=0.0209 support=0.3938 support_bce=0.3837 support_div=0.1662 support_budget=0.0910 time=27.9m
+ep019 step007650 loss=0.7554 ce=1.2695 pair=0.0642 gap=0.0018 pre=1.2755 topk_ce=1.0590 div=0.0029 risk=0.0217 support=0.3934 support_bce=0.3833 support_div=0.1649 support_budget=0.0913 time=28.1m
+ep019 step007700 loss=0.7600 ce=1.2778 pair=0.0646 gap=0.0018 pre=1.2826 topk_ce=1.0658 div=0.0029 risk=0.0216 support=0.3949 support_bce=0.3848 support_div=0.1658 support_budget=0.0919 time=28.3m
+ep019 step007750 loss=0.7561 ce=1.2710 pair=0.0640 gap=0.0018 pre=1.2757 topk_ce=1.0602 div=0.0029 risk=0.0213 support=0.3941 support_bce=0.3841 support_div=0.1652 support_budget=0.0911 time=28.4m
+ep019 step007800 loss=0.7526 ce=1.2652 pair=0.0636 gap=0.0018 pre=1.2701 topk_ce=1.0533 div=0.0028 risk=0.0216 support=0.3924 support_bce=0.3824 support_div=0.1638 support_budget=0.0903 time=28.6m
+ep019 step007850 loss=0.7538 ce=1.2676 pair=0.0638 gap=0.0018 pre=1.2722 topk_ce=1.0546 div=0.0028 risk=0.0214 support=0.3929 support_bce=0.3829 support_div=0.1645 support_budget=0.0909 time=28.8m
+ep019 step007900 loss=0.7545 ce=1.2687 pair=0.0637 gap=0.0018 pre=1.2738 topk_ce=1.0560 div=0.0029 risk=0.0214 support=0.3931 support_bce=0.3831 support_div=0.1641 support_budget=0.0905 time=28.9m
+[eval epoch 19] macro_top1=0.4576 top2=0.7892 top3=0.9144 vs_sbs=-0.853% vbs_closed=+19.73%
+          components: pre_top1=0.4458 gap_top1=0.4431 utility_top1=0.3237 base_top1=0.4547 support_g0_top1=0.4576 corr(pre/final)=+0.981 corr(gap/final)=+0.937 corr(util/final)=+0.356
+          support: g0@1=0.4576 u1@1=0.8356 u2@1=0.9494 u3@1=0.9724 top3_recall=0.9997 avg_shortlist=4.49 arm_coverage=0.9365
+       TSP: top1=0.364 mean_cost=7.9207 (sbs=7.9578) vs_sbs=-0.47% pre=0.340 gap=0.266 util=0.218
+      CVRP: top1=0.337 mean_cost=18.3180 (sbs=18.2943) vs_sbs=+0.13% pre=0.319 gap=0.274 util=0.231
+      ATSP: top1=0.730 mean_cost=1.6488 (sbs=1.6735) vs_sbs=-1.48% pre=0.728 gap=0.676 util=0.400
+      OVRP: top1=0.350 mean_cost=7.4566 (sbs=7.4617) vs_sbs=-0.07% pre=0.346 gap=0.280 util=0.337
+      VRPB: top1=0.548 mean_cost=9.3347 (sbs=9.3403) vs_sbs=-0.06% pre=0.548 gap=0.519 util=0.479
+      VRPL: top1=0.318 mean_cost=12.4025 (sbs=12.4072) vs_sbs=-0.04% pre=0.326 gap=0.314 util=0.280
+     VRPTW: top1=0.433 mean_cost=17.9452 (sbs=18.6571) vs_sbs=-3.82% pre=0.404 gap=0.426 util=0.218
+    OVRPTW: top1=0.492 mean_cost=10.0466 (sbs=10.0484) vs_sbs=-0.02% pre=0.477 gap=0.493 util=0.269
+     OVRPB: top1=0.550 mean_cost=6.3228 (sbs=6.3220) vs_sbs=+0.01% pre=0.549 gap=0.544 util=0.511
+     OVRPL: top1=0.391 mean_cost=7.4345 (sbs=7.4376) vs_sbs=-0.04% pre=0.375 gap=0.375 util=0.349
+     VRPBL: top1=0.547 mean_cost=9.3543 (sbs=9.3593) vs_sbs=-0.05% pre=0.536 gap=0.527 util=0.451
+    VRPBTW: top1=0.408 mean_cost=19.1081 (sbs=19.6697) vs_sbs=-2.86% pre=0.381 gap=0.439 util=0.249
+    VRPLTW: top1=0.431 mean_cost=17.6666 (sbs=18.5091) vs_sbs=-4.55% pre=0.423 gap=0.418 util=0.224
+    OVRPBL: top1=0.532 mean_cost=6.3087 (sbs=6.3103) vs_sbs=-0.03% pre=0.531 gap=0.563 util=0.498
+   OVRPBTW: top1=0.509 mean_cost=10.5078 (sbs=10.5068) vs_sbs=+0.01% pre=0.491 gap=0.510 util=0.352
+   OVRPLTW: top1=0.464 mean_cost=10.1380 (sbs=10.1272) vs_sbs=+0.11% pre=0.422 gap=0.478 util=0.249
+   VRPBLTW: top1=0.388 mean_cost=19.0535 (sbs=19.5198) vs_sbs=-2.39% pre=0.392 gap=0.389 util=0.241
+  OVRPBLTW: top1=0.444 mean_cost=10.5660 (sbs=10.5412) vs_sbs=+0.24% pre=0.436 gap=0.484 util=0.271
+ep020 step007950 loss=0.7552 ce=1.2680 pair=0.0646 gap=0.0018 pre=1.2713 topk_ce=1.0645 div=0.0026 risk=0.0200 support=0.3946 support_bce=0.3844 support_div=0.1661 support_budget=0.0917 time=29.2m
+ep020 step008000 loss=0.7470 ce=1.2553 pair=0.0631 gap=0.0018 pre=1.2592 topk_ce=1.0473 div=0.0024 risk=0.0211 support=0.3910 support_bce=0.3811 support_div=0.1621 support_budget=0.0891 time=29.4m
+ep020 step008050 loss=0.7448 ce=1.2513 pair=0.0625 gap=0.0018 pre=1.2552 topk_ce=1.0447 div=0.0024 risk=0.0209 support=0.3907 support_bce=0.3808 support_div=0.1624 support_budget=0.0890 time=29.6m
+ep020 step008100 loss=0.7505 ce=1.2613 pair=0.0635 gap=0.0018 pre=1.2647 topk_ce=1.0526 div=0.0023 risk=0.0211 support=0.3922 support_bce=0.3822 support_div=0.1637 support_budget=0.0901 time=29.7m
+ep020 step008150 loss=0.7515 ce=1.2630 pair=0.0635 gap=0.0018 pre=1.2674 topk_ce=1.0534 div=0.0024 risk=0.0209 support=0.3927 support_bce=0.3827 support_div=0.1640 support_budget=0.0900 time=29.9m
+ep020 step008200 loss=0.7519 ce=1.2639 pair=0.0635 gap=0.0018 pre=1.2689 topk_ce=1.0529 div=0.0025 risk=0.0211 support=0.3924 support_bce=0.3825 support_div=0.1636 support_budget=0.0898 time=30.1m
+ep020 step008250 loss=0.7503 ce=1.2613 pair=0.0633 gap=0.0018 pre=1.2664 topk_ce=1.0502 div=0.0025 risk=0.0212 support=0.3916 support_bce=0.3817 support_div=0.1633 support_budget=0.0897 time=30.2m
+ep020 step008300 loss=0.7521 ce=1.2642 pair=0.0636 gap=0.0018 pre=1.2692 topk_ce=1.0540 div=0.0026 risk=0.0212 support=0.3925 support_bce=0.3825 support_div=0.1639 support_budget=0.0901 time=30.4m
+[eval epoch 20] macro_top1=0.4638 top2=0.7985 top3=0.9060 vs_sbs=-0.939% vbs_closed=+24.28%
+          components: pre_top1=0.4368 gap_top1=0.4370 utility_top1=0.2785 base_top1=0.4494 support_g0_top1=0.4638 corr(pre/final)=+0.976 corr(gap/final)=+0.934 corr(util/final)=+0.272
+          support: g0@1=0.4638 u1@1=0.8496 u2@1=0.9464 u3@1=0.9729 top3_recall=0.9996 avg_shortlist=4.49 arm_coverage=0.9603
+       TSP: top1=0.346 mean_cost=7.9191 (sbs=7.9578) vs_sbs=-0.49% pre=0.329 gap=0.269 util=0.211
+      CVRP: top1=0.358 mean_cost=18.2955 (sbs=18.2943) vs_sbs=+0.01% pre=0.321 gap=0.272 util=0.225
+      ATSP: top1=0.769 mean_cost=1.6393 (sbs=1.6735) vs_sbs=-2.05% pre=0.771 gap=0.695 util=0.340
+      OVRP: top1=0.336 mean_cost=7.4589 (sbs=7.4617) vs_sbs=-0.04% pre=0.350 gap=0.279 util=0.285
+      VRPB: top1=0.552 mean_cost=9.3340 (sbs=9.3403) vs_sbs=-0.07% pre=0.519 gap=0.544 util=0.334
+      VRPL: top1=0.324 mean_cost=12.4044 (sbs=12.4072) vs_sbs=-0.02% pre=0.263 gap=0.271 util=0.199
+     VRPTW: top1=0.430 mean_cost=17.9161 (sbs=18.6571) vs_sbs=-3.97% pre=0.425 gap=0.422 util=0.217
+    OVRPTW: top1=0.499 mean_cost=10.0410 (sbs=10.0484) vs_sbs=-0.07% pre=0.453 gap=0.490 util=0.217
+     OVRPB: top1=0.549 mean_cost=6.3230 (sbs=6.3220) vs_sbs=+0.02% pre=0.557 gap=0.549 util=0.480
+     OVRPL: top1=0.383 mean_cost=7.4353 (sbs=7.4376) vs_sbs=-0.03% pre=0.353 gap=0.327 util=0.203
+     VRPBL: top1=0.548 mean_cost=9.3536 (sbs=9.3593) vs_sbs=-0.06% pre=0.503 gap=0.544 util=0.399
+    VRPBTW: top1=0.409 mean_cost=19.1002 (sbs=19.6697) vs_sbs=-2.90% pre=0.384 gap=0.436 util=0.217
+    VRPLTW: top1=0.408 mean_cost=17.7023 (sbs=18.5091) vs_sbs=-4.36% pre=0.364 gap=0.401 util=0.210
+    OVRPBL: top1=0.527 mean_cost=6.3086 (sbs=6.3103) vs_sbs=-0.03% pre=0.538 gap=0.529 util=0.485
+   OVRPBTW: top1=0.512 mean_cost=10.5039 (sbs=10.5068) vs_sbs=-0.03% pre=0.465 gap=0.476 util=0.311
+   OVRPLTW: top1=0.494 mean_cost=10.1279 (sbs=10.1272) vs_sbs=+0.01% pre=0.459 gap=0.487 util=0.230
+   VRPBLTW: top1=0.408 mean_cost=18.9734 (sbs=19.5198) vs_sbs=-2.80% pre=0.378 gap=0.399 util=0.204
+  OVRPBLTW: top1=0.496 mean_cost=10.5372 (sbs=10.5412) vs_sbs=-0.04% pre=0.430 gap=0.476 util=0.246
+[save] best_cost.pt epoch=20 vs_sbs=-0.939%
+ep021 step008350 loss=0.7551 ce=1.2686 pair=0.0637 gap=0.0018 pre=1.2741 topk_ce=1.0600 div=0.0027 risk=0.0210 support=0.3944 support_bce=0.3842 support_div=0.1666 support_budget=0.0921 time=30.7m
+ep021 step008400 loss=0.7514 ce=1.2621 pair=0.0630 gap=0.0018 pre=1.2677 topk_ce=1.0573 div=0.0025 risk=0.0213 support=0.3927 support_bce=0.3827 support_div=0.1631 support_budget=0.0897 time=30.8m
+ep021 step008450 loss=0.7469 ce=1.2555 pair=0.0630 gap=0.0018 pre=1.2619 topk_ce=1.0435 div=0.0024 risk=0.0214 support=0.3901 support_bce=0.3802 support_div=0.1629 support_budget=0.0903 time=31.0m
+ep021 step008500 loss=0.7523 ce=1.2643 pair=0.0635 gap=0.0018 pre=1.2701 topk_ce=1.0536 div=0.0025 risk=0.0211 support=0.3925 support_bce=0.3825 support_div=0.1644 support_budget=0.0907 time=31.2m
+ep021 step008550 loss=0.7516 ce=1.2630 pair=0.0635 gap=0.0018 pre=1.2691 topk_ce=1.0526 div=0.0025 risk=0.0212 support=0.3923 support_bce=0.3823 support_div=0.1642 support_budget=0.0907 time=31.3m
+ep021 step008600 loss=0.7514 ce=1.2629 pair=0.0635 gap=0.0018 pre=1.2682 topk_ce=1.0519 div=0.0025 risk=0.0211 support=0.3924 support_bce=0.3823 support_div=0.1644 support_budget=0.0906 time=31.5m
+ep021 step008650 loss=0.7506 ce=1.2617 pair=0.0631 gap=0.0018 pre=1.2668 topk_ce=1.0511 div=0.0025 risk=0.0211 support=0.3921 support_bce=0.3821 support_div=0.1635 support_budget=0.0902 time=31.7m
+ep021 step008700 loss=0.7508 ce=1.2622 pair=0.0631 gap=0.0018 pre=1.2679 topk_ce=1.0511 div=0.0025 risk=0.0211 support=0.3920 support_bce=0.3821 support_div=0.1638 support_budget=0.0902 time=31.8m
+[eval epoch 21] macro_top1=0.4573 top2=0.7939 top3=0.9129 vs_sbs=-0.870% vbs_closed=+21.68%
+          components: pre_top1=0.4356 gap_top1=0.4506 utility_top1=0.2828 base_top1=0.4361 support_g0_top1=0.4573 corr(pre/final)=+0.974 corr(gap/final)=+0.950 corr(util/final)=+0.320
+          support: g0@1=0.4573 u1@1=0.8136 u2@1=0.9478 u3@1=0.9721 top3_recall=0.9999 avg_shortlist=4.63 arm_coverage=0.9683
+       TSP: top1=0.325 mean_cost=7.9239 (sbs=7.9578) vs_sbs=-0.43% pre=0.322 gap=0.315 util=0.237
+      CVRP: top1=0.335 mean_cost=18.3125 (sbs=18.2943) vs_sbs=+0.10% pre=0.334 gap=0.256 util=0.200
+      ATSP: top1=0.760 mean_cost=1.6364 (sbs=1.6735) vs_sbs=-2.22% pre=0.773 gap=0.753 util=0.324
+      OVRP: top1=0.354 mean_cost=7.4570 (sbs=7.4617) vs_sbs=-0.06% pre=0.341 gap=0.313 util=0.332
+      VRPB: top1=0.560 mean_cost=9.3343 (sbs=9.3403) vs_sbs=-0.06% pre=0.540 gap=0.539 util=0.370
+      VRPL: top1=0.324 mean_cost=12.4018 (sbs=12.4072) vs_sbs=-0.04% pre=0.296 gap=0.308 util=0.239
+     VRPTW: top1=0.411 mean_cost=17.9786 (sbs=18.6571) vs_sbs=-3.64% pre=0.367 gap=0.420 util=0.180
+    OVRPTW: top1=0.494 mean_cost=10.0461 (sbs=10.0484) vs_sbs=-0.02% pre=0.463 gap=0.488 util=0.218
+     OVRPB: top1=0.549 mean_cost=6.3244 (sbs=6.3220) vs_sbs=+0.04% pre=0.553 gap=0.552 util=0.498
+     OVRPL: top1=0.377 mean_cost=7.4348 (sbs=7.4376) vs_sbs=-0.04% pre=0.391 gap=0.362 util=0.346
+     VRPBL: top1=0.543 mean_cost=9.3553 (sbs=9.3593) vs_sbs=-0.04% pre=0.517 gap=0.545 util=0.410
+    VRPBTW: top1=0.381 mean_cost=19.1932 (sbs=19.6697) vs_sbs=-2.42% pre=0.281 gap=0.398 util=0.221
+    VRPLTW: top1=0.439 mean_cost=17.6657 (sbs=18.5091) vs_sbs=-4.56% pre=0.407 gap=0.458 util=0.173
+    OVRPBL: top1=0.522 mean_cost=6.3099 (sbs=6.3103) vs_sbs=-0.01% pre=0.529 gap=0.537 util=0.507
+   OVRPBTW: top1=0.494 mean_cost=10.5064 (sbs=10.5068) vs_sbs=-0.00% pre=0.465 gap=0.488 util=0.253
+   OVRPLTW: top1=0.486 mean_cost=10.1296 (sbs=10.1272) vs_sbs=+0.02% pre=0.481 gap=0.500 util=0.151
+   VRPBLTW: top1=0.392 mean_cost=19.0632 (sbs=19.5198) vs_sbs=-2.34% pre=0.321 gap=0.391 util=0.193
+  OVRPBLTW: top1=0.485 mean_cost=10.5468 (sbs=10.5412) vs_sbs=+0.05% pre=0.460 gap=0.487 util=0.239
+ep022 step008750 loss=0.7459 ce=1.2511 pair=0.0632 gap=0.0018 pre=1.2603 topk_ce=1.0489 div=0.0025 risk=0.0217 support=0.3912 support_bce=0.3813 support_div=0.1630 support_budget=0.0896 time=32.1m
+ep022 step008800 loss=0.7466 ce=1.2545 pair=0.0627 gap=0.0018 pre=1.2610 topk_ce=1.0446 div=0.0025 risk=0.0212 support=0.3908 support_bce=0.3809 support_div=0.1635 support_budget=0.0893 time=32.3m
+ep022 step008850 loss=0.7491 ce=1.2587 pair=0.0629 gap=0.0018 pre=1.2640 topk_ce=1.0509 div=0.0025 risk=0.0210 support=0.3917 support_bce=0.3818 support_div=0.1640 support_budget=0.0896 time=32.5m
+ep022 step008900 loss=0.7496 ce=1.2592 pair=0.0631 gap=0.0018 pre=1.2651 topk_ce=1.0511 div=0.0025 risk=0.0209 support=0.3925 support_bce=0.3825 support_div=0.1643 support_budget=0.0899 time=32.6m
+ep022 step008950 loss=0.7482 ce=1.2571 pair=0.0628 gap=0.0018 pre=1.2631 topk_ce=1.0482 div=0.0025 risk=0.0209 support=0.3919 support_bce=0.3819 support_div=0.1635 support_budget=0.0896 time=32.8m
+ep022 step009000 loss=0.7507 ce=1.2613 pair=0.0634 gap=0.0018 pre=1.2671 topk_ce=1.0528 div=0.0026 risk=0.0211 support=0.3923 support_bce=0.3823 support_div=0.1641 support_budget=0.0899 time=33.0m
+ep022 step009050 loss=0.7509 ce=1.2616 pair=0.0635 gap=0.0018 pre=1.2669 topk_ce=1.0532 div=0.0026 risk=0.0211 support=0.3924 support_bce=0.3824 support_div=0.1640 support_budget=0.0901 time=33.2m
+ep022 step009100 loss=0.7505 ce=1.2611 pair=0.0633 gap=0.0018 pre=1.2665 topk_ce=1.0525 div=0.0025 risk=0.0210 support=0.3922 support_bce=0.3822 support_div=0.1640 support_budget=0.0899 time=33.3m
+[eval epoch 22] macro_top1=0.4662 top2=0.7964 top3=0.9133 vs_sbs=-0.949% vbs_closed=+24.04%
+          components: pre_top1=0.4552 gap_top1=0.4482 utility_top1=0.2776 base_top1=0.4542 support_g0_top1=0.4662 corr(pre/final)=+0.982 corr(gap/final)=+0.956 corr(util/final)=+0.248
+          support: g0@1=0.4662 u1@1=0.8595 u2@1=0.9493 u3@1=0.9725 top3_recall=0.9999 avg_shortlist=4.52 arm_coverage=0.9524
+       TSP: top1=0.350 mean_cost=7.9208 (sbs=7.9578) vs_sbs=-0.46% pre=0.357 gap=0.293 util=0.225
+      CVRP: top1=0.327 mean_cost=18.3086 (sbs=18.2943) vs_sbs=+0.08% pre=0.303 gap=0.244 util=0.237
+      ATSP: top1=0.760 mean_cost=1.6413 (sbs=1.6735) vs_sbs=-1.93% pre=0.754 gap=0.734 util=0.348
+      OVRP: top1=0.363 mean_cost=7.4545 (sbs=7.4617) vs_sbs=-0.10% pre=0.357 gap=0.289 util=0.343
+      VRPB: top1=0.553 mean_cost=9.3337 (sbs=9.3403) vs_sbs=-0.07% pre=0.544 gap=0.541 util=0.373
+      VRPL: top1=0.338 mean_cost=12.3996 (sbs=12.4072) vs_sbs=-0.06% pre=0.302 gap=0.294 util=0.229
+     VRPTW: top1=0.455 mean_cost=17.9009 (sbs=18.6571) vs_sbs=-4.05% pre=0.439 gap=0.460 util=0.196
+    OVRPTW: top1=0.503 mean_cost=10.0439 (sbs=10.0484) vs_sbs=-0.05% pre=0.508 gap=0.489 util=0.195
+     OVRPB: top1=0.550 mean_cost=6.3231 (sbs=6.3220) vs_sbs=+0.02% pre=0.555 gap=0.555 util=0.406
+     OVRPL: top1=0.385 mean_cost=7.4360 (sbs=7.4376) vs_sbs=-0.02% pre=0.379 gap=0.342 util=0.341
+     VRPBL: top1=0.545 mean_cost=9.3536 (sbs=9.3593) vs_sbs=-0.06% pre=0.531 gap=0.547 util=0.326
+    VRPBTW: top1=0.410 mean_cost=19.0942 (sbs=19.6697) vs_sbs=-2.93% pre=0.363 gap=0.437 util=0.216
+    VRPLTW: top1=0.452 mean_cost=17.6351 (sbs=18.5091) vs_sbs=-4.72% pre=0.450 gap=0.429 util=0.187
+    OVRPBL: top1=0.526 mean_cost=6.3089 (sbs=6.3103) vs_sbs=-0.02% pre=0.524 gap=0.540 util=0.499
+   OVRPBTW: top1=0.493 mean_cost=10.5084 (sbs=10.5068) vs_sbs=+0.02% pre=0.485 gap=0.476 util=0.247
+   OVRPLTW: top1=0.481 mean_cost=10.1302 (sbs=10.1272) vs_sbs=+0.03% pre=0.464 gap=0.493 util=0.187
+   VRPBLTW: top1=0.411 mean_cost=18.9859 (sbs=19.5198) vs_sbs=-2.73% pre=0.390 gap=0.400 util=0.197
+  OVRPBLTW: top1=0.490 mean_cost=10.5400 (sbs=10.5412) vs_sbs=-0.01% pre=0.489 gap=0.504 util=0.244
+[save] best_cost.pt epoch=22 vs_sbs=-0.949%
+ep023 step009150 loss=0.7598 ce=1.2773 pair=0.0640 gap=0.0017 pre=1.2802 topk_ce=1.0714 div=0.0021 risk=0.0199 support=0.3951 support_bce=0.3849 support_div=0.1675 support_budget=0.0927 time=33.6m
+ep023 step009200 loss=0.7542 ce=1.2671 pair=0.0643 gap=0.0018 pre=1.2723 topk_ce=1.0596 div=0.0021 risk=0.0212 support=0.3930 support_bce=0.3830 support_div=0.1645 support_budget=0.0913 time=33.8m
+ep023 step009250 loss=0.7557 ce=1.2703 pair=0.0642 gap=0.0018 pre=1.2754 topk_ce=1.0595 div=0.0022 risk=0.0211 support=0.3933 support_bce=0.3832 support_div=0.1648 support_budget=0.0908 time=34.0m
+ep023 step009300 loss=0.7565 ce=1.2710 pair=0.0645 gap=0.0018 pre=1.2766 topk_ce=1.0630 div=0.0022 risk=0.0211 support=0.3940 support_bce=0.3839 support_div=0.1648 support_budget=0.0912 time=34.2m
+ep023 step009350 loss=0.7540 ce=1.2669 pair=0.0641 gap=0.0018 pre=1.2714 topk_ce=1.0590 div=0.0022 risk=0.0210 support=0.3934 support_bce=0.3834 support_div=0.1645 support_budget=0.0908 time=34.3m
+ep023 step009400 loss=0.7516 ce=1.2629 pair=0.0638 gap=0.0018 pre=1.2676 topk_ce=1.0540 div=0.0022 risk=0.0210 support=0.3925 support_bce=0.3825 support_div=0.1637 support_budget=0.0902 time=34.5m
+ep023 step009450 loss=0.7522 ce=1.2642 pair=0.0637 gap=0.0018 pre=1.2693 topk_ce=1.0545 div=0.0022 risk=0.0210 support=0.3926 support_bce=0.3826 support_div=0.1640 support_budget=0.0904 time=34.6m
+ep023 step009500 loss=0.7516 ce=1.2632 pair=0.0634 gap=0.0018 pre=1.2686 topk_ce=1.0533 div=0.0023 risk=0.0209 support=0.3924 support_bce=0.3824 support_div=0.1636 support_budget=0.0900 time=34.8m
+[eval epoch 23] macro_top1=0.4677 top2=0.8012 top3=0.9153 vs_sbs=-0.962% vbs_closed=+24.54%
+          components: pre_top1=0.4614 gap_top1=0.4455 utility_top1=0.3143 base_top1=0.4571 support_g0_top1=0.4677 corr(pre/final)=+0.977 corr(gap/final)=+0.932 corr(util/final)=+0.365
+          support: g0@1=0.4677 u1@1=0.8622 u2@1=0.9487 u3@1=0.9739 top3_recall=0.9999 avg_shortlist=4.55 arm_coverage=0.9683
+       TSP: top1=0.331 mean_cost=7.9200 (sbs=7.9578) vs_sbs=-0.47% pre=0.337 gap=0.240 util=0.246
+      CVRP: top1=0.337 mean_cost=18.3024 (sbs=18.2943) vs_sbs=+0.04% pre=0.354 gap=0.242 util=0.231
+      ATSP: top1=0.766 mean_cost=1.6393 (sbs=1.6735) vs_sbs=-2.04% pre=0.768 gap=0.756 util=0.352
+      OVRP: top1=0.361 mean_cost=7.4572 (sbs=7.4617) vs_sbs=-0.06% pre=0.362 gap=0.290 util=0.339
+      VRPB: top1=0.547 mean_cost=9.3351 (sbs=9.3403) vs_sbs=-0.06% pre=0.543 gap=0.517 util=0.421
+      VRPL: top1=0.323 mean_cost=12.4035 (sbs=12.4072) vs_sbs=-0.03% pre=0.318 gap=0.298 util=0.231
+     VRPTW: top1=0.461 mean_cost=17.9049 (sbs=18.6571) vs_sbs=-4.03% pre=0.428 gap=0.471 util=0.222
+    OVRPTW: top1=0.497 mean_cost=10.0425 (sbs=10.0484) vs_sbs=-0.06% pre=0.487 gap=0.499 util=0.267
+     OVRPB: top1=0.544 mean_cost=6.3240 (sbs=6.3220) vs_sbs=+0.03% pre=0.551 gap=0.553 util=0.450
+     OVRPL: top1=0.386 mean_cost=7.4351 (sbs=7.4376) vs_sbs=-0.03% pre=0.359 gap=0.345 util=0.326
+     VRPBL: top1=0.550 mean_cost=9.3537 (sbs=9.3593) vs_sbs=-0.06% pre=0.525 gap=0.533 util=0.397
+    VRPBTW: top1=0.424 mean_cost=19.0958 (sbs=19.6697) vs_sbs=-2.92% pre=0.396 gap=0.431 util=0.234
+    VRPLTW: top1=0.440 mean_cost=17.6377 (sbs=18.5091) vs_sbs=-4.71% pre=0.442 gap=0.443 util=0.253
+    OVRPBL: top1=0.529 mean_cost=6.3094 (sbs=6.3103) vs_sbs=-0.01% pre=0.538 gap=0.534 util=0.493
+   OVRPBTW: top1=0.513 mean_cost=10.5023 (sbs=10.5068) vs_sbs=-0.04% pre=0.502 gap=0.478 util=0.369
+   OVRPLTW: top1=0.484 mean_cost=10.1276 (sbs=10.1272) vs_sbs=+0.00% pre=0.491 gap=0.499 util=0.297
+   VRPBLTW: top1=0.421 mean_cost=18.9731 (sbs=19.5198) vs_sbs=-2.80% pre=0.404 gap=0.407 util=0.225
+  OVRPBLTW: top1=0.504 mean_cost=10.5351 (sbs=10.5412) vs_sbs=-0.06% pre=0.501 gap=0.483 util=0.305
+[save] best.pt epoch=23 score=0.4677
+[save] best_top1.pt epoch=23 top1=0.4677
+[save] best_top3_safe.pt epoch=23 score=0.9153
+[save] best_cost.pt epoch=23 vs_sbs=-0.962%
+ep024 step009550 loss=0.7425 ce=1.2482 pair=0.0618 gap=0.0018 pre=1.2511 topk_ce=1.0383 div=0.0019 risk=0.0199 support=0.3905 support_bce=0.3806 support_div=0.1619 support_budget=0.0883 time=35.1m
+ep024 step009600 loss=0.7409 ce=1.2454 pair=0.0616 gap=0.0018 pre=1.2504 topk_ce=1.0360 div=0.0019 risk=0.0202 support=0.3892 support_bce=0.3794 support_div=0.1612 support_budget=0.0879 time=35.3m
+ep024 step009650 loss=0.7459 ce=1.2535 pair=0.0624 gap=0.0018 pre=1.2590 topk_ce=1.0447 div=0.0019 risk=0.0204 support=0.3909 support_bce=0.3810 support_div=0.1630 support_budget=0.0898 time=35.4m
+ep024 step009700 loss=0.7473 ce=1.2556 pair=0.0629 gap=0.0018 pre=1.2609 topk_ce=1.0482 div=0.0020 risk=0.0205 support=0.3913 support_bce=0.3813 support_div=0.1634 support_budget=0.0900 time=35.6m
+ep024 step009750 loss=0.7495 ce=1.2587 pair=0.0634 gap=0.0018 pre=1.2637 topk_ce=1.0530 div=0.0020 risk=0.0206 support=0.3926 support_bce=0.3826 support_div=0.1640 support_budget=0.0904 time=35.8m
+ep024 step009800 loss=0.7477 ce=1.2561 pair=0.0630 gap=0.0018 pre=1.2616 topk_ce=1.0491 div=0.0021 risk=0.0207 support=0.3914 support_bce=0.3814 support_div=0.1635 support_budget=0.0900 time=35.9m
+ep024 step009850 loss=0.7502 ce=1.2605 pair=0.0633 gap=0.0018 pre=1.2658 topk_ce=1.0521 div=0.0022 risk=0.0208 support=0.3920 support_bce=0.3820 support_div=0.1639 support_budget=0.0905 time=36.1m
+ep024 step009900 loss=0.7493 ce=1.2591 pair=0.0631 gap=0.0018 pre=1.2646 topk_ce=1.0508 div=0.0022 risk=0.0208 support=0.3918 support_bce=0.3818 support_div=0.1637 support_budget=0.0902 time=36.3m
+[eval epoch 24] macro_top1=0.4575 top2=0.7833 top3=0.9134 vs_sbs=-0.892% vbs_closed=+21.36%
+          components: pre_top1=0.4370 gap_top1=0.4549 utility_top1=0.2769 base_top1=0.4404 support_g0_top1=0.4575 corr(pre/final)=+0.977 corr(gap/final)=+0.953 corr(util/final)=+0.261
+          support: g0@1=0.4575 u1@1=0.8445 u2@1=0.9520 u3@1=0.9746 top3_recall=0.9998 avg_shortlist=4.62 arm_coverage=0.9613
+       TSP: top1=0.364 mean_cost=7.9219 (sbs=7.9578) vs_sbs=-0.45% pre=0.350 gap=0.300 util=0.229
+      CVRP: top1=0.352 mean_cost=18.3129 (sbs=18.2943) vs_sbs=+0.10% pre=0.347 gap=0.276 util=0.256
+      ATSP: top1=0.779 mean_cost=1.6366 (sbs=1.6735) vs_sbs=-2.20% pre=0.779 gap=0.779 util=0.348
+      OVRP: top1=0.360 mean_cost=7.4568 (sbs=7.4617) vs_sbs=-0.06% pre=0.286 gap=0.290 util=0.343
+      VRPB: top1=0.545 mean_cost=9.3357 (sbs=9.3403) vs_sbs=-0.05% pre=0.457 gap=0.541 util=0.331
+      VRPL: top1=0.323 mean_cost=12.4028 (sbs=12.4072) vs_sbs=-0.04% pre=0.274 gap=0.275 util=0.197
+     VRPTW: top1=0.404 mean_cost=17.9696 (sbs=18.6571) vs_sbs=-3.68% pre=0.386 gap=0.437 util=0.170
+    OVRPTW: top1=0.502 mean_cost=10.0444 (sbs=10.0484) vs_sbs=-0.04% pre=0.410 gap=0.501 util=0.237
+     OVRPB: top1=0.549 mean_cost=6.3232 (sbs=6.3220) vs_sbs=+0.02% pre=0.546 gap=0.549 util=0.424
+     OVRPL: top1=0.358 mean_cost=7.4365 (sbs=7.4376) vs_sbs=-0.01% pre=0.374 gap=0.359 util=0.301
+     VRPBL: top1=0.536 mean_cost=9.3576 (sbs=9.3593) vs_sbs=-0.02% pre=0.520 gap=0.549 util=0.337
+    VRPBTW: top1=0.388 mean_cost=19.1500 (sbs=19.6697) vs_sbs=-2.64% pre=0.358 gap=0.450 util=0.192
+    VRPLTW: top1=0.426 mean_cost=17.6593 (sbs=18.5091) vs_sbs=-4.59% pre=0.443 gap=0.428 util=0.191
+    OVRPBL: top1=0.528 mean_cost=6.3090 (sbs=6.3103) vs_sbs=-0.02% pre=0.535 gap=0.534 util=0.481
+   OVRPBTW: top1=0.492 mean_cost=10.5168 (sbs=10.5068) vs_sbs=+0.10% pre=0.477 gap=0.484 util=0.263
+   OVRPLTW: top1=0.475 mean_cost=10.1336 (sbs=10.1272) vs_sbs=+0.06% pre=0.495 gap=0.514 util=0.234
+   VRPBLTW: top1=0.387 mean_cost=19.0148 (sbs=19.5198) vs_sbs=-2.59% pre=0.393 gap=0.430 util=0.175
+  OVRPBLTW: top1=0.467 mean_cost=10.5491 (sbs=10.5412) vs_sbs=+0.08% pre=0.436 gap=0.493 util=0.275
+ep025 step009950 loss=0.7434 ce=1.2494 pair=0.0619 gap=0.0018 pre=1.2528 topk_ce=1.0417 div=0.0022 risk=0.0210 support=0.3903 support_bce=0.3806 support_div=0.1588 support_budget=0.0864 time=36.6m
+ep025 step010000 loss=0.7492 ce=1.2587 pair=0.0633 gap=0.0018 pre=1.2630 topk_ce=1.0515 div=0.0022 risk=0.0208 support=0.3923 support_bce=0.3824 support_div=0.1629 support_budget=0.0887 time=36.8m
+ep025 step010050 loss=0.7404 ce=1.2429 pair=0.0625 gap=0.0018 pre=1.2480 topk_ce=1.0382 div=0.0022 risk=0.0205 support=0.3898 support_bce=0.3799 support_div=0.1622 support_budget=0.0881 time=36.9m
+ep025 step010100 loss=0.7442 ce=1.2499 pair=0.0625 gap=0.0017 pre=1.2547 topk_ce=1.0444 div=0.0021 risk=0.0205 support=0.3906 support_bce=0.3807 support_div=0.1625 support_budget=0.0885 time=37.1m
+ep025 step010150 loss=0.7453 ce=1.2516 pair=0.0627 gap=0.0017 pre=1.2566 topk_ce=1.0462 div=0.0021 risk=0.0203 support=0.3912 support_bce=0.3813 support_div=0.1630 support_budget=0.0889 time=37.2m
+ep025 step010200 loss=0.7466 ce=1.2545 pair=0.0629 gap=0.0018 pre=1.2593 topk_ce=1.0466 div=0.0021 risk=0.0205 support=0.3911 support_bce=0.3812 support_div=0.1632 support_budget=0.0892 time=37.4m
+ep025 step010250 loss=0.7489 ce=1.2582 pair=0.0633 gap=0.0018 pre=1.2635 topk_ce=1.0502 div=0.0021 risk=0.0206 support=0.3919 support_bce=0.3819 support_div=0.1637 support_budget=0.0897 time=37.6m
+[eval epoch 25] macro_top1=0.4652 top2=0.8058 top3=0.9132 vs_sbs=-0.914% vbs_closed=+23.12%
+          components: pre_top1=0.4563 gap_top1=0.4508 utility_top1=0.2953 base_top1=0.4548 support_g0_top1=0.4652 corr(pre/final)=+0.981 corr(gap/final)=+0.944 corr(util/final)=+0.309
+          support: g0@1=0.4652 u1@1=0.8489 u2@1=0.9522 u3@1=0.9757 top3_recall=0.9997 avg_shortlist=4.87 arm_coverage=0.9454
+       TSP: top1=0.368 mean_cost=7.9185 (sbs=7.9578) vs_sbs=-0.49% pre=0.368 gap=0.320 util=0.223
+      CVRP: top1=0.372 mean_cost=18.2818 (sbs=18.2943) vs_sbs=-0.07% pre=0.368 gap=0.280 util=0.231
+      ATSP: top1=0.712 mean_cost=1.6504 (sbs=1.6735) vs_sbs=-1.38% pre=0.711 gap=0.664 util=0.353
+      OVRP: top1=0.354 mean_cost=7.4561 (sbs=7.4617) vs_sbs=-0.08% pre=0.357 gap=0.300 util=0.303
+      VRPB: top1=0.552 mean_cost=9.3347 (sbs=9.3403) vs_sbs=-0.06% pre=0.534 gap=0.526 util=0.431
+      VRPL: top1=0.308 mean_cost=12.4062 (sbs=12.4072) vs_sbs=-0.01% pre=0.286 gap=0.276 util=0.204
+     VRPTW: top1=0.462 mean_cost=17.9034 (sbs=18.6571) vs_sbs=-4.04% pre=0.444 gap=0.447 util=0.187
+    OVRPTW: top1=0.492 mean_cost=10.0433 (sbs=10.0484) vs_sbs=-0.05% pre=0.506 gap=0.507 util=0.249
+     OVRPB: top1=0.548 mean_cost=6.3236 (sbs=6.3220) vs_sbs=+0.03% pre=0.543 gap=0.568 util=0.469
+     OVRPL: top1=0.348 mean_cost=7.4370 (sbs=7.4376) vs_sbs=-0.01% pre=0.366 gap=0.350 util=0.281
+     VRPBL: top1=0.538 mean_cost=9.3559 (sbs=9.3593) vs_sbs=-0.04% pre=0.499 gap=0.530 util=0.436
+    VRPBTW: top1=0.420 mean_cost=19.1014 (sbs=19.6697) vs_sbs=-2.89% pre=0.417 gap=0.445 util=0.209
+    VRPLTW: top1=0.453 mean_cost=17.6506 (sbs=18.5091) vs_sbs=-4.64% pre=0.435 gap=0.443 util=0.237
+    OVRPBL: top1=0.538 mean_cost=6.3063 (sbs=6.3103) vs_sbs=-0.06% pre=0.532 gap=0.552 util=0.501
+   OVRPBTW: top1=0.515 mean_cost=10.4997 (sbs=10.5068) vs_sbs=-0.07% pre=0.474 gap=0.498 util=0.271
+   OVRPLTW: top1=0.499 mean_cost=10.1282 (sbs=10.1272) vs_sbs=+0.01% pre=0.475 gap=0.499 util=0.240
+   VRPBLTW: top1=0.408 mean_cost=19.0090 (sbs=19.5198) vs_sbs=-2.62% pre=0.381 gap=0.418 util=0.198
+  OVRPBLTW: top1=0.486 mean_cost=10.5418 (sbs=10.5412) vs_sbs=+0.01% pre=0.517 gap=0.491 util=0.292
+ep026 step010300 loss=0.9068 ce=1.5153 pair=0.0867 gap=0.0013 pre=1.5134 topk_ce=1.2971 div=0.0028 risk=0.0128 support=0.4739 support_bce=0.4598 support_div=0.2293 support_budget=0.1288 time=37.9m
+ep026 step010350 loss=0.7397 ce=1.2388 pair=0.0622 gap=0.0017 pre=1.2514 topk_ce=1.0431 div=0.0024 risk=0.0203 support=0.3902 support_bce=0.3804 support_div=0.1618 support_budget=0.0885 time=38.0m
+ep026 step010400 loss=0.7463 ce=1.2514 pair=0.0633 gap=0.0017 pre=1.2601 topk_ce=1.0502 div=0.0025 risk=0.0203 support=0.3923 support_bce=0.3823 support_div=0.1634 support_budget=0.0897 time=38.2m
+ep026 step010450 loss=0.7490 ce=1.2560 pair=0.0637 gap=0.0017 pre=1.2631 topk_ce=1.0549 div=0.0026 risk=0.0203 support=0.3935 support_bce=0.3835 support_div=0.1644 support_budget=0.0904 time=38.4m
+ep026 step010500 loss=0.7458 ce=1.2516 pair=0.0632 gap=0.0018 pre=1.2579 topk_ce=1.0477 div=0.0025 risk=0.0205 support=0.3919 support_bce=0.3819 support_div=0.1634 support_budget=0.0897 time=38.5m
+ep026 step010550 loss=0.7470 ce=1.2543 pair=0.0630 gap=0.0018 pre=1.2605 topk_ce=1.0482 div=0.0024 risk=0.0206 support=0.3919 support_bce=0.3820 support_div=0.1627 support_budget=0.0896 time=38.7m
+ep026 step010600 loss=0.7479 ce=1.2557 pair=0.0632 gap=0.0018 pre=1.2618 topk_ce=1.0502 div=0.0024 risk=0.0206 support=0.3923 support_bce=0.3823 support_div=0.1632 support_budget=0.0900 time=38.9m
+ep026 step010650 loss=0.7470 ce=1.2545 pair=0.0631 gap=0.0018 pre=1.2604 topk_ce=1.0477 div=0.0024 risk=0.0206 support=0.3916 support_bce=0.3817 support_div=0.1627 support_budget=0.0896 time=39.0m
+[eval epoch 26] macro_top1=0.4701 top2=0.8043 top3=0.9167 vs_sbs=-0.982% vbs_closed=+25.32%
+          components: pre_top1=0.4577 gap_top1=0.4611 utility_top1=0.2972 base_top1=0.4509 support_g0_top1=0.4701 corr(pre/final)=+0.980 corr(gap/final)=+0.945 corr(util/final)=+0.348
+          support: g0@1=0.4701 u1@1=0.8479 u2@1=0.9529 u3@1=0.9762 top3_recall=0.9996 avg_shortlist=4.61 arm_coverage=0.9524
+       TSP: top1=0.360 mean_cost=7.9198 (sbs=7.9578) vs_sbs=-0.48% pre=0.339 gap=0.327 util=0.229
+      CVRP: top1=0.356 mean_cost=18.2860 (sbs=18.2943) vs_sbs=-0.05% pre=0.333 gap=0.284 util=0.226
+      ATSP: top1=0.783 mean_cost=1.6351 (sbs=1.6735) vs_sbs=-2.30% pre=0.781 gap=0.774 util=0.364
+      OVRP: top1=0.350 mean_cost=7.4570 (sbs=7.4617) vs_sbs=-0.06% pre=0.360 gap=0.354 util=0.326
+      VRPB: top1=0.550 mean_cost=9.3354 (sbs=9.3403) vs_sbs=-0.05% pre=0.544 gap=0.554 util=0.396
+      VRPL: top1=0.319 mean_cost=12.4027 (sbs=12.4072) vs_sbs=-0.04% pre=0.304 gap=0.256 util=0.235
+     VRPTW: top1=0.473 mean_cost=17.8894 (sbs=18.6571) vs_sbs=-4.11% pre=0.417 gap=0.460 util=0.198
+    OVRPTW: top1=0.504 mean_cost=10.0416 (sbs=10.0484) vs_sbs=-0.07% pre=0.499 gap=0.496 util=0.254
+     OVRPB: top1=0.545 mean_cost=6.3239 (sbs=6.3220) vs_sbs=+0.03% pre=0.571 gap=0.562 util=0.457
+     OVRPL: top1=0.373 mean_cost=7.4362 (sbs=7.4376) vs_sbs=-0.02% pre=0.368 gap=0.355 util=0.334
+     VRPBL: top1=0.540 mean_cost=9.3557 (sbs=9.3593) vs_sbs=-0.04% pre=0.521 gap=0.548 util=0.406
+    VRPBTW: top1=0.411 mean_cost=19.0898 (sbs=19.6697) vs_sbs=-2.95% pre=0.395 gap=0.432 util=0.242
+    VRPLTW: top1=0.454 mean_cost=17.6352 (sbs=18.5091) vs_sbs=-4.72% pre=0.451 gap=0.440 util=0.230
+    OVRPBL: top1=0.526 mean_cost=6.3096 (sbs=6.3103) vs_sbs=-0.01% pre=0.518 gap=0.536 util=0.473
+   OVRPBTW: top1=0.513 mean_cost=10.5032 (sbs=10.5068) vs_sbs=-0.03% pre=0.483 gap=0.499 util=0.292
+   OVRPLTW: top1=0.486 mean_cost=10.1285 (sbs=10.1272) vs_sbs=+0.01% pre=0.473 gap=0.492 util=0.228
+   VRPBLTW: top1=0.421 mean_cost=18.9833 (sbs=19.5198) vs_sbs=-2.75% pre=0.400 gap=0.425 util=0.185
+  OVRPBLTW: top1=0.497 mean_cost=10.5370 (sbs=10.5412) vs_sbs=-0.04% pre=0.482 gap=0.505 util=0.275
+[save] best.pt epoch=26 score=0.4701
+[save] best_top1.pt epoch=26 top1=0.4701
+[save] best_top3_safe.pt epoch=26 score=0.9167
+[save] best_cost.pt epoch=26 vs_sbs=-0.982%
+ep027 step010700 loss=0.7049 ce=1.1893 pair=0.0542 gap=0.0019 pre=1.1923 topk_ce=0.9617 div=0.0020 risk=0.0227 support=0.3768 support_bce=0.3681 support_div=0.1430 support_budget=0.0785 time=39.4m
+ep027 step010750 loss=0.7341 ce=1.2346 pair=0.0605 gap=0.0018 pre=1.2381 topk_ce=1.0206 div=0.0021 risk=0.0202 support=0.3879 support_bce=0.3781 support_div=0.1605 support_budget=0.0885 time=39.5m
+ep027 step010800 loss=0.7435 ce=1.2495 pair=0.0620 gap=0.0017 pre=1.2536 topk_ce=1.0405 div=0.0021 risk=0.0204 support=0.3909 support_bce=0.3809 support_div=0.1634 support_budget=0.0895 time=39.7m
+ep027 step010850 loss=0.7414 ce=1.2455 pair=0.0618 gap=0.0017 pre=1.2498 topk_ce=1.0390 div=0.0021 risk=0.0204 support=0.3899 support_bce=0.3800 support_div=0.1626 support_budget=0.0889 time=39.8m
+ep027 step010900 loss=0.7415 ce=1.2453 pair=0.0619 gap=0.0017 pre=1.2504 topk_ce=1.0405 div=0.0020 risk=0.0204 support=0.3900 support_bce=0.3801 support_div=0.1625 support_budget=0.0892 time=40.0m
+ep027 step010950 loss=0.7415 ce=1.2446 pair=0.0621 gap=0.0017 pre=1.2504 topk_ce=1.0414 div=0.0021 risk=0.0202 support=0.3907 support_bce=0.3807 support_div=0.1627 support_budget=0.0892 time=40.2m
+ep027 step011000 loss=0.7409 ce=1.2437 pair=0.0621 gap=0.0017 pre=1.2497 topk_ce=1.0398 div=0.0021 risk=0.0202 support=0.3903 support_bce=0.3804 support_div=0.1626 support_budget=0.0891 time=40.3m
+ep027 step011050 loss=0.7428 ce=1.2471 pair=0.0622 gap=0.0017 pre=1.2532 topk_ce=1.0428 div=0.0021 risk=0.0201 support=0.3908 support_bce=0.3808 support_div=0.1628 support_budget=0.0890 time=40.5m
+[eval epoch 27] macro_top1=0.4683 top2=0.8031 top3=0.9154 vs_sbs=-0.946% vbs_closed=+24.72%
+          components: pre_top1=0.4626 gap_top1=0.4539 utility_top1=0.3173 base_top1=0.4569 support_g0_top1=0.4683 corr(pre/final)=+0.979 corr(gap/final)=+0.942 corr(util/final)=+0.392
+          support: g0@1=0.4683 u1@1=0.8484 u2@1=0.9506 u3@1=0.9747 top3_recall=0.9997 avg_shortlist=4.80 arm_coverage=0.9524
+       TSP: top1=0.353 mean_cost=7.9192 (sbs=7.9578) vs_sbs=-0.49% pre=0.339 gap=0.307 util=0.240
+      CVRP: top1=0.376 mean_cost=18.2846 (sbs=18.2943) vs_sbs=-0.05% pre=0.380 gap=0.281 util=0.296
+      ATSP: top1=0.782 mean_cost=1.6367 (sbs=1.6735) vs_sbs=-2.20% pre=0.772 gap=0.785 util=0.355
+      OVRP: top1=0.356 mean_cost=7.4559 (sbs=7.4617) vs_sbs=-0.08% pre=0.361 gap=0.352 util=0.329
+      VRPB: top1=0.539 mean_cost=9.3365 (sbs=9.3403) vs_sbs=-0.04% pre=0.533 gap=0.525 util=0.420
+      VRPL: top1=0.325 mean_cost=12.4005 (sbs=12.4072) vs_sbs=-0.05% pre=0.315 gap=0.304 util=0.226
+     VRPTW: top1=0.465 mean_cost=17.9048 (sbs=18.6571) vs_sbs=-4.03% pre=0.460 gap=0.454 util=0.233
+    OVRPTW: top1=0.506 mean_cost=10.0439 (sbs=10.0484) vs_sbs=-0.05% pre=0.502 gap=0.501 util=0.271
+     OVRPB: top1=0.552 mean_cost=6.3220 (sbs=6.3220) vs_sbs=-0.00% pre=0.554 gap=0.546 util=0.506
+     OVRPL: top1=0.379 mean_cost=7.4345 (sbs=7.4376) vs_sbs=-0.04% pre=0.368 gap=0.351 util=0.319
+     VRPBL: top1=0.519 mean_cost=9.3585 (sbs=9.3593) vs_sbs=-0.01% pre=0.517 gap=0.507 util=0.435
+    VRPBTW: top1=0.399 mean_cost=19.1021 (sbs=19.6697) vs_sbs=-2.89% pre=0.411 gap=0.403 util=0.248
+    VRPLTW: top1=0.436 mean_cost=17.6823 (sbs=18.5091) vs_sbs=-4.47% pre=0.440 gap=0.436 util=0.212
+    OVRPBL: top1=0.531 mean_cost=6.3103 (sbs=6.3103) vs_sbs=+0.00% pre=0.527 gap=0.524 util=0.479
+   OVRPBTW: top1=0.506 mean_cost=10.5035 (sbs=10.5068) vs_sbs=-0.03% pre=0.501 gap=0.513 util=0.332
+   OVRPLTW: top1=0.493 mean_cost=10.1286 (sbs=10.1272) vs_sbs=+0.01% pre=0.466 gap=0.481 util=0.281
+   VRPBLTW: top1=0.411 mean_cost=19.0186 (sbs=19.5198) vs_sbs=-2.57% pre=0.394 gap=0.409 util=0.202
+  OVRPBLTW: top1=0.501 mean_cost=10.5364 (sbs=10.5412) vs_sbs=-0.05% pre=0.487 gap=0.492 util=0.327
+ep028 step011100 loss=0.7889 ce=1.3248 pair=0.0679 gap=0.0017 pre=1.3338 topk_ce=1.1188 div=0.0019 risk=0.0223 support=0.4058 support_bce=0.3951 support_div=0.1754 support_budget=0.0999 time=40.8m
+ep028 step011150 loss=0.7418 ce=1.2464 pair=0.0625 gap=0.0017 pre=1.2492 topk_ce=1.0392 div=0.0021 risk=0.0206 support=0.3898 support_bce=0.3798 support_div=0.1629 support_budget=0.0901 time=40.9m
+ep028 step011200 loss=0.7409 ce=1.2430 pair=0.0626 gap=0.0017 pre=1.2486 topk_ce=1.0404 div=0.0022 risk=0.0202 support=0.3905 support_bce=0.3806 support_div=0.1625 support_budget=0.0894 time=41.1m
+ep028 step011250 loss=0.7439 ce=1.2487 pair=0.0628 gap=0.0017 pre=1.2546 topk_ce=1.0447 div=0.0022 risk=0.0204 support=0.3910 support_bce=0.3811 support_div=0.1627 support_budget=0.0896 time=41.3m
+ep028 step011300 loss=0.7410 ce=1.2433 pair=0.0625 gap=0.0017 pre=1.2499 topk_ce=1.0411 div=0.0022 risk=0.0202 support=0.3902 support_bce=0.3803 support_div=0.1622 support_budget=0.0892 time=41.4m
+ep028 step011350 loss=0.7422 ce=1.2455 pair=0.0625 gap=0.0017 pre=1.2514 topk_ce=1.0435 div=0.0022 risk=0.0203 support=0.3906 support_bce=0.3807 support_div=0.1625 support_budget=0.0892 time=41.6m
+ep028 step011400 loss=0.7453 ce=1.2507 pair=0.0629 gap=0.0017 pre=1.2565 topk_ce=1.0485 div=0.0021 risk=0.0202 support=0.3919 support_bce=0.3820 support_div=0.1634 support_budget=0.0898 time=41.8m
+ep028 step011450 loss=0.7441 ce=1.2490 pair=0.0627 gap=0.0017 pre=1.2545 topk_ce=1.0456 div=0.0022 risk=0.0202 support=0.3912 support_bce=0.3813 support_div=0.1632 support_budget=0.0898 time=42.0m
+[eval epoch 28] macro_top1=0.4654 top2=0.8008 top3=0.9111 vs_sbs=-0.962% vbs_closed=+24.10%
+          components: pre_top1=0.4524 gap_top1=0.4542 utility_top1=0.2396 base_top1=0.4467 support_g0_top1=0.4654 corr(pre/final)=+0.976 corr(gap/final)=+0.950 corr(util/final)=+0.088
+          support: g0@1=0.4654 u1@1=0.8569 u2@1=0.9513 u3@1=0.9755 top3_recall=0.9998 avg_shortlist=4.51 arm_coverage=0.9613
+       TSP: top1=0.352 mean_cost=7.9232 (sbs=7.9578) vs_sbs=-0.43% pre=0.361 gap=0.321 util=0.181
+      CVRP: top1=0.360 mean_cost=18.2855 (sbs=18.2943) vs_sbs=-0.05% pre=0.366 gap=0.272 util=0.181
+      ATSP: top1=0.771 mean_cost=1.6391 (sbs=1.6735) vs_sbs=-2.06% pre=0.769 gap=0.768 util=0.315
+      OVRP: top1=0.349 mean_cost=7.4565 (sbs=7.4617) vs_sbs=-0.07% pre=0.364 gap=0.330 util=0.324
+      VRPB: top1=0.541 mean_cost=9.3385 (sbs=9.3403) vs_sbs=-0.02% pre=0.527 gap=0.497 util=0.285
+      VRPL: top1=0.318 mean_cost=12.4048 (sbs=12.4072) vs_sbs=-0.02% pre=0.268 gap=0.313 util=0.192
+     VRPTW: top1=0.459 mean_cost=17.8958 (sbs=18.6571) vs_sbs=-4.08% pre=0.423 gap=0.441 util=0.169
+    OVRPTW: top1=0.497 mean_cost=10.0428 (sbs=10.0484) vs_sbs=-0.06% pre=0.497 gap=0.499 util=0.168
+     OVRPB: top1=0.544 mean_cost=6.3250 (sbs=6.3220) vs_sbs=+0.05% pre=0.549 gap=0.560 util=0.400
+     OVRPL: top1=0.373 mean_cost=7.4347 (sbs=7.4376) vs_sbs=-0.04% pre=0.350 gap=0.355 util=0.264
+     VRPBL: top1=0.540 mean_cost=9.3560 (sbs=9.3593) vs_sbs=-0.04% pre=0.513 gap=0.558 util=0.310
+    VRPBTW: top1=0.391 mean_cost=19.0810 (sbs=19.6697) vs_sbs=-2.99% pre=0.397 gap=0.417 util=0.217
+    VRPLTW: top1=0.440 mean_cost=17.6516 (sbs=18.5091) vs_sbs=-4.63% pre=0.426 gap=0.421 util=0.178
+    OVRPBL: top1=0.519 mean_cost=6.3107 (sbs=6.3103) vs_sbs=+0.01% pre=0.524 gap=0.533 util=0.451
+   OVRPBTW: top1=0.495 mean_cost=10.5089 (sbs=10.5068) vs_sbs=+0.02% pre=0.457 gap=0.485 util=0.218
+   OVRPLTW: top1=0.493 mean_cost=10.1279 (sbs=10.1272) vs_sbs=+0.01% pre=0.457 gap=0.491 util=0.120
+   VRPBLTW: top1=0.431 mean_cost=18.9670 (sbs=19.5198) vs_sbs=-2.83% pre=0.408 gap=0.434 util=0.158
+  OVRPBLTW: top1=0.504 mean_cost=10.5327 (sbs=10.5412) vs_sbs=-0.08% pre=0.487 gap=0.481 util=0.181
+ep029 step011500 loss=0.7334 ce=1.2313 pair=0.0621 gap=0.0018 pre=1.2389 topk_ce=1.0230 div=0.0022 risk=0.0206 support=0.3861 support_bce=0.3766 support_div=0.1556 support_budget=0.0843 time=42.2m
+ep029 step011550 loss=0.7422 ce=1.2450 pair=0.0625 gap=0.0017 pre=1.2494 topk_ce=1.0444 div=0.0020 risk=0.0196 support=0.3919 support_bce=0.3820 support_div=0.1633 support_budget=0.0894 time=42.4m
+ep029 step011600 loss=0.7357 ce=1.2337 pair=0.0623 gap=0.0017 pre=1.2384 topk_ce=1.0337 div=0.0020 risk=0.0199 support=0.3893 support_bce=0.3795 support_div=0.1614 support_budget=0.0882 time=42.5m
+ep029 step011650 loss=0.7469 ce=1.2528 pair=0.0636 gap=0.0017 pre=1.2574 topk_ce=1.0517 div=0.0020 risk=0.0199 support=0.3933 support_bce=0.3833 support_div=0.1636 support_budget=0.0903 time=42.7m
+ep029 step011700 loss=0.7425 ce=1.2458 pair=0.0628 gap=0.0018 pre=1.2521 topk_ce=1.0432 div=0.0019 risk=0.0202 support=0.3907 support_bce=0.3808 support_div=0.1623 support_budget=0.0893 time=42.9m
+ep029 step011750 loss=0.7454 ce=1.2510 pair=0.0630 gap=0.0017 pre=1.2569 topk_ce=1.0473 div=0.0019 risk=0.0202 support=0.3918 support_bce=0.3818 support_div=0.1629 support_budget=0.0896 time=43.1m
+ep029 step011800 loss=0.7443 ce=1.2494 pair=0.0628 gap=0.0017 pre=1.2556 topk_ce=1.0448 div=0.0019 risk=0.0203 support=0.3911 support_bce=0.3811 support_div=0.1626 support_budget=0.0893 time=43.2m
+ep029 step011850 loss=0.7422 ce=1.2456 pair=0.0625 gap=0.0017 pre=1.2516 topk_ce=1.0424 div=0.0019 risk=0.0201 support=0.3908 support_bce=0.3810 support_div=0.1623 support_budget=0.0890 time=43.4m
+[eval epoch 29] macro_top1=0.4721 top2=0.8036 top3=0.9153 vs_sbs=-0.975% vbs_closed=+25.19%
+          components: pre_top1=0.4591 gap_top1=0.4574 utility_top1=0.2501 base_top1=0.4492 support_g0_top1=0.4721 corr(pre/final)=+0.967 corr(gap/final)=+0.952 corr(util/final)=+0.189
+          support: g0@1=0.4721 u1@1=0.8517 u2@1=0.9501 u3@1=0.9739 top3_recall=0.9996 avg_shortlist=4.57 arm_coverage=0.9772
+       TSP: top1=0.357 mean_cost=7.9212 (sbs=7.9578) vs_sbs=-0.46% pre=0.351 gap=0.336 util=0.247
+      CVRP: top1=0.361 mean_cost=18.2783 (sbs=18.2943) vs_sbs=-0.09% pre=0.363 gap=0.249 util=0.209
+      ATSP: top1=0.770 mean_cost=1.6395 (sbs=1.6735) vs_sbs=-2.03% pre=0.767 gap=0.766 util=0.259
+      OVRP: top1=0.353 mean_cost=7.4575 (sbs=7.4617) vs_sbs=-0.06% pre=0.350 gap=0.308 util=0.273
+      VRPB: top1=0.556 mean_cost=9.3340 (sbs=9.3403) vs_sbs=-0.07% pre=0.530 gap=0.545 util=0.290
+      VRPL: top1=0.310 mean_cost=12.4071 (sbs=12.4072) vs_sbs=-0.00% pre=0.255 gap=0.302 util=0.169
+     VRPTW: top1=0.473 mean_cost=17.8900 (sbs=18.6571) vs_sbs=-4.11% pre=0.442 gap=0.426 util=0.188
+    OVRPTW: top1=0.505 mean_cost=10.0394 (sbs=10.0484) vs_sbs=-0.09% pre=0.502 gap=0.501 util=0.224
+     OVRPB: top1=0.550 mean_cost=6.3237 (sbs=6.3220) vs_sbs=+0.03% pre=0.547 gap=0.550 util=0.421
+     OVRPL: top1=0.377 mean_cost=7.4345 (sbs=7.4376) vs_sbs=-0.04% pre=0.363 gap=0.350 util=0.253
+     VRPBL: top1=0.534 mean_cost=9.3574 (sbs=9.3593) vs_sbs=-0.02% pre=0.508 gap=0.547 util=0.288
+    VRPBTW: top1=0.415 mean_cost=19.0810 (sbs=19.6697) vs_sbs=-2.99% pre=0.408 gap=0.422 util=0.209
+    VRPLTW: top1=0.451 mean_cost=17.6522 (sbs=18.5091) vs_sbs=-4.63% pre=0.447 gap=0.443 util=0.180
+    OVRPBL: top1=0.519 mean_cost=6.3103 (sbs=6.3103) vs_sbs=+0.00% pre=0.524 gap=0.539 util=0.428
+   OVRPBTW: top1=0.520 mean_cost=10.4983 (sbs=10.5068) vs_sbs=-0.08% pre=0.490 gap=0.513 util=0.258
+   OVRPLTW: top1=0.494 mean_cost=10.1279 (sbs=10.1272) vs_sbs=+0.01% pre=0.492 gap=0.491 util=0.200
+   VRPBLTW: top1=0.438 mean_cost=18.9637 (sbs=19.5198) vs_sbs=-2.85% pre=0.424 gap=0.447 util=0.152
+  OVRPBLTW: top1=0.514 mean_cost=10.5332 (sbs=10.5412) vs_sbs=-0.08% pre=0.501 gap=0.499 util=0.253
+[save] best.pt epoch=29 score=0.4721
+[save] best_top1.pt epoch=29 top1=0.4721
+[test last] macro_top1=0.4573 top2=0.7981 top3=0.9135 vs_sbs=-0.922% vbs_closed=+22.99%
+          components: pre_top1=0.4524 gap_top1=0.4463 utility_top1=0.2522 base_top1=0.4416 support_g0_top1=0.4573 corr(pre/final)=+0.966 corr(gap/final)=+0.954 corr(util/final)=+0.185
+          support: g0@1=0.4573 u1@1=0.8491 u2@1=0.9467 u3@1=0.9738 top3_recall=0.9999 avg_shortlist=4.56 arm_coverage=0.9603
+       TSP: top1=0.345 mean_cost=8.0483 (sbs=8.0829) vs_sbs=-0.43% pre=0.350 gap=0.325 util=0.246
+      CVRP: top1=0.329 mean_cost=18.3425 (sbs=18.3323) vs_sbs=+0.06% pre=0.328 gap=0.254 util=0.201
+      ATSP: top1=0.758 mean_cost=1.6374 (sbs=1.6697) vs_sbs=-1.94% pre=0.765 gap=0.770 util=0.265
+      OVRP: top1=0.353 mean_cost=7.4660 (sbs=7.4695) vs_sbs=-0.05% pre=0.336 gap=0.332 util=0.275
+      VRPB: top1=0.507 mean_cost=9.2906 (sbs=9.2951) vs_sbs=-0.05% pre=0.501 gap=0.502 util=0.313
+      VRPL: top1=0.302 mean_cost=12.3576 (sbs=12.3607) vs_sbs=-0.02% pre=0.254 gap=0.271 util=0.198
+     VRPTW: top1=0.421 mean_cost=17.6616 (sbs=18.4357) vs_sbs=-4.20% pre=0.416 gap=0.383 util=0.163
+    OVRPTW: top1=0.456 mean_cost=10.1219 (sbs=10.1233) vs_sbs=-0.01% pre=0.475 gap=0.453 util=0.221
+     OVRPB: top1=0.529 mean_cost=6.3008 (sbs=6.2963) vs_sbs=+0.07% pre=0.535 gap=0.531 util=0.430
+     OVRPL: top1=0.367 mean_cost=7.4470 (sbs=7.4537) vs_sbs=-0.09% pre=0.363 gap=0.339 util=0.257
+     VRPBL: top1=0.565 mean_cost=9.2451 (sbs=9.2492) vs_sbs=-0.04% pre=0.532 gap=0.561 util=0.280
+    VRPBTW: top1=0.418 mean_cost=19.0157 (sbs=19.5263) vs_sbs=-2.62% pre=0.435 gap=0.425 util=0.187
+    VRPLTW: top1=0.410 mean_cost=17.6231 (sbs=18.4269) vs_sbs=-4.36% pre=0.418 gap=0.421 util=0.169
+    OVRPBL: top1=0.568 mean_cost=6.3043 (sbs=6.3068) vs_sbs=-0.04% pre=0.561 gap=0.575 util=0.430
+   OVRPBTW: top1=0.512 mean_cost=10.6094 (sbs=10.6090) vs_sbs=+0.00% pre=0.496 gap=0.497 util=0.246
+   OVRPLTW: top1=0.474 mean_cost=10.1060 (sbs=10.1036) vs_sbs=+0.02% pre=0.480 gap=0.476 util=0.220
+   VRPBLTW: top1=0.419 mean_cost=19.1122 (sbs=19.6770) vs_sbs=-2.87% pre=0.420 gap=0.419 util=0.183
+  OVRPBLTW: top1=0.499 mean_cost=10.5887 (sbs=10.5928) vs_sbs=-0.04% pre=0.478 gap=0.500 util=0.256
+[test best] macro_top1=0.4573 top2=0.7981 top3=0.9135 vs_sbs=-0.922% vbs_closed=+22.99%
+          components: pre_top1=0.4524 gap_top1=0.4463 utility_top1=0.2522 base_top1=0.4416 support_g0_top1=0.4573 corr(pre/final)=+0.966 corr(gap/final)=+0.954 corr(util/final)=+0.185
+          support: g0@1=0.4573 u1@1=0.8491 u2@1=0.9467 u3@1=0.9738 top3_recall=0.9999 avg_shortlist=4.56 arm_coverage=0.9603
+       TSP: top1=0.345 mean_cost=8.0483 (sbs=8.0829) vs_sbs=-0.43% pre=0.350 gap=0.325 util=0.246
+      CVRP: top1=0.329 mean_cost=18.3425 (sbs=18.3323) vs_sbs=+0.06% pre=0.328 gap=0.254 util=0.201
+      ATSP: top1=0.758 mean_cost=1.6374 (sbs=1.6697) vs_sbs=-1.94% pre=0.765 gap=0.770 util=0.265
+      OVRP: top1=0.353 mean_cost=7.4660 (sbs=7.4695) vs_sbs=-0.05% pre=0.336 gap=0.332 util=0.275
+      VRPB: top1=0.507 mean_cost=9.2906 (sbs=9.2951) vs_sbs=-0.05% pre=0.501 gap=0.502 util=0.313
+      VRPL: top1=0.302 mean_cost=12.3576 (sbs=12.3607) vs_sbs=-0.02% pre=0.254 gap=0.271 util=0.198
+     VRPTW: top1=0.421 mean_cost=17.6616 (sbs=18.4357) vs_sbs=-4.20% pre=0.416 gap=0.383 util=0.163
+    OVRPTW: top1=0.456 mean_cost=10.1219 (sbs=10.1233) vs_sbs=-0.01% pre=0.475 gap=0.453 util=0.221
+     OVRPB: top1=0.529 mean_cost=6.3008 (sbs=6.2963) vs_sbs=+0.07% pre=0.535 gap=0.531 util=0.430
+     OVRPL: top1=0.367 mean_cost=7.4470 (sbs=7.4537) vs_sbs=-0.09% pre=0.363 gap=0.339 util=0.257
+     VRPBL: top1=0.565 mean_cost=9.2451 (sbs=9.2492) vs_sbs=-0.04% pre=0.532 gap=0.561 util=0.280
+    VRPBTW: top1=0.418 mean_cost=19.0157 (sbs=19.5263) vs_sbs=-2.62% pre=0.435 gap=0.425 util=0.187
+    VRPLTW: top1=0.410 mean_cost=17.6231 (sbs=18.4269) vs_sbs=-4.36% pre=0.418 gap=0.421 util=0.169
+    OVRPBL: top1=0.568 mean_cost=6.3043 (sbs=6.3068) vs_sbs=-0.04% pre=0.561 gap=0.575 util=0.430
+   OVRPBTW: top1=0.512 mean_cost=10.6094 (sbs=10.6090) vs_sbs=+0.00% pre=0.496 gap=0.497 util=0.246
+   OVRPLTW: top1=0.474 mean_cost=10.1060 (sbs=10.1036) vs_sbs=+0.02% pre=0.480 gap=0.476 util=0.220
+   VRPBLTW: top1=0.419 mean_cost=19.1122 (sbs=19.6770) vs_sbs=-2.87% pre=0.420 gap=0.419 util=0.183
+  OVRPBLTW: top1=0.499 mean_cost=10.5887 (sbs=10.5928) vs_sbs=-0.04% pre=0.478 gap=0.500 util=0.256
+[test best_top1] macro_top1=0.4573 top2=0.7981 top3=0.9135 vs_sbs=-0.922% vbs_closed=+22.99%
+          components: pre_top1=0.4524 gap_top1=0.4463 utility_top1=0.2522 base_top1=0.4416 support_g0_top1=0.4573 corr(pre/final)=+0.966 corr(gap/final)=+0.954 corr(util/final)=+0.185
+          support: g0@1=0.4573 u1@1=0.8491 u2@1=0.9467 u3@1=0.9738 top3_recall=0.9999 avg_shortlist=4.56 arm_coverage=0.9603
+       TSP: top1=0.345 mean_cost=8.0483 (sbs=8.0829) vs_sbs=-0.43% pre=0.350 gap=0.325 util=0.246
+      CVRP: top1=0.329 mean_cost=18.3425 (sbs=18.3323) vs_sbs=+0.06% pre=0.328 gap=0.254 util=0.201
+      ATSP: top1=0.758 mean_cost=1.6374 (sbs=1.6697) vs_sbs=-1.94% pre=0.765 gap=0.770 util=0.265
+      OVRP: top1=0.353 mean_cost=7.4660 (sbs=7.4695) vs_sbs=-0.05% pre=0.336 gap=0.332 util=0.275
+      VRPB: top1=0.507 mean_cost=9.2906 (sbs=9.2951) vs_sbs=-0.05% pre=0.501 gap=0.502 util=0.313
+      VRPL: top1=0.302 mean_cost=12.3576 (sbs=12.3607) vs_sbs=-0.02% pre=0.254 gap=0.271 util=0.198
+     VRPTW: top1=0.421 mean_cost=17.6616 (sbs=18.4357) vs_sbs=-4.20% pre=0.416 gap=0.383 util=0.163
+    OVRPTW: top1=0.456 mean_cost=10.1219 (sbs=10.1233) vs_sbs=-0.01% pre=0.475 gap=0.453 util=0.221
+     OVRPB: top1=0.529 mean_cost=6.3008 (sbs=6.2963) vs_sbs=+0.07% pre=0.535 gap=0.531 util=0.430
+     OVRPL: top1=0.367 mean_cost=7.4470 (sbs=7.4537) vs_sbs=-0.09% pre=0.363 gap=0.339 util=0.257
+     VRPBL: top1=0.565 mean_cost=9.2451 (sbs=9.2492) vs_sbs=-0.04% pre=0.532 gap=0.561 util=0.280
+    VRPBTW: top1=0.418 mean_cost=19.0157 (sbs=19.5263) vs_sbs=-2.62% pre=0.435 gap=0.425 util=0.187
+    VRPLTW: top1=0.410 mean_cost=17.6231 (sbs=18.4269) vs_sbs=-4.36% pre=0.418 gap=0.421 util=0.169
+    OVRPBL: top1=0.568 mean_cost=6.3043 (sbs=6.3068) vs_sbs=-0.04% pre=0.561 gap=0.575 util=0.430
+   OVRPBTW: top1=0.512 mean_cost=10.6094 (sbs=10.6090) vs_sbs=+0.00% pre=0.496 gap=0.497 util=0.246
+   OVRPLTW: top1=0.474 mean_cost=10.1060 (sbs=10.1036) vs_sbs=+0.02% pre=0.480 gap=0.476 util=0.220
+   VRPBLTW: top1=0.419 mean_cost=19.1122 (sbs=19.6770) vs_sbs=-2.87% pre=0.420 gap=0.419 util=0.183
+  OVRPBLTW: top1=0.499 mean_cost=10.5887 (sbs=10.5928) vs_sbs=-0.04% pre=0.478 gap=0.500 util=0.256
+[test best_top3_safe] macro_top1=0.4595 top2=0.7987 top3=0.9120 vs_sbs=-0.935% vbs_closed=+22.81%
+          components: pre_top1=0.4522 gap_top1=0.4509 utility_top1=0.3019 base_top1=0.4442 support_g0_top1=0.4595 corr(pre/final)=+0.980 corr(gap/final)=+0.945 corr(util/final)=+0.346
+          support: g0@1=0.4595 u1@1=0.8469 u2@1=0.9481 u3@1=0.9744 top3_recall=0.9996 avg_shortlist=4.61 arm_coverage=0.9524
+       TSP: top1=0.352 mean_cost=8.0442 (sbs=8.0829) vs_sbs=-0.48% pre=0.349 gap=0.331 util=0.245
+      CVRP: top1=0.334 mean_cost=18.3577 (sbs=18.3323) vs_sbs=+0.14% pre=0.319 gap=0.262 util=0.216
+      ATSP: top1=0.754 mean_cost=1.6330 (sbs=1.6697) vs_sbs=-2.20% pre=0.757 gap=0.749 util=0.351
+      OVRP: top1=0.349 mean_cost=7.4675 (sbs=7.4695) vs_sbs=-0.03% pre=0.334 gap=0.353 util=0.313
+      VRPB: top1=0.512 mean_cost=9.3012 (sbs=9.2951) vs_sbs=+0.07% pre=0.520 gap=0.495 util=0.405
+      VRPL: top1=0.305 mean_cost=12.3542 (sbs=12.3607) vs_sbs=-0.05% pre=0.292 gap=0.240 util=0.232
+     VRPTW: top1=0.416 mean_cost=17.6585 (sbs=18.4357) vs_sbs=-4.22% pre=0.365 gap=0.400 util=0.200
+    OVRPTW: top1=0.462 mean_cost=10.1223 (sbs=10.1233) vs_sbs=-0.01% pre=0.469 gap=0.472 util=0.239
+     OVRPB: top1=0.530 mean_cost=6.3010 (sbs=6.2963) vs_sbs=+0.07% pre=0.554 gap=0.532 util=0.478
+     OVRPL: top1=0.375 mean_cost=7.4467 (sbs=7.4537) vs_sbs=-0.09% pre=0.368 gap=0.358 util=0.343
+     VRPBL: top1=0.556 mean_cost=9.2480 (sbs=9.2492) vs_sbs=-0.01% pre=0.546 gap=0.557 util=0.397
+    VRPBTW: top1=0.429 mean_cost=19.0078 (sbs=19.5263) vs_sbs=-2.66% pre=0.413 gap=0.440 util=0.244
+    VRPLTW: top1=0.415 mean_cost=17.6239 (sbs=18.4269) vs_sbs=-4.36% pre=0.415 gap=0.430 util=0.222
+    OVRPBL: top1=0.566 mean_cost=6.3042 (sbs=6.3068) vs_sbs=-0.04% pre=0.547 gap=0.572 util=0.484
+   OVRPBTW: top1=0.515 mean_cost=10.6048 (sbs=10.6090) vs_sbs=-0.04% pre=0.509 gap=0.514 util=0.295
+   OVRPLTW: top1=0.492 mean_cost=10.1032 (sbs=10.1036) vs_sbs=-0.00% pre=0.479 gap=0.475 util=0.248
+   VRPBLTW: top1=0.422 mean_cost=19.1029 (sbs=19.6770) vs_sbs=-2.92% pre=0.433 gap=0.419 util=0.210
+  OVRPBLTW: top1=0.487 mean_cost=10.5925 (sbs=10.5928) vs_sbs=-0.00% pre=0.470 gap=0.518 util=0.312
+[test best_cost] macro_top1=0.4595 top2=0.7987 top3=0.9120 vs_sbs=-0.935% vbs_closed=+22.81%
+          components: pre_top1=0.4522 gap_top1=0.4509 utility_top1=0.3019 base_top1=0.4442 support_g0_top1=0.4595 corr(pre/final)=+0.980 corr(gap/final)=+0.945 corr(util/final)=+0.346
+          support: g0@1=0.4595 u1@1=0.8469 u2@1=0.9481 u3@1=0.9744 top3_recall=0.9996 avg_shortlist=4.61 arm_coverage=0.9524
+       TSP: top1=0.352 mean_cost=8.0442 (sbs=8.0829) vs_sbs=-0.48% pre=0.349 gap=0.331 util=0.245
+      CVRP: top1=0.334 mean_cost=18.3577 (sbs=18.3323) vs_sbs=+0.14% pre=0.319 gap=0.262 util=0.216
+      ATSP: top1=0.754 mean_cost=1.6330 (sbs=1.6697) vs_sbs=-2.20% pre=0.757 gap=0.749 util=0.351
+      OVRP: top1=0.349 mean_cost=7.4675 (sbs=7.4695) vs_sbs=-0.03% pre=0.334 gap=0.353 util=0.313
+      VRPB: top1=0.512 mean_cost=9.3012 (sbs=9.2951) vs_sbs=+0.07% pre=0.520 gap=0.495 util=0.405
+      VRPL: top1=0.305 mean_cost=12.3542 (sbs=12.3607) vs_sbs=-0.05% pre=0.292 gap=0.240 util=0.232
+     VRPTW: top1=0.416 mean_cost=17.6585 (sbs=18.4357) vs_sbs=-4.22% pre=0.365 gap=0.400 util=0.200
+    OVRPTW: top1=0.462 mean_cost=10.1223 (sbs=10.1233) vs_sbs=-0.01% pre=0.469 gap=0.472 util=0.239
+     OVRPB: top1=0.530 mean_cost=6.3010 (sbs=6.2963) vs_sbs=+0.07% pre=0.554 gap=0.532 util=0.478
+     OVRPL: top1=0.375 mean_cost=7.4467 (sbs=7.4537) vs_sbs=-0.09% pre=0.368 gap=0.358 util=0.343
+     VRPBL: top1=0.556 mean_cost=9.2480 (sbs=9.2492) vs_sbs=-0.01% pre=0.546 gap=0.557 util=0.397
+    VRPBTW: top1=0.429 mean_cost=19.0078 (sbs=19.5263) vs_sbs=-2.66% pre=0.413 gap=0.440 util=0.244
+    VRPLTW: top1=0.415 mean_cost=17.6239 (sbs=18.4269) vs_sbs=-4.36% pre=0.415 gap=0.430 util=0.222
+    OVRPBL: top1=0.566 mean_cost=6.3042 (sbs=6.3068) vs_sbs=-0.04% pre=0.547 gap=0.572 util=0.484
+   OVRPBTW: top1=0.515 mean_cost=10.6048 (sbs=10.6090) vs_sbs=-0.04% pre=0.509 gap=0.514 util=0.295
+   OVRPLTW: top1=0.492 mean_cost=10.1032 (sbs=10.1036) vs_sbs=-0.00% pre=0.479 gap=0.475 util=0.248
+   VRPBLTW: top1=0.422 mean_cost=19.1029 (sbs=19.6770) vs_sbs=-2.92% pre=0.433 gap=0.419 util=0.210
+  OVRPBLTW: top1=0.487 mean_cost=10.5925 (sbs=10.5928) vs_sbs=-0.00% pre=0.470 gap=0.518 util=0.312
