@@ -1,0 +1,2397 @@
+{
+  "protocol": {
+    "reference_updates": 56880,
+    "validation_interval": 1422,
+    "successful_update_budget": 14220,
+    "continuation_epochs": 10,
+    "batch_size": 128,
+    "eval_batch_size": 128,
+    "base_peak_lr": 1e-05,
+    "adapter_peak_lr": 0.0001,
+    "warmup_updates": 711,
+    "lr_final_fraction": 0.1,
+    "weight_decay": 0.0001,
+    "clip_norm": 1.0,
+    "rdrop_weight": 0.35,
+    "rdrop_ramp_updates": 4266,
+    "delta_screen": 0.001,
+    "primary": "macro_vs_sbs_pct",
+    "primary_unit": "percentage points; lower is better",
+    "loss": {
+      "ce": 0.35,
+      "comparison": 0.35,
+      "risk": 0.02,
+      "cost_scale": 0.01,
+      "focus_weights": {
+        "true3": 0.5,
+        "predicted3": 0.25,
+        "all_pairs": 0.25
+      }
+    },
+    "full_coverage": true,
+    "drop_last": false,
+    "gradient_accumulation": 1,
+    "amp_dtype": "fp16",
+    "dropout_passes": 2,
+    "augmentation": false,
+    "sampling": "natural distribution, interleaved task batches",
+    "initialization": "same R43A best, fresh AdamW/scaler, all original and adapter parameters trainable",
+    "lr_rule": "5% successful-update warmup, then fixed cosine; replaces validation-driven plateau",
+    "best_rule": "strict minimum validation macro_vs_sbs_pct, including step0",
+    "stage_a": {
+      "seeds": [
+        2
+      ],
+      "total_updates": 42660
+    },
+    "stage_b": {
+      "seeds": [
+        17,
+        42
+      ],
+      "maximum_total_updates": 127980
+    },
+    "screen": "C2 best beats C0 and C1 by delta_screen, and mean of last up-to-five common nonzero validation points is lower than both",
+    "test_rule": "only after stage A passes and all stage B arms finish; one locked best per run"
+  },
+  "baseline": {
+    "path": "code/V4/runs/R43_pairwise_selection/score_difference_seed2/best.pt",
+    "sha256": "1b99faac4d31097003403c39cdf4b7d7cb0960a66419101ae3c5b267f9058810",
+    "epoch": 35,
+    "training_seed": 2,
+    "successful_updates": 49770,
+    "recorded_val": {
+      "macro_ce": 1.0898928840955098,
+      "macro_top1": 0.48838888888888893,
+      "macro_top2": 0.8225555555555555,
+      "macro_top3": 0.9276666666666666,
+      "macro_top1_tie_aware": 0.4892222222222223,
+      "macro_mean_cost": 11.169070942108473,
+      "macro_vs_sbs_pct": -1.0668412736620827,
+      "macro_vs_oracle_pct": 0.896518241799418,
+      "macro_actual_regret_pct": 0.9277449977398032,
+      "macro_vbs_gap_closed_pct": 31.75294812466438,
+      "macro_true3_accuracy": 0.7047269341917937,
+      "macro_reference_top2_accuracy": 0.5854554965010348
+    },
+    "code_commit": "a872ca716c18b449b405f641d357fafe0a4a472d"
+  },
+  "metadata": {
+    "fields": [
+      "C",
+      "O",
+      "B",
+      "BP",
+      "L",
+      "TW",
+      "MD",
+      "A",
+      "PD",
+      "PC",
+      "OP",
+      "HAS_DEPOT",
+      "IS_MATRIX",
+      "IS_COORD",
+      "DEPOT_COUNT_NORM",
+      "ACTIVE_FEATURE_FRAC",
+      "train_normalized_log_real_nodes"
+    ],
+    "descriptor_source": "existing batch[problem_desc], unchanged registry/data semantics",
+    "size_source": "node_mask.sum(-1); matches loader n; CVRP/MVRP includes the single depot",
+    "log_n_mean": 4.4230610337568,
+    "log_n_std": 0.4740697248804898,
+    "normalization_fit": "train metadata only; equal weight per task-instance",
+    "train_instances": 180000,
+    "std_floor": 1e-06,
+    "problem_descriptors": {
+      "TSP": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      "CVRP": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.20000000298023224,
+        0.09090909361839294
+      ],
+      "ATSP": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.09090909361839294
+      ],
+      "OVRP": [
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.20000000298023224,
+        0.1818181872367859
+      ],
+      "VRPB": [
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.20000000298023224,
+        0.1818181872367859
+      ],
+      "VRPL": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.20000000298023224,
+        0.1818181872367859
+      ],
+      "VRPTW": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.20000000298023224,
+        0.1818181872367859
+      ],
+      "OVRPTW": [
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.20000000298023224,
+        0.27272728085517883
+      ],
+      "OVRPB": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.20000000298023224,
+        0.27272728085517883
+      ],
+      "OVRPL": [
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.20000000298023224,
+        0.27272728085517883
+      ],
+      "VRPBL": [
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.20000000298023224,
+        0.27272728085517883
+      ],
+      "VRPBTW": [
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.20000000298023224,
+        0.27272728085517883
+      ],
+      "VRPLTW": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.20000000298023224,
+        0.27272728085517883
+      ],
+      "OVRPBL": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.20000000298023224,
+        0.3636363744735718
+      ],
+      "OVRPBTW": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.20000000298023224,
+        0.3636363744735718
+      ],
+      "OVRPLTW": [
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.20000000298023224,
+        0.3636363744735718
+      ],
+      "VRPBLTW": [
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.20000000298023224,
+        0.3636363744735718
+      ],
+      "OVRPBLTW": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.20000000298023224,
+        0.4545454680919647
+      ]
+    },
+    "size_boundaries": {
+      "TSP": [
+        161.0,
+        275.0,
+        386.0
+      ],
+      "CVRP": [
+        162.0,
+        278.0,
+        390.0
+      ],
+      "ATSP": [
+        40.0,
+        60.0,
+        80.0
+      ],
+      "OVRP": [
+        63.0,
+        76.0,
+        89.0
+      ],
+      "VRPB": [
+        63.0,
+        76.0,
+        89.0
+      ],
+      "VRPL": [
+        63.0,
+        76.0,
+        89.0
+      ],
+      "VRPTW": [
+        63.0,
+        76.0,
+        89.0
+      ],
+      "OVRPTW": [
+        63.0,
+        76.0,
+        89.0
+      ],
+      "OVRPB": [
+        63.0,
+        76.0,
+        89.0
+      ],
+      "OVRPL": [
+        63.0,
+        76.0,
+        89.0
+      ],
+      "VRPBL": [
+        63.0,
+        76.0,
+        89.0
+      ],
+      "VRPBTW": [
+        63.0,
+        76.0,
+        89.0
+      ],
+      "VRPLTW": [
+        63.0,
+        76.0,
+        89.0
+      ],
+      "OVRPBL": [
+        63.0,
+        76.0,
+        89.0
+      ],
+      "OVRPBTW": [
+        63.0,
+        76.0,
+        89.0
+      ],
+      "OVRPLTW": [
+        63.0,
+        76.0,
+        89.0
+      ],
+      "VRPBLTW": [
+        63.0,
+        76.0,
+        89.0
+      ],
+      "OVRPBLTW": [
+        63.0,
+        76.0,
+        89.0
+      ]
+    }
+  },
+  "parameters": {
+    "C0": {
+      "original": 1842953,
+      "added": 0,
+      "total": 1842953,
+      "rank": null,
+      "added_fraction": 0.0,
+      "model_params": {
+        "embedding_dim": 128,
+        "head_num": 4,
+        "qkv_dim": 32,
+        "ff_hidden_dim": 512,
+        "head_hidden_dim": 256,
+        "encoder_layer_num": 4,
+        "solver_set_layer_num": 2,
+        "query_num": 4,
+        "dropout": 0.1,
+        "stats_dim": 12,
+        "rezero": false,
+        "gap_score_weight": 0.25,
+        "pre_score_weight": 0.25,
+        "support_branch": false,
+        "support_generators": 0,
+        "support_hidden": 128,
+        "support_score_weight": 0.0,
+        "support_score_mode": "g0",
+        "support_g0_as_main": false,
+        "support_feature_to_token": true,
+        "support_main_utility_weight": 0.0,
+        "support_main_pre_weight": 0.0,
+        "support_main_gap_weight": 0.0,
+        "solver_feature_spec": {
+          "feature_dim": 34,
+          "index_base": 0,
+          "feature_order": [
+            "\u6784\u9020\u5f0f",
+            "\u6269\u6563\u5f0f",
+            "\u5750\u6807\u4e0e\u8282\u70b9\u5c5e\u6027",
+            "\u6210\u672c\u77e9\u9635",
+            "\u56fe\u4e0e\u8fb9",
+            "MHA\uff0fTransformer",
+            "GNN",
+            "\u77e9\u9635\u53cc\u6d41\u6ce8\u610f\u529b",
+            "\u9759\u6001\u7f16\u7801\u590d\u7528",
+            "\u52a8\u6001\u72b6\u6001\u66f4\u65b0",
+            "\u52a8\u6001\u5c40\u90e8\u66f4\u65b0",
+            "\u8fed\u4ee3\u53bb\u566a",
+            "\u5b9e\u4f8b\u6761\u4ef6",
+            "\u5c5e\u6027\u6761\u4ef6",
+            "\u7ea6\u675f\u6761\u4ef6",
+            "\u5143\u5b66\u4e60\u4efb\u52a1\u6761\u4ef6",
+            "FFN \u4e13\u5bb6",
+            "LoRA \u4e13\u5bb6",
+            "\u76d1\u7763\u5b66\u4e60",
+            "\u5f3a\u5316\u5b66\u4e60",
+            "\u6269\u6563\u8bad\u7ec3",
+            "\u5355\u4efb\u52a1",
+            "\u591a\u4efb\u52a1",
+            "\u5143\u5b66\u4e60",
+            "\u5b50\u95ee\u9898\u91cd\u7f16\u7801",
+            "\u91cd\u89e3\u7801\u5668",
+            "\u68af\u5ea6\u5f15\u5bfc\u641c\u7d22",
+            "\u5168\u5c40\u2014\u5c40\u90e8\u53cc\u7b56\u7565",
+            "\u8fd1\u90bb\u6210\u672c\u8f93\u5165",
+            "\u4f2a one-hot \u8f93\u5165",
+            "\u7edf\u4e00\u77e9\u9635\u8868\u793a",
+            "\u5168\u5c40\u5206\u533a\u4e0e\u5c40\u90e8\u91cd\u6784",
+            "\u89e3\u7801\u5668 FFN \u6b8b\u5dee",
+            "\u5168\u5c40\u5c5e\u6027\u5d4c\u5165"
+          ],
+          "solver_active_indices": {
+            "BQ": [
+              0,
+              2,
+              5,
+              9,
+              18,
+              21,
+              24
+            ],
+            "LEHD": [
+              0,
+              2,
+              5,
+              9,
+              18,
+              21,
+              25
+            ],
+            "DIFUSCO": [
+              1,
+              4,
+              6,
+              11,
+              20,
+              21
+            ],
+            "DIFUSCO500": [
+              1,
+              4,
+              6,
+              11,
+              20,
+              21
+            ],
+            "T2T": [
+              1,
+              4,
+              6,
+              11,
+              20,
+              21,
+              26
+            ],
+            "T2T500": [
+              1,
+              4,
+              6,
+              11,
+              20,
+              21,
+              26
+            ],
+            "ELG": [
+              0,
+              2,
+              5,
+              8,
+              10,
+              19,
+              21,
+              27
+            ],
+            "OMNI": [
+              0,
+              2,
+              5,
+              8,
+              15,
+              19,
+              23
+            ],
+            "ICAM": [
+              0,
+              2,
+              5,
+              8,
+              12,
+              19,
+              21
+            ],
+            "ICAM_ATSP": [
+              0,
+              3,
+              7,
+              8,
+              12,
+              19,
+              21,
+              28
+            ],
+            "MATNET": [
+              0,
+              3,
+              7,
+              8,
+              19,
+              21
+            ],
+            "MATPOENET": [
+              0,
+              3,
+              7,
+              8,
+              19,
+              21,
+              29
+            ],
+            "UNICO_MatPOENet": [
+              0,
+              3,
+              7,
+              8,
+              19,
+              22,
+              29,
+              30
+            ],
+            "GLOP": [
+              0,
+              3,
+              4,
+              6,
+              7,
+              19,
+              31
+            ],
+            "MTPOMO": [
+              0,
+              2,
+              5,
+              8,
+              13,
+              19,
+              22
+            ],
+            "MVMOE": [
+              0,
+              2,
+              5,
+              8,
+              13,
+              16,
+              19,
+              22
+            ],
+            "RELD_CVRP": [
+              0,
+              2,
+              5,
+              8,
+              19,
+              21,
+              32
+            ],
+            "RELD_MTL": [
+              0,
+              2,
+              5,
+              8,
+              13,
+              19,
+              22,
+              32
+            ],
+            "RELD_MOEL": [
+              0,
+              2,
+              5,
+              8,
+              13,
+              16,
+              19,
+              22,
+              32
+            ],
+            "RouteFinder": [
+              0,
+              2,
+              5,
+              8,
+              13,
+              19,
+              22,
+              33
+            ],
+            "MoSES_RF": [
+              0,
+              2,
+              5,
+              8,
+              13,
+              17,
+              22,
+              33
+            ],
+            "MoSES_CaDA": [
+              0,
+              2,
+              5,
+              8,
+              14,
+              17,
+              22
+            ]
+          },
+          "solver_names": [
+            "BQ",
+            "DIFUSCO",
+            "DIFUSCO500",
+            "ELG",
+            "GLOP",
+            "ICAM",
+            "ICAM_ATSP",
+            "LEHD",
+            "MATNET",
+            "MATPOENET",
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "OMNI",
+            "RELD_CVRP",
+            "RELD_MOEL",
+            "RELD_MTL",
+            "RouteFinder",
+            "T2T",
+            "T2T500",
+            "UNICO_MatPOENet"
+          ]
+        },
+        "solver_feature_weight": 1.0,
+        "solver_feature_hidden": 128,
+        "sdpa": true,
+        "architecture": "pairwise",
+        "joint_layer_num": 2,
+        "local_geometry": true,
+        "geometry_mode": "real",
+        "ignore_coord_dist": true,
+        "native_winner": true,
+        "decision_head": "classification",
+        "pair_mode": "score_difference",
+        "node_adapter_mode": "none",
+        "log_n_mean": 4.4230610337568,
+        "log_n_std": 0.4740697248804898
+      }
+    },
+    "C1": {
+      "original": 1842953,
+      "added": 9984,
+      "total": 1852937,
+      "rank": 39,
+      "added_fraction": 0.005417392630197297,
+      "model_params": {
+        "embedding_dim": 128,
+        "head_num": 4,
+        "qkv_dim": 32,
+        "ff_hidden_dim": 512,
+        "head_hidden_dim": 256,
+        "encoder_layer_num": 4,
+        "solver_set_layer_num": 2,
+        "query_num": 4,
+        "dropout": 0.1,
+        "stats_dim": 12,
+        "rezero": false,
+        "gap_score_weight": 0.25,
+        "pre_score_weight": 0.25,
+        "support_branch": false,
+        "support_generators": 0,
+        "support_hidden": 128,
+        "support_score_weight": 0.0,
+        "support_score_mode": "g0",
+        "support_g0_as_main": false,
+        "support_feature_to_token": true,
+        "support_main_utility_weight": 0.0,
+        "support_main_pre_weight": 0.0,
+        "support_main_gap_weight": 0.0,
+        "solver_feature_spec": {
+          "feature_dim": 34,
+          "index_base": 0,
+          "feature_order": [
+            "\u6784\u9020\u5f0f",
+            "\u6269\u6563\u5f0f",
+            "\u5750\u6807\u4e0e\u8282\u70b9\u5c5e\u6027",
+            "\u6210\u672c\u77e9\u9635",
+            "\u56fe\u4e0e\u8fb9",
+            "MHA\uff0fTransformer",
+            "GNN",
+            "\u77e9\u9635\u53cc\u6d41\u6ce8\u610f\u529b",
+            "\u9759\u6001\u7f16\u7801\u590d\u7528",
+            "\u52a8\u6001\u72b6\u6001\u66f4\u65b0",
+            "\u52a8\u6001\u5c40\u90e8\u66f4\u65b0",
+            "\u8fed\u4ee3\u53bb\u566a",
+            "\u5b9e\u4f8b\u6761\u4ef6",
+            "\u5c5e\u6027\u6761\u4ef6",
+            "\u7ea6\u675f\u6761\u4ef6",
+            "\u5143\u5b66\u4e60\u4efb\u52a1\u6761\u4ef6",
+            "FFN \u4e13\u5bb6",
+            "LoRA \u4e13\u5bb6",
+            "\u76d1\u7763\u5b66\u4e60",
+            "\u5f3a\u5316\u5b66\u4e60",
+            "\u6269\u6563\u8bad\u7ec3",
+            "\u5355\u4efb\u52a1",
+            "\u591a\u4efb\u52a1",
+            "\u5143\u5b66\u4e60",
+            "\u5b50\u95ee\u9898\u91cd\u7f16\u7801",
+            "\u91cd\u89e3\u7801\u5668",
+            "\u68af\u5ea6\u5f15\u5bfc\u641c\u7d22",
+            "\u5168\u5c40\u2014\u5c40\u90e8\u53cc\u7b56\u7565",
+            "\u8fd1\u90bb\u6210\u672c\u8f93\u5165",
+            "\u4f2a one-hot \u8f93\u5165",
+            "\u7edf\u4e00\u77e9\u9635\u8868\u793a",
+            "\u5168\u5c40\u5206\u533a\u4e0e\u5c40\u90e8\u91cd\u6784",
+            "\u89e3\u7801\u5668 FFN \u6b8b\u5dee",
+            "\u5168\u5c40\u5c5e\u6027\u5d4c\u5165"
+          ],
+          "solver_active_indices": {
+            "BQ": [
+              0,
+              2,
+              5,
+              9,
+              18,
+              21,
+              24
+            ],
+            "LEHD": [
+              0,
+              2,
+              5,
+              9,
+              18,
+              21,
+              25
+            ],
+            "DIFUSCO": [
+              1,
+              4,
+              6,
+              11,
+              20,
+              21
+            ],
+            "DIFUSCO500": [
+              1,
+              4,
+              6,
+              11,
+              20,
+              21
+            ],
+            "T2T": [
+              1,
+              4,
+              6,
+              11,
+              20,
+              21,
+              26
+            ],
+            "T2T500": [
+              1,
+              4,
+              6,
+              11,
+              20,
+              21,
+              26
+            ],
+            "ELG": [
+              0,
+              2,
+              5,
+              8,
+              10,
+              19,
+              21,
+              27
+            ],
+            "OMNI": [
+              0,
+              2,
+              5,
+              8,
+              15,
+              19,
+              23
+            ],
+            "ICAM": [
+              0,
+              2,
+              5,
+              8,
+              12,
+              19,
+              21
+            ],
+            "ICAM_ATSP": [
+              0,
+              3,
+              7,
+              8,
+              12,
+              19,
+              21,
+              28
+            ],
+            "MATNET": [
+              0,
+              3,
+              7,
+              8,
+              19,
+              21
+            ],
+            "MATPOENET": [
+              0,
+              3,
+              7,
+              8,
+              19,
+              21,
+              29
+            ],
+            "UNICO_MatPOENet": [
+              0,
+              3,
+              7,
+              8,
+              19,
+              22,
+              29,
+              30
+            ],
+            "GLOP": [
+              0,
+              3,
+              4,
+              6,
+              7,
+              19,
+              31
+            ],
+            "MTPOMO": [
+              0,
+              2,
+              5,
+              8,
+              13,
+              19,
+              22
+            ],
+            "MVMOE": [
+              0,
+              2,
+              5,
+              8,
+              13,
+              16,
+              19,
+              22
+            ],
+            "RELD_CVRP": [
+              0,
+              2,
+              5,
+              8,
+              19,
+              21,
+              32
+            ],
+            "RELD_MTL": [
+              0,
+              2,
+              5,
+              8,
+              13,
+              19,
+              22,
+              32
+            ],
+            "RELD_MOEL": [
+              0,
+              2,
+              5,
+              8,
+              13,
+              16,
+              19,
+              22,
+              32
+            ],
+            "RouteFinder": [
+              0,
+              2,
+              5,
+              8,
+              13,
+              19,
+              22,
+              33
+            ],
+            "MoSES_RF": [
+              0,
+              2,
+              5,
+              8,
+              13,
+              17,
+              22,
+              33
+            ],
+            "MoSES_CaDA": [
+              0,
+              2,
+              5,
+              8,
+              14,
+              17,
+              22
+            ]
+          },
+          "solver_names": [
+            "BQ",
+            "DIFUSCO",
+            "DIFUSCO500",
+            "ELG",
+            "GLOP",
+            "ICAM",
+            "ICAM_ATSP",
+            "LEHD",
+            "MATNET",
+            "MATPOENET",
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "OMNI",
+            "RELD_CVRP",
+            "RELD_MOEL",
+            "RELD_MTL",
+            "RouteFinder",
+            "T2T",
+            "T2T500",
+            "UNICO_MatPOENet"
+          ]
+        },
+        "solver_feature_weight": 1.0,
+        "solver_feature_hidden": 128,
+        "sdpa": true,
+        "architecture": "pairwise",
+        "joint_layer_num": 2,
+        "local_geometry": true,
+        "geometry_mode": "real",
+        "ignore_coord_dist": true,
+        "native_winner": true,
+        "decision_head": "classification",
+        "pair_mode": "score_difference",
+        "node_adapter_mode": "shared",
+        "log_n_mean": 4.4230610337568,
+        "log_n_std": 0.4740697248804898
+      }
+    },
+    "C2": {
+      "original": 1842953,
+      "added": 9824,
+      "total": 1852777,
+      "rank": 32,
+      "added_fraction": 0.005330575440610802,
+      "model_params": {
+        "embedding_dim": 128,
+        "head_num": 4,
+        "qkv_dim": 32,
+        "ff_hidden_dim": 512,
+        "head_hidden_dim": 256,
+        "encoder_layer_num": 4,
+        "solver_set_layer_num": 2,
+        "query_num": 4,
+        "dropout": 0.1,
+        "stats_dim": 12,
+        "rezero": false,
+        "gap_score_weight": 0.25,
+        "pre_score_weight": 0.25,
+        "support_branch": false,
+        "support_generators": 0,
+        "support_hidden": 128,
+        "support_score_weight": 0.0,
+        "support_score_mode": "g0",
+        "support_g0_as_main": false,
+        "support_feature_to_token": true,
+        "support_main_utility_weight": 0.0,
+        "support_main_pre_weight": 0.0,
+        "support_main_gap_weight": 0.0,
+        "solver_feature_spec": {
+          "feature_dim": 34,
+          "index_base": 0,
+          "feature_order": [
+            "\u6784\u9020\u5f0f",
+            "\u6269\u6563\u5f0f",
+            "\u5750\u6807\u4e0e\u8282\u70b9\u5c5e\u6027",
+            "\u6210\u672c\u77e9\u9635",
+            "\u56fe\u4e0e\u8fb9",
+            "MHA\uff0fTransformer",
+            "GNN",
+            "\u77e9\u9635\u53cc\u6d41\u6ce8\u610f\u529b",
+            "\u9759\u6001\u7f16\u7801\u590d\u7528",
+            "\u52a8\u6001\u72b6\u6001\u66f4\u65b0",
+            "\u52a8\u6001\u5c40\u90e8\u66f4\u65b0",
+            "\u8fed\u4ee3\u53bb\u566a",
+            "\u5b9e\u4f8b\u6761\u4ef6",
+            "\u5c5e\u6027\u6761\u4ef6",
+            "\u7ea6\u675f\u6761\u4ef6",
+            "\u5143\u5b66\u4e60\u4efb\u52a1\u6761\u4ef6",
+            "FFN \u4e13\u5bb6",
+            "LoRA \u4e13\u5bb6",
+            "\u76d1\u7763\u5b66\u4e60",
+            "\u5f3a\u5316\u5b66\u4e60",
+            "\u6269\u6563\u8bad\u7ec3",
+            "\u5355\u4efb\u52a1",
+            "\u591a\u4efb\u52a1",
+            "\u5143\u5b66\u4e60",
+            "\u5b50\u95ee\u9898\u91cd\u7f16\u7801",
+            "\u91cd\u89e3\u7801\u5668",
+            "\u68af\u5ea6\u5f15\u5bfc\u641c\u7d22",
+            "\u5168\u5c40\u2014\u5c40\u90e8\u53cc\u7b56\u7565",
+            "\u8fd1\u90bb\u6210\u672c\u8f93\u5165",
+            "\u4f2a one-hot \u8f93\u5165",
+            "\u7edf\u4e00\u77e9\u9635\u8868\u793a",
+            "\u5168\u5c40\u5206\u533a\u4e0e\u5c40\u90e8\u91cd\u6784",
+            "\u89e3\u7801\u5668 FFN \u6b8b\u5dee",
+            "\u5168\u5c40\u5c5e\u6027\u5d4c\u5165"
+          ],
+          "solver_active_indices": {
+            "BQ": [
+              0,
+              2,
+              5,
+              9,
+              18,
+              21,
+              24
+            ],
+            "LEHD": [
+              0,
+              2,
+              5,
+              9,
+              18,
+              21,
+              25
+            ],
+            "DIFUSCO": [
+              1,
+              4,
+              6,
+              11,
+              20,
+              21
+            ],
+            "DIFUSCO500": [
+              1,
+              4,
+              6,
+              11,
+              20,
+              21
+            ],
+            "T2T": [
+              1,
+              4,
+              6,
+              11,
+              20,
+              21,
+              26
+            ],
+            "T2T500": [
+              1,
+              4,
+              6,
+              11,
+              20,
+              21,
+              26
+            ],
+            "ELG": [
+              0,
+              2,
+              5,
+              8,
+              10,
+              19,
+              21,
+              27
+            ],
+            "OMNI": [
+              0,
+              2,
+              5,
+              8,
+              15,
+              19,
+              23
+            ],
+            "ICAM": [
+              0,
+              2,
+              5,
+              8,
+              12,
+              19,
+              21
+            ],
+            "ICAM_ATSP": [
+              0,
+              3,
+              7,
+              8,
+              12,
+              19,
+              21,
+              28
+            ],
+            "MATNET": [
+              0,
+              3,
+              7,
+              8,
+              19,
+              21
+            ],
+            "MATPOENET": [
+              0,
+              3,
+              7,
+              8,
+              19,
+              21,
+              29
+            ],
+            "UNICO_MatPOENet": [
+              0,
+              3,
+              7,
+              8,
+              19,
+              22,
+              29,
+              30
+            ],
+            "GLOP": [
+              0,
+              3,
+              4,
+              6,
+              7,
+              19,
+              31
+            ],
+            "MTPOMO": [
+              0,
+              2,
+              5,
+              8,
+              13,
+              19,
+              22
+            ],
+            "MVMOE": [
+              0,
+              2,
+              5,
+              8,
+              13,
+              16,
+              19,
+              22
+            ],
+            "RELD_CVRP": [
+              0,
+              2,
+              5,
+              8,
+              19,
+              21,
+              32
+            ],
+            "RELD_MTL": [
+              0,
+              2,
+              5,
+              8,
+              13,
+              19,
+              22,
+              32
+            ],
+            "RELD_MOEL": [
+              0,
+              2,
+              5,
+              8,
+              13,
+              16,
+              19,
+              22,
+              32
+            ],
+            "RouteFinder": [
+              0,
+              2,
+              5,
+              8,
+              13,
+              19,
+              22,
+              33
+            ],
+            "MoSES_RF": [
+              0,
+              2,
+              5,
+              8,
+              13,
+              17,
+              22,
+              33
+            ],
+            "MoSES_CaDA": [
+              0,
+              2,
+              5,
+              8,
+              14,
+              17,
+              22
+            ]
+          },
+          "solver_names": [
+            "BQ",
+            "DIFUSCO",
+            "DIFUSCO500",
+            "ELG",
+            "GLOP",
+            "ICAM",
+            "ICAM_ATSP",
+            "LEHD",
+            "MATNET",
+            "MATPOENET",
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "OMNI",
+            "RELD_CVRP",
+            "RELD_MOEL",
+            "RELD_MTL",
+            "RouteFinder",
+            "T2T",
+            "T2T500",
+            "UNICO_MatPOENet"
+          ]
+        },
+        "solver_feature_weight": 1.0,
+        "solver_feature_hidden": 128,
+        "sdpa": true,
+        "architecture": "pairwise",
+        "joint_layer_num": 2,
+        "local_geometry": true,
+        "geometry_mode": "real",
+        "ignore_coord_dist": true,
+        "native_winner": true,
+        "decision_head": "classification",
+        "pair_mode": "score_difference",
+        "node_adapter_mode": "conditional",
+        "log_n_mean": 4.4230610337568,
+        "log_n_std": 0.4740697248804898
+      }
+    }
+  },
+  "schedules": {
+    "2": "05bd75e28ebdcf98a06c08de31808a9feb7041eb63da78778ef4f1b981442604",
+    "17": "87f2d0ea856e51c33277e8762d8d964bbf6ba1e3c182de0253b162cf5585e9ef",
+    "42": "684cf15308aa7ea42d768189a5a28db1bc5ed7f9f4fc02305cde7da9fe80b5ad"
+  },
+  "source_hashes": {
+    "/public/home/shiys/0selection2/code/V4/performance_experiment.py": "f42a41e1ce21ef1aec1c60a257056f719f34c422abc84dec1c6cca53beb26d0d",
+    "/public/home/shiys/0selection2/code/V4/r44_analysis.py": "c1f5122620071da2f247b644cb72a3cf51d1e040856b46cfeb0cf38b9e81abe3",
+    "/public/home/shiys/0selection2/code/V4/solver_features.py": "a6720bd42b5678566ceb71c6d76e20c3e7e792b36feafbe957f917e412223053",
+    "/public/home/shiys/0selection2/code/V4/training_monitor.py": "9076393f6b99b29e12eb46a228bc21e903e6ddb210f295aac01528bf2deb3e1a",
+    "/public/home/shiys/0selection2/code/V4/pairwise_selector.py": "32d0b112f3612ca7180ecaaa86b505d24ffeaeb148ff07ac2a9f1c6d53be67ca",
+    "/public/home/shiys/0selection2/code/V4/multitask_probe.py": "3041a67aa17ac9e2118c754dbd2d040a21ea76b387f12c4d7c5427a8a4da8290",
+    "/public/home/shiys/0selection2/code/V4/r40_experiment.py": "2a1f966ec456d34a657064b56fbf1cb172816369f0666a511af0bdf64ed5baf3",
+    "/public/home/shiys/0selection2/code/V4/performance_targets.py": "270c5d263917dbbef8642249859b82dce72cc9e341beab5471761d4a05f7effa",
+    "/public/home/shiys/0selection2/code/V4/r42_experiment.py": "f474cc83fd4adb4c0135b812cf523dd36380aab3e8b1e69433eade98186c4026",
+    "/public/home/shiys/0selection2/code/V4/test_r44.py": "7bf857b9349ee31ae9b2f7b76d05c6e8fc03a13516c93c0233b17f8d73ced2b0",
+    "/public/home/shiys/0selection2/code/V4/dual_stream.py": "20b2adc0f5c01a6c5e0674be8c2b5fa6f6781fd34bf8195b0023ec1d09a3b0e9",
+    "/public/home/shiys/0selection2/code/V4/run_v4_r44.sh": "0b58ca3d7ff26054bd55c14a87989a074edb87cc5b387dd195a78af3a6f1c51e",
+    "/public/home/shiys/0selection2/code/V4/conditional_node_adapter.py": "7a1afa5b420a6cf8330c70b9c42132d632e3aa679e198f414319239e17bc8d3e",
+    "/public/home/shiys/0selection2/code/V4/train.py": "e80d38fd52a697b6a364c887a4a18e1540490b024154cfc5bebc31308dd0e8f4",
+    "/public/home/shiys/0selection2/code/V4/tensor_loader.py": "c2c02cd8508b9c7bf0be8689909ffae9fad4f63a836ab696897aae3372fa782a",
+    "/public/home/shiys/0selection2/code/V4/r44_experiment.py": "d7453e3dc7d65f1c31cf32621841acd958f84e254d5267e35d93d372d60700d2",
+    "/public/home/shiys/0selection2/code/V4/performance_evaluation.py": "4f2cc3392a33f31ac1b61b0503f4702e98d4220b8266bbdedd4e20554cd5a361",
+    "/public/home/shiys/0selection2/code/V4/performance_analysis.py": "c4c0e7b6e064c196448f09bc23bc0902638643f7a7aed02b08ec86eb6fa70d9a",
+    "/public/home/shiys/0selection2/code/V4/local_geometry.py": "5cecafaf06e39595b847438d2e974ededf086954cab95ff83d232875f86fd581",
+    "/public/home/shiys/0selection2/code/V4/evaluate.py": "979e3b197e817cae3fbb53065fd84e28e1b3df24959c7efaba7b76955cd0dde2",
+    "/public/home/shiys/0selection2/code/V4/r43_experiment.py": "b97b7cb4e2dd6ba81f38eb449bfbb93a2c1ce7c0242e4b5ceb69fdc35cfaab60",
+    "/public/home/shiys/0selection2/code/V4/V4Model.py": "50bff946ab08cc38d66d41d86f76fa016dcd064624d4aefd1d5168a30e3b3aea",
+    "/public/home/shiys/0selection2/code/V4/pairwise_objective.py": "3f487cc91a2819fe7bad5c3ea98fe11fead57e59921f1d43529c617002654a0a",
+    "/public/home/shiys/0selection2/code/unified_selector/registry.py": "4719f198aac176629a0a6257671f96e039e23108bae33f75dd1639b7b045cc62",
+    "/public/home/shiys/0selection2/code/unified_selector/data.py": "3e270fdff3afab0cb93df85498811c44c5f5e46600b87aa04224f48b646fe12e"
+  },
+  "data_manifest": {
+    "train": {
+      "TSP": {
+        "pool": [
+          "BQ",
+          "DIFUSCO",
+          "DIFUSCO500",
+          "ELG",
+          "LEHD",
+          "OMNI",
+          "T2T",
+          "T2T500"
+        ],
+        "pool_ids": [
+          0,
+          1,
+          2,
+          3,
+          7,
+          14,
+          19,
+          20
+        ],
+        "data_hash": "86926e5b388ae36bf4d4a8c273e2dd2a86f05e4b8332cb1e91a3534b1acf7754",
+        "label_hash": "37dbfaacc715f1a32fa227ee7fa4e6e5eb89ac32081c5384bf6302ab7f1b1081"
+      },
+      "CVRP": {
+        "pool": [
+          "BQ",
+          "ELG",
+          "ICAM",
+          "LEHD",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "OMNI",
+          "RELD_CVRP",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          0,
+          3,
+          5,
+          7,
+          11,
+          12,
+          13,
+          14,
+          15,
+          18
+        ],
+        "data_hash": "d0bdcc9af58fd072e625e3fa058ca703e0b1c9d754a88145b5963be520964bae",
+        "label_hash": "fb1d5c04d05b7b5cb93fa98bb629efca8462f188724f60cde318c0b0e3546341"
+      },
+      "ATSP": {
+        "pool": [
+          "GLOP",
+          "ICAM_ATSP",
+          "MATNET",
+          "MATPOENET",
+          "UNICO_MatPOENet"
+        ],
+        "pool_ids": [
+          4,
+          6,
+          8,
+          9,
+          21
+        ],
+        "data_hash": "19a2ad28af76352e33a38ee194e403115fd60a1e8a52da245f2012bcf262d464",
+        "label_hash": "8e6379c4daa1ab60dae2dc6770081c862b7521a5599b92577f3159fe8f65bc60"
+      },
+      "OVRP": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "ebc9276fda5c47b37fef99fed314923375f3fa5977871393fd02e1227f5707eb",
+        "label_hash": "97489dc46774e7a64ca519deec74a328cb500da6d3ea2092664564c090478d47"
+      },
+      "VRPB": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "21bb22c0f5061091a947ebbd5bfad71b4274e17d2cf1e05216a1a37f2b408887",
+        "label_hash": "6d764a1a6e9ea02c4d8b238adc4eb62f4229fbd15d4dcae44f7f1200433ee64d"
+      },
+      "VRPL": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "f78c4c0e1509314f7dbfaba0597e65d24c2b63528aa390bf53e508791c128299",
+        "label_hash": "a16da96846d60072dd6bf01f9b7f292ddb2d939cac2872dbaa5f81949f141ea5"
+      },
+      "VRPTW": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "e9a5d5ac762e32ec3a5775c6644729550fab1b7396b38a7e2cb55c38d664b883",
+        "label_hash": "7cff85df391e9118dac2f3795ad52edca45fc58e129ff7331789cca37d0f3264"
+      },
+      "OVRPTW": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "94072d7fb476af0084255c424664e9a271d75ab35252ac42bea27674f02897f5",
+        "label_hash": "b025329e33bf38538069be7e30a910a11e0dc84f6c440f137e602a71ab1e908f"
+      },
+      "OVRPB": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "a93ed8ff0c9a96dad3514d3693b4a8502a13753575ea69d39637bd9bec54c45c",
+        "label_hash": "f3cf7b8852a50eaae83a2954fddb6fb2f21f1e3e77ed732cca3f42a2e93c5b31"
+      },
+      "OVRPL": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "5172ae283d5b64a2f599d88f40fb13767a25610d344e5e83550f8cd172e53747",
+        "label_hash": "13929bc999a1e956fa8f99a335a8311e685433e81c040f7c9b285a254dfbe0f1"
+      },
+      "VRPBL": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "b35e82c58c672db30d5baf328c4cc75a50252fc84f62fc64b12a7420d3f70fb0",
+        "label_hash": "eafe20187d2737f859dbf6b5917d1a1492c4ffc1c09f8411ce331e10abf17b6e"
+      },
+      "VRPBTW": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "5e77b757cca9acb4b5688cecca7e177cc81b6ce9811ff93796771527f7e53169",
+        "label_hash": "31138f6bab5f79a97b53642762b4b4dd97063726c750113c79a71cf55485a19f"
+      },
+      "VRPLTW": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "6b60eaa6951cde22d139c5ac81725c9752e6265496bc7ebdf26b8f71baa441b5",
+        "label_hash": "788e4abc3e6e1cae7ec6e31f757805dd7853cb4321d6c20c5052f768deb5ae58"
+      },
+      "OVRPBL": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "2c24768197a7542512fa132da91f6f1e2c41f103f5df857eaa30d8b111b70f19",
+        "label_hash": "68bdc2060f792c47fab53d5dc6ebc773d24b1c2622ebb0fc84ed8100b613f23a"
+      },
+      "OVRPBTW": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "44a98bd4a3975d74617ab7d322fd94b69ca6e3250c1ae9866ecc8cc6ee1dbe3c",
+        "label_hash": "f16cd7dd772826c3be3b046bcee03d33e1b4ed04c40c16490c3aab2d864d317b"
+      },
+      "OVRPLTW": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "ca996c57c0a226170a5099874a3eb6c05c4d056f1dfdb7b88f6a0acdcba6c06b",
+        "label_hash": "4e2680b11a806fa2432573bcf57a880331a7cf389bb58c521b2c0b9990b0fe05"
+      },
+      "VRPBLTW": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "812d27aea478c8d62b11e0bf5db0daee0f6a06e7678e6d6b4caec52194a86c64",
+        "label_hash": "a3c08d56258acfec20b555ddb30febf5bbe7edcae8cc30ccf11a8c893a2623aa"
+      },
+      "OVRPBLTW": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "1e19ca56e62e40d9a18d5d8c30330c29ca46bac93ee1c9e516b8caf867a460a8",
+        "label_hash": "62abda08c5ea4963e1439e05b429d99662a56dc466bedd343f5519aa289c2473"
+      }
+    },
+    "val": {
+      "TSP": {
+        "pool": [
+          "BQ",
+          "DIFUSCO",
+          "DIFUSCO500",
+          "ELG",
+          "LEHD",
+          "OMNI",
+          "T2T",
+          "T2T500"
+        ],
+        "pool_ids": [
+          0,
+          1,
+          2,
+          3,
+          7,
+          14,
+          19,
+          20
+        ],
+        "data_hash": "922152f713046a0bfe9ed96c66b9732b5754ec27dbd27842cd4cc18bd98afa3b",
+        "label_hash": "d7470cff01723e918b3b6bcf4abda4466ea2ee2fa08dcf17c861e78bf7aa591f"
+      },
+      "CVRP": {
+        "pool": [
+          "BQ",
+          "ELG",
+          "ICAM",
+          "LEHD",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "OMNI",
+          "RELD_CVRP",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          0,
+          3,
+          5,
+          7,
+          11,
+          12,
+          13,
+          14,
+          15,
+          18
+        ],
+        "data_hash": "336c446f3a1dff2ebf7dd90b97643b97df209db34bd56b6979267d012fe7ac35",
+        "label_hash": "7b7101249e788d41beea469350eb266b3a609956f4d8aa66db60b2abe8397a30"
+      },
+      "ATSP": {
+        "pool": [
+          "GLOP",
+          "ICAM_ATSP",
+          "MATNET",
+          "MATPOENET",
+          "UNICO_MatPOENet"
+        ],
+        "pool_ids": [
+          4,
+          6,
+          8,
+          9,
+          21
+        ],
+        "data_hash": "3518d5c84af2b49efa4fa25e0300ab0fe05db85af1958528baaa49687a7679ad",
+        "label_hash": "38e1be3a57b4ef3347261f5825fe8ec8de9fa333602e7e3e5f93837a7bb1a88a"
+      },
+      "OVRP": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "880613f4993f732f6d43ae35a6a619c6a06a50bb73bc1404a62d7de7a511c1f0",
+        "label_hash": "b6395eed5ddf08e76d33174bc1f17547f9f16bf22d8b03dc38fd488740f38fd3"
+      },
+      "VRPB": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "312f5b25fee05e4b2ec054912688ac64384322d8a50b52a5c60a95856acf6e02",
+        "label_hash": "764cfaaf42bf94c7f38be69a598efa7c84ecd028363297629a73fca425091f1f"
+      },
+      "VRPL": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "4f980e1b5583befbad4bc26c19ec7c4fbdf87c7d2ca26ddb4a970f06bd66569e",
+        "label_hash": "3c441b5c53628796f7b5d8a423e4706378f2e12c397f44a79f0acbc0fb2f260f"
+      },
+      "VRPTW": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "15a299c1f6508556a7dbce9d132c2bf21a5dada4cf17aaf84a7059bd64e08d77",
+        "label_hash": "f5bd6f6a5a6598873bb4a284ef6b7de239d2016a4a02f6d43dc17dca574380f6"
+      },
+      "OVRPTW": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "bb580fabad4d326837cb5e9cee9f01e27830698e72d0764801fb5a82e4e45626",
+        "label_hash": "fa59a40a61f584fd644779e6afec57ad79faae3626e10f02b327ba6e0635d8fa"
+      },
+      "OVRPB": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "8dfa96a3de44858a8acc76ab415a7eb0c931b0bc8df7900765211f13a26fc3c5",
+        "label_hash": "f7cd6ebb1815e0dccaa9ffcb49c5fd38d092e1bcf921d89f13a992c65f244f4a"
+      },
+      "OVRPL": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "4952bb0a70b7debf1875202e19eeff651feb2db6482fd0fe86e81d2c8937bfcf",
+        "label_hash": "8816aa4f215a4be1306af0963b932a4bbe813f481e468970de4bb2dde8af4a01"
+      },
+      "VRPBL": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "e2fc384940617b041c1683bd702cb2a2eb7952672ccf41fbea258c7241d61661",
+        "label_hash": "9e19524cbce02d5d00643a8cc88cd0b3c0e582900fd39d89ea07484ef097d681"
+      },
+      "VRPBTW": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "dc614515a182cd0e7c2f0508a9241f88790f1779074c23215a1e2ab9443ffb42",
+        "label_hash": "1dcde526feda1ba7ce3e53091b5efee3e208cd4c64ac254176c27dab3bf711ff"
+      },
+      "VRPLTW": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "533b40a1b3e6ef574ba522f08fda9542308acae793a5e99f385aa47a8ec51c41",
+        "label_hash": "e27aff962de407bd0b715dc58f436415d8e64a0b8b3af7009080bcea99a055db"
+      },
+      "OVRPBL": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "d90b2f49237bfa960760dc2e88ac123fdb078d9baa87e17166026ca5d7c780b1",
+        "label_hash": "a3a5e9e89de9e45e184cc92db4902126b686f23052fe38e5d337878366bbcd1f"
+      },
+      "OVRPBTW": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "672e1b489631ca7883b83a8ecfbc883b54a8ceb12a1d96248f766fbdc5f496a2",
+        "label_hash": "1d9174ca0ab22e9057adac8cdce042c2ad47f292ddf80d0d1ac9a390fc4244f2"
+      },
+      "OVRPLTW": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "b1427fb6c6fd31a49044856389b9f7ee7c22eb99ad15971b60acb32b8f98c893",
+        "label_hash": "02d18f70f5e60dda93270d4c94d5331693670f65d95ed4689a38fb80f6a16af4"
+      },
+      "VRPBLTW": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "db689d8e38f4c5cc82f8656e178df5d8224ff8dbbd3633fa78e8bfeb2c657324",
+        "label_hash": "55d52366acdde91f1518fec84b317845f027369493c12689e5c474ddbf2865fb"
+      },
+      "OVRPBLTW": {
+        "pool": [
+          "MTPOMO",
+          "MVMOE",
+          "MoSES_CaDA",
+          "MoSES_RF",
+          "RELD_MOEL",
+          "RELD_MTL",
+          "RouteFinder"
+        ],
+        "pool_ids": [
+          10,
+          11,
+          12,
+          13,
+          16,
+          17,
+          18
+        ],
+        "data_hash": "94ad3dfa81dbfc068997fae211a9b30b0f56b67a6308b53502a40bc6af130be4",
+        "label_hash": "f770a30dee6af80a8b3e5fb04b35e92aeac5b4cd49ff2a274e66cff1d432fa7a"
+      }
+    }
+  },
+  "baseline_replay_summary": {
+    "changed_choices": 4,
+    "primary_difference": 0.00032549293920403066
+  },
+  "insertion": "DualStreamSelector.encode_state: InstanceEncoder(node_only=True) output [B,N,128] -> adapt_nodes -> first joint_layers block; excludes CLS/condition/stats, includes real depot, masks padding",
+  "existing_conditioning": "additive problem/constraint/scale/stats condition token in instance attention; solver ID and 34 features enter solver stream; no equivalent multiplicative post-encoder node adapter",
+  "paper": {
+    "url": "https://arxiv.org/html/2302.01115v3",
+    "gate": "Sec2.2.1 Eq2-3, two-layer bounded 2*sigmoid gate",
+    "borrowed": "EPNet/PPNet channel modulation; not a full reproduction",
+    "project_adaptations": "GELU, metadata-only gate, bottleneck residual, zero Up/GateOut, no content detach, one insertion"
+  },
+  "hardware": {
+    "host": "gpu03",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "memory_gib": 23.5882568359375,
+    "torch": "2.5.1+cu124",
+    "tf32": true,
+    "slurm_job": "1465; two authorized RTX3090s",
+    "other_gpu": "RTX4090 occupied by an existing job; leave untouched"
+  },
+  "checks": {
+    "identity_modes": [
+      "C0",
+      "C1",
+      "C2"
+    ],
+    "representative_problems": [
+      "TSP",
+      "CVRP",
+      "ATSP",
+      "OVRPTW"
+    ],
+    "labels_excluded": true,
+    "padding_delta_zero": true,
+    "gradient_checks": [
+      {
+        "arm": "C1",
+        "third_backward": {
+          "down.weight": {
+            "finite": true,
+            "absolute_sum": 0.005427658557891846
+          },
+          "up.weight": {
+            "finite": true,
+            "absolute_sum": 1.1333696842193604
+          }
+        },
+        "smoke_discarded": true
+      },
+      {
+        "arm": "C2",
+        "third_backward": {
+          "down.weight": {
+            "finite": true,
+            "absolute_sum": 0.005732595920562744
+          },
+          "up.weight": {
+            "finite": true,
+            "absolute_sum": 0.8785315155982971
+          },
+          "gate_in.weight": {
+            "finite": true,
+            "absolute_sum": 0.0
+          },
+          "gate_in.bias": {
+            "finite": true,
+            "absolute_sum": 0.0
+          },
+          "gate_out.weight": {
+            "finite": true,
+            "absolute_sum": 5.2094459533691406e-05
+          },
+          "gate_out.bias": {
+            "finite": true,
+            "absolute_sum": 1.0311603546142578e-05
+          }
+        },
+        "smoke_discarded": true
+      }
+    ],
+    "test_read": false
+  },
+  "test_read": false
+}
