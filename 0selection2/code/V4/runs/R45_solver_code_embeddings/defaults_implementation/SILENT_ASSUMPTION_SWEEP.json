@@ -1,0 +1,22 @@
+{
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "review_scope": [
+    "solver_code_defaults.py",
+    "solver_code_corpus.py: explicit-assumption additions",
+    "solver_code_embeddings.py: explicit-assumption additions",
+    "test_solver_code_defaults.py",
+    "defaults_implementation/ASSUMPTIONS.md"
+  ],
+  "material_findings": [],
+  "review_limitations": [
+    "The reviewer did not rerun tests or the offline plan.",
+    "No cross-family assurance, historical reproduction or model-performance claim is made."
+  ],
+  "followup": {
+    "observation": "The assumption-specific vector bundle test did not directly replay a selector checkpoint.",
+    "action": "Extended the temporary test to save/reload a full selector checkpoint without API credentials or the external vector file, checking identical predictions and retained provenance.",
+    "deterministic_result": "Final accumulated suite: 46 tests passed; exit 0.",
+    "production_code_changed_after_review": false
+  }
+}

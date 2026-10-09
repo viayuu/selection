@@ -1,0 +1,1586 @@
+{
+  "schema": "r45-source-manifest-v1",
+  "baseline_commit": "307a9b6dfda6797dc782550bca1017d3e8b01421",
+  "roles": [
+    "encoder",
+    "decision",
+    "inference",
+    "config"
+  ],
+  "roots": {
+    "easynco": "/public/home/shiys/EasyNCO",
+    "sources": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code",
+    "reld": "/public/home/shiys/reld-nco-main",
+    "bridge": "/public/home/shiys/easynco_v3_bridge/scripts"
+  },
+  "evidence": {
+    "historical_audit": "code/V4/runs/R41_signal_audit/solver_manifest.json",
+    "recipe_notes": "code/V4/runs/R41_signal_audit/original_solver_provenance.md",
+    "policy": "Source candidates are not automatically certified as historical label implementations. Confirm bindings and fill actual configs before production upload. Missing optional training background is not a blocker."
+  },
+  "implementations": {
+    "bq": {
+      "entrypoint": "sources:bq-nco/test_tsp.py; sources:bq-nco/test_cvrp.py",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:bq-nco/model/model.py",
+              "symbols": [
+                "BQModel"
+              ]
+            },
+            {
+              "file": "sources:bq-nco/model/encoder.py",
+              "symbols": [
+                "*"
+              ]
+            },
+            {
+              "file": "sources:bq-nco/model/attention.py",
+              "symbols": [
+                "*"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:bq-nco/learning/tsp/decoding.py",
+              "symbols": [
+                "DecodingSubPb",
+                "prepare_input_and_forward_pass",
+                "greedy_decoding_step",
+                "reformat_subproblem_for_next_step"
+              ]
+            },
+            {
+              "file": "sources:bq-nco/learning/cvrp/decoding.py",
+              "symbols": [
+                "DecodingSubPb",
+                "prepare_input_and_forward_pass",
+                "greedy_decoding_step",
+                "reformat_subproblem_for_next_step"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:bq-nco/learning/tsp/decoding.py",
+              "symbols": [
+                "decode",
+                "greedy_decoding_loop",
+                "beam_search_decoding_loop"
+              ]
+            },
+            {
+              "file": "sources:bq-nco/learning/cvrp/decoding.py",
+              "symbols": [
+                "decode",
+                "greedy_decoding_loop",
+                "beam_search_decoding_loop",
+                "reconstruct_tours"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    },
+    "difusco": {
+      "entrypoint": "easynco:eval.py -> TSPDiffusionPolicy (candidate, not historical certification)",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/backbones/GNN/AGNNDifusco.py",
+              "symbols": [
+                "*"
+              ]
+            },
+            {
+              "file": "easynco:neural_solvers/methods/difusco/tsp_difusco.py",
+              "symbols": [
+                "TSPDiffusionPolicy.__init__",
+                "TSPDiffusionPolicy.forward"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/difusco/tsp_difusco.py",
+              "symbols": [
+                "TSPDiffusionPolicy.categorical_denoise_step",
+                "TSPDiffusionPolicy.gaussian_denoise_step"
+              ]
+            },
+            {
+              "file": "easynco:neural_solvers/backbones/Diffusion/diffusion.py",
+              "symbols": [
+                "*"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/difusco/tsp_difusco.py",
+              "symbols": [
+                "TSPDiffusionPolicy.initialize",
+                "TSPDiffusionPolicy.iteration",
+                "TSPDiffusionPolicy.duplicate_edge_index"
+              ]
+            },
+            {
+              "file": "easynco:neural_solvers/methods/difusco/util.py",
+              "symbols": [
+                "InferenceSchedule",
+                "merge_tour",
+                "two_opt_refine",
+                "evaluate_tsp_tour"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    },
+    "t2t": {
+      "entrypoint": "easynco:eval.py -> TSPT2TPolicy (candidate, not historical certification)",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/backbones/GNN/AGNNDifusco.py",
+              "symbols": [
+                "*"
+              ]
+            },
+            {
+              "file": "easynco:neural_solvers/methods/t2t/tsp_t2t.py",
+              "symbols": [
+                "TSPT2TPolicy.__init__",
+                "TSPT2TPolicy.forward"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/t2t/tsp_t2t.py",
+              "symbols": [
+                "TSPT2TPolicy.categorical_denoise_step",
+                "TSPT2TPolicy.guided_categorical_denoise_step",
+                "TSPT2TPolicy.tour2adj",
+                "TSPT2TPolicy.nodes2adj"
+              ]
+            },
+            {
+              "file": "easynco:neural_solvers/backbones/Diffusion/diffusion.py",
+              "symbols": [
+                "*"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/t2t/tsp_t2t.py",
+              "symbols": [
+                "TSPT2TPolicy.initialize",
+                "TSPT2TPolicy.iteration",
+                "TSPT2TPolicy.duplicate_edge_index"
+              ]
+            },
+            {
+              "file": "easynco:neural_solvers/methods/difusco/util.py",
+              "symbols": [
+                "InferenceSchedule",
+                "merge_tour",
+                "two_opt_refine"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    },
+    "elg": {
+      "entrypoint": "easynco:eval.py -> ELGPolicy (candidate)",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/am/am_encoder.py",
+              "symbols": [
+                "AttentionModelEncoder"
+              ]
+            },
+            {
+              "file": "easynco:neural_solvers/methods/elg/policy.py",
+              "symbols": [
+                "ELGPolicy",
+                "local_policy_att_tsp",
+                "local_policy_att_cvrp"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/am/am_decoder.py",
+              "symbols": [
+                "AttentionModelDecoder"
+              ]
+            },
+            {
+              "file": "easynco:neural_solvers/methods/elg/policy.py",
+              "symbols": [
+                "add_distance_penalty_tsp",
+                "add_distance_penalty_cvrp",
+                "elg_forward"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/elg/initialization.py",
+              "symbols": [
+                "ELGInitialization"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    },
+    "lehd": {
+      "entrypoint": "easynco:eval.py -> LEHDPolicy (candidate)",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/lehd/lehd_encoder.py",
+              "symbols": [
+                "*"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/lehd/lehd_decoder.py",
+              "symbols": [
+                "*"
+              ]
+            },
+            {
+              "file": "easynco:neural_solvers/methods/lehd/policy.py",
+              "symbols": [
+                "LEHDPolicy"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/lehd/iteration.py",
+              "symbols": [
+                "TSPLEHDIteration",
+                "CVRPLEHDIteration"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    },
+    "omni": {
+      "entrypoint": "easynco:eval.py -> OMNI_POMO_Policy; only train-side TSP recipe partially recovered",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/am/am_encoder.py",
+              "symbols": [
+                "AttentionModelEncoder"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/am/am_decoder.py",
+              "symbols": [
+                "AttentionModelDecoder"
+              ]
+            },
+            {
+              "file": "easynco:neural_solvers/methods/omni/policy.py",
+              "symbols": [
+                "OMNI_POMO_Policy"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/omni/initialization.py",
+              "symbols": [
+                "OMNIInitialization"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    },
+    "icam": {
+      "entrypoint": "easynco:eval.py -> CVRPICAMPolicy (candidate)",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/icam/icam_encoder.py",
+              "symbols": [
+                "*"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/icam/icam_decoder.py",
+              "symbols": [
+                "*"
+              ]
+            },
+            {
+              "file": "easynco:neural_solvers/methods/icam/policy.py",
+              "symbols": [
+                "CVRPICAMPolicy"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/icam/initialization.py",
+              "symbols": [
+                "ICAMInitialization"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    },
+    "icam_atsp": {
+      "entrypoint": "bridge:paper_source_atsp_runner.py#ICAMATSPRunner",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:ICAM/ICAM_ATSP/ATSPModel_ICAM.py",
+              "symbols": [
+                "ATSP_Encoder",
+                "EncoderLayer"
+              ]
+            },
+            {
+              "file": "bridge:paper_source_atsp_runner.py",
+              "symbols": [
+                "ICAMATSPRunner._pre_forward_compat"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:ICAM/ICAM_ATSP/ATSPModel_ICAM.py",
+              "symbols": [
+                "ATSPModel",
+                "ATSP_Decoder"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:ICAM/ICAM_ATSP/ATSPTester.py",
+              "symbols": [
+                "ATSPTester._test_one_batch"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    },
+    "matnet": {
+      "entrypoint": "easynco:eval.py -> ATSPPolicy (candidate)",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/matnet/matnet_encoder.py",
+              "symbols": [
+                "*"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/matnet/matnet_decoder.py",
+              "symbols": [
+                "ATSPDecoder"
+              ]
+            },
+            {
+              "file": "easynco:neural_solvers/methods/matnet/policy.py",
+              "symbols": [
+                "ATSPPolicy"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/matnet/initialization.py",
+              "symbols": [
+                "MatNetInitialization"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    },
+    "matpoenet": {
+      "entrypoint": "easynco:eval.py -> MatPOENetPolicy (candidate; not the UNICO bridge)",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/matnet/matnet_encoder.py",
+              "symbols": [
+                "*"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/matnet/matnet_decoder.py",
+              "symbols": [
+                "ATSPDecoder"
+              ]
+            },
+            {
+              "file": "easynco:neural_solvers/methods/matpoenet/policy.py",
+              "symbols": [
+                "MatPOENetPolicy"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/matpoenet/initialization.py",
+              "symbols": [
+                "*"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    },
+    "unico_matpoenet": {
+      "entrypoint": "bridge:paper_source_atsp_runner.py#UnicoMatpoenetRunner",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:UniCO/MatPOENet/ATSPModel.py",
+              "symbols": [
+                "ATSP_Encoder",
+                "EncoderLayer",
+                "EncodingBlock"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:UniCO/MatPOENet/ATSPModel.py",
+              "symbols": [
+                "ATSPModel",
+                "ATSP_Decoder"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:UniCO/MatPOENet/ATSPTester.py",
+              "symbols": [
+                "ATSPTester._test_one_batch"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    },
+    "glop_atsp": {
+      "entrypoint": "sources:GLOP/eval_atsp/test_glop.py (candidate)",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:GLOP/eval_atsp/ASHPPModel.py",
+              "symbols": [
+                "ATSP_Encoder",
+                "EncoderLayer",
+                "EncodingBlock"
+              ]
+            },
+            {
+              "file": "sources:GLOP/eval_atsp/ATSPModel_LIB.py",
+              "symbols": [
+                "*"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:GLOP/eval_atsp/ASHPPModel.py",
+              "symbols": [
+                "ASHPPModel",
+                "ATSP_Decoder"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:GLOP/eval_atsp/ATSPTester_glop.py",
+              "symbols": [
+                "ATSPTester._test_one_batch"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    },
+    "mtpomo": {
+      "entrypoint": "easynco:eval.py -> MTPOMOPolicy",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/mtpomo/mtpomo_encoder.py",
+              "symbols": [
+                "*"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/mtpomo/mtpomo_decoder.py",
+              "symbols": [
+                "*"
+              ]
+            },
+            {
+              "file": "easynco:neural_solvers/methods/mtpomo/policy.py",
+              "symbols": [
+                "MTPOMOPolicy"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/mvmoe/initialization.py",
+              "symbols": [
+                "MVRPInitialization.play_episode"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    },
+    "mvmoe": {
+      "entrypoint": "easynco:eval.py -> MoEPolicy",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/mvmoe/mvmoe_encoder.py",
+              "symbols": [
+                "*"
+              ]
+            },
+            {
+              "file": "easynco:neural_solvers/methods/mvmoe/moe_layer.py",
+              "symbols": [
+                "*"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/mvmoe/mvmoe_decoder.py",
+              "symbols": [
+                "*"
+              ]
+            },
+            {
+              "file": "easynco:neural_solvers/methods/mvmoe/policy.py",
+              "symbols": [
+                "MoEPolicy"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "easynco:neural_solvers/methods/mvmoe/initialization.py",
+              "symbols": [
+                "MVRPInitialization.play_episode"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    },
+    "routefinder": {
+      "entrypoint": "bridge:paper_source_routefinder_runner.py#RouteFinderRunner",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:routefinder/routefinder/models/encoder.py",
+              "symbols": [
+                "RouteFinderEncoder"
+              ]
+            },
+            {
+              "file": "sources:routefinder/routefinder/models/nn/transformer.py",
+              "symbols": [
+                "*"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:routefinder/routefinder/models/policy.py",
+              "symbols": [
+                "RouteFinderPolicy"
+              ]
+            },
+            {
+              "file": "sources:routefinder/routefinder/models/env_embeddings/mtvrp/init.py",
+              "symbols": [
+                "*"
+              ]
+            },
+            {
+              "file": "sources:routefinder/routefinder/models/env_embeddings/mtvrp/context.py",
+              "symbols": [
+                "*"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:routefinder/test.py",
+              "symbols": [
+                "test"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    },
+    "moses_rf": {
+      "entrypoint": "bridge:paper_source_routefinder_runner.py#MosesRunner; _build_moses_policy(method=moses_rf)",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:moses_vrp/models/encoder.py",
+              "symbols": [
+                "LoRAEncoder",
+                "MultiLoRAEncoder"
+              ]
+            },
+            {
+              "file": "sources:moses_vrp/models/nn/lora.py",
+              "symbols": [
+                "*"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:moses_vrp/models/policy.py",
+              "symbols": [
+                "MultiLoRAPolicy"
+              ]
+            },
+            {
+              "file": "sources:moses_vrp/models/decoder.py",
+              "symbols": [
+                "LoRADecoder",
+                "MultiLoRADecoder"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:moses_vrp/test.py",
+              "symbols": [
+                "test"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    },
+    "moses_cada": {
+      "entrypoint": "bridge:paper_source_routefinder_runner.py#MosesRunner; _build_moses_policy(method=moses_cada)",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:moses_vrp/models/encoder.py",
+              "symbols": [
+                "CadaEncoder",
+                "CadaLoRAEncoder",
+                "CadaMultiLoRAEncoder"
+              ]
+            },
+            {
+              "file": "sources:moses_vrp/models/nn/lora.py",
+              "symbols": [
+                "*"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:moses_vrp/models/policy.py",
+              "symbols": [
+                "CadaMultiLoRAPolicy"
+              ]
+            },
+            {
+              "file": "sources:moses_vrp/models/decoder.py",
+              "symbols": [
+                "LoRADecoder",
+                "MultiLoRADecoder"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "sources:moses_vrp/test.py",
+              "symbols": [
+                "test"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    },
+    "reld_cvrp": {
+      "entrypoint": "bridge:run_reld_cvrp_single_bridge.py#instantiate_single_cvrp_model",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "reld:CVRP/CVRPModel.py",
+              "symbols": [
+                "CVRP_Encoder",
+                "EncoderLayer",
+                "FeedForward"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "reld:CVRP/CVRPModel.py",
+              "symbols": [
+                "CVRPModel",
+                "CVRP_Decoder"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "bridge:reld_bridge_common.py",
+              "symbols": [
+                "_run_no_aug_batch"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    },
+    "reld_moel": {
+      "entrypoint": "bridge:reld_bridge_common.py#instantiate_reld_model(model_key=reld_moe_light)",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "reld:Multi-Task/models/MOEModel_Light.py",
+              "symbols": [
+                "MTL_Encoder",
+                "EncoderLayer",
+                "FeedForward",
+                "Add_And_Normalization_Module"
+              ]
+            },
+            {
+              "file": "reld:Multi-Task/models/MOELayer.py",
+              "symbols": [
+                "*"
+              ]
+            },
+            {
+              "file": "bridge:reld_bridge_common.py",
+              "symbols": [
+                "collate_problem_batch"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "reld:Multi-Task/models/MOEModel_Light.py",
+              "symbols": [
+                "MOEModel_Light",
+                "MTL_Decoder"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "bridge:reld_bridge_common.py",
+              "symbols": [
+                "_run_no_aug_batch"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    },
+    "reld_mtl": {
+      "entrypoint": "bridge:reld_bridge_common.py#instantiate_reld_model(model_key=reld_mtl)",
+      "views": {
+        "encoder": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "reld:Multi-Task/models/MTLModel.py",
+              "symbols": [
+                "MTL_Encoder",
+                "EncoderLayer",
+                "FeedForward",
+                "Add_And_Normalization_Module"
+              ]
+            },
+            {
+              "file": "bridge:reld_bridge_common.py",
+              "symbols": [
+                "collate_problem_batch"
+              ]
+            }
+          ]
+        },
+        "decision": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "reld:Multi-Task/models/MTLModel.py",
+              "symbols": [
+                "MTLModel",
+                "MTL_Decoder"
+              ]
+            }
+          ]
+        },
+        "inference": {
+          "status": "present",
+          "sources": [
+            {
+              "file": "bridge:reld_bridge_common.py",
+              "symbols": [
+                "_run_no_aug_batch"
+              ]
+            }
+          ]
+        },
+        "config": {
+          "status": "present",
+          "sources": []
+        }
+      }
+    }
+  },
+  "solvers": [
+    {
+      "solver_id": 0,
+      "solver_name": "BQ",
+      "deployments": [
+        {
+          "implementation": "bq",
+          "problems": [
+            "TSP",
+            "CVRP"
+          ],
+          "binding_status": "unverified",
+          "resolved_config": {},
+          "gaps": [
+            "NSS-imported label generation command, exact checkpoint, and beam/greedy budget are not bound to the available bq-nco source."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 1,
+      "solver_name": "DIFUSCO",
+      "deployments": [
+        {
+          "implementation": "difusco",
+          "problems": [
+            "TSP"
+          ],
+          "binding_status": "unverified",
+          "resolved_config": {},
+          "gaps": [
+            "Historical NSS recipe is missing; available difusco_tsp100.ckpt is a candidate, not a verified label binding."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 2,
+      "solver_name": "DIFUSCO500",
+      "deployments": [
+        {
+          "implementation": "difusco",
+          "problems": [
+            "TSP"
+          ],
+          "binding_status": "unverified",
+          "resolved_config": {},
+          "gaps": [
+            "Historical NSS recipe is missing; available difusco_tsp500.ckpt is unbound. The suffix is not interpreted as an inference budget."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 3,
+      "solver_name": "ELG",
+      "deployments": [
+        {
+          "implementation": "elg",
+          "problems": [
+            "TSP",
+            "CVRP"
+          ],
+          "binding_status": "unverified",
+          "resolved_config": {},
+          "gaps": [
+            "Confirm per-problem source variant, local-size parameters, checkpoint, and original inference budget."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 4,
+      "solver_name": "GLOP",
+      "deployments": [
+        {
+          "implementation": "glop_atsp",
+          "problems": [
+            "ATSP"
+          ],
+          "binding_status": "unverified",
+          "resolved_config": {},
+          "gaps": [
+            "ATSP decomposition/local-reconstruction implementation is available; historical checkpoint and actual partition/reconstruction settings require binding."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 5,
+      "solver_name": "ICAM",
+      "deployments": [
+        {
+          "implementation": "icam",
+          "problems": [
+            "CVRP"
+          ],
+          "binding_status": "unverified",
+          "resolved_config": {},
+          "gaps": [
+            "Bind CVRP label generation entry and actual adaptation/checkpoint/inference settings."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 6,
+      "solver_name": "ICAM_ATSP",
+      "deployments": [
+        {
+          "implementation": "icam_atsp",
+          "problems": [
+            "ATSP"
+          ],
+          "binding_status": "partial",
+          "resolved_config": {
+            "neighbors": 50,
+            "pomo_size": "number of nodes",
+            "augmentation": 1
+          },
+          "gaps": [
+            "Bridge entry and nearest-row/column conversion identified; confirm effective model_params and checkpoint per deployed scale."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 7,
+      "solver_name": "LEHD",
+      "deployments": [
+        {
+          "implementation": "lehd",
+          "problems": [
+            "TSP",
+            "CVRP"
+          ],
+          "binding_status": "unverified",
+          "resolved_config": {},
+          "gaps": [
+            "Confirm TSP/CVRP weights and actual reconstruction iterations; NSS TSP labels have no recovered full recipe."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 8,
+      "solver_name": "MATNET",
+      "deployments": [
+        {
+          "implementation": "matnet",
+          "problems": [
+            "ATSP"
+          ],
+          "binding_status": "unverified",
+          "resolved_config": {},
+          "gaps": [
+            "Historical ATSP source revision, checkpoint and inference budget need binding."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 9,
+      "solver_name": "MATPOENET",
+      "deployments": [
+        {
+          "implementation": "matpoenet",
+          "problems": [
+            "ATSP"
+          ],
+          "binding_status": "unverified",
+          "resolved_config": {},
+          "gaps": [
+            "Do not confuse this candidate with UNICO_MatPOENet; confirm actual label recipe and positional encoding configuration."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 10,
+      "solver_name": "MTPOMO",
+      "deployments": [
+        {
+          "implementation": "mtpomo",
+          "problems": "registry pools containing MTPOMO",
+          "binding_status": "partial",
+          "resolved_config": {
+            "pomo_size": "number of customers",
+            "augmentation": 1,
+            "recorded_seed": 1234
+          },
+          "gaps": [
+            "Eval entry identified, but top-level greedy setting and module default sampling were not resolved to a historical effective decoder configuration; confirm weights and environment mask dependency."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 11,
+      "solver_name": "MVMOE",
+      "deployments": [
+        {
+          "implementation": "mvmoe",
+          "problems": "registry pools containing MVMOE",
+          "binding_status": "partial",
+          "resolved_config": {
+            "pomo_size": "number of customers",
+            "augmentation": 1,
+            "recorded_seed": 1234
+          },
+          "gaps": [
+            "Resolve historical effective decoding strategy, source environment masks, checkpoint, and CVRP versus multi-task deployment differences."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 12,
+      "solver_name": "MoSES_CaDA",
+      "deployments": [
+        {
+          "implementation": "moses_cada",
+          "problems": "registry pools containing MoSES_CaDA",
+          "binding_status": "partial",
+          "resolved_config": {
+            "lora_rank": [
+              32,
+              32,
+              32,
+              32,
+              32
+            ],
+            "lora_alpha": 1.0,
+            "lora_n_experts": 4,
+            "lora_top_k": 4,
+            "lora_temperature": 1.0,
+            "lora_use_trainable_layer": true,
+            "lora_use_dynamic_topK": false,
+            "lora_use_basis_variants": false,
+            "lora_use_basis_variants_as_input": false,
+            "lora_use_linear": false,
+            "normalization": "rms",
+            "encoder_use_prenorm": false,
+            "encoder_use_post_layers_norm": false,
+            "mlp_activation": "silu",
+            "attn_sparse_ratio": 0.5,
+            "sparse_applied_to_score": true,
+            "lora_act_func": "sigmoid"
+          },
+          "gaps": [
+            "Bridge policy settings verified; bind scale50/100 checkpoints and historical rl4co decoder/environment dependency versions."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 13,
+      "solver_name": "MoSES_RF",
+      "deployments": [
+        {
+          "implementation": "moses_rf",
+          "problems": "registry pools containing MoSES_RF",
+          "binding_status": "partial",
+          "resolved_config": {
+            "lora_rank": [
+              32,
+              32,
+              32,
+              32,
+              32
+            ],
+            "lora_alpha": 1.0,
+            "lora_n_experts": 4,
+            "lora_top_k": 4,
+            "lora_temperature": 1.0,
+            "lora_use_trainable_layer": true,
+            "lora_use_dynamic_topK": false,
+            "lora_use_basis_variants": false,
+            "lora_use_basis_variants_as_input": false,
+            "lora_use_linear": false,
+            "normalization": "rms",
+            "encoder_use_prenorm": true,
+            "encoder_use_post_layers_norm": true,
+            "mlp_activation": "silu",
+            "lora_act_func": "softplus"
+          },
+          "gaps": [
+            "Bridge policy settings verified; bind scale50/100 checkpoints and historical rl4co decoder/environment dependency versions."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 14,
+      "solver_name": "OMNI",
+      "deployments": [
+        {
+          "implementation": "omni",
+          "problems": [
+            "TSP",
+            "CVRP"
+          ],
+          "binding_status": "partial",
+          "resolved_config": {},
+          "gaps": [
+            "TSP train has an EasyNCO recipe but val came from NSS; do not assume they used the same effective deployment. CVRP recipe also needs binding."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 15,
+      "solver_name": "RELD_CVRP",
+      "deployments": [
+        {
+          "implementation": "reld_cvrp",
+          "problems": [
+            "CVRP"
+          ],
+          "binding_status": "partial",
+          "resolved_config": {},
+          "checkpoint": "reld:CVRP/weights/ReLD/model_epoch_90.pt",
+          "gaps": [
+            "Entry and CVRP config identified; bind original parsed model/inference settings and checkpoint hash."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 16,
+      "solver_name": "RELD_MOEL",
+      "deployments": [
+        {
+          "implementation": "reld_moel",
+          "problems": "registry pools containing RELD_MOEL",
+          "binding_status": "partial",
+          "resolved_config": {
+            "embedding_dim": 128,
+            "encoder_layer_num": 6,
+            "decoder_layer_num": 1,
+            "qkv_dim": 16,
+            "head_num": 8,
+            "logit_clipping": 10,
+            "ff_hidden_dim": 512,
+            "num_experts": 4,
+            "eval_type": "argmax",
+            "norm": "none",
+            "norm_loc": "norm_last",
+            "expert_loc": [
+              "Enc0",
+              "Enc1",
+              "Enc2",
+              "Enc3",
+              "Enc4",
+              "Enc5",
+              "Dec"
+            ],
+            "problem": "Train_ALL",
+            "topk": 2,
+            "routing_level": "node",
+            "routing_method": "input_choice",
+            "ffidt": true,
+            "augmentation": 1,
+            "sample_size": 1,
+            "pomo_size": "number of customers"
+          },
+          "checkpoint": "reld:Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+          "checkpoint_sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3",
+          "gaps": [
+            "R41 verified OVRPTW repeat costs with this weight; other registered problems and constraint environment dependencies are not yet bound in this source corpus."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 17,
+      "solver_name": "RELD_MTL",
+      "deployments": [
+        {
+          "implementation": "reld_mtl",
+          "problems": "registry pools containing RELD_MTL",
+          "binding_status": "partial",
+          "resolved_config": {
+            "embedding_dim": 128,
+            "encoder_layer_num": 6,
+            "decoder_layer_num": 1,
+            "qkv_dim": 16,
+            "head_num": 8,
+            "logit_clipping": 10,
+            "ff_hidden_dim": 512,
+            "eval_type": "argmax",
+            "norm": "none",
+            "norm_loc": "norm_last",
+            "problem": "Train_ALL",
+            "augmentation": 1,
+            "sample_size": 1,
+            "pomo_size": "number of customers"
+          },
+          "checkpoint": "reld:Multi-Task/pretrained/reld_mtl/epoch-5000.pt",
+          "checkpoint_sha256": "2a67f0c1ada0a05563280fcd56d8375b1b0007978bad55c625c862fc3cc3b7ab",
+          "gaps": [
+            "R41 verified OVRPTW repeat costs with this weight; other registered problems and constraint environment dependencies are not yet bound in this source corpus."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 18,
+      "solver_name": "RouteFinder",
+      "deployments": [
+        {
+          "implementation": "routefinder",
+          "problems": "registry pools containing RouteFinder",
+          "binding_status": "partial",
+          "resolved_config": {
+            "augmentation": 8,
+            "result_reduction": "max_aug_reward"
+          },
+          "gaps": [
+            "Bridge entry verified; bind scale-dependent checkpoints and inherited rl4co decoder, environment and effective inference configuration."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 19,
+      "solver_name": "T2T",
+      "deployments": [
+        {
+          "implementation": "t2t",
+          "problems": [
+            "TSP"
+          ],
+          "binding_status": "unverified",
+          "resolved_config": {},
+          "gaps": [
+            "NSS-imported label recipe is missing; available t2t_tsp100.ckpt is not a proven historical binding."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 20,
+      "solver_name": "T2T500",
+      "deployments": [
+        {
+          "implementation": "t2t",
+          "problems": [
+            "TSP"
+          ],
+          "binding_status": "unverified",
+          "resolved_config": {},
+          "gaps": [
+            "Original checkpoint is missing; t2t_tsp500.ckpt was not found. Shared candidate source is recorded without guessing what 500 means."
+          ]
+        }
+      ]
+    },
+    {
+      "solver_id": 21,
+      "solver_name": "UNICO_MatPOENet",
+      "deployments": [
+        {
+          "implementation": "unico_matpoenet",
+          "problems": [
+            "ATSP"
+          ],
+          "binding_status": "partial",
+          "resolved_config": {},
+          "gaps": [
+            "UnicoMatpoenetRunner identified; infer and verify effective encoder layers and checkpoint per deployed scale before production corpus approval."
+          ]
+        }
+      ]
+    }
+  ]
+}

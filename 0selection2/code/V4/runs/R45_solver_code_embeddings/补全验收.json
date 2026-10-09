@@ -1,0 +1,247 @@
+{
+  "checked_at": "2026-10-08T17:09:16.332364+08:00",
+  "passed": true,
+  "checks": [
+    {
+      "check": "solver_identity_and_order",
+      "passed": true,
+      "detail": [
+        [
+          0,
+          "BQ"
+        ],
+        [
+          1,
+          "DIFUSCO"
+        ],
+        [
+          2,
+          "DIFUSCO500"
+        ],
+        [
+          3,
+          "ELG"
+        ],
+        [
+          4,
+          "GLOP"
+        ],
+        [
+          5,
+          "ICAM"
+        ],
+        [
+          6,
+          "ICAM_ATSP"
+        ],
+        [
+          7,
+          "LEHD"
+        ],
+        [
+          8,
+          "MATNET"
+        ],
+        [
+          9,
+          "MATPOENET"
+        ],
+        [
+          10,
+          "MTPOMO"
+        ],
+        [
+          11,
+          "MVMOE"
+        ],
+        [
+          12,
+          "MoSES_CaDA"
+        ],
+        [
+          13,
+          "MoSES_RF"
+        ],
+        [
+          14,
+          "OMNI"
+        ],
+        [
+          15,
+          "RELD_CVRP"
+        ],
+        [
+          16,
+          "RELD_MOEL"
+        ],
+        [
+          17,
+          "RELD_MTL"
+        ],
+        [
+          18,
+          "RouteFinder"
+        ],
+        [
+          19,
+          "T2T"
+        ],
+        [
+          20,
+          "T2T500"
+        ],
+        [
+          21,
+          "UNICO_MatPOENet"
+        ]
+      ]
+    },
+    {
+      "check": "confirmed_information_preserved",
+      "passed": true,
+      "detail": "All original nonempty config fields and RELD checkpoint identities retained in an applicable deployment."
+    },
+    {
+      "check": "original_candidate_implementations_retained",
+      "passed": true,
+      "detail": "The paper GLOP implementation remains as an explicitly unused candidate."
+    },
+    {
+      "check": "handoff_and_original_corpus_unchanged",
+      "passed": true,
+      "detail": {
+        "unchanged_files": 23,
+        "changed_or_missing_files": []
+      }
+    },
+    {
+      "check": "backup_matches_original",
+      "passed": true,
+      "detail": "Backup, original ZIP manifest and collector baseline hash agree."
+    },
+    {
+      "check": "all_384_label_ancestries_matched",
+      "passed": true,
+      "detail": {
+        "groups": 384,
+        "missing": []
+      }
+    },
+    {
+      "check": "current_label_files_unchanged_since_collection",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "deployment_scope_and_evidence",
+      "passed": true,
+      "detail": {
+        "covered_groups": 384,
+        "invalid_scopes_or_paths": []
+      }
+    },
+    {
+      "check": "unknown_nss_configs_not_invented",
+      "passed": true,
+      "detail": "NSS-only deployments retain empty semantic configs and explicit gaps."
+    },
+    {
+      "check": "historical_gaps_not_silenced",
+      "passed": true,
+      "detail": "No bulk confirmation, no cleared unresolved bindings and no production-ready claim."
+    },
+    {
+      "check": "original_solver_source_bytes_unchanged",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "reviewed_corpus_matches_manifest_and_sources",
+      "passed": true,
+      "detail": {
+        "selected_source_files": 93,
+        "chunks": 85
+      }
+    },
+    {
+      "check": "semantic_config_and_sensitive_content_guards",
+      "passed": true,
+      "detail": "All configs and generated chunks pass existing R45 result/path/secret guards."
+    },
+    {
+      "check": "checkpoint_inventory_consistent",
+      "passed": true,
+      "detail": {
+        "deployment_references": 35,
+        "inventory_paths": 34,
+        "existing_inventory_paths": 33,
+        "errors": [],
+        "hash_scope": "current local bytes; historical runtime identity not inferred"
+      }
+    },
+    {
+      "check": "archived_configuration_claims",
+      "passed": true,
+      "detail": [
+        {
+          "method": "glop",
+          "configs": 243,
+          "passed": true,
+          "model_variants": 1
+        },
+        {
+          "method": "matnet",
+          "configs": 243,
+          "passed": true,
+          "model_variants": 1
+        },
+        {
+          "method": "matpoenet",
+          "configs": 243,
+          "passed": true,
+          "model_variants": 81
+        },
+        {
+          "method": "mtpomo",
+          "configs": 2295,
+          "passed": true,
+          "model_variants": 1
+        },
+        {
+          "method": "mvmoe",
+          "configs": 2295,
+          "passed": true,
+          "model_variants": 1
+        }
+      ]
+    },
+    {
+      "check": "corrected_actual_call_chains",
+      "passed": true,
+      "detail": "GLOP initializer replaces the unused paper tester; RELD_CVRP uses the single-task bridge."
+    },
+    {
+      "check": "unico_scale_variants_are_disjoint_and_complete",
+      "passed": true,
+      "detail": "Exact20/50: eight layers; all other registered scales: five layers; no overlapping deployment averaging."
+    }
+  ],
+  "manifest_sha256": "bb71b2d495e43eb901d60d338b85dd9d3fcfbabfef730f74474d454d5b88fabf",
+  "reviewed_corpus_sha256": "24bcc35382583fa1d325868b7c6db42943dedffebe92d67ac0156c2b3ad774cf",
+  "deployment_statuses": {
+    "unverified": 10,
+    "partial": 16
+  },
+  "unit_test_run": {
+    "command": "python -m unittest code.V4.test_r45 -v",
+    "reference": "See the separate offline validation log, not a solver benchmark."
+  },
+  "safety": {
+    "solver_execution": false,
+    "gpu_execution": false,
+    "training": false,
+    "network_or_api_calls": false,
+    "datasets_or_labels_modified": false,
+    "observed_scores_in_output": false
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "review_scope": "Atlas API/cache identity, full semantic views, overflow splitting, component aggregation and offline checkpoint replay",
+  "findings": [
+    {
+      "issue": "Split fragments lost original callable identity in call context",
+      "resolution": "Call catalog is now built from original complete AST callables before splitting; component provenance retains origin_symbol",
+      "regression": "test_oversized_function_keeps_callable_identity_and_control_blocks"
+    },
+    {
+      "issue": "Second-pass/class-wrapping context could reject feasible semantic splits",
+      "resolution": "All repeated call/class context is budgeted before a single recursive AST splitting pass; fragments retain original AST and enclosing structure",
+      "regression": "test_class_initialization_is_retained_and_included_in_token_budget"
+    },
+    {
+      "issue": "Standalone corpus producer/Atlas consumer default paths differed",
+      "resolution": "Ready full-view corpus defaults to corpus_atlas; draft/legacy defaults are isolated; explicit defaults preparation also uses corpus_atlas"
+    }
+  ],
+  "declared_from_sweep": ["A-008"],
+  "deterministic_checks": {"tests": 65, "exit_code": 0},
+  "limitations": [
+    "Selected syntactic call relations do not resolve all dynamic aliases/imports",
+    "Unsplit atomic expressions or shared initialization that itself exceeds context require manual semantic source selection",
+    "No paid API request, real external vectors, training result or performance claim was produced"
+  ]
+}

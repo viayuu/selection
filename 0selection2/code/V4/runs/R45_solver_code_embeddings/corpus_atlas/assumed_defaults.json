@@ -1,0 +1,690 @@
+[
+  {
+    "solver": "BQ",
+    "deployment_index": 0,
+    "implementation": "bq",
+    "assumed_config": {
+      "dim_emb": 192,
+      "dim_ff": 512,
+      "nb_layers_encoder": 9,
+      "nb_heads": 12,
+      "dropout": 0.0,
+      "batchnorm": false,
+      "activation_ff": "relu",
+      "activation_attention": "softmax",
+      "beam_size": 1,
+      "knns": -1
+    },
+    "sources": [
+      {
+        "file": "sources:bq-nco/args.py",
+        "sha256": "a79a96ecb7f41ba04cf2dd5795090f04df5b9d43a0d912caee86d7407b45df9b",
+        "selector": "add_common_args",
+        "basis": "current source defaults"
+      }
+    ],
+    "preserved_gaps": [
+      "NSS generation entry, source revision and historical per-problem checkpoint identities are not recovered.",
+      "Beam/greedy choice, beam width, augmentation and input normalization remain unknown; current defaults and expansion recipes are not used."
+    ]
+  },
+  {
+    "solver": "DIFUSCO",
+    "deployment_index": 0,
+    "implementation": "difusco",
+    "assumed_config": {
+      "n_layers": 12,
+      "hidden_dim": 256,
+      "aggregation": "sum",
+      "diffusion_type": "categorical",
+      "diffusion_schedule": "linear",
+      "diffusion_steps": 1000,
+      "sparse_factor": -1,
+      "node_feature_only": false,
+      "parallel_sampling": 1,
+      "sequential_sampling": 1,
+      "inference_diffusion_steps": 50,
+      "inference_schedule": "cosine",
+      "inference_trick": "ddim"
+    },
+    "sources": [
+      {
+        "file": "easynco:configs_old/tsp_difusco_config.yaml",
+        "sha256": "f1909b17c252675196e9663f2ff6d39bdd84adbe83e785c58970bb7576f3542e",
+        "selector": "model",
+        "basis": "checked-in problem-specific template"
+      }
+    ],
+    "preserved_gaps": [
+      "Original NSS source/checkpoint binding and invocation are missing.",
+      "Diffusion type/steps/schedule, parallel/sequential sampling, sparse graph settings, augmentation and merge/2-opt budgets are unknown."
+    ]
+  },
+  {
+    "solver": "DIFUSCO500",
+    "deployment_index": 0,
+    "implementation": "difusco",
+    "assumed_config": {
+      "n_layers": 12,
+      "hidden_dim": 256,
+      "aggregation": "sum",
+      "diffusion_type": "categorical",
+      "diffusion_schedule": "linear",
+      "diffusion_steps": 1000,
+      "sparse_factor": -1,
+      "node_feature_only": false,
+      "parallel_sampling": 1,
+      "sequential_sampling": 1,
+      "inference_diffusion_steps": 50,
+      "inference_schedule": "cosine",
+      "inference_trick": "ddim"
+    },
+    "sources": [
+      {
+        "file": "easynco:configs_old/tsp_difusco_config.yaml",
+        "sha256": "f1909b17c252675196e9663f2ff6d39bdd84adbe83e785c58970bb7576f3542e",
+        "selector": "model",
+        "basis": "checked-in problem-specific template"
+      }
+    ],
+    "preserved_gaps": [
+      "Original NSS source/checkpoint/config binding is missing; the suffix is not interpreted as an inference budget.",
+      "Effective diffusion, sampling, sparsity, augmentation and postprocessing settings remain unknown."
+    ]
+  },
+  {
+    "solver": "ELG",
+    "deployment_index": 0,
+    "implementation": "elg",
+    "assumed_config": {
+      "embed_dim": 128,
+      "num_heads": 8,
+      "qkv_dim": 16,
+      "num_encoder_layers": 6,
+      "normalization": "instance",
+      "feedforward_hidden": 512,
+      "logit_clipping": 50,
+      "use_graph_mean": false,
+      "am_mode": false,
+      "first_placeholder": false,
+      "first_mode": "random",
+      "local_enable": false,
+      "local_size": 40,
+      "xi": 1.0,
+      "euclidean": false
+    },
+    "sources": [
+      {
+        "file": "easynco:settings/elg_settings.yaml",
+        "sha256": "4c3fa563b8cf0a52f673fae0b86171357189bf843d70a21eaa805cd3150a4de1",
+        "selector": "model",
+        "basis": "checked-in problem-specific template"
+      }
+    ],
+    "preserved_gaps": [
+      "Historical per-problem implementation/checkpoint, local-size and network configuration are unbound.",
+      "Decoder, starts, augmentation and original inference budget are unknown; later paperlike settings are not substituted."
+    ]
+  },
+  {
+    "solver": "GLOP",
+    "deployment_index": 0,
+    "implementation": "glop_atsp_init_only",
+    "assumed_config": {},
+    "sources": [
+      {
+        "file": "insertion:__init__.py",
+        "sha256": "1fe0e9ea45c78e7f194dd64171d6ad07dd5c6bd394bf3fc270c840454286d26b",
+        "selector": [
+          "_tsp_get_parameters"
+        ],
+        "basis": "current implementation; historical version unknown"
+      }
+    ],
+    "preserved_gaps": [
+      "Historical source/native-extension version and binary digest were not captured by the run.",
+      "The executed random_insertion C++ core is not covered by the Python-only corpus; this is not a complete neural GLOP paper deployment."
+    ]
+  },
+  {
+    "solver": "ICAM",
+    "deployment_index": 0,
+    "implementation": "icam",
+    "assumed_config": {
+      "embed_dim": 128
+    },
+    "sources": [
+      {
+        "file": "easynco:neural_solvers/methods/icam/policy.py",
+        "sha256": "6b14405f387726a17c0b532f316a5392dfa43d7a65a534450e6910f4b1f9b680",
+        "selector": "CVRPICAMPolicy.__init__",
+        "basis": "current source defaults"
+      }
+    ],
+    "preserved_gaps": [
+      "The historical solver revision, effective wrapper defaults and runtime checkpoint digest were not archived; current source/weight hashes alone do not prove them."
+    ]
+  },
+  {
+    "solver": "ICAM_ATSP",
+    "deployment_index": 0,
+    "implementation": "icam_atsp",
+    "assumed_config": {},
+    "sources": [
+      {
+        "file": "sources:ICAM/ICAM_ATSP/ATSPModel_ICAM.py",
+        "sha256": "be20ec9e0e5ff0a2b449c558e18e770f9962c2a6fcfef53e308723f16043cf3c",
+        "selector": [
+          "ATSP_Encoder",
+          "EncoderLayer",
+          "EncodingBlock",
+          "AddAndInstanceNormalization",
+          "FeedForward",
+          "adaptation_attention_free_module"
+        ],
+        "basis": "current implementation; historical version unknown"
+      }
+    ],
+    "preserved_gaps": [
+      "The original bridge/source revision and effective imported configuration snapshot are not archived; local code-derived values cannot certify the historical bytes or RNG/dependency state."
+    ]
+  },
+  {
+    "solver": "LEHD",
+    "deployment_index": 0,
+    "implementation": "lehd",
+    "assumed_config": {
+      "layer_num": 6,
+      "embed_dim": 128,
+      "num_heads": 8,
+      "qkv_dim": 16,
+      "feedforward_hidden": 512,
+      "multihead_bias": false,
+      "first_mode": "random"
+    },
+    "sources": [
+      {
+        "file": "easynco:neural_solvers/methods/lehd/policy.py",
+        "sha256": "b4a9a4ee32af2e7ce4e526d0fd874a8df1062437db78d2fe6e2f0625c49593a4",
+        "selector": "LEHDPolicy.__init__",
+        "basis": "current source defaults"
+      }
+    ],
+    "preserved_gaps": [
+      "Per-problem NSS entry, checkpoint/source revision and network settings are missing.",
+      "Original reconstruction count, decoder, augmentation and effective inference budget are not recovered."
+    ]
+  },
+  {
+    "solver": "MATNET",
+    "deployment_index": 0,
+    "implementation": "matnet",
+    "assumed_config": {},
+    "sources": [
+      {
+        "file": "easynco:neural_solvers/methods/matnet/matnet_encoder.py",
+        "sha256": "35738284914ecc50090e2553ef085ff1724737d6db11c253832844d9465e8f3e",
+        "selector": [
+          "*"
+        ],
+        "basis": "current implementation; historical version unknown"
+      }
+    ],
+    "preserved_gaps": [
+      "Historical source revision and actual loaded weight digest were not captured; the available implementation and current local hash are not a full runtime certification."
+    ]
+  },
+  {
+    "solver": "MATPOENET",
+    "deployment_index": 0,
+    "implementation": "matpoenet",
+    "assumed_config": {},
+    "sources": [
+      {
+        "file": "easynco:neural_solvers/methods/matnet/matnet_encoder.py",
+        "sha256": "35738284914ecc50090e2553ef085ff1724737d6db11c253832844d9465e8f3e",
+        "selector": [
+          "*"
+        ],
+        "basis": "current implementation; historical version unknown"
+      }
+    ],
+    "preserved_gaps": [
+      "Historical source revision and runtime checkpoint/native libtsp.so identity were not captured; native NN core remains outside the Python corpus."
+    ]
+  },
+  {
+    "solver": "MTPOMO",
+    "deployment_index": 0,
+    "implementation": "mtpomo",
+    "assumed_config": {
+      "decoder_strategy": "sampling"
+    },
+    "sources": [
+      {
+        "file": "easynco:phases/rl/ar_reinforce.py",
+        "sha256": "a5a501a24345c3995a54e122ae202eb1294b11dc68cf9e1f6fc3d1e71fbdaa70",
+        "selector": "ARREINFORCELightning.__init__",
+        "basis": "current source defaults"
+      }
+    ],
+    "preserved_gaps": [
+      "Effective greedy/sampling and historical solver revision are unresolved; no decoder value is inserted into semantic config.",
+      "Saved environment target uses the old EasyNCO.methods.envs namespace; current MVRPEnv masks/input conversion and runtime checkpoint bytes need historical binding. Current mode1 backhaul code can reduce N configured starts to min(floor(0.8*N), N)."
+    ]
+  },
+  {
+    "solver": "MVMOE",
+    "deployment_index": 0,
+    "implementation": "mvmoe",
+    "assumed_config": {
+      "embedding_dim": 128,
+      "ff_hidden_dim": 512,
+      "num_heads": 8,
+      "qkv_dim": 16,
+      "encoder_layer_num": 6,
+      "normalization": "instance",
+      "norm_loc": "norm_last",
+      "logit_clipping": 10,
+      "MoE_param": {
+        "light": false,
+        "expert_loc": [
+          "Enc0",
+          "Enc1",
+          "Enc2",
+          "Enc3",
+          "Enc4",
+          "Enc5",
+          "Dec"
+        ],
+        "num_experts": 4,
+        "topk": 2,
+        "routing_level": "node",
+        "routing_method": "input_choice"
+      },
+      "decoder_strategy": "sampling"
+    },
+    "sources": [
+      {
+        "file": "easynco:settings/mvmoe_settings.yaml",
+        "sha256": "6bab8db8a07af073e67ba6387c0b64e04eb07793cbb176a211bffb7604ac2ce3",
+        "selector": "model",
+        "basis": "checked-in problem-specific template"
+      },
+      {
+        "file": "easynco:phases/rl/ar_reinforce.py",
+        "sha256": "a5a501a24345c3995a54e122ae202eb1294b11dc68cf9e1f6fc3d1e71fbdaa70",
+        "selector": "ARREINFORCELightning.__init__",
+        "basis": "current source defaults"
+      }
+    ],
+    "preserved_gaps": [
+      "Original NSS CVRP source, checkpoint, network, normalization and decoder/inference recipe are unknown. The MoEPolicy source is only a candidate; no MVRP configuration or weight is projected onto CVRP."
+    ]
+  },
+  {
+    "solver": "MVMOE",
+    "deployment_index": 1,
+    "implementation": "mvmoe",
+    "assumed_config": {
+      "decoder_strategy": "sampling"
+    },
+    "sources": [
+      {
+        "file": "easynco:settings/mvmoe_settings.yaml",
+        "sha256": "6bab8db8a07af073e67ba6387c0b64e04eb07793cbb176a211bffb7604ac2ce3",
+        "selector": "model",
+        "basis": "checked-in problem-specific template"
+      },
+      {
+        "file": "easynco:phases/rl/ar_reinforce.py",
+        "sha256": "a5a501a24345c3995a54e122ae202eb1294b11dc68cf9e1f6fc3d1e71fbdaa70",
+        "selector": "ARREINFORCELightning.__init__",
+        "basis": "current source defaults"
+      }
+    ],
+    "preserved_gaps": [
+      "Effective decoder and historical solver revision are unresolved despite top-level greedy; retain the R41 sampling hypothesis without claiming confirmation.",
+      "Old environment namespace, constraint/input implementation and effective backhaul start count need historical source binding; runtime checkpoint digest not captured."
+    ]
+  },
+  {
+    "solver": "MoSES_CaDA",
+    "deployment_index": 0,
+    "implementation": "moses_cada",
+    "assumed_config": {
+      "embed_dim": 128,
+      "num_encoder_layers": 6,
+      "num_heads": 8,
+      "feedforward_hidden": 512,
+      "use_graph_context": false,
+      "linear_bias_decoder": false,
+      "mask_inner": true,
+      "out_bias_pointer_attn": false
+    },
+    "sources": [
+      {
+        "file": "sources:moses_vrp/models/policy.py",
+        "sha256": "f1f1ac5daa4fd311e1581af61d9a140c90d257d17203d388662265acd15bd571",
+        "selector": "CadaMultiLoRAPolicy.__init__",
+        "basis": "current source defaults"
+      }
+    ],
+    "preserved_gaps": [
+      "Historical rf_easnco_env/rl4co decoder, environment/import revisions and effective decoder/RNG parameters were not saved; do not infer them from today's defaults.",
+      "Original per-run loaded checkpoint digests and checkpoint-resolved base network parameters are not fully bound; current weight hashes identify local candidates only."
+    ]
+  },
+  {
+    "solver": "MoSES_RF",
+    "deployment_index": 0,
+    "implementation": "moses_rf",
+    "assumed_config": {
+      "embed_dim": 128,
+      "num_encoder_layers": 6,
+      "num_heads": 8,
+      "feedforward_hidden": 512,
+      "use_graph_context": false,
+      "linear_bias_decoder": false,
+      "mask_inner": true,
+      "out_bias_pointer_attn": false
+    },
+    "sources": [
+      {
+        "file": "sources:moses_vrp/models/policy.py",
+        "sha256": "f1f1ac5daa4fd311e1581af61d9a140c90d257d17203d388662265acd15bd571",
+        "selector": "MultiLoRAPolicy.__init__",
+        "basis": "current source defaults"
+      }
+    ],
+    "preserved_gaps": [
+      "Historical rl4co decoder/MTVRPEnv dependency revisions and effective decoder/RNG are unbound; current package defaults are not historical evidence.",
+      "Historical checkpoint byte identities and checkpoint-resolved base network settings remain incomplete; current bucket hashes are not runtime-captured digests."
+    ]
+  },
+  {
+    "solver": "OMNI",
+    "deployment_index": 0,
+    "implementation": "omni",
+    "assumed_config": {
+      "embed_dim": 128
+    },
+    "sources": [
+      {
+        "file": "easynco:neural_solvers/methods/omni/policy.py",
+        "sha256": "38dd328830aed657d51fd4b7b078ed154a53be39f0eacbcb1242a94bcddd28b7",
+        "selector": "OMNI_POMO_Policy.__init__",
+        "basis": "current source defaults"
+      }
+    ],
+    "preserved_gaps": [
+      "Historical source revision, unlogged constructor defaults and runtime loaded-weight digest remain unknown; file equality is not a complete deployment certification."
+    ]
+  },
+  {
+    "solver": "OMNI",
+    "deployment_index": 1,
+    "implementation": "omni",
+    "assumed_config": {
+      "embed_dim": 128,
+      "num_heads": 8,
+      "qkv_dim": 16,
+      "num_encoder_layers": 6,
+      "normalization": "instance",
+      "feedforward_hidden": 512,
+      "logit_clipping": 10,
+      "use_graph_mean": false,
+      "am_mode": true,
+      "first_placeholder": true,
+      "first_mode": "random"
+    },
+    "sources": [
+      {
+        "file": "easynco:neural_solvers/methods/omni/policy.py",
+        "sha256": "38dd328830aed657d51fd4b7b078ed154a53be39f0eacbcb1242a94bcddd28b7",
+        "selector": "OMNI_POMO_Policy.__init__",
+        "basis": "current source defaults"
+      }
+    ],
+    "preserved_gaps": [
+      "Original NSS validation command, source, checkpoint and effective model/decoder/augmentation/fine-tuning recipe are missing. Train/test settings must not be copied here."
+    ]
+  },
+  {
+    "solver": "OMNI",
+    "deployment_index": 2,
+    "implementation": "omni",
+    "assumed_config": {
+      "embed_dim": 128,
+      "num_heads": 8,
+      "qkv_dim": 16,
+      "num_encoder_layers": 6,
+      "normalization": "instance",
+      "feedforward_hidden": 512,
+      "logit_clipping": 10,
+      "use_graph_mean": false,
+      "am_mode": true,
+      "first_placeholder": true,
+      "first_mode": "random"
+    },
+    "sources": [
+      {
+        "file": "easynco:neural_solvers/methods/omni/policy.py",
+        "sha256": "38dd328830aed657d51fd4b7b078ed154a53be39f0eacbcb1242a94bcddd28b7",
+        "selector": "OMNI_POMO_Policy.__init__",
+        "basis": "current source defaults"
+      }
+    ],
+    "preserved_gaps": [
+      "CVRP NSS source/checkpoint, effective decoder, normalization, augmentation and adaptation recipe are unknown; TSP recipe is not applicable by name alone."
+    ]
+  },
+  {
+    "solver": "RELD_CVRP",
+    "deployment_index": 0,
+    "implementation": "reld_cvrp",
+    "assumed_config": {},
+    "sources": [
+      {
+        "file": "reld:CVRP/CVRPModel.py",
+        "sha256": "d5482c8825400a5f63d99f6f4e9a1138255ba831e6d80b4bd4069d0d5c1f4bdd",
+        "selector": [
+          "CVRP_Encoder",
+          "EncoderLayer",
+          "FeedForward"
+        ],
+        "basis": "current implementation; historical version unknown"
+      }
+    ],
+    "preserved_gaps": [
+      "Historical bridge/source/dependency revision and runtime checkpoint hash were not captured; recovered current YAML/bridge parameters remain a partial historical binding."
+    ]
+  },
+  {
+    "solver": "RELD_MOEL",
+    "deployment_index": 0,
+    "implementation": "reld_moel",
+    "assumed_config": {},
+    "sources": [
+      {
+        "file": "reld:Multi-Task/models/MOEModel_Light.py",
+        "sha256": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d",
+        "selector": [
+          "MTL_Encoder",
+          "EncoderLayer",
+          "FeedForward",
+          "Add_And_Normalization_Module"
+        ],
+        "basis": "current implementation; historical version unknown"
+      }
+    ],
+    "preserved_gaps": [
+      "All label-file ancestries are bound, but historical source/environment versions and effective per-problem runtime metadata outside the R41 OVRPTW verification are not fully archived. No new solver repeat is claimed."
+    ]
+  },
+  {
+    "solver": "RELD_MTL",
+    "deployment_index": 0,
+    "implementation": "reld_mtl",
+    "assumed_config": {},
+    "sources": [
+      {
+        "file": "reld:Multi-Task/models/MTLModel.py",
+        "sha256": "6b55919523a66e87897e6ae15f37ecae1f777fe25a01ebf76e6b117bb4fd3759",
+        "selector": [
+          "MTL_Encoder",
+          "EncoderLayer",
+          "FeedForward",
+          "Add_And_Normalization_Module"
+        ],
+        "basis": "current implementation; historical version unknown"
+      }
+    ],
+    "preserved_gaps": [
+      "Historical source/constraint-environment version and complete per-problem runtime metadata remain missing outside the preserved R41 OVRPTW verification. File equality alone does not certify all deployments."
+    ]
+  },
+  {
+    "solver": "RouteFinder",
+    "deployment_index": 0,
+    "implementation": "routefinder",
+    "assumed_config": {
+      "embed_dim": 128,
+      "num_encoder_layers": 6,
+      "num_heads": 8,
+      "normalization": "instance",
+      "feedforward_hidden": 512,
+      "encoder_use_post_layers_norm": false,
+      "encoder_use_prenorm": false,
+      "use_graph_context": false
+    },
+    "sources": [
+      {
+        "file": "sources:routefinder/routefinder/models/policy.py",
+        "sha256": "328f19c41df946b972af7247363177b1dd4ed705a927741089860325e919ba09",
+        "selector": "RouteFinderPolicy.__init__",
+        "basis": "current source defaults"
+      }
+    ],
+    "preserved_gaps": [
+      "Historical load_from_checkpoint-resolved network, rl4co decoder/MTVRPEnv versions and effective decoder/RNG remain unbound; do not substitute current defaults.",
+      "The historical weight digests were not captured per run; current bucket hashes are local identity evidence only."
+    ]
+  },
+  {
+    "solver": "T2T",
+    "deployment_index": 0,
+    "implementation": "t2t",
+    "assumed_config": {
+      "n_layers": 12,
+      "hidden_dim": 256,
+      "aggregation": "sum",
+      "diffusion_type": "categorical",
+      "diffusion_schedule": "linear",
+      "diffusion_steps": 1000,
+      "sparse_factor": -1,
+      "node_feature_only": false,
+      "parallel_sampling": 1,
+      "sequential_sampling": 1,
+      "inference_diffusion_steps": 50,
+      "inference_schedule": "cosine",
+      "inference_trick": "ddim",
+      "norm": true,
+      "rewrite": true,
+      "rewrite_steps": 3,
+      "rewrite_ratio": 0.4,
+      "rewrite_inference_steps": 10
+    },
+    "sources": [
+      {
+        "file": "easynco:configs_old/tsp_t2t_config.yaml",
+        "sha256": "cac90c1e14eb95a01a5483fa26834113dca98a684738ef3b7d6dbdb0e3d795af",
+        "selector": "model",
+        "basis": "checked-in problem-specific template"
+      }
+    ],
+    "preserved_gaps": [
+      "Original NSS entry/source/checkpoint binding is missing; local 100-node weights are not interchangeable by filename.",
+      "Historical diffusion/sampling, gradient guidance, rewrite steps/ratio, inference schedule, augmentation, normalization and postprocessing budgets are unknown."
+    ]
+  },
+  {
+    "solver": "T2T500",
+    "deployment_index": 0,
+    "implementation": "t2t",
+    "assumed_config": {
+      "n_layers": 12,
+      "hidden_dim": 256,
+      "aggregation": "sum",
+      "diffusion_type": "categorical",
+      "diffusion_schedule": "linear",
+      "diffusion_steps": 1000,
+      "sparse_factor": -1,
+      "node_feature_only": false,
+      "parallel_sampling": 1,
+      "sequential_sampling": 1,
+      "inference_diffusion_steps": 50,
+      "inference_schedule": "cosine",
+      "inference_trick": "ddim",
+      "norm": true,
+      "rewrite": true,
+      "rewrite_steps": 3,
+      "rewrite_ratio": 0.4,
+      "rewrite_inference_steps": 10
+    },
+    "sources": [
+      {
+        "file": "easynco:configs_old/tsp_t2t_config.yaml",
+        "sha256": "cac90c1e14eb95a01a5483fa26834113dca98a684738ef3b7d6dbdb0e3d795af",
+        "selector": "model",
+        "basis": "checked-in problem-specific template"
+      }
+    ],
+    "preserved_gaps": [
+      "The original NSS 500 deployment checkpoint/source/config identity remains unbound despite locating a candidate elsewhere; do not substitute tsp100 or infer a budget from 500.",
+      "Effective diffusion, gradient search/rewrite, sampling, sparsity, augmentation, normalization and postprocessing settings are unknown."
+    ]
+  },
+  {
+    "solver": "UNICO_MatPOENet",
+    "deployment_index": 0,
+    "implementation": "unico_matpoenet",
+    "assumed_config": {},
+    "sources": [
+      {
+        "file": "sources:UniCO/MatPOENet/ATSPModel.py",
+        "sha256": "e38ca85fa6cf0efa6a122986205abb68d5669f3715aa21e21180b75e6dca5375",
+        "selector": [
+          "ATSP_Encoder",
+          "EncoderLayer",
+          "EncodingBlock"
+        ],
+        "basis": "current implementation; historical version unknown"
+      }
+    ],
+    "preserved_gaps": [
+      "Historical bridge/source/dependency and libtsp.so versions, resolved test module snapshot, effective batch/RNG history and runtime weight digests were not captured; current key inspection is not a historical replay."
+    ]
+  },
+  {
+    "solver": "UNICO_MatPOENet",
+    "deployment_index": 1,
+    "implementation": "unico_matpoenet",
+    "assumed_config": {},
+    "sources": [
+      {
+        "file": "sources:UniCO/MatPOENet/ATSPModel.py",
+        "sha256": "e38ca85fa6cf0efa6a122986205abb68d5669f3715aa21e21180b75e6dca5375",
+        "selector": [
+          "ATSP_Encoder",
+          "EncoderLayer",
+          "EncodingBlock"
+        ],
+        "basis": "current implementation; historical version unknown"
+      }
+    ],
+    "preserved_gaps": [
+      "Historical bridge/source/dependency/native versions, effective batch/RNG history and per-run weight digests are not archived. Current exact/mix availability and test module values do not prove the original on-disk state."
+    ]
+  }
+]

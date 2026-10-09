@@ -1,0 +1,711 @@
+{
+  "schema": "r45-source-manifest-v1",
+  "baseline_commit": "307a9b6dfda6797dc782550bca1017d3e8b01421",
+  "roles": ["encoder", "decision", "inference", "config"],
+  "roots": {
+    "easynco": "/public/home/shiys/EasyNCO",
+    "sources": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code",
+    "reld": "/public/home/shiys/reld-nco-main",
+    "bridge": "/public/home/shiys/easynco_v3_bridge/scripts",
+    "insertion": "/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/site-packages/random_insertion"
+  },
+  "evidence": {
+    "historical_audit": "code/V4/runs/R41_signal_audit/solver_manifest.json",
+    "recipe_notes": "code/V4/runs/R41_signal_audit/original_solver_provenance.md",
+    "policy": "Source candidates are not automatically certified as historical label implementations. Confirm bindings and fill actual configs before production upload. Missing optional training background is not a blocker.",
+    "completion_evidence": "code/V4/runs/R45_solver_code_embeddings/\u6765\u6e90\u8865\u5168\u6838\u5bf9\u8bc1\u636e.json",
+    "completion_report": "code/V4/runs/R45_solver_code_embeddings/solver_source_completion.md",
+    "label_binding_scope": "All 384 problem/method/split files have an exact identifier/float64-cost digest match to a local ancestor. This proves file ancestry, not the historical solver revision or effective runtime parameters. No observed costs are semantic configuration inputs.",
+    "checkpoint_hash_scope": "Unless separately established by R41, checkpoint hashes identify current local bytes inspected on 2026-10-08, not a digest captured by the historical job.",
+    "recipe_scope": "Archived Hydra values are distinguished from parameters derived from the current bridge/source. NSS-only recipes and the effective MTPOMO/MVMOE decoder remain unresolved. No train_100k expansion configuration is substituted for the original labels.",
+    "revision_scope": "baseline_commit is the existing project reference, not a recovered historical solver-job revision. No source revision is certified by the current workspace HEAD."
+  },
+  "implementations": {
+    "bq": {
+      "entrypoint": "sources:bq-nco/test_tsp.py; sources:bq-nco/test_cvrp.py",
+      "views": {
+        "encoder": {"status": "present", "sources": [
+          {"file": "sources:bq-nco/model/model.py", "symbols": ["BQModel"]},
+          {"file": "sources:bq-nco/model/encoder.py", "symbols": ["*"]},
+          {"file": "sources:bq-nco/model/attention.py", "symbols": ["*"]}
+        ]},
+        "decision": {"status": "present", "sources": [
+          {"file": "sources:bq-nco/learning/tsp/decoding.py", "symbols": ["DecodingSubPb", "prepare_input_and_forward_pass", "greedy_decoding_step", "reformat_subproblem_for_next_step"]},
+          {"file": "sources:bq-nco/learning/cvrp/decoding.py", "symbols": ["DecodingSubPb", "prepare_input_and_forward_pass", "greedy_decoding_step", "reformat_subproblem_for_next_step"]}
+        ]},
+        "inference": {"status": "present", "sources": [
+          {"file": "sources:bq-nco/learning/tsp/decoding.py", "symbols": ["decode", "greedy_decoding_loop", "beam_search_decoding_loop"]},
+          {"file": "sources:bq-nco/learning/cvrp/decoding.py", "symbols": ["decode", "greedy_decoding_loop", "beam_search_decoding_loop", "reconstruct_tours"]}
+        ]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "difusco": {
+      "entrypoint": "easynco:eval.py -> TSPDiffusionPolicy (candidate, not historical certification)",
+      "views": {
+        "encoder": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/backbones/GNN/AGNNDifusco.py", "symbols": ["*"]},
+          {"file": "easynco:neural_solvers/methods/difusco/tsp_difusco.py", "symbols": ["TSPDiffusionPolicy.__init__", "TSPDiffusionPolicy.forward"]}
+        ]},
+        "decision": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/difusco/tsp_difusco.py", "symbols": ["TSPDiffusionPolicy.categorical_denoise_step", "TSPDiffusionPolicy.gaussian_denoise_step"]},
+          {"file": "easynco:neural_solvers/backbones/Diffusion/diffusion.py", "symbols": ["*"]}
+        ]},
+        "inference": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/difusco/tsp_difusco.py", "symbols": ["TSPDiffusionPolicy.initialize", "TSPDiffusionPolicy.iteration", "TSPDiffusionPolicy.duplicate_edge_index"]},
+          {"file": "easynco:neural_solvers/methods/difusco/util.py", "symbols": ["InferenceSchedule", "merge_tour", "two_opt_refine", "evaluate_tsp_tour"]}
+        ]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "t2t": {
+      "entrypoint": "easynco:eval.py -> TSPT2TPolicy (candidate, not historical certification)",
+      "views": {
+        "encoder": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/backbones/GNN/AGNNDifusco.py", "symbols": ["*"]},
+          {"file": "easynco:neural_solvers/methods/t2t/tsp_t2t.py", "symbols": ["TSPT2TPolicy.__init__", "TSPT2TPolicy.forward"]}
+        ]},
+        "decision": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/t2t/tsp_t2t.py", "symbols": ["TSPT2TPolicy.categorical_denoise_step", "TSPT2TPolicy.guided_categorical_denoise_step", "TSPT2TPolicy.tour2adj", "TSPT2TPolicy.nodes2adj"]},
+          {"file": "easynco:neural_solvers/backbones/Diffusion/diffusion.py", "symbols": ["*"]}
+        ]},
+        "inference": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/t2t/tsp_t2t.py", "symbols": ["TSPT2TPolicy.initialize", "TSPT2TPolicy.iteration", "TSPT2TPolicy.duplicate_edge_index"]},
+          {"file": "easynco:neural_solvers/methods/difusco/util.py", "symbols": ["InferenceSchedule", "merge_tour", "two_opt_refine"]}
+        ]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "elg": {
+      "entrypoint": "easynco:eval.py -> ELGPolicy (candidate)",
+      "views": {
+        "encoder": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/am/am_encoder.py", "symbols": ["AttentionModelEncoder"]},
+          {"file": "easynco:neural_solvers/methods/elg/policy.py", "symbols": ["ELGPolicy", "local_policy_att_tsp", "local_policy_att_cvrp"]}
+        ]},
+        "decision": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/am/am_decoder.py", "symbols": ["AttentionModelDecoder"]},
+          {"file": "easynco:neural_solvers/methods/elg/policy.py", "symbols": ["add_distance_penalty_tsp", "add_distance_penalty_cvrp", "elg_forward"]}
+        ]},
+        "inference": {"status": "present", "sources": [{"file": "easynco:neural_solvers/methods/elg/initialization.py", "symbols": ["ELGInitialization"]}]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "lehd": {
+      "entrypoint": "easynco:eval.py -> LEHDPolicy (candidate)",
+      "views": {
+        "encoder": {"status": "present", "sources": [{"file": "easynco:neural_solvers/methods/lehd/lehd_encoder.py", "symbols": ["*"]}]},
+        "decision": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/lehd/lehd_decoder.py", "symbols": ["*"]},
+          {"file": "easynco:neural_solvers/methods/lehd/policy.py", "symbols": ["LEHDPolicy"]}
+        ]},
+        "inference": {"status": "present", "sources": [{"file": "easynco:neural_solvers/methods/lehd/iteration.py", "symbols": ["TSPLEHDIteration", "CVRPLEHDIteration"]}]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "omni": {
+      "entrypoint": "easynco:eval.py -> OMNI_POMO_Policy; TSP train/test labels match EasyNCO, TSP val and all CVRP labels match NSS",
+      "views": {
+        "encoder": {"status": "present", "sources": [{"file": "easynco:neural_solvers/methods/am/am_encoder.py", "symbols": ["AttentionModelEncoder"]}]},
+        "decision": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/am/am_decoder.py", "symbols": ["AttentionModelDecoder"]},
+          {"file": "easynco:neural_solvers/methods/omni/policy.py", "symbols": ["OMNI_POMO_Policy"]}
+        ]},
+        "inference": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/omni/initialization.py", "symbols": ["OMNIInitialization.run", "OMNIInitialization.play_episode"]},
+          {"file": "easynco:neural_solvers/envs/TSPEnv.py", "symbols": ["TSPEnv.load_problems", "TSPEnv._reset", "TSPEnv.pre_step", "TSPEnv._step", "TSPEnv._get_travel_distance"]}
+        ]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "icam": {
+      "entrypoint": "easynco:eval.py -> CVRPICAMPolicy (candidate)",
+      "views": {
+        "encoder": {"status": "present", "sources": [{"file": "easynco:neural_solvers/methods/icam/icam_encoder.py", "symbols": ["*"]}]},
+        "decision": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/icam/icam_decoder.py", "symbols": ["*"]},
+          {"file": "easynco:neural_solvers/methods/icam/policy.py", "symbols": ["CVRPICAMPolicy"]}
+        ]},
+        "inference": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/icam/initialization.py", "symbols": ["ICAMInitialization"]},
+          {"file": "easynco:neural_solvers/pipeline/initialization.py", "symbols": ["ARInitialization.run", "ARInitialization.play_episode"]},
+          {"file": "easynco:neural_solvers/envs/CVRPEnv.py", "symbols": ["CVRPEnv.load_problems", "CVRPEnv._reset", "CVRPEnv.pre_step", "CVRPEnv._step", "CVRPEnv._get_travel_distance", "CVRPEnv._get_local_feature"]}
+        ]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "icam_atsp": {
+      "entrypoint": "bridge:paper_source_atsp_runner.py#ICAMATSPRunner",
+      "views": {
+        "encoder": {"status": "present", "sources": [
+          {"file": "sources:ICAM/ICAM_ATSP/ATSPModel_ICAM.py", "symbols": ["ATSP_Encoder", "EncoderLayer", "EncodingBlock", "AddAndInstanceNormalization", "FeedForward", "adaptation_attention_free_module"]},
+          {"file": "bridge:paper_source_atsp_runner.py", "symbols": ["ICAMATSPRunner._pre_forward_compat"]}
+        ]},
+        "decision": {"status": "present", "sources": [{"file": "sources:ICAM/ICAM_ATSP/ATSPModel_ICAM.py", "symbols": ["ATSPModel", "ATSP_Decoder"]}]},
+        "inference": {"status": "present", "sources": [
+          {"file": "bridge:paper_source_atsp_runner.py", "symbols": ["ICAMATSPRunner._get_tester", "ICAMATSPRunner.run_pt"]},
+          {"file": "sources:ICAM/ICAM_ATSP/ATSPEnv.py", "symbols": ["ATSPEnv.load_problems_atsp", "ATSPEnv.reset", "ATSPEnv.pre_step", "ATSPEnv.step", "ATSPEnv._get_total_distance", "ATSPEnv.get_local_feature"]}
+        ]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "matnet": {
+      "entrypoint": "easynco:eval.py -> ATSPPolicy (candidate)",
+      "views": {
+        "encoder": {"status": "present", "sources": [{"file": "easynco:neural_solvers/methods/matnet/matnet_encoder.py", "symbols": ["*"]}]},
+        "decision": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/matnet/matnet_decoder.py", "symbols": ["ATSPDecoder"]},
+          {"file": "easynco:neural_solvers/methods/matnet/policy.py", "symbols": ["ATSPPolicy"]}
+        ]},
+        "inference": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/matnet/initialization.py", "symbols": ["MatNetInitialization"]},
+          {"file": "easynco:neural_solvers/pipeline/initialization.py", "symbols": ["ARInitialization.run", "ARInitialization.play_episode"]},
+          {"file": "easynco:neural_solvers/envs/ATSPEnv.py", "symbols": ["ATSPEnv.load_problems", "ATSPEnv._reset", "ATSPEnv.pre_step", "ATSPEnv._step", "ATSPEnv._get_total_distance"]}
+        ]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "matpoenet": {
+      "entrypoint": "easynco:eval.py -> MatPOENetPolicy (candidate; not the UNICO bridge)",
+      "views": {
+        "encoder": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/matnet/matnet_encoder.py", "symbols": ["*"]},
+          {"file": "easynco:neural_solvers/methods/matpoenet/utils.py", "symbols": ["make_positional_encoding_cosh_recur", "BaseSolver.__init__", "BaseSolver._make_problem", "BaseSolver.get_path", "BaseSolver.solve_nearest_neighbor"]}
+        ]},
+        "decision": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/matnet/matnet_decoder.py", "symbols": ["ATSPDecoder"]},
+          {"file": "easynco:neural_solvers/methods/matpoenet/policy.py", "symbols": ["MatPOENetPolicy"]}
+        ]},
+        "inference": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/matpoenet/initialization.py", "symbols": ["*"]},
+          {"file": "easynco:neural_solvers/pipeline/initialization.py", "symbols": ["ARInitialization.run", "ARInitialization.play_episode"]},
+          {"file": "easynco:neural_solvers/envs/ATSPEnv.py", "symbols": ["ATSPEnv.load_problems", "ATSPEnv._reset", "ATSPEnv.pre_step", "ATSPEnv._step", "ATSPEnv._get_total_distance"]}
+        ]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "unico_matpoenet": {
+      "entrypoint": "bridge:paper_source_atsp_runner.py#UnicoMatpoenetRunner",
+      "views": {
+        "encoder": {"status": "present", "sources": [
+          {"file": "sources:UniCO/MatPOENet/ATSPModel.py", "symbols": ["ATSP_Encoder", "EncoderLayer", "EncodingBlock"]},
+          {"file": "sources:UniCO/MatPOENet/ATSPModel_LIB.py", "symbols": ["PEAddAndInstanceNormalization", "AddAndInstanceNormalization", "PEFeedForward", "FeedForward", "MixedScore_MultiHeadAttention"]},
+          {"file": "sources:UniCO/utils/positional_encoding.py", "symbols": ["make_positional_encoding_cosh_recur"]},
+          {"file": "sources:UniCO/utils/base_methods.py", "symbols": ["BaseSolver.__init__", "BaseSolver._make_problem", "BaseSolver.get_path", "BaseSolver.solve_nearest_neighbor"]},
+          {"file": "bridge:prepare_paper_source_data.py", "symbols": ["prepare_unico_atsp"]}
+        ]},
+        "decision": {"status": "present", "sources": [{"file": "sources:UniCO/MatPOENet/ATSPModel.py", "symbols": ["ATSPModel", "ATSP_Decoder"]}]},
+        "inference": {"status": "present", "sources": [
+          {"file": "bridge:paper_source_atsp_runner.py", "symbols": ["UnicoMatpoenetRunner._resolve_checkpoint", "UnicoMatpoenetRunner._infer_encoder_layers", "UnicoMatpoenetRunner._build_tester", "UnicoMatpoenetRunner.run_scale_dir"]},
+          {"file": "sources:UniCO/MatPOENet/ATSPEnv.py", "symbols": ["ATSPEnv.load_problems_manual", "ATSPEnv.reset", "ATSPEnv._create_step_state", "ATSPEnv.pre_step", "ATSPEnv.step", "ATSPEnv._update_step_state", "ATSPEnv._get_total_distance"]},
+          {"file": "sources:UniCO/utils/ATSProblemDef.py", "symbols": ["load_single_problem_from_file"]}
+        ]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "glop_atsp": {
+      "entrypoint": "sources:GLOP/eval_atsp/test_glop.py (candidate)",
+      "binding_note": "Preserved paper reconstruction candidate, not used for the current GLOP label column. The matched EasyNCO runs used ATSP random insertion with NoIteration.",
+      "views": {
+        "encoder": {"status": "present", "sources": [
+          {"file": "sources:GLOP/eval_atsp/ASHPPModel.py", "symbols": ["ATSP_Encoder", "EncoderLayer", "EncodingBlock"]},
+          {"file": "sources:GLOP/eval_atsp/ATSPModel_LIB.py", "symbols": ["*"]}
+        ]},
+        "decision": {"status": "present", "sources": [{"file": "sources:GLOP/eval_atsp/ASHPPModel.py", "symbols": ["ASHPPModel", "ATSP_Decoder"]}]},
+        "inference": {"status": "present", "sources": [{"file": "sources:GLOP/eval_atsp/ATSPTester_glop.py", "symbols": ["ATSPTester._test_one_batch"]}]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "glop_atsp_init_only": {
+      "entrypoint": "easynco:neural_solvers/methods/glop/initialization.py#GLOPInitialization.run -> insertion.atsp_random_insertion",
+      "binding_note": "No learned encoder or neural reconstruction is executed in the ATSP eval initializer. Encoder view contains actual input preparation. The native C++ dependency is still a coverage gap.",
+      "views": {
+        "encoder": {"status": "present", "sources": [{"file": "insertion:__init__.py", "symbols": ["_tsp_get_parameters"]}]},
+        "decision": {"status": "present", "sources": [{"file": "insertion:__init__.py", "symbols": ["atsp_random_insertion"]}]},
+        "inference": {"status": "present", "sources": [{"file": "easynco:neural_solvers/methods/glop/initialization.py", "symbols": ["GLOPInitialization.run"]}]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "mtpomo": {
+      "entrypoint": "easynco:eval.py -> MTPOMOPolicy",
+      "views": {
+        "encoder": {"status": "present", "sources": [{"file": "easynco:neural_solvers/methods/mtpomo/mtpomo_encoder.py", "symbols": ["*"]}]},
+        "decision": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/mtpomo/mtpomo_decoder.py", "symbols": ["*"]},
+          {"file": "easynco:neural_solvers/methods/mtpomo/policy.py", "symbols": ["MTPOMOPolicy"]}
+        ]},
+        "inference": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/pomo/initialization.py", "symbols": ["POMOInitialization.play_episode"]},
+          {"file": "easynco:neural_solvers/pipeline/initialization.py", "symbols": ["ARInitialization.run"]},
+          {"file": "easynco:neural_solvers/envs/MVRPEnv.py", "symbols": ["MVRPEnv.__init__", "MVRPEnv.load_problems", "MVRPEnv._reset", "MVRPEnv.pre_step", "MVRPEnv._step", "MVRPEnv._get_travel_distance"]}
+        ]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "mvmoe": {
+      "entrypoint": "easynco:eval.py -> MoEPolicy",
+      "views": {
+        "encoder": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/mvmoe/mvmoe_encoder.py", "symbols": ["*"]},
+          {"file": "easynco:neural_solvers/methods/mvmoe/moe_layer.py", "symbols": ["*"]}
+        ]},
+        "decision": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/mvmoe/mvmoe_decoder.py", "symbols": ["*"]},
+          {"file": "easynco:neural_solvers/methods/mvmoe/policy.py", "symbols": ["MoEPolicy"]}
+        ]},
+        "inference": {"status": "present", "sources": [
+          {"file": "easynco:neural_solvers/methods/pomo/initialization.py", "symbols": ["POMOInitialization.play_episode"]},
+          {"file": "easynco:neural_solvers/pipeline/initialization.py", "symbols": ["ARInitialization.run"]},
+          {"file": "easynco:neural_solvers/envs/MVRPEnv.py", "symbols": ["MVRPEnv.__init__", "MVRPEnv.load_problems", "MVRPEnv._reset", "MVRPEnv.pre_step", "MVRPEnv._step", "MVRPEnv._get_travel_distance"]}
+        ]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "routefinder": {
+      "entrypoint": "bridge:paper_source_routefinder_runner.py#RouteFinderRunner",
+      "views": {
+        "encoder": {"status": "present", "sources": [
+          {"file": "sources:routefinder/routefinder/models/encoder.py", "symbols": ["RouteFinderEncoder"]},
+          {"file": "sources:routefinder/routefinder/models/nn/transformer.py", "symbols": ["*"]},
+          {"file": "bridge:prepare_paper_source_data.py", "symbols": ["_to_tensor", "_float_scalar", "_canonical_vrp_item"]}
+        ]},
+        "decision": {"status": "present", "sources": [
+          {"file": "sources:routefinder/routefinder/models/policy.py", "symbols": ["RouteFinderPolicy"]},
+          {"file": "sources:routefinder/routefinder/models/env_embeddings/mtvrp/init.py", "symbols": ["*"]},
+          {"file": "sources:routefinder/routefinder/models/env_embeddings/mtvrp/context.py", "symbols": ["*"]}
+        ]},
+        "inference": {"status": "present", "sources": [
+          {"file": "sources:routefinder/test.py", "symbols": ["test"]},
+          {"file": "bridge:paper_source_routefinder_runner.py", "symbols": ["RouteFinderRunner.__init__", "RouteFinderRunner.run_npz"]},
+          {"file": "sources:routefinder/routefinder/envs/mtvrp/env.py", "symbols": ["MTVRPEnv.__init__", "MTVRPEnv.load_data", "MTVRPEnv._reset", "MTVRPEnv._step", "MTVRPEnv.get_action_mask", "MTVRPEnv._get_reward", "MTVRPEnv.get_num_starts", "MTVRPEnv.select_start_nodes"]}
+        ]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "moses_rf": {
+      "entrypoint": "bridge:paper_source_routefinder_runner.py#MosesRunner; _build_moses_policy(method=moses_rf)",
+      "views": {
+        "encoder": {"status": "present", "sources": [
+          {"file": "sources:moses_vrp/models/encoder.py", "symbols": ["LoRAEncoder", "MultiLoRAEncoder"]},
+          {"file": "sources:moses_vrp/models/nn/lora.py", "symbols": ["*"]},
+          {"file": "bridge:prepare_paper_source_data.py", "symbols": ["_to_tensor", "_float_scalar", "_canonical_vrp_item"]}
+        ]},
+        "decision": {"status": "present", "sources": [
+          {"file": "sources:moses_vrp/models/policy.py", "symbols": ["MultiLoRAPolicy"]},
+          {"file": "sources:moses_vrp/models/decoder.py", "symbols": ["LoRADecoder", "MultiLoRADecoder"]}
+        ]},
+        "inference": {"status": "present", "sources": [
+          {"file": "sources:moses_vrp/test.py", "symbols": ["test"]},
+          {"file": "bridge:paper_source_routefinder_runner.py", "symbols": ["_build_moses_policy", "MosesRunner.__init__", "MosesRunner.run_npz"]},
+          {"file": "sources:moses_vrp/envs/mtvrp/env.py", "symbols": ["MTVRPEnv.__init__", "MTVRPEnv.load_data", "MTVRPEnv._reset", "MTVRPEnv._step", "MTVRPEnv.get_action_mask", "MTVRPEnv._get_reward", "MTVRPEnv.get_num_starts", "MTVRPEnv.select_start_nodes"]}
+        ]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "moses_cada": {
+      "entrypoint": "bridge:paper_source_routefinder_runner.py#MosesRunner; _build_moses_policy(method=moses_cada)",
+      "views": {
+        "encoder": {"status": "present", "sources": [
+          {"file": "sources:moses_vrp/models/encoder.py", "symbols": ["CadaEncoder", "CadaLoRAEncoder", "CadaMultiLoRAEncoder"]},
+          {"file": "sources:moses_vrp/models/nn/lora.py", "symbols": ["*"]},
+          {"file": "bridge:prepare_paper_source_data.py", "symbols": ["_to_tensor", "_float_scalar", "_canonical_vrp_item"]}
+        ]},
+        "decision": {"status": "present", "sources": [
+          {"file": "sources:moses_vrp/models/policy.py", "symbols": ["CadaMultiLoRAPolicy"]},
+          {"file": "sources:moses_vrp/models/decoder.py", "symbols": ["LoRADecoder", "MultiLoRADecoder"]}
+        ]},
+        "inference": {"status": "present", "sources": [
+          {"file": "sources:moses_vrp/test.py", "symbols": ["test"]},
+          {"file": "bridge:paper_source_routefinder_runner.py", "symbols": ["_build_moses_policy", "MosesRunner.__init__", "MosesRunner.run_npz"]},
+          {"file": "sources:moses_vrp/envs/mtvrp/env.py", "symbols": ["MTVRPEnv.__init__", "MTVRPEnv.load_data", "MTVRPEnv._reset", "MTVRPEnv._step", "MTVRPEnv.get_action_mask", "MTVRPEnv._get_reward", "MTVRPEnv.get_num_starts", "MTVRPEnv.select_start_nodes"]}
+        ]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "reld_cvrp": {
+      "entrypoint": "bridge:run_reld_cvrp_single_bridge.py#instantiate_single_cvrp_model",
+      "views": {
+        "encoder": {"status": "present", "sources": [
+          {"file": "reld:CVRP/CVRPModel.py", "symbols": ["CVRP_Encoder", "EncoderLayer", "FeedForward"]},
+          {"file": "bridge:run_reld_cvrp_single_bridge.py", "symbols": ["collate_batch", "instantiate_single_cvrp_model"]}
+        ]},
+        "decision": {"status": "present", "sources": [{"file": "reld:CVRP/CVRPModel.py", "symbols": ["CVRPModel", "CVRP_Decoder"]}]},
+        "inference": {"status": "present", "sources": [
+          {"file": "bridge:run_reld_cvrp_single_bridge.py", "symbols": ["run_no_aug_scores"]},
+          {"file": "reld:CVRP/CVRPEnv.py", "symbols": ["CVRPEnv.__init__", "CVRPEnv.load_random_problems", "CVRPEnv.reset", "CVRPEnv.pre_step", "CVRPEnv.step", "CVRPEnv._get_reward", "CVRPEnv.get_cur_feature"]}
+        ]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "reld_moel": {
+      "entrypoint": "bridge:reld_bridge_common.py#instantiate_reld_model(model_key=reld_moe_light)",
+      "views": {
+        "encoder": {"status": "present", "sources": [
+          {"file": "reld:Multi-Task/models/MOEModel_Light.py", "symbols": ["MTL_Encoder", "EncoderLayer", "FeedForward", "Add_And_Normalization_Module"]},
+          {"file": "reld:Multi-Task/models/MOELayer.py", "symbols": ["*"]},
+          {"file": "bridge:reld_bridge_common.py", "symbols": ["collate_problem_batch"]}
+        ]},
+        "decision": {"status": "present", "sources": [{"file": "reld:Multi-Task/models/MOEModel_Light.py", "symbols": ["MOEModel_Light", "MTL_Decoder"]}]},
+        "inference": {"status": "present", "sources": [
+          {"file": "bridge:reld_bridge_common.py", "symbols": ["model_init_params", "instantiate_reld_model", "get_env_class", "_run_no_aug_batch"]},
+          {"file": "reld:Multi-Task/utils.py", "symbols": ["get_env"]},
+          {"file": "reld:Multi-Task/envs/OVRPEnv.py", "symbols": ["OVRPEnv.load_problems", "OVRPEnv.reset", "OVRPEnv.step", "OVRPEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/VRPBEnv.py", "symbols": ["VRPBEnv.load_problems", "VRPBEnv.reset", "VRPBEnv.step", "VRPBEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/VRPLEnv.py", "symbols": ["VRPLEnv.load_problems", "VRPLEnv.reset", "VRPLEnv.step", "VRPLEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/VRPTWEnv.py", "symbols": ["VRPTWEnv.load_problems", "VRPTWEnv.reset", "VRPTWEnv.step", "VRPTWEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/OVRPTWEnv.py", "symbols": ["OVRPTWEnv.load_problems", "OVRPTWEnv.reset", "OVRPTWEnv.step", "OVRPTWEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/OVRPBEnv.py", "symbols": ["OVRPBEnv.load_problems", "OVRPBEnv.reset", "OVRPBEnv.step", "OVRPBEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/OVRPLEnv.py", "symbols": ["OVRPLEnv.load_problems", "OVRPLEnv.reset", "OVRPLEnv.step", "OVRPLEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/VRPBLEnv.py", "symbols": ["VRPBLEnv.load_problems", "VRPBLEnv.reset", "VRPBLEnv.step", "VRPBLEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/VRPBTWEnv.py", "symbols": ["VRPBTWEnv.load_problems", "VRPBTWEnv.reset", "VRPBTWEnv.step", "VRPBTWEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/VRPLTWEnv.py", "symbols": ["VRPLTWEnv.load_problems", "VRPLTWEnv.reset", "VRPLTWEnv.step", "VRPLTWEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/OVRPBLEnv.py", "symbols": ["OVRPBLEnv.load_problems", "OVRPBLEnv.reset", "OVRPBLEnv.step", "OVRPBLEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/OVRPBTWEnv.py", "symbols": ["OVRPBTWEnv.load_problems", "OVRPBTWEnv.reset", "OVRPBTWEnv.step", "OVRPBTWEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/OVRPLTWEnv.py", "symbols": ["OVRPLTWEnv.load_problems", "OVRPLTWEnv.reset", "OVRPLTWEnv.step", "OVRPLTWEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/VRPBLTWEnv.py", "symbols": ["VRPBLTWEnv.load_problems", "VRPBLTWEnv.reset", "VRPBLTWEnv.step", "VRPBLTWEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/OVRPBLTWEnv.py", "symbols": ["OVRPBLTWEnv.load_problems", "OVRPBLTWEnv.reset", "OVRPBLTWEnv.step", "OVRPBLTWEnv._get_travel_distance"]}
+        ]},
+        "config": {"status": "present", "sources": []}
+      }
+    },
+    "reld_mtl": {
+      "entrypoint": "bridge:reld_bridge_common.py#instantiate_reld_model(model_key=reld_mtl)",
+      "views": {
+        "encoder": {"status": "present", "sources": [
+          {"file": "reld:Multi-Task/models/MTLModel.py", "symbols": ["MTL_Encoder", "EncoderLayer", "FeedForward", "Add_And_Normalization_Module"]},
+          {"file": "bridge:reld_bridge_common.py", "symbols": ["collate_problem_batch"]}
+        ]},
+        "decision": {"status": "present", "sources": [{"file": "reld:Multi-Task/models/MTLModel.py", "symbols": ["MTLModel", "MTL_Decoder"]}]},
+        "inference": {"status": "present", "sources": [
+          {"file": "bridge:reld_bridge_common.py", "symbols": ["model_init_params", "instantiate_reld_model", "get_env_class", "_run_no_aug_batch"]},
+          {"file": "reld:Multi-Task/utils.py", "symbols": ["get_env"]},
+          {"file": "reld:Multi-Task/envs/OVRPEnv.py", "symbols": ["OVRPEnv.load_problems", "OVRPEnv.reset", "OVRPEnv.step", "OVRPEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/VRPBEnv.py", "symbols": ["VRPBEnv.load_problems", "VRPBEnv.reset", "VRPBEnv.step", "VRPBEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/VRPLEnv.py", "symbols": ["VRPLEnv.load_problems", "VRPLEnv.reset", "VRPLEnv.step", "VRPLEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/VRPTWEnv.py", "symbols": ["VRPTWEnv.load_problems", "VRPTWEnv.reset", "VRPTWEnv.step", "VRPTWEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/OVRPTWEnv.py", "symbols": ["OVRPTWEnv.load_problems", "OVRPTWEnv.reset", "OVRPTWEnv.step", "OVRPTWEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/OVRPBEnv.py", "symbols": ["OVRPBEnv.load_problems", "OVRPBEnv.reset", "OVRPBEnv.step", "OVRPBEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/OVRPLEnv.py", "symbols": ["OVRPLEnv.load_problems", "OVRPLEnv.reset", "OVRPLEnv.step", "OVRPLEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/VRPBLEnv.py", "symbols": ["VRPBLEnv.load_problems", "VRPBLEnv.reset", "VRPBLEnv.step", "VRPBLEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/VRPBTWEnv.py", "symbols": ["VRPBTWEnv.load_problems", "VRPBTWEnv.reset", "VRPBTWEnv.step", "VRPBTWEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/VRPLTWEnv.py", "symbols": ["VRPLTWEnv.load_problems", "VRPLTWEnv.reset", "VRPLTWEnv.step", "VRPLTWEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/OVRPBLEnv.py", "symbols": ["OVRPBLEnv.load_problems", "OVRPBLEnv.reset", "OVRPBLEnv.step", "OVRPBLEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/OVRPBTWEnv.py", "symbols": ["OVRPBTWEnv.load_problems", "OVRPBTWEnv.reset", "OVRPBTWEnv.step", "OVRPBTWEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/OVRPLTWEnv.py", "symbols": ["OVRPLTWEnv.load_problems", "OVRPLTWEnv.reset", "OVRPLTWEnv.step", "OVRPLTWEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/VRPBLTWEnv.py", "symbols": ["VRPBLTWEnv.load_problems", "VRPBLTWEnv.reset", "VRPBLTWEnv.step", "VRPBLTWEnv._get_travel_distance"]},
+          {"file": "reld:Multi-Task/envs/OVRPBLTWEnv.py", "symbols": ["OVRPBLTWEnv.load_problems", "OVRPBLTWEnv.reset", "OVRPBLTWEnv.step", "OVRPBLTWEnv._get_travel_distance"]}
+        ]},
+        "config": {"status": "present", "sources": []}
+      }
+    }
+  },
+  "solvers": [
+    {"solver_id": 0, "solver_name": "BQ", "deployments": [{
+      "implementation": "bq", "problems": ["TSP", "CVRP"], "splits": ["train", "val", "test"], "binding_status": "unverified", "resolved_config": {},
+      "label_binding": {"origin": "nss_import", "matched_groups": 6},
+      "checkpoint_candidates": [
+        {"problem": "TSP", "checkpoint": "sources:bq-nco/pretrained_models/tsp.best", "sha256": "6826d7a71b30d882e4673a26ced162b7391157795931efe230f4d019292bba15"},
+        {"problem": "CVRP", "checkpoint": "sources:bq-nco/pretrained_models/cvrp.best", "sha256": "9a21eb23eca1fa0d2b2b37bcd3b0c93335cd79e74002b89a39aeee8dd70aab60"}
+      ],
+      "evidence": [{"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=BQ]; checkpoints", "supports": "All six current label files match NSS imports; both weights exist locally, neither is bound to the original NSS invocation."}],
+      "gaps": ["NSS generation entry, source revision and historical per-problem checkpoint identities are not recovered.", "Beam/greedy choice, beam width, augmentation and input normalization remain unknown; current defaults and expansion recipes are not used."]
+    }]},
+    {"solver_id": 1, "solver_name": "DIFUSCO", "deployments": [{
+      "implementation": "difusco", "problems": ["TSP"], "splits": ["train", "val", "test"], "binding_status": "unverified", "resolved_config": {},
+      "label_binding": {"origin": "nss_import", "matched_groups": 3},
+      "checkpoint_candidates": [{"checkpoint": "easynco:pretrained/DIFUSCO_pretrain/difusco_tsp100.ckpt", "sha256": "6141018aab281aa0234786ff2f79606a6ebf93eea9a80a5392df8aa071360381"}],
+      "evidence": [{"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=DIFUSCO]; checkpoints", "supports": "All current splits match NSS imports, not a recovered EasyNCO recipe."}],
+      "gaps": ["Original NSS source/checkpoint binding and invocation are missing.", "Diffusion type/steps/schedule, parallel/sequential sampling, sparse graph settings, augmentation and merge/2-opt budgets are unknown."]
+    }]},
+    {"solver_id": 2, "solver_name": "DIFUSCO500", "deployments": [{
+      "implementation": "difusco", "problems": ["TSP"], "splits": ["train", "val", "test"], "binding_status": "unverified", "resolved_config": {},
+      "label_binding": {"origin": "nss_import", "matched_groups": 3},
+      "checkpoint_candidates": [{"checkpoint": "easynco:pretrained/DIFUSCO_pretrain/difusco_tsp500.ckpt", "sha256": "02e6a315e6ca3f034e36b59e34f4eea5827a0bf0d07d9a23a189e4f78552559a"}],
+      "evidence": [{"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=DIFUSCO500]; checkpoints", "supports": "All current splits match NSS; the 500 weight is a candidate, not evidence of a diffusion or sampling budget."}],
+      "gaps": ["Original NSS source/checkpoint/config binding is missing; the suffix is not interpreted as an inference budget.", "Effective diffusion, sampling, sparsity, augmentation and postprocessing settings remain unknown."]
+    }]},
+    {"solver_id": 3, "solver_name": "ELG", "deployments": [{
+      "implementation": "elg", "problems": ["TSP", "CVRP"], "splits": ["train", "val", "test"], "binding_status": "unverified", "resolved_config": {},
+      "label_binding": {"origin": "nss_import", "matched_groups": 6},
+      "checkpoint_candidates": [
+        {"problem": "TSP", "checkpoint": "sources:ELG/TSP/weights/ELG.pt", "sha256": "94448cce3ba413388286449886eae05f27c03f94996ff45daea37ebdce88fcdf"},
+        {"problem": "CVRP", "checkpoint": "easynco:pretrained/ELG/elg_cvrp100.ckpt", "sha256": "ac87a60012c1e1b9f19b6892d8d2d6b0b0b0e71c3207e4a9c80413fbe0fb401b"}
+      ],
+      "evidence": [{"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=ELG]", "supports": "Both problems match NSS imports. Available EasyNCO CVRP rerun scores differ and do not bind the current labels to that configuration."}],
+      "gaps": ["Historical per-problem implementation/checkpoint, local-size and network configuration are unbound.", "Decoder, starts, augmentation and original inference budget are unknown; later paperlike settings are not substituted."]
+    }]},
+    {"solver_id": 4, "solver_name": "GLOP", "deployments": [{
+      "implementation": "glop_atsp_init_only", "problems": ["ATSP"], "splits": ["train", "val", "test"], "scale_range": [20, 100], "binding_status": "partial",
+      "resolved_config": {"initialization": "ATSP random insertion", "insertion_passes": 1, "order": "CPU torch.randperm", "learned_policy_used": false, "augmentation": 1, "pomo_size": 1, "iteration_steps": 0, "input_dtype": "contiguous float32 distance matrix; uint32 permutation", "result_reduction": "native insertion cycle cost"},
+      "config_evidence_scope": "NoIteration and batch1 are archived; initializer behavior is derived from the local source corresponding to that entry. Inactive GLOP revision_lens/iter are not represented as an executed budget.",
+      "label_binding": {"origin": "easynco_atsp_shards", "field": "no_aug_score", "matched_groups": 3, "matched_scale_configs": 243},
+      "checkpoint": "easynco:pretrained/glop/glop_policy_atsp.pt", "checkpoint_sha256": "53d31bb7544056f35773f2f056479424e9661554a16680548a21b9ed8f61a072",
+      "checkpoint_role": "loaded lower model, not used in this ATSP initializer", "recorded_seed": 1234,
+      "evidence": [
+        {"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=GLOP]; archived_configs[*/glop*/scale_*/.hydra/config.yaml]", "supports": "All label files match the original shards; saved configs use NoIteration and the named checkpoint, not the paper reconstruction tester."},
+        {"file": "/public/home/shiys/EasyNCO/neural_solvers/methods/glop/initialization.py", "locator": "GLOPInitialization.run, ATSP eval branch", "supports": "Random CPU permutation and insertion.atsp_random_insertion; no learned policy call."}
+      ],
+      "gaps": ["Historical source/native-extension version and binary digest were not captured by the run.", "The executed random_insertion C++ core is not covered by the Python-only corpus; this is not a complete neural GLOP paper deployment."]
+    }]},
+    {"solver_id": 5, "solver_name": "ICAM", "deployments": [{
+      "implementation": "icam", "problems": ["CVRP"], "splits": ["train", "val", "test"], "binding_status": "partial",
+      "resolved_config": {"num_encoder_layers": 12, "feedforward_hidden": 512, "normalization": "instance", "logit_clipping": 50, "decoder_strategy": "greedy", "pomo_size": "number of customers", "augmentation": 8, "result_reduction": "best POMO at augmentation index zero", "adaptation_steps": 0, "iteration_steps": 0},
+      "config_evidence_scope": "Logged model fields, explicit module.decoder_strategy and NoIteration; embedding/head defaults not forwarded by the wrapper are not presented as recorded runtime parameters.",
+      "label_binding": {"origin": "easynco_nss_eval", "field": "no_aug_score", "matched_groups": 3},
+      "checkpoint": "easynco:pretrained/icam_pretrain/icam_cvrp_best.ckpt", "checkpoint_sha256": "815079abbc465b76af89e9cfb54f0b9389354d951b374db12ede88ff8299e9ce", "recorded_seed": 1234, "recorded_batch_size": 1,
+      "evidence": [
+        {"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=ICAM]; archived_configs[icam_cvrp/CVRP*/eval.log]", "supports": "All three splits match no_aug_score; resolved archived logs and line locators are retained."},
+        {"file": "/public/home/shiys/EasyNCO/results/nss_eval/icam_cvrp/CVRPtrain/eval.log", "locator": "lines 35-41: settings.env/model/initialization/iteration/module/test_loader", "supports": "12 layers, clip50, instance norm, aug8, explicit module greedy, no iteration, named weight."}
+      ],
+      "gaps": ["The historical solver revision, effective wrapper defaults and runtime checkpoint digest were not archived; current source/weight hashes alone do not prove them."]
+    }]},
+    {"solver_id": 6, "solver_name": "ICAM_ATSP", "deployments": [{
+      "implementation": "icam_atsp", "problems": ["ATSP"], "splits": ["train", "val", "test"], "scale_range": [20, 100], "binding_status": "partial",
+      "resolved_config": {"neighbors": 50, "pomo_size": "number of nodes", "augmentation": 1, "embedding_dim": 128, "encoder_layer_num": 6, "encoder_structure": "two row/column sub-encoders", "ff_hidden_dim": 512, "logit_clipping": 50, "eval_type": "greedy", "iteration_steps": 0, "nearest_input": "sorted smallest row/column distances; repeat the largest selected value to width 50 when N is smaller", "result_reduction": "negative maximum POMO reward"},
+      "config_evidence_scope": "Values from the actual bridge _get_tester/run_pt and the imported atsp_test_main module. Not a saved historical resolved model snapshot.",
+      "label_binding": {"origin": "paper_source_shards", "field": "cost", "matched_groups": 3},
+      "checkpoint": "sources:ICAM/pretrained/icam_atsp.pt", "checkpoint_sha256": "e027daf439f79e6f40a2583781d21a9893974f70b49126c6edde50568dc41546",
+      "evidence": [
+        {"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=ICAM_ATSP]; checkpoints", "supports": "Three split cost files match paper-source shards; current named weight identity is recorded."},
+        {"file": "/public/home/shiys/easynco_v3_bridge/scripts/paper_source_atsp_runner.py", "locator": "ICAMATSPRunner._get_tester/_pre_forward_compat/run_pt", "supports": "N starts, no augmentation, nearest row/column padding and manual rollout; ATSPTester._test_one_batch is not the invoked rollout."},
+        {"file": "/public/home/shiys/methods论文_mineru_output/source_code/ICAM/ICAM_ATSP/atsp_test_main.py", "locator": "augmentation_enable=False; model_params; tester_params.model_load", "supports": "Single fixed weight and 128/6/512/50/greedy model parameters, not a size-selected checkpoint."}
+      ],
+      "gaps": ["The original bridge/source revision and effective imported configuration snapshot are not archived; local code-derived values cannot certify the historical bytes or RNG/dependency state."]
+    }]},
+    {"solver_id": 7, "solver_name": "LEHD", "deployments": [{
+      "implementation": "lehd", "problems": ["TSP", "CVRP"], "splits": ["train", "val", "test"], "binding_status": "unverified", "resolved_config": {},
+      "label_binding": {"origin": "nss_import", "matched_groups": 6},
+      "checkpoint_candidates": [
+        {"problem": "TSP", "checkpoint": "easynco:pretrained/lehd/lehd_tsp100.ckpt", "sha256": "82923eebfb60661e36c11f8af9332e810a3f95c6d523b566f6fd931344b72d5b"},
+        {"problem": "CVRP", "checkpoint": "easynco:pretrained/lehd/lehd_cvrp100.ckpt", "sha256": "1f48722338ec8bd7f6525a41b3e0c09a7b9c9622b8401532bc2871a29d687075"}
+      ],
+      "evidence": [{"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=LEHD]", "supports": "All splits of both problems match NSS; the available EasyNCO CVRP rerun does not match and its reconstruction settings must not be adopted."}],
+      "gaps": ["Per-problem NSS entry, checkpoint/source revision and network settings are missing.", "Original reconstruction count, decoder, augmentation and effective inference budget are not recovered."]
+    }]},
+    {"solver_id": 8, "solver_name": "MATNET", "deployments": [{
+      "implementation": "matnet", "problems": ["ATSP"], "splits": ["train", "val", "test"], "scale_range": [20, 100], "binding_status": "partial",
+      "resolved_config": {"embedding_dim": 256, "num_heads": 16, "qkv_dim": 16, "num_encoder_layers": 5, "feedforward_hidden": 512, "logit_clipping": 10, "ms_hidden_dim": 16, "decoder_strategy": "greedy", "pomo_size": "number of nodes", "augmentation": 128, "iteration_steps": 0, "result_reduction": "best POMO at augmentation index zero"},
+      "label_binding": {"origin": "easynco_atsp_shards", "field": "no_aug_score", "matched_groups": 3, "matched_scale_configs": 243},
+      "checkpoint": "easynco:pretrained/matnet_pretrain/matnet_atsp100.ckpt", "checkpoint_sha256": "a86d1ab1d8db62088e6a9d54118db92ebe8472c316dc046fcf755ca61280b5ca", "recorded_seed": 1234, "recorded_batch_sizes": [1, 3, 4],
+      "evidence": [
+        {"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=MATNET]; archived_configs[*/matnet*/scale_*/.hydra/config.yaml]", "supports": "All 243 relevant saved configurations use the same model and 100-node named weight, N starts, aug128, explicit module greedy and NoIteration."},
+        {"file": "/public/home/shiys/EasyNCO/results/label_v3/matnet_atsp/scale_50/.hydra/config.yaml", "locator": "settings.model/env/module/initialization_params/iteration/test_loader", "supports": "Representative archived model and inference configuration; the export selects no_aug_score, not best-of-128."}
+      ],
+      "gaps": ["Historical source revision and actual loaded weight digest were not captured; the available implementation and current local hash are not a full runtime certification."]
+    }]},
+    {"solver_id": 9, "solver_name": "MATPOENET", "deployments": [{
+      "implementation": "matpoenet", "problems": ["ATSP"], "splits": ["train", "val", "test"], "scale_range": [20, 100], "binding_status": "partial",
+      "resolved_config": {"embedding_dim": 512, "pos_embedding_dim": 512, "num_heads": 16, "qkv_dim": 16, "num_encoder_layers": 5, "feedforward_hidden": 512, "logit_clipping": 10, "ms_hidden_dim": 16, "one_hot_seed_cnt": "number of nodes", "decoder_strategy": "greedy", "pomo_size": "number of nodes", "augmentation": 8, "init_solver": "nearest neighbor", "positional_encoding": "cosh recurrence", "positional_encoding_scaler": 100, "nearest_neighbor_integer_scaler": 1000000, "iteration_steps": 0, "result_reduction": "best POMO at augmentation index zero"},
+      "config_evidence_scope": "Network, greedy, augmentation and NN initialization are archived; positional encoding/scalers are derived from the current referenced source, not an archived native binary.",
+      "label_binding": {"origin": "easynco_atsp_shards", "field": "no_aug_score", "matched_groups": 3, "matched_scale_configs": 243},
+      "checkpoint": "easynco:pretrained/matpoenet/MatNet-POE_mix.pt", "checkpoint_sha256": "879f02564cdf6346da48b66fc759675d9b0a88f05030301428226e7099358904", "recorded_seed": 1234,
+      "evidence": [
+        {"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=MATPOENET]; archived_configs[*/matpoenet*/scale_*/.hydra/config.yaml]", "supports": "All 243 relevant configurations use five encoder layers and the mix weight; distinct from UniCO size-specific weights and softmax sampling."},
+        {"file": "/public/home/shiys/EasyNCO/neural_solvers/envs/ATSPEnv.py", "locator": "ATSPEnv.load_problems, matpoenet branch", "supports": "Nearest-neighbor matrix reordering and cosh positional encoding with scaler100."}
+      ],
+      "gaps": ["Historical source revision and runtime checkpoint/native libtsp.so identity were not captured; native NN core remains outside the Python corpus."]
+    }]},
+    {"solver_id": 10, "solver_name": "MTPOMO", "deployments": [{
+      "implementation": "mtpomo", "problems": ["OVRP", "VRPB", "VRPL", "VRPTW", "OVRPTW", "OVRPB", "OVRPL", "VRPBL", "VRPBTW", "VRPLTW", "OVRPBL", "OVRPBTW", "OVRPLTW", "VRPBLTW", "OVRPBLTW"], "splits": ["train", "val", "test"], "scale_range": [50, 100], "binding_status": "partial",
+      "resolved_config": {"pomo_size": "number of customers", "pomo_size_scope": "configured; historical effective backhaul starts still need source-version binding", "augmentation": 1, "recorded_seed": 1234, "embedding_dim": 128, "ff_hidden_dim": 512, "encoder_layer_num": 6, "head_num": 8, "qkv_dim": 16, "logit_clipping": 10, "normalization": "instance", "environment_mode": 1, "initialization": "POMOInitialization", "iteration_steps": 0, "result_reduction": "best POMO at augmentation index zero"},
+      "label_binding": {"origin": "easynco_mvrp_shards", "field": "no_aug_score", "matched_groups": 45, "matched_scale_configs": 2295},
+      "checkpoint": "easynco:pretrained/mtpomo/mtpomo/mtpomo_mvrp_100.ckpt", "checkpoint_sha256": "c2892ceb7195e73cc37b83c85945c0001ee7a7f45986672a9ce751bbe21809b0", "recorded_batch_size": 64,
+      "decoder_evidence": {"requested_top_level": "greedy", "module_decoder_strategy_in_archived_configs": "absent in all 2295 relevant configs", "historical_effective_value": "unresolved", "source_supported_hypothesis": "sampling; see R41 revision audit, not a historical runtime proof"},
+      "evidence": [
+        {"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=MTPOMO]; archived_configs[results/label_v4/mvrp/*/mtpomo_*]", "supports": "All 15 problems and three splits match; all 2295 configs use the named weight, identical model, mode1, POMOInitialization, aug1, batch64, seed1234, but omit module decoder strategy."},
+        {"file": "/public/home/shiys/0selection2/code/V4/runs/R41_signal_audit/original_solver_provenance.md", "locator": "MTPOMO/MVMOE decoder propagation audit", "supports": "Top-level greedy does not prove the effective decoder; existing historical sampling hypothesis is retained."}
+      ],
+      "gaps": ["Effective greedy/sampling and historical solver revision are unresolved; no decoder value is inserted into semantic config.", "Saved environment target uses the old EasyNCO.methods.envs namespace; current MVRPEnv masks/input conversion and runtime checkpoint bytes need historical binding. Current mode1 backhaul code can reduce N configured starts to min(floor(0.8*N), N)."]
+    }]},
+    {"solver_id": 11, "solver_name": "MVMOE", "deployments": [
+      {
+        "implementation": "mvmoe", "problems": ["CVRP"], "splits": ["train", "val", "test"], "binding_status": "unverified", "resolved_config": {},
+        "label_binding": {"origin": "nss_import", "matched_groups": 3},
+        "evidence": [{"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[problem=CVRP,method=MVMOE]", "supports": "Current CVRP files match NSS MVMoE imports, not the multi-task EasyNCO label_v4 runs."}],
+        "gaps": ["Original NSS CVRP source, checkpoint, network, normalization and decoder/inference recipe are unknown. The MoEPolicy source is only a candidate; no MVRP configuration or weight is projected onto CVRP."]
+      },
+      {
+        "implementation": "mvmoe", "problems": ["OVRP", "VRPB", "VRPL", "VRPTW", "OVRPTW", "OVRPB", "OVRPL", "VRPBL", "VRPBTW", "VRPLTW", "OVRPBL", "OVRPBTW", "OVRPLTW", "VRPBLTW", "OVRPBLTW"], "splits": ["train", "val", "test"], "scale_range": [50, 100], "binding_status": "partial",
+        "resolved_config": {"pomo_size": "number of customers", "pomo_size_scope": "configured; historical effective backhaul starts still need source-version binding", "augmentation": 1, "recorded_seed": 1234, "embedding_dim": 128, "ff_hidden_dim": 512, "encoder_layer_num": 6, "num_heads": 8, "qkv_dim": 16, "normalization": "instance", "norm_loc": "norm_last", "logit_clipping": 10, "MoE_param": {"light": false, "expert_loc": ["Enc0", "Enc1", "Enc2", "Enc3", "Enc4", "Enc5", "Dec"], "num_experts": 4, "topk": 2, "routing_level": "node", "routing_method": "input_choice"}, "environment_mode": 1, "initialization": "POMOInitialization", "iteration_steps": 0, "result_reduction": "best POMO at augmentation index zero"},
+        "label_binding": {"origin": "easynco_mvrp_shards", "field": "no_aug_score", "matched_groups": 45, "matched_scale_configs": 2295},
+        "checkpoint": "easynco:pretrained/mvmoe/mvmoe/mvmoe_mvrp100.ckpt", "checkpoint_sha256": "713e92dfee8e37bfae8d7c00e18da3edf8b7bff6666b277d5931ccfaf2d7f715", "recorded_batch_size": 64,
+        "decoder_evidence": {"requested_top_level": "greedy", "module_decoder_strategy_in_archived_configs": "absent in all 2295 relevant configs", "historical_effective_value": "unresolved", "source_supported_hypothesis": "sampling; see R41 revision audit, not a historical runtime proof"},
+        "evidence": [{"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=MVMOE,problem!=CVRP]; archived_configs[results/label_v4/mvrp/*/mvmoe_*]", "supports": "All 45 cost files and 2295 relevant configs identified; full MoE parameters, named multi-task weight and POMOInitialization recovered, but effective decoder not logged."}],
+        "gaps": ["Effective decoder and historical solver revision are unresolved despite top-level greedy; retain the R41 sampling hypothesis without claiming confirmation.", "Old environment namespace, constraint/input implementation and effective backhaul start count need historical source binding; runtime checkpoint digest not captured."]
+      }
+    ]},
+    {"solver_id": 12, "solver_name": "MoSES_CaDA", "deployments": [{
+      "implementation": "moses_cada", "problems": ["CVRP", "OVRP", "VRPB", "VRPL", "VRPTW", "OVRPTW", "OVRPB", "OVRPL", "VRPBL", "VRPBTW", "VRPLTW", "OVRPBL", "OVRPBTW", "OVRPLTW", "VRPBLTW", "OVRPBLTW"], "splits": ["train", "val", "test"], "binding_status": "partial",
+      "resolved_config": {"lora_rank": [32,32,32,32,32], "lora_alpha": 1.0, "lora_n_experts": 4, "lora_top_k": 4, "lora_temperature": 1.0, "lora_use_trainable_layer": true, "lora_use_dynamic_topK": false, "lora_use_basis_variants": false, "lora_use_basis_variants_as_input": false, "lora_use_linear": false, "normalization": "rms", "encoder_use_prenorm": false, "encoder_use_post_layers_norm": false, "mlp_activation": "silu", "attn_sparse_ratio": 0.5, "sparse_applied_to_score": true, "lora_act_func": "sigmoid", "augmentation": 8, "pomo_size": "number of customers via MTVRPEnv.get_num_starts", "result_reduction": "negative max_aug_reward", "input_contract": {"vehicle_capacity": 1, "depot_time_window": [0, "infinity"], "customer_service_and_time_windows": "preserved; depot service zero", "demand": "split signed customer demand into nonnegative linehaul and backhaul arrays", "route_limit": "preserved; infinity if absent", "speed": 1}},
+      "config_evidence_scope": "Original R41 LoRA settings preserved. Bridge/test.py establish the selected best-augmentation mechanism; inherited rl4co decoder and checkpoint-resolved network defaults are not invented.",
+      "label_binding": {"origin": "paper_source_shards", "field": "cost", "matched_groups": 48},
+      "checkpoint_selection": "N<=75 -> bucket50; N>75 -> bucket100",
+      "checkpoints": [
+        {"bucket": 50, "checkpoint": "sources:moses_vrp/pretrained_moses_model/cada/50/multilora_denseroute_sigmoid.ckpt", "sha256": "1aa499f3fce5d3412c2544c9632bbb9709309a7299b4298b535fa7e9014ef803"},
+        {"bucket": 100, "checkpoint": "sources:moses_vrp/pretrained_moses_model/cada/100/multilora_denseroute_sigmoid.ckpt", "sha256": "2eac9b038ae4655581aa73e4dbe8ad529aefd1963368c9a92d254b6269f8aabf"}
+      ],
+      "evidence": [
+        {"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=MoSES_CaDA]; checkpoints", "supports": "All 48 split/problem files exactly match original paper-source shards; both candidate bucket weights identified."},
+        {"file": "/public/home/shiys/easynco_v3_bridge/scripts/paper_source_routefinder_runner.py", "locator": "_build_moses_policy(method=moses_cada); MosesRunner.run_npz", "supports": "Actual CaDA LoRA branch and best-augmentation output, distinct from RF."},
+        {"file": "/public/home/shiys/easynco_v3_bridge/scripts/prepare_paper_source_data.py", "locator": "_canonical_vrp_item; prepare_vrp_npz", "supports": "Problem-specific input conversion and exact <=75 checkpoint bucket boundary."}
+      ],
+      "gaps": ["Historical rf_easnco_env/rl4co decoder, environment/import revisions and effective decoder/RNG parameters were not saved; do not infer them from today's defaults.", "Original per-run loaded checkpoint digests and checkpoint-resolved base network parameters are not fully bound; current weight hashes identify local candidates only."]
+    }]},
+    {"solver_id": 13, "solver_name": "MoSES_RF", "deployments": [{
+      "implementation": "moses_rf", "problems": ["CVRP", "OVRP", "VRPB", "VRPL", "VRPTW", "OVRPTW", "OVRPB", "OVRPL", "VRPBL", "VRPBTW", "VRPLTW", "OVRPBL", "OVRPBTW", "OVRPLTW", "VRPBLTW", "OVRPBLTW"], "splits": ["train", "val", "test"], "binding_status": "partial",
+      "resolved_config": {"lora_rank": [32,32,32,32,32], "lora_alpha": 1.0, "lora_n_experts": 4, "lora_top_k": 4, "lora_temperature": 1.0, "lora_use_trainable_layer": true, "lora_use_dynamic_topK": false, "lora_use_basis_variants": false, "lora_use_basis_variants_as_input": false, "lora_use_linear": false, "normalization": "rms", "encoder_use_prenorm": true, "encoder_use_post_layers_norm": true, "mlp_activation": "silu", "lora_act_func": "softplus", "augmentation": 8, "pomo_size": "number of customers via MTVRPEnv.get_num_starts", "result_reduction": "negative max_aug_reward", "input_contract": {"vehicle_capacity": 1, "depot_time_window": [0, "infinity"], "customer_service_and_time_windows": "preserved; depot service zero", "demand": "split signed customer demand into nonnegative linehaul and backhaul arrays", "route_limit": "preserved; infinity if absent", "speed": 1}},
+      "config_evidence_scope": "Original R41 LoRA settings preserved. Current bridge/test.py support the best-augmentation mechanism; inherited decoder/defaults remain explicitly unresolved.",
+      "label_binding": {"origin": "paper_source_shards", "field": "cost", "matched_groups": 48},
+      "checkpoint_selection": "N<=75 -> bucket50; N>75 -> bucket100",
+      "checkpoints": [
+        {"bucket": 50, "checkpoint": "sources:moses_vrp/pretrained_moses_model/rf/50/multilora_denseroute_softplus.ckpt", "sha256": "4c08f6b52b947ed29da5361f6e565ceba46034291f99517277723e550d0f06d5"},
+        {"bucket": 100, "checkpoint": "sources:moses_vrp/pretrained_moses_model/rf/100/multilora_denseroute_softplus.ckpt", "sha256": "00666f0b088e2451a7a1dd2494ea54ef6e03fd291294472a17b3eb78b46c7a89"}
+      ],
+      "evidence": [
+        {"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=MoSES_RF]; checkpoints", "supports": "All 48 split/problem files match original shards, not later 100k recipes."},
+        {"file": "/public/home/shiys/easynco_v3_bridge/scripts/paper_source_routefinder_runner.py", "locator": "_build_moses_policy(method=moses_rf); MosesRunner.run_npz", "supports": "RF prenorm/postnorm=true, softplus branch and actual output reduction."},
+        {"file": "/public/home/shiys/easynco_v3_bridge/scripts/prepare_paper_source_data.py", "locator": "_canonical_vrp_item; prepare_vrp_npz", "supports": "Input contract and <=75/100 scale bucketing."}
+      ],
+      "gaps": ["Historical rl4co decoder/MTVRPEnv dependency revisions and effective decoder/RNG are unbound; current package defaults are not historical evidence.", "Historical checkpoint byte identities and checkpoint-resolved base network settings remain incomplete; current bucket hashes are not runtime-captured digests."]
+    }]},
+    {"solver_id": 14, "solver_name": "OMNI", "deployments": [
+      {
+        "implementation": "omni", "problems": ["TSP"], "splits": ["train", "test"], "binding_status": "partial",
+        "resolved_config": {"num_heads": 8, "qkv_dim": 16, "num_encoder_layers": 6, "normalization": "batch_no_track", "feedforward_hidden": 512, "logit_clipping": 10, "use_graph_mean": false, "am_mode": false, "first_placeholder": false, "first_mode": "random", "decoder_strategy": "greedy", "pomo_size": "number of nodes", "augmentation": 8, "fine_tune_enabled": false, "iteration_steps": 0, "result_reduction": "best POMO at augmentation index zero"},
+        "label_binding": {"origin": "easynco_nss_eval", "field": "no_aug_score", "matched_groups": 2},
+        "checkpoint": "easynco:pretrained/omni/omni_tsp_maml_fomaml.ckpt", "checkpoint_sha256": "9238fb5c1dc540b3389e228ee415bf4b73eb1991136c5a2d0ce7368fcb599e41", "recorded_seed": 1234, "recorded_batch_size": 1,
+        "evidence": [
+          {"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=OMNI,problem=TSP]; archived_configs[omni_tsp/TSPtrain/eval.log,omni_tsp/TSPtest/eval.log]", "supports": "Train and test labels match EasyNCO no_aug_score; val does not and remains a distinct NSS deployment."},
+          {"file": "/public/home/shiys/EasyNCO/results/nss_eval/omni_tsp/TSPtrain/eval.log", "locator": "lines 35-42: settings.env/model/iteration/module/test_loader", "supports": "Archived network, module greedy, 8-fold, no fine-tuning, no iteration and named MAML/FOMAML weight."},
+          {"file": "/public/home/shiys/EasyNCO/results/nss_eval/omni_tsp/TSPtest/eval.log", "locator": "lines 35-42", "supports": "Test uses the same recovered configuration, confirmed independently of train."}
+        ],
+        "gaps": ["Historical source revision, unlogged constructor defaults and runtime loaded-weight digest remain unknown; file equality is not a complete deployment certification."]
+      },
+      {
+        "implementation": "omni", "problems": ["TSP"], "splits": ["val"], "binding_status": "unverified", "resolved_config": {},
+        "label_binding": {"origin": "nss_import", "matched_groups": 1},
+        "checkpoint_candidates": [{"checkpoint": "easynco:pretrained/omni/omni_tsp_maml_fomaml.ckpt", "sha256": "9238fb5c1dc540b3389e228ee415bf4b73eb1991136c5a2d0ce7368fcb599e41"}],
+        "evidence": [{"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=OMNI,problem=TSP,split=val]", "supports": "Validation costs exactly match NSS; neither available EasyNCO no_aug nor aug output binds this cost column."}],
+        "gaps": ["Original NSS validation command, source, checkpoint and effective model/decoder/augmentation/fine-tuning recipe are missing. Train/test settings must not be copied here."]
+      },
+      {
+        "implementation": "omni", "problems": ["CVRP"], "splits": ["train", "val", "test"], "binding_status": "unverified", "resolved_config": {},
+        "label_binding": {"origin": "nss_import", "matched_groups": 3},
+        "checkpoint_candidates": [{"checkpoint": "easynco:pretrained/omni/omni_cvrp_maml_fomaml.ckpt", "sha256": "de441a67127f397432e46da864816b2a3b1d9abd2e3579d9ac3a7bd7fa8adc02"}],
+        "evidence": [{"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=OMNI,problem=CVRP]", "supports": "All three CVRP splits match NSS and differ from the available EasyNCO rerun; its configuration is not substituted."}],
+        "gaps": ["CVRP NSS source/checkpoint, effective decoder, normalization, augmentation and adaptation recipe are unknown; TSP recipe is not applicable by name alone."]
+      }
+    ]},
+    {"solver_id": 15, "solver_name": "RELD_CVRP", "deployments": [{
+      "implementation": "reld_cvrp", "problems": ["CVRP"], "splits": ["train", "val", "test"], "binding_status": "partial",
+      "resolved_config": {"embedding_dim": 128, "encoder_layer_num": 6, "head_num": 8, "qkv_dim": 16, "forcing_first_step": false, "logit_clipping": 50, "ff_hidden_dim": 512, "eval_type": "greedy", "pomo_size": "min(number of customers, 100)", "augmentation": 1, "iteration_steps": 0, "result_reduction": "negative maximum trajectory reward", "input_contract": "float32 depot/loc/normalized demand from the dataset; bridge performs no additional normalization"},
+      "config_evidence_scope": "Single-task bridge explicitly reads CVRP/config.yml and overrides inference augmentation to one and trajectory width to min(N,100). Template test_params.aug_factor=8 is not the executed setting.",
+      "label_binding": {"origin": "reld_export", "matched_groups": 3},
+      "checkpoint": "reld:CVRP/weights/ReLD/model_epoch_90.pt", "checkpoint_sha256": "5779a7de9f7c77a4cc5a7b152bda58b90aef2e07441b9ac6eb0f55c1df360aa6",
+      "evidence": [
+        {"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=RELD_CVRP]; checkpoints", "supports": "All three current cost columns match the original single-task RELD export and current named weight identity is recorded."},
+        {"file": "/public/home/shiys/easynco_v3_bridge/scripts/run_reld_cvrp_single_bridge.py", "locator": "collate_batch; instantiate_single_cvrp_model; run_no_aug_scores", "supports": "Actual input conversion, strict single-task weight load, greedy rollout, min(N,100) starts and aug1. reld_bridge_common._run_no_aug_batch is not this method's inference."},
+        {"file": "/public/home/shiys/reld-nco-main/CVRP/config.yml", "locator": "model_params", "supports": "Explicit 128/6/8/16/512 architecture, clipping50 and forcing_first_step=false."}
+      ],
+      "gaps": ["Historical bridge/source/dependency revision and runtime checkpoint hash were not captured; recovered current YAML/bridge parameters remain a partial historical binding."]
+    }]},
+    {"solver_id": 16, "solver_name": "RELD_MOEL", "deployments": [{
+      "implementation": "reld_moel", "problems": ["OVRP", "VRPB", "VRPL", "VRPTW", "OVRPTW", "OVRPB", "OVRPL", "VRPBL", "VRPBTW", "VRPLTW", "OVRPBL", "OVRPBTW", "OVRPLTW", "VRPBLTW", "OVRPBLTW"], "splits": ["train", "val", "test"], "binding_status": "partial",
+      "resolved_config": {"embedding_dim": 128, "encoder_layer_num": 6, "decoder_layer_num": 1, "qkv_dim": 16, "head_num": 8, "logit_clipping": 10, "ff_hidden_dim": 512, "num_experts": 4, "eval_type": "argmax", "norm": "none", "norm_loc": "norm_last", "expert_loc": ["Enc0", "Enc1", "Enc2", "Enc3", "Enc4", "Enc5", "Dec"], "problem": "Train_ALL", "topk": 2, "routing_level": "node", "routing_method": "input_choice", "ffidt": true, "augmentation": 1, "sample_size": 1, "pomo_size": "number of customers", "input_contract": {"dtype": "float32", "coordinates_demand_route_limit_service_and_customer_time_windows": "preserved by collate_problem_batch", "ovrptw_depot_time_window": [0, 3]}, "result_reduction": "negative best POMO reward at augmentation zero"},
+      "label_binding": {"origin": "reld_export", "matched_groups": 45},
+      "checkpoint": "reld:Multi-Task/pretrained/reld_moe_light/epoch-5000.pt", "checkpoint_sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3",
+      "evidence": [
+        {"file": "/public/home/shiys/0selection2/code/V4/runs/R41_signal_audit/solver_manifest.json", "locator": "RELD_MOEL / OVRPTW repeat verification", "supports": "Previously established weight hash, architecture, explicit argmax and successful OVRPTW repeat-cost evidence are preserved, not rerun."},
+        {"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=RELD_MOEL]", "supports": "All 15 registered problems and three splits match the original RELD export; equality does not extend the OVRPTW solver rerun to other problems."},
+        {"file": "/public/home/shiys/easynco_v3_bridge/scripts/reld_bridge_common.py", "locator": "collate_problem_batch; model_init_params; get_env_class; _run_no_aug_batch", "supports": "Input conversion, per-problem environment dispatch and explicit no-augmentation argmax rollout. All 15 constraint environments are now included in the source whitelist."}
+      ],
+      "gaps": ["All label-file ancestries are bound, but historical source/environment versions and effective per-problem runtime metadata outside the R41 OVRPTW verification are not fully archived. No new solver repeat is claimed."]
+    }]},
+    {"solver_id": 17, "solver_name": "RELD_MTL", "deployments": [{
+      "implementation": "reld_mtl", "problems": ["OVRP", "VRPB", "VRPL", "VRPTW", "OVRPTW", "OVRPB", "OVRPL", "VRPBL", "VRPBTW", "VRPLTW", "OVRPBL", "OVRPBTW", "OVRPLTW", "VRPBLTW", "OVRPBLTW"], "splits": ["train", "val", "test"], "binding_status": "partial",
+      "resolved_config": {"embedding_dim": 128, "encoder_layer_num": 6, "decoder_layer_num": 1, "qkv_dim": 16, "head_num": 8, "logit_clipping": 10, "ff_hidden_dim": 512, "eval_type": "argmax", "norm": "none", "norm_loc": "norm_last", "problem": "Train_ALL", "augmentation": 1, "sample_size": 1, "pomo_size": "number of customers", "input_contract": {"dtype": "float32", "coordinates_demand_route_limit_service_and_customer_time_windows": "preserved by collate_problem_batch", "ovrptw_depot_time_window": [0, 3]}, "result_reduction": "negative best POMO reward at augmentation zero"},
+      "label_binding": {"origin": "reld_export", "matched_groups": 45},
+      "checkpoint": "reld:Multi-Task/pretrained/reld_mtl/epoch-5000.pt", "checkpoint_sha256": "2a67f0c1ada0a05563280fcd56d8375b1b0007978bad55c625c862fc3cc3b7ab",
+      "evidence": [
+        {"file": "/public/home/shiys/0selection2/code/V4/runs/R41_signal_audit/solver_manifest.json", "locator": "RELD_MTL / OVRPTW repeat verification", "supports": "Existing checkpoint hash, model/argmax settings and successful repeat verification retained unchanged."},
+        {"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=RELD_MTL]", "supports": "All 45 current method/problem/split files match original RELD exports, without a new solver run."},
+        {"file": "/public/home/shiys/easynco_v3_bridge/scripts/reld_bridge_common.py", "locator": "collate_problem_batch; model_init_params; get_env_class; _run_no_aug_batch", "supports": "Actual shared input/rollout and per-problem environment selection; all registered environments now explicitly selected as source."}
+      ],
+      "gaps": ["Historical source/constraint-environment version and complete per-problem runtime metadata remain missing outside the preserved R41 OVRPTW verification. File equality alone does not certify all deployments."]
+    }]},
+    {"solver_id": 18, "solver_name": "RouteFinder", "deployments": [{
+      "implementation": "routefinder", "problems": ["CVRP", "OVRP", "VRPB", "VRPL", "VRPTW", "OVRPTW", "OVRPB", "OVRPL", "VRPBL", "VRPBTW", "VRPLTW", "OVRPBL", "OVRPBTW", "OVRPLTW", "VRPBLTW", "OVRPBLTW"], "splits": ["train", "val", "test"], "binding_status": "partial",
+      "resolved_config": {"augmentation": 8, "result_reduction": "max_aug_reward", "cost_sign": "negative reward", "pomo_size": "number of customers via MTVRPEnv.get_num_starts", "input_contract": {"vehicle_capacity": 1, "depot_time_window": [0, "infinity"], "customer_service_and_time_windows": "preserved; depot service zero", "demand": "split signed customer demand into nonnegative linehaul and backhaul arrays", "route_limit": "preserved; infinity if absent", "speed": 1}},
+      "config_evidence_scope": "Preserves the R41 8-fold/best-augmentation evidence and extends file-ancestry coverage. Base model and decoder defaults inherited from load_from_checkpoint/rl4co are not claimed as historical resolved settings.",
+      "label_binding": {"origin": "paper_source_shards", "field": "cost", "matched_groups": 48},
+      "checkpoint_selection": "N<=75 -> bucket50; N>75 -> bucket100",
+      "checkpoints": [
+        {"bucket": 50, "checkpoint": "sources:routefinder/checkpoints/50/rf-transformer.ckpt", "sha256": "2110637a8e41de6e3f243973c4907362f9a4852821111164f2c9afa6d2ce5d62"},
+        {"bucket": 100, "checkpoint": "sources:routefinder/checkpoints/100/rf-transformer.ckpt", "sha256": "eb09cee46108bac04012c2702f7cd4aac64341064167363255f02f2e63167f90"}
+      ],
+      "evidence": [
+        {"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=RouteFinder]; checkpoints", "supports": "All 48 current files match paper-source shards; current bucket weight bytes identified."},
+        {"file": "/public/home/shiys/easynco_v3_bridge/scripts/paper_source_routefinder_runner.py", "locator": "RouteFinderRunner.__init__/run_npz", "supports": "Actual load_from_checkpoint and test path, negative max_aug_reward export."},
+        {"file": "/public/home/shiys/easynco_v3_bridge/scripts/prepare_paper_source_data.py", "locator": "_canonical_vrp_item; prepare_vrp_npz", "supports": "Actual capacity/TW/demand conversion and <=75 bucket rule, not nearest-size selection."}
+      ],
+      "gaps": ["Historical load_from_checkpoint-resolved network, rl4co decoder/MTVRPEnv versions and effective decoder/RNG remain unbound; do not substitute current defaults.", "The historical weight digests were not captured per run; current bucket hashes are local identity evidence only."]
+    }]},
+    {"solver_id": 19, "solver_name": "T2T", "deployments": [{
+      "implementation": "t2t", "problems": ["TSP"], "splits": ["train", "val", "test"], "binding_status": "unverified", "resolved_config": {},
+      "label_binding": {"origin": "nss_import", "matched_groups": 3},
+      "checkpoint_candidates": [
+        {"checkpoint": "easynco:pretrained/T2T_pretrain/t2t_tsp100.ckpt", "sha256": "1eccba2059281b10049d2a20b98eab44d3e5bb9115637970e415358f35d79c71"},
+        {"checkpoint": "sources:T2TCO/ckpts/tsp100_categorical.ckpt", "sha256": "03673ed71747be5ff77ac7e5dda7c63229cb860bb75d23bf395760bc0fc68672"}
+      ],
+      "evidence": [{"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=T2T]; checkpoints", "supports": "Three NSS matches and two byte-distinct local candidate weights, neither proven to generate the original NSS column."}],
+      "gaps": ["Original NSS entry/source/checkpoint binding is missing; local 100-node weights are not interchangeable by filename.", "Historical diffusion/sampling, gradient guidance, rewrite steps/ratio, inference schedule, augmentation, normalization and postprocessing budgets are unknown."]
+    }]},
+    {"solver_id": 20, "solver_name": "T2T500", "deployments": [{
+      "implementation": "t2t", "problems": ["TSP"], "splits": ["train", "val", "test"], "binding_status": "unverified", "resolved_config": {},
+      "label_binding": {"origin": "nss_import", "matched_groups": 3},
+      "checkpoint_candidates": [
+        {"checkpoint": "easynco:pretrained/T2T_pretrain/t2t_tsp500.ckpt", "exists": false},
+        {"checkpoint": "sources:T2TCO/ckpts/tsp500_categorical.ckpt", "exists": true, "sha256": "326837c6e8947a73193b9976be783e88a5f4aa19fb9b428cab45887b8ede35d7"}
+      ],
+      "evidence": [{"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=T2T500]; checkpoints", "supports": "The expected EasyNCO path is still absent, but a distinct T2TCO 500-node candidate exists. This is a search result, not an original-weight binding."}],
+      "gaps": ["The original NSS 500 deployment checkpoint/source/config identity remains unbound despite locating a candidate elsewhere; do not substitute tsp100 or infer a budget from 500.", "Effective diffusion, gradient search/rewrite, sampling, sparsity, augmentation, normalization and postprocessing settings are unknown."]
+    }]},
+    {"solver_id": 21, "solver_name": "UNICO_MatPOENet", "deployments": [
+      {
+        "implementation": "unico_matpoenet", "problems": ["ATSP"], "splits": ["train", "val", "test"], "scales": [20, 50], "binding_status": "partial",
+        "resolved_config": {"embedding_dim": 512, "pos_embedding_dim": 512, "head_num": 16, "qkv_dim": 16, "encoder_layer_num": 8, "ff_hidden_dim": 512, "logit_clipping": 10, "ms_hidden_dim": 16, "eval_type": "softmax", "decoder_strategy": "multinomial sampling", "pomo_size": "number of nodes", "augmentation": 8, "init_solver": "nearest neighbor", "positional_encoding": "cosh recurrence", "positional_encoding_scaler": 100, "distance_matrix_roundtrip_scaler": 1000000, "nearest_neighbor_integer_scaler": 1000000, "iteration_steps": 0, "result_reduction": "best POMO then best augmentation"},
+        "config_evidence_scope": "Bridge resolves exact-scale weights and infers layer count from checkpoint keys, overriding the test module's static node_cnt rule. Other model and softmax settings are from the current imported test module, not a historical resolved snapshot.",
+        "label_binding": {"origin": "paper_source_shards", "field": "cost", "matched_groups": 3, "scale_scope": [20, 50]},
+        "checkpoints": [
+          {"scale": 20, "checkpoint": "sources:UniCO/ckpts/_matpoenet_extract/ckpts/MatNet-POE_20.pt", "sha256": "25e81f3abd1df083dd044356745347b926f07a56137df4c389c0f3d788e56f76", "encoder_layer_num_from_state_keys": 8},
+          {"scale": 50, "checkpoint": "sources:UniCO/ckpts/_matpoenet_extract/ckpts/MatNet-POE_50.pt", "sha256": "bdb571a8dad14db5d59db99b950b5b64b29f11b725430e57df1aed2f061c209d", "encoder_layer_num_from_state_keys": 8}
+        ],
+        "source_seed": {"value": 1234, "scope": "setup_seed in _build_tester for each scale"},
+        "evidence": [
+          {"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=UNICO_MatPOENet]; checkpoints[UniCO MatNet-POE_20/50]", "supports": "Current label files match original paper-source outputs; safe CPU-only checkpoint-key inspection identifies eight layers for the available exact 20/50 weights."},
+          {"file": "/public/home/shiys/easynco_v3_bridge/scripts/paper_source_atsp_runner.py", "locator": "UnicoMatpoenetRunner._resolve_checkpoint/_infer_encoder_layers/_build_tester/run_scale_dir", "supports": "Actual checkpoint selection, layer override, seeded per-scale manual rollout, aug8 and best-augmentation reduction; the paper tester rollout is not invoked."},
+          {"file": "/public/home/shiys/methods论文_mineru_output/source_code/UniCO/MatPOENet/test.py", "locator": "model_params.eval_type=softmax; env_params; tester_params", "supports": "512-dimensional model/PE, nearest-neighbor initialization and softmax sampling, not EasyNCO MATPOENET greedy."}
+        ],
+        "gaps": ["Historical bridge/source/dependency and libtsp.so versions, resolved test module snapshot, effective batch/RNG history and runtime weight digests were not captured; current key inspection is not a historical replay."]
+      },
+      {
+        "implementation": "unico_matpoenet", "problems": ["ATSP"], "splits": ["train", "val", "test"], "scale_range": [20, 100], "excluded_scales": [20, 50], "binding_status": "partial",
+        "resolved_config": {"embedding_dim": 512, "pos_embedding_dim": 512, "head_num": 16, "qkv_dim": 16, "encoder_layer_num": 5, "ff_hidden_dim": 512, "logit_clipping": 10, "ms_hidden_dim": 16, "eval_type": "softmax", "decoder_strategy": "multinomial sampling", "pomo_size": "number of nodes", "augmentation": 8, "init_solver": "nearest neighbor", "positional_encoding": "cosh recurrence", "positional_encoding_scaler": 100, "distance_matrix_roundtrip_scaler": 1000000, "nearest_neighbor_integer_scaler": 1000000, "iteration_steps": 0, "result_reduction": "best POMO then best augmentation"},
+        "config_evidence_scope": "Five layers in both the current exact100 and fallback mix checkpoint keys; exact20/50 are separate eight-layer deployments. Other parameters are derived from the actual local bridge/imported test code, not an archived run snapshot.",
+        "label_binding": {"origin": "paper_source_shards", "field": "cost", "matched_groups": 3, "scale_scope": "21..100 excluding 50"},
+        "checkpoint_selection": "exact MatNet-POE_N when present, otherwise mix, otherwise matpoenet archive fallback; current local exact scales are 20,50,100",
+        "checkpoints": [
+          {"scale": 100, "checkpoint": "sources:UniCO/ckpts/_matpoenet_extract/ckpts/MatNet-POE_100.pt", "sha256": "2bc51b021c1e184c2c520b369ef7e02a825470bd463a223c5b4824624f85f64b", "encoder_layer_num_from_state_keys": 5},
+          {"scale_scope": "21..99 excluding 50", "checkpoint": "sources:UniCO/ckpts/_matpoenet_extract/ckpts/MatNet-POE_mix.pt", "sha256": "a304ed73b969ef13519a914ed46b5c1be93b5335e8abc7fb9ac0fef42e467250", "encoder_layer_num_from_state_keys": 5}
+        ],
+        "source_seed": {"value": 1234, "scope": "setup_seed in _build_tester for each scale"},
+        "evidence": [
+          {"file": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/来源补全核对证据.json", "locator": "label_bindings[method=UNICO_MatPOENet]; checkpoints[UniCO MatNet-POE_100/mix]", "supports": "All splits match paper-source output and both available selected weight variants have five encoder layers by CPU-only key inspection."},
+          {"file": "/public/home/shiys/easynco_v3_bridge/scripts/paper_source_atsp_runner.py", "locator": "UnicoMatpoenetRunner._resolve_checkpoint/_infer_encoder_layers/_build_tester/run_scale_dir", "supports": "Exact100 versus mix rule and layer count override; no substitution with EasyNCO MATPOENET weight or greedy recipe."},
+          {"file": "/public/home/shiys/easynco_v3_bridge/scripts/prepare_paper_source_data.py", "locator": "prepare_unico_atsp", "supports": "Explicit matrix *1e6 rounding to integer TSPLIB; reader divides by1e6 before NN/POE rollout."}
+        ],
+        "gaps": ["Historical bridge/source/dependency/native versions, effective batch/RNG history and per-run weight digests are not archived. Current exact/mix availability and test module values do not prove the original on-disk state."]
+      }
+    ]}
+  ]
+}
