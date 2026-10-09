@@ -1,0 +1,184 @@
+{
+  "solver": "RELD_MOEL",
+  "split": "train",
+  "variant": "original_0",
+  "pid": 1370065,
+  "independent_process": true,
+  "seed": 2,
+  "seconds": 1.3269999315962195,
+  "model_eval": true,
+  "decode_budget": {
+    "eval_type": "argmax",
+    "starts": "N customers",
+    "aug_factor": 1,
+    "sample_size": 1,
+    "aggregation": "minimum cost over N starts",
+    "original_batch_size": 128
+  },
+  "actual_params": {
+    "embedding_dim": 128,
+    "sqrt_embedding_dim": 11.313708498984761,
+    "encoder_layer_num": 6,
+    "decoder_layer_num": 1,
+    "qkv_dim": 16,
+    "head_num": 8,
+    "logit_clipping": 10,
+    "ff_hidden_dim": 512,
+    "num_experts": 4,
+    "eval_type": "argmax",
+    "norm": "none",
+    "norm_loc": "norm_last",
+    "expert_loc": [
+      "Enc0",
+      "Enc1",
+      "Enc2",
+      "Enc3",
+      "Enc4",
+      "Enc5",
+      "Dec"
+    ],
+    "problem": "Train_ALL",
+    "topk": 2,
+    "routing_level": "node",
+    "routing_method": "input_choice",
+    "ffidt": true
+  },
+  "checkpoint": {
+    "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+    "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+  },
+  "source_sha256": "93ae0a5c765e32314b8d868c722b3a0d76353b2298d713c5a7db497a4c3b84a2",
+  "input_witness": [
+    {
+      "original_indices": [
+        1012
+      ],
+      "fields": [
+        "depot_xy",
+        "node_xy",
+        "node_demand",
+        "service_time",
+        "tw_start",
+        "tw_end"
+      ],
+      "actual_input_sha256": "149089540b45bf453ebcb61ba45f762ef2a128475729f7caaaff11f4ea613bdc",
+      "customer_count": 55,
+      "exact_input_match": true
+    },
+    {
+      "original_indices": [
+        2506
+      ],
+      "fields": [
+        "depot_xy",
+        "node_xy",
+        "node_demand",
+        "service_time",
+        "tw_start",
+        "tw_end"
+      ],
+      "actual_input_sha256": "88c1f3dfbbfb60d17cb0231ba877d311521c49df4a2e2f905a71d0d315a371e5",
+      "customer_count": 62,
+      "exact_input_match": true
+    },
+    {
+      "original_indices": [
+        2581
+      ],
+      "fields": [
+        "depot_xy",
+        "node_xy",
+        "node_demand",
+        "service_time",
+        "tw_start",
+        "tw_end"
+      ],
+      "actual_input_sha256": "690ef097bd91a8488579f8e31c9152658988bdacc03bfa94ad9cc5733be80e8b",
+      "customer_count": 63,
+      "exact_input_match": true
+    },
+    {
+      "original_indices": [
+        4442
+      ],
+      "fields": [
+        "depot_xy",
+        "node_xy",
+        "node_demand",
+        "service_time",
+        "tw_start",
+        "tw_end"
+      ],
+      "actual_input_sha256": "59926882aa05d552639e59defdc586e7ca8de517f68a1e8c640c8c4b1ea8b347",
+      "customer_count": 72,
+      "exact_input_match": true
+    },
+    {
+      "original_indices": [
+        5417
+      ],
+      "fields": [
+        "depot_xy",
+        "node_xy",
+        "node_demand",
+        "service_time",
+        "tw_start",
+        "tw_end"
+      ],
+      "actual_input_sha256": "6bb468357778b700a7ade99a28c0460fb6bd34b48c53b4c9ce5b6297919d101d",
+      "customer_count": 77,
+      "exact_input_match": true
+    },
+    {
+      "original_indices": [
+        6065
+      ],
+      "fields": [
+        "depot_xy",
+        "node_xy",
+        "node_demand",
+        "service_time",
+        "tw_start",
+        "tw_end"
+      ],
+      "actual_input_sha256": "7e4c0a6e7dc7d51f1bb8498d91680446dcee4d85b053706ec9d6942e9c8c100f",
+      "customer_count": 80,
+      "exact_input_match": true
+    },
+    {
+      "original_indices": [
+        8408
+      ],
+      "fields": [
+        "depot_xy",
+        "node_xy",
+        "node_demand",
+        "service_time",
+        "tw_start",
+        "tw_end"
+      ],
+      "actual_input_sha256": "d4464fd8b24a0f2ccb16adc9480465be2db6b76a618e98f69cfa9abb5dd68569",
+      "customer_count": 92,
+      "exact_input_match": true
+    },
+    {
+      "original_indices": [
+        9057
+      ],
+      "fields": [
+        "depot_xy",
+        "node_xy",
+        "node_demand",
+        "service_time",
+        "tw_start",
+        "tw_end"
+      ],
+      "actual_input_sha256": "2ff340921258365cce37ce64527caae930968910e171944b41410c449059b3c4",
+      "customer_count": 96,
+      "exact_input_match": true
+    }
+  ],
+  "instrumentation": "Subclass only records completed routes; original _run_no_aug_batch is called unchanged",
+  "torch": "2.5.1+cu124",
+  "gpu": "NVIDIA GeForce RTX 3090"
+}
