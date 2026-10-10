@@ -50,6 +50,9 @@ unlimited vehicles and permitted pickup-only routes, this supplies a feasible
 construction for each input; it does not certify any model-generated route.
 Counts and exact rule scope are recorded in`single_customer_feasibility.json`.
 
-The15 CPU-only budget estimator tests also passed. They cover current/stale
+The17 CPU-only budget estimator/controller tests also passed. They cover current/stale
 qualification, warm versus cold timing, true-size weighting and honest incomplete
-budget reporting. They do not establish new solver or selector performance.
+budget reporting, including rejection before locking or generation. A real
+CPU-only`python -m code.V4.r58_pipeline --stage labels` also exited3 on the
+181.637GPUh projection; no deployment lock or label column was created. These
+checks do not establish new solver or selector performance.

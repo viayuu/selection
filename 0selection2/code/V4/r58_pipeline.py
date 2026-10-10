@@ -10,6 +10,7 @@ from pathlib import Path
 
 from ..unified_selector.registry import POOLS, PROBLEMS
 from .r58_analysis import progress, summarize
+from .r58_budget import build_budget, markdown
 from .r58_labels import implementation_hashes, lock, publish, runtime_environment
 from .r58_scenario import ROOT, save_json, write_contract
 
@@ -70,6 +71,22 @@ def run(args):
             update(status='preflight_complete', finished=time.time())
             return 0
         if args.stage in ('all', 'labels'):
+            report = build_budget(args.root)
+            save_json(args.root / 'budget.json', report)
+            (args.root / 'BUDGET.md').write_text(markdown(report))
+            decision = report['budget']['decision']
+            if not report['coverage']['complete_budget']:
+                blocked = 'budget_not_cleared'
+            elif decision == 'skip_full_fresh_solve_projected_over_100h':
+                blocked = 'skipped_over_budget'
+            elif decision != 'point_estimate_within_100h_not_guaranteed':
+                blocked = 'budget_not_cleared'
+            else:
+                blocked = None
+            if blocked:
+                update(status=blocked, budget=report['budget'], budget_coverage=report['coverage'],
+                       finished=time.time())
+                return 3
             if not (args.root / 'deployments.lock.json').exists():
                 lock(args.root)
             backhaul = [p for p in PROBLEMS if 'B' in p]

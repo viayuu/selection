@@ -3,6 +3,7 @@
 import json
 import tempfile
 import unittest
+from argparse import Namespace
 from collections import Counter
 from pathlib import Path
 from unittest.mock import patch
@@ -242,6 +243,64 @@ class BudgetTests(unittest.TestCase):
              patch.object(r58_budget, 'implementation_hashes', side_effect=[HASHES, {'fixture.py': 'changed'}]):
             with self.assertRaisesRegex(RuntimeError, 'changed while estimating'):
                 r58_budget.build_budget(Path(directory))
+
+    def assert_pipeline_budget_blocked(self, complete, expected_status):
+        from . import r58_pipeline
+
+        for stage in ('all', 'labels'):
+            for locked in (False, True):
+                with self.subTest(stage=stage, existing_lock=locked), tempfile.TemporaryDirectory() as directory:
+                    root = Path(directory)
+                    records = {'BQ': profile(observations=((0, 10, 60.), (1, 20, 60.)))}
+                    if not complete:
+                        records['MISSING_TIMING'] = profile(method='MISSING_TIMING', observations=())
+                    for record in records.values():
+                        record['runtime_environment'] = {'fixture': True}
+                    report = self.build_fixture(root, list(records), records, distribution([10, 20]))
+                    # An incomplete over-budget subset must still be marked budget_not_cleared.
+                    self.assertEqual(report['coverage']['complete_budget'], complete)
+                    self.assertEqual(report['budget']['decision'], 'skip_full_fresh_solve_projected_over_100h')
+                    lock_path = root / 'deployments.lock.json'
+                    if locked:
+                        save_json(lock_path, {'fixture': 'existing lock'})
+                    original_lock = lock_path.read_bytes() if locked else None
+                    args = Namespace(root=root, stage=stage, force_preflight=False)
+                    with patch.object(r58_pipeline, 'PROBLEMS', ['TSP']), \
+                         patch.object(r58_pipeline, 'POOLS', {'TSP': list(records)}), \
+                         patch.object(r58_pipeline, 'implementation_hashes', return_value=HASHES), \
+                         patch.object(r58_pipeline, 'runtime_environment', return_value={'fixture': True}), \
+                         patch.object(r58_pipeline, 'progress', return_value={'complete_preflight': True}) as progress, \
+                         patch.object(r58_pipeline, 'build_budget', return_value=report) as build, \
+                         patch.object(r58_pipeline, 'lock') as lock, \
+                         patch.object(r58_pipeline.subprocess, 'run', side_effect=AssertionError('command launched')) as command, \
+                         patch.object(r58_pipeline, 'publish') as publish, \
+                         patch.object(r58_pipeline, 'summarize') as summarize:
+                        self.assertEqual(r58_pipeline.run(args), 3)
+                        build.assert_called_once_with(root)
+                        self.assertEqual(progress.call_count, int(stage == 'all'))
+                        lock.assert_not_called()
+                        command.assert_not_called()
+                        publish.assert_not_called()
+                        summarize.assert_not_called()
+                    state = json.loads((root / 'pipeline_state.json').read_text())
+                    self.assertEqual(state['status'], expected_status)
+                    self.assertEqual(state['budget'], report['budget'])
+                    self.assertEqual(state['budget_coverage'], report['coverage'])
+                    self.assertIn('finished', state)
+                    self.assertNotIn('current_command', state)
+                    self.assertEqual(json.loads((root / 'budget.json').read_text())['budget'], report['budget'])
+                    self.assertEqual((root / 'BUDGET.md').read_text(), r58_budget.markdown(report))
+                    self.assertFalse((root / 'logs').exists())
+                    if locked:
+                        self.assertEqual(lock_path.read_bytes(), original_lock)
+                    else:
+                        self.assertFalse(lock_path.exists())
+
+    def test_pipeline_over_budget_never_locks_or_generates(self):
+        self.assert_pipeline_budget_blocked(True, 'skipped_over_budget')
+
+    def test_pipeline_incomplete_budget_never_locks_or_generates(self):
+        self.assert_pipeline_budget_blocked(False, 'budget_not_cleared')
 
 
 if __name__ == '__main__':

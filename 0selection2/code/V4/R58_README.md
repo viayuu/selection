@@ -88,6 +88,13 @@ Full generation handles the eight B tasks first, then the other tasks and TSP
 last. It still locks every deployment before generating any validation/test
 label; ordering does not change candidate pools or per-column inference plans.
 
+`all` and `labels` now recompute the TRAIN-size budget before locking or solving.
+An incomplete timing projection exits3 as`budget_not_cleared`; the current
+over100GPUh label recipe exits3 as`skipped_over_budget`, even if a lock already
+exists. This is a label-budget guard, not proof that total work including
+training/evaluation and overhead fits100hours. A cheaper measured, explicitly
+declared deployment plan is still required before the full run.
+
 The existing read-only `python_compat` overlay provides TorchRL0.6/TensorDict0.6.2
 compatible with PyTorch2.5. The optional PyG accelerator is disabled when its
 binary cannot load on gpu03; supported torch-sparse operators remain real.

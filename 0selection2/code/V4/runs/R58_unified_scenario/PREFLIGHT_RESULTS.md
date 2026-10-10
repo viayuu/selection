@@ -46,11 +46,14 @@ partial-release claim or scalar-archive substitution is authorized.
 - `preflight/*.json`: current profiles, exact weights/configuration, TRAIN indices,
   saved route witnesses and independent costs.
 - `preflight_final_controller.log`: actual successful full candidate traversal.
-- `pipeline_state.json`: final status`preflight_complete`.
+- `pipeline_state.json` at commit`2ba1cd5d2`: final`preflight_complete`.
+  The subsequent real CPU-only`--stage labels` invocation exited3 with
+ `skipped_over_budget`, before any lock or cost column was created; its current
+  state supersedes that preflight controller state.
 - `deployment_preflight.csv`, `progress.json`: all128 qualifications current.
 - `single_customer_feasibility.json`: sufficient feasible constructions for all
  80000 B-task training inputs; not native solver-output certification.
-- `VALIDATION.md`:53 implementation/history tests, plus15 budget tests passed.
+- `VALIDATION.md`:53 implementation/history tests, plus17 budget/controller tests passed.
 
 The new scenario changes the feasible domain and potentially deployment
 budgets. Future new/old score differences must not be claimed as matched model

@@ -2,7 +2,7 @@
 
 **Budget measurement only. No performance claim or launch authorization.**
 
-Snapshot: 2026-10-10T17:35:35.153399+00:00.
+Snapshot: 2026-10-10T17:48:06.965559+00:00.
 
 - Current passing deployments: 128/128.
 - Timing coverage: 128/128; all-deployment estimate complete: True.
