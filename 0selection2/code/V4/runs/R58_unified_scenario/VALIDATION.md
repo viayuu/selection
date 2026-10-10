@@ -40,3 +40,16 @@ is recorded in`progress.json`, `deployment_preflight.csv`, `preflight/*.json`
 and`pipeline_state.json`. Full fresh cost generation, a complete scenario
 release, baseline training and locked test evaluation are not test-suite outputs
 and must not be claimed from this document.
+
+## Real Training Input Feasibility
+
+All80000 unchanged training instances across the eight B tasks were checked
+without running a solver or reading a cost label. Every customer can be served
+on its own route under the new capacity, time and distance rules. Together with
+unlimited vehicles and permitted pickup-only routes, this supplies a feasible
+construction for each input; it does not certify any model-generated route.
+Counts and exact rule scope are recorded in`single_customer_feasibility.json`.
+
+The15 CPU-only budget estimator tests also passed. They cover current/stale
+qualification, warm versus cold timing, true-size weighting and honest incomplete
+budget reporting. They do not establish new solver or selector performance.
