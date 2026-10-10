@@ -10,7 +10,7 @@ from pathlib import Path
 
 from ..unified_selector.registry import POOLS, PROBLEMS
 from .r58_analysis import progress, summarize
-from .r58_budget import build_budget, markdown
+from .r58_budget import WHOLE_CLEARED, WHOLE_OVER, build_whole_budget, markdown, write_execution_approval
 from .r58_labels import implementation_hashes, lock, publish, runtime_environment
 from .r58_scenario import ROOT, save_json, write_contract
 
@@ -71,22 +71,30 @@ def run(args):
             update(status='preflight_complete', finished=time.time())
             return 0
         if args.stage in ('all', 'labels'):
-            report = build_budget(args.root)
+            report = build_whole_budget(args.root)
             save_json(args.root / 'budget.json', report)
             (args.root / 'BUDGET.md').write_text(markdown(report))
-            decision = report['budget']['decision']
-            if not report['coverage']['complete_budget']:
+            whole = report.get('whole_project', {})
+            decision = whole.get('decision')
+            if not report['coverage']['complete_budget'] or not whole.get('complete'):
                 blocked = 'budget_not_cleared'
-            elif decision == 'skip_full_fresh_solve_projected_over_100h':
+            elif decision == WHOLE_OVER:
                 blocked = 'skipped_over_budget'
-            elif decision != 'point_estimate_within_100h_not_guaranteed':
+            elif decision != WHOLE_CLEARED:
                 blocked = 'budget_not_cleared'
             else:
                 blocked = None
             if blocked:
                 update(status=blocked, budget=report['budget'], budget_coverage=report['coverage'],
-                       finished=time.time())
+                       whole_project_budget=whole, finished=time.time())
                 return 3
+            try:
+                approval = write_execution_approval(args.root, report)
+            except (OSError, ValueError, KeyError, TypeError) as error:
+                update(status='budget_not_cleared', whole_project_budget=whole,
+                       error=str(error), finished=time.time())
+                return 3
+            update(whole_project_budget=whole, execution_approval=approval)
             if not (args.root / 'deployments.lock.json').exists():
                 lock(args.root)
             backhaul = [p for p in PROBLEMS if 'B' in p]

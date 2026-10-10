@@ -2,6 +2,7 @@
 
 import argparse
 import bisect
+import copy
 import json
 import math
 from collections import Counter
@@ -15,6 +16,12 @@ from .r58_scenario import CONTRACT, ROOT, canonical_hash, file_hash, save_json
 
 SPLIT_COUNTS = {'train': 10000, 'val': 1000, 'test': 1000}
 LIMIT_HOURS = 100
+BASELINE_EVALUATION_SECONDS = 3 * 3600
+UNACCOUNTED_OVERHEAD_SECONDS = 2 * 3600
+LABEL_CONTINGENCY_FRACTION = .10
+WHOLE_CLEARED = 'whole_plan_reference_under_100h'
+WHOLE_OVER = 'skip_whole_plan_at_or_over_100h'
+ACCOUNTING_RULE = 'G = S_actual + L_reference + H63 + 3h + 2h + 0.10 * L_reference < 100h'
 TRAINING_CONTEXT = (
     'Observed existing R45A history: 40 epochs at about 114 seconds of optimization per epoch '
     '(about 1.3 GPUh, excluding evaluation). Training under 3h on a 3090 is an expectation, '
@@ -214,6 +221,211 @@ def build_budget(root=ROOT):
         budget=budget, limitations=LIMITATIONS, training_context=TRAINING_CONTEXT, deployments=deployments)
 
 
+def whole_components(spent_seconds, label_reference_seconds, session_overhead_seconds):
+    from .r58_timing_refinement import positive
+
+    for name, value in [('spent', spent_seconds), ('label reference', label_reference_seconds),
+                        ('measured63 overhead', session_overhead_seconds)]:
+        positive(value, name, allow_zero=True)
+    components = dict(actual_spent=spent_seconds, remaining_label_reference=label_reference_seconds,
+        measured63_session_overhead=session_overhead_seconds,
+        baseline_preparation_evaluation=BASELINE_EVALUATION_SECONDS,
+        otherwise_unaccounted_overhead=UNACCOUNTED_OVERHEAD_SECONDS,
+        label_contingency=LABEL_CONTINGENCY_FRACTION * label_reference_seconds)
+    total = sum(components.values())
+    return dict(components_seconds=components, whole_reference_seconds=total,
+        whole_projected_gpu_hours=total / 3600,
+        label_reference_limit_gpu_hours=(95 - (spent_seconds + session_overhead_seconds) / 3600) / 1.10,
+        decision=WHOLE_CLEARED if total < LIMIT_HOURS * 3600 and
+                 not math.isclose(total, LIMIT_HOURS * 3600, rel_tol=0., abs_tol=1e-6) else WHOLE_OVER)
+
+
+def validated_measurement(selection, target, mode, measured, histogram):
+    from .r58_execution import execution_profile, make_execution_plan
+    from .r58_timing_refinement import groups_for, timing_estimate, validate_group
+
+    anchors, groups, _ = groups_for(selection, target)
+    workers = 1 if mode == 'serial1' else 4
+    if (measured.get('complete') is not True or measured.get('mode') != mode or
+            measured.get('worker_exitcodes') != [0] * workers or
+            len(measured.get('passes', [])) != 2):
+        raise ValueError('Incomplete refinement workers or passes')
+    expected_profile = selection['profiles'][f'{target["problem"]}__{target["method"]}']['deployment']
+    expected_execution = execution_profile(target['problem'], target['method'], make_execution_plan(mode))
+    prepared = measured['prepare']
+    if (prepared['deployment_profile'] != expected_profile or
+            prepared['execution_profile'] != expected_execution):
+        raise ValueError('Refinement startup differs from the current production deployment')
+    seconds = []
+    for timed_pass in measured['passes']:
+        if len(timed_pass) != len(groups):
+            raise ValueError('Incomplete fixed refinement anchors')
+        values = []
+        for anchor, group, observation in zip(anchors, groups, timed_pass):
+            raw = observation['raw']
+            validate_group(raw, group, anchor['true_size'], mode)
+            if (raw['worker_pids'] != prepared['worker_pids'] or
+                    raw['deployment_profile'] != expected_profile or raw['execution_profile'] != expected_execution or
+                    raw['groups'][0]['seconds'] > observation['outer_seconds']):
+                raise ValueError('Workers/profile changed or timing omits completed group work')
+            values.append(observation['outer_seconds'])
+        seconds.append(values)
+    if mode != 'mps4':
+        isolation = measured.get('control_isolation', {})
+        if (measured.get('controls_not_attached') is not True or
+                isolation.get('existing_mps_processes') != [] or
+                isolation.get('existing_target_context_pids') != []):
+            raise ValueError('Non-MPS control isolation proof missing')
+    elif measured.get('attachment_verified') is not True:
+        raise ValueError('MPS attachment qualification missing')
+    estimate = timing_estimate(histogram, anchors, seconds, measured['session_wall_seconds'])
+    if estimate != measured['estimate']:
+        raise ValueError('Saved refinement estimate differs from its two actual timed passes')
+    return estimate
+
+
+def load_refinement(root, report):
+    from . import r58_timing_refinement as refinement
+
+    directory = Path(root) / 'timing_refinement'
+    paths = {name: directory / f'{name}.json' for name in ('selection', 'run_state', 'summary')}
+    selection, state, summary = (json.loads(paths[name].read_text()) for name in paths)
+    refinement.verify_selection(selection)
+    if (selection['implementation_sha256'] != report['implementation_sha256'] or
+            selection['targets'] != refinement.targets() or len(selection['targets']) != 63 or
+            state.get('status') != 'complete' or not state.get('finished')):
+        raise ValueError('Require complete63 refinement under current fresh128 source freeze')
+    expected_profiles = {f'{r["problem"]}__{r["solver"]}' for r in report['deployments']}
+    if set(selection['profiles']) != expected_profiles:
+        raise ValueError('Refinement preflight roster differs from current128')
+    for problem, train in report['train_distributions'].items():
+        sampled = selection['datasets'][problem]
+        if (train['count'] != 10000 or train['input_sha256'] != sampled['input_sha256'] or
+                {int(n): c for n, c in train['histogram'].items()} !=
+                {int(n): c for n, c in sampled['histogram'].items()}):
+            raise ValueError('Refinement histogram differs from original TRAIN')
+    records = copy.deepcopy(state['records'])
+    if set(records) != {f'{t["problem"]}__{t["method"]}' for t in selection['targets']}:
+        raise ValueError('Incomplete or changed63 refinement roster')
+    for target in selection['targets']:
+        modes = records[f'{target["problem"]}__{target["method"]}']
+        if set(modes) != set(target['modes']):
+            raise ValueError('Missing precommitted execution condition')
+        for mode in target['modes']:
+            measured = modes[mode]
+            if mode == 'mps4' and measured.get('complete') is not True:
+                continue
+            measured['estimate'] = validated_measurement(selection, target, mode, measured,
+                report['train_distributions'][target['problem']]['histogram'])
+    family = refinement.choose_rf_family(records)
+    if family.get('complete') is not True or family.get('mode') not in ('normal4', 'mps4'):
+        raise ValueError('All48 RF-family qualification incomplete')
+    if summary != refinement.summarize(selection, state) or summary['rf_family'] != family:
+        raise ValueError('Final summary differs from completed raw refinement evidence')
+    ledger = state['ledger']
+    if len(ledger['entries']) < 5 or len({e['path'] for e in ledger['entries']}) != len(ledger['entries']):
+        raise ValueError('Require four pilot receipts plus new preflight without duplicate charges')
+    charged = sum(refinement.positive(e['wall_seconds'], 'spent receipt') for e in ledger['entries'])
+    wall = refinement.positive(state['wall_seconds'], 'refinement outer wall')
+    session_walls = sum(refinement.positive(m.get('session_wall_seconds', 0.), 'session wall', allow_zero=True)
+                        for modes in records.values() for m in modes.values())
+    cumulative = refinement.positive(state['cumulative_wall_seconds'], 'cumulative refinement allowance')
+    if (not math.isclose(charged, ledger['spent_seconds'], abs_tol=1e-6) or
+            not math.isclose(cumulative, charged + wall, abs_tol=1e-6) or wall < session_walls or
+            cumulative > refinement.CAP_SECONDS):
+        raise ValueError('Actual cumulative three-hour accounting incomplete or exceeded')
+    prerequisite_path = Path(root) / 'prerequisite_spent.json'
+    prerequisite = refinement.prerequisite_accounting(prerequisite_path, ledger)
+    if prerequisite != state.get('prerequisite_spent'):
+        raise ValueError('Earlier R58 spend receipt changed or is missing')
+    spent = cumulative + prerequisite['add_to_refinement_ledger_seconds']
+    if not math.isclose(spent, summary['whole_r58_spent_seconds'], abs_tol=1e-6):
+        raise ValueError('Whole-R58 spend is not deduplicated consistently')
+    estimates = []
+    for target in selection['targets']:
+        mode = family['mode'] if target['method'] in refinement.RF_METHODS else 'serial1'
+        measured = records[f'{target["problem"]}__{target["method"]}'][mode]
+        estimates.append(dict(problem=target['problem'], solver=target['method'], mode=mode,
+                              **measured['estimate']))
+    paths['prerequisite_spent'] = prerequisite_path
+    return dict(estimates=estimates, rf_family=family, spent_seconds=spent,
+        evidence={str(path.resolve()): file_hash(path) for path in paths.values()},
+        preflights={profile['path']: profile['sha256'] for profile in selection['profiles'].values()})
+
+
+def build_whole_budget(root=ROOT):
+    """Read-only mechanical gate; never publish an execution approval here."""
+    report = build_budget(root)
+    whole = dict(complete=False, decision='not_cleared_incomplete_whole_plan',
+                 accounting_rule=ACCOUNTING_RULE, blockers=[], execution_plan=None)
+    report['whole_project'] = whole
+    coverage = report['coverage']
+    if (not coverage['complete_budget'] or not coverage['all_current_passing'] or
+            coverage['current_passing_deployments'] != 128 or coverage['estimated_deployments'] != 128 or
+            coverage['expected_deployments'] != 128):
+        whole['blockers'].append('Require fresh current128 passing profiles with supported conservative timings')
+        return report
+    try:
+        evidence = load_refinement(root, report)
+        refined = {(r['problem'], r['solver']): r for r in evidence['estimates']}
+        if len(refined) != 63 or len(evidence['estimates']) != 63:
+            raise ValueError('Require complete63 refined estimates without duplicates')
+        remaining = [r for r in report['deployments'] if (r['problem'], r['solver']) not in refined]
+        if len(remaining) != 65 or len(refined) + len(remaining) != len(report['deployments']):
+            raise ValueError('Refined63 and unchanged65 do not partition current128')
+        startup = sum(r['projected_session_overhead_seconds'] for r in refined.values())
+        refined_reference = sum(r['reference_seconds'] - r['projected_session_overhead_seconds']
+                                for r in refined.values())
+        other_reference = sum(r['estimate']['conservative_reference_gpu_hours'] * 3600 for r in remaining)
+        components = whole_components(evidence['spent_seconds'], refined_reference + other_reference, startup)
+        from .r58_execution import make_execution_plan
+        plan = make_execution_plan(evidence['rf_family']['mode'])
+        if implementation_hashes() != report['implementation_sha256']:
+            raise ValueError('Current implementation changed while integrating final budget')
+        whole.update(complete=True, **components, rf_family=evidence['rf_family'], execution_plan=plan,
+            refined_deployments=63, preflight_only_deployments=65,
+            refined_label_reference_seconds=refined_reference, preflight65_reference_seconds=other_reference,
+            refined_estimates=evidence['estimates'], evidence=evidence['evidence'], preflights=evidence['preflights'])
+    except (OSError, ValueError, KeyError, TypeError, IndexError, ZeroDivisionError) as error:
+        whole['blockers'].append(str(error))
+    return report
+
+
+def write_execution_approval(root, report):
+    """Called only by the whole-plan pipeline gate, immediately before locking."""
+    from .r58_execution import validate_execution_plan
+
+    whole = report.get('whole_project', {})
+    if (whole.get('complete') is not True or whole.get('decision') != WHOLE_CLEARED or
+            not 0 < whole.get('whole_projected_gpu_hours', float('inf')) < LIMIT_HOURS or
+            report['implementation_sha256'] != implementation_hashes()):
+        raise ValueError('Complete current whole-plan reference <100h required before approval')
+    components = whole['components_seconds']
+    recalculated = whole_components(components['actual_spent'], components['remaining_label_reference'],
+                                    components['measured63_session_overhead'])
+    if any(whole[key] != value for key, value in recalculated.items()):
+        raise ValueError('Fixed008 accounting or allowance was altered')
+    plan = validate_execution_plan(whole['execution_plan'])
+    if plan['rf_mode'] != whole['rf_family']['mode'] or whole['rf_family'].get('complete') is not True:
+        raise ValueError('Execution plan differs from globally qualified RF family')
+    for path, digest in {**whole['evidence'], **whole['preflights']}.items():
+        if file_hash(path) != digest:
+            raise ValueError('Budget evidence changed before deployment lock')
+    approval = dict(approved=True, execution_plan_sha256=canonical_hash(plan),
+        implementation_sha256=report['implementation_sha256'], deployments=128,
+        whole_projected_gpu_hours=whole['whole_projected_gpu_hours'], accounting_rule=ACCOUNTING_RULE,
+        components_seconds=components, evidence=whole['evidence'], preflight_sha256=whole['preflights'])
+    root = Path(root)
+    lock_path = root / 'deployments.lock.json'
+    if lock_path.exists():
+        locked = json.loads(lock_path.read_text())
+        if locked.get('execution_plan') != plan or locked.get('execution_approval') != approval:
+            raise ValueError('Existing immutable lock differs from the cleared plan/approval')
+    save_json(root / 'execution_plan.json', plan)
+    save_json(root / 'execution_approval.json', approval)
+    return approval
+
+
 def markdown(report):
     coverage, budget = report['coverage'], report['budget']
     text = ['# R58 Fresh-Solve Budget', '',
@@ -265,6 +477,25 @@ def markdown(report):
              'source /public/home/shiys/miniconda3/etc/profile.d/conda.sh', 'conda activate easynco',
              'CUDA_VISIBLE_DEVICES="" OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 \\',
              '  python -m code.V4.r58_budget --root ' + report['root'], '```', '']
+    whole = report.get('whole_project')
+    if whole is not None:
+        section = ['# R58 Whole-Project Budget', '', f'`{whole["accounting_rule"]}`', '',
+            f'Whole-plan evidence complete: {whole["complete"]}. Decision: `{whole["decision"]}`.', '']
+        if whole['complete']:
+            section += [f'Whole reference: ~{whole["whole_projected_gpu_hours"]:.4g} GPUh. '
+                        f'RF family: `{whole["rf_family"]["mode"]}`.', '',
+                        '| Component | GPUh |', '|---|---:|']
+            section.extend(f'| {name} | {seconds / 3600:.4g} |'
+                           for name, seconds in whole['components_seconds'].items())
+            section += ['', 'H63 is charged ONCE: removed from the refined reference before adding the '
+                        'three-times measured session overhead. The65 unchanged estimates retain current '
+                        'preflight conservative references. No unmeasured parallel speedup is assumed.', '']
+        section.extend(f'- BLOCKED: {reason}' for reason in whole['blockers'])
+        section += ['', 'The3h baseline and2h otherwise-unaccounted overhead are fixed allowances, not '
+                    'measured R58 completion times. The10% label contingency and timing references are '
+                    'not confidence bounds or guarantees. Validation/test sizes are estimated from TRAIN.', '',
+                    'The preflight-only diagnostics below are NOT a whole-project approval.', '']
+        text = section + text
     return '\n'.join(text)
 
 
@@ -272,13 +503,15 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root', type=Path, default=ROOT, help='Read only preflight/<problem>__<method>.json here')
     parser.add_argument('--output-dir', type=Path, help='Write budget.json and BUDGET.md here (default: --root)')
+    parser.add_argument('--whole', action='store_true', help='Read completed refinement and apply fixed008 whole-project gate')
     args = parser.parse_args(argv)
-    report = build_budget(args.root)
+    report = build_whole_budget(args.root) if args.whole else build_budget(args.root)
     output = args.output_dir or args.root
     save_json(output / 'budget.json', report)
     (output / 'BUDGET.md').write_text(markdown(report))
     print(json.dumps(dict(coverage={k: v for k, v in report['coverage'].items() if not isinstance(v, list)},
-                          budget=report['budget'], output_dir=str(output.resolve()))))
+                          budget=report['budget'], whole_project=report.get('whole_project'),
+                          output_dir=str(output.resolve()))))
     return 0
 
 

@@ -1,5 +1,6 @@
 """Synthetic CPU-only fixtures for R58 fresh-solve budget accounting."""
 
+import copy
 import json
 import tempfile
 import unittest
@@ -257,6 +258,9 @@ class BudgetTests(unittest.TestCase):
                     for record in records.values():
                         record['runtime_environment'] = {'fixture': True}
                     report = self.build_fixture(root, list(records), records, distribution([10, 20]))
+                    report['whole_project'] = dict(complete=complete, accounting_rule=r58_budget.ACCOUNTING_RULE,
+                        blockers=[], decision=r58_budget.WHOLE_OVER if complete else 'not_cleared_incomplete_whole_plan',
+                        whole_projected_gpu_hours=101., rf_family={'mode': 'normal4'}, components_seconds={})
                     # An incomplete over-budget subset must still be marked budget_not_cleared.
                     self.assertEqual(report['coverage']['complete_budget'], complete)
                     self.assertEqual(report['budget']['decision'], 'skip_full_fresh_solve_projected_over_100h')
@@ -270,7 +274,8 @@ class BudgetTests(unittest.TestCase):
                          patch.object(r58_pipeline, 'implementation_hashes', return_value=HASHES), \
                          patch.object(r58_pipeline, 'runtime_environment', return_value={'fixture': True}), \
                          patch.object(r58_pipeline, 'progress', return_value={'complete_preflight': True}) as progress, \
-                         patch.object(r58_pipeline, 'build_budget', return_value=report) as build, \
+                         patch.object(r58_pipeline, 'build_whole_budget', return_value=report) as build, \
+                         patch.object(r58_pipeline, 'write_execution_approval') as approve, \
                          patch.object(r58_pipeline, 'lock') as lock, \
                          patch.object(r58_pipeline.subprocess, 'run', side_effect=AssertionError('command launched')) as command, \
                          patch.object(r58_pipeline, 'publish') as publish, \
@@ -279,6 +284,7 @@ class BudgetTests(unittest.TestCase):
                         build.assert_called_once_with(root)
                         self.assertEqual(progress.call_count, int(stage == 'all'))
                         lock.assert_not_called()
+                        approve.assert_not_called()
                         command.assert_not_called()
                         publish.assert_not_called()
                         summarize.assert_not_called()
@@ -291,6 +297,8 @@ class BudgetTests(unittest.TestCase):
                     self.assertEqual(json.loads((root / 'budget.json').read_text())['budget'], report['budget'])
                     self.assertEqual((root / 'BUDGET.md').read_text(), r58_budget.markdown(report))
                     self.assertFalse((root / 'logs').exists())
+                    self.assertFalse((root / 'execution_plan.json').exists())
+                    self.assertFalse((root / 'execution_approval.json').exists())
                     if locked:
                         self.assertEqual(lock_path.read_bytes(), original_lock)
                     else:
@@ -301,6 +309,275 @@ class BudgetTests(unittest.TestCase):
 
     def test_pipeline_incomplete_budget_never_locks_or_generates(self):
         self.assert_pipeline_budget_blocked(False, 'budget_not_cleared')
+
+
+class WholeBudgetTests(unittest.TestCase):
+    def fixture(self, root):
+        from . import r58_timing_refinement as refinement
+
+        scales = (50, 56, 63, 69, 75, 81, 88, 94, 100)
+        train = distribution([n for n in scales for _ in range(1111)] + [100])
+        for problem in r58_budget.PROBLEMS:
+            for method in r58_budget.POOLS[problem]:
+                record = profile(problem, method, ((0, 50, .01), (9999, 100, .03)))
+                if r58_budget.inference_batch_size(problem, method) == 16:
+                    record['batch_probe'] = dict(indices=list(range(9984, 10000)), seconds=.16, seconds_per_instance=.01)
+                save_json(root / 'preflight' / f'{problem}__{method}.json', record)
+        with patch.object(r58_budget, 'implementation_hashes', return_value=HASHES), \
+             patch.object(r58_budget, 'train_distribution', return_value=train):
+            base = r58_budget.build_budget(root)
+        artifacts = {}
+        for name in ('selection', 'run_state', 'summary', 'prerequisite_spent'):
+            path = root / 'evidence' / f'{name}.json'
+            save_json(path, {'fixture': name})
+            artifacts[str(path)] = file_hash(path)
+        evidence = dict(estimates=[dict(problem=t['problem'], solver=t['method'],
+            mode='normal4' if t['method'] in refinement.RF_METHODS else 'serial1',
+            reference_seconds=3900., fresh_solve_seconds=2100., projected_session_overhead_seconds=300.)
+            for t in refinement.targets()],
+            rf_family=dict(mode='normal4', complete=True, mps_credit=False), spent_seconds=6087.,
+            evidence=artifacts,
+            preflights={str(p): file_hash(p) for p in (root / 'preflight').glob('*.json')})
+        return base, evidence
+
+    def whole(self, root, base, evidence):
+        with patch.object(r58_budget, 'build_budget', return_value=copy.deepcopy(base)), \
+             patch.object(r58_budget, 'load_refinement', return_value=evidence), \
+             patch.object(r58_budget, 'implementation_hashes', return_value=HASHES):
+            return r58_budget.build_whole_budget(root)
+
+    def test_fixed_rule_strict_limit_and_nonfinite_spend_refused(self):
+        components = r58_budget.whole_components(2 * 3600, 80 * 3600, 3600)
+        self.assertEqual(components['whole_projected_gpu_hours'], 96.)
+        self.assertEqual(components['components_seconds']['label_contingency'], 8 * 3600)
+        self.assertEqual(components['decision'], r58_budget.WHOLE_CLEARED)
+        boundary = r58_budget.whole_components(3600, (100 * 3600 - 3600 - 5 * 3600) / 1.10, 0.)
+        self.assertAlmostEqual(boundary['whole_projected_gpu_hours'], 100.)
+        self.assertEqual(boundary['decision'], r58_budget.WHOLE_OVER)
+        for value in (float('nan'), float('inf'), -1, True):
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                r58_budget.whole_components(value, 3600, 0)
+
+    def test_refined63_overhead_once_and_unchanged65_conservative_no_speedup(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base, evidence = self.fixture(root)
+            report = self.whole(root, base, evidence)
+            whole = report['whole_project']
+            self.assertTrue(whole['complete'])
+            refined = {(r['problem'], r['solver']) for r in evidence['estimates']}
+            remaining = sum(r['estimate']['conservative_reference_gpu_hours'] * 3600
+                            for r in base['deployments'] if (r['problem'], r['solver']) not in refined)
+            self.assertAlmostEqual(whole['components_seconds']['remaining_label_reference'], 63 * 3600 + remaining)
+            self.assertEqual(whole['components_seconds']['measured63_session_overhead'], 63 * 300)
+            self.assertAlmostEqual(whole['whole_reference_seconds'],
+                6087 + 1.10 * (63 * 3600 + remaining) + 63 * 300 + 5 * 3600)
+            self.assertEqual(whole['execution_plan']['rf_mode'], 'normal4')
+            self.assertIn('H63 is charged ONCE', r58_budget.markdown(report))
+            self.assertFalse((root / 'execution_plan.json').exists())
+            self.assertFalse((root / 'execution_approval.json').exists())
+
+    def test_missing_stale_incomplete_or_changed_roster_never_clears(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base, evidence = self.fixture(root)
+            for reason in ('missing refinement', 'stale implementation', 'incomplete63', 'unqualified48'):
+                with self.subTest(reason=reason), \
+                     patch.object(r58_budget, 'build_budget', return_value=copy.deepcopy(base)), \
+                     patch.object(r58_budget, 'load_refinement', side_effect=ValueError(reason)):
+                    report = r58_budget.build_whole_budget(root)
+                    self.assertFalse(report['whole_project']['complete'])
+                    with self.assertRaises(ValueError):
+                        r58_budget.write_execution_approval(root, report)
+            stale = copy.deepcopy(base)
+            stale['coverage']['all_current_passing'] = False
+            with patch.object(r58_budget, 'build_budget', return_value=stale), \
+                 patch.object(r58_budget, 'load_refinement') as load:
+                self.assertFalse(r58_budget.build_whole_budget(root)['whole_project']['complete'])
+                load.assert_not_called()
+            evidence['estimates'].pop()
+            self.assertFalse(self.whole(root, base, evidence)['whole_project']['complete'])
+            self.assertFalse((root / 'execution_approval.json').exists())
+
+    def test_completed_raw_passes_profiles_and_max_reference_recomputed(self):
+        from . import r58_timing_refinement as refinement
+        from .r58_execution import execution_profile, make_execution_plan
+        from .test_r58_timing_refinement import raw_group
+
+        anchors = refinement.select_anchors([n for n in (50, 75, 100) for _ in range(8)], 3)
+        target = dict(problem='CVRP', method='RouteFinder', anchor_count=3)
+        deployment = {'fixture': 'current production'}
+        execution = execution_profile('CVRP', 'RouteFinder', make_execution_plan('normal4'))
+        selection = dict(datasets={'CVRP': {'anchors': anchors}},
+                         profiles={'CVRP__RouteFinder': {'deployment': deployment}})
+        passes = []
+        for pass_id in (1, 2):
+            observations = []
+            for anchor in anchors:
+                group = dict(id=anchor['id'], indices=anchor['indices'])
+                raw = raw_group(group, anchor['true_size'])
+                raw.update(deployment_profile=deployment, execution_profile=execution)
+                observations.append(dict(raw=raw, outer_seconds=4. + pass_id))
+            passes.append(observations)
+        measured = dict(complete=True, mode='normal4', worker_exitcodes=[0] * 4, passes=passes,
+            prepare=dict(worker_pids=[100, 101, 102, 103], deployment_profile=deployment, execution_profile=execution),
+            controls_not_attached=True, control_isolation=dict(existing_mps_processes=[], existing_target_context_pids=[]),
+            session_wall_seconds=43.)
+        histogram = {50: 4, 75: 12, 100: 8}
+        measured['estimate'] = refinement.timing_estimate(histogram, anchors,
+            [[g['outer_seconds'] for g in p] for p in passes], 43.)
+        estimate = r58_budget.validated_measurement(selection, target, 'normal4', measured, histogram)
+        self.assertEqual(estimate['max_pass_reference_seconds_per_instance'], 1.5)
+        self.assertEqual(estimate['projected_session_overhead_seconds'], 30.)
+        bad = copy.deepcopy(measured)
+        bad['estimate']['reference_seconds'] -= 1
+        with self.assertRaisesRegex(ValueError, 'actual timed passes'):
+            r58_budget.validated_measurement(selection, target, 'normal4', bad, histogram)
+        bad = copy.deepcopy(measured)
+        bad['passes'][1][0]['raw']['deployment_profile'] = {'fixture': 'stale'}
+        with self.assertRaisesRegex(ValueError, 'profile changed'):
+            r58_budget.validated_measurement(selection, target, 'normal4', bad, histogram)
+
+    def test_saved63_records_actual_spend_and_summary_checked_end_to_end_cpu_only(self):
+        from . import r58_timing_refinement as refinement
+        from .r58_execution import execution_profile, make_execution_plan
+        from .test_r58_timing_refinement import raw_group
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base, _ = self.fixture(root)
+            datasets = copy.deepcopy(base['train_distributions'])
+            for problem, dataset in datasets.items():
+                if problem != 'ATSP':
+                    sizes = [int(n) for n, frequency in dataset['histogram'].items() for _ in range(frequency)]
+                    dataset['anchors'] = refinement.select_anchors(sizes, 9 if problem in ('TSP', 'CVRP') else 3)
+            selection = dict(implementation_sha256=HASHES, selection_sha256='fixed CPU fixture',
+                targets=refinement.targets(), datasets=datasets,
+                profiles={f'{r["problem"]}__{r["solver"]}': dict(path=r['profile_path'],
+                    sha256=file_hash(r['profile_path']), deployment={'fixture': True}) for r in base['deployments']})
+            records = {}
+            for target in selection['targets']:
+                key = f'{target["problem"]}__{target["method"]}'
+                anchors, groups, _ = refinement.groups_for(selection, target)
+                records[key] = {}
+                for mode in target['modes']:
+                    if mode == 'mps4':
+                        records[key][mode] = dict(complete=False, error='MPS unavailable; no retry/credit')
+                        continue
+                    execution = execution_profile(target['problem'], target['method'], make_execution_plan(mode))
+                    passes, outer = [], 4. if mode == 'serial1' else 2.
+                    for _ in (1, 2):
+                        observations = []
+                        for anchor, group in zip(anchors, groups):
+                            raw = raw_group(group, anchor['true_size'], mode)
+                            raw.update(deployment_profile={'fixture': True}, execution_profile=execution)
+                            raw['groups'][0]['seconds'] = outer * .75
+                            observations.append(dict(raw=raw, outer_seconds=outer))
+                        passes.append(observations)
+                    session_wall = outer * 2 * len(anchors) + 10
+                    measured = dict(complete=True, mode=mode, worker_exitcodes=[0] * execution['workers'],
+                        prepare=dict(worker_pids=passes[0][0]['raw']['worker_pids'],
+                                     deployment_profile={'fixture': True}, execution_profile=execution),
+                        passes=passes, session_wall_seconds=session_wall, controls_not_attached=True,
+                        control_isolation=dict(existing_mps_processes=[], existing_target_context_pids=[]))
+                    measured['estimate'] = refinement.timing_estimate(datasets[target['problem']]['histogram'],
+                        anchors, [[g['outer_seconds'] for g in p] for p in passes], session_wall)
+                    records[key][mode] = measured
+            original = (404.7381637785584, 181.29578457027674, 629.78885849379, 270.6426247423515)
+            entries = [dict(path=f'pilot_{i}', wall_seconds=wall) for i, wall in enumerate(original)]
+            entries += [dict(path='revised_preflight_state.json', wall_seconds=200.),
+                        dict(path='readonly_guard_receipt.json', wall_seconds=1.)]
+            ledger = dict(entries=entries, spent_seconds=sum(e['wall_seconds'] for e in entries))
+            prerequisite_path = root / 'prerequisite_spent.json'
+            save_json(prerequisite_path, dict(before_additional_pilot_seconds=3894.,
+                slurm_outer_overhead_seconds=6.5345684150234,
+                completed_additional_pilot_controller_seconds=sum(original)))
+            wall = sum(m.get('session_wall_seconds', 0) for modes in records.values() for m in modes.values()) + 10
+            state = dict(status='complete', finished=10000., wall_seconds=wall, ledger=ledger, records=records,
+                cumulative_wall_seconds=ledger['spent_seconds'] + wall,
+                prerequisite_spent=refinement.prerequisite_accounting(prerequisite_path, ledger))
+            summary = refinement.summarize(selection, state)
+            for name, value in [('selection', selection), ('run_state', state), ('summary', summary)]:
+                save_json(root / 'timing_refinement' / f'{name}.json', value)
+            with patch.object(refinement, 'verify_selection'), \
+                 patch.object(r58_budget, 'build_budget', return_value=copy.deepcopy(base)), \
+                 patch.object(r58_budget, 'implementation_hashes', return_value=HASHES), \
+                 patch('torch.cuda.init', side_effect=AssertionError('GPU access')), \
+                 patch('torch.cuda.is_available', side_effect=AssertionError('GPU query')):
+                evidence = r58_budget.load_refinement(root, base)
+                self.assertAlmostEqual(evidence['spent_seconds'], 5387 + 200 + 1 + wall)
+                self.assertEqual(evidence['rf_family']['mode'], 'normal4')
+                report = r58_budget.build_whole_budget(root)
+                self.assertTrue(report['whole_project']['complete'])
+                self.assertEqual(report['whole_project']['decision'], r58_budget.WHOLE_OVER)
+                with self.assertRaises(ValueError):
+                    r58_budget.write_execution_approval(root, report)
+                summary['whole_r58_spent_seconds'] -= 1
+                save_json(root / 'timing_refinement/summary.json', summary)
+                self.assertFalse(r58_budget.build_whole_budget(root)['whole_project']['complete'])
+            self.assertFalse((root / 'execution_approval.json').exists())
+
+    def test_plan_and_approval_match_core_schema_but_changed_allowances_or_lock_block_writes(self):
+        from .r58_execution import read_execution_plan, require_budget_approval
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base, evidence = self.fixture(root)
+            report = self.whole(root, base, evidence)
+            with patch.object(r58_budget, 'implementation_hashes', return_value=HASHES):
+                approval = r58_budget.write_execution_approval(root, report)
+            self.assertEqual(require_budget_approval(root, read_execution_plan(root), HASHES), approval)
+            original = (root / 'execution_approval.json').read_bytes()
+            changed = copy.deepcopy(report)
+            changed['whole_project']['components_seconds']['label_contingency'] /= 2
+            with patch.object(r58_budget, 'implementation_hashes', return_value=HASHES), self.assertRaises(ValueError):
+                r58_budget.write_execution_approval(root, changed)
+            save_json(root / 'deployments.lock.json', {'execution_plan': {'old': True}})
+            with patch.object(r58_budget, 'implementation_hashes', return_value=HASHES), self.assertRaisesRegex(ValueError, 'immutable lock'):
+                r58_budget.write_execution_approval(root, report)
+            self.assertEqual((root / 'execution_approval.json').read_bytes(), original)
+
+    def test_pipeline_label_only_report_cannot_approve_or_generate(self):
+        from . import r58_pipeline
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base, _ = self.fixture(root)
+            args = Namespace(root=root, stage='labels', force_preflight=False)
+            with patch.object(r58_pipeline, 'build_whole_budget', return_value=base), \
+                 patch.object(r58_pipeline, 'write_execution_approval') as approve, \
+                 patch.object(r58_pipeline, 'lock') as lock, \
+                 patch.object(r58_pipeline.subprocess, 'run') as generate:
+                self.assertEqual(r58_pipeline.run(args), 3)
+                approve.assert_not_called()
+                lock.assert_not_called()
+                generate.assert_not_called()
+            self.assertEqual(json.loads((root / 'pipeline_state.json').read_text())['status'], 'budget_not_cleared')
+
+    def test_pipeline_writes_cleared_core_plan_and_approval_before_any_lock_or_generation(self):
+        from . import r58_pipeline
+        from .r58_execution import read_execution_plan, require_budget_approval
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base, evidence = self.fixture(root)
+            report = self.whole(root, base, evidence)
+            args = Namespace(root=root, stage='labels', force_preflight=False)
+            def assert_cleared(*unused, **kwargs):
+                approval = require_budget_approval(root, read_execution_plan(root), HASHES)
+                self.assertLess(approval['whole_projected_gpu_hours'], 100)
+                return Namespace(returncode=0)
+            with patch.object(r58_pipeline, 'PROBLEMS', ['TSP']), \
+                 patch.object(r58_pipeline, 'POOLS', {'TSP': ['BQ']}), \
+                 patch.object(r58_pipeline, 'build_whole_budget', return_value=report), \
+                 patch.object(r58_budget, 'implementation_hashes', return_value=HASHES), \
+                 patch.object(r58_pipeline, 'lock', side_effect=assert_cleared) as lock, \
+                 patch.object(r58_pipeline.subprocess, 'run', side_effect=assert_cleared) as generate, \
+                 patch.object(r58_pipeline, 'publish'), patch.object(r58_pipeline, 'summarize'), \
+                 patch('builtins.print'):
+                self.assertEqual(r58_pipeline.run(args), 0)
+                lock.assert_called_once_with(root)
+                self.assertEqual(generate.call_count, 3)
 
 
 if __name__ == '__main__':
