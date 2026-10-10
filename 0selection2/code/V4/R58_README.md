@@ -4,6 +4,16 @@ This experiment repairs benchmark semantics, not a selector architecture.
 Original inputs/splits, labels, solver source trees, and historical results remain
 unchanged. The new data live under `runs/R58_unified_scenario/scenario_v2/`.
 
+## Current Execution Status
+
+All128 revised TRAIN preflights and the fixed final63-deployment timing
+refinement passed. The settled whole-project reference is **114.248924GPUh**,
+above the100GPUh limit, so the production gate records `skipped_over_budget`.
+No full new labels, baseline training or test result exists. R58 is therefore
+not complete; no performance improvement is claimed. See
+`runs/R58_unified_scenario/RESULTS.md` and `BUDGET.md` for evidence. No further
+recipe or candidate-pool changes were made to force a passing estimate.
+
 ## Legacy Scenario Boundary
 
 Existing cost tables and R25-R57 reports describe the legacy deployment
@@ -99,12 +109,42 @@ Full generation handles the eight B tasks first, then the other tasks and TSP
 last. It still locks every deployment before generating any validation/test
 label; ordering does not change candidate pools or per-column inference plans.
 
-`all` and `labels` now recompute the TRAIN-size budget before locking or solving.
-An incomplete timing projection exits3 as`budget_not_cleared`; the current
-over100GPUh label recipe exits3 as`skipped_over_budget`, even if a lock already
-exists. This original label-budget guard is not proof that total work including
-training/evaluation and overhead fits100hours. A cheaper measured, explicitly
-declared deployment plan is still required before the full run.
+`all` and `labels` recompute the complete project budget before locking or
+solving. The fixed gate is:
+
+```text
+actual spent + remaining label reference + measured session overhead
+  + 3h baseline/preparation/evaluation + 2h remaining overhead
+  + 10% label contingency < 100 GPUh
+```
+
+The measured session overhead is counted once, not again inside the label
+reference. All128 current deployments must pass; the final TRAIN-only timing
+refinement must cover its complete63-deployment roster. The other65 retain
+their conservative preflight references. No unmeasured parallel acceleration
+is credited. Incomplete evidence exits3 as`budget_not_cleared`; a whole-project
+reference at or above100GPUh exits3 as`skipped_over_budget`, even if an old lock
+exists. The3h and2h components are fixed planning allowances, not measured R58
+completion times; the contingency is not a confidence bound.
+
+The final refinement compares serial1, ordinary four-client execution and
+installed private MPS4 for all48 RouteFinder-family deployments. MPS is adopted
+only globally for that family, after verified client attachment, exact route
+and cost equivalence, and an overall measured advantage. Otherwise it receives
+no speedup credit. This is the last measurement of the fixed revised recipe,
+within a cumulative3GPUh pilot cap. There is no automatic further recipe search
+or candidate removal if the budget does not clear.
+
+Read-only CPU budget report (after final timing and outer-wall accounting):
+
+```bash
+CUDA_VISIBLE_DEVICES='' python -m code.V4.r58_budget --whole
+```
+
+A passing preflight, a completed timing run, or this report alone does not
+publish scenario_v2 or constitute a new model result. The full54-dataset
+release, from-scratch baseline, and locked test remain separate completion
+requirements.
 
 The existing read-only `python_compat` overlay provides TorchRL0.6/TensorDict0.6.2
 compatible with PyTorch2.5. The optional PyG accelerator is disabled when its
