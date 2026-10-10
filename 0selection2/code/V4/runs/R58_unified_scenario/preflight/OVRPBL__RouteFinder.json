@@ -12,8 +12,9 @@
   "implementation_sha256": {
     "r58_scenario.py": "aeec3cc5228b2d590e0ae370f1f60936326ca9a859bf6220eaf3e51bb0455bf3",
     "r58_environments.py": "0a2ba84c17747651cf3becc0c6355a12f110945bd4793f63c19aa98763242402",
-    "r58_backends.py": "7e35a45f12ee1ae574d6b35cb9175f7f2ceac3e77d0fc8694429348a7742af77",
-    "r58_labels.py": "4598a343bbaea86ad32db301e8c97266d4136a6fb88853b5eee8bb569123a139"
+    "r58_backends.py": "445e449e61b06b1a898007e47b6d5e2205c89cc3a8236a434786878c9d1c31de",
+    "r58_labels.py": "0e766a058a6cd528cb94fcd3f87098a79663b2d2967d56b5dccee7b6ce7a99e2",
+    "r58_execution.py": "87da2545c3a16d431ca85b213a265095a219881ef73380952f380dc615dfbb89"
   },
   "passed": true,
   "runtime_environment": {
@@ -106,12 +107,13 @@
     "signed_demand_adapter_sha256": "5de9478385044661c1b52566c7e66722bd819aaef38269c7c15596983aa94abe",
     "budget": {
       "starts": "ALL N physical customers",
-      "augmentation": 8,
+      "augmentation": 1,
+      "orientation": "original, untransformed",
       "decoding": "multistart_greedy, explicitly selected",
       "precision": "FP32, matmul_precision=highest",
       "inference_batch_size": 1,
       "checkpoint_bucket": "50 if true N<=75, otherwise100",
-      "selection": "minimum over all starts and8 dihedral orientations; stable first tie"
+      "selection": "minimum over ALL N starts in original orientation; stable first tie"
     },
     "normalization": "original coordinates; demands divided by raw capacity; raw speed and L; customer TW retained; missing depot close=+infinity",
     "historical_adapter_note": "Historical scalar columns are not certified for this deployment; scenario_v2 uses its explicit contract, not the inherited depot cutoff of3",
@@ -121,17 +123,19 @@
     "checkpoint_loading": "strict full state; duplicate names restored only from identical registered parameter aliases",
     "checkpoint_alias_loader_sha256": "97d931dbc045df653647f895aae040c6b0c2d73297e1c98a0c83e3fc4dc96373",
     "constraint_adapter_sha256": "0a2ba84c17747651cf3becc0c6355a12f110945bd4793f63c19aa98763242402",
-    "r58_tensor_adapter_sha256": "7e35a45f12ee1ae574d6b35cb9175f7f2ceac3e77d0fc8694429348a7742af77"
+    "r58_tensor_adapter_sha256": "445e449e61b06b1a898007e47b6d5e2205c89cc3a8236a434786878c9d1c31de",
+    "budget_source": "R58 pre-validation revised deployment: original orientation only, all customer starts, unchanged fixed checkpoint; NOT equivalent to the prior 8-augmentation recipe",
+    "recipe_revision": "r58_rf_aug1_diff20"
   },
   "results": [
     {
       "index": 165,
       "true_size": 50,
-      "seconds": 0.14487545937299728,
+      "seconds": 0.14119310304522514,
       "independent": {
         "feasible": true,
         "errors": [],
-        "cost": 5.864712687918575,
+        "cost": 5.8845470174045715,
         "cost_matches": true
       },
       "route": [
@@ -159,19 +163,19 @@
         27,
         16,
         10,
-        24,
         48,
         44,
+        24,
+        8,
         4,
-        42,
         35,
         11,
         18,
         0,
         40,
-        8,
         29,
         13,
+        42,
         0,
         32,
         49,
@@ -195,18 +199,18 @@
         0,
         0
       ],
-      "first_call_seconds": 6.379288922995329,
-      "first_call_cost": 5.864712687918575,
+      "first_call_seconds": 6.424234836362302,
+      "first_call_cost": 5.8845470174045715,
       "timing_note": "Warm call below excludes deferred checkpoint/import loading"
     },
     {
       "index": 4955,
       "true_size": 75,
-      "seconds": 0.20717093627899885,
+      "seconds": 0.20086626894772053,
       "independent": {
         "feasible": true,
         "errors": [],
-        "cost": 6.5117180928348635,
+        "cost": 6.644241686614437,
         "cost_matches": true
       },
       "route": [
@@ -237,24 +241,23 @@
         42,
         16,
         4,
+        39,
         57,
         40,
-        39,
         58,
         51,
         0,
         44,
         20,
+        50,
         2,
-        6,
         26,
+        6,
+        22,
+        36,
         0,
         19,
         62,
-        22,
-        50,
-        36,
-        0,
         32,
         75,
         47,
@@ -262,7 +265,6 @@
         21,
         69,
         29,
-        65,
         31,
         66,
         61,
@@ -271,17 +273,18 @@
         59,
         64,
         0,
+        65,
         74,
         54,
-        1,
         60,
+        1,
         37,
         0,
         10,
         28,
         70,
-        45,
         12,
+        45,
         35,
         53,
         0,
@@ -297,14 +300,14 @@
         0,
         0
       ],
-      "first_call_seconds": 0.2082217838615179,
-      "first_call_cost": 6.5117180928348635,
+      "first_call_seconds": 0.2014110703021288,
+      "first_call_cost": 6.644241686614437,
       "timing_note": "Warm call below excludes deferred checkpoint/import loading"
     },
     {
       "index": 9825,
       "true_size": 100,
-      "seconds": 0.27506984304636717,
+      "seconds": 0.264578047208488,
       "independent": {
         "feasible": true,
         "errors": [],
@@ -423,10 +426,9 @@
         8,
         0,
         10,
-        0,
         0
       ],
-      "first_call_seconds": 3.960418054834008,
+      "first_call_seconds": 4.588619022630155,
       "first_call_cost": 9.895249024770296,
       "timing_note": "Warm call below excludes deferred checkpoint/import loading"
     }

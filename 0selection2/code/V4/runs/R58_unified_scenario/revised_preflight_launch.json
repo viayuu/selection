@@ -1,6 +1,8 @@
 {
   "status": "prepared_only_waiting_for_explicit_parent_gpu_baton",
   "source_commit": "ba108ed0e",
+  "actual_node_guard": "$(hostname -s) == gpu03; never inherited $HOSTNAME",
+  "launcher_only_correction": "Explicit parent approval: correct inherited HOSTNAME guard after failed read-only step1465.74; core five sources unchanged.",
   "cwd": "/public/home/shiys/0selection2",
   "root": "/public/home/shiys/0selection2/code/V4/runs/R58_unified_scenario",
   "script": "/public/home/shiys/0selection2/code/V4/runs/R58_unified_scenario/revised_preflight_launch.sh",
@@ -34,10 +36,12 @@
     "--stage", "preflight", "--force-preflight"
   ],
   "budget": {
-    "remaining_prerequisite_seconds_before_launch": 9313.535,
+    "remaining_prerequisite_seconds_before_launch": 9311.535,
+    "additional_readonly_seconds_charged": 2,
+    "additional_readonly_receipts": ["revised_preflight_readonly_1465_74.json", "revised_preflight_readonly_1465_75.json"],
     "timeout_seconds": 3600,
     "termination_cleanup_reserve_seconds": 30,
-    "remaining_after_maximum_step_seconds": 5683.535,
+    "remaining_after_maximum_step_seconds": 5681.535,
     "charge": "Charge this actual srun step to the existing 3-hour prerequisite ledger; receipt elapsed includes queue time."
   },
   "outputs_relative_to_root": {

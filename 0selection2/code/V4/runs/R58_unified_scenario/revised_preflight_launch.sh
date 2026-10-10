@@ -64,7 +64,7 @@ srun --jobid=1465 --overlap --exact --nodes=1 --ntasks=1 --nodelist=gpu03 \
     PYTHONPATH="$PYTHONPATH" WANDB_MODE=offline WANDB_DIR="$WANDB_DIR" MPLCONFIGDIR="$MPLCONFIGDIR" \
     bash -c '
         set -uo pipefail
-        [[ "$SLURM_JOB_ID" == 1465 && "${HOSTNAME%%.*}" == gpu03 && "$CONDA_DEFAULT_ENV" == easynco ]] || exit 64
+        [[ "$SLURM_JOB_ID" == 1465 && "$(hostname -s)" == gpu03 && "$CONDA_DEFAULT_ENV" == easynco ]] || exit 64
         timeout --signal=TERM --kill-after=30s 3600s \
             /public/home/shiys/miniconda3/envs/easynco/bin/python -u -m code.V4.r58_pipeline \
             --root "$1" --stage preflight --force-preflight

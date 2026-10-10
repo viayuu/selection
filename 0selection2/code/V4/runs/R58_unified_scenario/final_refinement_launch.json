@@ -1,0 +1,64 @@
+{
+  "status": "prepared_only_not_authorized_or_executed",
+  "source_commit": "bc8acc4c50d0a6803b33083d663f0368a1647629",
+  "cwd": "/public/home/shiys/0selection2",
+  "root": "/public/home/shiys/0selection2/code/V4/runs/R58_unified_scenario",
+  "parent_baton": "R58_PARENT_GPU_BATON=final-refinement, supplied explicitly by parent only after fresh128 completes",
+  "command_inside_existing_job1465_gpu03_shell": "bash /public/home/shiys/0selection2/code/V4/runs/R58_unified_scenario/final_refinement_launch.sh run",
+  "parent_srun_arguments_if_a_new_step_is_needed": ["--jobid=1465", "--overlap", "--exact", "--nodes=1", "--ntasks=1", "--nodelist=gpu03", "--cpus-per-task=4", "--mem=16G"],
+  "environment": {
+    "CONDA_DEFAULT_ENV": "easynco",
+    "SLURM_JOB_ID": "1465",
+    "actual_hostname": "gpu03, checked with hostname -s; never inherited HOSTNAME",
+    "CUDA_VISIBLE_DEVICES": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "CUDA_MPS_*": "Reject all inherited variables; production ExecutionSession owns private default-only MPS lifecycle"
+  },
+  "cooperative_cap": {
+    "cumulative_seconds": 10800,
+    "shutdown_reserve_seconds": 120,
+    "prior_four_pilots_seconds": 1486.4654315849766,
+    "charge_before_measurement": "Prior four controllers + completed revised preflight controller + numeric prior readonly receipts + preflight outer delta + fresh readonly + CPU launcher setup",
+    "external_timeout_or_process_group_kill": false,
+    "automatic_retry": false
+  },
+  "required_parent_completed_receipts": {
+    "preflight_controller": "revised_preflight_state.json",
+    "readonly_1465_74": "revised_preflight_readonly_1465_74_spend.json",
+    "readonly_1465_75": "revised_preflight_readonly_1465_75_spend.json",
+    "preflight_outer_delta": "revised_preflight_outer_overhead_spend.json",
+    "schema": "status=complete (or preflight_complete for controller), finished=numeric, wall_seconds=numeric; omit started for delta receipts, or use numeric non-overlapping actual endpoints",
+    "preflight_delta_policy": "max(0, completed revised_preflight_result elapsed_wall_seconds - actual controller wall charged by spent_ledger); never charge the full launcher wall as another receipt. Include any separately measured Slurm remainder once, not overlapping the readonly steps.",
+    "original_readonly_receipts": "Preserve original revised_preflight_readonly_1465_74.json and _75.json; they are not spent_ledger compatible and must not be passed to refiner"
+  },
+  "fresh_readonly": {
+    "script": "final_refinement_readonly_launch.sh",
+    "invoked_by_main_launcher": true,
+    "receipt": "final_refinement_readonly_spent.json",
+    "checks": "Production PrivateMPS.check_machine: all-user daemon absence, designated UUID has no contexts, Default mode; does not start MPS",
+    "schema": "status=complete, numeric started/finished/wall_seconds, passed boolean, evidence; failures preserved and stop launch"
+  },
+  "final_outer_accounting": {
+    "launcher_receipt": "final_refinement_result.json",
+    "parent_final_slurm_receipt": "final_refinement_slurm_spent.json: status=complete, finished=numeric, wall_seconds=actual Slurm step elapsed, returncode=integer, slurm_step_id; receipt source is completed sacct, not a guessed duration",
+    "cpu_settle_command": "bash /public/home/shiys/0selection2/code/V4/runs/R58_unified_scenario/final_refinement_launch.sh settle /public/home/shiys/0selection2/code/V4/runs/R58_unified_scenario/final_refinement_slurm_spent.json",
+    "receipt": "final_refinement_outer_spent.json",
+    "formula": "max(0, launcher_wall - refiner_wall - already_charged_fresh_readonly - already_charged_setup) + max(0, Slurm_wall - launcher_wall)",
+    "publication": "Preserve raw timing_refinement/run_state_controller.json. Until CPU settlement, canonical state/summary are outer_accounting_pending and budget fails closed. Settlement adds only positive outer delta once to ledger, regenerates summary via frozen summarize, and blocks if actual cumulative exceeds10800 or final Slurm failed.",
+    "whole_spent_dedup": "Existing prerequisite_spent adds earlier3894s + original pilot Slurm-controller6.534568415s only. Never add5387s again: four pilot controller walls already reside in ledger.",
+    "whole_rule_unchanged": "S_actual + L_reference + H63 + 3h + 2h + 0.10*L_reference <100h; no generation/approval command in launcher"
+  },
+  "measurement_plan": "Frozen production ExecutionSession; RF all48 serial1/normal4/default MPS4 at3 anchors, four TRAIN cases, two passes; remaining15 at9 anchors singleton. Entire RF family MPS adoption only if all48 equivalent to both controls and globally beneficial; otherwise normal4 without MPS credit.",
+  "cpu_preparation_checks": {
+    "shell_syntax": "bash -n passed for both new launchers and run_v4_r58.sh",
+    "json_and_embedded_python": "JSON parsed and all3 embedded Python blocks compiled",
+    "mock_accounting_tests": "4 passed in0.014s: numeric-only inputs/pending state, exact wrapper+Slurm dedup, duplicate settlement rejected, actual cap excess blocked",
+    "gpu_or_readonly_checks_executed": false
+  },
+  "core_or_refiner_changes": false,
+  "gpu_read_or_execution_during_preparation": false,
+  "full_generation_authorized": false
+}
