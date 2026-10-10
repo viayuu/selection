@@ -1,7 +1,6 @@
 """Focused CPU fixtures; no model, CUDA context or MPS service is started."""
 
 import copy
-import pickle
 import tempfile
 import unittest
 from pathlib import Path
@@ -30,31 +29,6 @@ def qualified(seconds, mode='normal4'):
 
 
 class RefinementTests(unittest.TestCase):
-    def test_prepare_selection_survives_json_roundtrip(self):
-        from . import r58_budget
-
-        with tempfile.TemporaryDirectory() as temporary:
-            root = Path(temporary)
-            inputs, output = root / 'inputs', root / 'output'
-            dataset = inputs / 'TSPtrain' / 'dataset.pkl'
-            dataset.parent.mkdir(parents=True)
-            items = [dict(n=n) for n in range(90, 131, 5) for _ in range(1111)] + [dict(n=90)]
-            with dataset.open('wb') as stream:
-                pickle.dump(items, stream)
-            methods = [f'fixture_{i}' for i in range(128)]
-            for method in methods:
-                save_json(root / 'preflight' / f'TSP__{method}.json', dict(deployment={}))
-            with patch.object(refinement, 'PROBLEMS', ['TSP']), \
-                 patch.object(refinement, 'POOLS', {'TSP': methods}), \
-                 patch.object(refinement, 'INPUT_ROOT', inputs), \
-                 patch.object(refinement, 'fields', side_effect=lambda problem, item: item), \
-                 patch.object(r58_budget, 'qualification_reason', return_value=None):
-                prepared = refinement.prepare(root, output)
-                loaded = refinement.read_json(output / 'selection.json')
-                refinement.verify_selection(loaded)
-                self.assertEqual(loaded, prepared)
-                self.assertEqual(refinement.prepare(root, output), loaded)
-
     def test_precommitted_scope_quantiles_determinism_and_disjoint_warmups(self):
         sizes = [n for n in range(50, 59) for _ in range(20)]
         anchors = refinement.select_anchors(sizes, 9)

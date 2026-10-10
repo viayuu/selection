@@ -67,9 +67,7 @@ fi
 [[ -z "$(compgen -v CUDA_MPS_ || true)" ]]
 git diff --quiet bc8acc4c50d0a6803b33083d663f0368a1647629 -- \
     code/V4/r58_scenario.py code/V4/r58_environments.py code/V4/r58_backends.py \
-    code/V4/r58_labels.py code/V4/r58_execution.py
-printf '%s  %s\n' 357af4b83c9ffc9fb2e380b56fcb39e44105cd6db86d9ef1ee8e7ae84f6154c7 \
-    code/V4/r58_timing_refinement.py | sha256sum --check --status
+    code/V4/r58_labels.py code/V4/r58_execution.py code/V4/r58_timing_refinement.py
 [[ ! -e "$R58_ROOT/final_refinement_result.json" && ! -e "$R58_ROOT/timing_refinement/run_state.json" ]]
 export CUDA_VISIBLE_DEVICES=GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d
 exec > "$R58_ROOT/final_refinement_controller.log" 2>&1
@@ -90,7 +88,6 @@ try:
     preflight = root / 'revised_preflight_state.json'
     receipts = [root / f'revised_preflight_readonly_1465_{step}_spend.json' for step in (74, 75)]
     receipts.append(root / 'revised_preflight_outer_overhead_spend.json')
-    receipts.append(root / 'bootstrap_failure/1465_77/spend.json')
     charged = []
     for path in receipts:
         receipt = read_json(path)

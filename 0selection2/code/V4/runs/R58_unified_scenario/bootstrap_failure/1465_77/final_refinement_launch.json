@@ -1,9 +1,6 @@
 {
   "status": "prepared_only_not_authorized_or_executed",
   "source_commit": "bc8acc4c50d0a6803b33083d663f0368a1647629",
-  "source_commit_scope": "Unchanged five production sources only; repaired refiner is separately pinned by SHA256 below",
-  "refiner_source_sha256": "357af4b83c9ffc9fb2e380b56fcb39e44105cd6db86d9ef1ee8e7ae84f6154c7",
-  "refiner_commit_status": "Parent must commit/push this bounded primary010 repair before a new explicit continuation baton; no execution currently authorized",
   "cwd": "/public/home/shiys/0selection2",
   "root": "/public/home/shiys/0selection2/code/V4/runs/R58_unified_scenario",
   "parent_baton": "R58_PARENT_GPU_BATON=final-refinement, supplied explicitly by parent only after fresh128 completes",
@@ -24,7 +21,7 @@
     "cumulative_seconds": 10800,
     "shutdown_reserve_seconds": 120,
     "prior_four_pilots_seconds": 1486.4654315849766,
-    "charge_before_measurement": "Prior four controllers + completed revised preflight controller + numeric prior readonly receipts + preflight outer delta + complete failed bootstrap ONCE + fresh readonly + CPU launcher setup",
+    "charge_before_measurement": "Prior four controllers + completed revised preflight controller + numeric prior readonly receipts + preflight outer delta + fresh readonly + CPU launcher setup",
     "external_timeout_or_process_group_kill": false,
     "automatic_retry": false
   },
@@ -36,15 +33,6 @@
     "schema": "status=complete (or preflight_complete for controller), finished=numeric, wall_seconds=numeric; omit started for delta receipts, or use numeric non-overlapping actual endpoints",
     "preflight_delta_policy": "max(0, completed revised_preflight_result elapsed_wall_seconds - actual controller wall charged by spent_ledger); never charge the full launcher wall as another receipt. Include any separately measured Slurm remainder once, not overlapping the readonly steps.",
     "original_readonly_receipts": "Preserve original revised_preflight_readonly_1465_74.json and _75.json; they are not spent_ledger compatible and must not be passed to refiner"
-  },
-  "primary010_bootstrap_repair": {
-    "ruling": ".aris/traces/auto-review-loop/2026-10-11_run01/010_bootstrap_hash_repair_response.md",
-    "archive": "bootstrap_failure/1465_77",
-    "complete_spend_receipt": "bootstrap_failure/1465_77/spend.json",
-    "charge_seconds": 33.43671369552612,
-    "charge_policy": "max(33.43671369552612 launcher wall,33s sacct) ONCE; archived nested readonly/setup/Slurm receipts are evidence, not additional ledger entries",
-    "source_change": "Only stringify histogram keys in prepare before selection hashing; shared canonical_hash and five production sources unchanged",
-    "continuation_scope": "Same unstarted measurement and unchanged anchors/modes/cases/recipe/cap; no automatic retry after measurement starts"
   },
   "fresh_readonly": {
     "script": "final_refinement_readonly_launch.sh",
@@ -67,12 +55,10 @@
   "cpu_preparation_checks": {
     "shell_syntax": "bash -n passed for both new launchers and run_v4_r58.sh",
     "json_and_embedded_python": "JSON parsed and all3 embedded Python blocks compiled",
-    "mock_accounting_tests": "Prior launcher4 passed in0.014s: numeric-only inputs/pending state, exact wrapper+Slurm dedup, duplicate settlement rejected, actual cap excess blocked",
-    "primary010_roundtrip_regression": "New single regression fails on old code at verify_selection; passes after one-line histogram repair. All9 refiner CPU tests pass in1.474s.",
+    "mock_accounting_tests": "4 passed in0.014s: numeric-only inputs/pending state, exact wrapper+Slurm dedup, duplicate settlement rejected, actual cap excess blocked",
     "gpu_or_readonly_checks_executed": false
   },
-  "five_core_changes": false,
-  "refiner_changes": true,
+  "core_or_refiner_changes": false,
   "gpu_read_or_execution_during_preparation": false,
   "full_generation_authorized": false
 }

@@ -95,7 +95,7 @@ def prepare(root=ROOT, output=OUTPUT):
         if len(sizes) != 10000:
             raise ValueError(f'{problem}: expected original 10000-case TRAIN')
         datasets[problem] = dict(path=str(path.resolve()), input_sha256=file_hash(path), count=len(sizes),
-            histogram={str(n): count for n, count in sorted(Counter(sizes).items())})
+            histogram=dict(sorted(Counter(sizes).items())))
         if problem != 'ATSP':
             datasets[problem]['anchors'] = select_anchors(sizes, 9 if problem in OTHER_METHODS else 3)
         del items
