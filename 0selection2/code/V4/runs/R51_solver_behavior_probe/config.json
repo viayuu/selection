@@ -1,0 +1,120 @@
+{
+  "seed": 2,
+  "models": [
+    "A_static_seed2",
+    "B_behavior_seed2"
+  ],
+  "problem": "OVRPTW",
+  "pair": [
+    "RELD_MOEL",
+    "RELD_MTL"
+  ],
+  "counts": {
+    "train": {
+      "total": 8000,
+      "non_ties": 8000
+    },
+    "development": {
+      "total": 1000,
+      "non_ties": 999
+    },
+    "internal": {
+      "total": 1000,
+      "non_ties": 1000
+    },
+    "original_val": {
+      "total": 1000,
+      "non_ties": 1000
+    }
+  },
+  "split": "Locked R49/R50 8000 train + 1000 development + 1000 internal + original1000 validation",
+  "supervision": "Original FP64 two-method costs; exact ties excluded; unweighted binary CE only",
+  "test_read": false,
+  "new_cost_labels": false,
+  "solver_frozen": true,
+  "solver_eval": true,
+  "solver_numeric": "FP32, no AMP, TF32 disabled",
+  "static_cache_root": "code/V4/runs/R50_pretrained_solver_encoder",
+  "static_cache_model": "B_pretrained_seed2",
+  "static_cache_manifest_sha256": "53a2c219b46c4202bc405e22caff532ec7f5add2604c2c17028b63c2d3b4ee4c",
+  "static_readout": "Exact R50 node readout; fresh seed2 parameters, not R50 trained readout",
+  "behavior_readout": "Same node MLP/graph385; behavior270->64 GELU Dropout ->64 GELU; concatenate; head449->128->2",
+  "behavior_normalization": "Per-field mean/population std from actual8000 training rows only; std floor1e-6",
+  "common_initial_sha256": "708fee81ceca120759472b759f3d1f13fcebf9c4d1f147496c073e168734829c",
+  "parameter_counts": {
+    "A_static_seed2": 100482,
+    "B_behavior_seed2": 130178
+  },
+  "initial_hashes": {
+    "A_static_seed2": "708fee81ceca120759472b759f3d1f13fcebf9c4d1f147496c073e168734829c",
+    "B_behavior_seed2": "282e0d71debb092bf1c13fda7b02247f462983f165f60d948e7cd7dd530e3468"
+  },
+  "batch_size": 128,
+  "successful_updates": 4000,
+  "evaluation_interval": 200,
+  "optimizer": "fresh AdamW",
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "dropout": 0.1,
+  "gradient_clip": 1.0,
+  "amp": false,
+  "tf32": false,
+  "scheduler": null,
+  "early_stop": false,
+  "selection": "Strict lowest development CE, u0/200/.../4000; no internal/val selection",
+  "sampling_plan_sha256": "7442e8987756e88d7ec74fafd2e64cc43bc8c3b9295ffb90b2d782deb8170e27",
+  "split_manifest_sha256": "52b1eb42b69cd4ba91ad95590841e4ca630096f58b71b1aa25cb3c0c2f86494f",
+  "timing": {
+    "rows": [
+      23,
+      190,
+      40,
+      130,
+      4923,
+      5099,
+      4955,
+      4928,
+      9977,
+      9892,
+      9922,
+      9996
+    ],
+    "source": "Original train, members of8000 training subset",
+    "selection": "Seed5102, four randomly chosen rows at minimum/median/maximum input customer size; no labels",
+    "batch_size": 1,
+    "warmup": 1,
+    "repetitions": 3,
+    "statistic": "Synchronized wall time including native collation and transfer",
+    "resume": true,
+    "overhead_screen_max_ratio_to_static": 1.25,
+    "caveat": "Engineering screen; GPU shared with unrelated workload on the other card; not a throughput benchmark"
+  },
+  "screen": "B-A >=5pp accuracy on BOTH internal and original_val, lower BOTH regrets, total pipeline latency <=1.25x A",
+  "runtime": {
+    "torch": "2.5.1+cu124",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+    "slurm_job": "1465"
+  },
+  "paper": "https://arxiv.org/html/2401.12745v1",
+  "wandb": {
+    "project": "selector",
+    "entity": "yjkds-southern-university-of-science-technology",
+    "mode": "offline"
+  },
+  "git_parent": "318bd541e7daac27e5741b68f9bf890c7f91c45f",
+  "sources": {
+    "r51_probe.py": "6c61225b1b05e8d4ff23d7fc47dba04c6a6e8745183fc23eaf9809cd7f01a6ce",
+    "r51_readout.py": "cd36f262432e077695c31f041cf48480f198786acc301c001cbd0de03a92f8ed",
+    "r51_experiment.py": "4aa80dba17453d0aaf2a99083d2e0c6a927c311181f4d6e165bab5bb6cab09bb",
+    "r51_analysis.py": "54d482da38461a32075271f3560687072337c4261233756bbeb259002ffb6561",
+    "test_r51.py": "3c208f2ded64d74885ed77286ad42cd91e84a2b4f5237476e445193849417914",
+    "run_v4_r51.sh": "a94e1914f54d852316ecc28c73b089b541ff1a732845fac57db9603a4a70c5c7"
+  },
+  "dependencies": {
+    "r50_readout.py": "ef929d660a3779b625964e748f5e644b1bfe3b3d579a1f699136e04019042ad4",
+    "r50_experiment.py": "4648bebbbe7fc7570de255907f91241f5d9dbdf6e63ef8f346dc3b04a9c19239",
+    "r50_solver_encoder.py": "5f14974ed1c99b4688fd900de2208b174afcf30758216c6209bf82da6d74ea3a",
+    "r48_common.py": "54ef0236456fe6cc38cdbe31ead1098765369af58a0a53aa2667a4f8734d21b5"
+  }
+}
