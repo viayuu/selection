@@ -1,0 +1,37 @@
+{
+  "seed": 2,
+  "splits": [
+    "train",
+    "val"
+  ],
+  "baseline": "R45A validation-cost-best; fixed",
+  "training": false,
+  "priors": {
+    "conditions": "problem, exact true size, scalar globals varying in train",
+    "pseudocount": 20.0,
+    "smoothing": "problem-global training distribution",
+    "fallback": [
+      "exact_conditions",
+      "size_only",
+      "problem_only"
+    ],
+    "tie_break": "smallest global solver ID"
+  },
+  "permutation": {
+    "repeats": 100,
+    "seed": 2,
+    "strata": "problem x exact true size",
+    "operation": "derangement of complete score rows; unchanged singleton rows explicitly reported",
+    "widening": false,
+    "singleton_policy": "full-scope metrics keep them unchanged; eligible-only metrics exclude them"
+  },
+  "metrics": "per-problem metrics, ALL is equal-weight 18-problem macro; FP64 raw costs",
+  "sample": {
+    "train": 16,
+    "val": 16,
+    "seed": 2,
+    "strata": "train-size quartiles with proportional quotas",
+    "labels_used": false
+  },
+  "no_test": true
+}

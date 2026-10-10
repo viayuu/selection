@@ -1,0 +1,23 @@
+{
+  "source": "/public/home/shiys/0selection2/code/V4/runs/R54_route_supervision/route_cache",
+  "route_generation": false,
+  "splits": [
+    "train",
+    "val"
+  ],
+  "checker": "independent scalar route simulation; does not import native solver environments",
+  "tolerance": 2e-05,
+  "fp32_inputs_then_fp64_arithmetic": true,
+  "checks": [
+    "visit every customer exactly once",
+    "per-vehicle delivery sum <= capacity",
+    "per-vehicle pickup sum <= capacity",
+    "classical B: no delivery after a pickup within a route",
+    "service starts inside each customer window, waiting and service included",
+    "per-vehicle distance <= route_limit; open excludes depot return",
+    "closed depot horizon=3 is reported separately because raw data omit it"
+  ],
+  "ambiguity": "Raw signed-demand fields do not specify backhaul_class; classical B and native signed-load semantics are separately reported.",
+  "validation": "only the fixed 64 R54 diagnostic routes per problem; no new labels or test",
+  "attribution": "Flags concern the saved selected route, not proof that every possible route/label is infeasible."
+}

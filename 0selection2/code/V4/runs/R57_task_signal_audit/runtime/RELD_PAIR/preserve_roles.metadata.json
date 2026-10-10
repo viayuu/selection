@@ -1,0 +1,199 @@
+{
+  "solver": "RELD_PAIR",
+  "variant": "preserve_roles",
+  "seed": 2,
+  "preflight": false,
+  "device": "NVIDIA GeForce RTX 3090",
+  "cuda_visible_devices": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+  "historical_exact_replay_claimed": false,
+  "node_permutation": "synchronized fields; depot stays fixed",
+  "started": 1791645120.4622953,
+  "label_use": "comparison after solving only; never supplied to the solver",
+  "provenance": {
+    "solvers": {
+      "RELD_MOEL": {
+        "problem": "OVRPTW",
+        "solver": "RELD_MOEL",
+        "status": "runtime_verified",
+        "randomness": "deterministic",
+        "original_entry": "/public/home/shiys/easynco_v3_bridge/scripts/reld_bridge_common.py",
+        "checkpoint": {
+          "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+          "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+        },
+        "decode_budget": {
+          "eval_type": "argmax",
+          "starts": "N customers",
+          "aug_factor": 1,
+          "sample_size": 1,
+          "aggregation": "minimum cost over N starts",
+          "original_batch_size": 128
+        },
+        "normalization": "Existing float32 conversion; already-normalized demand/capacity=1; original depot/customer/TW/service fields.",
+        "blocked": [],
+        "cost_files": {
+          "train": {
+            "path": "/public/home/shiys/0selection2/data/OVRPTWtrain/results/result_RELD_MOEL.txt",
+            "sha256": "af37485183aa4c46b4a550fa0567f9cd86ff14d9d9617d2ac2beb7fb14e38fc7"
+          },
+          "val": {
+            "path": "/public/home/shiys/0selection2/data/OVRPTWval/results/result_RELD_MOEL.txt",
+            "sha256": "5148372b4845bdfcaddfcd7cdcf6168b1253b4988ca57eda3eea821d7da2ad52"
+          }
+        },
+        "backend": "reld",
+        "source_sha256": "93ae0a5c765e32314b8d868c722b3a0d76353b2298d713c5a7db497a4c3b84a2",
+        "functions": [
+          "collate_problem_batch",
+          "instantiate_reld_model",
+          "_run_no_aug_batch"
+        ],
+        "historical_evidence": "/public/home/shiys/easynco_v3_bridge/exports/reld_nss_like_no_aug_v1/_bridge_state/reld_bridge_events.jsonl",
+        "portability": "Only relocate the old filesystem root in the original module AST; no algorithm/budget edits.",
+        "limitations": [
+          "Historical checkpoint digest and full CLI argv unavailable; current named weight is pinned.",
+          "Historical RNG seed unavailable; inspected algorithm uses deterministic argmax."
+        ],
+        "runtime_params_contract": {
+          "embedding_dim": 128,
+          "sqrt_embedding_dim": 11.313708498984761,
+          "encoder_layer_num": 6,
+          "decoder_layer_num": 1,
+          "qkv_dim": 16,
+          "head_num": 8,
+          "logit_clipping": 10,
+          "ff_hidden_dim": 512,
+          "num_experts": 4,
+          "eval_type": "argmax",
+          "norm": "none",
+          "norm_loc": "norm_last",
+          "expert_loc": [
+            "Enc0",
+            "Enc1",
+            "Enc2",
+            "Enc3",
+            "Enc4",
+            "Enc5",
+            "Dec"
+          ],
+          "problem": "Train_ALL",
+          "topk": 2,
+          "routing_level": "node",
+          "routing_method": "input_choice",
+          "ffidt": true
+        }
+      },
+      "RELD_MTL": {
+        "problem": "OVRPTW",
+        "solver": "RELD_MTL",
+        "status": "runtime_verified",
+        "randomness": "deterministic",
+        "original_entry": "/public/home/shiys/easynco_v3_bridge/scripts/reld_bridge_common.py",
+        "checkpoint": {
+          "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_mtl/epoch-5000.pt",
+          "sha256": "2a67f0c1ada0a05563280fcd56d8375b1b0007978bad55c625c862fc3cc3b7ab"
+        },
+        "decode_budget": {
+          "eval_type": "argmax",
+          "starts": "N customers",
+          "aug_factor": 1,
+          "sample_size": 1,
+          "aggregation": "minimum cost over N starts",
+          "original_batch_size": 128
+        },
+        "normalization": "Existing float32 conversion; already-normalized demand/capacity=1; original depot/customer/TW/service fields.",
+        "blocked": [],
+        "cost_files": {
+          "train": {
+            "path": "/public/home/shiys/0selection2/data/OVRPTWtrain/results/result_RELD_MTL.txt",
+            "sha256": "ea87e950c05c9c2676b0edc2fff53f22fcbc987fe0a3f389bd8962bf0b07f439"
+          },
+          "val": {
+            "path": "/public/home/shiys/0selection2/data/OVRPTWval/results/result_RELD_MTL.txt",
+            "sha256": "cb613f68241c1ab707515d0e574311266d568afaf6fd7dc18ae7665ca09cb08f"
+          }
+        },
+        "backend": "reld",
+        "source_sha256": "93ae0a5c765e32314b8d868c722b3a0d76353b2298d713c5a7db497a4c3b84a2",
+        "functions": [
+          "collate_problem_batch",
+          "instantiate_reld_model",
+          "_run_no_aug_batch"
+        ],
+        "historical_evidence": "/public/home/shiys/easynco_v3_bridge/exports/reld_nss_like_no_aug_v1/_bridge_state/reld_bridge_events.jsonl",
+        "portability": "Only relocate the old filesystem root in the original module AST; no algorithm/budget edits.",
+        "limitations": [
+          "Historical checkpoint digest and full CLI argv unavailable; current named weight is pinned.",
+          "Historical RNG seed unavailable; inspected algorithm uses deterministic argmax."
+        ],
+        "runtime_params_contract": {
+          "embedding_dim": 128,
+          "sqrt_embedding_dim": 11.313708498984761,
+          "encoder_layer_num": 6,
+          "decoder_layer_num": 1,
+          "qkv_dim": 16,
+          "head_num": 8,
+          "logit_clipping": 10,
+          "ff_hidden_dim": 512,
+          "num_experts": 4,
+          "eval_type": "argmax",
+          "norm": "none",
+          "norm_loc": "norm_last",
+          "expert_loc": [
+            "Enc0",
+            "Enc1",
+            "Enc2",
+            "Enc3",
+            "Enc4",
+            "Enc5",
+            "Dec"
+          ],
+          "problem": "Train_ALL",
+          "topk": 2,
+          "routing_level": "node",
+          "routing_method": "input_choice",
+          "ffidt": true
+        }
+      }
+    },
+    "audit_plan_sha256": "331d09e1e64977c5529ea9f0425be99920337887162c2464b27a92623e3feb39",
+    "source_files": {
+      "/public/home/shiys/reld-nco-main/Multi-Task/models/MTLModel.py": "6b55919523a66e87897e6ae15f37ecae1f777fe25a01ebf76e6b117bb4fd3759",
+      "/public/home/shiys/reld-nco-main/Multi-Task/models/MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d",
+      "/public/home/shiys/reld-nco-main/Multi-Task/models/MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+      "/public/home/shiys/reld-nco-main/Multi-Task/utils.py": "0e95b956ec6b50ddf06a776a18d6c8b730cd393a18f2c970f61890591ecf5323",
+      "/public/home/shiys/reld-nco-main/Multi-Task/train.py": "6de8fbf199d16f7c06fcfca8a7878c66de6804d3a683ba7b7a110789a7b42fcd",
+      "/public/home/shiys/reld-nco-main/Multi-Task/Trainer.py": "e3dac29464ac1045b4f0c2abc14be3f9f75c94be2cfcbd4708338a926486b935",
+      "/public/home/shiys/reld-nco-main/Multi-Task/envs/OVRPTWEnv.py": "52619ed405ca6409d9684ef5c8354ca4d7050c141bcc5c3bc2b383cbadbb388c"
+    },
+    "paper": "https://arxiv.org/html/2503.00753v1",
+    "repository": "https://github.com/ziweileonhuang/reld-nco",
+    "observed_checkpoint_metadata": {
+      "epoch": 5000,
+      "problem": "Train_ALL"
+    },
+    "code_training_evidence": {
+      "entry": "/public/home/shiys/reld-nco-main/Multi-Task/Trainer.py",
+      "sampling": "Trainer._train_one_epoch calls env.get_random_problems for fresh online instances",
+      "tasks": [
+        "CVRP",
+        "OVRP",
+        "VRPB",
+        "VRPL",
+        "VRPTW",
+        "OVRPTW"
+      ],
+      "objective": "POMO/REINFORCE expected route cost; MOE also uses its load-balancing loss"
+    },
+    "limitations": [
+      "Checkpoints contain epoch/problem and optimizer state, not a complete historical CLI or training-instance manifest.",
+      "Online random generation is verified in available source, not proof of the exact historical training trajectory.",
+      "No source evidence identifies these R49 holdouts as solver training data; absence of overlap cannot be certified.",
+      "External solver pretraining is introduced; this is not an equal-total-pretraining-data comparison.",
+      "The same current weight hashes were pinned in R48; missing historical deployment provenance is not silently reconstructed."
+    ]
+  },
+  "written": 960,
+  "finished": 1791645260.4895442,
+  "status": "completed"
+}
