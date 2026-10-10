@@ -1,0 +1,30 @@
+{
+  "seed": 2,
+  "selector_training": false,
+  "test_read": false,
+  "baseline": "R45A validation-best",
+  "cost_precision": "original raw_label.pkl FP64",
+  "weighting": "equal weight for each problem, equal weight for instances within each problem",
+  "error_label": "native ind",
+  "rank_tie_break": "ascending global solver ID",
+  "pair_correction": "diagnostic only: change existing errors in the selected pairs to native winner",
+  "mechanism": {
+    "instances": 1000,
+    "sampling": "size-stratified, independent of errors and winner",
+    "precheck": 8,
+    "sparse_support_max_starts": 2,
+    "quantiles": [
+      0.1,
+      0.25,
+      0.5
+    ],
+    "retain_fraction": 0.8,
+    "retain_rounding": "ceil",
+    "subset_repeats": 20,
+    "subset_seed": 2,
+    "subset_rule": "identical retained customer-start IDs for both methods",
+    "winner_ties": "exact native costs; ties reported separately, never called strict flips",
+    "sensitive": "at least one strict reversal in 20 offline subsets"
+  },
+  "paper": "https://arxiv.org/html/2405.13947v1"
+}

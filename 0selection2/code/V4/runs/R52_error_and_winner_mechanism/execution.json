@@ -1,0 +1,22 @@
+{
+  "seed": 2,
+  "initial_git_commit": "d7bcdd5af22f63d5ebdb911cd9f1bee485fd3872",
+  "conda_environment": "easynco",
+  "working_directory": "/public/home/shiys/0selection2",
+  "selector_training": false,
+  "test_read": false,
+  "stages_executed": [
+    "python -m code.V4.r52_error_budget",
+    "python -m code.V4.r52_start_audit --stage prepare",
+    "tmux new-session -d -s r52_winner_audit 'source /public/home/shiys/miniconda3/etc/profile.d/conda.sh && conda activate easynco && exec srun --jobid=1465 --overlap --exact --nodes=1 --ntasks=1 --cpus-per-task=4 --mem=12G env R52_GPU_UUID=GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d bash /public/home/shiys/0selection2/code/V4/run_v4_r52.sh replay'",
+    "bash code/V4/run_v4_r52.sh analysis",
+    "bash code/V4/run_v4_r52.sh tests"
+  ],
+  "gpu_node": "gpu03",
+  "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+  "gpu_model": "NVIDIA GeForce RTX 3090",
+  "prelaunch_gpu_used_mib": 2,
+  "other_gpus_untouched": true,
+  "cost_label_updates": false,
+  "repeat_solver_calls_for_subset_check": false
+}
