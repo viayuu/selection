@@ -1,0 +1,13 @@
+Executed from /public/home/shiys/0selection2 on 2026-10-10:
+
+source /public/home/shiys/miniconda3/etc/profile.d/conda.sh
+conda activate easynco
+tmux new-session -d -s r50_frozen_encoder 'source /public/home/shiys/miniconda3/etc/profile.d/conda.sh && conda activate easynco && exec srun --jobid=1465 --overlap --exact --nodes=1 --ntasks=1 --cpus-per-task=4 --mem=12G env R50_GPU_UUID=GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d bash /public/home/shiys/0selection2/code/V4/run_v4_r50.sh all'
+
+Only the previously idle GPU1 RTX3090 was made visible to PyTorch.
+The shared parent allocation1465 and all other GPU workloads were left intact.
+The tmux job exited after both4000-update readout runs, full timing and analysis.
+
+Post-training report-only update (no checkpoint or predictions changed):
+bash /public/home/shiys/0selection2/code/V4/run_v4_r50.sh tests
+bash /public/home/shiys/0selection2/code/V4/run_v4_r50.sh analysis

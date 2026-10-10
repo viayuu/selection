@@ -1,0 +1,102 @@
+{
+  "seed": 2,
+  "models": [
+    "A_random_seed2",
+    "B_pretrained_seed2"
+  ],
+  "problem": "OVRPTW",
+  "pair": [
+    "RELD_MOEL",
+    "RELD_MTL"
+  ],
+  "split": "Exact locked R49B 8000/1000/1000 + original 1000 validation; no resplitting",
+  "counts": {
+    "train": {
+      "total": 8000,
+      "non_ties": 8000
+    },
+    "development": {
+      "total": 1000,
+      "non_ties": 999
+    },
+    "internal": {
+      "total": 1000,
+      "non_ties": 1000
+    },
+    "original_val": {
+      "total": 1000,
+      "non_ties": 1000
+    }
+  },
+  "readout": {
+    "encoder_dim": 128,
+    "hidden_dim": 128,
+    "dropout": 0.1,
+    "node_mlp": "263->128 GELU Dropout ->128 GELU",
+    "pooling": "Customer-only masked mean/max + separately encoded depot0 + log1p(customer_count)/6",
+    "binary_mlp": "385->128 GELU Dropout ->2",
+    "raw_fields": [
+      "x",
+      "y",
+      "demand",
+      "service_time",
+      "tw_start",
+      "tw_end",
+      "is_depot"
+    ],
+    "normalization": "Two independent trainable channel LayerNorms; no dataset-fitted statistics",
+    "raw_depot": "Original xy, zero demand/service/TW placeholders, is_depot=1"
+  },
+  "representation": "Two frozen eval native six-layer ReLD encoders; no route decoding/solver selection",
+  "encoder_input": "Native depot xy and customer xy/demand/tw_start/tw_end; service is passed to readout, not added to native encoder",
+  "random_control": "Original solver constructor with seed2; no reset/weight loading; freeze exactly the same encoder architectures",
+  "trainable_parameters": 100482,
+  "initial_readout_sha256": "708fee81ceca120759472b759f3d1f13fcebf9c4d1f147496c073e168734829c",
+  "optimizer": "fresh AdamW",
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "dropout": 0.1,
+  "batch_size": 128,
+  "updates": 4000,
+  "evaluation_interval": 200,
+  "gradient_clip": 1.0,
+  "loss": "unweighted binary CE; original FP64 pair cost labels; exact ties excluded",
+  "amp": false,
+  "tf32": false,
+  "scheduler": null,
+  "early_stop": false,
+  "data_augmentation": false,
+  "selection": "Strict minimum development CE at update0 and each200 updates; one checkpoint for all evaluation sets",
+  "internal_and_original_val_select": false,
+  "test_read": false,
+  "sampling_plan_sha256": "7442e8987756e88d7ec74fafd2e64cc43bc8c3b9295ffb90b2d782deb8170e27",
+  "split_manifest_sha256": "52b1eb42b69cd4ba91ad95590841e4ca630096f58b71b1aa25cb3c0c2f86494f",
+  "provenance_sha256": "40464267c11d0e5ed508996f947d0f11f83c124ecbdf1d40cf0d6d29255943a5",
+  "r49_reference": "B_8000_seed2, its already locked development-selected checkpoint; no retraining",
+  "advancement_screen": "B gains >=5pp accuracy over R49B on BOTH internal and original validation, lowers BOTH pair regrets, and beats random A",
+  "runtime": {
+    "torch": "2.5.1+cu124",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+    "slurm_job": "1465"
+  },
+  "wandb": {
+    "project": "selector",
+    "entity": "yjkds-southern-university-of-science-technology",
+    "mode": "offline"
+  },
+  "git_parent": "d854008349a25986aabada51352d9c3728a9dfa4",
+  "sources": {
+    "r50_readout.py": "ef929d660a3779b625964e748f5e644b1bfe3b3d579a1f699136e04019042ad4",
+    "r50_solver_encoder.py": "5f14974ed1c99b4688fd900de2208b174afcf30758216c6209bf82da6d74ea3a",
+    "r50_experiment.py": "4648bebbbe7fc7570de255907f91241f5d9dbdf6e63ef8f346dc3b04a9c19239",
+    "r50_analysis.py": "8bd38513e56c6de8a5c64a5f020b377db61951d3fd5f3f9bbb8366003c794a38",
+    "test_r50.py": "d0b60015879fd9358dd9dda469faaa4ba857b7b2eb542236899052b359677802",
+    "run_v4_r50.sh": "a9903e8accad130be150f25ebea135b4156570fc66bac236bd4d69ccdb021961"
+  },
+  "dependencies": {
+    "r48_common.py": "54ef0236456fe6cc38cdbe31ead1098765369af58a0a53aa2667a4f8734d21b5",
+    "r41_label_stability.py": "9ddb41353f9cac356941733b965f9dcb34f3062ca04d27ee4ce7295c02c63257",
+    "performance_targets.py": "270c5d263917dbbef8642249859b82dce72cc9e341beab5471761d4a05f7effa"
+  }
+}
