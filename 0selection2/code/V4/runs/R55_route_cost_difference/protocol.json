@@ -1,0 +1,115 @@
+{
+  "seed": 2,
+  "frozen_baseline": {
+    "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/A_handcrafted_seed2/best.pt",
+    "sha256": "d1d435ef8fe15331c151b287d5bb2deedd498d669747dcb3f0aa1532b097848c",
+    "human_epoch": 38,
+    "original_selection": "validation macro_vs_sbs_pct",
+    "val": {
+      "top1": 0.49116666666666664,
+      "top2": 0.8244444444444444,
+      "top3": 0.927611111111111,
+      "mean_cost": 11.168516567489828,
+      "vs_sbs_pct": -1.0700411390867897,
+      "vs_oracle_pct": 0.8930994484085198,
+      "actual_regret_pct": 0.9260483583286789
+    }
+  },
+  "model_params": {
+    "embedding_dim": 128,
+    "head_num": 4,
+    "qkv_dim": 32,
+    "ff_hidden_dim": 512,
+    "encoder_layer_num": 4,
+    "dropout": 0.1,
+    "stats_dim": 12,
+    "rezero": false,
+    "ignore_coord_dist": true,
+    "local_geometry": true,
+    "geometry_mode": "real",
+    "node_only": true,
+    "sdpa": true
+  },
+  "gate": "frozen R45A predicted Top2 names are exactly RELD_MOEL and RELD_MTL",
+  "ranking": "swap original Top2 only; all remaining ranks and untriggered decisions unchanged",
+  "controller": {
+    "metric": "integrated validation actual_regret_pct",
+    "min_delta": 0.001,
+    "lr_patience": 3,
+    "lr_factor": 0.5,
+    "minimum_lr": 1e-06,
+    "min_epochs": 15,
+    "early_stop_patience": 8
+  },
+  "batch": 128,
+  "maximum_epochs": 40,
+  "warmup_epochs": 3,
+  "learning_rate": 0.0001,
+  "weight_decay": 0.0001,
+  "dropout": 0.1,
+  "optimizer": "fresh AdamW",
+  "gradient_clip": 1.0,
+  "accumulation": false,
+  "sampling": "all non-ties, complete shuffled coverage with tail; interleaved tasks",
+  "precision": "FP16 AMP + existing SDPA for training; FP32 eval, TF32 off; original FP64 cost accounting",
+  "success_screen": {
+    "top1_improvement_pp": 5.0,
+    "no_regret_increase": true,
+    "alternative_regret_relative_reduction_pct": 15.0,
+    "alternative_no_top1_decline": true
+  },
+  "wandb": {
+    "project": "selector",
+    "entity": "yjkds-southern-university-of-science-technology",
+    "mode": "offline"
+  },
+  "experiment": "R55",
+  "arm": "cost_difference_seed2",
+  "git_commit": "fd8d923aebfaf7f05be39e66f56a033152f7101d",
+  "score_rule": "delta_hat=sum(valid undirected edge D_hat * input Euclidean distance); positive/zero -> MOEL",
+  "architecture": {
+    "instance_encoder": "unchanged R53/R54 4x128, node_only",
+    "node_projection": "LayerNorm(128), Linear(128,32), GELU",
+    "edge_features": "sum/abs-difference/product of projected endpoints, raw/mean-normalized distance, explicit constraints and log(1+n)/6",
+    "condition_projection": "Linear(K_CBITS+K_PROBLEM_DESC+1,16), GELU",
+    "edge_mlp": "Linear(114,64), GELU, Dropout(0.1), Linear(64,1)",
+    "output_initialization": "nonzero Normal(std=0.001) weight, zero bias; avoid a random quadratic-in-N cost offset",
+    "readout": "fixed FP32 distance-weighted sum; no pooling classifier, post-sum calibration, solver ID or bypass"
+  },
+  "losses": "group-balanced difference-edge MSE + relative cost-difference MSE; weights 1 and 1",
+  "edge_normalization": "positive/negative/zero groups each averaged within each instance; equal mean over nonempty groups, then batch mean",
+  "cost_normalization": "((pred_delta-(rawFP64_MTL-rawFP64_MOEL))/(0.01*rawFP64_full_pool_min))^2, batch mean",
+  "target_receipt_sha256": "3c83906322ec54b7cc489dec573fc6f29ea3851b02ede1868d2c1572c3ae378d",
+  "training_population": "same 149976 non-tied queries and shuffled interleaved plan as R53/R54; 24 exact ties excluded for continuity",
+  "structure_validation": "unchanged 64 validation instances/task, diagnostics only; no route inputs or validation fitting",
+  "checkpoint_selection": "strict minimum integrated full18 validation actual_regret_pct",
+  "classification_metrics": "sign accuracy/regret only; raw cost differences are not calibrated BCE logits",
+  "inference": "instance encoder plus all-valid-edge decoder and fixed sum; no solver/probing",
+  "references": [
+    "https://proceedings.mlr.press/v119/koh20a.html"
+  ],
+  "reference_boundary": "supervised intermediate bottleneck must determine the output; signed billed counts and analytic distance readout are our adaptation",
+  "solver_runs": 0,
+  "new_annotations": 0,
+  "historical_costs_modified": false,
+  "test_used_for_selection": false,
+  "historical_references": [
+    "R45A",
+    "R53A",
+    "R54; not retrained or strictly same-run ablations"
+  ],
+  "source_hashes": {
+    "r55_targets.py": "64d411a476dc58266ae18aeca6aba203f291e17160608ca3038b3b0e902c5fa9",
+    "r55_model.py": "ac01d68674fe736b0e24b5fb5b15109c9e24847d656f235f2d201376bd5a2a96",
+    "r55_experiment.py": "26cd5881c1140852cd1ff479a05eaef176396ce56ff9393b0b21fbed6fcb6c64",
+    "r55_analysis.py": "1a1183441c92eb8a66bd5322e7acae51dd31e213210dfc83758da0ac2f033429",
+    "test_r55.py": "8d5d6bb39137b3a718d5e05b4f516a00ff2f6cb9c03e4de9c56b3aac24fbdde0",
+    "run_v4_r55.sh": "c7d93e6924dcc5fbfb60216fc579e45e5ec4bac5d82ef4347f41cba3e44c46b0"
+  },
+  "dependency_hashes": {
+    "V4Model.py": "50bff946ab08cc38d66d41d86f76fa016dcd064624d4aefd1d5168a30e3b3aea",
+    "r53_data.py": "203760fca5877fb84d47083154f7aac80860c57a8b9badf1b25a5c7d8e5ddbe9",
+    "pair_specialist.py": "e24bde789a2d742f38cb746a46055bbdeae94b3fb82dcef097f8dca2205443ac",
+    "performance_evaluation.py": "4f2cc3392a33f31ac1b61b0503f4702e98d4220b8266bbdedd4e20554cd5a361"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "environment": "easynco",
+  "working_directory": "/public/home/shiys/0selection2",
+  "tmux_session": "r55_train",
+  "slurm_job": 1465,
+  "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+  "device": "NVIDIA GeForce RTX 3090",
+  "other_gpus_used": false,
+  "command": "srun --jobid=1465 --overlap --exact --nodes=1 --ntasks=1 --cpus-per-task=4 --mem=16G env CUDA_VISIBLE_DEVICES=GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 PYTHONUNBUFFERED=1 WANDB_MODE=offline bash code/V4/run_v4_r55.sh all > code/V4/runs/R55_route_cost_difference/experiment.log 2>&1",
+  "target_conversion_command": "python -m code.V4.r55_targets",
+  "tests_command": "python -m unittest code.V4.test_r55 code.V4.test_r54 code.V4.test_r53 -q",
+  "posthoc_diagnostic_command": "python -m code.V4.r55_bottleneck_review",
+  "new_solver_runs": 0,
+  "selector_training_runs": 1,
+  "seed": 2,
+  "initial_target_conversion_note": "Before training, stopped an inefficient repeated-NPZ-decompression conversion and restarted with one decompression per archive. No solver, label, model configuration or training result changed."
+}
