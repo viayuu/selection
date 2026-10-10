@@ -1,0 +1,137 @@
+{
+  "seed": 2,
+  "problem": "OVRPTW",
+  "pair": [
+    "RELD_MOEL",
+    "RELD_MTL"
+  ],
+  "models": [
+    "A_2000_seed2",
+    "B_8000_seed2"
+  ],
+  "model_params": {
+    "embedding_dim": 128,
+    "head_num": 4,
+    "qkv_dim": 32,
+    "ff_hidden_dim": 512,
+    "encoder_layer_num": 4,
+    "dropout": 0.1,
+    "stats_dim": 12,
+    "rezero": false,
+    "ignore_coord_dist": true,
+    "local_geometry": true,
+    "geometry_mode": "real",
+    "node_only": true,
+    "sdpa": true
+  },
+  "architecture": "Unchanged R48 BinaryInstanceClassifier: four-layer InstanceEncoder + binary MLP",
+  "initialization": "One freshly initialized seed2 template copied to both models; no trained weights loaded",
+  "loss": "unweighted CE only; original FP64 pair labels; exact ties excluded",
+  "batch_size": 128,
+  "successful_updates": 4000,
+  "evaluate_every": 200,
+  "sampling": "Independent seeded shuffled passes; tails carried forward; every update uses 128 examples",
+  "presentations_per_model": 512000,
+  "optimizer": "fresh AdamW",
+  "learning_rate": 0.0001,
+  "weight_decay": 0.0001,
+  "dropout": 0.1,
+  "gradient_clip": 1.0,
+  "amp": false,
+  "tf32": false,
+  "scheduler": null,
+  "early_stopping": false,
+  "augmentation": false,
+  "class_resampling": false,
+  "selection": "Strictly lowest full development CE among fixed update evaluations, including u0000",
+  "original_validation_used_for_selection": false,
+  "internal_used_for_selection": false,
+  "normalization": "Geometry mean/std fit separately on each actual non-tie training subset, padding excluded",
+  "other_input_statistics": "Existing per-instance statistics only; no additional dataset-fitted normalization",
+  "distribution_statistics": "R48 explicit statistics are descriptive only, not extra network inputs",
+  "bootstrap": "2000 instance resamples, seed4902, conditional on fixed trained models; not seed uncertainty",
+  "split_manifest_sha256": "52b1eb42b69cd4ba91ad95590841e4ca630096f58b71b1aa25cb3c0c2f86494f",
+  "raw_source_hashes": {
+    "train": {
+      "data_hash": "94072d7fb476af0084255c424664e9a271d75ab35252ac42bea27674f02897f5",
+      "label_hash": "b025329e33bf38538069be7e30a910a11e0dc84f6c440f137e602a71ab1e908f",
+      "pool": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "pool_ids": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ]
+    },
+    "val": {
+      "data_hash": "bb580fabad4d326837cb5e9cee9f01e27830698e72d0764801fb5a82e4e45626",
+      "label_hash": "fa59a40a61f584fd644779e6afec57ad79faae3626e10f02b327ba6e0635d8fa",
+      "pool": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "pool_ids": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ]
+    }
+  },
+  "reference_r48_config_sha256": "f824ee7723c7b2d67edff2d2e023818662a753beaf03820142353331be517c22",
+  "git_parent": "02dee380d9bc625015698017e8f97f062efef6f8",
+  "runtime": {
+    "torch": "2.5.1+cu124",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "visible_gpu": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+    "slurm_job": "1465"
+  },
+  "wandb": {
+    "project": "selector",
+    "entity": "yjkds-southern-university-of-science-technology",
+    "mode": "offline"
+  },
+  "test_read": false,
+  "sources": {
+    "r49_data.py": "c2f0b0b54428686165623406f00a1138457802f752001eb0d85ada269b42a2ee",
+    "r49_experiment.py": "24a0b95e3d4a0a25f2de5af67d2bec619ae0b5ba0074a02ea9c4949e872c61a7",
+    "r49_analysis.py": "b35f238cce8b1d36f2a0841167702616b0c052ae210e580f4890cfe4c98bb354",
+    "test_r49.py": "779b7a84b115682e2df4a479212f70123e2a02068d6c6ae14abe2496214277e9",
+    "run_v4_r49.sh": "2d0c6e0a2812c7a2e91faf28c106b4ab137170e627a6be383dff0136a81a772c"
+  },
+  "dependencies": {
+    "r48_binary.py": "76934e2c624eeb79c9c5ec56bc028710c98e057a222ae56f687b7a327b6f3917",
+    "r48_common.py": "54ef0236456fe6cc38cdbe31ead1098765369af58a0a53aa2667a4f8734d21b5",
+    "V4Model.py": "50bff946ab08cc38d66d41d86f76fa016dcd064624d4aefd1d5168a30e3b3aea",
+    "local_geometry.py": "5cecafaf06e39595b847438d2e974ededf086954cab95ff83d232875f86fd581",
+    "tensor_loader.py": "c2c02cd8508b9c7bf0be8689909ffae9fad4f63a836ab696897aae3372fa782a",
+    "behavior_memory.py": "410c75ba201d3bffad48e2e22e82a99d3a865db8589fcb667774a87e6c35323c"
+  },
+  "initial_trainable_parameter_sha256": "6170f180c696ad88fdd5c4f5847619b04bef3392a9a44655ff94ceb2df728fe7",
+  "model": "B_8000_seed2",
+  "training_nominal": 8000,
+  "training_strict": 8000,
+  "normalization_sha256": "83f3e28c211656258ca720365413e95bdbca05933f07a148395df18dd4d9696d",
+  "sampling_plan_sha256": "7442e8987756e88d7ec74fafd2e64cc43bc8c3b9295ffb90b2d782deb8170e27",
+  "sampling_unique_instances": 8000,
+  "passes_started": 64
+}
