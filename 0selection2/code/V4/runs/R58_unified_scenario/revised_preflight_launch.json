@@ -1,0 +1,69 @@
+{
+  "status": "prepared_only_waiting_for_explicit_parent_gpu_baton",
+  "source_commit": "ba108ed0e",
+  "cwd": "/public/home/shiys/0selection2",
+  "root": "/public/home/shiys/0selection2/code/V4/runs/R58_unified_scenario",
+  "script": "/public/home/shiys/0selection2/code/V4/runs/R58_unified_scenario/revised_preflight_launch.sh",
+  "tmux_session": "r58_revised_preflight",
+  "tmux_command_after_parent_baton_only": [
+    "tmux", "new-session", "-d", "-s", "r58_revised_preflight",
+    "-c", "/public/home/shiys/0selection2",
+    "env R58_PARENT_GPU_BATON=revised-preflight bash /public/home/shiys/0selection2/code/V4/runs/R58_unified_scenario/revised_preflight_launch.sh"
+  ],
+  "srun": [
+    "srun", "--jobid=1465", "--overlap", "--exact", "--nodes=1", "--ntasks=1",
+    "--nodelist=gpu03", "--cpus-per-task=4", "--mem=16G"
+  ],
+  "environment": {
+    "CONDA_DEFAULT_ENV": "easynco",
+    "CUDA_VISIBLE_DEVICES": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/python_compat:/public/home/shiys/0selection2",
+    "WANDB_MODE": "offline",
+    "WANDB_DIR": "/public/home/shiys/0selection2/code/V4/runs/R58_unified_scenario",
+    "MPLCONFIGDIR": "/public/home/shiys/0selection2/code/V4/runs/R58_unified_scenario/mplconfig"
+  },
+  "bounded_command": [
+    "timeout", "--signal=TERM", "--kill-after=30s", "3600s",
+    "/public/home/shiys/miniconda3/envs/easynco/bin/python", "-u", "-m", "code.V4.r58_pipeline",
+    "--root", "/public/home/shiys/0selection2/code/V4/runs/R58_unified_scenario",
+    "--stage", "preflight", "--force-preflight"
+  ],
+  "budget": {
+    "remaining_prerequisite_seconds_before_launch": 9313.535,
+    "timeout_seconds": 3600,
+    "termination_cleanup_reserve_seconds": 30,
+    "remaining_after_maximum_step_seconds": 5683.535,
+    "charge": "Charge this actual srun step to the existing 3-hour prerequisite ledger; receipt elapsed includes queue time."
+  },
+  "outputs_relative_to_root": {
+    "controller_log": "revised_preflight_controller.log",
+    "srun_returncode": "revised_preflight_exit_code",
+    "gnu_timeout_returncode": "revised_preflight_timeout_exit_code",
+    "receipt": "revised_preflight_result.json",
+    "completed_state_only": "revised_preflight_state.json",
+    "nonzero_or_incomplete_state_if_available": "revised_preflight_failure_state.json"
+  },
+  "safety": {
+    "old_run_v4_r58_wrapper_used": false,
+    "mps": false,
+    "generation": false,
+    "deployment_lock": false,
+    "training": false,
+    "automatic_retry": false,
+    "existing_revised_outputs_overwritten": false,
+    "nonzero_state": "Retain the fresh pipeline state as failure evidence; never publish it as a completed preflight receipt."
+  },
+  "cpu_regression": {
+    "command": "source /public/home/shiys/miniconda3/etc/profile.d/conda.sh && conda activate easynco && CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m unittest code.V4.test_r58_execution code.V4.test_r58 code.V4.test_r58_budget code.V4.test_r43 code.V4.test_r45 -q",
+    "cwd": "/public/home/shiys/0selection2",
+    "result": "94 tests in 29.742s, OK",
+    "saved_log_path": null,
+    "original_exec_session": 5916,
+    "rerun": false
+  }
+}
