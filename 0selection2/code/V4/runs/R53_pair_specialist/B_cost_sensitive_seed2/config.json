@@ -1,0 +1,179 @@
+{
+  "experiment": "R53",
+  "seed": 2,
+  "arms": {
+    "A": "A_ce_seed2",
+    "B": "B_cost_sensitive_seed2"
+  },
+  "problems": [
+    "OVRP",
+    "VRPB",
+    "VRPL",
+    "VRPTW",
+    "OVRPTW",
+    "OVRPB",
+    "OVRPL",
+    "VRPBL",
+    "VRPBTW",
+    "VRPLTW",
+    "OVRPBL",
+    "OVRPBTW",
+    "OVRPLTW",
+    "VRPBLTW",
+    "OVRPBLTW"
+  ],
+  "frozen_baseline": {
+    "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/A_handcrafted_seed2/best.pt",
+    "sha256": "d1d435ef8fe15331c151b287d5bb2deedd498d669747dcb3f0aa1532b097848c",
+    "human_epoch": 38,
+    "original_selection": "validation macro_vs_sbs_pct",
+    "val": {
+      "top1": 0.49116666666666664,
+      "top2": 0.8244444444444444,
+      "top3": 0.927611111111111,
+      "mean_cost": 11.168516567489828,
+      "vs_sbs_pct": -1.0700411390867897,
+      "vs_oracle_pct": 0.8930994484085198,
+      "actual_regret_pct": 0.9260483583286789
+    }
+  },
+  "model_params": {
+    "embedding_dim": 128,
+    "head_num": 4,
+    "qkv_dim": 32,
+    "ff_hidden_dim": 512,
+    "encoder_layer_num": 4,
+    "dropout": 0.1,
+    "stats_dim": 12,
+    "rezero": false,
+    "ignore_coord_dist": true,
+    "local_geometry": true,
+    "geometry_mode": "real",
+    "node_only": true,
+    "sdpa": true
+  },
+  "label": "1: MOEL<MTL; 0: MTL<MOEL; exact ties excluded",
+  "weights": "abs(MOEL-MTL)/min(full legal pool), original FP64; no clipping or class balancing",
+  "training_weight_mean": 0.02227308843137882,
+  "weight_mean_population": "all non-tied training instances across all 15 MVRP tasks",
+  "losses": {
+    "A": "mean BCEWithLogits",
+    "B": "mean(weight / fixed training mean * BCEWithLogits)"
+  },
+  "gate": "frozen R45A predicted Top2 names are exactly RELD_MOEL and RELD_MTL",
+  "score_rule": "positive specialist logit -> MOEL; zero -> lower global ID (MOEL)",
+  "ranking": "swap original Top2 only; all remaining ranks and untriggered decisions unchanged",
+  "checkpoint_selection": "strict minimum integrated full 18-task validation actual_regret_pct, trained epochs only",
+  "controller": {
+    "metric": "integrated validation actual_regret_pct",
+    "min_delta": 0.001,
+    "lr_patience": 3,
+    "lr_factor": 0.5,
+    "minimum_lr": 1e-06,
+    "min_epochs": 15,
+    "early_stop_patience": 8
+  },
+  "batch": 128,
+  "maximum_epochs": 40,
+  "warmup_epochs": 3,
+  "learning_rate": 0.0001,
+  "weight_decay": 0.0001,
+  "dropout": 0.1,
+  "optimizer": "fresh AdamW",
+  "gradient_clip": 1.0,
+  "accumulation": false,
+  "sampling": "all non-ties, complete shuffled coverage with tail; interleaved tasks",
+  "initialization": "fresh independent instance encoder/head; exactly identical A/B parameter values",
+  "supervision_excludes": [
+    "full-pool CE",
+    "pairwise",
+    "risk",
+    "R-Drop",
+    "R52 start costs"
+  ],
+  "precision": "FP16 AMP + existing SDPA for training; FP32 eval, TF32 off; original FP64 cost accounting",
+  "baseline_training": false,
+  "test_policy": "one full test replay per locked validation-best; no test-driven changes",
+  "development_splits": [
+    "train",
+    "val"
+  ],
+  "test_used_for_selection": false,
+  "success_screen": {
+    "top1_improvement_pp": 5.0,
+    "no_regret_increase": true,
+    "alternative_regret_relative_reduction_pct": 15.0,
+    "alternative_no_top1_decline": true
+  },
+  "reference": "https://www.cs.ubc.ca/~kevinlb/papers/2012-SATzilla2012-Solver-Description.pdf",
+  "reference_boundary": "independent cost-sensitive pair classification only; not SATzilla voting/forests",
+  "git_commit": "8d970c5201beff2e0f4f1bb0f553238055aed59e",
+  "source_hashes": {
+    "pair_specialist.py": "e24bde789a2d742f38cb746a46055bbdeae94b3fb82dcef097f8dca2205443ac",
+    "r53_data.py": "203760fca5877fb84d47083154f7aac80860c57a8b9badf1b25a5c7d8e5ddbe9",
+    "r53_experiment.py": "c1ca3051326c57d1b84da1ba33d8f57259f8d1ac81b1409865d381a9e31bff07",
+    "r53_analysis.py": "741fc5c8b273feb21fd435a8e2ab7334a9a8a2787a2adb552bfd90aa197d0fbe",
+    "test_r53.py": "aadfc77ca341e0f6b3bbb52729a8944c39e669e5563ff67a65778979ee11bcfe",
+    "run_v4_r53.sh": "8072f4553d3af81e76064e0007c198fade5d5311b0eaa41bb8cd5916a446cbad"
+  },
+  "dependency_hashes": {
+    "V4Model.py": "50bff946ab08cc38d66d41d86f76fa016dcd064624d4aefd1d5168a30e3b3aea",
+    "local_geometry.py": "5cecafaf06e39595b847438d2e974ededf086954cab95ff83d232875f86fd581",
+    "tensor_loader.py": "c2c02cd8508b9c7bf0be8689909ffae9fad4f63a836ab696897aae3372fa782a",
+    "performance_targets.py": "270c5d263917dbbef8642249859b82dce72cc9e341beab5471761d4a05f7effa"
+  },
+  "wandb": {
+    "project": "selector",
+    "entity": "yjkds-southern-university-of-science-technology",
+    "mode": "offline"
+  },
+  "arm": "B",
+  "geometry": {
+    "mean": [
+      0.1828430698156281,
+      0.1344025762258454,
+      0.314901853572475,
+      0.5738543857069227,
+      0.28590952262987357,
+      0.19134741144292622,
+      0.3655827922333671,
+      0.45585936357948287,
+      0.4788121129634635,
+      0.2930263446987763,
+      0.42913866956708363,
+      0.4504549538969901
+    ],
+    "std": [
+      0.16938190932523806,
+      0.12190966448801535,
+      0.1631829092081133,
+      0.23419858696647275,
+      0.24989234128182375,
+      0.16201853831515894,
+      0.15716469195250454,
+      0.2139166241178069,
+      0.35529185635803906,
+      0.22244225236968332,
+      0.20100197624239347,
+      0.22644921614163094
+    ],
+    "count": 11397126,
+    "fields": [
+      "k4_radius",
+      "k4_mean_distance",
+      "k4_distance_cv",
+      "k4_anisotropy",
+      "k8_radius",
+      "k8_mean_distance",
+      "k8_distance_cv",
+      "k8_anisotropy",
+      "k16_radius",
+      "k16_mean_distance",
+      "k16_distance_cv",
+      "k16_anisotropy"
+    ],
+    "fitted_on": "valid nodes of all 15 MVRP non-tied training queries only"
+  },
+  "initialization_sha256": "b697f104b514ee435f8f4287b5b29664fed3e5c94802cef19b538958379229c4",
+  "trainable_parameters": 846601
+}
