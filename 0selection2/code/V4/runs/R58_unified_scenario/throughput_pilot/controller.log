@@ -1,0 +1,48 @@
+srun --jobid=1465 --overlap --exact --nodes=1 --ntasks=1 --cpus-per-task=4 --mem=16G env OPENBLAS_NUM_THREADS=1 WANDB_DIR=/public/home/shiys/0selection2/code/V4/runs/R58_unified_scenario/throughput_pilot WANDB_MODE=offline MKL_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/python_compat:/public/home/shiys/0selection2 MPLCONFIGDIR=/public/home/shiys/0selection2/code/V4/runs/R58_unified_scenario/throughput_pilot/mplconfig OMP_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d NUMEXPR_NUM_THREADS=1 timeout --signal=TERM --kill-after=30s 10800s /public/home/shiys/miniconda3/envs/easynco/bin/python -u -m code.V4.r58_throughput --stage run --wall-seconds 10800 --diffusion
+{"problem": "VRPBLTW", "method": "RouteFinder", "workers": 1, "status": "complete", "warm_completion_barrier_seconds": 5.547578200697899, "cold_wall_seconds": 23.439579896628857, "sampled_global_peak_mib": 362}
+{"problem": "VRPBLTW", "method": "RouteFinder", "workers": 2, "status": "complete", "warm_completion_barrier_seconds": 3.623319609090686, "cold_wall_seconds": 21.192173888906837, "sampled_global_peak_mib": 719}
+{"problem": "VRPBLTW", "method": "RouteFinder", "workers": 4, "status": "complete", "warm_completion_barrier_seconds": 3.2178562730550766, "cold_wall_seconds": 30.710453254170716, "sampled_global_peak_mib": 1434}
+{"problem": "VRPBLTW", "method": "MoSES_CaDA", "workers": 1, "status": "complete", "warm_completion_barrier_seconds": 10.412269962020218, "cold_wall_seconds": 21.31897241063416, "sampled_global_peak_mib": 450}
+{"problem": "VRPBLTW", "method": "MoSES_CaDA", "workers": 2, "status": "complete", "warm_completion_barrier_seconds": 6.036305834539235, "cold_wall_seconds": 19.341990697197616, "sampled_global_peak_mib": 895}
+{"problem": "VRPBLTW", "method": "MoSES_CaDA", "workers": 4, "status": "complete", "warm_completion_barrier_seconds": 6.336290258914232, "cold_wall_seconds": 27.846566442400217, "sampled_global_peak_mib": 1786}
+{"problem": "CVRP", "method": "BQ", "workers": 1, "status": "complete", "warm_completion_barrier_seconds": 44.45170665625483, "cold_wall_seconds": 54.956669280305505, "sampled_global_peak_mib": 388}
+{"problem": "CVRP", "method": "BQ", "workers": 2, "status": "complete", "warm_completion_barrier_seconds": 38.16482993494719, "cold_wall_seconds": 53.70683802943677, "sampled_global_peak_mib": 771}
+{"problem": "CVRP", "method": "BQ", "workers": 4, "status": "failed", "warm_completion_barrier_seconds": null, "cold_wall_seconds": 61.13009031768888, "sampled_global_peak_mib": 1538}
+{"problem": "CVRP", "method": "LEHD", "workers": 1, "status": "complete", "warm_completion_barrier_seconds": 28.01465357095003, "cold_wall_seconds": 36.17077964078635, "sampled_global_peak_mib": 368}
+{"problem": "CVRP", "method": "LEHD", "workers": 2, "status": "complete", "warm_completion_barrier_seconds": 23.588602997362614, "cold_wall_seconds": 35.00458175223321, "sampled_global_peak_mib": 731}
+{"problem": "CVRP", "method": "LEHD", "workers": 4, "status": "failed", "warm_completion_barrier_seconds": null, "cold_wall_seconds": 0.11559700779616833, "sampled_global_peak_mib": 2}
+{"problem": "TSP", "method": "DIFUSCO", "workers": 1, "status": "failed", "warm_completion_barrier_seconds": null, "cold_wall_seconds": 0.07551589794456959, "sampled_global_peak_mib": 2}
+{"problem": "TSP", "method": "DIFUSCO500", "workers": 1, "status": "failed", "warm_completion_barrier_seconds": null, "cold_wall_seconds": 0.07515591662377119, "sampled_global_peak_mib": 2}
+{"problem": "TSP", "method": "T2T", "workers": 1, "status": "failed", "warm_completion_barrier_seconds": null, "cold_wall_seconds": 0.0754841547459364, "sampled_global_peak_mib": 2}
+{"problem": "TSP", "method": "T2T500", "workers": 1, "status": "failed", "warm_completion_barrier_seconds": null, "cold_wall_seconds": 0.07535682525485754, "sampled_global_peak_mib": 2}
+wandb: Tracking run with wandb version 0.19.11
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:             CVRP__BQ__w1/warm_seconds ▁
+wandb:             CVRP__BQ__w2/warm_seconds ▁
+wandb:           CVRP__LEHD__w1/warm_seconds ▁
+wandb:           CVRP__LEHD__w2/warm_seconds ▁
+wandb:  VRPBLTW__MoSES_CaDA__w1/warm_seconds ▁
+wandb:  VRPBLTW__MoSES_CaDA__w2/warm_seconds ▁
+wandb:  VRPBLTW__MoSES_CaDA__w4/warm_seconds ▁
+wandb: VRPBLTW__RouteFinder__w1/warm_seconds ▁
+wandb: VRPBLTW__RouteFinder__w2/warm_seconds ▁
+wandb: VRPBLTW__RouteFinder__w4/warm_seconds ▁
+wandb: 
+wandb: Run summary:
+wandb:             CVRP__BQ__w1/warm_seconds 44.45171
+wandb:             CVRP__BQ__w2/warm_seconds 38.16483
+wandb:           CVRP__LEHD__w1/warm_seconds 28.01465
+wandb:           CVRP__LEHD__w2/warm_seconds 23.5886
+wandb:  VRPBLTW__MoSES_CaDA__w1/warm_seconds 10.41227
+wandb:  VRPBLTW__MoSES_CaDA__w2/warm_seconds 6.03631
+wandb:  VRPBLTW__MoSES_CaDA__w4/warm_seconds 6.33629
+wandb: VRPBLTW__RouteFinder__w1/warm_seconds 5.54758
+wandb: VRPBLTW__RouteFinder__w2/warm_seconds 3.62332
+wandb: VRPBLTW__RouteFinder__w4/warm_seconds 3.21786
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /public/home/shiys/0selection2/code/V4/runs/R58_unified_scenario/throughput_pilot/wandb/offline-run-20261011_014758-g66ejqes
+wandb: Find logs at: ./code/V4/runs/R58_unified_scenario/throughput_pilot/wandb/offline-run-20261011_014758-g66ejqes/logs
