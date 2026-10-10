@@ -1,0 +1,32 @@
+{
+  "source": "sacct on admin01, 2026-10-11; exact R58-owned Slurm steps only",
+  "accounting": "single designated GPU occupancy wall, conservatively including initialization and failed probes; not kernel-active time",
+  "command": "sacct -j 1465.54,1465.56,1465.58,1465.59,1465.60,1465.61,1465.62,1465.63,1465.64,1465.66,1465.67,1465.69,1465.70,1465.71,1465.72,1465.73 --noheader --parsable2 --format=JobIDRaw,JobName,State,ElapsedRaw,Start,End,MaxRSS",
+  "before_additional_pilot": [
+    {"step": "1465.54", "state": "COMPLETED", "seconds": 684},
+    {"step": "1465.56", "state": "COMPLETED", "seconds": 23},
+    {"step": "1465.58", "state": "COMPLETED", "seconds": 5},
+    {"step": "1465.59", "state": "FAILED", "seconds": 4},
+    {"step": "1465.60", "state": "FAILED", "seconds": 9},
+    {"step": "1465.61", "state": "COMPLETED", "seconds": 12},
+    {"step": "1465.62", "state": "FAILED", "seconds": 11},
+    {"step": "1465.63", "state": "COMPLETED", "seconds": 18},
+    {"step": "1465.64", "state": "FAILED", "seconds": 1387},
+    {"step": "1465.66", "state": "FAILED", "seconds": 338},
+    {"step": "1465.67", "state": "COMPLETED", "seconds": 1403}
+  ],
+  "before_additional_pilot_seconds": 3894,
+  "completed_additional_pilot": [
+    {"step": "1465.69", "state": "COMPLETED", "seconds": 409},
+    {"step": "1465.70", "state": "COMPLETED", "seconds": 182},
+    {"step": "1465.71", "state": "COMPLETED", "seconds": 630},
+    {"step": "1465.72", "state": "COMPLETED", "seconds": 272},
+    {"step": "1465.73", "state": "COMPLETED", "seconds": 0}
+  ],
+  "completed_additional_pilot_slurm_seconds": 1493,
+  "completed_additional_pilot_controller_seconds": 1486.4654315849766,
+  "slurm_outer_overhead_seconds": 6.5345684150234,
+  "total_before_final_preflight_seconds": 5387,
+  "deduplication": "Final refinement ledger already includes the four pilot controller receipts. Add only before_additional_pilot_seconds plus slurm_outer_overhead_seconds to that ledger, not the whole 5387 again.",
+  "remaining_work_not_included": "Fresh revised preflight, final refinement, full labels, publication, training and locked evaluation; no full label generation has begun."
+}

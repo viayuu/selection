@@ -13,10 +13,11 @@ This does not declare every historical non-B column incorrect or explain the
 entire Top1 plateau. Historical files are preserved, not retrospectively edited.
 
 No existing cost-only column has both a complete route-feasibility witness and
-a fully bound match to the new locked deployment. This implementation therefore
-uses fresh solves for all128 deployment columns, rather than certifying unknown
-history from current defaults. That conservative choice expands the workload
-beyond repairing only the eight B tasks and requires a multi-day solve budget.
+a fully bound match to the new deployment. The full release therefore requires
+fresh solves for all128 deployment columns, rather than certifying unknown
+history from current defaults. The original recipe exceeded the100GPUh budget
+and was skipped. Its qualifications and timing evidence are preserved under
+`runs/R58_unified_scenario/original_recipe/`; no full release exists yet.
 
 ## Explicit Task Decisions
 
@@ -48,13 +49,20 @@ new contract. Duplicate checkpoint parameter aliases may be restored only from
 another checkpoint entry referring to the identical registered parameter.
 Missing real weights are never randomly filled.
 
-RouteFinder-family inference is FP32 with all customer starts and8 fixed
-dihedral augmentations. Its deployment batch is locked to1: a train-only probe
+The original RouteFinder-family recipe used FP32, all customer starts and8
+fixed dihedral augmentations. Its deployment batch is1: a train-only probe
 found that even FP32 batched inference could change a physical instance's tour
 and cost. See `runs/R58_unified_scenario/preflight_findings.md`. The other MVRP
 deployments use fixed size-homogeneous batches of up to16, retaining the smaller tail; TSP,
 CVRP and ATSP deployments use singleton inference. These batch rules are part
 of the new deployment identity, not inferred historical settings.
+
+The bounded revised candidate uses the original orientation only for the
+RouteFinder family, retaining all customer starts. Diffusion uses20 denoising
+steps; T2T additionally executes one genuine10-step guided rewrite. These are
+explicitly different inference budgets, not quality-equivalent replacements
+or reproductions of the original papers. They require a fresh complete
+qualification and a measured whole-run budget before deployment lock.
 
 Other wrappers use the available fixed native weights and fully documented new
 decoding recipes. The GLOP identity denotes the available insertion-only
@@ -80,9 +88,12 @@ script uses the existing Slurm allocation on a login host without GPU access;
 override `R58_SLURM_JOB_ID` only if that allocation has expired. Existing queues
 and other GPUs are untouched.
 
-The complete fresh solve includes1,536,000 solver-instance evaluations. Current
-train-only timing indicates a multi-day single-GPU workload, especially for the
-TSP diffusion methods. Finish preflight and confirm this budget before starting
+The complete fresh solve includes1,536,000 solver-instance evaluations. Original
+TRAIN-size-weighted timing projected181.637labelGPUh, so that recipe is skipped.
+A representative revised pilot alone still projected102.709labelGPUh before
+overhead. One final precommitted TRAIN-only refinement is allowed within the
+same cumulative3GPUh pilot cap; no acceleration is assumed. Finish current-source
+preflight and clear the complete budget before starting
 `--stage all`; preflight alone does not generate full labels or train a model.
 Full generation handles the eight B tasks first, then the other tasks and TSP
 last. It still locks every deployment before generating any validation/test
@@ -91,7 +102,7 @@ label; ordering does not change candidate pools or per-column inference plans.
 `all` and `labels` now recompute the TRAIN-size budget before locking or solving.
 An incomplete timing projection exits3 as`budget_not_cleared`; the current
 over100GPUh label recipe exits3 as`skipped_over_budget`, even if a lock already
-exists. This is a label-budget guard, not proof that total work including
+exists. This original label-budget guard is not proof that total work including
 training/evaluation and overhead fits100hours. A cheaper measured, explicitly
 declared deployment plan is still required before the full run.
 

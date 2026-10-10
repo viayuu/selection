@@ -58,3 +58,23 @@ Original evidence is preserved in `original_recipe/` and commits0dd2862c8 and
 sub100GPUh plan, including spent work, startup/checking/IO, baseline/evaluation
 and contingency, before deployment lock or full labels. All18 tasks and all
 original candidates remain required. No selector score or70% result is claimed.
+
+## Revised Execution Implementation
+
+The revised production candidate now uses original-orientation RF augmentation1
+and witnessed diffusion20/T2T guided10 execution. A shared persistent execution
+session serves both timing refinement and eventual production. Workers preserve
+singleton or fixed width16 batches, reset seed2, write disjoint resumable shards,
+and independently check routes before a complete parent merge.
+
+CPU implementation/compatibility checks:94 passed. Native thread limits are1
+before worker imports. Optional MPS uses only the specified UUID and private
+node-local directories, rejects existing daemons/target contexts, verifies all
+four client attachments and requires safe owned-context termination on failures.
+No MPS service has been started by this revised implementation yet.
+
+This code is NOT GPU-qualified. The original128 preflights do not qualify it.
+Fresh current-source preflight, final bounded timing, whole-budget approval,
+full54-dataset release, baseline training and locked test are still outstanding.
+`prerequisite_spent.json` records5387seconds of earlier Slurm occupancy, including
+failed runs; final budgeting must not discard or double-count those receipts.

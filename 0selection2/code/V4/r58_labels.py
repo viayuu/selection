@@ -1,7 +1,6 @@
 """Resumable, fail-closed scenario_v2 generation and release validation."""
 
 import argparse
-import gc
 import json
 import os
 import pickle
@@ -15,6 +14,8 @@ import torch
 
 from ..unified_selector.registry import GLOBAL_SOLVERS, POOLS, PROBLEMS
 from .r58_backends import make_backend
+from .r58_execution import (ExecutionSession, backend_batch_size, execution_profile,
+    group_batches, read_execution_plan, require_budget_approval)
 from .r58_scenario import (CONTRACT, INPUT_ROOT, ROOT, canonical_hash, check_route,
                            fields, file_hash, save_json, write_contract)
 
@@ -38,13 +39,11 @@ def preflight_indices(problem, items):
 
 def implementation_hashes():
     return {name: file_hash(Path(__file__).with_name(name)) for name in
-            ('r58_scenario.py', 'r58_environments.py', 'r58_backends.py', 'r58_labels.py')}
+            ('r58_scenario.py', 'r58_environments.py', 'r58_backends.py', 'r58_labels.py', 'r58_execution.py')}
 
 
 def inference_batch_size(problem, method):
-    if problem in ('TSP', 'CVRP', 'ATSP') or method in ('RouteFinder', 'MoSES_RF', 'MoSES_CaDA'):
-        return 1
-    return 16
+    return backend_batch_size(problem, method)
 
 
 def inference_plan(problem, instances, method):
@@ -133,6 +132,8 @@ def probe(problem, method, root):
 
 def lock(root):
     contract = write_contract(root)
+    plan = read_execution_plan(root)
+    approval = require_budget_approval(root, plan, implementation_hashes())
     environment = runtime_environment()
     profiles, missing = {}, []
     for problem in PROBLEMS:
@@ -159,8 +160,11 @@ def lock(root):
         implementation_sha256=implementation_hashes(), global_solver_order=list(GLOBAL_SOLVERS),
         pools={p: list(POOLS[p]) for p in PROBLEMS}, deployments=profiles,
         all_cost_columns='fresh solve under this new locked deployment; no uncertified old-label reuse',
+        execution_plan=plan, execution_approval=approval,
+        execution_profiles={p: {m: execution_profile(p, m, plan) for m in POOLS[p]} for p in PROBLEMS},
         inference_batch_size={p: {m: inference_batch_size(p, m) for m in POOLS[p]} for p in PROBLEMS},
-        batch_plan='ascending true size, then original instance index; fixed width, retain tail',
+        batch_plan='ascending true size, then original instance index; unchanged fixed batches, retain tail; '
+                   'size-homogeneous groups <=100 cases except an unsplit original batch; persistent workers',
         random_state='seed=2 reset before each fixed inference batch; no seed search',
         runtime_environment=environment,
         failure_rule='stop affected column and publication; preserve complete input split',
@@ -188,6 +192,14 @@ def read_lock(root):
         raise ValueError('Contract changed after deployment lock')
     if payload['runtime_environment'] != runtime_environment():
         raise ValueError('Runtime environment differs from the locked deployment')
+    plan = read_execution_plan(root)
+    if payload.get('execution_plan') != plan:
+        raise ValueError('Execution plan differs from locked deployment')
+    if payload.get('execution_approval') != require_budget_approval(root, plan, implementation_hashes()):
+        raise ValueError('Budget approval differs from locked deployment')
+    expected = {p: {m: execution_profile(p, m, plan) for m in POOLS[p]} for p in PROBLEMS}
+    if payload.get('execution_profiles') != expected:
+        raise ValueError('Execution scheduler differs from locked deployment')
     return payload
 
 
@@ -217,7 +229,7 @@ def generate(problem, method, split, root):
     if path.exists() or metadata_path.exists():
         check_column_metadata(path, metadata)
     save_json(metadata_path, metadata)
-    completed = set()
+    completed = {}
     if path.exists():
         with path.open() as stream:
             for line in stream:
@@ -228,48 +240,36 @@ def generate(problem, method, split, root):
                 checked = check_route(problem, instances[index], row['route'], row['cost'])
                 if not checked['feasible'] or not checked['cost_matches']:
                     raise ValueError('Cached route fails current release check')
-                completed.add(index)
+                completed[index] = row
     if len(completed) == len(instances):
         return
-    seed_solver()
-    backend = make_backend(problem, method)
-    if canonical_hash(backend.profile()) != metadata['deployment_sha256']:
-        raise ValueError('Actual deployment differs from locked profile')
-    with path.open('a', buffering=1) as stream:
-        for indices in inference_plan(problem, instances, method):
-            if all(i in completed for i in indices):
-                continue
-            seed_solver()
-            before = time.perf_counter()
-            try:
-                output = backend.run([instances[i] for i in indices])
-                torch.cuda.synchronize()
-                elapsed = time.perf_counter() - before
-                rows = []
-                for offset, index in enumerate(indices):
-                    checked = check_route(problem, instances[index], output.tours[offset], output.costs[offset])
-                    if not checked['feasible'] or not checked['cost_matches']:
-                        raise ValueError(checked)
-                    if index not in completed:
-                        rows.append(dict(index=index, true_size=size(problem, instances[index]), cost=checked['cost'],
-                            reported_cost=float(output.costs[offset]), route=output.tours[offset], feasible=True,
-                            inference_batch=indices, seconds=elapsed / len(indices)))
-                stream.write(''.join(json.dumps(row, allow_nan=False) + '\n' for row in rows))
-                completed.update(row['index'] for row in rows)
-                stream.flush()
-                os.fsync(stream.fileno())
-                if len(completed) % 100 < len(indices):
-                    print(f'[R58] {problem}/{split}/{method} {len(completed)}/{len(instances)}', flush=True)
-            except Exception as error:
-                save_json(root / 'failures' / f'{problem}__{split}__{method}__{indices[0]}.json',
-                    dict(**metadata, indices=indices, error=repr(error), traceback=traceback.format_exc(),
-                         no_instance_dropped=True, training_allowed=False))
-                raise
-        stream.flush()
-        os.fsync(stream.fileno())
-    del backend
-    gc.collect()
-    torch.cuda.empty_cache()
+    groups = group_batches(problem, instances, inference_plan(problem, instances, method))
+    pending = [group for group in groups if not all(index in completed for index in group['indices'])]
+    directory = directory / 'execution' / method
+    # Warm the extreme input sizes, loading both RF checkpoint buckets before work.
+    warmups = [pending[0]] if len(pending) == 1 else [pending[0], pending[-1]]
+    try:
+        with ExecutionSession(problem, method, locked['execution_plan'], directory, metadata,
+                input_path=input_path, expected_profile=locked['deployments'][problem][method]) as session:
+            session.prepare(warmups)
+            result = session.run_groups(pending, pass_id='production')
+        for row in result['rows']:
+            completed[row['index']] = row
+        if set(completed) != set(range(len(instances))):
+            raise ValueError('Incomplete executed column; no instance may be dropped')
+        temporary = path.with_suffix('.jsonl.tmp')
+        with temporary.open('w') as stream:
+            for index in range(len(instances)):
+                stream.write(json.dumps(completed[index], allow_nan=False) + '\n')
+            stream.flush()
+            os.fsync(stream.fileno())
+        temporary.replace(path)
+        print(f'[R58] {problem}/{split}/{method} {len(completed)}/{len(instances)}', flush=True)
+    except Exception as error:
+        save_json(root / 'failures' / f'{problem}__{split}__{method}.json',
+            dict(**metadata, error=repr(error), traceback=traceback.format_exc(),
+                 no_instance_dropped=True, training_allowed=False))
+        raise
 
 
 def publish(root):
