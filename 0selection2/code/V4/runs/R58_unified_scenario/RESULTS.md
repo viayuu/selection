@@ -1,8 +1,14 @@
 # R58: Unified scenario_v2
 
-**Status: implementation and bounded qualification complete; full regeneration
-and training SKIPPED because the measured whole-plan reference exceeds the
-100 GPU-hour limit. R58 is not a completed benchmark/model experiment.**
+**Current status: deferred by explicit user instruction on2026-10-11.
+Do not launch cost-table solving, semantic repairs or a full R58 baseline.
+R58 is not a completed benchmark/model experiment. See `DEFERRED.md`.**
+
+The prior100h skip was correct under its original authorization and remains
+unchanged in `budget_limit_100_archive/` and commit6df3f4989. Its114.248924h
+reference is retained, not relabeled as under100h. New authorization is recorded
+in `compute_authorization.json`; the qualified recipe, candidate pools and
+original splits are unchanged.
 
 ## Completed Work
 
@@ -28,7 +34,7 @@ and training SKIPPED because the measured whole-plan reference exceeds the
 The earlier original recipe was also over budget and remains archived under
 `original_recipe/`. Its qualification is not substituted for the revised one.
 
-## Final Budget Decision
+## Historical100h Budget Decision
 
 The complete128-deployment projection covers1,536,000 solver-instance solves:
 10000train +1000validation +1000test per deployment. Validation/test size
@@ -51,7 +57,7 @@ unchanged65 deployments contribute7.215483h using current conservative
 preflight references. The allowance and contingency are planning assumptions,
 not measured completion times or confidence bounds.
 
-Decision: **`skip_whole_plan_at_or_over_100h`**. The actual CPU-only production
+Historical decision: **`skip_whole_plan_at_or_over_100h`**. The actual CPU-only production
 gate was exercised with:
 
 ```bash
@@ -87,11 +93,11 @@ validation selection, test evaluation, and new train-fitted references have
 Small TRAIN route witnesses establish bounded deployment qualification, not
 feasibility of all1,536,000 future solves.
 
-Completing this fixed full18 plan requires a changed compute authorization or
-an explicitly new scope decision. The measured114.25h is a planning reference,
-not a guarantee or a claim that additional compute will improve Top1. The
-post-R58 performance loop and70% target remain unachieved; they were not run
-against the semantically inconsistent legacy cost table.
+The user first removed the compute cutoff, then explicitly deferred all R58
+operations. Full label generation, baseline training and locked test remain
+unexecuted. The measured114.25h is a historical planning reference, not a
+completion claim. The separate70% performance goal continues on the existing
+legacy deployment scenario; its results cannot certify repaired task semantics.
 
 ## Evidence
 

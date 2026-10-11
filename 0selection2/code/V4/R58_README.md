@@ -6,13 +6,22 @@ unchanged. The new data live under `runs/R58_unified_scenario/scenario_v2/`.
 
 ## Current Execution Status
 
+**Deferred by user instruction on2026-10-11. Do not launch the commands below.**
+Task-definition decisions, solver repairs, full cost generation and baseline
+training are postponed. The B discrepancy is retained as an open issue in
+`runs/R58_unified_scenario/DEFERRED.md`. Continue the separate performance goal
+on the explicitly labeled legacy deployment scenario, not a certified v2.
+
 All128 revised TRAIN preflights and the fixed final63-deployment timing
-refinement passed. The settled whole-project reference is **114.248924GPUh**,
-above the100GPUh limit, so the production gate records `skipped_over_budget`.
-No full new labels, baseline training or test result exists. R58 is therefore
-not complete; no performance improvement is claimed. See
-`runs/R58_unified_scenario/RESULTS.md` and `BUDGET.md` for evidence. No further
-recipe or candidate-pool changes were made to force a passing estimate.
+refinement passed. The settled whole-project reference is **114.248924GPUh**.
+The original100GPUh policy correctly skipped that run; its artifacts are
+preserved under `budget_limit_100_archive/` and commit6df3f4989. The user has
+since removed all GPU-hour limits. An explicit `--gpu-hour-limit none` selects
+that authorization; the default100h policy remains available and unchanged.
+Qualification, source, independent checking and release gates still apply.
+No full new labels, baseline training or test result exists yet. R58 remains
+incomplete, with no performance improvement claimed. No recipe or pool changes
+were made to force a passing estimate.
 
 ## Legacy Scenario Boundary
 
@@ -87,10 +96,12 @@ decision before the protocol is locked, never per-instance candidate removal.
 
 ## Execution
 
+These are retained reference commands, not current launch instructions.
+
 ```bash
 bash code/V4/run_v4_r58.sh --stage preflight
 bash code/V4/run_v4_r58.sh --stage preflight --force-preflight
-bash code/V4/run_v4_r58.sh --stage all
+bash code/V4/run_v4_r58.sh --stage all --gpu-hour-limit none
 ```
 
 Use tmux for the long full run. Only the specified idle3090 UUID is used. The
@@ -126,6 +137,11 @@ is credited. Incomplete evidence exits3 as`budget_not_cleared`; a whole-project
 reference at or above100GPUh exits3 as`skipped_over_budget`, even if an old lock
 exists. The3h and2h components are fixed planning allowances, not measured R58
 completion times; the contingency is not a confidence bound.
+
+The100h cutoff above describes the original/default policy. The user's
+explicit no-cap invocation removes only that cutoff; it does not bypass
+qualification or evidence checks, alter the reference, or imply completion.
+See `compute_authorization.json` in the run directory.
 
 The final refinement compares serial1, ordinary four-client execution and
 installed private MPS4 for all48 RouteFinder-family deployments. MPS is adopted
