@@ -1,0 +1,77 @@
+{
+  "status": "deferred_by_user",
+  "launch_authorization_revoked": true,
+  "launch_commands_authorized": false,
+  "deferral_guard": "DEFERRED.md existence blocks launcher and --worker before environment setup or any execution",
+  "deferral_reason": "User explicitly cancelled all R58 work and future launch authorization. Preserve this preparation only; do not execute the recorded command.",
+  "launch_command_status": "historical_prepared_command_do_not_execute",
+  "purpose": "Complete full18-task R58 scenario_v2 before any later research loop",
+  "gpu_hour_limit": null,
+  "timeout_seconds": null,
+  "parent_gpu_baton_required": "full-scenario",
+  "tmux_session": "r58_full_scenario",
+  "launch_command": "tmux new-session -d -s r58_full_scenario -c /public/home/shiys/0selection2 'env R58_PARENT_GPU_BATON=full-scenario bash /public/home/shiys/0selection2/code/V4/runs/R58_unified_scenario/full_scenario_launch.sh'",
+  "srun_command": [
+    "srun", "--jobid=1465", "--overlap", "--exact", "--nodes=1", "--ntasks=1",
+    "--nodelist=gpu03", "--cpus-per-task=4", "--mem=16G", "bash",
+    "/public/home/shiys/0selection2/code/V4/runs/R58_unified_scenario/full_scenario_launch.sh",
+    "--worker"
+  ],
+  "pipeline_command": ["bash", "code/V4/run_v4_r58.sh", "--stage", "all", "--gpu-hour-limit", "none"],
+  "environment": {
+    "conda": "easynco",
+    "CUDA_VISIBLE_DEVICES": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+    "R58_GPU_UUID": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+    "R58_SLURM_JOB_ID": "1465",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "PYTHONPATH": "/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/python_compat:/public/home/shiys/0selection2",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "WANDB_MODE": "offline",
+    "CUDA_MPS_*": "must all be absent"
+  },
+  "recipe": {
+    "revision": "r58_rf_aug1_diff20",
+    "rf_mode": "normal4",
+    "mps": false,
+    "seed": 2,
+    "solver_ids": 22,
+    "tasks": 18,
+    "deployments": 128,
+    "recipe_or_timing_change": false
+  },
+  "prelaunch_gates": [
+    "DEFERRED.md must be absent; its existence unconditionally refuses execution even with an old baton",
+    "Explicit parent full-scenario GPU baton after source/authorization/tests/review freeze",
+    "Singleton flock and no previous full_scenario attempt artifacts; never automatic retry",
+    "Actual hostname -s is gpu03; Slurm1465 step has exactly4CPU/16G",
+    "Fresh target-only nvidia-smi: assigned RTX3090, Default mode, zero GPU utilization, under500MiB, no compute contexts",
+    "All-user ps shows no NVIDIA MPS control/server; never stop any foreign process or service",
+    "Explicit compute_authorization.json no-cap authorization for the assigned UUID",
+    "All128 preflight records pass current source and runtime-environment checks; reject rather than rerun stale qualification",
+    "Read-only build_whole_budget verifies current128/refined63/unchanged65 and globally measured normal4",
+    "Existing pipeline writes no-cap execution approval and locks deployments before new val/test solving",
+    "Existing pipeline publishes all54 problem/split datasets before baseline training"
+  ],
+  "known_limits": [
+    "Preparation only: no GPU/read-only srun/model solve started by this launcher yet",
+    "All future R58 launch authorization is revoked by user redirect; no qualification, solving, pipeline, baseline or launch is authorized",
+    "Latest reported target2MiB is stale evidence, not a launch authorization",
+    "Existing train100k user queues are not modified; if they occupy target GPU, abort without switching GPUs",
+    "Slurm accounting may lag; the raw sacct snapshot is retained without fabricated final accounting"
+  ],
+  "artifacts": {
+    "started": "full_scenario_started.json",
+    "controller_log": "full_scenario_controller.log",
+    "prelaunch_evidence": "full_scenario_prelaunch.json",
+    "prelaunch_log": "full_scenario_prelaunch.log",
+    "runtime_pid_step_environment": "full_scenario_runtime.json",
+    "result": "full_scenario_result.json",
+    "returncode": "full_scenario_exit_code",
+    "completed_pipeline_state": "full_scenario_state.json",
+    "failed_pipeline_state": "full_scenario_failure_state.json",
+    "slurm_accounting": "full_scenario_sacct.log"
+  }
+}
