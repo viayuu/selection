@@ -1,0 +1,86 @@
+{
+  "authorized": true,
+  "created_utc": "2026-10-12T12:46:48.437227+00:00",
+  "authorization": "Parent explicitly conditionally delegated mechanical validation-only freeze and one full original18 TEST per bundle after both current arms genuinely finish; both results/candidates are published and owned training is terminal COMPLETED0:0.",
+  "models": {
+    "A": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R66_additive_correction_full18/A_independent_sum_seed2/best.pt",
+      "sha256": "54fba1060e759f7b562b192bb4e0b449c3c4db9ba2cbb5eec4ed1711cacd8fba",
+      "epoch": 9,
+      "native_correct": 8778,
+      "native_total": 18000,
+      "val": {
+        "macro_ce": 1.2069488498899672,
+        "macro_top1": 0.4876666666666667,
+        "macro_top2": 0.8189444444444445,
+        "macro_top3": 0.927,
+        "macro_top1_tie_aware": 0.48850000000000005,
+        "macro_mean_cost": 11.16938333424288,
+        "macro_vs_sbs_pct": -1.0598116923694232,
+        "macro_vs_oracle_pct": 0.9035858983531837,
+        "macro_actual_regret_pct": 0.9388849155717066,
+        "macro_vbs_gap_closed_pct": 30.951180793856047
+      },
+      "parameter_mode": "averaged x",
+      "unique_bundle_path": "/public/home/shiys/0selection2/code/V4/runs/R66_additive_correction_full18/A_independent_sum_seed2/best_checkpoints/epoch009.pt",
+      "unique_bundle_sha256": "1c8b97a758e08232a0c9538062f59a0b65d25b1cbe38fd10067e54bd0bf4573f"
+    },
+    "B": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R66_additive_correction_full18/B_additive_correction_seed2/best.pt",
+      "sha256": "e2e0acc2453a47422b2f454670796f622af938e7acecb87fe41943514db2a723",
+      "epoch": 33,
+      "native_correct": 8760,
+      "native_total": 18000,
+      "val": {
+        "macro_ce": 1.0882357524500952,
+        "macro_top1": 0.4866666666666667,
+        "macro_top2": 0.8203888888888888,
+        "macro_top3": 0.9246666666666667,
+        "macro_top1_tie_aware": 0.4874444444444444,
+        "macro_mean_cost": 11.169789985299328,
+        "macro_vs_sbs_pct": -1.0597140255154507,
+        "macro_vs_oracle_pct": 0.9036678318011335,
+        "macro_actual_regret_pct": 0.9427035201970294,
+        "macro_vbs_gap_closed_pct": 30.908621536321657
+      },
+      "parameter_mode": "averaged x",
+      "unique_bundle_path": "/public/home/shiys/0selection2/code/V4/runs/R66_additive_correction_full18/B_additive_correction_seed2/best_checkpoints/epoch033.pt",
+      "unique_bundle_sha256": "de4eda23d3b4c0b1bc07ff89ed3d845b651f61ea6a437e8b7a44163f2bee6b7f"
+    }
+  },
+  "official_arm": "A",
+  "proposed_official_arm": "A",
+  "base_checkpoint": "code/V4/runs/R65_schedule_free_full18/B_schedule_free_seed2/best.pt",
+  "base_checkpoint_sha256": "d880cb2ed4605f410742b4c37945494323213168af95d02b22794d232b9e7ad8",
+  "base_state_sha256": "2fee76707bd267b740e874ca866876405fb7a6932f262ae9bb6212c21717b5f8",
+  "base_parameter_mode": "averaged x",
+  "coefficient": 1,
+  "inference_rule": "FP32 eval; live frozen R65B40 saved x plus live R66 member averaged x; coefficient1; full legal pool; highest summed direct utility; exact ties by ascending global solver ID; one final solver",
+  "selector_forwards_per_deployment": 2,
+  "completed_solvers_per_deployment": 1,
+  "validation_only_provenance": {
+    "source": "validation_candidates.json and both published result.json files",
+    "candidates_sha256": "c682086ad9e41bd5816deb874ae160c226a458b13b37523e23c2621c623ef86b",
+    "published_records_copied_exactly": true,
+    "unique_bundle_rule": "The original best_checkpoints/epochNNN.pt for the published selected epoch; no checkpoint choice. TEST verifies identical published and unique base/member states despite archive-name serialization hashes.",
+    "checkpoint_rule": "max integer native_correct /18000; earliest exact tie",
+    "official_arm_rule": "Maximum published original integer VAL count/18000; exact tie A",
+    "same_effective_lr_trace_sha256": "bc57df6eef1991b310dd586650df5287fa5a41fa66065952f311f15c61786ca7",
+    "cost_or_test_used_for_selection": false,
+    "parameter_mode_choice": false,
+    "posterior_per_task_assembly": false
+  },
+  "training_terminal_receipt": "training_terminal_receipt.json",
+  "training_terminal": {
+    "slurm_step": "1465.94",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_seconds": 6109,
+    "tmux_session": "r66_train",
+    "tmux_terminal": true,
+    "observed_utc": "2026-10-12T12:46:48.437227+00:00"
+  },
+  "source_lock": "protocol.json#/source_hashes; source_launch/hashes.json; unchanged original frozen launch sources required",
+  "test_scope": "ONE paired original18/fulllegalpool TEST,1000 original rows/task/bundle, FP32 batch128 with tails, live saved F+g_x and coefficient1; no base-cache TEST, optimizer transition, reference inference, solver execution or timing benchmark",
+  "exclusive_start_marker": "final_test_started.json"
+}

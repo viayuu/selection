@@ -1,0 +1,187 @@
+{
+  "arms": {
+    "A": {
+      "epochs_completed": 40,
+      "successful_updates": 9600,
+      "presentations": 7200000,
+      "amp_retries": 4,
+      "wall_seconds": 3006.9861632157117,
+      "objective_scope": "standalone g",
+      "evaluation_scope": "composite F+g_x",
+      "actual_execution": {
+        "recorded_successful_optimizer_steps": 9600,
+        "recorded_query_presentations": 7200000,
+        "recorded_amp_retries": 4
+      },
+      "logged_update_seconds": 2688.681563142687,
+      "peak_allocated_gib": 15.331607341766357,
+      "peak_reserved_gib": 22.833984375,
+      "logged_whole_device_peak_physical_gib": 21.231689453125,
+      "selected_evaluation_seconds": {
+        "train": 18.51259197574109,
+        "val": 1.8550375401973724,
+        "test": 15.147466172464192
+      },
+      "train_val_timing_uses_cached_base": true,
+      "ordinary_test_evaluation_seconds": 15.151043560355902,
+      "selected_validation_count_delta": 0
+    },
+    "B": {
+      "epochs_completed": 40,
+      "successful_updates": 9600,
+      "presentations": 7200000,
+      "amp_retries": 4,
+      "wall_seconds": 3055.495084230788,
+      "objective_scope": "composite F+g",
+      "evaluation_scope": "composite F+g_x",
+      "actual_execution": {
+        "recorded_successful_optimizer_steps": 9600,
+        "recorded_query_presentations": 7200000,
+        "recorded_amp_retries": 4
+      },
+      "logged_update_seconds": 2708.011457664892,
+      "peak_allocated_gib": 15.331609725952148,
+      "peak_reserved_gib": 22.814453125,
+      "logged_whole_device_peak_physical_gib": 21.214111328125,
+      "selected_evaluation_seconds": {
+        "train": 18.613966247998178,
+        "val": 1.8688141675665975,
+        "test": 14.638302944600582
+      },
+      "train_val_timing_uses_cached_base": true,
+      "ordinary_test_evaluation_seconds": 14.641829319298267,
+      "selected_validation_count_delta": 0
+    }
+  },
+  "training_terminal": {
+    "observed_utc": "2026-10-12T12:46:48.437227+00:00",
+    "tmux_session": "r66_train",
+    "tmux_terminal": true,
+    "tmux_handle_returncode": 1,
+    "tmux_handle_observation": "can't find window: r66_train",
+    "slurm_step": "1465.94",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "start_local": "2026-10-12T19:01:25",
+    "end_local": "2026-10-12T20:43:14",
+    "slurm_timestamp_timezone": "Asia/Shanghai",
+    "elapsed_seconds": 6109,
+    "sacct_command": "sacct -j 1465.94 --noheader --parsable2 --format=JobIDRaw,State,ExitCode,Start,End,ElapsedRaw,NodeList",
+    "sacct_raw": "1465.94|COMPLETED|0:0|2026-10-12T19:01:25|2026-10-12T20:43:14|6109|gpu03",
+    "paired_training_completed_utc": "2026-10-12T12:43:12.928552+00:00",
+    "both_result_files_and_validation_candidates_published": true,
+    "arms": {
+      "A": {
+        "status": "complete",
+        "epochs": 40,
+        "successful_updates": 9600,
+        "presentations": 7200000,
+        "amp_retries": 4,
+        "wall_seconds": 3006.9861632157117,
+        "selected_epoch": 9,
+        "original_validation_correct": 8778,
+        "selected_validation_count_delta": 0
+      },
+      "B": {
+        "status": "complete",
+        "epochs": 40,
+        "successful_updates": 9600,
+        "presentations": 7200000,
+        "amp_retries": 4,
+        "wall_seconds": 3055.495084230788,
+        "selected_epoch": 33,
+        "original_validation_correct": 8760,
+        "selected_validation_count_delta": 0
+      }
+    },
+    "restart_or_rerun_performed": false,
+    "host": "gpu03",
+    "gpu_index": 1,
+    "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d"
+  },
+  "test_terminal": {
+    "observed_utc": "2026-10-12T12:49:17.616390+00:00",
+    "tmux_session": "r66_final_test",
+    "tmux_terminal": true,
+    "tmux_handle_returncode": 1,
+    "tmux_handle_observation": "can't find window: r66_final_test",
+    "slurm_step": "1465.95",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "start_local": "2026-10-12T20:47:10",
+    "end_local": "2026-10-12T20:47:47",
+    "elapsed_seconds": 37,
+    "slurm_timestamp_timezone": "Asia/Shanghai",
+    "sacct_command": "sacct -j 1465.95 --noheader --parsable2 --format=JobIDRaw,State,ExitCode,Start,End,ElapsedRaw,NodeList",
+    "sacct_raw": "1465.95|COMPLETED|0:0|2026-10-12T20:47:10|2026-10-12T20:47:47|37|gpu03",
+    "command": "R66_PARENT_GPU_BATON=locked-test bash code/V4/run_v4_r66_test.sh",
+    "test_results_complete": true,
+    "exclusive_final_test_started_exists": true,
+    "original_full18_fulllegalpool_tests_per_frozen_model": 1,
+    "official_arm_frozen_before_test": "A",
+    "wall_seconds_published": 34.49616882484406,
+    "results": {
+      "A": {
+        "native_correct": 8499,
+        "native_total": 18000,
+        "native_top1": 0.4721666666666667,
+        "complete_evaluation_seconds": 15.151043560355902,
+        "evaluated_bundle_path": "/public/home/shiys/0selection2/code/V4/runs/R66_additive_correction_full18/A_independent_sum_seed2/best_checkpoints/epoch009.pt",
+        "evaluated_bundle_sha256": "1c8b97a758e08232a0c9538062f59a0b65d25b1cbe38fd10067e54bd0bf4573f"
+      },
+      "B": {
+        "native_correct": 8569,
+        "native_total": 18000,
+        "native_top1": 0.47605555555555557,
+        "complete_evaluation_seconds": 14.641829319298267,
+        "evaluated_bundle_path": "/public/home/shiys/0selection2/code/V4/runs/R66_additive_correction_full18/B_additive_correction_seed2/best_checkpoints/epoch033.pt",
+        "evaluated_bundle_sha256": "de4eda23d3b4c0b1bc07ff89ed3d845b651f61ea6a437e8b7a44163f2bee6b7f"
+      }
+    },
+    "actual_launch_idle_receipt": {
+      "checked_utc": "2026-10-12T12:47:10.727072+00:00",
+      "host": "gpu03",
+      "slurm_step": "1465.95",
+      "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+      "gpu_index": 1,
+      "gpu_name": "NVIDIA GeForce RTX 3090",
+      "memory_used_mib": 2,
+      "memory_total_mib": 24576,
+      "compute_apps": [],
+      "idle": true,
+      "tmux_session": "r66_final_test",
+      "baton": "locked-test",
+      "only_assigned_uuid_queried": true
+    },
+    "launch_receipt_source": "test_launch_receipt.json",
+    "selector_forwards_per_query": 2,
+    "deployment_completed_solvers_per_query": 1,
+    "solver_executions_during_evaluation": 0,
+    "base_cache_test_inference": false,
+    "optimizer_mode_transition": false,
+    "separate_latency_benchmark": false,
+    "duplicate_attempt_or_rerun": false,
+    "reference_inference_or_prediction_replay": false,
+    "test_based_reselection": false
+  },
+  "new_pair_updates": 19200,
+  "new_pair_presentations": 14400000,
+  "new_pair_arm_wall_seconds": 6062.4812474465,
+  "new_training_gpu_allocation_step_seconds": 6109,
+  "new_test_gpu_allocation_step_seconds": 37,
+  "test_wall_seconds": 34.49616882484406,
+  "inherited_base": {
+    "checkpoint_sha256": "d880cb2ed4605f410742b4c37945494323213168af95d02b22794d232b9e7ad8",
+    "successful_updates": 9600,
+    "presentations": 7200000,
+    "counted_once_for_pair": true,
+    "training_arm_wall_seconds": 2979.1438028374687,
+    "result_path": "/public/home/shiys/0selection2/code/V4/runs/R65_schedule_free_full18/B_schedule_free_seed2/result.json",
+    "result_sha256": "75b95d69d0f2afe18feb57e828ab318daf81e1f7f3373a756e74842cb640d814"
+  },
+  "new_pilots_or_sizing": 0,
+  "selector_forwards_per_deployment": 2,
+  "completed_solvers_per_deployment": 1,
+  "inference_scope": "ordinary live F+g_x FP32 eval batch128; original full18/fulllegalpool; no timing benchmark",
+  "solver_executions_during_delivery": 0
+}
