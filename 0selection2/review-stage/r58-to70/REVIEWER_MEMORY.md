@@ -761,3 +761,154 @@ B TEST47.411111% is not70% acceptance. No extra experiment or replay performed.
 
 Verbatim fresh Memory update:
 R64's completed larger-batch paired experiment and validation-frozen delivery are supported; no actionable delivery defect was found. Preserve original selection counts, disclosed timing-evaluation variation, historical-reference exposure and aborted-run separation. R60B remains the validation reference. Legacy B-domain inconsistency and R58 remain unresolved/deferred. No ceiling, noise explanation or70% achievement is established.
+
+Parent whole-version R64 commit ca88f30d0 pushed successfully to origin/main
+(15363d0ec..ca88f30d0). Only curated R64 code/results/locks/predictions/curves/
+review receipts and prospective R65 plan were committed; all50 unrelated user
+staged files remain staged. No extra R64 commit or retest. R65 implementation is
+now authorized per adopted primary plan, with no new preflight/review gate.
+
+
+## R65 Fresh Formal Launch And Parent Handoff, 2026-10-12T08:52:54.255771+00:00
+
+Adopted actual R64_closure_R65_plan.response.md exactly for one optimizer mechanism:
+A ordinary AdamW versus B unmodified official AdamWScheduleFree at upstream
+70785b53e778d0e872c0bbb75ff4ee54ee10c291, vendored with Apache-2.0 license in
+isolated R65 files; shared conda environment unchanged. Fresh exact R64 selector,
+seed2 original18/fullpools/nativeCE+sameRDrop, handcrafted34+ID, existing TRAIN-only
+geometry, exact R64 schedule generation. Mean FP32 task gradients, no PCGrad or
+normalization, global clip1, fixed real256/task/effective768; tail16/effective48.
+Both40E/9600updates/7.2M presentations. LR3e-4 after720 successful-update warmup;
+B internal warmup only. B gradients at y, evaluation/best and resumable last at x;
+resume optimizer returns from eval to train once before continuation.
+
+Exactly ONE focused CPU check PASSED (roundtrip max error0, exact model+optimizer
+resume, actual selected256 rows reused in both forwards, tail16, no double ramp).
+No GPU preflight, sizing, timing campaign, additional tests/review/audit or solver
+calls. Source snapshot36 files, paired initial state/schedule and both configs saved.
+
+Actual assigned-UUID idle launch receipt 2026-10-12T08:51:04.998856+00:00:
+gpu03/index1 GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d, RTX3090,2MiB,no clients.
+Live tmux r65_train, panePID2056504; existing Slurm1465 step1465.92, trainingPID2031634.
+Launch command and full receipt: code/V4/runs/R65_schedule_free_full18/handoff.json.
+Pipeline log: code/V4/runs/R65_schedule_free_full18/pipeline.log. A then B automatically.
+A first formal update1 tasks VRPL/OVRPBL/OVRPL,256 each/effective768; LR
+4.1666666666666667e-7, loss1.9512447118759155, CE1.9512438774108887,
+KL0.0016764886677265167, gradnorm0.9690369367599487,clip1,retries0,finite.
+Normal formal time0.7634726753458381s,1005.929910526413 rows/s; peak allocated
+4.404256820678711GiB,reserved4.607421875GiB,physical used4.930908203125GiB.
+At handoff evidence observed 2026-10-12T08:52:54.255771+00:00, A successful update213 recorded;
+last.pt present and both arm configs present. This is launch evidence, no outcome analysis.
+
+Parent now owns ordinary monitoring of this existing pipeline; do not duplicate it.
+After both complete, parent uniquely locks validation-selected weights/rule/official
+arm (integer native correct/18000, exact checkpoint ties earliest, official tieA),
+then authorizes ONE original TEST/arm via exclusive final_test_started entry.
+TEST/analysis not authorized or started; historical references reused, no inference
+reruns. No Git add/commit/push. R64 sources/snapshots/artifacts untouched, R58 wholly
+deferred, legacy B-task feasible-domain mismatch remains unresolved/disclosed.
+Full18 single-solver native70% goal ACTIVE, nightmare/100rounds, same-family/
+provisional. Plan8ready remains PLAN ONLY; no performance acceptance or70% promise.
+
+## R65 Locked Delivery Completed, 2026-10-12
+
+Existing r65_train/Slurm1465.92 genuinely completed0:0,16:51:04-18:31:18CST,
+elapsed6014s; tmux gone observed18:33:36CST. Fresh paired A/B each40E,
+9600updates/7.2M presentations/4AMP retries. Arm wall A2987.141745s/B2979.143803s.
+No restart/rerun, training/weight/source-snapshot/README/parameter-mode changes.
+
+Parent-delegated mechanical validation lock at10:34:15UTC copied published records:
+A38 ordinary8599/18000=47.772222%; B40 averaged x8770/18000=48.722222%; officialB.
+B minus A validation171correct/+0.950000pp. Selected TRAIN A50.556111%, B49.382222%.
+No cost/TEST selection, x/y/z choice or posterior per-task model assembly.
+
+ONE locked full original18/fulllegalpool TEST/model ran together in r65_final_test/
+1465.93,18:35:23-18:35:45CST,COMPLETED0:0/22s; tmux gone observed18:36:25CST.
+Actual launch queried only assignedUUID/index1, idle2MiB/no clients. Exclusive
+final_test_started marker created once. A8365/18000=46.472222%, officialB8575/18000
+=47.638889%. Historical R45A/R60B/R64 saved official tests reused; no inference,
+solver/prediction replay, reselection or duplicate attempt.
+
+New standalone r65_analysis.py executed ONCE on CPU after actual TEST terminal0;
+owned exec57600 settled exit0, wall52.42s/user51.28s/system0.55s. Wrote81-line
+RESULTS.md,391-row comparison.csv, full18/family/split/last5/optimizer CSVs,
+329 PNGs and terminal/lock/compute/analysis/delivery/reference-provenance receipts.
+Root: code/V4/runs/R65_schedule_free_full18/. No report-generation CPU tests.
+
+This is one seed/one LR/frozen weights. R64 comparison also changes common LR/
+controller; only new A/B identifies this optimizer-package contrast. Historical
+TEST is exposed, not pristine. No cost/margin veto on native70%; official locked
+TEST is below70%, so full18/single-solver goal stays ACTIVE,nightmare/100rounds.
+R58 fully deferred; legacy eight B-task feasible-domain mismatch unresolved/disclosed.
+Parent primary Astra TRAIN/validation-only review/next plan, one fresh delivery
+review and ONE whole-version commit/push remain pending. Worker did no Git/R66;
+R64 remains COMPLETE/pushed ca88f30d0 and immutable. All owned exec sessions settled.
+
+## R65 Primary TRAIN/Validation Review and Adopted R66 Plan
+
+Actual GPT-6-Astra/max resumed primary thread01a12e68-4d2a-71d0-aefd-67fc1c158282;
+CLI81429 returned0. Trace .aris/traces/R65_closure_R66_plan.events.jsonl and
+verbatim response .aris/traces/R65_closure_R66_plan.response.md. Full memory was
+snapshotted before new R65 TEST in R65_before_test_reviewer_memory.md; that full
+snapshot was prepended. New R65 TEST/delivery analysis excluded from planning.
+Parent adopts the ONE full18 additive-correction plan below, not a parameter
+grid. ActualSol/max fresh thread01a12fba-be9a-7032-96fd-d7c7f26a8466/CLI3776
+implements R66; no Git/R65 mutations/TEST authorized. Formal launch follows one
+focused CPU check and ordinary assignedUUIDidle check, real256/effective768.
+
+`review_independence=same-family; acceptance_status=provisional`
+
+R65 performance: **4/10, not ready for 70%.** Completed TRAIN/validation integrity: **9/10, ready within that scope.** I found no actionable defect in the inspected optimizer, gradient, checkpoint or selection paths. New R65 TEST and delivery analyses were excluded.
+
+| Selected model | Epoch | TRAIN Top1 | Validation correct / Top1 | Validation regret |
+|---|---:|---:|---:|---:|
+| [A: constant AdamW](/public/home/shiys/0selection2/code/V4/runs/R65_schedule_free_full18/A_constant_adamw_seed2/result.json) | 38 | 50.556111% | 8599/18000 / 47.772222% | 1.044606% |
+| [B: schedule-free](/public/home/shiys/0selection2/code/V4/runs/R65_schedule_free_full18/B_schedule_free_seed2/result.json) | 40 | 49.382222% | 8770/18000 / 48.722222% | 0.945528% |
+
+B gains **171 correct decisions, +0.950000pp**, over matched A. That is a useful result for this optimizer recipe, but B remains **0.638889pp below R60B** and **0.038889pp below R64B**. It does not advance the broad validation incumbent.
+
+The curves refine the earlier diagnosis. Between epochs20 and40, A’s TRAIN accuracy rises from47.7339% to51.2589%, while validation slips from47.5278% to47.3778%; validation CE rises from1.12426 to1.15812. This is actual late fitting/generalization divergence. B’s averaged deployment model improves more smoothly: validation rises from47.8722% to48.7222%, with CE falling from1.09753 to1.09011. Its final TRAIN/validation gap is only0.66pp. Thus schedule-free stabilized this regime, but stronger optimization alone has not resolved the remaining classification difficulty. These results establish neither an accuracy ceiling nor label noise.
+
+Both arms completed **9,600 updates / 7.2M presentations**, four AMP retries each, with identical effective LR traces. Combined recorded wall time was **5,966.29 seconds**, peak allocated memory15.3195GiB. Both selected-checkpoint validation recounts agree exactly. The inspected code correctly trains B at `y`, evaluates/saves `x`, and retains integer-count checkpoint selection.
+
+I compared **stagewise corrective learning**, an **independently trained ensemble**, and **TRAIN-example retrieval**. Retrieval already exists in [R47](/public/home/shiys/0selection2/code/V4/r47_model.py:12), so repeating that mechanism lacks a new justification. An independent ensemble tests diversity; it makes a useful control for learning a correction specifically against the existing selector’s errors.
+
+**Recommend R66: one full18 additive correction stage. Score: 8/10, ready, PLAN ONLY.** Stagewise additive fitting fixes the current predictor and optimizes the loss after adding a new function; this is the construction in [Friedman, Section3, equations9–10](https://www.cse.iitb.ac.in/~soumen/readings/papers/Friedman1999GreedyFuncApprox.pdf). Here the project hypothesis is that additional capacity trained on remaining native-classification errors generalizes better than independently trained additional capacity. No gain is promised.
+
+1. **Common frozen component and architecture.** Freeze the existing validation-selected **R65B40 averaged-`x` checkpoint** as `F` in both arms. Add one fully trainable R64 `NativeUtilitySelector`, `g`, retaining dimension128, four encoder layers, two joint layers, four heads, FFN512, readout256, dropout0.1, handcrafted34+ID and existing TRAIN geometry. Every original input field and directed ATSP path remains available. Both arms receive identical fresh `g` initialization using fixed member seed`660002`; zero its final score-layer weight and bias in both arms. Experiment/data seed remains2. The inherited `F` is explicitly shared; trainable parameters start fresh.
+
+2. **Single experimental difference.** Let `RDropCE(s1,s2,w)` mean the existing mean of two native-winner CEs plus `0.35 × min(u/720,1)` times existing legal-pool symmetric KL. A trains `RDropCE(g1,g2,w)`. B trains `RDropCE(F+g1,F+g2,w)`, with detached, frozen `F`. Both deploy the same fixed sum **`F+g`**. B’s CE gradient therefore depends on the remaining composite prediction error, `softmax(F+g)-one_hot(w)`. This is one correction stage with coefficient1, with no task gates, candidate pruning or coefficient selection.
+
+3. **Inputs and cached predictions.** Preserve original18 tasks, all legal candidates and native winners. Reuse R65B’s existing `train_predictions/best/<task>.npz` and `val_predictions/best/<task>.npz` logits, aligned by original row indices and pool IDs. The archives also contain labels/costs: only prediction logits and indexing metadata enter this cache interface. Labels remain loss/evaluation targets; routes never enter either model. The frozen base receives inputs only. Use isolated R66 wrapper/objective/runner files and reuse the established R64 model and R65 optimizer/update machinery.
+
+4. **Batch, optimizer and budget.** Retain real256 rows per task, three tasks per update, effective768; tail16/task gives48. Average same-state task gradients in FP32, clip once at1, and preserve whole-triple AMP retry semantics. Both new members use **R65B’s exact schedule-free optimizer configuration**, internal720-update warmup to`3e-4`, then constant LR. Run fixed40 epochs: **240 updates /180,000 presentations per epoch; 9,600 updates /7.2M presentations per arm**, with two dropout forwards. Share task order, row order and dropout streams. No early stopping. New paired expenditure is19,200 updates/14.4M presentations; disclose the inherited base’s earlier9,600 updates/7.2M presentations separately.
+
+5. **Selection and inference.** Every epoch evaluate the **composite** `F+g_x` on all18,000 validation examples, FP32 batch128. Select maximum integer correct count over epochs1–40, earliest exact tie; never select the new member alone. Freeze one complete two-model bundle per arm, coefficient1, and official arm by validation count, tieA. At inference compute both selectors’ full-pool logits, sum them, break exact ties by ascending global solver ID, and execute **one selected solver**. No per-task checkpoint assembly.
+
+6. **TEST and execution.** After the parent freezes both bundles, run one full original TEST per bundle and reuse historical reference results. No TEST-driven changes. One focused CPU check should cover the offset objective, frozen-base gradients and identical composite inference rule; then begin formal training at batch256. Cached base logits keep training activation demand close to R65. Deployment requires approximately twice the selector forward work; measure actual latency during ordinary final evaluation. R65’s roughly1.66-hour pair is a marginal-training reference, not a cutoff. Sol alone uses the assigned UUID; one commit follows completed training, locked TEST and reporting.
+
+The corrective-learning hypothesis is unsupported if B does not beat the matched additive-ensemble control on validation. Beating A while remaining below R60B is limited progress. Additional TRAIN fitting without validation improvement is insufficient; cost/regret remain disclosures, not vetoes. A 70% claim still requires the official frozen full18 TEST result.
+
+Memory update, proposed without editing files: R65 schedule-free B40 achieved48.722222% validation, +0.95pp over matched A38 but−0.638889pp versus R60B. A developed late fitting/generalization divergence; B stabilized deployment predictions without improving the broad incumbent. Mode transitions, matched budgets and integer selection are supported; no actionable defect found. R66 proposes one full18 additive correction against an independently trained additive-ensemble control, sharing frozen R65B40 and identical fresh trainable-member initialization. New TEST evidence did not inform planning. R58 and eight legacy B-task semantics remain deferred; the70% goal remains active and unachieved.
+
+## R65 Fresh Nightmare Delivery Review
+
+Actual fresh GPT-6-Astra/max thread01a12fb6-0a82-7342-b0e5-36da1dbf8da5,
+CLI7395 returned0. Full current memory prepended. Read-only direct-artifact
+review, no GPU/replay/experiments/edits. Raw trace and verbatim response:
+.aris/traces/R65_fresh_delivery_review.events.jsonl and
+.aris/traces/R65_fresh_delivery_review.response.md. No actionable findings;
+delivery9/ready only, same-family/provisional. Performance70% remains unachieved.
+No debate/fix experiment is warranted when there is no critical objection.
+
+No actionable delivery defects found. **Delivery integrity: 9/10, ready**, with `review_independence=same-family` and `acceptance_status=provisional`.
+
+- **Optimizer handling is correct.** B’s saved checkpoint contains averaged `x`, with optimizer `train_mode=False` and `k=9600`. TEST loads those weights directly without another transition. Warmup occurs once; the recorded A/B effective LR traces match. See [optimizer handling](/public/home/shiys/0selection2/code/V4/r65_optimizer.py:42) and [TEST loading](/public/home/shiys/0selection2/code/V4/r65_experiment.py:477).
+- **Selection precedes TEST.** The histories uniquely select A38 and B40 by integer validation counts. Official B was frozen at 10:34:15 UTC, before TEST started at 10:35:25 UTC. The exclusive marker, tested identities and terminal receipt agree. See [lock](/public/home/shiys/0selection2/code/V4/runs/R65_schedule_free_full18/final_test_lock.json:3) and [TEST receipt](/public/home/shiys/0selection2/code/V4/runs/R65_schedule_free_full18/test_terminal_receipt.json:7).
+- **Accounting and reporting agree.** Both arms completed 40 epochs, 9600 updates, 7.2M presentations and four AMP retries. All 391 comparison rows’ 2737 metric values match their saved source records. Complete TRAIN evaluations, original 18-task TEST coverage and historical-reference reuse are supported; no cached optimization metric substitutes for evaluation.
+
+**Performance against 70%: not ready.** Official B achieved **8575/18000 = 47.638889% TEST Top1**, versus A’s 46.472222%. B’s actual TEST regret is **0.978280%**; cost does not veto or redefine the Top1 target. B remains below the historical R60B reference. [Reported results](/public/home/shiys/0selection2/code/V4/runs/R65_schedule_free_full18/RESULTS.md:22)
+
+Residual limitations are one seed, one LR, exposed historical TEST data, and the unresolved legacy eight B-task feasible-domain discrepancy. R58 remains deferred. No corrective experiment or replay is required by this review.
+
+Memory update: R65 delivery is supported with no actionable defects. Preserve validation-frozen A38/B40, official B, averaged-x deployment and completed one-time tests. TEST feedback remains reporting-only, not permission for R66 tuning. The full18 single-solver 70% goal remains active and unachieved.

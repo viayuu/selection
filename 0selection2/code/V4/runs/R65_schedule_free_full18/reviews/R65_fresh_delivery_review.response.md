@@ -1,0 +1,11 @@
+No actionable delivery defects found. **Delivery integrity: 9/10, ready**, with `review_independence=same-family` and `acceptance_status=provisional`.
+
+- **Optimizer handling is correct.** B’s saved checkpoint contains averaged `x`, with optimizer `train_mode=False` and `k=9600`. TEST loads those weights directly without another transition. Warmup occurs once; the recorded A/B effective LR traces match. See [optimizer handling](/public/home/shiys/0selection2/code/V4/r65_optimizer.py:42) and [TEST loading](/public/home/shiys/0selection2/code/V4/r65_experiment.py:477).
+- **Selection precedes TEST.** The histories uniquely select A38 and B40 by integer validation counts. Official B was frozen at 10:34:15 UTC, before TEST started at 10:35:25 UTC. The exclusive marker, tested identities and terminal receipt agree. See [lock](/public/home/shiys/0selection2/code/V4/runs/R65_schedule_free_full18/final_test_lock.json:3) and [TEST receipt](/public/home/shiys/0selection2/code/V4/runs/R65_schedule_free_full18/test_terminal_receipt.json:7).
+- **Accounting and reporting agree.** Both arms completed 40 epochs, 9600 updates, 7.2M presentations and four AMP retries. All 391 comparison rows’ 2737 metric values match their saved source records. Complete TRAIN evaluations, original 18-task TEST coverage and historical-reference reuse are supported; no cached optimization metric substitutes for evaluation.
+
+**Performance against 70%: not ready.** Official B achieved **8575/18000 = 47.638889% TEST Top1**, versus A’s 46.472222%. B’s actual TEST regret is **0.978280%**; cost does not veto or redefine the Top1 target. B remains below the historical R60B reference. [Reported results](/public/home/shiys/0selection2/code/V4/runs/R65_schedule_free_full18/RESULTS.md:22)
+
+Residual limitations are one seed, one LR, exposed historical TEST data, and the unresolved legacy eight B-task feasible-domain discrepancy. R58 remains deferred. No corrective experiment or replay is required by this review.
+
+Memory update: R65 delivery is supported with no actionable defects. Preserve validation-frozen A38/B40, official B, averaged-x deployment and completed one-time tests. TEST feedback remains reporting-only, not permission for R66 tuning. The full18 single-solver 70% goal remains active and unachieved.

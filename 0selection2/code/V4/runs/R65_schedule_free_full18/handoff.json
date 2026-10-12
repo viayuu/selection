@@ -1,0 +1,119 @@
+{
+  "observed_utc": "2026-10-12T08:52:54.255771+00:00",
+  "first_formal": {
+    "arm": "A",
+    "successful_update": 1,
+    "tasks": [
+      "VRPL",
+      "OVRPBL",
+      "OVRPL"
+    ],
+    "task_rows": [
+      256,
+      256,
+      256
+    ],
+    "actual_forward_rows": [
+      256,
+      256,
+      256
+    ],
+    "rows": 768,
+    "lr": 4.1666666666666667e-7,
+    "optimizer_base_lr": 4.1666666666666667e-7,
+    "loss": 1.9512447118759155,
+    "ce": 1.9512438774108887,
+    "kl": 0.0016764886677265167,
+    "grad_norm": 0.9690369367599487,
+    "clip_coefficient": 1,
+    "seconds": 0.7634726753458381,
+    "queries_per_second": 1005.929910526413,
+    "peak_memory_gib": 4.404256820678711,
+    "peak_reserved_gib": 4.607421875,
+    "physical_used_gib": 4.930908203125,
+    "physical_total_gib": 23.5882568359375,
+    "retries": 0,
+    "finite_loss": true,
+    "finite_gradient": true,
+    "consistency_weight": 0.0004861111111111111
+  },
+  "launch": {
+    "id": "20261012T085150222095Z",
+    "arm": "A",
+    "status": "started",
+    "started_unix": 1791795110.222163,
+    "host": "gpu03",
+    "pid": 2031634,
+    "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+    "slurm_step": "1465.92",
+    "tmux_session": "r65_train",
+    "formal": true,
+    "resumed_from_successful_update": 0,
+    "previously_recorded_execution": {
+      "recorded_successful_optimizer_steps": 0,
+      "recorded_query_presentations": 0,
+      "recorded_amp_retries": 0
+    },
+    "recorded_steps_after_checkpoint": 0
+  },
+  "assigned_idle_receipt": {
+    "checked_utc": "2026-10-12T08:51:04.998856+00:00",
+    "host": "gpu03",
+    "slurm_step": "1465.92",
+    "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+    "gpu_index": 1,
+    "gpu_name": "NVIDIA GeForce RTX 3090",
+    "memory_used_mib": 2,
+    "memory_total_mib": 24576,
+    "compute_apps": [],
+    "idle": true,
+    "tmux_session": "r65_train",
+    "baton": "schedule-free-full18",
+    "only_assigned_uuid_queried": true
+  },
+  "receipt_path": "code/V4/runs/R65_schedule_free_full18/launch_receipt_20261012T085104999311Z.json",
+  "tmux_pane": "r65_train 2056504 bash",
+  "cpu_check": {
+    "passed": true,
+    "focused_cpu_checks": 1,
+    "optimizer": "official AdamWScheduleFree",
+    "eval_train_roundtrip": true,
+    "roundtrip_max_abs_error": 0,
+    "checkpoint_mode": "eval x plus optimizer train_mode=False",
+    "exact_resume_model_and_optimizer": true,
+    "resumed_successful_updates": 9,
+    "no_double_warmup": true,
+    "first_effective_lr": 4.1666666666666667e-7,
+    "actual_selected_rows_forwarded": true,
+    "real_task_rows": [
+      256,
+      256,
+      256
+    ],
+    "tail_task_rows": [
+      16,
+      16,
+      16
+    ],
+    "actual_two_forwards_share_selected_batch": true,
+    "fp32_arithmetic_mean": true,
+    "gpu_used": false,
+    "data_or_test_loaded": false
+  },
+  "last_checkpoint_exists": true,
+  "latest_successful_update": 213,
+  "initial_hash": "ea1915fd5389f55754677c05ba10080735ca4c25c9f1216fbce0d32d48a5b0fe",
+  "schedule_hash": "930e0d3f19fc0384d285acebdc17f30fe0d5b00dbb0cc3608008de14a7e94688",
+  "parameter_count": 1842953,
+  "source_snapshot_files": 36,
+  "both_configs_exist": true,
+  "test_entry_started": false,
+  "command": "source /public/home/shiys/miniconda3/etc/profile.d/conda.sh && conda activate easynco && tmux new-session -d -s r65_train bash -lc 'source /public/home/shiys/miniconda3/etc/profile.d/conda.sh && conda activate easynco && cd /public/home/shiys/0selection2 && R65_PARENT_GPU_BATON=schedule-free-full18 bash code/V4/run_v4_r65.sh train > code/V4/runs/R65_schedule_free_full18/pipeline.log 2>&1'",
+  "ownership": "Parent owns monitoring of the live tmux A -> B pipeline after implementation worker returns",
+  "test_authorized": false,
+  "analysis_authorized": false,
+  "git_operations": false,
+  "r58": "deferred",
+  "legacy_B_feasible_domain": "unresolved/disclosed",
+  "performance_acceptance": false
+}

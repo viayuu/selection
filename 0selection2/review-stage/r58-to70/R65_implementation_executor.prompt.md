@@ -54,6 +54,10 @@ gates. Timing comes from normal first formal successful update. Immediately laun
 the fresh paired pipeline after this necessary check, A then B. Ordinary assigned
 UUID idle check ONLY at actual launch; if unavailable wait, never switch devices.
 
+Keep tool output concise: use focused source reads and structured JSON summaries,
+not giant result/history/state dumps. Necessary implementation work is authorized;
+do not turn source provenance or normal input loading into another audit gate.
+
 Sole assigned GPU: gpu03/index1 UUID GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d,
 existing Slurm1465. New tmux r65_train. Do not touch anotherGPU/client/process/
 allocation/queue or old jobs. Use existing R64 launcher pattern safely but new

@@ -1,0 +1,76 @@
+{
+  "lock": {
+    "authorized": true,
+    "created_utc": "2026-10-12T10:34:15+00:00",
+    "authorization": "Parent user conditionally delegated this mechanical freeze and one full original TEST per frozen arm after both arms genuinely finish; both result files and validation_candidates.json are published and training is terminal COMPLETED 0:0.",
+    "models": {
+      "A": {
+        "path": "/public/home/shiys/0selection2/code/V4/runs/R65_schedule_free_full18/A_constant_adamw_seed2/best.pt",
+        "sha256": "23f65ba8f1202ec6bd91fce41f9dfa12dbf5ce9d50eab19522c0cee7116ebd51",
+        "epoch": 38,
+        "native_correct": 8599,
+        "native_total": 18000,
+        "val": {
+          "macro_ce": 1.1482249200344086,
+          "macro_top1": 0.4777222222222222,
+          "macro_top2": 0.8115555555555557,
+          "macro_top3": 0.9146666666666666,
+          "macro_top1_tie_aware": 0.47822222222222227,
+          "macro_mean_cost": 11.183101703569825,
+          "macro_vs_sbs_pct": -0.9653311841106879,
+          "macro_vs_oracle_pct": 1.0016764628234445,
+          "macro_actual_regret_pct": 1.04460615289387,
+          "macro_vbs_gap_closed_pct": 26.226776533322838
+        },
+        "parameter_mode": "ordinary"
+      },
+      "B": {
+        "path": "/public/home/shiys/0selection2/code/V4/runs/R65_schedule_free_full18/B_schedule_free_seed2/best.pt",
+        "sha256": "d880cb2ed4605f410742b4c37945494323213168af95d02b22794d232b9e7ad8",
+        "epoch": 40,
+        "native_correct": 8770,
+        "native_total": 18000,
+        "val": {
+          "macro_ce": 1.0901139742798276,
+          "macro_top1": 0.4872222222222222,
+          "macro_top2": 0.8214999999999999,
+          "macro_top3": 0.9248333333333333,
+          "macro_top1_tie_aware": 0.48800000000000004,
+          "macro_mean_cost": 11.169639888890874,
+          "macro_vs_sbs_pct": -1.0560372972245973,
+          "macro_vs_oracle_pct": 0.9075363303661383,
+          "macro_actual_regret_pct": 0.9455277310434759,
+          "macro_vbs_gap_closed_pct": 31.014482848809596
+        },
+        "parameter_mode": "averaged x"
+      }
+    },
+    "official_arm": "B",
+    "proposed_official_arm": "B",
+    "inference_rule": "FP32 eval; full legal pool; highest direct utility; exact ties by ascending global solver ID",
+    "validation_only_provenance": {
+      "source": "validation_candidates.json and both published result.json files",
+      "records_copied_exactly_as_published": true,
+      "checkpoint_rule": "Strict maximum original integer native validation correct/18000; earliest exact within-arm tie",
+      "official_arm_rule": "Maximum published integer native validation correct/18000; exact tie A",
+      "same_effective_lr_trace_sha256": "bc57df6eef1991b310dd586650df5287fa5a41fa66065952f311f15c61786ca7",
+      "cost_or_test_used_for_selection": false,
+      "parameter_mode_choice": false,
+      "posterior_per_task_assembly": false
+    },
+    "training_terminal_receipt": "training_terminal_receipt.json",
+    "training_terminal": {
+      "slurm_step": "1465.92",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed_seconds": 6014,
+      "tmux_session": "r65_train",
+      "tmux_terminal": true,
+      "observed_utc": "2026-10-12T10:33:36.883772+00:00"
+    },
+    "test_scope": "One full original18/fulllegalpool TEST per frozen A/B together; 1000 rows/task/model; fixed FP32 batch128; no reference inference or solver execution",
+    "exclusive_start_marker": "final_test_started.json"
+  },
+  "started_unix": 1791801325.607812,
+  "one_complete_original_test_per_frozen_model": true
+}

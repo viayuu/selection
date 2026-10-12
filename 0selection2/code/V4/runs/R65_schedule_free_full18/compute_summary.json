@@ -1,0 +1,157 @@
+{
+  "arms": {
+    "A": {
+      "epochs_completed": 40,
+      "successful_updates": 9600,
+      "presentations": 7200000,
+      "amp_retries": 4,
+      "wall_seconds": 2987.141744663939,
+      "actual_execution": {
+        "recorded_successful_optimizer_steps": 9600,
+        "recorded_query_presentations": 7200000,
+        "recorded_amp_retries": 4
+      },
+      "logged_update_seconds": 2679.756014798768,
+      "peak_allocated_gib": 15.319464206695557,
+      "peak_reserved_gib": 22.822265625,
+      "logged_whole_device_peak_physical_gib": 21.219970703125,
+      "selected_evaluation_seconds": {
+        "train": 18.40531421545893,
+        "val": 1.8453138656914234,
+        "test": 8.047035369090736
+      },
+      "selected_validation_count_delta": 0
+    },
+    "B": {
+      "epochs_completed": 40,
+      "successful_updates": 9600,
+      "presentations": 7200000,
+      "amp_retries": 4,
+      "wall_seconds": 2979.1438028374687,
+      "actual_execution": {
+        "recorded_successful_optimizer_steps": 9600,
+        "recorded_query_presentations": 7200000,
+        "recorded_amp_retries": 4
+      },
+      "logged_update_seconds": 2678.193969719112,
+      "peak_allocated_gib": 15.319464206695557,
+      "peak_reserved_gib": 22.802734375,
+      "logged_whole_device_peak_physical_gib": 21.202392578125,
+      "selected_evaluation_seconds": {
+        "train": 18.383693584240973,
+        "val": 1.8561111148446798,
+        "test": 7.403797327540815
+      },
+      "selected_validation_count_delta": 0
+    }
+  },
+  "training_terminal": {
+    "observed_utc": "2026-10-12T10:33:36.883772+00:00",
+    "recorded_utc": "2026-10-12T10:34:15+00:00",
+    "tmux_session": "r65_train",
+    "tmux_terminal": true,
+    "tmux_handle_returncode": 1,
+    "tmux_handle_observation": "can't find window: r65_train",
+    "slurm_step": "1465.92",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "start_local": "2026-10-12T16:51:04",
+    "end_local": "2026-10-12T18:31:18",
+    "slurm_timestamp_timezone": "Asia/Shanghai",
+    "elapsed_seconds": 6014,
+    "sacct_command": "sacct -j 1465.92 --noheader --parsable2 --format=JobIDRaw,State,ExitCode,Start,End,ElapsedRaw",
+    "sacct_raw": "1465.92|COMPLETED|0:0|2026-10-12T16:51:04|2026-10-12T18:31:18|6014",
+    "scontrol_terminal_observation": "Job step 1465.92 not found",
+    "pipeline_terminal_line": "[R65 paired training complete] parent validation freeze / TEST authorization pending",
+    "paired_training_completed_utc": "2026-10-12T10:31:16.961111+00:00",
+    "both_result_files_and_validation_candidates_published": true,
+    "arms": {
+      "A": {
+        "status": "complete",
+        "epochs": 40,
+        "successful_updates": 9600,
+        "presentations": 7200000,
+        "amp_retries": 4,
+        "wall_seconds": 2987.141744663939
+      },
+      "B": {
+        "status": "complete",
+        "epochs": 40,
+        "successful_updates": 9600,
+        "presentations": 7200000,
+        "amp_retries": 4,
+        "wall_seconds": 2979.1438028374687
+      }
+    },
+    "restart_or_rerun_performed": false,
+    "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+    "host": "gpu03",
+    "gpu_index": 1
+  },
+  "test_terminal": {
+    "observed_utc": "2026-10-12T10:36:25.360552+00:00",
+    "tmux_session": "r65_final_test",
+    "tmux_terminal": true,
+    "tmux_handle_returncode": 1,
+    "tmux_handle_observation": "can't find window: r65_final_test",
+    "slurm_step": "1465.93",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "start_local": "2026-10-12T18:35:23",
+    "end_local": "2026-10-12T18:35:45",
+    "slurm_timestamp_timezone": "Asia/Shanghai",
+    "elapsed_seconds": 22,
+    "sacct_command": "sacct -j 1465.93 --noheader --parsable2 --format=JobIDRaw,State,ExitCode,Start,End,ElapsedRaw",
+    "sacct_raw": "1465.93|COMPLETED|0:0|2026-10-12T18:35:23|2026-10-12T18:35:45|22",
+    "scontrol_terminal_observation": "Job step 1465.93 not found",
+    "command": "R65_PARENT_GPU_BATON=locked-test bash code/V4/run_v4_r65.sh test",
+    "test_results_complete": true,
+    "exclusive_final_test_started_exists": true,
+    "original_full18_fulllegalpool_tests_per_frozen_model": 1,
+    "official_arm_frozen_before_test": "B",
+    "wall_seconds_published": 19.343863286077976,
+    "results": {
+      "A": {
+        "native_correct": 8365,
+        "native_total": 18000,
+        "native_top1": 0.4647222222222222
+      },
+      "B": {
+        "native_correct": 8575,
+        "native_total": 18000,
+        "native_top1": 0.47638888888888886
+      }
+    },
+    "actual_launch_idle_receipt": {
+      "checked_utc": "2026-10-12T10:35:24.106101+00:00",
+      "host": "gpu03",
+      "slurm_step": "1465.93",
+      "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+      "gpu_index": 1,
+      "gpu_name": "NVIDIA GeForce RTX 3090",
+      "memory_used_mib": 2,
+      "memory_total_mib": 24576,
+      "compute_apps": [],
+      "idle": true,
+      "tmux_session": "r65_final_test",
+      "baton": "locked-test",
+      "only_assigned_uuid_queried": true
+    },
+    "launch_receipt_source": "availability.jsonl entry checked_utc=2026-10-12T10:35:24.106101+00:00 and matching launch_receipt JSON",
+    "duplicate_attempt_or_rerun": false,
+    "reference_inference_or_solver_execution": false,
+    "test_based_reselection": false
+  },
+  "test_wall_seconds": 19.343863286077976,
+  "new_pilots_or_sizing": 0,
+  "analysis_process": {
+    "executions": 1,
+    "cpu_only": true,
+    "exit_code_observed": 0,
+    "wall_seconds": 52.42,
+    "cpu_user_seconds": 51.28,
+    "cpu_system_seconds": 0.55,
+    "source": "Owned exec session57600 settled; /usr/bin/time -p in analysis.log"
+  },
+  "inference_scope": "FP32 eval batch128, original full18/fulllegalpool; no singleton timing or solver execution"
+}
