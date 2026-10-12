@@ -1485,8 +1485,388 @@ cleanup entries and usercode/.gitignore; no forcedweights/NPZ/rawupdates/W&B.
 Source README remains frozen launch-era protocol, REPORT generated before
 parent closure; RESULTS/DELIVERY explain actual final delivery without rerun.
 Actual nextSol/maxCLI74082 started isolatedR68implementation; no formalGPU
-launch yet confirmed. Primary R68plan8/ready is PLANONLY, one SAMcontrast from
-shared Bstage1terminalxtrunk/freshhead, full18native single-solver70 unchanged.
+launch yet confirmed at that publication-preparation snapshot. Primary R68plan8/ready
+is PLANONLY, one SAMcontrast from shared Bstage1terminalxtrunk/freshhead,
+full18native single-solver70 unchanged.
+
+## R67 Published; R68 Actual Formal Launch Handoff
+
+R67 was published in ONE completed-version commit
+`7dd4941775f5aa8ddd22725e21d88c592ef10ca8` (486 files), actual push session84237
+terminal0: main `8cc4ce3e8..7dd494177` to github.com:viayuu/selection.git.
+Exactly14524 unrelated preexisting staged cleanup entries remained staged
+(20pt/13969npz/451wandb/84other); user code/.gitignore remained unstaged.
+No newly forced weights/NPZ/rawupdates/W&B/cache or regenerable schedule;
+schedule_seed2.json was not committed. Local inference assets remain local,
+so Git alone is not the complete inference bundle. No second R67 commit is due.
+Post-publication metadata updates should join a later completed version.
+
+Actual Sol/max implementation CLI74082/thread01a1303e-208b-7b83-bd84-f32f7616c169
+returned terminal0/turn.completed. Six isolated R68 source/launcher/README files
+and formal handoff exist. ONE distinct focused synthetic CPU check type was
+invoked TWICE and passed both times. It verifies global SAM effective norm
+0.0500000082, exact weight restoration, identical masks/rows on both passes,
+injected second-pass failure and whole-update retry with exactly one successful
+AdamW step, inactive grad=None, target-isolated inputs and common initialization.
+This is not two different experiment pilots or performance evidence.
+
+Preparation step1465.98 failed in3s before any formal update or start marker:
+read-only version recording assumed workspace-local .git, but actual repository
+metadata is /public/home/shiys/.git. Minimum ancestor lookup correction only;
+the same focused CPU check was repeated because the runner source receipt changed.
+Both invocation receipts and failed preparation/recovery are retained. No trained
+state was discarded/restarted; no algorithm, task, loss or batch changed.
+
+Actual formal training launched in tmux r68_train/pane%79/panePID4014571,
+existing Slurm1465/step1465.99, gpu03/index1, sole permitted
+GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d. TrainingPID1436918 belongs to gpu03's
+PID namespace; its absence from admin01 ps is not a failure. A then B run
+sequentially in this exact existing job. Parent normal observation confirmed
+pane alive and step RUNNING/539s; saved pipeline later showed A epoch7/update1620
+with3 whole-update AMP retries. Snapshot only, not terminal or a quality claim.
+
+First formal A update used actual OVRP/CVRP/OVRPLTW batches256/256/256,
+768 selected rows/1536 dropout-view rows, finite loss2.0596263409,
+unscaled FP32 mean gradient norm0.7479377985, LR4.1666667e-7,
+RDrop0.0004861111, zero retries, peak allocated15.2501GiB,
+reserved19.0625GiB/physical19.3860of23.5883GiB. This is a first-update measurement,
+not a whole-run peak or SAM GPU validation; B runs after A.
+
+R68 shares R67B stage1 terminal averaged-x trunk only and the entire fresh
+head(seed670003); no inherited utility head/projector/stage2 trained state.
+Both ordinary-weight AdamW arms are fully trainable/fresh optimizer+scaler;
+B adds global un-clipped L2 SAM rho.05, exact restoration, same dropout RNG,
+one clipped second gradient/base optimizer step. Exact R67 stage2 global41-80
+task/row/dropout order reused. Each new arm40E/9600updates/7.2M selected rows;
+inherited stage1 9600updates/7.2M rows counted separately ONCE. A two views vs
+B four views: selected rows/updates matched, compute not matched. No ScheduleFree
+averaging/mode transition, no new loss or solver/reference/R58 operation.
+
+Next action: ordinary180-300s monitor of the existing job, not a duplicate launch
+or GPU-capacity preflight. Missing isolated delivery entrypoints may be prepared
+without touching frozen training sources. Only after BOTH actual TRAIN/VAL
+terminal0: validation-only integer-correct/earliest-tie checkpoints and official
+arm freeze; ONE original18 TEST per model; ONCE CPU analysis; actual Astra/max
+primary completed-TRAIN/VAL next-plan review with new TEST excluded, fresh
+nightmare delivery review, and ONE completed R68 commit/push. No new R68 TEST
+or analysis has run. All needed foreground exec sessions settled; background
+training stays alive. R64 batch request remains complete/pushedca88f30d0:
+old42 archived, fresh256/task/effective768 both complete, no rerun warranted.
+Full18 native single-solver70% goal ACTIVE/unachieved/nightmare100. Legacy
+eight-B semantics unresolved and disclosed; R58 remains fully deferred.
+
+
+## R68 Bounded Conditional Literature Scout Complete
+
+Actual primary Astra/max CLI35913/thread01a12e68-4d2a-71d0-aefd-67fc1c158282
+returned terminal0. FULL persistent memory was prepended in the saved prompt.
+The actual trace records primary-source browsing and direct prior-code/protocol
+reading. Five primary papers; no partial R68 TRAIN outcome or new R68 TEST used,
+no GPU/replay/edits/Git/experiment or candidate adoption. Conditional preference
+is full18 shared-vs-task-specific complete selector parameters if completed R68
+does not advance validation; latent interpolation and joint cost distribution
+are alternative hypotheses only. Reduced per-task data/18x capacity, smoothing
+assumptions and cost-distribution assumptions are explicitly counter-evidence.
+One globally selected bundle is required if task unsharing is later adopted;
+no per-task epoch stitching. No evidence70attainable/no ceiling claim.
+Full raw actual response including Memory update follows verbatim.
+
+### Verbatim R68 Conditional Scout
+
+`review_independence=same-family; acceptance_status=provisional; PLAN/SCOUT ONLY`
+
+**My conditional preference is a full18 comparison of shared versus task-specific complete selector parameters, if completed R68 does not advance the validation incumbent. No R69 is adopted.** I checked five primary papers. R68 outcomes and TEST artifacts were excluded; historical TEST exposure in memory remains disclosed.
+
+R67 supports retaining its useful contrastive initialization: B gained105 validation decisions across13 tasks, but remained13 decisions below R60B. Its late TRAIN/validation divergence makes additional capacity risky, while providing no proof that shared capacity is sufficient. I compared these three directions.
+
+1. **Change which tasks share parameters.**
+
+   [Standley et al., Sections4–5](https://proceedings.mlr.press/v119/standley20a/standley20a.pdf) show that task grouping benefits depend on network capacity and training-data volume. [Fifty et al., Section4.1, Eq.1](https://arxiv.org/pdf/2109.04617) measure affinity through the relative loss change after another task’s update:
+   `Z(i→j) = 1 − L_j(θ − η∇L_i)/L_j(θ)`.
+   Their grouping method differs from modifying gradients while retaining one shared model.
+
+   **Project adaptation:** compare one shared full18 selector against a single task-indexed bundle containing18 complete selectors. Initialize every copy from the same R67B terminal pretraining trunk and identical fresh head. Each task retains its entire legal pool. Known problem identity activates one selector, which chooses one completed solver. Select the entire bundle at one common epoch using aggregate validation correct count.
+
+   This removes cross-task parameter sharing throughout fine-tuning. R64 PCGrad retained shared parameters; R53 only modified a gated solver pair. R49–56’s diagnostics, frozen readouts and route-supervised specialists do not establish this full18 contrast.
+
+   **Counter-evidence and control:** R64’s negligible PCGrad gain weakens an interference explanation; R67’s overfitting warns that reducing each model’s training population to10,000 examples could hurt. Shared versus untied models with identical per-task exposure is the minimum control. It changes total parameter capacity, so a gain would not isolate gradient interference. Failure to improve full18 validation would reject this bounded unsharing recipe.
+
+   **Feasibility:** sequential task forwards preserve the calibrated batch256 activation shape. The local single-selector checkpoint is7.46MB;18 parameter copies are modest relative to activation memory, although optimizer storage and runtime must be disclosed. There is one active selector forward per query.
+
+2. **Train on interpolated hidden examples while preserving ordinary native supervision.**
+
+   [Manifold Mixup, Section2, Eq.1](https://proceedings.mlr.press/v97/verma19a/verma19a.pdf) jointly interpolates hidden representations and one-hot targets:
+   `h̃ = λh_i + (1−λ)h_j`, `ỹ = λy_i + (1−λ)y_j`.
+   [RegMixup, Eq.3](https://proceedings.neurips.cc/paper_files/paper/2022/file/5ddcfaad1cb72ce6f1a365e8f1ecf791-Paper-Conference.pdf) retains clean-example CE and adds interpolation CE instead of replacing ordinary supervision.
+
+   **Project adaptation:** interpolate aligned candidate-conditioned representations between TRAIN examples from the same task and legal pool, at one fixed location before the utility head. Keep original CE/RDrop. These are auxiliary latent targets, not asserted winners for newly constructed routing instances. No coordinate transformation or solver-label invariance assumption is needed.
+
+   This supplies predictions between training representations. RDrop compares dropout views of one example; R67 clusters examples by winner without imposing these interpolated predictions. It also differs from R54/R55 reconstruction and R61/R62 pretraining targets.
+
+   **Counter-evidence and control:** winner boundaries may be discontinuous, so linear interpolation could erase useful distinctions. R67’s modest benefit and R66’s weak fitting make stronger smoothing uncertain. Compare an extra unmixed head-loss pass against the same computation using mixed features and targets, with one fixed mixing recipe. Better calibration or CE without better native validation Top1 would not support the selection hypothesis.
+
+   **Feasibility:** reuse backbone features, adding small mixing and head computations; inference remains unchanged. This is a plausible secondary direction, with stronger overlap with R68’s generalization motivation.
+
+3. **Predict a joint cost distribution and choose the most probable native winner.**
+
+   [Salinas et al., Sections3–4, Eq.5](https://proceedings.neurips.cc/paper_files/paper/2019/file/0b105cf1504c4e241fcc6d519ea962fb-Paper.pdf) combine likelihood training, marginal transformations and covariance `Σ = D + VVᵀ`. Their evidence concerns forecasting.
+
+   **Project adaptation:** use the existing complete TRAIN cost vectors to learn a conditional joint distribution, then select
+   `argmax_m P(C_m = min_j C_j | x)`.
+   Joint samples must be mapped back to original cost units before comparing candidates. Sampling predicted costs executes no solvers.
+
+   This differs from [R39’s point estimates](/public/home/shiys/0selection2/code/V4/dual_stream.py:110), R43 pairwise margins and R62 comparison pretraining: dependence between candidate costs affects the probability of being the minimum. It adds no observations.
+
+   **Counter-evidence and control:** previous cost-supervised approaches have not established a broad gain. Likelihood may emphasize absolute-cost variation while missing winner boundaries; learned variance does not establish label noise. Compare diagonal versus fixed rank-two covariance with identical backbone, marginal treatment and sampling rule. Better likelihood without better native validation Top1 would refute the proposed benefit.
+
+   **Feasibility:** small legal pools make covariance operations and fixed-budget sampling inexpensive relative to the backbone. Inference adds distribution sampling to one selector forward. This remains more speculative than task unsharing.
+
+For the preferred conditional direction,40 full-data epochs would preserve7.2M selected-row presentations per arm. Under the existing triple schedule, that is9,600 logical updates; each untied task model receives1,600 active updates and400,000 rows. Those differences must be reported alongside18-fold parameter storage. One globally selected bundle prevents task-wise checkpoint assembly; no task-group search is proposed.
+
+Adoption must await completed R68 TRAIN/validation. Any subsequent experiment retains original18 tasks, full pools, native winners, validation-only checkpoint/official-arm selection, and one frozen full18 TEST per model or bundle. These papers and project results provide **no evidence that70% is attainable**, and establish no accuracy ceiling.
+
+**Memory update:** Conditional scout checked five primary papers covering task grouping, latent-example interpolation and joint cost-distribution learning. Full-model task unsharing is the preferred conditional next comparison if completed R68 does not advance full18 validation; it differs from R64 gradient projection and prior gated pair specialists. Its main risks are reduced per-model data and increased parameter capacity. Latent interpolation is distinct from RDrop/SupCon but may oversmooth winner boundaries; joint cost distributions remain assumption-heavy. No R69 is adopted. R68 outcomes and TEST evidence did not guide this scout; historical TEST exposure is disclosed. R58 and legacy eight-B-task semantics remain deferred, and the full18 single-solver70% goal remains active and unachieved.
+
+## R68 Delivery Code Prepared; Existing Formal Job Preserved
+
+Actual same Sol/max thread resumed as CLI32452, terminal0/turn.completed.
+Created r68_frozen_evaluation.py, run_v4_r68_test.sh, r68_analysis.py and
+R68root/DELIVERY_PROTOCOL.md/delivery_preparation.json. Python ast/compile
+syntax and shell bash-n passed, without imports or entrypoint execution.
+One CPU load of an existing unique checkpoint read actual ordinary-weight
+metadata only; no model instantiation/forward, GPU query/job, TEST, analysis,
+metric replay, focused CPU check rerun, solver/R58, frozen source edit or Git.
+These files are NOT added to the frozen launch hash list. Parent quick read
+confirmed the intended ordinary-weight mode/unique selection/full18 scope;
+runtime verification awaits actual future delivery, not claimed from syntax.
+Actual response/events/prompts and bounded scout records copied into
+R68root/reviews for later ONE whole-version publication; no current Git action.
+
+Normal authoritative observation at2026-10-12T17:55:30UTC:
+tmuxr68_train/pane%79/PID4014571 alive, exactSlurm1465.99 RUNNING/2108s/gpu03.
+Current Aepoch28/global68,6660successfulupdates/4998240selectedrows;
+trainingPID1436918 and assignedUUID unchanged. AthenB remains the SAME job,
+not restarted for observation timeouts. All needed foreground CLI sessions
+(32452/35913) settled; background formal training remains live.
+
+Next goal turn: ordinary180-300s monitoring ONLY while that job is live.
+No repeat CPU checks, GPU sizing or duplicate launch. Both actual40epoch
+TRAIN/VAL terminal0 and candidates required before prepared mechanical
+validation freeze, ONE original18 TEST/model and ONCE CPU analysis. Parent
+then runs actual primary completed-TRAIN/VAL next-plan review excluding new
+R68 TEST, fresh nightmare delivery review, and ONE completed R68 commit/push.
+Future task files and full pre-newTEST Reviewer Memory snapshot are prepared;
+use FULL current memory at reviewer invocation, not only an old summary.
+No R69 adopted, no R68 TEST or analysis executed, no new current-version
+commit. Full18 native single-completed-solver70% objective ACTIVE/unachieved,
+not blocked; R58 and legacy eight-B-task semantics remain deferred/disclosed.
+
+## R68 Actual Staged Delivery Executor Armed
+
+Parent explicitly authorized the prepared conditional delivery at
+2026-10-12T18:00:31UTC. Actual same Sol/max CLI thread
+01a1303e-208b-7b83-bd84-f32f7616c169 resumed in OWNED CPU tmuxr68_delivery,
+pane%80/panePID4166113/actualcodexPID4166122, with actual process arguments
+--modelgpt-6.1-sol/model_reasoning_effort=max confirmed. Raw trace:
+.aris/traces/R68_locked_delivery_execution.events.jsonl. Explicit prompt and
+R68root/delivery_authorization.json preserve preauthorization. This is a CPU
+executor only, not a second GPU training job or new experiment.
+
+Actual first worker monitor confirmed existing r68_train/pane%79/PID4014571,
+Slurm1465.99RUNNING/2432s/gpu03, A32/global72/u7680/5760000rows;
+no paired completion, freeze/TEST/analysis markers yet. Parent also directly
+confirmed trainer alive/A31 before launch. Soleassigned3090/seed/data/sources/
+batch and AthenB training unchanged. Do NOT resume this same Sol CLI thread,
+start a duplicate executor, restart training or query otherGPUs while it lives.
+
+The executor monitors180-300s; ONLY after BOTH actual40epochTRAIN/VALterminal0
+and complete candidates does it record actual scheduler/tmux terminal evidence,
+mechanically freeze unique integer-VALbest checkpoints/officialarm(earliesttie,
+armtieA), perform ONE original18 TEST/model on SAMEassignedUUID/allocation, then
+ONCE prepared CPU analysis after actualTESTterminal0. Any actual failure must
+be preserved/reported, not automatically retried or corrected by reselection.
+No frozen source/weight edit, newsolver/R58/reference inference, Git or candidate.
+It returns execution_receipt linking actual receipts and authorization.
+
+Parent retains actual Astra/max completed-TRAIN/VAL nextplan with NEW R68 TEST
+excluded and full before-newTEST Reviewer Memory, fresh nightmare delivery
+review, whole-objective audit, persistentstate and ONEwholeversioncommit/push.
+All unified foreground execsessions settled; owned CPUexecutor/GPUtrainer tmux
+remain live. Next goal turn: poll those SAMEhandles coarsely; do not relaunch
+merely for timeout. Full18 native single-completed-solver70% goal remains ACTIVE
+and unachieved; R69 not adopted, R58/legacy8Bsemantics deferred/disclosed.
+
+Parent18:05:21UTC confirmed SAME r68_delivery pane%80/PID4166113 alive and
+actual executor trace has a CPU monitor command in_progress, followed by
+worker statement that the loop is active. It polls every240s through A and B;
+freeze/TEST gates remain closed until both actual results/VAL histories and
+tmux+Slurm terminal0. No duplicate executor or new parent foreground session.
+
+## R68 Coarse Monitor: Natural A-to-B Transition
+
+Verified wait only at 2026-10-12T18:15:20UTC, not a new implementation or
+experiment. Original r68_train/pane%79/PID4014571 and CPU r68_delivery/
+pane%80/PID4166113 remain alive; same Slurm1465.99 RUNNING/3297seconds.
+A result.json now publishes40epochs/9600successfulupdates/7200000rows.
+B naturally started, observed epoch2/global42/u420/318240rows. Its actual
+existing update has real forward rows256/256/256, finite first and second
+losses1.3763976892/1.4425755342, perturbation norm0.0499999970, exact original
+weight restoration, RNG replay for second pass and one base optimizer step;
+zero retries for that snapshot. Peak allocated15.3200GiB so far is not a
+whole-run maximum. No extra SAM precheck, GPUjob, restart or protocol edit.
+
+Existing Sol/max CPU delivery executor stays live and must not be duplicated
+or resumed concurrently. Still await B full40epochs and BOTH terminal0 before
+validation freeze/ONEoriginal18TESTpermodel/ONCECPUanalysis. Parent then actual
+Astra completed-TRAIN/VAL closure with newR68TEST excluded, fresh nightmare
+delivery review, whole-goal audit and ONEversioncommit. No R69 adoption,
+TEST-driven planning, R58 or solver execution. Original70%goal remains ACTIVE,
+unachieved and not blocked; this status observation is only verified wait.
+
+## R68 Actual Primary TRAIN/VAL Closure And R69 Plan
+
+Actual GPT-6-Astra/max primary CLI56785, same thread
+01a12e68-4d2a-71d0-aefd-67fc1c158282, completed exit0/turn.completed.
+Full before-newR68TEST memory was prepended; the actual call began only after
+both40epoch TRAIN pipelines and1465.99 completed0. NEW R68 TEST and analysis
+were explicitly excluded from planning. Full raw response follows verbatim,
+including its Memory update. Performance4/notready for70%; integrity9/ready,
+nextR69plan8/ready PLANONLY, same-family/provisional. No actionable defect or
+corrective replay; parent adopts ONE full18 shared-versus-complete-task-specific
+fine-tuning contrast, not a local expert or conditional-scout-only adoption.
+
+`review_independence=same-family; acceptance_status=provisional`
+
+**R68 performance: 4/10, not ready for 70%. TRAIN/validation integrity: 9/10, ready within the inspected scope.** No actionable implementation defect found. Both arms completed successfully; new R68 TEST and delivery-analysis artifacts were excluded.
+
+SAM loses **28 validation decisions, −0.155556 percentage points**, against matched AdamW. Validation selects **A28**, ahead of B35. A remains **1.338889pp below R60B**; B remains **1.494444pp below**. This bounded SAM recipe does not advance the incumbent.
+
+| Validation record | Native Top1 | CE | Actual regret |
+|---|---:|---:|---:|
+| A28, selected: 8644/18000 | 48.022222% | 1.119215 | 0.974169% |
+| B35, selected: 8616/18000 | 47.866667% | 1.113930 | 1.013203% |
+| A40, final | 47.050000% | 1.148645 | 1.064938% |
+| B40, final | 47.177778% | 1.120747 | 1.090791% |
+| A, last-five mean | 47.431111% | 1.156541 | 1.030852% |
+| B, last-five mean | 47.516667% | 1.118958 | 1.028748% |
+
+Last-five means summarize epochs36–40; they are not averaged checkpoints. Sources: completed [A result](/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/A_plain_adamw_seed2/result.json), [B result](/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/B_sam_adamw_seed2/result.json) and their complete histories.
+
+At the selected checkpoints, each cell below is **Top1% / CE / regret%**:
+
+| Family | A28 | B35 | Fixed R60B39 |
+|---|---:|---:|---:|
+| ALL | 48.022 / 1.1192 / 0.9742 | 47.867 / 1.1139 / 1.0132 | 49.361 / 1.0924 / 0.9228 |
+| TSP | 36.000 / 1.7170 / 0.6571 | 36.300 / 1.7272 / 0.7564 | 37.600 / 1.6335 / 0.6242 |
+| CVRP | 48.800 / 1.3788 / 0.6983 | 48.400 / 1.3603 / 0.6522 | 49.300 / 1.3349 / 0.6544 |
+| ATSP | 77.600 / 0.6016 / 0.3600 | 74.100 / 0.6513 / 0.7708 | 78.400 / 0.5904 / 0.3063 |
+| MVRP | 46.800 / 1.0966 / 1.0546 | 46.853 / 1.0875 / 1.0705 | 48.213 / 1.0737 / 1.0017 |
+
+B improves **nine tasks and regresses on nine** against A. Its largest gains are OVRPL+2.3pp and OVRPTW+2.0pp; largest losses are VRPBTW−4.1pp and ATSP−3.5pp. Against R60B, A improves3/regresses14/ties1; B improves4/regresses14. Neither improves any family aggregate over the [fixed reference](/public/home/shiys/0selection2/code/V4/runs/R60_expanded_partial_supervision/B_expanded_seed2/result.json).
+
+A shows clear late fitting/generalization divergence: selected-to-final TRAIN Top1 rises **49.5844%→53.5683%**, TRAIN CE falls1.06507→0.99185, while validation Top1 falls48.0222%→47.0500%. B fits less strongly: selected-to-final TRAIN49.6978%→50.1900%, validation47.8667%→47.1778%. SAM lowers late validation CE and slightly improves the last-five accuracy mean, but does not improve the predeclared selected-checkpoint target. These observations establish neither sharp minima nor label noise or an accuracy ceiling.
+
+The inspected [initialization](/public/home/shiys/0selection2/code/V4/r68_model.py:30), [gradient update](/public/home/shiys/0selection2/code/V4/r68_gradient.py:87) and [training/selection path](/public/home/shiys/0selection2/code/V4/r68_experiment.py:241) correctly implement the shared terminal trunk/fresh head, ordinary AdamW weights, unclipped global SAM perturbation, repeated dropout masks, exact restoration and one clipped optimizer step. Boundary, tail, selected-epoch and retry records agree. All three B retries occurred in the perturbed pass; the whole update was retried. Both selected validation recounts agree exactly. No corrective replay is warranted.
+
+Each arm completed **9,600 updates/7.2M selected rows**. Successful dropout-view rows were14.4M for A and28.8M for B; attempted totals14,405,632/28,807,680 include5/3 retries. Arm wall times were**3,002.02s/5,677.56s**, making B1.891× as costly; recorded training-epoch time was1.973×. Combined arm wall was8,679.58s, within the8,729s terminal job. Peak allocated memory was15.311/15.325GiB. The earlier3s preparation failure and inherited pretraining remain separate expenditure.
+
+**Recommend R69: complete task-specific fine-tuning versus shared fine-tuning. Score: 8/10, ready, PLAN ONLY.**
+
+The remaining hypothesis is that one shared parameter vector compromises task-specific winner boundaries. R64 changed gradients within shared parameters; R68 changed neighborhood optimization. Neither tested removing the sharing constraint throughout the complete selector. R49–56’s pair specialists and R59–67’s transfer, auxiliary supervision, recurrence and additive correction do not establish this full18 comparison. R64’s small gain and R68’s overfitting are counter-evidence to a simple interference explanation.
+
+[Standley et al., Sections4–5](https://proceedings.mlr.press/v119/standley20a/standley20a.pdf) show that task-sharing outcomes depend on capacity and data volume. [Fifty et al., Section4.1](https://arxiv.org/pdf/2109.04617) distinguish task grouping from modifying updates within shared parameters. Their evidence concerns other domains. Our adaptation compares `mean_t L_t(theta)` with `mean_t L_t(theta_t)` using one fixed assignment: every task gets its own complete parameter copy. No affinity-measurement or grouping search is proposed.
+
+1. **Architecture and initialization.** `A_shared_seed2` contains one R64 `NativeUtilitySelector`; `B_task_specific_seed2` contains18 complete copies indexed by known problem identity. Retain d128, four encoder/two joint layers, four heads, FFN512, readout256, dropout0.1, handcrafted34+ID, directed ATSP and all original inputs. Initialize every copy identically from R67B’s terminal stage1 averaged-x trunk plus the entire fresh head670003, using the existing R68 initialization identity. All parameters train; no trained R68 state transfers.
+
+2. **Isolated implementation.** Add `r69_model.py`, `r69_gradients.py`, `r69_experiment.py`, one focused CPU-check entry and launcher. Reuse the existing input whitelist, native objective and full18 evaluation. The task-indexed wrapper chooses one branch from `problem_id`; labels and costs remain targets. Existing R68 sources and artifacts stay frozen.
+
+3. **One contrast and fixed optimizer.** Both arms use R68A’s ordinary AdamW configuration: LR`3e-4*min(u/720,1)`, betas`(.9,.999)`, epsilon`1e-8`, weight decay`1e-4`, `foreach=False`; no SAM or parameter averaging. Keep two-forward native CE plus symmetric legal-pool RDrop with coefficient`0.35*min(u/720,1)`. A is the matched shared control; this choice holds the optimizer fixed while testing parameter sharing.
+
+4. **Exact update semantics.** Compute the same three task losses at unchanged weights. A averages their FP32 gradients in shared coordinates. B assigns each active branch its own FP32 task gradient divided by3, equivalent to differentiating the same mean loss in disjoint coordinates. Clip the complete active gradient once at1, then call one AdamW step. All inactive branches retain `grad=None`, with no moment, parameter or weight-decay advancement. Use the common global successful-update LR clock; per-parameter Adam counters advance only when active.
+
+5. **Data and budgets.** Reuse the exact R67 global41–80 task/row/dropout schedule, seed2, real256/task, three tasks/update, tail16/task. Fixed40 epochs give9,600 logical updates and7.2M selected rows per arm;14.4M dropout-view rows each. Each B branch receives1,600 active updates and400,000 rows. These are matched example/forward budgets, **not matched parameter capacity or per-parameter update counts**. Count inherited stage1’s9,600 updates/7.2M rows separately once.
+
+6. **Recovery and necessary check.** Preserve whole-triple AMP recovery, restored RNG, no optimizer/cursor advancement before all gradients are finite, and20-attempt limit. One focused synthetic CPU check covers identical initialization, correct task routing/target isolation, inactive-branch immutability, the divided-by3 gradient, injected whole-update retry and complete-bundle save/load. Then formal training; no sizing or diagnostic campaign.
+
+7. **Selection and deployment.** Evaluate all18,000 validation rows each epoch, FP32 batch128. Select maximum integer native-correct count, earliest exact tie; official arm by count, tieA. B’s checkpoint contains **all18 branches from one common epoch**. At inference, known task identity activates one selector, full-pool utility argmax uses global-ID ties, and one selected solver completes. After the parent freezes both complete models/rule/official arm, run one original full18 TEST each; reuse historical reference results. Cost remains disclosure.
+
+8. **Feasibility and interpretation.** B has33,173,154 parameters versus1,842,953 for A. FP32 weights, gradients and two Adam moments total approximately0.49GiB for the bank, before temporary buffers; sequential task forwards preserve the measured batch256 activation shape. One selector forward remains active per query. Allow roughly2–3 hours for the pair as a planning estimate, including larger checkpoint overhead; measure ordinary runtime on the assigned UUID only. One completed-version commit follows delivery.
+
+The strongest risk is fitting18 models from only10,000 fine-tuning examples each. A gain would support this unsharing recipe, not isolate harmful gradient interference from increased capacity and changed optimizer histories. Failure to beat matched A leaves the hypothesis unsupported; remaining below R60B means no incumbent improvement. No evidence establishes that70% is attainable. Historical TEST exposure remains disclosed; new R68 TEST did not inform this recommendation.
+
+**Memory update:** R68 completed matched40-epoch arms. Plain AdamW A28 achieved8644/18000 validation correct,48.022222%; SAM B35 achieved8616,47.866667%,−0.155556pp against A and−1.494444pp versus R60B. SAM reduced late fitting and validation CE without improving selected native Top1; task effects split nine gains/nine regressions. Inspected initialization, SAM restoration/retry, accounting and integer-selection paths are correct; no corrective replay is required. Recommend one R69 full18 shared-versus-task-specific complete-selector fine-tuning comparison, with common initialization, fixed AdamW/data budgets and one globally selected bundle. Increased capacity, fewer examples per branch and different active parameter-update counts remain explicit limitations. New R68 TEST was excluded; historical TEST is exposed. R58 and eight legacy B-task semantics remain deferred; the full18 single-completed-solver70% goal remains active and unachieved.
+
+## R69 Approved Reuse Of Exact Shared Control
+
+Actual same primary GPT-6-Astra/max CLI7781 completed exit0/turn.completed,
+full current memory prepended, NEW R68 TEST/analysis excluded. Parent asked
+one evidence-based operational amendment to avoid redundant shared training;
+direct protocol/source inspection confirmed exact R68A scientific equivalence.
+Main full18 shared-versus-task-specific hypothesis unchanged, plan8/ready ONLY.
+Parent adopts reuse and trains ONLY NEW B; never retrain/recount/reselect/retest
+fixed A28/8644VALcorrect. Raw response and Memory update follow verbatim.
+
+`review_independence=same-family; acceptance_status=provisional`
+
+**Allow reuse. Rerunning A is unnecessary. Amended R69 plan: 8/10, ready, PLAN ONLY.**
+
+The saved [protocol](/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/protocol.json), initialization/schedule records and [training path](/public/home/shiys/0selection2/code/V4/r68_experiment.py:215) match the proposed shared control: identical starting state, data/dropout order, objective, AdamW settings, gradient reduction, clipping, budget and integer validation selection. I found no scientific protocol difference requiring another A run. This establishes protocol equivalence, not an independent replication.
+
+Amend execution as follows:
+
+1. **Reuse fixed A.** Reference R68A’s complete TRAIN/validation history and immutable epoch28 checkpoint: **8644/18000 validation correct, 48.022222%**. Preserve its existing identity and selection. Do not retrain, recount, reselect or retest A.
+
+2. **Train only B.** Initialize all18 complete selectors from the common **pre-fine-tuning** state: R67B terminal stage1 trunk plus fresh head670003. Do not initialize from trained A28. Retain the adopted schedule, native CE/RDrop, ordinary AdamW, real256×3 batches and16×3 tails. Each active branch receives its task gradient divided by3; clip the combined active gradient once at1 and perform one AdamW step. Inactive branches remain `grad=None`; retain whole-update AMP recovery.
+
+3. **Separate expenditure.**
+
+   | Component | Updates | Selected-row presentations | Accounting |
+   |---|---:|---:|---|
+   | New B training | 9,600 logical | 7.2M | Measure actual runtime/retries |
+   | Reused R68A | 9,600 historical | 7.2M historical | Existing3,002.024237s;5 retries |
+   | Shared inherited pretraining | 9,600 historical | 7.2M historical | Count once separately |
+
+   B runs40 epochs and14.4M successful dropout-view rows; each branch receives1,600 active updates/400,000 rows. Describe R69 as **one new arm compared with a reused control**, not two newly executed arms. Capacity and per-parameter update counts remain unmatched.
+
+4. **Freeze by validation only.** Evaluate B’s complete18-task validation each epoch. Select maximum integer correct count, earliest exact tie, saving all18 branches from that common epoch. Official B requires **more than8644 correct**; otherwise official A remains. Preserve the full-pool utility/global-ID-tie inference rule and one completed solver per query.
+
+5. **Test only new B.** After the parent freezes B and the official arm, execute exactly one full original18-task TEST for B. Reuse A’s already-saved official TEST report unchanged, without new inference. Historical TEST exposure must remain disclosed; its values cannot guide B’s design or selection.
+
+This amendment adds no verification gate. Existing R69 implementation requirements, sole assigned UUID/allocation1465/gpu03 restriction and one completed-version publication remain. R68’s negative performance conclusion is unchanged. No TEST artifacts, replay, hash verification or GPU operations were used here.
+
+**Memory update:** R69 shared-control reuse is allowed after direct protocol/source inspection confirmed equivalence with completed R68A. Keep A28 fixed at8644/18000 validation correct; reuse its complete history, checkpoint and existing official TEST without rerunning or reselection. Execute only new task-specific B from the common initial trunk/fresh-head state, retaining the adopted40-epoch schedule and update semantics. Separate new B expenditure, historical A expenditure and inherited pretraining. Select one common-epoch B bundle by integer full18 validation count; official-arm tie favors fixed A. Only B receives a new frozen full18 TEST. No new R68 TEST informed this amendment; historical exposure remains disclosed. R58 remains deferred and the70% goal remains active and unachieved.
+
+## R68 Actual Fresh Nightmare Delivery Closure
+
+Actual FRESH GPT-6-Astra/max CLI67087, independent thread
+01a131b7-2ba8-7313-a2e0-3f1dd4191758, completed exit0/turn.completed.
+Full current Reviewer Memory was prepended. Direct repository/source/saved-
+record inspection found no actionable delivery defect; integrity9/ready for
+legacy reporting only, performance4/notready for70%. No inference/replay/GPU/
+analysis rerun, edits or Git. Same-family/provisional, not cross-family or
+performance acceptance. Full raw response and Memory update follow verbatim.
+
+No actionable delivery defects found. **Delivery integrity: 9/10, ready for legacy reporting only.**
+
+`review_independence=same-family; acceptance_status=provisional`
+
+- **Initialization and SAM match the plan.** Both arms inherit the same terminal R67B stage1 trunk and identical complete fresh head. SAM uses the unclipped three-task FP32 mean, replays dropout RNG, restores original weights, then clips and performs one AdamW step. [Initialization](/public/home/shiys/0selection2/code/V4/r68_model.py:25), [update implementation](/public/home/shiys/0selection2/code/V4/r68_gradient.py:91).
+- **Selection precedes TEST.** Complete histories uniquely select A28/B35. Official A was frozen at 19:47:02 UTC; TEST started at 19:47:33. Tested checkpoint identities match the lock. Each model completed 144 batches covering all 18,000 original TEST rows and full legal pools. [Lock](/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/final_test_lock.json:3), [evaluation](/public/home/shiys/0selection2/code/V4/r68_frozen_evaluation.py:246).
+- **Accounting and reporting agree.** Saved logs confirm 9,600 updates/7.2M selected rows per arm, matching task/row/dropout/LR schedules, and 5/3 retries. Successful view rows are 14.4M/28.8M; inherited pretraining is counted separately once. All 805 comparison rows’ 5,635 metric values match saved source summaries. [Compute](/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/compute_summary.json).
+- **Preparation recovery is correctly distinguished from training.** Records preserve the three-second, zero-update metadata failure and two passed invocations of the same focused CPU check. No trained restart is represented. [Recovery receipt](/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/preparation_recovery.json).
+
+**Performance against 70%: 4/10, not ready.**
+
+| Frozen model | Validation correct / Top1 | TEST correct / Top1 |
+|---|---:|---:|
+| Official A28 | 8644/18000 / 48.022222% | 8435/18000 / **46.861111%** |
+| B35 | 8616/18000 / 47.866667% | 8396/18000 / 46.644444% |
+
+SAM loses 28 validation decisions and 39 TEST decisions against matched A. Both remain below fixed R60B. Official A’s TEST actual regret is 1.015239%; cost does not redefine the native Top1 target. [Results](/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/RESULTS.md:7)
+
+Residual limitations remain one seed/radius, exposed historical TEST, unresolved eight-B-task semantics, and local-only inference assets. R58 remains deferred. This review used source and saved-record inspection without inference, prediction replay, GPU operations, edits or Git mutation. No corrective experiment or analysis rerun is warranted.
+
+**Memory update:** R68 delivery is supported with no actionable defects. Preserve validation-frozen A28/B35, official A, complete ordinary unperturbed weights and completed one-time original18 tests. Official A achieved 46.861111% TEST; SAM B achieved 46.644444%, with no matched validation gain. Initialization, SAM restoration/retry, accounting and reporting are supported. TEST remains reporting-only and does not reopen next-plan adoption. Historical TEST exposure, local-only assets and deferred legacy B semantics remain disclosed. Delivery readiness does not establish performance acceptance; the full18 single-completed-solver 70% goal remains active and unachieved.
 
 
 

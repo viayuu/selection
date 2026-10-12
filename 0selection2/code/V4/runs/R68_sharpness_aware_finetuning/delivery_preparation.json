@@ -1,0 +1,135 @@
+{
+  "recorded_utc": "2026-10-12T17:52:11.217130+00:00",
+  "status": "DELIVERY_CODE_PREPARED_SYNTAX_ONLY",
+  "workspace": "/public/home/shiys/0selection2",
+  "root": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning",
+  "changed_files": [
+    "code/V4/r68_frozen_evaluation.py",
+    "code/V4/run_v4_r68_test.sh",
+    "code/V4/r68_analysis.py",
+    "code/V4/runs/R68_sharpness_aware_finetuning/DELIVERY_PROTOCOL.md",
+    "code/V4/runs/R68_sharpness_aware_finetuning/delivery_preparation.json"
+  ],
+  "syntax": {
+    "python": {
+      "method": "ast.parse and compile(source, path, 'exec'); no imports or bytecode files",
+      "files": ["code/V4/r68_frozen_evaluation.py", "code/V4/r68_analysis.py"],
+      "returncode": 0,
+      "result": "PASS"
+    },
+    "launcher": {
+      "command": "bash -n code/V4/run_v4_r68_test.sh",
+      "returncode": 0,
+      "result": "PASS"
+    },
+    "runtime_validation": "Not executed; syntax-only preparation as requested"
+  },
+  "delivery_source_hashes": {
+    "code/V4/r68_frozen_evaluation.py": "5997eb11f843c4b7dc277162553972ac36765a7cbc0d97012ad2af616f644817",
+    "code/V4/run_v4_r68_test.sh": "65395141b3428ffbe9b64490ae895f21fcc3846b48920b4015680d3cb5b3ca07",
+    "code/V4/r68_analysis.py": "f8fc77af8b37d06d61469ed59e51b7a5e010e63b0daf497bfd52468e69a99624",
+    "code/V4/runs/R68_sharpness_aware_finetuning/DELIVERY_PROTOCOL.md": "656a2400e98c896a7d51822dfda74819b7799f733d28d3760585b150fb2630ed"
+  },
+  "checkpoint_schema_inspection": {
+    "scope": "CPU torch.load of one existing unique R68 checkpoint to read actual saved structure; no model instantiated or forward",
+    "inspected_path": "code/V4/runs/R68_sharpness_aware_finetuning/A_plain_adamw_seed2/best_checkpoints/epoch001.pt",
+    "parameter_mode": "ordinary AdamW weights",
+    "checkpoint_mode": "eval",
+    "checkpoint_epoch_is_zero_based": true,
+    "history_and_lock_epoch_is_one_based": true,
+    "global_epoch": "40 + one-based fine-tuning epoch",
+    "projector_included": false,
+    "perturbed_weights": false,
+    "saved_model_state_sha256": true,
+    "stage_field_required": false
+  },
+  "selection_and_deployment": {
+    "checkpoint_rule": "max INTEGER original18 VAL native_correct/18000; earliest epoch exacttie",
+    "official_arm_rule": "max INTEGER validation count; exacttie A",
+    "unique_selected_epoch_checkpoint_and_published_best_must_match": true,
+    "model": "one complete NativeUtilitySelector per arm at ordinary unperturbed AdamW weights",
+    "optimizer_mode_transition": false,
+    "parameter_averaging": false,
+    "projector_included": false,
+    "task_wise_assembly": false,
+    "cost_or_test_selection": false,
+    "selector_forwards_per_query": 1,
+    "deployment_completed_solvers_per_query": 1,
+    "test_batch_size": 128,
+    "test_rows_per_original_task": 1000,
+    "test_tail_rows_per_task": 104,
+    "test_original_task_count": 18,
+    "exclusive_test_marker": "final_test_started.json",
+    "exclusive_analysis_marker": "analysis_started.json"
+  },
+  "budget": {
+    "new_epochs_per_arm": 40,
+    "new_successful_updates_per_arm": 9600,
+    "new_selected_rows_per_arm": 7200000,
+    "new_pair_successful_updates": 19200,
+    "new_pair_selected_rows": 14400000,
+    "inherited_R67B_stage1_successful_updates_counted_once": 9600,
+    "inherited_R67B_stage1_selected_rows_counted_once": 7200000,
+    "new_successful_view_rows": {"A": 14400000, "B": 28800000},
+    "real_batch_per_task": 256,
+    "tasks_per_update": 3,
+    "effective_batch": 768,
+    "tail_per_task": 16,
+    "tail_effective_batch": 48,
+    "fresh_encoders": false,
+    "shared_inherited_contrastive_trunk": true,
+    "flops_matched": false,
+    "actual_saved_counters_authoritative": true
+  },
+  "existing_training": {
+    "source": "parent-provided observation; deliberately not queried during this sidecar task",
+    "tmux_session": "r68_train",
+    "slurm_step": "1465.99",
+    "parent_reported_state": "RUNNING; A epoch10/40 then B follows",
+    "allocation": "1465",
+    "node": "gpu03",
+    "gpu_index": 1,
+    "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+    "job_modified_restarted_stopped_or_relaunched": false,
+    "frozen_six_launch_files_protocol_snapshot_budget_modified": false,
+    "delivery_added_to_training_hashlist": false
+  },
+  "future_commands": {
+    "environment": "Use activated easynco, bridge PYTHONPATH, threads1 and offline selector W&B as documented in DELIVERY_PROTOCOL.md",
+    "freeze": "CUDA_VISIBLE_DEVICES= python -B -m code.V4.r68_frozen_evaluation --stage freeze --authorize-test",
+    "paired_test": "tmux new-session -d -s r68_final_test 'R68_PARENT_GPU_BATON=locked-test bash code/V4/run_v4_r68_test.sh >> code/V4/runs/R68_sharpness_aware_finetuning/test_pipeline.log 2>&1'",
+    "analysis_once": "CUDA_VISIBLE_DEVICES= python -B -m code.V4.r68_analysis",
+    "executed_now": false,
+    "authorization_granted_by_preparation": false
+  },
+  "future_gates": [
+    "BOTH actual40epoch pipelines terminal0; full40 VAL histories, both results, validation_candidates and paired_training_complete published",
+    "Actual Slurm1465.99 COMPLETED/0:0 and original tmux gone; parent training_terminal_receipt with elapsed_seconds/original scheduler_evidence",
+    "Future explicit parent authorization, mechanical CPU freeze and valid final_test_lock",
+    "Assigned UUID-only idle check immediately before future one-time paired TEST; never switch or stop clients",
+    "Actual future TEST step COMPLETED/0:0 and owned tmux gone; matching test_terminal_receipt before ONCE CPU analysis"
+  ],
+  "historical_references": ["R45A38", "R60B39", "R64A", "R64B", "R65A", "R65B", "R66A", "R66B", "R67A", "R67B"],
+  "current_actions_not_performed": {
+    "gpu_queries_or_jobs": true,
+    "test_or_inference": true,
+    "prediction_or_metric_replay": true,
+    "generated_analysis_execution": true,
+    "solver_or_R58": true,
+    "focused_cpu_check_rerun_or_extra_test_campaign": true,
+    "agents_reviewers_or_network_preflight": true,
+    "git_staging_commit_revert_or_parent_state_changes": true
+  },
+  "foreground_exec_sessions_settled": true,
+  "genuine_implementation_blockers": [],
+  "limits": {
+    "historical_test_exposure_disclosed": true,
+    "legacy_eight_B_task_feasible_domain_mismatches": "unresolved/disclosed; not repaired or used as a native70% veto",
+    "R58": "fully deferred",
+    "claim_70pct": "only official locked complete original18 TEST>=.70 with parent whole-objective audit",
+    "goal_status": "ACTIVE; parent owns audit and closure",
+    "weights_npz_raw_updates_wandb_regenerable_caches": "LOCAL under user ignore/cleanup; never force-add",
+    "git_alone_contains_all_inference_assets": false,
+    "later_publication": "parent curates code/reports/configs/receipts/CSV/figures/reviews once on completed whole version"
+  }
+}

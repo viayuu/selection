@@ -1,0 +1,356 @@
+{
+  "started_utc": "2026-10-12T19:47:33.849090+00:00",
+  "started_unix": 1791834453.8491087,
+  "lock": {
+    "authorized": true,
+    "frozen_utc": "2026-10-12T19:47:02.415507+00:00",
+    "official_arm": "A",
+    "models": {
+      "A": {
+        "path": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/A_plain_adamw_seed2/best.pt",
+        "sha256": "f9714da76840f4b685b3418c2365a6249f3356a8d16cfa7d29dbf2fc7ee679a9",
+        "selected_epoch_checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/A_plain_adamw_seed2/best_checkpoints/epoch028.pt",
+        "epoch": 28,
+        "global_epoch": 68,
+        "native_correct": 8644,
+        "native_total": 18000,
+        "val": {
+          "macro_ce": 1.1192148725191753,
+          "macro_top1": 0.4802222222222222,
+          "macro_top2": 0.8128333333333333,
+          "macro_top3": 0.9198333333333335,
+          "macro_top1_tie_aware": 0.4808888888888888,
+          "macro_mean_cost": 11.174141584370902,
+          "macro_vs_sbs_pct": -1.0244551991308737,
+          "macro_vs_oracle_pct": 0.9401074936834917,
+          "macro_actual_regret_pct": 0.9741691650041189,
+          "macro_vbs_gap_closed_pct": 28.381294171432668
+        },
+        "parameter_mode": "ordinary AdamW weights",
+        "projector_included": false,
+        "perturbed_weights": false,
+        "model_state_sha256": "4c3ddf21fa6f5be52b5773b8fc623256ef561516668f63d61217ace4410c3f95",
+        "inference_path": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/A_plain_adamw_seed2/best_checkpoints/epoch028.pt",
+        "inference_sha256": "f9714da76840f4b685b3418c2365a6249f3356a8d16cfa7d29dbf2fc7ee679a9",
+        "unique_checkpoints": [
+          {
+            "path": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/A_plain_adamw_seed2/best_checkpoints/epoch028.pt",
+            "sha256": "f9714da76840f4b685b3418c2365a6249f3356a8d16cfa7d29dbf2fc7ee679a9"
+          }
+        ],
+        "model_class": "NativeUtilitySelector",
+        "training_phase": "R68 40epoch full fine-tuning",
+        "checkpoint_mode": "eval",
+        "optimizer_mode_transition": false,
+        "parameter_averaging": false
+      },
+      "B": {
+        "path": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/B_sam_adamw_seed2/best.pt",
+        "sha256": "ab116a617dc82e5d581c508e7771a59338ae47aa2409c8c91d5005e7956d6550",
+        "selected_epoch_checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/B_sam_adamw_seed2/best_checkpoints/epoch035.pt",
+        "epoch": 35,
+        "global_epoch": 75,
+        "native_correct": 8616,
+        "native_total": 18000,
+        "val": {
+          "macro_ce": 1.113929678996404,
+          "macro_top1": 0.4786666666666667,
+          "macro_top2": 0.8148333333333333,
+          "macro_top3": 0.921222222222222,
+          "macro_top1_tie_aware": 0.47950000000000004,
+          "macro_mean_cost": 11.177486364878867,
+          "macro_vs_sbs_pct": -0.9877978013693587,
+          "macro_vs_oracle_pct": 0.978185057430039,
+          "macro_actual_regret_pct": 1.0132026011395139,
+          "macro_vbs_gap_closed_pct": 27.880411535264173
+        },
+        "parameter_mode": "ordinary AdamW weights",
+        "projector_included": false,
+        "perturbed_weights": false,
+        "model_state_sha256": "71f42b608f28ae8ae0be73f0ffbc78424bc48b46dc3b3b63f45a7fb2d8dd712d",
+        "inference_path": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/B_sam_adamw_seed2/best_checkpoints/epoch035.pt",
+        "inference_sha256": "ab116a617dc82e5d581c508e7771a59338ae47aa2409c8c91d5005e7956d6550",
+        "unique_checkpoints": [
+          {
+            "path": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/B_sam_adamw_seed2/best_checkpoints/epoch035.pt",
+            "sha256": "ab116a617dc82e5d581c508e7771a59338ae47aa2409c8c91d5005e7956d6550"
+          }
+        ],
+        "model_class": "NativeUtilitySelector",
+        "training_phase": "R68 40epoch full fine-tuning",
+        "checkpoint_mode": "eval",
+        "optimizer_mode_transition": false,
+        "parameter_averaging": false
+      }
+    },
+    "inference_rule": "FP32 eval; full legal pool; highest direct utility; exact ties by ascending global solver ID",
+    "selection": "max integer VAL correct; earliest epoch exacttie; armtie A",
+    "original_full18": true,
+    "problems": [
+      "TSP",
+      "CVRP",
+      "ATSP",
+      "OVRP",
+      "VRPB",
+      "VRPL",
+      "VRPTW",
+      "OVRPTW",
+      "OVRPB",
+      "OVRPL",
+      "VRPBL",
+      "VRPBTW",
+      "VRPLTW",
+      "OVRPBL",
+      "OVRPBTW",
+      "OVRPLTW",
+      "VRPBLTW",
+      "OVRPBLTW"
+    ],
+    "rows_per_task": 1000,
+    "native_total": 18000,
+    "full_legal_pools": {
+      "TSP": [
+        0,
+        1,
+        2,
+        3,
+        7,
+        14,
+        19,
+        20
+      ],
+      "CVRP": [
+        0,
+        3,
+        5,
+        7,
+        11,
+        12,
+        13,
+        14,
+        15,
+        18
+      ],
+      "ATSP": [
+        4,
+        6,
+        8,
+        9,
+        21
+      ],
+      "OVRP": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "VRPB": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "VRPL": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "VRPTW": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "OVRPTW": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "OVRPB": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "OVRPL": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "VRPBL": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "VRPBTW": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "VRPLTW": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "OVRPBL": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "OVRPBTW": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "OVRPLTW": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "VRPBLTW": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "OVRPBLTW": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ]
+    },
+    "selector_forwards_per_query": 1,
+    "final_completed_solvers_per_query": 1,
+    "projector_included": false,
+    "parameter_mode": "ordinary AdamW weights",
+    "perturbed_weights": false,
+    "parameter_averaging": false,
+    "optimizer_mode_transition": false,
+    "tests_per_frozen_model": 1,
+    "test_batch_size": 128,
+    "tails_retained": true,
+    "inherited_initialization": {
+      "inherited_stage1_successful_updates_once": 9600,
+      "inherited_stage1_presentations_once": 7200000,
+      "inherited_from": "R67B stage1 terminal",
+      "source_parameter_mode": "terminal averaged x",
+      "deployment_parameter_mode": "ordinary AdamW weights",
+      "inherited_trunk_hash": "03e8e5e09c6a22d1f1b68a2ac95607125e2afd597911542d3f7db3061ad00b08",
+      "starting_selector_hash": "224266578ae478225829c7215dfd16e6aa704289842fbe762bb35d4b25bcca56",
+      "stage2_head_seed": 670003,
+      "stage2_head_hash": "7286ebbd4eaaf4c5c1e3dae2f80c0456a822e07aeccfe89aff79905bf94f35fb",
+      "entire_fresh_head_copied": true,
+      "inherited_utility_head_loaded": false,
+      "projector_loaded": false,
+      "explicit_identical_copy_across_arms": true,
+      "all_selector_parameters_trainable": true,
+      "fresh_encoders": false,
+      "schedulefree_optimizer": false,
+      "optimizer_mode_transition": false
+    },
+    "inherited_budget_counted_once": true,
+    "new_successful_updates_per_arm": 9600,
+    "new_presentations_per_arm": 7200000,
+    "flops_matched": false,
+    "schedule_identity": {
+      "original80epoch_sha256": "03a66636a654d06a0f9a29e6c005fdd012543bcf2a8bf8859ef41490bb509d9f",
+      "selected_stage2_sha256": "915a19d75dd2f8b4df3fea1cab1e73f63f43e9413dff9b0fa2f483da2ce83b7c",
+      "global_epochs": [
+        41,
+        80
+      ],
+      "zero_based_slice": [
+        40,
+        80
+      ],
+      "seed": 2,
+      "batch_size": 256,
+      "dropout_successful_offset": 9600,
+      "same_task_row_dropout_order_across_arms": true,
+      "regeneration": "paired_triples(sizes, epochs=80, seed=2, batch_size=256); verify R67 full hash; slice permutations/cycles/triples[40:80]",
+      "saved_row_cache": false
+    },
+    "training_terminal_receipt_sha256": "4f7cd37de0f08e0fb0627d73ce0e05fc0c482dc52020b074c21336182c6674d1",
+    "validation_candidates_sha256": "542ea224349f538b583fcdb47c41f6ba1a44d707f7564aad959023e695f91b3f",
+    "protocol_sha256": "3c6b467e369dd603ce2d45386425edfdab50f68f80be7e50ff0a88d73e1704b4",
+    "delivery_source_hashes": {
+      "code/V4/r68_frozen_evaluation.py": "5997eb11f843c4b7dc277162553972ac36765a7cbc0d97012ad2af616f644817",
+      "code/V4/run_v4_r68_test.sh": "65395141b3428ffbe9b64490ae895f21fcc3846b48920b4015680d3cb5b3ca07",
+      "code/V4/r68_analysis.py": "f8fc77af8b37d06d61469ed59e51b7a5e010e63b0daf497bfd52468e69a99624",
+      "code/V4/runs/R68_sharpness_aware_finetuning/DELIVERY_PROTOCOL.md": "656a2400e98c896a7d51822dfda74819b7799f733d28d3760585b150fb2630ed"
+    },
+    "test_reselection": false,
+    "costs_select_checkpoint": false,
+    "task_wise_assembly": false
+  },
+  "allowed_attempts": 1,
+  "evaluation_module_sha256": "5997eb11f843c4b7dc277162553972ac36765a7cbc0d97012ad2af616f644817",
+  "host": "gpu03",
+  "pid": 1659733,
+  "slurm_step": "1465.100",
+  "tmux_session": "r68_final_test",
+  "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+  "batch_size": 128,
+  "selector_forwards_per_query": 1,
+  "optimizer_mode_transition": false,
+  "parameter_mode": "ordinary AdamW weights",
+  "perturbed_weights": false,
+  "parameter_averaging": false,
+  "cached_test_scores": false,
+  "separate_latency_benchmark": false
+}

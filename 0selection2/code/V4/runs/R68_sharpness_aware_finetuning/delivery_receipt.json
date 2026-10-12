@@ -1,0 +1,121 @@
+{
+  "recorded_utc": "2026-10-12T19:50:06.235611+00:00",
+  "training": {
+    "observed_utc": "2026-10-12T19:46:25.985540+00:00",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "tmux_terminal": true,
+    "tmux_session": "r68_train",
+    "slurm_step": "1465.99",
+    "elapsed_seconds": 8729,
+    "scheduler_evidence": {
+      "command": "sacct -j 1465.99 --noheader --parsable2 --format=JobIDRaw,State,ExitCode,ElapsedRaw,Start,End,NodeList",
+      "returncode": 0,
+      "stdout": "1465.99|COMPLETED|0:0|8729|2026-10-13T01:20:22|2026-10-13T03:45:51|gpu03\n",
+      "scheduler_timestamp_timezone": "Asia/Shanghai"
+    },
+    "tmux_evidence": {
+      "command": "tmux has-session -t '=r68_train'",
+      "returncode": 1,
+      "stderr": "can't find session: r68_train"
+    },
+    "both_actual_pipelines_complete": true,
+    "arms": {
+      "A": {
+        "completed_validation_epochs": 40,
+        "result_published": true,
+        "successful_updates": 9600,
+        "selected_rows": 7200000
+      },
+      "B": {
+        "completed_validation_epochs": 40,
+        "result_published": true,
+        "successful_updates": 9600,
+        "selected_rows": 7200000
+      }
+    },
+    "paired_training_complete_published": true,
+    "validation_candidates_published": true,
+    "parent_execution_preauthorization_utc": "2026-10-12T18:00:00Z",
+    "trainer_modified_restarted_or_relaunched": false,
+    "gpu_queries_during_training_monitor": 0,
+    "monitor_returncode": 0
+  },
+  "test": {
+    "observed_utc": "2026-10-12T19:48:15.781679+00:00",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "tmux_terminal": true,
+    "tmux_session": "r68_final_test",
+    "slurm_step": "1465.100",
+    "elapsed_seconds": 23,
+    "scheduler_evidence": {
+      "command": "sacct -j 1465.100 --noheader --parsable2 --format=JobIDRaw,State,ExitCode,ElapsedRaw,Start,End,NodeList",
+      "returncode": 0,
+      "stdout": "1465.100|COMPLETED|0:0|23|2026-10-13T03:47:30|2026-10-13T03:47:53|gpu03\n",
+      "scheduler_timestamp_timezone": "Asia/Shanghai"
+    },
+    "tmux_evidence": {
+      "command": "tmux has-session -t '=r68_final_test'",
+      "returncode": 1,
+      "stderr": "can't find session: r68_final_test",
+      "initial_owned_pane": "%81",
+      "initial_owned_pane_pid": 379560
+    },
+    "evaluator_returncode": 0,
+    "test_process_receipt": "test_process_receipt.json",
+    "process_receipt_is_scheduler_evidence": false,
+    "complete_paired_test": true,
+    "completed_arms": [
+      "A",
+      "B"
+    ],
+    "original_full18_fulllegalpool_tests_per_frozen_model": 1,
+    "parameter_mode": "ordinary AdamW weights",
+    "perturbed_weights": false,
+    "parameter_averaging": false,
+    "optimizer_mode_transition": false,
+    "exclusive_test_marker_preserved": true,
+    "parent_execution_preauthorization_utc": "2026-10-12T18:00:00Z",
+    "automatic_retry_or_replay": false,
+    "monitor_returncode": 0
+  },
+  "analysis": {
+    "recorded_utc": "2026-10-12T19:50:06.231829+00:00",
+    "returncode": 0,
+    "cpu_only": true,
+    "executions": 1,
+    "wall_seconds": 56.977472407743335,
+    "module_sha256": "f8fc77af8b37d06d61469ed59e51b7a5e010e63b0daf497bfd52468e69a99624",
+    "comparison_rows": 805,
+    "png_count": 330
+  },
+  "freeze_sha256": "66bd5f6ea653130e2633b06e0449cc0ea39fe59e859bd3dfad8a60ce2e2481e9",
+  "decision": {
+    "official_arm": "A",
+    "decision_source": "integer VAL only; earliest epoch tie; arm tie A",
+    "validation_count_B_minus_A": -28,
+    "sam_exceeds_matched_control_validation": false,
+    "sam_matches_or_exceeds_matched_control_validation": false,
+    "sam_matches_A_validation_but_below_R60B_test_limited_progress": false,
+    "official_test_correct": 8435,
+    "official_test_total": 18000,
+    "official_test_top1": 0.4686111111111111,
+    "numeric_threshold_reached": false,
+    "whole_objective_audit_passed": false,
+    "actual_budget_consistent": true,
+    "claim_70pct_supported": false,
+    "goal_status": "ACTIVE; parent whole-objective closure pending",
+    "one_experiment_one_seed": true,
+    "shared_inherited_contrastive_prior": true,
+    "fresh_encoders": false,
+    "flops_matched": false,
+    "severe_overfit_noise_or_ceiling_claim": false,
+    "cost_veto": false,
+    "test_reselection": false
+  },
+  "parent_reviews_objective_audit_memory_and_git": true,
+  "git_alone_contains_all_inference_assets": false,
+  "no_worker_git_actions": true,
+  "r58": "fully deferred; eight legacy B-task mismatch disclosed"
+}
