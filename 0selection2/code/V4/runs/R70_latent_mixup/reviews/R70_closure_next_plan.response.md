@@ -1,0 +1,59 @@
+**No actionable TRAIN/validation integrity defect found. Integrity: 9/10, ready within this scope. Performance against the 70% goal: 4/10, not ready.**
+
+`review_independence=same-family; acceptance_status=provisional`
+
+The [terminal receipt](/public/home/shiys/0selection2/code/V4/runs/R70_latent_mixup/training_terminal_receipt.json) records original Slurm1465.103 `COMPLETED/0:0`, 3,722 seconds, and `r70_train` absent. All40 validation epochs are published. The [objective and recovery path](/public/home/shiys/0selection2/code/V4/runs/R70_latent_mixup/source_launch/code/V4/r70_gradients.py:20) preserve candidate alignment, gradients through both partners, private auxiliary RNG, FP32 loss reductions, task gradients divided by three and whole-update retries. The [initialization and selection path](/public/home/shiys/0selection2/code/V4/runs/R70_latent_mixup/source_launch/code/V4/r70_experiment.py:277) recreates the original bank after capacity testing and selects one complete common-epoch bank by integer validation count. No corrective replay is warranted.
+
+| Record | TRAIN Top1% / CE | VAL Correct / Top1% | VAL CE | Regret% |
+|---|---:|---:|---:|---:|
+| Reused A20 | 50.331111 / 1.050462 | 8604 / 47.800000 | 1.119310 | 1.042269 |
+| New B23 | 50.891111 / 1.042508 | **8709 / 48.383333** | 1.121139 | 0.988830 |
+| A final40 | 59.985556 / 0.871883 | 8369 / 46.494444 | 1.273051 | 1.102857 |
+| B final40 | 58.138889 / 0.912213 | 8158 / 45.322222 | 1.232391 | 1.113405 |
+| A epochs36–40 mean | unavailable | — / 46.181111 | 1.256336 | 1.104494 |
+| B epochs36–40 mean | unavailable | — / 46.292222 | 1.206230 | 1.094876 |
+
+Sources: saved [A result](/public/home/shiys/0selection2/code/V4/runs/R69_task_specific_finetuning/B_task_specific_seed2/result.json), [B result](/public/home/shiys/0selection2/code/V4/runs/R70_latent_mixup/B_latent_mixup_seed2/result.json) and complete histories. Last-five values are epoch means, not averaged checkpoints or seed uncertainty; only epoch40 has a complete TRAIN evaluation within that interval.
+
+**B gains105 decisions, +0.583333pp, and the predeclared rule selects B23.** It remains **176 decisions, 0.977778pp below R60B**. The original mixup hypothesis receives bounded positive support; this is not an incumbent improvement. At common epochs20/23/30/40, B−A validation counts are **−37/+164/+2/−211**.
+
+Each selected-family cell is **Top1% / CE / regret%**:
+
+| Family | A20 | B23 |
+|---|---:|---:|
+| TSP | 36.700 / 1.6523 / 0.6613 | 36.300 / 1.6442 / 0.6876 |
+| CVRP | 49.200 / 1.3400 / 0.6622 | 49.000 / 1.3583 / 0.6428 |
+| ATSP | 78.500 / 0.5939 / 0.3127 | 78.000 / 0.5858 / 0.3238 |
+| MVRP | 46.400 / 1.1041 / 1.1416 | **47.173 / 1.1061 / 1.0763** |
+
+Ten tasks improve: OVRPB+0.5, OVRPBLTW+0.4, OVRPBTW+1.3, OVRPL+2.8, OVRPLTW+1.9, VRPBL+1.5, VRPBLTW+1.1, VRPBTW+0.2, VRPLTW+1.4 and VRPTW+2.6pp. Eight regress: ATSP−0.5, CVRP−0.2, OVRP−0.2, OVRPBL−0.3, OVRPTW−1.0, TSP−0.4, VRPB−0.3 and VRPL−0.3pp.
+
+Late divergence remains substantial. From selected23 to final40, B’s TRAIN accuracy rises **50.8911%→58.1389%**, while validation falls **48.3833%→45.3222%**. Optimization clean CE, mixed CE and total loss fall respectively **1.06192→0.94235**, **1.14619→1.06764** and **1.10676→1.01287**. The final TRAIN/validation gap remains **12.816667pp**. Mixup reduces late fitting and CE relative to A, but does not produce sustained native-accuracy improvement.
+
+New B completed **9,600 updates/7.2M selected rows**, with **14.4M successful encoder-view rows plus14.4M mixed-head rows**; attempted counts were14,404,704 each. Five retries occurred across four updates. Each branch received1,600 active updates/400,000 rows; saved counters show2,588 parameter tensors at1,600 and76 unused tensors at zero. Arm wall was **3,668.194599s**, peak allocated **15.672294GiB**. The discarded4.474874s capacity update is outside the formal update budget. Reused A’s3,554.574466s and inherited stage1’s2,764.217798s remain separate historical expenditure. Control reuse is protocol equivalence, not replication.
+
+**Approve one R71 experiment: joint performance-mixture learning with winner-probability inference. Plan: 8/10, ready, PLAN ONLY.**
+
+R70’s positive but localized, unstable gain does not justify another mixup variation. I retain the scout’s distributional direction and make it concrete with a finite mixture. [Bishop and Legleye, NIPS1994, Sections1–2.1, equations4–7](https://papers.neurips.cc/paper_files/paper/1994/file/74bba22728b6185eec06286af6bec36d-Paper.pdf) use network-predicted mixture weights, locations and widths, trained by likelihood. Their experiments concern inverse problems. Full covariance and native-minimum inference here are project adaptations. Installed PyTorch already supplies the required [mixture and multivariate-normal likelihood APIs](https://docs.pytorch.org/docs/stable/distributions.html#mixturesamefamily).
+
+1. **One new model; fixed comparator.** Reuse complete R70B23 as A, fixed at **8709 validation correct**, with its entire40-epoch history. Train only new B. Retain18 complete task branches and the existing full-information `encode_pairs` backbone. Initialize every trunk from the original R67B terminal stage1 state, before fine-tuning. Replace the scalar utility head with the density head below; do not initialize from trained R70 weights. This compares complete objective/readout/inference packages, not covariance alone. R60B remains the broader descriptive incumbent.
+
+2. **Original complete TRAIN targets.** Within each unchanged legal pool, order candidates by global ID and choose its first candidate as fixed reference `r`. Form FP64 differences `d_j=c_j−c_r`, retaining `d_r=0`. For each nonreference coordinate, fit mean and population standard deviation using only that task’s original10,000 TRAIN rows; use scale `max(std,1e-6)`. Model the standardized `K−1` coordinates and undo normalization before comparing sampled differences. Costs enter the likelihood target interface only. Preserve original native winner labels, all candidates and all held-out splits.
+
+3. **Fixed non-Gaussian density.** Each branch predicts an **eight-component full-covariance Gaussian mixture**. Flatten its candidate-aligned `K×384` features and use `Linear(384K,128)→GELU→Linear(128,8[1+D+D(D+1)/2])`, `D=K−1`, without head dropout. Outputs define mixture logits, means and lower-triangular factors; factor diagonals are `softplus(raw)+1e-3`. Initialize first layers with seed`710002+problem_id`; zero final weights, set uniform mixture weights/unit covariance, and give component mean biases independent `N(0,0.1²)` draws from that private seed. All retained backbone and new head parameters train.
+
+4. **Likelihood training.** Use two ordinary backbone-dropout views and minimize their mean joint negative log likelihood divided by `D`. This replaces the clean/mixed CE and RDrop objective; no additional auxiliary loss or coefficient search. Use `MixtureSameFamily(Categorical, MultivariateNormal(scale_tril=...))`. Keep density heads, factors, likelihood and reductions in FP32; encoder AMP remains available. Report density NLL separately from native winner-probability CE. A mixture can alter binary winner probabilities through distribution shape; a single Gaussian’s covariance alone cannot reverse its fixed-mean binary decision.
+
+5. **Exact exposure and update budget.** Reuse seed2/global41–80 task and row order: **40 epochs,9,600 successful updates,7.2M selected rows,14.4M encoder-view rows**, real256/task×3 and16/task tails. Fresh AdamW uses LR`3e-4*min(u/720,1)`, betas`(.9,.999)`, epsilon`1e-8`, WD`1e-4`, `foreach=False`. Divide each active branch’s task gradient by three, clip the complete active gradient once at1, then perform one step; inactive parameters retain `grad=None`. Nonfinite outputs, likelihoods or gradients retry the entire triple with restored RNG and reduced AMP scale, without optimizer/cursor advancement; retain20 attempts.
+
+6. **One frozen probability rule.** Before validation, generate and save **2,048 standard-normal Sobol vectors per task**, using scrambled Sobol seed`710003+problem_id` and inverse-normal conversion with uniforms clipped to `[2^-24,1−2^-24]`. Reuse this table for every query and component. For each component, transform vectors through its predicted mean/factor, undo TRAIN normalization, insert reference difference zero, and count full-pool native minima. Weight component frequencies by mixture probabilities; select maximum probability, with global-ID ties. Stream one component and256 vectors at a time. One encoder forward predicts all parameters; these16,384 predicted vectors execute no solvers. Use a disclosed`1e-12` probability floor only for reporting CE.
+
+7. **Validation and delivery.** Evaluate the identical probability rule on all18,000 validation rows every epoch, FP32 batch128. Retain five-epoch/final/selected full TRAIN evaluations. Select maximum integer validation correct count, earliest tie, saving all18 branches from one common epoch. Official B requires **more than8709**; otherwise fixed A remains. Freeze weights, normalizers, candidate ordering and sampling tables before **one original full18 TEST for new B regardless of improvement**. Reuse A’s authorized R70 TEST unchanged once delivered, without inference or planning feedback.
+
+8. **Bounded implementation.** Use isolated R71 files and existing PyTorch APIs. The specified head gives approximately38.2M total parameters versus33.17M for A; record actual counts. Activation demand should remain close to the existing two-view bank, but capacity is unmeasured. Permit one focused synthetic CPU check covering likelihood, normalization/order restoration, input isolation and whole-update recovery, then one discarded worst-padded TRAIN update at real256 with full-bank optimizer storage. A capacity failure is reported, not silently microbatched. Sol/max alone uses the designated UUID/allocation1465/gpu03; measure ordinary runtime, separate inherited expenditure, and publish one completed version.
+
+R39 already showed that improved cost prediction can worsen selection, and native CE already targets winner probabilities. This experiment tests whether coherent, non-Gaussian continuous supervision improves finite-data learning. Likelihood fitting may instead emphasize irrelevant variation or overfit; continuous densities also approximate rather than explicitly represent exact cost-tie atoms. Lower NLL without improved native validation Top1 rejects this recipe’s selection benefit. Beating A while remaining below R60B is limited progress. No70% gain is promised.
+
+**Memory update:** R70 completed40 epochs with no actionable inspected TRAIN/validation defect. New mixup B23 achieved8709/18000,48.383333%, gaining105 decisions/+0.583333pp over reused R69B20; official validation selection is B. Ten tasks improve and eight regress, with the aggregate gain confined to MVRP. B remains176 decisions below R60B. Final TRAIN58.138889% versus validation45.322222% leaves substantial divergence; reduced late CE does not establish sustained accuracy improvement. New expenditure is9,600 updates/7.2M rows/3,668.194599s, with five retries and additional mixed-head computation. Approve one R71 conditional joint-mixture likelihood and winner-probability experiment against fixed R70B23, preserving full18/native pools and one completed solver. Capacity and objective changes are disclosed; only the new model trains and receives a new frozen TEST. R58 and eight legacy B semantics remain deferred. The70% goal remains active and unachieved.
+
+**NEW R70 TEST, locks, delivery analyses and parent state were excluded throughout.** Historical TEST exposure remains disclosed. No experiment/check rerun, inference, prediction replay, GPU operation, hash campaign, edit, Git action or agent delegation occurred.

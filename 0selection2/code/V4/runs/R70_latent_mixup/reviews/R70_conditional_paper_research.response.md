@@ -1,0 +1,59 @@
+**My conditional preference is full-pool, non-Gaussian performance-distribution learning with native-winner probability inference.** It changes how existing supervision produces decisions, rather than adding another encoder component. A heterogeneous selector ensemble ranks second. Neither has evidence supporting a jump to 70%; adoption must await completed R70 TRAIN/validation.
+
+`review_independence=same-family; acceptance_status=provisional; scope=conditional research only`
+
+The completed evidence supports several distinctions:
+
+| Rounds | Completed TRAIN/validation lesson |
+|---|---|
+| R59–62 | Trainable encoder transfer, route pretraining and broad portfolio pretraining did not advance the incumbent. R60’s real partial-pair supervision remains the strongest result: **49.361111%**, +0.605556pp over its matched control. |
+| R63 | Recurrence did not establish a breakthrough; final A40/B15 comparisons have unequal budgets. |
+| R64–65 | PCGrad gained only 0.066667pp. Schedule-free gained 0.95pp over its control but remained below R60B. Optimization matters, without explaining the entire difficulty. |
+| R66 | Corrective training lost 0.10pp against the independent sum. Additional selector capacity and better composite CE were insufficient. |
+| R67 | Contrastive pretraining gained 0.583333pp across 13 tasks, reaching 49.288889%. This is useful representation evidence, just below R60B. |
+| R68 | SAM reduced late fitting and validation CE but lost 0.155556pp in selected native accuracy. |
+| R69 | Unsharing lost 0.222222pp. Final TRAIN reached **59.985556%**, while validation fell to **46.494444%**. Greater fitting capacity did not generalize. |
+
+R69 strengthens the generalization concern seen in R40. It does not establish one universal bottleneck: several earlier recipes barely improved TRAIN fitting. R57 also directly contradicts an information-free explanation: original R45A validation accuracy was 49.1167%, versus 42.4667% for the conditional-majority prior and 39.7110% after within-size score permutation. See [R57 evidence](/public/home/shiys/0selection2/code/V4/runs/R57_task_signal_audit/RESULTS.md:25).
+
+I checked the proposed directions against the older mechanisms:
+
+- **R39/R43:** centered continuous-cost regression, native classification, pairwise comparisons and relative-risk supervision already exist. R39 learned considerably better cost predictions than its TRAIN-fitted mean baseline, yet performance-argmin lost **329 validation decisions against its own classification head**. Merely “use all costs” is not new. [R39 findings](/public/home/shiys/0selection2/code/V4/runs/R39_performance_model/RESULTS.md:32)
+- **R42/R44–47/R50/R56:** relation queries, conditional adapters, source embeddings/tokens, TRAIN-memory retrieval, frozen solver encoders and joint node-edge processing cover much of the obvious representation menu. R59 already tested end-to-end encoder transfer. R48’s tree reached 93.489% TRAIN but 53.4% validation on the binary diagnostic; replacing neural learning with a tree is not an untouched remedy. R49’s sample-count comparison does not establish a ceiling. [Retrieval design](/public/home/shiys/0selection2/code/V4/R47_README.md), [binary evidence](/public/home/shiys/0selection2/code/V4/runs/R48_core_diagnosis/RESULTS.md:65)
+- **R51–55/R61:** pooled prefix statistics, start-mechanism analysis, gated pair specialists, route-successor supervision and the mandatory edge-cost sum have already been explored. R52 does not support blaming most errors on rare exceptional starts; its validation trajectories cannot become training data. Dense execution transfer would need a concrete difference from these experiments, not another summary of the same two solvers.
+
+1. **First: Learn a joint distribution of performance differences, then predict the most probable native winner.**
+
+   [Salinas et al., NeurIPS 2019, Sections 3–4 and Appendix A](https://arxiv.org/pdf/1910.03002) model joint predictive distributions using marginal transformations and structured covariance, trained by likelihood. Their evidence concerns forecasting distributions, not routing-selector accuracy. [Durkan et al., NeurIPS 2019, Sections 2.1 and 3.1–3.2](https://proceedings.neurips.cc/paper/2019/file/7ac71d433f282034e088473244df8c02-Paper.pdf) provide an implementable alternative: invertible spline transformations supporting flexible, potentially multimodal densities, exact likelihood evaluation and sampling.
+
+   The project adaptation would learn `q(d | x)` from the existing complete TRAIN cost vectors. For a fixed reference candidate `r`, use differences `d_j = (c_j - c_r) / s_task`, with positive TRAIN-fitted scale and `d_r = 0`. This preserves ordering while avoiding a redundant common-cost dimension. Predict:
+   `argmax_j P_q(j = native_argmin(0, d_-r) | x)`.
+   All original candidates remain represented. Actual costs enter supervision only; inference samples **predicted cost vectors**, then completes one selected solver.
+
+   There is an important correction to the earlier Gaussian-covariance suggestion. With two jointly Gaussian costs and fixed means, `P(C1 < C2) > 1/2` exactly when `mu1 < mu2`. Covariance changes confidence, not the binary choice. Thus adding Gaussian variance alone has limited direct leverage on pair-dominated decisions. Flexible distribution shape and the complete multi-candidate minimum event are the substantive hypothesis.
+
+   This is distinct from R39’s point estimates and R43’s pairwise marginal comparisons: neither models a coherent joint distribution and integrates its native-winning regions. However, it introduces **no new query information**. Native CE already targets winner probabilities; any advantage must come from finite-sample use of richer continuous supervision. Likelihood can still emphasize irrelevant differences, and a flexible density can overfit. Those are substantial counterarguments.
+
+   **Feasibility and falsification:** current pools contain 5–10 candidates, giving only 4–9 difference dimensions. One existing full-information encoder plus a small conditional density model is plausible on the assigned 3090; predicted samples can be streamed without repeating encoder forwards. Runtime remains unmeasured. Lower likelihood loss without higher full18 native validation accuracy rejects its selection benefit. Existing controls should be reused only when initialization, backbone and training exposure actually match; R39 is a historical comparison, not an equivalent control. Distribution shape, training objective and inference budget remain undecided.
+
+2. **Second: Fixed heterogeneous consensus across complete selectors.**
+
+   The strongest directly relevant paper is [Tornede et al., *Machine Learning*, 2022, Sections 5.1–5.2, 6.3 and 6.6.1](https://link.springer.com/article/10.1007/s10994-022-06161-4). It combines algorithm selectors while returning one algorithm. Heterogeneous voting performed strongly across ASlib scenarios. Its gains concern penalized runtime, **not native Top1**, so its reported percentages cannot be transferred here. [Lakshminarayanan et al., NeurIPS 2017, Section 2.4](https://papers.nips.cc/paper_files/paper/2017/file/9ef2ed4b7fd2c810847ffa5fa85bce38-Paper.pdf) separately establish probability averaging across independently trained models.
+
+   A project candidate would combine a small, predeclared set of complete, globally selected full18 policies from genuinely different training mechanisms. Full-pool rank aggregation is attractive when score scales differ. Every query would run the same fixed selector bundle, aggregate all legal candidates and complete one solver. No task-specific checkpoint assembly, member search, fitted validation weights or reference retraining is needed.
+
+   This is an **extension of an already tested ensemble family**: R66’s fixed two-selector sum is material counter-evidence. Its weak gain prevents treating ensembling as an untouched solution. The remaining hypothesis is useful diversity between different learned policies, rather than another independently trained copy beside the same base. Family-level gains and losses do not establish instance-level complementarity.
+
+   Learned stacking is less attractive initially. Tornede’s Section 5.5 requires disjoint data for base fitting and meta-learning; Section 6.6 found no stacking variant beating the best individual selector overall. Honest cross-fitting here would also need to exclude held-out fold labels from inherited supervised pretraining, not just fine-tuning. It cannot be manufactured cheaply from existing in-sample predictions.
+
+   **Feasibility and falsification:** new training expense could be zero; deployment costs several sequential selector forwards. The exact saved components can be reused, but their reuse is not independent replication. Failure to improve native full18 validation over the strongest component rejects that fixed bundle. Disagreement, hypothetical oracle coverage or improved calibration alone would not count.
+
+The distributional direction has higher information value and greater modeling risk. Consensus has lower implementation risk and stronger direct algorithm-selection precedent, but weaker grounds for expecting a large gain after R66. **Neither is presently a credible forecast of the remaining 20.638889pp to 70%.**
+
+I also examined two broader transfer premises without promoting them. [TabPFN, *Nature* 2025, “Principled in-context learning” and Methods](https://doi.org/10.1038/s41586-024-08328-6), learns a prediction procedure across synthetic datasets and conditions on labelled TRAIN rows. Its small-table evidence does not establish that another frozen graph-summary interface preserves the missing routing information. [Georgiev et al., 2024, Sections 4.1 and 5.3](https://proceedings.mlr.press/v231/georgiev24a/georgiev24a.pdf), support relevant algorithmic-trace pretraining, while also documenting failed transfer configurations. Existing saved route supervision does not yet supply a clearly distinct, reusable full18 dense-execution curriculum. Neither paper justifies repeating the static-embedding or route-auxiliary cycle.
+
+The conditional preference becomes appropriate if completed R70 improves smoothness or reduces its TRAIN/validation gap **without improving native validation selection**. That would weaken another generic regularization intervention and favor testing a different use of existing performance targets. Broad, stable native gains from R70 would weaken an immediate switch; severe additional underfitting would also make the richer density objective less attractive. These are interpretation conditions, not new thresholds or gates for R70.
+
+**Memory update:** This scout reconsidered completed R59–69 and checked relevant earlier mechanisms. R69 demonstrates additional TRAIN fitting with substantial late generalization loss, while R57 establishes usable instance signal. Conditional preference is full-pool non-Gaussian performance-distribution learning with native-winner probability inference; Gaussian covariance alone cannot change a fixed-mean binary decision. Fixed heterogeneous selector consensus ranks second, with R66’s limited ensemble result retained as counter-evidence. Learned stacking requires honest disjoint fitting and has mixed direct precedent. Tabular foundation and dense algorithmic-transfer papers do not yet justify another static-summary or paired-route experiment. No successor, hyperparameters or execution plan is adopted. R70 proceeds unchanged; R58 and legacy B semantics remain deferred. The full18 single-completed-solver 70% goal remains active and unachieved.
+
+**NEW R70 TEST, partial outcomes, analysis and delivery outputs did not inform this research.** Historical TEST exposure remains disclosed. No experiment, inference, replay, GPU operation, edit, Git action or agent delegation occurred.

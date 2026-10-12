@@ -2090,6 +2090,183 @@ Disclosed limitations are substantive but are not delivery bugs: one seed, proto
 No GPU operation, inference, prediction replay, experiment/check/analysis rerun, hash campaign, edit, Git operation or agent delegation occurred. This continuation read only the saved objective audit and makes no successor-design recommendation.
 
 
+## R69 One Completed-Version Publication
+
+At2026-10-12T21:55:12UTC, ONE scoped R69 commit1e4bdd1d74cf71c432c21150eb74b403dd3fe29e completed actualforeground16587exit0 (499files/179988insertions16deletions), THEN actualpush16204exit0 main385492c4c..1e4bdd1d7 togit@github.com:viayuu/selection.git. Exactly14524unrelateduserstagedcleanupentriesremain; usercode/.gitignore is unstaged. No new weights/NPZ/rawupdates/W&B/cache/regenerableschedule forced. Git is notallinferenceassets. No secondR69commit. Primary/freshreviews and negativewhole-goalaudit are complete; goal70 remainsACTIVE/unachieved. ActualSol/maxR70thread01a13212-f99c-72a3-9279-db14f0073262/pane86/PID823018 is implementing the alreadyadopted TRAINVAL-only latentmixup plan inisolatedfiles. Atthisobservation formalR70training is NOTyetclaimed. Only soleUUID/allocation1465/gpu03, oneCPUcheck+onediscardedreal256capacityupdate thenfixed40EnewB; noAnewcompute. R64largerbatch rerun was already completed/pushedca88f30d0, neverduplicated.
+
+
+## R70 Actual Formal Launch and Conditional Delivery Handoff
+
+ActualGPT-6.1-Sol/max thread01a13212-f99c-72a3-9279-db14f0073262 implemented isolated5R70sources. Actualrawturn.completed and wrapperCLIreturncode0 at2026-10-12T21:59:01UTC. OnefocusedCPUinvocation1passed1.237583s (expectedsyntheticinjectedretry1), one discardedTRAIN-onlycapacityupdatepassed4.474874s on scheduled101/500/499paddednodes atreal256x3, full18bankAdam moments265385232bytesmaterialized; peak15.668794GiBallocated. Mutatedcapacitybank/optimizer discarded, exact formalinitialstate recreated. SAMEoriginalTRAIN is r70_train/pane88/panePID870566, Slurm1465.103/gpu03/trainer286375, soleassignedUUID. Firstactualu1/768rows/256x3finite:cleanCE2.0596255064,mixCE2.0596777201,KL.0017969127,total2.0596524477,grad.8549323082,zeroAMP retries; nootherGPU. Firstpeakallocated15.378483/reserved20.107422/physical20.430908of23.588257GiB, notwhole-runmax. Actuallateru180physical22.628174/reserved22.304688GiB; no batchincreaseormicrobatchchange.
+
+Atparent22:05:30UTC originalfixed40ETRAIN remainsLIVE atcompletedcommonE5/global45/u1200/900000rows; full18VAL8420/18000(46.777778%),CE1.1326718065/regret.9969735423%. These are progress, notterminalorTEST. Soleimplementationforegroundsettled; originaltrainingneverstopped/restarted. SAMEactualSol/max resumed onlyafterimplementationterminal underCPUtmuxr70_delivery/pane89/PID890163, rawthread.started/firstmessagesconfirmed22:03:55. IsolatedCPUdeliverypreparation now; explicitparent delivery_authorization.json permits future originalTRAINCOMPLETED0:0+ownedtmuxgone ->integerVALcompletebanklock/officialBstrictly>8604elsefixedreusedR69B20 ->ONEnewBoriginal18TEST ->actualTESTterminal0+ownedtmuxgone ->ONCECPUanalysis. FixedA hasno newcompute. No freeze/TEST/analysis atthisobservation. Do NOTduplicate thisliveexecutor/controller. Parent stillowns actualAstraTRAINVAL-onlyprimary andfreshreviews/wholeobjectiveaudit/state/fullmemory/ONEcompletedR70commit. R70primarytaskpreparedONLY; NEW R70TESTexcluded/noR71adopted. R58/legacy8Bsemantics fullydeferred/unfixed; original70goalACTIVE/unachieved. R69published1e4bdd1d7 andR64largerbatchca88f30d0 mustnotrerun.
+
+## R70 Live Progress and Conditional Primary-Paper Research
+
+At2026-10-12T22:26:01UTC, SAMEoriginalTRAIN1465.103 RUNNING/gpu03/r70_train, E19/global59/u4500/3378240selectedrows. LastcompletedVAL E18 is8548/18000 (47.488889%), CE1.1233491765/regret1.0321075299%; notterminal/selected/TEST. Actualu4500physical22.630127of23.588257GiB withreal256x3, no batchsweep/change. Conditionaldeliveryprepared onecombinedAST/shellsyntaxcheckrc0/.013583s; runtimeunverified. Initialnewtmuxsessiondispatch returned1 duplicateownedr70_delivery, then SAMEsessionnewconditionalwindow/pane90/PID938630 started, parentpane89preserved. This is CPUcontrollerdispatch, notTRAIN/TESTrestart. Controllerwaits240s/originalTRAINCOMPLETED0:0+ownedtmuxgone; zero freeze/TEST/analysis atobservation.
+
+SAMEpersistentprimary GPT-6-Astra/max thread01a12e68-4d2a-71d0-aefd-67fc1c158282 is ACTUALLYLIVE underCPUtmuxr70_paper_research/pane91/PID956878; rawthread.started andfirstresearchmessagesconfirmed. FULLmemory197265charprompt review-stage/r58-to70/R70_conditional_paper_research.prompt.md, rawtrace .aris/traces/R70_conditional_paper_research.events.jsonl. ResearchONLY for2-3 genuinelydifferent full18high-leverage conditionaldirections fromprimarypapers; noR70protocolchange/NEW R70TEST/analysis/deliveryevidence, noR71adoption/code/experiment/GPU/Git. Actualresearchrawresponse+Memoryupdate mustbe appended BEFORE any SAMEprimaryclosurecall, andthatcall waitsresearchterminal+R70completeTRAIN/VAL. R70freshnightmaretaskpreparedONLY; noadditionalchecks/replays. Original70goalACTIVE/unachieved; no R64/R69rerunorsecondR69commit.
+
+## R70 Conditional Primary-Paper Research: Actual Raw Response
+
+Actual SAME persistentGPT-6-Astra/max thread01a12e68-4d2a-71d0-aefd-67fc1c158282, rawturn.completed and wrapperCLIreturncode0 at2026-10-12T22:37:30UTC. ResearchONLY; no successor/recipe adopted. Full raw response including its Memory update follows verbatim. TRAIN remainsoriginal1465.103, no protocolchange. Full-memory future primaryclosure waitsactualcompleteTRAIN/VAL; NEW R70TEST excluded.
+
+**My conditional preference is full-pool, non-Gaussian performance-distribution learning with native-winner probability inference.** It changes how existing supervision produces decisions, rather than adding another encoder component. A heterogeneous selector ensemble ranks second. Neither has evidence supporting a jump to 70%; adoption must await completed R70 TRAIN/validation.
+
+`review_independence=same-family; acceptance_status=provisional; scope=conditional research only`
+
+The completed evidence supports several distinctions:
+
+| Rounds | Completed TRAIN/validation lesson |
+|---|---|
+| R59–62 | Trainable encoder transfer, route pretraining and broad portfolio pretraining did not advance the incumbent. R60’s real partial-pair supervision remains the strongest result: **49.361111%**, +0.605556pp over its matched control. |
+| R63 | Recurrence did not establish a breakthrough; final A40/B15 comparisons have unequal budgets. |
+| R64–65 | PCGrad gained only 0.066667pp. Schedule-free gained 0.95pp over its control but remained below R60B. Optimization matters, without explaining the entire difficulty. |
+| R66 | Corrective training lost 0.10pp against the independent sum. Additional selector capacity and better composite CE were insufficient. |
+| R67 | Contrastive pretraining gained 0.583333pp across 13 tasks, reaching 49.288889%. This is useful representation evidence, just below R60B. |
+| R68 | SAM reduced late fitting and validation CE but lost 0.155556pp in selected native accuracy. |
+| R69 | Unsharing lost 0.222222pp. Final TRAIN reached **59.985556%**, while validation fell to **46.494444%**. Greater fitting capacity did not generalize. |
+
+R69 strengthens the generalization concern seen in R40. It does not establish one universal bottleneck: several earlier recipes barely improved TRAIN fitting. R57 also directly contradicts an information-free explanation: original R45A validation accuracy was 49.1167%, versus 42.4667% for the conditional-majority prior and 39.7110% after within-size score permutation. See [R57 evidence](/public/home/shiys/0selection2/code/V4/runs/R57_task_signal_audit/RESULTS.md:25).
+
+I checked the proposed directions against the older mechanisms:
+
+- **R39/R43:** centered continuous-cost regression, native classification, pairwise comparisons and relative-risk supervision already exist. R39 learned considerably better cost predictions than its TRAIN-fitted mean baseline, yet performance-argmin lost **329 validation decisions against its own classification head**. Merely “use all costs” is not new. [R39 findings](/public/home/shiys/0selection2/code/V4/runs/R39_performance_model/RESULTS.md:32)
+- **R42/R44–47/R50/R56:** relation queries, conditional adapters, source embeddings/tokens, TRAIN-memory retrieval, frozen solver encoders and joint node-edge processing cover much of the obvious representation menu. R59 already tested end-to-end encoder transfer. R48’s tree reached 93.489% TRAIN but 53.4% validation on the binary diagnostic; replacing neural learning with a tree is not an untouched remedy. R49’s sample-count comparison does not establish a ceiling. [Retrieval design](/public/home/shiys/0selection2/code/V4/R47_README.md), [binary evidence](/public/home/shiys/0selection2/code/V4/runs/R48_core_diagnosis/RESULTS.md:65)
+- **R51–55/R61:** pooled prefix statistics, start-mechanism analysis, gated pair specialists, route-successor supervision and the mandatory edge-cost sum have already been explored. R52 does not support blaming most errors on rare exceptional starts; its validation trajectories cannot become training data. Dense execution transfer would need a concrete difference from these experiments, not another summary of the same two solvers.
+
+1. **First: Learn a joint distribution of performance differences, then predict the most probable native winner.**
+
+   [Salinas et al., NeurIPS 2019, Sections 3–4 and Appendix A](https://arxiv.org/pdf/1910.03002) model joint predictive distributions using marginal transformations and structured covariance, trained by likelihood. Their evidence concerns forecasting distributions, not routing-selector accuracy. [Durkan et al., NeurIPS 2019, Sections 2.1 and 3.1–3.2](https://proceedings.neurips.cc/paper/2019/file/7ac71d433f282034e088473244df8c02-Paper.pdf) provide an implementable alternative: invertible spline transformations supporting flexible, potentially multimodal densities, exact likelihood evaluation and sampling.
+
+   The project adaptation would learn `q(d | x)` from the existing complete TRAIN cost vectors. For a fixed reference candidate `r`, use differences `d_j = (c_j - c_r) / s_task`, with positive TRAIN-fitted scale and `d_r = 0`. This preserves ordering while avoiding a redundant common-cost dimension. Predict:
+   `argmax_j P_q(j = native_argmin(0, d_-r) | x)`.
+   All original candidates remain represented. Actual costs enter supervision only; inference samples **predicted cost vectors**, then completes one selected solver.
+
+   There is an important correction to the earlier Gaussian-covariance suggestion. With two jointly Gaussian costs and fixed means, `P(C1 < C2) > 1/2` exactly when `mu1 < mu2`. Covariance changes confidence, not the binary choice. Thus adding Gaussian variance alone has limited direct leverage on pair-dominated decisions. Flexible distribution shape and the complete multi-candidate minimum event are the substantive hypothesis.
+
+   This is distinct from R39’s point estimates and R43’s pairwise marginal comparisons: neither models a coherent joint distribution and integrates its native-winning regions. However, it introduces **no new query information**. Native CE already targets winner probabilities; any advantage must come from finite-sample use of richer continuous supervision. Likelihood can still emphasize irrelevant differences, and a flexible density can overfit. Those are substantial counterarguments.
+
+   **Feasibility and falsification:** current pools contain 5–10 candidates, giving only 4–9 difference dimensions. One existing full-information encoder plus a small conditional density model is plausible on the assigned 3090; predicted samples can be streamed without repeating encoder forwards. Runtime remains unmeasured. Lower likelihood loss without higher full18 native validation accuracy rejects its selection benefit. Existing controls should be reused only when initialization, backbone and training exposure actually match; R39 is a historical comparison, not an equivalent control. Distribution shape, training objective and inference budget remain undecided.
+
+2. **Second: Fixed heterogeneous consensus across complete selectors.**
+
+   The strongest directly relevant paper is [Tornede et al., *Machine Learning*, 2022, Sections 5.1–5.2, 6.3 and 6.6.1](https://link.springer.com/article/10.1007/s10994-022-06161-4). It combines algorithm selectors while returning one algorithm. Heterogeneous voting performed strongly across ASlib scenarios. Its gains concern penalized runtime, **not native Top1**, so its reported percentages cannot be transferred here. [Lakshminarayanan et al., NeurIPS 2017, Section 2.4](https://papers.nips.cc/paper_files/paper/2017/file/9ef2ed4b7fd2c810847ffa5fa85bce38-Paper.pdf) separately establish probability averaging across independently trained models.
+
+   A project candidate would combine a small, predeclared set of complete, globally selected full18 policies from genuinely different training mechanisms. Full-pool rank aggregation is attractive when score scales differ. Every query would run the same fixed selector bundle, aggregate all legal candidates and complete one solver. No task-specific checkpoint assembly, member search, fitted validation weights or reference retraining is needed.
+
+   This is an **extension of an already tested ensemble family**: R66’s fixed two-selector sum is material counter-evidence. Its weak gain prevents treating ensembling as an untouched solution. The remaining hypothesis is useful diversity between different learned policies, rather than another independently trained copy beside the same base. Family-level gains and losses do not establish instance-level complementarity.
+
+   Learned stacking is less attractive initially. Tornede’s Section 5.5 requires disjoint data for base fitting and meta-learning; Section 6.6 found no stacking variant beating the best individual selector overall. Honest cross-fitting here would also need to exclude held-out fold labels from inherited supervised pretraining, not just fine-tuning. It cannot be manufactured cheaply from existing in-sample predictions.
+
+   **Feasibility and falsification:** new training expense could be zero; deployment costs several sequential selector forwards. The exact saved components can be reused, but their reuse is not independent replication. Failure to improve native full18 validation over the strongest component rejects that fixed bundle. Disagreement, hypothetical oracle coverage or improved calibration alone would not count.
+
+The distributional direction has higher information value and greater modeling risk. Consensus has lower implementation risk and stronger direct algorithm-selection precedent, but weaker grounds for expecting a large gain after R66. **Neither is presently a credible forecast of the remaining 20.638889pp to 70%.**
+
+I also examined two broader transfer premises without promoting them. [TabPFN, *Nature* 2025, “Principled in-context learning” and Methods](https://doi.org/10.1038/s41586-024-08328-6), learns a prediction procedure across synthetic datasets and conditions on labelled TRAIN rows. Its small-table evidence does not establish that another frozen graph-summary interface preserves the missing routing information. [Georgiev et al., 2024, Sections 4.1 and 5.3](https://proceedings.mlr.press/v231/georgiev24a/georgiev24a.pdf), support relevant algorithmic-trace pretraining, while also documenting failed transfer configurations. Existing saved route supervision does not yet supply a clearly distinct, reusable full18 dense-execution curriculum. Neither paper justifies repeating the static-embedding or route-auxiliary cycle.
+
+The conditional preference becomes appropriate if completed R70 improves smoothness or reduces its TRAIN/validation gap **without improving native validation selection**. That would weaken another generic regularization intervention and favor testing a different use of existing performance targets. Broad, stable native gains from R70 would weaken an immediate switch; severe additional underfitting would also make the richer density objective less attractive. These are interpretation conditions, not new thresholds or gates for R70.
+
+**Memory update:** This scout reconsidered completed R59–69 and checked relevant earlier mechanisms. R69 demonstrates additional TRAIN fitting with substantial late generalization loss, while R57 establishes usable instance signal. Conditional preference is full-pool non-Gaussian performance-distribution learning with native-winner probability inference; Gaussian covariance alone cannot change a fixed-mean binary decision. Fixed heterogeneous selector consensus ranks second, with R66’s limited ensemble result retained as counter-evidence. Learned stacking requires honest disjoint fitting and has mixed direct precedent. Tabular foundation and dense algorithmic-transfer papers do not yet justify another static-summary or paired-route experiment. No successor, hyperparameters or execution plan is adopted. R70 proceeds unchanged; R58 and legacy B semantics remain deferred. The full18 single-completed-solver 70% goal remains active and unachieved.
+
+**NEW R70 TEST, partial outcomes, analysis and delivery outputs did not inform this research.** Historical TEST exposure remains disclosed. No experiment, inference, replay, GPU operation, edit, Git action or agent delegation occurred.
+
+
+## R70 Primary TRAIN/VAL Closure and R71 Adopted Plan: Actual Raw Response
+
+Actual SAME persistentGPT-6-Astra/max thread01a12e68-4d2a-71d0-aefd-67fc1c158282, rawturn.completed andwrapperCLIreturncode0 at2026-10-12T23:20:20UTC. FULLpre-newR70TESTmemory210540charprompt; NEW R70TEST/locks/analysis/delivery/parentstate excluded. TRAINVALintegrity9ready, performance4notready, ONE R71plan8readyPLANONLY. Adoptedbelow onlyafteractualR70completeTRAIN/VAL, noTESTfeedback. Full raw response includingMemoryupdate follows verbatim.
+
+**No actionable TRAIN/validation integrity defect found. Integrity: 9/10, ready within this scope. Performance against the 70% goal: 4/10, not ready.**
+
+`review_independence=same-family; acceptance_status=provisional`
+
+The [terminal receipt](/public/home/shiys/0selection2/code/V4/runs/R70_latent_mixup/training_terminal_receipt.json) records original Slurm1465.103 `COMPLETED/0:0`, 3,722 seconds, and `r70_train` absent. All40 validation epochs are published. The [objective and recovery path](/public/home/shiys/0selection2/code/V4/runs/R70_latent_mixup/source_launch/code/V4/r70_gradients.py:20) preserve candidate alignment, gradients through both partners, private auxiliary RNG, FP32 loss reductions, task gradients divided by three and whole-update retries. The [initialization and selection path](/public/home/shiys/0selection2/code/V4/runs/R70_latent_mixup/source_launch/code/V4/r70_experiment.py:277) recreates the original bank after capacity testing and selects one complete common-epoch bank by integer validation count. No corrective replay is warranted.
+
+| Record | TRAIN Top1% / CE | VAL Correct / Top1% | VAL CE | Regret% |
+|---|---:|---:|---:|---:|
+| Reused A20 | 50.331111 / 1.050462 | 8604 / 47.800000 | 1.119310 | 1.042269 |
+| New B23 | 50.891111 / 1.042508 | **8709 / 48.383333** | 1.121139 | 0.988830 |
+| A final40 | 59.985556 / 0.871883 | 8369 / 46.494444 | 1.273051 | 1.102857 |
+| B final40 | 58.138889 / 0.912213 | 8158 / 45.322222 | 1.232391 | 1.113405 |
+| A epochs36–40 mean | unavailable | — / 46.181111 | 1.256336 | 1.104494 |
+| B epochs36–40 mean | unavailable | — / 46.292222 | 1.206230 | 1.094876 |
+
+Sources: saved [A result](/public/home/shiys/0selection2/code/V4/runs/R69_task_specific_finetuning/B_task_specific_seed2/result.json), [B result](/public/home/shiys/0selection2/code/V4/runs/R70_latent_mixup/B_latent_mixup_seed2/result.json) and complete histories. Last-five values are epoch means, not averaged checkpoints or seed uncertainty; only epoch40 has a complete TRAIN evaluation within that interval.
+
+**B gains105 decisions, +0.583333pp, and the predeclared rule selects B23.** It remains **176 decisions, 0.977778pp below R60B**. The original mixup hypothesis receives bounded positive support; this is not an incumbent improvement. At common epochs20/23/30/40, B−A validation counts are **−37/+164/+2/−211**.
+
+Each selected-family cell is **Top1% / CE / regret%**:
+
+| Family | A20 | B23 |
+|---|---:|---:|
+| TSP | 36.700 / 1.6523 / 0.6613 | 36.300 / 1.6442 / 0.6876 |
+| CVRP | 49.200 / 1.3400 / 0.6622 | 49.000 / 1.3583 / 0.6428 |
+| ATSP | 78.500 / 0.5939 / 0.3127 | 78.000 / 0.5858 / 0.3238 |
+| MVRP | 46.400 / 1.1041 / 1.1416 | **47.173 / 1.1061 / 1.0763** |
+
+Ten tasks improve: OVRPB+0.5, OVRPBLTW+0.4, OVRPBTW+1.3, OVRPL+2.8, OVRPLTW+1.9, VRPBL+1.5, VRPBLTW+1.1, VRPBTW+0.2, VRPLTW+1.4 and VRPTW+2.6pp. Eight regress: ATSP−0.5, CVRP−0.2, OVRP−0.2, OVRPBL−0.3, OVRPTW−1.0, TSP−0.4, VRPB−0.3 and VRPL−0.3pp.
+
+Late divergence remains substantial. From selected23 to final40, B’s TRAIN accuracy rises **50.8911%→58.1389%**, while validation falls **48.3833%→45.3222%**. Optimization clean CE, mixed CE and total loss fall respectively **1.06192→0.94235**, **1.14619→1.06764** and **1.10676→1.01287**. The final TRAIN/validation gap remains **12.816667pp**. Mixup reduces late fitting and CE relative to A, but does not produce sustained native-accuracy improvement.
+
+New B completed **9,600 updates/7.2M selected rows**, with **14.4M successful encoder-view rows plus14.4M mixed-head rows**; attempted counts were14,404,704 each. Five retries occurred across four updates. Each branch received1,600 active updates/400,000 rows; saved counters show2,588 parameter tensors at1,600 and76 unused tensors at zero. Arm wall was **3,668.194599s**, peak allocated **15.672294GiB**. The discarded4.474874s capacity update is outside the formal update budget. Reused A’s3,554.574466s and inherited stage1’s2,764.217798s remain separate historical expenditure. Control reuse is protocol equivalence, not replication.
+
+**Approve one R71 experiment: joint performance-mixture learning with winner-probability inference. Plan: 8/10, ready, PLAN ONLY.**
+
+R70’s positive but localized, unstable gain does not justify another mixup variation. I retain the scout’s distributional direction and make it concrete with a finite mixture. [Bishop and Legleye, NIPS1994, Sections1–2.1, equations4–7](https://papers.neurips.cc/paper_files/paper/1994/file/74bba22728b6185eec06286af6bec36d-Paper.pdf) use network-predicted mixture weights, locations and widths, trained by likelihood. Their experiments concern inverse problems. Full covariance and native-minimum inference here are project adaptations. Installed PyTorch already supplies the required [mixture and multivariate-normal likelihood APIs](https://docs.pytorch.org/docs/stable/distributions.html#mixturesamefamily).
+
+1. **One new model; fixed comparator.** Reuse complete R70B23 as A, fixed at **8709 validation correct**, with its entire40-epoch history. Train only new B. Retain18 complete task branches and the existing full-information `encode_pairs` backbone. Initialize every trunk from the original R67B terminal stage1 state, before fine-tuning. Replace the scalar utility head with the density head below; do not initialize from trained R70 weights. This compares complete objective/readout/inference packages, not covariance alone. R60B remains the broader descriptive incumbent.
+
+2. **Original complete TRAIN targets.** Within each unchanged legal pool, order candidates by global ID and choose its first candidate as fixed reference `r`. Form FP64 differences `d_j=c_j−c_r`, retaining `d_r=0`. For each nonreference coordinate, fit mean and population standard deviation using only that task’s original10,000 TRAIN rows; use scale `max(std,1e-6)`. Model the standardized `K−1` coordinates and undo normalization before comparing sampled differences. Costs enter the likelihood target interface only. Preserve original native winner labels, all candidates and all held-out splits.
+
+3. **Fixed non-Gaussian density.** Each branch predicts an **eight-component full-covariance Gaussian mixture**. Flatten its candidate-aligned `K×384` features and use `Linear(384K,128)→GELU→Linear(128,8[1+D+D(D+1)/2])`, `D=K−1`, without head dropout. Outputs define mixture logits, means and lower-triangular factors; factor diagonals are `softplus(raw)+1e-3`. Initialize first layers with seed`710002+problem_id`; zero final weights, set uniform mixture weights/unit covariance, and give component mean biases independent `N(0,0.1²)` draws from that private seed. All retained backbone and new head parameters train.
+
+4. **Likelihood training.** Use two ordinary backbone-dropout views and minimize their mean joint negative log likelihood divided by `D`. This replaces the clean/mixed CE and RDrop objective; no additional auxiliary loss or coefficient search. Use `MixtureSameFamily(Categorical, MultivariateNormal(scale_tril=...))`. Keep density heads, factors, likelihood and reductions in FP32; encoder AMP remains available. Report density NLL separately from native winner-probability CE. A mixture can alter binary winner probabilities through distribution shape; a single Gaussian’s covariance alone cannot reverse its fixed-mean binary decision.
+
+5. **Exact exposure and update budget.** Reuse seed2/global41–80 task and row order: **40 epochs,9,600 successful updates,7.2M selected rows,14.4M encoder-view rows**, real256/task×3 and16/task tails. Fresh AdamW uses LR`3e-4*min(u/720,1)`, betas`(.9,.999)`, epsilon`1e-8`, WD`1e-4`, `foreach=False`. Divide each active branch’s task gradient by three, clip the complete active gradient once at1, then perform one step; inactive parameters retain `grad=None`. Nonfinite outputs, likelihoods or gradients retry the entire triple with restored RNG and reduced AMP scale, without optimizer/cursor advancement; retain20 attempts.
+
+6. **One frozen probability rule.** Before validation, generate and save **2,048 standard-normal Sobol vectors per task**, using scrambled Sobol seed`710003+problem_id` and inverse-normal conversion with uniforms clipped to `[2^-24,1−2^-24]`. Reuse this table for every query and component. For each component, transform vectors through its predicted mean/factor, undo TRAIN normalization, insert reference difference zero, and count full-pool native minima. Weight component frequencies by mixture probabilities; select maximum probability, with global-ID ties. Stream one component and256 vectors at a time. One encoder forward predicts all parameters; these16,384 predicted vectors execute no solvers. Use a disclosed`1e-12` probability floor only for reporting CE.
+
+7. **Validation and delivery.** Evaluate the identical probability rule on all18,000 validation rows every epoch, FP32 batch128. Retain five-epoch/final/selected full TRAIN evaluations. Select maximum integer validation correct count, earliest tie, saving all18 branches from one common epoch. Official B requires **more than8709**; otherwise fixed A remains. Freeze weights, normalizers, candidate ordering and sampling tables before **one original full18 TEST for new B regardless of improvement**. Reuse A’s authorized R70 TEST unchanged once delivered, without inference or planning feedback.
+
+8. **Bounded implementation.** Use isolated R71 files and existing PyTorch APIs. The specified head gives approximately38.2M total parameters versus33.17M for A; record actual counts. Activation demand should remain close to the existing two-view bank, but capacity is unmeasured. Permit one focused synthetic CPU check covering likelihood, normalization/order restoration, input isolation and whole-update recovery, then one discarded worst-padded TRAIN update at real256 with full-bank optimizer storage. A capacity failure is reported, not silently microbatched. Sol/max alone uses the designated UUID/allocation1465/gpu03; measure ordinary runtime, separate inherited expenditure, and publish one completed version.
+
+R39 already showed that improved cost prediction can worsen selection, and native CE already targets winner probabilities. This experiment tests whether coherent, non-Gaussian continuous supervision improves finite-data learning. Likelihood fitting may instead emphasize irrelevant variation or overfit; continuous densities also approximate rather than explicitly represent exact cost-tie atoms. Lower NLL without improved native validation Top1 rejects this recipe’s selection benefit. Beating A while remaining below R60B is limited progress. No70% gain is promised.
+
+**Memory update:** R70 completed40 epochs with no actionable inspected TRAIN/validation defect. New mixup B23 achieved8709/18000,48.383333%, gaining105 decisions/+0.583333pp over reused R69B20; official validation selection is B. Ten tasks improve and eight regress, with the aggregate gain confined to MVRP. B remains176 decisions below R60B. Final TRAIN58.138889% versus validation45.322222% leaves substantial divergence; reduced late CE does not establish sustained accuracy improvement. New expenditure is9,600 updates/7.2M rows/3,668.194599s, with five retries and additional mixed-head computation. Approve one R71 conditional joint-mixture likelihood and winner-probability experiment against fixed R70B23, preserving full18/native pools and one completed solver. Capacity and objective changes are disclosed; only the new model trains and receives a new frozen TEST. R58 and eight legacy B semantics remain deferred. The70% goal remains active and unachieved.
+
+**NEW R70 TEST, locks, delivery analyses and parent state were excluded throughout.** Historical TEST exposure remains disclosed. No experiment/check rerun, inference, prediction replay, GPU operation, hash campaign, edit, Git action or agent delegation occurred.
+
+## R70 Fresh Nightmare Delivery Review: Actual Raw Response
+
+Actual FRESH GPT-6-Astra/max thread01a1325e-01d5-76a2-9269-c99593615ac1, rawturn.completed andwrapperCLIreturncode0 at2026-10-12T23:12:13UTC. FULLmemory212331charprompt; directactualcompletedlegacydeliveryread, noexecution/replay. Integrity9ready/noactionabledefects, performance4notready. Rawresponse+Memoryupdate intentionallyappended ONLYafter primaryactualterminal, so noNEW R70TEST contaminationofliveprimarymemory. Same-family/provisional acceptanceisnotgoalcompletion. Full raw response follows verbatim.
+
+No actionable delivery defects found. **Delivery integrity: 9/10, ready for scoped legacy reporting. Original 70% performance: 4/10, not ready.** No corrective experiment or replay is warranted.
+
+`review_independence=same-family; acceptance_status=provisional`
+
+- **Implementation matches the adopted objective.** Both clean forwards precede mixing; the private RNG restores ordinary randomness; gathered mixed-target probabilities preserve gradients through both partners. Active gradients are divided by three, clipped once, and applied in one AdamW step. Whole-update recovery preserves the successful-update clock. [Objective and recovery](/public/home/shiys/0selection2/code/V4/r70_gradients.py:50)
+- **Completion and selection are supported.** TRAIN1465.103 and TEST1465.104 recorded `COMPLETED/0:0` with their tmux sessions gone. All 40 validation records uniquely select B23/global63 at **8709 correct**. The complete-bank lock at **23:02:40.821 UTC** precedes TEST at **23:02:43.601 UTC**. [Lock](/public/home/shiys/0selection2/code/V4/runs/R70_latent_mixup/final_test_lock.json:4)
+- **Only B received new TEST inference.** Strict loading retains all 18 branches from one epoch. Recorded evaluation covers 18,000 rows through 144 batches, including 104-row tails, with one active selector and no solver executions. A’s historical TEST object and reused history equal their original saved objects. [TEST evidence](/public/home/shiys/0selection2/code/V4/runs/R70_latent_mixup/test_results_B.json:1651)
+- **Reporting agrees with saved evidence.** All **391 comparison rows / 2737 metric values**, 2254 learning-curve rows, best/final/last-five summaries, common-epoch comparisons and deltas match their saved sources. The 9600 update records match the reused control’s task, row, dropout and LR schedules. Sparse TRAIN observations remain explicit; last-five variability is not seed uncertainty. [Reporting implementation](/public/home/shiys/0selection2/code/V4/r70_analysis.py:43)
+
+| Frozen model | Validation correct / Top1 | TEST correct / Top1 |
+|---|---:|---:|
+| Reused A20 | 8604/18000 / 47.800000% | 8338/18000 / 46.322222% |
+| Official B23 | 8709/18000 / 48.383333% | 8409/18000 / **46.716667%** |
+
+B gains **105 validation decisions** and **71 TEST decisions** over its matched reused control, but remains below R60B. Official B is **4191 decisions short** of 12600/18000. The parent’s `passed=false` audit is correct; regret does not redefine the target. [Objective audit](/public/home/shiys/0selection2/code/V4/runs/R70_latent_mixup/objective_audit.json:14)
+
+New B completed **9600 updates / 7.2M selected rows**, five retries and **3668.194599s** formal wall time. Encoder views and mixed-head rows each total 14.4M successful versus 14,404,704 attempted. Historical control training, inherited pretraining and the **4.474874s discarded capacity update** are separately accounted. Equal parameter capacity does not imply equal computation. [Accounting](/public/home/shiys/0selection2/code/V4/runs/R70_latent_mixup/compute_summary.json:2)
+
+Disclosed limitations remain one seed, control reuse without independent replication, exposed historical TEST, local-only inference assets and unresolved eight-B-task semantics. R58 remains deferred. Publication is parent-owned; this review performed no Git inspection or mutation.
+
+**Memory update:** R70 delivery is supported with no actionable defect. Preserve the globally selected complete B23/global63 bank, official B, fixed reused R69B20 control and one-time new-B TEST. B achieved 48.383333% validation and 46.716667% TEST, modest matched gains without advancing R60B or reaching 70%. Initialization, latent objective, RNG recovery, inactive-parameter handling, selection and accounting are supported. TEST remains reporting-only. No ceiling or label-noise conclusion follows. R58 and legacy B discrepancies remain deferred; the full18 native single-completed-solver 70% goal remains active and unachieved.
+
+This review used source and saved-record inspection only: no GPU operation, checkpoint loading, forward, prediction replay, experiment/check/analysis rerun, hash campaign, edits, Git operation or delegation. No successor was designed and no TEST evidence was sent to the planner.
+
+
+
+
 
 
 
