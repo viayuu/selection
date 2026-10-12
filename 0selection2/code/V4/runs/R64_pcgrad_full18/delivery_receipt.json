@@ -1,0 +1,275 @@
+{
+  "recorded_at": "2026-10-12T16:24:49.000+08:00",
+  "executor": "requested GPT-6.1-Sol/max",
+  "scope": "Conditional parent-delegated R64 terminal monitoring, validation-only freeze, one TEST per frozen arm, CPU analysis once and factual delivery",
+  "training": {
+    "tmux": "r64_train",
+    "slurm_step": "1465.90",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "start": "2026-10-12T14:28:07+08:00",
+    "end": "2026-10-12T16:07:16+08:00",
+    "elapsed_seconds": 5949,
+    "tmux_absent_observed_at": "2026-10-12T16:08:27.270559+08:00",
+    "arms": {
+      "A": {
+        "epochs": 40,
+        "successful_updates": 9600,
+        "presentations": 7200000,
+        "amp_retries": 5,
+        "arm_wall_seconds": 2943.003809871152,
+        "wall_attempts": [
+          {
+            "id": "20261012T062918546023Z",
+            "arm": "A",
+            "status": "complete",
+            "started_unix": 1791786558.5460684,
+            "host": "gpu03",
+            "pid": 450449,
+            "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+            "slurm_step": "1465.90",
+            "tmux_session": "r64_train",
+            "formal": true,
+            "resumed_from_successful_update": 0,
+            "previously_recorded_execution": {
+              "recorded_successful_optimizer_steps": 0,
+              "recorded_query_presentations": 0,
+              "recorded_amp_retries": 0
+            },
+            "recorded_steps_after_checkpoint": 0,
+            "wall_seconds": 2943.003809871152,
+            "last_committed_update": 9600,
+            "heartbeat_unix": 1791789479.223848,
+            "finished_unix": 1791789501.5498977
+          }
+        ],
+        "optimization": {
+          "grad_norm": 1.2819062834652142,
+          "clip_coefficient": 0.8212980195700286,
+          "projection_mean_change_norm": 0,
+          "projection_relative_mean_change": 0,
+          "conflict_pairs": 12582,
+          "comparable_pairs": 28800,
+          "training_epoch_seconds": 2690.6815829072148,
+          "peak_memory_gib": 15.324179649353027,
+          "conflict_frequency": 0.436875
+        },
+        "inference": {
+          "scope": "one ordinary selected validation evaluation; each query exactly once; cached input gather, forward, CPU output transfer",
+          "excludes": [
+            "disk decode",
+            "geometry cache preparation",
+            "checkpoint load",
+            "solver execution"
+          ],
+          "selected_validation_seconds": 3.624781078658998,
+          "singleton_calls": 288,
+          "singleton_mean_ms": 6.14616382194476,
+          "batched_calls": 144,
+          "batched_queries": 17712,
+          "batched_seconds": 1.702587808482349,
+          "batched_queries_per_second": 10402.987682490282
+        },
+        "normal_timing_validation_correct": 8767,
+        "normal_timing_validation_count_delta": 2,
+        "original_selection_validation_correct": 8765,
+        "final_epoch": 40,
+        "final_validation_correct": 8765
+      },
+      "B": {
+        "epochs": 40,
+        "successful_updates": 9600,
+        "presentations": 7200000,
+        "amp_retries": 4,
+        "arm_wall_seconds": 2933.605836570263,
+        "wall_attempts": [
+          {
+            "id": "20261012T071821564369Z",
+            "arm": "B",
+            "status": "complete",
+            "started_unix": 1791789501.5643945,
+            "host": "gpu03",
+            "pid": 450449,
+            "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+            "slurm_step": "1465.90",
+            "tmux_session": "r64_train",
+            "formal": true,
+            "resumed_from_successful_update": 0,
+            "previously_recorded_execution": {
+              "recorded_successful_optimizer_steps": 0,
+              "recorded_query_presentations": 0,
+              "recorded_amp_retries": 0
+            },
+            "recorded_steps_after_checkpoint": 0,
+            "wall_seconds": 2933.605836570263,
+            "last_committed_update": 9600,
+            "heartbeat_unix": 1791792413.2024262,
+            "finished_unix": 1791792435.1702502
+          }
+        ],
+        "optimization": {
+          "grad_norm": 1.395830980145062,
+          "clip_coefficient": 0.794300202308463,
+          "projection_mean_change_norm": 0.10829022813811662,
+          "projection_relative_mean_change": 0.11260089184338738,
+          "conflict_pairs": 12594,
+          "comparable_pairs": 28800,
+          "training_epoch_seconds": 2682.551688948646,
+          "peak_memory_gib": 15.324179649353027,
+          "conflict_frequency": 0.4372916666666667
+        },
+        "inference": {
+          "scope": "one ordinary selected validation evaluation; each query exactly once; cached input gather, forward, CPU output transfer",
+          "excludes": [
+            "disk decode",
+            "geometry cache preparation",
+            "checkpoint load",
+            "solver execution"
+          ],
+          "selected_validation_seconds": 3.5364396441727877,
+          "singleton_calls": 288,
+          "singleton_mean_ms": 5.942426447290927,
+          "batched_calls": 144,
+          "batched_queries": 17712,
+          "batched_seconds": 1.6755647771060467,
+          "batched_queries_per_second": 10570.764104143618
+        },
+        "normal_timing_validation_correct": 8777,
+        "normal_timing_validation_count_delta": 0,
+        "original_selection_validation_correct": 8777,
+        "final_epoch": 40,
+        "final_validation_correct": 8777
+      }
+    }
+  },
+  "freeze": {
+    "authorized": true,
+    "official_arm": "B",
+    "inference_rule": "FP32 eval; full legal pool; highest direct utility; exact ties by ascending global solver ID",
+    "models": {
+      "A": {
+        "path": "/public/home/shiys/0selection2/code/V4/runs/R64_pcgrad_full18/A_mean_gradient_seed2/best.pt",
+        "sha256": "a51670b1dbbe4634e875dfd1d0710d904335942abbd9cfed176a98aa61865d45",
+        "epoch": 40,
+        "native_correct": 8765,
+        "native_total": 18000,
+        "val": {
+          "macro_ce": 1.0942144062783983,
+          "macro_top1": 0.48694444444444446,
+          "macro_top2": 0.8205555555555555,
+          "macro_top3": 0.9257777777777778,
+          "macro_top1_tie_aware": 0.48777777777777775,
+          "macro_mean_cost": 11.169958427074866,
+          "macro_vs_sbs_pct": -1.0576165884767723,
+          "macro_vs_oracle_pct": 0.9058736852822423,
+          "macro_actual_regret_pct": 0.9386191991520598,
+          "macro_vbs_gap_closed_pct": 30.706881869567113
+        }
+      },
+      "B": {
+        "path": "/public/home/shiys/0selection2/code/V4/runs/R64_pcgrad_full18/B_pcgrad_seed2/best.pt",
+        "sha256": "b455e93db94d99409179e4a623147e90fad64ebd26fcfed46f14d7ef2f98d86e",
+        "epoch": 40,
+        "native_correct": 8777,
+        "native_total": 18000,
+        "val": {
+          "macro_ce": 1.0946459571520488,
+          "macro_top1": 0.4876111111111111,
+          "macro_top2": 0.8211111111111111,
+          "macro_top3": 0.9248888888888889,
+          "macro_top1_tie_aware": 0.4884444444444445,
+          "macro_mean_cost": 11.17017423960636,
+          "macro_vs_sbs_pct": -1.0552047042603687,
+          "macro_vs_oracle_pct": 0.9083835409598476,
+          "macro_actual_regret_pct": 0.940972888511657,
+          "macro_vbs_gap_closed_pct": 30.72645591880914
+        }
+      }
+    },
+    "locked_at": "2026-10-12T16:09:30.935447+08:00",
+    "authorization_source": "/public/home/shiys/0selection2/review-stage/r58-to70/R64_locked_delivery_executor.prompt.md",
+    "validation_only_provenance": {
+      "selection_rule": "Maximum integer native validation correct count; earlier epoch on exact checkpoint ties; arm A on an exact between-arm tie",
+      "validation_rows_per_task": 1000,
+      "validation_total": 18000,
+      "candidate_source": "/public/home/shiys/0selection2/code/V4/runs/R64_pcgrad_full18/validation_candidates.json",
+      "training_slurm_step": "1465.90",
+      "training_terminal_state": "COMPLETED",
+      "training_exit_code": "0:0",
+      "training_ended_at": "2026-10-12T16:07:16+08:00",
+      "both_arms_epochs": 40,
+      "new_test_evidence_used": false,
+      "cost_or_regret_used_for_selection": false
+    }
+  },
+  "test": {
+    "tmux": "r64_final_test",
+    "tmux_initial_pane_pid": 1897125,
+    "slurm_step": "1465.91",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "start": "2026-10-12T16:09:44+08:00",
+    "end": "2026-10-12T16:10:06+08:00",
+    "elapsed_seconds": 22,
+    "tmux_absent_observed_at": "2026-10-12T16:10:42.198740+08:00",
+    "launch_receipt": "launch_receipt_20261012T080944762483Z.json",
+    "launch_receipt_legacy_tmux_field": "r64_train; actual test tmux was r64_final_test",
+    "one_complete_original_test_per_frozen_model": true,
+    "results": "test_results.json",
+    "A": {
+      "correct": 8528,
+      "total": 18000
+    },
+    "B": {
+      "correct": 8534,
+      "total": 18000
+    }
+  },
+  "gpu": {
+    "uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+    "host": "gpu03",
+    "index": 1,
+    "allocation": "1465",
+    "model": "NVIDIA GeForce RTX 3090"
+  },
+  "analysis": {
+    "stage": "analyze",
+    "command": "bash code/V4/run_v4_r64.sh analyze --reference-tests code/V4/runs/R64_pcgrad_full18/reference_tests.json",
+    "invocations": 1,
+    "execution": "CPU; launcher sets CUDA_VISIBLE_DEVICES empty",
+    "return_code": 0,
+    "analysis_artifact_completed_at": "2026-10-12T16:14:42.498521+08:00",
+    "process_wall_seconds": null,
+    "process_wall_measurement": "not separately instrumented",
+    "plots": 328,
+    "reference_provenance": "reference_provenance.json",
+    "historical_models_rerun": false,
+    "additional_metric_or_prediction_replay": false,
+    "source_edits": false
+  },
+  "artifacts": [
+    "RESULTS.md",
+    "comparison.md",
+    "comparison.csv",
+    "comparison_deltas.csv",
+    "last5_validation.csv",
+    "compute_summary.json",
+    "analysis.json",
+    "reference_provenance.json"
+  ],
+  "classification": "progress: completed locked delivery; full18 native70% goal remains active and unachieved",
+  "model_performance": {
+    "official_arm": "B",
+    "validation_gain_over_A_pp": 0.06666666666666667,
+    "test_gain_over_A_pp": 0.03333333333333333,
+    "official_test_top1": 0.4741111111111111,
+    "target_top1": 0.7,
+    "target_achieved": false,
+    "single_seed_provisional": true
+  },
+  "old_batch42": "ABORTED archive; not resumed, mixed or used as a matched batch-effect control",
+  "r58": "deferred; external legacy B semantics unresolved",
+  "git_actions": false,
+  "source_edits_during_delivery": false,
+  "no_new_experiment": true
+}

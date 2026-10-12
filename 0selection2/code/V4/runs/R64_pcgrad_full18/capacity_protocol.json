@@ -1,0 +1,21 @@
+{
+  "start": 256,
+  "maximum_candidates": 3,
+  "feasible256_branch": [
+    512,
+    "1024 if512 fits else384"
+  ],
+  "infeasible256_branch": [
+    128,
+    "192 only if128 fits"
+  ],
+  "warmup_updates_per_arm": 2,
+  "timed_updates_per_arm": 3,
+  "tie_fraction": 0.03,
+  "minimum_physical_headroom_fraction": 0.15,
+  "criterion": "highest eligible PCGrad presentations/second; within3% of fastest prefer smaller batch",
+  "timing_scope": "complete real update_triple including AMP retries, clipping, AdamW; both dropout forwards; no accumulation",
+  "representative_triple": "three distinct TRAIN tasks with largest maximum padded node counts; largest rows within each task",
+  "resident_inputs": "normal original TRAIN and validation caches/geometry; validation never forwarded or used to choose batch",
+  "formal_initialization": "discard every calibration model/optimizer/scaler/projection RNG; both formal arms fresh seed2"
+}

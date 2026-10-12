@@ -1,0 +1,64 @@
+{
+  "lock": {
+    "authorized": true,
+    "official_arm": "B",
+    "inference_rule": "FP32 eval; full legal pool; highest direct utility; exact ties by ascending global solver ID",
+    "models": {
+      "A": {
+        "path": "/public/home/shiys/0selection2/code/V4/runs/R64_pcgrad_full18/A_mean_gradient_seed2/best.pt",
+        "sha256": "a51670b1dbbe4634e875dfd1d0710d904335942abbd9cfed176a98aa61865d45",
+        "epoch": 40,
+        "native_correct": 8765,
+        "native_total": 18000,
+        "val": {
+          "macro_ce": 1.0942144062783983,
+          "macro_top1": 0.48694444444444446,
+          "macro_top2": 0.8205555555555555,
+          "macro_top3": 0.9257777777777778,
+          "macro_top1_tie_aware": 0.48777777777777775,
+          "macro_mean_cost": 11.169958427074866,
+          "macro_vs_sbs_pct": -1.0576165884767723,
+          "macro_vs_oracle_pct": 0.9058736852822423,
+          "macro_actual_regret_pct": 0.9386191991520598,
+          "macro_vbs_gap_closed_pct": 30.706881869567113
+        }
+      },
+      "B": {
+        "path": "/public/home/shiys/0selection2/code/V4/runs/R64_pcgrad_full18/B_pcgrad_seed2/best.pt",
+        "sha256": "b455e93db94d99409179e4a623147e90fad64ebd26fcfed46f14d7ef2f98d86e",
+        "epoch": 40,
+        "native_correct": 8777,
+        "native_total": 18000,
+        "val": {
+          "macro_ce": 1.0946459571520488,
+          "macro_top1": 0.4876111111111111,
+          "macro_top2": 0.8211111111111111,
+          "macro_top3": 0.9248888888888889,
+          "macro_top1_tie_aware": 0.4884444444444445,
+          "macro_mean_cost": 11.17017423960636,
+          "macro_vs_sbs_pct": -1.0552047042603687,
+          "macro_vs_oracle_pct": 0.9083835409598476,
+          "macro_actual_regret_pct": 0.940972888511657,
+          "macro_vbs_gap_closed_pct": 30.72645591880914
+        }
+      }
+    },
+    "locked_at": "2026-10-12T16:09:30.935447+08:00",
+    "authorization_source": "/public/home/shiys/0selection2/review-stage/r58-to70/R64_locked_delivery_executor.prompt.md",
+    "validation_only_provenance": {
+      "selection_rule": "Maximum integer native validation correct count; earlier epoch on exact checkpoint ties; arm A on an exact between-arm tie",
+      "validation_rows_per_task": 1000,
+      "validation_total": 18000,
+      "candidate_source": "/public/home/shiys/0selection2/code/V4/runs/R64_pcgrad_full18/validation_candidates.json",
+      "training_slurm_step": "1465.90",
+      "training_terminal_state": "COMPLETED",
+      "training_exit_code": "0:0",
+      "training_ended_at": "2026-10-12T16:07:16+08:00",
+      "both_arms_epochs": 40,
+      "new_test_evidence_used": false,
+      "cost_or_regret_used_for_selection": false
+    }
+  },
+  "started_unix": 1791792586.2912831,
+  "one_complete_original_test_per_frozen_model": true
+}

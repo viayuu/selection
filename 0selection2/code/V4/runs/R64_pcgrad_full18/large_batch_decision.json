@@ -1,0 +1,60 @@
+{
+  "batch_size": 256,
+  "effective_batch_size": 768,
+  "final_effective_batch_size": 48,
+  "tail_per_task": 16,
+  "cycles_per_epoch": 40,
+  "updates_per_epoch": 240,
+  "warmup_updates": 720,
+  "maximum_updates_per_arm": 9600,
+  "locked": true,
+  "policy": {
+    "start": 256,
+    "maximum_candidates": 3,
+    "feasible256_branch": [
+      512,
+      "1024 if512 fits else384"
+    ],
+    "infeasible256_branch": [
+      128,
+      "192 only if128 fits"
+    ],
+    "warmup_updates_per_arm": 2,
+    "timed_updates_per_arm": 3,
+    "tie_fraction": 0.03,
+    "minimum_physical_headroom_fraction": 0.15,
+    "criterion": "highest eligible PCGrad presentations/second; within3% of fastest prefer smaller batch",
+    "timing_scope": "complete real update_triple including AMP retries, clipping, AdamW; both dropout forwards; no accumulation",
+    "representative_triple": "three distinct TRAIN tasks with largest maximum padded node counts; largest rows within each task",
+    "resident_inputs": "normal original TRAIN and validation caches/geometry; validation never forwarded or used to choose batch",
+    "formal_initialization": "discard every calibration model/optimizer/scaler/projection RNG; both formal arms fresh seed2"
+  },
+  "selected_pcgrad_queries_per_second": 892.8703614019702,
+  "largest_eligible_pcgrad_queries_per_second": 892.8703614019702,
+  "measured_candidates": [
+    256,
+    512,
+    384
+  ],
+  "eligible_candidates": [
+    256
+  ],
+  "calibration_cost": {
+    "wall_seconds": 25.706882759928703,
+    "distinct_sizes": 3,
+    "actual_successful_discarded_updates": 20,
+    "actual_discarded_query_presentations": 19200,
+    "actual_amp_retries": 0,
+    "genuine_cuda_oom_attempts": 2,
+    "formal_updates": 0,
+    "failed_attempt_work_in_individual_receipts": true
+  },
+  "chosen_using_train_only": true,
+  "validation_used": false,
+  "test_used": false,
+  "original_lr": 0.0001,
+  "scaled_lr": false,
+  "original_initialization_seed": 2,
+  "aborted_batch42_archive": "/public/home/shiys/0selection2/code/V4/runs/R64_pcgrad_full18_aborted_batch42_20261012T140928",
+  "old_trained_weights_reused": false
+}
