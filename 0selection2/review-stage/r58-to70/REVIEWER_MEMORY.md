@@ -1126,3 +1126,368 @@ code/.gitignore: do not newly force weights/NPZs/rawupdates/W&B intoGit;
 retain local artifacts and documentpublicationboundary. No R67 GPUlaunchclaim
 until actualworkerreceipt. Goalactive; R58deferred; oneGPUUUID unchanged.
 
+## R66 Completed-Version Publication
+
+Actual scoped commit8cc4ce3e8 (451files) pushed originmain:
+db49aa599..8cc4ce3e8, terminal0, observed2026-10-12T13:22:31UTC.
+Onecommit for completedR66 only. Existing unrelated stagedcleanup count before
+and after stays14524 (20pt/13969npz/451W&B/84other). code/.gitignore and unrelated
+dirtysource untouched. No newlyforcedweights/NPZ/rawupdates/W&B/schedulecache;
+exactlocalbundleidentitiesretainedbyfinal_test_lock.json, publicationboundary
+documented inRESULTS.md/DELIVERY.md. No claimGitcontainsallinferenceassets.
+
+Actual primary/freshrawresponses andtracescopied toR66/reviews; rawmemory
+appendpreserved andround8delivery-only acquittalrecordsame-family/provisional.
+70%goalACTIVE/notachieved. R67actualSol/max implementationstillinprogress;
+formaltraininglaunchmustbeconfirmedfromhandoff, notassumedfromdelegation.
+
+## R67 Actual Formal Launch and Settled Executor Handoff
+
+ActualrequestedSol/max thread01a1303e-208b-7b83-bd84-f32f7616c169/CLI28594
+terminal0. SixisolatedR67code/check/launcher/READMEfilesplusactualprotocol/
+configs/source snapshot written. FocusedCPUcheckpassed Eq2scalarreference,
+positive/self/counterpartmasks andbothviewgradients, forwardtargetisolation,
+explicitcommonfreshinit, encode_pairsonce, inactiveheadgradNone, terminal-x
+trunktransfer, identicalentireheadreset, projectorremoval, freshoptimizer/
+scaler/stagecounters. Initialwarmupassertionfixturecorrected then samefocused
+checkpassed; no formaltrainingfailure/overfitpilot/GPU sizing sweep.
+
+FormalAstage1+stage2thenBstage1+stage2 ALREADYLIVE in tmuxr67_train,
+existingSlurm1465.96/gpu03index1 soleUUID
+GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d, trainingPID4133768,
+pane3124448. ActualUUID-only immediatelyprelaunchidle receipt13:25:06.158553UTC:
+2MiB/noclients. Parentnormaltmuxobservation13:28:43UTC alive. No otherGPU/
+client/process/queue/allocationtouched. Workerlocalneededexecsessionssettled.
+
+Firstformalupdate real256eachofVRPL/OVRPBL/OVRPL/effective768,
+nativeCE/RDrop loss1.9512447119/gradnorm.9690369368/LR4.1666666667e-7,
+finite/noAMP retry. Firstsmall-nodepeak4.40953GiB is NOTwhole-runmaximum.
+HandoffobservedAstage1update120. Shared80epochschedule,19200successfulupdates/
+14.4Mpresentations EACHarm; pair38400/28.8M. No trainedR66state reused.
+Onlystage2full18VALselectsmaxintegercorrect/earliesttie; officialtieA. Stage1
+fixedterminal-xtransfer, no stage1VALselection. Bothstage2fullyfine-tuned;
+inferenceonesingleutilityselector/onecompletedsolver, no projector.
+
+Authorlossrescalingclarification retained inR67README/actualprotocol. No TEST/
+referenceinference/newlabels/solver/R58/Git byworker. Handoff/progressroot:
+code/V4/runs/R67_supervised_contrastive_full18/. Nextturnnormalmonitor ONLY
+existingjob; prepareactualmissing isolatedTEST/analysisentrywhiletraining.
+AfterBOTHterminal freezeuniquecompletebeststage2checkpoint/arm+officialarm
+fromVALonly, ONEoriginalfull18TESTeach thenanalysisONCE/actualAstraTRAIN-VAL
+nextplan/freshdeliveryreview/ONEcompletedversioncommit. Do not relaunch or
+interpretcached/syntheticcheckasproductionevidence. New R66TESTexcludedfrom
+R67design; R67TESTnotyetread/authorized. R58deferred/eightlegacyBsemantics
+unresolved, nightmare100/nativefull18single-solver70%goalACTIVE/notachieved.
+
+## R67 Existing Job Revalidated; Delivery Code Preparation
+
+NewgoalturnpreviousclassificationPROGRESS: R66completed/pushed and R67actual
+code/check/formallaunch were authoritative advances, notstatus-onlyplanning.
+Parent13:32:03UTC reobservedactualtmuxr67_trainpane3124448alive AND
+sacct1465.96RUNNINGelapsed6m59s. PipelineAstage1epoch6/update1260 finite,
+onewhole-tripleAMP retry/noskippedrows. Existingjobnotterminal; no restart,
+newGPUquery/sizing/stop/relabel/TEST/referenceinference/solver/R58 performed.
+
+ActualsameSol/max thread01a1303e-208b-7b83-bd84-f32f7616c169 resumedCLI78032,
+trace .aris/traces/R67_delivery_preparation.events.jsonl. Delegated ONLY actual
+missingnewr67_frozen_evaluation.py/testlauncher/r67_analysis.py andshort
+DELIVERY_PROTOCOL.md onCPUwhilecurrenttrainingcontinues. FrozenR67launchfiles/
+snapshothashlist untouched, no repeatedCPUcheck; syntaxonlynewentrypoints.
+ReturnpromptlywithoutTEST/analysisexecution/Git/agents/GPUjob. Parentownsstate/
+memoryandlateruniqueVALlock+ONEfull18TESTeach afterBOTHactualtrainterminal.
+No planorimplementationintentcountedasperformancegain; formal70%notachieved.
+
+## R67 Missing Delivery Entrypoints Implemented, Not Executed
+
+ResumedactualSol/maxCLI78032terminal0. Actualnewr67_frozen_evaluation.py,
+run_v4_r67_test.sh,r67_analysis.py,DELIVERY_PROTOCOL.md andpreparationreceipt
+exist. Syntaxpassed(inmemorycompile/bash-nONLY); runtimeunverified. No TEST/
+analysisexecution/referenceinference/predictionreplay/GPUquery/job/CPUcheck
+rerun/solver/R58/Git/newagent orfrozentrainingsourceedit. Rootreceiptprepared
+2026-10-12T13:46:34Z, actualtrace .aris/traces/R67_delivery_preparation.events.jsonl.
+
+Futurefreeze requiresBOTHactualtrainingterminal0+published40+40results,
+maxintegerstage2VALcorrect/earliesttie andofficialarmtieA. Load complete saved-x
+singleNativeUtilitySelector withoutprojector/optimizertransition; exclusive
+ONEoriginalfull18FP32batch128TESTeach afterparentauthorization. CPUanalysis
+ONLYafteractualTESTterminal0. Weights/NPZ/rawupdates/W&B/regenerableschedules
+remainlocal perconcurrentcleanup; onecompletedversionpublicationlater.
+
+Parentnormalobservation13:51:27UTC: actualtmuxpane3124448alive and current
+pipelineAstage1epoch22/update5280,3whole-tripleAMP retries,finite/noskips.
+No restart/relaunch. ThisgoalturnmadePROGRESS byactualmissingdeliverycode,
+notstatus-onlywaiting; ongoingtrainingwaitisalsoverified. Goal70%ACTIVE.
+
+## Bounded Conditional Literature Scout While R67 Trains
+
+ActualprimaryAstra/maxthread01a12e68-4d2a-71d0-aefd-67fc1c158282 resumed
+CLI68059. FULL reviewer memorysnapshotR67_literature_scout_memory.md prepended;
+promptR67_conditional_literature_scout.prompt.md. Readonly4-6primarypapers,
+atmost3substantivelydifferentcandidatefamilies(transfer/optimization/other
+performance-supervisionifnonduplicative), notnewexperimentalbranches. No R68
+adoption, R67partialoutcomeassumption, TEST-baseddecision, sourceedit, GPU/
+solver/R58/Git oradditionalreviewgate. CurrentR67remainsanongoingexperiment.
+ConditionalresearchmustwaitcompletedR67TRAIN/VALbeforenextadoption. Exposed
+historicalTESTacknowledged butnotrecommendationevidence. Rawresponse+Memory
+updatewillbeappendedwhenterminal; same-family/provisionalonly.
+
+## Conditional Astra Scout Completed; R67 Formal Training Continues
+
+Actual Astra/max CLI68059 returned terminal0. Raw response below is preserved
+verbatim, including its Memory update. Five primary papers were checked;
+SAM-versus-AdamW is a conditional preference only, not an adopted R68 plan.
+R59 already tested trainable solver-encoder transfer; repeating unfreezing
+alone is not a new mechanism. No performance verdict or acquittal receipt
+follows from this scout. Historical TEST exposure remains disclosed; no R67
+partial outcome or TEST feedback informed the recommendation.
+
+Parent normal observation2026-10-12T14:12:40Z: existing tmuxr67_train pane
+3124448 alive; A stage1 completed40epochs/9600updates with4 AMP retries.
+Terminal averaged-x trunk transferred unchanged, entire score head replaced,
+projector discarded, optimizer/scaler/counters reset. Actual A stage2 update1
+processed768rows, finite gradient2.2128443718, loss2.0031642516; no restart.
+R67 full paired experiment remains incomplete. New delivery entrypoints are
+prepared/syntax-only, runtime and TEST still unexecuted. No new GPU job or Git
+commit in this goal turn. User's R64batch request already completed/pushed
+ca88f30d0: old42 archive preserved, fresh256/task effective768 A/B terminal.
+Only preexisting R67 is live; no accidental stop or duplicate R64 rerun.
+
+### Verbatim Conditional Scout Response
+
+`review_independence=same-family; acceptance_status=provisional; PLAN/SCOUT ONLY`
+
+**My conditional preference is one SAM-versus-AdamW experiment if completed R67 fails its matched validation comparison. This is not R68 adoption.** I checked five primary papers and relevant local implementation paths. R67 partial outcomes and TEST evidence did not inform this recommendation; historical TEST exposure in memory remains disclosed.
+
+R66 supplies little support for adding further correction stages: corrective B reached48.666667% validation versus independent-sum A’s48.766667%, with little additional TRAIN fitting. R65 provides a more specific optimization signal: ordinary AdamW developed late TRAIN/validation divergence, whereas schedule-free stabilized predictions without beating R60B’s49.361111%. Neither observation establishes sharpness as the cause.
+
+1. **Solver-pretrained encoder transfer: feasible, but substantially overlaps R59.**
+
+   [ReLD, Sections3–4.2](https://arxiv.org/html/2503.00753v1) improves contextual decoding through residual context injection and a nonlinear query transformation. Its solver results do not establish that its encoder distinguishes competing solvers. [RouteFinder, Sections4.2–4.4](https://arxiv.org/html/2406.15007v4) offers a different upstream representation: global attributes enter the encoder, with mixed-variant RL training and reward normalization. Transferring that representation into a selector would be a project adaptation.
+
+   The important local correction is that [R59 already fine-tuned the native encoder end to end]( /public/home/shiys/0selection2/code/V4/r59_transfer.py:139), against the same randomly initialized architecture. Its final A/B budgets differed, so it does not reject every transfer recipe, but “unfreeze R50” is not an untried mechanism. The compatible ReLD-MTL checkpoint still exists. RouteFinder’s50/100-node checkpoints also exist with a local loader; their existence does not establish selector compatibility.
+
+   A defensible new transfer comparison would require the same RouteFinder-based architecture in both arms, pretrained versus random encoder, identical downstream initialization and exposure, preserving all input fields and the existing TSP/ATSP paths. Failure to improve full18 validation over the random control would refute that bounded transfer hypothesis. This is feasible in principle, but batch256 memory is not established for the changed backbone, and upstream data budgets/provenance remain additional limitations. **Lower priority.**
+
+2. **SAM: the strongest conditional choice, with a fitting caveat.**
+
+   [Foret et al., Section2, Algorithm1](https://arxiv.org/html/2010.01412v3) optimize loss in a parameter neighborhood: compute a gradient, perturb weights in its normalized direction, then update the original weights using the perturbed gradient. This differs from PCGrad’s task-gradient projections and schedule-free parameter averaging. AppendixC.3 examines a fixed radius0.05.
+
+   The [transformer study, Section4 and Table1](https://arxiv.org/html/2106.01548v3), finds improved image-classification generalization with SAM, including **higher ordinary training loss**. That supports testing neighborhood robustness; it does not support promising better TRAIN fitting here. Applying SAM to this selector’s native CE/RDrop and task-averaged gradient is our adaptation.
+
+   Matched control: ordinary AdamW versus AdamW with one fixed SAM perturbation, sharing architecture, initialization, examples and successful-update budget. The hypothesis fails this bounded comparison if SAM does not improve validation Top1. Recovering a weak AdamW baseline while remaining below R60B would be limited progress. Sequential gradient passes should preserve realbatch256 capacity, with approximately twice B’s gradient computation and unchanged inference cost.
+
+3. **Joint performance-distribution learning: distinct, but more speculative.**
+
+   [Salinas et al., Sections3–4, Equation5](https://proceedings.neurips.cc/paper_files/paper/2019/file/0b105cf1504c4e241fcc6d519ea962fb-Paper.pdf) learn a joint predictive distribution using marginal transformations, likelihood training and low-rank-plus-diagonal covariance. Their evidence concerns multivariate forecasting.
+
+   The project adaptation would learn the **joint distribution of the existing complete solver-cost vector**, then select the candidate with greatest predicted probability of being the native minimum. This differs from [R39’s point performance estimates]( /public/home/shiys/0selection2/code/V4/dual_stream.py:110), pairwise comparisons and R67’s cross-example winner clustering. It adds no observations; it changes supervision and the decision rule.
+
+   Matched control: diagonal versus rank-two correlated predictive distributions, with identical backbone, marginal treatment, training exposure and fixed sampling-based winner rule. Better likelihood without better native validation Top1 would not support the selection hypothesis. Small candidate pools make this plausible at batch256, with one encoder forward plus inexpensive distribution sampling at inference. However, covariance misspecification and density fitting unrelated to winner boundaries are substantial risks. Predictive variance would not demonstrate label noise. **Second priority, not an adopted backup experiment.**
+
+The conditional SAM experiment should remain narrow:
+
+- Use fresh paired R64 `NativeUtilitySelector` models, seed2, original full18 inputs/pools/native winners and unchanged CE/RDrop. Reuse R65A’s AdamW settings: LR3e-4 after720 successful-update warmup, then constant; fixed40 epochs,9,600 updates and7.2M selected-row presentations per arm.
+- Keep real256/task, three tasks/update, effective768 and existing tails. B uses fixed L2 radius0.05 from the **unscaled FP32 mean gradient across the entire three-task update**. Recompute on the same rows and dropout masks at perturbed weights, restore weights, then apply the second gradient with the existing final clipping. Both share initial weights and data order.
+- Disclose unequal computation: A has two dropout forwards per selected row; B has four. Budgets match updates and selected examples, not FLOPs. Sequential passes require little additional persistent memory. No new sizing or curvature-measurement campaign is proposed.
+- Select each model by integer full18 validation-correct count, earliest exact tie; freeze the official arm by validation, tieA. Keep the full-pool utility rule and one completed solver. Only then permit one frozen full18 TEST per model. Cost remains disclosure.
+
+This tests a different training objective with established external evidence and modest implementation scope. It could still worsen this weak-fitting regime. No result from the papers justifies a70% projection, and completed R67 evidence must precede any adoption.
+
+Memory update, proposed without editing files: Conditional scout checked five primary papers. R59 already implemented trainable solver-encoder transfer; repeating unfreezing is not a new mechanism. SAM is the preferred conditional next contrast because neighborhood optimization remains untested and R65A showed actual late fitting/generalization divergence, while R66’s weak fitting limits confidence. Joint cost-distribution learning is distinct but carries stronger modeling assumptions. R67 remains unresolved, no R68 plan is adopted, and no R67 outcomes or TEST feedback guided this scout. R58 and legacy eight-B-task semantics remain deferred; the full18 single-solver70% goal remains active.
+
+### Parent Continuation
+
+Conditional scout artifacts also copied to R67/reviews and
+review-stage/r58-to70/R67_conditional_ideas.md. Current goal turn made progress
+through missing delivery-code implementation and completed research; all
+foreground executor/scout sessions terminal0. Await both R67 TRAIN/VAL
+terminal before checkpoint freeze, one locked original TEST each, one CPU
+analysis, actual primary/fresh closure, and one completed-version publication.
+R58 remains fully deferred; original full18 single-solver70% goal ACTIVE.
+
+## Goal Continuation: Verified Existing R67 Wait
+
+Previous goal turn was PROGRESS: actual missing R67 delivery code and completed
+bounded Astra/max primary-paper scout with full raw memory preservation.
+At2026-10-12T14:19:51Z parent revalidated the actual handle, not merely state:
+tmuxr67_train pane3124448 alive, sacct1465.96 RUNNING/3286s/gpu03. RUNNING
+ExitCode0:0 is not terminal success. A stage1complete40E/9600updates and A
+stage2epoch7/update1560/5cumulativeAMP retries. B has not started. Current wait
+is VERIFIED_WAIT, not blocked; no duplicated training, GPU query, TEST or Git.
+Keep original full18 paired experiment and native70% goal; conditional SAM
+scout is not adoption. Future delivery requires both actual pipelines terminal,
+validation-only lock and one original TEST each; existing code is syntax-only.
+
+## R67 Conditional Mechanical Delivery Delegated to Actual Sol/max
+
+At2026-10-12T14:56:50Z actual resumed Sol/max CLI82488/thread
+01a1303e-208b-7b83-bd84-f32f7616c169 started; trace
+.aris/traces/R67_locked_delivery_execution.events.jsonl. Parent delegates ONLY
+ordinary existing-job monitor and, AFTER both actual TRAIN/VAL terminal0,
+mechanical unique validation-best/officialarm freeze, ONE original18 TEST/model,
+then ONCE CPU analysis. Existing source/protocol/budget/rule unchanged, no Git,
+new candidate, extra checks or state/memory edits by worker. Parent latest
+normal observation A stage2epoch34/update8100; original tmux remains alive.
+Prepared R67_closure_next_plan.prompt.md is NOT an invoked review or adopted
+R68 plan. Actual primary TRAIN/VAL closure must wait both arms complete and
+use full pre-new-R67TEST memory; fresh nightmare delivery review follows actual
+artifacts. Authoritative raw response/terminal receipts will be preserved later.
+
+## Actual R67A Completion and Continuing R67B
+
+Actual Sol/max CLI82488 remains live at2026-10-12T16:03:49Z. Its readonly
+four-minute existing-job monitor confirms1465.96/tmuxr67_train active, not a
+file-only/intent inference. A finished both fixed40epoch stages/19200updates/
+14.4Mpresentations; published stage2best16/global56 has8767/18000 nativeVALcorrect
+(48.705556%). B finished stage1 and reached stage2epoch11/update2460,total12060.
+These are completed/partial TRAIN-VAL observations, not a paired conclusion,
+official arm selection, TEST result or R68 adoption. Current goal turn has
+actual completed A work plus VERIFIED_WAIT on B/executor. No extra GPU query,
+restart, TEST, source/policy change or Git. Conditional delivery still requires
+BOTH actual terminal0. User environment date is now2026-10-13 Asia/Shanghai;
+timestamps above are UTC. Original full18 single-solver70% remains ACTIVE.
+
+## Both R67 TRAIN/VAL Pipelines Actually Terminal, Before New TEST
+
+Parent actual sacct observation2026-10-12T16:40:00Z:1465.96 COMPLETED/0:0,
+11557seconds,gpu03. Actual paired_training_complete published at16:37:41.279554Z,
+both80epochs/19200updates/14.4Mrows, pair38400/28.8M. This is successful terminal
+work, not a lock-file inference. Sol/maxCLI82488 owns remaining mechanical
+freeze/oneTESTeach/analysis. Parent has NOT read any new R67 TEST evidence.
+
+Actual published validation_candidates: A stage2epoch16/global56 nativecorrect
+8767/18000=48.705556%, CE1.0938096642,actualregret.9513953186%; Bstage2epoch36/
+global76 nativecorrect8872/18000=49.288889%, CE1.0977291299,regret.9354403960%.
+Complete saved averaged-x no-projector checkpoint identities are recorded in
+candidates; proposed officialB fixed by greater INTEGERVALcount before TEST.
+B-A+0.583333pp, B-R60B49.361111%VAL=-0.072222pp. Limited matched benefit, not
+an established broad breakthrough or70% success. No new decision rule, cost
+selection, task assembly or partial-outcome optimization. Primary Astra/max
+completed TRAIN/VAL closure/nextplan may now run with this full pre-new-TEST
+memory snapshot. It must exclude new R67 TEST/results/analysis/delivery outputs.
+Conditional SAM preference is research, not already adopted R68. Goal ACTIVE.
+
+## R67 Actual Primary TRAIN/VAL Closure and Adopted R68 Plan
+
+Actual primary Astra/max CLI36580/thread01a12e68-4d2a-71d0-aefd-67fc1c158282
+returned terminal0. FULL R67_before_test_reviewer_memory.md was prepended; call
+began only after actual bothTRAIN/VALterminal, before parent read newR67TEST.
+Raw response below preserved verbatim including Memory update; same-family/
+provisional. Performance4/notready, inspectedTRAIN-VALintegrity9/ready; ONE
+R68 SAM fine-tuning plan8/ready PLANONLY adopted, not70% acceptance.
+
+### Verbatim Primary Response
+
+`review_independence=same-family; acceptance_status=provisional`
+
+**R67 performance: 4/10, not ready for70%. TRAIN/validation integrity: 9/10, ready within the inspected scope.** No actionable defect found. New R67 TEST and delivery outputs were excluded.
+
+| Selected model | Stage2 epoch | TRAIN Top1 | Validation correct / Top1 | Validation regret |
+|---|---:|---:|---:|---:|
+| [A: classification pretraining](/public/home/shiys/0selection2/code/V4/runs/R67_supervised_contrastive_full18/A_classification_pretrain_seed2/result.json) | 16 | 50.375000% | 8767/18000 /48.705556% | 0.951395% |
+| [B: contrastive pretraining](/public/home/shiys/0selection2/code/V4/runs/R67_supervised_contrastive_full18/B_contrastive_pretrain_seed2/result.json) | 36 | 51.277778% | 8872/18000 /49.288889% | 0.935440% |
+
+B gains **105 decisions, +0.583333pp**, over matched A. The matched comparison is positive, so the scout’s conditional failure trigger did not occur. B nevertheless remains **13 decisions,0.072222pp below R60B**. The broad validation incumbent is unchanged.
+
+The benefit spans **13 improved tasks and five regressions**. Family gains over A are TSP+0.4pp, CVRP+0.5pp, ATSP+1.7pp and MVRP+0.526667pp. Against R60B, B improves the first three families but loses0.18pp across MVRP. This supports a modest, distributed benefit from this pretraining recipe; one seed does not establish a reproducible breakthrough.
+
+The complete stage2 curves show late fitting/generalization divergence:
+
+- A’s selected-to-final TRAIN Top1 rises50.3750%→52.9983%, while validation falls48.7056%→48.1444% and validation CE rises1.09381→1.13451.
+- B’s epochs20→40 TRAIN Top1 rises49.9189%→51.6439%, while validation stays approximately49.06%→49.08% and CE rises1.08725→1.10309.
+
+These are comparable native-classification evaluations after full fine-tuning. Stage1 B’s contrastive loss is not CE; its0.1 multiplier remains a project choice. The evidence supports late generalization loss, especially in A, without establishing sharp minima, label noise or an accuracy ceiling.
+
+Both arms completed19,200 updates/14.4M selected-row presentations, with8/6 AMP retries. Combined recorded arm wall time was11,506.55seconds; peak allocated memory15.3311GiB. The [objective](/public/home/shiys/0selection2/code/V4/r67_objective.py:23), [stage transition](/public/home/shiys/0selection2/code/V4/r67_model.py:72) and [selection path](/public/home/shiys/0selection2/code/V4/r67_experiment.py:318) support the intended loss, terminal averaged-x transfer, identical complete head reset, fully trainable stage2 and integer selection. Both selected validation recounts agree.
+
+**Recommend R68: SAM fine-tuning from the shared R67B contrastive-pretrained trunk. Score: 8/10, ready, PLAN ONLY.**
+
+Among the three scouted directions, SAM directly tests the newly observed late fine-tuning divergence. Joint cost-distribution learning changes supervision but introduces stronger distributional assumptions. RouteFinder transfer changes the backbone and requires additional adaptation; R59 already tested trainable ReLD transfer. Neither currently has stronger project evidence.
+
+[SAM’s Algorithm1 and Sections3.2/C.3](https://arxiv.org/html/2010.01412v3) support neighborhood optimization and its use during fine-tuning, including a fixed radius0.05. That evidence concerns image models. AdamW, native CE/RDrop and the shared three-task perturbation below are project adaptations.
+
+1. **Shared starting model.** Load R67B’s `stage1_terminal_x.pt`, using its terminal averaged-x trunk. Replace the entire utility head with the identical fresh `stage2_head` from R67’s `shared_initialization.pt`, seed670003. Copy this complete starting state into both arms. Discard the projector; train every selector parameter. Preserve the R64 d128/four-encoder/two-joint-layer architecture, handcrafted34+ID, all original inputs and directed ATSP path. The trunk is inherited pretraining, explicitly disclosed.
+
+2. **One contrast.** `A_plain_adamw_seed2` uses ordinary AdamW; `B_sam_adamw_seed2` adds one SAM perturbation. Both use the existing two-forward native CE plus symmetric legal-pool RDrop, weight`0.35×min(u/720,1)`. Reuse the R64 model/objective and R67 input/evaluation machinery in isolated R68 runner/gradient files. Both optimizers/scalers start fresh. Future weights are ordinary AdamW weights, with no schedule-free transitions or averaging.
+
+3. **Matched data and optimizer.** Reuse R67’s stage2 task/row/dropout schedule, global epochs41–80, for both arms. Keep real256/task, three distinct tasks/update, effective768; tails16/task/effective48. AdamW settings: betas`(.9,.999)`, epsilon`1e-8`, weight decay`1e-4`, `foreach=False`; LR`3e-4×min(u/720,1)` using successful-update counter`u=1…9600`, then constant. Run40 fixed epochs with no early stopping or plateau controller.
+
+4. **Exact SAM update.** Compute the unscaled FP32 mean gradient`g` across all three task losses at unchanged weights`w`. Before clipping, form`epsilon=0.05*g/max(||g||₂,1e-12)`. Perturb all participating parameters once. Restore the pre-pass RNG state and recompute the three-task mean gradient on the **same rows and same two dropout masks** at`w+epsilon`. Copy the exact original weights back, clip the second mean gradient once at1, and perform one AdamW step. A clips its ordinary mean gradient once at1. Weight decay occurs only in that single optimizer step.
+
+5. **Numerical recovery.** If either pass or reduction is nonfinite, restore exact unperturbed weights and RNG, clear both passes’ gradients, reduce AMP scale and retry the entire same update. Optimizer state, LR counter, row cursor and presentation counters advance only after success. Retain the existing20-attempt failure limit; checkpoint only restored, unperturbed weights. One focused CPU check covering perturbation/restoration, repeated dropout masks and whole-update retry is sufficient before formal training.
+
+6. **Budget and feasibility.** Each arm performs9,600 new updates/7.2M selected-row presentations; the pair performs19,200/14.4M. A processes14.4M dropout-view rows and B28.8M, so updates/examples match while computation does not. Count the shared inherited stage1’s9,600 updates/7.2M rows separately once. Sequential passes should retain batch256’s activation footprint; extra weight/gradient buffers are small relative to the measured15.33GiB peak. Approximately2.5hours for the new pair is a planning estimate, not measured throughput or a cutoff. Inference remains one selector forward.
+
+7. **Selection and delivery.** Evaluate all18,000 validation rows each epoch in FP32 batch128. Select maximum integer native-correct count, earliest exact tie; official arm by validation, tieA. Freeze complete weights and the full-pool utility-argmax/global-ID-tie rule. Parent then authorizes one original full18 TEST per frozen model, with historical results reused. Retain normal TRAIN evaluations, task/family reporting and cost disclosure. Sol uses only the assigned UUID; one commit follows completed training, locked TEST and reporting.
+
+The SAM hypothesis is unsupported if B fails to beat matched A on validation. Beating A while remaining below R60B is limited progress. Comparisons with R67 also change the fine-tuning optimizer, so only the new A/B contrast isolates SAM. Stronger regularization could harm fitting; no70% jump is promised.
+
+Memory update, proposed without editing files: R67 completed matched80-epoch arms. Contrastive B36 achieved49.288889% validation, +0.583333pp over A16 across13 tasks and all four families, but−0.072222pp versus R60B. Both stage2 curves show late fitting/generalization divergence; the matched contrastive result is positive. Inspected training/selection paths are correct. R68 proposes one SAM-versus-AdamW fine-tuning comparison sharing R67B’s terminal contrastive trunk and fresh identical head. New R67 TEST did not inform planning; historical TEST remains exposed. R58 and eight legacy B-task semantics remain deferred; the full18 single-solver70% goal remains active and unachieved.
+
+### Parent Actual Delivery Observation
+
+Actual Sol/max CLI82488 also terminal0. TRAIN1465.96 COMPLETED0:0/11557s;
+TEST1465.97 COMPLETED0:0/24s, both ownedtmux gone. Unique averaged-x locks A16/
+B36; officialB fixed by VALbeforeTEST. ONE full18 TEST each: A8548/18000
+(47.488889%,regret.975968%); B8658/18000(48.100000%,regret.955544%). Existing
+CPUanalysisONCE return0/58.866923s,667comparison rows/331plots. Actual reports
+are REPORT.md; parent added concise RESULTS.md entry, no analysis rerun.
+
+NextR68 inherits ONLY Bterminalstage1xtrunk(9600updates/7.2Mrows countedonce),
+identicalwholefreshhead670003, no stage2weights. Paired ordinaryAdamW versus
+SAM L2rho.05, identicalR67stage2schedule/seed2/nativeCE+RDrop/40E/9600newupdates
+and7.2Mnewrows each, real256task/effective768. SAM repeats same rows/dropout
+masks at perturbedweights, exactrestore before oneclippedAdamWstep; whole
+updateAMP retry. Updates/selectedrows match, gradientcompute differs; inference
+oneforward/onecompletedsolver. Primary used TRAIN/VALonly, not new TEST.
+Fresh nightmare R67 delivery review and one scoped Gitcommit/push pending.
+Goal70% ACTIVE; noR58 or otherGPU/client/queue/allocation changes.
+
+## R67 Fresh Nightmare Delivery Review Complete
+
+Actual FRESH Astra/max CLI35751/thread01a1310c-0b8f-7140-9335-cac7fdcb6e00
+returned terminal0. Full current memory prepended; direct repository/source/
+saved-log/result inspection, no GPU/inference/replay/edits/Git. Raw response
+below preserved verbatim including Memory update. Delivery9/ready, no actionable
+defects; performance4/notready. Same-family/provisional, not goal acceptance.
+
+### Verbatim Fresh Review
+
+No actionable delivery defects found. **Delivery integrity: 9/10, ready for legacy reporting only.**
+
+`review_independence=same-family; acceptance_status=provisional`
+
+- **The implemented contrast matches the plan.** Both views are anchors, self-comparisons are excluded, positives are averaged outside the logarithm, and the loss reduction uses FP32. The fixed `0.1` multiplier is correctly disclosed as a project choice, distinct from the [author implementation’s temperature/base-temperature scaling](https://github.com/HobbitLong/SupContrast/blob/master/losses.py). See [R67 objective](/public/home/shiys/0selection2/code/V4/r67_objective.py:16).
+- **Training and stage transitions are supported.** Each arm completed 19,200 updates and 14.4M selected-row presentations. Inspected boundary, tail and retry records agree with the runner. Terminal averaged-x trunks transfer with identical fresh complete heads, discarded projectors and reset optimizer/scaler state. Unused stage1 parameters retain `grad=None`. See [transition implementation](/public/home/shiys/0selection2/code/V4/r67_model.py:72).
+- **Selection precedes TEST.** Complete validation histories uniquely select A16/B36. Official B was frozen at 16:41:17 UTC, before TEST began at 16:41:44. Each test records 144 forward batches covering all 18,000 rows, including tails, using one complete saved-x selector without optimizer transitions or supervised inputs. See [lock](/public/home/shiys/0selection2/code/V4/runs/R67_supervised_contrastive_full18/final_test_lock.json:3) and [evaluation implementation](/public/home/shiys/0selection2/code/V4/r67_frozen_evaluation.py:251).
+- **Reporting is appropriately bounded.** Inspected tables agree with saved results. Stage1 objectives remain distinguished; historical references are reused; evaluation wall time is not presented as singleton latency. Local-only weights and prediction assets are disclosed.
+
+**Performance against 70%: 4/10, not ready.**
+
+| Frozen model | Validation Top1 | TEST Top1 |
+|---|---:|---:|
+| A16 | 48.705556% | 47.488889% |
+| Official B36 | 49.288889% | **48.100000%** |
+
+B improves matched A by **0.583333pp validation** and **0.611111pp TEST**, but remains below R60B. Official B’s TEST actual regret is **0.955544%**; it does not redefine or veto the native Top1 target. [Reported results](/public/home/shiys/0selection2/code/V4/runs/R67_supervised_contrastive_full18/REPORT.md:13)
+
+Limits remain one seed, exposed historical TEST, no independent replication, and unresolved legacy eight-B-task semantics. This review inspected sources and saved artifacts without GPU work, inference, metric replay, edits or Git operations. No corrective experiment or analysis rerun is warranted.
+
+Memory update: R67 delivery is supported with no actionable defects. Preserve validation-frozen A16/B36, official B, averaged-x single-selector deployment and completed one-time tests. TEST remains reporting-only. R58 remains deferred; delivery readiness does not establish 70% acceptance. The full18 single-solver goal remains active and unachieved.
+
+### Parent Publication and Next-Execution Boundary
+
+Round9R67 completed scientifically bounded delivery with no corrective rerun.
+NativeofficialB48.1%<70: objective_audit.json scopewholeobjective/passedfalse
+links actual final lock and complete TEST; goal ACTIVE. One scoped completed
+R67 commit/push follows, preserving exactly14524preexistingunrelatedstaged
+cleanup entries and usercode/.gitignore; no forcedweights/NPZ/rawupdates/W&B.
+Source README remains frozen launch-era protocol, REPORT generated before
+parent closure; RESULTS/DELIVERY explain actual final delivery without rerun.
+Actual nextSol/maxCLI74082 started isolatedR68implementation; no formalGPU
+launch yet confirmed. Primary R68plan8/ready is PLANONLY, one SAMcontrast from
+shared Bstage1terminalxtrunk/freshhead, full18native single-solver70 unchanged.
+
+
+
+

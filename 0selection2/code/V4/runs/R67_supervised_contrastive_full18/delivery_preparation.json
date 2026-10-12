@@ -1,0 +1,70 @@
+{
+  "prepared_utc": "2026-10-12T13:46:34Z",
+  "status": "delivery code prepared; syntax checks passed; execution deferred",
+  "cpu_only": true,
+  "changed_files": [
+    "code/V4/r67_frozen_evaluation.py",
+    "code/V4/run_v4_r67_test.sh",
+    "code/V4/r67_analysis.py",
+    "code/V4/runs/R67_supervised_contrastive_full18/DELIVERY_PROTOCOL.md",
+    "code/V4/runs/R67_supervised_contrastive_full18/delivery_preparation.json"
+  ],
+  "syntax": {
+    "r67_frozen_evaluation.py": "PASS; in-memory compile only; not imported or executed",
+    "r67_analysis.py": "PASS; in-memory compile only; not imported or executed",
+    "run_v4_r67_test.sh": "PASS; bash -n, returncode0",
+    "launcher_embedded_python_blocks": "2/2 PASS; in-memory compile only; not executed",
+    "python_syntax_check_returncode": 0,
+    "shell_syntax_check_returncode": 0
+  },
+  "future_environment": {
+    "cwd": "/public/home/shiys/0selection2",
+    "conda": "source /public/home/shiys/miniconda3/etc/profile.d/conda.sh; conda activate easynco",
+    "PYTHONPATH": "/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/python_compat:/public/home/shiys/0selection2",
+    "threads": 1,
+    "full_prelude": "DELIVERY_PROTOCOL.md"
+  },
+  "exact_future_commands_after_required_parent_gates": [
+    "CUDA_VISIBLE_DEVICES= python -B -m code.V4.r67_frozen_evaluation --stage freeze --authorize-test",
+    "tmux new-session -d -s r67_final_test 'R67_PARENT_GPU_BATON=locked-test bash code/V4/run_v4_r67_test.sh >> code/V4/runs/R67_supervised_contrastive_full18/test_pipeline.log 2>&1'",
+    "CUDA_VISIBLE_DEVICES= python -B -m code.V4.r67_analysis"
+  ],
+  "future_required_gates": [
+    "Actual complete A1/A2/B1/B2 training and paired published results/candidates",
+    "Parent actual training_terminal_receipt.json with terminal0/owned Slurm step/r67_train terminal",
+    "Parent explicit CPU freeze command and later locked-test GPU authorization",
+    "One exclusive original18 FP32batch128 TEST per locked stage2 saved-x selector",
+    "Parent actual test_terminal_receipt.json terminal0 before the once-only CPU analysis",
+    "Parent whole-objective audit bound to actual lock/results hashes before a supported70% claim"
+  ],
+  "deployment": {
+    "model": "one complete NativeUtilitySelector per arm",
+    "checkpoint_stage": 2,
+    "parameter_mode": "averaged x loaded directly",
+    "optimizer_mode_transition": false,
+    "projector": false,
+    "reference_trained_weights": false,
+    "scope": "original18/full legal pools/native winners/FP64 cost metrics/global-ID exactties",
+    "test_reselection": false
+  },
+  "frozen_launch_files_or_snapshot_modified": false,
+  "frozen_training_hash_list_modified": false,
+  "training_job_actions": [],
+  "training_tmux_touched": false,
+  "gpu_or_job_queries": 0,
+  "test_executions": 0,
+  "analysis_executions": 0,
+  "reference_inference_or_prediction_replays": 0,
+  "solver_or_R58_executions": 0,
+  "cpucheck_reruns": 0,
+  "extra_test_campaigns": 0,
+  "git_operations": 0,
+  "agents_or_reviewers": 0,
+  "network_preflights": 0,
+  "all_local_exec_sessions_settled": true,
+  "runtime_verification": "Not performed; this task authorized syntax checks only",
+  "unresolved_preparation_blockers": [],
+  "r58": "fully deferred",
+  "legacy_B_semantics": "eight feasible-domain mismatches unresolved/disclosed; no native70% metric veto",
+  "asset_policy": "Weights/NPZ/raw updates/W&B/regenerable schedules stay local; parent curates completed commit; Git alone lacks all inference assets"
+}
