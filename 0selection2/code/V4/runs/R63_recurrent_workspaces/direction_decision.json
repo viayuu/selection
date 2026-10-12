@@ -1,0 +1,98 @@
+{
+  "best_arm_by_native_top1": "A",
+  "best_validation_native_top1": 0.4849444444444445,
+  "validation_target_hit": false,
+  "target_native_top1": 0.7,
+  "goal_achieved": false,
+  "heldout_required": false,
+  "best_gain_vs_incumbent_pp": -0.8666666666666711,
+  "substantial_progress_milestone": false,
+  "B_minus_A_top1_pp": -1.1500000000000066,
+  "communicating_advantage_ge_2pp": false,
+  "best_regret_delta_vs_incumbent_pp": 0.05354465382025708,
+  "regret_is_target_veto": false,
+  "scope": "original full18/fullpool native Top1; validation controls direction, never TEST",
+  "training_budgets": {
+    "A": {
+      "epochs": 40,
+      "successful_updates": 56880
+    },
+    "B": {
+      "epochs": 15,
+      "successful_updates": 21330
+    }
+  },
+  "paired_horizon": false,
+  "budget_amendment": {
+    "requested_by": "user",
+    "requested_at": "2026-10-12T12:19:24+08:00",
+    "scope": "R63B training horizon only",
+    "A_epochs": 40,
+    "B_epochs": 15,
+    "A_successful_updates": 56880,
+    "B_successful_updates": 21330,
+    "stop_after_completed_validation": true,
+    "paired_horizon": false,
+    "common_prefix_epochs": 15,
+    "reason": "User requests stopping B after epoch15 and complete validation because of long training time",
+    "checkpoint_selection": "Keep each arm's strict validation-native-Top1 best checkpoint within its completed budget; no test reselection",
+    "unchanged": [
+      "A result and checkpoint",
+      "original full18 tasks and legal pools",
+      "initialization",
+      "first15 batch and LR sequence",
+      "loss",
+      "test protocol"
+    ],
+    "comparison_limit": "A40/B15 are unequal budgets, not a matched-horizon causal comparison",
+    "boundary_handling": "A checkpoint-boundary interrupt and resume solely for finalization are authorized; no further B optimizer updates after completed epoch15",
+    "accounting": "Record actual stop, any discarded partial work and restart overhead without treating them as successful completed updates"
+  },
+  "B_minus_A_contrast_scope": "descriptive unequal-budget A40/B15 contrast; not a matched-horizon mechanism claim",
+  "official_arm": "A",
+  "official_arm_selection": "maximum validation native Top1; ties A; never TEST",
+  "final_test_status": "complete",
+  "locked_checkpoints": [
+    {
+      "model": "R45A historical",
+      "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R45_solver_code_embeddings/A_handcrafted_seed2/best.pt",
+      "checkpoint_epoch": 38,
+      "checkpoint_sha256": "d1d435ef8fe15331c151b287d5bb2deedd498d669747dcb3f0aa1532b097848c",
+      "lock_status": "final TEST locked",
+      "lock_source": "code/V4/runs/R45_solver_code_embeddings/locked_checkpoints.json",
+      "selection_rule": "historical validation-cost selection; unchanged"
+    },
+    {
+      "model": "R60B incumbent",
+      "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R60_expanded_partial_supervision/B_expanded_seed2/best.pt",
+      "checkpoint_epoch": 39,
+      "checkpoint_sha256": "127f15ca5aa585a6006f72beabf0a1ad1eb948f444e62e4c032f173a18debe25",
+      "lock_status": "final TEST locked",
+      "lock_source": "/public/home/shiys/0selection2/code/V4/runs/R63_recurrent_workspaces/final_test_lock.json",
+      "selection_rule": "historical validation-cost selection; unchanged"
+    },
+    {
+      "model": "R63A",
+      "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R63_recurrent_workspaces/A_static_memory_seed2/best.pt",
+      "checkpoint_epoch": 34,
+      "checkpoint_sha256": "95827a6fd15edb4d54282961af4fb0885d4c4168ecbdd2b8f3d35eb8bfd0e95b",
+      "lock_status": "final TEST locked",
+      "lock_source": "/public/home/shiys/0selection2/code/V4/runs/R63_recurrent_workspaces/final_test_lock.json",
+      "selection_rule": "strict maximum validation native Top1; epoch ties keep earlier"
+    },
+    {
+      "model": "R63B",
+      "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R63_recurrent_workspaces/B_communicating_memory_seed2/best.pt",
+      "checkpoint_epoch": 12,
+      "checkpoint_sha256": "91d47ac4b84a62af71ba8a2c933c17809cd6bb8f34b81ff0de608257260520d0",
+      "lock_status": "final TEST locked",
+      "lock_source": "/public/home/shiys/0selection2/code/V4/runs/R63_recurrent_workspaces/final_test_lock.json",
+      "selection_rule": "strict maximum validation native Top1; epoch ties keep earlier"
+    }
+  ],
+  "official_test_native_top1": 0.4733888888888889,
+  "official_test_target_hit": false,
+  "official_test_gain_vs_incumbent_pp": -0.9055555555555483,
+  "test_B_minus_A_top1_pp": -0.8222222222222297,
+  "goal_claim": "Not declared from validation or auxiliary metrics; locked TEST target is reported separately."
+}

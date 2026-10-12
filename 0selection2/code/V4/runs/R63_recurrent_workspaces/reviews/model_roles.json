@@ -1,0 +1,30 @@
+{
+  "planner_reviewer": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "max",
+    "thread_id": "01a12e68-4d2a-71d0-aefd-67fc1c158282",
+    "input_scope": "completed TRAIN/validation only; no new TEST used for R64 planning",
+    "response": "R63_closure_R64_plan.response.md",
+    "trace": ".aris/traces/R63_closure_R64_plan.events.jsonl"
+  },
+  "fresh_delivery_reviewer": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "max",
+    "scope": "R63 legacy-delivery evidence only, not70% performance acceptance",
+    "response": "R63_fresh_result_review.response.md",
+    "trace": ".aris/traces/R63_fresh_result_review.events.jsonl"
+  },
+  "test_executor": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "max",
+    "thread_id": "01a12e6a-0ea7-7471-a325-9de85b680ac0",
+    "slurm_step": "1465.88",
+    "return_code": 0,
+    "response": "R63_final_test_executor.response.md",
+    "trace": ".aris/traces/R63_final_test_executor.events.jsonl"
+  },
+  "review_independence": "same-family",
+  "acceptance_status": "provisional",
+  "goal70_achieved": false,
+  "collab_thread_limit_workaround": "Independent Codex CLI calls preserve the requested actual model roles; no model substitution"
+}

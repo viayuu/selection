@@ -1,0 +1,18 @@
+{
+  "requested_by": "user",
+  "requested_at": "2026-10-12T12:19:24+08:00",
+  "scope": "R63B training horizon only",
+  "A_epochs": 40,
+  "B_epochs": 15,
+  "A_successful_updates": 56880,
+  "B_successful_updates": 21330,
+  "stop_after_completed_validation": true,
+  "paired_horizon": false,
+  "common_prefix_epochs": 15,
+  "reason": "User requests stopping B after epoch15 and complete validation because of long training time",
+  "checkpoint_selection": "Keep each arm's strict validation-native-Top1 best checkpoint within its completed budget; no test reselection",
+  "unchanged": ["A result and checkpoint", "original full18 tasks and legal pools", "initialization", "first15 batch and LR sequence", "loss", "test protocol"],
+  "comparison_limit": "A40/B15 are unequal budgets, not a matched-horizon causal comparison",
+  "boundary_handling": "A checkpoint-boundary interrupt and resume solely for finalization are authorized; no further B optimizer updates after completed epoch15",
+  "accounting": "Record actual stop, any discarded partial work and restart overhead without treating them as successful completed updates"
+}

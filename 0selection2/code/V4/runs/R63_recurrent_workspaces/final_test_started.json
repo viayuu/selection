@@ -1,0 +1,91 @@
+{
+  "status": "started",
+  "locked_models": {
+    "A": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R63_recurrent_workspaces/A_static_memory_seed2/best.pt",
+      "sha256": "95827a6fd15edb4d54282961af4fb0885d4c4168ecbdd2b8f3d35eb8bfd0e95b",
+      "epoch": 34,
+      "validation_macro_top1": 0.4849444444444445,
+      "epochs_completed": 40,
+      "checkpoint_rule": "strict maximum validation native macro Top1; ties retain earlier epoch"
+    },
+    "B": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R63_recurrent_workspaces/B_communicating_memory_seed2/best.pt",
+      "sha256": "91d47ac4b84a62af71ba8a2c933c17809cd6bb8f34b81ff0de608257260520d0",
+      "epoch": 12,
+      "validation_macro_top1": 0.47344444444444445,
+      "epochs_completed": 15,
+      "checkpoint_rule": "strict maximum validation native macro Top1 within user-capped15 epochs; ties retain earlier epoch"
+    },
+    "R60B": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R60_expanded_partial_supervision/B_expanded_seed2/best.pt",
+      "sha256": "127f15ca5aa585a6006f72beabf0a1ad1eb948f444e62e4c032f173a18debe25",
+      "epoch": 39,
+      "validation_macro_top1": 0.4936111111111112,
+      "checkpoint_rule": "unchanged historical validation-cost-selected epoch39"
+    }
+  },
+  "selection_frozen_before_test": true,
+  "paired_horizon": false,
+  "budget_amendment": {
+    "requested_by": "user",
+    "requested_at": "2026-10-12T12:19:24+08:00",
+    "scope": "R63B training horizon only",
+    "A_epochs": 40,
+    "B_epochs": 15,
+    "A_successful_updates": 56880,
+    "B_successful_updates": 21330,
+    "stop_after_completed_validation": true,
+    "paired_horizon": false,
+    "common_prefix_epochs": 15,
+    "reason": "User requests stopping B after epoch15 and complete validation because of long training time",
+    "checkpoint_selection": "Keep each arm's strict validation-native-Top1 best checkpoint within its completed budget; no test reselection",
+    "unchanged": [
+      "A result and checkpoint",
+      "original full18 tasks and legal pools",
+      "initialization",
+      "first15 batch and LR sequence",
+      "loss",
+      "test protocol"
+    ],
+    "comparison_limit": "A40/B15 are unequal budgets, not a matched-horizon causal comparison",
+    "boundary_handling": "A checkpoint-boundary interrupt and resume solely for finalization are authorized; no further B optimizer updates after completed epoch15",
+    "accounting": "Record actual stop, any discarded partial work and restart overhead without treating them as successful completed updates"
+  },
+  "policy": "ONE original full18/fullpool TEST per fixed model; no TEST reselection or training",
+  "diagnostic_reference_top2": "Two fixed best TRAIN mean-cost methods per task; not TEST-query nominations",
+  "inference_source_hashes": {
+    "code/V4/V4Model.py": "50bff946ab08cc38d66d41d86f76fa016dcd064624d4aefd1d5168a30e3b3aea",
+    "code/V4/dual_stream.py": "20b2adc0f5c01a6c5e0674be8c2b5fa6f6781fd34bf8195b0023ec1d09a3b0e9",
+    "code/V4/evaluate.py": "979e3b197e817cae3fbb53065fd84e28e1b3df24959c7efaba7b76955cd0dde2",
+    "code/V4/local_geometry.py": "5cecafaf06e39595b847438d2e974ededf086954cab95ff83d232875f86fd581",
+    "code/V4/multitask_probe.py": "3041a67aa17ac9e2118c754dbd2d040a21ea76b387f12c4d7c5427a8a4da8290",
+    "code/V4/pairwise_objective.py": "3f487cc91a2819fe7bad5c3ea98fe11fead57e59921f1d43529c617002654a0a",
+    "code/V4/pairwise_selector.py": "32d0b112f3612ca7180ecaaa86b505d24ffeaeb148ff07ac2a9f1c6d53be67ca",
+    "code/V4/performance_analysis.py": "c4c0e7b6e064c196448f09bc23bc0902638643f7a7aed02b08ec86eb6fa70d9a",
+    "code/V4/performance_evaluation.py": "4f2cc3392a33f31ac1b61b0503f4702e98d4220b8266bbdedd4e20554cd5a361",
+    "code/V4/performance_experiment.py": "f42a41e1ce21ef1aec1c60a257056f719f34c422abc84dec1c6cca53beb26d0d",
+    "code/V4/performance_targets.py": "270c5d263917dbbef8642249859b82dce72cc9e341beab5471761d4a05f7effa",
+    "code/V4/r40_experiment.py": "2a1f966ec456d34a657064b56fbf1cb172816369f0666a511af0bdf64ed5baf3",
+    "code/V4/r42_experiment.py": "f474cc83fd4adb4c0135b812cf523dd36380aab3e8b1e69433eade98186c4026",
+    "code/V4/r43_experiment.py": "b97b7cb4e2dd6ba81f38eb449bfbb93a2c1ce7c0242e4b5ceb69fdc35cfaab60",
+    "code/V4/r45_experiment.py": "19712fe1ddd4ff00c56ba54cc6cccf73c5fb63dcaad8d954088cc57ce1975a64",
+    "code/V4/r59_experiment.py": "ff02017be4e9f10dcacb951df1ad491ccf63502c71cfbbe577b06035a933b63b",
+    "code/V4/r63_graph.py": "fdfe983b2cb6d9fe8277f6b6b2af6b93ff4888c3468157cd389fd62f63fd3c6a",
+    "code/V4/r63_model.py": "ccf29808ba357d71e25ef88ffd2c13a08d13a66cad7f748dc1ebda62b499d5e7",
+    "code/V4/solver_code_encoder.py": "d460b0279cd397b662d68592022d48af3a62d79fef56fb887830caf20cf7f77a",
+    "code/V4/solver_features.py": "a6720bd42b5678566ceb71c6d76e20c3e7e792b36feafbe957f917e412223053",
+    "code/V4/tensor_loader.py": "c2c02cd8508b9c7bf0be8689909ffae9fad4f63a836ab696897aae3372fa782a",
+    "code/V4/train.py": "e80d38fd52a697b6a364c887a4a18e1540490b024154cfc5bebc31308dd0e8f4",
+    "code/V4/training_monitor.py": "9076393f6b99b29e12eb46a228bc21e903e6ddb210f295aac01528bf2deb3e1a",
+    "code/unified_selector/registry.py": "4719f198aac176629a0a6257671f96e039e23108bae33f75dd1639b7b045cc62",
+    "code/unified_selector/data.py": "3e270fdff3afab0cb93df85498811c44c5f5e46600b87aa04224f48b646fe12e"
+  },
+  "test_entry_source_hashes": {
+    "r63_experiment.py": "6c1a20c2342dfaac1e9eb9427b8dfba23bee75a357df937bda640e80aed79dfa",
+    "run_v4_r63.sh": "7c1c8a320cc9bb54617131fbade67453303fb022603e9e55a3acf81e5e66059b"
+  },
+  "slurm_step": "1465.88",
+  "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+  "started_unix": 1791780077.222364
+}
