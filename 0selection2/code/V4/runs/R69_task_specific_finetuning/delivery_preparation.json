@@ -1,0 +1,89 @@
+{
+  "phase": "CPU-only delivery-code preparation",
+  "status": "prepared; syntax-only validation passed; runtime unverified",
+  "syntax_validated_utc": "2026-10-12T20:53:47Z",
+  "execution_authorized": false,
+  "runtime_verified": false,
+  "files": [
+    "code/V4/r69_frozen_evaluation.py",
+    "code/V4/run_v4_r69_test.sh",
+    "code/V4/r69_analysis.py",
+    "code/V4/runs/R69_task_specific_finetuning/DELIVERY_PROTOCOL.md",
+    "code/V4/runs/R69_task_specific_finetuning/delivery_preparation.json"
+  ],
+  "parent_observation": {
+    "observed_utc": "2026-10-12T20:32:23Z",
+    "source": "authoritative parent observation; not independently queried in this phase",
+    "training_tmux": "r69_train",
+    "training_pane": "%82",
+    "training_pane_pid": 505438,
+    "training_slurm_step": "1465.101",
+    "state": "RUNNING",
+    "elapsed_seconds": 738,
+    "node": "gpu03",
+    "epoch": 8,
+    "global_epoch": 48,
+    "successful_updates": 1860,
+    "selected_rows": 1398240
+  },
+  "original_training_preserved": true,
+  "training_sources_snapshot_hashlist_protocol_edited": false,
+  "new_arms": ["B"],
+  "reused_control": "fixed R68A28/global68/8644 validation correct",
+  "new_tests_required": {"A": false, "B": true},
+  "historical_original_A_tests_reused": 1,
+  "A_weights_loaded": false,
+  "A_inference_recount_reselection_test": false,
+  "existing_B_checkpoint_reads": 0,
+  "model_forwards": 0,
+  "GPU_queries": 0,
+  "GPU_jobs_started": 0,
+  "TRAIN_commands": 0,
+  "freeze_executions": 0,
+  "TEST_executions": 0,
+  "analysis_executions": 0,
+  "prediction_replays": 0,
+  "CPU_check_reruns": 0,
+  "source_hash_campaigns": 0,
+  "Git_operations": 0,
+  "agents_spawned": 0,
+  "waiting_executor_created": false,
+  "future_commands": {
+    "freeze": "CUDA_VISIBLE_DEVICES='' python -B -m code.V4.r69_frozen_evaluation --stage freeze --authorize-test",
+    "test": "tmux new-session -d -s r69_final_test -c /public/home/shiys/0selection2 'R69_PARENT_GPU_BATON=locked-test bash code/V4/run_v4_r69_test.sh >> code/V4/runs/R69_task_specific_finetuning/final_test_pipeline.log 2>&1'",
+    "analysis": "CUDA_VISIBLE_DEVICES='' python -B -m code.V4.r69_analysis --authorize-analysis"
+  },
+  "future_gates": [
+    "Original TRAIN1465.101 actual COMPLETED/0:0 on gpu03 AND r69_train gone; parent original scheduler/tmux evidence receipt",
+    "Actual training_complete.json, B result9600updates/7.2Mrows, all40 full18 VAL histories, one selected complete common-epoch bundle",
+    "Separate parent freeze authorization; earliest maximum integer B VAL count, official B strictly>8644 else fixed A; exclusive lock",
+    "Separate explicit parent locked-test baton; only assigned UUID/allocation in r69_final_test; exclusive one-new-B TEST marker",
+    "Actual future new B TEST Slurm COMPLETED/0:0 AND owned tmux gone, separate from process exit; parent terminal receipt",
+    "Separate parent authorization for ONCE CPU analysis with exclusive marker"
+  ],
+  "syntax_validation": {
+    "python": "passed: ast.parse and compile, without import or execution",
+    "python_modules": [
+      "code/V4/r69_frozen_evaluation.py",
+      "code/V4/r69_analysis.py"
+    ],
+    "embedded_launcher_python_blocks": 2,
+    "python_validation_invocations": 1,
+    "python_validation_returncode": 0,
+    "shell_bash_n": "passed: bash -n code/V4/run_v4_r69_test.sh; script not executed",
+    "shell_validation_invocations": 1,
+    "shell_validation_returncode": 0,
+    "actual_validation_failures": 0,
+    "modules_imported_or_executed": false,
+    "delivery_runtime_verified": false
+  },
+  "foreground_preparation_sessions_settled": true,
+  "automatic_delivery_execution": false,
+  "limitations": [
+    "Syntax-only preparation; delivery runtime unverified",
+    "Parameter capacity and per-parameter optimizer histories are not matched",
+    "Historical TEST exposure disclosed; new B TEST cannot guide design or selection",
+    "R58 deferred; eight legacy B-task feasible-domain mismatches disclosed/unfixed, not a native70 veto",
+    "Parent owns reviews, whole-goal audit, memory/state and one completed-version commit"
+  ]
+}

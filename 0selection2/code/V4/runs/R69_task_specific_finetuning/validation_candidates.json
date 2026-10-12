@@ -1,0 +1,64 @@
+{
+  "models": {
+    "A": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/A_plain_adamw_seed2/best.pt",
+      "sha256": "f9714da76840f4b685b3418c2365a6249f3356a8d16cfa7d29dbf2fc7ee679a9",
+      "selected_epoch_checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/A_plain_adamw_seed2/best_checkpoints/epoch028.pt",
+      "epoch": 28,
+      "global_epoch": 68,
+      "native_correct": 8644,
+      "native_total": 18000,
+      "val": {
+        "macro_ce": 1.1192148725191753,
+        "macro_top1": 0.4802222222222222,
+        "macro_top2": 0.8128333333333333,
+        "macro_top3": 0.9198333333333335,
+        "macro_top1_tie_aware": 0.4808888888888888,
+        "macro_mean_cost": 11.174141584370902,
+        "macro_vs_sbs_pct": -1.0244551991308737,
+        "macro_vs_oracle_pct": 0.9401074936834917,
+        "macro_actual_regret_pct": 0.9741691650041189,
+        "macro_vbs_gap_closed_pct": 28.381294171432668
+      },
+      "parameter_mode": "ordinary AdamW weights",
+      "projector_included": false,
+      "perturbed_weights": false
+    },
+    "B": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R69_task_specific_finetuning/B_task_specific_seed2/best.pt",
+      "sha256": "8029e3125a1e8a52389abca64f508dbd8bc8516f66bbcf8bb352621afcb3b315",
+      "selected_epoch_checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R69_task_specific_finetuning/B_task_specific_seed2/best_checkpoints/epoch020.pt",
+      "epoch": 20,
+      "global_epoch": 60,
+      "native_correct": 8604,
+      "native_total": 18000,
+      "val": {
+        "macro_ce": 1.119309624036153,
+        "macro_top1": 0.478,
+        "macro_top2": 0.8136111111111111,
+        "macro_top3": 0.9207222222222222,
+        "macro_top1_tie_aware": 0.47883333333333333,
+        "macro_mean_cost": 11.18430059242089,
+        "macro_vs_sbs_pct": -0.9656438370668659,
+        "macro_vs_oracle_pct": 1.0015229606794773,
+        "macro_actual_regret_pct": 1.0422689893761583,
+        "macro_vbs_gap_closed_pct": 25.969550941876637
+      },
+      "parameter_mode": "ordinary AdamW weights",
+      "model_type": "complete_task_specific_bank",
+      "all18_common_epoch": true
+    }
+  },
+  "proposed_official_arm": "A",
+  "official_rule": "B strictly>8644; tie/lower fixed A",
+  "new_arms": [
+    "B"
+  ],
+  "reused_arms": [
+    "A"
+  ],
+  "parent_freeze_pending": true,
+  "inference_rule": "FP32 eval; full legal pool; highest direct utility; exact ties by ascending global solver ID",
+  "test_authorized": false,
+  "later_test": "parent freezes B bundle and official arm, then ONE original full18 TEST for new B; reuse existing A TEST unchanged"
+}

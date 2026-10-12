@@ -1,0 +1,415 @@
+{
+  "recorded_utc": "2026-10-12T21:26:30.999272+00:00",
+  "training": {
+    "observed_utc": "2026-10-12T21:23:04.586980+00:00",
+    "recorded_utc": "2026-10-12T21:23:04.682658+00:00",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_seconds": 3604,
+    "scheduler_start": "2026-10-13T04:20:05",
+    "scheduler_end": "2026-10-13T05:20:09",
+    "scheduler_timestamp_timezone": "Asia/Shanghai",
+    "slurm_step": "1465.101",
+    "node": "gpu03",
+    "tmux_session": "r69_train",
+    "tmux_terminal": true,
+    "original_tmux_pane": "%82",
+    "original_tmux_pane_pid": 505438,
+    "original_training_pid": 269032,
+    "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+    "gpu_index": 1,
+    "scheduler_evidence": {
+      "command": "sacct -j 1465.101 --noheader --parsable2 --format=JobIDRaw,State,ExitCode,ElapsedRaw,Start,End,NodeList",
+      "returncode": 0,
+      "stdout": "1465.101|COMPLETED|0:0|3604|2026-10-13T04:20:05|2026-10-13T05:20:09|gpu03\n",
+      "stderr": ""
+    },
+    "tmux_evidence": {
+      "command": "tmux has-session -t =r69_train",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "can't find session: r69_train\n"
+    },
+    "process_receipt_alone_is_terminal_evidence": false,
+    "trainer_restart": false,
+    "terminal_success": true
+  },
+  "new_B_test": {
+    "observed_utc": "2026-10-12T21:24:57.655072+00:00",
+    "recorded_utc": "2026-10-12T21:24:57.749043+00:00",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_seconds": 17,
+    "scheduler_start": "2026-10-13T05:24:05",
+    "scheduler_end": "2026-10-13T05:24:22",
+    "scheduler_timestamp_timezone": "Asia/Shanghai",
+    "slurm_step": "1465.102",
+    "node": "gpu03",
+    "tmux_session": "r69_final_test",
+    "tmux_terminal": true,
+    "tmux_pane": "%85",
+    "tmux_pane_pid": "745609",
+    "test_pid": 1635387,
+    "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+    "gpu_index": 1,
+    "scheduler_evidence": {
+      "command": "sacct -j 1465.102 --noheader --parsable2 --format=JobIDRaw,State,ExitCode,ElapsedRaw,Start,End,NodeList",
+      "returncode": 0,
+      "stdout": "1465.102|COMPLETED|0:0|17|2026-10-13T05:24:05|2026-10-13T05:24:22|gpu03\n",
+      "stderr": ""
+    },
+    "tmux_evidence": {
+      "command": "tmux has-session -t =r69_final_test",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "can't find session: r69_final_test\n"
+    },
+    "process_receipt_alone_is_terminal_evidence": false,
+    "terminal_success": true,
+    "new_tests_completed": {
+      "A": 0,
+      "B": 1
+    },
+    "historical_original_A_tests_reused": 1,
+    "automatic_retry": false,
+    "reselection": false
+  },
+  "historical_A_test_reused": {
+    "label": "reused R68A shared control",
+    "lock_path": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/final_test_lock.json",
+    "lock_sha256": "66bd5f6ea653130e2633b06e0449cc0ea39fe59e859bd3dfad8a60ce2e2481e9",
+    "lock_json_pointer": "/models/A",
+    "test_path": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/test_results.json",
+    "test_sha256": "ea39cf82cf98ccdb1fd7778ab073c7e7c933b649168a9eff44f95c3604e37f69",
+    "test_json_pointer": "/models/A",
+    "result_path": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/A_plain_adamw_seed2/result.json",
+    "result_sha256": "b075562d38d5bb2845c631406809b516a9abf96ae3156cf1ed448b982450103b",
+    "history_path": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/A_plain_adamw_seed2/history.json",
+    "history_sha256": "11dac09e1f54b3019197399e2b7aace01250e7892ae14a56b80ed661c121fc8d",
+    "original_tests_already_executed": 1,
+    "new_R69_tests": 0,
+    "new_R69_training": false,
+    "weights_loaded": false,
+    "inference": false,
+    "recount": false,
+    "reselection": false,
+    "historical_test_exposure": true,
+    "reuse_is_protocol_equivalence_not_independent_replication": true
+  },
+  "analysis": {
+    "recorded_utc": "2026-10-12T21:26:30.995402+00:00",
+    "returncode": 0,
+    "cpu_only": true,
+    "executions": 1,
+    "wall_seconds": 56.87497657723725,
+    "module_sha256": "fd7954b5b2e444e5ae11a5510bcc8c9c5ae8129dd00e38b252520a6c4d289579",
+    "comparison_rows": 874,
+    "png_count": 332,
+    "inference": false,
+    "NPZ_replay": false,
+    "new_arms": [
+      "B"
+    ],
+    "reused_arms": [
+      "A"
+    ]
+  },
+  "freeze_sha256": "4f47d9595def614964dd992a06b2d6615df362af927709a703fe64d06331d4de",
+  "decision": {
+    "official_arm": "A",
+    "official_model": "Reused_R68A_shared",
+    "selection": "INTEGER VAL only; B earliest common-epoch maximum; official B strictly>8644, tie/lower fixed A",
+    "validation_count_B_minus_A": -40,
+    "B_vs_matched_A_test_delta_pp": -0.5388888888888888,
+    "B_vs_fixed_R60B_test_delta_pp": -1.9222222222222196,
+    "official_test_correct": 8435,
+    "official_test_total": 18000,
+    "official_test_top1": 0.4686111111111111,
+    "numeric_threshold_reached": false,
+    "whole_objective_audit_passed": false,
+    "actual_budget_consistent": true,
+    "claim_70pct_supported": false,
+    "goal_status": "ACTIVE; parent whole-goal audit/closure required",
+    "one_new_arm": true,
+    "one_seed": true,
+    "parameter_capacity_matched": false,
+    "per_parameter_optimizer_histories_matched": false,
+    "pure_task_interference_causal_claim": false,
+    "accuracy_ceiling_or_noise_claim": false,
+    "historical_test_exposure": true,
+    "new_B_test_used_for_planning": false,
+    "test_reselection": false,
+    "cost_veto": false
+  },
+  "parent_reviews_goal_audit_memory_and_git": true,
+  "git_alone_contains_all_inference_assets": false,
+  "worker_git_actions": false,
+  "r58": "fully deferred; eight legacy B-task mismatches disclosed",
+  "delivery_phase_status": "completed; parent reviews/whole-goal audit/publication pending",
+  "handoff_recorded_utc": "2026-10-12T21:33:14.640522+00:00",
+  "results_path": "/public/home/shiys/0selection2/code/V4/runs/R69_task_specific_finetuning/RESULTS.md",
+  "observed_process_returncodes": {
+    "freeze": 0,
+    "new_B_test": 0,
+    "once_CPU_analysis": 0
+  },
+  "execution_receipts": {
+    "freeze": "freeze_execution_receipt.json",
+    "test_tmux": "test_tmux_execution_receipt.json",
+    "test_process": "test_process_receipt.json",
+    "analysis": "analysis_execution_receipt.json"
+  },
+  "actual_phase_times": {
+    "freeze_started_utc": "2026-10-12T21:23:21.157194+00:00",
+    "freeze_finished_utc": "2026-10-12T21:23:24.455620+00:00",
+    "new_B_test_started_utc": "2026-10-12T21:24:09.169091+00:00",
+    "new_B_test_process_finished_utc": "2026-10-12T21:24:22.374450+00:00",
+    "analysis_started_utc": "2026-10-12T21:25:32.678563+00:00",
+    "analysis_finished_utc": "2026-10-12T21:26:31.376222+00:00"
+  },
+  "actual_new_B_test_handle": {
+    "slurm_step": "1465.102",
+    "tmux_session": "r69_final_test",
+    "tmux_pane": "%85",
+    "tmux_pane_pid": "745609",
+    "evaluator_pid": 1635387,
+    "node": "gpu03",
+    "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+    "gpu_index": 1,
+    "identity_source": "prepared launcher test_launch_receipt.json and exclusive final_test_started.json"
+  },
+  "new_tests_executed": {
+    "A": 0,
+    "B": 1
+  },
+  "historical_original_tests_reused": {
+    "A": 1
+  },
+  "new_R69_A_training_compute": 0,
+  "execution_attempts": {
+    "freeze": 1,
+    "new_B_test": 1,
+    "once_CPU_analysis": 1
+  },
+  "automatic_retries": 0,
+  "actual_delivery_phase_failure_files": [],
+  "new_B_expenditure": {
+    "successful_updates": 9600,
+    "selected_rows": 7200000,
+    "successful_view_rows": 14400000,
+    "attempted_view_rows": 14405152,
+    "amp_retries": 5,
+    "wall_seconds": 3554.5744660124183,
+    "logged_update_seconds": 2964.3219721782953,
+    "training_epoch_seconds": 3237.4035925604403,
+    "peak_allocated_gib": 15.66131591796875,
+    "peak_reserved_gib": 21.376953125,
+    "peak_physical_gib": 21.702392578125,
+    "grad_norm": {
+      "min": 0.12628883123397827,
+      "mean": 1.1176172800393154,
+      "max": 11.514206886291504
+    },
+    "clip_coefficient": {
+      "min": 0.08684922227177888,
+      "mean": 0.8440534559560223,
+      "max": 1.0
+    },
+    "amp_scale": {
+      "min": 16384.0,
+      "mean": 22958.08,
+      "max": 65536.0
+    },
+    "complete_test_evaluation_seconds": 8.123364327475429
+  },
+  "historical_reused_A_expenditure": {
+    "successful_updates": 9600,
+    "selected_rows": 7200000,
+    "successful_view_rows": 14400000,
+    "attempted_view_rows": 14405632,
+    "wall_seconds": 3002.0242369314656,
+    "amp_retries": 5,
+    "new_R69_training_compute": 0,
+    "new_R69_test_compute": 0,
+    "accounting": "historical reused R68A; not a newly executed R69 arm",
+    "original_test_already_executed": 1,
+    "new_R69_tests": 0,
+    "historical_test_evaluation_seconds": 7.742874149233103
+  },
+  "inherited_stage1_expenditure_once": {
+    "successful_updates": 9600,
+    "selected_rows": 7200000,
+    "wall_seconds": 2764.217798124999,
+    "amp_retries": 1,
+    "counted_once": true,
+    "source": "R67B terminal stage1 averaged-x trunk; entire fresh head670003",
+    "result_path": "/public/home/shiys/0selection2/code/V4/runs/R67_supervised_contrastive_full18/B_contrastive_pretrain_seed2/stage1_result.json",
+    "result_sha256": "11559c208f1d39b457cf7276d05e473dd4c1c39a16d8b7e5c7040f9993a82d66",
+    "new_compute": 0
+  },
+  "parameter_counts": {
+    "shared": 1842953,
+    "B": 33173154,
+    "branches": 18,
+    "trainable_B": 33173154,
+    "capacity_matched": false,
+    "per_parameter_update_counts_matched": false,
+    "branch_active_updates": 1600,
+    "shared_historical_updates": 9600
+  },
+  "per_parameter_optimizer_histories_matched": false,
+  "parameter_capacity_matched": false,
+  "saved_record_compute_checks": {
+    "exact_budget": true,
+    "finite_updates": true,
+    "one_step_and_clip": true,
+    "inactive_grad_and_steps": true,
+    "two_views_and_tails": true,
+    "branch_budget": true,
+    "identical_prefinetuning_state": true,
+    "same_saved_schedule": true,
+    "same_actual_task_rows_dropout_lr": true,
+    "parameter_counts": true,
+    "inherited_once": true,
+    "focused_check_record": true
+  },
+  "artifact_inventory": {
+    "required_receipts_and_reports": [
+      "RESULTS.md",
+      "REPORT.md",
+      "training_terminal_receipt.json",
+      "freeze_execution_receipt.json",
+      "final_test_lock.json",
+      "test_results.json",
+      "test_results_B.json",
+      "test_launch_receipt.json",
+      "test_tmux_execution_receipt.json",
+      "test_process_receipt.json",
+      "test_terminal_receipt.json",
+      "analysis_started.json",
+      "analysis_receipt.json",
+      "analysis_execution_receipt.json",
+      "compute_summary.json",
+      "reference_provenance.json",
+      "analysis.json"
+    ],
+    "root_csv_files": [
+      "branch_compute.csv",
+      "comparison.csv",
+      "comparison_deltas.csv",
+      "family_curves.csv",
+      "last5_validation.csv",
+      "learning_curves.csv",
+      "matched_common_epochs.csv",
+      "method_metrics.csv",
+      "metric_availability.csv",
+      "optimization_curves.csv",
+      "parameter_optimizer_steps.csv",
+      "selected_metrics.csv",
+      "stage2_summary.csv",
+      "task_curves.csv",
+      "task_diagnostics.csv",
+      "task_gain_regression.csv",
+      "task_optimization.csv",
+      "update_curves.csv"
+    ],
+    "comparison_rows": 874,
+    "figure_count": 332,
+    "figure_directory": "curves/delivery",
+    "new_B_prediction_files": [
+      "ATSP.npz",
+      "CVRP.npz",
+      "OVRP.npz",
+      "OVRPB.npz",
+      "OVRPBL.npz",
+      "OVRPBLTW.npz",
+      "OVRPBTW.npz",
+      "OVRPL.npz",
+      "OVRPLTW.npz",
+      "OVRPTW.npz",
+      "TSP.npz",
+      "VRPB.npz",
+      "VRPBL.npz",
+      "VRPBLTW.npz",
+      "VRPBTW.npz",
+      "VRPL.npz",
+      "VRPLTW.npz",
+      "VRPTW.npz"
+    ],
+    "prediction_assets_opened_or_replayed_during_CPU_analysis": false,
+    "local_B_best_bundle": "/public/home/shiys/0selection2/code/V4/runs/R69_task_specific_finetuning/B_task_specific_seed2/best_checkpoints/epoch020.pt",
+    "local_B_final_bundle": "/public/home/shiys/0selection2/code/V4/runs/R69_task_specific_finetuning/B_task_specific_seed2/final.pt",
+    "weights_NPZ_rawupdates_WandB_cache_schedule_remain_local": true
+  },
+  "final_owned_gpu_tmux_observations": [
+    {
+      "session": "r69_train",
+      "command": "tmux has-session -t =r69_train",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "can't find session: r69_train\n",
+      "absent": true
+    },
+    {
+      "session": "r69_final_test",
+      "command": "tmux has-session -t =r69_final_test",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "can't find session: r69_final_test\n",
+      "absent": true
+    }
+  ],
+  "parent_created_delivery_executor": {
+    "session": "r69_delivery",
+    "created_by": "parent",
+    "new_executor_created_by_worker": false,
+    "command": "tmux list-panes -t r69_delivery:0 -F '#{session_name}:#{window_index}.#{pane_index} pane=#{pane_id} pid=#{pane_pid}'",
+    "returncode": 0,
+    "stdout": "r69_delivery:0.0 pane=%84 pid=660842\n",
+    "stderr": ""
+  },
+  "duplicate_trainers_tests_executors_created": 0,
+  "settled_long_foreground_sessions": [
+    {
+      "session_id": 59935,
+      "phase": "CPU freeze",
+      "actual_returncode": 0
+    },
+    {
+      "session_id": 38566,
+      "phase": "ONCE CPU analysis",
+      "actual_returncode": 0
+    }
+  ],
+  "foreground_execution_sessions_created_by_worker_settled": true,
+  "action_limits": {
+    "training_stop_restart": 0,
+    "new_A_training_inference_recount_reselection_tests": 0,
+    "reference_inference": 0,
+    "solver_executions": 0,
+    "NPZ_replays": 0,
+    "extra_CPU_checks": 0,
+    "other_GPU_client_queue_allocation_queries": 0,
+    "Git_actions": 0,
+    "agents_spawned": 0,
+    "parent_state_memory_edits": 0,
+    "frozen_training_source_protocol_snapshot_edits": 0,
+    "delivery_source_runtime_edits": 0,
+    "successor_designs": 0
+  },
+  "operator_observation_limitations": [
+    "Immediate outer tmux display returned empty format fields with rc0; authoritative TEST pane%85/panePID745609 was captured by the prepared launcher. The original empty observation is preserved in test_tmux_execution_receipt.json."
+  ],
+  "goal_status": "ACTIVE; native70 not reached; parent whole-goal audit and actual Astra reviews remain required",
+  "historical_test_exposure": true,
+  "new_B_test_used_for_planning": false,
+  "legacy_B_semantics": "eight feasible-domain mismatches disclosed/unfixed, not a numeric native70 veto; R58 fully deferred",
+  "parent_next_responsibilities": [
+    "TRAIN/VAL-only planning",
+    "fresh direct delivery review",
+    "actual Astra reviews",
+    "whole-goal audit",
+    "state/memory",
+    "ONE R69 version publication"
+  ]
+}

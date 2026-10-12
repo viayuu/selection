@@ -1,0 +1,444 @@
+{
+  "started_utc": "2026-10-12T21:24:09.169091+00:00",
+  "started_unix": 1791840249.1691103,
+  "lock": {
+    "authorized": true,
+    "frozen_utc": "2026-10-12T21:23:24.113719+00:00",
+    "official_arm": "A",
+    "models": {
+      "A": {
+        "path": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/A_plain_adamw_seed2/best.pt",
+        "sha256": "f9714da76840f4b685b3418c2365a6249f3356a8d16cfa7d29dbf2fc7ee679a9",
+        "selected_epoch_checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/A_plain_adamw_seed2/best_checkpoints/epoch028.pt",
+        "epoch": 28,
+        "global_epoch": 68,
+        "native_correct": 8644,
+        "native_total": 18000,
+        "val": {
+          "macro_ce": 1.1192148725191753,
+          "macro_top1": 0.4802222222222222,
+          "macro_top2": 0.8128333333333333,
+          "macro_top3": 0.9198333333333335,
+          "macro_top1_tie_aware": 0.4808888888888888,
+          "macro_mean_cost": 11.174141584370902,
+          "macro_vs_sbs_pct": -1.0244551991308737,
+          "macro_vs_oracle_pct": 0.9401074936834917,
+          "macro_actual_regret_pct": 0.9741691650041189,
+          "macro_vbs_gap_closed_pct": 28.381294171432668
+        },
+        "parameter_mode": "ordinary AdamW weights",
+        "projector_included": false,
+        "perturbed_weights": false,
+        "model_state_sha256": "4c3ddf21fa6f5be52b5773b8fc623256ef561516668f63d61217ace4410c3f95",
+        "inference_path": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/A_plain_adamw_seed2/best_checkpoints/epoch028.pt",
+        "inference_sha256": "f9714da76840f4b685b3418c2365a6249f3356a8d16cfa7d29dbf2fc7ee679a9",
+        "unique_checkpoints": [
+          {
+            "path": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/A_plain_adamw_seed2/best_checkpoints/epoch028.pt",
+            "sha256": "f9714da76840f4b685b3418c2365a6249f3356a8d16cfa7d29dbf2fc7ee679a9"
+          }
+        ],
+        "model_class": "NativeUtilitySelector",
+        "training_phase": "R68 40epoch full fine-tuning",
+        "checkpoint_mode": "eval",
+        "optimizer_mode_transition": false,
+        "parameter_averaging": false
+      },
+      "B": {
+        "path": "/public/home/shiys/0selection2/code/V4/runs/R69_task_specific_finetuning/B_task_specific_seed2/best.pt",
+        "sha256": "8029e3125a1e8a52389abca64f508dbd8bc8516f66bbcf8bb352621afcb3b315",
+        "selected_epoch_checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R69_task_specific_finetuning/B_task_specific_seed2/best_checkpoints/epoch020.pt",
+        "epoch": 20,
+        "global_epoch": 60,
+        "native_correct": 8604,
+        "native_total": 18000,
+        "val": {
+          "macro_ce": 1.119309624036153,
+          "macro_top1": 0.478,
+          "macro_top2": 0.8136111111111111,
+          "macro_top3": 0.9207222222222222,
+          "macro_top1_tie_aware": 0.47883333333333333,
+          "macro_mean_cost": 11.18430059242089,
+          "macro_vs_sbs_pct": -0.9656438370668659,
+          "macro_vs_oracle_pct": 1.0015229606794773,
+          "macro_actual_regret_pct": 1.0422689893761583,
+          "macro_vbs_gap_closed_pct": 25.969550941876637
+        },
+        "parameter_mode": "ordinary AdamW weights",
+        "model_type": "complete_task_specific_bank",
+        "all18_common_epoch": true,
+        "inference_path": "/public/home/shiys/0selection2/code/V4/runs/R69_task_specific_finetuning/B_task_specific_seed2/best_checkpoints/epoch020.pt",
+        "inference_sha256": "8029e3125a1e8a52389abca64f508dbd8bc8516f66bbcf8bb352621afcb3b315",
+        "model_state_sha256": "fa1bc7d09fc83590640edb097b776c8fa97cd03354e0c137ae48f6552157541a",
+        "model_class": "TaskSpecificSelector",
+        "factory": "code.V4.r69_model.make_bank",
+        "problem_names": [
+          "TSP",
+          "CVRP",
+          "ATSP",
+          "OVRP",
+          "VRPB",
+          "VRPL",
+          "VRPTW",
+          "OVRPTW",
+          "OVRPB",
+          "OVRPL",
+          "VRPBL",
+          "VRPBTW",
+          "VRPLTW",
+          "OVRPBL",
+          "OVRPBTW",
+          "OVRPLTW",
+          "VRPBLTW",
+          "OVRPBLTW"
+        ],
+        "common_epoch": 20,
+        "branch_epochs": [
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20,
+          20
+        ],
+        "checkpoint_mode": "eval",
+        "parameter_averaging": false,
+        "perturbed_weights": false,
+        "optimizer_mode_transition": false,
+        "projector_included": false
+      }
+    },
+    "control_reuse": {
+      "label": "reused R68A shared control",
+      "lock_path": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/final_test_lock.json",
+      "lock_sha256": "66bd5f6ea653130e2633b06e0449cc0ea39fe59e859bd3dfad8a60ce2e2481e9",
+      "lock_json_pointer": "/models/A",
+      "test_path": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/test_results.json",
+      "test_sha256": "ea39cf82cf98ccdb1fd7778ab073c7e7c933b649168a9eff44f95c3604e37f69",
+      "test_json_pointer": "/models/A",
+      "result_path": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/A_plain_adamw_seed2/result.json",
+      "result_sha256": "b075562d38d5bb2845c631406809b516a9abf96ae3156cf1ed448b982450103b",
+      "history_path": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/A_plain_adamw_seed2/history.json",
+      "history_sha256": "11dac09e1f54b3019197399e2b7aace01250e7892ae14a56b80ed661c121fc8d",
+      "original_tests_already_executed": 1,
+      "new_R69_tests": 0,
+      "new_R69_training": false,
+      "weights_loaded": false,
+      "inference": false,
+      "recount": false,
+      "reselection": false,
+      "historical_test_exposure": true,
+      "reuse_is_protocol_equivalence_not_independent_replication": true
+    },
+    "new_tests_required": {
+      "A": false,
+      "B": true
+    },
+    "new_test_attempts_allowed": {
+      "A": 0,
+      "B": 1
+    },
+    "historical_original_tests_reused": {
+      "A": 1
+    },
+    "selection": "B earliest maximum INTEGER full18 VAL count; official B strictly>8644, tie/lower fixed A",
+    "original_full18": true,
+    "problems": [
+      "TSP",
+      "CVRP",
+      "ATSP",
+      "OVRP",
+      "VRPB",
+      "VRPL",
+      "VRPTW",
+      "OVRPTW",
+      "OVRPB",
+      "OVRPL",
+      "VRPBL",
+      "VRPBTW",
+      "VRPLTW",
+      "OVRPBL",
+      "OVRPBTW",
+      "OVRPLTW",
+      "VRPBLTW",
+      "OVRPBLTW"
+    ],
+    "rows_per_task": 1000,
+    "native_total": 18000,
+    "full_legal_pools": {
+      "TSP": [
+        0,
+        1,
+        2,
+        3,
+        7,
+        14,
+        19,
+        20
+      ],
+      "CVRP": [
+        0,
+        3,
+        5,
+        7,
+        11,
+        12,
+        13,
+        14,
+        15,
+        18
+      ],
+      "ATSP": [
+        4,
+        6,
+        8,
+        9,
+        21
+      ],
+      "OVRP": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "VRPB": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "VRPL": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "VRPTW": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "OVRPTW": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "OVRPB": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "OVRPL": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "VRPBL": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "VRPBTW": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "VRPLTW": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "OVRPBL": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "OVRPBTW": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "OVRPLTW": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "VRPBLTW": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ],
+      "OVRPBLTW": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18
+      ]
+    },
+    "inference_rule": "FP32 eval; full legal pool; highest direct utility; exact ties by ascending global solver ID",
+    "test_batch_size": 128,
+    "tail_rows": 104,
+    "selector_forwards_per_query": 1,
+    "deployment_completed_solvers_per_query": 1,
+    "evaluation_solver_executions": 0,
+    "parameter_mode": "ordinary AdamW weights",
+    "parameter_averaging": false,
+    "perturbed_weights": false,
+    "optimizer_mode_transition": false,
+    "projector_included": false,
+    "task_wise_assembly": false,
+    "test_reselection": false,
+    "costs_select_checkpoint": false,
+    "inherited_initialization": {
+      "inherited_stage1_successful_updates_once": 9600,
+      "inherited_stage1_presentations_once": 7200000,
+      "inherited_from": "R67B stage1 terminal",
+      "source_parameter_mode": "terminal averaged x",
+      "deployment_parameter_mode": "ordinary AdamW weights",
+      "inherited_trunk_hash": "03e8e5e09c6a22d1f1b68a2ac95607125e2afd597911542d3f7db3061ad00b08",
+      "starting_selector_hash": "224266578ae478225829c7215dfd16e6aa704289842fbe762bb35d4b25bcca56",
+      "stage2_head_seed": 670003,
+      "stage2_head_hash": "7286ebbd4eaaf4c5c1e3dae2f80c0456a822e07aeccfe89aff79905bf94f35fb",
+      "entire_fresh_head_copied": true,
+      "inherited_utility_head_loaded": false,
+      "projector_loaded": false,
+      "explicit_identical_copy_across_arms": true,
+      "all_selector_parameters_trainable": true,
+      "fresh_encoders": false,
+      "schedulefree_optimizer": false,
+      "optimizer_mode_transition": false,
+      "explicit_identical_copy_all18": true,
+      "initialization_container": "/public/home/shiys/0selection2/code/V4/runs/R68_sharpness_aware_finetuning/shared_initialization.pt",
+      "initialized_from_trained_R68": false,
+      "initialized_from_R67_stage2": false,
+      "deployment": "eighteen ordinary fully trainable complete selectors"
+    },
+    "schedule_identity": {
+      "original80epoch_sha256": "03a66636a654d06a0f9a29e6c005fdd012543bcf2a8bf8859ef41490bb509d9f",
+      "selected_stage2_sha256": "915a19d75dd2f8b4df3fea1cab1e73f63f43e9413dff9b0fa2f483da2ce83b7c",
+      "global_epochs": [
+        41,
+        80
+      ],
+      "zero_based_slice": [
+        40,
+        80
+      ],
+      "seed": 2,
+      "batch_size": 256,
+      "dropout_successful_offset": 9600,
+      "same_task_row_dropout_order_across_arms": true,
+      "regeneration": "paired_triples(sizes, epochs=80, seed=2, batch_size=256); verify R67 full hash; slice permutations/cycles/triples[40:80]",
+      "saved_row_cache": false
+    },
+    "new_arms": [
+      "B"
+    ],
+    "reused_arms": [
+      "A"
+    ],
+    "new_training_updates": 9600,
+    "new_selected_rows": 7200000,
+    "successful_view_rows": 14400000,
+    "capacity_matched": false,
+    "per_parameter_optimizer_histories_matched": false,
+    "training_terminal_receipt_sha256": "259393d659b6333357cc27f180f7953b5b11c28c621f963bad1be7b15aeb4f8f",
+    "protocol_sha256": "5eb88b60b555292703b72dfe35a16ab1717c51263e48f2a7ab29f73944ce4898",
+    "args_sha256": "65a0f6f7c326c540c7693ef14b56235d94f7f8a88120dab7fafb1d25b51e4e65",
+    "validation_candidates_sha256": "c07d529c4efddc53a09e1cedb452bcd9f2ad6641db30bc9ed3f6322b8996df59",
+    "delivery_source_hashes": {
+      "code/V4/r69_frozen_evaluation.py": "747b2cadf49195bc85b487e5e3c4e00324c1ebd0cdff150f6592b0efbf75b234",
+      "code/V4/run_v4_r69_test.sh": "77c8cee8dbc2a99cbb936839e0a02fa153c8ed110daa7cb9664e54fb492f4bf7",
+      "code/V4/r69_analysis.py": "fd7954b5b2e444e5ae11a5510bcc8c9c5ae8129dd00e38b252520a6c4d289579",
+      "code/V4/runs/R69_task_specific_finetuning/DELIVERY_PROTOCOL.md": "3604a402edbfd10951ce37cc1d866940098d02b3ef9f79e0cb59ea9f7ef87045"
+    }
+  },
+  "allowed_attempts": 1,
+  "models_to_evaluate": [
+    "B"
+  ],
+  "new_tests_required": {
+    "A": false,
+    "B": true
+  },
+  "historical_original_A_tests_reused": 1,
+  "host": "gpu03",
+  "pid": 1635387,
+  "slurm_step": "1465.102",
+  "tmux_session": "r69_final_test",
+  "tmux_pane": "%85",
+  "tmux_pane_pid": "745609",
+  "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+  "batch_size": 128,
+  "parent_baton": "locked-test",
+  "evaluation_module_sha256": "747b2cadf49195bc85b487e5e3c4e00324c1ebd0cdff150f6592b0efbf75b234",
+  "automatic_retry": false
+}
