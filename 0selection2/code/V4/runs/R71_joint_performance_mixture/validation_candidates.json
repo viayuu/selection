@@ -1,0 +1,66 @@
+{
+  "models": {
+    "A": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R70_latent_mixup/B_latent_mixup_seed2/best.pt",
+      "sha256": "9ee78e596e1b68a057fdfb7c27322a52c7d17f782aab1eba9efc69c942b20fbb",
+      "selected_epoch_checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R70_latent_mixup/B_latent_mixup_seed2/best_checkpoints/epoch023.pt",
+      "epoch": 23,
+      "global_epoch": 63,
+      "native_correct": 8709,
+      "native_total": 18000,
+      "val": {
+        "macro_ce": 1.1211394468943279,
+        "macro_top1": 0.48383333333333334,
+        "macro_top2": 0.8140000000000001,
+        "macro_top3": 0.9219444444444443,
+        "macro_top1_tie_aware": 0.4844444444444444,
+        "macro_mean_cost": 11.176385866237858,
+        "macro_vs_sbs_pct": -1.0150367641895088,
+        "macro_vs_oracle_pct": 0.9500235969084324,
+        "macro_actual_regret_pct": 0.9888299379229379,
+        "macro_vbs_gap_closed_pct": 28.518094411162096
+      },
+      "parameter_mode": "ordinary AdamW weights",
+      "model_type": "complete_task_specific_bank",
+      "all18_common_epoch": true
+    },
+    "B": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R71_joint_performance_mixture/B_joint_mixture_seed2/best.pt",
+      "sha256": "fa8bfcbd0d97ba827505bfcc4b10d536abb75001da46b4f792dd6c06542c9c99",
+      "selected_epoch_checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R71_joint_performance_mixture/B_joint_mixture_seed2/best_checkpoints/epoch031.pt",
+      "epoch": 31,
+      "global_epoch": 71,
+      "native_correct": 8371,
+      "native_total": 18000,
+      "val": {
+        "macro_ce": 1.175962143474155,
+        "macro_top1": 0.46505555555555556,
+        "macro_top2": 0.7885555555555556,
+        "macro_top3": 0.9120555555555554,
+        "macro_top1_tie_aware": 0.4659444444444445,
+        "macro_mean_cost": 11.18057056972091,
+        "macro_vs_sbs_pct": -0.9754040722855488,
+        "macro_vs_oracle_pct": 0.9902308946941195,
+        "macro_actual_regret_pct": 1.0246409762445314,
+        "macro_vbs_gap_closed_pct": 23.725639331397005,
+        "macro_density_nll_per_dimension": -0.12805792035659153
+      },
+      "parameter_mode": "ordinary AdamW weights",
+      "model_type": "complete_joint_mixture_bank",
+      "all18_common_epoch": true,
+      "persistent_inference_buffers": true
+    }
+  },
+  "proposed_official_arm": "A",
+  "official_rule": "B strictly>8709; tie/lower fixed R70B23 A",
+  "new_arms": [
+    "B"
+  ],
+  "reused_arms": [
+    "A"
+  ],
+  "parent_freeze_pending": true,
+  "inference_rule": "FP32 one encoder forward; eight full-covariance mixture components; fixed scrambled Sobol2048 normals/component; undo TRAIN normalization; full-pool minimum frequencies weighted by mixture probabilities; maximum win probability; exact ties by ascending global solver ID; CE-only floor1e-12",
+  "test_authorized": false,
+  "later_test": "parent later freezes common-epoch bank/buffers/official arm before ONE full18 new B TEST regardless of improvement; A TEST reused unchanged"
+}

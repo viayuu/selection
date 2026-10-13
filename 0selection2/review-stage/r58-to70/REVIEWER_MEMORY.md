@@ -2265,6 +2265,265 @@ Disclosed limitations remain one seed, control reuse without independent replica
 This review used source and saved-record inspection only: no GPU operation, checkpoint loading, forward, prediction replay, experiment/check/analysis rerun, hash campaign, edits, Git operation or delegation. No successor was designed and no TEST evidence was sent to the planner.
 
 
+## R70 One Completed-Version Publication; R71 Actual Implementation Handoff
+
+At2026-10-12T23:38:30UTC, ONEscopedR70commit15eccdea56021649f1783afada68873286f82bb9 completed actualforeground42035exit0 (505files/254835insertions13deletions), THEN actualpush12956exit0 main1e4bdd1d7..15eccdea5 togit@github.com:viayuu/selection.git. Exactly14524unrelateduserstagedcleanupentriesremain, usercode/.gitignoreunstaged. Initialnormalgitaddreturned1 forignoredreview-stage; onlyownedR70text/reviewtracefiles thenforced, neverweights/arrays/rawupdates/W&B/cache/schedule (scopedforbiddencount0). Weights/NPZlocal, Gitnotallinferenceassets. No secondR70commit; postpublicationmetadatajoinsfutureR71.
+
+R70actualprimaryandfreshreviews/negativewholeobjectiveaudit/fullrawMemoryupdates/round12scopedacquittal COMPLETE. OfficialB23VAL8709/18000, TEST8409/18000=46.716667% remainsbelow12600; integrity9ready isNOTgoalcompletion. R71 ONEjoint8componentfullcovGaussianmixture NLL/nativewinnerprobabilityplan8ready wasadoptedONLYfromcompletedR70TRAINVAL; NEW R70TESTexcludedfromprimary. ActualSAME GPT-6.1-Sol/max thread01a13212-f99c-72a3-9279-db14f0073262 resumed afterR70CLI0 underCPUtmuxr71_implementation/pane95/PID1227493 at23:31:06UTC; rawthread.started/firstimplementationmessagesconfirmed. Fullapprovedsource code/V4/runs/R71_joint_performance_mixture/approved_plan.md; isolatedcode/ONECPUcheck/ONEdiscardedfull256capacityupdate/full18Adammoments/formalrecreation/soleUUIDallocation1465gpu03 firstupdatehandoffrequested. FormalR71trainingNOTYETclaimedbyparent; neverduplicateactor orinterpretintendedcommandsasruntime. No Anewcompute, no extraGPU/solver/costlabels/R58/newTESTyet. Original70goalACTIVE/unachieved.
+
+### R71 Actual Implementation and Formal Launch, 2026-10-12T23:55:10UTC
+
+SAME actual Sol/max implementation wrapper CLI0 at23:49:32UTC. Root reviews
+preserve complete raw implementation response/events/bootstrap and prompt/runner.
+ONE CPU invocation passed1.389959573s. ONE discarded TRAIN capacity update passed
+3.752882919s/5.965898365s total with all18 Adam moments305848320bytes materialized;
+peakallocated15.733320236GiB/reserved19.46875/physical19.792236328. Formal model,
+optimizer and RNG recreated exactly afterward, not transferred from capacity.
+
+Actual newB originalTRAIN1465.105 RUNNING/gpu03/soleUUID
+GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d/index1, r71_train/pane%96/panePID1287378,
+trainerPID1476336. Firstformalupdate1 real256x3/768rows/1536encoder views,
+finiteNLL/D1.4887570540/jointNLL10.2687127590/grad.3552532196/zero retries.
+B38231040 trainableparams versus fixedA33173154, notcapacity/FLOPs matched.
+At23:55UTC actualepoch5/u1080/812160rows; latest completedepoch4VAL7352/18000.
+Partial results are NOT used to adopt a successor or alter the fixed40E protocol.
+
+Actual SAME Sol/max CPU delivery prep launched r71_delivery_prep/pane%97/
+PID1316617 with independent future controller requested in DIFFERENT r71_delivery.
+Preparation and future runtime remain UNVERIFIED pending actual receipts. Parent
+preauthorization is originalTRAINterminal0/tmuxgone/full40Ebudget THEN unique
+common-epoch integerVALfreeze/officialB strictly>8709 THEN ONE newB original18
+TEST/sameUUID THEN actualTESTterminal0 THEN ONCECPUanalysis. No Anewcompute,
+R58/solver/newcost/extraGPU/restart/TEST tuning. Original70goal ACTIVE/unachieved.
+Current post-R70publication state/memory belongs to future ONE R71 commit only;
+R70 already published15eccdea56021649f1783afada68873286f82bb9, no second commit.
+
+### R71 Independent Delivery Controller Actually Armed, 2026-10-13T00:11UTC
+
+Actual SAME Sol/max CPU preparation wrapper CLI0 at00:08:33UTC. Complete raw
+response/events/bootstrap/prompt/runner preserved under R71 reviews. ONE combined
+syntax invocation passed0/.087946439s, no runtime check or historical replay.
+Preparation GPUqueries/loads/forwards/freezes/TEST/analysis all0; training sources
+and launch snapshots unchanged. Existing focusedCPU/capacity checks not repeated.
+
+Independent CPU-only r71_delivery/pane%98/PID1365571 on admin01 actually started
+00:07:57UTC with command python -B -u -m code.V4.r71_frozen_evaluation --stage deliver.
+One dispatch, no session replacement. First actual observation originalTRAIN
+1465.105 RUNNING0:0/gpu03, r71_train present,2880updates/2160000rows. A RUNNING
+0:0 is NOT terminal. Controller waits240s between ordinary observations and
+conditionally performs locked VAL selection/ONEnewBTEST/ONCECPUanalysis only
+after actual corresponding terminal gates. Future runtime remains UNVERIFIED.
+
+Latest parent00:09:50UTC originalTRAINepoch14/u3180; completedepoch13VAL7653/18000,
+known currentbestE12 7949/18000. Partialonly, no stopping or scientific change.
+Future primaryTRAINVAL-only closure andfreshnightmare tasks written, NOT called.
+Full current memory must precede reviewer calls; NEW R71TEST stays excluded from
+primary planning, including through concurrent fresh-memory append timing.
+NoAcompute/R58/extraGPU/solver/newlabels/Git. Goal70ACTIVE/unachieved.
+
+
+### R71 Conditional Primary-Paper Research, Actual CLI0 2026-10-13T00:28:54UTC
+
+Actual SAME GPT-6-Astra/max primary thread01a12e68-4d2a-71d0-aefd-67fc1c158282,
+CPUtmuxr71_paper_research/pane99/PID1393620, rawturn.completed and wrapperCLI0;
+full227504-character memory prepended/231734-character prompt. Research ONLY;
+no successor adoption/currentR71results/newTEST. Fullrawresponse below is preserved
+before any next SAMEprimarycall. R66 factual correction is authoritative: native
+CE/RDrop standalone-g versus composite-F+g training, both deployingF+g, NOT a
+nativeCE-versus-regret-routing contrast. Paper references/negative evidence are
+research claims, not a performance forecast or a goal70 acquittal.
+
+#### Full Raw Reviewer Response
+
+**Conditional ranking: first, fixed heterogeneous selector consensus; second, teacher consistency on existing expansion inputs. Neither is adopted.** R71 must finish its approved TRAIN/validation experiment before the next decision.
+
+`review_independence=same-family; acceptance_status=provisional; scope=research only`
+
+I examined four primary papers:
+
+| Paper and Sections Read | Relevant Evidence and Limitation |
+|---|---|
+| [Tornede et al., *Machine Learning*, 2022](https://link.springer.com/article/10.1007/s10994-022-06161-4), §§5.1, 5.5, 6.3, 6.6 | Heterogeneous selector voting and rank aggregation improved algorithm-selection performance. The target was penalized runtime, not native Top1. Learned stacking did not outperform the best individual selector overall. |
+| [Lakshminarayanan et al., NeurIPS 2017](https://papers.nips.cc/paper_files/paper/2017/file/9ef2ed4b7fd2c810847ffa5fa85bce38-Paper.pdf), §2.4 and Figure 2 | Independently trained networks combine predictions through probability averaging. Classification and uncertainty results support aggregation, but do not establish useful diversity among our saved selectors. |
+| [Xie et al., CVPR 2020, Noisy Student](https://arxiv.org/pdf/1911.04252), §2, §4.1/Table 6, Appendix A.2 | Joint training on true labels and teacher predictions can improve the student. Their ablation retains some benefit from model noise without input augmentation. Evidence concerns image classification with strong teachers and substantial additional computation. |
+| [Wei et al., ICLR 2021, revised manuscript](https://arxiv.org/pdf/2010.03622v5), §§3.1–4, especially Theorem 4.3 | Self-training can correct teacher errors under class expansion, separation and teacher-quality assumptions. These conditions are unestablished here; the theorem does not guarantee improvement from dropout consistency alone. |
+
+1. **First: Fixed heterogeneous consensus across complete full18 policies.**
+
+A concrete conditional candidate would reuse **R60B39, R67B36 and R70B23**, representing expanded partial supervision, contrastive pretraining and task-specific latent mixup. Each remains its original, globally selected complete policy. Every query runs the same bundle.
+
+One fixed full-pool Borda rule would select the candidate with the smallest sum of within-model ranks, breaking final ties by global solver ID. This avoids fitting temperatures or weights across differently trained score functions. Member selection, aggregation and tie handling would be declared before evaluating the bundle, with no subsequent subset search.
+
+**The R66 distinction needs correcting:** its [objective](/public/home/shiys/0selection2/code/V4/r66_objective.py:1) compared native CE/RDrop on standalone `g` against native CE/RDrop on `F+g`; both deployed `F+g`. It was not a native-CE versus regret-routing contrast. The proposed difference is heterogeneous complete policies and ordinal aggregation, rather than another corrective member trained beside the same frozen base.
+
+This remains an **extension of an already tested ensemble family**. R66’s independent sum improved its base by only eight validation decisions, and corrective training lost against that sum. Furthermore, R67 and R70 share inherited pretraining. Different objectives, family gains or selected epochs do **not** prove complementary errors on individual instances.
+
+The plausible benefit is combining already learned decision signals when their errors differ. It adds no query information and can dilute the strongest member.
+
+**Minimal decisive comparison:** evaluate exactly one frozen bundle against its unchanged components and the standing validation incumbent on all18,000 native validation cases. Failure to beat the strongest component rejects that bundle’s selection benefit. Disagreement, hypothetical oracle coverage and better calibration are insufficient.
+
+**Compute:** zero new training; three live selector evaluations per query, followed by **one completed solver**. Sequential evaluation limits activation memory, but latency must include every member. No reference retraining or new standalone reference evaluation is needed.
+
+2. **Second: One-stage teacher consistency using the existing expansion inputs.**
+
+The [R62 preparation receipt](/public/home/shiys/0selection2/code/V4/runs/R62_portfolio_performance_pretraining/data_cache/preparation.json) records **1.62 million expansion input rows**. Those inputs offer a different opportunity from their auxiliary deployment costs.
+
+The mechanism would freeze an existing complete native selector, concretely R60B39, and obtain its full-pool probability targets on unchanged expansion inputs. A student jointly learns from original native winner labels and consistency with those teacher probabilities under model dropout. Original winners remain immutable; teacher probabilities are auxiliary predictions, not measured winners or new solver labels.
+
+Reuse the existing raw-input cache, native input whitelist, complete legal pools and full-information backbone. Discard auxiliary deployment costs from this objective. Preserve coordinates, orientation, customer order and physical start roles. **No rotation, reflection or coordinate perturbation is justified by presumed winner invariance.**
+
+This differs from R62’s comparisons between auxiliary solver deployments and R71’s likelihood training on measured original cost vectors. It also differs from RDrop on the original labelled examples: the additional constraint is applied across many more existing input locations.
+
+The potential source of improvement is broader input coverage plus regularized learning from true and predicted targets together. Exact imitation alone cannot create better labels: without useful inductive bias and the original supervised anchor, the student can simply reproduce the teacher’s errors.
+
+**The counter-evidence is substantial.** [R49](/public/home/shiys/0selection2/code/V4/runs/R49_existing_data_diagnosis/RESULTS.md:25) increased distinct training examples from2,000 to8,000 at equal4,000-update budgets; original validation accuracy changed52.5%→51.9%. That narrow binary experiment establishes neither a benefit from more samples nor a ceiling. R60’s genuine additional pair labels produced only a modest gain, while R62’s broader auxiliary supervision failed to advance the incumbent. Pseudo-targets are weaker evidence than those measured labels.
+
+The expansion rows provide additional inputs, **not additional independently observed native winners**. Repeating their optimization increases presentations, not sample count. Teacher confidence also cannot certify correctness, and ImageNet-style uniform class balancing would change the native winner distribution.
+
+**Minimal decisive comparison:** two otherwise matched students could share initialization, frozen teacher, original supervised stream, optimizer updates and forward-row budgets. The auxiliary stream uses original-TRAIN replay in A and prefix-excluded expansion inputs in B. This is a new scientific control because no saved run used that objective; historical references remain reused. No B-over-A native validation gain rejects the proposed coverage benefit under that recipe. Better pseudo-target agreement alone does not count.
+
+**Compute:** one teacher pass over the chosen existing input bank, followed by explicitly budgeted student training. Teacher inference, distinct rows and repeated presentations must be counted separately. Deployment returns to one selector forward and **one completed solver**. Runtime is unmeasured; no new solve or ground-truth acquisition is required.
+
+Consensus ranks first because it directly tests whether completed mechanisms combine usefully with little additional expenditure. Self-training is a more substantial data-organization change, but its teacher-error risk makes it the weaker recommendation. Neither paper set supports forecasting the remaining gap to70%.
+
+**Memory update:** This scout read four primary papers and retained two conditional directions: fixed heterogeneous full18 consensus first, expansion-input teacher consistency second. R66 was native CE/RDrop standalone-versus-composite training, not regret routing; its weak ensemble gain remains material counter-evidence. Saved task summaries do not establish instance-level complementarity. R62 supplies an existing expansion input bank, but teacher targets would add no observed native winners. R49’s2,000/8,000 comparison showed no clear accuracy benefit and cannot establish a ceiling. Self-training requires assumptions about teacher quality and class structure that remain unproved. No successor, member bundle, loss coefficient or execution budget is adopted. R71 must complete before closure and adoption. R58 and legacy eight-B semantics remain deferred; full18 native single-completed-solver70% remains active and unachieved.
+
+**R71 partial TRAIN/VAL and NEW R71 TEST evidence did not inform this research.** Its current result, status, history, report, analysis-output, delivery and parent-state artifacts were not inspected. Historical TEST exposure remains disclosed. No experiment, model inference, prediction replay, cache creation, GPU/job query, solver execution, edit, Git action or subordinate-agent delegation occurred.
+
+#### Memory Update Copied From Raw Response
+
+**Memory update:** This scout read four primary papers and retained two conditional directions: fixed heterogeneous full18 consensus first, expansion-input teacher consistency second. R66 was native CE/RDrop standalone-versus-composite training, not regret routing; its weak ensemble gain remains material counter-evidence. Saved task summaries do not establish instance-level complementarity. R62 supplies an existing expansion input bank, but teacher targets would add no observed native winners. R49’s2,000/8,000 comparison showed no clear accuracy benefit and cannot establish a ceiling. Self-training requires assumptions about teacher quality and class structure that remain unproved. No successor, member bundle, loss coefficient or execution budget is adopted. R71 must complete before closure and adoption. R58 and legacy eight-B semantics remain deferred; full18 native single-completed-solver70% remains active and unachieved.
+
+Parent action: conditional directions retained only. Wait actualR71completeTRAINVAL
+before nextprimaryclosure/adoption. No primarynewTEST access; freshnewTESTreview
+memory append must wait until primaryactualterminal. Original70ACTIVE/unachieved.
+
+
+### R71 Actual Primary Closure, CLI0 2026-10-13T02:28:13UTC
+
+Actual SAME GPT-6-Astra/max primary thread01a12e68-4d2a-71d0-aefd-67fc1c158282,
+CPUtmuxr71_primary_review/pane101/PID1837743, FULL238758char persistent memory/
+245162char prompt. Completed TRAIN/VAL ONLY; NEW R71TEST excluded. Integrity9ready
+with noactionabledefect; original70performance4notready. R72 fixed heterogeneous
+consensus plan8ready PLANONLY. This raw response is appended before fresh newTEST
+evidence; actualprimaryterminal gate satisfied, no concurrent memory leak.
+
+#### Full Raw Primary Response
+
+**No actionable TRAIN/validation implementation defect found. Integrity: 9/10, ready within this scope. Original 70% performance: 4/10, not ready.** This does not review or approve R71’s TEST delivery.
+
+`review_independence=same-family; acceptance_status=provisional`
+
+The saved [terminal receipt](/public/home/shiys/0selection2/code/V4/runs/R71_joint_performance_mixture/training_terminal_receipt.json) records original Slurm1465.105 `COMPLETED/0:0`, 4,076 seconds, and `r71_train` absent. The complete history contains all40 validation epochs and uniquely selects epoch31. **Validation retains fixed R70B23 as official A.**
+
+The inspected [model](/public/home/shiys/0selection2/code/V4/r71_model.py:24), [gradient path](/public/home/shiys/0selection2/code/V4/r71_gradients.py:12) and [training/evaluation path](/public/home/shiys/0selection2/code/V4/r71_experiment.py:286) implement the approved TRAIN-only normalization, canonical candidate order, installed mixture likelihood, two-view NLL/D, fixed Sobol integration, restored cost units, target isolation and integer checkpoint selection. Whole-update retries and inactive-parameter handling are supported. Zero initial trunk gradients follow correctly from the zero final-layer weights. No repair or replay is warranted.
+
+| Record | TRAIN Top1 | VAL Correct / Top1 | VAL Native CE | VAL Density NLL/D |
+|---|---:|---:|---:|---:|
+| Reused A23 | 50.891111% | 8709 /48.383333% | 1.121139 | Not applicable |
+| New B31, selected | 46.063333% | **8371 /46.505556%** | 1.175962 | −0.128058 |
+| A40, final | 58.138889% | 8158 /45.322222% | 1.232391 | Not applicable |
+| B40, final | 45.993333% | 8247 /45.816667% | 1.163053 | −0.165196 |
+
+Sources: original [A result](/public/home/shiys/0selection2/code/V4/runs/R70_latent_mixup/B_latent_mixup_seed2/result.json) and [B result](/public/home/shiys/0selection2/code/V4/runs/R71_joint_performance_mixture/B_joint_mixture_seed2/result.json). **B loses338 decisions, −1.877778pp against A, and514 decisions, −2.855556pp against R60B.** Selected validation regret also worsens:1.024641% versus0.988830%; regret remains disclosure, not the target.
+
+| Selected Family | A23 Top1 | B31 Top1 | B−A |
+|---|---:|---:|---:|
+| TSP | 36.300% | 36.000% | −0.300pp |
+| CVRP | 49.000% | 44.100% | −4.900pp |
+| ATSP | 78.000% | 78.400% | +0.400pp |
+| MVRP | 47.173% | 45.240% | −1.933pp |
+
+Only **ATSP+0.4pp, OVRPTW+1.6pp and VRPBLTW+0.2pp** improve; the other15 tasks regress. The largest losses are OVRP−5.3pp, VRPBL−5.2pp and CVRP−4.9pp.
+
+R71 did learn winner information: validation accuracy rises from29.188889% at epoch1 to46.505556% at its selected epoch. Nevertheless, improved density fitting did not produce stronger native discrimination than the existing policies. Between selected31 and final40, TRAIN density NLL/D improves−0.160860→−0.216729 and validation improves−0.128058→−0.165196, while native accuracy declines on both splits. Negative continuous-density NLL is legitimate; it is neither classification CE nor proof of accurate point-cost predictions or calibration.
+
+The final TRAIN/validation accuracy gap is only **0.176667pp**. R69’s large classification generalization gap is absent here. B’s last-five validation mean is46.011111%, below A’s46.292222%, although B has lower native CE. Its final89-decision advantage over A does not overturn the selected-checkpoint loss. These observations reject this bounded density-learning package’s selection benefit; they do not identify a universal bottleneck, label noise or an accuracy ceiling.
+
+New B completed **9,600 updates/7.2M selected rows**,14.4M successful versus14,402,560 attempted encoder-view rows, four retries and **4,019.743262s** arm wall time. Peak allocation was15.748332GiB. All18 branches received1,600 active updates/400,000 rows. The1.389960s CPU check and5.965898s discarded capacity operation are separately recorded, with formal state recreated afterward. Historical A and inherited pretraining remain separate expenditure. B’s38,231,040 versus A’s33,173,154 parameters make this an objective/readout/inference package comparison, not an isolated covariance experiment.
+
+**Recommend R72: one fixed heterogeneous full18 consensus experiment. Plan: 8/10, ready, PLAN ONLY.** Parent adoption and execution remain subsequent actions.
+
+The major observed failure is that successive single-policy learning changes have not surpassed R60B. R39/R43/R55 and nowR71 constrain another cost-supervision proposal. R45/R47/R50/R51/R53/R54/R56 constrain another embedding, retrieval, trajectory-summary or pair-specialist intervention. R64–65 produced limited optimization gains; R67 andR70 modest matched gains; R68–69 negative comparisons. This supports a bounded test of combining already learned decisions before funding another training mechanism.
+
+The directly relevant primary source is [Tornede et al., §§5.1/Eq.14,6.3 and6.6](https://link.springer.com/article/10.1007/s10994-022-06161-4): Borda aggregates complete candidate rankings, and heterogeneous voting improved aggregate ASlib penalized-runtime performance. Its target differs from native Top1; stacking results were weaker. [Lakshminarayanan et al., §2.4 and§3.4](https://papers.nips.cc/paper_files/paper/2017/file/9ef2ed4b7fd2c810847ffa5fa85bce38-Paper.pdf) support neural prediction aggregation, but use probability averaging. The proposed ordinal combination follows Tornede, not an exact deep-ensemble reproduction.
+
+**R66 remains material counterevidence.** It compared native CE/RDrop on standalone`g` against composite`F+g`, with both deploying`F+g`; it was not native CE versus regret routing. Its independent sum gained only eight validation decisions over its base. R72 instead combines three complete policies from different training mechanisms with fixed ordinal aggregation. Their task summaries do not establish complementary instance errors, and R67/R70 share pretraining. Consensus can dilute the strongest member.
+
+1. **Frozen components and control.** B contains exactly **R60B39, R67B36/global76 and R70B23/global63**, on every query. Use their existing complete saved checkpoints: R60 andR67 `best.pt`, and R70 `best_checkpoints/epoch023.pt`; all three files exist. Reconstruct their original architectures from saved arguments and strictly load complete states. R67 uses saved averaged-`x` weights without an optimizer transition or projector; R70 retains its complete18-branch common-epoch bank. Every parameter and normalization buffer is frozen. A is unchanged R60B39, **8885/18000 validation correct**. Preserve its historical cost-selected checkpoint; no reselection.
+
+2. **Inputs and supervision boundary.** Use original full18 inputs, legal pools and existing preprocessing. Preserve each member’s TRAIN-fitted normalization, directed ATSP information, geometry and constraint fields. Known problem identity selects R70’s branch. Costs, winners, routes and auxiliary targets never enter member forwards or aggregation. No transformations, additional runtime fields, new labels or solver calls.
+
+3. **One exact inference rule.** Preserve each member’s original returned `logits`: R60’s score-difference/maximin output and R67/R70’s direct utilities. Align legal columns by ascending global solver ID and exclude padding. For member`m` and candidate`j`, define doubled midrank `q_mj = 2*G_mj + E_mj + 1`, where`G` counts strictly higher legal scores and`E` counts equal legal scores, including itself. Sum `Q_j = q_1j+q_2j+q_3j` in integer arithmetic. Select minimum`Q`; final ties use smallest global ID. This retains every legal candidate and fixes exact-score ties without fitted weights or temperatures.
+
+4. **Objective and numerics.** There is no optimized loss, calibration, optimizer or trainable aggregation. Run sequential FP32 evaluation with dropout disabled and no gradients. For reporting CE only, use the fixed score `z_j=−Q_j/6` and stable legal-pool log-softmax; label this **Borda-score CE**, not calibrated probability quality. Density NLL is inapplicable. Nonfinite legal scores or inconsistent candidate sets stop the evaluation and preserve the failure; no member dropping or alternative aggregation.
+
+5. **Exact new budget.** **Zero training epochs, zero optimizer updates and zero TRAIN forward rows.** Run one complete18,000-row validation evaluation of B, batch128 with104-row task tails:144 query batches and432 member forwards, totaling54,000 member-row forwards. Each query executes three selectors and ultimately **one completed solver**. R60 runs only as B’s required member; A receives no separate reference evaluation. Reuse saved component metrics. Record ordinary evaluation wall time including all three forwards and aggregation; report historical training separately, counting shared inherited pretraining once.
+
+6. **Selection and TEST.** Record the fixed membership, checkpoints, preprocessing and rule before validation. There is one candidate and no epoch, subset, weighting or task-wise selection. Official B requires **more than8885 correct**; otherwise official A remains. After the parent freezes the complete bundle and official arm, execute **one original full18 TEST for B regardless of validation improvement**, using all three live members. Reuse A’s historical TEST unchanged. This adds another54,000 member-row forwards, with no standalone component reruns or cached-TEST shortcut.
+
+7. **Minimum check and stopping rule.** One synthetic CPU check covers column permutations, legal masks, exact-score midranks, final global-ID ties and exclusion of targets from the forward interface. Then proceed directly to the formal validation pass on the designated3090, without a GPU pilot or reference replay. If B does not beat8885, reject this fixed bundle’s selection benefit; do not search subsets or aggregation coefficients afterward. Complete its predeclared frozen TEST/reporting once. Any gain supports this particular bundle, not proven error independence or a70% forecast.
+
+**Memory update:** R71 completed40 epochs with no actionable inspected TRAIN/validation defect. B31 achieved8371/18000,46.505556%, losing338 decisions against fixed R70B23 and514 against R60B; validation retains A. Three tasks improve and15 regress. Density likelihood improves into late training while native accuracy remains weak; final TRAIN45.993333% and validation45.816667% do not reproduce R69’s large classification gap. New expenditure is9,600 updates/7.2M rows/4,019.743262s, four retries, with unequal parameter capacity and separately discarded capacity work. Recommend one fixed R60B39/R67B36/R70B23 Borda-consensus experiment with zero training and reused R60B39 control. R66’s weak ensemble result and unestablished instance complementarity remain explicit counterevidence. No successor was launched.
+
+**NEW R71 TEST and all prohibited delivery artifacts were excluded throughout.** Historical TEST exposure remains disclosed. No model execution, prediction replay, GPU/job query, edits, Git or subordinate agents occurred. R58 and legacy B discrepancies remain deferred. Goal success still requires an actual locked original18 TEST with **at least12600/18000 correct**; integrity and plan readiness do not complete that goal.
+
+#### Primary Memory Update Copied Verbatim
+
+**Memory update:** R71 completed40 epochs with no actionable inspected TRAIN/validation defect. B31 achieved8371/18000,46.505556%, losing338 decisions against fixed R70B23 and514 against R60B; validation retains A. Three tasks improve and15 regress. Density likelihood improves into late training while native accuracy remains weak; final TRAIN45.993333% and validation45.816667% do not reproduce R69’s large classification gap. New expenditure is9,600 updates/7.2M rows/4,019.743262s, four retries, with unequal parameter capacity and separately discarded capacity work. Recommend one fixed R60B39/R67B36/R70B23 Borda-consensus experiment with zero training and reused R60B39 control. R66’s weak ensemble result and unestablished instance complementarity remain explicit counterevidence. No successor was launched.
+
+### R71 Actual Fresh Nightmare Delivery Review, CLI0 2026-10-13T02:23:03UTC
+
+Actual FRESH GPT-6-Astra/max thread01a1330b-53e7-7f43-9995-82b17d979520,
+CPUtmuxr71_fresh_review/pane102/PID1842517, FULL238758char persistent memory/
+241600char prompt. Same-family/provisional. Integrity9ready/noactionabledefects;
+original70performance4notready. Full raw response and newR71TEST evidence appended
+ONLY AFTER primaryactualCLI0 at02:28:13UTC; no successor proposal fromthisreview.
+
+#### Full Raw Fresh Response
+
+No actionable delivery defects found. **Legacy delivery integrity: 9/10, ready within the inspected scope. Original 70% performance: 4/10, not ready.** No corrective experiment or replay is warranted.
+
+`review_independence=same-family; acceptance_status=provisional`
+
+The negative report is numerically faithful:
+
+| Frozen Model | Validation Correct / Top1 | TEST Correct / Top1 |
+|---|---:|---:|
+| Official reused A23 | 8709/18000 / 48.383333% | 8409/18000 / **46.716667%** |
+| New mixture B31 | 8371/18000 / 46.505556% | 8119/18000 / 45.105556% |
+
+B loses **338 validation decisions** and **290 TEST decisions** against fixed A. Official A remains **4,191 decisions short** of 12,600/18,000. The original goal remains **ACTIVE and unachieved**; regret and deferred semantics do not redefine that threshold. [Results](/public/home/shiys/0selection2/code/V4/runs/R71_joint_performance_mixture/RESULTS.md:3)
+
+- **Completion and selection are supported.** Original TRAIN1465.105 and TEST1465.106 recorded `COMPLETED/0:0`, with owned tmux sessions gone. All 40 validation records uniquely select B31/global71. The lock at **00:56:01.096 UTC** precedes TEST at **00:56:04.166 UTC**. Official A follows the predeclared requirement that B exceed 8,709 correct. [Lock](/public/home/shiys/0selection2/code/V4/runs/R71_joint_performance_mixture/final_test_lock.json), [selection implementation](/public/home/shiys/0selection2/code/V4/r71_frozen_evaluation.py:95)
+
+- **Original scope and TEST isolation are preserved.** Records retain all 18 tasks, 128 legal deployments and 18,000 native TEST winners. New B’s 144 wrapper, active-branch and encoder batches include every 104-row tail. A’s reused TEST object exactly equals the original R70 object. Labels and costs remain outside forward inputs; no new A inference occurs. [TEST implementation](/public/home/shiys/0selection2/code/V4/r71_frozen_evaluation.py:275)
+
+- **The density and decision rules match the plan.** Normalizers use original TRAIN-only FP64 differences. Training uses two-view, dimension-normalized joint likelihood for eight full-covariance components. Persistent Sobol normals are reused across components and queries, streaming one component and 256 vectors at a time. Inference restores cost differences, counts minima over the complete pool and applies global-ID ties. Native-winner CE remains separate from density NLL. The 16,384 predicted vectors execute no solvers; deployment selects one completed solver. [Model](/public/home/shiys/0selection2/code/V4/r71_model.py:24)
+
+- **Accounting agrees with direct records.** The 9,600 update records total 7.2M selected rows, 14.4M successful encoder views, 14,402,560 attempted views and four whole-update retries. Formal wall time is 4,019.743262s. The single CPU-check invocation, discarded capacity update and fresh formal recreation are supported. Historical control and inherited pretraining expenditure remain separate. B’s 38,231,040 parameters versus A’s 33,173,154 are explicitly unmatched. The 10.510779s TEST measurement is whole-evaluation time, not singleton or solver latency. [Accounting](/public/home/shiys/0selection2/code/V4/runs/R71_joint_performance_mixture/compute_summary.json)
+
+- **Reporting matches saved sources.** All 391 comparison rows’ 2,737 primary metric values and 138 density values agree with their source summaries. Historical reference extracts omit additional diagnostics but preserve the reported values. [Reporting implementation](/public/home/shiys/0selection2/code/V4/r71_analysis.py:122)
+
+Residual uncertainty remains one seed, historical TEST exposure, unmatched objective/readout/capacity, local-only inference assets and unresolved eight-B semantics. This review inspected sources and saved JSON/CSV/log records; it did not independently replay predictions or load weights. No GPU operation, evaluation, hash campaign, edit, Git action or delegation occurred.
+
+**Memory update:** R71 delivery is supported with no actionable defect. Preserve globally selected B31/global71 at 8371/18000 validation correct, fixed official R70B23 A at 8709, and the one-time new-B TEST of 8119/18000. A’s historical 8409/18000 TEST was reused unchanged. Full-pool mixture inference, TRAIN-only normalization, integer selection, recovery and accounting are supported. The negative report is numerically faithful. TEST remains reporting-only; no successor recommendation follows. R58 and eight legacy B discrepancies remain deferred. Delivery readiness does not establish performance acceptance: the full18 native single-completed-solver 70% goal remains active and unachieved.
+
+#### Fresh Memory Update Copied Verbatim
+
+**Memory update:** R71 delivery is supported with no actionable defect. Preserve globally selected B31/global71 at 8371/18000 validation correct, fixed official R70B23 A at 8709, and the one-time new-B TEST of 8119/18000. A’s historical 8409/18000 TEST was reused unchanged. Full-pool mixture inference, TRAIN-only normalization, integer selection, recovery and accounting are supported. The negative report is numerically faithful. TEST remains reporting-only; no successor recommendation follows. R58 and eight legacy B discrepancies remain deferred. Delivery readiness does not establish performance acceptance: the full18 native single-completed-solver 70% goal remains active and unachieved.
+
+Parent adoption: ONE R72 fixed full18 R60B39/R67B36/R70B23 doubled-midrank Borda
+bundle plan is adopted from completed R71 TRAIN/VAL primary8ready only, not NEW
+R71TEST. Zero new training, exact fixed3components, one original VAL and later
+ONE original TEST forbundle regardless ofVALgain, fixedR60B39 control8885VAL/
+historicalTEST reused. No member/weight/temperature/subset/taskwise search.
+R71 B31TEST8119/18000 versus fixedA8409; original70auditfalse, goalACTIVE/unachieved.
+No R58/solver/newcost/otherGPU or nativegoal redefinition. R71 ONEpublicationpending;
+parent state/memory updated afterthat publication belongs to futureR72, nosecondcommit.
+
+
+
 
 
 

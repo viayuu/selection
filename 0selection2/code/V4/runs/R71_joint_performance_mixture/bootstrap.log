@@ -1,0 +1,1590 @@
+[R71 assigned-GPU launch] {"checked_utc": "2026-10-12T23:46:56.151834+00:00", "host": "gpu03", "slurm_step": "1465.105", "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d", "gpu_index": 1, "gpu_name": "NVIDIA GeForce RTX 3090", "memory_used_mib": 2, "memory_total_mib": 24576, "compute_apps": [], "idle": true, "only_assigned_uuid_queried": true, "tmux_session": "r71_train", "tmux_pane": "%96", "tmux_pane_pid": "1287378"}
+[cache] TSP/train: 10000 instances, 45.0 MiB on cuda:0
+[cache] CVRP/train: 10000 instances, 83.3 MiB on cuda:0
+[cache] ATSP/train: 10000 instances, 384.5 MiB on cuda:0
+[cache] OVRP/train: 10000 instances, 33.9 MiB on cuda:0
+[cache] VRPB/train: 10000 instances, 33.9 MiB on cuda:0
+[cache] VRPL/train: 10000 instances, 33.9 MiB on cuda:0
+[cache] VRPTW/train: 10000 instances, 33.9 MiB on cuda:0
+[cache] OVRPTW/train: 10000 instances, 33.9 MiB on cuda:0
+[cache] OVRPB/train: 10000 instances, 33.9 MiB on cuda:0
+[cache] OVRPL/train: 10000 instances, 33.9 MiB on cuda:0
+[cache] VRPBL/train: 10000 instances, 33.9 MiB on cuda:0
+[cache] VRPBTW/train: 10000 instances, 33.9 MiB on cuda:0
+[cache] VRPLTW/train: 10000 instances, 33.9 MiB on cuda:0
+[cache] OVRPBL/train: 10000 instances, 33.9 MiB on cuda:0
+[cache] OVRPBTW/train: 10000 instances, 33.9 MiB on cuda:0
+[cache] OVRPLTW/train: 10000 instances, 33.9 MiB on cuda:0
+[cache] VRPBLTW/train: 10000 instances, 33.9 MiB on cuda:0
+[cache] OVRPBLTW/train: 10000 instances, 33.9 MiB on cuda:0
+[cache] TSP/val: 1000 instances, 4.5 MiB on cuda:0
+[cache] CVRP/val: 1000 instances, 8.3 MiB on cuda:0
+[cache] ATSP/val: 1000 instances, 38.4 MiB on cuda:0
+[cache] OVRP/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPB/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPL/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPTW/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPTW/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPB/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPL/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPBL/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPBTW/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPLTW/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPBL/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPBTW/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPLTW/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPBLTW/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPBLTW/val: 1000 instances, 3.4 MiB on cuda:0
+[R71 capacity passed] {"status": "passed", "full_bank_parameters": 38231040, "optimizer_moment_gpu_bytes": 305848320, "update_seconds": 3.7528829192742705, "peak_memory_gib": 15.733320236206055, "peak_reserved_gib": 19.46875}
+wandb: Tracking run with wandb version 0.19.11
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+[R71 first FORMAL update] {"successful_update": 1, "tasks": ["OVRP", "CVRP", "OVRPLTW"], "task_rows": [256, 256, 256], "rows": 768, "lr": 4.1666666666666667e-07, "nll_per_dimension": 1.488757054011027, "joint_nll": 10.268712759017944, "loss": 1.488757054011027, "grad_norm": 0.3552532196044922, "seconds": 0.5886311149224639, "peak_memory_gib": 15.404731273651123, "retries": 0, "finite_gradient": true}
+[R71B] epoch=1/40 update=1/240 total=1 NLL/D=1.488757 lr=4.16666667e-07 retries=0
+[R71B] epoch=1/40 update=60/240 total=60 NLL/D=1.405428 lr=2.5e-05 retries=0
+[R71B] epoch=1/40 update=120/240 total=120 NLL/D=1.376383 lr=5e-05 retries=0
+[R71B] epoch=1/40 update=180/240 total=180 NLL/D=1.224188 lr=7.5e-05 retries=0
+[R71B] epoch=1/40 update=240/240 total=240 NLL/D=0.953082 lr=0.0001 retries=0
+[R71B val epoch1] macro_top1=0.2919 top2=0.4381 top3=0.6391 vs_sbs=+4.607% vbs_closed=-549.78%
+       TSP: top1=0.297 mean_cost=7.9953 (sbs=7.9578) vs_sbs=+0.47%
+      CVRP: top1=0.219 mean_cost=18.2943 (sbs=18.2943) vs_sbs=+0.00%
+      ATSP: top1=0.682 mean_cost=1.6389 (sbs=1.6735) vs_sbs=-2.07%
+      OVRP: top1=0.213 mean_cost=7.4787 (sbs=7.4617) vs_sbs=+0.23%
+      VRPB: top1=0.066 mean_cost=11.8032 (sbs=9.3403) vs_sbs=+26.37%
+      VRPL: top1=0.022 mean_cost=14.3601 (sbs=12.4072) vs_sbs=+15.74%
+     VRPTW: top1=0.150 mean_cost=18.8443 (sbs=18.6571) vs_sbs=+1.00%
+    OVRPTW: top1=0.476 mean_cost=10.0484 (sbs=10.0484) vs_sbs=+0.00%
+     OVRPB: top1=0.015 mean_cost=8.2158 (sbs=6.3220) vs_sbs=+29.96%
+     OVRPL: top1=0.194 mean_cost=7.4605 (sbs=7.4376) vs_sbs=+0.31%
+     VRPBL: top1=0.528 mean_cost=9.3593 (sbs=9.3593) vs_sbs=+0.00%
+    VRPBTW: top1=0.170 mean_cost=19.8517 (sbs=19.6697) vs_sbs=+0.93%
+    VRPLTW: top1=0.149 mean_cost=18.5091 (sbs=18.5091) vs_sbs=+0.00%
+    OVRPBL: top1=0.555 mean_cost=6.3103 (sbs=6.3103) vs_sbs=+0.00%
+   OVRPBTW: top1=0.461 mean_cost=10.5068 (sbs=10.5068) vs_sbs=+0.00%
+   OVRPLTW: top1=0.494 mean_cost=10.1272 (sbs=10.1272) vs_sbs=+0.00%
+   VRPBLTW: top1=0.092 mean_cost=21.4708 (sbs=19.5198) vs_sbs=+10.00%
+  OVRPBLTW: top1=0.471 mean_cost=10.5412 (sbs=10.5412) vs_sbs=+0.00%
+[R71B] epoch=2/40 update=60/240 total=300 NLL/D=0.696258 lr=0.000125 retries=0
+[R71B] epoch=2/40 update=120/240 total=360 NLL/D=0.583864 lr=0.00015 retries=0
+[R71B] epoch=2/40 update=180/240 total=420 NLL/D=0.426551 lr=0.000175 retries=0
+[R71B] epoch=2/40 update=240/240 total=480 NLL/D=0.124604 lr=0.0002 retries=0
+[R71B val epoch2] macro_top1=0.3703 top2=0.6341 top3=0.7898 vs_sbs=+0.070% vbs_closed=-60.96%
+       TSP: top1=0.297 mean_cost=7.9953 (sbs=7.9578) vs_sbs=+0.47%
+      CVRP: top1=0.220 mean_cost=18.3101 (sbs=18.2943) vs_sbs=+0.09%
+      ATSP: top1=0.707 mean_cost=1.6383 (sbs=1.6735) vs_sbs=-2.10%
+      OVRP: top1=0.213 mean_cost=7.4787 (sbs=7.4617) vs_sbs=+0.23%
+      VRPB: top1=0.315 mean_cost=9.6679 (sbs=9.3403) vs_sbs=+3.51%
+      VRPL: top1=0.169 mean_cost=12.4309 (sbs=12.4072) vs_sbs=+0.19%
+     VRPTW: top1=0.303 mean_cost=18.2280 (sbs=18.6571) vs_sbs=-2.30%
+    OVRPTW: top1=0.476 mean_cost=10.0484 (sbs=10.0484) vs_sbs=+0.00%
+     OVRPB: top1=0.545 mean_cost=6.3220 (sbs=6.3220) vs_sbs=+0.00%
+     OVRPL: top1=0.194 mean_cost=7.4605 (sbs=7.4376) vs_sbs=+0.31%
+     VRPBL: top1=0.246 mean_cost=9.8621 (sbs=9.3593) vs_sbs=+5.37%
+    VRPBTW: top1=0.429 mean_cost=19.1100 (sbs=19.6697) vs_sbs=-2.85%
+    VRPLTW: top1=0.277 mean_cost=18.0049 (sbs=18.5091) vs_sbs=-2.72%
+    OVRPBL: top1=0.555 mean_cost=6.3103 (sbs=6.3103) vs_sbs=+0.00%
+   OVRPBTW: top1=0.461 mean_cost=10.5068 (sbs=10.5068) vs_sbs=+0.00%
+   OVRPLTW: top1=0.494 mean_cost=10.1272 (sbs=10.1272) vs_sbs=+0.00%
+   VRPBLTW: top1=0.315 mean_cost=19.6675 (sbs=19.5198) vs_sbs=+0.76%
+  OVRPBLTW: top1=0.449 mean_cost=10.5733 (sbs=10.5412) vs_sbs=+0.30%
+[R71B] epoch=3/40 update=60/240 total=540 NLL/D=0.314628 lr=0.000225 retries=0
+[R71B] epoch=3/40 update=120/240 total=600 NLL/D=-0.269103 lr=0.00025 retries=0
+[R71B] epoch=3/40 update=180/240 total=660 NLL/D=0.314471 lr=0.000275 retries=0
+[R71B] epoch=3/40 update=240/240 total=720 NLL/D=-0.351546 lr=0.0003 retries=0
+[R71B val epoch3] macro_top1=0.3976 top2=0.7306 top3=0.8726 vs_sbs=-0.462% vbs_closed=-6.46%
+       TSP: top1=0.297 mean_cost=7.9953 (sbs=7.9578) vs_sbs=+0.47%
+      CVRP: top1=0.251 mean_cost=18.3053 (sbs=18.2943) vs_sbs=+0.06%
+      ATSP: top1=0.728 mean_cost=1.6428 (sbs=1.6735) vs_sbs=-1.84%
+      OVRP: top1=0.326 mean_cost=7.4664 (sbs=7.4617) vs_sbs=+0.06%
+      VRPB: top1=0.504 mean_cost=9.3403 (sbs=9.3403) vs_sbs=+0.00%
+      VRPL: top1=0.128 mean_cost=12.4949 (sbs=12.4072) vs_sbs=+0.71%
+     VRPTW: top1=0.325 mean_cost=18.0360 (sbs=18.6571) vs_sbs=-3.33%
+    OVRPTW: top1=0.476 mean_cost=10.0484 (sbs=10.0484) vs_sbs=+0.00%
+     OVRPB: top1=0.423 mean_cost=6.3671 (sbs=6.3220) vs_sbs=+0.71%
+     OVRPL: top1=0.334 mean_cost=7.4376 (sbs=7.4376) vs_sbs=+0.00%
+     VRPBL: top1=0.528 mean_cost=9.3593 (sbs=9.3593) vs_sbs=+0.00%
+    VRPBTW: top1=0.394 mean_cost=19.1586 (sbs=19.6697) vs_sbs=-2.60%
+    VRPLTW: top1=0.313 mean_cost=17.8198 (sbs=18.5091) vs_sbs=-3.72%
+    OVRPBL: top1=0.400 mean_cost=6.3553 (sbs=6.3103) vs_sbs=+0.71%
+   OVRPBTW: top1=0.460 mean_cost=10.5069 (sbs=10.5068) vs_sbs=+0.00%
+   OVRPLTW: top1=0.494 mean_cost=10.1272 (sbs=10.1272) vs_sbs=+0.00%
+   VRPBLTW: top1=0.327 mean_cost=19.5470 (sbs=19.5198) vs_sbs=+0.14%
+  OVRPBLTW: top1=0.449 mean_cost=10.5733 (sbs=10.5412) vs_sbs=+0.30%
+[R71B] epoch=4/40 update=60/240 total=780 NLL/D=-0.184777 lr=0.0003 retries=0
+[R71B] epoch=4/40 update=120/240 total=840 NLL/D=0.254338 lr=0.0003 retries=0
+[R71B] epoch=4/40 update=180/240 total=900 NLL/D=0.025842 lr=0.0003 retries=0
+[R71B] epoch=4/40 update=240/240 total=960 NLL/D=-0.067545 lr=0.0003 retries=0
+[R71B val epoch4] macro_top1=0.4084 top2=0.7442 top3=0.8663 vs_sbs=-0.594% vbs_closed=+2.88%
+       TSP: top1=0.172 mean_cost=8.0365 (sbs=7.9578) vs_sbs=+0.99%
+      CVRP: top1=0.230 mean_cost=18.4075 (sbs=18.2943) vs_sbs=+0.62%
+      ATSP: top1=0.723 mean_cost=1.6440 (sbs=1.6735) vs_sbs=-1.77%
+      OVRP: top1=0.302 mean_cost=7.4617 (sbs=7.4617) vs_sbs=+0.00%
+      VRPB: top1=0.504 mean_cost=9.3403 (sbs=9.3403) vs_sbs=+0.00%
+      VRPL: top1=0.283 mean_cost=12.4072 (sbs=12.4072) vs_sbs=+0.00%
+     VRPTW: top1=0.292 mean_cost=18.1922 (sbs=18.6571) vs_sbs=-2.49%
+    OVRPTW: top1=0.476 mean_cost=10.0484 (sbs=10.0484) vs_sbs=+0.00%
+     OVRPB: top1=0.545 mean_cost=6.3220 (sbs=6.3220) vs_sbs=+0.00%
+     OVRPL: top1=0.193 mean_cost=7.4606 (sbs=7.4376) vs_sbs=+0.31%
+     VRPBL: top1=0.528 mean_cost=9.3593 (sbs=9.3593) vs_sbs=+0.00%
+    VRPBTW: top1=0.433 mean_cost=19.1133 (sbs=19.6697) vs_sbs=-2.83%
+    VRPLTW: top1=0.317 mean_cost=17.7902 (sbs=18.5091) vs_sbs=-3.88%
+    OVRPBL: top1=0.555 mean_cost=6.3103 (sbs=6.3103) vs_sbs=+0.00%
+   OVRPBTW: top1=0.454 mean_cost=10.5362 (sbs=10.5068) vs_sbs=+0.28%
+   OVRPLTW: top1=0.494 mean_cost=10.1272 (sbs=10.1272) vs_sbs=+0.00%
+   VRPBLTW: top1=0.402 mean_cost=19.0868 (sbs=19.5198) vs_sbs=-2.22%
+  OVRPBLTW: top1=0.449 mean_cost=10.5733 (sbs=10.5412) vs_sbs=+0.30%
+[R71B] epoch=5/40 update=60/240 total=1020 NLL/D=0.465144 lr=0.0003 retries=0
+[R71B] epoch=5/40 update=120/240 total=1080 NLL/D=0.093031 lr=0.0003 retries=0
+[R71B] epoch=5/40 update=180/240 total=1140 NLL/D=0.243853 lr=0.0003 retries=0
+[R71B] epoch=5/40 update=240/240 total=1200 NLL/D=0.164479 lr=0.0003 retries=0
+[R71B val epoch5] macro_top1=0.4170 top2=0.7539 top3=0.8732 vs_sbs=-0.706% vbs_closed=+7.70%
+       TSP: top1=0.289 mean_cost=7.9975 (sbs=7.9578) vs_sbs=+0.50%
+      CVRP: top1=0.260 mean_cost=18.3972 (sbs=18.2943) vs_sbs=+0.56%
+      ATSP: top1=0.771 mean_cost=1.6355 (sbs=1.6735) vs_sbs=-2.27%
+      OVRP: top1=0.214 mean_cost=7.4782 (sbs=7.4617) vs_sbs=+0.22%
+      VRPB: top1=0.504 mean_cost=9.3403 (sbs=9.3403) vs_sbs=+0.00%
+      VRPL: top1=0.276 mean_cost=12.4085 (sbs=12.4072) vs_sbs=+0.01%
+     VRPTW: top1=0.324 mean_cost=18.0254 (sbs=18.6571) vs_sbs=-3.39%
+    OVRPTW: top1=0.476 mean_cost=10.0484 (sbs=10.0484) vs_sbs=+0.00%
+     OVRPB: top1=0.545 mean_cost=6.3220 (sbs=6.3220) vs_sbs=+0.00%
+     OVRPL: top1=0.219 mean_cost=7.4587 (sbs=7.4376) vs_sbs=+0.28%
+     VRPBL: top1=0.531 mean_cost=9.3639 (sbs=9.3593) vs_sbs=+0.05%
+    VRPBTW: top1=0.369 mean_cost=19.1496 (sbs=19.6697) vs_sbs=-2.64%
+    VRPLTW: top1=0.323 mean_cost=17.8642 (sbs=18.5091) vs_sbs=-3.48%
+    OVRPBL: top1=0.555 mean_cost=6.3103 (sbs=6.3103) vs_sbs=+0.00%
+   OVRPBTW: top1=0.469 mean_cost=10.5249 (sbs=10.5068) vs_sbs=+0.17%
+   OVRPLTW: top1=0.494 mean_cost=10.1272 (sbs=10.1272) vs_sbs=+0.00%
+   VRPBLTW: top1=0.416 mean_cost=18.9872 (sbs=19.5198) vs_sbs=-2.73%
+  OVRPBLTW: top1=0.471 mean_cost=10.5412 (sbs=10.5412) vs_sbs=+0.00%
+[R71B] epoch=6/40 update=60/240 total=1260 NLL/D=0.198630 lr=0.0003 retries=0
+[R71B] epoch=6/40 update=120/240 total=1320 NLL/D=-0.130991 lr=0.0003 retries=0
+[R71B] epoch=6/40 update=180/240 total=1380 NLL/D=0.249629 lr=0.0003 retries=0
+[R71B] epoch=6/40 update=240/240 total=1440 NLL/D=-0.341277 lr=0.0003 retries=0
+[R71B val epoch6] macro_top1=0.4263 top2=0.7619 top3=0.8750 vs_sbs=-0.759% vbs_closed=+11.84%
+       TSP: top1=0.297 mean_cost=7.9953 (sbs=7.9578) vs_sbs=+0.47%
+      CVRP: top1=0.260 mean_cost=18.2926 (sbs=18.2943) vs_sbs=-0.01%
+      ATSP: top1=0.711 mean_cost=1.6380 (sbs=1.6735) vs_sbs=-2.12%
+      OVRP: top1=0.326 mean_cost=7.4664 (sbs=7.4617) vs_sbs=+0.06%
+      VRPB: top1=0.504 mean_cost=9.3403 (sbs=9.3403) vs_sbs=+0.00%
+      VRPL: top1=0.197 mean_cost=12.4256 (sbs=12.4072) vs_sbs=+0.15%
+     VRPTW: top1=0.335 mean_cost=18.0246 (sbs=18.6571) vs_sbs=-3.39%
+    OVRPTW: top1=0.457 mean_cost=10.0667 (sbs=10.0484) vs_sbs=+0.18%
+     OVRPB: top1=0.545 mean_cost=6.3220 (sbs=6.3220) vs_sbs=+0.00%
+     OVRPL: top1=0.333 mean_cost=7.4458 (sbs=7.4376) vs_sbs=+0.11%
+     VRPBL: top1=0.528 mean_cost=9.3603 (sbs=9.3593) vs_sbs=+0.01%
+    VRPBTW: top1=0.424 mean_cost=19.1052 (sbs=19.6697) vs_sbs=-2.87%
+    VRPLTW: top1=0.346 mean_cost=17.7972 (sbs=18.5091) vs_sbs=-3.85%
+    OVRPBL: top1=0.555 mean_cost=6.3103 (sbs=6.3103) vs_sbs=+0.00%
+   OVRPBTW: top1=0.489 mean_cost=10.5018 (sbs=10.5068) vs_sbs=-0.05%
+   OVRPLTW: top1=0.494 mean_cost=10.1272 (sbs=10.1272) vs_sbs=+0.00%
+   VRPBLTW: top1=0.401 mean_cost=19.0579 (sbs=19.5198) vs_sbs=-2.37%
+  OVRPBLTW: top1=0.471 mean_cost=10.5412 (sbs=10.5412) vs_sbs=+0.00%
+[R71B] epoch=7/40 update=60/240 total=1500 NLL/D=0.258123 lr=0.0003 retries=0
+[R71B] epoch=7/40 update=120/240 total=1560 NLL/D=0.184784 lr=0.0003 retries=0
+[R71B] epoch=7/40 update=180/240 total=1620 NLL/D=-0.622643 lr=0.0003 retries=0
+[R71B] epoch=7/40 update=240/240 total=1680 NLL/D=0.296162 lr=0.0003 retries=0
+[R71B val epoch7] macro_top1=0.4204 top2=0.7706 top3=0.8815 vs_sbs=-0.688% vbs_closed=+7.99%
+       TSP: top1=0.271 mean_cost=7.9485 (sbs=7.9578) vs_sbs=-0.12%
+      CVRP: top1=0.311 mean_cost=18.3228 (sbs=18.2943) vs_sbs=+0.16%
+      ATSP: top1=0.688 mean_cost=1.6383 (sbs=1.6735) vs_sbs=-2.10%
+      OVRP: top1=0.302 mean_cost=7.4617 (sbs=7.4617) vs_sbs=+0.00%
+      VRPB: top1=0.504 mean_cost=9.3403 (sbs=9.3403) vs_sbs=+0.00%
+      VRPL: top1=0.224 mean_cost=12.4554 (sbs=12.4072) vs_sbs=+0.39%
+     VRPTW: top1=0.352 mean_cost=18.0059 (sbs=18.6571) vs_sbs=-3.49%
+    OVRPTW: top1=0.476 mean_cost=10.0484 (sbs=10.0484) vs_sbs=+0.00%
+     OVRPB: top1=0.545 mean_cost=6.3220 (sbs=6.3220) vs_sbs=+0.00%
+     OVRPL: top1=0.333 mean_cost=7.4458 (sbs=7.4376) vs_sbs=+0.11%
+     VRPBL: top1=0.528 mean_cost=9.3593 (sbs=9.3593) vs_sbs=+0.00%
+    VRPBTW: top1=0.439 mean_cost=19.0889 (sbs=19.6697) vs_sbs=-2.95%
+    VRPLTW: top1=0.368 mean_cost=18.0522 (sbs=18.5091) vs_sbs=-2.47%
+    OVRPBL: top1=0.400 mean_cost=6.3553 (sbs=6.3103) vs_sbs=+0.71%
+   OVRPBTW: top1=0.461 mean_cost=10.5068 (sbs=10.5068) vs_sbs=+0.00%
+   OVRPLTW: top1=0.494 mean_cost=10.1272 (sbs=10.1272) vs_sbs=+0.00%
+   VRPBLTW: top1=0.400 mean_cost=19.0072 (sbs=19.5198) vs_sbs=-2.63%
+  OVRPBLTW: top1=0.471 mean_cost=10.5412 (sbs=10.5412) vs_sbs=+0.00%
+[R71B] epoch=8/40 update=60/240 total=1740 NLL/D=-0.360326 lr=0.0003 retries=0
+[R71B] epoch=8/40 update=120/240 total=1800 NLL/D=0.142976 lr=0.0003 retries=0
+[R71B] epoch=8/40 update=180/240 total=1860 NLL/D=0.429879 lr=0.0003 retries=0
+[R71B] epoch=8/40 update=240/240 total=1920 NLL/D=-0.008686 lr=0.0003 retries=0
+[R71B val epoch8] macro_top1=0.4276 top2=0.7718 top3=0.8842 vs_sbs=-0.780% vbs_closed=+10.64%
+       TSP: top1=0.297 mean_cost=7.9953 (sbs=7.9578) vs_sbs=+0.47%
+      CVRP: top1=0.263 mean_cost=18.3856 (sbs=18.2943) vs_sbs=+0.50%
+      ATSP: top1=0.778 mean_cost=1.6352 (sbs=1.6735) vs_sbs=-2.29%
+      OVRP: top1=0.303 mean_cost=7.4615 (sbs=7.4617) vs_sbs=-0.00%
+      VRPB: top1=0.504 mean_cost=9.3403 (sbs=9.3403) vs_sbs=+0.00%
+      VRPL: top1=0.276 mean_cost=12.4085 (sbs=12.4072) vs_sbs=+0.01%
+     VRPTW: top1=0.375 mean_cost=17.9627 (sbs=18.6571) vs_sbs=-3.72%
+    OVRPTW: top1=0.457 mean_cost=10.0667 (sbs=10.0484) vs_sbs=+0.18%
+     OVRPB: top1=0.545 mean_cost=6.3220 (sbs=6.3220) vs_sbs=+0.00%
+     OVRPL: top1=0.194 mean_cost=7.4605 (sbs=7.4376) vs_sbs=+0.31%
+     VRPBL: top1=0.528 mean_cost=9.3593 (sbs=9.3593) vs_sbs=+0.00%
+    VRPBTW: top1=0.452 mean_cost=19.0597 (sbs=19.6697) vs_sbs=-3.10%
+    VRPLTW: top1=0.351 mean_cost=17.7895 (sbs=18.5091) vs_sbs=-3.89%
+    OVRPBL: top1=0.555 mean_cost=6.3103 (sbs=6.3103) vs_sbs=+0.00%
+   OVRPBTW: top1=0.461 mean_cost=10.5068 (sbs=10.5068) vs_sbs=+0.00%
+   OVRPLTW: top1=0.482 mean_cost=10.1274 (sbs=10.1272) vs_sbs=+0.00%
+   VRPBLTW: top1=0.405 mean_cost=19.0283 (sbs=19.5198) vs_sbs=-2.52%
+  OVRPBLTW: top1=0.471 mean_cost=10.5412 (sbs=10.5412) vs_sbs=+0.00%
+[R71B] epoch=9/40 update=60/240 total=1980 NLL/D=0.285791 lr=0.0003 retries=0
+[R71B] epoch=9/40 update=120/240 total=2040 NLL/D=-0.159059 lr=0.0003 retries=0
+[R71B] epoch=9/40 update=180/240 total=2100 NLL/D=0.420066 lr=0.0003 retries=0
+[R71B] epoch=9/40 update=240/240 total=2160 NLL/D=0.151487 lr=0.0003 retries=0
+[R71B val epoch9] macro_top1=0.4283 top2=0.7699 top3=0.8864 vs_sbs=-0.735% vbs_closed=+2.63%
+       TSP: top1=0.266 mean_cost=7.9808 (sbs=7.9578) vs_sbs=+0.29%
+      CVRP: top1=0.270 mean_cost=18.4042 (sbs=18.2943) vs_sbs=+0.60%
+      ATSP: top1=0.759 mean_cost=1.6360 (sbs=1.6735) vs_sbs=-2.24%
+      OVRP: top1=0.213 mean_cost=7.4787 (sbs=7.4617) vs_sbs=+0.23%
+      VRPB: top1=0.553 mean_cost=9.3335 (sbs=9.3403) vs_sbs=-0.07%
+      VRPL: top1=0.117 mean_cost=12.5087 (sbs=12.4072) vs_sbs=+0.82%
+     VRPTW: top1=0.389 mean_cost=17.9823 (sbs=18.6571) vs_sbs=-3.62%
+    OVRPTW: top1=0.480 mean_cost=10.0635 (sbs=10.0484) vs_sbs=+0.15%
+     OVRPB: top1=0.545 mean_cost=6.3220 (sbs=6.3220) vs_sbs=+0.00%
+     OVRPL: top1=0.332 mean_cost=7.4459 (sbs=7.4376) vs_sbs=+0.11%
+     VRPBL: top1=0.528 mean_cost=9.3593 (sbs=9.3593) vs_sbs=+0.00%
+    VRPBTW: top1=0.440 mean_cost=19.0669 (sbs=19.6697) vs_sbs=-3.06%
+    VRPLTW: top1=0.407 mean_cost=17.7866 (sbs=18.5091) vs_sbs=-3.90%
+    OVRPBL: top1=0.555 mean_cost=6.3103 (sbs=6.3103) vs_sbs=+0.00%
+   OVRPBTW: top1=0.488 mean_cost=10.5015 (sbs=10.5068) vs_sbs=-0.05%
+   OVRPLTW: top1=0.494 mean_cost=10.1272 (sbs=10.1272) vs_sbs=+0.00%
+   VRPBLTW: top1=0.403 mean_cost=19.0351 (sbs=19.5198) vs_sbs=-2.48%
+  OVRPBLTW: top1=0.471 mean_cost=10.5412 (sbs=10.5412) vs_sbs=+0.00%
+[R71B] epoch=10/40 update=60/240 total=2220 NLL/D=0.241319 lr=0.0003 retries=0
+[R71B] epoch=10/40 update=120/240 total=2280 NLL/D=-0.380630 lr=0.0003 retries=0
+[R71B] epoch=10/40 update=180/240 total=2340 NLL/D=-0.000193 lr=0.0003 retries=0
+[R71B] epoch=10/40 update=240/240 total=2400 NLL/D=0.120437 lr=0.0003 retries=0
+[R71B val epoch10] macro_top1=0.4246 top2=0.7666 top3=0.8870 vs_sbs=-0.757% vbs_closed=+10.08%
+       TSP: top1=0.294 mean_cost=7.9832 (sbs=7.9578) vs_sbs=+0.32%
+      CVRP: top1=0.326 mean_cost=18.2953 (sbs=18.2943) vs_sbs=+0.01%
+      ATSP: top1=0.775 mean_cost=1.6350 (sbs=1.6735) vs_sbs=-2.30%
+      OVRP: top1=0.304 mean_cost=7.4613 (sbs=7.4617) vs_sbs=-0.00%
+      VRPB: top1=0.504 mean_cost=9.3403 (sbs=9.3403) vs_sbs=+0.00%
+      VRPL: top1=0.201 mean_cost=12.4383 (sbs=12.4072) vs_sbs=+0.25%
+     VRPTW: top1=0.294 mean_cost=18.2461 (sbs=18.6571) vs_sbs=-2.20%
+    OVRPTW: top1=0.476 mean_cost=10.0484 (sbs=10.0484) vs_sbs=+0.00%
+     OVRPB: top1=0.556 mean_cost=6.3232 (sbs=6.3220) vs_sbs=+0.02%
+     OVRPL: top1=0.193 mean_cost=7.4606 (sbs=7.4376) vs_sbs=+0.31%
+     VRPBL: top1=0.528 mean_cost=9.3593 (sbs=9.3593) vs_sbs=+0.00%
+    VRPBTW: top1=0.428 mean_cost=19.0623 (sbs=19.6697) vs_sbs=-3.09%
+    VRPLTW: top1=0.418 mean_cost=17.7020 (sbs=18.5091) vs_sbs=-4.36%
+    OVRPBL: top1=0.555 mean_cost=6.3103 (sbs=6.3103) vs_sbs=+0.00%
+   OVRPBTW: top1=0.459 mean_cost=10.5077 (sbs=10.5068) vs_sbs=+0.01%
+   OVRPLTW: top1=0.433 mean_cost=10.1540 (sbs=10.1272) vs_sbs=+0.26%
+   VRPBLTW: top1=0.428 mean_cost=18.9652 (sbs=19.5198) vs_sbs=-2.84%
+  OVRPBLTW: top1=0.471 mean_cost=10.5412 (sbs=10.5412) vs_sbs=+0.00%
+[R71B] epoch=11/40 update=60/240 total=2460 NLL/D=0.137779 lr=0.0003 retries=0
+[R71B] epoch=11/40 update=120/240 total=2520 NLL/D=0.222283 lr=0.0003 retries=0
+[R71B] epoch=11/40 update=180/240 total=2580 NLL/D=0.005781 lr=0.0003 retries=0
+[R71B] epoch=11/40 update=240/240 total=2640 NLL/D=-0.065794 lr=0.0003 retries=0
+[R71B val epoch11] macro_top1=0.4335 top2=0.7674 top3=0.8753 vs_sbs=-0.816% vbs_closed=+11.29%
+       TSP: top1=0.282 mean_cost=7.9985 (sbs=7.9578) vs_sbs=+0.51%
+      CVRP: top1=0.313 mean_cost=18.2940 (sbs=18.2943) vs_sbs=-0.00%
+      ATSP: top1=0.705 mean_cost=1.6378 (sbs=1.6735) vs_sbs=-2.13%
+      OVRP: top1=0.214 mean_cost=7.4784 (sbs=7.4617) vs_sbs=+0.22%
+      VRPB: top1=0.533 mean_cost=9.3357 (sbs=9.3403) vs_sbs=-0.05%
+      VRPL: top1=0.202 mean_cost=12.4442 (sbs=12.4072) vs_sbs=+0.30%
+     VRPTW: top1=0.391 mean_cost=18.0134 (sbs=18.6571) vs_sbs=-3.45%
+    OVRPTW: top1=0.483 mean_cost=10.0500 (sbs=10.0484) vs_sbs=+0.02%
+     OVRPB: top1=0.516 mean_cost=6.3344 (sbs=6.3220) vs_sbs=+0.20%
+     OVRPL: top1=0.338 mean_cost=7.4416 (sbs=7.4376) vs_sbs=+0.05%
+     VRPBL: top1=0.526 mean_cost=9.3595 (sbs=9.3593) vs_sbs=+0.00%
+    VRPBTW: top1=0.400 mean_cost=19.0786 (sbs=19.6697) vs_sbs=-3.01%
+    VRPLTW: top1=0.436 mean_cost=17.6797 (sbs=18.5091) vs_sbs=-4.48%
+    OVRPBL: top1=0.560 mean_cost=6.3078 (sbs=6.3103) vs_sbs=-0.04%
+   OVRPBTW: top1=0.495 mean_cost=10.5037 (sbs=10.5068) vs_sbs=-0.03%
+   OVRPLTW: top1=0.491 mean_cost=10.1254 (sbs=10.1272) vs_sbs=-0.02%
+   VRPBLTW: top1=0.417 mean_cost=18.9847 (sbs=19.5198) vs_sbs=-2.74%
+  OVRPBLTW: top1=0.501 mean_cost=10.5363 (sbs=10.5412) vs_sbs=-0.05%
+[R71B] epoch=12/40 update=60/240 total=2700 NLL/D=0.326906 lr=0.0003 retries=0
+[R71B] epoch=12/40 update=120/240 total=2760 NLL/D=-0.241496 lr=0.0003 retries=0
+[R71B] epoch=12/40 update=180/240 total=2820 NLL/D=0.021980 lr=0.0003 retries=0
+[R71B] epoch=12/40 update=240/240 total=2880 NLL/D=-0.036386 lr=0.0003 retries=0
+[R71B val epoch12] macro_top1=0.4416 top2=0.7721 top3=0.8940 vs_sbs=-0.822% vbs_closed=+12.30%
+       TSP: top1=0.298 mean_cost=7.9945 (sbs=7.9578) vs_sbs=+0.46%
+      CVRP: top1=0.350 mean_cost=18.3230 (sbs=18.2943) vs_sbs=+0.16%
+      ATSP: top1=0.750 mean_cost=1.6361 (sbs=1.6735) vs_sbs=-2.23%
+      OVRP: top1=0.216 mean_cost=7.4785 (sbs=7.4617) vs_sbs=+0.23%
+      VRPB: top1=0.544 mean_cost=9.3341 (sbs=9.3403) vs_sbs=-0.07%
+      VRPL: top1=0.277 mean_cost=12.4079 (sbs=12.4072) vs_sbs=+0.01%
+     VRPTW: top1=0.367 mean_cost=17.9871 (sbs=18.6571) vs_sbs=-3.59%
+    OVRPTW: top1=0.470 mean_cost=10.0641 (sbs=10.0484) vs_sbs=+0.16%
+     OVRPB: top1=0.555 mean_cost=6.3236 (sbs=6.3220) vs_sbs=+0.03%
+     OVRPL: top1=0.333 mean_cost=7.4458 (sbs=7.4376) vs_sbs=+0.11%
+     VRPBL: top1=0.502 mean_cost=9.3766 (sbs=9.3593) vs_sbs=+0.19%
+    VRPBTW: top1=0.417 mean_cost=19.0862 (sbs=19.6697) vs_sbs=-2.97%
+    VRPLTW: top1=0.445 mean_cost=17.6731 (sbs=18.5091) vs_sbs=-4.52%
+    OVRPBL: top1=0.555 mean_cost=6.3103 (sbs=6.3103) vs_sbs=+0.00%
+   OVRPBTW: top1=0.495 mean_cost=10.5011 (sbs=10.5068) vs_sbs=-0.05%
+   OVRPLTW: top1=0.494 mean_cost=10.1272 (sbs=10.1272) vs_sbs=+0.00%
+   VRPBLTW: top1=0.395 mean_cost=18.9943 (sbs=19.5198) vs_sbs=-2.69%
+  OVRPBLTW: top1=0.486 mean_cost=10.5409 (sbs=10.5412) vs_sbs=-0.00%
+[R71B] epoch=13/40 update=60/240 total=2940 NLL/D=-0.644191 lr=0.0003 retries=0
+[R71B] epoch=13/40 update=120/240 total=3000 NLL/D=-0.245312 lr=0.0003 retries=0
+[R71B] epoch=13/40 update=180/240 total=3060 NLL/D=0.380172 lr=0.0003 retries=0
+[R71B] epoch=13/40 update=240/240 total=3120 NLL/D=0.075706 lr=0.0003 retries=0
+[R71B val epoch13] macro_top1=0.4252 top2=0.7659 top3=0.8909 vs_sbs=-0.798% vbs_closed=+10.38%
+       TSP: top1=0.300 mean_cost=7.9906 (sbs=7.9578) vs_sbs=+0.41%
+      CVRP: top1=0.360 mean_cost=18.2828 (sbs=18.2943) vs_sbs=-0.06%
+      ATSP: top1=0.758 mean_cost=1.6387 (sbs=1.6735) vs_sbs=-2.08%
+      OVRP: top1=0.248 mean_cost=7.4718 (sbs=7.4617) vs_sbs=+0.14%
+      VRPB: top1=0.533 mean_cost=9.3403 (sbs=9.3403) vs_sbs=-0.00%
+      VRPL: top1=0.169 mean_cost=12.4354 (sbs=12.4072) vs_sbs=+0.23%
+     VRPTW: top1=0.337 mean_cost=17.9821 (sbs=18.6571) vs_sbs=-3.62%
+    OVRPTW: top1=0.480 mean_cost=10.0469 (sbs=10.0484) vs_sbs=-0.02%
+     OVRPB: top1=0.510 mean_cost=6.3384 (sbs=6.3220) vs_sbs=+0.26%
+     OVRPL: top1=0.334 mean_cost=7.4376 (sbs=7.4376) vs_sbs=+0.00%
+     VRPBL: top1=0.451 mean_cost=9.3890 (sbs=9.3593) vs_sbs=+0.32%
+    VRPBTW: top1=0.397 mean_cost=19.0913 (sbs=19.6697) vs_sbs=-2.94%
+    VRPLTW: top1=0.369 mean_cost=17.7513 (sbs=18.5091) vs_sbs=-4.09%
+    OVRPBL: top1=0.554 mean_cost=6.3098 (sbs=6.3103) vs_sbs=-0.01%
+   OVRPBTW: top1=0.461 mean_cost=10.5068 (sbs=10.5068) vs_sbs=+0.00%
+   OVRPLTW: top1=0.494 mean_cost=10.1272 (sbs=10.1272) vs_sbs=+0.00%
+   VRPBLTW: top1=0.427 mean_cost=18.9546 (sbs=19.5198) vs_sbs=-2.90%
+  OVRPBLTW: top1=0.471 mean_cost=10.5412 (sbs=10.5412) vs_sbs=+0.00%
+[R71B] epoch=14/40 update=60/240 total=3180 NLL/D=-0.321388 lr=0.0003 retries=0
+[R71B] epoch=14/40 update=120/240 total=3240 NLL/D=-0.311091 lr=0.0003 retries=0
+[R71B] epoch=14/40 update=180/240 total=3300 NLL/D=-0.045089 lr=0.0003 retries=0
+[R71B] epoch=14/40 update=240/240 total=3360 NLL/D=0.112593 lr=0.0003 retries=0
+[R71B val epoch14] macro_top1=0.4414 top2=0.7847 top3=0.8881 vs_sbs=-0.903% vbs_closed=+18.89%
+       TSP: top1=0.341 mean_cost=7.9308 (sbs=7.9578) vs_sbs=-0.34%
+      CVRP: top1=0.409 mean_cost=18.2458 (sbs=18.2943) vs_sbs=-0.27%
+      ATSP: top1=0.713 mean_cost=1.6377 (sbs=1.6735) vs_sbs=-2.14%
+      OVRP: top1=0.196 mean_cost=7.4943 (sbs=7.4617) vs_sbs=+0.44%
+      VRPB: top1=0.504 mean_cost=9.3403 (sbs=9.3403) vs_sbs=+0.00%
+      VRPL: top1=0.255 mean_cost=12.4205 (sbs=12.4072) vs_sbs=+0.11%
+     VRPTW: top1=0.403 mean_cost=17.9566 (sbs=18.6571) vs_sbs=-3.75%
+    OVRPTW: top1=0.473 mean_cost=10.0473 (sbs=10.0484) vs_sbs=-0.01%
+     OVRPB: top1=0.560 mean_cost=6.3197 (sbs=6.3220) vs_sbs=-0.04%
+     OVRPL: top1=0.333 mean_cost=7.4458 (sbs=7.4376) vs_sbs=+0.11%
+     VRPBL: top1=0.528 mean_cost=9.3593 (sbs=9.3593) vs_sbs=+0.00%
+    VRPBTW: top1=0.386 mean_cost=19.0969 (sbs=19.6697) vs_sbs=-2.91%
+    VRPLTW: top1=0.408 mean_cost=17.7011 (sbs=18.5091) vs_sbs=-4.37%
+    OVRPBL: top1=0.542 mean_cost=6.3082 (sbs=6.3103) vs_sbs=-0.03%
+   OVRPBTW: top1=0.499 mean_cost=10.4994 (sbs=10.5068) vs_sbs=-0.07%
+   OVRPLTW: top1=0.487 mean_cost=10.1252 (sbs=10.1272) vs_sbs=-0.02%
+   VRPBLTW: top1=0.409 mean_cost=18.9513 (sbs=19.5198) vs_sbs=-2.91%
+  OVRPBLTW: top1=0.500 mean_cost=10.5351 (sbs=10.5412) vs_sbs=-0.06%
+[R71B] epoch=15/40 update=60/240 total=3420 NLL/D=0.108297 lr=0.0003 retries=0
+[R71B] epoch=15/40 update=120/240 total=3480 NLL/D=0.177240 lr=0.0003 retries=0
+[R71B] epoch=15/40 update=180/240 total=3540 NLL/D=-0.298224 lr=0.0003 retries=0
+[R71B] epoch=15/40 update=240/240 total=3600 NLL/D=-0.561940 lr=0.0003 retries=0
+[R71B val epoch15] macro_top1=0.4405 top2=0.7761 top3=0.9027 vs_sbs=-0.907% vbs_closed=+18.86%
+       TSP: top1=0.324 mean_cost=7.9263 (sbs=7.9578) vs_sbs=-0.40%
+      CVRP: top1=0.429 mean_cost=18.2219 (sbs=18.2943) vs_sbs=-0.40%
+      ATSP: top1=0.771 mean_cost=1.6361 (sbs=1.6735) vs_sbs=-2.24%
+      OVRP: top1=0.254 mean_cost=7.4705 (sbs=7.4617) vs_sbs=+0.12%
+      VRPB: top1=0.499 mean_cost=9.3426 (sbs=9.3403) vs_sbs=+0.02%
+      VRPL: top1=0.155 mean_cost=12.4430 (sbs=12.4072) vs_sbs=+0.29%
+     VRPTW: top1=0.415 mean_cost=17.9334 (sbs=18.6571) vs_sbs=-3.88%
+    OVRPTW: top1=0.476 mean_cost=10.0484 (sbs=10.0484) vs_sbs=+0.00%
+     OVRPB: top1=0.545 mean_cost=6.3220 (sbs=6.3220) vs_sbs=+0.00%
+     OVRPL: top1=0.343 mean_cost=7.4372 (sbs=7.4376) vs_sbs=-0.00%
+     VRPBL: top1=0.551 mean_cost=9.3579 (sbs=9.3593) vs_sbs=-0.01%
+    VRPBTW: top1=0.401 mean_cost=19.0883 (sbs=19.6697) vs_sbs=-2.96%
+    VRPLTW: top1=0.413 mean_cost=17.7004 (sbs=18.5091) vs_sbs=-4.37%
+    OVRPBL: top1=0.555 mean_cost=6.3103 (sbs=6.3103) vs_sbs=+0.00%
+   OVRPBTW: top1=0.471 mean_cost=10.5119 (sbs=10.5068) vs_sbs=+0.05%
+   OVRPLTW: top1=0.447 mean_cost=10.1395 (sbs=10.1272) vs_sbs=+0.12%
+   VRPBLTW: top1=0.409 mean_cost=18.9961 (sbs=19.5198) vs_sbs=-2.68%
+  OVRPBLTW: top1=0.471 mean_cost=10.5412 (sbs=10.5412) vs_sbs=+0.00%
+[R71B] epoch=16/40 update=60/240 total=3660 NLL/D=-0.457185 lr=0.0003 retries=0
+[R71B] epoch=16/40 update=120/240 total=3720 NLL/D=-0.558803 lr=0.0003 retries=0
+[R71B] epoch=16/40 update=180/240 total=3780 NLL/D=-0.406235 lr=0.0003 retries=0
+[R71B] epoch=16/40 update=240/240 total=3840 NLL/D=-0.803494 lr=0.0003 retries=0
+[R71B val epoch16] macro_top1=0.4448 top2=0.7937 top3=0.9030 vs_sbs=-0.853% vbs_closed=+20.28%
+       TSP: top1=0.334 mean_cost=7.9165 (sbs=7.9578) vs_sbs=-0.52%
+      CVRP: top1=0.410 mean_cost=18.2358 (sbs=18.2943) vs_sbs=-0.32%
+      ATSP: top1=0.728 mean_cost=1.6458 (sbs=1.6735) vs_sbs=-1.65%
+      OVRP: top1=0.306 mean_cost=7.4595 (sbs=7.4617) vs_sbs=-0.03%
+      VRPB: top1=0.526 mean_cost=9.3372 (sbs=9.3403) vs_sbs=-0.03%
+      VRPL: top1=0.244 mean_cost=12.4248 (sbs=12.4072) vs_sbs=+0.14%
+     VRPTW: top1=0.394 mean_cost=17.9341 (sbs=18.6571) vs_sbs=-3.87%
+    OVRPTW: top1=0.476 mean_cost=10.0484 (sbs=10.0484) vs_sbs=+0.00%
+     OVRPB: top1=0.566 mean_cost=6.3184 (sbs=6.3220) vs_sbs=-0.06%
+     OVRPL: top1=0.344 mean_cost=7.4364 (sbs=7.4376) vs_sbs=-0.02%
+     VRPBL: top1=0.522 mean_cost=9.3604 (sbs=9.3593) vs_sbs=+0.01%
+    VRPBTW: top1=0.416 mean_cost=19.0592 (sbs=19.6697) vs_sbs=-3.10%
+    VRPLTW: top1=0.386 mean_cost=17.9068 (sbs=18.5091) vs_sbs=-3.25%
+    OVRPBL: top1=0.544 mean_cost=6.3150 (sbs=6.3103) vs_sbs=+0.08%
+   OVRPBTW: top1=0.472 mean_cost=10.5060 (sbs=10.5068) vs_sbs=-0.01%
+   OVRPLTW: top1=0.454 mean_cost=10.1391 (sbs=10.1272) vs_sbs=+0.12%
+   VRPBLTW: top1=0.407 mean_cost=18.9645 (sbs=19.5198) vs_sbs=-2.84%
+  OVRPBLTW: top1=0.478 mean_cost=10.5416 (sbs=10.5412) vs_sbs=+0.00%
+[R71B] epoch=17/40 update=60/240 total=3900 NLL/D=-0.628726 lr=0.0003 retries=0
+[R71B] epoch=17/40 update=120/240 total=3960 NLL/D=-0.562901 lr=0.0003 retries=0
+[R71 AMP retry] whole same triple; task=0; scale=131072.0
+[R71B] epoch=17/40 update=180/240 total=4020 NLL/D=-0.134952 lr=0.0003 retries=1
+[R71B] epoch=17/40 update=240/240 total=4080 NLL/D=-0.047818 lr=0.0003 retries=1
+[R71B val epoch17] macro_top1=0.4436 top2=0.7824 top3=0.8994 vs_sbs=-0.888% vbs_closed=+16.94%
+       TSP: top1=0.352 mean_cost=7.9325 (sbs=7.9578) vs_sbs=-0.32%
+      CVRP: top1=0.444 mean_cost=18.2220 (sbs=18.2943) vs_sbs=-0.40%
+      ATSP: top1=0.775 mean_cost=1.6360 (sbs=1.6735) vs_sbs=-2.24%
+      OVRP: top1=0.213 mean_cost=7.4785 (sbs=7.4617) vs_sbs=+0.23%
+      VRPB: top1=0.537 mean_cost=9.3400 (sbs=9.3403) vs_sbs=-0.00%
+      VRPL: top1=0.212 mean_cost=12.4438 (sbs=12.4072) vs_sbs=+0.29%
+     VRPTW: top1=0.389 mean_cost=17.9680 (sbs=18.6571) vs_sbs=-3.69%
+    OVRPTW: top1=0.465 mean_cost=10.0508 (sbs=10.0484) vs_sbs=+0.02%
+     OVRPB: top1=0.545 mean_cost=6.3220 (sbs=6.3220) vs_sbs=+0.00%
+     OVRPL: top1=0.289 mean_cost=7.4537 (sbs=7.4376) vs_sbs=+0.22%
+     VRPBL: top1=0.543 mean_cost=9.3564 (sbs=9.3593) vs_sbs=-0.03%
+    VRPBTW: top1=0.413 mean_cost=19.0947 (sbs=19.6697) vs_sbs=-2.92%
+    VRPLTW: top1=0.418 mean_cost=17.6860 (sbs=18.5091) vs_sbs=-4.45%
+    OVRPBL: top1=0.556 mean_cost=6.3102 (sbs=6.3103) vs_sbs=-0.00%
+   OVRPBTW: top1=0.457 mean_cost=10.5102 (sbs=10.5068) vs_sbs=+0.03%
+   OVRPLTW: top1=0.496 mean_cost=10.1269 (sbs=10.1272) vs_sbs=-0.00%
+   VRPBLTW: top1=0.405 mean_cost=18.9835 (sbs=19.5198) vs_sbs=-2.75%
+  OVRPBLTW: top1=0.476 mean_cost=10.5431 (sbs=10.5412) vs_sbs=+0.02%
+[R71B] epoch=18/40 update=60/240 total=4140 NLL/D=-0.567158 lr=0.0003 retries=1
+[R71 AMP retry] whole same triple; task=0; scale=65536.0
+[R71B] epoch=18/40 update=120/240 total=4200 NLL/D=-0.315113 lr=0.0003 retries=2
+[R71B] epoch=18/40 update=180/240 total=4260 NLL/D=-0.141120 lr=0.0003 retries=2
+[R71B] epoch=18/40 update=240/240 total=4320 NLL/D=-0.583309 lr=0.0003 retries=2
+[R71B val epoch18] macro_top1=0.4447 top2=0.7796 top3=0.9018 vs_sbs=-0.911% vbs_closed=+19.05%
+       TSP: top1=0.356 mean_cost=7.9306 (sbs=7.9578) vs_sbs=-0.34%
+      CVRP: top1=0.428 mean_cost=18.2392 (sbs=18.2943) vs_sbs=-0.30%
+      ATSP: top1=0.760 mean_cost=1.6356 (sbs=1.6735) vs_sbs=-2.26%
+      OVRP: top1=0.245 mean_cost=7.4777 (sbs=7.4617) vs_sbs=+0.21%
+      VRPB: top1=0.504 mean_cost=9.3403 (sbs=9.3403) vs_sbs=+0.00%
+      VRPL: top1=0.207 mean_cost=12.4288 (sbs=12.4072) vs_sbs=+0.17%
+     VRPTW: top1=0.399 mean_cost=17.9423 (sbs=18.6571) vs_sbs=-3.83%
+    OVRPTW: top1=0.485 mean_cost=10.0517 (sbs=10.0484) vs_sbs=+0.03%
+     OVRPB: top1=0.542 mean_cost=6.3235 (sbs=6.3220) vs_sbs=+0.02%
+     OVRPL: top1=0.322 mean_cost=7.4370 (sbs=7.4376) vs_sbs=-0.01%
+     VRPBL: top1=0.549 mean_cost=9.3569 (sbs=9.3593) vs_sbs=-0.02%
+    VRPBTW: top1=0.412 mean_cost=19.1045 (sbs=19.6697) vs_sbs=-2.87%
+    VRPLTW: top1=0.413 mean_cost=17.6970 (sbs=18.5091) vs_sbs=-4.39%
+    OVRPBL: top1=0.555 mean_cost=6.3103 (sbs=6.3103) vs_sbs=+0.00%
+   OVRPBTW: top1=0.454 mean_cost=10.5189 (sbs=10.5068) vs_sbs=+0.12%
+   OVRPLTW: top1=0.480 mean_cost=10.1268 (sbs=10.1272) vs_sbs=-0.00%
+   VRPBLTW: top1=0.433 mean_cost=18.9344 (sbs=19.5198) vs_sbs=-3.00%
+  OVRPBLTW: top1=0.461 mean_cost=10.5489 (sbs=10.5412) vs_sbs=+0.07%
+[R71B] epoch=19/40 update=60/240 total=4380 NLL/D=-0.724259 lr=0.0003 retries=2
+[R71B] epoch=19/40 update=120/240 total=4440 NLL/D=-0.393987 lr=0.0003 retries=2
+[R71B] epoch=19/40 update=180/240 total=4500 NLL/D=-0.256575 lr=0.0003 retries=2
+[R71B] epoch=19/40 update=240/240 total=4560 NLL/D=0.283273 lr=0.0003 retries=2
+[R71B val epoch19] macro_top1=0.4521 top2=0.7832 top3=0.9034 vs_sbs=-0.922% vbs_closed=+19.53%
+       TSP: top1=0.366 mean_cost=7.9211 (sbs=7.9578) vs_sbs=-0.46%
+      CVRP: top1=0.438 mean_cost=18.2289 (sbs=18.2943) vs_sbs=-0.36%
+      ATSP: top1=0.761 mean_cost=1.6384 (sbs=1.6735) vs_sbs=-2.10%
+      OVRP: top1=0.303 mean_cost=7.4701 (sbs=7.4617) vs_sbs=+0.11%
+      VRPB: top1=0.519 mean_cost=9.3389 (sbs=9.3403) vs_sbs=-0.01%
+      VRPL: top1=0.199 mean_cost=12.4296 (sbs=12.4072) vs_sbs=+0.18%
+     VRPTW: top1=0.418 mean_cost=17.9232 (sbs=18.6571) vs_sbs=-3.93%
+    OVRPTW: top1=0.463 mean_cost=10.0636 (sbs=10.0484) vs_sbs=+0.15%
+     OVRPB: top1=0.542 mean_cost=6.3216 (sbs=6.3220) vs_sbs=-0.01%
+     OVRPL: top1=0.320 mean_cost=7.4410 (sbs=7.4376) vs_sbs=+0.05%
+     VRPBL: top1=0.528 mean_cost=9.3593 (sbs=9.3593) vs_sbs=+0.00%
+    VRPBTW: top1=0.437 mean_cost=19.0685 (sbs=19.6697) vs_sbs=-3.06%
+    VRPLTW: top1=0.430 mean_cost=17.6937 (sbs=18.5091) vs_sbs=-4.41%
+    OVRPBL: top1=0.491 mean_cost=6.3241 (sbs=6.3103) vs_sbs=+0.22%
+   OVRPBTW: top1=0.506 mean_cost=10.4975 (sbs=10.5068) vs_sbs=-0.09%
+   OVRPLTW: top1=0.494 mean_cost=10.1291 (sbs=10.1272) vs_sbs=+0.02%
+   VRPBLTW: top1=0.437 mean_cost=18.9628 (sbs=19.5198) vs_sbs=-2.85%
+  OVRPBLTW: top1=0.486 mean_cost=10.5362 (sbs=10.5412) vs_sbs=-0.05%
+[R71B] epoch=20/40 update=60/240 total=4620 NLL/D=-0.115489 lr=0.0003 retries=2
+[R71B] epoch=20/40 update=120/240 total=4680 NLL/D=-0.082775 lr=0.0003 retries=2
+[R71B] epoch=20/40 update=180/240 total=4740 NLL/D=-0.174418 lr=0.0003 retries=2
+[R71B] epoch=20/40 update=240/240 total=4800 NLL/D=-0.775242 lr=0.0003 retries=2
+[R71B val epoch20] macro_top1=0.4497 top2=0.7822 top3=0.9114 vs_sbs=-0.865% vbs_closed=+19.52%
+       TSP: top1=0.361 mean_cost=7.9201 (sbs=7.9578) vs_sbs=-0.47%
+      CVRP: top1=0.474 mean_cost=18.2058 (sbs=18.2943) vs_sbs=-0.48%
+      ATSP: top1=0.745 mean_cost=1.6407 (sbs=1.6735) vs_sbs=-1.96%
+      OVRP: top1=0.212 mean_cost=7.4793 (sbs=7.4617) vs_sbs=+0.24%
+      VRPB: top1=0.534 mean_cost=9.3409 (sbs=9.3403) vs_sbs=+0.01%
+      VRPL: top1=0.273 mean_cost=12.4083 (sbs=12.4072) vs_sbs=+0.01%
+     VRPTW: top1=0.428 mean_cost=17.9088 (sbs=18.6571) vs_sbs=-4.01%
+    OVRPTW: top1=0.465 mean_cost=10.0532 (sbs=10.0484) vs_sbs=+0.05%
+     OVRPB: top1=0.545 mean_cost=6.3220 (sbs=6.3220) vs_sbs=+0.00%
+     OVRPL: top1=0.335 mean_cost=7.4394 (sbs=7.4376) vs_sbs=+0.02%
+     VRPBL: top1=0.524 mean_cost=9.3667 (sbs=9.3593) vs_sbs=+0.08%
+    VRPBTW: top1=0.414 mean_cost=19.0879 (sbs=19.6697) vs_sbs=-2.96%
+    VRPLTW: top1=0.415 mean_cost=17.8352 (sbs=18.5091) vs_sbs=-3.64%
+    OVRPBL: top1=0.558 mean_cost=6.3090 (sbs=6.3103) vs_sbs=-0.02%
+   OVRPBTW: top1=0.505 mean_cost=10.5039 (sbs=10.5068) vs_sbs=-0.03%
+   OVRPLTW: top1=0.430 mean_cost=10.1496 (sbs=10.1272) vs_sbs=+0.22%
+   VRPBLTW: top1=0.402 mean_cost=19.0088 (sbs=19.5198) vs_sbs=-2.62%
+  OVRPBLTW: top1=0.475 mean_cost=10.5411 (sbs=10.5412) vs_sbs=-0.00%
+[R71B] epoch=21/40 update=60/240 total=4860 NLL/D=-0.338090 lr=0.0003 retries=2
+[R71B] epoch=21/40 update=120/240 total=4920 NLL/D=-0.443661 lr=0.0003 retries=2
+[R71B] epoch=21/40 update=180/240 total=4980 NLL/D=-0.009150 lr=0.0003 retries=2
+[R71B] epoch=21/40 update=240/240 total=5040 NLL/D=-0.107379 lr=0.0003 retries=2
+[R71B val epoch21] macro_top1=0.4497 top2=0.7857 top3=0.9064 vs_sbs=-0.905% vbs_closed=+18.82%
+       TSP: top1=0.358 mean_cost=7.9361 (sbs=7.9578) vs_sbs=-0.27%
+      CVRP: top1=0.438 mean_cost=18.2382 (sbs=18.2943) vs_sbs=-0.31%
+      ATSP: top1=0.715 mean_cost=1.6377 (sbs=1.6735) vs_sbs=-2.14%
+      OVRP: top1=0.319 mean_cost=7.4681 (sbs=7.4617) vs_sbs=+0.09%
+      VRPB: top1=0.517 mean_cost=9.3546 (sbs=9.3403) vs_sbs=+0.15%
+      VRPL: top1=0.254 mean_cost=12.4198 (sbs=12.4072) vs_sbs=+0.10%
+     VRPTW: top1=0.386 mean_cost=17.9419 (sbs=18.6571) vs_sbs=-3.83%
+    OVRPTW: top1=0.487 mean_cost=10.0477 (sbs=10.0484) vs_sbs=-0.01%
+     OVRPB: top1=0.547 mean_cost=6.3238 (sbs=6.3220) vs_sbs=+0.03%
+     OVRPL: top1=0.295 mean_cost=7.4424 (sbs=7.4376) vs_sbs=+0.07%
+     VRPBL: top1=0.538 mean_cost=9.3576 (sbs=9.3593) vs_sbs=-0.02%
+    VRPBTW: top1=0.428 mean_cost=19.0763 (sbs=19.6697) vs_sbs=-3.02%
+    VRPLTW: top1=0.441 mean_cost=17.6690 (sbs=18.5091) vs_sbs=-4.54%
+    OVRPBL: top1=0.561 mean_cost=6.3082 (sbs=6.3103) vs_sbs=-0.03%
+   OVRPBTW: top1=0.447 mean_cost=10.5181 (sbs=10.5068) vs_sbs=+0.11%
+   OVRPLTW: top1=0.464 mean_cost=10.1353 (sbs=10.1272) vs_sbs=+0.08%
+   VRPBLTW: top1=0.420 mean_cost=18.9886 (sbs=19.5198) vs_sbs=-2.72%
+  OVRPBLTW: top1=0.479 mean_cost=10.5384 (sbs=10.5412) vs_sbs=-0.03%
+[R71B] epoch=22/40 update=60/240 total=5100 NLL/D=-0.332598 lr=0.0003 retries=2
+[R71B] epoch=22/40 update=120/240 total=5160 NLL/D=-0.222455 lr=0.0003 retries=2
+[R71B] epoch=22/40 update=180/240 total=5220 NLL/D=-0.029201 lr=0.0003 retries=2
+[R71B] epoch=22/40 update=240/240 total=5280 NLL/D=-0.543979 lr=0.0003 retries=2
+[R71B val epoch22] macro_top1=0.4541 top2=0.8034 top3=0.9115 vs_sbs=-0.935% vbs_closed=+21.47%
+       TSP: top1=0.357 mean_cost=7.9289 (sbs=7.9578) vs_sbs=-0.36%
+      CVRP: top1=0.443 mean_cost=18.2222 (sbs=18.2943) vs_sbs=-0.39%
+      ATSP: top1=0.780 mean_cost=1.6351 (sbs=1.6735) vs_sbs=-2.29%
+      OVRP: top1=0.275 mean_cost=7.4753 (sbs=7.4617) vs_sbs=+0.18%
+      VRPB: top1=0.506 mean_cost=9.3398 (sbs=9.3403) vs_sbs=-0.00%
+      VRPL: top1=0.275 mean_cost=12.4096 (sbs=12.4072) vs_sbs=+0.02%
+     VRPTW: top1=0.409 mean_cost=17.9481 (sbs=18.6571) vs_sbs=-3.80%
+    OVRPTW: top1=0.476 mean_cost=10.0484 (sbs=10.0484) vs_sbs=+0.00%
+     OVRPB: top1=0.545 mean_cost=6.3220 (sbs=6.3220) vs_sbs=+0.00%
+     OVRPL: top1=0.353 mean_cost=7.4373 (sbs=7.4376) vs_sbs=-0.00%
+     VRPBL: top1=0.536 mean_cost=9.3572 (sbs=9.3593) vs_sbs=-0.02%
+    VRPBTW: top1=0.400 mean_cost=19.0638 (sbs=19.6697) vs_sbs=-3.08%
+    VRPLTW: top1=0.443 mean_cost=17.6851 (sbs=18.5091) vs_sbs=-4.45%
+    OVRPBL: top1=0.555 mean_cost=6.3103 (sbs=6.3103) vs_sbs=+0.00%
+   OVRPBTW: top1=0.457 mean_cost=10.5313 (sbs=10.5068) vs_sbs=+0.23%
+   OVRPLTW: top1=0.476 mean_cost=10.1301 (sbs=10.1272) vs_sbs=+0.03%
+   VRPBLTW: top1=0.424 mean_cost=18.9433 (sbs=19.5198) vs_sbs=-2.95%
+  OVRPBLTW: top1=0.464 mean_cost=10.5484 (sbs=10.5412) vs_sbs=+0.07%
+[R71B] epoch=23/40 update=60/240 total=5340 NLL/D=-0.139474 lr=0.0003 retries=2
+[R71B] epoch=23/40 update=120/240 total=5400 NLL/D=0.354769 lr=0.0003 retries=2
+[R71B] epoch=23/40 update=180/240 total=5460 NLL/D=-0.265068 lr=0.0003 retries=2
+[R71B] epoch=23/40 update=240/240 total=5520 NLL/D=-0.943739 lr=0.0003 retries=2
+[R71B val epoch23] macro_top1=0.4481 top2=0.7812 top3=0.9048 vs_sbs=-0.935% vbs_closed=+21.66%
+       TSP: top1=0.364 mean_cost=7.9132 (sbs=7.9578) vs_sbs=-0.56%
+      CVRP: top1=0.456 mean_cost=18.2088 (sbs=18.2943) vs_sbs=-0.47%
+      ATSP: top1=0.732 mean_cost=1.6419 (sbs=1.6735) vs_sbs=-1.89%
+      OVRP: top1=0.240 mean_cost=7.4742 (sbs=7.4617) vs_sbs=+0.17%
+      VRPB: top1=0.491 mean_cost=9.3432 (sbs=9.3403) vs_sbs=+0.03%
+      VRPL: top1=0.248 mean_cost=12.4168 (sbs=12.4072) vs_sbs=+0.08%
+     VRPTW: top1=0.410 mean_cost=17.9206 (sbs=18.6571) vs_sbs=-3.95%
+    OVRPTW: top1=0.474 mean_cost=10.0472 (sbs=10.0484) vs_sbs=-0.01%
+     OVRPB: top1=0.545 mean_cost=6.3256 (sbs=6.3220) vs_sbs=+0.06%
+     OVRPL: top1=0.349 mean_cost=7.4445 (sbs=7.4376) vs_sbs=+0.09%
+     VRPBL: top1=0.531 mean_cost=9.3592 (sbs=9.3593) vs_sbs=-0.00%
+    VRPBTW: top1=0.417 mean_cost=19.0551 (sbs=19.6697) vs_sbs=-3.12%
+    VRPLTW: top1=0.404 mean_cost=17.7057 (sbs=18.5091) vs_sbs=-4.34%
+    OVRPBL: top1=0.530 mean_cost=6.3097 (sbs=6.3103) vs_sbs=-0.01%
+   OVRPBTW: top1=0.483 mean_cost=10.5062 (sbs=10.5068) vs_sbs=-0.01%
+   OVRPLTW: top1=0.478 mean_cost=10.1300 (sbs=10.1272) vs_sbs=+0.03%
+   VRPBLTW: top1=0.434 mean_cost=18.9504 (sbs=19.5198) vs_sbs=-2.92%
+  OVRPBLTW: top1=0.479 mean_cost=10.5404 (sbs=10.5412) vs_sbs=-0.01%
+[R71B] epoch=24/40 update=60/240 total=5580 NLL/D=-0.315901 lr=0.0003 retries=2
+[R71B] epoch=24/40 update=120/240 total=5640 NLL/D=-0.527051 lr=0.0003 retries=2
+[R71B] epoch=24/40 update=180/240 total=5700 NLL/D=-0.061068 lr=0.0003 retries=2
+[R71B] epoch=24/40 update=240/240 total=5760 NLL/D=-0.100977 lr=0.0003 retries=2
+[R71B val epoch24] macro_top1=0.4496 top2=0.7787 top3=0.9017 vs_sbs=-0.929% vbs_closed=+18.32%
+       TSP: top1=0.371 mean_cost=7.9197 (sbs=7.9578) vs_sbs=-0.48%
+      CVRP: top1=0.445 mean_cost=18.2284 (sbs=18.2943) vs_sbs=-0.36%
+      ATSP: top1=0.775 mean_cost=1.6356 (sbs=1.6735) vs_sbs=-2.26%
+      OVRP: top1=0.260 mean_cost=7.4675 (sbs=7.4617) vs_sbs=+0.08%
+      VRPB: top1=0.549 mean_cost=9.3354 (sbs=9.3403) vs_sbs=-0.05%
+      VRPL: top1=0.281 mean_cost=12.4078 (sbs=12.4072) vs_sbs=+0.00%
+     VRPTW: top1=0.425 mean_cost=17.9280 (sbs=18.6571) vs_sbs=-3.91%
+    OVRPTW: top1=0.489 mean_cost=10.0497 (sbs=10.0484) vs_sbs=+0.01%
+     OVRPB: top1=0.506 mean_cost=6.3346 (sbs=6.3220) vs_sbs=+0.20%
+     OVRPL: top1=0.183 mean_cost=7.4772 (sbs=7.4376) vs_sbs=+0.53%
+     VRPBL: top1=0.516 mean_cost=9.3666 (sbs=9.3593) vs_sbs=+0.08%
+    VRPBTW: top1=0.435 mean_cost=19.0392 (sbs=19.6697) vs_sbs=-3.21%
+    VRPLTW: top1=0.461 mean_cost=17.6500 (sbs=18.5091) vs_sbs=-4.64%
+    OVRPBL: top1=0.539 mean_cost=6.3092 (sbs=6.3103) vs_sbs=-0.02%
+   OVRPBTW: top1=0.502 mean_cost=10.5041 (sbs=10.5068) vs_sbs=-0.03%
+   OVRPLTW: top1=0.452 mean_cost=10.1389 (sbs=10.1272) vs_sbs=+0.12%
+   VRPBLTW: top1=0.428 mean_cost=18.9589 (sbs=19.5198) vs_sbs=-2.87%
+  OVRPBLTW: top1=0.475 mean_cost=10.5491 (sbs=10.5412) vs_sbs=+0.08%
+[R71B] epoch=25/40 update=60/240 total=5820 NLL/D=0.283483 lr=0.0003 retries=2
+[R71B] epoch=25/40 update=120/240 total=5880 NLL/D=-0.107638 lr=0.0003 retries=2
+[R71B] epoch=25/40 update=180/240 total=5940 NLL/D=-0.428713 lr=0.0003 retries=2
+[R71B] epoch=25/40 update=240/240 total=6000 NLL/D=0.111986 lr=0.0003 retries=2
+[R71B val epoch25] macro_top1=0.4543 top2=0.7931 top3=0.9061 vs_sbs=-0.944% vbs_closed=+20.25%
+       TSP: top1=0.369 mean_cost=7.9162 (sbs=7.9578) vs_sbs=-0.52%
+      CVRP: top1=0.468 mean_cost=18.2085 (sbs=18.2943) vs_sbs=-0.47%
+      ATSP: top1=0.775 mean_cost=1.6360 (sbs=1.6735) vs_sbs=-2.24%
+      OVRP: top1=0.341 mean_cost=7.4604 (sbs=7.4617) vs_sbs=-0.02%
+      VRPB: top1=0.479 mean_cost=9.3503 (sbs=9.3403) vs_sbs=+0.11%
+      VRPL: top1=0.203 mean_cost=12.4398 (sbs=12.4072) vs_sbs=+0.26%
+     VRPTW: top1=0.422 mean_cost=17.9185 (sbs=18.6571) vs_sbs=-3.96%
+    OVRPTW: top1=0.485 mean_cost=10.0485 (sbs=10.0484) vs_sbs=+0.00%
+     OVRPB: top1=0.545 mean_cost=6.3220 (sbs=6.3220) vs_sbs=+0.00%
+     OVRPL: top1=0.312 mean_cost=7.4425 (sbs=7.4376) vs_sbs=+0.07%
+     VRPBL: top1=0.534 mean_cost=9.3586 (sbs=9.3593) vs_sbs=-0.01%
+    VRPBTW: top1=0.399 mean_cost=19.0729 (sbs=19.6697) vs_sbs=-3.03%
+    VRPLTW: top1=0.456 mean_cost=17.6762 (sbs=18.5091) vs_sbs=-4.50%
+    OVRPBL: top1=0.558 mean_cost=6.3100 (sbs=6.3103) vs_sbs=-0.00%
+   OVRPBTW: top1=0.470 mean_cost=10.5137 (sbs=10.5068) vs_sbs=+0.07%
+   OVRPLTW: top1=0.480 mean_cost=10.1363 (sbs=10.1272) vs_sbs=+0.09%
+   VRPBLTW: top1=0.422 mean_cost=18.9469 (sbs=19.5198) vs_sbs=-2.93%
+  OVRPBLTW: top1=0.459 mean_cost=10.5533 (sbs=10.5412) vs_sbs=+0.11%
+[R71B] epoch=26/40 update=60/240 total=6060 NLL/D=-0.281059 lr=0.0003 retries=2
+[R71B] epoch=26/40 update=120/240 total=6120 NLL/D=-0.270080 lr=0.0003 retries=2
+[R71B] epoch=26/40 update=180/240 total=6180 NLL/D=-0.362177 lr=0.0003 retries=2
+[R71B] epoch=26/40 update=240/240 total=6240 NLL/D=-0.103217 lr=0.0003 retries=2
+[R71B val epoch26] macro_top1=0.4517 top2=0.7787 top3=0.9023 vs_sbs=-0.887% vbs_closed=+18.33%
+       TSP: top1=0.340 mean_cost=7.9181 (sbs=7.9578) vs_sbs=-0.50%
+      CVRP: top1=0.436 mean_cost=18.2189 (sbs=18.2943) vs_sbs=-0.41%
+      ATSP: top1=0.784 mean_cost=1.6350 (sbs=1.6735) vs_sbs=-2.30%
+      OVRP: top1=0.352 mean_cost=7.4611 (sbs=7.4617) vs_sbs=-0.01%
+      VRPB: top1=0.476 mean_cost=9.3499 (sbs=9.3403) vs_sbs=+0.10%
+      VRPL: top1=0.272 mean_cost=12.4192 (sbs=12.4072) vs_sbs=+0.10%
+     VRPTW: top1=0.402 mean_cost=18.0053 (sbs=18.6571) vs_sbs=-3.49%
+    OVRPTW: top1=0.460 mean_cost=10.0665 (sbs=10.0484) vs_sbs=+0.18%
+     OVRPB: top1=0.519 mean_cost=6.3335 (sbs=6.3220) vs_sbs=+0.18%
+     OVRPL: top1=0.348 mean_cost=7.4373 (sbs=7.4376) vs_sbs=-0.00%
+     VRPBL: top1=0.538 mean_cost=9.3617 (sbs=9.3593) vs_sbs=+0.03%
+    VRPBTW: top1=0.429 mean_cost=19.0621 (sbs=19.6697) vs_sbs=-3.09%
+    VRPLTW: top1=0.457 mean_cost=17.6456 (sbs=18.5091) vs_sbs=-4.67%
+    OVRPBL: top1=0.540 mean_cost=6.3079 (sbs=6.3103) vs_sbs=-0.04%
+   OVRPBTW: top1=0.480 mean_cost=10.5047 (sbs=10.5068) vs_sbs=-0.02%
+   OVRPLTW: top1=0.409 mean_cost=10.1593 (sbs=10.1272) vs_sbs=+0.32%
+   VRPBLTW: top1=0.411 mean_cost=19.0565 (sbs=19.5198) vs_sbs=-2.37%
+  OVRPBLTW: top1=0.477 mean_cost=10.5451 (sbs=10.5412) vs_sbs=+0.04%
+[R71B] epoch=27/40 update=60/240 total=6300 NLL/D=-0.731591 lr=0.0003 retries=2
+[R71B] epoch=27/40 update=120/240 total=6360 NLL/D=-0.223557 lr=0.0003 retries=2
+[R71B] epoch=27/40 update=180/240 total=6420 NLL/D=-0.836452 lr=0.0003 retries=2
+[R71B] epoch=27/40 update=240/240 total=6480 NLL/D=-0.052700 lr=0.0003 retries=2
+[R71B val epoch27] macro_top1=0.4472 top2=0.7856 top3=0.8972 vs_sbs=-0.896% vbs_closed=+15.86%
+       TSP: top1=0.342 mean_cost=7.9252 (sbs=7.9578) vs_sbs=-0.41%
+      CVRP: top1=0.464 mean_cost=18.2067 (sbs=18.2943) vs_sbs=-0.48%
+      ATSP: top1=0.755 mean_cost=1.6358 (sbs=1.6735) vs_sbs=-2.25%
+      OVRP: top1=0.251 mean_cost=7.4865 (sbs=7.4617) vs_sbs=+0.33%
+      VRPB: top1=0.482 mean_cost=9.3493 (sbs=9.3403) vs_sbs=+0.10%
+      VRPL: top1=0.195 mean_cost=12.4691 (sbs=12.4072) vs_sbs=+0.50%
+     VRPTW: top1=0.414 mean_cost=17.9418 (sbs=18.6571) vs_sbs=-3.83%
+    OVRPTW: top1=0.496 mean_cost=10.0503 (sbs=10.0484) vs_sbs=+0.02%
+     OVRPB: top1=0.569 mean_cost=6.3184 (sbs=6.3220) vs_sbs=-0.06%
+     OVRPL: top1=0.326 mean_cost=7.4443 (sbs=7.4376) vs_sbs=+0.09%
+     VRPBL: top1=0.538 mean_cost=9.3590 (sbs=9.3593) vs_sbs=-0.00%
+    VRPBTW: top1=0.406 mean_cost=19.0934 (sbs=19.6697) vs_sbs=-2.93%
+    VRPLTW: top1=0.404 mean_cost=17.7133 (sbs=18.5091) vs_sbs=-4.30%
+    OVRPBL: top1=0.547 mean_cost=6.3075 (sbs=6.3103) vs_sbs=-0.04%
+   OVRPBTW: top1=0.488 mean_cost=10.5061 (sbs=10.5068) vs_sbs=-0.01%
+   OVRPLTW: top1=0.483 mean_cost=10.1301 (sbs=10.1272) vs_sbs=+0.03%
+   VRPBLTW: top1=0.406 mean_cost=18.9658 (sbs=19.5198) vs_sbs=-2.84%
+  OVRPBLTW: top1=0.483 mean_cost=10.5366 (sbs=10.5412) vs_sbs=-0.04%
+[R71B] epoch=28/40 update=60/240 total=6540 NLL/D=-0.116319 lr=0.0003 retries=2
+[R71 AMP retry] whole same triple; task=0; scale=65536.0
+[R71B] epoch=28/40 update=120/240 total=6600 NLL/D=-0.525208 lr=0.0003 retries=3
+[R71B] epoch=28/40 update=180/240 total=6660 NLL/D=-0.548367 lr=0.0003 retries=3
+[R71B] epoch=28/40 update=240/240 total=6720 NLL/D=-0.286782 lr=0.0003 retries=3
+[R71B val epoch28] macro_top1=0.4554 top2=0.7979 top3=0.9156 vs_sbs=-0.980% vbs_closed=+25.46%
+       TSP: top1=0.361 mean_cost=7.9143 (sbs=7.9578) vs_sbs=-0.55%
+      CVRP: top1=0.461 mean_cost=18.2044 (sbs=18.2943) vs_sbs=-0.49%
+      ATSP: top1=0.772 mean_cost=1.6353 (sbs=1.6735) vs_sbs=-2.28%
+      OVRP: top1=0.294 mean_cost=7.4644 (sbs=7.4617) vs_sbs=+0.04%
+      VRPB: top1=0.529 mean_cost=9.3384 (sbs=9.3403) vs_sbs=-0.02%
+      VRPL: top1=0.240 mean_cost=12.4154 (sbs=12.4072) vs_sbs=+0.07%
+     VRPTW: top1=0.414 mean_cost=17.9060 (sbs=18.6571) vs_sbs=-4.03%
+    OVRPTW: top1=0.471 mean_cost=10.0499 (sbs=10.0484) vs_sbs=+0.01%
+     OVRPB: top1=0.545 mean_cost=6.3220 (sbs=6.3220) vs_sbs=+0.00%
+     OVRPL: top1=0.308 mean_cost=7.4366 (sbs=7.4376) vs_sbs=-0.01%
+     VRPBL: top1=0.546 mean_cost=9.3550 (sbs=9.3593) vs_sbs=-0.05%
+    VRPBTW: top1=0.407 mean_cost=19.0765 (sbs=19.6697) vs_sbs=-3.02%
+    VRPLTW: top1=0.457 mean_cost=17.6933 (sbs=18.5091) vs_sbs=-4.41%
+    OVRPBL: top1=0.552 mean_cost=6.3094 (sbs=6.3103) vs_sbs=-0.01%
+   OVRPBTW: top1=0.482 mean_cost=10.5032 (sbs=10.5068) vs_sbs=-0.03%
+   OVRPLTW: top1=0.480 mean_cost=10.1297 (sbs=10.1272) vs_sbs=+0.02%
+   VRPBLTW: top1=0.403 mean_cost=18.9647 (sbs=19.5198) vs_sbs=-2.84%
+  OVRPBLTW: top1=0.475 mean_cost=10.5373 (sbs=10.5412) vs_sbs=-0.04%
+[R71B] epoch=29/40 update=60/240 total=6780 NLL/D=0.022304 lr=0.0003 retries=3
+[R71B] epoch=29/40 update=120/240 total=6840 NLL/D=0.033534 lr=0.0003 retries=3
+[R71B] epoch=29/40 update=180/240 total=6900 NLL/D=-0.010546 lr=0.0003 retries=3
+[R71B] epoch=29/40 update=240/240 total=6960 NLL/D=-0.413669 lr=0.0003 retries=3
+[R71B val epoch29] macro_top1=0.4623 top2=0.7911 top3=0.9112 vs_sbs=-0.989% vbs_closed=+24.22%
+       TSP: top1=0.357 mean_cost=7.9154 (sbs=7.9578) vs_sbs=-0.53%
+      CVRP: top1=0.478 mean_cost=18.2053 (sbs=18.2943) vs_sbs=-0.49%
+      ATSP: top1=0.780 mean_cost=1.6351 (sbs=1.6735) vs_sbs=-2.30%
+      OVRP: top1=0.292 mean_cost=7.4638 (sbs=7.4617) vs_sbs=+0.03%
+      VRPB: top1=0.516 mean_cost=9.3526 (sbs=9.3403) vs_sbs=+0.13%
+      VRPL: top1=0.257 mean_cost=12.4204 (sbs=12.4072) vs_sbs=+0.11%
+     VRPTW: top1=0.425 mean_cost=17.9257 (sbs=18.6571) vs_sbs=-3.92%
+    OVRPTW: top1=0.475 mean_cost=10.0483 (sbs=10.0484) vs_sbs=-0.00%
+     OVRPB: top1=0.545 mean_cost=6.3220 (sbs=6.3220) vs_sbs=+0.00%
+     OVRPL: top1=0.327 mean_cost=7.4367 (sbs=7.4376) vs_sbs=-0.01%
+     VRPBL: top1=0.526 mean_cost=9.3596 (sbs=9.3593) vs_sbs=+0.00%
+    VRPBTW: top1=0.436 mean_cost=19.0550 (sbs=19.6697) vs_sbs=-3.13%
+    VRPLTW: top1=0.462 mean_cost=17.6401 (sbs=18.5091) vs_sbs=-4.70%
+    OVRPBL: top1=0.546 mean_cost=6.3091 (sbs=6.3103) vs_sbs=-0.02%
+   OVRPBTW: top1=0.499 mean_cost=10.5007 (sbs=10.5068) vs_sbs=-0.06%
+   OVRPLTW: top1=0.497 mean_cost=10.1269 (sbs=10.1272) vs_sbs=-0.00%
+   VRPBLTW: top1=0.427 mean_cost=18.9505 (sbs=19.5198) vs_sbs=-2.92%
+  OVRPBLTW: top1=0.477 mean_cost=10.5407 (sbs=10.5412) vs_sbs=-0.00%
+[R71B] epoch=30/40 update=60/240 total=7020 NLL/D=0.197273 lr=0.0003 retries=3
+[R71B] epoch=30/40 update=120/240 total=7080 NLL/D=-0.151247 lr=0.0003 retries=3
+[R71B] epoch=30/40 update=180/240 total=7140 NLL/D=-0.797136 lr=0.0003 retries=3
+[R71B] epoch=30/40 update=240/240 total=7200 NLL/D=-0.636694 lr=0.0003 retries=3
+[R71B val epoch30] macro_top1=0.4587 top2=0.7963 top3=0.9094 vs_sbs=-0.957% vbs_closed=+21.18%
+       TSP: top1=0.348 mean_cost=7.9153 (sbs=7.9578) vs_sbs=-0.53%
+      CVRP: top1=0.462 mean_cost=18.2130 (sbs=18.2943) vs_sbs=-0.44%
+      ATSP: top1=0.779 mean_cost=1.6354 (sbs=1.6735) vs_sbs=-2.28%
+      OVRP: top1=0.301 mean_cost=7.4678 (sbs=7.4617) vs_sbs=+0.08%
+      VRPB: top1=0.457 mean_cost=9.3888 (sbs=9.3403) vs_sbs=+0.52%
+      VRPL: top1=0.278 mean_cost=12.4095 (sbs=12.4072) vs_sbs=+0.02%
+     VRPTW: top1=0.432 mean_cost=17.9267 (sbs=18.6571) vs_sbs=-3.91%
+    OVRPTW: top1=0.476 mean_cost=10.0484 (sbs=10.0484) vs_sbs=+0.00%
+     OVRPB: top1=0.536 mean_cost=6.3290 (sbs=6.3220) vs_sbs=+0.11%
+     OVRPL: top1=0.339 mean_cost=7.4335 (sbs=7.4376) vs_sbs=-0.05%
+     VRPBL: top1=0.526 mean_cost=9.3580 (sbs=9.3593) vs_sbs=-0.01%
+    VRPBTW: top1=0.448 mean_cost=19.0369 (sbs=19.6697) vs_sbs=-3.22%
+    VRPLTW: top1=0.460 mean_cost=17.6554 (sbs=18.5091) vs_sbs=-4.61%
+    OVRPBL: top1=0.557 mean_cost=6.3100 (sbs=6.3103) vs_sbs=-0.00%
+   OVRPBTW: top1=0.494 mean_cost=10.4991 (sbs=10.5068) vs_sbs=-0.07%
+   OVRPLTW: top1=0.470 mean_cost=10.1342 (sbs=10.1272) vs_sbs=+0.07%
+   VRPBLTW: top1=0.406 mean_cost=18.9699 (sbs=19.5198) vs_sbs=-2.82%
+  OVRPBLTW: top1=0.488 mean_cost=10.5352 (sbs=10.5412) vs_sbs=-0.06%
+[R71B] epoch=31/40 update=60/240 total=7260 NLL/D=-0.143468 lr=0.0003 retries=3
+[R71B] epoch=31/40 update=120/240 total=7320 NLL/D=-0.166633 lr=0.0003 retries=3
+[R71B] epoch=31/40 update=180/240 total=7380 NLL/D=-0.223782 lr=0.0003 retries=3
+[R71B] epoch=31/40 update=240/240 total=7440 NLL/D=0.180605 lr=0.0003 retries=3
+[R71B val epoch31] macro_top1=0.4651 top2=0.7886 top3=0.9121 vs_sbs=-0.975% vbs_closed=+23.73%
+       TSP: top1=0.360 mean_cost=7.9186 (sbs=7.9578) vs_sbs=-0.49%
+      CVRP: top1=0.441 mean_cost=18.2240 (sbs=18.2943) vs_sbs=-0.38%
+      ATSP: top1=0.784 mean_cost=1.6349 (sbs=1.6735) vs_sbs=-2.31%
+      OVRP: top1=0.301 mean_cost=7.4653 (sbs=7.4617) vs_sbs=+0.05%
+      VRPB: top1=0.530 mean_cost=9.3383 (sbs=9.3403) vs_sbs=-0.02%
+      VRPL: top1=0.300 mean_cost=12.4153 (sbs=12.4072) vs_sbs=+0.07%
+     VRPTW: top1=0.435 mean_cost=17.9179 (sbs=18.6571) vs_sbs=-3.96%
+    OVRPTW: top1=0.512 mean_cost=10.0396 (sbs=10.0484) vs_sbs=-0.09%
+     OVRPB: top1=0.561 mean_cost=6.3196 (sbs=6.3220) vs_sbs=-0.04%
+     OVRPL: top1=0.354 mean_cost=7.4374 (sbs=7.4376) vs_sbs=-0.00%
+     VRPBL: top1=0.490 mean_cost=9.3763 (sbs=9.3593) vs_sbs=+0.18%
+    VRPBTW: top1=0.438 mean_cost=19.0444 (sbs=19.6697) vs_sbs=-3.18%
+    VRPLTW: top1=0.440 mean_cost=17.6893 (sbs=18.5091) vs_sbs=-4.43%
+    OVRPBL: top1=0.565 mean_cost=6.3086 (sbs=6.3103) vs_sbs=-0.03%
+   OVRPBTW: top1=0.484 mean_cost=10.5050 (sbs=10.5068) vs_sbs=-0.02%
+   OVRPLTW: top1=0.476 mean_cost=10.1303 (sbs=10.1272) vs_sbs=+0.03%
+   VRPBLTW: top1=0.431 mean_cost=18.9414 (sbs=19.5198) vs_sbs=-2.96%
+  OVRPBLTW: top1=0.469 mean_cost=10.5442 (sbs=10.5412) vs_sbs=+0.03%
+[R71B] epoch=32/40 update=60/240 total=7500 NLL/D=-0.341330 lr=0.0003 retries=3
+[R71B] epoch=32/40 update=120/240 total=7560 NLL/D=-0.103502 lr=0.0003 retries=3
+[R71B] epoch=32/40 update=180/240 total=7620 NLL/D=-0.035132 lr=0.0003 retries=3
+[R71B] epoch=32/40 update=240/240 total=7680 NLL/D=-0.520475 lr=0.0003 retries=3
+[R71B val epoch32] macro_top1=0.4644 top2=0.8000 top3=0.9139 vs_sbs=-0.995% vbs_closed=+25.49%
+       TSP: top1=0.366 mean_cost=7.9271 (sbs=7.9578) vs_sbs=-0.39%
+      CVRP: top1=0.469 mean_cost=18.2031 (sbs=18.2943) vs_sbs=-0.50%
+      ATSP: top1=0.766 mean_cost=1.6356 (sbs=1.6735) vs_sbs=-2.27%
+      OVRP: top1=0.352 mean_cost=7.4556 (sbs=7.4617) vs_sbs=-0.08%
+      VRPB: top1=0.529 mean_cost=9.3386 (sbs=9.3403) vs_sbs=-0.02%
+      VRPL: top1=0.214 mean_cost=12.4226 (sbs=12.4072) vs_sbs=+0.12%
+     VRPTW: top1=0.432 mean_cost=17.9262 (sbs=18.6571) vs_sbs=-3.92%
+    OVRPTW: top1=0.480 mean_cost=10.0486 (sbs=10.0484) vs_sbs=+0.00%
+     OVRPB: top1=0.566 mean_cost=6.3182 (sbs=6.3220) vs_sbs=-0.06%
+     OVRPL: top1=0.361 mean_cost=7.4314 (sbs=7.4376) vs_sbs=-0.08%
+     VRPBL: top1=0.541 mean_cost=9.3572 (sbs=9.3593) vs_sbs=-0.02%
+    VRPBTW: top1=0.413 mean_cost=19.0562 (sbs=19.6697) vs_sbs=-3.12%
+    VRPLTW: top1=0.467 mean_cost=17.6394 (sbs=18.5091) vs_sbs=-4.70%
+    OVRPBL: top1=0.535 mean_cost=6.3104 (sbs=6.3103) vs_sbs=+0.00%
+   OVRPBTW: top1=0.496 mean_cost=10.5102 (sbs=10.5068) vs_sbs=+0.03%
+   OVRPLTW: top1=0.485 mean_cost=10.1272 (sbs=10.1272) vs_sbs=-0.00%
+   VRPBLTW: top1=0.419 mean_cost=18.9463 (sbs=19.5198) vs_sbs=-2.94%
+  OVRPBLTW: top1=0.469 mean_cost=10.5442 (sbs=10.5412) vs_sbs=+0.03%
+[R71B] epoch=33/40 update=60/240 total=7740 NLL/D=-0.582283 lr=0.0003 retries=3
+[R71B] epoch=33/40 update=120/240 total=7800 NLL/D=-0.107718 lr=0.0003 retries=3
+[R71B] epoch=33/40 update=180/240 total=7860 NLL/D=-0.166347 lr=0.0003 retries=3
+[R71B] epoch=33/40 update=240/240 total=7920 NLL/D=-0.295273 lr=0.0003 retries=3
+[R71B val epoch33] macro_top1=0.4555 top2=0.8004 top3=0.9141 vs_sbs=-0.983% vbs_closed=+24.44%
+       TSP: top1=0.348 mean_cost=7.9127 (sbs=7.9578) vs_sbs=-0.57%
+      CVRP: top1=0.456 mean_cost=18.2103 (sbs=18.2943) vs_sbs=-0.46%
+      ATSP: top1=0.784 mean_cost=1.6349 (sbs=1.6735) vs_sbs=-2.31%
+      OVRP: top1=0.259 mean_cost=7.4667 (sbs=7.4617) vs_sbs=+0.07%
+      VRPB: top1=0.530 mean_cost=9.3369 (sbs=9.3403) vs_sbs=-0.04%
+      VRPL: top1=0.264 mean_cost=12.4120 (sbs=12.4072) vs_sbs=+0.04%
+     VRPTW: top1=0.419 mean_cost=17.9085 (sbs=18.6571) vs_sbs=-4.01%
+    OVRPTW: top1=0.476 mean_cost=10.0484 (sbs=10.0484) vs_sbs=+0.00%
+     OVRPB: top1=0.544 mean_cost=6.3221 (sbs=6.3220) vs_sbs=+0.00%
+     OVRPL: top1=0.322 mean_cost=7.4454 (sbs=7.4376) vs_sbs=+0.11%
+     VRPBL: top1=0.528 mean_cost=9.3641 (sbs=9.3593) vs_sbs=+0.05%
+    VRPBTW: top1=0.421 mean_cost=19.0417 (sbs=19.6697) vs_sbs=-3.19%
+    VRPLTW: top1=0.435 mean_cost=17.6698 (sbs=18.5091) vs_sbs=-4.53%
+    OVRPBL: top1=0.557 mean_cost=6.3098 (sbs=6.3103) vs_sbs=-0.01%
+   OVRPBTW: top1=0.472 mean_cost=10.5067 (sbs=10.5068) vs_sbs=-0.00%
+   OVRPLTW: top1=0.484 mean_cost=10.1274 (sbs=10.1272) vs_sbs=+0.00%
+   VRPBLTW: top1=0.409 mean_cost=18.9721 (sbs=19.5198) vs_sbs=-2.81%
+  OVRPBLTW: top1=0.491 mean_cost=10.5369 (sbs=10.5412) vs_sbs=-0.04%
+[R71B] epoch=34/40 update=60/240 total=7980 NLL/D=-0.045183 lr=0.0003 retries=3
+[R71B] epoch=34/40 update=120/240 total=8040 NLL/D=-0.179719 lr=0.0003 retries=3
+[R71B] epoch=34/40 update=180/240 total=8100 NLL/D=-0.510700 lr=0.0003 retries=3
+[R71B] epoch=34/40 update=240/240 total=8160 NLL/D=-0.240550 lr=0.0003 retries=3
+[R71B val epoch34] macro_top1=0.4623 top2=0.7912 top3=0.9117 vs_sbs=-0.980% vbs_closed=+23.14%
+       TSP: top1=0.343 mean_cost=7.9195 (sbs=7.9578) vs_sbs=-0.48%
+      CVRP: top1=0.477 mean_cost=18.2044 (sbs=18.2943) vs_sbs=-0.49%
+      ATSP: top1=0.780 mean_cost=1.6349 (sbs=1.6735) vs_sbs=-2.31%
+      OVRP: top1=0.274 mean_cost=7.4661 (sbs=7.4617) vs_sbs=+0.06%
+      VRPB: top1=0.478 mean_cost=9.3579 (sbs=9.3403) vs_sbs=+0.19%
+      VRPL: top1=0.266 mean_cost=12.4163 (sbs=12.4072) vs_sbs=+0.07%
+     VRPTW: top1=0.429 mean_cost=17.9167 (sbs=18.6571) vs_sbs=-3.97%
+    OVRPTW: top1=0.513 mean_cost=10.0424 (sbs=10.0484) vs_sbs=-0.06%
+     OVRPB: top1=0.536 mean_cost=6.3283 (sbs=6.3220) vs_sbs=+0.10%
+     OVRPL: top1=0.336 mean_cost=7.4368 (sbs=7.4376) vs_sbs=-0.01%
+     VRPBL: top1=0.547 mean_cost=9.3558 (sbs=9.3593) vs_sbs=-0.04%
+    VRPBTW: top1=0.451 mean_cost=19.0364 (sbs=19.6697) vs_sbs=-3.22%
+    VRPLTW: top1=0.455 mean_cost=17.6477 (sbs=18.5091) vs_sbs=-4.65%
+    OVRPBL: top1=0.563 mean_cost=6.3093 (sbs=6.3103) vs_sbs=-0.02%
+   OVRPBTW: top1=0.494 mean_cost=10.5112 (sbs=10.5068) vs_sbs=+0.04%
+   OVRPLTW: top1=0.471 mean_cost=10.1320 (sbs=10.1272) vs_sbs=+0.05%
+   VRPBLTW: top1=0.420 mean_cost=18.9575 (sbs=19.5198) vs_sbs=-2.88%
+  OVRPBLTW: top1=0.488 mean_cost=10.5392 (sbs=10.5412) vs_sbs=-0.02%
+[R71B] epoch=35/40 update=60/240 total=8220 NLL/D=-0.332193 lr=0.0003 retries=3
+[R71B] epoch=35/40 update=120/240 total=8280 NLL/D=-0.190545 lr=0.0003 retries=3
+[R71B] epoch=35/40 update=180/240 total=8340 NLL/D=0.072565 lr=0.0003 retries=3
+[R71B] epoch=35/40 update=240/240 total=8400 NLL/D=-0.689296 lr=0.0003 retries=3
+[R71B val epoch35] macro_top1=0.4599 top2=0.7988 top3=0.9131 vs_sbs=-0.973% vbs_closed=+23.27%
+       TSP: top1=0.365 mean_cost=7.9156 (sbs=7.9578) vs_sbs=-0.53%
+      CVRP: top1=0.464 mean_cost=18.2107 (sbs=18.2943) vs_sbs=-0.46%
+      ATSP: top1=0.776 mean_cost=1.6352 (sbs=1.6735) vs_sbs=-2.29%
+      OVRP: top1=0.268 mean_cost=7.4678 (sbs=7.4617) vs_sbs=+0.08%
+      VRPB: top1=0.535 mean_cost=9.3403 (sbs=9.3403) vs_sbs=+0.00%
+      VRPL: top1=0.243 mean_cost=12.4188 (sbs=12.4072) vs_sbs=+0.09%
+     VRPTW: top1=0.422 mean_cost=17.9243 (sbs=18.6571) vs_sbs=-3.93%
+    OVRPTW: top1=0.489 mean_cost=10.0539 (sbs=10.0484) vs_sbs=+0.05%
+     OVRPB: top1=0.577 mean_cost=6.3162 (sbs=6.3220) vs_sbs=-0.09%
+     OVRPL: top1=0.304 mean_cost=7.4382 (sbs=7.4376) vs_sbs=+0.01%
+     VRPBL: top1=0.501 mean_cost=9.3719 (sbs=9.3593) vs_sbs=+0.13%
+    VRPBTW: top1=0.439 mean_cost=19.0411 (sbs=19.6697) vs_sbs=-3.20%
+    VRPLTW: top1=0.436 mean_cost=17.6620 (sbs=18.5091) vs_sbs=-4.58%
+    OVRPBL: top1=0.558 mean_cost=6.3091 (sbs=6.3103) vs_sbs=-0.02%
+   OVRPBTW: top1=0.487 mean_cost=10.5108 (sbs=10.5068) vs_sbs=+0.04%
+   OVRPLTW: top1=0.490 mean_cost=10.1290 (sbs=10.1272) vs_sbs=+0.02%
+   VRPBLTW: top1=0.437 mean_cost=18.9685 (sbs=19.5198) vs_sbs=-2.82%
+  OVRPBLTW: top1=0.487 mean_cost=10.5371 (sbs=10.5412) vs_sbs=-0.04%
+[R71B] epoch=36/40 update=60/240 total=8460 NLL/D=0.315065 lr=0.0003 retries=3
+[R71B] epoch=36/40 update=120/240 total=8520 NLL/D=0.095525 lr=0.0003 retries=3
+[R71B] epoch=36/40 update=180/240 total=8580 NLL/D=-0.153400 lr=0.0003 retries=3
+[R71B] epoch=36/40 update=240/240 total=8640 NLL/D=-0.337357 lr=0.0003 retries=3
+[R71B val epoch36] macro_top1=0.4531 top2=0.7964 top3=0.9112 vs_sbs=-0.965% vbs_closed=+22.50%
+       TSP: top1=0.368 mean_cost=7.9147 (sbs=7.9578) vs_sbs=-0.54%
+      CVRP: top1=0.452 mean_cost=18.2159 (sbs=18.2943) vs_sbs=-0.43%
+      ATSP: top1=0.735 mean_cost=1.6409 (sbs=1.6735) vs_sbs=-1.95%
+      OVRP: top1=0.297 mean_cost=7.4624 (sbs=7.4617) vs_sbs=+0.01%
+      VRPB: top1=0.454 mean_cost=9.3670 (sbs=9.3403) vs_sbs=+0.29%
+      VRPL: top1=0.267 mean_cost=12.4188 (sbs=12.4072) vs_sbs=+0.09%
+     VRPTW: top1=0.395 mean_cost=17.9136 (sbs=18.6571) vs_sbs=-3.98%
+    OVRPTW: top1=0.500 mean_cost=10.0449 (sbs=10.0484) vs_sbs=-0.04%
+     OVRPB: top1=0.552 mean_cost=6.3211 (sbs=6.3220) vs_sbs=-0.01%
+     OVRPL: top1=0.323 mean_cost=7.4370 (sbs=7.4376) vs_sbs=-0.01%
+     VRPBL: top1=0.545 mean_cost=9.3550 (sbs=9.3593) vs_sbs=-0.05%
+    VRPBTW: top1=0.412 mean_cost=19.0438 (sbs=19.6697) vs_sbs=-3.18%
+    VRPLTW: top1=0.453 mean_cost=17.6389 (sbs=18.5091) vs_sbs=-4.70%
+    OVRPBL: top1=0.555 mean_cost=6.3103 (sbs=6.3103) vs_sbs=+0.00%
+   OVRPBTW: top1=0.469 mean_cost=10.5065 (sbs=10.5068) vs_sbs=-0.00%
+   OVRPLTW: top1=0.482 mean_cost=10.1302 (sbs=10.1272) vs_sbs=+0.03%
+   VRPBLTW: top1=0.419 mean_cost=18.9549 (sbs=19.5198) vs_sbs=-2.89%
+  OVRPBLTW: top1=0.477 mean_cost=10.5408 (sbs=10.5412) vs_sbs=-0.00%
+[R71 AMP retry] whole same triple; task=1; scale=65536.0
+[R71B] epoch=37/40 update=60/240 total=8700 NLL/D=-0.121536 lr=0.0003 retries=4
+[R71B] epoch=37/40 update=120/240 total=8760 NLL/D=-0.048159 lr=0.0003 retries=4
+[R71B] epoch=37/40 update=180/240 total=8820 NLL/D=0.066197 lr=0.0003 retries=4
+[R71B] epoch=37/40 update=240/240 total=8880 NLL/D=-0.315858 lr=0.0003 retries=4
+[R71B val epoch37] macro_top1=0.4634 top2=0.8037 top3=0.9162 vs_sbs=-0.988% vbs_closed=+24.28%
+       TSP: top1=0.365 mean_cost=7.9232 (sbs=7.9578) vs_sbs=-0.43%
+      CVRP: top1=0.491 mean_cost=18.2024 (sbs=18.2943) vs_sbs=-0.50%
+      ATSP: top1=0.717 mean_cost=1.6377 (sbs=1.6735) vs_sbs=-2.14%
+      OVRP: top1=0.333 mean_cost=7.4696 (sbs=7.4617) vs_sbs=+0.11%
+      VRPB: top1=0.516 mean_cost=9.3483 (sbs=9.3403) vs_sbs=+0.09%
+      VRPL: top1=0.269 mean_cost=12.4126 (sbs=12.4072) vs_sbs=+0.04%
+     VRPTW: top1=0.441 mean_cost=17.9077 (sbs=18.6571) vs_sbs=-4.02%
+    OVRPTW: top1=0.487 mean_cost=10.0422 (sbs=10.0484) vs_sbs=-0.06%
+     OVRPB: top1=0.561 mean_cost=6.3188 (sbs=6.3220) vs_sbs=-0.05%
+     OVRPL: top1=0.345 mean_cost=7.4379 (sbs=7.4376) vs_sbs=+0.00%
+     VRPBL: top1=0.514 mean_cost=9.3649 (sbs=9.3593) vs_sbs=+0.06%
+    VRPBTW: top1=0.432 mean_cost=19.0432 (sbs=19.6697) vs_sbs=-3.19%
+    VRPLTW: top1=0.460 mean_cost=17.6346 (sbs=18.5091) vs_sbs=-4.72%
+    OVRPBL: top1=0.562 mean_cost=6.3086 (sbs=6.3103) vs_sbs=-0.03%
+   OVRPBTW: top1=0.486 mean_cost=10.5050 (sbs=10.5068) vs_sbs=-0.02%
+   OVRPLTW: top1=0.488 mean_cost=10.1273 (sbs=10.1272) vs_sbs=+0.00%
+   VRPBLTW: top1=0.396 mean_cost=18.9593 (sbs=19.5198) vs_sbs=-2.87%
+  OVRPBLTW: top1=0.479 mean_cost=10.5353 (sbs=10.5412) vs_sbs=-0.06%
+[R71B] epoch=38/40 update=60/240 total=8940 NLL/D=-0.369216 lr=0.0003 retries=4
+[R71B] epoch=38/40 update=120/240 total=9000 NLL/D=-0.154666 lr=0.0003 retries=4
+[R71B] epoch=38/40 update=180/240 total=9060 NLL/D=-0.036349 lr=0.0003 retries=4
+[R71B] epoch=38/40 update=240/240 total=9120 NLL/D=-0.317610 lr=0.0003 retries=4
+[R71B val epoch38] macro_top1=0.4641 top2=0.8113 top3=0.9201 vs_sbs=-1.004% vbs_closed=+25.45%
+       TSP: top1=0.369 mean_cost=7.9138 (sbs=7.9578) vs_sbs=-0.55%
+      CVRP: top1=0.500 mean_cost=18.1966 (sbs=18.2943) vs_sbs=-0.53%
+      ATSP: top1=0.781 mean_cost=1.6347 (sbs=1.6735) vs_sbs=-2.32%
+      OVRP: top1=0.314 mean_cost=7.4608 (sbs=7.4617) vs_sbs=-0.01%
+      VRPB: top1=0.536 mean_cost=9.3393 (sbs=9.3403) vs_sbs=-0.01%
+      VRPL: top1=0.290 mean_cost=12.4064 (sbs=12.4072) vs_sbs=-0.01%
+     VRPTW: top1=0.437 mean_cost=17.8880 (sbs=18.6571) vs_sbs=-4.12%
+    OVRPTW: top1=0.490 mean_cost=10.0441 (sbs=10.0484) vs_sbs=-0.04%
+     OVRPB: top1=0.551 mean_cost=6.3241 (sbs=6.3220) vs_sbs=+0.03%
+     OVRPL: top1=0.319 mean_cost=7.4382 (sbs=7.4376) vs_sbs=+0.01%
+     VRPBL: top1=0.487 mean_cost=9.3731 (sbs=9.3593) vs_sbs=+0.15%
+    VRPBTW: top1=0.428 mean_cost=19.0690 (sbs=19.6697) vs_sbs=-3.05%
+    VRPLTW: top1=0.468 mean_cost=17.6235 (sbs=18.5091) vs_sbs=-4.79%
+    OVRPBL: top1=0.525 mean_cost=6.3108 (sbs=6.3103) vs_sbs=+0.01%
+   OVRPBTW: top1=0.481 mean_cost=10.5039 (sbs=10.5068) vs_sbs=-0.03%
+   OVRPLTW: top1=0.488 mean_cost=10.1322 (sbs=10.1272) vs_sbs=+0.05%
+   VRPBLTW: top1=0.413 mean_cost=18.9541 (sbs=19.5198) vs_sbs=-2.90%
+  OVRPBLTW: top1=0.477 mean_cost=10.5457 (sbs=10.5412) vs_sbs=+0.04%
+[R71B] epoch=39/40 update=60/240 total=9180 NLL/D=0.162487 lr=0.0003 retries=4
+[R71B] epoch=39/40 update=120/240 total=9240 NLL/D=0.249002 lr=0.0003 retries=4
+[R71B] epoch=39/40 update=180/240 total=9300 NLL/D=-0.003854 lr=0.0003 retries=4
+[R71B] epoch=39/40 update=240/240 total=9360 NLL/D=-0.456677 lr=0.0003 retries=4
+[R71B val epoch39] macro_top1=0.4618 top2=0.7952 top3=0.9103 vs_sbs=-0.989% vbs_closed=+24.40%
+       TSP: top1=0.349 mean_cost=7.9133 (sbs=7.9578) vs_sbs=-0.56%
+      CVRP: top1=0.467 mean_cost=18.2203 (sbs=18.2943) vs_sbs=-0.40%
+      ATSP: top1=0.779 mean_cost=1.6353 (sbs=1.6735) vs_sbs=-2.28%
+      OVRP: top1=0.340 mean_cost=7.4609 (sbs=7.4617) vs_sbs=-0.01%
+      VRPB: top1=0.527 mean_cost=9.3391 (sbs=9.3403) vs_sbs=-0.01%
+      VRPL: top1=0.269 mean_cost=12.4181 (sbs=12.4072) vs_sbs=+0.09%
+     VRPTW: top1=0.423 mean_cost=17.9025 (sbs=18.6571) vs_sbs=-4.04%
+    OVRPTW: top1=0.495 mean_cost=10.0469 (sbs=10.0484) vs_sbs=-0.02%
+     OVRPB: top1=0.543 mean_cost=6.3226 (sbs=6.3220) vs_sbs=+0.01%
+     OVRPL: top1=0.309 mean_cost=7.4438 (sbs=7.4376) vs_sbs=+0.08%
+     VRPBL: top1=0.534 mean_cost=9.3587 (sbs=9.3593) vs_sbs=-0.01%
+    VRPBTW: top1=0.412 mean_cost=19.0497 (sbs=19.6697) vs_sbs=-3.15%
+    VRPLTW: top1=0.456 mean_cost=17.6537 (sbs=18.5091) vs_sbs=-4.62%
+    OVRPBL: top1=0.566 mean_cost=6.3081 (sbs=6.3103) vs_sbs=-0.03%
+   OVRPBTW: top1=0.461 mean_cost=10.5058 (sbs=10.5068) vs_sbs=-0.01%
+   OVRPLTW: top1=0.487 mean_cost=10.1306 (sbs=10.1272) vs_sbs=+0.03%
+   VRPBLTW: top1=0.414 mean_cost=18.9617 (sbs=19.5198) vs_sbs=-2.86%
+  OVRPBLTW: top1=0.481 mean_cost=10.5417 (sbs=10.5412) vs_sbs=+0.00%
+[R71B] epoch=40/40 update=60/240 total=9420 NLL/D=0.153663 lr=0.0003 retries=4
+[R71B] epoch=40/40 update=120/240 total=9480 NLL/D=-0.626418 lr=0.0003 retries=4
+[R71B] epoch=40/40 update=180/240 total=9540 NLL/D=-0.476799 lr=0.0003 retries=4
+[R71B] epoch=40/40 update=240/240 total=9600 NLL/D=0.084958 lr=0.0003 retries=4
+[R71B val epoch40] macro_top1=0.4582 top2=0.7899 top3=0.9132 vs_sbs=-0.966% vbs_closed=+23.81%
+       TSP: top1=0.350 mean_cost=7.9150 (sbs=7.9578) vs_sbs=-0.54%
+      CVRP: top1=0.482 mean_cost=18.2028 (sbs=18.2943) vs_sbs=-0.50%
+      ATSP: top1=0.790 mean_cost=1.6347 (sbs=1.6735) vs_sbs=-2.32%
+      OVRP: top1=0.297 mean_cost=7.4619 (sbs=7.4617) vs_sbs=+0.00%
+      VRPB: top1=0.542 mean_cost=9.3412 (sbs=9.3403) vs_sbs=+0.01%
+      VRPL: top1=0.292 mean_cost=12.4062 (sbs=12.4072) vs_sbs=-0.01%
+     VRPTW: top1=0.415 mean_cost=17.9168 (sbs=18.6571) vs_sbs=-3.97%
+    OVRPTW: top1=0.489 mean_cost=10.0460 (sbs=10.0484) vs_sbs=-0.02%
+     OVRPB: top1=0.565 mean_cost=6.3173 (sbs=6.3220) vs_sbs=-0.07%
+     OVRPL: top1=0.202 mean_cost=7.4580 (sbs=7.4376) vs_sbs=+0.27%
+     VRPBL: top1=0.510 mean_cost=9.3693 (sbs=9.3593) vs_sbs=+0.11%
+    VRPBTW: top1=0.385 mean_cost=19.1501 (sbs=19.6697) vs_sbs=-2.64%
+    VRPLTW: top1=0.470 mean_cost=17.6308 (sbs=18.5091) vs_sbs=-4.75%
+    OVRPBL: top1=0.556 mean_cost=6.3101 (sbs=6.3103) vs_sbs=-0.00%
+   OVRPBTW: top1=0.475 mean_cost=10.5066 (sbs=10.5068) vs_sbs=-0.00%
+   OVRPLTW: top1=0.485 mean_cost=10.1309 (sbs=10.1272) vs_sbs=+0.04%
+   VRPBLTW: top1=0.444 mean_cost=18.9540 (sbs=19.5198) vs_sbs=-2.90%
+  OVRPBLTW: top1=0.498 mean_cost=10.5305 (sbs=10.5412) vs_sbs=-0.10%
+wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:                  attempted_view_presentations ▁▁▁▁▂▂▂▂▃▃▄▄▄▄▄▄▅▅▅▆▆▆▆▆▆▆▆▆▇▇▇█████████
+wandb:                              clip_coefficient ██▂▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▂▂▂▁▂▁▁▁▁▁▁▁▁▂▁▁▂▁▁▁▂▂
+wandb:                                         epoch ▁▁▁▁▂▂▂▂▂▂▄▄▄▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇▇▇▇██
+wandb:                                  global_epoch ▁▁▁▁▁▂▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▄▅▅▅▅▅▅▅▅▆▆▆▆▇▇▇▇█
+wandb:                                     grad_norm ▅▅█▄▁▇▁▁▆▄▄▆▁▁▃▂▂▃▂▁▁▂▂▂▂▃▂▂▂▂▂▁▃▁▂▁▃▂▂▂
+wandb:                                     joint_nll █▇▅▃▄▄▅▃▅▃▄▄▃▅▄▄▁▆▂▂▃▄▂▂▃▅▃▄▂▃▅▃▅▄▃▃▅▃▅▅
+wandb:                                          loss █▆▄▆▄▃▅▄▄▄▂▄▂▃▅▃▄▄▂▃▃▄▃▃▄▃▄▄▂▄▃▄▃▄▃▂▂▃▁▃
+wandb:                                            lr ▁▄██████████████████████████████████████
+wandb:                             nll_per_dimension ██▆▅▄▃▃▃▄▃▄▄▃▄▅▄▄▃▂▂▄▂▃▃▄▄▂▂▂▄▃▄▃▃▃▁▃▂▄▄
+wandb:                      optimization/amp_retries ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁██▁▁▁▁▁▁▁▁▁█▁▁▁▁▁▁▁▁█▁▁▁
+wandb:              optimization/attempted_view_rows ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▅▅▁▁▁▁▁▁▁▁▁▅▁▁▁▁▁▁▁▁█▁▁▁
+wandb:                 optimization/clip_coefficient █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▂▂
+wandb:                        optimization/grad_norm ▁▅██▇▇▇▇▆▆▆▆▆▅▅▅▅▅▅▅▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▃▃▃▃▃
+wandb:                        optimization/joint_nll █▅▃▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                             optimization/loss █▅▃▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                               optimization/lr ▁▄██████████████████████████████████████
+wandb:                         optimization/lr_first ▁▃▆█████████████████████████████████████
+wandb:                optimization/nll_per_dimension █▅▃▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                  optimization/peak_memory_gib ▃▅▃▄▅▅█▄▅▃▃▅▃▅▄▅▅▃▅▄▂▅▅▅▄▄▃▄▅▄▃▃▄▅▅▁▁▅▁▃
+wandb:                          optimization/samples ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                          optimization/seconds ▄▂▄▂▃▂▂▃▁▇▁▃▂▂▄▃▆▆▂▁▂▁█▅▃▁▃▆▄▂▇▂▃▃▃▆▆▂▃▃
+wandb:             optimization/successful_view_rows ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                          optimization/updates ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                               peak_memory_gib ▇▇▇▇▇█▇▇▆▇▇▁▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▂▇▇▇▇▇▆▆▇
+wandb:                             peak_reserved_gib ▁███████████████████████████████████████
+wandb:                                 presentations ▁▁▁▂▂▂▂▂▃▃▃▄▄▄▄▄▄▄▄▅▅▅▅▅▅▅▅▅▆▆▆▇▇▇▇▇████
+wandb:                            queries_per_second ██▂▇██▂▂█▁█▂█▂██████▂▂▂▂██▁███▃▂█▂▇█▁███
+wandb:                                       retries ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                                         scale ▁▁▁▁▁▁▁▁█████████▁▁▁▁▁▁▁▁▁▁███▁▁▁▁▁▁▁▁▁▁
+wandb:                             successful_update ▁▁▁▂▂▂▂▃▃▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▅▅▅▅▆▆▆▆▇▇▇▇██
+wandb:             train_eval/ATSP/actual_regret_pct ▂▂▃█▃▁▁▁
+wandb:                            train_eval/ATSP/ce ▄▅▄█▄▃▁▁
+wandb:     train_eval/ATSP/density_nll_per_dimension ▇▇▅█▄▃▂▁
+wandb:                     train_eval/ATSP/mean_cost ▂▂▃█▃▁▁▁
+wandb:                          train_eval/ATSP/top1 ▄▅▅▁▆▇▇█
+wandb:                          train_eval/ATSP/top2 █▇▇▁▇▇▇█
+wandb:                          train_eval/ATSP/top3 ▅▅▄▁▇▅██
+wandb:             train_eval/CVRP/actual_regret_pct █▃▁▁▁▁▁▁
+wandb:                            train_eval/CVRP/ce █▇▄▂▂▃▂▁
+wandb:     train_eval/CVRP/density_nll_per_dimension █▇▄▄▂▃▁▁
+wandb:                     train_eval/CVRP/mean_cost █▄▂▁▂▁▁▁
+wandb:                          train_eval/CVRP/top1 ▁▄▆▇▇▇▇█
+wandb:                          train_eval/CVRP/top2 ▁▄▆▇▇▇▇█
+wandb:                          train_eval/CVRP/top3 ▁▃▅▇▇▇▇█
+wandb:             train_eval/OVRP/actual_regret_pct █▁▅█▂▃▃▂
+wandb:                            train_eval/OVRP/ce ▃▄█▅▂▃▂▁
+wandb:     train_eval/OVRP/density_nll_per_dimension █▅▅▄▂▂▁▁
+wandb:                     train_eval/OVRP/mean_cost █▁▆█▃▃▃▂
+wandb:                          train_eval/OVRP/top1 ▁█▃▁▇▇▅█
+wandb:                          train_eval/OVRP/top2 ▃▆▁▁▇▆▅█
+wandb:                          train_eval/OVRP/top3 █▄▁▄▇▃▅▇
+wandb:            train_eval/OVRPB/actual_regret_pct ▄▄▄▄▄█▁▂
+wandb:                           train_eval/OVRPB/ce █▄▃▅▂▂▁▂
+wandb:    train_eval/OVRPB/density_nll_per_dimension █▇▄▅▃▂▁▁
+wandb:                    train_eval/OVRPB/mean_cost ▅▅▄▅▅█▁▂
+wandb:                         train_eval/OVRPB/top1 ▁▆▁▁▁▁█▅
+wandb:                         train_eval/OVRPB/top2 ▁▁▁▁▁▁▁▁
+wandb:                         train_eval/OVRPB/top3 ▅▁▆▄▄▄█▅
+wandb:           train_eval/OVRPBL/actual_regret_pct ███▃▆▇▁█
+wandb:                          train_eval/OVRPBL/ce █▄▇▂▃▁▁▁
+wandb:   train_eval/OVRPBL/density_nll_per_dimension █▅▄▄▂▂▁▁
+wandb:                   train_eval/OVRPBL/mean_cost ███▂▆▇▁█
+wandb:                        train_eval/OVRPBL/top1 ▁▁▁▅▂▁█▁
+wandb:                        train_eval/OVRPBL/top2 ▁▁▁▁▁▁▁▁
+wandb:                        train_eval/OVRPBL/top3 ▁▅▇▄▄▆▇█
+wandb:         train_eval/OVRPBLTW/actual_regret_pct ▅▅▅▅█▂▅▁
+wandb:                        train_eval/OVRPBLTW/ce █▅▄▅▄▂▂▁
+wandb: train_eval/OVRPBLTW/density_nll_per_dimension █▇▇▄▆▂▁▂
+wandb:                 train_eval/OVRPBLTW/mean_cost ▅▅▅▅█▂▄▁
+wandb:                      train_eval/OVRPBLTW/top1 ▂▂▂▂▁█▆█
+wandb:                      train_eval/OVRPBLTW/top2 ███▇▁▆██
+wandb:                      train_eval/OVRPBLTW/top3 ▁▁▃▃▁█▁▆
+wandb:          train_eval/OVRPBTW/actual_regret_pct █▃▄▃▆▂▂▁
+wandb:                         train_eval/OVRPBTW/ce █▇▃▅▅▂▂▁
+wandb:  train_eval/OVRPBTW/density_nll_per_dimension █▆▄▃▄▁▁▂
+wandb:                  train_eval/OVRPBTW/mean_cost █▄▄▄▆▂▂▁
+wandb:                       train_eval/OVRPBTW/top1 ▁▄▅▆▂▆▇█
+wandb:                       train_eval/OVRPBTW/top2 █▁▆█▁███
+wandb:                       train_eval/OVRPBTW/top3 ▁▁▂▂▄▇▂█
+wandb:            train_eval/OVRPL/actual_regret_pct ▇█▂▁▃▁▂▇
+wandb:                           train_eval/OVRPL/ce ▄▃▃▆▆▂▁█
+wandb:    train_eval/OVRPL/density_nll_per_dimension █▅▃▃▂▂▁▁
+wandb:                    train_eval/OVRPL/mean_cost ██▂▁▂▁▂▇
+wandb:                         train_eval/OVRPL/top1 ▂▁▇█▇█▇▁
+wandb:                         train_eval/OVRPL/top2 ▂▁█▃▅██▃
+wandb:                         train_eval/OVRPL/top3 ███▁▂▄▅▃
+wandb:          train_eval/OVRPLTW/actual_regret_pct ▁█▄▆▃▂▁▁
+wandb:                         train_eval/OVRPLTW/ce ▅▂█▆▃▁▂▁
+wandb:  train_eval/OVRPLTW/density_nll_per_dimension █▇▄▃▃▂▂▁
+wandb:                  train_eval/OVRPLTW/mean_cost ▁█▅▇▃▂▁▂
+wandb:                       train_eval/OVRPLTW/top1 ▆▂▅▁▆▇██
+wandb:                       train_eval/OVRPLTW/top2 ██▁▄███▆
+wandb:                       train_eval/OVRPLTW/top3 ▁▁▃▇█▄▇▅
+wandb:           train_eval/OVRPTW/actual_regret_pct ▃▃▃▅▃▃█▁
+wandb:                          train_eval/OVRPTW/ce █▅▃▄▁▁▁▃
+wandb:   train_eval/OVRPTW/density_nll_per_dimension █▇▆▄▂▁▁▁
+wandb:                   train_eval/OVRPTW/mean_cost ▃▃▃▆▃▃█▁
+wandb:                        train_eval/OVRPTW/top1 ▃▃▃▁▅▃▇█
+wandb:                        train_eval/OVRPTW/top2 ███▁██▆▂
+wandb:                        train_eval/OVRPTW/top3 ▄▄▄▇█▇█▁
+wandb:              train_eval/TSP/actual_regret_pct █▇▂▁▁▁▁▁
+wandb:                             train_eval/TSP/ce █▇▅▂▁▂▁▁
+wandb:      train_eval/TSP/density_nll_per_dimension █▅▅▄▂▂▂▁
+wandb:                      train_eval/TSP/mean_cost █▇▂▁▁▁▁▁
+wandb:                           train_eval/TSP/top1 ▁▂▅██▇██
+wandb:                           train_eval/TSP/top2 ▁▂▅▇▇▆██
+wandb:                           train_eval/TSP/top3 ▁▃▆▇█▇██
+wandb:             train_eval/VRPB/actual_regret_pct ▂▂▂▂▃█▁▂
+wandb:                            train_eval/VRPB/ce ▅▄▅▃▄█▁▃
+wandb:     train_eval/VRPB/density_nll_per_dimension █▆▅▃▂▄▂▁
+wandb:                     train_eval/VRPB/mean_cost ▂▂▂▂▃█▁▁
+wandb:                          train_eval/VRPB/top1 ▆▆▅▇▄▁▇█
+wandb:                          train_eval/VRPB/top2 █▇▅▅█▁█▆
+wandb:                          train_eval/VRPB/top3 ▄▄██▁▁▆▆
+wandb:            train_eval/VRPBL/actual_regret_pct █▂▃▄▃▁▇▅
+wandb:                           train_eval/VRPBL/ce ▅▄▁▄▂▁▂█
+wandb:    train_eval/VRPBL/density_nll_per_dimension █▆▃▄▁▂▁▂
+wandb:                    train_eval/VRPBL/mean_cost █▂▃▅▃▁▇▇
+wandb:                         train_eval/VRPBL/top1 ▅▄▇▃█▅▅▁
+wandb:                         train_eval/VRPBL/top2 ███▅███▁
+wandb:                         train_eval/VRPBL/top3 ▁▁█▇▇██▇
+wandb:          train_eval/VRPBLTW/actual_regret_pct █▅▇█▁▃▄▁
+wandb:                         train_eval/VRPBLTW/ce █▆▅▃▂▃▂▁
+wandb:  train_eval/VRPBLTW/density_nll_per_dimension █▆▅▄▂▃▂▁
+wandb:                  train_eval/VRPBLTW/mean_cost █▅█▆▁▃▄▁
+wandb:                       train_eval/VRPBLTW/top1 ▄▅▄▁█▆▆█
+wandb:                       train_eval/VRPBLTW/top2 ▁▃▁▆█▁▆▅
+wandb:                       train_eval/VRPBLTW/top3 ▁▄▄▆▇▇▇█
+wandb:           train_eval/VRPBTW/actual_regret_pct █▃▅▃▂▂▁▅
+wandb:                          train_eval/VRPBTW/ce █▄▅▃▂▂▁▅
+wandb:   train_eval/VRPBTW/density_nll_per_dimension █▅▄▃▂▂▁▃
+wandb:                   train_eval/VRPBTW/mean_cost █▃▅▃▂▂▁▆
+wandb:                        train_eval/VRPBTW/top1 ▁▆▄▆▆▇█▄
+wandb:                        train_eval/VRPBTW/top2 ▂▅▃▄▆▇█▁
+wandb:                        train_eval/VRPBTW/top3 ▁▄▃▅▇▇█▁
+wandb:             train_eval/VRPL/actual_regret_pct ▁██▁▆▁▃▁
+wandb:                            train_eval/VRPL/ce ▇█▅▁▅▂▃▁
+wandb:     train_eval/VRPL/density_nll_per_dimension █▆▄▃▃▁▂▁
+wandb:                     train_eval/VRPL/mean_cost ▁██▁▇▁▄▁
+wandb:                          train_eval/VRPL/top1 █▃▁█▃▇▅█
+wandb:                          train_eval/VRPL/top2 ▁▂▅█▃█▅█
+wandb:                          train_eval/VRPL/top3 ▁▂▇█▄▇▆▇
+wandb:           train_eval/VRPLTW/actual_regret_pct █▂▂▅▂▁▂▁
+wandb:                          train_eval/VRPLTW/ce █▄▃▄▃▂▂▁
+wandb:   train_eval/VRPLTW/density_nll_per_dimension █▅▄▅▃▂▂▁
+wandb:                   train_eval/VRPLTW/mean_cost █▃▂▇▂▁▂▂
+wandb:                        train_eval/VRPLTW/top1 ▁▆▆▅▆▇▇█
+wandb:                        train_eval/VRPLTW/top2 ▁▆▆▆▆▇▇█
+wandb:                        train_eval/VRPLTW/top3 ▁▆▇▆▇███
+wandb:            train_eval/VRPTW/actual_regret_pct ▃█▂▂▁▁▂▁
+wandb:                           train_eval/VRPTW/ce █▇▂▂▂▁▂▁
+wandb:    train_eval/VRPTW/density_nll_per_dimension █▇▄▃▂▁▂▁
+wandb:                    train_eval/VRPTW/mean_cost ▄█▂▁▁▁▂▁
+wandb:                         train_eval/VRPTW/top1 ▃▁▇▇██▆█
+wandb:                         train_eval/VRPTW/top2 ▃▁▇███▇▇
+wandb:                         train_eval/VRPTW/top3 ▁▃▇▇████
+wandb:            train_eval/macro_actual_regret_pct █▆▃▃▂▁▁▁
+wandb:                           train_eval/macro_ce █▆▅▃▂▂▁▁
+wandb:    train_eval/macro_density_nll_per_dimension █▆▄▄▂▂▁▁
+wandb:                    train_eval/macro_mean_cost █▆▃▃▁▁▁▁
+wandb:                         train_eval/macro_top1 ▁▃▅▆▇███
+wandb:               train_eval/macro_top1_tie_aware ▁▃▅▆▇███
+wandb:                         train_eval/macro_top2 ▁▃▅▅▇▇█▇
+wandb:                         train_eval/macro_top3 ▁▃▆▇▇▇██
+wandb:           train_eval/macro_vbs_gap_closed_pct ▁▂▆▆▇███
+wandb:                train_eval/macro_vs_oracle_pct █▆▃▄▂▁▁▁
+wandb:                   train_eval/macro_vs_sbs_pct █▆▃▄▂▁▁▁
+wandb:                     train_eval/native_correct ▁▃▅▆▇███
+wandb:                    val/ATSP/actual_regret_pct ▄▃▆▇▂▃▃▁▂▁▃▂▃▃▂█▂▂▃▅▃▁▅▂▂▁▂▁▁▁▁▂▁▁▁▅▃▁▁▁
+wandb:                                   val/ATSP/ce █▃▂▅▂▂▄▁▁▂▂▂▂▂▂▂▂▂▂▂▂▁▂▁▂▁▂▁▁▁▁▁▁▁▁▂▂▁▂▁
+wandb:            val/ATSP/density_nll_per_dimension █▄▃▄▂▂▃▂▂▂▃▃▂▂▂▂▂▂▂▃▂▁▂▁▂▂▂▂▁▁▁▁▁▁▁▂▁▁▁▁
+wandb:                            val/ATSP/mean_cost ▄▃▆▇▂▃▃▁▂▁▃▂▄▃▂█▂▂▃▅▃▁▅▂▂▁▂▁▁▁▁▂▁▁▁▅▃▁▁▁
+wandb:                                 val/ATSP/top1 ▁▃▄▄▇▃▁▇▆▇▂▅▆▃▇▄▇▆▆▅▃▇▄▇▇█▆▇▇▇█▆█▇▇▄▃▇▇█
+wandb:                                 val/ATSP/top2 ▁██▇██▇████████████▇██▇███████████▇█████
+wandb:                                 val/ATSP/top3 ▇▆█▁█▇▆▇▇█▇▇▇█▇▆█▅▇▇▇▇▅▇▇▇█▇▇▇▇▇▇▇▆▆▇█▇▆
+wandb:                    val/CVRP/actual_regret_pct ▃▄▄██▃▅▇█▄▄▄▃▂▂▂▂▂▂▁▂▁▁▂▁▁▁▁▁▁▂▁▂▁▁▂▁▁▂▁
+wandb:                                   val/CVRP/ce █▆▅▆▅▅▄▅▅▅▄▄▄▃▃▃▂▂▃▂▂▂▂▃▂▂▂▁▂▂▂▁▂▁▂▂▁▁▂▁
+wandb:            val/CVRP/density_nll_per_dimension █▅▄▄▄▄▃▃▄▃▃▃▃▄▂▂▂▃▃▂▂▂▂▃▁▂▁▁▁▂▂▁▁▁▁▁▁▁▂▁
+wandb:                            val/CVRP/mean_cost ▄▅▅██▄▅▇█▄▄▅▄▃▂▂▂▂▂▁▂▂▁▂▁▂▁▁▁▂▂▁▁▁▁▂▁▁▂▁
+wandb:                                 val/CVRP/top1 ▁▁▂▁▂▂▃▂▂▄▃▄▅▆▆▆▇▆▆▇▆▇▇▇▇▆▇▇▇▇▇▇▇▇▇▇██▇█
+wandb:                                 val/CVRP/top2 ▁▅▅▄▄▄▆▄▄▅▆▅▆▇▇▆▇▇▆▇▇▇▇▇▇▇▇█▇▇▇▇███▇████
+wandb:                                 val/CVRP/top3 ▁▅▅▄▄▆▆▅▄▅▆▆▆▆▇▆▇▇▆█▇▇▇▇▇▇███▇▇▇███▇██▇█
+wandb:                    val/OVRP/actual_regret_pct ▅▅▃▂▅▃▂▂▅▂▅▅▄█▄▂▅▆▄▆▃▅▄▄▂▂▆▃▃▃▃▁▃▃▃▂▄▂▂▂
+wandb:                                   val/OVRP/ce ▇█▂▃▂▃▃▂▂▂▃▂▂▄▄▂▃▂▂▃▁▂▃▂▁▁▂▁▂▂▂▁▂▂▂▂▁▁▂▁
+wandb:            val/OVRP/density_nll_per_dimension █▅▃▄▃▃▃▃▂▂▂▂▂▂▂▂▂▁▂▂▂▁▁▁▁▁▁▁▁▂▁▁▁▁▁▁▁▁▂▁
+wandb:                            val/OVRP/mean_cost ▅▅▃▂▅▃▂▂▅▂▅▅▄█▄▂▅▅▄▅▃▅▄▃▂▂▇▃▂▃▃▁▃▃▃▂▄▂▂▂
+wandb:                                 val/OVRP/top1 ▂▂▇▆▂▇▆▆▂▆▂▂▃▁▄▆▂▃▆▂▇▅▃▄██▃▅▅▆▆█▄▄▄▆▇▆▇▆
+wandb:                                 val/OVRP/top2 ▁▆▆▆▆▆▆▇▆▇▄▆▆▅▆█▇▆▆▆▇▇▆▇█▇▆▆▇▇▇█▇▆▇▇▇█▇█
+wandb:                                 val/OVRP/top3 ▁▁█▅█▅▄█▆▆▄██▃▅▇█▇▆▇█▇▆▇▇▇▆▇▇▆▇▇▇▇▇▇▇▇▇▇
+wandb:                   val/OVRPB/actual_regret_pct █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                                  val/OVRPB/ce █▄▂▃▂▂▂▂▂▂▂▂▂▁▁▁▂▁▁▂▁▁▁▂▁▂▁▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:           val/OVRPB/density_nll_per_dimension █▄▄▃▃▃▃▃▃▃▄▃▂▂▂▂▂▂▂▂▁▂▁▂▁▁▁▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:                           val/OVRPB/mean_cost █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                                val/OVRPB/top1 ▁█▆███████▇█▇██████████▇█▇███▇███▇██████
+wandb:                                val/OVRPB/top2 ▁██████████████████████▇████████████████
+wandb:                                val/OVRPB/top3 ▁███████████████████████████████████████
+wandb:                  val/OVRPBL/actual_regret_pct ▁▁█▁▁▁█▁▁▁▁▁▁▁▁▂▁▁▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                                 val/OVRPBL/ce █▆▄▂▂▂▂▂▁▁▁▁▁▂▂▂▂▂▂▁▁▂▁▂▁▁▁▁▁▁▁▂▁▁▁▁▁▁▁▁
+wandb:          val/OVRPBL/density_nll_per_dimension █▅▃▄▃▃▃▃▃▂▃▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▂▁▁▁▁▁▁▁▁▁
+wandb:                          val/OVRPBL/mean_cost ▁▁█▁▁▁█▁▁▁▁▁▁▁▁▂▁▁▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                               val/OVRPBL/top1 ██▁███▁█████▇▇█▇██▅███▆▇█▇▇▇▇██▇█████▆██
+wandb:                               val/OVRPBL/top2 ▁▁██████████████████████████████████████
+wandb:                               val/OVRPBL/top3 ▁▃██████████████████████████████████████
+wandb:                val/OVRPBLTW/actual_regret_pct ▃███▃▃▃▃▃▃▂▃▃▂▃▃▃▄▂▃▂▄▃▄▄▃▂▂▃▂▃▃▂▂▂▃▂▄▃▁
+wandb:                               val/OVRPBLTW/ce █▃▃▃▂▂▃▂▂▂▂▂▂▂▂▂▂▂▁▂▁▂▁▂▂▂▁▂▁▁▂▂▁▁▁▁▂▁▁▁
+wandb:        val/OVRPBLTW/density_nll_per_dimension █▅▄▄▄▄▅▄▄▄▄▃▃▄▃▃▃▄▂▂▂▃▂▂▄▂▂▂▁▂▁▂▁▁▁▁▂▁▁▂
+wandb:                        val/OVRPBLTW/mean_cost ▃███▃▃▃▃▃▃▂▃▃▂▃▃▃▄▂▃▂▄▃▄▅▃▂▂▃▂▃▃▂▂▂▃▂▃▃▁
+wandb:                             val/OVRPBLTW/top1 ▄▁▁▁▄▄▄▄▄▄█▆▄█▄▅▅▃▆▄▅▃▅▄▂▅▆▄▅▆▄▄▇▆▆▅▅▅▅█
+wandb:                             val/OVRPBLTW/top2 ▁████████████████▇██████████████████████
+wandb:                             val/OVRPBLTW/top3 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                 val/OVRPBTW/actual_regret_pct ▂▂▂█▆▂▂▂▂▃▂▂▂▁▃▂▃▄▁▂▄▆▂▂▄▂▃▂▂▁▂▃▂▃▃▂▂▂▃▂
+wandb:                                val/OVRPBTW/ce █▃▂▃▂▂▂▂▂▂▁▂▁▁▁▁▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▂▁▁▁▁▁▁▂▁
+wandb:         val/OVRPBTW/density_nll_per_dimension █▅▅▄▄▄▄▄▄▃▃▃▃▃▂▂▂▃▂▂▂▂▁▂▂▁▁▂▂▁▂▂▁▂▂▁▁▁▁▂
+wandb:                         val/OVRPBTW/mean_cost ▃▃▃█▆▂▃▃▂▃▂▂▃▁▄▃▃▅▁▂▅▇▃▂▄▂▃▂▂▁▂▃▃▃▃▃▂▂▂▃
+wandb:                              val/OVRPBTW/top1 ▃▃▃▂▄▆▃▃▆▂▇▇▃▇▄▄▂▂██▁▂▅█▄▅▆▅▇▇▅▇▄▇▆▄▆▅▃▄
+wandb:                              val/OVRPBTW/top2 ▁██████████▇█████▇██████████████████▇███
+wandb:                              val/OVRPBTW/top3 █████████████████▁███████████████████▁█▁
+wandb:                   val/OVRPL/actual_regret_pct ▅▅▂▅▅▃▃▅▃▅▃▃▂▃▂▂▄▂▃▂▃▂▃█▃▂▃▂▂▁▂▁▃▂▂▂▂▂▃▅
+wandb:                                  val/OVRPL/ce █▇▃▃▂▃▂▃▂▂▂▄▃▂▂▁▃▂▂▂▃▂▂▄▂▁▁▁▁▁▁▁▂▁▁▁▁▁▂▃
+wandb:           val/OVRPL/density_nll_per_dimension █▅▃▃▃▂▃▂▂▂▂▃▃▂▁▂▂▁▃▁▂▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                           val/OVRPL/mean_cost ▅▅▂▅▅▃▃▅▃▅▃▃▂▃▂▂▄▂▂▂▃▂▃█▃▂▃▂▂▁▂▁▃▂▂▂▂▂▃▅
+wandb:                                val/OVRPL/top1 ▁▁▇▁▂▇▇▁▇▁▇▇▇▇▇▇▅▆▆▇▅██▁▆▇▇▆▇▇██▆▇▆▇▇▆▆▂
+wandb:                                val/OVRPL/top2 ▁▄▄▆▆▇█▆█▆█▆████▆▇▇▇▆█▇▅▇██▇████▇█▇▇▇█▇▆
+wandb:                                val/OVRPL/top3 ▁▅▇███████▇▇▇███▇█▇▇██▇▆████████████████
+wandb:                 val/OVRPLTW/actual_regret_pct ▁▁▁▁▁▁▁▁▁█▁▁▁▁▃▄▁▁▂▅▃▂▂▄▄█▂▂▁▃▂▁▂▃▂▂▁▃▂▂
+wandb:                                val/OVRPLTW/ce █▇▄▃▂▂▃▃▂▂▂▂▃▁▃▂▂▂▁▃▂▂▁▂▂▂▁▂▁▂▂▁▁▃▂▂▁▁▁▁
+wandb:         val/OVRPLTW/density_nll_per_dimension █▅▄▄▄▄▄▄▄▄▃▃▃▂▃▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▂▁▁▁▁▂▁▁▁▁
+wandb:                         val/OVRPLTW/mean_cost ▁▁▁▁▁▁▁▁▁▇▁▁▁▁▄▄▁▁▂▆▃▂▂▄▃█▂▂▁▃▂▁▁▂▂▂▁▂▂▂
+wandb:                              val/OVRPLTW/top1 ███████▇█▃███▇▄▅█▇█▃▅▆▆▄▇▁▇▇█▆▆▇▇▆▇▇▇▇▇▇
+wandb:                              val/OVRPLTW/top2 █▁██████████▇█▅████▇███▇█▇███████▆█████▇
+wandb:                              val/OVRPLTW/top3 ▆▆▆▆▆▆▆▃▆▆▆▆▆▆▆▆▆▆██▆▁█▆█▆█▆█▆▃███▆▅████
+wandb:                  val/OVRPTW/actual_regret_pct ▃▃▃▃▃█▃█▇▃▃▇▂▂▃▃▃▄▇▄▃▃▃▃▃▇▃▄▃▃▁▃▃▁▅▂▂▂▂▂
+wandb:                                 val/OVRPTW/ce █▅▃▅▃▂▃▂▂▂▃▃▂▂▂▃▂▂▂▂▂▂▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▂
+wandb:          val/OVRPTW/density_nll_per_dimension █▅▅▆▅▅▅▄▄▄▄▄▄▃▃▄▃▅▂▂▂▂▂▃▂▂▁▂▁▁▂▁▁▂▁▁▁▁▁▁
+wandb:                          val/OVRPTW/mean_cost ▃▃▃▃▃█▃█▇▃▄▇▃▃▃▃▄▄▇▅▃▃▃▄▃█▄▄▃▃▁▃▃▂▅▂▂▂▃▃
+wandb:                               val/OVRPTW/top1 ▃▃▃▃▃▁▃▁▄▃▄▃▄▃▃▃▂▅▂▂▅▃▃▅▅▁▆▃▃▃█▄▃█▅▆▅▅▆▅
+wandb:                               val/OVRPTW/top2 ▁██████████▇███▇███▇▇████▇█████████▇███▇
+wandb:                               val/OVRPTW/top3 ▆▆▆▆▆▆▆▆▆▆▆▆▁█▆▆▆▁▆▆▆▆███▆▆▆█▆██▆█▆▆████
+wandb:                     val/TSP/actual_regret_pct ▆▆▆█▆▆▃▆▅▅▆▆▆▂▂▁▂▂▁▁▃▂▁▁▁▁▂▁▁▁▁▂▁▁▁▁▁▁▁▁
+wandb:                                    val/TSP/ce █▆▇▇▅▅▆▄▅▄▆▄▄▃▃▃▂▂▁▂▂▁▁▁▁▂▂▁▂▂▁▁▃▁▁▁▁▁▂▁
+wandb:             val/TSP/density_nll_per_dimension █▅▅▅▃▃▅▃▃▂▃▃▃▂▂▃▂▂▂▂▂▂▁▁▂▁▂▁▂▂▁▂▁▁▁▁▁▁▁▁
+wandb:                             val/TSP/mean_cost ▆▆▆█▆▆▃▆▅▅▆▆▅▂▂▁▂▂▁▁▂▂▁▁▁▁▂▁▁▁▁▂▁▁▁▁▂▁▁▁
+wandb:                                  val/TSP/top1 ▅▅▅▁▅▅▄▅▄▅▅▅▆▇▆▇▇▇███████▇▇██▇██▇▇████▇▇
+wandb:                                  val/TSP/top2 ▂▂▂▁▄▂▂▄▂▄▂▄▅▆▆▅▆▇▇▇▇▇▇█▇▇▆▇▇▆▇▇▆▇████▇▇
+wandb:                                  val/TSP/top3 ▃▃▃▂▃▁▃▄▄▅▃▃▅▅▆▄▇▇▇▇▇▇▇█▇▆▅▇▇▆█▇▆▇█▇██▇▇
+wandb:                    val/VRPB/actual_regret_pct █▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                                   val/VRPB/ce █▅▃▂▂▂▂▂▁▂▁▂▂▂▂▁▂▂▂▁▁▁▃▁▂▃▁▁▂▃▁▂▁▂▁▂▁▁▁▂
+wandb:            val/VRPB/density_nll_per_dimension █▄▄▃▃▄▃▃▂▃▃▂▂▂▂▂▂▂▂▂▂▂▂▁▁▂▂▂▁▂▁▂▁▁▂▂▁▁▁▁
+wandb:                            val/VRPB/mean_cost █▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                                 val/VRPB/top1 ▁▅▇▇▇▇▇▇█▇███▇▇██▇██▇▇▇█▇▇▇█▇▇███▇█▇▇███
+wandb:                                 val/VRPB/top2 ▁▁▆██████████▇▇████▇██▆██▅▆▇▇▆█▇█▇█▆████
+wandb:                                 val/VRPB/top3 ▁██████▇██▇█████████████████████▇███████
+wandb:                   val/VRPBL/actual_regret_pct ▁█▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                                  val/VRPBL/ce █▆▃▃▂▂▂▂▂▂▂▂▂▂▁▂▂▂▂▂▁▁▁▂▂▂▁▁▂▁▃▁▁▁▂▁▁▂▁▂
+wandb:           val/VRPBL/density_nll_per_dimension █▅▄▃▃▃▃▃▃▃▂▂▂▂▂▂▂▃▂▂▂▂▂▂▁▂▂▁▂▁▂▁▁▁▁▁▁▁▁▁
+wandb:                           val/VRPBL/mean_cost ▁█▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                                val/VRPBL/top1 ▇▁▇▇█▇▇▇▇▇▇▇▆▇█▇██▇▇███▇████▇▇▇█▇█▇█▇▇█▇
+wandb:                                val/VRPBL/top2 ▁▂████████▇█▅▇██▇██▇███▆████▆█▅▇█▇█████▆
+wandb:                                val/VRPBL/top3 ▁█▇█████████████████████████████████████
+wandb:                 val/VRPBLTW/actual_regret_pct █▃▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                                val/VRPBLTW/ce █▅▅▃▃▃▂▃▂▂▂▂▂▂▂▂▁▁▁▁▂▁▂▁▁▂▁▁▁▂▁▁▁▁▁▂▁▁▁▁
+wandb:         val/VRPBLTW/density_nll_per_dimension █▅▄▄▄▃▃▃▃▃▃▃▃▃▂▂▂▂▂▂▂▂▁▁▂▂▂▁▂▂▁▁▁▂▁▁▁▁▁▁
+wandb:                         val/VRPBLTW/mean_cost █▃▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                              val/VRPBLTW/top1 ▁▅▆▇▇▇▇▇▇█▇▇█▇▇▇▇██▇█████▇▇▇█▇██▇███▇▇▇█
+wandb:                              val/VRPBLTW/top2 ▁▆▆▇██▇███████████████▇██▇███▇████████▇█
+wandb:                              val/VRPBLTW/top3 ▁▆▇▇▇▇▇▇▇██▇▇█▇█████▇█▇██▇██████████████
+wandb:                  val/VRPBTW/actual_regret_pct █▁▂▁▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂
+wandb:                                 val/VRPBTW/ce █▄▃▃▃▂▂▂▂▂▂▂▂▂▂▁▂▂▂▂▂▂▁▁▁▁▂▁▁▁▁▁▁▁▁▁▁▂▁▂
+wandb:          val/VRPBTW/density_nll_per_dimension █▅▄▄▄▃▄▃▃▂▃▂▂▃▂▂▂▂▂▁▂▂▁▂▁▁▂▂▁▂▁▁▁▂▁▁▁▃▁▂
+wandb:                          val/VRPBTW/mean_cost █▂▂▂▂▂▁▁▁▁▁▁▁▂▁▁▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂
+wandb:                               val/VRPBTW/top1 ▁▇▇█▆▇███▇▇▇▇▆▇▇▇▇█▇▇▇▇█▇▇▇▇███▇▇██▇█▇▇▆
+wandb:                               val/VRPBTW/top2 ▁▇▇██▇██████████▇▇▇████████████████████▇
+wandb:                               val/VRPBTW/top3 ▁▇▇▇▇▇▇█████▇▇██▇██▇▇██████████████████▇
+wandb:                    val/VRPL/actual_regret_pct █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                                   val/VRPL/ce ▇█▃▂▄▂▃▂▃▅▃▁▄▃▄▁▄▃▂▂▂▁▂▂▃▃▆▁▃▁▂▂▁▁▂▃▂▂▂▁
+wandb:            val/VRPL/density_nll_per_dimension █▅▄▃▃▂▂▃▃▂▃▂▂▂▂▂▂▁▁▁▁▁▁▁▂▁▂▁▁▁▁▁▁▂▁▂▁▁▁▁
+wandb:                            val/VRPL/mean_cost █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                                 val/VRPL/top1 ▁▅▄█▇▅▆▇▃▆▆▇▅▇▄▇▆▆▅▇▇▇▇█▆▇▅▆▇▇█▆▇▇▇▇▇█▇█
+wandb:                                 val/VRPL/top2 ▁▂▃▆▄▆▆▆▅▅▅█▆▇▅▇▅▆▆▆▆█▆▆▅▇▅▇▆▇▇▆█▇▆▇▇█▇▇
+wandb:                                 val/VRPL/top3 ▁▅▆▆▄▆▆▆▇▅▅█▇▇▇▇▅▆██▇█▇▇▆▆▅█▇▇█▇█▇▇▇▇█▇▇
+wandb:                  val/VRPLTW/actual_regret_pct █▄▂▂▃▂▄▂▂▂▁▁▂▂▂▃▁▂▁▂▁▁▂▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                                 val/VRPLTW/ce █▆▄▄▄▃▃▃▃▂▂▂▄▂▂▂▂▂▂▂▂▂▂▁▂▁▂▁▁▁▂▁▁▁▁▁▁▁▁▁
+wandb:          val/VRPLTW/density_nll_per_dimension █▅▄▄▄▄▃▃▃▃▂▂▄▂▂▂▂▂▂▃▂▂▂▂▂▂▃▂▁▁▃▁▁▁▂▁▁▁▁▁
+wandb:                          val/VRPLTW/mean_cost █▄▃▂▃▂▄▂▂▂▁▁▂▂▂▃▁▂▂▃▁▁▂▁▁▁▂▂▁▁▂▁▁▁▁▁▁▁▁▁
+wandb:                               val/VRPLTW/top1 ▁▄▅▅▅▅▆▅▇▇▇▇▆▇▇▆▇▇▇▇▇▇▇███▇███▇█▇█▇█████
+wandb:                               val/VRPLTW/top2 ▁▃▅▆▆▆▇▇▇▇▇▇▆▇▇▇███▇▇█▇█▇█▇███▇█████████
+wandb:                               val/VRPLTW/top3 ▂▁▇▇▆▇▇▇▇▇▇█▆▇█████▇█▇▇█▇█▇███▇█████████
+wandb:                   val/VRPTW/actual_regret_pct █▃▂▃▂▂▂▂▂▃▂▂▂▁▁▁▂▁▁▁▁▁▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                                  val/VRPTW/ce █▆▄▅▄▃▃▂▃▄▂▃▃▂▁▂▂▂▂▁▂▂▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:           val/VRPTW/density_nll_per_dimension █▅▄▄▄▅▃▃▄▃▃▄▃▂▂▂▂▂▂▂▂▂▂▂▁▂▂▁▁▁▁▁▁▁▂▁▁▁▁▁
+wandb:                           val/VRPTW/mean_cost █▃▂▃▂▂▂▂▂▄▂▂▂▂▁▁▂▁▁▁▁▁▁▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                                val/VRPTW/top1 ▁▅▅▄▅▅▆▆▇▄▇▆▅▇▇▇▇▇▇█▇▇▇██▇▇▇████▇██▇███▇
+wandb:                                val/VRPTW/top2 ▁▄▇▅▇▇▇▇▇▆▇▇▇███▇▇██▇████▇██████████████
+wandb:                                val/VRPTW/top3 ▁▃▇▅▇▆▇▇▇▇▇▇▆▇██▇███▇████▇██████████████
+wandb:                   val/macro_actual_regret_pct █▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                                  val/macro_ce █▅▃▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▁▂▂▁▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:           val/macro_density_nll_per_dimension █▅▄▄▃▃▃▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                           val/macro_mean_cost █▃▂▂▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                                val/macro_top1 ▁▄▅▆▆▆▆▆▇▆▇▇▆▇▇▇▇▇▇▇▇█▇▇█▇▇█████████████
+wandb:                      val/macro_top1_tie_aware ▁▄▅▆▆▆▆▆▇▆▇▇▆▇▇▇▇▇▇▇▇█▇▇█▇▇█████████████
+wandb:                                val/macro_top2 ▁▅▆▇▇▇▇▇▇▇▇▇▇▇▇█▇▇▇▇██▇▇█▇██████████████
+wandb:                                val/macro_top3 ▁▅▇▇▇▇▇▇▇▇▇▇▇▇██▇█████████▇█████████████
+wandb:                  val/macro_vbs_gap_closed_pct ▁▇██████████████████████████████████████
+wandb:                       val/macro_vs_oracle_pct █▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                          val/macro_vs_sbs_pct █▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                            val/native_correct ▁▄▅▆▆▆▆▆▇▆▇▇▆▇▇▇▇▇▇▇▇█▇▇█▇▇█████████████
+wandb:                            view_presentations ▁▁▁▁▁▂▂▂▂▂▂▂▂▂▂▃▃▃▃▄▄▄▄▅▅▅▅▅▆▆▆▆▆▆▇▇████
+wandb: 
+wandb: Run summary:
+wandb:                  attempted_view_presentations 14402560
+wandb:                              clip_coefficient 0.08419
+wandb:                                         epoch 40
+wandb:                                  global_epoch 80
+wandb:                                     grad_norm 11.87836
+wandb:                                     joint_nll 0.61287
+wandb:                                          loss 0.08496
+wandb:                                            lr 0.0003
+wandb:                             nll_per_dimension 0.08496
+wandb:                      optimization/amp_retries 0
+wandb:              optimization/attempted_view_rows 360000
+wandb:                 optimization/clip_coefficient 0.10618
+wandb:                        optimization/grad_norm 12.39686
+wandb:                        optimization/joint_nll -1.46473
+wandb:                             optimization/loss -0.24059
+wandb:                               optimization/lr 0.0003
+wandb:                         optimization/lr_first 0.0003
+wandb:                optimization/nll_per_dimension -0.24059
+wandb:                  optimization/peak_memory_gib 15.73848
+wandb:                          optimization/samples 180000
+wandb:                          optimization/seconds 86.23526
+wandb:             optimization/successful_view_rows 360000
+wandb:                          optimization/updates 240
+wandb:                               peak_memory_gib 15.73848
+wandb:                             peak_reserved_gib 21.34961
+wandb:                                 presentations 7200000
+wandb:                            queries_per_second 253.99964
+wandb:                                       retries 0
+wandb:                                         scale 65536
+wandb:                             successful_update 9600
+wandb:             train_eval/ATSP/actual_regret_pct 0.36844
+wandb:                            train_eval/ATSP/ce 0.60667
+wandb:     train_eval/ATSP/density_nll_per_dimension 0.51137
+wandb:                     train_eval/ATSP/mean_cost 1.64106
+wandb:                          train_eval/ATSP/top1 0.7696
+wandb:                          train_eval/ATSP/top2 0.9594
+wandb:                          train_eval/ATSP/top3 0.9945
+wandb:             train_eval/CVRP/actual_regret_pct 0.69326
+wandb:                            train_eval/CVRP/ce 1.42703
+wandb:     train_eval/CVRP/density_nll_per_dimension 0.13518
+wandb:                     train_eval/CVRP/mean_cost 17.99
+wandb:                          train_eval/CVRP/top1 0.453
+wandb:                          train_eval/CVRP/top2 0.6639
+wandb:                          train_eval/CVRP/top3 0.7927
+wandb:             train_eval/OVRP/actual_regret_pct 0.82325
+wandb:                            train_eval/OVRP/ce 1.51491
+wandb:     train_eval/OVRP/density_nll_per_dimension -1.01386
+wandb:                     train_eval/OVRP/mean_cost 7.45997
+wandb:                          train_eval/OVRP/top1 0.3404
+wandb:                          train_eval/OVRP/top2 0.6616
+wandb:                          train_eval/OVRP/top3 0.843
+wandb:            train_eval/OVRPB/actual_regret_pct 1.01219
+wandb:                           train_eval/OVRPB/ce 0.88765
+wandb:    train_eval/OVRPB/density_nll_per_dimension -0.71924
+wandb:                    train_eval/OVRPB/mean_cost 6.3191
+wandb:                         train_eval/OVRPB/top1 0.5528
+wandb:                         train_eval/OVRPB/top2 0.9637
+wandb:                         train_eval/OVRPB/top3 0.9805
+wandb:           train_eval/OVRPBL/actual_regret_pct 1.05817
+wandb:                          train_eval/OVRPBL/ce 0.88433
+wandb:   train_eval/OVRPBL/density_nll_per_dimension -0.50849
+wandb:                   train_eval/OVRPBL/mean_cost 6.30789
+wandb:                        train_eval/OVRPBL/top1 0.5415
+wandb:                        train_eval/OVRPBL/top2 0.9594
+wandb:                        train_eval/OVRPBL/top3 0.9875
+wandb:         train_eval/OVRPBLTW/actual_regret_pct 1.17926
+wandb:                        train_eval/OVRPBLTW/ce 0.89276
+wandb: train_eval/OVRPBLTW/density_nll_per_dimension 0.28752
+wandb:                 train_eval/OVRPBLTW/mean_cost 10.5419
+wandb:                      train_eval/OVRPBLTW/top1 0.5008
+wandb:                      train_eval/OVRPBLTW/top2 0.9149
+wandb:                      train_eval/OVRPBLTW/top3 0.9989
+wandb:          train_eval/OVRPBTW/actual_regret_pct 1.21394
+wandb:                         train_eval/OVRPBTW/ce 0.90546
+wandb:  train_eval/OVRPBTW/density_nll_per_dimension 0.27634
+wandb:                  train_eval/OVRPBTW/mean_cost 10.58392
+wandb:                       train_eval/OVRPBTW/top1 0.4921
+wandb:                       train_eval/OVRPBTW/top2 0.9097
+wandb:                       train_eval/OVRPBTW/top3 0.9984
+wandb:            train_eval/OVRPL/actual_regret_pct 1.07241
+wandb:                           train_eval/OVRPL/ce 1.65205
+wandb:    train_eval/OVRPL/density_nll_per_dimension -0.84556
+wandb:                    train_eval/OVRPL/mean_cost 7.4723
+wandb:                         train_eval/OVRPL/top1 0.215
+wandb:                         train_eval/OVRPL/top2 0.5578
+wandb:                         train_eval/OVRPL/top3 0.83
+wandb:          train_eval/OVRPLTW/actual_regret_pct 0.90878
+wandb:                         train_eval/OVRPLTW/ce 0.91158
+wandb:  train_eval/OVRPLTW/density_nll_per_dimension 0.05135
+wandb:                  train_eval/OVRPLTW/mean_cost 10.11511
+wandb:                       train_eval/OVRPLTW/top1 0.4877
+wandb:                       train_eval/OVRPLTW/top2 0.8965
+wandb:                       train_eval/OVRPLTW/top3 0.9993
+wandb:           train_eval/OVRPTW/actual_regret_pct 0.88747
+wandb:                          train_eval/OVRPTW/ce 0.93934
+wandb:   train_eval/OVRPTW/density_nll_per_dimension 0.09749
+wandb:                   train_eval/OVRPTW/mean_cost 10.10116
+wandb:                        train_eval/OVRPTW/top1 0.4784
+wandb:                        train_eval/OVRPTW/top2 0.8975
+wandb:                        train_eval/OVRPTW/top3 0.9989
+wandb:              train_eval/TSP/actual_regret_pct 0.59104
+wandb:                             train_eval/TSP/ce 1.5852
+wandb:      train_eval/TSP/density_nll_per_dimension 0.37366
+wandb:                      train_eval/TSP/mean_cost 8.00554
+wandb:                           train_eval/TSP/top1 0.3815
+wandb:                           train_eval/TSP/top2 0.6186
+wandb:                           train_eval/TSP/top3 0.7607
+wandb:             train_eval/VRPB/actual_regret_pct 0.81664
+wandb:                            train_eval/VRPB/ce 1.04282
+wandb:     train_eval/VRPB/density_nll_per_dimension -0.7756
+wandb:                     train_eval/VRPB/mean_cost 9.31537
+wandb:                          train_eval/VRPB/top1 0.5322
+wandb:                          train_eval/VRPB/top2 0.8991
+wandb:                          train_eval/VRPB/top3 0.9836
+wandb:            train_eval/VRPBL/actual_regret_pct 0.91442
+wandb:                           train_eval/VRPBL/ce 1.07628
+wandb:    train_eval/VRPBL/density_nll_per_dimension -0.51162
+wandb:                    train_eval/VRPBL/mean_cost 9.32824
+wandb:                         train_eval/VRPBL/top1 0.4794
+wandb:                         train_eval/VRPBL/top2 0.8196
+wandb:                         train_eval/VRPBL/top3 0.9843
+wandb:          train_eval/VRPBLTW/actual_regret_pct 1.57108
+wandb:                         train_eval/VRPBLTW/ce 1.14688
+wandb:  train_eval/VRPBLTW/density_nll_per_dimension 0.03989
+wandb:                  train_eval/VRPBLTW/mean_cost 19.03863
+wandb:                       train_eval/VRPBLTW/top1 0.4508
+wandb:                       train_eval/VRPBLTW/top2 0.7803
+wandb:                       train_eval/VRPBLTW/top3 0.9357
+wandb:           train_eval/VRPBTW/actual_regret_pct 1.94999
+wandb:                          train_eval/VRPBTW/ce 1.23978
+wandb:   train_eval/VRPBTW/density_nll_per_dimension 0.13144
+wandb:                   train_eval/VRPBTW/mean_cost 19.14469
+wandb:                        train_eval/VRPBTW/top1 0.4094
+wandb:                        train_eval/VRPBTW/top2 0.7573
+wandb:                        train_eval/VRPBTW/top3 0.8951
+wandb:             train_eval/VRPL/actual_regret_pct 0.50571
+wandb:                            train_eval/VRPL/ce 1.78044
+wandb:     train_eval/VRPL/density_nll_per_dimension -1.12587
+wandb:                     train_eval/VRPL/mean_cost 12.39581
+wandb:                          train_eval/VRPL/top1 0.27
+wandb:                          train_eval/VRPL/top2 0.468
+wandb:                          train_eval/VRPL/top3 0.645
+wandb:           train_eval/VRPLTW/actual_regret_pct 1.40236
+wandb:                          train_eval/VRPLTW/ce 1.15924
+wandb:   train_eval/VRPLTW/density_nll_per_dimension -0.15185
+wandb:                   train_eval/VRPLTW/mean_cost 17.80665
+wandb:                        train_eval/VRPLTW/top1 0.4618
+wandb:                        train_eval/VRPLTW/top2 0.7838
+wandb:                        train_eval/VRPLTW/top3 0.9254
+wandb:            train_eval/VRPTW/actual_regret_pct 1.31541
+wandb:                           train_eval/VRPTW/ce 1.18487
+wandb:    train_eval/VRPTW/density_nll_per_dimension -0.15328
+wandb:                    train_eval/VRPTW/mean_cost 17.8004
+wandb:                         train_eval/VRPTW/top1 0.4624
+wandb:                         train_eval/VRPTW/top2 0.7522
+wandb:                         train_eval/VRPTW/top3 0.9233
+wandb:            train_eval/macro_actual_regret_pct 1.01577
+wandb:                           train_eval/macro_ce 1.15763
+wandb:    train_eval/macro_density_nll_per_dimension -0.21673
+wandb:                    train_eval/macro_mean_cost 11.1871
+wandb:                         train_eval/macro_top1 0.45993
+wandb:               train_eval/macro_top1_tie_aware 0.46094
+wandb:                         train_eval/macro_top2 0.79241
+wandb:                         train_eval/macro_top3 0.91538
+wandb:           train_eval/macro_vbs_gap_closed_pct 24.11847
+wandb:                train_eval/macro_vs_oracle_pct 0.99449
+wandb:                   train_eval/macro_vs_sbs_pct -0.99758
+wandb:                     train_eval/native_correct 82788
+wandb:                    val/ATSP/actual_regret_pct 0.30835
+wandb:                                   val/ATSP/ce 0.58534
+wandb:            val/ATSP/density_nll_per_dimension 0.51635
+wandb:                            val/ATSP/mean_cost 1.63468
+wandb:                                 val/ATSP/top1 0.79
+wandb:                                 val/ATSP/top2 0.968
+wandb:                                 val/ATSP/top3 0.992
+wandb:                    val/CVRP/actual_regret_pct 0.64937
+wandb:                                   val/CVRP/ce 1.37316
+wandb:            val/CVRP/density_nll_per_dimension 0.21865
+wandb:                            val/CVRP/mean_cost 18.20282
+wandb:                                 val/CVRP/top1 0.482
+wandb:                                 val/CVRP/top2 0.695
+wandb:                                 val/CVRP/top3 0.827
+wandb:                    val/OVRP/actual_regret_pct 0.79526
+wandb:                                   val/OVRP/ce 1.56988
+wandb:            val/OVRP/density_nll_per_dimension -0.99018
+wandb:                            val/OVRP/mean_cost 7.46192
+wandb:                                 val/OVRP/top1 0.297
+wandb:                                 val/OVRP/top2 0.635
+wandb:                                 val/OVRP/top3 0.813
+wandb:                   val/OVRPB/actual_regret_pct 0.91199
+wandb:                                  val/OVRPB/ce 0.88125
+wandb:           val/OVRPB/density_nll_per_dimension -0.68133
+wandb:                           val/OVRPB/mean_cost 6.31731
+wandb:                                val/OVRPB/top1 0.565
+wandb:                                val/OVRPB/top2 0.968
+wandb:                                val/OVRPB/top3 0.983
+wandb:                  val/OVRPBL/actual_regret_pct 1.05063
+wandb:                                 val/OVRPBL/ce 0.88959
+wandb:          val/OVRPBL/density_nll_per_dimension -0.4578
+wandb:                          val/OVRPBL/mean_cost 6.31011
+wandb:                               val/OVRPBL/top1 0.556
+wandb:                               val/OVRPBL/top2 0.955
+wandb:                               val/OVRPBL/top3 0.983
+wandb:                val/OVRPBLTW/actual_regret_pct 1.14259
+wandb:                               val/OVRPBLTW/ce 0.88034
+wandb:        val/OVRPBLTW/density_nll_per_dimension 0.32233
+wandb:                        val/OVRPBLTW/mean_cost 10.53048
+wandb:                             val/OVRPBLTW/top1 0.498
+wandb:                             val/OVRPBLTW/top2 0.92
+wandb:                             val/OVRPBLTW/top3 0.999
+wandb:                 val/OVRPBTW/actual_regret_pct 1.25439
+wandb:                                val/OVRPBTW/ce 0.90696
+wandb:         val/OVRPBTW/density_nll_per_dimension 0.31653
+wandb:                         val/OVRPBTW/mean_cost 10.50663
+wandb:                              val/OVRPBTW/top1 0.475
+wandb:                              val/OVRPBTW/top2 0.913
+wandb:                              val/OVRPBTW/top3 0.998
+wandb:                   val/OVRPL/actual_regret_pct 1.08312
+wandb:                                  val/OVRPL/ce 1.66134
+wandb:           val/OVRPL/density_nll_per_dimension -0.80504
+wandb:                           val/OVRPL/mean_cost 7.45799
+wandb:                                val/OVRPL/top1 0.202
+wandb:                                val/OVRPL/top2 0.544
+wandb:                                val/OVRPL/top3 0.829
+wandb:                 val/OVRPLTW/actual_regret_pct 0.90024
+wandb:                                val/OVRPLTW/ce 0.91561
+wandb:         val/OVRPLTW/density_nll_per_dimension 0.09703
+wandb:                         val/OVRPLTW/mean_cost 10.13087
+wandb:                              val/OVRPLTW/top1 0.485
+wandb:                              val/OVRPLTW/top2 0.894
+wandb:                              val/OVRPLTW/top3 1
+wandb:                  val/OVRPTW/actual_regret_pct 0.90028
+wandb:                                 val/OVRPTW/ce 0.9366
+wandb:          val/OVRPTW/density_nll_per_dimension 0.15202
+wandb:                          val/OVRPTW/mean_cost 10.04604
+wandb:                               val/OVRPTW/top1 0.489
+wandb:                               val/OVRPTW/top2 0.9
+wandb:                               val/OVRPTW/top3 1
+wandb:                     val/TSP/actual_regret_pct 0.57467
+wandb:                                    val/TSP/ce 1.64863
+wandb:             val/TSP/density_nll_per_dimension 0.40896
+wandb:                             val/TSP/mean_cost 7.91504
+wandb:                                  val/TSP/top1 0.35
+wandb:                                  val/TSP/top2 0.589
+wandb:                                  val/TSP/top3 0.738
+wandb:                    val/VRPB/actual_regret_pct 0.79711
+wandb:                                   val/VRPB/ce 1.03514
+wandb:            val/VRPB/density_nll_per_dimension -0.71447
+wandb:                            val/VRPB/mean_cost 9.34119
+wandb:                                 val/VRPB/top1 0.542
+wandb:                                 val/VRPB/top2 0.902
+wandb:                                 val/VRPB/top3 0.993
+wandb:                   val/VRPBL/actual_regret_pct 0.90222
+wandb:                                  val/VRPBL/ce 1.04525
+wandb:           val/VRPBL/density_nll_per_dimension -0.43473
+wandb:                           val/VRPBL/mean_cost 9.36925
+wandb:                                val/VRPBL/top1 0.51
+wandb:                                val/VRPBL/top2 0.819
+wandb:                                val/VRPBL/top3 0.993
+wandb:                 val/VRPBLTW/actual_regret_pct 1.72024
+wandb:                                val/VRPBLTW/ce 1.19226
+wandb:         val/VRPBLTW/density_nll_per_dimension 0.12128
+wandb:                         val/VRPBLTW/mean_cost 18.95397
+wandb:                              val/VRPBLTW/top1 0.444
+wandb:                              val/VRPBLTW/top2 0.759
+wandb:                              val/VRPBLTW/top3 0.93
+wandb:                  val/VRPBTW/actual_regret_pct 2.11522
+wandb:                                 val/VRPBTW/ce 1.28037
+wandb:          val/VRPBTW/density_nll_per_dimension 0.21896
+wandb:                          val/VRPBTW/mean_cost 19.15011
+wandb:                               val/VRPBTW/top1 0.385
+wandb:                               val/VRPBTW/top2 0.752
+wandb:                               val/VRPBTW/top3 0.878
+wandb:                    val/VRPL/actual_regret_pct 0.49916
+wandb:                                   val/VRPL/ce 1.75591
+wandb:            val/VRPL/density_nll_per_dimension -1.08203
+wandb:                            val/VRPL/mean_cost 12.40624
+wandb:                                 val/VRPL/top1 0.292
+wandb:                                 val/VRPL/top2 0.49
+wandb:                                 val/VRPL/top3 0.635
+wandb:                  val/VRPLTW/actual_regret_pct 1.27749
+wandb:                                 val/VRPLTW/ce 1.15076
+wandb:          val/VRPLTW/density_nll_per_dimension -0.09196
+wandb:                          val/VRPLTW/mean_cost 17.63082
+wandb:                               val/VRPLTW/top1 0.47
+wandb:                               val/VRPLTW/top2 0.787
+wandb:                               val/VRPLTW/top3 0.927
+wandb:                   val/VRPTW/actual_regret_pct 1.57208
+wandb:                                  val/VRPTW/ce 1.22657
+wandb:           val/VRPTW/density_nll_per_dimension -0.0881
+wandb:                           val/VRPTW/mean_cost 17.91677
+wandb:                                val/VRPTW/top1 0.415
+wandb:                                val/VRPTW/top2 0.728
+wandb:                                val/VRPTW/top3 0.92
+wandb:                   val/macro_actual_regret_pct 1.02524
+wandb:                                  val/macro_ce 1.16305
+wandb:           val/macro_density_nll_per_dimension -0.1652
+wandb:                           val/macro_mean_cost 11.18235
+wandb:                                val/macro_top1 0.45817
+wandb:                      val/macro_top1_tie_aware 0.45917
+wandb:                                val/macro_top2 0.78989
+wandb:                                val/macro_top3 0.91322
+wandb:                  val/macro_vbs_gap_closed_pct 23.80597
+wandb:                       val/macro_vs_oracle_pct 0.99982
+wandb:                          val/macro_vs_sbs_pct -0.96624
+wandb:                            val/native_correct 8247
+wandb:                            view_presentations 14400000
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /public/home/shiys/0selection2/code/V4/runs/R71_joint_performance_mixture/B_joint_mixture_seed2/wandb/offline-run-20261013_074754-r71-b-20261012T234748691706Z
+wandb: Find logs at: ./code/V4/runs/R71_joint_performance_mixture/B_joint_mixture_seed2/wandb/offline-run-20261013_074754-r71-b-20261012T234748691706Z/logs
+[R71 training complete] one new B; parent freeze pending; no TEST/analysis executed
