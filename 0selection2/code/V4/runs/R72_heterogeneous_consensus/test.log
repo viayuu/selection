@@ -1,0 +1,132 @@
+[R72 assigned-UUID TEST launch] {"checked_utc": "2026-10-13T03:14:57.533906+00:00", "host": "gpu03", "slurm_step": "1465.108", "pid": 2645669, "command": "/public/home/shiys/miniconda3/envs/easynco/bin/python /public/home/shiys/0selection2/code/V4/r72_frozen_evaluation.py --stage test", "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d", "gpu_index": 1, "gpu_name": "NVIDIA GeForce RTX 3090", "physical_memory_used_mib": 2, "physical_memory_total_mib": 24576, "compute_apps": [], "idle": true, "only_assigned_uuid_queried": true, "tmux_session": "r72_final_test", "tmux_pane": "%109", "tmux_pane_pid": 2070738, "tmux_server_host": "admin01", "query_commands": [["nvidia-smi", "--id=GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d", "--query-gpu=index,uuid,name,memory.used,memory.total", "--format=csv,noheader,nounits"], ["nvidia-smi", "--id=GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d", "--query-compute-apps=gpu_uuid,pid,process_name,used_gpu_memory", "--format=csv,noheader,nounits"]], "raw_stdout": ["1, GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d, NVIDIA GeForce RTX 3090, 2, 24576\n", ""]}
+[cache] TSP/test: 1000 instances, 4.5 MiB on cuda:0
+[cache] CVRP/test: 1000 instances, 8.3 MiB on cuda:0
+[cache] ATSP/test: 1000 instances, 38.4 MiB on cuda:0
+[cache] OVRP/test: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPB/test: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPL/test: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPTW/test: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPTW/test: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPB/test: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPL/test: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPBL/test: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPBTW/test: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPLTW/test: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPBL/test: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPBTW/test: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPLTW/test: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPBLTW/test: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPBLTW/test: 1000 instances, 3.4 MiB on cuda:0
+wandb: Tracking run with wandb version 0.19.11
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+[R72 first actual TEST batch] {"recorded_utc": "2026-10-13T03:15:05.594220+00:00", "problem": "TSP", "start_index": 0, "rows": 128, "true_nodes": [353, 65, 239, 381, 269, 167, 463, 170, 338, 266, 280, 326, 259, 196, 450, 236, 490, 322, 84, 301, 243, 92, 78, 255, 118, 494, 185, 273, 269, 246, 169, 147, 268, 238, 297, 438, 174, 398, 110, 81, 422, 309, 305, 339, 414, 481, 152, 355, 358, 258, 105, 283, 263, 205, 224, 112, 470, 391, 465, 203, 276, 378, 397, 244, 119, 157, 142, 162, 371, 353, 187, 371, 133, 417, 174, 405, 132, 200, 88, 304, 152, 145, 259, 274, 267, 108, 79, 129, 309, 429, 146, 178, 115, 275, 142, 195, 499, 103, 94, 167, 146, 406, 244, 466, 323, 421, 127, 346, 352, 272, 56, 163, 488, 388, 98, 340, 290, 245, 131, 361, 59, 417, 368, 116, 366, 331, 400, 109], "three_member_forward_and_aggregation_seconds": 1.3226105403155088, "elapsed_seconds": 1.3640406876802444, "counters": {"query_batches": 1, "query_rows": 128, "member_forwards": 3, "member_row_forwards": 384, "member_calls": {"R60B39": 1, "R67B36_global76": 1, "R70B23_global63": 1}, "R70_active_branch_calls": 1}, "peak_allocated_bytes": 2422908416, "peak_reserved_bytes": 4766826496, "physical_used_bytes": 5099487232, "physical_total_bytes": 25327697920, "aggregation_dtype": "torch.int64", "all_legal_scores_finite": true, "target_fields_forwarded": [], "solver_executions": 0}
+[R72 TEST task] {"problem": "TSP", "native_correct": 367, "rows": 1000, "elapsed_seconds": 8.736672728322446}
+[R72 TEST task] {"problem": "CVRP", "native_correct": 479, "rows": 1000, "elapsed_seconds": 17.253400369547307}
+[R72 TEST task] {"problem": "ATSP", "native_correct": 776, "rows": 1000, "elapsed_seconds": 17.466980227269232}
+[R72 TEST task] {"problem": "OVRP", "native_correct": 373, "rows": 1000, "elapsed_seconds": 17.88552748505026}
+[R72 TEST task] {"problem": "VRPB", "native_correct": 508, "rows": 1000, "elapsed_seconds": 18.30480242241174}
+[R72 TEST task] {"problem": "VRPL", "native_correct": 312, "rows": 1000, "elapsed_seconds": 18.726462239399552}
+[R72 TEST task] {"problem": "VRPTW", "native_correct": 427, "rows": 1000, "elapsed_seconds": 19.149310627020895}
+[R72 TEST task] {"problem": "OVRPTW", "native_correct": 488, "rows": 1000, "elapsed_seconds": 19.570894912816584}
+[R72 TEST task] {"problem": "OVRPB", "native_correct": 582, "rows": 1000, "elapsed_seconds": 19.996114178560674}
+[R72 TEST task] {"problem": "OVRPL", "native_correct": 376, "rows": 1000, "elapsed_seconds": 20.415754028595984}
+[R72 TEST task] {"problem": "VRPBL", "native_correct": 547, "rows": 1000, "elapsed_seconds": 20.835681905969977}
+[R72 TEST task] {"problem": "VRPBTW", "native_correct": 443, "rows": 1000, "elapsed_seconds": 21.257464673370123}
+[R72 TEST task] {"problem": "VRPLTW", "native_correct": 457, "rows": 1000, "elapsed_seconds": 21.680208444595337}
+[R72 TEST task] {"problem": "OVRPBL", "native_correct": 575, "rows": 1000, "elapsed_seconds": 22.100810334086418}
+[R72 TEST task] {"problem": "OVRPBTW", "native_correct": 524, "rows": 1000, "elapsed_seconds": 22.52007662318647}
+[R72 TEST task] {"problem": "OVRPLTW", "native_correct": 514, "rows": 1000, "elapsed_seconds": 22.940873296931386}
+[R72 TEST task] {"problem": "VRPBLTW", "native_correct": 449, "rows": 1000, "elapsed_seconds": 23.36364369932562}
+[R72 TEST task] {"problem": "OVRPBLTW", "native_correct": 483, "rows": 1000, "elapsed_seconds": 23.786528850905597}
+wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb: runtime/complete_evaluation_seconds ▁
+wandb:            test/ATSP/Borda_score_CE ▁
+wandb:                      test/ATSP/top1 ▁
+wandb:                 test/Borda_score_CE ▁
+wandb:            test/CVRP/Borda_score_CE ▁
+wandb:                      test/CVRP/top1 ▁
+wandb:            test/OVRP/Borda_score_CE ▁
+wandb:                      test/OVRP/top1 ▁
+wandb:           test/OVRPB/Borda_score_CE ▁
+wandb:                     test/OVRPB/top1 ▁
+wandb:          test/OVRPBL/Borda_score_CE ▁
+wandb:                    test/OVRPBL/top1 ▁
+wandb:        test/OVRPBLTW/Borda_score_CE ▁
+wandb:                  test/OVRPBLTW/top1 ▁
+wandb:         test/OVRPBTW/Borda_score_CE ▁
+wandb:                   test/OVRPBTW/top1 ▁
+wandb:           test/OVRPL/Borda_score_CE ▁
+wandb:                     test/OVRPL/top1 ▁
+wandb:         test/OVRPLTW/Borda_score_CE ▁
+wandb:                   test/OVRPLTW/top1 ▁
+wandb:          test/OVRPTW/Borda_score_CE ▁
+wandb:                    test/OVRPTW/top1 ▁
+wandb:             test/TSP/Borda_score_CE ▁
+wandb:                       test/TSP/top1 ▁
+wandb:            test/VRPB/Borda_score_CE ▁
+wandb:                      test/VRPB/top1 ▁
+wandb:           test/VRPBL/Borda_score_CE ▁
+wandb:                     test/VRPBL/top1 ▁
+wandb:         test/VRPBLTW/Borda_score_CE ▁
+wandb:                   test/VRPBLTW/top1 ▁
+wandb:          test/VRPBTW/Borda_score_CE ▁
+wandb:                    test/VRPBTW/top1 ▁
+wandb:            test/VRPL/Borda_score_CE ▁
+wandb:                      test/VRPL/top1 ▁
+wandb:          test/VRPLTW/Borda_score_CE ▁
+wandb:                    test/VRPLTW/top1 ▁
+wandb:           test/VRPTW/Borda_score_CE ▁
+wandb:                     test/VRPTW/top1 ▁
+wandb:                     test/macro_top1 ▁
+wandb:                 test/native_correct ▁
+wandb:          test/native_rows_completed ▁▁▂▂▃▃▃▄▄▅▅▆▆▆▇▇██
+wandb: 
+wandb: Run summary:
+wandb: runtime/complete_evaluation_seconds 23.78672
+wandb:            test/ATSP/Borda_score_CE 0.71476
+wandb:                      test/ATSP/top1 0.776
+wandb:                 test/Borda_score_CE 1.24318
+wandb:            test/CVRP/Borda_score_CE 1.63101
+wandb:                      test/CVRP/top1 0.479
+wandb:            test/OVRP/Borda_score_CE 1.65144
+wandb:                      test/OVRP/top1 0.373
+wandb:           test/OVRPB/Borda_score_CE 0.88751
+wandb:                     test/OVRPB/top1 0.582
+wandb:          test/OVRPBL/Borda_score_CE 0.89033
+wandb:                    test/OVRPBL/top1 0.575
+wandb:        test/OVRPBLTW/Borda_score_CE 0.98914
+wandb:                  test/OVRPBLTW/top1 0.483
+wandb:         test/OVRPBTW/Borda_score_CE 0.99633
+wandb:                   test/OVRPBTW/top1 0.524
+wandb:           test/OVRPL/Borda_score_CE 1.56923
+wandb:                     test/OVRPL/top1 0.376
+wandb:         test/OVRPLTW/Borda_score_CE 0.96802
+wandb:                   test/OVRPLTW/top1 0.514
+wandb:          test/OVRPTW/Borda_score_CE 1.01583
+wandb:                    test/OVRPTW/top1 0.488
+wandb:             test/TSP/Borda_score_CE 1.92727
+wandb:                       test/TSP/top1 0.367
+wandb:            test/VRPB/Borda_score_CE 1.00028
+wandb:                      test/VRPB/top1 0.508
+wandb:           test/VRPBL/Borda_score_CE 0.9476
+wandb:                     test/VRPBL/top1 0.547
+wandb:         test/VRPBLTW/Borda_score_CE 1.24904
+wandb:                   test/VRPBLTW/top1 0.449
+wandb:          test/VRPBTW/Borda_score_CE 1.27943
+wandb:                    test/VRPBTW/top1 0.443
+wandb:            test/VRPL/Borda_score_CE 2.08619
+wandb:                      test/VRPL/top1 0.312
+wandb:          test/VRPLTW/Borda_score_CE 1.27758
+wandb:                    test/VRPLTW/top1 0.457
+wandb:           test/VRPTW/Borda_score_CE 1.29635
+wandb:                     test/VRPTW/top1 0.427
+wandb:                     test/macro_top1 0.48222
+wandb:                 test/native_correct 8680
+wandb:          test/native_rows_completed 18000
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /public/home/shiys/0selection2/code/V4/runs/R72_heterogeneous_consensus/wandb/offline-run-20261013_111503-r72-test-1465-108
+wandb: Find logs at: ./code/V4/runs/R72_heterogeneous_consensus/wandb/offline-run-20261013_111503-r72-test-1465-108/logs
+[R72 ONE B TEST process complete] {"native_correct": 8680, "native_total": 18000, "complete_evaluation_seconds": 23.78672246914357, "new_tests": {"A": 0, "B": 1}}

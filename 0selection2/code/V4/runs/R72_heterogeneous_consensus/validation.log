@@ -1,0 +1,132 @@
+[R72 assigned-UUID launch] {"checked_utc": "2026-10-13T02:53:40.089189+00:00", "host": "gpu03", "slurm_step": "1465.107", "pid": 776169, "command": "/public/home/shiys/0selection2/code/V4/r72_experiment.py --stage validate", "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d", "gpu_index": 1, "gpu_name": "NVIDIA GeForce RTX 3090", "physical_memory_used_mib": 2, "physical_memory_total_mib": 24576, "compute_apps": [], "idle": true, "only_assigned_uuid_queried": true, "tmux_session": "r72_validate", "tmux_pane": "%106", "tmux_pane_pid": 1987756, "tmux_server_host": "admin01", "query_commands": [["nvidia-smi", "--id=GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d", "--query-gpu=index,uuid,name,memory.used,memory.total", "--format=csv,noheader,nounits"], ["nvidia-smi", "--id=GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d", "--query-compute-apps=gpu_uuid,pid,process_name,used_gpu_memory", "--format=csv,noheader,nounits"]], "raw_stdout": ["1, GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d, NVIDIA GeForce RTX 3090, 2, 24576\n", ""]}
+[cache] TSP/val: 1000 instances, 4.5 MiB on cuda:0
+[cache] CVRP/val: 1000 instances, 8.3 MiB on cuda:0
+[cache] ATSP/val: 1000 instances, 38.4 MiB on cuda:0
+[cache] OVRP/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPB/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPL/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPTW/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPTW/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPB/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPL/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPBL/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPBTW/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPLTW/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPBL/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPBTW/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPLTW/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] VRPBLTW/val: 1000 instances, 3.4 MiB on cuda:0
+[cache] OVRPBLTW/val: 1000 instances, 3.4 MiB on cuda:0
+wandb: Tracking run with wandb version 0.19.11
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+[R72 first formal VAL batch] {"recorded_utc": "2026-10-13T02:53:49.334784+00:00", "problem": "TSP", "rows": 128, "start_index": 0, "padded_nodes": 497, "three_member_forward_and_aggregation_seconds": 0.5092021068558097, "elapsed_seconds": 0.5499399807304144, "counters": {"query_batches": 1, "query_rows": 128, "member_forwards": 3, "member_row_forwards": 384, "member_calls": {"R60B39": 1, "R67B36_global76": 1, "R70B23_global63": 1}, "R70_active_branch_calls": 1}, "peak_allocated_bytes": 2130004480, "peak_reserved_bytes": 2992635904, "physical_used_bytes": 3325296640, "physical_total_bytes": 25327697920, "legal_scores_finite": true, "aggregation_dtype": "torch.int64", "target_fields_forwarded": [], "solver_executions": 0}
+[R72 VAL task] {"problem": "TSP", "rows": 1000, "native_correct": 387, "Borda_score_CE": 1.952127456665039, "elapsed_seconds": 1.8572301138192415}
+[R72 VAL task] {"problem": "CVRP", "rows": 1000, "native_correct": 496, "Borda_score_CE": 1.62479567527771, "elapsed_seconds": 3.3308464158326387}
+[R72 VAL task] {"problem": "ATSP", "rows": 1000, "native_correct": 784, "Borda_score_CE": 0.6978938579559326, "elapsed_seconds": 3.5442247670143843}
+[R72 VAL task] {"problem": "OVRP", "rows": 1000, "native_correct": 378, "Borda_score_CE": 1.624789834022522, "elapsed_seconds": 3.7744468515738845}
+[R72 VAL task] {"problem": "VRPB", "rows": 1000, "native_correct": 552, "Borda_score_CE": 0.9512237906455994, "elapsed_seconds": 4.003594903275371}
+[R72 VAL task] {"problem": "VRPL", "rows": 1000, "native_correct": 327, "Borda_score_CE": 1.973001480102539, "elapsed_seconds": 4.232325214892626}
+[R72 VAL task] {"problem": "VRPTW", "rows": 1000, "native_correct": 459, "Borda_score_CE": 1.2721976041793823, "elapsed_seconds": 4.463371140882373}
+[R72 VAL task] {"problem": "OVRPTW", "rows": 1000, "native_correct": 508, "Borda_score_CE": 0.9566079378128052, "elapsed_seconds": 4.691431659273803}
+[R72 VAL task] {"problem": "OVRPB", "rows": 1000, "native_correct": 592, "Borda_score_CE": 0.8747184872627258, "elapsed_seconds": 4.929294681176543}
+[R72 VAL task] {"problem": "OVRPL", "rows": 1000, "native_correct": 407, "Borda_score_CE": 1.5426074266433716, "elapsed_seconds": 5.163240998983383}
+[R72 VAL task] {"problem": "VRPBL", "rows": 1000, "native_correct": 537, "Borda_score_CE": 0.9823859930038452, "elapsed_seconds": 5.39658104069531}
+[R72 VAL task] {"problem": "VRPBTW", "rows": 1000, "native_correct": 437, "Borda_score_CE": 1.2378348112106323, "elapsed_seconds": 5.626121969893575}
+[R72 VAL task] {"problem": "VRPLTW", "rows": 1000, "native_correct": 487, "Borda_score_CE": 1.1947338581085205, "elapsed_seconds": 5.855359301902354}
+[R72 VAL task] {"problem": "OVRPBL", "rows": 1000, "native_correct": 591, "Borda_score_CE": 0.8996084928512573, "elapsed_seconds": 6.083468726836145}
+[R72 VAL task] {"problem": "OVRPBTW", "rows": 1000, "native_correct": 500, "Borda_score_CE": 0.9942720532417297, "elapsed_seconds": 6.311081316322088}
+[R72 VAL task] {"problem": "OVRPLTW", "rows": 1000, "native_correct": 525, "Borda_score_CE": 0.9573255777359009, "elapsed_seconds": 6.539837773889303}
+[R72 VAL task] {"problem": "VRPBLTW", "rows": 1000, "native_correct": 437, "Borda_score_CE": 1.2709366083145142, "elapsed_seconds": 6.768598046153784}
+[R72 VAL task] {"problem": "OVRPBLTW", "rows": 1000, "native_correct": 519, "Borda_score_CE": 0.9693613648414612, "elapsed_seconds": 6.995554721914232}
+wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:  runtime/validation_seconds ▁
+wandb:     val/ATSP/Borda_score_CE ▁
+wandb:               val/ATSP/top1 ▁
+wandb:          val/Borda_score_CE ▁
+wandb:     val/CVRP/Borda_score_CE ▁
+wandb:               val/CVRP/top1 ▁
+wandb:     val/OVRP/Borda_score_CE ▁
+wandb:               val/OVRP/top1 ▁
+wandb:    val/OVRPB/Borda_score_CE ▁
+wandb:              val/OVRPB/top1 ▁
+wandb:   val/OVRPBL/Borda_score_CE ▁
+wandb:             val/OVRPBL/top1 ▁
+wandb: val/OVRPBLTW/Borda_score_CE ▁
+wandb:           val/OVRPBLTW/top1 ▁
+wandb:  val/OVRPBTW/Borda_score_CE ▁
+wandb:            val/OVRPBTW/top1 ▁
+wandb:    val/OVRPL/Borda_score_CE ▁
+wandb:              val/OVRPL/top1 ▁
+wandb:  val/OVRPLTW/Borda_score_CE ▁
+wandb:            val/OVRPLTW/top1 ▁
+wandb:   val/OVRPTW/Borda_score_CE ▁
+wandb:             val/OVRPTW/top1 ▁
+wandb:      val/TSP/Borda_score_CE ▁
+wandb:                val/TSP/top1 ▁
+wandb:     val/VRPB/Borda_score_CE ▁
+wandb:               val/VRPB/top1 ▁
+wandb:    val/VRPBL/Borda_score_CE ▁
+wandb:              val/VRPBL/top1 ▁
+wandb:  val/VRPBLTW/Borda_score_CE ▁
+wandb:            val/VRPBLTW/top1 ▁
+wandb:   val/VRPBTW/Borda_score_CE ▁
+wandb:             val/VRPBTW/top1 ▁
+wandb:     val/VRPL/Borda_score_CE ▁
+wandb:               val/VRPL/top1 ▁
+wandb:   val/VRPLTW/Borda_score_CE ▁
+wandb:             val/VRPLTW/top1 ▁
+wandb:    val/VRPTW/Borda_score_CE ▁
+wandb:              val/VRPTW/top1 ▁
+wandb:              val/macro_top1 ▁
+wandb:          val/native_correct ▁
+wandb:   val/native_rows_completed ▁▁▂▂▃▃▃▄▄▅▅▆▆▆▇▇██
+wandb: 
+wandb: Run summary:
+wandb:  runtime/validation_seconds 6.99578
+wandb:     val/ATSP/Borda_score_CE 0.69789
+wandb:               val/ATSP/top1 0.784
+wandb:          val/Borda_score_CE 1.22091
+wandb:     val/CVRP/Borda_score_CE 1.6248
+wandb:               val/CVRP/top1 0.496
+wandb:     val/OVRP/Borda_score_CE 1.62479
+wandb:               val/OVRP/top1 0.378
+wandb:    val/OVRPB/Borda_score_CE 0.87472
+wandb:              val/OVRPB/top1 0.592
+wandb:   val/OVRPBL/Borda_score_CE 0.89961
+wandb:             val/OVRPBL/top1 0.591
+wandb: val/OVRPBLTW/Borda_score_CE 0.96936
+wandb:           val/OVRPBLTW/top1 0.519
+wandb:  val/OVRPBTW/Borda_score_CE 0.99427
+wandb:            val/OVRPBTW/top1 0.5
+wandb:    val/OVRPL/Borda_score_CE 1.54261
+wandb:              val/OVRPL/top1 0.407
+wandb:  val/OVRPLTW/Borda_score_CE 0.95733
+wandb:            val/OVRPLTW/top1 0.525
+wandb:   val/OVRPTW/Borda_score_CE 0.95661
+wandb:             val/OVRPTW/top1 0.508
+wandb:      val/TSP/Borda_score_CE 1.95213
+wandb:                val/TSP/top1 0.387
+wandb:     val/VRPB/Borda_score_CE 0.95122
+wandb:               val/VRPB/top1 0.552
+wandb:    val/VRPBL/Borda_score_CE 0.98239
+wandb:              val/VRPBL/top1 0.537
+wandb:  val/VRPBLTW/Borda_score_CE 1.27094
+wandb:            val/VRPBLTW/top1 0.437
+wandb:   val/VRPBTW/Borda_score_CE 1.23783
+wandb:             val/VRPBTW/top1 0.437
+wandb:     val/VRPL/Borda_score_CE 1.973
+wandb:               val/VRPL/top1 0.327
+wandb:   val/VRPLTW/Borda_score_CE 1.19473
+wandb:             val/VRPLTW/top1 0.487
+wandb:    val/VRPTW/Borda_score_CE 1.2722
+wandb:              val/VRPTW/top1 0.459
+wandb:              val/macro_top1 0.49572
+wandb:          val/native_correct 8923
+wandb:   val/native_rows_completed 18000
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /public/home/shiys/0selection2/code/V4/runs/R72_heterogeneous_consensus/wandb/offline-run-20261013_105348-r72-1465-107
+wandb: Find logs at: ./code/V4/runs/R72_heterogeneous_consensus/wandb/offline-run-20261013_105348-r72-1465-107/logs
+[R72 complete VAL process; scheduler terminal pending] {"composite": {"path": "/public/home/shiys/0selection2/code/V4/runs/R72_heterogeneous_consensus/consensus_complete.pt", "sha256": "a24e1e6da025329f2a726cd032692f48b1396c8d1fb8efb1361d1e7f5ccbce9f", "created_utc": "2026-10-13T02:53:42.322823+00:00", "member_order": ["R60B39", "R67B36_global76", "R70B23_global63"], "member_source_sha256": {"R60B39": "127f15ca5aa585a6006f72beabf0a1ad1eb948f444e62e4c032f173a18debe25", "R67B36_global76": "8d73ba8cb2b7c4b416bf4ef79631a9a0d28ec84bc863f59d5d59a5691c43cff2", "R70B23_global63": "9ee78e596e1b68a057fdfb7c27322a52c7d17f782aab1eba9efc69c942b20fbb"}, "parameter_counts": {"R60B39": 1842953, "R67B36_global76": 1842953, "R70B23_global63": 33173154}, "stored_parameters": 36859060, "trainable_parameters": 0, "active_parameters_per_query": 5528859, "complete_states": true, "all18_R70_common_epoch": true, "checkpoint_loads": 3, "standalone_A_or_component_evaluations": 0, "TEST_lock": false}, "native_correct": 8923, "native_total": 18000, "val": {"macro_ce": 1.2209123505486383, "macro_top1": 0.49572222222222223, "macro_top2": 0.8238333333333334, "macro_top3": 0.9277777777777779, "macro_top1_tie_aware": 0.49644444444444447, "macro_mean_cost": 11.168429913693835, "macro_vs_sbs_pct": -1.0732963885601547, "macro_vs_oracle_pct": 0.8898841033725647, "macro_actual_regret_pct": 0.9258622724923803, "macro_vbs_gap_closed_pct": 32.22108308691973}, "inference_rule": "Exactly three frozen FP32 policies; ascending global-ID full legal pools; q=2*strictly_higher+equal_including_self+1; integer Q=sum(q); minimum Q, ties smallest global solver ID; reporting z=-Q/6", "one_fixed_candidate": true, "proposed_official_arm": "B", "official_rule": "B iff native INTEGER VAL correct>8885; otherwise unchanged A=R60B39", "parent_freeze_pending": true, "fixed_A_original_VAL_correct": 8885, "TEST_authorized": false, "TEST_executed": false, "final_TEST_lock_created": false, "no_epoch_or_member_selection": true}

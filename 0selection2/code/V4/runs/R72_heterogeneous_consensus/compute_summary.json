@@ -1,0 +1,170 @@
+{
+  "new_TRAIN_epochs": 0,
+  "new_optimizer_updates": 0,
+  "new_TRAIN_forward_rows": 0,
+  "trainable_parameters": 0,
+  "stored_parameters": 36859060,
+  "active_parameters_per_query": 5528859,
+  "selectors_per_query": 3,
+  "completed_deployment_solvers_per_query": 1,
+  "solver_executions": 0,
+  "parameter_and_compute_matched": false,
+  "validation_seconds": 6.995775409974158,
+  "test_evaluation_seconds": 23.78672246914357,
+  "test_forward_and_aggregation_seconds": 23.173433354124427,
+  "test_setup_and_evaluation_seconds": 30.246784715913236,
+  "test_counters": {
+    "query_batches": 144,
+    "query_rows": 18000,
+    "member_forwards": 432,
+    "member_row_forwards": 54000,
+    "member_calls": {
+      "R60B39": 144,
+      "R67B36_global76": 144,
+      "R70B23_global63": 144
+    },
+    "R70_active_branch_calls": 144
+  },
+  "peak_allocated_bytes": 2424914432,
+  "peak_reserved_bytes": 6067060736,
+  "peak_observed_physical_used_bytes": 6399721472,
+  "historical_accounting": {
+    "new_R72_training": {
+      "epochs": 0,
+      "updates": 0,
+      "rows": 0,
+      "encoder_view_rows": 0
+    },
+    "historical_members": {
+      "R60B39": {
+        "source": "/public/home/shiys/0selection2/code/V4/runs/R60_expanded_partial_supervision/B_expanded_seed2/result.json",
+        "epochs_completed": 40,
+        "successful_updates": 56880,
+        "wall_seconds": 5215.24073642958,
+        "extra_rows_by_problem": {
+          "OVRP": 400000,
+          "VRPB": 400000,
+          "VRPL": 400000,
+          "VRPTW": 400000,
+          "OVRPTW": 400000,
+          "OVRPB": 400000,
+          "OVRPL": 400000,
+          "VRPBL": 400000,
+          "VRPBTW": 400000,
+          "VRPLTW": 400000,
+          "OVRPBL": 400000,
+          "OVRPBTW": 400000,
+          "OVRPLTW": 400000,
+          "VRPBLTW": 400000,
+          "OVRPBLTW": 400000
+        }
+      },
+      "R67B36_global76": {
+        "source": "/public/home/shiys/0selection2/code/V4/runs/R67_supervised_contrastive_full18/B_contrastive_pretrain_seed2/result.json",
+        "epochs_completed": 80,
+        "successful_updates": 19200,
+        "presentations": 14400000,
+        "amp_retries": 6,
+        "wall_seconds": 5757.09132033214
+      },
+      "R70B23_global63": {
+        "source": "/public/home/shiys/0selection2/code/V4/runs/R70_latent_mixup/B_latent_mixup_seed2/result.json",
+        "epochs_completed": 40,
+        "successful_updates": 9600,
+        "presentations": 7200000,
+        "successful_view_rows": 14400000,
+        "amp_retries": 5,
+        "wall_seconds": 3668.194598888047
+      }
+    },
+    "inherited_R67B_stage1_once": {
+      "source": "/public/home/shiys/0selection2/code/V4/runs/R67_supervised_contrastive_full18/B_contrastive_pretrain_seed2/stage1_result.json",
+      "counted_once": true,
+      "shared_by": [
+        "R67B",
+        "R70B"
+      ],
+      "epochs_completed": 40,
+      "successful_updates": 9600,
+      "presentations": 7200000,
+      "amp_retries": 1,
+      "wall_seconds": 2764.217798124999
+    },
+    "accounting_note": "R67 total already includes stage1 once; R70 historical result is stage2 only. Do not add shared stage1 a second time. R60 expanded supervision remains historical."
+  },
+  "original_cpu_check": {
+    "passed": true,
+    "seconds": 0.09242406021803617,
+    "synthetic_only": true,
+    "checks": [
+      "input/returned column permutations",
+      "padding/legal masks",
+      "exact-score midranks",
+      "integer sum",
+      "smallest global-ID final ties",
+      "target exclusion"
+    ],
+    "real_checkpoint_loads": 0,
+    "real_data_forwards": 0,
+    "GPU_operations": 0,
+    "actual_invocations": 1,
+    "failed_invocations": 0,
+    "completed_utc": "2026-10-13T02:52:21.844153+00:00"
+  },
+  "validation_terminal": {
+    "recorded_utc": "2026-10-13T02:55:13.245827+00:00",
+    "slurm_step": "1465.107",
+    "tmux_session": "r72_validate",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_seconds": 18.0,
+    "node": "gpu03",
+    "tmux_terminal": true,
+    "scheduler_evidence": {
+      "command": "sacct -j 1465.107 --noheader --parsable2 --format=JobIDRaw,State,ExitCode,ElapsedRaw,Start,End,NodeList",
+      "recorded_utc": "2026-10-13T02:55:13.152740+00:00",
+      "finished_utc": "2026-10-13T02:55:13.242536+00:00",
+      "wall_seconds": 0.08979649282991886,
+      "returncode": 0,
+      "stdout": "1465.107|COMPLETED|0:0|18|2026-10-13T10:53:39|2026-10-13T10:53:57|gpu03\n",
+      "stderr": ""
+    },
+    "tmux_evidence": {
+      "command": "tmux has-session -t =r72_validate",
+      "recorded_utc": "2026-10-13T02:55:13.242561+00:00",
+      "finished_utc": "2026-10-13T02:55:13.245776+00:00",
+      "wall_seconds": 0.0032337773591279984,
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "can't find session: r72_validate\n"
+    }
+  },
+  "test_terminal": {
+    "recorded_utc": "2026-10-13T03:15:30.864666+00:00",
+    "slurm_step": "1465.108",
+    "tmux_session": "r72_final_test",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_seconds": 34.0,
+    "node": "gpu03",
+    "tmux_terminal": true,
+    "scheduler_evidence": {
+      "command": "sacct -j 1465.108 --noheader --parsable2 --format=JobIDRaw,State,ExitCode,ElapsedRaw,Start,End,NodeList",
+      "recorded_utc": "2026-10-13T03:15:30.751635+00:00",
+      "finished_utc": "2026-10-13T03:15:30.852557+00:00",
+      "wall_seconds": 0.10095800273120403,
+      "returncode": 0,
+      "stdout": "1465.108|COMPLETED|0:0|34|2026-10-13T11:14:55|2026-10-13T11:15:29|gpu03\n",
+      "stderr": ""
+    },
+    "tmux_evidence": {
+      "command": "tmux has-session -t =r72_final_test",
+      "recorded_utc": "2026-10-13T03:15:30.852600+00:00",
+      "finished_utc": "2026-10-13T03:15:30.864610+00:00",
+      "wall_seconds": 0.012034053914248943,
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "can't find session: r72_final_test\n"
+    }
+  }
+}

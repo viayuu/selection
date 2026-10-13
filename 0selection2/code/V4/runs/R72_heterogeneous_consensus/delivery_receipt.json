@@ -1,0 +1,142 @@
+{
+  "recorded_utc": "2026-10-13T03:15:33.960005+00:00",
+  "validation": {
+    "recorded_utc": "2026-10-13T02:55:13.245827+00:00",
+    "slurm_step": "1465.107",
+    "tmux_session": "r72_validate",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_seconds": 18.0,
+    "node": "gpu03",
+    "tmux_terminal": true,
+    "scheduler_evidence": {
+      "command": "sacct -j 1465.107 --noheader --parsable2 --format=JobIDRaw,State,ExitCode,ElapsedRaw,Start,End,NodeList",
+      "recorded_utc": "2026-10-13T02:55:13.152740+00:00",
+      "finished_utc": "2026-10-13T02:55:13.242536+00:00",
+      "wall_seconds": 0.08979649282991886,
+      "returncode": 0,
+      "stdout": "1465.107|COMPLETED|0:0|18|2026-10-13T10:53:39|2026-10-13T10:53:57|gpu03\n",
+      "stderr": ""
+    },
+    "tmux_evidence": {
+      "command": "tmux has-session -t =r72_validate",
+      "recorded_utc": "2026-10-13T02:55:13.242561+00:00",
+      "finished_utc": "2026-10-13T02:55:13.245776+00:00",
+      "wall_seconds": 0.0032337773591279984,
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "can't find session: r72_validate\n"
+    }
+  },
+  "new_B_test": {
+    "recorded_utc": "2026-10-13T03:15:30.864666+00:00",
+    "slurm_step": "1465.108",
+    "tmux_session": "r72_final_test",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_seconds": 34.0,
+    "node": "gpu03",
+    "tmux_terminal": true,
+    "scheduler_evidence": {
+      "command": "sacct -j 1465.108 --noheader --parsable2 --format=JobIDRaw,State,ExitCode,ElapsedRaw,Start,End,NodeList",
+      "recorded_utc": "2026-10-13T03:15:30.751635+00:00",
+      "finished_utc": "2026-10-13T03:15:30.852557+00:00",
+      "wall_seconds": 0.10095800273120403,
+      "returncode": 0,
+      "stdout": "1465.108|COMPLETED|0:0|34|2026-10-13T11:14:55|2026-10-13T11:15:29|gpu03\n",
+      "stderr": ""
+    },
+    "tmux_evidence": {
+      "command": "tmux has-session -t =r72_final_test",
+      "recorded_utc": "2026-10-13T03:15:30.852600+00:00",
+      "finished_utc": "2026-10-13T03:15:30.864610+00:00",
+      "wall_seconds": 0.012034053914248943,
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "can't find session: r72_final_test\n"
+    }
+  },
+  "analysis": {
+    "recorded_utc": "2026-10-13T03:15:33.635267+00:00",
+    "returncode": 0,
+    "cpu_only": true,
+    "invocations": 1,
+    "wall_seconds": 1.293252371251583,
+    "comparison_rows": 184,
+    "figures": [
+      "/public/home/shiys/0selection2/code/V4/runs/R72_heterogeneous_consensus/curves/delivery/task_top1.png",
+      "/public/home/shiys/0selection2/code/V4/runs/R72_heterogeneous_consensus/curves/delivery/family_top1.png"
+    ],
+    "png_count": 2,
+    "JSON_only": true,
+    "NPZ_replay": false,
+    "model_forwards": 0,
+    "solver_executions": 0,
+    "original_A_object_unchanged": true
+  },
+  "analysis_process": {
+    "recorded_utc": "2026-10-13T03:15:33.958959+00:00",
+    "command": "/public/home/shiys/miniconda3/envs/easynco/bin/python -B -u -m code.V4.r72_analysis",
+    "returncode": 0,
+    "wall_seconds": 3.0860474426299334,
+    "invocations": 1,
+    "cpu_only": true
+  },
+  "decision": {
+    "official_arm": "B",
+    "official_test_correct": 8680,
+    "official_test_total": 18000,
+    "official_test_top1": 0.4822222222222222,
+    "A_original_test_correct": 8684,
+    "A_count_source": "saved task Top1*n arithmetic; original object unchanged; no prediction recount",
+    "B_minus_A_test_decisions": -4,
+    "B_minus_A_test_delta_pp": -0.022222222222222223,
+    "validation_count_B_minus_A": 38,
+    "selection_frozen_before_TEST": true,
+    "TEST_reselection": false,
+    "original_native_70pct_threshold_correct": 12600,
+    "numeric_threshold_reached": false,
+    "whole_objective_audit_passed": false,
+    "claim_70pct_supported": false,
+    "goal_status": "ACTIVE/unachieved",
+    "parent_reviews_pending": true,
+    "historical_test_exposure": true,
+    "NEW_R72_TEST_used_for_planning": false
+  },
+  "control_reuse": {
+    "label": "fixed A = historical original R60B39",
+    "trace_path": "/public/home/shiys/0selection2/code/V4/runs/R64_pcgrad_full18/reference/R60B_official.json",
+    "trace_json_pointer": "/provenance/test",
+    "test_path": "/public/home/shiys/0selection2/code/V4/runs/R63_recurrent_workspaces/reference/R60B/test_eval.json",
+    "test_json_pointer": "",
+    "original_aggregate_path": "/public/home/shiys/0selection2/code/V4/runs/R63_recurrent_workspaces/test_results.json",
+    "original_aggregate_json_pointer": "/R60B",
+    "original_lock_path": "/public/home/shiys/0selection2/code/V4/runs/R63_recurrent_workspaces/final_test_lock.json",
+    "original_lock_json_pointer": "/R60B",
+    "original_process_receipt": "/public/home/shiys/0selection2/code/V4/runs/R63_recurrent_workspaces/test_protocol.json",
+    "original_slurm_step": "1465.88",
+    "original_tests_already_executed": 1,
+    "new_R72_tests": 0,
+    "original_object_unchanged": true,
+    "standalone_weight_load": false,
+    "standalone_inference": false,
+    "prediction_recount": false,
+    "reselection": false,
+    "historical_test_exposure": true,
+    "reuse_is_protocol_equivalence_not_replication": true
+  },
+  "new_tests_executed": {
+    "A": 0,
+    "B": 1
+  },
+  "original_A_tests_already_executed": 1,
+  "new_TRAIN_epochs": 0,
+  "new_optimizer_updates": 0,
+  "new_TRAIN_forward_rows": 0,
+  "solver_executions": 0,
+  "owned_TEST_tmux_gone": true,
+  "parent_reviews_goal_audit_memory_and_Git_pending": true,
+  "worker_Git_actions": false,
+  "Git_alone_contains_all_inference_assets": false,
+  "R58": "deferred; eight legacy B semantics disclosed/unfixed"
+}
