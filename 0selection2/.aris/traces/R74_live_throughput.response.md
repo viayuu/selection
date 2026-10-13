@@ -1,0 +1,7 @@
+Cache/data stalls are a likely contributor. Through u16, **339/1,092 seconds (31%) occurred outside the update timer**; the timer itself also includes lazy observation reads and transfers. The 128-map LRU serves 27,072 TRAIN files. Batch observation memoization already exists. The one CPU observation request could not acquire a step and was cancelled, leaving GPU utilization and process I/O unmeasured.
+
+One prospective fix: a **byte-identical node-local cache mirror**, retaining the current 128-map bound and all ordering/reconstruction. It needs roughly **40GB disk plus headroom**, avoids FD growth, and permits bounded copying without loading the cache into RAM. Available local capacity and throughput benefit remain unverified.
+
+Resume needs explicit handling. At the inspected snapshot, logs reached u16 but `last.pt` still corresponded to u1 by timestamp/save cadence. Restarting there would repeat accepted updates. Exact continuation requires a checkpoint matching the accepted clock, restored ScheduleFree state/scaler/RNG/cursor, and partial-epoch accounting; the current entry point starts fresh.
+
+Evidence saved in [throughput_diagnosis.json](/public/home/shiys/0selection2/code/V4/runs/R74_adaptive_incomplete_acquisition/continuation7/throughput_diagnosis.json). Trainer, observer, sources and caches were untouched. Foreground diagnostic work settled; no GPU query, model load, forward, evaluation or Git execution occurred. Goal remains active/unachieved.

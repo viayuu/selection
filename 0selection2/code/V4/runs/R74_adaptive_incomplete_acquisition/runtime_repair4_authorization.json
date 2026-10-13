@@ -1,0 +1,23 @@
+{
+  "authorized_utc": "2026-10-13T10:28:44Z",
+  "authorized_by": "parent",
+  "scope": "Fourth minimum execution-only native ATSP interface repair; scientific plan unchanged",
+  "prior_steps": [
+    {"step": "1465.111", "state": "FAILED", "exit_code": "1:0", "elapsed_seconds": 1427},
+    {"step": "1465.112", "state": "FAILED", "exit_code": "1:0", "elapsed_seconds": 20},
+    {"step": "1465.113", "state": "FAILED", "exit_code": "1:0", "elapsed_seconds": 14},
+    {"step": "1465.114", "state": "FAILED", "exit_code": "1:0", "elapsed_seconds": 13}
+  ],
+  "charged_prior_Slurm_wall_seconds": 1474,
+  "actual_failure": "ATSPEnv.load_problems assigns batch_size, and current TorchRL tries to resize an unused done CompositeSpec with incompatible legacy shape",
+  "minimum_fix": "Extend the isolated real native ATSPEnv adapter to retain _batch_size without resizing unused TorchRL specs; call native _reset(None) for native initialization. State transitions remain original _step/pre_step. No native algorithm reimplementation or shared source changes",
+  "source_references": {
+    "load_problems": "/public/home/shiys/EasyNCO/neural_solvers/envs/ATSPEnv.py:276",
+    "native_reset": "/public/home/shiys/EasyNCO/neural_solvers/envs/ATSPEnv.py:331",
+    "native_step": "/public/home/shiys/EasyNCO/neural_solvers/envs/ATSPEnv.py:410"
+  },
+  "preserved_base_work": "20016 actual rows/1729 batches: complete TSP/CVRP20000 plus failed16 ATSP outputs. Continuation3 reused those16 outputs with no new forward and no replay. Preserve existing reuse evidence and complete caches",
+  "continuation": "New continuation4 records on1465/gpu03/sole UUID. One syntax-only changed-source check then direct formal remaining generation/unchanged40E training. No neural preflight or complete-cache replay",
+  "checking_scope": "Use existing receipts for already established facts; do not repeat full artifact hashing, prefix audits, reference forwards or original neural checks. Only necessary current source/partial row checks",
+  "forbidden": "System/package upgrades, fake outputs, alternate solver/weights/config/input/budget/pools/labels, automatic retry, TEST, Git, delivery watcher restart"
+}

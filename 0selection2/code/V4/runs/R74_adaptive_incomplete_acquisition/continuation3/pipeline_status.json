@@ -1,0 +1,123 @@
+{
+  "utc": "2026-10-13T10:26:03.439056+00:00",
+  "pid": 2723773,
+  "requested_stage": "explicit_continuation",
+  "error_type": "ValueError",
+  "error": "The shape of the spec and the Composite mismatch during shape resetting: the 0 first dimensions should match but got self['done'].shape=torch.Size([1]) and Composite.shape=torch.Size([]).",
+  "traceback": "Traceback (most recent call last):\n  File \"/public/home/shiys/0selection2/code/V4/r74_continuation.py\", line 250, in main\n    caches, raw, generation = experiment.generate(protocol, r48, model, counts, launch, wb, device,\n  File \"/public/home/shiys/0selection2/code/V4/r74_experiment.py\", line 319, in generate\n    trajectory = probes.start(problem, native.instances, source_rows, probe)\n  File \"/public/home/shiys/0selection2/code/V4/r74_acquisition.py\", line 193, in start\n    return Trajectory(self, problem, instances, rows, probe)\n  File \"/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/site-packages/torch/utils/_contextlib.py\", line 116, in decorate_context\n    return func(*args, **kwargs)\n  File \"/public/home/shiys/0selection2/code/V4/r74_acquisition.py\", line 219, in __init__\n    self.env.load_problems(matrix, batch_size=len(rows))\n  File \"/public/home/shiys/EasyNCO/neural_solvers/envs/ATSPEnv.py\", line 276, in load_problems\n    self.batch_size = torch.Size([batch_size, self.pomo_size])\n  File \"/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/python_compat/torchrl/envs/common.py\", line 438, in __setattr__\n    return super().__setattr__(key, value)\n  File \"/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/site-packages/torch/nn/modules/module.py\", line 2032, in __setattr__\n    super().__setattr__(name, value)\n  File \"/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/python_compat/torchrl/envs/common.py\", line 483, in batch_size\n    self.output_spec.shape = value\n  File \"/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/python_compat/torchrl/data/tensor_specs.py\", line 650, in __setattr__\n    super().__setattr__(key, value)\n  File \"/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/python_compat/torchrl/data/tensor_specs.py\", line 4171, in shape\n    spec.shape = value\n  File \"/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/python_compat/torchrl/data/tensor_specs.py\", line 650, in __setattr__\n    super().__setattr__(key, value)\n  File \"/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/python_compat/torchrl/data/tensor_specs.py\", line 4174, in shape\n    raise ValueError(\nValueError: The shape of the spec and the Composite mismatch during shape resetting: the 0 first dimensions should match but got self['done'].shape=torch.Size([1]) and Composite.shape=torch.Size([]).\n",
+  "automatic_restart": false,
+  "original_job_status": "FAILED 1:0; preserved",
+  "original_failed_step_seconds": 1427,
+  "prior_steps": [
+    {
+      "step": "1465.111",
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "elapsed_seconds": 1427
+    },
+    {
+      "step": "1465.112",
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "elapsed_seconds": 20
+    },
+    {
+      "step": "1465.113",
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "elapsed_seconds": 14
+    }
+  ],
+  "charged_prior_Slurm_wall_seconds": 1461,
+  "continuation_formal_seconds": 10.735610496252775,
+  "cumulative_formal_wall_seconds": 1471.7356104962528,
+  "slurm_step": "1465.114",
+  "last_saved_progress": {
+    "stage": "formal_feature_generation",
+    "updated_utc": "2026-10-13T10:25:59.190037+00:00",
+    "launch": {
+      "utc": "2026-10-13T10:25:52.785088+00:00",
+      "host": "gpu03",
+      "slurm_step": "1465.114",
+      "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+      "gpu_index": 1,
+      "gpu_name": "NVIDIA GeForce RTX 3090",
+      "memory_used_mib": 2,
+      "memory_total_mib": 24576,
+      "compute_apps": [],
+      "idle": true,
+      "only_assigned_uuid_queried": true,
+      "tmux_session": "r74_continuation3",
+      "tmux_pane": "%137",
+      "tmux_pane_pid": "3705524",
+      "tmux_server_host": "admin01",
+      "bootstrap_pid": 2724413,
+      "bootstrap_started_utc": "2026-10-13T10:25:52.703129+00:00",
+      "bootstrap_seconds": 0.08201149106025696,
+      "original_step": "1465.111",
+      "original_status": "FAILED 1:0",
+      "first_continuation_step": "1465.112",
+      "first_continuation_status": "FAILED 1:0",
+      "second_continuation_step": "1465.113",
+      "second_continuation_status": "FAILED 1:0",
+      "charged_prior_Slurm_wall_seconds": 1461,
+      "automatic_restart": false,
+      "trainer_pid": 2723773,
+      "trainer_ppid": 2723701,
+      "started_utc": "2026-10-13T10:25:54.125688+00:00",
+      "command": "bash code/V4/run_v4_r74_continuation.sh",
+      "execution_continuation": true,
+      "continuation_record": "continuation3",
+      "prior_steps": [
+        {
+          "step": "1465.111",
+          "state": "FAILED",
+          "exit_code": "1:0",
+          "elapsed_seconds": 1427
+        },
+        {
+          "step": "1465.112",
+          "state": "FAILED",
+          "exit_code": "1:0",
+          "elapsed_seconds": 20
+        },
+        {
+          "step": "1465.113",
+          "state": "FAILED",
+          "exit_code": "1:0",
+          "elapsed_seconds": 14
+        }
+      ],
+      "status": "running"
+    },
+    "split": "train",
+    "problem": "ATSP",
+    "counters": {
+      "base_query_rows": 20000,
+      "query_batches": 1728,
+      "trajectory_initializations": 20000,
+      "start_trajectories": 982780,
+      "model_action_calls": 117370,
+      "decoder_calls": 116512,
+      "completed_trajectories": 0,
+      "train_rows": 20000,
+      "train_initializations": 20000
+    },
+    "successful_updates": 0
+  },
+  "update_failure_receipt": null,
+  "base_execution": {
+    "planned_unique_inputs": 198000,
+    "prior_completed_forward_rows": 20000,
+    "prior_failed_forward_rows": 16,
+    "prior_total_forward_rows": 20016,
+    "prior_total_forward_batches": 1729,
+    "new_forward_rows": 0,
+    "new_forward_batches": 0,
+    "reused_failed_output_rows": 16,
+    "replayed_uncommitted_rows": 0,
+    "actual_cumulative_forward_rows": 20016,
+    "actual_cumulative_forward_batches": 1729
+  },
+  "stage": "failed_preserved_no_retry"
+}

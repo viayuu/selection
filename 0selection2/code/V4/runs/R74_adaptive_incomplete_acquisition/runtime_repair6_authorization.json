@@ -1,0 +1,23 @@
+{
+  "authorized_utc": "2026-10-13T10:53:15Z",
+  "authorized_by": "parent",
+  "scope": "Sixth minimum execution repair: native MOEL decoder tuple probability capture; unchanged R74 scientific plan",
+  "prior_steps": [
+    {"step": "1465.111", "state": "FAILED", "exit_code": "1:0", "elapsed_seconds": 1427},
+    {"step": "1465.112", "state": "FAILED", "exit_code": "1:0", "elapsed_seconds": 20},
+    {"step": "1465.113", "state": "FAILED", "exit_code": "1:0", "elapsed_seconds": 14},
+    {"step": "1465.114", "state": "FAILED", "exit_code": "1:0", "elapsed_seconds": 13},
+    {"step": "1465.115", "state": "FAILED", "exit_code": "1:0", "elapsed_seconds": 13},
+    {"step": "1465.116", "state": "FAILED", "exit_code": "1:0", "elapsed_seconds": 60}
+  ],
+  "charged_prior_Slurm_wall_seconds": 1547,
+  "actual_failure": "First OVRP MOEL decoder forward returns (probs, moe_loss); the feature hook incorrectly applies detach to the tuple",
+  "source_evidence": "/public/home/shiys/reld-nco-main/Multi-Task/models/MOEModel_Light.py:81,364; MTLModel.py:72,296 returns probabilities directly",
+  "minimum_fix": "Capture the first element of the actual MOEL decoder tuple, or the direct Tensor for other native decoders. Do not alter probabilities or use the auxiliary loss as a feature",
+  "completed_prefix": "30000 TRAIN rows/TSP,CVRP,ATSP;2376successfulbatches;1581966starts;126530modelcalls;125024decodercalls;zero completions/optimizerupdates",
+  "actual_base_work": "30016rows/2377batches, including uncommitted first16 OVRP base outputs. Existing failed16 ATSP outputs were already reused and absorbed in the completed ATSP cache",
+  "continuation": "Fresh continuation6 onsame1465/gpu03/sole UUID. Skip all3 complete tasks. Reuse the persisted uncommitted OVRP base slice if aligned/finite; explicit minimum partial replay permitted only if unavailable and separately charged",
+  "partial_native_work": "Preserve partial OVRP outputs and account for actual MTL acquisitions and failed MOEL decoder computation separately. Unrecoverable native state may be rerun only for that uncommitted batch, with extra initializations/action/decoder work charged, never hidden in planned unique-cache totals",
+  "checking_scope": "One syntax-only check then direct formal continuation; existing handoffs establish prior facts, no repeated artifact scans/audits/reference/neural preflight",
+  "forbidden": "Scientific rule/configuration/weights/data/pools/label changes, source reimplementation, system upgrades, complete-task replay, automatic retry, TEST, Git, watcher restart"
+}

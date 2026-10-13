@@ -1,0 +1,78 @@
+{
+  "BQ": {
+    "parameters": 3107539,
+    "trainable_parameters": 0,
+    "recipe": {
+      "source": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/bq-nco/learning/tsp/decoding.py",
+      "symbol": "greedy_decoding_step",
+      "checkpoint": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/bq-nco/pretrained_models/tsp.best",
+      "params": {
+        "dim_input_nodes": 2,
+        "emb_size": 192,
+        "dim_ff": 512,
+        "activation_ff": "relu",
+        "nb_layers_encoder": 9,
+        "nb_heads": 12,
+        "activation_attention": "softmax",
+        "dropout": 0.0,
+        "batchnorm": false,
+        "problem": "tsp"
+      },
+      "beam": 1,
+      "knns": -1,
+      "initialization": "original node0; append node0 only as closure placeholder"
+    },
+    "state": "/public/home/shiys/0selection2/code/V4/runs/R74_adaptive_incomplete_acquisition/probe_states/BQ.pt",
+    "loaded_utc": "2026-10-13T09:18:04.545743+00:00"
+  },
+  "RELD_CVRP": {
+    "parameters": 1382784,
+    "trainable_parameters": 0,
+    "recipe": {
+      "source": "/public/home/shiys/reld-nco-main/CVRP/CVRPModel.py",
+      "symbol": "one_step_rollout",
+      "checkpoint": "/public/home/shiys/reld-nco-main/CVRP/weights/ReLD/model_epoch_90.pt",
+      "config": "/public/home/shiys/reld-nco-main/CVRP/config.yml",
+      "forcing_first_step": false,
+      "starts": "learned min(n,100)",
+      "params": {
+        "embedding_dim": 128,
+        "encoder_layer_num": 6,
+        "head_num": 8,
+        "qkv_dim": 16,
+        "forcing_first_step": false,
+        "logit_clipping": 50,
+        "ff_hidden_dim": 512,
+        "eval_type": "greedy"
+      }
+    },
+    "state": "/public/home/shiys/0selection2/code/V4/runs/R74_adaptive_incomplete_acquisition/probe_states/RELD_CVRP.pt",
+    "loaded_utc": "2026-10-13T09:38:49.984801+00:00"
+  },
+  "MATNET": {
+    "parameters": 5601696,
+    "trainable_parameters": 0,
+    "recipe": {
+      "source": "/public/home/shiys/EasyNCO/neural_solvers/methods/matnet/policy.py",
+      "symbol": "ATSPPolicy",
+      "checkpoint": "/public/home/shiys/EasyNCO/pretrained/matnet_pretrain/matnet_atsp100.ckpt",
+      "params": {
+        "embedding_dim": 256,
+        "num_heads": 16,
+        "qkv_dim": 16,
+        "num_encoder_layers": 5,
+        "feedforward_hidden": 512,
+        "logit_clipping": 10.0,
+        "ms_hidden_dim": 16,
+        "ms_layer1_init": 0.7071067811865476,
+        "ms_layer2_init": 0.25
+      },
+      "starts": "all n",
+      "column_embedding": "CPU torch.randperm(n) with private generator seed2 per n; broadcast queries",
+      "environment": "ATSPEnv method_name=matnet aug_factor=1; no NN initializer"
+    },
+    "state": "/public/home/shiys/0selection2/code/V4/runs/R74_adaptive_incomplete_acquisition/probe_states/MATNET.pt",
+    "loaded_utc": "2026-10-13T10:11:24.990642+00:00",
+    "original_frozen_snapshot_strictly_restored": false
+  }
+}

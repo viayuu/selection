@@ -1,0 +1,7 @@
+Wrote [feasibility.md](/public/home/shiys/0selection2/review-stage/r58-to70/acquisition_feasibility/feasibility.md), [task_coverage.csv](/public/home/shiys/0selection2/review-stage/r58-to70/acquisition_feasibility/task_coverage.csv), [solver_interfaces.csv](/public/home/shiys/0selection2/review-stage/r58-to70/acquisition_feasibility/solver_interfaces.csv) and [receipt.json](/public/home/shiys/0selection2/review-stage/r58-to70/acquisition_feasibility/receipt.json).
+
+The inventory covers **18 tasks,22 solver names and128 legal pairs**. Only OVRPTW has an identified aligned decoder-prefix TRAIN cache, covering two ReLD methods. It stores pooled features; live continuation is demonstrated separately. Recorded acquisition/continuation timing covers12 TRAIN rows with3 repeats.
+
+Sources expose potential incomplete boundaries across all18 tasks, but existing evidence does **not** establish a complete full18 action menu. Missing evidence concerns aligned states, deployment bindings and measured continuation costs. Cache absence does not prove impossibility; all final solver choices remain preserved.
+
+No model/checkpoint loading, solver, GPU, evaluation or Git execution occurred. Goal70 remains ACTIVE/unachieved.

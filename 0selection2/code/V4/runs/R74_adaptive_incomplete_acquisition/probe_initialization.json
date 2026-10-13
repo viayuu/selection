@@ -1,0 +1,52 @@
+{
+  "BQ": {
+    "parameters": 3107539,
+    "trainable_parameters": 0,
+    "recipe": {
+      "source": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/bq-nco/learning/tsp/decoding.py",
+      "symbol": "greedy_decoding_step",
+      "checkpoint": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/bq-nco/pretrained_models/tsp.best",
+      "params": {
+        "dim_input_nodes": 2,
+        "emb_size": 192,
+        "dim_ff": 512,
+        "activation_ff": "relu",
+        "nb_layers_encoder": 9,
+        "nb_heads": 12,
+        "activation_attention": "softmax",
+        "dropout": 0.0,
+        "batchnorm": false,
+        "problem": "tsp"
+      },
+      "beam": 1,
+      "knns": -1,
+      "initialization": "original node0; append node0 only as closure placeholder"
+    },
+    "state": "/public/home/shiys/0selection2/code/V4/runs/R74_adaptive_incomplete_acquisition/probe_states/BQ.pt",
+    "loaded_utc": "2026-10-13T09:18:04.545743+00:00"
+  },
+  "RELD_CVRP": {
+    "parameters": 1382784,
+    "trainable_parameters": 0,
+    "recipe": {
+      "source": "/public/home/shiys/reld-nco-main/CVRP/CVRPModel.py",
+      "symbol": "one_step_rollout",
+      "checkpoint": "/public/home/shiys/reld-nco-main/CVRP/weights/ReLD/model_epoch_90.pt",
+      "config": "/public/home/shiys/reld-nco-main/CVRP/config.yml",
+      "forcing_first_step": false,
+      "starts": "learned min(n,100)",
+      "params": {
+        "embedding_dim": 128,
+        "encoder_layer_num": 6,
+        "head_num": 8,
+        "qkv_dim": 16,
+        "forcing_first_step": false,
+        "logit_clipping": 50,
+        "ff_hidden_dim": 512,
+        "eval_type": "greedy"
+      }
+    },
+    "state": "/public/home/shiys/0selection2/code/V4/runs/R74_adaptive_incomplete_acquisition/probe_states/RELD_CVRP.pt",
+    "loaded_utc": "2026-10-13T09:38:49.984801+00:00"
+  }
+}

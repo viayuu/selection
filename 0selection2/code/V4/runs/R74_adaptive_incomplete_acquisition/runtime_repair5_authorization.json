@@ -1,0 +1,19 @@
+{
+  "authorized_utc": "2026-10-13T10:43:58Z",
+  "authorized_by": "parent",
+  "scope": "Fifth minimum execution repair: explicit CPU randperm device only; unchanged adopted R74 experiment",
+  "prior_steps": [
+    {"step": "1465.111", "state": "FAILED", "exit_code": "1:0", "elapsed_seconds": 1427},
+    {"step": "1465.112", "state": "FAILED", "exit_code": "1:0", "elapsed_seconds": 20},
+    {"step": "1465.113", "state": "FAILED", "exit_code": "1:0", "elapsed_seconds": 14},
+    {"step": "1465.114", "state": "FAILED", "exit_code": "1:0", "elapsed_seconds": 13},
+    {"step": "1465.115", "state": "FAILED", "exit_code": "1:0", "elapsed_seconds": 13}
+  ],
+  "charged_prior_Slurm_wall_seconds": 1487,
+  "actual_failure": "Native ATSP batch loading and reset passed; randperm using a CPU generator inherited the enclosing CUDA default device",
+  "minimum_fix": "Add device='cpu' to the existing seed2 CPU torch.randperm call, then retain its existing .to(self.device). Do not change the generator, seed, permutation rule, encoder or inputs",
+  "preserved_work": "20000 complete TSP/CVRP plus16 actual persisted ATSP base rows reused without new forwards; total20016rows/1729batches, zero successful ATSP batches/optimizer updates",
+  "continuation": "Fresh continuation5 records; same1465/gpu03/sole UUID. Reuse verified first16 base outputs and complete caches. One syntax-only check then direct formal generation and unchanged40E training",
+  "checking_scope": "Existing handoffs establish prior facts. No repeated full source/artifact scans, hashing, preflights, reference forwards or audits",
+  "forbidden": "Scientific configuration changes, new seed/permutation rule, package upgrades, alternate solver/weights/data/pools/labels, completion, unrecorded retries, TEST, Git or watcher restart"
+}

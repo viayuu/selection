@@ -1,0 +1,151 @@
+{
+  "utc": "2026-10-13T10:47:42.943452+00:00",
+  "pid": 566837,
+  "requested_stage": "explicit_continuation",
+  "error_type": "AttributeError",
+  "error": "'tuple' object has no attribute 'detach'",
+  "traceback": "Traceback (most recent call last):\n  File \"/public/home/shiys/0selection2/code/V4/r74_continuation.py\", line 187, in main\n    caches, raw, generation = experiment.generate(protocol, r48, model, counts, launch, wb, device,\n  File \"/public/home/shiys/0selection2/code/V4/r74_experiment.py\", line 323, in generate\n    value = trajectory.acquire_increment(base['nodes'])\n  File \"/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/site-packages/torch/utils/_contextlib.py\", line 116, in decorate_context\n    return func(*args, **kwargs)\n  File \"/public/home/shiys/0selection2/code/V4/r74_acquisition.py\", line 357, in acquire_increment\n    self.step()\n  File \"/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/site-packages/torch/utils/_contextlib.py\", line 116, in decorate_context\n    return func(*args, **kwargs)\n  File \"/public/home/shiys/0selection2/code/V4/r74_acquisition.py\", line 314, in step\n    selected, _ = self.model(self.state)\n  File \"/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/site-packages/torch/nn/modules/module.py\", line 1736, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File \"/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/site-packages/torch/nn/modules/module.py\", line 1747, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"/public/home/shiys/reld-nco-main/Multi-Task/models/MOEModel_Light.py\", line 81, in forward\n    probs, moe_loss = self.decoder(encoded_last_node, attr, ninf_mask=state.ninf_mask, T=self.T, step=state.selected_count)\n  File \"/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/site-packages/torch/nn/modules/module.py\", line 1736, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File \"/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/site-packages/torch/nn/modules/module.py\", line 1844, in _call_impl\n    return inner()\n  File \"/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/site-packages/torch/nn/modules/module.py\", line 1803, in inner\n    hook_result = hook(self, args, result)\n  File \"/public/home/shiys/0selection2/code/V4/r74_acquisition.py\", line 295, in capture\n    self.distribution = output.detach().float()\nAttributeError: 'tuple' object has no attribute 'detach'\n",
+  "automatic_restart": false,
+  "original_job_status": "FAILED 1:0; preserved",
+  "original_failed_step_seconds": 1427,
+  "prior_steps": [
+    {
+      "step": "1465.111",
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "elapsed_seconds": 1427
+    },
+    {
+      "step": "1465.112",
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "elapsed_seconds": 20
+    },
+    {
+      "step": "1465.113",
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "elapsed_seconds": 14
+    },
+    {
+      "step": "1465.114",
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "elapsed_seconds": 13
+    },
+    {
+      "step": "1465.115",
+      "state": "FAILED",
+      "exit_code": "1:0",
+      "elapsed_seconds": 13
+    }
+  ],
+  "charged_prior_Slurm_wall_seconds": 1487,
+  "continuation_formal_seconds": 56.576590061187744,
+  "cumulative_formal_wall_seconds": 1543.5765900611877,
+  "slurm_step": "1465.116",
+  "last_saved_progress": {
+    "stage": "formal_feature_generation",
+    "updated_utc": "2026-10-13T10:47:41.522974+00:00",
+    "launch": {
+      "utc": "2026-10-13T10:46:46.447319+00:00",
+      "host": "gpu03",
+      "slurm_step": "1465.116",
+      "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+      "gpu_index": 1,
+      "gpu_name": "NVIDIA GeForce RTX 3090",
+      "memory_used_mib": 2,
+      "memory_total_mib": 24576,
+      "compute_apps": [],
+      "idle": true,
+      "only_assigned_uuid_queried": true,
+      "tmux_session": "r74_continuation5",
+      "tmux_pane": "%141",
+      "tmux_pane_pid": "3781395",
+      "tmux_server_host": "admin01",
+      "bootstrap_pid": 567607,
+      "bootstrap_started_utc": "2026-10-13T10:46:46.366443+00:00",
+      "bootstrap_seconds": 0.08094324544072151,
+      "original_step": "1465.111",
+      "original_status": "FAILED 1:0",
+      "first_continuation_step": "1465.112",
+      "first_continuation_status": "FAILED 1:0",
+      "second_continuation_step": "1465.113",
+      "second_continuation_status": "FAILED 1:0",
+      "third_continuation_step": "1465.114",
+      "third_continuation_status": "FAILED 1:0",
+      "fourth_continuation_step": "1465.115",
+      "fourth_continuation_status": "FAILED 1:0",
+      "charged_prior_Slurm_wall_seconds": 1487,
+      "automatic_restart": false,
+      "trainer_pid": 566837,
+      "trainer_ppid": 566723,
+      "started_utc": "2026-10-13T10:46:48.233799+00:00",
+      "command": "bash code/V4/run_v4_r74_continuation.sh",
+      "execution_continuation": true,
+      "continuation_record": "continuation5",
+      "prior_steps": [
+        {
+          "step": "1465.111",
+          "state": "FAILED",
+          "exit_code": "1:0",
+          "elapsed_seconds": 1427
+        },
+        {
+          "step": "1465.112",
+          "state": "FAILED",
+          "exit_code": "1:0",
+          "elapsed_seconds": 20
+        },
+        {
+          "step": "1465.113",
+          "state": "FAILED",
+          "exit_code": "1:0",
+          "elapsed_seconds": 14
+        },
+        {
+          "step": "1465.114",
+          "state": "FAILED",
+          "exit_code": "1:0",
+          "elapsed_seconds": 13
+        },
+        {
+          "step": "1465.115",
+          "state": "FAILED",
+          "exit_code": "1:0",
+          "elapsed_seconds": 13
+        }
+      ],
+      "status": "running"
+    },
+    "split": "train",
+    "problem": "OVRP",
+    "counters": {
+      "base_query_rows": 30000,
+      "query_batches": 2376,
+      "trajectory_initializations": 30000,
+      "start_trajectories": 1581966,
+      "model_action_calls": 126530,
+      "decoder_calls": 125024,
+      "completed_trajectories": 0,
+      "train_rows": 30000,
+      "train_initializations": 30000
+    },
+    "successful_updates": 0
+  },
+  "update_failure_receipt": null,
+  "base_execution": {
+    "planned_unique_inputs": 198000,
+    "prior_completed_forward_rows": 20000,
+    "prior_failed_forward_rows": 16,
+    "prior_total_forward_rows": 20016,
+    "prior_total_forward_batches": 1729,
+    "new_forward_rows": 10000,
+    "new_forward_batches": 648,
+    "reused_failed_output_rows": 16,
+    "replayed_uncommitted_rows": 0,
+    "actual_cumulative_forward_rows": 30016,
+    "actual_cumulative_forward_batches": 2377
+  },
+  "stage": "failed_preserved_no_retry"
+}

@@ -1,0 +1,117 @@
+{
+  "utc": "2026-10-13T12:10:36.742492+00:00",
+  "pid": 4103818,
+  "host": "admin01",
+  "tmux": "r74_delivery_continuation7_controller",
+  "pane": "%149",
+  "pane_pid": 4103818,
+  "tmux_identity": {
+    "command": "tmux display-message -p -t %149 '#{session_name}|#{pane_id}|#{pane_pid}'",
+    "recorded_utc": "2026-10-13T12:10:36.731579+00:00",
+    "finished_utc": "2026-10-13T12:10:36.742420+00:00",
+    "seconds": 0.010866052471101284,
+    "returncode": 0,
+    "stdout": "r74_delivery_continuation7_controller|%149|4103818\n",
+    "stderr": ""
+  },
+  "active_formal_process": {
+    "utc": "2026-10-13T12:08:12.402659+00:00",
+    "host": "gpu03",
+    "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+    "gpu_index": 1,
+    "gpu_name": "NVIDIA GeForce RTX 3090",
+    "memory_used_mib": 2,
+    "memory_total_mib": 24576,
+    "compute_apps": [],
+    "idle": true,
+    "only_assigned_uuid_queried": true,
+    "gpu_observation": {
+      "command": [
+        "nvidia-smi",
+        "--id=GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+        "--query-gpu=index,uuid,name,memory.used,memory.total",
+        "--format=csv,noheader,nounits"
+      ],
+      "returncode": 0,
+      "stdout": "1, GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d, NVIDIA GeForce RTX 3090, 2, 24576\n",
+      "stderr": ""
+    },
+    "assigned_client_observation": {
+      "command": [
+        "nvidia-smi",
+        "--id=GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+        "--query-compute-apps=gpu_uuid,pid,process_name,used_gpu_memory",
+        "--format=csv,noheader,nounits"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "trainer_pid": 101584,
+    "trainer_ppid": 101493,
+    "started_utc": "2026-10-13T12:08:12.403190+00:00",
+    "slurm_step": "1465.118",
+    "tmux_session": "r74_continuation7",
+    "tmux_pane": "%148",
+    "tmux_pane_pid": "4094522",
+    "tmux_server_host": "admin01",
+    "command": "bash code/V4/run_v4_r74_continuation7.sh",
+    "execution_continuation": true,
+    "continuation_record": "continuation7",
+    "train_only_continuation": true,
+    "status": "running",
+    "automatic_restart": false,
+    "prior_steps": [
+      {
+        "step": "1465.111",
+        "state": "FAILED",
+        "exit_code": "1:0",
+        "elapsed_seconds": 1427
+      },
+      {
+        "step": "1465.112",
+        "state": "FAILED",
+        "exit_code": "1:0",
+        "elapsed_seconds": 20
+      },
+      {
+        "step": "1465.113",
+        "state": "FAILED",
+        "exit_code": "1:0",
+        "elapsed_seconds": 14
+      },
+      {
+        "step": "1465.114",
+        "state": "FAILED",
+        "exit_code": "1:0",
+        "elapsed_seconds": 13
+      },
+      {
+        "step": "1465.115",
+        "state": "FAILED",
+        "exit_code": "1:0",
+        "elapsed_seconds": 13
+      },
+      {
+        "step": "1465.116",
+        "state": "FAILED",
+        "exit_code": "1:0",
+        "elapsed_seconds": 60
+      },
+      {
+        "step": "1465.117",
+        "state": "FAILED",
+        "exit_code": "1:0",
+        "elapsed_seconds": 2292
+      }
+    ],
+    "charged_prior_Slurm_wall_seconds": 3839
+  },
+  "command": "bash code/V4/run_v4_r74_delivery.sh continuation7-controller",
+  "controller": "python -B -u -m code.V4.r74_delivery --stage continuation7-controller",
+  "CPU_only": true,
+  "monitor_interval_seconds": 240,
+  "future_execution": "UNVERIFIED",
+  "automatic_retry": false,
+  "conditional_authorization_is_not_a_VAL_freeze_or_TEST": true
+}

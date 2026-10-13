@@ -1,0 +1,21 @@
+{
+  "authorized_utc": "2026-10-13T10:13:37Z",
+  "authorized_by": "parent",
+  "scope": "Third minimum execution-only compatibility repair; adopted R74 scientific plan unchanged",
+  "prior_steps": [
+    {"step": "1465.111", "state": "FAILED", "exit_code": "1:0", "elapsed_seconds": 1427},
+    {"step": "1465.112", "state": "FAILED", "exit_code": "1:0", "elapsed_seconds": 20},
+    {"step": "1465.113", "state": "FAILED", "exit_code": "1:0", "elapsed_seconds": 14}
+  ],
+  "charged_prior_Slurm_wall_seconds": 1461,
+  "actual_failure": "Native MATNET imports and frozen weights now load, but ATSPEnv assigns self.device after EnvBase initialization and current TorchRL rejects even the unchanged device",
+  "minimum_fix": "Use an isolated native ATSPEnv subclass or equivalently scoped adapter accepting only redundant same-device assignment; retain the real native state transitions, decoder, masks, matrix and all starts. Do not edit shared EasyNCO or TorchRL sources",
+  "source_references": {
+    "native_constructor": "/public/home/shiys/EasyNCO/neural_solvers/envs/ATSPEnv.py:238",
+    "TorchRL_device_property": "/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/python_compat/torchrl/envs/common.py:501"
+  },
+  "completed_cache_prefix": "TRAIN/TSP and TRAIN/CVRP, 20000 complete rows; zero ATSP batches and zero optimizer updates",
+  "failed_partial_work": "Continuation2 ran the first ATSP base forward before the native constructor failure. Preserve its actual count separately. Replaying only this uncommitted partial batch is explicitly authorized and must be charged as extra base-forward work, not hidden under unique-input totals",
+  "continuation": "New continuation3 records, same1465/gpu03/sole UUID; reuse all completed task metadata and caches without replay; one syntax-only changed-source check, then direct remaining formal generation and unchanged training",
+  "forbidden": "System/library upgrades, fake solver outputs, alternate weights/configs/input/budgets/pools/labels, replaying completed TSP/CVRP, unrecorded retries, TEST, Git or delivery-controller restart"
+}

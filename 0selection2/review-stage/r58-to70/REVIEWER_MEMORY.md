@@ -2999,3 +2999,323 @@ Residual limits remain one run, exposed historical TEST, unmatched warm-start/ex
 **Memory update:** R73 delivery is supported with no actionable defect. Preserve validation-selected B23/global63, official B, and its one-time full18 TEST of8641/18000 versus unchanged historical A’s8680. The pre-lock tuple/list metadata defect was narrowly repaired with original evidence retained and no training, TEST or analysis rerun. Teacher/input isolation, complete warm start, recovery, coverage and accounting are supported. The small validation gain did not improve TEST accuracy; TEST remains reporting-only. R58 and legacy B discrepancies remain deferred. Delivery readiness does not establish70% acceptance; the original full18 native single-completed-solver goal remains active and unachieved.
 
 Parent whole-objective disposition: original18/fulllegalpool/nativeTEST officialB8641/18000=48.0055556%, threshold12600, missing3959; goal70ACTIVE/unachieved, objectiveauditfalse. OfficialB remains selected fromVAL8959 vsfixedA8923 and frozen06:26:09.791714UTC beforeTEST06:26:12.217136UTC. NewBTEST1465.110 actualterminal0/ownedtmuxgone, A exactR72object reused8680 without anynewcontrolcomputation, ONCEanalysis0. OriginalTRAIN1465.109 terminal0/full40Ebudget and narrowprelockrepair/failure retained. Primary+freshfullraw andverbatimMemoryupdates saved; scopedround15legacyintegrityacquittal is NOT70acceptance. ONEversionGitcommit pending. No justified launch-ready successor; next bounded question is read-only existingTRAIN/full18 non-completing acquisition feasibility, no solver/pilot/newlabels/recipegrid. Historical/currentcompletedTEST exposure must be disclosed in later planning and not used as design evidence. R58 fullydeferred/eightBsemanticsunfixed, not native70veto.
+
+
+### Post-R73 Bounded Existing-TRAIN Acquisition Feasibility, 2026-10-13T07:45:50UTC
+
+Actual SAME GPT-6.1-Sol/max execution thread01a13212-f99c-72a3-9279-db14f0073262 completed wrapper0/rawturn.completed at07:45:50UTC after one transient serveroverload reconnect. This was read-only source/TRAINmetadata research plus four notes, NOT a neural experiment/preflight or adopted R74. Files: review-stage/r58-to70/acquisition_feasibility/{feasibility.md,task_coverage.csv,solver_interfaces.csv,receipt.json}; raw trace/response .aris/traces/R74_acquisition_feasibility.*. All18originaltasks/22solvernames/128legalpairs inventoried, complete final pools preserved. OnlyOVRPTW has identified aligned decoder-prefixTRAINcache10000x270/twoReLDmethods, pooled summaries not serializedresumablestate. One livecontinuationwitness and measured12TRAINrowsx3repeats apply onlythere. Source-level precompletion boundaries arevisibleacrossall18, but sourcepossibility is not an alreadycertifiedfull18actionmenu. DIFUSCO/T2Tinitialization, GLOPpublicinsertion andMatPOENet/UniCOpreprocessing can alreadyconstructcomplete tours; later'prefix'isnotadmissiblewithout an earlierboundary. No model/checkpoint/NPZload, forward, solver, costreplay, GPU/jobquery, newlabels, APIcall orGit occurred. Note-onlyJSON/CSVstructureparseonce0 is not a scientific check. PriorcompletedTESTexposuredisclosed, no TESToutcomesused orTESTfilesread. Cacheabsence is not impossibility; unknownhistoricaldeploymentsnotcertifiedbydefaults. R73published2a1fd0629, no furtherR73computation/commit. Parent will ask actualAstra to assess one majorplan, with clarified distinction between missingconveniencecache and genuine source constraints: boundedfeaturegeneration maybe firstformalstage onlyAFTER explicitplanadoption, all compute counted, chosen-solverrestartallowed if no continuationdeduction, no complete/near-completeprobe, no newcompletedsolverlabels/R58. No successoradopted/authorized yet; goal70ACTIVE/unachieved.
+
+
+## R74 Actual Primary Feasibility-to-Plan, Completed 2026-10-13T08:16:30Z
+
+Actual SAME GPT-6-Astra/max thread 01a12e68-4d2a-71d0-aefd-67fc1c158282 completed raw turn and wrapper returncode 0. Full response below is preserved verbatim; same-family/provisional. Plan8/ready is only adoption readiness, not native70 performance acceptance (4/not ready). No R74 TEST exists. Previously delivered historical TEST exposure is explicitly disclosed, not erased or used for mechanism/recipe selection.
+
+### Full Raw Primary Response
+
+**Recommend one R74 bounded acquisition experiment. Plan: 8/10, ready for parent adoption only.** The original 70% goal remains **4/10, not ready**. R73’s settled integrity verdict does not establish performance acceptance.
+
+`review_independence=same-family; acceptance_status=provisional`
+
+I inspected the [feasibility notes](/public/home/shiys/0selection2/review-stage/r58-to70/acquisition_feasibility/feasibility.md), both inventories, [receipt](/public/home/shiys/0selection2/review-stage/r58-to70/acquisition_feasibility/receipt.json), raw response and relevant source boundaries. Existing measured evidence remains OVRPTW-only: two ReLD prefixes, pooled TRAIN features and a narrow continuation/timing witness. However, the inspected sources support constructing a separately specified, bounded extractor across all18 tasks. Missing caches, historical deployment equivalence and final-solver continuation witnesses are not prerequisites for that experiment.
+
+Two source citations need correction. MATNET’s applicable implementation is [ATSPPolicy.pre_forward/forward](/public/home/shiys/EasyNCO/neural_solvers/methods/matnet/policy.py:157), not the earlier `MatNetGLOPPolicy` methods. The cited ICAM methods at lines151/176 consume CVRP coordinates and demands; they do not establish the claimed ATSP interface. This proposal uses MATNET for ATSP. Its [environment loading path](/public/home/shiys/EasyNCO/neural_solvers/envs/ATSPEnv.py:266), with `method_name="matnet"` and augmentation1, does not invoke the MatPOENet complete-tour initializer.
+
+The parent clarifications are otherwise sound. One distinction remains essential: deterministic prefixes add **computed execution features**, not new information independent of the original instance. Their potential benefit is making useful algorithmic structure accessible to the selector. Neither a source boundary nor an existing checkpoint demonstrates that this structure predicts native winners.
+
+[Janisch et al., problem definition, equations1–2 and Method](https://ojs.aaai.org/index.php/AAAI/article/download/4287/4165), support choosing acquisitions conditional on observations already obtained. Their method uses cost-sensitive Q-learning on tabular features. Here I propose a small, finite acquisition tree trained by exact expected classification loss, with a fixed operation budget and no latency penalty. This is a project adaptation. [Renau and Hart, sections3–4 and6](https://arxiv.org/html/2401.12745v1), support investigating trajectory-derived selection features, but their continuous-optimization experiments evaluate complete candidate points and do not validate routing prefixes.
+
+**Hypothesis:** a full18 policy can improve native selection by learning when to deepen one incomplete solver trajectory and when to inspect a different solver, while conditioning its final decision on instance-aligned per-start states. R51’s fixed two-solver OVRPTW summaries lost2.6pp validation, so useful prefix information is unproved. R50’s frozen encoders, R47’s retrieval, R53–56’s pair/route mechanisms, R60/R62’s auxiliary supervision and R64–73’s limited gains all constrain optimism. R66 also remains counterevidence to generic residual capacity: it trained standalone `g` versus composite `F+g`, with both deploying `F+g`. The proposed change is the acquired execution state and learned acquisition policy.
+
+1. **Control and inherited model.** Reuse published R73B23/global63 as A, fixed at **8959/18000 validation correct**. Train only B. B contains that complete saved averaged-`x` selector as a frozen FP32/eval component `F`, including its normalization buffers and head. Preserve all original input fields, directed ATSP information, legal candidates and native labels. Expose its existing `encode_state` outputs and reconstruct its original utilities through the same decoder/head; do not execute a second base forward. Only the new state adapter, acquisition gates and utility correction train. This is a package comparison with additional computation, not a matched causal test of adaptivity alone.
+
+2. **Fixed probe implementations.** Freeze every probe weight and run greedy FP32/eval, augmentation1, without solver adaptation, postprocessing or full-solve wrappers. These are explicitly new extractor recipes, not certifications of historical label deployments.
+
+| Original Tasks | Probe Recipe |
+|---|---|
+| TSP | BQ `pretrained_models/tsp.best`; d192, nine layers,12 heads, FF512, ReZero, ReLU, softmax, dropout0; beam1, no KNN restriction. Preserve original coordinates/order, append node0 only as the closure placeholder, and call the source [greedy step](/public/home/shiys/methods论文_mineru_output/source_code/bq-nco/learning/tsp/decoding.py:138), never `decode`. |
+| CVRP | ReLD `CVRP/weights/ReLD/model_epoch_90.pt` with its [model configuration](/public/home/shiys/reld-nco-main/CVRP/config.yml:13): d128, six layers, eight heads, FF512, clipping50, `forcing_first_step=False`; `min(n,100)` learned starts and bounded [one_step_rollout](/public/home/shiys/reld-nco-main/CVRP/CVRPModel.py:50). |
+| ATSP | MATNET `matnet_atsp100.ckpt`; d256, five layers,16 heads, FF512, clipping10, all n starts. Preserve the directed matrix. Generate one column-embedding permutation per n with private seed2 and broadcast it across queries, making this extractor independent of batching. No NN initializer or matrix reordering. |
+| All15 MVRP | Existing Train_ALL epoch5000 ReLD-MTL and ReLD-MOEL weights/configurations recorded in [R48’s plan](/public/home/shiys/0selection2/code/V4/runs/R48_core_diagnosis/audit_plan.json). Use each actual [task environment](/public/home/shiys/reld-nco-main/Multi-Task/utils.py:94), preserving constraints and its positive-demand start subset for backhaul tasks. |
+
+3. **Acquisition tree and noncompletion invariant.** Let n be the true customer count for VRP and true node count otherwise. Fix \(h=\lfloor(\lfloor n/4\rfloor-1)/2\rfloor\). After initialization of one starting customer/node per trajectory, one increment performs exactly h further selections; depot visits also consume selections. Every start therefore visits at most \(1+2h\le\lfloor n/4\rfloor\) distinct required nodes. Check the bound and `finished/done` before and after every step. Never call completion, reward-reconstruction or route-length-finalization functions. On MVRP, the root gate chooses MTL or MOEL; after its first increment, a second gate chooses either another increment of that same live state or the other model’s first increment. Thus the three terminal observation sets are MTL-deep, MOEL-deep, or both-shallow. Other families use their sole probe for two increments. There is no stop action, length search or cost coefficient: the experiment tests information allocation under this fixed limit. Retain live state when deepening; final solver execution always restarts separately.
+
+4. **Exact observation interface.** Keep separate tokens for every actual start and observed checkpoint. Each token contains frozen `F` node embeddings for the original start, current node and mean of distinct visited nodes; probe identity; shallow/deep identity; and12 scalars: selections/n, visited/n, partial traversed distance, last-action probability, normalized last-action entropy, top-two probability gap, last-decision legal fraction, depot returns/n, remaining normalized load, current time, current-route length and accumulated waiting. Divide distance/time quantities by \(n\mu\), where \(\mu\) is the input’s mean off-diagonal edge length, floored at1e−8; unavailable VRP fields are zero. Preserve directed distances for ATSP. No final cost, reward, complete route, winner, gap or rank enters this interface. Source-row IDs serve cache alignment only. Use the original native adapters for demands and constraints; do not apply coordinate transformations.
+
+5. **Trainable policy.** Concatenate the three128-dimensional node embeddings,12 scalars, five-way probe identity and two-way checkpoint identity:403 dimensions. Apply `Linear(403,128)→GELU→LayerNorm`. Project each frozen384-dimensional candidate feature to128, then use two candidate-to-observed-token cross-attention blocks, four heads, FF256, dropout0.1, with residuals and LayerNorm. A shared linear scalar head produces \(\Delta_j\); deploy utilities \(F_j+\Delta_j\). Initialize this final head to zero. The root gate is `128→128→2` from frozen instance summary h; the second shared gate is `258→128→2` from h, the mean currently observed shallow-token embedding and two-way first-probe identity. Gates use GELU, no dropout, and zero final layers. Initialize new parameters with seed2. Gate calls receive only their current observations. Ties choose MTL at the root and deepen at the second gate.
+
+6. **Objective.** For MVRP, let a be root probability of MTL, b the probability of deepening after MTL, and c that after MOEL. Terminal weights are \(w=(ab,(1-a)c,a(1-b)+(1-a)(1-c))\); other families have one terminal weight1. Compute two independent adapter-dropout views for every terminal observation set. Minimize their weighted mean native-winner CE, plus `0.35*min(u/720,1)` times the weighted symmetric legal-pool KL. Detach w in the KL term so acquisition gates optimize classification loss rather than consistency magnitude. Use FP32 reductions. This exactly differentiates expected leaf CE without action sampling, pseudo-winners, policy-value targets or a replay buffer. Deployment follows hard gate argmax; only that hard policy’s validation accuracy selects checkpoints. The soft-training/hard-deployment mismatch is a stated risk.
+
+7. **Formal generation and training budget.** After adoption and the single check below, generate both bounded probe trajectories on each original MVRP TRAIN input and the sole trajectory on each other TRAIN input: **330,000 trajectory initializations over180,000 distinct rows**. Generate the corresponding33,000 validation trajectories over18,000 rows once, storing both checkpoints and charging this counterfactual acquisition work separately. Frozen `F` processes each of these198,000 inputs once as a required B component. Use task/true-size/start-count groups, fixed batch16 and natural tails; preserve original row alignment. Release probe models before optimization. Cached validation gates must still access only their chosen observation path.
+
+8. **Optimization protocol.** Reuse seed2’s R67 global41–80 task/row order, real256 rows/task, three tasks/update,16-row task tails. Run40 fixed epochs,240 updates/epoch: **9600 successful updates and7.2M native presentations**. The two dropout views across three MVRP leaves and one leaf elsewhere total **38.4M successful leaf-view rows**, not38.4M distinct examples. Use the existing official ScheduleFree configuration: LR3e−4, internal720-update warmup, betas(.9,.999), epsilon1e−8, WD1e−4, `foreach=False`, r0, `weight_lr_power=2`, `inner_momentum=0`; fresh optimizer/scaler, train y and evaluate/save x. Average the three same-state task gradients in FP32, clip once at1 and step once. Whole-update nonfinite recovery restores RNG and retries the same rows without counter advancement, at most20 attempts. Preserve the common dropout schedule. Actual extraction/data/capacity failure stops and preserves evidence; it does not authorize a recipe substitution.
+
+9. **Selection and TEST.** Evaluate the complete hard policy on all18,000 validation rows every epoch, FP32 batch128 with104-row task tails. Retain five-epoch/final/selected complete native TRAIN evaluations. Select one entire policy by maximum integer validation count, earliest tie. Official B requires **more than8959**; otherwise A remains. Final solver utility ties use ascending global solver ID, with every original legal candidate retained. After parent freeze, perform **one original full18 TEST of B regardless of validation gain**, executing its selected acquisitions live, including `F`; do not use a counterfactual TEST feature bank. Reuse A’s saved TEST unchanged. No per-task checkpoint assembly, gate threshold selection or alternative aggregation.
+
+10. **Minimum check and accounting.** One combined synthetic CPU check covers the quarter-instance boundary, target/future-observation isolation, legal masks/ties and expected-loss gradient/retry behavior. Then start formal generation; record the first actual batches’ start counts, selections, visited maxima, zero completed trajectories and finite observations. No GPU pilot or reference replay. Separately record extraction/loading/cache work, frozen-base forwards, optimization attempts, cached evaluations and live TEST acquisition. Deployment cost is **loading + base selection features + every acquired prefix and gate + final decision + one full restarted selected solver**. The duplicated prefix work is charged. This screen creates no new completed-solver labels; consequently, without matching existing completion timings, total deployment latency remains unmeasured. Acquisition/selection timing must not be presented as end-to-end latency or a speedup.
+
+This is sufficiently specified for **one bounded implementation and formal screen**, with unmeasured extraction throughput and unverified runtime adapters explicitly outstanding. B failing to exceed8959 rejects this package’s validation benefit. A gain would support this particular complete policy; without a matched fixed-acquisition control it would not prove that adaptivity caused the gain. Collapsed gates, stronger TRAIN fitting, lower CE or useful-looking probe statistics do not independently establish success. There is no70% forecast.
+
+**Memory update:** The feasibility query establishes narrow recorded OVRPTW execution evidence and source-backed incomplete boundaries across all18 tasks. Missing caches and final-solver continuation witnesses are resolved as unnecessary prerequisites under separately locked extraction and fully charged restart semantics. Two citation locations require correction: the applicable MATNET class is `ATSPPolicy`, and the cited ICAM methods are CVRP. Recommend one full18 bounded acquisition package against fixed R73B23, with learned MVRP probe allocation, at most one-quarter node coverage per start, frozen original selector features and one new trainable policy. Feature usefulness, throughput, hard-routing generalization and causal benefit of adaptivity remain unresolved. Parent adoption and execution are pending.
+
+Historical TEST results, including completed R73 delivery, are known from memory; that exposure was not erased. They were not used to choose this mechanism or protocol. I opened no TEST artifacts and performed no model/array loading, inference, replay, GPU/job operation, edits, Git action or delegation. R58 and legacy B discrepancies remain deferred. The original goal stays **ACTIVE and unachieved** until the official locked original18 TEST reaches12600/18000 and the full objective audit passes.
+
+### Verbatim Primary Memory Update Copy
+
+**Memory update:** The feasibility query establishes narrow recorded OVRPTW execution evidence and source-backed incomplete boundaries across all18 tasks. Missing caches and final-solver continuation witnesses are resolved as unnecessary prerequisites under separately locked extraction and fully charged restart semantics. Two citation locations require correction: the applicable MATNET class is `ATSPPolicy`, and the cited ICAM methods are CVRP. Recommend one full18 bounded acquisition package against fixed R73B23, with learned MVRP probe allocation, at most one-quarter node coverage per start, frozen original selector features and one new trainable policy. Feature usefulness, throughput, hard-routing generalization and causal benefit of adaptivity remain unresolved. Parent adoption and execution are pending.
+
+Historical TEST results, including completed R73 delivery, are known from memory; that exposure was not erased. They were not used to choose this mechanism or protocol. I opened no TEST artifacts and performed no model/array loading, inference, replay, GPU/job operation, edits, Git action or delegation. R58 and legacy B discrepancies remain deferred. The original goal stays **ACTIVE and unachieved** until the official locked original18 TEST reaches12600/18000 and the full objective audit passes.
+
+### Parent Adoption, 2026-10-13T08:24:14Z
+
+Adopt ONE R74 full18 bounded acquisition package, root code/V4/runs/R74_adaptive_incomplete_acquisition/, fixed R73B23/global63 control8959VALcorrect. No further planning gate. Train only the new policy with frozen complete base/probes; no completed probe trajectory, new final-solver cost labels, candidate pruning, R58 repair or TEST-driven choice. All original legal candidates remain selectable. Fixed one-quarter per-start operation boundary, per-start observations and learned MVRP information allocation materially differ from R51 pooled fixed summaries, but feature usefulness and hard-routing generalization are unproved. Exact expected leaf CE/weighted detached-policy symmetric KL, sole GPU/allocation, real256/task/triple update and fixed40E/9600 follow approved raw protocol. One combined synthetic CPU check then DIRECT formal native TRAIN/VAL feature generation; no GPU pilot/reference inference. Correct the two identified source citations during implementation without reopening a source audit. Features may be stored losslessly/factorized to avoid repeating unchanged F node embeddings; do not alter FP32 observed values/semantics or use unchosen future states in deployed gates. Counterfactual TRAIN/VAL acquisition work, live selected-path TEST work and one restarted chosen completion are separately accounted; no unmeasured end-to-end speedup claim. New B one original18 TEST only after unique validation checkpoint/official-arm parent lock. Goal70 ACTIVE/unachieved; R73 remains closed/pushed2a1fd0629 and no new commit until completed meaningful R74 version.
+
+
+## R74 Actual Implementation and First Formal Batch, 2026-10-13T09:20:59Z
+
+Actual SAME GPT-6.1-Sol/max wrapper0/rawturn.completed09:20:59UTC. One combined synthetic CPU invocation passed6.214378s with one injected synthetic retry; no real-data/model preflight or GPU pilot. Original formal task1465.111/gpu03/soleUUID launched09:17:56UTC, trainerPID580952, tmuxr74_train/pane%129/panePID3450348. First formal TSP16rows/n50/one start produced shallow6/deep11 visited nodes under quarter12, finitefeatures/zerocompletions. Policy-model2259470params/frozenbase1842953/newtrainable416517; lazyBQ3107539frozenparams, otherprobes not yet runtime-verified. Cache factorization preserves full per-start/checkpoint FP32 information. Latest executorhanded-off status3320rows/288batches/zerocompletions/zerooptimizerupdates, NOT training success. Other nativeprobeinterfaces, completefeaturegeneration and optimization remain unverified; preserve genuine failures without recipe substitution. Actualinitial serveroverload reconnected on SAMECLI, no duplicatedjob/restart. Two source-note corrections completed; originalpools unchanged. Foregroundsessions settled; originalformal tmux intentionallylive. NoTEST/controlreplay/Git/complete-solverexecution. Parent now prepares independent conditional delivery while originalprocess lives, no additionalpreflight. Goal70 ACTIVE/unachieved.
+
+### Full Raw Implementation Handoff
+
+R74 is implemented and live in formal cache generation. No optimization update has been observed.
+
+- **CPU:** one combined invocation passed in **6.214378s**.
+- **Launch:** Slurm `1465.111`, `gpu03`; tmux `r74_train`, pane `%129`, pane PID `3450348`, trainer PID `580952`; assigned UUID only.
+- **First batch:** 16 TSP TRAIN rows, `n=50`, one start; shallow/deep selections and visited maxima **6/11**, quarter limit **12**; finite features, zero completions.
+- **Parameters:** 2,259,470 policy-model total; **416,517 trainable**. Frozen BQ adds 3,107,539.
+- **First-batch peak allocation:** 49,771,520 bytes. Latest saved status: **3,320 rows / 288 batches**, zero completions, zero updates.
+
+[Execution handoff](/public/home/shiys/0selection2/code/V4/runs/R74_adaptive_incomplete_acquisition/execution_handoff.json) records identities, storage, receipts and the two authorized feasibility-note corrections. Remaining probes and training runtime are not yet execution-verified.
+
+Foreground sessions are settled; `r74_train` remains live. No TEST, completed solver execution or Git operation. Goal70 remains ACTIVE/unachieved.
+
+
+## R74 First Formal Runtime Failure and Explicit Minimal Repair Authorization
+
+Original formal1465.111 is ACTUALFAILED1:0/1427s/nodegpu03; ownedr74_train gone. Failure2026-10-13T09:41:40.295903UTC is ModuleNotFoundError for top-level neural_solvers during firstATSP EasyNCO eager import, not a scientific outcome or changed solver. TRAIN/TSP and TRAIN/CVRP complete caches retained:20000basequeries/20000trajectoryinitializations/1728batches/982780starttrajectories/117370modelcalls/116512decodercalls/zero completedtrajectories/zero optimizerupdates. No ATSPsuccessfulbatch. Parent explicitly authorizes minimum import searchpath/namespace correction plus continuation of remaining formal generation and unchanged training, skipping completed tasks without reference/feature replay. Preserve old failure/log/protocol/snapshots and charge loading/failedwall. No nativeweight/input/config/operationbudget/objective/data/order/pool/label/R58 change or autonomousrestart. Fresh ACTUAL GPT-6.1-Sol/max repairthread01a134a7-bc56-7ec2-9563-076ec70a0a96 started09:46:10UTC/tmuxr74_import_repair/pane%131/PID3560790, separate from concurrent SAME Sol CPUdeliverypreparation; disjointsource ownership. Originalconditionaldelivery cannot run TEST after failedstep; watcheramendment requires later explicitparentauthorization afteractualrepairhandoff/prepcompletion. One syntax-only executionrepair check, not another neural/GPUpreflight. GPUcurrentlyno ownedtrainerlive. Goal70 ACTIVE/unachieved; actualfailureunhidden, planmechanism unchanged.
+
+
+## R74 Conditional Delivery Preparation and Second Import Failure, 2026-10-13T10:03:06Z
+
+Actual SAME mainSol/max CPUdeliverypreparation wrapper0 at09:58:00UTC: one syntax-only invocation0/.071863602s; controller launchedr74_delivery_controller/%132/PID3592099 and correctly stopped on original1465.111 failure, nowgone. No freeze/TEST/analysis/GPU/model/arrayload. 'Untouched' preparation handoff refers to deliveryexecutor's ownership, not a denial of separately authorized concurrent runtime source amendments.
+
+### Full Raw CPU Delivery Preparation Response
+
+CPU delivery preparation is complete. The controller launched, then stopped on the original formal failure.
+
+- Syntax-only invocation: **passed**, exit `0`.
+- Controller: `r74_delivery_controller`, pane `%132`, PID `3592099`; now gone.
+- Original step `1465.111`: **FAILED `1:0`**, 1,427s.
+- Blocker: `ModuleNotFoundError: No module named 'neural_solvers'` during MATNET import.
+- Last recorded progress: **20,000 TRAIN extraction rows; zero optimizer updates**.
+
+[Handoff and evidence](/public/home/shiys/0selection2/code/V4/runs/R74_adaptive_incomplete_acquisition/delivery_preparation_handoff.json) preserve the original traceback and terminal observation.
+
+No restart, repair, VAL lock, TEST or analysis occurred. Preparation performed no GPU/model/array/evaluation operations. Foreground sessions are settled; future delivery remains unverified and blocked. Goal70 remains ACTIVE/unachieved.
+
+Actual freshSol/max repairthread01a134a7-bc56-7ec2-9563-076ec70a0a96 wrapper0 at09:59:59UTC. Namespace searchpath fix+explicitcontinuation preserved all20kcompleteTRAINcache/sourceevidence; one changedexecution syntaxcheck only. Newformal1465.112 FAILED1:0/20s on unrelated eagerDIFUSCO PyG GLIBC_2.29 import, before anyATSPbatch/optimizerupdate. BOTHformalstepsgone; chargedSlurmwall1427+20=1447s; no automaticretry or scientificfailure claim.
+
+### Full Raw First Execution Repair Response
+
+Applied the namespace fix; the single syntax-only check passed. Continuation `1465.112` then failed `1:0` after 20s: EasyNCO’s eager DIFUSCO import requires unavailable `GLIBC_2.29` through `libpyg.so`.
+
+No ATSP batch or optimizer update ran. Counters remain unchanged; completed TSP/CVRP caches and original failure records are preserved. Charged Slurm wall: **1427 + 20 = 1447s**. No retry or TEST; both owned tmux sessions are absent.
+
+[Handoff with receipts, counters, and amendment references](/public/home/shiys/0selection2/code/V4/runs/R74_adaptive_incomplete_acquisition/continuation/handoff.json). Goal70 remains active and unachieved.
+
+Parent explicitly authorizes SECOND minimum execution-only repair: narrow scoped namespace loading of unchanged real MatNetEncoder/ATSPDecoder/ATSPPolicy/ATSPEnv, avoiding unrelatedmethods registry import sideeffects. No systemupgrade, fakealgorithm/output, model/config/weight/input/budget/objective/data/pool/label substitution. SAME actualrepairSol/max thread resumed10:03:06UTC/tmuxr74_scoped_import_repair/%134/PID3622702. Preserve both failedruns+complete20kcache, newcontinuation2 records, one syntax-onlychangedexecution check thenDIRECTfirstformalATSPbatch onsole1465UUID; no neural/GPUpreflight or completedtaskreplay. Futuredeliverywatcher needs separateparentrefresh afteractualsuccessfulhandoff; noTESTauthorizedfromfailedruns. Full18 native70 goalACTIVE/unachieved, no blockerthreshold reached or performanceacceptance.
+
+
+## R74 Third Native Interface Repair, 2026-10-13T10:17:46Z
+
+Actual SAME GPT-6.1-Sol/max scoped-import executor thread 01a134a7-bc56-7ec2-9563-076ec70a0a96 completed CLI0/rawturn.completed at10:16:26UTC. Native MATNET real imports and frozen state loaded, but actual formal1465.113 FAILED1:0/14s in redundant native ATSPEnv.device assignment, no successful ATSP batch or optimizer update. Prior Slurm1427+20+14=1461s, all failures preserved. First16 ATSP base rows were actually forwarded/written before failure; actual base work20016rows/1729batches vs20000complete-prefixrows. Partial cache contents not validated and not claimed reusable. Not a scientific negative or performance result.
+
+### Full Raw Scoped-Import Executor Response
+
+Native MATNET imports and weight loading succeeded. Formal step `1465.113` then failed `1:0` after **14s** because the unchanged `ATSPEnv` assigns `self.device`, which current TorchRL rejects.
+
+No ATSP batch or optimizer update completed. The failed batch did process **16 additional base rows**, making actual base work **20,016 rows**. Total charged Slurm wall is **1,461s**.
+
+Old caches and evidence remain intact; partial work is preserved. No retry or TEST ran, and all owned tmux sessions are gone.
+
+[Detailed handoff](/public/home/shiys/0selection2/code/V4/runs/R74_adaptive_incomplete_acquisition/continuation2/handoff.json). Goal70 remains active and unachieved.
+
+Parent explicitly authorizes THIRD minimum execution-only repair in runtime_repair3_authorization.json: isolated native ATSPEnv same-device assignment compatibility, no shared source/package/algorithm/config changes. Preserve all complete20kcache and failures; explicit minimum uncommitted16-row replay is allowed only with separate failed-work accounting. SAMEactualSol/max device-repair CLI launched10:17:46UTC/tmuxr74_device_repair/%136/PID3675950, direct continuation3 on1465/soleUUID next after one syntax-only changedexecutioncheck. No neural/GPUpreflight, complete-task replay, auto retry, TEST, deliverywatcher restart or Git. Full18 native70 goal remainsACTIVE/unachieved; no blockerthreshold or acceptance claim.
+
+
+## R74 Fourth Native Interface Repair, 2026-10-13T10:31:24Z
+
+Actual SAME GPT-6.1-Sol/max device repair completedCLI0/rawturn.completed10:29:34UTC. Real1465.114FAILED1:0/13s afterdevicefixpassed, in legacyATSPEnv.batch_size/currentTorchRLCompositeSpec bookkeeping. All16partialbaseoutputs were checked/reused duringformalexecution; ZEROnewbaseforwards, actualcumulative20016rows/1729batches, successfulprefix20krows/1728batches. PriorSlurm1427+20+14+13=1474s. NofiniteATSPbatch/update/VAL/TEST, notaperformanceresult.
+
+### Full Raw Device-Repair Executor Response
+
+`1465.114` failed `1:0` after **13s**. The device adapter worked; native `ATSPEnv.load_problems` then hit a TorchRL batch-size/Composite-spec shape mismatch.
+
+Syntax check: **1 invocation, exit 0, 0.019s**. The 20,000 complete TSP/CVRP rows remain untouched. All 16 persisted partial base rows were verified and reused, adding **zero base forwards**; cumulative actual base work remains **20,016 rows**.
+
+Charged Slurm wall is **1,474s**. No finite ATSP batch or optimizer update occurred. No retry, TEST, or watcher refresh ran; all owned sessions are terminal.
+
+[Full handoff, source amendment, and receipts](/public/home/shiys/0selection2/code/V4/runs/R74_adaptive_incomplete_acquisition/continuation3/handoff.json).
+
+ParentauthorizesFOURTHminimumexecution-onlyrepair(runtime_repair4_authorization.json): isolatednativeATSPEnv_batch_sizesettingwithoutunusedmodernspecresize andactualnative_reset(None), unchangedpre_step/_step/masks/solver/sourceweights/scientificrecipe. No sharedEasyNCO/TorchRLedit, no reimplementation/upgrade/fallback. Existingreceiptsreplace redundanthash/auditloops; ONEsyntax-onlychangedexecutioncheckthendirectcontinuation4same1465/soleUUID. SAMEactualSol/maxthreadresumed10:31:24UTC/tmuxr74_batch_interface_repair/%138/PID3725560. Allcompletecache/partialreuse/failurespreserved. No automaticretry/deliverywatcher/TEST/Git/R58. Native70goalACTIVE/unachieved; currentrepairmeaningfulprogress, noblock/acceptanceclaim.
+
+
+## R74 Fifth Minimum Device Repair, 2026-10-13T10:45:06Z
+
+Actual SAME GPT-6.1-Sol/max fourthrepaircompletedCLI0/rawturn.completed10:43:19UTC. Formal1465.115FAILED1:0/13s afterrealnativebatch_size/_resetpassed; CPUgeneratorrandperm inheritedCUDAdefaultdevice. Zero newbaseforwards,16partialoutputsreused, actualcumulative20016rows/1729batches; noATSPaction/batch/update. CumulativeSlurm1487s. ONEsyntax0/.017689s. Allpreviousfailurespreserved, notscientificresult.
+
+### Full Raw Batch-Interface Executor Response
+
+Continuation4 `1465.115` **FAILED `1:0` after 13s**. Native batch-size loading and `_reset(None)` passed; permutation creation then raised `Expected a 'cuda' device type for generator but found 'cpu'`. No retry occurred.
+
+- One syntax invocation: exit `0`, **0.01769s**.
+- Complete TSP/CVRP caches: **20,000 rows**, skipped entirely. Reused **16 finite ATSP base rows**; zero new base forwards. Cumulative: **20,016 rows / 1,729 forward batches**.
+- ATSP configured **20 starts / 5-visit limit**. Native reset returned; no prefix actions or successful batch. Prefix done/finite checks were not reached.
+- Cumulative Slurm charge: **1,487s**.
+- Observed trainer PID `4042001`, pane `%139`, pane PID `3754598`. Step terminal; `r74_continuation4` and all prior owned sessions are absent.
+- Optimizer updates: **0**. No TEST or delivery-watcher restart.
+
+The isolated adapter omits spec resizing and calls native reset directly. Exact changes are in the [source amendment](/public/home/shiys/0selection2/code/V4/runs/R74_adaptive_incomplete_acquisition/continuation4/execution_amendment.json); failure and accounting are in the [handoff](/public/home/shiys/0selection2/code/V4/runs/R74_adaptive_incomplete_acquisition/continuation4/handoff.json). Prior evidence remains preserved. Goal70 remains active and unachieved.
+
+ParentauthorizesFIFTHminimumone-lineexecutionrepair(runtime_repair5_authorization.json): explicitdevice='cpu' onexistingCPU Generator(seed2) randperm, existing.to(cuda) retained, no permutation/weights/config/scientificchange. SAMEactualSol/maxresumed10:45:06UTC/tmuxr74_rng_device_repair/%140/PID3775348. Onecheapchangedsyntaxcheck/directcontinuation5same1465/soleUUID, preservecomplete20kcache/actual16partialbaseoutputs/oldfailures, no rescan/hash-audit/preflight/replay/automaticretry/TEST/Git/watcherrestart. Native70goalACTIVE/unachieved; no blocker/acceptanceclaim.
+
+
+## R74 ATSP Complete, Native MOEL Hook Repair, 2026-10-13T10:54:41Z
+
+Actual SAME GPT-6.1-Sol/max CPU-randpermrepaircompletedCLI0/rawturn.completed10:51:57UTC. FirstrealATSPbatch16/n20/all20starts finite, shallow3/deep5visited/limit5/donefalse/completed0; fullTRAIN/ATSP10000 COMPLETE. Completecacheprefixnow30000TSP/CVRP/ATSProws/2376batches/1581966starts/126530modelcalls/125024decodercalls. Actual1465.116FAILED1:0/60s atfirstOVRP MOELdecoderhook expectingTensorbutnative returns(probs,moe_loss). ActualFwork30016rows/2377batches includesfailed16OVRPoutputs; oldfailed16ATSPoutputsabsorbedincompletecache, no duplicateFforward. PriorSlurm1547s, zerooptimizerupdate/VAL/TEST. Runtimeprogress, notscientificperformanceoutcome.
+
+### Full Raw CPU-Randperm Executor Response
+
+The explicit CPU `randperm` fix passed. TRAIN/ATSP completed, then `1465.116` **FAILED `1:0` after 60s** in OVRP: the decoder hook called `.detach()` on a tuple. No retry; `r74_continuation5` is absent.
+
+- First finite ATSP batch: **16 rows, 20 starts**, visits **3 then 5**, limit **5**, `done=false`, finite features, zero completions.
+- Complete caches: **30,000 rows** across TSP/CVRP/ATSP. Successful counters: **2,376 batches**, **1,581,966 starts**, **126,530 model calls**, **125,024 decoder calls**.
+- Reused **16** base rows; executed **10,000 new rows**, including **16 failed OVRP rows**. Actual cumulative base work: **30,016 rows / 2,377 forward batches**.
+- Syntax: **one invocation**, exit `0`, **0.01776s**.
+- Slurm charge: **1,487 + 60 = 1,547s**.
+- Optimizer updates: **0**. No TEST or watcher restart.
+
+All prior evidence and the completed ATSP cache are preserved. Details: [terminal handoff](/public/home/shiys/0selection2/code/V4/runs/R74_adaptive_incomplete_acquisition/continuation5/terminal_handoff.json). Goal70 remains active and unachieved.
+
+ParentauthorizesSIXTHminimumexecutionfix(runtime_repair6_authorization.json): captureactualMOELtuple'sprobabilityfirstelement, directTensorforothernative decoders, no alteredvalues/aux-lossfeature. SAMEactualSol/maxresumed10:54:41UTC/tmuxr74_decoder_tuple_repair/%142/PID3813389, directcontinuation6same1465/soleUUIDafterONEsyntax-onlycheck. Skipallthreecomplete30ktasks, preserveallpartials/failures/snapshots. Reusefirst16OVRPbaseoutputsifvalid; minimumunrecoverablepartialnativebatchreplayexplicitlyallowedonlywithseparateextra initialization/action/faileddecoderaccounting, nothiddeninplannedunique-cachetotals. No scientificrecipe/pool/labelchange, no repeatedaudit/neuralpreflight/complete-taskreplay/automaticretry/TEST/Git/watcherrestart. Native70goalACTIVE/unachieved.
+
+
+## R74 Actual Native Continuation Running, 2026-10-13T11:09:42Z
+
+Actual SAME GPT-6.1-Sol/max decoder-tuple repair completedCLI0/rawturn.completed11:06:36UTC. Directformalcontinuation6actual1465.117 LIVE/gpu03/soleUUID/r74_continuation6/%143/panePID3850676/trainer2280579/start11:04:22UTC. FirstOVRP16/n50/all50starts perprobe shallow6/deep11visited<=12 finite/donefalse/completed0. Originalcomplete30kcache skippedbeforeforwards; partialOVRP16Foutputsreused, no duplicateFforward. FailednativeOVRPpartialwork32initrows/1600starts/14returned+1failedmodelcalls/11decodercomputations separatelysource/control-flow-derived; currentreplay24model/20decoder calls instrumented. PriorfailedSlurm1547s preserved; firstbatchobservation9snew/notterminalwall. Notscientificperformanceoutcome; zeroupdates/VAL/TEST.
+
+### Full Raw Decoder-Tuple Executor Response
+
+First finite OVRP batch passed. **`1465.117` remains live** in `r74_continuation6`, trainer PID `2280579`, pane `%143`.
+
+- Both probes: **16 rows, 50 starts**, distinct visits **6 then 11**, limit **12**, finite features, `done=false`, zero completions.
+- Three complete tasks skipped: **30,000 cached rows**. Reused **16 OVRP base rows**, zero new forwards. Actual base work at first batch: **30,016 rows / 2,377 forward batches**.
+- Successful generation counters: **30,032 initializations**, **1,583,566 starts**, **126,554 model calls**, **125,044 decoder calls**.
+- Prior failed probe work charged separately: **32 initialization rows, 14 returned model calls, one failed call, 11 decoder computations**. These counts are source/control-flow-derived. The current replay recorded **24 model calls / 20 decoder calls**.
+- Syntax: **one invocation**, exit `0`, **0.01916s**.
+- Slurm at first-batch observation: **1,547 prior + 9 new = 1,556s**; the live job continues accruing time.
+
+Optimizer updates remain **0**. No TEST or watcher restart. Records: [handoff](/public/home/shiys/0selection2/code/V4/runs/R74_adaptive_incomplete_acquisition/runtime_repair6_handoff.json). Goal70 remains active and unachieved.
+
+ParentnormalJSONobservation11:09:42UTC: lastsuccessfulTRAIN/VRPTWbatch cumulative65116basequeries/4704batches/100232plannedinitializations/6413440startstates/212214modelcalls/201396decodercalls/completions0; stillfeaturegeneration, successupdates0. NoGPU/referenceforward/replayperformedbymonitor.
+
+ParentauthorizesCPUconditionaldeliveryrefresh(delivery_refresh_authorization.json)toactual1465.117only, exactoriginalscientificprotocolplusseparatecurrentexecutionamendments, oldfailedcontroller/sources/receiptsretained. SAME mainSol/maxthread01a13212-f99c-72a3-9279-db14f0073262 resumed11:09:04UTC/tmuxr74_delivery_refresh/%144/PID3869286. Scope3deliveryfiles+freshdelivery_refreshrecords; noactiveexecutionfileedit/model/array/GPUpreflight/VALreplay/Git. OnechangeddeliverysyntaxcheckthenfreshCPUwatcher; futureunverified. Actual1465.117COMPLETED0:0/tmuxgone/fullgeneration+40E9600/7.2Mnative/38.4Mleafviews ->uniqueearliestMAXintegerhardVALwholeB/officialBiff>8959 ->ONEnewBlivefull18TESTregardlessgain/sameUUID/zeroAcompute ->actualTESTterminal0/ONCECPUanalysis. NoTESTnow orauto retry. Full18native70goalACTIVE/unachieved, noacceptanceorblockclaim.
+
+
+## R74 Conditional Delivery Refresh Complete, 2026-10-13T11:28:44Z
+
+Actual SAME mainGPT-6.1-Sol/maxthread01a13212-f99c-72a3-9279-db14f0073262 CPUrefreshcompletedCLI0/rawturn.completed11:26:11UTC. ONEchanged-deliverysyntaxinvocation0/.059071009s, noGPU/model/checkpoint/arrayloads/forwards. FreshindependentCPUcontroller r74_delivery_continuation_controller/%146/PID3926177 started11:23:46UTC, firstnormalwait146684TRAINrows/263368plannedinitializations/completion0/optimizerupdates0, actual1465.117ownedtmuxlive, noactivefailure. Oldfailedcontroller/sourceevidence andsixactualfailedsteps/1547s retained. Bindingusescurrentexplicitexecutionamendments plusunchangedscientificprotocol, canonicalfrozenprobesfromfuturecompletegenerationmanifest. Futurelock/TEST/analysis STILL UNVERIFIED/notexecuted.
+
+### Full Raw CPU Delivery Refresh Executor Response
+
+CPU refresh is complete; the independent observer is live.
+
+- Controller: `r74_delivery_continuation_controller`, pane `%146`, PID `3926177`; polls every 240s.
+- Bound to continuation `1465.117`, trainer `2280579`.
+- One syntax-only invocation passed, exit `0`.
+- First normal wait: **146,684 TRAIN rows**, **263,368 planned initializations**, zero completions/optimizer updates; no active failure.
+- Six historical failed steps remain FAILED, with **1,547s** separately charged.
+
+[Handoff and receipts](/public/home/shiys/0selection2/code/V4/runs/R74_adaptive_incomplete_acquisition/delivery_refresh/handoff.json) record the preserved old evidence and explicit execution-source binding.
+
+The live formal job was untouched. No VAL lock, TEST, analysis, GPU/model/array operation or Git execution occurred. Foreground sessions are settled. Future delivery remains UNVERIFIED; Goal70 stays ACTIVE/unachieved.
+
+ParentnormalJSONobservation11:28:44UTC: actualcontinuation6TRAIN/OVRPBLTW lastbatch cumulative172272basequeries/11808batches/314544plannedinitializations/20623930startstates/480874modelcalls/441640decodercalls/completed0, successupdates0. SingleassignedGPUjobstillgeneration; no unexpectedforward/replay/restart. Conditionalwatcher may proceed only afteractual1465.117COMPLETED0:0/allgeneration+40E9600budget/uniqueearliestMAXintegerVALwholepolicylock, thenONEnewBlivefull18TEST/sameUUID/zeroAcompute andactualTESTterminal0/ONCEanalysis. No TEST-drivenchoices. Parentactualprimary/freshreview+Memory/objectiveaudit/oneversioncommit remainpending. Native70goalACTIVE/unachieved.
+
+
+## R74 Complete Features and Unsaved First-Update Logging Failure, 2026-10-13T11:49Z
+
+OrdinaryJSON+actualSlurmobservation:1465.117FAILED1:0/2292s. All180000TRAIN+18000VAL features COMPLETE beforefailure; feature_cache_complete authoritative198000Finputs/14745batches/363000plannedinitializations/23769531startstates/615489modelcalls/567593decodercalls/completed0. Preservedpartialnativework adds32initializations/1600starts/14returnedcalls+1failedattempt/11decodercomputations separately; actual363032init. Everycompletecache/probe snapshot retained, no completedsolver/newlabels.
+
+Failure traceback is r74_experiment.train metrics constructor: explicit cumulative successful_leaf_view_rows plus **values per-update samekey. Source/control-flow shows update_triple returned after optimizer.step and localcountersadvanced, but no updates.jsonl/last.pt/history/first_formal_update was written. Thus ONE executed-but-unsaved successfuloptimizerupdate, NOT zeroexecutedwork; exact abandonedtriple rows/viewcount to be derived from originalschedule, chargedseparately. Prior failedSlurmsteps now.1111427+.11220+.11314+.11413+.11513+.11660+.1172292=3839s. Originalprocess/generationtime not substituted forSlurmwall.
+
+FreshCPUdeliveryobserver correctlystopped at11:43:47 onactive1465.117failure; originaldelivery_refreshrecordsremainimmutable. Parentauthorized runtime_repair7: minimumlogging-onlyfix, ONEsyntax-onlyinvocation then DIRECT train-onlyfreshseed2initialstate/optimizer continuation usingALLcompleteexistingcache; NO F/probe replay/cachegeneration/reference/preflight or scientificchange. ActualSAME mainGPT-6.1-Sol/maxthread01a13212-f99c-72a3-9279-db14f0073262 resumed in tmuxr74_train_logging_repair, rawtrace .aris/traces/R74_train_logging_repair.events.jsonl. Freshcontinuation7+conditionaldelivery_refresh2 maybindactualnewidentityonly, preservegenerationcontinuation6 provenance andnewtrainingamendment. No VAL/test/analysis/commit yet. Native70goalACTIVE/unachieved.
+
+
+
+## R74 Train-Only Continuation7 Live, 2026-10-13T12:20Z
+
+Actual SAME GPT-6.1-Sol/max main execution thread01a13212-f99c-72a3-9279-db14f0073262 repair CLI returncode0 at12:15:43UTC. FULL raw final response follows; not a planning/scientificreview:
+
+Cache-only continuation7 is live. The duplicate metric key is fixed; all completed generation was reused with **zero new F/probe forwards**.
+
+- **Training:** `1465.118/gpu03`, trainer `101584`; tmux `r74_continuation7`, pane `%148`, pane PID `4094522`; same assigned UUID/index1.
+- **First persisted formal update:** 768 rows (`256×3`), CE/loss `1.237001618`, KL `0`, gradient `0.442510992`, LR `4.166666667e-7`, zero AMP retries. Update time **2.779s**; peak allocation **1.10GB**, physical usage **1.52GB**.
+- **Prior work:** seven FAILED steps retain **3,839s** Slurm wall. The abandoned unsaved update is separately charged: **768 native presentations / 3,584 leaf views**.
+- **Observer:** `r74_delivery_continuation7_controller`, pane `%149`, PID `4103818`; first normal CPU wait recorded.
+- **Verification:** one combined syntax/static-review invocation passed; syntax and launch commands exited `0`.
+
+[Full handoff](/public/home/shiys/0selection2/code/V4/runs/R74_adaptive_incomplete_acquisition/continuation7/handoff.json) records source changes, receipts and accounting.
+
+Foreground sessions are settled; training and observer remain live. No VAL lock, TEST, analysis, Git or review occurred. Future delivery remains UNVERIFIED; Goal70 remains ACTIVE/unachieved.
+
+Parent ordinary JSON observation: first persisted formal update belongs to actual1465.118/gpu03/trainer101584/tmuxr74_continuation7/%148/panePID4094522, start12:08:12.403190UTC. Unchanged originalseed2initial state restored; complete198kfeatures reused with ZEROnewF/probe/cachegeneration. Formalu1native768/3584leafviews, same-state3x256,2.7791475s,zeroAMP retry. Abandoned previous successful-but-unsaved update separatelysource-derived768native/3584leafviews/one optimizerstep; sevenpreviousfailedsteps3839SlurmsecondsremainFAILED. New acceptedbudget9600/7.2M/38.4M unchanged; actualoverallattempt accounting must add abandonedwork.
+
+Onecombinedsyntax/static-review invocation0; mainCLIforegroundsettled. Fresh conditional CPUobserver tmuxr74_delivery_continuation7_controller/%149/PID4103818 is LIVE, boundactual1465.118; olddelivery_refreshobserverfailure and alloldrecordsretained. Generation provenance remainscontinuation6, training provenancecontinuation7, frozen5probes fromcompletedgeneration. FutureVALlock/ONEnewBliveoriginal18TEST/ONCEanalysis STILL UNVERIFIED/notexecuted; conditional onlyafteractualterminal0/fullbudget/uniqueVALwholepolicylock. NoTEST-drivenchoices/Git/newprimaryreview.
+
+Latestactuallypersistedupdate at12:18:02UTC:u8/native6144/leafviews31744, zeroAMP retries; thatmixed-taskupdate29.669s, prioru5three-MVRPupdate71.331s. First2.779s is NOT representativeaverage. PhysicalGPUusagearound1.52GB, peak1.098GB. Original128-mapLRU and lazyObs reconstruction alreadyincludeper-batch observationmemoization; runtime I/O maydominate, notestablishedyet. ParentmayseekactualSol CPU/source/assigned-onlyutilizationdiagnosiswithoutanybenchmark/forward/scientificchange. Liveformaljobmustnotstoporrestartuntilspecificparentauthorization. Native70goalACTIVE/unachieved.
+
+
+## R74 Read-Only Throughput Diagnosis and Operational Fastpath Authorization, 2026-10-13T12:40Z
+
+Actual SAME GPT-6.1-Sol/max readonlymonitorCLI0 at12:35:05UTC, rawtrace .aris/traces/R74_live_throughput.events.jsonl. FULL rawfinalresponse:
+
+Cache/data stalls are a likely contributor. Through u16, **339/1,092 seconds (31%) occurred outside the update timer**; the timer itself also includes lazy observation reads and transfers. The 128-map LRU serves 27,072 TRAIN files. Batch observation memoization already exists. The one CPU observation request could not acquire a step and was cancelled, leaving GPU utilization and process I/O unmeasured.
+
+One prospective fix: a **byte-identical node-local cache mirror**, retaining the current 128-map bound and all ordering/reconstruction. It needs roughly **40GB disk plus headroom**, avoids FD growth, and permits bounded copying without loading the cache into RAM. Available local capacity and throughput benefit remain unverified.
+
+Resume needs explicit handling. At the inspected snapshot, logs reached u16 but `last.pt` still corresponded to u1 by timestamp/save cadence. Restarting there would repeat accepted updates. Exact continuation requires a checkpoint matching the accepted clock, restored ScheduleFree state/scaler/RNG/cursor, and partial-epoch accounting; the current entry point starts fresh.
+
+Evidence saved in [throughput_diagnosis.json](/public/home/shiys/0selection2/code/V4/runs/R74_adaptive_incomplete_acquisition/continuation7/throughput_diagnosis.json). Trainer, observer, sources and caches were untouched. Foreground diagnostic work settled; no GPU query, model load, forward, evaluation or Git execution occurred. Goal remains active/unachieved.
+
+Parentauthorization runtime_io_authorization.json is OPERATIONAL ONLY: prepare onebyte-identical completefeaturemirror onnode-localdisk while1465.118continues, minimumexactcheckpointresume/noacceptedrepeats/skips, ONEsyntax-onlyinvocation/directformalresume, unchangedscience/batch/taskorder/budgets. NeededCPUcapacityobservation/copy viaexisting1465overlappreferred; CPU-onlysshgpu03 allowedbecauseprioroverlaprequestcouldnotacquire. NootherGPU/allocation/forward/pilot. If no localcapacity/access/safecut, keepcurrenttrain/observer andreport. Preservesevenfailures3839s/abandoned768native3584views/allcache/sourceprotocol. PrepareFIRST, stoponlyownCPUobserver2 and1465.118atnaturallypersistedmatchingacceptedcheckpoint; restorecompleteSFree/scaler/RNG/cursor/partialepochstatistics andcontinueoriginalaccepted9600clock, not9600new. Freshconditionalobserver3mustbindactualnewidentity, retain generation6/training7/resume8provenance, futureONEnewBTEST/zeroAcompute/ONCEanalysisONLYafterterminal0/fullbudget/uniqueVALlock. No Git/reviewcallsnow.
+
+ActualSAMEexecutionthread01a13212-f99c-72a3-9279-db14f0073262 resumed inCPUtmuxr74_runtime_io with .aris/traces/R74_runtime_io.events.jsonl. It has NOTyetstopped/resumedanyGPUjob orcopiedcache atauthorization. Latestnormalupdatelog12:37:51UTCu28/wall1769.259s/49.836slastupdate/AMP0. Native70goalACTIVE/unachieved.
+
+
+## Explicit User Pause, 2026-10-13T13:04:27Z
+
+User newestrequest: pausecurrentgoal andpause/recordR74progress. update_goal(status=paused) returned actualstatusPAUSED. This supersedesallpreviousconditionaltraining/delivery/review/publicationauthorizations untilexplicituserresume. No70successclaim.
+
+ParentstoppedonlyownedCPUtmuxr74_runtime_io (actualSAMESol/maxruntimefastpathCLIinterrupted; noCLI0claimed) andr74_delivery_continuation7_controller. No pendingcheckpoint_cut/controllerprocesswasfound. Onlyr74_continuation7/%148 remainswitholdtrainer1465.118/gpu03/PID101584/soleUUID. SlurmsignalSTOP anddirectkill-STOP returned0. Actualprocess/threadobservation13:04UTC: mainD, mostthreadsD, autogradSl, sharedpending0x40000(SIGSTOP); fullystoppedTNOTobserved. Thuspauseissignal-pendingduringuninterruptiblekernelwait, not falselyconfirmedT orreleasedGPU. No loggedupdatesafteru91at12:58:09UTC. CUDAcontext/allocationretained, nootherjobs/GPUs touched.
+
+Lastloggedsuccessfulu91/global41E1/native69888/leafviews373248/AMP0. CPUreadactualdurablelast.pt:epoch1/global41/next_step60/success60/native46080/views245760/AMP0/averagedx/eval, optimizer+scaler+RNGpresent/history0. Independentpause_checkpoint_update000060.pt copiedandpreserved.31laterloggedupdatesarenotdurablycheckpointed; doNOTsilentlyrestartfromu60andrepeat them. Currentinmemorystateonlypossiblefuturelivecontinuationifkernelresolves; unfinishedresume8codenotverified/launched.
+
+ThebackgroundCPUmirrorhadalreadycompletednaturally12:57:35UTC:gpu03/tmp/shiys_r74_feature_cache_continuation8,3405groups/69780files/39688996290bytes/604.082787s,ordinarybytecopy/sizechecks/readonly/nohasharrayaudit/noF/probeforward. ItsPID4000884wasalreadygonewhenpauseattemptedsignal; finalcomplete=truecache_mirror.logisactualcompletionevidence, periodicmirror_progress.jsonstilllastfalseisNOTfinalstatus. Original198kfeaturesremainpersistentauthority; mirrorisephemeral, NOTyetusedbytraining. No syntaxreceipt/cut/resumedstep8/observer3completed; partialsourceeditsretainedunvalidated.
+
+WrittenR74/PAUSED.md+PAUSE_STATE.json andupdatedREVIEW_STATEtopstatusPAUSED. NofullR74VALepoch/uniquecheckpointlock/TEST/analysis/versioncommit. SevenpriorFAILED3839Slurmseconds+abandonedoneoptimizerupdate768native3584viewsremainseparate. R58deferred. STOPallgoalwork; awaitexplicituserresume, noautoCONT/restart/TEST/review/commit.
+
+## User-Authorized Progress Publication, 2026-10-13
+
+The user subsequently requested one complete GitHub progress snapshot. This
+supersedes only the prohibition on publication, not the pause of the goal or
+R74 execution. Preserve implementation, execution/failure/review evidence and
+pause records in one commit. Heavy local weights, feature arrays, W&B and
+rebuildable bulk logs remain local. The durable update60 versus logged update91
+boundary and unfinished/unvalidated continuation8 are explicitly documented.
+No new training, evaluation, model checks or goal resumption is authorized.
+
+
+
+
+
+

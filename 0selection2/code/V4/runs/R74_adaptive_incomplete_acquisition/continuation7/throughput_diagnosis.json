@@ -1,0 +1,110 @@
+{
+  "recorded_utc": "2026-10-13T12:31:38Z",
+  "actor_thread": "01a13212-f99c-72a3-9279-db14f0073262",
+  "scope": "Read-only operational diagnosis; this JSON is the only new artifact",
+  "formal_training_identity": {
+    "step": "1465.118",
+    "node": "gpu03",
+    "trainer_pid": 101584,
+    "tmux": "r74_continuation7",
+    "pane": "%148",
+    "pane_pid": 4094522,
+    "assigned_gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d"
+  },
+  "saved_update_sample": {
+    "successful_update_range": [1, 16],
+    "native_rows_per_update": 768,
+    "cumulative_retries": 0,
+    "wall_seconds_through_update16": 1092.0742336343974,
+    "sum_update_timer_seconds": 752.601111500524,
+    "outside_update_timer_seconds": 339.4731221338734,
+    "outside_update_timer_fraction_rounded": 0.311,
+    "update_timer_scope": "Includes lazy observation mmap reads, CPU reconstruction, blocking host-to-device transfers, policy compute, backward and optimizer step; not GPU-only time",
+    "outside_timer_scope": "Includes base-cache gather before update_started, prior logging/checkpoint work and control overhead; not an isolated I/O measurement",
+    "same_leaf_view_count_example": {
+      "leaf_views": 4608,
+      "update4_seconds": 63.480697281,
+      "update5_seconds": 71.331228209,
+      "update6_seconds": 132.543422957,
+      "qualification": "Equal leaf-view counts do not prove identical tensor shapes or compute"
+    },
+    "peak_allocated_bytes_in_sample": 1098328576
+  },
+  "cache_metadata_evidence": {
+    "source": "code/V4/runs/R74_adaptive_incomplete_acquisition/feature_cache_complete.json",
+    "mmap_lru_capacity": 128,
+    "train_groups": 1746,
+    "val_groups": 1659,
+    "train_array_files_used_by_take": 27072,
+    "val_array_file_upper_bound_used_by_take": 26028,
+    "train_plus_val_array_file_upper_bound": 53100,
+    "train_used_payload_bytes": 35582268768,
+    "val_used_payload_bytes": 3544648304,
+    "all_stored_train_val_array_payload_bytes": 39669947000,
+    "mvrp_train_groups_per_task": 51,
+    "mvrp_train_distinct_fields_per_group": 20,
+    "mvrp_train_files_per_task_upper_bound": 1020,
+    "interpretation": "The 128-map global LRU is much smaller than the multi-task working set. Evicted files require another np.load header/open/mmap on reuse. Actual hit/miss counts and selected-group counts were not instrumented.",
+    "existing_batch_memoization": "Observations already caches by (probe, checkpoint, positions); repeated leaf/view observation reads within a batch are not a missing-cache defect",
+    "backhaul_group_qualification": "Actual TRAIN metadata has 51 groups for each MVRP task; no additional positive-demand-count fragmentation is claimed"
+  },
+  "one_optional_runtime_observation": {
+    "attempts": 1,
+    "command": "srun --jobid=1465 --overlap --exact --nodes=1 --nodelist=gpu03 --ntasks=1 --cpus-per-task=1 --mem=128M python -B -",
+    "requested_gpu_resources": false,
+    "outcome": "No observation step acquired; pending diagnostic request cancelled without another attempt",
+    "stdout_stderr": [
+      "srun: Job 1465 step creation temporarily disabled, retrying (Requested nodes are busy)",
+      "srun: Cancelled pending job step with signal 15",
+      "srun: error: Unable to create step for job 1465: Job/step already completing or completed"
+    ],
+    "returncode": 1,
+    "cancellation_scope": "Only the exact pending diagnostic srun command; no signal sent to trainer or observer",
+    "gpu_queries_executed": 0,
+    "trainer_proc_observations_executed": 0,
+    "qualification": "The cancellation message is not a terminal observation of formal training. GPU utilization, trainer CPU/I/O rates, RSS and FD limits remain unmeasured. The NFS path characterization comes from the parent's report, not a new mount probe."
+  },
+  "diagnosis": "Substantial data/control-path stalls are supported by the outside-timer wall time. Mmap reopening on the reported NFS cache paths is a plausible contributor, with observation reconstruction and transfer synchronization also inside the update timer. Available evidence does not quantify GPU compute versus I/O or establish one exclusive bottleneck. Free GPU memory does not support a batch change.",
+  "one_prospective_byte_identical_fix_not_applied": {
+    "fix": "Stream-copy the complete immutable TRAIN/VAL cache groups to a read-only node-local disk mirror and redirect only cache-file opens through an isolated path resolver; retain original metadata identities, array bytes/dtypes/shapes, source-row alignment, order, 128-entry mmap bound and existing batch observation memoization",
+    "disk_requirement": "39,669,947,000 bytes of stored array payload, plus source_indices, NPY headers, metadata and free-space headroom; node-local capacity has not been inspected",
+    "memory_implications": "Bounded streaming copy does not require an in-RAM copy of the roughly 37 GiB cache. File-backed pages remain reclaimable. Keep the existing 16 GiB job memory limit; actual process RSS is unknown.",
+    "fd_implications": "Retaining maxsize=128 keeps roughly 128 cached mmap descriptors plus existing baseline and transient opens. A cache holding the full TRAIN/VAL working set could instead retain up to 53,100 mappings/descriptors; its safety cannot be asserted without the actual limits.",
+    "limits": "Removes repeated remote-path opens/page reads after mirroring, but leaves CPU NumPy gather/token reconstruction, host-to-device synchronization and model compute unchanged. No throughput gain is measured or promised. Copy/loading wall must be charged separately.",
+    "authorized_or_implemented": false
+  },
+  "resume_assessment_from_source_and_file_stat_only": {
+    "last_checkpoint": "code/V4/runs/R74_adaptive_incomplete_acquisition/B_adaptive_seed2/last.pt",
+    "last_checkpoint_bytes": 12505360,
+    "last_checkpoint_mtime_utc": "2026-10-13T12:08:26.416954Z",
+    "checkpoint_content_loaded": false,
+    "durable_clock_inference": "The timestamp and source save cadence correspond to u1; saved update logs reached u16. No later checkpoint boundary was observed in this diagnosis.",
+    "save_cadence": "u1, every 60 updates and epoch end",
+    "saved_state_fields": "Complete averaged-x model; ScheduleFree optimizer including z, exp_avg_sq and group clocks/weight_sum/lr state; scaler/growth; RNG; epoch/next_step/accepted counters; best/history/lr trace and task/gradient counters",
+    "current_entry_supports_resume": false,
+    "exact_continuation_requirements": "A separately authorized loader must restore the durable complete x state and optimizer/scaler/RNG/counters, then use the official optimizer.train() x-to-y transition once and continue the exact next scheduled triple. Reconstruct partial-epoch metric totals from already saved accepted update JSONL without forwards; those totals are not in last.pt.",
+    "no_repeat_limit": "Restarting from the observed u1 checkpoint would repeat already accepted later updates. A no-repeat continuation requires a durable boundary matching the accepted head. Logs alone cannot restore the later parameter or optimizer state. No restart or new resume code is authorized here."
+  },
+  "source_references": [
+    "code/V4/r74_data.py:16 mapped_array",
+    "code/V4/r74_data.py:139 CachedTask.take",
+    "code/V4/r74_data.py:157 CachedTask.gather",
+    "code/V4/r74_data.py:175 Observations.__call__",
+    "code/V4/r74_experiment.py:517 train",
+    "code/V4/r74_experiment.py:533 save_last",
+    "code/V4/r74_experiment.py:551 base gather before update timer",
+    "code/V4/r74_experiment.py:579 update metrics",
+    "code/V4/r65_official_schedulefree/adamw_schedulefree.py:86 eval and train transitions",
+    "code/V4/run_v4_r74_continuation7.sh:20 original training step resources"
+  ],
+  "execution_scope": {
+    "model_checkpoint_array_loads": 0,
+    "forwards_benchmarks_tests_or_evaluations": 0,
+    "source_config_cache_or_recipe_edits": 0,
+    "formal_train_or_observer_stop_pause_restart": 0,
+    "git_or_review_calls": 0,
+    "foreground_diagnostic_sessions_settled": true,
+    "future_test_executed_by_this_call": false,
+    "goal_status": "ACTIVE/unachieved"
+  }
+}
