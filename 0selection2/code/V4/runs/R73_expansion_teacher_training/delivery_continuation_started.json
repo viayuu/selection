@@ -1,0 +1,74 @@
+{
+  "utc": "2026-10-13T06:26:09.716454+00:00",
+  "pid": 2799816,
+  "host": "admin01",
+  "tmux": "r73_delivery_continuation",
+  "pane": "%123",
+  "pane_pid": 2799816,
+  "identity": {
+    "command": "tmux display-message -p -t %123 '#{session_name}|#{pane_id}|#{pane_pid}'",
+    "recorded_utc": "2026-10-13T06:26:08.414561+00:00",
+    "finished_utc": "2026-10-13T06:26:08.417621+00:00",
+    "seconds": 0.0030719460919499397,
+    "returncode": 0,
+    "stdout": "r73_delivery_continuation|%123|2799816\n",
+    "stderr": ""
+  },
+  "command": "/public/home/shiys/miniconda3/envs/easynco/bin/python -B -u /public/home/shiys/0selection2/code/V4/runs/R73_expansion_teacher_training/delivery_continue.py",
+  "original_controller_gone": {
+    "command": "tmux has-session -t =r73_delivery",
+    "recorded_utc": "2026-10-13T06:26:08.411006+00:00",
+    "finished_utc": "2026-10-13T06:26:08.414518+00:00",
+    "seconds": 0.003525787964463234,
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "can't find session: r73_delivery\n"
+  },
+  "original_training_terminal": {
+    "recorded_utc": "2026-10-13T06:16:00.237213+00:00",
+    "slurm_step": "1465.109",
+    "tmux_session": "r73_train",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_seconds": 7631.0,
+    "node": "gpu03",
+    "tmux_terminal": true,
+    "scheduler_evidence": {
+      "command": "sacct -j 1465.109 --noheader --parsable2 --format=JobIDRaw,State,ExitCode,ElapsedRaw,Start,End,NodeList",
+      "recorded_utc": "2026-10-13T06:16:00.126234+00:00",
+      "finished_utc": "2026-10-13T06:16:00.224548+00:00",
+      "wall_seconds": 0.0983249107375741,
+      "returncode": 0,
+      "stdout": "1465.109|COMPLETED|0:0|7631|2026-10-13T12:04:58|2026-10-13T14:12:09|gpu03\n",
+      "stderr": ""
+    },
+    "tmux_evidence": {
+      "command": "tmux has-session -t =r73_train",
+      "recorded_utc": "2026-10-13T06:16:00.224584+00:00",
+      "finished_utc": "2026-10-13T06:16:00.237141+00:00",
+      "wall_seconds": 0.012585095129907131,
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "can't find session: r73_train\n"
+    },
+    "original_trainer_pid": 2797410,
+    "original_pane_pid": "2256839",
+    "formal_process_gone": true,
+    "formal_process_evidence": "Original exec Python tied to this Slurm step; scheduler terminal0 confirms the step process exited; owned launcher tmux is independently absent"
+  },
+  "original_failure": {
+    "utc": "2026-10-13T06:16:00.458877+00:00",
+    "error_type": "ValueError",
+    "message": "The unique selected state must be the complete shared averaged-x NativeUtilitySelector with original buffers",
+    "traceback": "Traceback (most recent call last):\n  File \"/public/home/shiys/0selection2/code/V4/r73_delivery.py\", line 128, in main\n    freeze()\n  File \"/public/home/shiys/0selection2/code/V4/r73_frozen_evaluation.py\", line 225, in freeze\n    checkpoint = read_checkpoint(candidate, protocol)\n  File \"/public/home/shiys/0selection2/code/V4/r73_frozen_evaluation.py\", line 209, in read_checkpoint\n    raise ValueError('The unique selected state must be the complete shared averaged-x NativeUtilitySelector with original buffers')\nValueError: The unique selected state must be the complete shared averaged-x NativeUtilitySelector with original buffers\n",
+    "automatic_retry": false,
+    "original_failures_preserved": true
+  },
+  "repair_receipt": "/public/home/shiys/0selection2/code/V4/runs/R73_expansion_teacher_training/delivery_repair.json",
+  "authorization": "explicit parent repair and continuation from original pre-lock failure",
+  "original_controller_main_rerun": false,
+  "new_TEST_attempts_allowed": 1,
+  "analysis_invocations_allowed": 1,
+  "CPU_only": true,
+  "automatic_retry": false
+}

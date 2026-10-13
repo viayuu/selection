@@ -2718,12 +2718,284 @@ onlyafterpublication, SAME actualSol/max, soleUUID/allocation1465, noGPUcapacity
 pilot/R58/newsolverannotations. GoalACTIVE/unachieved; no followupbaseline retrain.
 
 
+### R72 Actual Publication / R73 Actual Implementation, 2026-10-13T03:43UTC
+
+R72 ONEcompletedversioncommit9512d912cc2d19ec0347e2420cead8f03cc1ef16,
+123ownedfiles/33053insertions20deletions. Actualcommit unifiedexec76629terminal0
+THENactualpush70252terminal0, b6f78ed6c..9512d912c main togithub.com:viayuu/selection.
+Exactly14524preexistingunrelatedstagedcleanup remain; usercode/.gitignore still
+modified/unstaged. Noweights/NPZ/rawbatches/W&B/cache/lockfiles committed; scoped
+forbiddencount0. No secondR72commit. This postpublicationnote/statejoinsfutureR73.
+R72allactualVAL/uniqueofficialBfreeze/ONEnewBTEST/ONCEanalysis/primary+freshreviews/
+fullrawMemoryupdates/round14scopedacquittal/negative70audit COMPLETE. OfficialB
+8680/18000, original70stillACTIVE/unachieved; no furtherR72computationneeded.
+
+R73EXACTplan8readyadoptedfromR72completedVAL-onlyprimary, NEWR72TESTexcluded.
+Fullapprovedrawcopyinruns/R73_expansion_teacher_training/approved_plan.md.
+SAME actualSol/max01a13212-f99c-72a3-9279-db14f0073262 resumed03:41:43UTC,
+CPUtmuxr73_implementation/pane111/PID2171819; actualrawthread.started/turn.started
+and agentcodeimplementationmessage confirmed. No formalteacher/GPU/TRAINclaimyet.
+ONEinput-onlyteacher-cachethenstudentformalprocessplannedonsoleUUID/1465/gpu03;
+ONEsyntheticCPUcheck/directformalpass, noGPUcapacitypilot. Returnafteractualfirst
+teacherbatch/handoffwhileformaljoblives; parentlaterconditionaldelivery. Native
+batchreal256/taskx3, extraequalauxrows, sequentialbackwardpreservesfootprint.
+FixedR72teacher/control8923, onecompletewarm-startR67B36sharedstudent/fresh
+ScheduleFree; no newsolverlabels/R58/otherGPU/referenceextra/confidencesearch.
+
+### R73 Actual Formal Teacher Handoff, 2026-10-13T04:05UTC
+Original SAME Sol/max implementation remains the single execution actor. ONE
+synthetic CPU invocation passed in6.490444218739867s at04:04:35.119988UTC;
+no real checkpoint/data/GPU used by that check. Original formal cache-then-
+training launched04:05:00.285326UTC as1465.109/gpu03/soleUUID,
+r73_train/pane112/PID2256839, Python2797410. First actual teacherbatch at
+04:05:03.831348UTC recorded128queries/3memberforwards/384memberrows,
+peakallocated202259456bytes. This is formal expansion-input inference, not a
+capacity pilot, native/reference evaluation or solver execution. Student NOT
+constructed/updates0 at this handoff; complete cache/40epoch training NOT claimed.
+Original job intentionally remains live. Prepared R73_delivery_executor.prompt.md
+and its SAME-thread CPU runner only; parent will not resume until implementation
+wrapper actually terminates0. Later delivery must await actual fullbudget TRAIN
+terminal0 before unique VAL-best lock/ONE new B TEST/ONCE analysis. No duplicate
+launch, recipe change, extra preflight or publication. Goal70ACTIVE/unachieved.
+
+### R73 Actual Implementation Terminal / Conditional Delivery, 2026-10-13T04:10UTC
+Implementation wrapper actually returned0/rawturn.completed at04:09:06UTC.
+Originalformal1465.109/r73_train intentionally remains live. Current status at
+04:10:20UTC records249632/1620000teacherrows,1952querybatches,
+5856memberforwards/748896memberrows; studentNOTconstructed/updates0.
+Only after actual implementation terminal0, parent resumed SAME Sol/max thread
+01a13212-f99c-72a3-9279-db14f0073262 at04:10:07UTC underCPUtmux
+r73_delivery_exec/pane113/PID2276451; rawthread.started/turn.started and actual
+agentmessage confirmed. Prompt/runner R73_delivery_executor prepare isolated
+conditionaldelivery, not another experiment. Controller launch/VALlock/TEST/
+analysis NOT yet observed. Parent authorizes ONE new B original18TEST regardless
+VALgain ONLY after originalformaljob actualterminal0/exactcache+40epochbudget/
+uniqueearliestMAXintegerVALlock; A reuses unchanged R72savedmodelsB object.
+No immediateTEST, duplicatedcache/TRAIN, extraCPU/GPUpreflight, referencepass,
+solver, R58, otherGPU, newcost or publication. Next observe existingactor and
+formaljob; observation expiry must not trigger a restart. Goal70 remains active.
+
+### R73 Actual Cache Complete / First Student Update, 2026-10-13T04:18UTC
+Previousgoalturn was PROGRESS(implementation/CPU/formallaunch/conditionalactor),
+not no-progress. Thisturn revalidated SAME1465.109 RUNNING on gpu03 and actual
+SAMESol/max deliverytmuxLIVE, without duplicate launch. Originalteacher cache
+completed04:16:41.705582UTC:1620000rows/12672querybatches/38016memberforwards/
+4860000memberrows/18tails,699.3957912810147s. All18tasks90000rows/sourceIDs
+10000..99999; no auxiliarycost/observationmask reads, native teacherforwards,
+component evaluations, measurednewlabels or solver executions.
+First actualstudent optimizerupdate succeeded04:17:33.635564UTC:OVRP/CVRP/
+OVRPLTW each256native+256aux,768+768rows/2304encoder-viewrows,ONEstep,
+finite loss/gradient,zero retry. NativeCE1.1581525803/KL.0123183403/pseudoCE
+.8287641406/total1.9869227089; gradnorm3.5452954769,peakallocated16373540864
+bytes/physical20805058560bytes. Full40epoch/9600budget remains unchanged and
+NOTyetcomplete. Conditionaldeliveryactor still implementing; no actualcontroller
+launch, VALbest/freeze, TEST, analysis, review or publication claimed. Goal70
+ACTIVE/unachieved; no R58/newsolverlabel/otherGPU/restart/replay/search.
+
+### R73 Actual Conditional Controller / Early VAL, 2026-10-13T04:37UTC
+SAME Sol/max deliverywrapper actually returned0/rawturn.completed04:35:51UTC.
+ONE combined syntax-only invocation passed0 in.02934591844677925s; no neural
+CPU/model/GPU preflight repeated. Actual CPUcontroller launched04:31:56.500768
+UTC under r73_delivery/pane114/PID2356713/controller2356714,240spoll, andlive
+revalidated04:37UTC. Original1465.109/gpu03/soleUUID stillRUNNING; actualstudent
+status04:37:28UTC has1680successfulupdates/native1.26M+aux1.26M/3retries,
+epoch7updatesdone but fullVAL7 notyetobserved. LastobservedbestfullVAL6/global46
+is8938/18000=49.6555556%,only15abovefixedA8923,notabreakthrough orfinalselection.
+No finalfreeze, TEST, analysis, newreview, publication or goalcompletion claimed.
+Controller will preserve the same training job and await exactfull40E/9600budget,
+allnativeVALs andactualterminal0 before mechanicaluniquelock/ONE newB TEST/
+ONCEanalysis. A remains unchangedR72savedresult. Parent nextreview must exclude
+NEW R73TEST fromactualAstraTRAINVAL-onlyclosure/nextplanning, withholding its
+numbers andfreshreviewMemory untilprimaryactualterminal0. No additionalexecution
+actorresume needed while normaloriginaljob/controllerlive. Goal70ACTIVE.
 
 
+### R73 Actual Preparatory Primary Research / Full Raw, 2026-10-13T04:58:56UTC
+Actual SAME Astra/max wrapper0/rawturn.completed; fullMemory289389chars was
+prepended. This is paper/source preparation, NOT R73 closure or a plan adoption.
+Full persistent Memory necessarily included the parent's disclosed early R73
+VAL6 observation; current R73 learning-outcome files and NEW R73 TEST were
+excluded from research. Do not misdescribe this as erasing known prefix context.
+No current result was used to adopt a successor, and no new experiment is ready.
+FULL RAW RESPONSE FOLLOWS VERBATIM:
+
+**PREPARATORY: no plan adopted; R73 final validation remains pending.** I examined four primary papers and the permitted sources. Neither family currently justifies automatic adoption: one has limited identifiable supervision; the other changes inference information substantially but lacks established full18 feasibility.
+
+`review_independence=same-family; acceptance_status=provisional`
+
+The completed evidence does not support a universal bottleneck. [R57](/public/home/shiys/0selection2/code/V4/runs/R57_task_signal_audit/RESULTS.md:25) establishes useful instance signal beyond problem/size priors. R69 demonstrates substantial additional TRAIN fitting without generalization; R71 shows weak native fitting with a small generalization gap. [R49’s](/public/home/shiys/0selection2/code/V4/runs/R49_existing_data_diagnosis/RESULTS.md:3) sample-count result is one binary task, not a full18 scaling law. The current encoder already consumes coordinates, constraints and directed matrix information; no newly demonstrated missing-input defect emerged from this reading.
+
+**1. Full-pool learning from partially observed outcomes**
+
+The substantive hypothesis is to learn the native winner jointly from complete original labels and **sets of still-possible winners** on additional inputs, allowing uncertainty instead of manufacturing complete labels.
+
+For deployment-compatible observed costs, define
+\(S(x)=P\setminus\{j:\exists i\text{ observed with }c_i<c_j\}\).
+The native winner must remain in \(S\). Unobserved candidates remain possible; exact ties need not exclude either candidate. These sets constrain training only, never prune the inference pool.
+
+There is relevant measured information, but its limits matter:
+
+- R60 records 1.35M additional inputs with two measured costs across 15 MVRP tasks.
+- [R62’s preparation](/public/home/shiys/0selection2/code/V4/runs/R62_portfolio_performance_pretraining/data_cache/preparation.json) records 1.62M inputs and 11,402,307 observed cells. Its [inventory](/public/home/shiys/0selection2/code/V4/runs/R62_portfolio_performance_pretraining/data_cache/inventory.json) records small-sample replay agreement for **39/128 columns**, versus historical differences for 89.
+- Those 39 include R60’s 30 columns plus nine others: TSP BQ/LEHD; CVRP BQ/LEHD/ReLD; ATSP ICAM; and RouteFinder on OVRP/OVRPL/VRPL. Agreement covers only four or eight examples. It neither certifies complete equivalence nor makes the remaining columns universally invalid.
+
+The strongest supporting paper is [Lv et al., ICML 2020](https://proceedings.mlr.press/v119/lv20a/lv20a.pdf): Section4, Equation10 progressively redistributes label responsibility within the candidate set. Section5 reports gains on synthetic partial-label image/UCI datasets and real partial-label datasets. However, Section3’s consistency result requires deterministic labels and **ambiguity degree below one**, meaning every false candidate has some chance of exclusion.
+
+That assumption fails for the R60 pair alone: a strict comparison leaves six of seven candidates possible, and the five unobserved candidates are always retained. Original fully labelled rows can anchor learning, but the extra pair data alone cannot identify their relative winner probabilities. Likewise, [Ishida et al., ICML 2019](https://proceedings.mlr.press/v97/ishida19a/ishida19a.pdf), Equation5 and Theorem1, require uniformly generated complementary labels for their unbiased-risk result; Section4 constructs experimental labels accordingly. Our fixed, outcome-dependent solver comparisons do not follow that mechanism.
+
+**Difference and counterevidence.** This would directly constrain full-pool winner learning, unlike R60’s pair BCE or R62’s auxiliary comparison pretraining. It does not repeat R39/R43/R71’s continuous-cost prediction, ranking or density estimation. Nevertheless, merely replacing R60’s BCE with a partial-label loss would remain a small variant. R60’s modest gain and R62’s negative scaling result are strong counterevidence to expecting much from repackaging those observations. R73 already tests broader inputs with teacher decisions, so another pseudo-label variant is not independently justified now.
+
+**Minimum meaningful screen, conditional only:** a full18 comparison using the same accepted observations, backbone and exposure, contrasting joint partial-label identification with matched comparison supervision. All original native labels and inference candidates remain. No native validation gain rejects the package; lower ambiguity loss does not rescue it. Computation should remain close to existing selector training, with small label-set storage and unchanged single-selector inference.
+
+The unresolved question is useful *native-compatible* constraint coverage beyond the pair. At most one future small TRAIN-only row query could inspect aligned, co-observed costs and survivor-set sizes for those nine additional columns, retaining deployment provenance. That would characterize coverage, not certify historical equivalence. **I did not execute it.**
+
+**2. Adaptive acquisition of bounded solver-state information**
+
+This family changes what the selector can observe at query time: it chooses whether and where to spend a strictly limited amount of incomplete computation, then predicts one winner from the entire legal pool.
+
+[Janisch et al., AAAI 2019](https://ojs.aaai.org/index.php/AAAI/article/download/4287/4165), “Problem definition,” Equations1–2, formulate actions that either acquire a feature or terminate with a class prediction. Figure4/Table1 evaluate eight classification datasets with 8–784 features. This supports adaptive information acquisition, but their assigned feature costs and tabular observations do not establish useful routing probes. Their error-plus-cost objective also cannot replace our native Top1 target.
+
+[Renau and Hart, January 2024](https://arxiv.org/html/2401.12745v1), Sections3–4 and6, provide algorithm-selection evidence for short trajectories. The conditions are narrow: three continuous optimizers, 24 BBOB functions, and validation on held-out instances of functions also represented in training. Labels use performance after 100,000 evaluations. Their fitness observations evaluate complete candidate points; under our boundary, complete routing solutions cannot quietly become probe features.
+
+**The substantive change** would be a learned acquisition-and-stop policy over incomplete construction states, with a declared information budget. All candidates remain selectable. No complete tour, final cost or current-query label enters the selector. Nonselected computations must stop well before completion; selected execution must preserve its original deployment recipe. Probe computation, model loading and final solver execution all count toward latency.
+
+**Strong local counterevidence:** [R51](/public/home/shiys/0selection2/code/V4/runs/R51_solver_behavior_probe/RESULTS.md) already tested real solver behavior, not merely an embedding. Its fixed ten-step, all-start, pooled two-solver probe reduced original binary validation accuracy from 56.9% to 54.3%, with measured pipeline latency 1.1961 times the static comparator. Simply lengthening that prefix or changing pooling is unjustified.
+
+What remains untested is full18 native classification with **state-dependent acquisition**, rather than R51’s fixed probe, R47’s historical-neighbor retrieval, R50’s static solver encoding, or R53–56’s pair specialists and predicted route structure. R60–73 primarily change learning from existing inputs; they do not establish the value of this additional execution information.
+
+**Minimum meaningful screen, conditional only:** fixed versus adaptive acquisition under the same bounded probe menu and maximum work, both predicting original full-pool winners. Compare native validation accuracy and complete latency, retaining the static incumbent as a reference. No adaptive gain rejects the allocation hypothesis; a runtime reduction alone does not advance70%.
+
+The small acquisition policy is unlikely to dominate memory. Native decoder states, all-start execution and heterogeneous solver interfaces are the uncertain costs. Sequential execution may fit the3090, but full18 prefix availability, recipe-preserving continuation and useful latency are unestablished. R51’s measurements cannot be extrapolated. **This family is more distinct mechanistically, not more strongly demonstrated.**
+
+**Conditional implication:** neither another pair-loss substitution nor another fixed pooled prefix is justified by these papers. Completed R73 TRAIN/validation can inform the next decision, but cannot establish missing deployment equivalence or full18 probe feasibility.
+
+**Memory update**
+
+Preparatory research examined four primary papers on partial/complementary-label learning and adaptive information acquisition. R62 metadata records39 small-sample replay-agreeing columns, including nine beyond R60’s30; this does not certify additional native full-pool labels. Fixed-pair exclusions leave persistent ambiguity, so standard partial-label consistency assumptions do not apply directly. Adaptive bounded solver-state acquisition remains distinct from fixed-input learning, but R51’s negative binary probe and unestablished full18 interfaces are material counterevidence. Neither family is adopted or launch-ready. R73 outcomes were excluded and final validation remains pending. Historical TEST exposure is disclosed and was not recommendation evidence. R58 and legacy B discrepancies remain deferred; the original full18 single-completed-solver70% goal is unchanged.
+
+Only read-only source/metadata and primary-paper research occurred. No R73 learning or delivery outcomes, arrays, weights, inference, GPU/job queries, tests, edits, Git operations or agents were used.
+
+### R73 Preparatory Research Memory Update (Verbatim Copy)
+
+**Memory update**
+
+Preparatory research examined four primary papers on partial/complementary-label learning and adaptive information acquisition. R62 metadata records39 small-sample replay-agreeing columns, including nine beyond R60’s30; this does not certify additional native full-pool labels. Fixed-pair exclusions leave persistent ambiguity, so standard partial-label consistency assumptions do not apply directly. Adaptive bounded solver-state acquisition remains distinct from fixed-input learning, but R51’s negative binary probe and unestablished full18 interfaces are material counterevidence. Neither family is adopted or launch-ready. R73 outcomes were excluded and final validation remains pending. Historical TEST exposure is disclosed and was not recommendation evidence. R58 and legacy B discrepancies remain deferred; the original full18 single-completed-solver70% goal is unchanged.
+
+Only read-only source/metadata and primary-paper research occurred. No R73 learning or delivery outcomes, arrays, weights, inference, GPU/job queries, tests, edits, Git operations or agents were used.
+
+Parent disposition: preserve both conditional families as research, not an
+adopted experiment. No tiny TRAIN array query, solver-state pilot or extra
+training is authorized merely by this memo. Full R73 TRAIN/VAL is still pending;
+actual SAME-primary closure may subsequently decide one justified successor.
+New R73 TEST must remain excluded from that planning and its numbers/fresh
+review held from Memory until primary actual terminal0. No goal/acquittal/70
+claim, R58 operation or version publication. Original job/controller continue.
 
 
+### R73 Actual Primary Final TRAIN/VAL Closure / Full Raw, 2026-10-13T06:33:24UTC
+
+Actual SAME GPT-6-Astra/max thread01a12e68-4d2a-71d0-aefd-67fc1c158282, wrapper0/rawturn.completed; FULL persistentMemory301511chars prepended, prompt310239chars. NEW R73TEST/delivery/freshreview excluded. HistoricalTEST and prior earlyR73VALprefix exposure explicitly disclosed, not erased. Closure uses actual complete40E TRAIN/VAL, original1465.109 terminal0. Primary is same-family/provisional, integrity9ready but original70performance4notready; no successor launch-ready/adopted.
+
+**No actionable TRAIN/validation implementation defect found. Integrity: 9/10, ready within this scope. Original 70% performance: 4/10, not ready.** No corrective experiment or replay is warranted. This does not assess R73’s TEST delivery.
+
+`review_independence=same-family; acceptance_status=provisional`
+
+The [terminal receipt](/public/home/shiys/0selection2/code/V4/runs/R73_expansion_teacher_training/training_terminal_receipt.json) records original `1465.109 COMPLETED/0:0`, 7,631 seconds, with the training process and owned tmux gone. The completion record and history support all **40 epochs, 9,600 successful updates and both 7.2M-row streams**.
+
+The inspected implementation preserves the adopted design:
+
+- The [input reader](/public/home/shiys/0selection2/code/V4/r73_data.py:18) excludes auxiliary costs and observation masks. Teacher targets retain task, source-row and global-candidate alignment.
+- The [training path](/public/home/shiys/0selection2/code/V4/r73_experiment.py:265) releases the frozen teacher before strictly restoring complete R67B36, including its trained head and buffers. Optimizer/scaler state starts fresh; all 1,842,953 selector parameters remain trainable.
+- The [gradient path](/public/home/shiys/0selection2/code/V4/r73_gradients.py:34) implements native mean CE plus ramped legal-pool RDrop plus auxiliary CE, releases native graphs before auxiliary computation, restores private RNG and retries the entire update before advancing counters. Saved evaluations use averaged `x`; selection uses integer counts and earliest ties.
+
+**R73 gains 36 validation decisions, +0.200000pp, over its fixed teacher/control.** Epoch23/global63 uniquely maximizes validation accuracy, so the predeclared rule selects B. It also exceeds historical R60B by74 decisions/+0.411111pp and its R67B warm start by87/+0.483333pp. These are small, single-run package gains, without an exposure-matched control or independent replication. [Saved result](/public/home/shiys/0selection2/code/V4/runs/R73_expansion_teacher_training/B_teacher_training_seed2/result.json)
+
+| Record | VAL Correct / Top1 | CE | Mean Cost | Actual Regret |
+|---|---:|---:|---:|---:|
+| Fixed R72 teacher/control | 8923 /49.572222% | 1.220912* | 11.168430 | 0.925862% |
+| Selected B23 | **8959 /49.772222%** | 1.252106 | **11.167655** | **0.917354%** |
+| Final B40 | 8932 /49.622222% | 1.286271 | 11.168001 | 0.919657% |
+| Epochs36–40 mean | 8927 /49.594444% | 1.282046 | 11.168055 | 0.920444% |
+
+*Teacher CE is the fixed Borda-score diagnostic; it is not directly comparable calibrated probability quality. Last-five counts are **8932, 8922, 8924, 8925, 8932**. Their mean describes epochs, not a checkpoint, ensemble or seed uncertainty. Selected validation was retained from its original epoch evaluation; no validation recount selected another model.
+
+| Family | Teacher Top1 | B23 Top1 | Change |
+|---|---:|---:|---:|
+| TSP | 38.700% | 38.300% | −0.400pp |
+| CVRP | 49.600% | 50.600% | +1.000pp |
+| ATSP | 78.400% | 78.900% | +0.500pp |
+| MVRP | 48.373333% | 48.540000% | +0.166667pp |
+
+Nine tasks improve: **CVRP+1.0, ATSP+0.5, VRPB+1.1, VRPTW+0.4, OVRPTW+1.1, OVRPB+0.3, VRPBL+1.2, VRPBTW+1.7 and OVRPBTW+1.0pp**. Seven regress: **TSP−0.4, OVRP−0.7, VRPL−0.6, OVRPL−0.1, VRPLTW−0.7, OVRPBL−0.8 and OVRPBLTW−1.4pp**. OVRPLTW and VRPBLTW tie.
+
+The [complete history](/public/home/shiys/0selection2/code/V4/runs/R73_expansion_teacher_training/B_teacher_training_seed2/history.json) shows additional fitting with limited validation movement. Complete native TRAIN accuracy rises **50.865556% at epoch5 →52.215556% at selected23 →53.567222% at40**. From23→40, validation loses27 decisions while CE rises1.252106→1.286271; the final TRAIN/VAL gap is3.945pp. Optimization pseudo-target CE falls0.564979→0.423589 across training. Better imitation and fitting therefore do not establish sustained native improvement. TRAIN measurements exist at5/10/15/20/25/30/35/40 plus the selected checkpoint; missing epochs must remain missing.
+
+Actual expenditure separates as follows:
+
+- **Teacher:** one1.62M-input pass,12,672 query batches,38,016 member forwards,4.86M member-row forwards and eighteen16-row tails; **699.395791s**. No native teacher pass, component evaluation, measured labels or solver executions.
+- **Student:** preparation **49.247368s**; training-run wall **6,876.811431s**, including its evaluations and checkpoint work. New exposure is7.2M native plus7.2M auxiliary presentations,21.6M successful encoder-view rows; attempted views total21,604,080 with six retries. Distinct inputs are180,000 native plus1.62M expansion rows; only the native rows supply measured full-pool winners.
+- **Evaluation:** forty complete validation passes total720,000 rows/73.926404s. Eight scheduled TRAIN passes plus selected-TRAIN evaluation total1.62M rows/163.762191s. These times are already inside student wall time. The original process records7,627.687051s overall; scheduler wall is7,631s. The single synthetic CPU check cost6.490444s separately.
+
+Historical R60/R67/R70 training remains separate expenditure. R67B36’s inherited state contains40 pretraining plus36 fine-tuning epochs; those updates are not new R73 exposure. Shared R67/R70 pretraining must be counted once. Deployment requires **one shared selector forward and one completed solver**, without the teacher. Selected validation’s1.841943s is a whole cached-input evaluation measurement, not singleton latency or a measured deployment speedup.
+
+**Next-plan verdict: no defensible launch-ready R74 plan from the evidence inspected.** I investigated adaptive acquisition of bounded incomplete solver states as the most substantive remaining direction; this is a research recommendation, not experiment adoption.
+
+Its hypothesis would be that choosing which incomplete execution state to observe, conditioned on the current instance and acquired states, adds useful decision information. R73 expanded input coverage but supplied no independently measured winners on those inputs. That motivates examining additional information, without establishing that missing information caused the plateau.
+
+[Janisch et al., problem definition and Equations1–2](https://ojs.aaai.org/index.php/AAAI/article/download/4287/4165) support sequential feature acquisition and stopping. Their tabular error-plus-feature-cost objective would require adaptation to a fixed acquisition budget and our unchanged native target. [Renau and Hart, Sections3–4 and6](https://arxiv.org/html/2401.12745v1) support short-trajectory algorithm selection, but study three continuous optimizers and complete-point fitness evaluations. Their results do not establish full18 routing feasibility or justify exposing completed routing solutions.
+
+The local obstacle is concrete: [R51’s initializer](/public/home/shiys/0selection2/code/V4/r51_probe.py:90) explicitly constructs **OVRPTW**, and its features summarize two ReLD solvers at fixed steps1/5/10. Its completed binary comparison lost2.6pp validation and incurred1.1961× pipeline latency. Adaptive acquisition differs from that fixed probe, but changing prefix length or pooling would repeat the rejected mechanism. A full18 acquisition menu, usable existing TRAIN states, continuation semantics and total cost remain unestablished.
+
+Other completed evidence prevents treating a familiar module as a new solution: R39/R43/R55/R71 constrain more cost supervision; R45/R47/R50/R53–56 constrain representation, retrieval and pair-specific proposals; R60/R62 constrain broader auxiliary supervision. R64–70 give mixed optimization and generalization results. R66 specifically compared standalone-`g` versus composite-`F+g` **training**, with both deploying `F+g`; its weak ensemble benefit remains counterevidence. R72/R73 now add modest gains, not a universal diagnosis.
+
+Partial-outcome learning also remains unready. A strict R60 pair comparison leaves six of seven candidates possible. Even assuming all39 small-sample-agreeing columns were compatible and co-observed, additional exclusions remain sparse: at least seven candidates survive for TSP, eight for CVRP, all five for ATSP, and five or six for MVRP. Four/eight-instance agreement does not certify full-column compatibility. [PRODEN’s Section3 condition](https://proceedings.mlr.press/v119/lv20a/lv20a.pdf) requires every false label to have some chance of exclusion; the extra fixed-pair observations alone do not meet it. Original complete labels can anchor learning, but merely substituting a partial-label loss for R60’s comparison loss is insufficient justification for a major new experiment.
+
+The minimum proposed next question is **read-only feasibility**, not a pilot: *Do existing TRAIN artifacts and their generating sources provide a bounded, non-completing acquisition action for every original task, with row/deployment identity, retained state and recorded continuation/cost evidence?* A compact present/absent/unknown table with exact sources would resolve whether a full18 action menu can be specified. Do not generate missing states, evaluate models, reconstruct final costs or launch a solver. I have not executed this query. Until that question is answered, exact initialization, training budget and inference workload cannot honestly receive a plan-ready verdict.
+
+**Memory update:** R73 completed40 epochs/9,600 updates without an actionable inspected TRAIN/VAL defect. Unique B23/global63 reached8959/18000,49.772222%, +36/+0.20pp over fixed R72 and +74 over R60B. Nine tasks improve, seven regress and two tie; selected cost/regret improve slightly. Final TRAIN53.567222% versus VAL49.622222%, worsening validation CE and falling pseudo-target loss retain a generalization concern without proving teacher-error causality, noise or a ceiling. Teacher caching, complete warm start, fresh optimizer, target isolation, recovery and integer selection are supported. Adaptive acquisition remains a distinct but unready research direction; partial supervision retains ambiguity and compatibility limits. No successor is adopted or launched.
+
+**NEW R73 TEST, locks, predictions and prohibited delivery outputs were not read.** Historical TEST exposure and the previously disclosed early VAL prefix remain acknowledged; conclusions use the complete permitted TRAIN/VAL records. No execution, replay, edits, Git or delegation occurred. R58 remains deferred. Goal acceptance still requires an official locked original18 TEST with **at least12600/18000 correct**.
+
+### R73 Primary Closure Memory Update (Verbatim Copy)
+
+**Memory update:** R73 completed40 epochs/9,600 updates without an actionable inspected TRAIN/VAL defect. Unique B23/global63 reached8959/18000,49.772222%, +36/+0.20pp over fixed R72 and +74 over R60B. Nine tasks improve, seven regress and two tie; selected cost/regret improve slightly. Final TRAIN53.567222% versus VAL49.622222%, worsening validation CE and falling pseudo-target loss retain a generalization concern without proving teacher-error causality, noise or a ceiling. Teacher caching, complete warm start, fresh optimizer, target isolation, recovery and integer selection are supported. Adaptive acquisition remains a distinct but unready research direction; partial supervision retains ambiguity and compatibility limits. No successor is adopted or launched.
+
+Parent disposition: no neural replay or corrective TRAIN/VAL experiment. Original CPU delivery prelock tuple/list config guard failed, independently repaired by SAME actualSol/max without changing selected state, rule or budget; original failure preserved. ONE new BTEST and ONCEanalysis completed with actual1465.110 terminal0. NEW TEST numbers were withheld from primary Memory/context until this actual06:33:24UTC terminal0; final TRAIN/VAL-only planner attests exclusion. Next proposed bounded question is read-only existingTRAIN acquisition feasibility; not a solver run, pilot, new labels or adopted successor. Freshnightmare deliveryreview, whole-goal negativeaudit and ONE R73versioncommit pending. Goal70 ACTIVE/unachieved; R58 deferred.
 
 
+### R73 Actual Fresh Nightmare Delivery Review / Full Raw, 2026-10-13T06:50:10UTC
 
+Actual FRESH GPT-6-Astra/max thread01a133fc-da9a-7140-96bd-179e7a4224ff, wrapper0/rawturn.completed; FULL persistentMemory314162chars prepended, prompt320580chars. Same-family/provisional, not cross-family. Primary finalTRAINVAL-only call was actualterminal0 at06:33:24UTC BEFORE this freshreview and currentTEST numbers enter Memory. Integrity9ready, original70performance4notready. No successor recommendation/adoption.
 
+No actionable delivery defects found. **Legacy delivery integrity: 9/10, ready within the inspected scope. Original 70% performance: 4/10, not ready.** No further repair or replay is warranted.
 
+`review_independence=same-family; acceptance_status=provisional`
+
+- **Teacher and supervision boundaries are preserved.** The frozen three-member R72 teacher processes only the 1.62M expansion inputs, with aligned source IDs10000–99999 and hard global-ID targets. The reader excludes auxiliary costs and observation masks. Recorded teacher release precedes student construction; pseudo-targets are not represented as measured winners. [Input reader](/public/home/shiys/0selection2/code/V4/r73_data.py:18), [teacher execution](/public/home/shiys/0selection2/code/V4/r73_experiment.py:167).
+
+- **Student initialization and training match the plan.** The complete R67B36 averaged-x selector, including its trained head and normalization buffers, is strictly restored. Optimizer/scaler state starts fresh. The implemented objective is native two-view CE plus ramped symmetric KL plus one auxiliary CE; native graphs are released before auxiliary computation. Same-state gradients are averaged, clipped once and applied once, with whole-update RNG recovery. All40 epochs/9600 updates completed, with7.2M native plus7.2M auxiliary presentations and six retries. [Initialization](/public/home/shiys/0selection2/code/V4/r73_experiment.py:265), [gradient handling](/public/home/shiys/0selection2/code/V4/r73_gradients.py:34).
+
+- **The delivery failure was repaired narrowly.** The original traceback records failure before lock creation. Comparing original and repaired sources confirms JSON canonicalization of checkpoint metadata, retaining state, buffer, epoch and strict-restoration predicates. Training sources remain identical to their launch snapshots. The separate authorized continuation preserves the original failure; it does not restart training or repeat TEST/analysis. [Repaired guard](/public/home/shiys/0selection2/code/V4/r73_frozen_evaluation.py:191), [repair evidence](/public/home/shiys/0selection2/code/V4/runs/R73_expansion_teacher_training/delivery_repair.json).
+
+- **Selection precedes the single new TEST.** All40 validation records uniquely select epoch23/global63 at8959/18000. Official B was frozen at **06:26:09.792 UTC**, before TEST began at **06:26:12.217 UTC**. Original TRAIN1465.109 and TEST1465.110 have saved `COMPLETED/0:0` receipts and absent owned tmux sessions. New B covers18,000 rows through144 selector forwards, retaining all eighteen104-row tails and original legal pools. [Lock](/public/home/shiys/0selection2/code/V4/runs/R73_expansion_teacher_training/final_test_lock.json), [TEST implementation](/public/home/shiys/0selection2/code/V4/r73_frozen_evaluation.py:307).
+
+- **Control reuse and reporting agree with saved evidence.** A’s TEST object exactly equals the original R72 `/models/B` object. B TEST uses one shared selector, with no teacher or control inference. All **115 comparison rows/805 metric values** and **1127 learning-curve rows/7889 metric values** match their saved JSON sources. Sparse TRAIN observations and distinct Borda-score versus utility CE remain explicit. CPU analysis ran once after successful TEST termination. [Reporting](/public/home/shiys/0selection2/code/V4/r73_analysis.py:294).
+
+| Frozen Policy | Validation Correct / Top1 | TEST Correct / Top1 |
+|---|---:|---:|
+| Reused A: R72 consensus | 8923/18000 /49.572222% | 8680/18000 /48.222222% |
+| Official B23 | 8959/18000 /49.772222% | 8641/18000 / **48.005556%** |
+
+B gains **36 validation decisions (+0.200000pp)** but loses **39 TEST decisions (−0.216667pp)**. Official B remains unchanged. Its TEST regret is0.951462%; regret does not redefine the target. B is **3959 decisions short of12600**, so the original goal remains **ACTIVE and unachieved**. [Results](/public/home/shiys/0selection2/code/V4/runs/R73_expansion_teacher_training/RESULTS.md:5)
+
+Accounting correctly separates699.395791s teacher inference,49.247368s student preparation and6876.811431s student wall time. The237.688595s of native evaluation is included in student wall time. Historical training remains separate, with shared pretraining counted once. TEST’s9.165417s is a cached-input full-pass measurement, not singleton latency, completed-solver latency or a matched speedup.
+
+Residual limits remain one run, exposed historical TEST, unmatched warm-start/exposure/capacity/compute, teacher-error propagation, local-only inference assets and unresolved legacy eight-B semantics. R58 remains deferred. This review inspected sources and saved records without loading weights/NPZs, executing models, recomputing prediction metrics, querying GPU/jobs, editing files, using Git or delegating. No successor recommendation follows.
+
+**Memory update:** R73 delivery is supported with no actionable defect. Preserve validation-selected B23/global63, official B, and its one-time full18 TEST of8641/18000 versus unchanged historical A’s8680. The pre-lock tuple/list metadata defect was narrowly repaired with original evidence retained and no training, TEST or analysis rerun. Teacher/input isolation, complete warm start, recovery, coverage and accounting are supported. The small validation gain did not improve TEST accuracy; TEST remains reporting-only. R58 and legacy B discrepancies remain deferred. Delivery readiness does not establish70% acceptance; the original full18 native single-completed-solver goal remains active and unachieved.
+
+### R73 Fresh Delivery Memory Update (Verbatim Copy)
+
+**Memory update:** R73 delivery is supported with no actionable defect. Preserve validation-selected B23/global63, official B, and its one-time full18 TEST of8641/18000 versus unchanged historical A’s8680. The pre-lock tuple/list metadata defect was narrowly repaired with original evidence retained and no training, TEST or analysis rerun. Teacher/input isolation, complete warm start, recovery, coverage and accounting are supported. The small validation gain did not improve TEST accuracy; TEST remains reporting-only. R58 and legacy B discrepancies remain deferred. Delivery readiness does not establish70% acceptance; the original full18 native single-completed-solver goal remains active and unachieved.
+
+Parent whole-objective disposition: original18/fulllegalpool/nativeTEST officialB8641/18000=48.0055556%, threshold12600, missing3959; goal70ACTIVE/unachieved, objectiveauditfalse. OfficialB remains selected fromVAL8959 vsfixedA8923 and frozen06:26:09.791714UTC beforeTEST06:26:12.217136UTC. NewBTEST1465.110 actualterminal0/ownedtmuxgone, A exactR72object reused8680 without anynewcontrolcomputation, ONCEanalysis0. OriginalTRAIN1465.109 terminal0/full40Ebudget and narrowprelockrepair/failure retained. Primary+freshfullraw andverbatimMemoryupdates saved; scopedround15legacyintegrityacquittal is NOT70acceptance. ONEversionGitcommit pending. No justified launch-ready successor; next bounded question is read-only existingTRAIN/full18 non-completing acquisition feasibility, no solver/pilot/newlabels/recipegrid. Historical/currentcompletedTEST exposure must be disclosed in later planning and not used as design evidence. R58 fullydeferred/eightBsemanticsunfixed, not native70veto.

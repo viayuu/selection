@@ -1,0 +1,642 @@
+{
+  "utc": "2026-10-13T06:26:47.721415+00:00",
+  "decision": {
+    "official_arm": "B",
+    "official_test_correct": 8641,
+    "official_test_total": 18000,
+    "official_test_top1": 0.48005555555555557,
+    "original_native_70pct_threshold_correct": 12600,
+    "numeric_threshold_reached": false,
+    "validation_B_minus_A": 36,
+    "B_minus_A_test_decisions": -39,
+    "TEST_reselection": false,
+    "whole_objective_audit_passed": false,
+    "claim_70pct_supported": false,
+    "goal_status": "ACTIVE/unachieved; parent reviews and whole-objective audit pending",
+    "capacity_exposure_compute_matched": false,
+    "isolated_coverage_causality": false,
+    "hard_teacher_targets_are_measured_truth": false,
+    "historical_TEST_exposure": true,
+    "new_R73_TEST_used_for_planning": false
+  },
+  "actual_compute": {
+    "new_teacher": {
+      "query_rows": 1620000,
+      "member_row_forwards": 4860000,
+      "counters": {
+        "query_rows": 1620000,
+        "query_batches": 12672,
+        "member_forwards": 38016,
+        "member_rows": 4860000,
+        "r70_branch_calls": 12672,
+        "tails": 18
+      },
+      "wall_seconds": 699.3957912810147,
+      "memory": {
+        "allocated_bytes": 156078080,
+        "peak_allocated_bytes": 2281479680,
+        "reserved_bytes": 13553893376,
+        "peak_reserved_bytes": 24951914496,
+        "physical_used_bytes": 13886554112,
+        "physical_total_bytes": 25327697920
+      },
+      "parameters": {
+        "R60B39": 1842953,
+        "R67B36_global76": 1842953,
+        "R70B23_global63": 33173154
+      },
+      "targets": "hard predictions, not measured solver winners",
+      "native_teacher_forwards": 0,
+      "component_evaluations": 0,
+      "release": {
+        "released_utc": "2026-10-13T04:16:41.897537+00:00",
+        "before_student_construction": true,
+        "graphs_retained": false,
+        "memory_after_release": {
+          "allocated_bytes": 8519680,
+          "peak_allocated_bytes": 2281479680,
+          "reserved_bytes": 20971520,
+          "peak_reserved_bytes": 24951914496,
+          "physical_used_bytes": 353632256,
+          "physical_total_bytes": 25327697920
+        }
+      }
+    },
+    "new_student": {
+      "epochs": 40,
+      "successful_updates": 9600,
+      "native_presentations": 7200000,
+      "auxiliary_presentations": 7200000,
+      "total_presentations": 14400000,
+      "native_encoder_views": 14400000,
+      "pseudo_supervised_encoder_views": 7200000,
+      "total_encoder_views": 21600000,
+      "actual_attempted_views": {
+        "native_view_rows": 14402720,
+        "auxiliary_view_rows": 7201360,
+        "native_forward_calls": 57620,
+        "auxiliary_forward_calls": 28810
+      },
+      "retries": 6,
+      "logged_update_seconds": 6573.40411062073,
+      "wall_seconds": 6876.811431135982,
+      "preparation_seconds": 49.24736831989139,
+      "preparation_peak_memory": null,
+      "native_evaluation_seconds": 237.68859479669482,
+      "native_evaluation_is_subset_of_training_wall": true,
+      "native_evaluation_peak_memory": null,
+      "unavailable_memory": "Preparation/evaluation peaks were not separately recorded; no fabricated measurement",
+      "update_peak_allocated_bytes": 16440889856,
+      "update_peak_reserved_bytes": 22565355520,
+      "parameter_count": 1842953,
+      "capacity_or_exposure_or_compute_matched": false,
+      "initialization": "complete warm-started R67B36/global76 averaged-x model including trained head",
+      "global41_80_is_data_schedule_not_entire_parameter_lifetime": true,
+      "distinct_native_inputs": 180000,
+      "distinct_expansion_inputs": 1620000,
+      "measured_native_winner_rows": 180000,
+      "auxiliary_costs_read": false,
+      "observation_masks_read": false,
+      "gradient": {
+        "min": 0.8122404217720032,
+        "mean": 3.8801695120148363,
+        "max": 25.977445602416992
+      },
+      "update_seconds": {
+        "min": 0.19634716399013996,
+        "mean": 0.684729594856326,
+        "max": 5.812629600055516
+      }
+    },
+    "historical_accounting": {
+      "new_R72_training": {
+        "epochs": 0,
+        "updates": 0,
+        "rows": 0,
+        "encoder_view_rows": 0
+      },
+      "historical_members": {
+        "R60B39": {
+          "source": "/public/home/shiys/0selection2/code/V4/runs/R60_expanded_partial_supervision/B_expanded_seed2/result.json",
+          "epochs_completed": 40,
+          "successful_updates": 56880,
+          "wall_seconds": 5215.24073642958,
+          "extra_rows_by_problem": {
+            "OVRP": 400000,
+            "VRPB": 400000,
+            "VRPL": 400000,
+            "VRPTW": 400000,
+            "OVRPTW": 400000,
+            "OVRPB": 400000,
+            "OVRPL": 400000,
+            "VRPBL": 400000,
+            "VRPBTW": 400000,
+            "VRPLTW": 400000,
+            "OVRPBL": 400000,
+            "OVRPBTW": 400000,
+            "OVRPLTW": 400000,
+            "VRPBLTW": 400000,
+            "OVRPBLTW": 400000
+          }
+        },
+        "R67B36_global76": {
+          "source": "/public/home/shiys/0selection2/code/V4/runs/R67_supervised_contrastive_full18/B_contrastive_pretrain_seed2/result.json",
+          "epochs_completed": 80,
+          "successful_updates": 19200,
+          "presentations": 14400000,
+          "amp_retries": 6,
+          "wall_seconds": 5757.09132033214
+        },
+        "R70B23_global63": {
+          "source": "/public/home/shiys/0selection2/code/V4/runs/R70_latent_mixup/B_latent_mixup_seed2/result.json",
+          "epochs_completed": 40,
+          "successful_updates": 9600,
+          "presentations": 7200000,
+          "successful_view_rows": 14400000,
+          "amp_retries": 5,
+          "wall_seconds": 3668.194598888047
+        }
+      },
+      "inherited_R67B_stage1_once": {
+        "source": "/public/home/shiys/0selection2/code/V4/runs/R67_supervised_contrastive_full18/B_contrastive_pretrain_seed2/stage1_result.json",
+        "counted_once": true,
+        "shared_by": [
+          "R67B",
+          "R70B"
+        ],
+        "epochs_completed": 40,
+        "successful_updates": 9600,
+        "presentations": 7200000,
+        "amp_retries": 1,
+        "wall_seconds": 2764.217798124999
+      },
+      "accounting_note": "R67 total already includes stage1 once; R70 historical result is stage2 only. Do not add shared stage1 a second time. R60 expanded supervision remains historical."
+    },
+    "historical_source": "/public/home/shiys/0selection2/code/V4/runs/R72_heterogeneous_consensus/protocol.json#/historical_accounting",
+    "shared_R67_R70_stage1_counted_once": true,
+    "new_R73_inherited_training": false,
+    "reused_A": {
+      "new_training_updates": 0,
+      "new_TEST_passes": 0,
+      "original_TEST_passes_already_executed": 1,
+      "selectors_per_query": 3,
+      "stored_parameters": 36859060,
+      "active_parameters_per_query": 5528859,
+      "protocol_equivalence_not_replication": true
+    },
+    "new_B_test": {
+      "passes": 1,
+      "counters": {
+        "query_batches": 144,
+        "query_rows": 18000,
+        "selector_forward_calls": 144,
+        "selector_forward_rows": 18000,
+        "encoder_forward_calls": 144,
+        "encoder_forward_rows": 18000,
+        "tails104": 18
+      },
+      "complete_evaluation_seconds": 9.165416817180812,
+      "forward_seconds": 8.434913653880358,
+      "setup_and_evaluation_seconds": 14.985991857945919,
+      "peak_allocated_bytes": 2284610048,
+      "peak_reserved_bytes": 5926551552,
+      "peak_observed_physical_used_bytes": 6259212288,
+      "selectors_per_query": 1,
+      "whole_evaluation_is_not_singleton_or_solver_latency": true,
+      "additional_latency_benchmark": false
+    },
+    "solver_executions": 0,
+    "new_measured_solver_labels": 0,
+    "original_cpu_check": {
+      "passed": true,
+      "invocations": 1,
+      "synthetic_only": true,
+      "cuda_used": false,
+      "real_checkpoint_loads": 0,
+      "real_data_reads": 0,
+      "seconds": 6.490444218739867,
+      "global_local_legal_alignment": true,
+      "column_permutation_alignment": true,
+      "target_isolation": true,
+      "combined_three_task_gradient_matches_reference": true,
+      "two_native_and_one_auxiliary_paths": true,
+      "private_rng_restored": true,
+      "injected_whole_update_retry": true,
+      "retry_rows_and_draws_identical": true,
+      "optimizer_steps_after_recovery": 1,
+      "loss_scaling_fixture": "synthetic FP32 scale/backoff; no CPU AMP claim",
+      "completed_utc": "2026-10-13T04:04:35.119988+00:00",
+      "command": "bash code/V4/run_v4_r73.sh cpu-check",
+      "pid": 2254972,
+      "source_hashes": {
+        "r73_data.py": "3954d81555d4916070bc1f7809fdfe7efbf2fed17b8d64b460cae212958fb3da",
+        "r73_gradients.py": "970d0b808490e7da91c96c63e4ff2f52af2e1327e01d5c93b1d6637f16c9be94",
+        "r73_experiment.py": "952fe547e09334a0d85295b76550918d0ff71d87a74c106f0830f58cfc270c83",
+        "r73_cpu_check.py": "6508d0f6245152387978b8b71b67d0fa8de54a751312ab04ded64d81392ace54",
+        "run_v4_r73.sh": "19d76b1e8c445ac71afeecbff5b2cae28979c877fb431f6f0cecbdfbc19648f6",
+        "R73_README.md": "58b6f040948a7f9c2a65aff38968fb73b208342694d3496f7e86899cd30ab68f"
+      }
+    },
+    "formal_launch": {
+      "checked_utc": "2026-10-13T04:04:58.765403+00:00",
+      "host": "gpu03",
+      "slurm_step": "1465.109",
+      "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+      "gpu_index": 1,
+      "gpu_name": "NVIDIA GeForce RTX 3090",
+      "memory_used_mib": 2,
+      "memory_total_mib": 24576,
+      "compute_apps": [],
+      "idle": true,
+      "only_assigned_uuid_queried": true,
+      "tmux_session": "r73_train",
+      "tmux_pane": "%112",
+      "tmux_pane_pid": "2256839",
+      "tmux_server_host": "admin01",
+      "trainer_pid": 2797410,
+      "started_utc": "2026-10-13T04:05:00.285326+00:00",
+      "command": "bash code/V4/run_v4_r73.sh train",
+      "status": "complete",
+      "completed_utc": "2026-10-13T06:12:07.972092+00:00",
+      "total_formal_wall_seconds": 7627.687050988898
+    }
+  },
+  "metric_availability": [
+    {
+      "model": "R73A_reused_R72_consensus",
+      "scope": "TRAIN and epoch history",
+      "available": false,
+      "reason": "Fixed R72 has zero new training and no native TRAIN/epoch history; no control inference authorized"
+    },
+    {
+      "model": "R73B_warm_started_shared_student",
+      "scope": "last-five TRAIN mean",
+      "available": false,
+      "actual_train_epochs": [
+        40
+      ],
+      "reason": "Only actual sparse native TRAIN measurements exist; no interpolation"
+    },
+    {
+      "model": "R73B_warm_started_shared_student",
+      "scope": "instance correction/harm versus A",
+      "available": false,
+      "saved_record": null,
+      "reason": "Existing saved counts only when present; no native teacher pass or NPZ replay is added"
+    }
+  ],
+  "selected": {
+    "A": {
+      "val": {
+        "macro_ce": 1.2209123505486383,
+        "macro_top1": 0.49572222222222223,
+        "macro_top2": 0.8238333333333334,
+        "macro_top3": 0.9277777777777779,
+        "macro_top1_tie_aware": 0.49644444444444447,
+        "macro_mean_cost": 11.168429913693835,
+        "macro_vs_sbs_pct": -1.0732963885601547,
+        "macro_vs_oracle_pct": 0.8898841033725647,
+        "macro_actual_regret_pct": 0.9258622724923803,
+        "macro_vbs_gap_closed_pct": 32.22108308691973
+      },
+      "test": {
+        "macro_ce": 1.243184980418947,
+        "macro_top1": 0.4822222222222222,
+        "macro_top2": 0.818888888888889,
+        "macro_top3": 0.9255,
+        "macro_top1_tie_aware": 0.4833888888888889,
+        "macro_mean_cost": 11.168550795641632,
+        "macro_vs_sbs_pct": -1.0348888228879547,
+        "macro_vs_oracle_pct": 0.9127438334452016,
+        "macro_actual_regret_pct": 0.9407058744029335,
+        "macro_vbs_gap_closed_pct": 30.83047511543002
+      }
+    },
+    "B": {
+      "train": {
+        "macro_ce": 1.1206063628196716,
+        "macro_top1": 0.5221555555555556,
+        "macro_top2": 0.8399611111111112,
+        "macro_top3": 0.9417555555555555,
+        "macro_top1_tie_aware": 0.5230222222222223,
+        "macro_mean_cost": 11.16274657936973,
+        "macro_vs_sbs_pct": -1.173014281369119,
+        "macro_vs_oracle_pct": 0.8137336989153544,
+        "macro_actual_regret_pct": 0.8403556249918172,
+        "macro_vbs_gap_closed_pct": 36.47031177988471
+      },
+      "val": {
+        "macro_ce": 1.2521057493156857,
+        "macro_top1": 0.49772222222222223,
+        "macro_top2": 0.8245,
+        "macro_top3": 0.9255555555555556,
+        "macro_top1_tie_aware": 0.4984444444444445,
+        "macro_mean_cost": 11.167655395073696,
+        "macro_vs_sbs_pct": -1.0803976198624017,
+        "macro_vs_oracle_pct": 0.8827384454974923,
+        "macro_actual_regret_pct": 0.9173539663997311,
+        "macro_vbs_gap_closed_pct": 32.950939599989184
+      },
+      "test": {
+        "macro_ce": 1.2772398458586798,
+        "macro_top1": 0.48005555555555557,
+        "macro_top2": 0.8150555555555556,
+        "macro_top3": 0.9233888888888888,
+        "macro_top1_tie_aware": 0.48116666666666674,
+        "macro_mean_cost": 11.169604780268036,
+        "macro_vs_sbs_pct": -1.0288784857183657,
+        "macro_vs_oracle_pct": 0.9190127376332539,
+        "macro_actual_regret_pct": 0.9514615422641359,
+        "macro_vbs_gap_closed_pct": 30.535034525193453
+      }
+    }
+  },
+  "figures": [
+    "/public/home/shiys/0selection2/code/V4/runs/R73_expansion_teacher_training/curves/delivery/family_top1.png",
+    "/public/home/shiys/0selection2/code/V4/runs/R73_expansion_teacher_training/curves/delivery/native_learning.png",
+    "/public/home/shiys/0selection2/code/V4/runs/R73_expansion_teacher_training/curves/delivery/optimization.png",
+    "/public/home/shiys/0selection2/code/V4/runs/R73_expansion_teacher_training/curves/delivery/task_top1.png"
+  ],
+  "original_A_object_unchanged": true,
+  "delivery_repair_evidence": {
+    "original_failure": {
+      "utc": "2026-10-13T06:16:00.458877+00:00",
+      "error_type": "ValueError",
+      "message": "The unique selected state must be the complete shared averaged-x NativeUtilitySelector with original buffers",
+      "traceback": "Traceback (most recent call last):\n  File \"/public/home/shiys/0selection2/code/V4/r73_delivery.py\", line 128, in main\n    freeze()\n  File \"/public/home/shiys/0selection2/code/V4/r73_frozen_evaluation.py\", line 225, in freeze\n    checkpoint = read_checkpoint(candidate, protocol)\n  File \"/public/home/shiys/0selection2/code/V4/r73_frozen_evaluation.py\", line 209, in read_checkpoint\n    raise ValueError('The unique selected state must be the complete shared averaged-x NativeUtilitySelector with original buffers')\nValueError: The unique selected state must be the complete shared averaged-x NativeUtilitySelector with original buffers\n",
+      "automatic_retry": false,
+      "original_failures_preserved": true
+    },
+    "repair": {
+      "utc": "2026-10-13T06:25:28.640009+00:00",
+      "authorization": "Explicit parent repair of the failed metadata predicate and one continuation from pre-lock failure",
+      "original_failure": {
+        "utc": "2026-10-13T06:16:00.458877+00:00",
+        "error_type": "ValueError",
+        "message": "The unique selected state must be the complete shared averaged-x NativeUtilitySelector with original buffers",
+        "traceback": "Traceback (most recent call last):\n  File \"/public/home/shiys/0selection2/code/V4/r73_delivery.py\", line 128, in main\n    freeze()\n  File \"/public/home/shiys/0selection2/code/V4/r73_frozen_evaluation.py\", line 225, in freeze\n    checkpoint = read_checkpoint(candidate, protocol)\n  File \"/public/home/shiys/0selection2/code/V4/r73_frozen_evaluation.py\", line 209, in read_checkpoint\n    raise ValueError('The unique selected state must be the complete shared averaged-x NativeUtilitySelector with original buffers')\nValueError: The unique selected state must be the complete shared averaged-x NativeUtilitySelector with original buffers\n",
+        "automatic_retry": false,
+        "original_failures_preserved": true
+      },
+      "original_failure_and_trace_preserved": true,
+      "original_sources_and_preparation": "/public/home/shiys/0selection2/code/V4/runs/R73_expansion_teacher_training/delivery_repair_original",
+      "original_preparation_receipt": {
+        "prepared_utc": "2026-10-13T04:31:39.292188+00:00",
+        "syntax_passed": true,
+        "syntax_invocations": 1,
+        "failed_syntax_invocations": 0,
+        "syntax_check": {
+          "command": "combined AST syntax of3 new Python files and bash -n of2 new shell files; no imports or runtime execution",
+          "returncode": 0,
+          "checks": [
+            {
+              "file": "r73_frozen_evaluation.py",
+              "method": "ast.parse only",
+              "returncode": 0
+            },
+            {
+              "file": "r73_delivery.py",
+              "method": "ast.parse only",
+              "returncode": 0
+            },
+            {
+              "file": "r73_analysis.py",
+              "method": "ast.parse only",
+              "returncode": 0
+            },
+            {
+              "file": "run_v4_r73_test.sh",
+              "method": "bash -n only",
+              "returncode": 0,
+              "stdout": "",
+              "stderr": ""
+            },
+            {
+              "file": "run_v4_r73_delivery.sh",
+              "method": "bash -n only",
+              "returncode": 0,
+              "stdout": "",
+              "stderr": ""
+            }
+          ],
+          "seconds": 0.02934591844677925
+        },
+        "delivery_source_hashes": {
+          "code/V4/r73_frozen_evaluation.py": "8928631faec18925f40fe5f5810b0f9b1d536ea78e882e9562d2fd3c62445b1c",
+          "code/V4/r73_delivery.py": "b246475bf8a02bbc5b849e6145ef7b2f16650d2f13270f1bee894e9e8db00979",
+          "code/V4/r73_analysis.py": "e80e2c249184844e0ab953c68256d7b40131540d4c57d5b77a4eb058cf88d3bf",
+          "code/V4/run_v4_r73_test.sh": "078e9442eec6e29d78b3b3acd998f493039d9ffe35da77d58a7d92173c522762",
+          "code/V4/run_v4_r73_delivery.sh": "fc6232b9bfb9249d53a18f352ede2e74fd28bcd4fd42f9c272fb3d8b659054c6",
+          "code/V4/runs/R73_expansion_teacher_training/DELIVERY_PROTOCOL.md": "4689117f596b3b172dfea3caf4449eaaf9bcb4d0580485960ebe8cbab940658b"
+        },
+        "original_formal_process": {
+          "checked_utc": "2026-10-13T04:04:58.765403+00:00",
+          "host": "gpu03",
+          "slurm_step": "1465.109",
+          "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+          "gpu_index": 1,
+          "gpu_name": "NVIDIA GeForce RTX 3090",
+          "memory_used_mib": 2,
+          "memory_total_mib": 24576,
+          "compute_apps": [],
+          "idle": true,
+          "only_assigned_uuid_queried": true,
+          "tmux_session": "r73_train",
+          "tmux_pane": "%112",
+          "tmux_pane_pid": "2256839",
+          "tmux_server_host": "admin01",
+          "trainer_pid": 2797410,
+          "started_utc": "2026-10-13T04:05:00.285326+00:00",
+          "command": "bash code/V4/run_v4_r73.sh train",
+          "status": "running"
+        },
+        "future_execution": "UNVERIFIED; no freeze, new TEST or analysis has executed",
+        "preparation_GPU_queries": 0,
+        "preparation_GPU_jobs": 0,
+        "preparation_checkpoint_loads": 0,
+        "preparation_model_forwards": 0,
+        "preparation_metric_replays": 0,
+        "additional_synthetic_CPU_invocations": 0,
+        "training_source_changes": false,
+        "original_training_stop_or_restart": false,
+        "controller_launch_record": "delivery_started.json when actually launched",
+        "conditional_parent_authorization": true,
+        "new_TEST_budget": {
+          "A": 0,
+          "B": 1
+        },
+        "analysis_budget": 1,
+        "Git_operations": 0
+      },
+      "checkpoint_inspection": {
+        "invocations": 1,
+        "returncode": 0,
+        "checkpoint_loads": 1,
+        "map_location": "cpu",
+        "weights_only": false,
+        "model_constructions": 0,
+        "model_forwards": 0,
+        "GPU_queries": 0,
+        "seconds_after_import": 0.04163207206875086,
+        "total_command_wall_seconds": 1.750787866,
+        "command": "CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/python_compat:/public/home/shiys/0selection2 python -B - (focused checkpoint metadata/state predicates on stdin)",
+        "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R73_expansion_teacher_training/B_teacher_training_seed2/best_checkpoints/epoch023.pt",
+        "epoch": 23,
+        "global_epoch": 63,
+        "native_correct": 8959,
+        "native_total": 18000,
+        "parameter_mode": "averaged x",
+        "checkpoint_mode": "eval",
+        "complete_shared_selector": true,
+        "trained_head_retained": true,
+        "successful_updates_at_checkpoint": 5520,
+        "native_presentations_at_checkpoint": 4140000,
+        "auxiliary_presentations_at_checkpoint": 4140000,
+        "state_entries": 151,
+        "first_head_shape": [
+          256,
+          384
+        ],
+        "final_head_shape": [
+          1,
+          256
+        ],
+        "raw_args_equal_protocol": false,
+        "only_differing_args_field": "optimizer",
+        "difference": "checkpoint optimizer betas tuple (0.9,0.999) versus JSON protocol list [0.9,0.999]; serialized values identical",
+        "all_other_failed_guard_predicates_passed": true,
+        "geometry_mean_max_abs_difference": 0.0,
+        "geometry_std_max_abs_difference": 0.0
+      },
+      "minimal_guard_change": "Compare json.loads(json.dumps(checkpoint args, allow_nan=False)) to the JSON protocol; retain every metadata/state/buffer predicate and strict complete restore",
+      "reporting_change": "Include original pre-lock failure and repair evidence in the one authorized analysis/report invocation",
+      "syntax_check": {
+        "utc": "2026-10-13T06:25:28.639633+00:00",
+        "invocations": 1,
+        "returncode": 0,
+        "checks": [
+          {
+            "file": "code/V4/r73_frozen_evaluation.py",
+            "method": "ast.parse only; no runtime import or execution",
+            "returncode": 0
+          },
+          {
+            "file": "code/V4/r73_analysis.py",
+            "method": "ast.parse only; no runtime import or execution",
+            "returncode": 0
+          },
+          {
+            "file": "code/V4/runs/R73_expansion_teacher_training/delivery_continue.py",
+            "method": "ast.parse only; no runtime import or execution",
+            "returncode": 0
+          }
+        ],
+        "seconds": 0.012689056806266308
+      },
+      "original_delivery_source_hashes": {
+        "code/V4/r73_frozen_evaluation.py": "8928631faec18925f40fe5f5810b0f9b1d536ea78e882e9562d2fd3c62445b1c",
+        "code/V4/r73_delivery.py": "b246475bf8a02bbc5b849e6145ef7b2f16650d2f13270f1bee894e9e8db00979",
+        "code/V4/r73_analysis.py": "e80e2c249184844e0ab953c68256d7b40131540d4c57d5b77a4eb058cf88d3bf",
+        "code/V4/run_v4_r73_test.sh": "078e9442eec6e29d78b3b3acd998f493039d9ffe35da77d58a7d92173c522762",
+        "code/V4/run_v4_r73_delivery.sh": "fc6232b9bfb9249d53a18f352ede2e74fd28bcd4fd42f9c272fb3d8b659054c6",
+        "code/V4/runs/R73_expansion_teacher_training/DELIVERY_PROTOCOL.md": "4689117f596b3b172dfea3caf4449eaaf9bcb4d0580485960ebe8cbab940658b"
+      },
+      "repaired_delivery_source_hashes": {
+        "code/V4/r73_frozen_evaluation.py": "8393338ef06740e3e0c377ec9276da9ed07585440a13d8f8f35724246b13c27c",
+        "code/V4/r73_delivery.py": "b246475bf8a02bbc5b849e6145ef7b2f16650d2f13270f1bee894e9e8db00979",
+        "code/V4/r73_analysis.py": "2a42cff82e37fe7f332ec0b136301db5d214547972e77b2147136d424ce2abcf",
+        "code/V4/run_v4_r73_test.sh": "078e9442eec6e29d78b3b3acd998f493039d9ffe35da77d58a7d92173c522762",
+        "code/V4/run_v4_r73_delivery.sh": "fc6232b9bfb9249d53a18f352ede2e74fd28bcd4fd42f9c272fb3d8b659054c6",
+        "code/V4/runs/R73_expansion_teacher_training/DELIVERY_PROTOCOL.md": "4689117f596b3b172dfea3caf4449eaaf9bcb4d0580485960ebe8cbab940658b"
+      },
+      "continuation_source": "/public/home/shiys/0selection2/code/V4/runs/R73_expansion_teacher_training/delivery_continue.py",
+      "continuation_source_sha256": "4e2293b602e95d63ce7141737e4b860a6d2282caeaf3c56c30ebf26e933788c9",
+      "protocol_changed": false,
+      "weights_or_buffers_changed": false,
+      "selection_changed": false,
+      "official_arm_changed": false,
+      "inference_rule_changed": false,
+      "training_or_teacher_repeated": false,
+      "original_controller_main_rerun": false,
+      "new_TEST_attempts_allowed": 1,
+      "analysis_invocations_allowed": 1,
+      "future_execution": "UNVERIFIED; repair syntax passed, continuation not yet dispatched",
+      "Git_operations": 0
+    },
+    "continuation": {
+      "utc": "2026-10-13T06:26:09.716454+00:00",
+      "pid": 2799816,
+      "host": "admin01",
+      "tmux": "r73_delivery_continuation",
+      "pane": "%123",
+      "pane_pid": 2799816,
+      "identity": {
+        "command": "tmux display-message -p -t %123 '#{session_name}|#{pane_id}|#{pane_pid}'",
+        "recorded_utc": "2026-10-13T06:26:08.414561+00:00",
+        "finished_utc": "2026-10-13T06:26:08.417621+00:00",
+        "seconds": 0.0030719460919499397,
+        "returncode": 0,
+        "stdout": "r73_delivery_continuation|%123|2799816\n",
+        "stderr": ""
+      },
+      "command": "/public/home/shiys/miniconda3/envs/easynco/bin/python -B -u /public/home/shiys/0selection2/code/V4/runs/R73_expansion_teacher_training/delivery_continue.py",
+      "original_controller_gone": {
+        "command": "tmux has-session -t =r73_delivery",
+        "recorded_utc": "2026-10-13T06:26:08.411006+00:00",
+        "finished_utc": "2026-10-13T06:26:08.414518+00:00",
+        "seconds": 0.003525787964463234,
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "can't find session: r73_delivery\n"
+      },
+      "original_training_terminal": {
+        "recorded_utc": "2026-10-13T06:16:00.237213+00:00",
+        "slurm_step": "1465.109",
+        "tmux_session": "r73_train",
+        "state": "COMPLETED",
+        "exit_code": "0:0",
+        "elapsed_seconds": 7631.0,
+        "node": "gpu03",
+        "tmux_terminal": true,
+        "scheduler_evidence": {
+          "command": "sacct -j 1465.109 --noheader --parsable2 --format=JobIDRaw,State,ExitCode,ElapsedRaw,Start,End,NodeList",
+          "recorded_utc": "2026-10-13T06:16:00.126234+00:00",
+          "finished_utc": "2026-10-13T06:16:00.224548+00:00",
+          "wall_seconds": 0.0983249107375741,
+          "returncode": 0,
+          "stdout": "1465.109|COMPLETED|0:0|7631|2026-10-13T12:04:58|2026-10-13T14:12:09|gpu03\n",
+          "stderr": ""
+        },
+        "tmux_evidence": {
+          "command": "tmux has-session -t =r73_train",
+          "recorded_utc": "2026-10-13T06:16:00.224584+00:00",
+          "finished_utc": "2026-10-13T06:16:00.237141+00:00",
+          "wall_seconds": 0.012585095129907131,
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "can't find session: r73_train\n"
+        },
+        "original_trainer_pid": 2797410,
+        "original_pane_pid": "2256839",
+        "formal_process_gone": true,
+        "formal_process_evidence": "Original exec Python tied to this Slurm step; scheduler terminal0 confirms the step process exited; owned launcher tmux is independently absent"
+      },
+      "original_failure": {
+        "utc": "2026-10-13T06:16:00.458877+00:00",
+        "error_type": "ValueError",
+        "message": "The unique selected state must be the complete shared averaged-x NativeUtilitySelector with original buffers",
+        "traceback": "Traceback (most recent call last):\n  File \"/public/home/shiys/0selection2/code/V4/r73_delivery.py\", line 128, in main\n    freeze()\n  File \"/public/home/shiys/0selection2/code/V4/r73_frozen_evaluation.py\", line 225, in freeze\n    checkpoint = read_checkpoint(candidate, protocol)\n  File \"/public/home/shiys/0selection2/code/V4/r73_frozen_evaluation.py\", line 209, in read_checkpoint\n    raise ValueError('The unique selected state must be the complete shared averaged-x NativeUtilitySelector with original buffers')\nValueError: The unique selected state must be the complete shared averaged-x NativeUtilitySelector with original buffers\n",
+        "automatic_retry": false,
+        "original_failures_preserved": true
+      },
+      "repair_receipt": "/public/home/shiys/0selection2/code/V4/runs/R73_expansion_teacher_training/delivery_repair.json",
+      "authorization": "explicit parent repair and continuation from original pre-lock failure",
+      "original_controller_main_rerun": false,
+      "new_TEST_attempts_allowed": 1,
+      "analysis_invocations_allowed": 1,
+      "CPU_only": true,
+      "automatic_retry": false
+    }
+  },
+  "legacy_B_and_R58": "deferred/unfixed; not numeric70 veto"
+}
