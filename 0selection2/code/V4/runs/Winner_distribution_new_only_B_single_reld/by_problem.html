@@ -1,0 +1,931 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>方法Top1分布</title><style>
+body{font:16px/1.7 "Noto Sans CJK SC","Microsoft YaHei",sans-serif;
+margin:0;color:#202528;background:#fafafa}
+main{max-width:1200px;margin:auto;padding:28px 20px 60px}
+h1{font-size:28px}h2{font-size:21px;margin-top:32px}h3{font-size:18px}
+table{border-collapse:collapse;display:block;overflow-x:auto;background:white;font-size:14px}
+th,td{border:1px solid #d8dddf;padding:8px 12px;white-space:nowrap}
+th{background:#edf1f2}a{color:#13676d}
+img{display:block;max-width:100%;height:auto;margin:18px 0}
+</style></head><body><main><h1 id="18">当前数据：18种问题各方法获胜实例占比</h1>
+<p>数据目录：<code>/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014</code>。</p>
+<p>每种问题：训练集70,114例、测试集3,895例。只统计现有候选池，不模拟删除，不包含validation。</p>
+<p>每个问题独立展示。左图为训练集，右图为测试集；每个方法一根柱，横轴统一为0–100%。表格同时保留获胜数量和比例。</p>
+<p>获胜比例使用该目录已发布的winner计数，分母为该问题对应划分的全部实例数，不是模型预测准确率。</p>
+<p><code>reld_mt</code>对应原RELD_MOEL；RELD_MTL已移除。候选及顺序取自此目录的元数据，不沿用旧候选池或文件名字母排序。</p>
+<p><a href="winner_distributions.pdf">18页图表PDF</a> · <a href="distribution_bundle.zip">完整图表包</a> · <a href="winner_distribution.csv">训练与测试CSV</a></p>
+<p><strong>问题目录：</strong> <a href="#tsp">TSP</a> · <a href="#cvrp">CVRP</a> · <a href="#atsp">ATSP</a> · <a href="#ovrp">OVRP</a> · <a href="#vrpb">VRPB</a> · <a href="#vrpl">VRPL</a> · <a href="#vrptw">VRPTW</a> · <a href="#ovrptw">OVRPTW</a> · <a href="#ovrpb">OVRPB</a> · <a href="#ovrpl">OVRPL</a> · <a href="#vrpbl">VRPBL</a> · <a href="#vrpbtw">VRPBTW</a> · <a href="#vrpltw">VRPLTW</a> · <a href="#ovrpbl">OVRPBL</a> · <a href="#ovrpbtw">OVRPBTW</a> · <a href="#ovrpltw">OVRPLTW</a> · <a href="#vrpbltw">VRPBLTW</a> · <a href="#ovrpbltw">OVRPBLTW</a></p>
+<h2 id="tsp">TSP</h2>
+<p><img alt="TSP各方法训练与测试获胜比例" src="figures/TSP.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">训练获胜数量</th>
+<th style="text-align: right;">训练比例</th>
+<th style="text-align: right;">测试获胜数量</th>
+<th style="text-align: right;">测试比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BQ</td>
+<td style="text-align: right;">20,669</td>
+<td style="text-align: right;">29.48%</td>
+<td style="text-align: right;">1,147</td>
+<td style="text-align: right;">29.45%</td>
+</tr>
+<tr>
+<td>DIFUSCO</td>
+<td style="text-align: right;">6,084</td>
+<td style="text-align: right;">8.68%</td>
+<td style="text-align: right;">303</td>
+<td style="text-align: right;">7.78%</td>
+</tr>
+<tr>
+<td>DIFUSCO500</td>
+<td style="text-align: right;">865</td>
+<td style="text-align: right;">1.23%</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">1.08%</td>
+</tr>
+<tr>
+<td>ELG</td>
+<td style="text-align: right;">5,184</td>
+<td style="text-align: right;">7.39%</td>
+<td style="text-align: right;">282</td>
+<td style="text-align: right;">7.24%</td>
+</tr>
+<tr>
+<td>LEHD</td>
+<td style="text-align: right;">11,881</td>
+<td style="text-align: right;">16.95%</td>
+<td style="text-align: right;">637</td>
+<td style="text-align: right;">16.35%</td>
+</tr>
+<tr>
+<td>OMNI</td>
+<td style="text-align: right;">404</td>
+<td style="text-align: right;">0.58%</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">0.72%</td>
+</tr>
+<tr>
+<td>T2T</td>
+<td style="text-align: right;">22,538</td>
+<td style="text-align: right;">32.14%</td>
+<td style="text-align: right;">1,327</td>
+<td style="text-align: right;">34.07%</td>
+</tr>
+<tr>
+<td>T2T500</td>
+<td style="text-align: right;">2,489</td>
+<td style="text-align: right;">3.55%</td>
+<td style="text-align: right;">129</td>
+<td style="text-align: right;">3.31%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/TSP.csv">该问题CSV</a> · <a href="figures/TSP.pdf">本图PDF</a></p>
+<h2 id="cvrp">CVRP</h2>
+<p><img alt="CVRP各方法训练与测试获胜比例" src="figures/CVRP.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">训练获胜数量</th>
+<th style="text-align: right;">训练比例</th>
+<th style="text-align: right;">测试获胜数量</th>
+<th style="text-align: right;">测试比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BQ</td>
+<td style="text-align: right;">8,999</td>
+<td style="text-align: right;">12.83%</td>
+<td style="text-align: right;">507</td>
+<td style="text-align: right;">13.02%</td>
+</tr>
+<tr>
+<td>ELG</td>
+<td style="text-align: right;">1,428</td>
+<td style="text-align: right;">2.04%</td>
+<td style="text-align: right;">84</td>
+<td style="text-align: right;">2.16%</td>
+</tr>
+<tr>
+<td>ICAM</td>
+<td style="text-align: right;">13,158</td>
+<td style="text-align: right;">18.77%</td>
+<td style="text-align: right;">703</td>
+<td style="text-align: right;">18.05%</td>
+</tr>
+<tr>
+<td>LEHD</td>
+<td style="text-align: right;">10,116</td>
+<td style="text-align: right;">14.43%</td>
+<td style="text-align: right;">528</td>
+<td style="text-align: right;">13.56%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,506</td>
+<td style="text-align: right;">2.15%</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">2.44%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">1,832</td>
+<td style="text-align: right;">2.61%</td>
+<td style="text-align: right;">124</td>
+<td style="text-align: right;">3.18%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">2,163</td>
+<td style="text-align: right;">3.08%</td>
+<td style="text-align: right;">123</td>
+<td style="text-align: right;">3.16%</td>
+</tr>
+<tr>
+<td>OMNI</td>
+<td style="text-align: right;">17,073</td>
+<td style="text-align: right;">24.35%</td>
+<td style="text-align: right;">968</td>
+<td style="text-align: right;">24.85%</td>
+</tr>
+<tr>
+<td>RELD_CVRP</td>
+<td style="text-align: right;">12,676</td>
+<td style="text-align: right;">18.08%</td>
+<td style="text-align: right;">705</td>
+<td style="text-align: right;">18.10%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">1,163</td>
+<td style="text-align: right;">1.66%</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">1.49%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/CVRP.csv">该问题CSV</a> · <a href="figures/CVRP.pdf">本图PDF</a></p>
+<h2 id="atsp">ATSP</h2>
+<p><img alt="ATSP各方法训练与测试获胜比例" src="figures/ATSP.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">训练获胜数量</th>
+<th style="text-align: right;">训练比例</th>
+<th style="text-align: right;">测试获胜数量</th>
+<th style="text-align: right;">测试比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GLOP</td>
+<td style="text-align: right;">210</td>
+<td style="text-align: right;">0.30%</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">0.28%</td>
+</tr>
+<tr>
+<td>ICAM_ATSP</td>
+<td style="text-align: right;">21,342</td>
+<td style="text-align: right;">30.44%</td>
+<td style="text-align: right;">1,168</td>
+<td style="text-align: right;">29.99%</td>
+</tr>
+<tr>
+<td>MATNET</td>
+<td style="text-align: right;">10,022</td>
+<td style="text-align: right;">14.29%</td>
+<td style="text-align: right;">559</td>
+<td style="text-align: right;">14.35%</td>
+</tr>
+<tr>
+<td>MATPOENET</td>
+<td style="text-align: right;">5,579</td>
+<td style="text-align: right;">7.96%</td>
+<td style="text-align: right;">315</td>
+<td style="text-align: right;">8.09%</td>
+</tr>
+<tr>
+<td>UNICO_MatPOENet</td>
+<td style="text-align: right;">32,961</td>
+<td style="text-align: right;">47.01%</td>
+<td style="text-align: right;">1,842</td>
+<td style="text-align: right;">47.29%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/ATSP.csv">该问题CSV</a> · <a href="figures/ATSP.pdf">本图PDF</a></p>
+<h2 id="ovrp">OVRP</h2>
+<p><img alt="OVRP各方法训练与测试获胜比例" src="figures/OVRP.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">训练获胜数量</th>
+<th style="text-align: right;">训练比例</th>
+<th style="text-align: right;">测试获胜数量</th>
+<th style="text-align: right;">测试比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">660</td>
+<td style="text-align: right;">0.94%</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">1.10%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">404</td>
+<td style="text-align: right;">0.58%</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">0.54%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">24,277</td>
+<td style="text-align: right;">34.63%</td>
+<td style="text-align: right;">1,402</td>
+<td style="text-align: right;">35.99%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">23,970</td>
+<td style="text-align: right;">34.19%</td>
+<td style="text-align: right;">1,294</td>
+<td style="text-align: right;">33.22%</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">4,556</td>
+<td style="text-align: right;">6.50%</td>
+<td style="text-align: right;">270</td>
+<td style="text-align: right;">6.93%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">16,247</td>
+<td style="text-align: right;">23.17%</td>
+<td style="text-align: right;">865</td>
+<td style="text-align: right;">22.21%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/OVRP.csv">该问题CSV</a> · <a href="figures/OVRP.pdf">本图PDF</a></p>
+<h2 id="vrpb">VRPB</h2>
+<p><img alt="VRPB各方法训练与测试获胜比例" src="figures/VRPB.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">训练获胜数量</th>
+<th style="text-align: right;">训练比例</th>
+<th style="text-align: right;">测试获胜数量</th>
+<th style="text-align: right;">测试比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">3,716</td>
+<td style="text-align: right;">5.30%</td>
+<td style="text-align: right;">223</td>
+<td style="text-align: right;">5.73%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">10,094</td>
+<td style="text-align: right;">14.40%</td>
+<td style="text-align: right;">552</td>
+<td style="text-align: right;">14.17%</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">56,304</td>
+<td style="text-align: right;">80.30%</td>
+<td style="text-align: right;">3,120</td>
+<td style="text-align: right;">80.10%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/VRPB.csv">该问题CSV</a> · <a href="figures/VRPB.pdf">本图PDF</a></p>
+<h2 id="vrpl">VRPL</h2>
+<p><img alt="VRPL各方法训练与测试获胜比例" src="figures/VRPL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">训练获胜数量</th>
+<th style="text-align: right;">训练比例</th>
+<th style="text-align: right;">测试获胜数量</th>
+<th style="text-align: right;">测试比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">2,314</td>
+<td style="text-align: right;">3.30%</td>
+<td style="text-align: right;">132</td>
+<td style="text-align: right;">3.39%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">2,283</td>
+<td style="text-align: right;">3.26%</td>
+<td style="text-align: right;">136</td>
+<td style="text-align: right;">3.49%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">21,472</td>
+<td style="text-align: right;">30.62%</td>
+<td style="text-align: right;">1,180</td>
+<td style="text-align: right;">30.30%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">22,124</td>
+<td style="text-align: right;">31.55%</td>
+<td style="text-align: right;">1,247</td>
+<td style="text-align: right;">32.02%</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">9,625</td>
+<td style="text-align: right;">13.73%</td>
+<td style="text-align: right;">546</td>
+<td style="text-align: right;">14.02%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">12,296</td>
+<td style="text-align: right;">17.54%</td>
+<td style="text-align: right;">654</td>
+<td style="text-align: right;">16.79%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/VRPL.csv">该问题CSV</a> · <a href="figures/VRPL.pdf">本图PDF</a></p>
+<h2 id="vrptw">VRPTW</h2>
+<p><img alt="VRPTW各方法训练与测试获胜比例" src="figures/VRPTW.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">训练获胜数量</th>
+<th style="text-align: right;">训练比例</th>
+<th style="text-align: right;">测试获胜数量</th>
+<th style="text-align: right;">测试比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.01%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">12,713</td>
+<td style="text-align: right;">18.13%</td>
+<td style="text-align: right;">693</td>
+<td style="text-align: right;">17.79%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">738</td>
+<td style="text-align: right;">1.05%</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">1.00%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">98</td>
+<td style="text-align: right;">0.14%</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.10%</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">56,257</td>
+<td style="text-align: right;">80.24%</td>
+<td style="text-align: right;">3,149</td>
+<td style="text-align: right;">80.85%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">304</td>
+<td style="text-align: right;">0.43%</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.26%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/VRPTW.csv">该问题CSV</a> · <a href="figures/VRPTW.pdf">本图PDF</a></p>
+<h2 id="ovrptw">OVRPTW</h2>
+<p><img alt="OVRPTW各方法训练与测试获胜比例" src="figures/OVRPTW.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">训练获胜数量</th>
+<th style="text-align: right;">训练比例</th>
+<th style="text-align: right;">测试获胜数量</th>
+<th style="text-align: right;">测试比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">10,770</td>
+<td style="text-align: right;">15.36%</td>
+<td style="text-align: right;">587</td>
+<td style="text-align: right;">15.07%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">327</td>
+<td style="text-align: right;">0.47%</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">0.56%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">0.08%</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.13%</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">58,801</td>
+<td style="text-align: right;">83.86%</td>
+<td style="text-align: right;">3,273</td>
+<td style="text-align: right;">84.03%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">158</td>
+<td style="text-align: right;">0.23%</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.21%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/OVRPTW.csv">该问题CSV</a> · <a href="figures/OVRPTW.pdf">本图PDF</a></p>
+<h2 id="ovrpb">OVRPB</h2>
+<p><img alt="OVRPB各方法训练与测试获胜比例" src="figures/OVRPB.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">训练获胜数量</th>
+<th style="text-align: right;">训练比例</th>
+<th style="text-align: right;">测试获胜数量</th>
+<th style="text-align: right;">测试比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">3,813</td>
+<td style="text-align: right;">5.44%</td>
+<td style="text-align: right;">222</td>
+<td style="text-align: right;">5.70%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">4,379</td>
+<td style="text-align: right;">6.25%</td>
+<td style="text-align: right;">242</td>
+<td style="text-align: right;">6.21%</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">61,922</td>
+<td style="text-align: right;">88.32%</td>
+<td style="text-align: right;">3,431</td>
+<td style="text-align: right;">88.09%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/OVRPB.csv">该问题CSV</a> · <a href="figures/OVRPB.pdf">本图PDF</a></p>
+<h2 id="ovrpl">OVRPL</h2>
+<p><img alt="OVRPL各方法训练与测试获胜比例" src="figures/OVRPL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">训练获胜数量</th>
+<th style="text-align: right;">训练比例</th>
+<th style="text-align: right;">测试获胜数量</th>
+<th style="text-align: right;">测试比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">616</td>
+<td style="text-align: right;">0.88%</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">1.31%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">430</td>
+<td style="text-align: right;">0.61%</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">0.69%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">24,949</td>
+<td style="text-align: right;">35.58%</td>
+<td style="text-align: right;">1,370</td>
+<td style="text-align: right;">35.17%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">24,152</td>
+<td style="text-align: right;">34.45%</td>
+<td style="text-align: right;">1,353</td>
+<td style="text-align: right;">34.74%</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">4,477</td>
+<td style="text-align: right;">6.39%</td>
+<td style="text-align: right;">264</td>
+<td style="text-align: right;">6.78%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">15,490</td>
+<td style="text-align: right;">22.09%</td>
+<td style="text-align: right;">830</td>
+<td style="text-align: right;">21.31%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/OVRPL.csv">该问题CSV</a> · <a href="figures/OVRPL.pdf">本图PDF</a></p>
+<h2 id="vrpbl">VRPBL</h2>
+<p><img alt="VRPBL各方法训练与测试获胜比例" src="figures/VRPBL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">训练获胜数量</th>
+<th style="text-align: right;">训练比例</th>
+<th style="text-align: right;">测试获胜数量</th>
+<th style="text-align: right;">测试比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">3,671</td>
+<td style="text-align: right;">5.24%</td>
+<td style="text-align: right;">193</td>
+<td style="text-align: right;">4.96%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">10,772</td>
+<td style="text-align: right;">15.36%</td>
+<td style="text-align: right;">599</td>
+<td style="text-align: right;">15.38%</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">55,671</td>
+<td style="text-align: right;">79.40%</td>
+<td style="text-align: right;">3,103</td>
+<td style="text-align: right;">79.67%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/VRPBL.csv">该问题CSV</a> · <a href="figures/VRPBL.pdf">本图PDF</a></p>
+<h2 id="vrpbtw">VRPBTW</h2>
+<p><img alt="VRPBTW各方法训练与测试获胜比例" src="figures/VRPBTW.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">训练获胜数量</th>
+<th style="text-align: right;">训练比例</th>
+<th style="text-align: right;">测试获胜数量</th>
+<th style="text-align: right;">测试比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">0.11%</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.18%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">14,262</td>
+<td style="text-align: right;">20.34%</td>
+<td style="text-align: right;">819</td>
+<td style="text-align: right;">21.03%</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">55,777</td>
+<td style="text-align: right;">79.55%</td>
+<td style="text-align: right;">3,069</td>
+<td style="text-align: right;">78.79%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/VRPBTW.csv">该问题CSV</a> · <a href="figures/VRPBTW.pdf">本图PDF</a></p>
+<h2 id="vrpltw">VRPLTW</h2>
+<p><img alt="VRPLTW各方法训练与测试获胜比例" src="figures/VRPLTW.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">训练获胜数量</th>
+<th style="text-align: right;">训练比例</th>
+<th style="text-align: right;">测试获胜数量</th>
+<th style="text-align: right;">测试比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.01%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">12,461</td>
+<td style="text-align: right;">17.77%</td>
+<td style="text-align: right;">726</td>
+<td style="text-align: right;">18.64%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">843</td>
+<td style="text-align: right;">1.20%</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">1.18%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">140</td>
+<td style="text-align: right;">0.20%</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.15%</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">56,372</td>
+<td style="text-align: right;">80.40%</td>
+<td style="text-align: right;">3,101</td>
+<td style="text-align: right;">79.61%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">294</td>
+<td style="text-align: right;">0.42%</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0.41%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/VRPLTW.csv">该问题CSV</a> · <a href="figures/VRPLTW.pdf">本图PDF</a></p>
+<h2 id="ovrpbl">OVRPBL</h2>
+<p><img alt="OVRPBL各方法训练与测试获胜比例" src="figures/OVRPBL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">训练获胜数量</th>
+<th style="text-align: right;">训练比例</th>
+<th style="text-align: right;">测试获胜数量</th>
+<th style="text-align: right;">测试比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">3,546</td>
+<td style="text-align: right;">5.06%</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: right;">4.70%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">4,460</td>
+<td style="text-align: right;">6.36%</td>
+<td style="text-align: right;">224</td>
+<td style="text-align: right;">5.75%</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">62,108</td>
+<td style="text-align: right;">88.58%</td>
+<td style="text-align: right;">3,488</td>
+<td style="text-align: right;">89.55%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/OVRPBL.csv">该问题CSV</a> · <a href="figures/OVRPBL.pdf">本图PDF</a></p>
+<h2 id="ovrpbtw">OVRPBTW</h2>
+<p><img alt="OVRPBTW各方法训练与测试获胜比例" src="figures/OVRPBTW.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">训练获胜数量</th>
+<th style="text-align: right;">训练比例</th>
+<th style="text-align: right;">测试获胜数量</th>
+<th style="text-align: right;">测试比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">11,743</td>
+<td style="text-align: right;">16.75%</td>
+<td style="text-align: right;">591</td>
+<td style="text-align: right;">15.17%</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">58,371</td>
+<td style="text-align: right;">83.25%</td>
+<td style="text-align: right;">3,304</td>
+<td style="text-align: right;">84.83%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/OVRPBTW.csv">该问题CSV</a> · <a href="figures/OVRPBTW.pdf">本图PDF</a></p>
+<h2 id="ovrpltw">OVRPLTW</h2>
+<p><img alt="OVRPLTW各方法训练与测试获胜比例" src="figures/OVRPLTW.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">训练获胜数量</th>
+<th style="text-align: right;">训练比例</th>
+<th style="text-align: right;">测试获胜数量</th>
+<th style="text-align: right;">测试比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">10,709</td>
+<td style="text-align: right;">15.27%</td>
+<td style="text-align: right;">622</td>
+<td style="text-align: right;">15.97%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">432</td>
+<td style="text-align: right;">0.62%</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0.59%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">71</td>
+<td style="text-align: right;">0.10%</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.08%</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">58,737</td>
+<td style="text-align: right;">83.77%</td>
+<td style="text-align: right;">3,237</td>
+<td style="text-align: right;">83.11%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">165</td>
+<td style="text-align: right;">0.24%</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.26%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/OVRPLTW.csv">该问题CSV</a> · <a href="figures/OVRPLTW.pdf">本图PDF</a></p>
+<h2 id="vrpbltw">VRPBLTW</h2>
+<p><img alt="VRPBLTW各方法训练与测试获胜比例" src="figures/VRPBLTW.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">训练获胜数量</th>
+<th style="text-align: right;">训练比例</th>
+<th style="text-align: right;">测试获胜数量</th>
+<th style="text-align: right;">测试比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">0.10%</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.08%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">14,228</td>
+<td style="text-align: right;">20.29%</td>
+<td style="text-align: right;">791</td>
+<td style="text-align: right;">20.31%</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">55,814</td>
+<td style="text-align: right;">79.60%</td>
+<td style="text-align: right;">3,101</td>
+<td style="text-align: right;">79.61%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/VRPBLTW.csv">该问题CSV</a> · <a href="figures/VRPBLTW.pdf">本图PDF</a></p>
+<h2 id="ovrpbltw">OVRPBLTW</h2>
+<p><img alt="OVRPBLTW各方法训练与测试获胜比例" src="figures/OVRPBLTW.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">训练获胜数量</th>
+<th style="text-align: right;">训练比例</th>
+<th style="text-align: right;">测试获胜数量</th>
+<th style="text-align: right;">测试比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">11,669</td>
+<td style="text-align: right;">16.64%</td>
+<td style="text-align: right;">644</td>
+<td style="text-align: right;">16.53%</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">58,442</td>
+<td style="text-align: right;">83.35%</td>
+<td style="text-align: right;">3,251</td>
+<td style="text-align: right;">83.47%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/OVRPBLTW.csv">该问题CSV</a> · <a href="figures/OVRPBLTW.pdf">本图PDF</a></p>
+<p>说明：直接使用数据目录已有的获胜计数，没有加载模型、重新求解、改动数据或重新划分。精确并列沿用该数据发布时的winner规则。</p></main></body></html>

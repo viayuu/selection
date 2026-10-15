@@ -1,0 +1,38 @@
+{
+  "arm": "D_code_embedding",
+  "controller_pid": 2408065,
+  "controller_host": "admin01",
+  "session": "r80_D_code_embedding",
+  "started_utc": "2026-10-15T12:29:35.027919+00:00",
+  "state": "failed",
+  "group": {
+    "job": 1475,
+    "node": "gpu05",
+    "index": 1,
+    "gpu_type": "4090",
+    "cap": 352,
+    "uuid": "GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d",
+    "batch": 1024,
+    "updates": 49680
+  },
+  "command": [
+    "srun",
+    "--jobid=1475",
+    "--overlap",
+    "--exact",
+    "-N1",
+    "-n1",
+    "--nodelist=gpu05",
+    "--cpus-per-task=4",
+    "--mem=9G",
+    "--gres=none",
+    "bash",
+    "/public/home/shiys/0selection2/code/V4/run_v4_r80.sh",
+    "container-entry",
+    "D_code_embedding"
+  ],
+  "resource_correction": "Original GPU-GRES step never started a worker; use existing allocation-owned container, not a new allocation",
+  "srun_pid": 2408117,
+  "exit_status": 1,
+  "finished_utc": "2026-10-15T12:29:37.708704+00:00"
+}

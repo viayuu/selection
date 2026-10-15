@@ -1,0 +1,36 @@
+{
+  "arm": "C_lr3e4",
+  "controller_pid": 2415079,
+  "controller_host": "admin01",
+  "session": "r80_C_lr3e4",
+  "started_utc": "2026-10-15T12:31:14.778699+00:00",
+  "state": "running",
+  "group": {
+    "job": 1465,
+    "node": "gpu03",
+    "index": 1,
+    "gpu_type": "3090",
+    "cap": 384,
+    "uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+    "batch": 1024,
+    "updates": 49680
+  },
+  "command": [
+    "srun",
+    "--jobid=1465",
+    "--overlap",
+    "--exact",
+    "-N1",
+    "-n1",
+    "--nodelist=gpu03",
+    "--cpus-per-task=4",
+    "--mem=9G",
+    "--gres=none",
+    "bash",
+    "/public/home/shiys/0selection2/code/V4/run_v4_r80.sh",
+    "container-entry",
+    "C_lr3e4"
+  ],
+  "resource_correction": "Original GPU-GRES step never started a worker; use existing allocation-owned container, not a new allocation",
+  "srun_pid": 2415175
+}

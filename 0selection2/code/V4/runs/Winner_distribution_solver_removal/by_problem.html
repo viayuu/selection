@@ -1,0 +1,2563 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>方法Top1分布</title><style>
+body{font:16px/1.7 "Noto Sans CJK SC","Microsoft YaHei",sans-serif;
+margin:0;color:#202528;background:#fafafa}
+main{max-width:1200px;margin:auto;padding:28px 20px 60px}
+h1{font-size:28px}h2{font-size:21px;margin-top:32px}h3{font-size:18px}
+table{border-collapse:collapse;display:block;overflow-x:auto;background:white;font-size:14px}
+th,td{border:1px solid #d8dddf;padding:8px 12px;white-space:nowrap}
+th{background:#edf1f2}a{color:#13676d}
+img{display:block;max-width:100%;height:auto;margin:18px 0}
+</style></head><body><main><h1 id="18">18种问题：训练集各方法获胜实例占比</h1>
+<p>只统计训练集，每种问题10,000例。各问题独立展示，不混合汇总。</p>
+<p>每个问题分为三套独立图表：原候选池、只删除RELD_MTL、只删除RELD_MOEL。每张图中，每个方法只有一根柱，横轴统一为0–100%。</p>
+<p>表格分别列出获胜数量和比例，每张表的获胜数量合计10,000。被删除的方法不参与对应图表。</p>
+<p>Top1分布是方法成为真实winner的比例，不是选择模型准确率。原池沿用原标签；删除时仅将被删方法的winner按剩余FP64成本重新分配，完全并列按原成本列顺序。原数据未修改。</p>
+<p><a href="winner_distributions_train.pdf">下载54页训练集图表PDF</a> · <a href="per_problem_bundle.zip">下载训练集图表包</a> · <a href="train_winner_distribution.csv">全部训练集CSV</a></p>
+<p><strong>问题目录：</strong> <a href="#tsp">TSP</a> · <a href="#cvrp">CVRP</a> · <a href="#atsp">ATSP</a> · <a href="#ovrp">OVRP</a> · <a href="#vrpb">VRPB</a> · <a href="#vrpl">VRPL</a> · <a href="#vrptw">VRPTW</a> · <a href="#ovrptw">OVRPTW</a> · <a href="#ovrpb">OVRPB</a> · <a href="#ovrpl">OVRPL</a> · <a href="#vrpbl">VRPBL</a> · <a href="#vrpbtw">VRPBTW</a> · <a href="#vrpltw">VRPLTW</a> · <a href="#ovrpbl">OVRPBL</a> · <a href="#ovrpbtw">OVRPBTW</a> · <a href="#ovrpltw">OVRPLTW</a> · <a href="#vrpbltw">VRPBLTW</a> · <a href="#ovrpbltw">OVRPBLTW</a></p>
+<h2 id="tsp">TSP</h2>
+<h3 id="_1">原候选池</h3>
+<p><img alt="TSP训练集：原候选池" src="figures_train/TSP_original.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BQ</td>
+<td style="text-align: right;">3,077</td>
+<td style="text-align: right;">30.77%</td>
+</tr>
+<tr>
+<td>DIFUSCO</td>
+<td style="text-align: right;">521</td>
+<td style="text-align: right;">5.21%</td>
+</tr>
+<tr>
+<td>DIFUSCO500</td>
+<td style="text-align: right;">1,283</td>
+<td style="text-align: right;">12.83%</td>
+</tr>
+<tr>
+<td>ELG</td>
+<td style="text-align: right;">724</td>
+<td style="text-align: right;">7.24%</td>
+</tr>
+<tr>
+<td>LEHD</td>
+<td style="text-align: right;">1,623</td>
+<td style="text-align: right;">16.23%</td>
+</tr>
+<tr>
+<td>OMNI</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0.45%</td>
+</tr>
+<tr>
+<td>T2T</td>
+<td style="text-align: right;">1,090</td>
+<td style="text-align: right;">10.90%</td>
+</tr>
+<tr>
+<td>T2T500</td>
+<td style="text-align: right;">1,637</td>
+<td style="text-align: right;">16.37%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/TSP_original.csv">本情况CSV</a> · <a href="figures_train/TSP_original.pdf">本图PDF</a></p>
+<h3 id="reld_mtl">只删除 RELD_MTL</h3>
+<p><img alt="TSP训练集：只删除 RELD_MTL" src="figures_train/TSP_without_RELD_MTL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BQ</td>
+<td style="text-align: right;">3,077</td>
+<td style="text-align: right;">30.77%</td>
+</tr>
+<tr>
+<td>DIFUSCO</td>
+<td style="text-align: right;">521</td>
+<td style="text-align: right;">5.21%</td>
+</tr>
+<tr>
+<td>DIFUSCO500</td>
+<td style="text-align: right;">1,283</td>
+<td style="text-align: right;">12.83%</td>
+</tr>
+<tr>
+<td>ELG</td>
+<td style="text-align: right;">724</td>
+<td style="text-align: right;">7.24%</td>
+</tr>
+<tr>
+<td>LEHD</td>
+<td style="text-align: right;">1,623</td>
+<td style="text-align: right;">16.23%</td>
+</tr>
+<tr>
+<td>OMNI</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0.45%</td>
+</tr>
+<tr>
+<td>T2T</td>
+<td style="text-align: right;">1,090</td>
+<td style="text-align: right;">10.90%</td>
+</tr>
+<tr>
+<td>T2T500</td>
+<td style="text-align: right;">1,637</td>
+<td style="text-align: right;">16.37%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/TSP_without_RELD_MTL.csv">本情况CSV</a> · <a href="figures_train/TSP_without_RELD_MTL.pdf">本图PDF</a></p>
+<h3 id="reld_moel">只删除 RELD_MOEL</h3>
+<p><img alt="TSP训练集：只删除 RELD_MOEL" src="figures_train/TSP_without_RELD_MOEL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BQ</td>
+<td style="text-align: right;">3,077</td>
+<td style="text-align: right;">30.77%</td>
+</tr>
+<tr>
+<td>DIFUSCO</td>
+<td style="text-align: right;">521</td>
+<td style="text-align: right;">5.21%</td>
+</tr>
+<tr>
+<td>DIFUSCO500</td>
+<td style="text-align: right;">1,283</td>
+<td style="text-align: right;">12.83%</td>
+</tr>
+<tr>
+<td>ELG</td>
+<td style="text-align: right;">724</td>
+<td style="text-align: right;">7.24%</td>
+</tr>
+<tr>
+<td>LEHD</td>
+<td style="text-align: right;">1,623</td>
+<td style="text-align: right;">16.23%</td>
+</tr>
+<tr>
+<td>OMNI</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0.45%</td>
+</tr>
+<tr>
+<td>T2T</td>
+<td style="text-align: right;">1,090</td>
+<td style="text-align: right;">10.90%</td>
+</tr>
+<tr>
+<td>T2T500</td>
+<td style="text-align: right;">1,637</td>
+<td style="text-align: right;">16.37%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/TSP_without_RELD_MOEL.csv">本情况CSV</a> · <a href="figures_train/TSP_without_RELD_MOEL.pdf">本图PDF</a></p>
+<h2 id="cvrp">CVRP</h2>
+<h3 id="_2">原候选池</h3>
+<p><img alt="CVRP训练集：原候选池" src="figures_train/CVRP_original.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BQ</td>
+<td style="text-align: right;">1,297</td>
+<td style="text-align: right;">12.97%</td>
+</tr>
+<tr>
+<td>ELG</td>
+<td style="text-align: right;">187</td>
+<td style="text-align: right;">1.87%</td>
+</tr>
+<tr>
+<td>ICAM</td>
+<td style="text-align: right;">1,160</td>
+<td style="text-align: right;">11.60%</td>
+</tr>
+<tr>
+<td>LEHD</td>
+<td style="text-align: right;">1,608</td>
+<td style="text-align: right;">16.08%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">1.50%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">314</td>
+<td style="text-align: right;">3.14%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">349</td>
+<td style="text-align: right;">3.49%</td>
+</tr>
+<tr>
+<td>OMNI</td>
+<td style="text-align: right;">2,533</td>
+<td style="text-align: right;">25.33%</td>
+</tr>
+<tr>
+<td>RELD_CVRP</td>
+<td style="text-align: right;">2,234</td>
+<td style="text-align: right;">22.34%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">168</td>
+<td style="text-align: right;">1.68%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/CVRP_original.csv">本情况CSV</a> · <a href="figures_train/CVRP_original.pdf">本图PDF</a></p>
+<h3 id="reld_mtl_1">只删除 RELD_MTL</h3>
+<p><img alt="CVRP训练集：只删除 RELD_MTL" src="figures_train/CVRP_without_RELD_MTL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BQ</td>
+<td style="text-align: right;">1,297</td>
+<td style="text-align: right;">12.97%</td>
+</tr>
+<tr>
+<td>ELG</td>
+<td style="text-align: right;">187</td>
+<td style="text-align: right;">1.87%</td>
+</tr>
+<tr>
+<td>ICAM</td>
+<td style="text-align: right;">1,160</td>
+<td style="text-align: right;">11.60%</td>
+</tr>
+<tr>
+<td>LEHD</td>
+<td style="text-align: right;">1,608</td>
+<td style="text-align: right;">16.08%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">1.50%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">314</td>
+<td style="text-align: right;">3.14%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">349</td>
+<td style="text-align: right;">3.49%</td>
+</tr>
+<tr>
+<td>OMNI</td>
+<td style="text-align: right;">2,533</td>
+<td style="text-align: right;">25.33%</td>
+</tr>
+<tr>
+<td>RELD_CVRP</td>
+<td style="text-align: right;">2,234</td>
+<td style="text-align: right;">22.34%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">168</td>
+<td style="text-align: right;">1.68%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/CVRP_without_RELD_MTL.csv">本情况CSV</a> · <a href="figures_train/CVRP_without_RELD_MTL.pdf">本图PDF</a></p>
+<h3 id="reld_moel_1">只删除 RELD_MOEL</h3>
+<p><img alt="CVRP训练集：只删除 RELD_MOEL" src="figures_train/CVRP_without_RELD_MOEL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BQ</td>
+<td style="text-align: right;">1,297</td>
+<td style="text-align: right;">12.97%</td>
+</tr>
+<tr>
+<td>ELG</td>
+<td style="text-align: right;">187</td>
+<td style="text-align: right;">1.87%</td>
+</tr>
+<tr>
+<td>ICAM</td>
+<td style="text-align: right;">1,160</td>
+<td style="text-align: right;">11.60%</td>
+</tr>
+<tr>
+<td>LEHD</td>
+<td style="text-align: right;">1,608</td>
+<td style="text-align: right;">16.08%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">1.50%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">314</td>
+<td style="text-align: right;">3.14%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">349</td>
+<td style="text-align: right;">3.49%</td>
+</tr>
+<tr>
+<td>OMNI</td>
+<td style="text-align: right;">2,533</td>
+<td style="text-align: right;">25.33%</td>
+</tr>
+<tr>
+<td>RELD_CVRP</td>
+<td style="text-align: right;">2,234</td>
+<td style="text-align: right;">22.34%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">168</td>
+<td style="text-align: right;">1.68%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/CVRP_without_RELD_MOEL.csv">本情况CSV</a> · <a href="figures_train/CVRP_without_RELD_MOEL.pdf">本图PDF</a></p>
+<h2 id="atsp">ATSP</h2>
+<h3 id="_3">原候选池</h3>
+<p><img alt="ATSP训练集：原候选池" src="figures_train/ATSP_original.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GLOP</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">0.21%</td>
+</tr>
+<tr>
+<td>ICAM_ATSP</td>
+<td style="text-align: right;">3,059</td>
+<td style="text-align: right;">30.59%</td>
+</tr>
+<tr>
+<td>MATNET</td>
+<td style="text-align: right;">1,407</td>
+<td style="text-align: right;">14.07%</td>
+</tr>
+<tr>
+<td>MATPOENET</td>
+<td style="text-align: right;">819</td>
+<td style="text-align: right;">8.19%</td>
+</tr>
+<tr>
+<td>UNICO_MatPOENet</td>
+<td style="text-align: right;">4,694</td>
+<td style="text-align: right;">46.94%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/ATSP_original.csv">本情况CSV</a> · <a href="figures_train/ATSP_original.pdf">本图PDF</a></p>
+<h3 id="reld_mtl_2">只删除 RELD_MTL</h3>
+<p><img alt="ATSP训练集：只删除 RELD_MTL" src="figures_train/ATSP_without_RELD_MTL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GLOP</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">0.21%</td>
+</tr>
+<tr>
+<td>ICAM_ATSP</td>
+<td style="text-align: right;">3,059</td>
+<td style="text-align: right;">30.59%</td>
+</tr>
+<tr>
+<td>MATNET</td>
+<td style="text-align: right;">1,407</td>
+<td style="text-align: right;">14.07%</td>
+</tr>
+<tr>
+<td>MATPOENET</td>
+<td style="text-align: right;">819</td>
+<td style="text-align: right;">8.19%</td>
+</tr>
+<tr>
+<td>UNICO_MatPOENet</td>
+<td style="text-align: right;">4,694</td>
+<td style="text-align: right;">46.94%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/ATSP_without_RELD_MTL.csv">本情况CSV</a> · <a href="figures_train/ATSP_without_RELD_MTL.pdf">本图PDF</a></p>
+<h3 id="reld_moel_2">只删除 RELD_MOEL</h3>
+<p><img alt="ATSP训练集：只删除 RELD_MOEL" src="figures_train/ATSP_without_RELD_MOEL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GLOP</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">0.21%</td>
+</tr>
+<tr>
+<td>ICAM_ATSP</td>
+<td style="text-align: right;">3,059</td>
+<td style="text-align: right;">30.59%</td>
+</tr>
+<tr>
+<td>MATNET</td>
+<td style="text-align: right;">1,407</td>
+<td style="text-align: right;">14.07%</td>
+</tr>
+<tr>
+<td>MATPOENET</td>
+<td style="text-align: right;">819</td>
+<td style="text-align: right;">8.19%</td>
+</tr>
+<tr>
+<td>UNICO_MatPOENet</td>
+<td style="text-align: right;">4,694</td>
+<td style="text-align: right;">46.94%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/ATSP_without_RELD_MOEL.csv">本情况CSV</a> · <a href="figures_train/ATSP_without_RELD_MOEL.pdf">本图PDF</a></p>
+<h2 id="ovrp">OVRP</h2>
+<h3 id="_4">原候选池</h3>
+<p><img alt="OVRP训练集：原候选池" src="figures_train/OVRP_original.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">83</td>
+<td style="text-align: right;">0.83%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">0.45%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">3,211</td>
+<td style="text-align: right;">32.11%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">3,240</td>
+<td style="text-align: right;">32.40%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">537</td>
+<td style="text-align: right;">5.37%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">745</td>
+<td style="text-align: right;">7.45%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">2,139</td>
+<td style="text-align: right;">21.39%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRP_original.csv">本情况CSV</a> · <a href="figures_train/OVRP_original.pdf">本图PDF</a></p>
+<h3 id="reld_mtl_3">只删除 RELD_MTL</h3>
+<p><img alt="OVRP训练集：只删除 RELD_MTL" src="figures_train/OVRP_without_RELD_MTL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">91</td>
+<td style="text-align: right;">0.91%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">0.57%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">3,447</td>
+<td style="text-align: right;">34.47%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">3,475</td>
+<td style="text-align: right;">34.75%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">608</td>
+<td style="text-align: right;">6.08%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">2,322</td>
+<td style="text-align: right;">23.22%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRP_without_RELD_MTL.csv">本情况CSV</a> · <a href="figures_train/OVRP_without_RELD_MTL.pdf">本图PDF</a></p>
+<h3 id="reld_moel_3">只删除 RELD_MOEL</h3>
+<p><img alt="OVRP训练集：只删除 RELD_MOEL" src="figures_train/OVRP_without_RELD_MOEL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">102</td>
+<td style="text-align: right;">1.02%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">0.51%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">3,338</td>
+<td style="text-align: right;">33.38%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">3,415</td>
+<td style="text-align: right;">34.15%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">815</td>
+<td style="text-align: right;">8.15%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">2,279</td>
+<td style="text-align: right;">22.79%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRP_without_RELD_MOEL.csv">本情况CSV</a> · <a href="figures_train/OVRP_without_RELD_MOEL.pdf">本图PDF</a></p>
+<h2 id="vrpb">VRPB</h2>
+<h3 id="_5">原候选池</h3>
+<p><img alt="VRPB训练集：原候选池" src="figures_train/VRPB_original.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">187</td>
+<td style="text-align: right;">1.87%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">571</td>
+<td style="text-align: right;">5.71%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.05%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.05%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">4,100</td>
+<td style="text-align: right;">41.00%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">5,131</td>
+<td style="text-align: right;">51.31%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.01%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPB_original.csv">本情况CSV</a> · <a href="figures_train/VRPB_original.pdf">本图PDF</a></p>
+<h3 id="reld_mtl_4">只删除 RELD_MTL</h3>
+<p><img alt="VRPB训练集：只删除 RELD_MTL" src="figures_train/VRPB_without_RELD_MTL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">504</td>
+<td style="text-align: right;">5.04%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,431</td>
+<td style="text-align: right;">14.31%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">0.21%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0.14%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">8,028</td>
+<td style="text-align: right;">80.28%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.02%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPB_without_RELD_MTL.csv">本情况CSV</a> · <a href="figures_train/VRPB_without_RELD_MTL.pdf">本图PDF</a></p>
+<h3 id="reld_moel_4">只删除 RELD_MOEL</h3>
+<p><img alt="VRPB训练集：只删除 RELD_MOEL" src="figures_train/VRPB_without_RELD_MOEL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">431</td>
+<td style="text-align: right;">4.31%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,124</td>
+<td style="text-align: right;">11.24%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.12%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.06%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">8,425</td>
+<td style="text-align: right;">84.25%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.02%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPB_without_RELD_MOEL.csv">本情况CSV</a> · <a href="figures_train/VRPB_without_RELD_MOEL.pdf">本图PDF</a></p>
+<h2 id="vrpl">VRPL</h2>
+<h3 id="_6">原候选池</h3>
+<p><img alt="VRPL训练集：原候选池" src="figures_train/VRPL_original.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">309</td>
+<td style="text-align: right;">3.09%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">244</td>
+<td style="text-align: right;">2.44%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">2,658</td>
+<td style="text-align: right;">26.58%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">2,747</td>
+<td style="text-align: right;">27.47%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">1,118</td>
+<td style="text-align: right;">11.18%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">1,459</td>
+<td style="text-align: right;">14.59%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">1,465</td>
+<td style="text-align: right;">14.65%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPL_original.csv">本情况CSV</a> · <a href="figures_train/VRPL_original.pdf">本图PDF</a></p>
+<h3 id="reld_mtl_5">只删除 RELD_MTL</h3>
+<p><img alt="VRPL训练集：只删除 RELD_MTL" src="figures_train/VRPL_without_RELD_MTL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">369</td>
+<td style="text-align: right;">3.69%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">328</td>
+<td style="text-align: right;">3.28%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">3,061</td>
+<td style="text-align: right;">30.61%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">3,181</td>
+<td style="text-align: right;">31.81%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">1,353</td>
+<td style="text-align: right;">13.53%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">1,708</td>
+<td style="text-align: right;">17.08%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPL_without_RELD_MTL.csv">本情况CSV</a> · <a href="figures_train/VRPL_without_RELD_MTL.pdf">本图PDF</a></p>
+<h3 id="reld_moel_5">只删除 RELD_MOEL</h3>
+<p><img alt="VRPL训练集：只删除 RELD_MOEL" src="figures_train/VRPL_without_RELD_MOEL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">410</td>
+<td style="text-align: right;">4.10%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">284</td>
+<td style="text-align: right;">2.84%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">2,937</td>
+<td style="text-align: right;">29.37%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">3,046</td>
+<td style="text-align: right;">30.46%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">1,655</td>
+<td style="text-align: right;">16.55%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">1,668</td>
+<td style="text-align: right;">16.68%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPL_without_RELD_MOEL.csv">本情况CSV</a> · <a href="figures_train/VRPL_without_RELD_MOEL.pdf">本图PDF</a></p>
+<h2 id="vrptw">VRPTW</h2>
+<h3 id="_7">原候选池</h3>
+<p><img alt="VRPTW训练集：原候选池" src="figures_train/VRPTW_original.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">629</td>
+<td style="text-align: right;">6.29%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">1,572</td>
+<td style="text-align: right;">15.72%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">1,681</td>
+<td style="text-align: right;">16.81%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">2,244</td>
+<td style="text-align: right;">22.44%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">2,549</td>
+<td style="text-align: right;">25.49%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">1,325</td>
+<td style="text-align: right;">13.25%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPTW_original.csv">本情况CSV</a> · <a href="figures_train/VRPTW_original.pdf">本图PDF</a></p>
+<h3 id="reld_mtl_6">只删除 RELD_MTL</h3>
+<p><img alt="VRPTW训练集：只删除 RELD_MTL" src="figures_train/VRPTW_without_RELD_MTL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,116</td>
+<td style="text-align: right;">11.16%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">1,740</td>
+<td style="text-align: right;">17.40%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">1,809</td>
+<td style="text-align: right;">18.09%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">3,917</td>
+<td style="text-align: right;">39.17%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">1,418</td>
+<td style="text-align: right;">14.18%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPTW_without_RELD_MTL.csv">本情况CSV</a> · <a href="figures_train/VRPTW_without_RELD_MTL.pdf">本图PDF</a></p>
+<h3 id="reld_moel_6">只删除 RELD_MOEL</h3>
+<p><img alt="VRPTW训练集：只删除 RELD_MOEL" src="figures_train/VRPTW_without_RELD_MOEL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,052</td>
+<td style="text-align: right;">10.52%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">1,689</td>
+<td style="text-align: right;">16.89%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">1,780</td>
+<td style="text-align: right;">17.80%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">4,110</td>
+<td style="text-align: right;">41.10%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">1,369</td>
+<td style="text-align: right;">13.69%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPTW_without_RELD_MOEL.csv">本情况CSV</a> · <a href="figures_train/VRPTW_without_RELD_MOEL.pdf">本图PDF</a></p>
+<h2 id="ovrptw">OVRPTW</h2>
+<h3 id="_8">原候选池</h3>
+<p><img alt="OVRPTW训练集：原候选池" src="figures_train/OVRPTW_original.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">750</td>
+<td style="text-align: right;">7.50%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.04%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.02%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">4,550</td>
+<td style="text-align: right;">45.50%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">4,691</td>
+<td style="text-align: right;">46.91%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.03%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPTW_original.csv">本情况CSV</a> · <a href="figures_train/OVRPTW_original.pdf">本图PDF</a></p>
+<h3 id="reld_mtl_7">只删除 RELD_MTL</h3>
+<p><img alt="OVRPTW训练集：只删除 RELD_MTL" src="figures_train/OVRPTW_without_RELD_MTL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.01%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,493</td>
+<td style="text-align: right;">14.93%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">0.34%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">0.19%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">8,440</td>
+<td style="text-align: right;">84.40%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">0.13%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPTW_without_RELD_MTL.csv">本情况CSV</a> · <a href="figures_train/OVRPTW_without_RELD_MTL.pdf">本图PDF</a></p>
+<h3 id="reld_moel_7">只删除 RELD_MOEL</h3>
+<p><img alt="OVRPTW训练集：只删除 RELD_MOEL" src="figures_train/OVRPTW_without_RELD_MOEL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,431</td>
+<td style="text-align: right;">14.31%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0.16%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.04%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">8,544</td>
+<td style="text-align: right;">85.44%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.05%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPTW_without_RELD_MOEL.csv">本情况CSV</a> · <a href="figures_train/OVRPTW_without_RELD_MOEL.pdf">本图PDF</a></p>
+<h2 id="ovrpb">OVRPB</h2>
+<h3 id="_9">原候选池</h3>
+<p><img alt="OVRPB训练集：原候选池" src="figures_train/OVRPB_original.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">164</td>
+<td style="text-align: right;">1.64%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">169</td>
+<td style="text-align: right;">1.69%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.12%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.07%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">4,252</td>
+<td style="text-align: right;">42.52%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">5,385</td>
+<td style="text-align: right;">53.85%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">0.11%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPB_original.csv">本情况CSV</a> · <a href="figures_train/OVRPB_original.pdf">本图PDF</a></p>
+<h3 id="reld_mtl_8">只删除 RELD_MTL</h3>
+<p><img alt="OVRPB训练集：只删除 RELD_MTL" src="figures_train/OVRPB_without_RELD_MTL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">502</td>
+<td style="text-align: right;">5.02%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">597</td>
+<td style="text-align: right;">5.97%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">0.56%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">0.36%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">8,776</td>
+<td style="text-align: right;">87.76%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">0.33%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPB_without_RELD_MTL.csv">本情况CSV</a> · <a href="figures_train/OVRPB_without_RELD_MTL.pdf">本图PDF</a></p>
+<h3 id="reld_moel_8">只删除 RELD_MOEL</h3>
+<p><img alt="OVRPB训练集：只删除 RELD_MOEL" src="figures_train/OVRPB_without_RELD_MOEL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">476</td>
+<td style="text-align: right;">4.76%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">379</td>
+<td style="text-align: right;">3.79%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">0.25%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0.14%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">9,092</td>
+<td style="text-align: right;">90.92%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0.14%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPB_without_RELD_MOEL.csv">本情况CSV</a> · <a href="figures_train/OVRPB_without_RELD_MOEL.pdf">本图PDF</a></p>
+<h2 id="ovrpl">OVRPL</h2>
+<h3 id="_10">原候选池</h3>
+<p><img alt="OVRPL训练集：原候选池" src="figures_train/OVRPL_original.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: right;">0.96%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">0.56%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">3,316</td>
+<td style="text-align: right;">33.16%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">3,229</td>
+<td style="text-align: right;">32.29%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">505</td>
+<td style="text-align: right;">5.05%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">742</td>
+<td style="text-align: right;">7.42%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">2,056</td>
+<td style="text-align: right;">20.56%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPL_original.csv">本情况CSV</a> · <a href="figures_train/OVRPL_original.pdf">本图PDF</a></p>
+<h3 id="reld_mtl_9">只删除 RELD_MTL</h3>
+<p><img alt="OVRPL训练集：只删除 RELD_MTL" src="figures_train/OVRPL_without_RELD_MTL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">108</td>
+<td style="text-align: right;">1.08%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">0.70%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">3,532</td>
+<td style="text-align: right;">35.32%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">3,473</td>
+<td style="text-align: right;">34.73%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">584</td>
+<td style="text-align: right;">5.84%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">2,233</td>
+<td style="text-align: right;">22.33%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPL_without_RELD_MTL.csv">本情况CSV</a> · <a href="figures_train/OVRPL_without_RELD_MTL.pdf">本图PDF</a></p>
+<h3 id="reld_moel_9">只删除 RELD_MOEL</h3>
+<p><img alt="OVRPL训练集：只删除 RELD_MOEL" src="figures_train/OVRPL_without_RELD_MOEL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">111</td>
+<td style="text-align: right;">1.11%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">0.62%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">3,455</td>
+<td style="text-align: right;">34.55%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">3,388</td>
+<td style="text-align: right;">33.88%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">804</td>
+<td style="text-align: right;">8.04%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">2,180</td>
+<td style="text-align: right;">21.80%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPL_without_RELD_MOEL.csv">本情况CSV</a> · <a href="figures_train/OVRPL_without_RELD_MOEL.pdf">本图PDF</a></p>
+<h2 id="vrpbl">VRPBL</h2>
+<h3 id="_11">原候选池</h3>
+<p><img alt="VRPBL训练集：原候选池" src="figures_train/VRPBL_original.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">206</td>
+<td style="text-align: right;">2.06%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">657</td>
+<td style="text-align: right;">6.57%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.03%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.05%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">4,116</td>
+<td style="text-align: right;">41.16%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">5,010</td>
+<td style="text-align: right;">50.10%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.03%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPBL_original.csv">本情况CSV</a> · <a href="figures_train/VRPBL_original.pdf">本图PDF</a></p>
+<h3 id="reld_mtl_10">只删除 RELD_MTL</h3>
+<p><img alt="VRPBL训练集：只删除 RELD_MTL" src="figures_train/VRPBL_without_RELD_MTL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">514</td>
+<td style="text-align: right;">5.14%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,531</td>
+<td style="text-align: right;">15.31%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">0.19%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0.16%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">7,911</td>
+<td style="text-align: right;">79.11%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.09%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPBL_without_RELD_MTL.csv">本情况CSV</a> · <a href="figures_train/VRPBL_without_RELD_MTL.pdf">本图PDF</a></p>
+<h3 id="reld_moel_10">只删除 RELD_MOEL</h3>
+<p><img alt="VRPBL训练集：只删除 RELD_MOEL" src="figures_train/VRPBL_without_RELD_MOEL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">432</td>
+<td style="text-align: right;">4.32%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,181</td>
+<td style="text-align: right;">11.81%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.05%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.07%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">8,369</td>
+<td style="text-align: right;">83.69%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.06%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPBL_without_RELD_MOEL.csv">本情况CSV</a> · <a href="figures_train/VRPBL_without_RELD_MOEL.pdf">本图PDF</a></p>
+<h2 id="vrpbtw">VRPBTW</h2>
+<h3 id="_12">原候选池</h3>
+<p><img alt="VRPBTW训练集：原候选池" src="figures_train/VRPBTW_original.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.01%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">896</td>
+<td style="text-align: right;">8.96%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">420</td>
+<td style="text-align: right;">4.20%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">835</td>
+<td style="text-align: right;">8.35%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">3,030</td>
+<td style="text-align: right;">30.30%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">3,625</td>
+<td style="text-align: right;">36.25%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">1,193</td>
+<td style="text-align: right;">11.93%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPBTW_original.csv">本情况CSV</a> · <a href="figures_train/VRPBTW_original.pdf">本图PDF</a></p>
+<h3 id="reld_mtl_11">只删除 RELD_MTL</h3>
+<p><img alt="VRPBTW训练集：只删除 RELD_MTL" src="figures_train/VRPBTW_without_RELD_MTL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.02%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,627</td>
+<td style="text-align: right;">16.27%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">511</td>
+<td style="text-align: right;">5.11%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">977</td>
+<td style="text-align: right;">9.77%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">5,555</td>
+<td style="text-align: right;">55.55%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">1,328</td>
+<td style="text-align: right;">13.28%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPBTW_without_RELD_MTL.csv">本情况CSV</a> · <a href="figures_train/VRPBTW_without_RELD_MTL.pdf">本图PDF</a></p>
+<h3 id="reld_moel_11">只删除 RELD_MOEL</h3>
+<p><img alt="VRPBTW训练集：只删除 RELD_MOEL" src="figures_train/VRPBTW_without_RELD_MOEL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.01%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,507</td>
+<td style="text-align: right;">15.07%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">474</td>
+<td style="text-align: right;">4.74%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">893</td>
+<td style="text-align: right;">8.93%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">5,868</td>
+<td style="text-align: right;">58.68%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">1,257</td>
+<td style="text-align: right;">12.57%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPBTW_without_RELD_MOEL.csv">本情况CSV</a> · <a href="figures_train/VRPBTW_without_RELD_MOEL.pdf">本图PDF</a></p>
+<h2 id="vrpltw">VRPLTW</h2>
+<h3 id="_13">原候选池</h3>
+<p><img alt="VRPLTW训练集：原候选池" src="figures_train/VRPLTW_original.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.01%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">692</td>
+<td style="text-align: right;">6.92%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">1,609</td>
+<td style="text-align: right;">16.09%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">1,333</td>
+<td style="text-align: right;">13.33%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">2,279</td>
+<td style="text-align: right;">22.79%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">2,582</td>
+<td style="text-align: right;">25.82%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">1,504</td>
+<td style="text-align: right;">15.04%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPLTW_original.csv">本情况CSV</a> · <a href="figures_train/VRPLTW_original.pdf">本图PDF</a></p>
+<h3 id="reld_mtl_12">只删除 RELD_MTL</h3>
+<p><img alt="VRPLTW训练集：只删除 RELD_MTL" src="figures_train/VRPLTW_without_RELD_MTL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.01%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,211</td>
+<td style="text-align: right;">12.11%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">1,780</td>
+<td style="text-align: right;">17.80%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">1,433</td>
+<td style="text-align: right;">14.33%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">3,976</td>
+<td style="text-align: right;">39.76%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">1,599</td>
+<td style="text-align: right;">15.99%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPLTW_without_RELD_MTL.csv">本情况CSV</a> · <a href="figures_train/VRPLTW_without_RELD_MTL.pdf">本图PDF</a></p>
+<h3 id="reld_moel_12">只删除 RELD_MOEL</h3>
+<p><img alt="VRPLTW训练集：只删除 RELD_MOEL" src="figures_train/VRPLTW_without_RELD_MOEL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.01%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,136</td>
+<td style="text-align: right;">11.36%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">1,719</td>
+<td style="text-align: right;">17.19%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">1,394</td>
+<td style="text-align: right;">13.94%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">4,179</td>
+<td style="text-align: right;">41.79%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">1,571</td>
+<td style="text-align: right;">15.71%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPLTW_without_RELD_MOEL.csv">本情况CSV</a> · <a href="figures_train/VRPLTW_without_RELD_MOEL.pdf">本图PDF</a></p>
+<h2 id="ovrpbl">OVRPBL</h2>
+<h3 id="_14">原候选池</h3>
+<p><img alt="OVRPBL训练集：原候选池" src="figures_train/OVRPBL_original.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">205</td>
+<td style="text-align: right;">2.05%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">171</td>
+<td style="text-align: right;">1.71%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.09%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.12%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">4,179</td>
+<td style="text-align: right;">41.79%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">5,415</td>
+<td style="text-align: right;">54.15%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.09%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPBL_original.csv">本情况CSV</a> · <a href="figures_train/OVRPBL_original.pdf">本图PDF</a></p>
+<h3 id="reld_mtl_13">只删除 RELD_MTL</h3>
+<p><img alt="OVRPBL训练集：只删除 RELD_MTL" src="figures_train/OVRPBL_without_RELD_MTL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">520</td>
+<td style="text-align: right;">5.20%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">588</td>
+<td style="text-align: right;">5.88%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">68</td>
+<td style="text-align: right;">0.68%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">0.48%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">8,752</td>
+<td style="text-align: right;">87.52%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">0.24%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPBL_without_RELD_MTL.csv">本情况CSV</a> · <a href="figures_train/OVRPBL_without_RELD_MTL.pdf">本图PDF</a></p>
+<h3 id="reld_moel_13">只删除 RELD_MOEL</h3>
+<p><img alt="OVRPBL训练集：只删除 RELD_MOEL" src="figures_train/OVRPBL_without_RELD_MOEL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">520</td>
+<td style="text-align: right;">5.20%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">395</td>
+<td style="text-align: right;">3.95%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">0.17%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0.23%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">9,033</td>
+<td style="text-align: right;">90.33%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.12%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPBL_without_RELD_MOEL.csv">本情况CSV</a> · <a href="figures_train/OVRPBL_without_RELD_MOEL.pdf">本图PDF</a></p>
+<h2 id="ovrpbtw">OVRPBTW</h2>
+<h3 id="_15">原候选池</h3>
+<p><img alt="OVRPBTW训练集：原候选池" src="figures_train/OVRPBTW_original.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">882</td>
+<td style="text-align: right;">8.82%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.03%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.05%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">4,361</td>
+<td style="text-align: right;">43.61%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">4,736</td>
+<td style="text-align: right;">47.36%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">0.13%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPBTW_original.csv">本情况CSV</a> · <a href="figures_train/OVRPBTW_original.pdf">本图PDF</a></p>
+<h3 id="reld_mtl_14">只删除 RELD_MTL</h3>
+<p><img alt="OVRPBTW训练集：只删除 RELD_MTL" src="figures_train/OVRPBTW_without_RELD_MTL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.01%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,714</td>
+<td style="text-align: right;">17.14%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.12%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.12%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">8,232</td>
+<td style="text-align: right;">82.32%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">0.29%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPBTW_without_RELD_MTL.csv">本情况CSV</a> · <a href="figures_train/OVRPBTW_without_RELD_MTL.pdf">本图PDF</a></p>
+<h3 id="reld_moel_14">只删除 RELD_MOEL</h3>
+<p><img alt="OVRPBTW训练集：只删除 RELD_MOEL" src="figures_train/OVRPBTW_without_RELD_MOEL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,610</td>
+<td style="text-align: right;">16.10%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.05%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.07%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">8,352</td>
+<td style="text-align: right;">83.52%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">0.26%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPBTW_without_RELD_MOEL.csv">本情况CSV</a> · <a href="figures_train/OVRPBTW_without_RELD_MOEL.pdf">本图PDF</a></p>
+<h2 id="ovrpltw">OVRPLTW</h2>
+<h3 id="_16">原候选池</h3>
+<p><img alt="OVRPLTW训练集：原候选池" src="figures_train/OVRPLTW_original.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">766</td>
+<td style="text-align: right;">7.66%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.12%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">4,458</td>
+<td style="text-align: right;">44.58%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">4,764</td>
+<td style="text-align: right;">47.64%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPLTW_original.csv">本情况CSV</a> · <a href="figures_train/OVRPLTW_original.pdf">本图PDF</a></p>
+<h3 id="reld_mtl_15">只删除 RELD_MTL</h3>
+<p><img alt="OVRPLTW训练集：只删除 RELD_MTL" src="figures_train/OVRPLTW_without_RELD_MTL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,528</td>
+<td style="text-align: right;">15.28%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">0.55%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.10%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">8,385</td>
+<td style="text-align: right;">83.85%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">0.22%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPLTW_without_RELD_MTL.csv">本情况CSV</a> · <a href="figures_train/OVRPLTW_without_RELD_MTL.pdf">本图PDF</a></p>
+<h3 id="reld_moel_15">只删除 RELD_MOEL</h3>
+<p><img alt="OVRPLTW训练集：只删除 RELD_MOEL" src="figures_train/OVRPLTW_without_RELD_MOEL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,444</td>
+<td style="text-align: right;">14.44%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">0.27%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.03%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">8,517</td>
+<td style="text-align: right;">85.17%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.09%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPLTW_without_RELD_MOEL.csv">本情况CSV</a> · <a href="figures_train/OVRPLTW_without_RELD_MOEL.pdf">本图PDF</a></p>
+<h2 id="vrpbltw">VRPBLTW</h2>
+<h3 id="_17">原候选池</h3>
+<p><img alt="VRPBLTW训练集：原候选池" src="figures_train/VRPBLTW_original.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.03%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">902</td>
+<td style="text-align: right;">9.02%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">473</td>
+<td style="text-align: right;">4.73%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">625</td>
+<td style="text-align: right;">6.25%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">3,020</td>
+<td style="text-align: right;">30.20%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">3,574</td>
+<td style="text-align: right;">35.74%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">1,403</td>
+<td style="text-align: right;">14.03%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPBLTW_original.csv">本情况CSV</a> · <a href="figures_train/VRPBLTW_original.pdf">本图PDF</a></p>
+<h3 id="reld_mtl_16">只删除 RELD_MTL</h3>
+<p><img alt="VRPBLTW训练集：只删除 RELD_MTL" src="figures_train/VRPBLTW_without_RELD_MTL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.08%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,659</td>
+<td style="text-align: right;">16.59%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">572</td>
+<td style="text-align: right;">5.72%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">715</td>
+<td style="text-align: right;">7.15%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">5,477</td>
+<td style="text-align: right;">54.77%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">1,569</td>
+<td style="text-align: right;">15.69%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPBLTW_without_RELD_MTL.csv">本情况CSV</a> · <a href="figures_train/VRPBLTW_without_RELD_MTL.pdf">本图PDF</a></p>
+<h3 id="reld_moel_16">只删除 RELD_MOEL</h3>
+<p><img alt="VRPBLTW训练集：只删除 RELD_MOEL" src="figures_train/VRPBLTW_without_RELD_MOEL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.05%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,504</td>
+<td style="text-align: right;">15.04%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">535</td>
+<td style="text-align: right;">5.35%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">686</td>
+<td style="text-align: right;">6.86%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">5,777</td>
+<td style="text-align: right;">57.77%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">1,493</td>
+<td style="text-align: right;">14.93%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/VRPBLTW_without_RELD_MOEL.csv">本情况CSV</a> · <a href="figures_train/VRPBLTW_without_RELD_MOEL.pdf">本图PDF</a></p>
+<h2 id="ovrpbltw">OVRPBLTW</h2>
+<h3 id="_18">原候选池</h3>
+<p><img alt="OVRPBLTW训练集：原候选池" src="figures_train/OVRPBLTW_original.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">838</td>
+<td style="text-align: right;">8.38%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.04%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.03%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">4,301</td>
+<td style="text-align: right;">43.01%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">4,848</td>
+<td style="text-align: right;">48.48%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.06%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPBLTW_original.csv">本情况CSV</a> · <a href="figures_train/OVRPBLTW_original.pdf">本图PDF</a></p>
+<h3 id="reld_mtl_17">只删除 RELD_MTL</h3>
+<p><img alt="OVRPBLTW训练集：只删除 RELD_MTL" src="figures_train/OVRPBLTW_without_RELD_MTL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,616</td>
+<td style="text-align: right;">16.16%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.12%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.09%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">8,344</td>
+<td style="text-align: right;">83.44%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">0.19%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPBLTW_without_RELD_MTL.csv">本情况CSV</a> · <a href="figures_train/OVRPBLTW_without_RELD_MTL.pdf">本图PDF</a></p>
+<h3 id="reld_moel_17">只删除 RELD_MOEL</h3>
+<p><img alt="OVRPBLTW训练集：只删除 RELD_MOEL" src="figures_train/OVRPBLTW_without_RELD_MOEL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">获胜数量</th>
+<th style="text-align: right;">占训练实例比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">1,552</td>
+<td style="text-align: right;">15.52%</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.07%</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.06%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">8,412</td>
+<td style="text-align: right;">84.12%</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0.23%</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables_train/OVRPBLTW_without_RELD_MOEL.csv">本情况CSV</a> · <a href="figures_train/OVRPBLTW_without_RELD_MOEL.pdf">本图PDF</a></p>
+<p>备注：带B任务仍使用原成本场景，本次不修复其已知语义问题；没有训练模型或复跑solver。</p></main></body></html>

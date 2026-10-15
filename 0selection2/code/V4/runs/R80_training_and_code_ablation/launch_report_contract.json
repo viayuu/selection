@@ -1,0 +1,13 @@
+{
+  "experiment": "R80",
+  "reporter": "/public/home/shiys/0selection2/code/V4/r80_reporting.py",
+  "reporter_sha256": "ba3681260b436bc64e5a96a7310d414f726a5d870bc0bed3ed7c262e7b61e0d8",
+  "basis": "Reporter author completed actual factory/lock/epoch alignment and synthetic PDF/failure-preservation checks; main thread authorized this final reporting contract",
+  "command": ["python", "-B", "-u", "-m", "code.V4.r80_reporting", "--root", "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation", "--arm", "ARM", "--device", "cuda:0"],
+  "runner_train_includes_unique_val_best_lock_and_full_test": true,
+  "subsequent_test_command_reuses_existing_result": true,
+  "reporter_trigger": "Only after successful train and idempotent TEST verification",
+  "reporter_training_restart": false,
+  "reporter_failure_policy": "Preserve completed training/TEST, record nonzero exit, do not retry automatically",
+  "reporter_hash_note": "A/B launched before final reporter changes; their original source hash receipts are preserved. No training or model change is implied."
+}

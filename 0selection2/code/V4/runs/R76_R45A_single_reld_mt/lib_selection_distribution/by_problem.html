@@ -1,0 +1,176 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>方法Top1分布</title><style>
+body{font:16px/1.7 "Noto Sans CJK SC","Microsoft YaHei",sans-serif;
+margin:0;color:#202528;background:#fafafa}
+main{max-width:1200px;margin:auto;padding:28px 20px 60px}
+h1{font-size:28px}h2{font-size:21px;margin-top:32px}h3{font-size:18px}
+table{border-collapse:collapse;display:block;overflow-x:auto;background:white;font-size:14px}
+th,td{border:1px solid #d8dddf;padding:8px 12px;white-space:nowrap}
+th{background:#edf1f2}a{color:#13676d}
+img{display:block;max-width:100%;height:auto;margin:18px 0}
+</style></head><body><main><h1 id="r76-lib-winner-train">R76 LIB 选择/真实 winner 与 TRAIN 模型选择分布</h1>
+<p>复用 TEST 分布报告的中文横向条形图、独立分母、表格、逐问题 PNG/PDF/CSV、HTML 和整包样式；不覆盖 TEST 报告。</p>
+<p>同一锁定 epoch 18，checkpoint SHA256 <code>5ba5777e437235e22682c4d54cfd8cdefca6fb53c27204a8e1e3f753ea9043c9</code>。无新推理或训练，候选按名称对齐并验证 global solver ID。</p>
+<p>每图三栏：LIB 模型选法、LIB native 标签真实 winner、TRAIN 模型选法。TRAIN 标签频数另有明确字段，不替代模型选择；仅比较 TSP/CVRP 各自对应问题，不混合18题。</p>
+<p><a href="selection_distributions.pdf">PDF</a> · <a href="selection_distribution.csv">长表CSV</a> · <a href="comparison.csv">名称对齐宽表</a> · <a href="selection_distribution_bundle.zip">完整图表包</a></p>
+<h2 id="tsplib">TSPLIB</h2>
+<p>LIB Top1 28.57%；LIB 与 TRAIN 选法总变差距离 12.84%。</p>
+<p><img alt="TSPLIB分布" src="figures/TSPLIB.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">LIB 选择数/比例</th>
+<th style="text-align: right;">LIB winner数/比例</th>
+<th style="text-align: right;">TRAIN 模型选择数/比例</th>
+<th style="text-align: right;">LIB−TRAIN 选择 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BQ</td>
+<td style="text-align: right;">23 / 46.94%</td>
+<td style="text-align: right;">22 / 44.90%</td>
+<td style="text-align: right;">23,911 / 34.10%</td>
+<td style="text-align: right;">+12.84</td>
+</tr>
+<tr>
+<td>DIFUSCO</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">3 / 6.12%</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">+0.00</td>
+</tr>
+<tr>
+<td>DIFUSCO500</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">3 / 6.12%</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">+0.00</td>
+</tr>
+<tr>
+<td>ELG</td>
+<td style="text-align: right;">1 / 2.04%</td>
+<td style="text-align: right;">7 / 14.29%</td>
+<td style="text-align: right;">6,685 / 9.53%</td>
+<td style="text-align: right;">-7.49</td>
+</tr>
+<tr>
+<td>LEHD</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">4 / 8.16%</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">+0.00</td>
+</tr>
+<tr>
+<td>OMNI</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">+0.00</td>
+</tr>
+<tr>
+<td>T2T</td>
+<td style="text-align: right;">25 / 51.02%</td>
+<td style="text-align: right;">5 / 10.20%</td>
+<td style="text-align: right;">39,518 / 56.36%</td>
+<td style="text-align: right;">-5.34</td>
+</tr>
+<tr>
+<td>T2T500</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">5 / 10.20%</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">+0.00</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/TSPLIB.csv">该问题CSV</a> · <a href="figures/TSPLIB.pdf">本图PDF</a></p>
+<h2 id="cvrplib">CVRPLIB</h2>
+<p>LIB Top1 33.00%；LIB 与 TRAIN 选法总变差距离 18.71%。</p>
+<p><img alt="CVRPLIB分布" src="figures/CVRPLIB.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">LIB 选择数/比例</th>
+<th style="text-align: right;">LIB winner数/比例</th>
+<th style="text-align: right;">TRAIN 模型选择数/比例</th>
+<th style="text-align: right;">LIB−TRAIN 选择 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BQ</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">3 / 3.00%</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">+0.00</td>
+</tr>
+<tr>
+<td>ELG</td>
+<td style="text-align: right;">2 / 2.00%</td>
+<td style="text-align: right;">3 / 3.00%</td>
+<td style="text-align: right;">5,182 / 7.39%</td>
+<td style="text-align: right;">-5.39</td>
+</tr>
+<tr>
+<td>ICAM</td>
+<td style="text-align: right;">52 / 52.00%</td>
+<td style="text-align: right;">38 / 38.00%</td>
+<td style="text-align: right;">23,976 / 34.20%</td>
+<td style="text-align: right;">+17.80</td>
+</tr>
+<tr>
+<td>LEHD</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">2 / 2.00%</td>
+<td style="text-align: right;">3 / 0.00%</td>
+<td style="text-align: right;">-0.00</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">1 / 1.00%</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">+0.00</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">1 / 1.00%</td>
+<td style="text-align: right;">2 / 2.00%</td>
+<td style="text-align: right;">2,295 / 3.27%</td>
+<td style="text-align: right;">-2.27</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">2 / 2.00%</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">764 / 1.09%</td>
+<td style="text-align: right;">+0.91</td>
+</tr>
+<tr>
+<td>OMNI</td>
+<td style="text-align: right;">43 / 43.00%</td>
+<td style="text-align: right;">5 / 5.00%</td>
+<td style="text-align: right;">34,649 / 49.42%</td>
+<td style="text-align: right;">-6.42</td>
+</tr>
+<tr>
+<td>RELD_CVRP</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">45 / 45.00%</td>
+<td style="text-align: right;">3,245 / 4.63%</td>
+<td style="text-align: right;">-4.63</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">1 / 1.00%</td>
+<td style="text-align: right;">0 / 0.00%</td>
+<td style="text-align: right;">+0.00</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/CVRPLIB.csv">该问题CSV</a> · <a href="figures/CVRPLIB.pdf">本图PDF</a></p></main></body></html>

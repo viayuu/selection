@@ -1,0 +1,126 @@
+{
+  "experiment": "R80",
+  "launch_state": "all_four_real_training_startup_verified",
+  "startup_verified_utc": "2026-10-15T12:33:10.993383+00:00",
+  "startup_evidence": "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation/launch_startup_check.json",
+  "actual_transports": {
+    "A_ce_only": "original GPU srun step 1465.162; unchanged",
+    "B_batch512": "original GPU srun step 1475.29; unchanged",
+    "C_lr3e4": "CPU-only srun step 1465.165 -> existing allocation container 1465_gpu03",
+    "D_code_embedding": "CPU-only srun step 1475.31 -> existing allocation container 1475_gpu05"
+  },
+  "resource_correction_record": "launch_resource_correction.json",
+  "final_reporter_contract": "launch_report_contract.json",
+  "created_utc": "2026-10-15T12:18:49.386093+00:00",
+  "root": "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation",
+  "data_root": "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+  "cache_root": "/tmp/shiys_R76_R45A_single_reld_mt_cache",
+  "source_cache": "/public/home/shiys/0selection2/code/V4/runs/R76_R45A_single_reld_mt/cache",
+  "seed": 2,
+  "initialization": "scratch",
+  "problems": 18,
+  "groups": {
+    "A_ce_only": {
+      "job": 1465,
+      "node": "gpu03",
+      "index": 0,
+      "gpu_type": "3090",
+      "cap": 384,
+      "uuid": "GPU-cb24f168-9f18-f0d5-6f4a-6d2406958f50",
+      "batch": 1024,
+      "updates": 49680
+    },
+    "B_batch512": {
+      "job": 1475,
+      "node": "gpu05",
+      "index": 0,
+      "gpu_type": "4090",
+      "cap": 352,
+      "uuid": "GPU-71479e7e-f8bd-e430-66ed-f8db9f0d47be",
+      "batch": 512,
+      "updates": 99360
+    },
+    "C_lr3e4": {
+      "job": 1465,
+      "node": "gpu03",
+      "index": 1,
+      "gpu_type": "3090",
+      "cap": 384,
+      "uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+      "batch": 1024,
+      "updates": 49680
+    },
+    "D_code_embedding": {
+      "job": 1475,
+      "node": "gpu05",
+      "index": 1,
+      "gpu_type": "4090",
+      "cap": 352,
+      "uuid": "GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d",
+      "batch": 1024,
+      "updates": 49680
+    }
+  },
+  "cpu_per_process": 4,
+  "memory_per_process": "9G",
+  "torch_threads": 2,
+  "node_total_cpu": 8,
+  "node_total_memory": "18G",
+  "node_physical_gpu_count": 2,
+  "resource_policy": "existing jobs only; overlapping steps inherit allocated GPUs; one UUID per process",
+  "training_rule": "fixed successful-update budgets; unchanged effective batch; no resume/retry",
+  "pipeline": [
+    "train",
+    "test",
+    "LIB_and_PDF_report"
+  ],
+  "pipeline_rule": "next stage only after exit 0; errors persist; no automatic restart",
+  "selection": "one VAL-selected checkpoint locked before TEST/LIB; no TEST/LIB tuning",
+  "wandb": {
+    "enabled": true,
+    "project": "selector",
+    "entity": "yjkds-southern-university-of-science-technology",
+    "policy": "prefer online with existing credentials, including netrc; explicit offline fallback"
+  },
+  "startup_check": "one bounded check only: A/C/D >=18 successful updates; B >=36; all18 tasks",
+  "continuous_monitor": false,
+  "external_notifications": false,
+  "git_commit": false,
+  "source_sha256": {
+    "/public/home/shiys/0selection2/code/V4/run_v4_r80.sh": "615e4cb9d3ed52d4f7c199c0a0e20242fadbd5bb1a03f0d1486db1298f07dda9",
+    "/public/home/shiys/0selection2/code/V4/r80_launch.py": "89902c54619f6319d578a1e0d2ff765872b64eb89082f2943f5bfde5151cae19",
+    "/public/home/shiys/0selection2/code/V4/r80_experiment.py": "df11f0a18b9d0649743f5a736a0756c839d7ebf7fcdd8b5c5d04d93996a0f5cb",
+    "/public/home/shiys/0selection2/code/V4/r80_reporting.py": "e2aa4528892d620fc6b2f01c462399519deb65cbf5c55e04e90a96c73d6f2eb0"
+  },
+  "submitted_utc": "2026-10-15T12:18:49.386420+00:00",
+  "sessions": {
+    "A_ce_only": {
+      "session": "r80_A_ce_only",
+      "submission_exit_status": 0,
+      "command": "bash /public/home/shiys/0selection2/code/V4/run_v4_r80.sh allocated A_ce_only",
+      "submitted_utc": "2026-10-15T12:18:49.390350+00:00"
+    },
+    "B_batch512": {
+      "session": "r80_B_batch512",
+      "submission_exit_status": 0,
+      "command": "bash /public/home/shiys/0selection2/code/V4/run_v4_r80.sh allocated B_batch512",
+      "submitted_utc": "2026-10-15T12:18:49.396781+00:00"
+    },
+    "C_lr3e4": {
+      "session": "r80_C_lr3e4",
+      "effective_command": "bash /public/home/shiys/0selection2/code/V4/run_v4_r80.sh allocated-container C_lr3e4",
+      "original_command_note": "Original waiting GPU-GRES step never started a runner; cancellation and failed container-cache preflight receipts preserved separately",
+      "submission_exit_status": 0,
+      "command": "bash /public/home/shiys/0selection2/code/V4/run_v4_r80.sh allocated C_lr3e4",
+      "submitted_utc": "2026-10-15T12:18:49.403160+00:00"
+    },
+    "D_code_embedding": {
+      "session": "r80_D_code_embedding",
+      "effective_command": "bash /public/home/shiys/0selection2/code/V4/run_v4_r80.sh allocated-container D_code_embedding",
+      "original_command_note": "Original waiting GPU-GRES step never started a runner; cancellation and failed container-cache preflight receipts preserved separately",
+      "submission_exit_status": 0,
+      "command": "bash /public/home/shiys/0selection2/code/V4/run_v4_r80.sh allocated D_code_embedding",
+      "submitted_utc": "2026-10-15T12:18:49.410174+00:00"
+    }
+  }
+}

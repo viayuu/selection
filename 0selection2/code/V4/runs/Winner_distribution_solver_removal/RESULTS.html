@@ -1,0 +1,428 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>方法Top1分布</title><style>
+body{font:16px/1.7 "Noto Sans CJK SC","Microsoft YaHei",sans-serif;
+margin:0;color:#202528;background:#fafafa}
+main{max-width:1200px;margin:auto;padding:28px 20px 60px}
+h1{font-size:28px}h2{font-size:21px;margin-top:32px}h3{font-size:18px}
+table{border-collapse:collapse;display:block;overflow-x:auto;background:white;font-size:14px}
+th,td{border:1px solid #d8dddf;padding:8px 12px;white-space:nowrap}
+th{background:#edf1f2}a{color:#13676d}
+</style></head><body><main><h1>各方法Top1分布与删除单一方法后的变化</h1>
+<p>Top1分布指方法成为真实winner的次数，不是选择模型的预测准确率。每个问题train为10,000例、test为1,000例；不使用validation。</p>
+<p>原候选池使用原标签的native winner。每次只删除一个指定方法；原winner未被删除的实例保持不变，被删除的winner按剩余FP64成本重新分配，完全并列按原成本列顺序确定。</p>
+<h2>15类MVRP汇总</h2>
+<p>训练共150,000例，测试共15,000例。单元格为“数量（比例）”。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">原训练</th>
+<th style="text-align: right;">原测试</th>
+<th style="text-align: right;">删除MTL训练</th>
+<th style="text-align: right;">删除MTL测试</th>
+<th style="text-align: right;">删除MOEL训练</th>
+<th style="text-align: right;">删除MOEL测试</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">1,255 (0.84%)</td>
+<td style="text-align: right;">116 (0.77%)</td>
+<td style="text-align: right;">2,621 (1.75%)</td>
+<td style="text-align: right;">245 (1.63%)</td>
+<td style="text-align: right;">2,489 (1.66%)</td>
+<td style="text-align: right;">254 (1.69%)</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">8,268 (5.51%)</td>
+<td style="text-align: right;">843 (5.62%)</td>
+<td style="text-align: right;">16,566 (11.04%)</td>
+<td style="text-align: right;">1,664 (11.09%)</td>
+<td style="text-align: right;">14,712 (9.81%)</td>
+<td style="text-align: right;">1,465 (9.77%)</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">13,311 (8.87%)</td>
+<td style="text-align: right;">1,306 (8.71%)</td>
+<td style="text-align: right;">14,920 (9.95%)</td>
+<td style="text-align: right;">1,459 (9.73%)</td>
+<td style="text-align: right;">14,261 (9.51%)</td>
+<td style="text-align: right;">1,412 (9.41%)</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">13,729 (9.15%)</td>
+<td style="text-align: right;">1,372 (9.15%)</td>
+<td style="text-align: right;">15,227 (10.15%)</td>
+<td style="text-align: right;">1,516 (10.11%)</td>
+<td style="text-align: right;">14,672 (9.78%)</td>
+<td style="text-align: right;">1,490 (9.93%)</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">47,050 (31.37%)</td>
+<td style="text-align: right;">4,725 (31.50%)</td>
+<td style="text-align: right;">88,338 (58.89%)</td>
+<td style="text-align: right;">8,918 (59.45%)</td>
+<td style="text-align: right;">已删除</td>
+<td style="text-align: right;">已删除</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">55,256 (36.84%)</td>
+<td style="text-align: right;">5,553 (37.02%)</td>
+<td style="text-align: right;">已删除</td>
+<td style="text-align: right;">已删除</td>
+<td style="text-align: right;">91,952 (61.30%)</td>
+<td style="text-align: right;">9,219 (61.46%)</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">11,131 (7.42%)</td>
+<td style="text-align: right;">1,085 (7.23%)</td>
+<td style="text-align: right;">12,328 (8.22%)</td>
+<td style="text-align: right;">1,198 (7.99%)</td>
+<td style="text-align: right;">11,914 (7.94%)</td>
+<td style="text-align: right;">1,160 (7.73%)</td>
+</tr>
+</tbody>
+</table>
+<h2>被删除方法的winner流向</h2>
+<table>
+<thead>
+<tr>
+<th>删除的方法</th>
+<th>新winner</th>
+<th style="text-align: right;">训练转移数</th>
+<th style="text-align: right;">占该方法原训练winner</th>
+<th style="text-align: right;">测试转移数</th>
+<th style="text-align: right;">占该方法原测试winner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RELD_MTL</td>
+<td>MTPOMO</td>
+<td style="text-align: right;">1,366</td>
+<td style="text-align: right;">2.47%</td>
+<td style="text-align: right;">129</td>
+<td style="text-align: right;">2.32%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td>MVMOE</td>
+<td style="text-align: right;">8,298</td>
+<td style="text-align: right;">15.02%</td>
+<td style="text-align: right;">821</td>
+<td style="text-align: right;">14.78%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">1,609</td>
+<td style="text-align: right;">2.91%</td>
+<td style="text-align: right;">153</td>
+<td style="text-align: right;">2.76%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td>MoSES_RF</td>
+<td style="text-align: right;">1,498</td>
+<td style="text-align: right;">2.71%</td>
+<td style="text-align: right;">144</td>
+<td style="text-align: right;">2.59%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">41,288</td>
+<td style="text-align: right;">74.72%</td>
+<td style="text-align: right;">4,193</td>
+<td style="text-align: right;">75.51%</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td>RouteFinder</td>
+<td style="text-align: right;">1,197</td>
+<td style="text-align: right;">2.17%</td>
+<td style="text-align: right;">113</td>
+<td style="text-align: right;">2.03%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td>MTPOMO</td>
+<td style="text-align: right;">1,234</td>
+<td style="text-align: right;">2.62%</td>
+<td style="text-align: right;">138</td>
+<td style="text-align: right;">2.92%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td>MVMOE</td>
+<td style="text-align: right;">6,444</td>
+<td style="text-align: right;">13.70%</td>
+<td style="text-align: right;">622</td>
+<td style="text-align: right;">13.16%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">950</td>
+<td style="text-align: right;">2.02%</td>
+<td style="text-align: right;">106</td>
+<td style="text-align: right;">2.24%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td>MoSES_RF</td>
+<td style="text-align: right;">943</td>
+<td style="text-align: right;">2.00%</td>
+<td style="text-align: right;">118</td>
+<td style="text-align: right;">2.50%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td>RELD_MTL</td>
+<td style="text-align: right;">36,696</td>
+<td style="text-align: right;">77.99%</td>
+<td style="text-align: right;">3,666</td>
+<td style="text-align: right;">77.59%</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td>RouteFinder</td>
+<td style="text-align: right;">783</td>
+<td style="text-align: right;">1.66%</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">1.59%</td>
+</tr>
+</tbody>
+</table>
+<h2>全18任务汇总</h2>
+<p>训练共180,000例，测试共18,000例。方法适用的候选池不同，这里是全部标签中的份额，不是各方法在其可用任务上的胜率。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">原训练</th>
+<th style="text-align: right;">原测试</th>
+<th style="text-align: right;">删除MTL训练</th>
+<th style="text-align: right;">删除MTL测试</th>
+<th style="text-align: right;">删除MOEL训练</th>
+<th style="text-align: right;">删除MOEL测试</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BQ</td>
+<td style="text-align: right;">4,374 (2.43%)</td>
+<td style="text-align: right;">402 (2.23%)</td>
+<td style="text-align: right;">4,374 (2.43%)</td>
+<td style="text-align: right;">402 (2.23%)</td>
+<td style="text-align: right;">4,374 (2.43%)</td>
+<td style="text-align: right;">402 (2.23%)</td>
+</tr>
+<tr>
+<td>DIFUSCO</td>
+<td style="text-align: right;">521 (0.29%)</td>
+<td style="text-align: right;">52 (0.29%)</td>
+<td style="text-align: right;">521 (0.29%)</td>
+<td style="text-align: right;">52 (0.29%)</td>
+<td style="text-align: right;">521 (0.29%)</td>
+<td style="text-align: right;">52 (0.29%)</td>
+</tr>
+<tr>
+<td>DIFUSCO500</td>
+<td style="text-align: right;">1,283 (0.71%)</td>
+<td style="text-align: right;">132 (0.73%)</td>
+<td style="text-align: right;">1,283 (0.71%)</td>
+<td style="text-align: right;">132 (0.73%)</td>
+<td style="text-align: right;">1,283 (0.71%)</td>
+<td style="text-align: right;">132 (0.73%)</td>
+</tr>
+<tr>
+<td>ELG</td>
+<td style="text-align: right;">911 (0.51%)</td>
+<td style="text-align: right;">93 (0.52%)</td>
+<td style="text-align: right;">911 (0.51%)</td>
+<td style="text-align: right;">93 (0.52%)</td>
+<td style="text-align: right;">911 (0.51%)</td>
+<td style="text-align: right;">93 (0.52%)</td>
+</tr>
+<tr>
+<td>GLOP</td>
+<td style="text-align: right;">21 (0.01%)</td>
+<td style="text-align: right;">5 (0.03%)</td>
+<td style="text-align: right;">21 (0.01%)</td>
+<td style="text-align: right;">5 (0.03%)</td>
+<td style="text-align: right;">21 (0.01%)</td>
+<td style="text-align: right;">5 (0.03%)</td>
+</tr>
+<tr>
+<td>ICAM</td>
+<td style="text-align: right;">1,160 (0.64%)</td>
+<td style="text-align: right;">113 (0.63%)</td>
+<td style="text-align: right;">1,160 (0.64%)</td>
+<td style="text-align: right;">113 (0.63%)</td>
+<td style="text-align: right;">1,160 (0.64%)</td>
+<td style="text-align: right;">113 (0.63%)</td>
+</tr>
+<tr>
+<td>ICAM_ATSP</td>
+<td style="text-align: right;">3,059 (1.70%)</td>
+<td style="text-align: right;">301 (1.67%)</td>
+<td style="text-align: right;">3,059 (1.70%)</td>
+<td style="text-align: right;">301 (1.67%)</td>
+<td style="text-align: right;">3,059 (1.70%)</td>
+<td style="text-align: right;">301 (1.67%)</td>
+</tr>
+<tr>
+<td>LEHD</td>
+<td style="text-align: right;">3,231 (1.79%)</td>
+<td style="text-align: right;">332 (1.84%)</td>
+<td style="text-align: right;">3,231 (1.79%)</td>
+<td style="text-align: right;">332 (1.84%)</td>
+<td style="text-align: right;">3,231 (1.79%)</td>
+<td style="text-align: right;">332 (1.84%)</td>
+</tr>
+<tr>
+<td>MATNET</td>
+<td style="text-align: right;">1,407 (0.78%)</td>
+<td style="text-align: right;">148 (0.82%)</td>
+<td style="text-align: right;">1,407 (0.78%)</td>
+<td style="text-align: right;">148 (0.82%)</td>
+<td style="text-align: right;">1,407 (0.78%)</td>
+<td style="text-align: right;">148 (0.82%)</td>
+</tr>
+<tr>
+<td>MATPOENET</td>
+<td style="text-align: right;">819 (0.46%)</td>
+<td style="text-align: right;">88 (0.49%)</td>
+<td style="text-align: right;">819 (0.46%)</td>
+<td style="text-align: right;">88 (0.49%)</td>
+<td style="text-align: right;">819 (0.46%)</td>
+<td style="text-align: right;">88 (0.49%)</td>
+</tr>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">1,255 (0.70%)</td>
+<td style="text-align: right;">116 (0.64%)</td>
+<td style="text-align: right;">2,621 (1.46%)</td>
+<td style="text-align: right;">245 (1.36%)</td>
+<td style="text-align: right;">2,489 (1.38%)</td>
+<td style="text-align: right;">254 (1.41%)</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">8,418 (4.68%)</td>
+<td style="text-align: right;">869 (4.83%)</td>
+<td style="text-align: right;">16,716 (9.29%)</td>
+<td style="text-align: right;">1,690 (9.39%)</td>
+<td style="text-align: right;">14,862 (8.26%)</td>
+<td style="text-align: right;">1,491 (8.28%)</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">13,625 (7.57%)</td>
+<td style="text-align: right;">1,332 (7.40%)</td>
+<td style="text-align: right;">15,234 (8.46%)</td>
+<td style="text-align: right;">1,485 (8.25%)</td>
+<td style="text-align: right;">14,575 (8.10%)</td>
+<td style="text-align: right;">1,438 (7.99%)</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">14,078 (7.82%)</td>
+<td style="text-align: right;">1,411 (7.84%)</td>
+<td style="text-align: right;">15,576 (8.65%)</td>
+<td style="text-align: right;">1,555 (8.64%)</td>
+<td style="text-align: right;">15,021 (8.35%)</td>
+<td style="text-align: right;">1,529 (8.49%)</td>
+</tr>
+<tr>
+<td>OMNI</td>
+<td style="text-align: right;">2,578 (1.43%)</td>
+<td style="text-align: right;">247 (1.37%)</td>
+<td style="text-align: right;">2,578 (1.43%)</td>
+<td style="text-align: right;">247 (1.37%)</td>
+<td style="text-align: right;">2,578 (1.43%)</td>
+<td style="text-align: right;">247 (1.37%)</td>
+</tr>
+<tr>
+<td>RELD_CVRP</td>
+<td style="text-align: right;">2,234 (1.24%)</td>
+<td style="text-align: right;">254 (1.41%)</td>
+<td style="text-align: right;">2,234 (1.24%)</td>
+<td style="text-align: right;">254 (1.41%)</td>
+<td style="text-align: right;">2,234 (1.24%)</td>
+<td style="text-align: right;">254 (1.41%)</td>
+</tr>
+<tr>
+<td>RELD_MOEL</td>
+<td style="text-align: right;">47,050 (26.14%)</td>
+<td style="text-align: right;">4,725 (26.25%)</td>
+<td style="text-align: right;">88,338 (49.08%)</td>
+<td style="text-align: right;">8,918 (49.54%)</td>
+<td style="text-align: right;">已删除</td>
+<td style="text-align: right;">已删除</td>
+</tr>
+<tr>
+<td>RELD_MTL</td>
+<td style="text-align: right;">55,256 (30.70%)</td>
+<td style="text-align: right;">5,553 (30.85%)</td>
+<td style="text-align: right;">已删除</td>
+<td style="text-align: right;">已删除</td>
+<td style="text-align: right;">91,952 (51.08%)</td>
+<td style="text-align: right;">9,219 (51.22%)</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">11,299 (6.28%)</td>
+<td style="text-align: right;">1,099 (6.11%)</td>
+<td style="text-align: right;">12,496 (6.94%)</td>
+<td style="text-align: right;">1,212 (6.73%)</td>
+<td style="text-align: right;">12,082 (6.71%)</td>
+<td style="text-align: right;">1,174 (6.52%)</td>
+</tr>
+<tr>
+<td>T2T</td>
+<td style="text-align: right;">1,090 (0.61%)</td>
+<td style="text-align: right;">114 (0.63%)</td>
+<td style="text-align: right;">1,090 (0.61%)</td>
+<td style="text-align: right;">114 (0.63%)</td>
+<td style="text-align: right;">1,090 (0.61%)</td>
+<td style="text-align: right;">114 (0.63%)</td>
+</tr>
+<tr>
+<td>T2T500</td>
+<td style="text-align: right;">1,637 (0.91%)</td>
+<td style="text-align: right;">156 (0.87%)</td>
+<td style="text-align: right;">1,637 (0.91%)</td>
+<td style="text-align: right;">156 (0.87%)</td>
+<td style="text-align: right;">1,637 (0.91%)</td>
+<td style="text-align: right;">156 (0.87%)</td>
+</tr>
+<tr>
+<td>UNICO_MatPOENet</td>
+<td style="text-align: right;">4,694 (2.61%)</td>
+<td style="text-align: right;">458 (2.54%)</td>
+<td style="text-align: right;">4,694 (2.61%)</td>
+<td style="text-align: right;">458 (2.54%)</td>
+<td style="text-align: right;">4,694 (2.61%)</td>
+<td style="text-align: right;">458 (2.54%)</td>
+</tr>
+</tbody>
+</table>
+<h2>说明</h2>
+<ul>
+<li>只删除RELD_MTL和只删除RELD_MOEL是两次独立统计，不是连续删除。</li>
+<li>TSP、CVRP、ATSP的候选池中没有这两个方法，三种情况下的分布完全不变。</li>
+<li>原实例、成本、winner文件均未修改；没有训练模型或重新运行solver。</li>
+<li>带B问题仍沿用原成本场景，本次不修复其已知约束语义问题。</li>
+<li><a href="by_problem.html">全部18问题逐项表</a> / <a href="by_problem.md">Markdown</a></li>
+<li><a href="comparison.csv">宽表CSV</a> / <a href="winner_distribution.csv">原始长表CSV</a> / <a href="winner_transfers.csv">winner流向CSV</a></li>
+</ul></main></body></html>

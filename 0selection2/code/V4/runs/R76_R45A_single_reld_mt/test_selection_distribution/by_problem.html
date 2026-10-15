@@ -1,0 +1,1054 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>方法Top1分布</title><style>
+body{font:16px/1.7 "Noto Sans CJK SC","Microsoft YaHei",sans-serif;
+margin:0;color:#202528;background:#fafafa}
+main{max-width:1200px;margin:auto;padding:28px 20px 60px}
+h1{font-size:28px}h2{font-size:21px;margin-top:32px}h3{font-size:18px}
+table{border-collapse:collapse;display:block;overflow-x:auto;background:white;font-size:14px}
+th,td{border:1px solid #d8dddf;padding:8px 12px;white-space:nowrap}
+th{background:#edf1f2}a{color:#13676d}
+img{display:block;max-width:100%;height:auto;margin:18px 0}
+</style></head><body><main><h1 id="test">模型test结果：各问题的方法选择情况</h1>
+<p>结果目录：<code>/public/home/shiys/0selection2/code/V4/runs/R76_R45A_single_reld_mt</code>。使用已锁定权重的完整test预测，不重新推理、不更换checkpoint。</p>
+<p>18种问题分别统计。左图表示模型选择比例，右图表示真实winner比例；每个比例的分母只使用该问题的测试实例数。</p>
+<p>表格并列模型选择数量／比例与真实winner数量／比例。差值为选择比例减winner比例，单位为百分点，不代表该方法的选择一定合理或不合理。</p>
+<p><code>reld_mt</code>沿用保存预测中的方法名称，对应当前数据中保留的MOEL部署。</p>
+<p><a href="selection_distributions.pdf">18页PDF</a> · <a href="selection_distribution.csv">全部选择分布CSV</a> · <a href="selection_distribution_bundle.zip">完整图表包</a></p>
+<p><strong>问题目录：</strong> <a href="#tsp">TSP</a> · <a href="#cvrp">CVRP</a> · <a href="#atsp">ATSP</a> · <a href="#ovrp">OVRP</a> · <a href="#vrpb">VRPB</a> · <a href="#vrpl">VRPL</a> · <a href="#vrptw">VRPTW</a> · <a href="#ovrptw">OVRPTW</a> · <a href="#ovrpb">OVRPB</a> · <a href="#ovrpl">OVRPL</a> · <a href="#vrpbl">VRPBL</a> · <a href="#vrpbtw">VRPBTW</a> · <a href="#vrpltw">VRPLTW</a> · <a href="#ovrpbl">OVRPBL</a> · <a href="#ovrpbtw">OVRPBTW</a> · <a href="#ovrpltw">OVRPLTW</a> · <a href="#vrpbltw">VRPBLTW</a> · <a href="#ovrpbltw">OVRPBLTW</a></p>
+<h2 id="tsp">TSP</h2>
+<p>测试集3,895例，模型Top1为43.21%。</p>
+<p><img alt="TSP模型选择与真实winner" src="figures/TSP.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">模型选择数量</th>
+<th style="text-align: right;">选择比例</th>
+<th style="text-align: right;">真实winner数量</th>
+<th style="text-align: right;">winner比例</th>
+<th style="text-align: right;">比例差 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BQ</td>
+<td style="text-align: right;">1,313</td>
+<td style="text-align: right;">33.71%</td>
+<td style="text-align: right;">1,147</td>
+<td style="text-align: right;">29.45%</td>
+<td style="text-align: right;">+4.26</td>
+</tr>
+<tr>
+<td>DIFUSCO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">303</td>
+<td style="text-align: right;">7.78%</td>
+<td style="text-align: right;">-7.78</td>
+</tr>
+<tr>
+<td>DIFUSCO500</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">42</td>
+<td style="text-align: right;">1.08%</td>
+<td style="text-align: right;">-1.08</td>
+</tr>
+<tr>
+<td>ELG</td>
+<td style="text-align: right;">371</td>
+<td style="text-align: right;">9.53%</td>
+<td style="text-align: right;">282</td>
+<td style="text-align: right;">7.24%</td>
+<td style="text-align: right;">+2.28</td>
+</tr>
+<tr>
+<td>LEHD</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">637</td>
+<td style="text-align: right;">16.35%</td>
+<td style="text-align: right;">-16.35</td>
+</tr>
+<tr>
+<td>OMNI</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">0.72%</td>
+<td style="text-align: right;">-0.72</td>
+</tr>
+<tr>
+<td>T2T</td>
+<td style="text-align: right;">2,211</td>
+<td style="text-align: right;">56.77%</td>
+<td style="text-align: right;">1,327</td>
+<td style="text-align: right;">34.07%</td>
+<td style="text-align: right;">+22.70</td>
+</tr>
+<tr>
+<td>T2T500</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">129</td>
+<td style="text-align: right;">3.31%</td>
+<td style="text-align: right;">-3.31</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/TSP.csv">该问题CSV</a> · <a href="figures/TSP.pdf">本图PDF</a></p>
+<h2 id="cvrp">CVRP</h2>
+<p>测试集3,895例，模型Top1为33.89%。</p>
+<p><img alt="CVRP模型选择与真实winner" src="figures/CVRP.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">模型选择数量</th>
+<th style="text-align: right;">选择比例</th>
+<th style="text-align: right;">真实winner数量</th>
+<th style="text-align: right;">winner比例</th>
+<th style="text-align: right;">比例差 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BQ</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">507</td>
+<td style="text-align: right;">13.02%</td>
+<td style="text-align: right;">-13.02</td>
+</tr>
+<tr>
+<td>ELG</td>
+<td style="text-align: right;">283</td>
+<td style="text-align: right;">7.27%</td>
+<td style="text-align: right;">84</td>
+<td style="text-align: right;">2.16%</td>
+<td style="text-align: right;">+5.11</td>
+</tr>
+<tr>
+<td>ICAM</td>
+<td style="text-align: right;">1,308</td>
+<td style="text-align: right;">33.58%</td>
+<td style="text-align: right;">703</td>
+<td style="text-align: right;">18.05%</td>
+<td style="text-align: right;">+15.53</td>
+</tr>
+<tr>
+<td>LEHD</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.03%</td>
+<td style="text-align: right;">528</td>
+<td style="text-align: right;">13.56%</td>
+<td style="text-align: right;">-13.53</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">95</td>
+<td style="text-align: right;">2.44%</td>
+<td style="text-align: right;">-2.44</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">126</td>
+<td style="text-align: right;">3.23%</td>
+<td style="text-align: right;">124</td>
+<td style="text-align: right;">3.18%</td>
+<td style="text-align: right;">+0.05</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">1.31%</td>
+<td style="text-align: right;">123</td>
+<td style="text-align: right;">3.16%</td>
+<td style="text-align: right;">-1.85</td>
+</tr>
+<tr>
+<td>OMNI</td>
+<td style="text-align: right;">1,952</td>
+<td style="text-align: right;">50.12%</td>
+<td style="text-align: right;">968</td>
+<td style="text-align: right;">24.85%</td>
+<td style="text-align: right;">+25.26</td>
+</tr>
+<tr>
+<td>RELD_CVRP</td>
+<td style="text-align: right;">174</td>
+<td style="text-align: right;">4.47%</td>
+<td style="text-align: right;">705</td>
+<td style="text-align: right;">18.10%</td>
+<td style="text-align: right;">-13.63</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">1.49%</td>
+<td style="text-align: right;">-1.49</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/CVRP.csv">该问题CSV</a> · <a href="figures/CVRP.pdf">本图PDF</a></p>
+<h2 id="atsp">ATSP</h2>
+<p>测试集3,895例，模型Top1为74.48%。</p>
+<p><img alt="ATSP模型选择与真实winner" src="figures/ATSP.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">模型选择数量</th>
+<th style="text-align: right;">选择比例</th>
+<th style="text-align: right;">真实winner数量</th>
+<th style="text-align: right;">winner比例</th>
+<th style="text-align: right;">比例差 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GLOP</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">0.28%</td>
+<td style="text-align: right;">-0.28</td>
+</tr>
+<tr>
+<td>ICAM_ATSP</td>
+<td style="text-align: right;">1,182</td>
+<td style="text-align: right;">30.35%</td>
+<td style="text-align: right;">1,168</td>
+<td style="text-align: right;">29.99%</td>
+<td style="text-align: right;">+0.36</td>
+</tr>
+<tr>
+<td>MATNET</td>
+<td style="text-align: right;">430</td>
+<td style="text-align: right;">11.04%</td>
+<td style="text-align: right;">559</td>
+<td style="text-align: right;">14.35%</td>
+<td style="text-align: right;">-3.31</td>
+</tr>
+<tr>
+<td>MATPOENET</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">315</td>
+<td style="text-align: right;">8.09%</td>
+<td style="text-align: right;">-8.09</td>
+</tr>
+<tr>
+<td>UNICO_MatPOENet</td>
+<td style="text-align: right;">2,283</td>
+<td style="text-align: right;">58.61%</td>
+<td style="text-align: right;">1,842</td>
+<td style="text-align: right;">47.29%</td>
+<td style="text-align: right;">+11.32</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/ATSP.csv">该问题CSV</a> · <a href="figures/ATSP.pdf">本图PDF</a></p>
+<h2 id="ovrp">OVRP</h2>
+<p>测试集3,895例，模型Top1为36.77%。</p>
+<p><img alt="OVRP模型选择与真实winner" src="figures/OVRP.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">模型选择数量</th>
+<th style="text-align: right;">选择比例</th>
+<th style="text-align: right;">真实winner数量</th>
+<th style="text-align: right;">winner比例</th>
+<th style="text-align: right;">比例差 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">1.10%</td>
+<td style="text-align: right;">-1.10</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">0.54%</td>
+<td style="text-align: right;">-0.54</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">1,031</td>
+<td style="text-align: right;">26.47%</td>
+<td style="text-align: right;">1,402</td>
+<td style="text-align: right;">35.99%</td>
+<td style="text-align: right;">-9.53</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">2,864</td>
+<td style="text-align: right;">73.53%</td>
+<td style="text-align: right;">1,294</td>
+<td style="text-align: right;">33.22%</td>
+<td style="text-align: right;">+40.31</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">270</td>
+<td style="text-align: right;">6.93%</td>
+<td style="text-align: right;">-6.93</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">865</td>
+<td style="text-align: right;">22.21%</td>
+<td style="text-align: right;">-22.21</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/OVRP.csv">该问题CSV</a> · <a href="figures/OVRP.pdf">本图PDF</a></p>
+<h2 id="vrpb">VRPB</h2>
+<p>测试集3,895例，模型Top1为80.10%。</p>
+<p><img alt="VRPB模型选择与真实winner" src="figures/VRPB.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">模型选择数量</th>
+<th style="text-align: right;">选择比例</th>
+<th style="text-align: right;">真实winner数量</th>
+<th style="text-align: right;">winner比例</th>
+<th style="text-align: right;">比例差 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">223</td>
+<td style="text-align: right;">5.73%</td>
+<td style="text-align: right;">-5.73</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">552</td>
+<td style="text-align: right;">14.17%</td>
+<td style="text-align: right;">-14.17</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">3,895</td>
+<td style="text-align: right;">100.00%</td>
+<td style="text-align: right;">3,120</td>
+<td style="text-align: right;">80.10%</td>
+<td style="text-align: right;">+19.90</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/VRPB.csv">该问题CSV</a> · <a href="figures/VRPB.pdf">本图PDF</a></p>
+<h2 id="vrpl">VRPL</h2>
+<p>测试集3,895例，模型Top1为32.53%。</p>
+<p><img alt="VRPL模型选择与真实winner" src="figures/VRPL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">模型选择数量</th>
+<th style="text-align: right;">选择比例</th>
+<th style="text-align: right;">真实winner数量</th>
+<th style="text-align: right;">winner比例</th>
+<th style="text-align: right;">比例差 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">132</td>
+<td style="text-align: right;">3.39%</td>
+<td style="text-align: right;">-3.39</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">136</td>
+<td style="text-align: right;">3.49%</td>
+<td style="text-align: right;">-3.49</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">1,533</td>
+<td style="text-align: right;">39.36%</td>
+<td style="text-align: right;">1,180</td>
+<td style="text-align: right;">30.30%</td>
+<td style="text-align: right;">+9.06</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">2,362</td>
+<td style="text-align: right;">60.64%</td>
+<td style="text-align: right;">1,247</td>
+<td style="text-align: right;">32.02%</td>
+<td style="text-align: right;">+28.63</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">546</td>
+<td style="text-align: right;">14.02%</td>
+<td style="text-align: right;">-14.02</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">654</td>
+<td style="text-align: right;">16.79%</td>
+<td style="text-align: right;">-16.79</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/VRPL.csv">该问题CSV</a> · <a href="figures/VRPL.pdf">本图PDF</a></p>
+<h2 id="vrptw">VRPTW</h2>
+<p>测试集3,895例，模型Top1为80.85%。</p>
+<p><img alt="VRPTW模型选择与真实winner" src="figures/VRPTW.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">模型选择数量</th>
+<th style="text-align: right;">选择比例</th>
+<th style="text-align: right;">真实winner数量</th>
+<th style="text-align: right;">winner比例</th>
+<th style="text-align: right;">比例差 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">+0.00</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">693</td>
+<td style="text-align: right;">17.79%</td>
+<td style="text-align: right;">-17.79</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">1.00%</td>
+<td style="text-align: right;">-1.00</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.10%</td>
+<td style="text-align: right;">-0.10</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">3,895</td>
+<td style="text-align: right;">100.00%</td>
+<td style="text-align: right;">3,149</td>
+<td style="text-align: right;">80.85%</td>
+<td style="text-align: right;">+19.15</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.26%</td>
+<td style="text-align: right;">-0.26</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/VRPTW.csv">该问题CSV</a> · <a href="figures/VRPTW.pdf">本图PDF</a></p>
+<h2 id="ovrptw">OVRPTW</h2>
+<p>测试集3,895例，模型Top1为84.03%。</p>
+<p><img alt="OVRPTW模型选择与真实winner" src="figures/OVRPTW.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">模型选择数量</th>
+<th style="text-align: right;">选择比例</th>
+<th style="text-align: right;">真实winner数量</th>
+<th style="text-align: right;">winner比例</th>
+<th style="text-align: right;">比例差 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">+0.00</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">587</td>
+<td style="text-align: right;">15.07%</td>
+<td style="text-align: right;">-15.07</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">0.56%</td>
+<td style="text-align: right;">-0.56</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.13%</td>
+<td style="text-align: right;">-0.13</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">3,895</td>
+<td style="text-align: right;">100.00%</td>
+<td style="text-align: right;">3,273</td>
+<td style="text-align: right;">84.03%</td>
+<td style="text-align: right;">+15.97</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.21%</td>
+<td style="text-align: right;">-0.21</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/OVRPTW.csv">该问题CSV</a> · <a href="figures/OVRPTW.pdf">本图PDF</a></p>
+<h2 id="ovrpb">OVRPB</h2>
+<p>测试集3,895例，模型Top1为88.09%。</p>
+<p><img alt="OVRPB模型选择与真实winner" src="figures/OVRPB.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">模型选择数量</th>
+<th style="text-align: right;">选择比例</th>
+<th style="text-align: right;">真实winner数量</th>
+<th style="text-align: right;">winner比例</th>
+<th style="text-align: right;">比例差 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">222</td>
+<td style="text-align: right;">5.70%</td>
+<td style="text-align: right;">-5.70</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">242</td>
+<td style="text-align: right;">6.21%</td>
+<td style="text-align: right;">-6.21</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">3,895</td>
+<td style="text-align: right;">100.00%</td>
+<td style="text-align: right;">3,431</td>
+<td style="text-align: right;">88.09%</td>
+<td style="text-align: right;">+11.91</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/OVRPB.csv">该问题CSV</a> · <a href="figures/OVRPB.pdf">本图PDF</a></p>
+<h2 id="ovrpl">OVRPL</h2>
+<p>测试集3,895例，模型Top1为37.33%。</p>
+<p><img alt="OVRPL模型选择与真实winner" src="figures/OVRPL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">模型选择数量</th>
+<th style="text-align: right;">选择比例</th>
+<th style="text-align: right;">真实winner数量</th>
+<th style="text-align: right;">winner比例</th>
+<th style="text-align: right;">比例差 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">1.31%</td>
+<td style="text-align: right;">-1.31</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">0.69%</td>
+<td style="text-align: right;">-0.69</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">1,222</td>
+<td style="text-align: right;">31.37%</td>
+<td style="text-align: right;">1,370</td>
+<td style="text-align: right;">35.17%</td>
+<td style="text-align: right;">-3.80</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">2,673</td>
+<td style="text-align: right;">68.63%</td>
+<td style="text-align: right;">1,353</td>
+<td style="text-align: right;">34.74%</td>
+<td style="text-align: right;">+33.89</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">264</td>
+<td style="text-align: right;">6.78%</td>
+<td style="text-align: right;">-6.78</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">830</td>
+<td style="text-align: right;">21.31%</td>
+<td style="text-align: right;">-21.31</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/OVRPL.csv">该问题CSV</a> · <a href="figures/OVRPL.pdf">本图PDF</a></p>
+<h2 id="vrpbl">VRPBL</h2>
+<p>测试集3,895例，模型Top1为79.67%。</p>
+<p><img alt="VRPBL模型选择与真实winner" src="figures/VRPBL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">模型选择数量</th>
+<th style="text-align: right;">选择比例</th>
+<th style="text-align: right;">真实winner数量</th>
+<th style="text-align: right;">winner比例</th>
+<th style="text-align: right;">比例差 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">193</td>
+<td style="text-align: right;">4.96%</td>
+<td style="text-align: right;">-4.96</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">599</td>
+<td style="text-align: right;">15.38%</td>
+<td style="text-align: right;">-15.38</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">3,895</td>
+<td style="text-align: right;">100.00%</td>
+<td style="text-align: right;">3,103</td>
+<td style="text-align: right;">79.67%</td>
+<td style="text-align: right;">+20.33</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/VRPBL.csv">该问题CSV</a> · <a href="figures/VRPBL.pdf">本图PDF</a></p>
+<h2 id="vrpbtw">VRPBTW</h2>
+<p>测试集3,895例，模型Top1为78.79%。</p>
+<p><img alt="VRPBTW模型选择与真实winner" src="figures/VRPBTW.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">模型选择数量</th>
+<th style="text-align: right;">选择比例</th>
+<th style="text-align: right;">真实winner数量</th>
+<th style="text-align: right;">winner比例</th>
+<th style="text-align: right;">比例差 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.18%</td>
+<td style="text-align: right;">-0.18</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">819</td>
+<td style="text-align: right;">21.03%</td>
+<td style="text-align: right;">-21.03</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">3,895</td>
+<td style="text-align: right;">100.00%</td>
+<td style="text-align: right;">3,069</td>
+<td style="text-align: right;">78.79%</td>
+<td style="text-align: right;">+21.21</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/VRPBTW.csv">该问题CSV</a> · <a href="figures/VRPBTW.pdf">本图PDF</a></p>
+<h2 id="vrpltw">VRPLTW</h2>
+<p>测试集3,895例，模型Top1为79.61%。</p>
+<p><img alt="VRPLTW模型选择与真实winner" src="figures/VRPLTW.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">模型选择数量</th>
+<th style="text-align: right;">选择比例</th>
+<th style="text-align: right;">真实winner数量</th>
+<th style="text-align: right;">winner比例</th>
+<th style="text-align: right;">比例差 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">+0.00</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">726</td>
+<td style="text-align: right;">18.64%</td>
+<td style="text-align: right;">-18.64</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">1.18%</td>
+<td style="text-align: right;">-1.18</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.15%</td>
+<td style="text-align: right;">-0.15</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">3,895</td>
+<td style="text-align: right;">100.00%</td>
+<td style="text-align: right;">3,101</td>
+<td style="text-align: right;">79.61%</td>
+<td style="text-align: right;">+20.39</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0.41%</td>
+<td style="text-align: right;">-0.41</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/VRPLTW.csv">该问题CSV</a> · <a href="figures/VRPLTW.pdf">本图PDF</a></p>
+<h2 id="ovrpbl">OVRPBL</h2>
+<p>测试集3,895例，模型Top1为89.55%。</p>
+<p><img alt="OVRPBL模型选择与真实winner" src="figures/OVRPBL.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">模型选择数量</th>
+<th style="text-align: right;">选择比例</th>
+<th style="text-align: right;">真实winner数量</th>
+<th style="text-align: right;">winner比例</th>
+<th style="text-align: right;">比例差 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: right;">4.70%</td>
+<td style="text-align: right;">-4.70</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">224</td>
+<td style="text-align: right;">5.75%</td>
+<td style="text-align: right;">-5.75</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">3,895</td>
+<td style="text-align: right;">100.00%</td>
+<td style="text-align: right;">3,488</td>
+<td style="text-align: right;">89.55%</td>
+<td style="text-align: right;">+10.45</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/OVRPBL.csv">该问题CSV</a> · <a href="figures/OVRPBL.pdf">本图PDF</a></p>
+<h2 id="ovrpbtw">OVRPBTW</h2>
+<p>测试集3,895例，模型Top1为84.83%。</p>
+<p><img alt="OVRPBTW模型选择与真实winner" src="figures/OVRPBTW.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">模型选择数量</th>
+<th style="text-align: right;">选择比例</th>
+<th style="text-align: right;">真实winner数量</th>
+<th style="text-align: right;">winner比例</th>
+<th style="text-align: right;">比例差 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">+0.00</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">591</td>
+<td style="text-align: right;">15.17%</td>
+<td style="text-align: right;">-15.17</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">3,895</td>
+<td style="text-align: right;">100.00%</td>
+<td style="text-align: right;">3,304</td>
+<td style="text-align: right;">84.83%</td>
+<td style="text-align: right;">+15.17</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/OVRPBTW.csv">该问题CSV</a> · <a href="figures/OVRPBTW.pdf">本图PDF</a></p>
+<h2 id="ovrpltw">OVRPLTW</h2>
+<p>测试集3,895例，模型Top1为83.11%。</p>
+<p><img alt="OVRPLTW模型选择与真实winner" src="figures/OVRPLTW.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">模型选择数量</th>
+<th style="text-align: right;">选择比例</th>
+<th style="text-align: right;">真实winner数量</th>
+<th style="text-align: right;">winner比例</th>
+<th style="text-align: right;">比例差 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">+0.00</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">622</td>
+<td style="text-align: right;">15.97%</td>
+<td style="text-align: right;">-15.97</td>
+</tr>
+<tr>
+<td>MoSES_CaDA</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0.59%</td>
+<td style="text-align: right;">-0.59</td>
+</tr>
+<tr>
+<td>MoSES_RF</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.08%</td>
+<td style="text-align: right;">-0.08</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">3,895</td>
+<td style="text-align: right;">100.00%</td>
+<td style="text-align: right;">3,237</td>
+<td style="text-align: right;">83.11%</td>
+<td style="text-align: right;">+16.89</td>
+</tr>
+<tr>
+<td>RouteFinder</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.26%</td>
+<td style="text-align: right;">-0.26</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/OVRPLTW.csv">该问题CSV</a> · <a href="figures/OVRPLTW.pdf">本图PDF</a></p>
+<h2 id="vrpbltw">VRPBLTW</h2>
+<p>测试集3,895例，模型Top1为79.61%。</p>
+<p><img alt="VRPBLTW模型选择与真实winner" src="figures/VRPBLTW.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">模型选择数量</th>
+<th style="text-align: right;">选择比例</th>
+<th style="text-align: right;">真实winner数量</th>
+<th style="text-align: right;">winner比例</th>
+<th style="text-align: right;">比例差 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.08%</td>
+<td style="text-align: right;">-0.08</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">791</td>
+<td style="text-align: right;">20.31%</td>
+<td style="text-align: right;">-20.31</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">3,895</td>
+<td style="text-align: right;">100.00%</td>
+<td style="text-align: right;">3,101</td>
+<td style="text-align: right;">79.61%</td>
+<td style="text-align: right;">+20.39</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/VRPBLTW.csv">该问题CSV</a> · <a href="figures/VRPBLTW.pdf">本图PDF</a></p>
+<h2 id="ovrpbltw">OVRPBLTW</h2>
+<p>测试集3,895例，模型Top1为83.47%。</p>
+<p><img alt="OVRPBLTW模型选择与真实winner" src="figures/OVRPBLTW.png" /></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align: right;">模型选择数量</th>
+<th style="text-align: right;">选择比例</th>
+<th style="text-align: right;">真实winner数量</th>
+<th style="text-align: right;">winner比例</th>
+<th style="text-align: right;">比例差 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTPOMO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">+0.00</td>
+</tr>
+<tr>
+<td>MVMOE</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">644</td>
+<td style="text-align: right;">16.53%</td>
+<td style="text-align: right;">-16.53</td>
+</tr>
+<tr>
+<td>reld_mt</td>
+<td style="text-align: right;">3,895</td>
+<td style="text-align: right;">100.00%</td>
+<td style="text-align: right;">3,251</td>
+<td style="text-align: right;">83.47%</td>
+<td style="text-align: right;">+16.53</td>
+</tr>
+</tbody>
+</table>
+<p><a href="tables/OVRPBLTW.csv">该问题CSV</a> · <a href="figures/OVRPBLTW.pdf">本图PDF</a></p></main></body></html>

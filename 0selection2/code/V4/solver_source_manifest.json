@@ -11,6 +11,22 @@
   },
   "evidence": {
     "historical_audit": "code/V4/runs/R41_signal_audit/solver_manifest.json",
+    "current_label_deployment_audits": {
+      "R81": {
+        "manifest": "code/V4/runs/R81_current_label_deployment/manifest.json",
+        "report": "code/V4/runs/R81_current_label_deployment/RESULTS.md",
+        "scenario_id": "new_only_seed2_B_filtered_MOEL_as_reld_mt_v1",
+        "problems": ["VRPTW", "VRPLTW"],
+        "solvers": ["MTPOMO", "MVMOE", "MoSES_CaDA", "MoSES_RF", "reld_mt", "RouteFinder"],
+        "solver_aliases": {"reld_mt": "RELD_MOEL"},
+        "documentation_status": "R58 point 3 CURRENT deployment conditions recorded with explicit gaps; R58 task_contract is proposed-only, full labels/training remain deferred",
+        "binding_status": "12 columns bound to frozen new-label generation, all three current splits",
+        "aligned_fp64_costs": 934848,
+        "maximum_alignment_difference": 0.0,
+        "saved_train_routes_checked": 48,
+        "scope": "Current new-only labels, not certification of historical original-prefix labels; effective external-library decode and exact runtime environment gaps remain explicit in R81. R58 is deferred and unchanged."
+      }
+    },
     "recipe_notes": "code/V4/runs/R41_signal_audit/original_solver_provenance.md",
     "policy": "Source candidates are not automatically certified as historical label implementations. Confirm bindings and fill actual configs before production upload. Missing optional training background is not a blocker.",
     "completion_evidence": "code/V4/runs/R45_solver_code_embeddings/\u6765\u6e90\u8865\u5168\u6838\u5bf9\u8bc1\u636e.json",

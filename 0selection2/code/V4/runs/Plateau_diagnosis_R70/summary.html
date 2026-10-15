@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Selector Analysis: Short Report</title>
+<style>
+body { margin: 0; background: #fafafa; color: #202528;
+       font: 16px/1.7 "Noto Sans CJK SC", "Microsoft YaHei", sans-serif; }
+main { max-width: 1100px; margin: auto; padding: 28px 24px 64px; }
+h1 { font-size: 30px; margin: 0 0 20px; }
+h2 { font-size: 22px; margin: 38px 0 12px; padding-top: 18px;
+     border-top: 1px solid #d8dddf; }
+h3 { font-size: 18px; margin: 26px 0 12px; }
+p { margin: 12px 0; }
+table { border-collapse: collapse; width: 100%; font-size: 14px;
+        display: block; overflow-x: auto; background: #fff; }
+th, td { padding: 9px 12px; border: 1px solid #d8dddf; white-space: nowrap; }
+th { background: #edf1f2; }
+strong { color: #173f42; }
+a { color: #13676d; }
+li { margin: 7px 0; }
+@media (max-width: 600px) { main { padding: 20px 14px 40px; }
+                          h1 { font-size: 26px; } h2 { font-size: 20px; } }
+@media print { body { background: #fff; } main { max-width: none; padding: 0; }
+               table { display: table; font-size: 10px; } th, td { padding: 4px; }
+               h2, h3 { break-after: avoid; } tr { break-inside: avoid; } }
+</style>
+</head>
+<body><main><h1>分析</h1>
+<p>除特别注明外，以下都是 test 结果；18任务按问题等权平均。regret 表示所选方法比该实例最便宜的方法平均贵多少，越低越好。</p>
+<p>各表只保留一个模型示例，统一写“模型”；不同表可能使用不同已有权重，不合并视为同一个模型的成绩。具体来源保留在<a href="report.html">详细报告</a>。</p>
+<h2>模型是否学到了选择信息</h2>
+<table>
+<thead>
+<tr>
+<th>使用的信息</th>
+<th style="text-align: right;">Top1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>只看问题、规模，选训练中当前规模最常获胜的方法</td>
+<td style="text-align: right;">42.20%</td>
+</tr>
+<tr>
+<td>用统计特征分组，选组内最常获胜的方法</td>
+<td style="text-align: right;">46.19%</td>
+</tr>
+<tr>
+<td>模型</td>
+<td style="text-align: right;">48.24%</td>
+</tr>
+</tbody>
+</table>
+<p>特征分组：客户数量、坐标中心、到中心的距离、客户间距离、depot位置、需求、时间窗、服务时间、ATSP矩阵边成本。每个问题单独用一棵深度3的树分组，规则只从train学习。</p>
+<p><strong>结论：模型学到了选择信息，但简单统计已经能解释相当一部分成绩。</strong></p>
+<h3>不同方法是否擅长不同区域</h3>
+<p>CVRP比较 OMNI 与 RELD_CVRP：正值表示OMNI更便宜。ATSP比较 UNICO_MatPOENet 与 ICAM_ATSP：正值表示UNICO更便宜。</p>
+<p>优势为每例两方法成本差除以该例Oracle后再平均，单位pp；不是获胜率。低/高需求以容量归一化平均需求0.0468134为界，边界只由train确定。</p>
+<table>
+<thead>
+<tr>
+<th>区域</th>
+<th style="text-align: right;">Train/Val/Test样本数</th>
+<th style="text-align: right;">Train优势 pp</th>
+<th style="text-align: right;">Val优势 pp</th>
+<th style="text-align: right;">Test优势 pp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CVRP：162至277客户，低需求</td>
+<td style="text-align: right;">935 / 90 / 107</td>
+<td style="text-align: right;">-3.752</td>
+<td style="text-align: right;">-3.781</td>
+<td style="text-align: right;">-3.924</td>
+</tr>
+<tr>
+<td>CVRP：162至277客户，高需求</td>
+<td style="text-align: right;">1584 / 170 / 167</td>
+<td style="text-align: right;">+0.482</td>
+<td style="text-align: right;">+0.591</td>
+<td style="text-align: right;">+0.506</td>
+</tr>
+<tr>
+<td>CVRP：278至389客户，低需求</td>
+<td style="text-align: right;">1179 / 119 / 117</td>
+<td style="text-align: right;">-3.324</td>
+<td style="text-align: right;">-3.376</td>
+<td style="text-align: right;">-4.032</td>
+</tr>
+<tr>
+<td>CVRP：278至389客户，高需求</td>
+<td style="text-align: right;">1303 / 120 / 124</td>
+<td style="text-align: right;">+0.637</td>
+<td style="text-align: right;">+0.761</td>
+<td style="text-align: right;">+0.777</td>
+</tr>
+<tr>
+<td>ATSP：20至40节点</td>
+<td style="text-align: right;">2604 / 273 / 273</td>
+<td style="text-align: right;">+11.387</td>
+<td style="text-align: right;">+11.959</td>
+<td style="text-align: right;">+10.860</td>
+</tr>
+<tr>
+<td>ATSP：41至60节点</td>
+<td style="text-align: right;">2476 / 247 / 247</td>
+<td style="text-align: right;">+5.511</td>
+<td style="text-align: right;">+5.503</td>
+<td style="text-align: right;">+5.650</td>
+</tr>
+<tr>
+<td>ATSP：61至80节点</td>
+<td style="text-align: right;">2460 / 240 / 240</td>
+<td style="text-align: right;">-1.694</td>
+<td style="text-align: right;">-1.963</td>
+<td style="text-align: right;">-1.957</td>
+</tr>
+<tr>
+<td>ATSP：81至100节点</td>
+<td style="text-align: right;">2460 / 240 / 240</td>
+<td style="text-align: right;">-6.980</td>
+<td style="text-align: right;">-7.112</td>
+<td style="text-align: right;">-7.147</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论：确实存在跨train/val/test一致的方法偏好。</strong> CVRP低需求更偏RELD_CVRP，高需求更偏OMNI；ATSP小规模更偏UNICO，大规模两者比较时更偏ICAM。区域平均更好，不代表每个实例都赢，也不代表ICAM在大规模一定胜过其他全部方法。</p>
+<h2>是不是只记住了选方法的比例</h2>
+<p>把同问题、同规模实例的预测互相交换100次：保持总体选方法比例不变，只破坏“这个实例对应这个预测”。下面是交换后的平均结果。</p>
+<table>
+<thead>
+<tr>
+<th>模型 / 范围</th>
+<th style="text-align: right;">原Top1</th>
+<th style="text-align: right;">交换后Top1</th>
+<th style="text-align: right;">原regret</th>
+<th style="text-align: right;">交换后regret</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型 / 全18任务</td>
+<td style="text-align: right;">47.91%</td>
+<td style="text-align: right;">39.43%</td>
+<td style="text-align: right;">0.9432%</td>
+<td style="text-align: right;">2.1168%</td>
+</tr>
+<tr>
+<td>模型 / CVRP</td>
+<td style="text-align: right;">48.10%</td>
+<td style="text-align: right;">25.67%</td>
+<td style="text-align: right;">0.6138%</td>
+<td style="text-align: right;">1.9592%</td>
+</tr>
+<tr>
+<td>模型 / VRPTW</td>
+<td style="text-align: right;">43.50%</td>
+<td style="text-align: right;">25.40%</td>
+<td style="text-align: right;">1.4119%</td>
+<td style="text-align: right;">5.4560%</td>
+</tr>
+<tr>
+<td>模型 / ATSP</td>
+<td style="text-align: right;">77.50%</td>
+<td style="text-align: right;">76.05%</td>
+<td style="text-align: right;">0.3274%</td>
+<td style="text-align: right;">0.4055%</td>
+</tr>
+<tr>
+<td>模型 / OVRPTW</td>
+<td style="text-align: right;">49.10%</td>
+<td style="text-align: right;">45.59%</td>
+<td style="text-align: right;">0.8190%</td>
+<td style="text-align: right;">1.0197%</td>
+</tr>
+<tr>
+<td>NSS / TSP</td>
+<td style="text-align: right;">35.10%</td>
+<td style="text-align: right;">29.45%</td>
+<td style="text-align: right;">0.6088%</td>
+<td style="text-align: right;">1.0718%</td>
+</tr>
+<tr>
+<td>NSS / CVRP</td>
+<td style="text-align: right;">45.90%</td>
+<td style="text-align: right;">26.32%</td>
+<td style="text-align: right;">0.5695%</td>
+<td style="text-align: right;">1.8111%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论：不是只学了选择比例，模型与NSS都利用了实例信息。</strong> CVRP、VRPTW的实例级增益明显；ATSP更多依赖规模，OVRPTW的额外实例级增益较弱。没有第二个同规模实例时保留原预测，不放宽条件；全18任务可交换覆盖率98.88%。</p>
+<h2>剩余错误主要卡在哪里</h2>
+<p>按模型给各方法的排名，统计真正winner的位置。</p>
+<table>
+<thead>
+<tr>
+<th>错误类型</th>
+<th style="text-align: right;">错误数</th>
+<th style="text-align: right;">占全部错误</th>
+<th style="text-align: right;">占总regret</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>winner排第二，只是没有排第一</td>
+<td style="text-align: right;">6,147</td>
+<td style="text-align: right;">64.09%</td>
+<td style="text-align: right;">64.36%</td>
+</tr>
+<tr>
+<td>winner排第三</td>
+<td style="text-align: right;">1,951</td>
+<td style="text-align: right;">20.34%</td>
+<td style="text-align: right;">20.31%</td>
+</tr>
+<tr>
+<td>winner不在前三</td>
+<td style="text-align: right;">1,493</td>
+<td style="text-align: right;">15.57%</td>
+<td style="text-align: right;">15.32%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论：主要卡在头部候选之间的最终排序，不是完全找不到好方法。</strong> MOEL/MTL互选贡献48.52%的regret，但其余方法比较仍占51.48%，不能只研究这一对。</p>
+<p>高Top3也不一定全是模型能力：OVRPTW固定三个强方法就覆盖99.9%的winner，与模型相同；CVRP固定三个只覆盖64.5%，模型为81.1%，后者才有明显动态候选增益。Top3覆盖不是只执行一个方法的准确率。</p>
+<h3>有些方法是不是一直被忽略</h3>
+<p>使用同一模型权重统计train和test；“获胜占比”与“被选择占比”不是同一个指标。</p>
+<table>
+<thead>
+<tr>
+<th>问题 / 方法</th>
+<th style="text-align: right;">Train获胜占比</th>
+<th style="text-align: right;">Train选择占比</th>
+<th style="text-align: right;">Test获胜占比</th>
+<th style="text-align: right;">Test选择占比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TSP / BQ</td>
+<td style="text-align: right;">30.77%</td>
+<td style="text-align: right;">64.21%</td>
+<td style="text-align: right;">28.00%</td>
+<td style="text-align: right;">65.00%</td>
+</tr>
+<tr>
+<td>TSP / LEHD</td>
+<td style="text-align: right;">16.23%</td>
+<td style="text-align: right;">0.34%</td>
+<td style="text-align: right;">18.50%</td>
+<td style="text-align: right;">0.50%</td>
+</tr>
+<tr>
+<td>TSP / T2T</td>
+<td style="text-align: right;">10.90%</td>
+<td style="text-align: right;">0.74%</td>
+<td style="text-align: right;">11.40%</td>
+<td style="text-align: right;">0.50%</td>
+</tr>
+<tr>
+<td>VRPTW / MVMOE</td>
+<td style="text-align: right;">6.29%</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">6.60%</td>
+<td style="text-align: right;">0.00%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论：部分方法在训练集就很少被选，不能全部解释为测试时泛化失败。</strong> 但不能直接强制选够次数，还要看选它失败时的代价及能否识别它的获胜条件。</p>
+<h2>是不是因为方法成本太接近，才很难选对</h2>
+<p>按每例真正第一、第二名的相对成本差分组，统计模型选错造成的损失。</p>
+<table>
+<thead>
+<tr>
+<th>真正前两名成本差</th>
+<th style="text-align: right;">实例数</th>
+<th style="text-align: right;">错误数</th>
+<th style="text-align: right;">占总regret</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>完全相等</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">0.01%</td>
+</tr>
+<tr>
+<td>大于0、不超过0.1%</td>
+<td style="text-align: right;">1,390</td>
+<td style="text-align: right;">919</td>
+<td style="text-align: right;">2.91%</td>
+</tr>
+<tr>
+<td>0.1%至0.5%</td>
+<td style="text-align: right;">4,244</td>
+<td style="text-align: right;">2,660</td>
+<td style="text-align: right;">11.73%</td>
+</tr>
+<tr>
+<td>0.5%至1%</td>
+<td style="text-align: right;">3,458</td>
+<td style="text-align: right;">1,951</td>
+<td style="text-align: right;">13.04%</td>
+</tr>
+<tr>
+<td>1%至2%</td>
+<td style="text-align: right;">3,774</td>
+<td style="text-align: right;">1,980</td>
+<td style="text-align: right;">21.41%</td>
+</tr>
+<tr>
+<td>大于2%</td>
+<td style="text-align: right;">5,096</td>
+<td style="text-align: right;">2,052</td>
+<td style="text-align: right;">50.90%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论：不能全部归因于近似并列，差距超过2%的实例贡献了一半剩余成本损失。</strong> TSP更接近：69.9%的实例前两名差距不超过0.5%；但不能把TSP推广到全部任务。</p>
+<h2>为什么改了很多轮，总分仍差不多</h2>
+<p>对比模型一次改动前后的预测，共18,000个test实例。</p>
+<table>
+<thead>
+<tr>
+<th>变化</th>
+<th style="text-align: right;">实例数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>改变了选择</td>
+<td style="text-align: right;">4,670</td>
+</tr>
+<tr>
+<td>纠正原有错误</td>
+<td style="text-align: right;">1,682</td>
+</tr>
+<tr>
+<td>把原本正确的改错</td>
+<td style="text-align: right;">1,897</td>
+</tr>
+<tr>
+<td>两者都错，但变便宜</td>
+<td style="text-align: right;">473</td>
+</tr>
+<tr>
+<td>两者都错，但变贵</td>
+<td style="text-align: right;">617</td>
+</tr>
+<tr>
+<td>两者都错，改选但成本相等</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论：不是改动没有影响，而是纠正与新增错误互相抵消。</strong> 另外，15个历史模型共同选错5,146例，占28.59%，贡献表中改动后模型49.17%的regret；这些共同错误值得定位，但不能据此宣布它们不可学。</p>
+<h2>NSS也有类似问题吗</h2>
+<p>使用相同本地数据与候选池，统一按原始标签重算。普通test与LIB各保留一个已有模型示例，两部分不是同一权重。</p>
+<table>
+<thead>
+<tr>
+<th>数据集</th>
+<th style="text-align: right;">NSS Top1 / Top3</th>
+<th style="text-align: right;">模型 Top1 / Top3</th>
+<th style="text-align: right;">NSS regret</th>
+<th style="text-align: right;">模型 regret</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TSP test</td>
+<td style="text-align: right;">35.10% / 72.20%</td>
+<td style="text-align: right;">35.90% / 75.20%</td>
+<td style="text-align: right;">0.6088%</td>
+<td style="text-align: right;">0.6504%</td>
+</tr>
+<tr>
+<td>CVRP test</td>
+<td style="text-align: right;">45.90% / 77.70%</td>
+<td style="text-align: right;">48.10% / 82.20%</td>
+<td style="text-align: right;">0.5695%</td>
+<td style="text-align: right;">0.6138%</td>
+</tr>
+<tr>
+<td>TSPLIB，49例</td>
+<td style="text-align: right;">38.78% / 81.63%</td>
+<td style="text-align: right;">55.10% / 83.67%</td>
+<td style="text-align: right;">0.4353%</td>
+<td style="text-align: right;">0.3431%</td>
+</tr>
+<tr>
+<td>CVRPLIB，100例</td>
+<td style="text-align: right;">68.00% / 87.00%</td>
+<td style="text-align: right;">69.00% / 88.00%</td>
+<td style="text-align: right;">0.2724%</td>
+<td style="text-align: right;">0.3429%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论：本地NSS也有低Top1，但不是所有指标都比模型差。</strong> TSP/CVRP test上，模型的Top1更高，NSS的成本损失反而更低。NSS训练抽样准确率与val/test接近，也不能统一归为严重过拟合。</p>
+<p>原论文排序损失的Top1为TSP约35%、CVRP约62%、TSPLIB约40%、CVRPLIB约56%，没有可直接比较的Top3命中率表。候选池不同，不能直接要求本地复现达到原数字；本地还存在validation选型指标差异，不是严格重做原论文。数字来源见<a href="report.html">详细报告</a>。</p>
+<h2>提高Top1和降低成本，是不是同一件事</h2>
+<p>在完全相同的训练规模分组内，只把决策从“谁最常赢”改成“谁平均相对成本最低”。</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th style="text-align: right;">Test Top1变化</th>
+<th style="text-align: right;">Test regret变化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TSP</td>
+<td style="text-align: right;">-7.30个百分点</td>
+<td style="text-align: right;">-0.5072个百分点</td>
+</tr>
+<tr>
+<td>CVRP</td>
+<td style="text-align: right;">-2.80个百分点</td>
+<td style="text-align: right;">-0.7108个百分点</td>
+</tr>
+<tr>
+<td>VRPTW</td>
+<td style="text-align: right;">+3.20个百分点</td>
+<td style="text-align: right;">-0.3296个百分点</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论：有些问题存在准确率与成本取舍，有些可以同时改善。</strong> 不能只盯Top1，也不能据此断言换一个loss就能突破。</p>
+<h2>是不是train与test差太多</h2>
+<p>“非规模越界”指至少一项所测几何、需求等特征超出train范围。</p>
+<table>
+<thead>
+<tr>
+<th>数据集</th>
+<th>规模范围</th>
+<th style="text-align: right;">规模超出train的比例</th>
+<th style="text-align: right;">非规模越界比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TSP test</td>
+<td>50至499</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">0.50%</td>
+</tr>
+<tr>
+<td>TSPLIB</td>
+<td>51至1002</td>
+<td style="text-align: right;">14.29%</td>
+<td style="text-align: right;">87.76%</td>
+</tr>
+<tr>
+<td>CVRP test</td>
+<td>50至499</td>
+<td style="text-align: right;">0.00%</td>
+<td style="text-align: right;">0.20%</td>
+</tr>
+<tr>
+<td>CVRPLIB</td>
+<td>100至1000</td>
+<td style="text-align: right;">32.00%</td>
+<td style="text-align: right;">52.00%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论：普通val/test的规模与所测粗统计接近train，暂不支持明显的粗分布偏移；LIB明显更不同，必须单独评价。</strong> 这不证明普通test覆盖充分，也不能指定是哪项变化造成LIB性能下降；越界比例不是不可预测比例。</p>
+<h2>不换网络，现有分数还能改善多少</h2>
+<p>只用train建立查表规则：在相似规模、相同有序Top2和相近分数差下，选平均相对成本更低的那个方法。只重排原Top2，不新训神经模型。</p>
+<table>
+<thead>
+<tr>
+<th>使用方式</th>
+<th style="text-align: right;">Val Top1</th>
+<th style="text-align: right;">Test Top1</th>
+<th style="text-align: right;">Val regret</th>
+<th style="text-align: right;">Test regret</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型</td>
+<td style="text-align: right;">48.38%</td>
+<td style="text-align: right;">46.72%</td>
+<td style="text-align: right;">0.9888%</td>
+<td style="text-align: right;">1.0052%</td>
+</tr>
+<tr>
+<td>分数条件查表，按平均相对成本选择</td>
+<td style="text-align: right;">48.54%</td>
+<td style="text-align: right;">47.37%</td>
+<td style="text-align: right;">0.9821%</td>
+<td style="text-align: right;">0.9859%</td>
+</tr>
+<tr>
+<td>再增加一个几何／约束描述符</td>
+<td style="text-align: right;">48.34%</td>
+<td style="text-align: right;">47.13%</td>
+<td style="text-align: right;">0.9771%</td>
+<td style="text-align: right;">0.9937%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论：能恢复少量退化，但不是突破；增加这个描述符也没有稳定收益。</strong> 这是回顾性诊断，不是正式发布的新模型结果。</p>
+<h2>总结</h2>
+<ul>
+<li>模型确实学到了实例信息，数据也确实存在可迁移的方法偏好。</li>
+<li>平台的直接表现是：头部排序仍弱、部分方法长期被忽略、改动带来的纠正与伤害抵消；尚未确认一个共同根因。</li>
+<li>不能据此说方向没有价值，也不能说已经达到上限；下一步需要针对明确的获胜条件与实际成本错误，而不是只期待更复杂的网络自然提高Top1。</li>
+</ul>
+<p>备注：本轮没有重训、复跑solver或修改标签。带B任务已知的旧约束语义问题仍待处理；以上均为旧场景统计。几何距离统计在超过128客户时使用固定子集。</p></main></body></html>

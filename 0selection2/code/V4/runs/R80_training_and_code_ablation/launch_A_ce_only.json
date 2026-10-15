@@ -1,0 +1,89 @@
+{
+  "arm": "A_ce_only",
+  "worker_pid": 3893291,
+  "host": "gpu03",
+  "job_id": "1465",
+  "step_id": "162",
+  "started_utc": "2026-10-15T12:18:50.257410+00:00",
+  "state": "running",
+  "group": {
+    "job": 1465,
+    "node": "gpu03",
+    "index": 0,
+    "gpu_type": "3090",
+    "cap": 384,
+    "uuid": "GPU-cb24f168-9f18-f0d5-6f4a-6d2406958f50",
+    "batch": 1024,
+    "updates": 49680
+  },
+  "stages": [
+    {
+      "stage": "train",
+      "command": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r80_experiment",
+        "train",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation",
+        "--arm",
+        "A_ce_only",
+        "--data-root",
+        "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+        "--cache-root",
+        "/tmp/shiys_R76_R45A_single_reld_mt_cache",
+        "--gpu-type",
+        "3090",
+        "--large-micro-cap",
+        "384",
+        "--device",
+        "cuda:0",
+        "--eval-batch-size",
+        "256",
+        "--log-every",
+        "18",
+        "--wandb-mode",
+        "offline"
+      ],
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation/A_ce_only/train.log",
+      "started_utc": "2026-10-15T12:18:51.733849+00:00",
+      "state": "running",
+      "pid": 3896328
+    }
+  ],
+  "gpu_preflight": {
+    "index": 0,
+    "uuid": "GPU-cb24f168-9f18-f0d5-6f4a-6d2406958f50",
+    "name": "NVIDIA GeForce RTX 3090",
+    "memory_used_mib": 2,
+    "memory_total_mib": 24576,
+    "utilization_pct": 0
+  },
+  "cache": {
+    "path": "/tmp/shiys_R76_R45A_single_reld_mt_cache",
+    "array_count": 321,
+    "array_bytes": 17026116096,
+    "available_bytes": 267068293120,
+    "validation": "metadata identity + all array file sizes; no TEST values read",
+    "copied_files": 0,
+    "reused": true
+  },
+  "wandb": {
+    "enabled": true,
+    "requested": "online_if_existing_credentials",
+    "checked_utc": "2026-10-15T12:18:50.419196+00:00",
+    "selected_mode": "offline",
+    "credential_present": false,
+    "credential_source": "none",
+    "offline_reason": "No existing W&B credential found; no login prompt was started"
+  },
+  "cuda_visible_devices": "GPU-cb24f168-9f18-f0d5-6f4a-6d2406958f50",
+  "source_sha256": {
+    "/public/home/shiys/0selection2/code/V4/run_v4_r80.sh": "615e4cb9d3ed52d4f7c199c0a0e20242fadbd5bb1a03f0d1486db1298f07dda9",
+    "/public/home/shiys/0selection2/code/V4/r80_launch.py": "89902c54619f6319d578a1e0d2ff765872b64eb89082f2943f5bfde5151cae19",
+    "/public/home/shiys/0selection2/code/V4/r80_experiment.py": "df11f0a18b9d0649743f5a736a0756c839d7ebf7fcdd8b5c5d04d93996a0f5cb",
+    "/public/home/shiys/0selection2/code/V4/r80_reporting.py": "e2aa4528892d620fc6b2f01c462399519deb65cbf5c55e04e90a96c73d6f2eb0"
+  }
+}

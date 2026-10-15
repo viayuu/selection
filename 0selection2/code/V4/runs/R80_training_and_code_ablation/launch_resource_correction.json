@@ -1,0 +1,13 @@
+{
+  "experiment": "R80",
+  "reason": "Slurm 20 --overlap does not share the inherited GPU GRES; first A/B steps each inherited both allocated GPUs, leaving C/D pending without any runner process",
+  "preserved_running_arms": ["A_ce_only", "B_batch512"],
+  "pending_only_srun_clients_terminated": {"C_lr3e4": 2363886, "D_code_embedding": 2363883},
+  "original_controller_exit_records": ["launch_C_lr3e4_controller.json", "launch_D_code_embedding_controller.json"],
+  "precondition": "Both C/D worker receipts were absent before pending-only srun cancellation; no C/D runner training had started",
+  "correction": "Existing allocation CPU-only srun (4 CPU, 9G, --gres=none) execs into that allocation's existing Sothis container; container identity/cgroup and two assigned UUIDs are verified",
+  "new_allocation": false,
+  "hyperparameter_change": false,
+  "training_restart": false,
+  "cache_action": "Copy existing node-local frozen cache once into each existing container's local /tmp; no cache generation or solver/embedding work"
+}

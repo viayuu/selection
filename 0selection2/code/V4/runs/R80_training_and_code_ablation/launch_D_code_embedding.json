@@ -1,0 +1,103 @@
+{
+  "arm": "D_code_embedding",
+  "worker_pid": 219999,
+  "host": "76045731f6b4",
+  "job_id": "1475",
+  "step_id": "existing_allocation_container",
+  "started_utc": "2026-10-15T12:32:05.264709+00:00",
+  "state": "running",
+  "group": {
+    "job": 1475,
+    "node": "gpu05",
+    "index": 1,
+    "gpu_type": "4090",
+    "cap": 352,
+    "uuid": "GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d",
+    "batch": 1024,
+    "updates": 49680
+  },
+  "stages": [
+    {
+      "stage": "train",
+      "command": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r80_experiment",
+        "train",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation",
+        "--arm",
+        "D_code_embedding",
+        "--data-root",
+        "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+        "--cache-root",
+        "/tmp/shiys_R76_R45A_single_reld_mt_cache",
+        "--gpu-type",
+        "4090",
+        "--large-micro-cap",
+        "352",
+        "--device",
+        "cuda:0",
+        "--eval-batch-size",
+        "256",
+        "--log-every",
+        "18",
+        "--wandb-mode",
+        "offline"
+      ],
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation/D_code_embedding/train.log",
+      "started_utc": "2026-10-15T12:32:07.065556+00:00",
+      "state": "running",
+      "pid": 220045
+    }
+  ],
+  "container": {
+    "name": "1475_gpu05",
+    "id": "76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6",
+    "cgroup": "12:memory:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n11:cpuset:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n10:blkio:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n9:hugetlb:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n8:devices:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n7:perf_event:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n6:rdma:/\n5:freezer:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n4:pids:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n3:net_cls,net_prio:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n2:cpu,cpuacct:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n1:name=systemd:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n",
+    "assigned_cpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "allocated_cpu_limit": 10,
+    "allocated_memory_bytes": 21474836480,
+    "transport": "existing allocation CPU srun -> allocation-owned container exec"
+  },
+  "gpu_preflight": {
+    "index": 1,
+    "uuid": "GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d",
+    "name": "NVIDIA GeForce RTX 4090",
+    "memory_used_mib": 2,
+    "memory_total_mib": 24564,
+    "utilization_pct": 0
+  },
+  "cache": {
+    "path": "/tmp/shiys_R76_R45A_single_reld_mt_cache",
+    "array_count": 321,
+    "array_bytes": 17026116096,
+    "available_bytes": 246900314112,
+    "validation": "metadata identity + all array file sizes; no TEST values read",
+    "copied_files": 0,
+    "reused": true
+  },
+  "wandb": {
+    "enabled": true,
+    "requested": "online_if_existing_credentials",
+    "checked_utc": "2026-10-15T12:32:05.375594+00:00",
+    "selected_mode": "offline",
+    "credential_present": false,
+    "credential_source": "none",
+    "offline_reason": "No existing W&B credential found; no login prompt was started"
+  },
+  "cuda_visible_devices": "GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d",
+  "source_sha256": {
+    "/public/home/shiys/0selection2/code/V4/run_v4_r80.sh": "615e4cb9d3ed52d4f7c199c0a0e20242fadbd5bb1a03f0d1486db1298f07dda9",
+    "/public/home/shiys/0selection2/code/V4/r80_launch.py": "44f54f5d6b7f7098c9a3802d1cd06c061ac2a28b10784ea63b245e3ebe271bfc",
+    "/public/home/shiys/0selection2/code/V4/r80_experiment.py": "df11f0a18b9d0649743f5a736a0756c839d7ebf7fcdd8b5c5d04d93996a0f5cb",
+    "/public/home/shiys/0selection2/code/V4/r80_reporting.py": "ba3681260b436bc64e5a96a7310d414f726a5d870bc0bed3ed7c262e7b61e0d8"
+  }
+}
