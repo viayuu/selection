@@ -1,0 +1,277 @@
+[
+  {
+    "round": "001",
+    "baseline": "R76 ep18",
+    "mechanism": "Frozen R76 logits plus per-task sum-zero intercepts; natural TRAIN CE + ||b||^2/(2N); seed2, batch1024.",
+    "mechanism_short": "Frozen R76\nsum-zero CE offsets",
+    "successful_updates": 540000,
+    "actual_budget": "540,000 CPU updates (30,000/task), batch1,024; only 1/18 passed two successive convergence checks.",
+    "baseline_val": {
+      "top1_pct": 69.236913,
+      "regret_pct": 0.464503404,
+      "mean_cost": 11.402474922
+    },
+    "candidate_val": {
+      "top1_pct": 69.379546,
+      "regret_pct": 0.467179029,
+      "mean_cost": 11.402575925
+    },
+    "baseline_train": {
+      "top1_pct": 69.369646,
+      "regret_pct": 0.460650092,
+      "mean_cost": 11.37300484
+    },
+    "candidate_train": {
+      "top1_pct": 69.425982,
+      "regret_pct": 0.462689801,
+      "mean_cost": 11.373099773
+    },
+    "metric_split": "VAL",
+    "counts_split": "VAL",
+    "counts_rows_per_task": 3895,
+    "zero_pairs_base": 54,
+    "zero_pairs_candidate": 54,
+    "train_zero_pairs_base": 55,
+    "train_zero_pairs_candidate": 55,
+    "changed_predictions": 2355,
+    "corrected": 740,
+    "harmed": 640,
+    "wrong_to_wrong": 975,
+    "wrong_to_wrong_source": "Derived counter: 2355 - 740 - 640",
+    "status": "inconclusive; 1/18 converged; cost gate failed",
+    "final_action": "retain R76 identity; no certified converged optimum claim",
+    "test_run": false,
+    "source_results": "/public/home/shiys/0selection2/code/V4/runs/R78_zero_selection_goal/round001/RESULTS.md",
+    "source_protocol": "/public/home/shiys/0selection2/code/V4/runs/R78_zero_selection_goal/round001/RESEARCH_HANDOFF.md",
+    "precision_note": "Copied original report precision; no prediction recomputation"
+  },
+  {
+    "round": "002",
+    "baseline": "R76 ep18",
+    "mechanism": "Frozen R76, K-1 intercepts; FP64 cost-weighted quadratic mean[(r/c)*(1+h+b)^2]+||b||^2/(2N), c=TRAIN mean regret; projected SVRG.",
+    "mechanism_short": "Frozen R76\ncost-weighted quadratic\nK-1 offsets / SVRG",
+    "successful_updates": 253000,
+    "actual_budget": "253,000 CPU updates + 271 full-gradient snapshots (not updates); 14/18 converged, 4 hit 30,000; no candidate VAL.",
+    "baseline_val": {},
+    "candidate_val": {},
+    "baseline_train": {
+      "top1_pct": 69.369646,
+      "regret_pct": 0.460650092,
+      "mean_cost": 11.37300484
+    },
+    "candidate_train": {
+      "top1_pct": 40.849743,
+      "regret_pct": 2.826220296,
+      "mean_cost": 11.653491213
+    },
+    "metric_split": "TRAIN only; candidate VAL not evaluated",
+    "counts_split": "TRAIN",
+    "counts_rows_per_task": 70114,
+    "zero_pairs_base": 55,
+    "zero_pairs_candidate": 21,
+    "corrected": 143169,
+    "harmed": 503105,
+    "status": "inconclusive; 14/18 converged; VAL not evaluated",
+    "route_disposition": "route_closed_negative; preserve original inconclusive status",
+    "final_action": "retain R76 identity; analytical TRAIN reference not deployed",
+    "test_run": false,
+    "reference_train": {
+      "top1_pct": 40.849505409,
+      "regret_pct": 2.826224389
+    },
+    "reference_prediction_disagreements": 27,
+    "source_results": "/public/home/shiys/0selection2/code/V4/runs/R78_zero_selection_goal/round002/RESULTS.md",
+    "source_protocol": "/public/home/shiys/0selection2/code/V4/runs/R78_zero_selection_goal/round002/protocol.json",
+    "source_reference": "/public/home/shiys/0selection2/code/V4/runs/R78_zero_selection_goal/round002/TRAIN_REFERENCE_READOUT.md",
+    "precision_note": "Copied original report precision; TRAIN only, no candidate VAL"
+  },
+  {
+    "round": "003",
+    "baseline": "R77B ep28/u34776",
+    "mechanism": "Matched full-model continuation from B: control original loss; treatment replaces only 0.02 risk with 0.02*mean_valid_K[(r/a_t)*softplus(z-mean_valid_K z)]; CE/compare/RDrop each remain 0.35.",
+    "mechanism_short": "Matched continuation\nC: original risk\nT: new 0.02 risk",
+    "successful_updates": 29808,
+    "actual_budget": "29,808 GPU updates total (14,904/arm), batch1,024; fixed +4,968/+9,936/+14,904; 0/6 endpoint gates passed.",
+    "baseline_val": {
+      "top1_pct": 70.894308943,
+      "regret_pct": 0.401326745,
+      "mean_cost": 11.395558343544
+    },
+    "candidate_val": {
+      "top1_pct": 70.828697761,
+      "regret_pct": 0.413110693,
+      "mean_cost": 11.395991601929
+    },
+    "matched_control_val": {
+      "top1_pct": 70.81443446,
+      "regret_pct": 0.410925983,
+      "mean_cost": 11.395855343252
+    },
+    "metric_split": "VAL; final actual endpoints; C=control, T=treatment",
+    "counts_split": "VAL +4968 only",
+    "counts_rows_per_task": 3895,
+    "zero_pairs_base": 30,
+    "zero_pairs_candidate": 27,
+    "first_endpoint_control_zero_pairs": 27,
+    "counts_note": "First endpoint only: B30 -> control27/treatment27; TSP LEHD winner641, zero selected. Final changed_decisions.csv describes fallback B, not actual trajectories; do not use its zeros.",
+    "status": "closed negative; 0/6 endpoint gates; finite budget only",
+    "final_action": "retain whole R77B; no sufficient-convergence claim",
+    "test_run": false,
+    "source_results": "/public/home/shiys/0selection2/code/V4/runs/R78_zero_selection_goal/round003/FINAL_RESULTS.md",
+    "source_protocol": "/public/home/shiys/0selection2/code/V4/runs/R78_zero_selection_goal/round003/EXECUTION_PLAN.md",
+    "val_endpoints": [
+      {
+        "update": 4968,
+        "arm": "control",
+        "top1_pct": 70.921409214,
+        "regret_pct": 0.405973048,
+        "mean_cost": 11.39571683927
+      },
+      {
+        "update": 4968,
+        "arm": "treatment",
+        "top1_pct": 70.897161603,
+        "regret_pct": 0.407708383,
+        "mean_cost": 11.395848830432
+      },
+      {
+        "update": 9936,
+        "arm": "control",
+        "top1_pct": 70.850092711,
+        "regret_pct": 0.408499816,
+        "mean_cost": 11.395744982192
+      },
+      {
+        "update": 9936,
+        "arm": "treatment",
+        "top1_pct": 70.832976751,
+        "regret_pct": 0.410676066,
+        "mean_cost": 11.395886356713
+      },
+      {
+        "update": 14904,
+        "arm": "control",
+        "top1_pct": 70.81443446,
+        "regret_pct": 0.410925983,
+        "mean_cost": 11.395855343252
+      },
+      {
+        "update": 14904,
+        "arm": "treatment",
+        "top1_pct": 70.828697761,
+        "regret_pct": 0.413110693,
+        "mean_cost": 11.395991601929
+      }
+    ]
+  },
+  {
+    "round": "004",
+    "baseline": "R77B ep28/u34776",
+    "mechanism": "Frozen B cost head: g=1-p+Dp; FP64 relative-cost regression + fixed unit prior; no backbone update.",
+    "mechanism_short": "Frozen B\nprobability-to-cost head",
+    "actual_budget": "24,840 CPU updates; 1,380/task; batch 1,024; fit 21.50s",
+    "successful_updates": 24840,
+    "baseline_val": {
+      "top1_pct": 70.89430894308944,
+      "regret_pct": 0.40132674544775454,
+      "mean_cost": 11.395558343544208
+    },
+    "candidate_val": {
+      "top1_pct": 67.94751105405791,
+      "regret_pct": 0.49272605411993387,
+      "mean_cost": 11.407802464374912
+    },
+    "zero_pairs_base": 30,
+    "zero_pairs_candidate": 23,
+    "zero_winner_rows_base": 2648,
+    "zero_winner_rows_candidate": 1441,
+    "status": "closed negative; all 3 gates failed",
+    "final_action": "retain whole R77B",
+    "test_run": false,
+    "metric_split": "VAL",
+    "counts_split": "VAL",
+    "counts_rows_per_task": 3895,
+    "source_results": "/public/home/shiys/0selection2/code/V4/runs/R78_zero_selection_goal/round004/results.json",
+    "source_protocol": "/public/home/shiys/0selection2/code/V4/runs/R78_zero_selection_goal/round004/protocol.json",
+    "changed_predictions": 10024,
+    "corrected": 3276,
+    "harmed": 5342,
+    "wrong_to_wrong": 1406,
+    "runtime_seconds": 21.500315375626087
+  },
+  {
+    "round": "005",
+    "baseline": "R77B ep28/u34776",
+    "mechanism": "Fixed 0.5/0.5 average of A/B T=1 probabilities; original preprocessing; no training or weight search.",
+    "mechanism_short": "Fixed A/B\nprobability average",
+    "actual_budget": "0 updates; one cached VAL screen, 70,110 rows; CPU 0.290s",
+    "successful_updates": 0,
+    "baseline_val": {
+      "top1_pct": 70.89430894308944,
+      "regret_pct": 0.40132674544775454,
+      "mean_cost": 11.395558343544208
+    },
+    "candidate_val": {
+      "top1_pct": 70.75310226786479,
+      "regret_pct": 0.4027526786453317,
+      "mean_cost": 11.39561063702268
+    },
+    "zero_pairs_base": 30,
+    "zero_pairs_candidate": 33,
+    "zero_winner_rows_base": 2648,
+    "zero_winner_rows_candidate": 3268,
+    "status": "closed negative; all 3 gates failed",
+    "final_action": "retain whole R77B",
+    "test_run": false,
+    "metric_split": "VAL",
+    "counts_split": "VAL",
+    "counts_rows_per_task": 3895,
+    "source_results": "/public/home/shiys/0selection2/code/V4/runs/R78_zero_selection_goal/round005/results.json",
+    "source_protocol": "/public/home/shiys/0selection2/code/V4/runs/R78_zero_selection_goal/round005/protocol.json",
+    "changed_predictions": 2444,
+    "corrected": 751,
+    "harmed": 850,
+    "wrong_to_wrong": 843,
+    "runtime_seconds": 0.29017232172191143
+  },
+  {
+    "round": "006",
+    "baseline": "R77B ep28/u34776",
+    "mechanism": "Original two-view loss + 0.10 cost-profile neighborhood representation loss; unique final14904 endpoint.",
+    "mechanism_short": "Cost-profile\nneighborhood loss",
+    "actual_budget": "14,904 GPU updates; 828/task; batch 1,024; single 4090; 4,858.43s",
+    "successful_updates": 14904,
+    "baseline_val": {
+      "top1_pct": 70.89430894308944,
+      "regret_pct": 0.40132674544775454,
+      "mean_cost": 11.395558343544208
+    },
+    "candidate_val": {
+      "top1_pct": 70.8015974896591,
+      "regret_pct": 0.4123337565650735,
+      "mean_cost": 11.395979869603726
+    },
+    "zero_pairs_base": 30,
+    "zero_pairs_candidate": 26,
+    "zero_winner_rows_base": 2648,
+    "zero_winner_rows_candidate": 1959,
+    "status": "closed negative; all 3 gates failed",
+    "final_action": "retain whole R77B",
+    "test_run": false,
+    "metric_split": "VAL",
+    "counts_split": "VAL",
+    "counts_rows_per_task": 3895,
+    "source_results": "/public/home/shiys/0selection2/code/V4/runs/R78_zero_selection_goal/round006/results.json",
+    "source_protocol": "/public/home/shiys/0selection2/code/V4/runs/R78_zero_selection_goal/round006/prepared.json",
+    "corrected": 641,
+    "harmed": 706,
+    "wrong_to_wrong": 586,
+    "changed_predictions": 1933,
+    "runtime_seconds": 4858.433006641993,
+    "historical_control_val": {
+      "top1_pct": 70.81443446013407,
+      "regret_pct": 0.41092598253845325,
+      "mean_cost": 11.395855343252101
+    }
+  }
+]

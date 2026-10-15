@@ -3314,6 +3314,65 @@ rebuildable bulk logs remain local. The durable update60 versus logged update91
 boundary and unfinished/unvalidated continuation8 are explicitly documented.
 No new training, evaluation, model checks or goal resumption is authorized.
 
+## R74 Termination and Separate Batch-Selection Request, 2026-10-13
+
+The user explicitly requested one seed2 full-label large-data training/test run,
+but only batch selection is authorized before their approval. This is a separate
+bounded R75 capacity task, not resumption of the paused native70 goal or R74.
+Use the unchanged R65B native-utility model and exact complete updates, real
+TRAIN-only rows, no VAL/TEST, scratch state discarded, at most80 successful
+updates/8 batch candidates/600s GPU timing and at least3GiB physical headroom.
+Because the user requests a large batch, recommend the largest safe candidate
+within95% of the best measured mixed-size throughput; report all measurements.
+Actual Sol/max data adapter agent01a13596-c303-7542-82d2-8c25905a22b5 and focused
+read-only Astra/max planner01a13596-cdd8-7c22-870a-69b664b7cec8 participated.
+
+The user also explicitly ordered complete termination of the paused R74 process,
+then clarified to KEEP all disk files. Only owned step1465.118 was cancelled;
+actual sacct CANCELLED0:9, PID101584 gone, no r74 tmux/controllers, no compute
+clients on the assigned UUID, memory2MiB. Current NVML physical index is4, not
+the old1; binding remains the same UUID/logicalcuda0. All weights/caches/logs
+remain intact. Later in-memory updates61-91 are no longer recoverable; durable
+update60 remains. TERMINATED.json supersedes earlier retained-process notes.
+Other jobs/devices/allocation1465 were not cancelled. Goal remains PAUSED.
+
+R75 capacity selection completed without formal TRAIN/VAL/TEST. Both owned GPU
+steps1465.119/.120 completed0:0. Default allocator measurements are preserved;
+one explicitly recorded expandable-segment allocator regime was then tested in
+a fresh process to reduce reservation overhead, not change the model/loss.
+Final recommendation is per-task384/effective1152 with
+PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True: allocated19.407GiB,
+reserved19.709GiB, conservative device peak20.032GiB, physical headroom3.556GiB,
+six all18 mixed updates2839.5instances/s.416/448 fail the3GiB safety margin;
+512 causes one genuine CUDA OOM. Combined8 configurations/21successful scratch
+updates/20928native presentations/AMP0/oneOOM/28.491s measured GPU body. All
+sizing state discarded; assigned GPU returned2MiB. RootBATCH_SELECTION.md,
+batch_comparison.csv andbatch_recommendation.json are final; original/default
+reports are archived undercapacity_default_allocator_* andexpanded actual raw
+reports remain undercapacity_expandable_allocator/. NoGitcommit. Wait for user's
+explicit batch approval before the one seed2 large-data formal run; goal and
+R74 are NOT resumed. Formal stats/schedules must fit actual new TRAIN counts.
+
+User then explicitly approved batch384 and requested training/evaluation plus
+continuous monitoring. This authorizes one independent R75 seed2 run, not the
+old native70 goal or R74 resumption. Sole UUID unchanged. Actual r75_train /
+1465.121 launched successfully; first phase generates contiguous node-local
+TRAIN+VAL caches/FP64-derived FP32 geometry and fits all TRAIN-only statistics.
+No model preflight or reference inference. Actual allocation launched at2MiB.
+
+R75 keeps the R65B native-utility model/CE+RDrop/ScheduleFree package, with40 full
+epochs,384/task, up to3 distinct actual task gradients/group, complete tails.
+1566groups/E,4698successful-update warmup/KLramp,62640update upperbudget. Late
+1/2-task groups average actual tasks; no dummy rows/replay/oversampling. Maxfull18
+VALintegercorrect, earliesttie, selects one complete averaged-x model. One full
+TEST only after that lock. Fresh seed2 weights, no Rxx trained state. R75 monitor
+tmux records progress/quality changes without autorestart or protocol changes.
+Actual focused Astra/max reviewer01a135ef-0d6e-7332-af0b-2fcaf4a5d3df found no
+protocol blocker and highlighted tail means, success clocks, SF-mode pairing
+and deterministic whole-update recovery. Cache adapter Sol/max agent
+01a135ef-0bef-7863-80c2-162026b31ad1; CPUanalysis Sol/max agent
+01a135ef-0d17-7d30-9eda-2396adee517e. Goal remains PAUSED; no Git yet.
+
 
 
 

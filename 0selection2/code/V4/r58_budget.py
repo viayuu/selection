@@ -21,7 +21,10 @@ UNACCOUNTED_OVERHEAD_SECONDS = 2 * 3600
 LABEL_CONTINGENCY_FRACTION = .10
 WHOLE_CLEARED = 'whole_plan_reference_under_100h'
 WHOLE_OVER = 'skip_whole_plan_at_or_over_100h'
-ACCOUNTING_RULE = 'G = S_actual + L_reference + H63 + 3h + 2h + 0.10 * L_reference < 100h'
+WHOLE_UNLIMITED = 'whole_plan_unlimited_user_authorization'
+ACCOUNTING_FORMULA = 'G = S_actual + L_reference + H63 + 3h + 2h + 0.10 * L_reference'
+ACCOUNTING_RULE = ACCOUNTING_FORMULA + ' < 100h'
+UNLIMITED_ACCOUNTING_RULE = ACCOUNTING_FORMULA + '; no GPU-hour limit (unlimited user authorization)'
 TRAINING_CONTEXT = (
     'Observed existing R45A history: 40 epochs at about 114 seconds of optimization per epoch '
     '(about 1.3 GPUh, excluding evaluation). Training under 3h on a 3090 is an expectation, '
@@ -51,6 +54,14 @@ LIMITATIONS = [
     'JSON retains arithmetic precision for audit, not timing accuracy.',
     'Preflight may still be running: this is a timestamped snapshot. Rerun after final preflight.',
 ]
+
+
+def gpu_hour_policy(limit=LIMIT_HOURS):
+    if limit is None or (type(limit) is str and limit == 'none'):
+        return dict(gpu_hour_limit=None, authorization='unlimited_user_authorization')
+    if (type(limit) is int and limit == LIMIT_HOURS) or (type(limit) is str and limit == '100'):
+        return dict(gpu_hour_limit=LIMIT_HOURS, authorization='default_100h_limit')
+    raise ValueError('--gpu-hour-limit must be 100 or none; arbitrary limits are not supported')
 
 
 def train_distribution(problem):
@@ -158,7 +169,9 @@ def estimate_profile(record, train, width):
     return estimate
 
 
-def build_budget(root=ROOT):
+def build_budget(root=ROOT, gpu_hour_limit=LIMIT_HOURS):
+    policy = gpu_hour_policy(gpu_hour_limit)
+    unlimited = policy['gpu_hour_limit'] is None
     started = datetime.now(timezone.utc).isoformat()
     hashes = implementation_hashes()
     trains = {problem: train_distribution(problem) for problem in PROBLEMS}
@@ -195,18 +208,22 @@ def build_budget(root=ROOT):
     total = sum(row['estimate']['fresh_solve_gpu_hours'] for row in measured)
     reference = sum(row['estimate']['conservative_reference_gpu_hours'] for row in measured)
     complete = len(measured) == len(deployments)
-    over = max(total, reference) > LIMIT_HOURS
-    budget = dict(threshold_gpu_hours=LIMIT_HOURS,
+    over = not unlimited and max(total, reference) > LIMIT_HOURS
+    budget = dict(threshold_gpu_hours=policy['gpu_hour_limit'],
         current_profile_subtotal_gpu_hours=total,
         current_profile_conservative_reference_gpu_hours=reference,
-        current_profile_point_status='>100h' if total > LIMIT_HOURS else '<=100h',
-        conservative_reference_status='>100h' if reference > LIMIT_HOURS else '<=100h',
+        current_profile_point_status='no_gpu_hour_limit' if unlimited else
+                                     ('>100h' if total > LIMIT_HOURS else '<=100h'),
+        conservative_reference_status='no_gpu_hour_limit' if unlimited else
+                                      ('>100h' if reference > LIMIT_HOURS else '<=100h'),
         all_deployments_gpu_hours=total if complete else None,
-        all_deployments_status=('>100h' if over else '<=100h') if complete else
+        all_deployments_status=('no_gpu_hour_limit' if unlimited else '>100h' if over else '<=100h') if complete else
                                ('>100h_projected_current_subset' if over else 'unknown_incomplete_coverage'),
-        decision='skip_full_fresh_solve_projected_over_100h' if over else
+        decision='unlimited_user_authorization_not_a_whole_plan_approval' if unlimited and complete else
+                 'skip_full_fresh_solve_projected_over_100h' if over else
                  ('point_estimate_within_100h_not_guaranteed' if complete else 'not_cleared_incomplete_coverage'))
     return dict(scenario='R58 scenario_v2 fresh solve',
+        gpu_hour_policy=policy,
         snapshot_started_utc=started, snapshot_finished_utc=datetime.now(timezone.utc).isoformat(),
         root=str(Path(root).resolve()), implementation_sha256=hashes, contract_sha256=canonical_hash(CONTRACT),
         projection_counts=SPLIT_COUNTS, projected_solver_instance_evaluations=len(deployments) * sum(SPLIT_COUNTS.values()),
@@ -221,9 +238,11 @@ def build_budget(root=ROOT):
         budget=budget, limitations=LIMITATIONS, training_context=TRAINING_CONTEXT, deployments=deployments)
 
 
-def whole_components(spent_seconds, label_reference_seconds, session_overhead_seconds):
+def whole_components(spent_seconds, label_reference_seconds, session_overhead_seconds, gpu_hour_limit=LIMIT_HOURS):
     from .r58_timing_refinement import positive
 
+    policy = gpu_hour_policy(gpu_hour_limit)
+    unlimited = policy['gpu_hour_limit'] is None
     for name, value in [('spent', spent_seconds), ('label reference', label_reference_seconds),
                         ('measured63 overhead', session_overhead_seconds)]:
         positive(value, name, allow_zero=True)
@@ -234,9 +253,11 @@ def whole_components(spent_seconds, label_reference_seconds, session_overhead_se
         label_contingency=LABEL_CONTINGENCY_FRACTION * label_reference_seconds)
     total = sum(components.values())
     return dict(components_seconds=components, whole_reference_seconds=total,
+        gpu_hour_policy=policy, accounting_rule=UNLIMITED_ACCOUNTING_RULE if unlimited else ACCOUNTING_RULE,
         whole_projected_gpu_hours=total / 3600,
-        label_reference_limit_gpu_hours=(95 - (spent_seconds + session_overhead_seconds) / 3600) / 1.10,
-        decision=WHOLE_CLEARED if total < LIMIT_HOURS * 3600 and
+        label_reference_limit_gpu_hours=None if unlimited else
+            (95 - (spent_seconds + session_overhead_seconds) / 3600) / 1.10,
+        decision=WHOLE_UNLIMITED if unlimited else WHOLE_CLEARED if total < LIMIT_HOURS * 3600 and
                  not math.isclose(total, LIMIT_HOURS * 3600, rel_tol=0., abs_tol=1e-6) else WHOLE_OVER)
 
 
@@ -353,11 +374,14 @@ def load_refinement(root, report):
         preflights={profile['path']: profile['sha256'] for profile in selection['profiles'].values()})
 
 
-def build_whole_budget(root=ROOT):
+def build_whole_budget(root=ROOT, gpu_hour_limit=LIMIT_HOURS):
     """Read-only mechanical gate; never publish an execution approval here."""
-    report = build_budget(root)
+    policy = gpu_hour_policy(gpu_hour_limit)
+    report = build_budget(root, gpu_hour_limit=gpu_hour_limit)
     whole = dict(complete=False, decision='not_cleared_incomplete_whole_plan',
-                 accounting_rule=ACCOUNTING_RULE, blockers=[], execution_plan=None)
+        gpu_hour_policy=policy,
+        accounting_rule=UNLIMITED_ACCOUNTING_RULE if policy['gpu_hour_limit'] is None else ACCOUNTING_RULE,
+        blockers=[], execution_plan=None)
     report['whole_project'] = whole
     coverage = report['coverage']
     if (not coverage['complete_budget'] or not coverage['all_current_passing'] or
@@ -377,7 +401,8 @@ def build_whole_budget(root=ROOT):
         refined_reference = sum(r['reference_seconds'] - r['projected_session_overhead_seconds']
                                 for r in refined.values())
         other_reference = sum(r['estimate']['conservative_reference_gpu_hours'] * 3600 for r in remaining)
-        components = whole_components(evidence['spent_seconds'], refined_reference + other_reference, startup)
+        components = whole_components(evidence['spent_seconds'], refined_reference + other_reference, startup,
+                                      gpu_hour_limit=gpu_hour_limit)
         from .r58_execution import make_execution_plan
         plan = make_execution_plan(evidence['rf_family']['mode'])
         if implementation_hashes() != report['implementation_sha256']:
@@ -391,19 +416,30 @@ def build_whole_budget(root=ROOT):
     return report
 
 
-def write_execution_approval(root, report):
+def write_execution_approval(root, report, gpu_hour_limit=LIMIT_HOURS):
     """Called only by the whole-plan pipeline gate, immediately before locking."""
     from .r58_execution import validate_execution_plan
 
-    whole = report.get('whole_project', {})
-    if (whole.get('complete') is not True or whole.get('decision') != WHOLE_CLEARED or
-            not 0 < whole.get('whole_projected_gpu_hours', float('inf')) < LIMIT_HOURS or
+    policy = gpu_hour_policy(gpu_hour_limit)
+    decision = WHOLE_UNLIMITED if policy['gpu_hour_limit'] is None else WHOLE_CLEARED
+    whole, coverage = report.get('whole_project', {}), report.get('coverage', {})
+    hours = whole.get('whole_projected_gpu_hours')
+    if (whole.get('complete') is not True or whole.get('decision') != decision or
+            report.get('gpu_hour_policy') != policy or whole.get('gpu_hour_policy') != policy or
+            not coverage.get('complete_budget') or not coverage.get('all_current_passing') or
+            any(coverage.get(key) != 128 for key in ('expected_deployments', 'current_passing_deployments',
+                                                   'estimated_deployments')) or
+            whole.get('refined_deployments') != 63 or whole.get('preflight_only_deployments') != 65 or
+            len(whole.get('evidence', {})) != 4 or len(whole.get('preflights', {})) != 128 or
+            isinstance(hours, bool) or not isinstance(hours, (int, float)) or
+            not math.isfinite(hours) or hours <= 0 or
+            (policy['gpu_hour_limit'] is not None and hours >= LIMIT_HOURS) or
             report['implementation_sha256'] != implementation_hashes()):
-        raise ValueError('Complete current whole-plan reference <100h required before approval')
+        raise ValueError('Complete current128/refined63 evidence and matching GPU-hour authorization required before approval')
     components = whole['components_seconds']
     recalculated = whole_components(components['actual_spent'], components['remaining_label_reference'],
-                                    components['measured63_session_overhead'])
-    if any(whole[key] != value for key, value in recalculated.items()):
+                                    components['measured63_session_overhead'], gpu_hour_limit=gpu_hour_limit)
+    if any(whole.get(key) != value for key, value in recalculated.items()):
         raise ValueError('Fixed008 accounting or allowance was altered')
     plan = validate_execution_plan(whole['execution_plan'])
     if plan['rf_mode'] != whole['rf_family']['mode'] or whole['rf_family'].get('complete') is not True:
@@ -413,8 +449,10 @@ def write_execution_approval(root, report):
             raise ValueError('Budget evidence changed before deployment lock')
     approval = dict(approved=True, execution_plan_sha256=canonical_hash(plan),
         implementation_sha256=report['implementation_sha256'], deployments=128,
-        whole_projected_gpu_hours=whole['whole_projected_gpu_hours'], accounting_rule=ACCOUNTING_RULE,
+        whole_projected_gpu_hours=whole['whole_projected_gpu_hours'], accounting_rule=whole['accounting_rule'],
         components_seconds=components, evidence=whole['evidence'], preflight_sha256=whole['preflights'])
+    if policy['gpu_hour_limit'] is None:
+        approval.update(gpu_hour_policy=policy, decision=decision)
     root = Path(root)
     lock_path = root / 'deployments.lock.json'
     if lock_path.exists():
@@ -428,9 +466,13 @@ def write_execution_approval(root, report):
 
 def markdown(report):
     coverage, budget = report['coverage'], report['budget']
+    policy = report.get('gpu_hour_policy', gpu_hour_policy())
+    policy_text = 'Unlimited user authorization; no GPU-hour limit.' if policy['gpu_hour_limit'] is None else \
+                  '100h limit (historical/default policy).'
     text = ['# R58 Fresh-Solve Budget', '',
         '**Budget measurement only. No performance claim or launch authorization.**', '',
         f'Snapshot: {report["snapshot_finished_utc"]}.', '',
+        f'GPU-hour policy: {policy_text}', '',
         f'- Current passing deployments: {coverage["current_passing_deployments"]}/{coverage["expected_deployments"]}.',
         f'- Timing coverage: {coverage["estimated_deployments"]}/{coverage["expected_deployments"]}; '
         f'all-deployment estimate complete: {coverage["complete_budget"]}.',
@@ -476,7 +518,9 @@ def markdown(report):
              'Regenerate (CPU only):', '', '```bash',
              'source /public/home/shiys/miniconda3/etc/profile.d/conda.sh', 'conda activate easynco',
              'CUDA_VISIBLE_DEVICES="" OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 \\',
-             '  python -m code.V4.r58_budget --root ' + report['root'], '```', '']
+             '  python -m code.V4.r58_budget --root ' + report['root'] +
+             (' --whole' if report.get('whole_project') is not None else '') +
+             (' --gpu-hour-limit none' if policy['gpu_hour_limit'] is None else ''), '```', '']
     whole = report.get('whole_project')
     if whole is not None:
         section = ['# R58 Whole-Project Budget', '', f'`{whole["accounting_rule"]}`', '',
@@ -504,12 +548,16 @@ def main(argv=None):
     parser.add_argument('--root', type=Path, default=ROOT, help='Read only preflight/<problem>__<method>.json here')
     parser.add_argument('--output-dir', type=Path, help='Write budget.json and BUDGET.md here (default: --root)')
     parser.add_argument('--whole', action='store_true', help='Read completed refinement and apply fixed008 whole-project gate')
+    parser.add_argument('--gpu-hour-limit', choices=['100', 'none'], default='100',
+                        help='Historical 100h limit (default), or explicit unlimited user authorization')
     args = parser.parse_args(argv)
-    report = build_whole_budget(args.root) if args.whole else build_budget(args.root)
+    report = build_whole_budget(args.root, gpu_hour_limit=args.gpu_hour_limit) if args.whole else \
+             build_budget(args.root, gpu_hour_limit=args.gpu_hour_limit)
     output = args.output_dir or args.root
     save_json(output / 'budget.json', report)
     (output / 'BUDGET.md').write_text(markdown(report))
-    print(json.dumps(dict(coverage={k: v for k, v in report['coverage'].items() if not isinstance(v, list)},
+    print(json.dumps(dict(gpu_hour_policy=report['gpu_hour_policy'],
+                          coverage={k: v for k, v in report['coverage'].items() if not isinstance(v, list)},
                           budget=report['budget'], whole_project=report.get('whole_project'),
                           output_dir=str(output.resolve()))))
     return 0

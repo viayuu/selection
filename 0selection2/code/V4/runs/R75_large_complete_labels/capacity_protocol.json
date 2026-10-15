@@ -1,0 +1,125 @@
+{
+  "seed": 2,
+  "stage": "batch_capacity_only",
+  "formal_training_authorized": false,
+  "user_batch_approval_received": false,
+  "formal_updates": 0,
+  "validation_read": false,
+  "test_read": false,
+  "model": "unchanged r64_model.NativeUtilitySelector",
+  "optimizer": "unchanged official R65B AdamWScheduleFree, scratch/discarded",
+  "objective": "native CE of two dropout forwards + symmetric legal-pool KL",
+  "consistency_weight": 0.35,
+  "dropout": 0.1,
+  "gradient_clip": 1.0,
+  "amp": "FP16",
+  "task_gradients": "three distinct tasks, unchanged state, FP32 arithmetic mean, one step",
+  "effective_batch": "3 * per_task_batch; no sample microbatching",
+  "data_root": "/public/home/shiys/训练数据_公共完整标签_20261013_1923",
+  "problems": [
+    "TSP",
+    "CVRP",
+    "ATSP",
+    "OVRP",
+    "VRPB",
+    "VRPL",
+    "VRPTW",
+    "OVRPTW",
+    "OVRPB",
+    "OVRPL",
+    "VRPBL",
+    "VRPBTW",
+    "VRPLTW",
+    "OVRPBL",
+    "OVRPBTW",
+    "OVRPLTW",
+    "VRPBLTW",
+    "OVRPBLTW"
+  ],
+  "solver_names": [
+    "BQ",
+    "DIFUSCO",
+    "DIFUSCO500",
+    "ELG",
+    "GLOP",
+    "ICAM",
+    "ICAM_ATSP",
+    "LEHD",
+    "MATNET",
+    "MATPOENET",
+    "MTPOMO",
+    "MVMOE",
+    "MoSES_CaDA",
+    "MoSES_RF",
+    "OMNI",
+    "RELD_CVRP",
+    "RELD_MOEL",
+    "RELD_MTL",
+    "RouteFinder",
+    "T2T",
+    "T2T500",
+    "UNICO_MatPOENet"
+  ],
+  "cache": "selected real TRAIN rows on CPU only",
+  "geometry": "input-only geometry cached on CPU; preprocessing reported separately",
+  "geometry_normalization": "historical R65 TRAIN stats ONLY for capacity; refit new TRAIN before formal run",
+  "representative_triples": [
+    [
+      "VRPTW",
+      "VRPBLTW",
+      "OVRPTW"
+    ],
+    [
+      "VRPBL",
+      "ATSP",
+      "VRPBTW"
+    ],
+    [
+      "TSP",
+      "OVRPLTW",
+      "OVRPBLTW"
+    ],
+    [
+      "OVRPBTW",
+      "OVRPL",
+      "VRPLTW"
+    ],
+    [
+      "VRPL",
+      "OVRPBL",
+      "OVRP"
+    ],
+    [
+      "VRPB",
+      "OVRPB",
+      "CVRP"
+    ]
+  ],
+  "stress_triples": [
+    [
+      "TSP",
+      "CVRP",
+      "OVRPBLTW"
+    ],
+    [
+      "TSP",
+      "CVRP",
+      "ATSP"
+    ]
+  ],
+  "warmup_updates_per_candidate": 2,
+  "timed_updates_per_candidate": 6,
+  "timing": "CPU cached-row gathering, H2D transfer, both forwards, backward, reduction, clipping, optimizer and AMP retries",
+  "minimum_physical_headroom_bytes": 3221225472,
+  "selection": "largest safety-passing batch within95% of best measured representative throughput",
+  "selection_reason": "user explicitly requests a large batch; avoid larger batches with material throughput loss",
+  "candidates": "start256,384,512; bounded growth to1024 or32-row refinement at first unsafe size",
+  "max_candidates": 8,
+  "max_successful_scratch_updates": 80,
+  "max_gpu_seconds": 600,
+  "labels": "native ind unchanged; no final costs in model input",
+  "approved_gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+  "parent_goal": "paused",
+  "R74": "terminated; disk files retained",
+  "legacy_B_semantics": "R58 deferred/unfixed; this is the legacy deployment scenario"
+}

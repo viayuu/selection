@@ -1,0 +1,12 @@
+Close Round004 as `finite_frozen_score_cost_head_trial_closed_negative` and retain frozen B. The reported fitted candidate fails all three VAL gates and deteriorates on actual TRAIN decision metrics. This supports closing the authorized finite trial without a fifth variant or optimizer retry.
+
+No substantive factual correction is needed to the proposed conclusion. Its claim boundaries must remain explicit:
+
+- TRAIN deterioration makes an explanation confined to validation overfitting insufficient. It does **not** establish whether approximation, surrogate/decision mismatch, regularization, finite optimization, or score information caused the failure. Neither numerical optimality nor impossibility of conditional cost learning follows.
+- The negative result concerns realized decisions. Fitting MSE is unreported; unchanged frozen-B CE provides no evidence about fitted-head quality. Aggregate deterioration does not mean every task worsened on every metric, and isolated taskwise improvements do not authorize assembling another candidate.
+- Reduced zero-pair counts do not establish repaired selections. Winner coverage depends on which pairs enter or leave the zero-selected set. Round003’s 660 reclassified true winners were not 660 correctly recovered predictions. Round004’s category cost contributions describe the existing equal-task macro metric, not an unqualified total of physical routing costs.
+- The cumulative conclusion is “four tested interventions produced no accepted improvement under their respective protocols.” These trials do not establish a common-baseline causal comparison. Round003 fallback TRAIN rows cannot establish endpoint TRAIN behavior; R77’s baseline gains cannot be attributed to R78 interventions or uniquely to batch size.
+
+R78 remains active awaiting the already-running NSS locked-model TRAIN/VAL handoff; the older broad app goal remains paused. Interpretation of that handoff requires the stated comparability of instances, candidate pools, and relative-cost definitions. Changed method counts alone would not establish improved decisions or a mechanism, and any advantage would not uniquely identify architecture or a start-role feature as its cause. The sole next research action remains waiting for that handoff.
+
+This is a **same-family provisional research review**, based solely on the supplied closure request, not independent acceptance, numerical verification, or code checking.

@@ -2,6 +2,12 @@
 
 ## Current Status: Paused Progress Snapshot
 
+On 2026-10-13 the user subsequently requested terminating the paused R74
+process to release GPU memory, while explicitly retaining all disk files.
+Step1465.118 is cancelled (0:9), PID101584 is gone, and the assigned GPU returned
+to2MiB with no compute clients. See `runs/R74_adaptive_incomplete_acquisition/TERMINATED.json`.
+The goal remains paused; this is not permission to restart R74.
+
 The user paused the goal and R74 on 2026-10-13. The subsequent request to
 publish current progress authorizes a Git snapshot only, not resumed execution.
 See `runs/R74_adaptive_incomplete_acquisition/PAUSED.md` and `PAUSE_STATE.json`

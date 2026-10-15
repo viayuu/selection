@@ -52,15 +52,35 @@ def read_execution_plan(root):
 
 
 def require_budget_approval(root, plan, hashes):
+    from .r58_budget import WHOLE_UNLIMITED, gpu_hour_policy, whole_components
+
     approval = json.loads((Path(root) / 'execution_approval.json').read_text())
+    policy = approval.get('gpu_hour_policy', gpu_hour_policy())
+    try:
+        if policy != gpu_hour_policy(policy['gpu_hour_limit']):
+            raise ValueError('GPU-hour authorization policy mismatch')
+    except (KeyError, TypeError, ValueError) as error:
+        raise ValueError('Invalid GPU-hour authorization in budget approval') from error
+    unlimited = policy['gpu_hour_limit'] is None
     hours = approval.get('whole_projected_gpu_hours')
     if (approval.get('approved') is not True or
             approval.get('execution_plan_sha256') != canonical_hash(plan) or
             approval.get('implementation_sha256') != hashes or
             approval.get('deployments') != sum(map(len, POOLS.values())) or
             isinstance(hours, bool) or not isinstance(hours, (int, float)) or
-            not math.isfinite(hours) or not 0 < hours <= 100):
-        raise ValueError('Whole-R58 <=100h budget approval does not match execution plan/frozen sources')
+            not math.isfinite(hours) or hours <= 0 or (not unlimited and hours > 100)):
+        raise ValueError('Whole-R58 budget approval does not match authorization, execution plan or frozen sources')
+    if unlimited:
+        try:
+            components = approval['components_seconds']
+            checked = whole_components(components['actual_spent'], components['remaining_label_reference'],
+                                       components['measured63_session_overhead'], gpu_hour_limit='none')
+            if (components != checked['components_seconds'] or hours != checked['whole_projected_gpu_hours'] or
+                    approval.get('accounting_rule') != checked['accounting_rule'] or
+                    approval.get('decision') != WHOLE_UNLIMITED):
+                raise ValueError('Unlimited approval must retain truthful fixed008 accounting')
+        except (KeyError, TypeError, ValueError) as error:
+            raise ValueError('Unlimited approval requires complete, unaltered fixed008 components') from error
     return approval
 
 

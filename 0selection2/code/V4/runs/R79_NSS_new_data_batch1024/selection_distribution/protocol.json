@@ -1,0 +1,212 @@
+{
+  "model_version": "R79_NSS_new_data_batch1024",
+  "created_utc": "2026-10-15T09:31:29.474915+00:00",
+  "execution": "CPU-only saved-prediction reporting; no training or inference",
+  "model_selection_rule": "Use saved pred directly; no score argmax or tie-break changes",
+  "true_winner_rule": "Use saved winner directly (native/FP64 ind), not FP32 cost argmin",
+  "model_top1_rule": "100 * count(saved pred == saved winner) / n; native/FP64 ind labels",
+  "model_top1_csv_scope": "Dataset-level accuracy repeated only on model-selection rows; blank on true-winner rows",
+  "historical_nss_top1_rule": "FP32 cost argmin; not recomputed or mixed into this report",
+  "panel_order": [
+    "lib_model_selection",
+    "lib_true_winner",
+    "test_model_selection",
+    "test_true_winner"
+  ],
+  "candidate_order": "Each task's test_predictions.npz pool; LIB counts aligned by name",
+  "percentages": "100 * count / panel sample count; include zero-count solvers",
+  "checkpoint_hash_policy": "Copy existing metadata only; never open or rehash weights",
+  "font_path": "/usr/share/fonts/google-noto-cjk/NotoSansCJK-Regular.ttc",
+  "final_test_lock_path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/final_test_lock.json",
+  "tasks": {
+    "TSP": {
+      "checkpoint": {
+        "path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/TSP/best.pt",
+        "sha256": "c677a8cd4ee473ee47bdedff871050827f75717c321ae9d551a3edc7bc78994b",
+        "best_epoch": 47,
+        "val_top_1": 0.389351487159729,
+        "criterion": "gap",
+        "validation_predictions": {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/TSP/best_val_predictions.npz",
+          "sha256": "0f6c546c83c43afed8f443671b2e5acc0178b6ca77c17e9139ec51863b4e6b74",
+          "rows": 3895,
+          "split": "val"
+        }
+      },
+      "candidate_order": [
+        "BQ",
+        "DIFUSCO",
+        "DIFUSCO500",
+        "ELG",
+        "LEHD",
+        "OMNI",
+        "T2T",
+        "T2T500"
+      ],
+      "sources": {
+        "test": {
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/TSP/test_predictions.npz",
+          "metadata_path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/TSP/test_metrics.json",
+          "original_directory": "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014/TSPtest",
+          "n": 3895,
+          "archive_pool_order": [
+            "BQ",
+            "DIFUSCO",
+            "DIFUSCO500",
+            "ELG",
+            "LEHD",
+            "OMNI",
+            "T2T",
+            "T2T500"
+          ]
+        },
+        "TSPLIB": {
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/TSP/TSPLIB_predictions.npz",
+          "metadata_path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/TSP/TSPLIB_metrics.json",
+          "original_directory": "/public/home/shiys/0selection2/data/TSPLIB",
+          "n": 49,
+          "archive_pool_order": [
+            "BQ",
+            "DIFUSCO",
+            "DIFUSCO500",
+            "ELG",
+            "LEHD",
+            "OMNI",
+            "T2T",
+            "T2T500"
+          ]
+        }
+      },
+      "model_top1_native": {
+        "TSPLIB": {
+          "matched_instances": 10,
+          "n_instances": 49,
+          "percentage": 20.408163265306122,
+          "label_rule": "saved pred == saved winner (native/FP64 ind)"
+        },
+        "test": {
+          "matched_instances": 1727,
+          "n_instances": 3895,
+          "percentage": 44.33889602053915,
+          "label_rule": "saved pred == saved winner (native/FP64 ind)"
+        }
+      },
+      "count_checks": {
+        "lib_model_selection": {
+          "total_count": 49,
+          "expected_n": 49
+        },
+        "lib_true_winner": {
+          "total_count": 49,
+          "expected_n": 49
+        },
+        "test_model_selection": {
+          "total_count": 3895,
+          "expected_n": 3895
+        },
+        "test_true_winner": {
+          "total_count": 3895,
+          "expected_n": 3895
+        }
+      }
+    },
+    "CVRP": {
+      "checkpoint": {
+        "path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/CVRP/best.pt",
+        "sha256": "b1e7595eb16a89e3bdf526c3c4d8b05ce3d7d4dc39ab1241667657924e3fc574",
+        "best_epoch": 39,
+        "val_top_1": 0.6208471655845642,
+        "criterion": "gap",
+        "validation_predictions": {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/CVRP/best_val_predictions.npz",
+          "sha256": "9f71f3e4f41b0d017989e8ed4a2dfcb5801a511a1e0efed32fd73dedf4315449",
+          "rows": 3895,
+          "split": "val"
+        }
+      },
+      "candidate_order": [
+        "BQ",
+        "ELG",
+        "ICAM",
+        "LEHD",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "OMNI",
+        "RELD_CVRP",
+        "RouteFinder"
+      ],
+      "sources": {
+        "test": {
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/CVRP/test_predictions.npz",
+          "metadata_path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/CVRP/test_metrics.json",
+          "original_directory": "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014/CVRPtest",
+          "n": 3895,
+          "archive_pool_order": [
+            "BQ",
+            "ELG",
+            "ICAM",
+            "LEHD",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "OMNI",
+            "RELD_CVRP",
+            "RouteFinder"
+          ]
+        },
+        "CVRPLIB": {
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/CVRP/CVRPLIB_predictions.npz",
+          "metadata_path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/CVRP/CVRPLIB_metrics.json",
+          "original_directory": "/public/home/shiys/0selection2/data/CVRPLIB",
+          "n": 100,
+          "archive_pool_order": [
+            "BQ",
+            "ELG",
+            "ICAM",
+            "LEHD",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "OMNI",
+            "RELD_CVRP",
+            "RouteFinder"
+          ]
+        }
+      },
+      "model_top1_native": {
+        "CVRPLIB": {
+          "matched_instances": 70,
+          "n_instances": 100,
+          "percentage": 70.0,
+          "label_rule": "saved pred == saved winner (native/FP64 ind)"
+        },
+        "test": {
+          "matched_instances": 1800,
+          "n_instances": 3895,
+          "percentage": 46.21309370988447,
+          "label_rule": "saved pred == saved winner (native/FP64 ind)"
+        }
+      },
+      "count_checks": {
+        "lib_model_selection": {
+          "total_count": 100,
+          "expected_n": 100
+        },
+        "lib_true_winner": {
+          "total_count": 100,
+          "expected_n": 100
+        },
+        "test_model_selection": {
+          "total_count": 3895,
+          "expected_n": 3895
+        },
+        "test_true_winner": {
+          "total_count": 3895,
+          "expected_n": 3895
+        }
+      }
+    }
+  },
+  "pdf_pages": 2
+}

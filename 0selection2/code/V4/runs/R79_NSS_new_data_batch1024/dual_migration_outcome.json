@@ -1,0 +1,41 @@
+{
+  "decision": "DataParallel rejected; TSP/CVRP each continue on one approved4090, both3090 released",
+  "root": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024",
+  "dp_numerical_gate_passed": false,
+  "dp_formal_optimizer_updates": 0,
+  "cause": "Original Add_And_Normalization_Module.forward uses isinstance(norm, nn.Parameter). DataParallel replicas expose norm as Tensor, selecting the unscaled residual branch. Original forward is retained, not patched.",
+  "unused_parameter_detail": "DP coalescing also creates exact-zero gradients for four originally-unused modulate parameters; a strict-zero-to-None adapter was added before checking, but forward non-equivalence still rejects DP.",
+  "TSP": {
+    "resume_update": 8220,
+    "resume_epoch": 15,
+    "max_dp_score_error": 1255704.924847126,
+    "dp_argmax_changes": 393,
+    "dp_relative_gradient_error": 972629.5622944843,
+    "single4090_uuid": "GPU-71479e7e-f8bd-e430-66ed-f8db9f0d47be",
+    "unsaved_single_gpu_updates_after_failed_gate_replayed": 92
+  },
+  "CVRP": {
+    "resume_update": 7124,
+    "resume_epoch": 13,
+    "max_dp_score_error": 11373.34790277481,
+    "dp_argmax_changes": 984,
+    "dp_relative_gradient_error": 112868.56489258372,
+    "single4090_uuid": "GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d",
+    "legacy_handoff_unsaved_updates_replayed": 85,
+    "unsaved_single_gpu_updates_after_failed_gate_replayed": 86
+  },
+  "control_errors_disclosed": [
+    "Legacy handoff watcher matched forked DataLoader argv instead of root trainer; fixed PPid filtering and duplicate-root refusal.",
+    "Terminating the srun wrapper triggers immediate Slurm cancellation, bypassing Python SIGTERM checkpoint handling. Future safe pauses must directly signal root Python workers and verify checkpoint before stopping wrapper."
+  ],
+  "checkpoint_and_best_validation_preserved": true,
+  "uncheckpointed_suffixes_archived_not_counted_in_retained_budget": true,
+  "global_batch": 1024,
+  "micro_batch": 64,
+  "tail_batch": 784,
+  "seed": 2,
+  "epochs": 50,
+  "augmentations_per_base_instance": 8,
+  "retained_updates_per_model": 27400,
+  "test_lib_opened_for_speed_or_selection": false
+}

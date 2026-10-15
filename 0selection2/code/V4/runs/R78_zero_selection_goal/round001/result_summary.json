@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "run_id": "R78_zero_selection_goal",
+  "round": 1,
+  "tasks": 18,
+  "aggregation": "equal_weight_fixed_18_tasks",
+  "evaluation_outcome": "negative_no_certified_gain",
+  "original_execution_outcome": "inconclusive",
+  "numerical_fit_outcome": "inconclusive",
+  "candidate_accepted": false,
+  "improvement_certified": false,
+  "selected_rule": "identity",
+  "test_opened": false,
+  "original_execution_outputs_unchanged": true,
+  "metrics": {
+    "train": {
+      "identity": {"top1": 0.6936964562474446, "ce": 0.7527030800295704, "mean_cost": 11.373004840415984, "actual_regret_pct": 0.4606500924792527, "vs_sbs_pct": -0.1438454168430519},
+      "candidate": {"top1": 0.6942598244763291, "ce": 0.7439029725452987, "mean_cost": 11.373099772773923, "actual_regret_pct": 0.4626898014683156, "vs_sbs_pct": -0.13922242898087916}
+    },
+    "val": {
+      "identity": {"top1": 0.6923691342176581, "ce": 0.7558651625814528, "mean_cost": 11.402474921565549, "actual_regret_pct": 0.4645034039981286, "vs_sbs_pct": -0.14206915881566146},
+      "candidate": {"top1": 0.6937954642704323, "ce": 0.7465028002145884, "mean_cost": 11.402575924596249, "actual_regret_pct": 0.46717902893576757, "vs_sbs_pct": -0.13717949804586527}
+    }
+  },
+  "val_gate": {
+    "all_train_fits_converged": false,
+    "all18_macro_top1_improved": true,
+    "macro_mean_cost_not_worse": false,
+    "macro_actual_regret_not_worse": false,
+    "cost_degradation_tolerance": 0.0,
+    "macro_vs_sbs_role": "reporting_only"
+  },
+  "fit": {
+    "device": "cpu",
+    "seed": 2,
+    "logical_batch_size": 1024,
+    "updates_per_task": 30000,
+    "total_updates": 540000,
+    "converged_tasks": ["OVRPBTW"],
+    "converged_count": 1,
+    "prior_precision": 1.0
+  },
+  "future_training_policy": {
+    "no_unplanned_broad_retraining": true,
+    "user_authorized_all18_training_allowed": true,
+    "requires": "Explicit user authorization following Astra's plan and the existing resource/batch constraints."
+  },
+  "references": {
+    "schema": "result_schema.json",
+    "train": "train_comparison.json",
+    "val": "val_comparison.json",
+    "decision": "val_decision.json",
+    "candidate": "train_locked_candidate.json",
+    "handoff": "RESEARCH_HANDOFF.md"
+  }
+}

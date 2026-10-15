@@ -80,6 +80,55 @@ class PlanTests(unittest.TestCase):
                 with self.subTest(change=change), self.assertRaises(ValueError):
                     require_budget_approval(directory, plan, hashes)
 
+    def test_unlimited_approval_keeps_114h_and_exact_plan_source_bindings(self):
+        from .r58_budget import WHOLE_UNLIMITED, whole_components
+
+        plan, hashes = make_execution_plan('normal4'), {'frozen.py': 'abc'}
+        checked = whole_components(3 * 3600, (114 - 9) * 3600 / 1.10, 3600, gpu_hour_limit='none')
+        approval = dict(approved=True, execution_plan_sha256=canonical_hash(plan),
+            implementation_sha256=hashes, deployments=128,
+            whole_projected_gpu_hours=checked['whole_projected_gpu_hours'],
+            components_seconds=checked['components_seconds'], accounting_rule=checked['accounting_rule'],
+            gpu_hour_policy=checked['gpu_hour_policy'], decision=WHOLE_UNLIMITED)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'execution_approval.json'
+            _write_json(path, approval)
+            self.assertEqual(require_budget_approval(directory, plan, hashes), approval)
+            self.assertAlmostEqual(approval['whole_projected_gpu_hours'], 114.)
+            for change in ({'gpu_hour_policy': {'gpu_hour_limit': 100, 'authorization': 'default_100h_limit'}},
+                           {'gpu_hour_policy': {'gpu_hour_limit': 200, 'authorization': 'unlimited_user_authorization'}},
+                           {'gpu_hour_policy': {'gpu_hour_limit': None}}, {'decision': 'whole_plan_reference_under_100h'},
+                           {'whole_projected_gpu_hours': 99.}, {'whole_projected_gpu_hours': True},
+                           {'approved': False}, {'deployments': 127}, {'execution_plan_sha256': 'other'},
+                           {'implementation_sha256': {'frozen.py': 'changed'}}):
+                _write_json(path, dict(approval, **change))
+                with self.subTest(change=change), self.assertRaises(ValueError):
+                    require_budget_approval(directory, plan, hashes)
+            approval.pop('gpu_hour_policy')
+            _write_json(path, approval)
+            with self.assertRaises(ValueError):
+                require_budget_approval(directory, plan, hashes)
+
+    def test_unlimited_approval_rejects_missing_or_altered_fixed_components(self):
+        from .r58_budget import whole_components
+
+        plan, hashes = make_execution_plan('normal4'), {'frozen.py': 'abc'}
+        checked = whole_components(3600, 100 * 3600, 3600, gpu_hour_limit='none')
+        approval = dict(approved=True, execution_plan_sha256=canonical_hash(plan),
+            implementation_sha256=hashes, deployments=128,
+            whole_projected_gpu_hours=checked['whole_projected_gpu_hours'],
+            components_seconds=checked['components_seconds'], accounting_rule=checked['accounting_rule'],
+            gpu_hour_policy=checked['gpu_hour_policy'], decision=checked['decision'])
+        components = checked['components_seconds']
+        with tempfile.TemporaryDirectory() as directory:
+            for change in ({'components_seconds': {}},
+                           {'components_seconds': dict(components, label_contingency=0.)},
+                           {'components_seconds': dict(components, baseline_preparation_evaluation=0.)},
+                           {'accounting_rule': 'G < 100h'}):
+                _write_json(Path(directory) / 'execution_approval.json', dict(approval, **change))
+                with self.subTest(change=change), self.assertRaisesRegex(ValueError, 'fixed008'):
+                    require_budget_approval(directory, plan, hashes)
+
     def test_grouping_retains_original_batches_and_size_boundaries(self):
         items = [item(2) for _ in range(33)] + [item(3) for _ in range(17)]
         batches = [list(range(0, 16)), list(range(16, 32)), [32], list(range(33, 49)), [49]]

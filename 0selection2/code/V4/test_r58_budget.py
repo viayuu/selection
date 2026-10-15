@@ -114,14 +114,14 @@ class BudgetTests(unittest.TestCase):
             with self.subTest(batch=batch), self.assertRaises(ValueError):
                 r58_budget.estimate_profile(dict(record, batch_probe=batch), train, 16)
 
-    def build_fixture(self, root, methods, records, train):
+    def build_fixture(self, root, methods, records, train, gpu_hour_limit=100):
         for method, record in records.items():
             save_json(root / 'preflight' / f'TSP__{method}.json', record)
         with patch.object(r58_budget, 'PROBLEMS', ['TSP']), \
              patch.object(r58_budget, 'POOLS', {'TSP': methods}), \
              patch.object(r58_budget, 'implementation_hashes', return_value=HASHES), \
              patch.object(r58_budget, 'train_distribution', return_value=train):
-            return r58_budget.build_budget(root)
+            return r58_budget.build_budget(root, gpu_hour_limit=gpu_hour_limit)
 
     def test_stale_never_in_current_subtotal_and_incomplete_not_full_estimate(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -245,6 +245,43 @@ class BudgetTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, 'changed while estimating'):
                 r58_budget.build_budget(Path(directory))
 
+    def test_unlimited_cli_preserves_114h_estimate_without_under_100h_claim(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            record = profile(observations=((0, 10, 34.2), (1, 20, 34.2)))
+            capped = self.build_fixture(root, ['BQ'], {'BQ': record}, distribution([10, 20]))
+            report = self.build_fixture(root, ['BQ'], {'BQ': record}, distribution([10, 20]), 'none')
+            self.assertAlmostEqual(report['budget']['all_deployments_gpu_hours'], 114.)
+            self.assertEqual(report['budget']['all_deployments_gpu_hours'], capped['budget']['all_deployments_gpu_hours'])
+            self.assertEqual(capped['budget']['decision'], 'skip_full_fresh_solve_projected_over_100h')
+            self.assertIsNone(report['budget']['threshold_gpu_hours'])
+            self.assertEqual(report['budget']['current_profile_point_status'], 'no_gpu_hour_limit')
+            self.assertEqual(report['budget']['conservative_reference_status'], 'no_gpu_hour_limit')
+            output = root / 'report'
+            with patch.object(r58_budget, 'build_budget', return_value=report) as build, patch('builtins.print'):
+                self.assertEqual(r58_budget.main(['--root', str(root), '--output-dir', str(output),
+                                                 '--gpu-hour-limit', 'none']), 0)
+            build.assert_called_once_with(root, gpu_hour_limit='none')
+            self.assertEqual(json.loads((output / 'budget.json').read_text())['gpu_hour_policy'],
+                             r58_budget.gpu_hour_policy('none'))
+            self.assertIn('Unlimited user authorization; no GPU-hour limit.', (output / 'BUDGET.md').read_text())
+            self.assertFalse((root / 'execution_approval.json').exists())
+
+    def test_invalid_limits_rejected_by_policy_and_both_clis_before_work(self):
+        from . import r58_pipeline
+
+        for value in (0, 99, 101, 100., True, float('nan'), float('inf'), '101', 'unlimited', 'None', ''):
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                r58_budget.gpu_hour_policy(value)
+        for module, work in ((r58_budget, 'build_budget'), (r58_pipeline, 'run')):
+            for value in ('0', '101', 'inf', '-1', 'unlimited'):
+                with self.subTest(module=module.__name__, value=value), patch('sys.stderr'), \
+                     patch.object(module, work) as perform:
+                    with self.assertRaises(SystemExit) as error:
+                        module.main(['--gpu-hour-limit', value])
+                    self.assertEqual(error.exception.code, 2)
+                    perform.assert_not_called()
+
     def assert_pipeline_budget_blocked(self, complete, expected_status):
         from . import r58_pipeline
 
@@ -281,7 +318,7 @@ class BudgetTests(unittest.TestCase):
                          patch.object(r58_pipeline, 'publish') as publish, \
                          patch.object(r58_pipeline, 'summarize') as summarize:
                         self.assertEqual(r58_pipeline.run(args), 3)
-                        build.assert_called_once_with(root)
+                        build.assert_called_once_with(root, gpu_hour_limit=100)
                         self.assertEqual(progress.call_count, int(stage == 'all'))
                         lock.assert_not_called()
                         approve.assert_not_called()
@@ -340,11 +377,136 @@ class WholeBudgetTests(unittest.TestCase):
             preflights={str(p): file_hash(p) for p in (root / 'preflight').glob('*.json')})
         return base, evidence
 
-    def whole(self, root, base, evidence):
+    def whole(self, root, base, evidence, gpu_hour_limit=100):
+        base = copy.deepcopy(base)
+        base['gpu_hour_policy'] = r58_budget.gpu_hour_policy(gpu_hour_limit)
         with patch.object(r58_budget, 'build_budget', return_value=copy.deepcopy(base)), \
              patch.object(r58_budget, 'load_refinement', return_value=evidence), \
              patch.object(r58_budget, 'implementation_hashes', return_value=HASHES):
-            return r58_budget.build_whole_budget(root)
+            return r58_budget.build_whole_budget(root, gpu_hour_limit=gpu_hour_limit)
+
+    def expensive_fixture(self, root):
+        base, evidence = self.fixture(root)
+        current = self.whole(root, base, evidence)['whole_project']['whole_reference_seconds']
+        extra_per_deployment = (114 * 3600 - current) / 1.10 / 63
+        for estimate in evidence['estimates']:
+            estimate['reference_seconds'] += extra_per_deployment
+        return base, evidence
+
+    def test_114h_unlimited_approval_requires_matching_policy_and_keeps_lock_stable(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base, evidence = self.expensive_fixture(root)
+            capped = self.whole(root, base, evidence)
+            report = self.whole(root, base, evidence, 'none')
+            whole = report['whole_project']
+            self.assertAlmostEqual(whole['whole_projected_gpu_hours'], 114.)
+            self.assertEqual(capped['whole_project']['decision'], r58_budget.WHOLE_OVER)
+            self.assertEqual(whole['decision'], r58_budget.WHOLE_UNLIMITED)
+            self.assertEqual(whole['components_seconds'], capped['whole_project']['components_seconds'])
+            self.assertEqual(whole['whole_reference_seconds'], capped['whole_project']['whole_reference_seconds'])
+            self.assertIsNone(whole['label_reference_limit_gpu_hours'])
+            self.assertIn('unlimited user authorization', whole['accounting_rule'])
+            self.assertNotIn('< 100h', whole['accounting_rule'])
+            with patch.object(r58_budget, 'implementation_hashes', return_value=HASHES):
+                for denied in (capped, report):
+                    with self.subTest(policy=denied['gpu_hour_policy']), self.assertRaises(ValueError):
+                        r58_budget.write_execution_approval(root, denied)
+                approval = r58_budget.write_execution_approval(root, report, gpu_hour_limit='none')
+                self.assertAlmostEqual(approval['whole_projected_gpu_hours'], 114.)
+                self.assertEqual(approval['gpu_hour_policy'], r58_budget.gpu_hour_policy('none'))
+                self.assertEqual(approval['decision'], r58_budget.WHOLE_UNLIMITED)
+                save_json(root / 'deployments.lock.json', dict(execution_plan=whole['execution_plan'],
+                                                              execution_approval=approval))
+                before = {p: (root / p).read_bytes() for p in
+                          ('execution_plan.json', 'execution_approval.json', 'deployments.lock.json')}
+                self.assertEqual(r58_budget.write_execution_approval(root, report, gpu_hour_limit='none'), approval)
+                for name, data in before.items():
+                    self.assertEqual((root / name).read_bytes(), data)
+                changed = copy.deepcopy(report)
+                changed['whole_project']['components_seconds']['label_contingency'] /= 2
+                with self.assertRaisesRegex(ValueError, 'Fixed008'):
+                    r58_budget.write_execution_approval(root, changed, gpu_hour_limit='none')
+                changed = copy.deepcopy(report)
+                changed['whole_project']['gpu_hour_policy'] = r58_budget.gpu_hour_policy()
+                with self.assertRaisesRegex(ValueError, 'matching GPU-hour authorization'):
+                    r58_budget.write_execution_approval(root, changed, gpu_hour_limit='none')
+                save_json(root / 'deployments.lock.json', dict(execution_plan=whole['execution_plan'],
+                    execution_approval=dict(approval, gpu_hour_policy=r58_budget.gpu_hour_policy())))
+                with self.assertRaisesRegex(ValueError, 'immutable lock'):
+                    r58_budget.write_execution_approval(root, report, gpu_hour_limit='none')
+                self.assertEqual((root / 'execution_approval.json').read_bytes(), before['execution_approval.json'])
+
+    def test_unlimited_incomplete_or_changed_evidence_and_sources_cannot_approve(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base, evidence = self.expensive_fixture(root)
+            report = self.whole(root, base, evidence, 'none')
+            with patch.object(r58_budget, 'implementation_hashes', return_value=HASHES):
+                for incomplete in ('whole', 'coverage', 'refined63', 'family48', 'evidence', 'preflights'):
+                    changed = copy.deepcopy(report)
+                    if incomplete == 'whole':
+                        changed['whole_project']['complete'] = False
+                    elif incomplete == 'coverage':
+                        changed['coverage']['current_passing_deployments'] = 127
+                    elif incomplete == 'refined63':
+                        changed['whole_project']['refined_deployments'] = 62
+                    elif incomplete == 'family48':
+                        changed['whole_project']['rf_family']['complete'] = False
+                    else:
+                        changed['whole_project'][incomplete].clear()
+                    with self.subTest(incomplete=incomplete), self.assertRaises(ValueError):
+                        r58_budget.write_execution_approval(root, changed, gpu_hour_limit='none')
+                save_json(next(iter(evidence['evidence'])), {'changed': True})
+                with self.assertRaisesRegex(ValueError, 'evidence changed'):
+                    r58_budget.write_execution_approval(root, report, gpu_hour_limit='none')
+            with patch.object(r58_budget, 'implementation_hashes', return_value={'fixture.py': 'changed'}), \
+                 self.assertRaises(ValueError):
+                r58_budget.write_execution_approval(root, report, gpu_hour_limit='none')
+            self.assertFalse((root / 'execution_plan.json').exists())
+            self.assertFalse((root / 'execution_approval.json').exists())
+
+    def test_unlimited_pipeline_requires_complete_budget_and_matching_policy_before_commands(self):
+        from . import r58_pipeline
+        from .r58_execution import read_execution_plan, require_budget_approval
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base, evidence = self.expensive_fixture(root)
+            report = self.whole(root, base, evidence, 'none')
+            args = Namespace(root=root, stage='labels', force_preflight=False, gpu_hour_limit='none')
+            for invalid in ('incomplete', 'policy mismatch'):
+                blocked = copy.deepcopy(report)
+                if invalid == 'incomplete':
+                    blocked['whole_project']['complete'] = False
+                else:
+                    blocked['whole_project']['gpu_hour_policy'] = r58_budget.gpu_hour_policy()
+                with self.subTest(invalid=invalid), \
+                     patch.object(r58_pipeline, 'build_whole_budget', return_value=blocked), \
+                     patch.object(r58_pipeline, 'write_execution_approval') as approve, \
+                     patch.object(r58_pipeline, 'lock') as lock, \
+                     patch.object(r58_pipeline.subprocess, 'run') as generate:
+                    self.assertEqual(r58_pipeline.run(args), 3)
+                    approve.assert_not_called()
+                    lock.assert_not_called()
+                    generate.assert_not_called()
+                self.assertEqual(json.loads((root / 'pipeline_state.json').read_text())['status'], 'budget_not_cleared')
+            def check_approval(*unused, **kwargs):
+                approval = require_budget_approval(root, read_execution_plan(root), HASHES)
+                self.assertEqual(approval['gpu_hour_policy'], r58_budget.gpu_hour_policy('none'))
+                self.assertAlmostEqual(approval['whole_projected_gpu_hours'], 114.)
+                return Namespace(returncode=0)
+            with patch.object(r58_pipeline, 'PROBLEMS', ['TSP']), \
+                 patch.object(r58_pipeline, 'POOLS', {'TSP': ['BQ']}), \
+                 patch.object(r58_pipeline, 'build_whole_budget', return_value=report) as build, \
+                 patch.object(r58_budget, 'implementation_hashes', return_value=HASHES), \
+                 patch.object(r58_pipeline, 'lock', side_effect=check_approval) as lock, \
+                 patch.object(r58_pipeline.subprocess, 'run', side_effect=check_approval) as generate, \
+                 patch.object(r58_pipeline, 'publish'), patch.object(r58_pipeline, 'summarize'), patch('builtins.print'):
+                self.assertEqual(r58_pipeline.run(args), 0)
+                build.assert_called_once_with(root, gpu_hour_limit='none')
+                lock.assert_called_once_with(root)
+                self.assertEqual(generate.call_count, 3)
 
     def test_fixed_rule_strict_limit_and_nonfinite_spend_refused(self):
         components = r58_budget.whole_components(2 * 3600, 80 * 3600, 3600)

@@ -1,0 +1,346 @@
+{
+  "seed": 2,
+  "groups": 1,
+  "data_root": "/public/home/shiys/训练数据_公共完整标签_20261013_1923",
+  "cache_root": "/tmp/shiys_r75_large_complete_labels_cache",
+  "problems": [
+    "TSP",
+    "CVRP",
+    "ATSP",
+    "OVRP",
+    "VRPB",
+    "VRPL",
+    "VRPTW",
+    "OVRPTW",
+    "OVRPB",
+    "OVRPL",
+    "VRPBL",
+    "VRPBTW",
+    "VRPLTW",
+    "OVRPBL",
+    "OVRPBTW",
+    "OVRPLTW",
+    "VRPBLTW",
+    "OVRPBLTW"
+  ],
+  "solver_names": [
+    "BQ",
+    "DIFUSCO",
+    "DIFUSCO500",
+    "ELG",
+    "GLOP",
+    "ICAM",
+    "ICAM_ATSP",
+    "LEHD",
+    "MATNET",
+    "MATPOENET",
+    "MTPOMO",
+    "MVMOE",
+    "MoSES_CaDA",
+    "MoSES_RF",
+    "OMNI",
+    "RELD_CVRP",
+    "RELD_MOEL",
+    "RELD_MTL",
+    "RouteFinder",
+    "T2T",
+    "T2T500",
+    "UNICO_MatPOENet"
+  ],
+  "sizes": {
+    "TSP": 87904,
+    "CVRP": 98983,
+    "ATSP": 100000,
+    "OVRP": 100000,
+    "VRPB": 100000,
+    "VRPL": 100000,
+    "VRPTW": 100000,
+    "OVRPTW": 100000,
+    "OVRPB": 100000,
+    "OVRPL": 100000,
+    "VRPBL": 100000,
+    "VRPBTW": 100000,
+    "VRPLTW": 100000,
+    "OVRPBL": 100000,
+    "OVRPBTW": 100000,
+    "OVRPLTW": 100000,
+    "VRPBLTW": 100000,
+    "OVRPBLTW": 100000
+  },
+  "train_rows": 1786887,
+  "batch_size": 384,
+  "effective_batch_size": 1152,
+  "eval_batch_size": 128,
+  "max_epochs": 40,
+  "updates_per_epoch": 1566,
+  "warmup_successful_updates": 4698,
+  "rdrop_ramp_updates": 4698,
+  "maximum_successful_updates": 62640,
+  "maximum_presentations": 71475480,
+  "optimizer": {
+    "implementation": "official AdamWScheduleFree",
+    "lr": 0.0003,
+    "weight_decay": 0.0001,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "foreach": false,
+    "warmup_steps": 4698,
+    "r": 0.0,
+    "weight_lr_power": 2.0,
+    "inner_momentum": 0.0
+  },
+  "objective": "mean two-dropout native CE + .35*ramp*legal symmetric KL",
+  "model": "unchanged R65B NativeUtilitySelector; fresh all parameters seed2",
+  "no_inherited_trained_weights": true,
+  "geometry_stats": {
+    "fields": [
+      "k4_radius",
+      "k4_mean_distance",
+      "k4_distance_cv",
+      "k4_anisotropy",
+      "k8_radius",
+      "k8_mean_distance",
+      "k8_distance_cv",
+      "k8_anisotropy",
+      "k16_radius",
+      "k16_mean_distance",
+      "k16_distance_cv",
+      "k16_anisotropy"
+    ],
+    "scales": [
+      4,
+      8,
+      16
+    ],
+    "mean": [
+      0.1568708921887201,
+      0.11578839124219302,
+      0.3118431633051784,
+      0.5734670245105384,
+      0.24219892904677595,
+      0.16348642540358227,
+      0.3575125818218949,
+      0.45047582601829994,
+      0.39821229710747696,
+      0.24695980804382245,
+      0.40945351270210273,
+      0.42904014611816393
+    ],
+    "std": [
+      0.15335782265691764,
+      0.11112599890155059,
+      0.16018640140850085,
+      0.23389077234620695,
+      0.22728441975936026,
+      0.14825534112533034,
+      0.14642950347458922,
+      0.2117884671516199,
+      0.33342017832960874,
+      0.20698705073569626,
+      0.1795186445913171,
+      0.22241354413079567
+    ],
+    "fitted_on": "all coordinate training valid nodes only",
+    "valid_train_nodes": 162874683,
+    "valid_nodes_by_problem": {
+      "TSP": 21762855,
+      "CVRP": 27125928,
+      "OVRP": 7599060,
+      "VRPB": 7599060,
+      "VRPL": 7599060,
+      "VRPTW": 7599060,
+      "OVRPTW": 7599060,
+      "OVRPB": 7599060,
+      "OVRPL": 7599060,
+      "VRPBL": 7599060,
+      "VRPBTW": 7599060,
+      "VRPLTW": 7599060,
+      "OVRPBL": 7599060,
+      "OVRPBTW": 7599060,
+      "OVRPLTW": 7599060,
+      "VRPBLTW": 7599060,
+      "OVRPBLTW": 7599060
+    },
+    "sources": {
+      "train/TSP": {
+        "path": "/public/home/shiys/训练数据_公共完整标签_20261013_1923/TSPtrain/dataset.pkl",
+        "size_bytes": 200156833,
+        "mtime_ns": 1791890632288426803
+      },
+      "train/CVRP": {
+        "path": "/public/home/shiys/训练数据_公共完整标签_20261013_1923/CVRPtrain/dataset.pkl",
+        "size_bytes": 414247240,
+        "mtime_ns": 1791890740615298856
+      },
+      "train/OVRP": {
+        "path": "/public/home/shiys/训练数据_公共完整标签_20261013_1923/OVRPtrain/dataset.pkl",
+        "size_bytes": 238983943,
+        "mtime_ns": 1791890832356037386
+      },
+      "train/VRPB": {
+        "path": "/public/home/shiys/训练数据_公共完整标签_20261013_1923/VRPBtrain/dataset.pkl",
+        "size_bytes": 238983943,
+        "mtime_ns": 1791890850848186251
+      },
+      "train/VRPL": {
+        "path": "/public/home/shiys/训练数据_公共完整标签_20261013_1923/VRPLtrain/dataset.pkl",
+        "size_bytes": 240354153,
+        "mtime_ns": 1791890870537344753
+      },
+      "train/VRPTW": {
+        "path": "/public/home/shiys/训练数据_公共完整标签_20261013_1923/VRPTWtrain/dataset.pkl",
+        "size_bytes": 444096782,
+        "mtime_ns": 1791890890357504309
+      },
+      "train/OVRPTW": {
+        "path": "/public/home/shiys/训练数据_公共完整标签_20261013_1923/OVRPTWtrain/dataset.pkl",
+        "size_bytes": 444096782,
+        "mtime_ns": 1791890917067719331
+      },
+      "train/OVRPB": {
+        "path": "/public/home/shiys/训练数据_公共完整标签_20261013_1923/OVRPBtrain/dataset.pkl",
+        "size_bytes": 238983943,
+        "mtime_ns": 1791890939042896236
+      },
+      "train/OVRPL": {
+        "path": "/public/home/shiys/训练数据_公共完整标签_20261013_1923/OVRPLtrain/dataset.pkl",
+        "size_bytes": 240354153,
+        "mtime_ns": 1791890957864047750
+      },
+      "train/VRPBL": {
+        "path": "/public/home/shiys/训练数据_公共完整标签_20261013_1923/VRPBLtrain/dataset.pkl",
+        "size_bytes": 240354153,
+        "mtime_ns": 1791890977648207015
+      },
+      "train/VRPBTW": {
+        "path": "/public/home/shiys/训练数据_公共完整标签_20261013_1923/VRPBTWtrain/dataset.pkl",
+        "size_bytes": 444096782,
+        "mtime_ns": 1791891010422470855
+      },
+      "train/VRPLTW": {
+        "path": "/public/home/shiys/训练数据_公共完整标签_20261013_1923/VRPLTWtrain/dataset.pkl",
+        "size_bytes": 445467038,
+        "mtime_ns": 1791891033507656695
+      },
+      "train/OVRPBL": {
+        "path": "/public/home/shiys/训练数据_公共完整标签_20261013_1923/OVRPBLtrain/dataset.pkl",
+        "size_bytes": 240354153,
+        "mtime_ns": 1791891063200895731
+      },
+      "train/OVRPBTW": {
+        "path": "/public/home/shiys/训练数据_公共完整标签_20261013_1923/OVRPBTWtrain/dataset.pkl",
+        "size_bytes": 444096782,
+        "mtime_ns": 1791891081475042842
+      },
+      "train/OVRPLTW": {
+        "path": "/public/home/shiys/训练数据_公共完整标签_20261013_1923/OVRPLTWtrain/dataset.pkl",
+        "size_bytes": 445466983,
+        "mtime_ns": 1791891105330234881
+      },
+      "train/VRPBLTW": {
+        "path": "/public/home/shiys/训练数据_公共完整标签_20261013_1923/VRPBLTWtrain/dataset.pkl",
+        "size_bytes": 445466983,
+        "mtime_ns": 1791891131984449452
+      },
+      "train/OVRPBLTW": {
+        "path": "/public/home/shiys/训练数据_公共完整标签_20261013_1923/OVRPBLTWtrain/dataset.pkl",
+        "size_bytes": 445466983,
+        "mtime_ns": 1791891157239652761
+      }
+    },
+    "feature_sources": [
+      {
+        "path": "/public/home/shiys/0selection2/code/unified_selector/data.py",
+        "size_bytes": 9672,
+        "mtime_ns": 1779283215537838128
+      },
+      {
+        "path": "/public/home/shiys/0selection2/code/V4/r75_data.py",
+        "size_bytes": 9836,
+        "mtime_ns": 1791906787023475773
+      },
+      {
+        "path": "/public/home/shiys/0selection2/code/V4/local_geometry.py",
+        "size_bytes": 3437,
+        "mtime_ns": 1790747649468181418
+      }
+    ],
+    "calculation_dtype": "float64",
+    "cache_dtype": "float32",
+    "statistics_dtype": "float64",
+    "statistics_input": "cached float32 geometry converted to float64",
+    "std_floor": 1e-06,
+    "sum": [
+      25550296.837164965,
+      18858997.518652163,
+      50791356.36904816,
+      93403259.82810718,
+      39448073.791433126,
+      26627799.71241161,
+      58229748.43275269,
+      73371107.36189376,
+      64858701.65808213,
+      40223500.44887843,
+      66689611.084591456,
+      69879777.79326963
+    ],
+    "squared_sum": [
+      7838685.92592985,
+      4194990.429036572,
+      20018250.005146977,
+      62473731.66244349,
+      17968095.390510257,
+      7933211.6940920055,
+      24310161.420623638,
+      40357549.016948216,
+      43934150.70390862,
+      16911732.09845413,
+      32555248.76762469,
+      38038279.81265479
+    ],
+    "neighbor_policy": "exclude self/padding; include all kth-distance ties; use all when fewer than k"
+  },
+  "geometry_fit": "all valid coordinate TRAIN nodes only; population moments of cached FP32 features",
+  "gradients": "same-state FP32 arithmetic mean of actual distinct tasks, normally3; clip1; one update",
+  "partial_groups": "late active-task cycles contain1/2 real tasks, mean over actual tasks; no dummy/repeated/dropped rows",
+  "sampling": "per-epoch private seed2 permutation each task; shuffle active tasks each cycle; retain every tail",
+  "dropout": 0.1,
+  "rdrop_weight": 0.35,
+  "amp": "FP16",
+  "allocator_configuration": "expandable_segments:True",
+  "checkpoint_rule": "strict maximum full18 validation integer correct; earliest exact tie",
+  "training_control": "fixed40 full epochs, no LR/controller/early-stop parameter search",
+  "checkpoint_interval_updates": 60,
+  "train_evaluation": "full every5/final/selected, eval averaged x",
+  "validation_evaluation": "full every epoch, eval averaged x",
+  "inference_rule": "FP32 eval; full legal pool; highest direct utility; exact ties by ascending global solver ID",
+  "test_rule": "unique VAL-selected complete checkpoint, exactly one full18 TEST",
+  "wandb": {
+    "project": "selector",
+    "entity": "yjkds-southern-university-of-science-technology",
+    "mode": "offline"
+  },
+  "approved_gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+  "old_goal": "paused; this is a separate user-approved experiment",
+  "R74": "terminated, disk files kept",
+  "legacy_B_semantics": "R58 deferred/unfixed",
+  "limitations": [
+    "One seed and historical baseline, not matched data-only causality.",
+    "TSP/CVRP snapshot misses mainly large-size tails."
+  ],
+  "source_hashes": {
+    "r75_experiment.py": "ba13a4ec7b61f6639c1bd41ff72aa02e7bd6c9a5733bf345c14b501db4786063",
+    "r75_data.py": "1488e72810fd96d198db12177a59dc69b7989303d8ce3b979b120bf0f885d986",
+    "r75_cache.py": "1eee2758dfbf3e819cbd8a04478b0450a4010c05850a96f51210314dac83aabf",
+    "r75_gradients.py": "839b4d6a31ccaf14d2b02f9c1fa370d2de31675f906b8b15f67827d6011928bd",
+    "r75_analysis.py": "a5ee8ee18388fcf1713201811e30eee58a3d39039784f15aedc01b10e234c517",
+    "r75_monitor.py": "f3857dac810e67ea61febc9630a9baa16850c4da4773d5867fee2f075ed7d94e",
+    "run_v4_r75.sh": "c24c822ea6c4cd16a512b04fa6aa9de88d7b777af19b59679213f5a9f695f80f",
+    "r64_model.py": "f09cc3a4d618e1d480e03e63c2f9896be31078c846928698aa0efaa8ad9dda0c",
+    "r65_gradients.py": "6e9b48ab7d9ce8e92dced0be8e0e7f1e033f3ea044c76712f86837c0d70c1611",
+    "r65_official_schedulefree/adamw_schedulefree.py": "eccb8691b9faa5e64f5160575637c6211ac6edfc00442c12a9013b2637e1bd50"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "started_utc": "2026-10-13T16:34:50Z",
+  "purpose": "Reduce real random TRAIN mmap input stalls without modifying or restarting training",
+  "helper": "code/V4/r75_prefetch.py",
+  "tmux": "r75_prefetch",
+  "allocation": "1465",
+  "node": "gpu03",
+  "cpu_count": 1,
+  "memory_limit_gib": 2,
+  "cuda_visible_devices": "",
+  "ahead_groups": 12,
+  "trainer_step": "1465.121",
+  "trainer_pid": 1632292,
+  "unchanged": ["batch384", "seed2", "model", "loss", "optimizer", "samples", "sample_order", "dropout_rng", "update_budget", "checkpoint_rule", "test_rule"],
+  "io_only": true,
+  "reads_current_query_labels": false,
+  "reads_validation_or_test": false,
+  "extra_neural_updates": 0,
+  "trainer_restarted": false,
+  "helper_stopped_utc": "2026-10-13T17:16:01Z",
+  "helper_step": "1465.122",
+  "helper_stop_reason": "No sustained measured throughput gain; stop only the input helper, leave formal step1465.121 running",
+  "helper_stop_command": "scancel --signal=TERM 1465.122",
+  "live_measurement_with_helper": {
+    "observed_update": 1214,
+    "recent_updates": 120,
+    "recent_rows_per_second": 351.36126188365876,
+    "comparison_is_observational_not_a_matched_benchmark": true,
+    "amp_retries": 0,
+    "finite_losses_and_gradients": true
+  },
+  "formal_eta_from_capacity_fixture_not_reliable": true,
+  "live_measurement_before_helper": {
+    "observed_update": 381,
+    "recent_updates": 120,
+    "recent_seconds": 356.8856428442523,
+    "recent_rows_per_second": 387.3509701827065,
+    "naive_40_epoch_training_hours": 51.74841821241658,
+    "estimate_excludes_full_evaluation": true
+  },
+  "reviewer": "GPT-6-Astra max: focused runtime review; no new scientific protocol blocker",
+  "executor": "GPT-6.1-Sol max"
+}

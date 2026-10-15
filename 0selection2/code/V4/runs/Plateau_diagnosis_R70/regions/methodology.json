@@ -1,0 +1,115 @@
+{
+  "purpose": "Scientific train-to-heldout solver preference diagnosis; not competitive new selector training",
+  "problems": [
+    "TSP",
+    "CVRP",
+    "ATSP",
+    "OVRP",
+    "VRPB",
+    "VRPL",
+    "VRPTW",
+    "OVRPTW",
+    "OVRPB",
+    "OVRPL",
+    "VRPBL",
+    "VRPBTW",
+    "VRPLTW",
+    "OVRPBL",
+    "OVRPBTW",
+    "OVRPLTW",
+    "VRPBLTW",
+    "OVRPBLTW"
+  ],
+  "splits": [
+    "train",
+    "val",
+    "test",
+    "TSPLIB(TSP)",
+    "CVRPLIB(CVRP)"
+  ],
+  "hardware": {
+    "gpu": false,
+    "threads": 4,
+    "affinity": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "labels": "Original raw_label FP64 costs, unchanged native local winner; names/order from current registry and result filenames, not README",
+  "gap": "(solver cost - original full native pool minimum) / minimum; CSV gap/advantage numbers in percent or percentage points",
+  "tie_break": "first registry position, without modifying native winner",
+  "priors": {
+    "size": "unique interior train quartiles",
+    "pseudocount": 20.0,
+    "hierarchy": [
+      "exact training size shrunk to bin",
+      "bin shrunk to global",
+      "out-of-train-size global fallback"
+    ],
+    "global_sbs": "training minimum mean absolute cost, distinct from training minimum mean relative gap"
+  },
+  "trees": {
+    "winner": "DecisionTreeClassifier gini",
+    "cost": "DecisionTreeRegressor multioutput relative gap squared_error",
+    "max_depth": 3,
+    "min_samples_leaf": 200,
+    "random_state": 2,
+    "tuning": false,
+    "eval_threshold_selection": false
+  },
+  "regions": "Same frozen regions have BOTH majority and minmeanrelativegap actions; extra label-free train-median feature x size-bin regions",
+  "feature_only_regions": {
+    "geometry": "distance_mean, or ATSP matrix_asymmetry_mean",
+    "demand": "demand_abs_mean when varying in train",
+    "TW": "directed_tw_pressure_fraction when varying in train",
+    "threshold": "global training input median; no label threshold selection"
+  },
+  "features": {
+    "source": "raw pre-solve coordinates/matrix/demand/service/TW/explicit global fields only",
+    "index_distribution_inference": false,
+    "label_features": false,
+    "absent_globals": "presence flag and zero; no inferred backhaul class/depot deadline",
+    "geometry": {
+      "max_customers": 128,
+      "sampling": "smallest deterministic uint64 coordinate hashes with raw-attribute tie breaks; no instance IDs",
+      "all_customers_when_small": true,
+      "demand_tw_scalars": "all actual customers",
+      "caution": "nn1/nn8 are subset nearest distances for sampled instances, not estimates of exact full-set nearest neighbors"
+    },
+    "reused_cache": "OVRPTW r49 75-field input statistics if matching existing source provenance; all others computed/cached here",
+    "CVRPLIB": "Remove first depot from loc only if zero demand and exactly matching depot; keep raw_node_counts; costs/winners unchanged"
+  },
+  "uncertainty": {
+    "empirical_se": "sample SD/sqrt(N)",
+    "mean_ci": "two-sided Student-t 95%; Wilson native win-rate CI",
+    "support_min_heldout": 30,
+    "unsupported": "flagged, never merged",
+    "tree_train_ci": "adaptive and descriptive, not honest estimation; feature-only regions avoid target-selected thresholds",
+    "reference_pair": "top two native winner frequencies in TRAIN; registry tie break",
+    "reference_family_size": 1728,
+    "pair_family_size": 38208,
+    "simultaneous": "Bonferroni Student-t intervals across conservative maximum val/test region families; descriptive iid-instance assumption",
+    "multiplicity_caution": "No p-value search; nominal mean CIs also retained. Multiple routing variants may share base instances, so macro uncertainty is not computed as independent instances."
+  },
+  "pairs": "All unordered pairs in each actual native pool, not only ReLD; train-top3 and large train expected-gap pairs flagged, never prune coverage",
+  "independence": "Analytic expected native accuracy and relative gap of independent draws from train-smoothed same-region distribution; no duplicated model/error/permutation statistics",
+  "hindsight": "Heldout best constant mean relative gap is an evaluation-label diagnostic lower reference among constants ONLY, not a fitted deployable policy or lower bound for region policies",
+  "feature_shift": "Signed mean difference / pooled population SD; empirical two-sample ECDF KS distance; per-feature and per-instance train min/max exceedance. No KS p-values.",
+  "arrays": {
+    "feature_cache": "feature_cache/{problem}_{split}.npz: X FP64[N,F], names, sizes, indices, split, raw_node_counts, geometry_sample_size",
+    "memberships": "memberships/{problem}_{split}.npz: indices,sizes,split,size_bin,winner_tree_leaf,gap_tree_leaf,predeclared_feature_quantile,geometry_quantile plus demand/TW regions when available",
+    "baselines": "{val_predictions,test_predictions,LIB_predictions}/{problem}.npz: indices,truth,winner,costs,pool,pool_ids,sizes,pred_majority,pred_mean_gap,pred_global_sbs,logits_majority,logits_mean_gap,train_prob,train_mean_gaps,range/fallback/leaf metadata",
+    "truth": "native local registry winner, identical to winner",
+    "logits_majority": "log smoothed train probabilities; argmax unchanged",
+    "logits_mean_gap": "negative smoothed mean relative gaps, fractional units"
+  },
+  "limits": [
+    "Historical solver costs/contracts are taken as provided, not recertified.",
+    "No neural selector training, GPU, tuning, solver reruns, commits, or R70 residual contrast here.",
+    "Failure of these shallow fixed diagnostics does not demonstrate feature insufficiency or conditional independence.",
+    "LIB is an out-of-distribution supplemental holdout, never merged into the 18-task macro.",
+    "Mean advantage sign alone is not certainty; support and empirical intervals are reported."
+  ]
+}

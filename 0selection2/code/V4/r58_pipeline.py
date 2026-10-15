@@ -10,16 +10,20 @@ from pathlib import Path
 
 from ..unified_selector.registry import POOLS, PROBLEMS
 from .r58_analysis import progress, summarize
-from .r58_budget import WHOLE_CLEARED, WHOLE_OVER, build_whole_budget, markdown, write_execution_approval
+from .r58_budget import (LIMIT_HOURS, WHOLE_CLEARED, WHOLE_OVER, WHOLE_UNLIMITED, build_whole_budget,
+                         gpu_hour_policy, markdown, write_execution_approval)
 from .r58_labels import implementation_hashes, lock, publish, runtime_environment
 from .r58_scenario import ROOT, save_json, write_contract
 
 
 def run(args):
+    limit = getattr(args, 'gpu_hour_limit', LIMIT_HOURS)
+    policy = gpu_hour_policy(limit)
     args.root.mkdir(parents=True, exist_ok=True)
     write_contract(args.root)
     state = dict(stage=args.stage, pid=os.getpid(), cuda_visible_devices=os.environ.get('CUDA_VISIBLE_DEVICES'),
-                 slurm_job_id=os.environ.get('SLURM_JOB_ID'), started=time.time(), status='running')
+                 slurm_job_id=os.environ.get('SLURM_JOB_ID'), started=time.time(), status='running',
+                 gpu_hour_policy=policy)
     def update(**values):
         state.update(values)
         save_json(args.root / 'pipeline_state.json', state)
@@ -71,16 +75,19 @@ def run(args):
             update(status='preflight_complete', finished=time.time())
             return 0
         if args.stage in ('all', 'labels'):
-            report = build_whole_budget(args.root)
+            report = build_whole_budget(args.root, gpu_hour_limit=limit)
             save_json(args.root / 'budget.json', report)
             (args.root / 'BUDGET.md').write_text(markdown(report))
             whole = report.get('whole_project', {})
             decision = whole.get('decision')
-            if not report['coverage']['complete_budget'] or not whole.get('complete'):
+            cleared = WHOLE_UNLIMITED if policy['gpu_hour_limit'] is None else WHOLE_CLEARED
+            if (not report['coverage']['complete_budget'] or not whole.get('complete') or
+                    report.get('gpu_hour_policy', gpu_hour_policy()) != policy or
+                    whole.get('gpu_hour_policy', gpu_hour_policy()) != policy):
                 blocked = 'budget_not_cleared'
             elif decision == WHOLE_OVER:
                 blocked = 'skipped_over_budget'
-            elif decision != WHOLE_CLEARED:
+            elif decision != cleared:
                 blocked = 'budget_not_cleared'
             else:
                 blocked = None
@@ -89,7 +96,7 @@ def run(args):
                        whole_project_budget=whole, finished=time.time())
                 return 3
             try:
-                approval = write_execution_approval(args.root, report)
+                approval = write_execution_approval(args.root, report, gpu_hour_limit=limit)
             except (OSError, ValueError, KeyError, TypeError) as error:
                 update(status='budget_not_cleared', whole_project_budget=whole,
                        error=str(error), finished=time.time())
@@ -123,12 +130,14 @@ def run(args):
         raise
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--stage', choices=['all', 'preflight', 'labels', 'train', 'analysis'], default='all')
     parser.add_argument('--root', type=Path, default=ROOT)
     parser.add_argument('--force-preflight', action='store_true', help='Recheck all candidates with frozen current sources')
-    args = parser.parse_args()
+    parser.add_argument('--gpu-hour-limit', choices=['100', 'none'], default='100',
+                        help='Historical 100h limit (default), or explicit unlimited user authorization')
+    args = parser.parse_args(argv)
     if args.stage == 'analysis':
         summarize(args.root)
     else:

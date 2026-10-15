@@ -1,0 +1,5971 @@
+{
+  "schema_version": 1,
+  "completed_utc": "2026-10-14T19:23:18.281681+00:00",
+  "split": "train",
+  "tasks": 18,
+  "rows": 1262052,
+  "historical_execution_outcome": "inconclusive",
+  "research_decision": "route_closed_negative",
+  "source_train_directory": "/public/home/shiys/0selection2/code/V4/runs/R76_R45A_single_reld_mt/evaluation/train/selected_best",
+  "train_shards": [
+    "/public/home/shiys/0selection2/code/V4/runs/R76_R45A_single_reld_mt/evaluation/train/selected_best/rank000.npz",
+    "/public/home/shiys/0selection2/code/V4/runs/R76_R45A_single_reld_mt/evaluation/train/selected_best/rank001.npz",
+    "/public/home/shiys/0selection2/code/V4/runs/R76_R45A_single_reld_mt/evaluation/train/selected_best/rank002.npz",
+    "/public/home/shiys/0selection2/code/V4/runs/R76_R45A_single_reld_mt/evaluation/train/selected_best/rank003.npz"
+  ],
+  "base_checkpoint_sha256": "5ba5777e437235e22682c4d54cfd8cdefca6fb53c27204a8e1e3f753ea9043c9",
+  "additional_optimizer_updates": 0,
+  "new_backbone_forwards": 0,
+  "gpu_used": false,
+  "val_read": false,
+  "test_read": false,
+  "plan_gate_changed": false,
+  "reference_role": "Existing closed-form TRAIN diagnostic only; not a deployed or retroactively qualified candidate",
+  "tie_policy": "ascending global solver ID",
+  "macro_aggregation": "equal weight per task",
+  "signed_difference": "new rule minus old rule; negative cost/regret is better",
+  "metrics": {
+    "identity": {
+      "macro": {
+        "macro_ce": 0.7527030800295704,
+        "macro_top1": 0.6936964562474446,
+        "macro_top2": 0.8873889506929983,
+        "macro_top3": 0.9513348102930783,
+        "macro_top1_tie_aware": 0.6951987715244696,
+        "macro_mean_cost": 11.373004840415984,
+        "macro_vs_sbs_pct": -0.1438454168430519,
+        "macro_vs_oracle_pct": 0.43889411662091493,
+        "macro_actual_regret_pct": 0.4606500924792527,
+        "macro_vbs_gap_closed_pct": 7.27350850866689
+      },
+      "per_problem": {
+        "TSP": {
+          "n": 70114,
+          "mean_cost": 7.646266166843708,
+          "sbs": 7.658740371906901,
+          "vbs": 7.610581768282815,
+          "oracle_cost": 7.610581768282815,
+          "sbs_cost": 7.658740371906901,
+          "sbs_name": "T2T",
+          "top1_tie_aware": 0.430227914539179,
+          "vs_sbs_pct": -0.16287541367702163,
+          "vs_oracle_pct": 0.4688787223811053,
+          "actual_regret_pct": 0.4607288380928713,
+          "vbs_gap_closed_pct": 25.90233961217582,
+          "top1": 0.4186467752517329,
+          "top2": 0.6532789457169752,
+          "top3": 0.8287931083663748,
+          "pick_dist": [
+            0.3410303220469521,
+            0.0,
+            0.0,
+            0.09534472430613002,
+            0.0,
+            0.0,
+            0.5636249536469179,
+            0.0
+          ],
+          "arm_distribution": {
+            "BQ": 0.3410303220469521,
+            "DIFUSCO": 0.0,
+            "DIFUSCO500": 0.0,
+            "ELG": 0.09534472430613002,
+            "LEHD": 0.0,
+            "OMNI": 0.0,
+            "T2T": 0.5636249536469179,
+            "T2T500": 0.0
+          },
+          "ce": 1.4682933270252176,
+          "pool": [
+            "BQ",
+            "DIFUSCO",
+            "DIFUSCO500",
+            "ELG",
+            "LEHD",
+            "OMNI",
+            "T2T",
+            "T2T500"
+          ],
+          "method_top1": {
+            "BQ": 0.29479133981801064,
+            "DIFUSCO": 0.086772969735003,
+            "DIFUSCO500": 0.012337051088227743,
+            "ELG": 0.07393673160852327,
+            "LEHD": 0.16945260575633966,
+            "OMNI": 0.00576204467010868,
+            "T2T": 0.32144792766066693,
+            "T2T500": 0.03549932966312006
+          },
+          "method_mean_cost": {
+            "BQ": 7.718419738710515,
+            "DIFUSCO": 7.740539687174941,
+            "DIFUSCO500": 7.913212170253916,
+            "ELG": 7.774105597586999,
+            "LEHD": 7.761481161972221,
+            "OMNI": 7.869381122439238,
+            "T2T": 7.658740371906901,
+            "T2T500": 7.806000427236764
+          },
+          "best_top1": 0.32144792766066693,
+          "best_top2": 0.6162392674786776,
+          "best_top3": 0.7030122372136806,
+          "top1_exceeds_methods": [
+            "BQ",
+            "DIFUSCO",
+            "DIFUSCO500",
+            "ELG",
+            "LEHD",
+            "OMNI",
+            "T2T",
+            "T2T500"
+          ],
+          "top1_not_exceeds_methods": [],
+          "cost_exceeds_methods": [
+            "BQ",
+            "DIFUSCO",
+            "DIFUSCO500",
+            "ELG",
+            "LEHD",
+            "OMNI",
+            "T2T",
+            "T2T500"
+          ],
+          "cost_not_exceeds_methods": [],
+          "sbs_selection_split": "train"
+        },
+        "CVRP": {
+          "n": 70114,
+          "mean_cost": 18.060584396135056,
+          "sbs": 18.08167448976078,
+          "vbs": 17.87773027534145,
+          "oracle_cost": 17.87773027534145,
+          "sbs_cost": 18.08167448976078,
+          "sbs_name": "RELD_CVRP",
+          "top1_tie_aware": 0.3343269532475682,
+          "vs_sbs_pct": -0.11663794543843586,
+          "vs_oracle_pct": 1.0228038905241599,
+          "actual_regret_pct": 1.4185653977584949,
+          "vbs_gap_closed_pct": 10.34110905561647,
+          "top1": 0.3343269532475682,
+          "top2": 0.5265567504350058,
+          "top3": 0.6646033602418918,
+          "pick_dist": [
+            0.0,
+            0.07390820663490887,
+            0.3419573836894201,
+            4.278746042159911e-05,
+            0.0,
+            0.03273240722252332,
+            0.010896539920700573,
+            0.4941809053826625,
+            0.04628176968936304,
+            0.0
+          ],
+          "arm_distribution": {
+            "BQ": 0.0,
+            "ELG": 0.07390820663490887,
+            "ICAM": 0.3419573836894201,
+            "LEHD": 4.278746042159911e-05,
+            "MVMOE": 0.0,
+            "MoSES_CaDA": 0.03273240722252332,
+            "MoSES_RF": 0.010896539920700573,
+            "OMNI": 0.4941809053826625,
+            "RELD_CVRP": 0.04628176968936304,
+            "RouteFinder": 0.0
+          },
+          "ce": 1.7054640988479068,
+          "pool": [
+            "BQ",
+            "ELG",
+            "ICAM",
+            "LEHD",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "OMNI",
+            "RELD_CVRP",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "BQ": 0.12834811877799013,
+            "ELG": 0.020366831160681175,
+            "ICAM": 0.1876658014091337,
+            "LEHD": 0.1442793165416322,
+            "MVMOE": 0.021479305131642753,
+            "MoSES_CaDA": 0.026128875830789856,
+            "MoSES_RF": 0.03084975896397296,
+            "OMNI": 0.24350343725932053,
+            "RELD_CVRP": 0.18079128276806344,
+            "RouteFinder": 0.016587272156773254
+          },
+          "method_mean_cost": {
+            "BQ": 18.38766784753254,
+            "ELG": 18.425514994281883,
+            "ICAM": 18.145098887347523,
+            "LEHD": 18.449957587080696,
+            "MVMOE": 19.363815866989764,
+            "MoSES_CaDA": 19.087202047572173,
+            "MoSES_RF": 20.10840874863926,
+            "OMNI": 18.201455312817583,
+            "RELD_CVRP": 18.08167448976078,
+            "RouteFinder": 18.690927057906514
+          },
+          "best_top1": 0.18079128276806344,
+          "best_top2": 0.36845708417719714,
+          "best_top3": 0.6119605214365177,
+          "top1_exceeds_methods": [
+            "BQ",
+            "ELG",
+            "ICAM",
+            "LEHD",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "OMNI",
+            "RELD_CVRP",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [],
+          "cost_exceeds_methods": [
+            "BQ",
+            "ELG",
+            "ICAM",
+            "LEHD",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "OMNI",
+            "RELD_CVRP",
+            "RouteFinder"
+          ],
+          "cost_not_exceeds_methods": [],
+          "sbs_selection_split": "train"
+        },
+        "ATSP": {
+          "n": 70114,
+          "mean_cost": 1.6411833335542358,
+          "sbs": 1.6786440012738184,
+          "vbs": 1.6339172954570116,
+          "oracle_cost": 1.6339172954570116,
+          "sbs_cost": 1.6786440012738184,
+          "sbs_name": "UNICO_MatPOENet",
+          "top1_tie_aware": 0.7564395127934507,
+          "vs_sbs_pct": -2.23160287060008,
+          "vs_oracle_pct": 0.4447004825413714,
+          "actual_regret_pct": 0.4496290347149701,
+          "vbs_gap_closed_pct": 83.75458696425186,
+          "top1": 0.7416921014348061,
+          "top2": 0.9520637818410018,
+          "top3": 0.9913997204552586,
+          "pick_dist": [
+            0.0,
+            0.308098240009128,
+            0.10869441195766893,
+            0.0,
+            0.5832073480332031
+          ],
+          "arm_distribution": {
+            "GLOP": 0.0,
+            "ICAM_ATSP": 0.308098240009128,
+            "MATNET": 0.10869441195766893,
+            "MATPOENET": 0.0,
+            "UNICO_MatPOENet": 0.5832073480332031
+          },
+          "ce": 0.6836131933073797,
+          "pool": [
+            "GLOP",
+            "ICAM_ATSP",
+            "MATNET",
+            "MATPOENET",
+            "UNICO_MatPOENet"
+          ],
+          "method_top1": {
+            "GLOP": 0.002995122229511938,
+            "ICAM_ATSP": 0.30438999343925605,
+            "MATNET": 0.14293864278175542,
+            "MATPOENET": 0.07957041389736715,
+            "UNICO_MatPOENet": 0.4701058276521094
+          },
+          "method_mean_cost": {
+            "GLOP": 1.9307446030878113,
+            "ICAM_ATSP": 1.7141565689004237,
+            "MATNET": 2.3101392186544487,
+            "MATPOENET": 1.725548583767149,
+            "UNICO_MatPOENet": 1.6786440012738184
+          },
+          "best_top1": 0.4701058276521094,
+          "best_top2": 0.7744958210913655,
+          "best_top3": 0.8540662349887327,
+          "top1_exceeds_methods": [
+            "GLOP",
+            "ICAM_ATSP",
+            "MATNET",
+            "MATPOENET",
+            "UNICO_MatPOENet"
+          ],
+          "top1_not_exceeds_methods": [],
+          "cost_exceeds_methods": [
+            "GLOP",
+            "ICAM_ATSP",
+            "MATNET",
+            "MATPOENET",
+            "UNICO_MatPOENet"
+          ],
+          "cost_not_exceeds_methods": [],
+          "sbs_selection_split": "train"
+        },
+        "OVRP": {
+          "n": 70114,
+          "mean_cost": 7.449545426315936,
+          "sbs": 7.453426893276933,
+          "vbs": 7.397518721769257,
+          "oracle_cost": 7.397518721769257,
+          "sbs_cost": 7.453426893276933,
+          "sbs_name": "MoSES_RF",
+          "top1_tie_aware": 0.37634423938157857,
+          "vs_sbs_pct": -0.0520762733246638,
+          "vs_oracle_pct": 0.703299396777135,
+          "actual_regret_pct": 0.7155449321740495,
+          "vbs_gap_closed_pct": 6.942575398774867,
+          "top1": 0.3759591522377842,
+          "top2": 0.6893202498787688,
+          "top3": 0.9198448241435376,
+          "pick_dist": [
+            0.0,
+            0.0,
+            0.2568816498844739,
+            0.7431183501155262,
+            0.0,
+            0.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.0,
+            "MoSES_CaDA": 0.2568816498844739,
+            "MoSES_RF": 0.7431183501155262,
+            "reld_mt": 0.0,
+            "RouteFinder": 0.0
+          },
+          "ce": 1.3092882245696995,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.009413241292751805,
+            "MVMOE": 0.00576204467010868,
+            "MoSES_CaDA": 0.3462503922183872,
+            "MoSES_RF": 0.34187180876857687,
+            "reld_mt": 0.06497988989360184,
+            "RouteFinder": 0.23172262315657358
+          },
+          "method_mean_cost": {
+            "MTPOMO": 8.364112907455441,
+            "MVMOE": 9.191530408891145,
+            "MoSES_CaDA": 7.459420620692829,
+            "MoSES_RF": 7.453426893276933,
+            "reld_mt": 7.629936280074982,
+            "RouteFinder": 7.471160473528848
+          },
+          "best_top1": 0.34187180876857687,
+          "best_top2": 0.6881222009869641,
+          "best_top3": 0.9198448241435376,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "cost_not_exceeds_methods": [],
+          "sbs_selection_split": "train"
+        },
+        "VRPB": {
+          "n": 70114,
+          "mean_cost": 9.357769237550087,
+          "sbs": 9.357769237550087,
+          "vbs": 9.319670239912009,
+          "oracle_cost": 9.319670239912009,
+          "sbs_cost": 9.357769237550087,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.8030635821661865,
+          "vs_sbs_pct": 0.0,
+          "vs_oracle_pct": 0.4088019925309938,
+          "actual_regret_pct": 0.4161568337513724,
+          "vbs_gap_closed_pct": 0.0,
+          "top1": 0.8030350571925721,
+          "top2": 0.9673531676983199,
+          "top3": 1.0,
+          "pick_dist": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.0,
+            "reld_mt": 1.0
+          },
+          "ce": 0.5718278937158211,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.0529994009755541,
+            "MVMOE": 0.1439655418318738,
+            "reld_mt": 0.8030350571925721
+          },
+          "method_mean_cost": {
+            "MTPOMO": 10.729432702884013,
+            "MVMOE": 11.68793228361713,
+            "reld_mt": 9.357769237550087
+          },
+          "best_top1": 0.8030350571925721,
+          "best_top2": 0.8560344581681262,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "VRPL": {
+          "n": 70114,
+          "mean_cost": 12.396519049380206,
+          "sbs": 12.39716842018313,
+          "vbs": 12.340739246225024,
+          "oracle_cost": 12.340739246225024,
+          "sbs_cost": 12.39716842018313,
+          "sbs_name": "MoSES_RF",
+          "top1_tie_aware": 0.33338562911829306,
+          "vs_sbs_pct": -0.005238057441137034,
+          "vs_oracle_pct": 0.45199725917752787,
+          "actual_regret_pct": 0.46256578036637164,
+          "vbs_gap_closed_pct": 1.150771413747259,
+          "top1": 0.3333428416578715,
+          "top2": 0.6219727871751719,
+          "top3": 0.8111931996462903,
+          "pick_dist": [
+            0.0,
+            0.0,
+            0.3944148101663006,
+            0.6055851898336994,
+            0.0,
+            0.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.0,
+            "MoSES_CaDA": 0.3944148101663006,
+            "MoSES_RF": 0.6055851898336994,
+            "reld_mt": 0.0,
+            "RouteFinder": 0.0
+          },
+          "ce": 1.468093148029957,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.03300339447186011,
+            "MVMOE": 0.03256125738083692,
+            "MoSES_CaDA": 0.30624411672419205,
+            "MoSES_RF": 0.31554325812248624,
+            "reld_mt": 0.13727643551929714,
+            "RouteFinder": 0.17537153778132755
+          },
+          "method_mean_cost": {
+            "MTPOMO": 13.400922014691627,
+            "MVMOE": 14.188011836423557,
+            "MoSES_CaDA": 12.398698581673651,
+            "MoSES_RF": 12.39716842018313,
+            "reld_mt": 12.531558705841162,
+            "RouteFinder": 12.419604198834222
+          },
+          "best_top1": 0.31554325812248624,
+          "best_top2": 0.6217873748466782,
+          "best_top3": 0.7971589126280059,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "cost_not_exceeds_methods": [],
+          "sbs_selection_split": "train"
+        },
+        "VRPTW": {
+          "n": 70114,
+          "mean_cost": 18.81545674796452,
+          "sbs": 18.81545674796452,
+          "vbs": 18.759479119106647,
+          "oracle_cost": 18.759479119106647,
+          "sbs_cost": 18.81545674796452,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.8023647203126337,
+          "vs_sbs_pct": 0.0,
+          "vs_oracle_pct": 0.29839649865790463,
+          "actual_regret_pct": 0.31179119450918347,
+          "vbs_gap_closed_pct": 0.0,
+          "top1": 0.8023647203126337,
+          "top2": 0.9892460849473714,
+          "top3": 0.9960065036939841,
+          "pick_dist": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.0,
+            "MoSES_CaDA": 0.0,
+            "MoSES_RF": 0.0,
+            "reld_mt": 1.0,
+            "RouteFinder": 0.0
+          },
+          "ce": 0.4926531636336728,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 5.704994722879881e-05,
+            "MVMOE": 0.18131899477992983,
+            "MoSES_CaDA": 0.01052571526371338,
+            "MoSES_RF": 0.001397723707105571,
+            "reld_mt": 0.8023647203126337,
+            "RouteFinder": 0.00433579598938871
+          },
+          "method_mean_cost": {
+            "MTPOMO": 23.50449378274113,
+            "MVMOE": 20.445820107491212,
+            "MoSES_CaDA": 22.85174172927085,
+            "MoSES_RF": 21.73084248536036,
+            "reld_mt": 18.81545674796452,
+            "RouteFinder": 21.76642406670598
+          },
+          "best_top1": 0.8023647203126337,
+          "best_top2": 0.9836837150925636,
+          "best_top3": 0.9850814387996691,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPTW": {
+          "n": 70114,
+          "mean_cost": 10.119165380940911,
+          "sbs": 10.119165380940911,
+          "vbs": 10.093938919860525,
+          "oracle_cost": 10.093938919860525,
+          "sbs_cost": 10.119165380940911,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.8386484867501498,
+          "vs_sbs_pct": 0.0,
+          "vs_oracle_pct": 0.2499169182681671,
+          "actual_regret_pct": 0.24581342962009192,
+          "vbs_gap_closed_pct": 0.0,
+          "top1": 0.8386484867501498,
+          "top2": 0.9945945175000713,
+          "top3": 0.9976181647031976,
+          "pick_dist": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.0,
+            "MoSES_CaDA": 0.0,
+            "MoSES_RF": 0.0,
+            "reld_mt": 1.0,
+            "RouteFinder": 0.0
+          },
+          "ce": 0.42470042676952485,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.1536069829135408,
+            "MoSES_CaDA": 0.004663833185954303,
+            "MoSES_RF": 0.0008272242348175828,
+            "reld_mt": 0.8386484867501498,
+            "RouteFinder": 0.002253472915537553
+          },
+          "method_mean_cost": {
+            "MTPOMO": 14.461218758052622,
+            "MVMOE": 11.33480077112612,
+            "MoSES_CaDA": 13.108648779119795,
+            "MoSES_RF": 12.088299448309039,
+            "reld_mt": 10.119165380940911,
+            "RouteFinder": 11.649492711958633
+          },
+          "best_top1": 0.8386484867501498,
+          "best_top2": 0.9922554696636906,
+          "best_top3": 0.9945089425792281,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPB": {
+          "n": 70114,
+          "mean_cost": 6.36321315753966,
+          "sbs": 6.36321315753966,
+          "vbs": 6.346542603427536,
+          "oracle_cost": 6.346542603427536,
+          "sbs_cost": 6.36321315753966,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.8831759705622272,
+          "vs_sbs_pct": 0.0,
+          "vs_oracle_pct": 0.2626714284265752,
+          "actual_regret_pct": 0.2712426745029851,
+          "vbs_gap_closed_pct": 0.0,
+          "top1": 0.88316170807542,
+          "top2": 0.9654705194397695,
+          "top3": 1.0,
+          "pick_dist": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.0,
+            "reld_mt": 1.0
+          },
+          "ce": 0.4399493512626277,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.05438286219585247,
+            "MVMOE": 0.0624554297287275,
+            "reld_mt": 0.88316170807542
+          },
+          "method_mean_cost": {
+            "MTPOMO": 7.312356388554981,
+            "MVMOE": 8.2736193447243,
+            "reld_mt": 6.36321315753966
+          },
+          "best_top1": 0.88316170807542,
+          "best_top2": 0.9375445702712725,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPL": {
+          "n": 70114,
+          "mean_cost": 7.451387656372076,
+          "sbs": 7.4529368940932414,
+          "vbs": 7.3982277428576655,
+          "oracle_cost": 7.3982277428576655,
+          "sbs_cost": 7.4529368940932414,
+          "sbs_name": "MoSES_RF",
+          "top1_tie_aware": 0.3764155518156146,
+          "vs_sbs_pct": -0.020786942693595822,
+          "vs_oracle_pct": 0.7185492980495534,
+          "actual_regret_pct": 0.7317133162305747,
+          "vbs_gap_closed_pct": 2.831770711437742,
+          "top1": 0.3761873520266994,
+          "top2": 0.7008443392189863,
+          "top3": 0.921228285363836,
+          "pick_dist": [
+            0.0,
+            0.0,
+            0.31149271186924155,
+            0.6885072881307585,
+            0.0,
+            0.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.0,
+            "MoSES_CaDA": 0.31149271186924155,
+            "MoSES_RF": 0.6885072881307585,
+            "reld_mt": 0.0,
+            "RouteFinder": 0.0
+          },
+          "ce": 1.299530718886984,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.008785691873235017,
+            "MVMOE": 0.006132869327095872,
+            "MoSES_CaDA": 0.3558347833528254,
+            "MoSES_RF": 0.34446758136748723,
+            "reld_mt": 0.06385315343583307,
+            "RouteFinder": 0.2209259206435234
+          },
+          "method_mean_cost": {
+            "MTPOMO": 8.306216681065312,
+            "MVMOE": 9.041230620084393,
+            "MoSES_CaDA": 7.459269570992244,
+            "MoSES_RF": 7.4529368940932414,
+            "reld_mt": 7.632910260074201,
+            "RouteFinder": 7.474671944099132
+          },
+          "best_top1": 0.34446758136748723,
+          "best_top2": 0.7003023647203126,
+          "best_top3": 0.921228285363836,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "cost_not_exceeds_methods": [],
+          "sbs_selection_split": "train"
+        },
+        "VRPBL": {
+          "n": 70114,
+          "mean_cost": 9.402794261882867,
+          "sbs": 9.402794261882867,
+          "vbs": 9.362778661880554,
+          "oracle_cost": 9.362778661880554,
+          "sbs_cost": 9.402794261882867,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.7940069030436147,
+          "vs_sbs_pct": 0.0,
+          "vs_oracle_pct": 0.42739021659490284,
+          "actual_regret_pct": 0.42870803455220075,
+          "vbs_gap_closed_pct": 0.0,
+          "top1": 0.7940069030436147,
+          "top2": 0.9673389052115127,
+          "top3": 1.0,
+          "pick_dist": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.0,
+            "reld_mt": 1.0
+          },
+          "ce": 0.5840886420411182,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.05235758906923011,
+            "MVMOE": 0.15363550788715521,
+            "reld_mt": 0.7940069030436147
+          },
+          "method_mean_cost": {
+            "MTPOMO": 10.63622523113093,
+            "MVMOE": 11.19678936736543,
+            "reld_mt": 9.402794261882867
+          },
+          "best_top1": 0.7940069030436147,
+          "best_top2": 0.8463644921128448,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "VRPBTW": {
+          "n": 70114,
+          "mean_cost": 19.7408163437067,
+          "sbs": 19.7408163437067,
+          "vbs": 19.650132743917144,
+          "oracle_cost": 19.650132743917144,
+          "sbs_cost": 19.7408163437067,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.7955187266451779,
+          "vs_sbs_pct": 0.0,
+          "vs_oracle_pct": 0.4614910289480356,
+          "actual_regret_pct": 0.4447660235727877,
+          "vbs_gap_closed_pct": 0.0,
+          "top1": 0.7955187266451779,
+          "top2": 0.9982457141227145,
+          "top3": 1.0,
+          "pick_dist": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.0,
+            "reld_mt": 1.0
+          },
+          "ce": 0.46702771896022377,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.0010696865105399777,
+            "MVMOE": 0.20341158684428218,
+            "reld_mt": 0.7955187266451779
+          },
+          "method_mean_cost": {
+            "MTPOMO": 24.821552536860715,
+            "MVMOE": 21.45834565028019,
+            "reld_mt": 19.7408163437067
+          },
+          "best_top1": 0.7955187266451779,
+          "best_top2": 0.99893031348946,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "VRPLTW": {
+          "n": 70114,
+          "mean_cost": 18.775183100523225,
+          "sbs": 18.775183100523225,
+          "vbs": 18.71994787579577,
+          "oracle_cost": 18.71994787579577,
+          "sbs_cost": 18.775183100523225,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.8040049062954617,
+          "vs_sbs_pct": 0.0,
+          "vs_oracle_pct": 0.29506078272190095,
+          "actual_regret_pct": 0.30977245138806503,
+          "vbs_gap_closed_pct": 0.0,
+          "top1": 0.8040049062954617,
+          "top2": 0.988718372935505,
+          "top3": 0.9958496163391048,
+          "pick_dist": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.0,
+            "MoSES_CaDA": 0.0,
+            "MoSES_RF": 0.0,
+            "reld_mt": 1.0,
+            "RouteFinder": 0.0
+          },
+          "ce": 0.49341080667459664,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 5.704994722879881e-05,
+            "MVMOE": 0.1777248481045155,
+            "MoSES_CaDA": 0.01202327637846935,
+            "MoSES_RF": 0.0019967481530079583,
+            "reld_mt": 0.8040049062954617,
+            "RouteFinder": 0.004193171121316713
+          },
+          "method_mean_cost": {
+            "MTPOMO": 23.456875883662857,
+            "MVMOE": 20.407449472119488,
+            "MoSES_CaDA": 22.96850345494303,
+            "MoSES_RF": 21.6341626357272,
+            "reld_mt": 18.775183100523225,
+            "RouteFinder": 21.710954748244934
+          },
+          "best_top1": 0.8040049062954617,
+          "best_top2": 0.9817297543999772,
+          "best_top3": 0.9837265025529851,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPBL": {
+          "n": 70114,
+          "mean_cost": 6.3591801600721904,
+          "sbs": 6.3591801600721904,
+          "vbs": 6.3429477520036395,
+          "oracle_cost": 6.3429477520036395,
+          "sbs_cost": 6.3591801600721904,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.8858145306215591,
+          "vs_sbs_pct": 0.0,
+          "vs_oracle_pct": 0.2559126876525708,
+          "actual_regret_pct": 0.26321184391456987,
+          "vbs_gap_closed_pct": 0.0,
+          "top1": 0.8858145306215591,
+          "top2": 0.9660410189120575,
+          "top3": 1.0,
+          "pick_dist": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.0,
+            "reld_mt": 1.0
+          },
+          "ce": 0.4344698911062242,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.050574778218330146,
+            "MVMOE": 0.06361069116011067,
+            "reld_mt": 0.8858145306215591
+          },
+          "method_mean_cost": {
+            "MTPOMO": 7.21994730599741,
+            "MVMOE": 7.8721198987187675,
+            "reld_mt": 6.3591801600721904
+          },
+          "best_top1": 0.8858145306215591,
+          "best_top2": 0.9363893088398894,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPBTW": {
+          "n": 70114,
+          "mean_cost": 10.625827688673974,
+          "sbs": 10.625827688673974,
+          "vbs": 10.587621084053806,
+          "oracle_cost": 10.587621084053806,
+          "sbs_cost": 10.625827688673974,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.8325156174230539,
+          "vs_sbs_pct": 0.0,
+          "vs_oracle_pct": 0.3608610878388152,
+          "actual_regret_pct": 0.33684874402183707,
+          "vbs_gap_closed_pct": 0.0,
+          "top1": 0.8325156174230539,
+          "top2": 0.9997290127506632,
+          "top3": 1.0,
+          "pick_dist": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.0,
+            "reld_mt": 1.0
+          },
+          "ce": 0.40549710910456127,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.16748438257694612,
+            "reld_mt": 0.8325156174230539
+          },
+          "method_mean_cost": {
+            "MTPOMO": 15.22681841300568,
+            "MVMOE": 11.891326931058556,
+            "reld_mt": 10.625827688673974
+          },
+          "best_top1": 0.8325156174230539,
+          "best_top2": 1.0,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPLTW": {
+          "n": 70114,
+          "mean_cost": 10.109913379187619,
+          "sbs": 10.109913379187619,
+          "vbs": 10.084619649815254,
+          "oracle_cost": 10.084619649815254,
+          "sbs_cost": 10.109913379187619,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.8377499500812962,
+          "vs_sbs_pct": 0.0,
+          "vs_oracle_pct": 0.2508149067657506,
+          "actual_regret_pct": 0.24805285724581358,
+          "vbs_gap_closed_pct": 0.0,
+          "top1": 0.837735687594489,
+          "top2": 0.9937245058048322,
+          "top3": 0.9974898023219329,
+          "pick_dist": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.0,
+            "MoSES_CaDA": 0.0,
+            "MoSES_RF": 0.0,
+            "reld_mt": 1.0,
+            "RouteFinder": 0.0
+          },
+          "ce": 0.43409804148997155,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.15273697121830163,
+            "MoSES_CaDA": 0.0061613943007102715,
+            "MoSES_RF": 0.0010126365633111789,
+            "reld_mt": 0.837735687594489,
+            "RouteFinder": 0.002353310323187951
+          },
+          "method_mean_cost": {
+            "MTPOMO": 14.455601920396575,
+            "MVMOE": 11.321139335353465,
+            "MoSES_CaDA": 13.199366552792522,
+            "MoSES_RF": 12.078013545799008,
+            "reld_mt": 10.109913379187619,
+            "RouteFinder": 11.619377029259322
+          },
+          "best_top1": 0.837735687594489,
+          "best_top2": 0.9904726588127906,
+          "best_top3": 0.9928259691359785,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "VRPBLTW": {
+          "n": 70114,
+          "mean_cost": 19.771468264366362,
+          "sbs": 19.771468264366362,
+          "vbs": 19.681153817794105,
+          "oracle_cost": 19.681153817794105,
+          "sbs_cost": 19.771468264366362,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.7960464386570443,
+          "vs_sbs_pct": 0.0,
+          "vs_oracle_pct": 0.4588879666729939,
+          "actual_regret_pct": 0.440427766067709,
+          "vbs_gap_closed_pct": 0.0,
+          "top1": 0.7960464386570443,
+          "top2": 0.9986450637533161,
+          "top3": 1.0,
+          "pick_dist": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.0,
+            "reld_mt": 1.0
+          },
+          "ce": 0.463400105934621,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.0010268990501183786,
+            "MVMOE": 0.20292666229283737,
+            "reld_mt": 0.7960464386570443
+          },
+          "method_mean_cost": {
+            "MTPOMO": 24.863075653995395,
+            "MVMOE": 21.503255695428322,
+            "reld_mt": 19.771468264366362
+          },
+          "best_top1": 0.7960464386570443,
+          "best_top2": 0.9989731009498817,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPBLTW": {
+          "n": 70114,
+          "mean_cost": 10.62781337647838,
+          "sbs": 10.62781337647838,
+          "vbs": 10.589726415731171,
+          "oracle_cost": 10.589726415731171,
+          "sbs_cost": 10.62781337647838,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.8335282539863651,
+          "vs_sbs_pct": 0.0,
+          "vs_oracle_pct": 0.3596595346470055,
+          "actual_regret_pct": 0.33616251214260157,
+          "vbs_gap_closed_pct": 0.0,
+          "top1": 0.8335282539863651,
+          "top2": 0.999857375131928,
+          "top3": 1.0,
+          "pick_dist": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.0,
+            "reld_mt": 1.0
+          },
+          "ce": 0.40324957917216114,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 4.278746042159911e-05,
+            "MVMOE": 0.16642895855321335,
+            "reld_mt": 0.8335282539863651
+          },
+          "method_mean_cost": {
+            "MTPOMO": 15.245804979670774,
+            "MVMOE": 11.887189896569781,
+            "reld_mt": 10.62781337647838
+          },
+          "best_top1": 0.8335282539863651,
+          "best_top2": 0.9999572125395784,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        }
+      }
+    },
+    "fitted": {
+      "macro": {
+        "macro_ce": 1.4283471264526344,
+        "macro_top1": 0.40849743116765397,
+        "macro_top2": 0.7945251067309429,
+        "macro_top3": 0.9080893655728924,
+        "macro_top1_tie_aware": 0.40967091688773527,
+        "macro_mean_cost": 11.653491213000642,
+        "macro_vs_sbs_pct": 1.982256025091553,
+        "macro_vs_oracle_pct": 2.5739003193603884,
+        "macro_actual_regret_pct": 2.8262202964743777,
+        "macro_vbs_gap_closed_pct": -603.3521634286712
+      },
+      "per_problem": {
+        "TSP": {
+          "n": 70114,
+          "mean_cost": 7.648682935475012,
+          "sbs": 7.658740371906901,
+          "vbs": 7.610581768282815,
+          "oracle_cost": 7.610581768282815,
+          "sbs_cost": 7.658740371906901,
+          "sbs_name": "T2T",
+          "top1_tie_aware": 0.36753002253472916,
+          "vs_sbs_pct": -0.13131972026079186,
+          "vs_oracle_pct": 0.500634095424668,
+          "actual_regret_pct": 0.49135979455626455,
+          "vbs_gap_closed_pct": 20.883986816549942,
+          "top1": 0.3618250278118493,
+          "top2": 0.5958011238839604,
+          "top3": 0.7661807912827681,
+          "pick_dist": [
+            0.15922640271557748,
+            0.0,
+            0.00014262486807199704,
+            0.26660866588698406,
+            0.0,
+            0.0004278746042159911,
+            0.5725104829278033,
+            0.0010839489973471774
+          ],
+          "arm_distribution": {
+            "BQ": 0.15922640271557748,
+            "DIFUSCO": 0.0,
+            "DIFUSCO500": 0.00014262486807199704,
+            "ELG": 0.26660866588698406,
+            "LEHD": 0.0,
+            "OMNI": 0.0004278746042159911,
+            "T2T": 0.5725104829278033,
+            "T2T500": 0.0010839489973471774
+          },
+          "ce": 1.6930518633505405,
+          "pool": [
+            "BQ",
+            "DIFUSCO",
+            "DIFUSCO500",
+            "ELG",
+            "LEHD",
+            "OMNI",
+            "T2T",
+            "T2T500"
+          ],
+          "method_top1": {
+            "BQ": 0.29479133981801064,
+            "DIFUSCO": 0.086772969735003,
+            "DIFUSCO500": 0.012337051088227743,
+            "ELG": 0.07393673160852327,
+            "LEHD": 0.16945260575633966,
+            "OMNI": 0.00576204467010868,
+            "T2T": 0.32144792766066693,
+            "T2T500": 0.03549932966312006
+          },
+          "method_mean_cost": {
+            "BQ": 7.718419738710515,
+            "DIFUSCO": 7.740539687174941,
+            "DIFUSCO500": 7.913212170253916,
+            "ELG": 7.774105597586999,
+            "LEHD": 7.761481161972221,
+            "OMNI": 7.869381122439238,
+            "T2T": 7.658740371906901,
+            "T2T500": 7.806000427236764
+          },
+          "best_top1": 0.32144792766066693,
+          "best_top2": 0.6162392674786776,
+          "best_top3": 0.7030122372136806,
+          "top1_exceeds_methods": [
+            "BQ",
+            "DIFUSCO",
+            "DIFUSCO500",
+            "ELG",
+            "LEHD",
+            "OMNI",
+            "T2T",
+            "T2T500"
+          ],
+          "top1_not_exceeds_methods": [],
+          "cost_exceeds_methods": [
+            "BQ",
+            "DIFUSCO",
+            "DIFUSCO500",
+            "ELG",
+            "LEHD",
+            "OMNI",
+            "T2T",
+            "T2T500"
+          ],
+          "cost_not_exceeds_methods": [],
+          "sbs_selection_split": "train"
+        },
+        "CVRP": {
+          "n": 70114,
+          "mean_cost": 18.10334462253353,
+          "sbs": 18.08167448976078,
+          "vbs": 17.87773027534145,
+          "oracle_cost": 17.87773027534145,
+          "sbs_cost": 18.08167448976078,
+          "sbs_name": "RELD_CVRP",
+          "top1_tie_aware": 0.2347034828992783,
+          "vs_sbs_pct": 0.11984582946131805,
+          "vs_oracle_pct": 1.2619854070808456,
+          "actual_regret_pct": 1.5760252295968755,
+          "vbs_gap_closed_pct": -10.625519745412,
+          "top1": 0.2347034828992783,
+          "top2": 0.44336366488860995,
+          "top3": 0.5806686253815215,
+          "pick_dist": [
+            0.0,
+            0.009427503779559004,
+            0.10705422597484097,
+            0.0,
+            0.012779188179250934,
+            0.1968223179393559,
+            0.10803833756453775,
+            0.15082579798613685,
+            0.4146960664061386,
+            0.0003565621701799926
+          ],
+          "arm_distribution": {
+            "BQ": 0.0,
+            "ELG": 0.009427503779559004,
+            "ICAM": 0.10705422597484097,
+            "LEHD": 0.0,
+            "MVMOE": 0.012779188179250934,
+            "MoSES_CaDA": 0.1968223179393559,
+            "MoSES_RF": 0.10803833756453775,
+            "OMNI": 0.15082579798613685,
+            "RELD_CVRP": 0.4146960664061386,
+            "RouteFinder": 0.0003565621701799926
+          },
+          "ce": 2.1291552727906313,
+          "pool": [
+            "BQ",
+            "ELG",
+            "ICAM",
+            "LEHD",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "OMNI",
+            "RELD_CVRP",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "BQ": 0.12834811877799013,
+            "ELG": 0.020366831160681175,
+            "ICAM": 0.1876658014091337,
+            "LEHD": 0.1442793165416322,
+            "MVMOE": 0.021479305131642753,
+            "MoSES_CaDA": 0.026128875830789856,
+            "MoSES_RF": 0.03084975896397296,
+            "OMNI": 0.24350343725932053,
+            "RELD_CVRP": 0.18079128276806344,
+            "RouteFinder": 0.016587272156773254
+          },
+          "method_mean_cost": {
+            "BQ": 18.38766784753254,
+            "ELG": 18.425514994281883,
+            "ICAM": 18.145098887347523,
+            "LEHD": 18.449957587080696,
+            "MVMOE": 19.363815866989764,
+            "MoSES_CaDA": 19.087202047572173,
+            "MoSES_RF": 20.10840874863926,
+            "OMNI": 18.201455312817583,
+            "RELD_CVRP": 18.08167448976078,
+            "RouteFinder": 18.690927057906514
+          },
+          "best_top1": 0.18079128276806344,
+          "best_top2": 0.36845708417719714,
+          "best_top3": 0.6119605214365177,
+          "top1_exceeds_methods": [
+            "BQ",
+            "ELG",
+            "ICAM",
+            "LEHD",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RELD_CVRP",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "OMNI"
+          ],
+          "cost_exceeds_methods": [
+            "BQ",
+            "ELG",
+            "ICAM",
+            "LEHD",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "OMNI",
+            "RouteFinder"
+          ],
+          "cost_not_exceeds_methods": [
+            "RELD_CVRP"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "ATSP": {
+          "n": 70114,
+          "mean_cost": 1.6527698786839091,
+          "sbs": 1.6786440012738184,
+          "vbs": 1.6339172954570116,
+          "oracle_cost": 1.6339172954570116,
+          "sbs_cost": 1.6786440012738184,
+          "sbs_name": "UNICO_MatPOENet",
+          "top1_tie_aware": 0.7202698462503923,
+          "vs_sbs_pct": -1.5413704496173741,
+          "vs_oracle_pct": 1.153827264043028,
+          "actual_regret_pct": 1.1915786056991622,
+          "vbs_gap_closed_pct": 57.84938129779869,
+          "top1": 0.705536697378555,
+          "top2": 0.9434492398094532,
+          "top3": 0.9810879424936532,
+          "pick_dist": [
+            0.0,
+            0.18170408192372423,
+            0.2595915223778418,
+            0.0,
+            0.558704395698434
+          ],
+          "arm_distribution": {
+            "GLOP": 0.0,
+            "ICAM_ATSP": 0.18170408192372423,
+            "MATNET": 0.2595915223778418,
+            "MATPOENET": 0.0,
+            "UNICO_MatPOENet": 0.558704395698434
+          },
+          "ce": 0.8466563926396034,
+          "pool": [
+            "GLOP",
+            "ICAM_ATSP",
+            "MATNET",
+            "MATPOENET",
+            "UNICO_MatPOENet"
+          ],
+          "method_top1": {
+            "GLOP": 0.002995122229511938,
+            "ICAM_ATSP": 0.30438999343925605,
+            "MATNET": 0.14293864278175542,
+            "MATPOENET": 0.07957041389736715,
+            "UNICO_MatPOENet": 0.4701058276521094
+          },
+          "method_mean_cost": {
+            "GLOP": 1.9307446030878113,
+            "ICAM_ATSP": 1.7141565689004237,
+            "MATNET": 2.3101392186544487,
+            "MATPOENET": 1.725548583767149,
+            "UNICO_MatPOENet": 1.6786440012738184
+          },
+          "best_top1": 0.4701058276521094,
+          "best_top2": 0.7744958210913655,
+          "best_top3": 0.8540662349887327,
+          "top1_exceeds_methods": [
+            "GLOP",
+            "ICAM_ATSP",
+            "MATNET",
+            "MATPOENET",
+            "UNICO_MatPOENet"
+          ],
+          "top1_not_exceeds_methods": [],
+          "cost_exceeds_methods": [
+            "GLOP",
+            "ICAM_ATSP",
+            "MATNET",
+            "MATPOENET",
+            "UNICO_MatPOENet"
+          ],
+          "cost_not_exceeds_methods": [],
+          "sbs_selection_split": "train"
+        },
+        "OVRP": {
+          "n": 70114,
+          "mean_cost": 7.531907647617791,
+          "sbs": 7.453426893276933,
+          "vbs": 7.397518721769257,
+          "oracle_cost": 7.397518721769257,
+          "sbs_cost": 7.453426893276933,
+          "sbs_name": "MoSES_RF",
+          "top1_tie_aware": 0.2625581196337393,
+          "vs_sbs_pct": 1.0529486028989954,
+          "vs_oracle_pct": 1.8166757111821585,
+          "actual_regret_pct": 1.7277934931133243,
+          "vbs_gap_closed_pct": -140.37438933248387,
+          "top1": 0.26204467010868016,
+          "top2": 0.557634709187894,
+          "top3": 0.7700887126679408,
+          "pick_dist": [
+            0.0,
+            0.3277234218558348,
+            0.16654305844767095,
+            0.5057335196964943,
+            0.0,
+            0.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.3277234218558348,
+            "MoSES_CaDA": 0.16654305844767095,
+            "MoSES_RF": 0.5057335196964943,
+            "reld_mt": 0.0,
+            "RouteFinder": 0.0
+          },
+          "ce": 1.6324542291967075,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.009413241292751805,
+            "MVMOE": 0.00576204467010868,
+            "MoSES_CaDA": 0.3462503922183872,
+            "MoSES_RF": 0.34187180876857687,
+            "reld_mt": 0.06497988989360184,
+            "RouteFinder": 0.23172262315657358
+          },
+          "method_mean_cost": {
+            "MTPOMO": 8.364112907455441,
+            "MVMOE": 9.191530408891145,
+            "MoSES_CaDA": 7.459420620692829,
+            "MoSES_RF": 7.453426893276933,
+            "reld_mt": 7.629936280074982,
+            "RouteFinder": 7.471160473528848
+          },
+          "best_top1": 0.34187180876857687,
+          "best_top2": 0.6881222009869641,
+          "best_top3": 0.9198448241435376,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "MoSES_CaDA",
+            "MoSES_RF"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "cost_not_exceeds_methods": [
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "VRPB": {
+          "n": 70114,
+          "mean_cost": 9.443277613555557,
+          "sbs": 9.357769237550087,
+          "vbs": 9.319670239912009,
+          "oracle_cost": 9.319670239912009,
+          "sbs_cost": 9.357769237550087,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.5995806828878684,
+          "vs_sbs_pct": 0.9137688035985025,
+          "vs_oracle_pct": 1.3263063012057374,
+          "actual_regret_pct": 1.3516857996655651,
+          "vbs_gap_closed_pct": -224.43733774246817,
+          "top1": 0.599552157914254,
+          "top2": 0.9656131443078415,
+          "top3": 1.0,
+          "pick_dist": [
+            0.0,
+            0.431868100522007,
+            0.568131899477993
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.431868100522007,
+            "reld_mt": 0.568131899477993
+          },
+          "ce": 0.7698836747503998,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.0529994009755541,
+            "MVMOE": 0.1439655418318738,
+            "reld_mt": 0.8030350571925721
+          },
+          "method_mean_cost": {
+            "MTPOMO": 10.729432702884013,
+            "MVMOE": 11.68793228361713,
+            "reld_mt": 9.357769237550087
+          },
+          "best_top1": 0.8030350571925721,
+          "best_top2": 0.8560344581681262,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "VRPL": {
+          "n": 70114,
+          "mean_cost": 12.49196868112576,
+          "sbs": 12.39716842018313,
+          "vbs": 12.340739246225024,
+          "oracle_cost": 12.340739246225024,
+          "sbs_cost": 12.39716842018313,
+          "sbs_name": "MoSES_RF",
+          "top1_tie_aware": 0.24221981344667257,
+          "vs_sbs_pct": 0.7646928534768671,
+          "vs_oracle_pct": 1.2254487505438227,
+          "actual_regret_pct": 1.2775120912023181,
+          "vbs_gap_closed_pct": -167.99866858411113,
+          "top1": 0.24221981344667257,
+          "top2": 0.46736743018512705,
+          "top3": 0.6574578543514847,
+          "pick_dist": [
+            0.0029095473086687396,
+            0.4839119148814787,
+            0.2640128932880737,
+            0.2491656445217788,
+            0.0,
+            0.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0029095473086687396,
+            "MVMOE": 0.4839119148814787,
+            "MoSES_CaDA": 0.2640128932880737,
+            "MoSES_RF": 0.2491656445217788,
+            "reld_mt": 0.0,
+            "RouteFinder": 0.0
+          },
+          "ce": 1.8423604240632223,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.03300339447186011,
+            "MVMOE": 0.03256125738083692,
+            "MoSES_CaDA": 0.30624411672419205,
+            "MoSES_RF": 0.31554325812248624,
+            "reld_mt": 0.13727643551929714,
+            "RouteFinder": 0.17537153778132755
+          },
+          "method_mean_cost": {
+            "MTPOMO": 13.400922014691627,
+            "MVMOE": 14.188011836423557,
+            "MoSES_CaDA": 12.398698581673651,
+            "MoSES_RF": 12.39716842018313,
+            "reld_mt": 12.531558705841162,
+            "RouteFinder": 12.419604198834222
+          },
+          "best_top1": 0.31554325812248624,
+          "best_top2": 0.6217873748466782,
+          "best_top3": 0.7971589126280059,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "MoSES_CaDA",
+            "MoSES_RF"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "cost_not_exceeds_methods": [
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "VRPTW": {
+          "n": 70114,
+          "mean_cost": 19.380497469511607,
+          "sbs": 18.81545674796452,
+          "vbs": 18.759479119106647,
+          "oracle_cost": 18.759479119106647,
+          "sbs_cost": 18.81545674796452,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.2885871580568788,
+          "vs_sbs_pct": 3.0030667292103352,
+          "vs_oracle_pct": 3.310424273840562,
+          "actual_regret_pct": 3.67945018973057,
+          "vbs_gap_closed_pct": -1009.4045301234626,
+          "top1": 0.2885871580568788,
+          "top2": 0.8522548991642183,
+          "top3": 0.9497675214650426,
+          "pick_dist": [
+            0.0,
+            0.7011581139287446,
+            0.1877513763299769,
+            5.704994722879881e-05,
+            0.1109621473600137,
+            7.131243403599852e-05
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.7011581139287446,
+            "MoSES_CaDA": 0.1877513763299769,
+            "MoSES_RF": 5.704994722879881e-05,
+            "reld_mt": 0.1109621473600137,
+            "RouteFinder": 7.131243403599852e-05
+          },
+          "ce": 1.6189096839625379,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 5.704994722879881e-05,
+            "MVMOE": 0.18131899477992983,
+            "MoSES_CaDA": 0.01052571526371338,
+            "MoSES_RF": 0.001397723707105571,
+            "reld_mt": 0.8023647203126337,
+            "RouteFinder": 0.00433579598938871
+          },
+          "method_mean_cost": {
+            "MTPOMO": 23.50449378274113,
+            "MVMOE": 20.445820107491212,
+            "MoSES_CaDA": 22.85174172927085,
+            "MoSES_RF": 21.73084248536036,
+            "reld_mt": 18.81545674796452,
+            "RouteFinder": 21.76642406670598
+          },
+          "best_top1": 0.8023647203126337,
+          "best_top2": 0.9836837150925636,
+          "best_top3": 0.9850814387996691,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPTW": {
+          "n": 70114,
+          "mean_cost": 10.473170026127272,
+          "sbs": 10.119165380940911,
+          "vbs": 10.093938919860525,
+          "oracle_cost": 10.093938919860525,
+          "sbs_cost": 10.119165380940911,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.29994009755540973,
+          "vs_sbs_pct": 3.498358133894275,
+          "vs_oracle_pct": 3.7570180410006593,
+          "actual_regret_pct": 4.27039629833307,
+          "vbs_gap_closed_pct": -1403.3068057318653,
+          "top1": 0.29994009755540973,
+          "top2": 0.8781555752060929,
+          "top3": 0.9651139572695895,
+          "pick_dist": [
+            0.0,
+            0.7054796474313261,
+            0.14365176712211541,
+            0.0,
+            0.15076874803890805,
+            9.983740765039792e-05
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.7054796474313261,
+            "MoSES_CaDA": 0.14365176712211541,
+            "MoSES_RF": 0.0,
+            "reld_mt": 0.15076874803890805,
+            "RouteFinder": 9.983740765039792e-05
+          },
+          "ce": 1.8536047466829688,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.1536069829135408,
+            "MoSES_CaDA": 0.004663833185954303,
+            "MoSES_RF": 0.0008272242348175828,
+            "reld_mt": 0.8386484867501498,
+            "RouteFinder": 0.002253472915537553
+          },
+          "method_mean_cost": {
+            "MTPOMO": 14.461218758052622,
+            "MVMOE": 11.33480077112612,
+            "MoSES_CaDA": 13.108648779119795,
+            "MoSES_RF": 12.088299448309039,
+            "reld_mt": 10.119165380940911,
+            "RouteFinder": 11.649492711958633
+          },
+          "best_top1": 0.8386484867501498,
+          "best_top2": 0.9922554696636906,
+          "best_top3": 0.9945089425792281,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPB": {
+          "n": 70114,
+          "mean_cost": 6.439794356281732,
+          "sbs": 6.36321315753966,
+          "vbs": 6.346542603427536,
+          "oracle_cost": 6.346542603427536,
+          "sbs_cost": 6.36321315753966,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.6794933964686083,
+          "vs_sbs_pct": 1.2034988746421504,
+          "vs_oracle_pct": 1.4693315507538607,
+          "actual_regret_pct": 1.375688346792806,
+          "vbs_gap_closed_pct": -459.38004356060213,
+          "top1": 0.679479133981801,
+          "top2": 0.961862110277548,
+          "top3": 1.0,
+          "pick_dist": [
+            0.0,
+            0.29111161822175313,
+            0.7088883817782469
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.29111161822175313,
+            "reld_mt": 0.7088883817782469
+          },
+          "ce": 0.6981028062184903,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.05438286219585247,
+            "MVMOE": 0.0624554297287275,
+            "reld_mt": 0.88316170807542
+          },
+          "method_mean_cost": {
+            "MTPOMO": 7.312356388554981,
+            "MVMOE": 8.2736193447243,
+            "reld_mt": 6.36321315753966
+          },
+          "best_top1": 0.88316170807542,
+          "best_top2": 0.9375445702712725,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPL": {
+          "n": 70114,
+          "mean_cost": 7.520981286682615,
+          "sbs": 7.4529368940932414,
+          "vbs": 7.3982277428576655,
+          "oracle_cost": 7.3982277428576655,
+          "sbs_cost": 7.4529368940932414,
+          "sbs_name": "MoSES_RF",
+          "top1_tie_aware": 0.28112787745671336,
+          "vs_sbs_pct": 0.9129876390514102,
+          "vs_oracle_pct": 1.6592290490578199,
+          "actual_regret_pct": 1.5593919412680621,
+          "vbs_gap_closed_pct": -124.37479115034482,
+          "top1": 0.28099951507544857,
+          "top2": 0.5541403999201301,
+          "top3": 0.759962347034829,
+          "pick_dist": [
+            0.0,
+            0.30540263000256723,
+            0.2161622500499187,
+            0.47843511994751403,
+            0.0,
+            0.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.30540263000256723,
+            "MoSES_CaDA": 0.2161622500499187,
+            "MoSES_RF": 0.47843511994751403,
+            "reld_mt": 0.0,
+            "RouteFinder": 0.0
+          },
+          "ce": 1.6122152393634277,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.008785691873235017,
+            "MVMOE": 0.006132869327095872,
+            "MoSES_CaDA": 0.3558347833528254,
+            "MoSES_RF": 0.34446758136748723,
+            "reld_mt": 0.06385315343583307,
+            "RouteFinder": 0.2209259206435234
+          },
+          "method_mean_cost": {
+            "MTPOMO": 8.306216681065312,
+            "MVMOE": 9.041230620084393,
+            "MoSES_CaDA": 7.459269570992244,
+            "MoSES_RF": 7.4529368940932414,
+            "reld_mt": 7.632910260074201,
+            "RouteFinder": 7.474671944099132
+          },
+          "best_top1": 0.34446758136748723,
+          "best_top2": 0.7003023647203126,
+          "best_top3": 0.921228285363836,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "MoSES_CaDA",
+            "MoSES_RF"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "cost_not_exceeds_methods": [
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "VRPBL": {
+          "n": 70114,
+          "mean_cost": 9.462229175304094,
+          "sbs": 9.402794261882867,
+          "vbs": 9.362778661880554,
+          "oracle_cost": 9.362778661880554,
+          "sbs_cost": 9.402794261882867,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.6216590124654134,
+          "vs_sbs_pct": 0.6320984142146324,
+          "vs_oracle_pct": 1.0621901575911474,
+          "actual_regret_pct": 1.0546267624142276,
+          "vbs_gap_closed_pct": -148.52935709520935,
+          "top1": 0.6216590124654134,
+          "top2": 0.9656274067946488,
+          "top3": 1.0,
+          "pick_dist": [
+            0.0,
+            0.3983369940382805,
+            0.6016630059617195
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.3983369940382805,
+            "reld_mt": 0.6016630059617195
+          },
+          "ce": 0.7171078316080883,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.05235758906923011,
+            "MVMOE": 0.15363550788715521,
+            "reld_mt": 0.7940069030436147
+          },
+          "method_mean_cost": {
+            "MTPOMO": 10.63622523113093,
+            "MVMOE": 11.19678936736543,
+            "reld_mt": 9.402794261882867
+          },
+          "best_top1": 0.7940069030436147,
+          "best_top2": 0.8463644921128448,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "VRPBTW": {
+          "n": 70114,
+          "mean_cost": 20.531447752089903,
+          "sbs": 19.7408163437067,
+          "vbs": 19.650132743917144,
+          "oracle_cost": 19.650132743917144,
+          "sbs_cost": 19.7408163437067,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.374090766466041,
+          "vs_sbs_pct": 4.005059338061523,
+          "vs_oracle_pct": 4.485033356558765,
+          "actual_regret_pct": 5.000669578292798,
+          "vbs_gap_closed_pct": -871.8571056045025,
+          "top1": 0.374090766466041,
+          "top2": 0.86452063781841,
+          "top3": 1.0,
+          "pick_dist": [
+            0.08377784750549105,
+            0.7308668739481416,
+            0.18535527854636735
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.08377784750549105,
+            "MVMOE": 0.7308668739481416,
+            "reld_mt": 0.18535527854636735
+          },
+          "ce": 1.3972210929696924,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.0010696865105399777,
+            "MVMOE": 0.20341158684428218,
+            "reld_mt": 0.7955187266451779
+          },
+          "method_mean_cost": {
+            "MTPOMO": 24.821552536860715,
+            "MVMOE": 21.45834565028019,
+            "reld_mt": 19.7408163437067
+          },
+          "best_top1": 0.7955187266451779,
+          "best_top2": 0.99893031348946,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "VRPLTW": {
+          "n": 70114,
+          "mean_cost": 19.32893310382931,
+          "sbs": 18.775183100523225,
+          "vbs": 18.71994787579577,
+          "oracle_cost": 18.71994787579577,
+          "sbs_cost": 18.775183100523225,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.2876886213880252,
+          "vs_sbs_pct": 2.9493720532113077,
+          "vs_oracle_pct": 3.253135276198793,
+          "actual_regret_pct": 3.628796012551778,
+          "vbs_gap_closed_pct": -1002.5305519049498,
+          "top1": 0.2876886213880252,
+          "top2": 0.8220326896197621,
+          "top3": 0.9421941409704196,
+          "pick_dist": [
+            0.0,
+            0.6952677068773712,
+            0.19208717231936562,
+            0.00032803719656559317,
+            0.11220298371224006,
+            0.00011409989445759762
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.6952677068773712,
+            "MoSES_CaDA": 0.19208717231936562,
+            "MoSES_RF": 0.00032803719656559317,
+            "reld_mt": 0.11220298371224006,
+            "RouteFinder": 0.00011409989445759762
+          },
+          "ce": 1.6673708266467056,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 5.704994722879881e-05,
+            "MVMOE": 0.1777248481045155,
+            "MoSES_CaDA": 0.01202327637846935,
+            "MoSES_RF": 0.0019967481530079583,
+            "reld_mt": 0.8040049062954617,
+            "RouteFinder": 0.004193171121316713
+          },
+          "method_mean_cost": {
+            "MTPOMO": 23.456875883662857,
+            "MVMOE": 20.407449472119488,
+            "MoSES_CaDA": 22.96850345494303,
+            "MoSES_RF": 21.6341626357272,
+            "reld_mt": 18.775183100523225,
+            "RouteFinder": 21.710954748244934
+          },
+          "best_top1": 0.8040049062954617,
+          "best_top2": 0.9817297543999772,
+          "best_top3": 0.9837265025529851,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPBL": {
+          "n": 70114,
+          "mean_cost": 6.428586352944796,
+          "sbs": 6.3591801600721904,
+          "vbs": 6.3429477520036395,
+          "oracle_cost": 6.3429477520036395,
+          "sbs_cost": 6.3591801600721904,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.6869812020423881,
+          "vs_sbs_pct": 1.0914330326476929,
+          "vs_oracle_pct": 1.3501388359080435,
+          "actual_regret_pct": 1.2240704247964507,
+          "vbs_gap_closed_pct": -427.57792053709414,
+          "top1": 0.6869812020423881,
+          "top2": 0.9649000199674815,
+          "top3": 1.0,
+          "pick_dist": [
+            0.0,
+            0.2840659497389965,
+            0.7159340502610035
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.2840659497389965,
+            "reld_mt": 0.7159340502610035
+          },
+          "ce": 0.6702616990693002,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.050574778218330146,
+            "MVMOE": 0.06361069116011067,
+            "reld_mt": 0.8858145306215591
+          },
+          "method_mean_cost": {
+            "MTPOMO": 7.21994730599741,
+            "MVMOE": 7.8721198987187675,
+            "reld_mt": 6.3591801600721904
+          },
+          "best_top1": 0.8858145306215591,
+          "best_top2": 0.9363893088398894,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPBTW": {
+          "n": 70114,
+          "mean_cost": 11.145657536276865,
+          "sbs": 10.625827688673974,
+          "vbs": 10.587621084053806,
+          "oracle_cost": 10.587621084053806,
+          "sbs_cost": 10.625827688673974,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.3719656559317683,
+          "vs_sbs_pct": 4.892135114867102,
+          "vs_oracle_pct": 5.2706500146999735,
+          "actual_regret_pct": 6.124512092169347,
+          "vbs_gap_closed_pct": -1360.5758815021504,
+          "top1": 0.3719656559317683,
+          "top2": 0.8511994751404854,
+          "top3": 1.0,
+          "pick_dist": [
+            0.04478420857460707,
+            0.7438172119690789,
+            0.211398579456314
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.04478420857460707,
+            "MVMOE": 0.7438172119690789,
+            "reld_mt": 0.211398579456314
+          },
+          "ce": 1.7443572093524098,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.16748438257694612,
+            "reld_mt": 0.8325156174230539
+          },
+          "method_mean_cost": {
+            "MTPOMO": 15.22681841300568,
+            "MVMOE": 11.891326931058556,
+            "reld_mt": 10.625827688673974
+          },
+          "best_top1": 0.8325156174230539,
+          "best_top2": 1.0,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPLTW": {
+          "n": 70114,
+          "mean_cost": 10.446010031206141,
+          "sbs": 10.109913379187619,
+          "vbs": 10.084619649815254,
+          "oracle_cost": 10.084619649815254,
+          "sbs_cost": 10.109913379187619,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.31103631229141115,
+          "vs_sbs_pct": 3.324426623777166,
+          "vs_oracle_pct": 3.58357968807983,
+          "actual_regret_pct": 4.064821533809967,
+          "vbs_gap_closed_pct": -1328.7746028694867,
+          "top1": 0.31103631229141115,
+          "top2": 0.8775993382206121,
+          "top3": 0.9730866873948142,
+          "pick_dist": [
+            0.0,
+            0.6989474284736287,
+            0.13737627292694754,
+            7.131243403599852e-05,
+            0.1633910488632798,
+            0.00021393730210799556
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.6989474284736287,
+            "MoSES_CaDA": 0.13737627292694754,
+            "MoSES_RF": 7.131243403599852e-05,
+            "reld_mt": 0.1633910488632798,
+            "RouteFinder": 0.00021393730210799556
+          },
+          "ce": 1.7975215159236424,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.15273697121830163,
+            "MoSES_CaDA": 0.0061613943007102715,
+            "MoSES_RF": 0.0010126365633111789,
+            "reld_mt": 0.837735687594489,
+            "RouteFinder": 0.002353310323187951
+          },
+          "method_mean_cost": {
+            "MTPOMO": 14.455601920396575,
+            "MVMOE": 11.321139335353465,
+            "MoSES_CaDA": 13.199366552792522,
+            "MoSES_RF": 12.078013545799008,
+            "reld_mt": 10.109913379187619,
+            "RouteFinder": 11.619377029259322
+          },
+          "best_top1": 0.837735687594489,
+          "best_top2": 0.9904726588127906,
+          "best_top3": 0.9928259691359785,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "VRPBLTW": {
+          "n": 70114,
+          "mean_cost": 20.590776404845545,
+          "sbs": 19.771468264366362,
+          "vbs": 19.681153817794105,
+          "oracle_cost": 19.681153817794105,
+          "sbs_cost": 19.771468264366362,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.36787232221810195,
+          "vs_sbs_pct": 4.143891235208885,
+          "vs_oracle_pct": 4.621795020112263,
+          "actual_regret_pct": 5.1724193764944815,
+          "vbs_gap_closed_pct": -907.172851713908,
+          "top1": 0.36787232221810195,
+          "top2": 0.8706962946059275,
+          "top3": 1.0,
+          "pick_dist": [
+            0.09043842884445331,
+            0.7312234361183216,
+            0.1783381350372251
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.09043842884445331,
+            "MVMOE": 0.7312234361183216,
+            "reld_mt": 0.1783381350372251
+          },
+          "ce": 1.3809826246398638,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.0010268990501183786,
+            "MVMOE": 0.20292666229283737,
+            "reld_mt": 0.7960464386570443
+          },
+          "method_mean_cost": {
+            "MTPOMO": 24.863075653995395,
+            "MVMOE": 21.503255695428322,
+            "reld_mt": 19.771468264366362
+          },
+          "best_top1": 0.7960464386570443,
+          "best_top2": 0.9989731009498817,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPBLTW": {
+          "n": 70114,
+          "mean_cost": 11.142806959920105,
+          "sbs": 10.62781337647838,
+          "vbs": 10.589726415731171,
+          "oracle_cost": 10.589726415731171,
+          "sbs_cost": 10.62781337647838,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.3767721139857946,
+          "vs_sbs_pct": 4.845715343303958,
+          "vs_oracle_pct": 5.222802955205008,
+          "actual_regret_pct": 6.101167766051733,
+          "vbs_gap_closed_pct": -1352.151952632382,
+          "top1": 0.3767721139857946,
+          "top2": 0.86523376215877,
+          "top3": 1.0,
+          "pick_dist": [
+            0.044056821747439884,
+            0.7375559802607182,
+            0.21838719799184186
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.044056821747439884,
+            "MVMOE": 0.7375559802607182,
+            "reld_mt": 0.21838719799184186
+          },
+          "ce": 1.639031142919185,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 4.278746042159911e-05,
+            "MVMOE": 0.16642895855321335,
+            "reld_mt": 0.8335282539863651
+          },
+          "method_mean_cost": {
+            "MTPOMO": 15.245804979670774,
+            "MVMOE": 11.887189896569781,
+            "reld_mt": 10.62781337647838
+          },
+          "best_top1": 0.8335282539863651,
+          "best_top2": 0.9999572125395784,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        }
+      }
+    },
+    "reference": {
+      "macro": {
+        "macro_ce": 1.4283480634069812,
+        "macro_top1": 0.4084950540865194,
+        "macro_top2": 0.7945227296498084,
+        "macro_top3": 0.9080893655728924,
+        "macro_top1_tie_aware": 0.40966853980660073,
+        "macro_mean_cost": 11.653492604283485,
+        "macro_vs_sbs_pct": 1.9822636372839861,
+        "macro_vs_oracle_pct": 2.5739080287463696,
+        "macro_actual_regret_pct": 2.826224388660436,
+        "macro_vbs_gap_closed_pct": -603.3526116137563
+      },
+      "per_problem": {
+        "TSP": {
+          "n": 70114,
+          "mean_cost": 7.648682935475012,
+          "sbs": 7.658740371906901,
+          "vbs": 7.610581768282815,
+          "oracle_cost": 7.610581768282815,
+          "sbs_cost": 7.658740371906901,
+          "sbs_name": "T2T",
+          "top1_tie_aware": 0.36753002253472916,
+          "vs_sbs_pct": -0.13131972026079186,
+          "vs_oracle_pct": 0.500634095424668,
+          "actual_regret_pct": 0.49135979455626455,
+          "vbs_gap_closed_pct": 20.883986816549942,
+          "top1": 0.3618250278118493,
+          "top2": 0.5958011238839604,
+          "top3": 0.7661807912827681,
+          "pick_dist": [
+            0.15922640271557748,
+            0.0,
+            0.00014262486807199704,
+            0.26660866588698406,
+            0.0,
+            0.0004278746042159911,
+            0.5725104829278033,
+            0.0010839489973471774
+          ],
+          "arm_distribution": {
+            "BQ": 0.15922640271557748,
+            "DIFUSCO": 0.0,
+            "DIFUSCO500": 0.00014262486807199704,
+            "ELG": 0.26660866588698406,
+            "LEHD": 0.0,
+            "OMNI": 0.0004278746042159911,
+            "T2T": 0.5725104829278033,
+            "T2T500": 0.0010839489973471774
+          },
+          "ce": 1.693051869503277,
+          "pool": [
+            "BQ",
+            "DIFUSCO",
+            "DIFUSCO500",
+            "ELG",
+            "LEHD",
+            "OMNI",
+            "T2T",
+            "T2T500"
+          ],
+          "method_top1": {
+            "BQ": 0.29479133981801064,
+            "DIFUSCO": 0.086772969735003,
+            "DIFUSCO500": 0.012337051088227743,
+            "ELG": 0.07393673160852327,
+            "LEHD": 0.16945260575633966,
+            "OMNI": 0.00576204467010868,
+            "T2T": 0.32144792766066693,
+            "T2T500": 0.03549932966312006
+          },
+          "method_mean_cost": {
+            "BQ": 7.718419738710515,
+            "DIFUSCO": 7.740539687174941,
+            "DIFUSCO500": 7.913212170253916,
+            "ELG": 7.774105597586999,
+            "LEHD": 7.761481161972221,
+            "OMNI": 7.869381122439238,
+            "T2T": 7.658740371906901,
+            "T2T500": 7.806000427236764
+          },
+          "best_top1": 0.32144792766066693,
+          "best_top2": 0.6162392674786776,
+          "best_top3": 0.7030122372136806,
+          "top1_exceeds_methods": [
+            "BQ",
+            "DIFUSCO",
+            "DIFUSCO500",
+            "ELG",
+            "LEHD",
+            "OMNI",
+            "T2T",
+            "T2T500"
+          ],
+          "top1_not_exceeds_methods": [],
+          "cost_exceeds_methods": [
+            "BQ",
+            "DIFUSCO",
+            "DIFUSCO500",
+            "ELG",
+            "LEHD",
+            "OMNI",
+            "T2T",
+            "T2T500"
+          ],
+          "cost_not_exceeds_methods": [],
+          "sbs_selection_split": "train"
+        },
+        "CVRP": {
+          "n": 70114,
+          "mean_cost": 18.103372980178204,
+          "sbs": 18.08167448976078,
+          "vbs": 17.87773027534145,
+          "oracle_cost": 17.87773027534145,
+          "sbs_cost": 18.08167448976078,
+          "sbs_name": "RELD_CVRP",
+          "top1_tie_aware": 0.23467495792566392,
+          "vs_sbs_pct": 0.12000266031617635,
+          "vs_oracle_pct": 1.2621440270188078,
+          "actual_regret_pct": 1.5761271020265089,
+          "vbs_gap_closed_pct": -10.639424353961004,
+          "top1": 0.23467495792566392,
+          "top2": 0.44334940240180276,
+          "top3": 0.5806828878683287,
+          "pick_dist": [
+            0.0,
+            0.009427503779559004,
+            0.10691160110676898,
+            0.0,
+            0.012779188179250934,
+            0.1968223179393559,
+            0.10803833756453775,
+            0.15076874803890805,
+            0.41489574122143935,
+            0.0003565621701799926
+          ],
+          "arm_distribution": {
+            "BQ": 0.0,
+            "ELG": 0.009427503779559004,
+            "ICAM": 0.10691160110676898,
+            "LEHD": 0.0,
+            "MVMOE": 0.012779188179250934,
+            "MoSES_CaDA": 0.1968223179393559,
+            "MoSES_RF": 0.10803833756453775,
+            "OMNI": 0.15076874803890805,
+            "RELD_CVRP": 0.41489574122143935,
+            "RouteFinder": 0.0003565621701799926
+          },
+          "ce": 2.1291646910677318,
+          "pool": [
+            "BQ",
+            "ELG",
+            "ICAM",
+            "LEHD",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "OMNI",
+            "RELD_CVRP",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "BQ": 0.12834811877799013,
+            "ELG": 0.020366831160681175,
+            "ICAM": 0.1876658014091337,
+            "LEHD": 0.1442793165416322,
+            "MVMOE": 0.021479305131642753,
+            "MoSES_CaDA": 0.026128875830789856,
+            "MoSES_RF": 0.03084975896397296,
+            "OMNI": 0.24350343725932053,
+            "RELD_CVRP": 0.18079128276806344,
+            "RouteFinder": 0.016587272156773254
+          },
+          "method_mean_cost": {
+            "BQ": 18.38766784753254,
+            "ELG": 18.425514994281883,
+            "ICAM": 18.145098887347523,
+            "LEHD": 18.449957587080696,
+            "MVMOE": 19.363815866989764,
+            "MoSES_CaDA": 19.087202047572173,
+            "MoSES_RF": 20.10840874863926,
+            "OMNI": 18.201455312817583,
+            "RELD_CVRP": 18.08167448976078,
+            "RouteFinder": 18.690927057906514
+          },
+          "best_top1": 0.18079128276806344,
+          "best_top2": 0.36845708417719714,
+          "best_top3": 0.6119605214365177,
+          "top1_exceeds_methods": [
+            "BQ",
+            "ELG",
+            "ICAM",
+            "LEHD",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RELD_CVRP",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "OMNI"
+          ],
+          "cost_exceeds_methods": [
+            "BQ",
+            "ELG",
+            "ICAM",
+            "LEHD",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "OMNI",
+            "RouteFinder"
+          ],
+          "cost_not_exceeds_methods": [
+            "RELD_CVRP"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "ATSP": {
+          "n": 70114,
+          "mean_cost": 1.6527698786839091,
+          "sbs": 1.6786440012738184,
+          "vbs": 1.6339172954570116,
+          "oracle_cost": 1.6339172954570116,
+          "sbs_cost": 1.6786440012738184,
+          "sbs_name": "UNICO_MatPOENet",
+          "top1_tie_aware": 0.7202698462503923,
+          "vs_sbs_pct": -1.5413704496173741,
+          "vs_oracle_pct": 1.153827264043028,
+          "actual_regret_pct": 1.1915786056991622,
+          "vbs_gap_closed_pct": 57.84938129779869,
+          "top1": 0.705536697378555,
+          "top2": 0.9434492398094532,
+          "top3": 0.9810879424936532,
+          "pick_dist": [
+            0.0,
+            0.18170408192372423,
+            0.2595915223778418,
+            0.0,
+            0.558704395698434
+          ],
+          "arm_distribution": {
+            "GLOP": 0.0,
+            "ICAM_ATSP": 0.18170408192372423,
+            "MATNET": 0.2595915223778418,
+            "MATPOENET": 0.0,
+            "UNICO_MatPOENet": 0.558704395698434
+          },
+          "ce": 0.8466563924044341,
+          "pool": [
+            "GLOP",
+            "ICAM_ATSP",
+            "MATNET",
+            "MATPOENET",
+            "UNICO_MatPOENet"
+          ],
+          "method_top1": {
+            "GLOP": 0.002995122229511938,
+            "ICAM_ATSP": 0.30438999343925605,
+            "MATNET": 0.14293864278175542,
+            "MATPOENET": 0.07957041389736715,
+            "UNICO_MatPOENet": 0.4701058276521094
+          },
+          "method_mean_cost": {
+            "GLOP": 1.9307446030878113,
+            "ICAM_ATSP": 1.7141565689004237,
+            "MATNET": 2.3101392186544487,
+            "MATPOENET": 1.725548583767149,
+            "UNICO_MatPOENet": 1.6786440012738184
+          },
+          "best_top1": 0.4701058276521094,
+          "best_top2": 0.7744958210913655,
+          "best_top3": 0.8540662349887327,
+          "top1_exceeds_methods": [
+            "GLOP",
+            "ICAM_ATSP",
+            "MATNET",
+            "MATPOENET",
+            "UNICO_MatPOENet"
+          ],
+          "top1_not_exceeds_methods": [],
+          "cost_exceeds_methods": [
+            "GLOP",
+            "ICAM_ATSP",
+            "MATNET",
+            "MATPOENET",
+            "UNICO_MatPOENet"
+          ],
+          "cost_not_exceeds_methods": [],
+          "sbs_selection_split": "train"
+        },
+        "OVRP": {
+          "n": 70114,
+          "mean_cost": 7.53190855466525,
+          "sbs": 7.453426893276933,
+          "vbs": 7.397518721769257,
+          "oracle_cost": 7.397518721769257,
+          "sbs_cost": 7.453426893276933,
+          "sbs_name": "MoSES_RF",
+          "top1_tie_aware": 0.2625438571469321,
+          "vs_sbs_pct": 1.0529607724348855,
+          "vs_oracle_pct": 1.816687972691633,
+          "actual_regret_pct": 1.7278029349042672,
+          "vbs_gap_closed_pct": -140.37601172047277,
+          "top1": 0.26203040762187296,
+          "top2": 0.557634709187894,
+          "top3": 0.7700744501811336,
+          "pick_dist": [
+            0.0,
+            0.3277234218558348,
+            0.16642895855321335,
+            0.5058476195909519,
+            0.0,
+            0.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.3277234218558348,
+            "MoSES_CaDA": 0.16642895855321335,
+            "MoSES_RF": 0.5058476195909519,
+            "reld_mt": 0.0,
+            "RouteFinder": 0.0
+          },
+          "ce": 1.632459935764713,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.009413241292751805,
+            "MVMOE": 0.00576204467010868,
+            "MoSES_CaDA": 0.3462503922183872,
+            "MoSES_RF": 0.34187180876857687,
+            "reld_mt": 0.06497988989360184,
+            "RouteFinder": 0.23172262315657358
+          },
+          "method_mean_cost": {
+            "MTPOMO": 8.364112907455441,
+            "MVMOE": 9.191530408891145,
+            "MoSES_CaDA": 7.459420620692829,
+            "MoSES_RF": 7.453426893276933,
+            "reld_mt": 7.629936280074982,
+            "RouteFinder": 7.471160473528848
+          },
+          "best_top1": 0.34187180876857687,
+          "best_top2": 0.6881222009869641,
+          "best_top3": 0.9198448241435376,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "MoSES_CaDA",
+            "MoSES_RF"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "cost_not_exceeds_methods": [
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "VRPB": {
+          "n": 70114,
+          "mean_cost": 9.443277613555557,
+          "sbs": 9.357769237550087,
+          "vbs": 9.319670239912009,
+          "oracle_cost": 9.319670239912009,
+          "sbs_cost": 9.357769237550087,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.5995806828878684,
+          "vs_sbs_pct": 0.9137688035985025,
+          "vs_oracle_pct": 1.3263063012057374,
+          "actual_regret_pct": 1.3516857996655651,
+          "vbs_gap_closed_pct": -224.43733774246817,
+          "top1": 0.599552157914254,
+          "top2": 0.9656131443078415,
+          "top3": 1.0,
+          "pick_dist": [
+            0.0,
+            0.431868100522007,
+            0.568131899477993
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.431868100522007,
+            "reld_mt": 0.568131899477993
+          },
+          "ce": 0.769883748906349,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.0529994009755541,
+            "MVMOE": 0.1439655418318738,
+            "reld_mt": 0.8030350571925721
+          },
+          "method_mean_cost": {
+            "MTPOMO": 10.729432702884013,
+            "MVMOE": 11.68793228361713,
+            "reld_mt": 9.357769237550087
+          },
+          "best_top1": 0.8030350571925721,
+          "best_top2": 0.8560344581681262,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "VRPL": {
+          "n": 70114,
+          "mean_cost": 12.491964072316508,
+          "sbs": 12.39716842018313,
+          "vbs": 12.340739246225024,
+          "oracle_cost": 12.340739246225024,
+          "sbs_cost": 12.39716842018313,
+          "sbs_name": "MoSES_RF",
+          "top1_tie_aware": 0.24221981344667257,
+          "vs_sbs_pct": 0.7646556771709889,
+          "vs_oracle_pct": 1.2254114042458353,
+          "actual_regret_pct": 1.2774665531590694,
+          "vbs_gap_closed_pct": -167.9905011612531,
+          "top1": 0.24221981344667257,
+          "top2": 0.46735316769831986,
+          "top3": 0.6574578543514847,
+          "pick_dist": [
+            0.00289528482186154,
+            0.4839119148814787,
+            0.2640556807484953,
+            0.24913711954816442,
+            0.0,
+            0.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.00289528482186154,
+            "MVMOE": 0.4839119148814787,
+            "MoSES_CaDA": 0.2640556807484953,
+            "MoSES_RF": 0.24913711954816442,
+            "reld_mt": 0.0,
+            "RouteFinder": 0.0
+          },
+          "ce": 1.842361071763466,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.03300339447186011,
+            "MVMOE": 0.03256125738083692,
+            "MoSES_CaDA": 0.30624411672419205,
+            "MoSES_RF": 0.31554325812248624,
+            "reld_mt": 0.13727643551929714,
+            "RouteFinder": 0.17537153778132755
+          },
+          "method_mean_cost": {
+            "MTPOMO": 13.400922014691627,
+            "MVMOE": 14.188011836423557,
+            "MoSES_CaDA": 12.398698581673651,
+            "MoSES_RF": 12.39716842018313,
+            "reld_mt": 12.531558705841162,
+            "RouteFinder": 12.419604198834222
+          },
+          "best_top1": 0.31554325812248624,
+          "best_top2": 0.6217873748466782,
+          "best_top3": 0.7971589126280059,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "MoSES_CaDA",
+            "MoSES_RF"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "cost_not_exceeds_methods": [
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "VRPTW": {
+          "n": 70114,
+          "mean_cost": 19.380497469511607,
+          "sbs": 18.81545674796452,
+          "vbs": 18.759479119106647,
+          "oracle_cost": 18.759479119106647,
+          "sbs_cost": 18.81545674796452,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.2885871580568788,
+          "vs_sbs_pct": 3.0030667292103352,
+          "vs_oracle_pct": 3.310424273840562,
+          "actual_regret_pct": 3.67945018973057,
+          "vbs_gap_closed_pct": -1009.4045301234626,
+          "top1": 0.2885871580568788,
+          "top2": 0.8522548991642183,
+          "top3": 0.9497675214650426,
+          "pick_dist": [
+            0.0,
+            0.7011581139287446,
+            0.1877513763299769,
+            5.704994722879881e-05,
+            0.1109621473600137,
+            7.131243403599852e-05
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.7011581139287446,
+            "MoSES_CaDA": 0.1877513763299769,
+            "MoSES_RF": 5.704994722879881e-05,
+            "reld_mt": 0.1109621473600137,
+            "RouteFinder": 7.131243403599852e-05
+          },
+          "ce": 1.6189097069291032,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 5.704994722879881e-05,
+            "MVMOE": 0.18131899477992983,
+            "MoSES_CaDA": 0.01052571526371338,
+            "MoSES_RF": 0.001397723707105571,
+            "reld_mt": 0.8023647203126337,
+            "RouteFinder": 0.00433579598938871
+          },
+          "method_mean_cost": {
+            "MTPOMO": 23.50449378274113,
+            "MVMOE": 20.445820107491212,
+            "MoSES_CaDA": 22.85174172927085,
+            "MoSES_RF": 21.73084248536036,
+            "reld_mt": 18.81545674796452,
+            "RouteFinder": 21.76642406670598
+          },
+          "best_top1": 0.8023647203126337,
+          "best_top2": 0.9836837150925636,
+          "best_top3": 0.9850814387996691,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPTW": {
+          "n": 70114,
+          "mean_cost": 10.473170026127272,
+          "sbs": 10.119165380940911,
+          "vbs": 10.093938919860525,
+          "oracle_cost": 10.093938919860525,
+          "sbs_cost": 10.119165380940911,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.29994009755540973,
+          "vs_sbs_pct": 3.498358133894275,
+          "vs_oracle_pct": 3.7570180410006593,
+          "actual_regret_pct": 4.27039629833307,
+          "vbs_gap_closed_pct": -1403.3068057318653,
+          "top1": 0.29994009755540973,
+          "top2": 0.8781555752060929,
+          "top3": 0.9651139572695895,
+          "pick_dist": [
+            0.0,
+            0.7054796474313261,
+            0.14365176712211541,
+            0.0,
+            0.15076874803890805,
+            9.983740765039792e-05
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.7054796474313261,
+            "MoSES_CaDA": 0.14365176712211541,
+            "MoSES_RF": 0.0,
+            "reld_mt": 0.15076874803890805,
+            "RouteFinder": 9.983740765039792e-05
+          },
+          "ce": 1.8536048245399617,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.1536069829135408,
+            "MoSES_CaDA": 0.004663833185954303,
+            "MoSES_RF": 0.0008272242348175828,
+            "reld_mt": 0.8386484867501498,
+            "RouteFinder": 0.002253472915537553
+          },
+          "method_mean_cost": {
+            "MTPOMO": 14.461218758052622,
+            "MVMOE": 11.33480077112612,
+            "MoSES_CaDA": 13.108648779119795,
+            "MoSES_RF": 12.088299448309039,
+            "reld_mt": 10.119165380940911,
+            "RouteFinder": 11.649492711958633
+          },
+          "best_top1": 0.8386484867501498,
+          "best_top2": 0.9922554696636906,
+          "best_top3": 0.9945089425792281,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPB": {
+          "n": 70114,
+          "mean_cost": 6.439794356281732,
+          "sbs": 6.36321315753966,
+          "vbs": 6.346542603427536,
+          "oracle_cost": 6.346542603427536,
+          "sbs_cost": 6.36321315753966,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.6794933964686083,
+          "vs_sbs_pct": 1.2034988746421504,
+          "vs_oracle_pct": 1.4693315507538607,
+          "actual_regret_pct": 1.375688346792806,
+          "vbs_gap_closed_pct": -459.38004356060213,
+          "top1": 0.679479133981801,
+          "top2": 0.961862110277548,
+          "top3": 1.0,
+          "pick_dist": [
+            0.0,
+            0.29111161822175313,
+            0.7088883817782469
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.29111161822175313,
+            "reld_mt": 0.7088883817782469
+          },
+          "ce": 0.6981029118759298,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.05438286219585247,
+            "MVMOE": 0.0624554297287275,
+            "reld_mt": 0.88316170807542
+          },
+          "method_mean_cost": {
+            "MTPOMO": 7.312356388554981,
+            "MVMOE": 8.2736193447243,
+            "reld_mt": 6.36321315753966
+          },
+          "best_top1": 0.88316170807542,
+          "best_top2": 0.9375445702712725,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPL": {
+          "n": 70114,
+          "mean_cost": 7.520981673890927,
+          "sbs": 7.4529368940932414,
+          "vbs": 7.3982277428576655,
+          "oracle_cost": 7.3982277428576655,
+          "sbs_cost": 7.4529368940932414,
+          "sbs_name": "MoSES_RF",
+          "top1_tie_aware": 0.28112787745671336,
+          "vs_sbs_pct": 0.9129928344303373,
+          "vs_oracle_pct": 1.659234282856037,
+          "actual_regret_pct": 1.559399824439784,
+          "vbs_gap_closed_pct": -124.37549890819317,
+          "top1": 0.28099951507544857,
+          "top2": 0.5541261374333228,
+          "top3": 0.759962347034829,
+          "pick_dist": [
+            0.0,
+            0.30540263000256723,
+            0.2161337250763043,
+            0.4784636449211285,
+            0.0,
+            0.0
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.30540263000256723,
+            "MoSES_CaDA": 0.2161337250763043,
+            "MoSES_RF": 0.4784636449211285,
+            "reld_mt": 0.0,
+            "RouteFinder": 0.0
+          },
+          "ce": 1.612215849433872,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.008785691873235017,
+            "MVMOE": 0.006132869327095872,
+            "MoSES_CaDA": 0.3558347833528254,
+            "MoSES_RF": 0.34446758136748723,
+            "reld_mt": 0.06385315343583307,
+            "RouteFinder": 0.2209259206435234
+          },
+          "method_mean_cost": {
+            "MTPOMO": 8.306216681065312,
+            "MVMOE": 9.041230620084393,
+            "MoSES_CaDA": 7.459269570992244,
+            "MoSES_RF": 7.4529368940932414,
+            "reld_mt": 7.632910260074201,
+            "RouteFinder": 7.474671944099132
+          },
+          "best_top1": 0.34446758136748723,
+          "best_top2": 0.7003023647203126,
+          "best_top3": 0.921228285363836,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "MoSES_CaDA",
+            "MoSES_RF"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "cost_not_exceeds_methods": [
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "VRPBL": {
+          "n": 70114,
+          "mean_cost": 9.462229175304094,
+          "sbs": 9.402794261882867,
+          "vbs": 9.362778661880554,
+          "oracle_cost": 9.362778661880554,
+          "sbs_cost": 9.402794261882867,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.6216590124654134,
+          "vs_sbs_pct": 0.6320984142146324,
+          "vs_oracle_pct": 1.0621901575911474,
+          "actual_regret_pct": 1.0546267624142276,
+          "vbs_gap_closed_pct": -148.52935709520935,
+          "top1": 0.6216590124654134,
+          "top2": 0.9656274067946488,
+          "top3": 1.0,
+          "pick_dist": [
+            0.0,
+            0.3983369940382805,
+            0.6016630059617195
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.3983369940382805,
+            "reld_mt": 0.6016630059617195
+          },
+          "ce": 0.7171078488063914,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.05235758906923011,
+            "MVMOE": 0.15363550788715521,
+            "reld_mt": 0.7940069030436147
+          },
+          "method_mean_cost": {
+            "MTPOMO": 10.63622523113093,
+            "MVMOE": 11.19678936736543,
+            "reld_mt": 9.402794261882867
+          },
+          "best_top1": 0.7940069030436147,
+          "best_top2": 0.8463644921128448,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "VRPBTW": {
+          "n": 70114,
+          "mean_cost": 20.531447752089903,
+          "sbs": 19.7408163437067,
+          "vbs": 19.650132743917144,
+          "oracle_cost": 19.650132743917144,
+          "sbs_cost": 19.7408163437067,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.374090766466041,
+          "vs_sbs_pct": 4.005059338061523,
+          "vs_oracle_pct": 4.485033356558765,
+          "actual_regret_pct": 5.000669578292798,
+          "vbs_gap_closed_pct": -871.8571056045025,
+          "top1": 0.374090766466041,
+          "top2": 0.86452063781841,
+          "top3": 1.0,
+          "pick_dist": [
+            0.08377784750549105,
+            0.7308668739481416,
+            0.18535527854636735
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.08377784750549105,
+            "MVMOE": 0.7308668739481416,
+            "reld_mt": 0.18535527854636735
+          },
+          "ce": 1.39722109848969,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.0010696865105399777,
+            "MVMOE": 0.20341158684428218,
+            "reld_mt": 0.7955187266451779
+          },
+          "method_mean_cost": {
+            "MTPOMO": 24.821552536860715,
+            "MVMOE": 21.45834565028019,
+            "reld_mt": 19.7408163437067
+          },
+          "best_top1": 0.7955187266451779,
+          "best_top2": 0.99893031348946,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "VRPLTW": {
+          "n": 70114,
+          "mean_cost": 19.32893310382931,
+          "sbs": 18.775183100523225,
+          "vbs": 18.71994787579577,
+          "oracle_cost": 18.71994787579577,
+          "sbs_cost": 18.775183100523225,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.2876886213880252,
+          "vs_sbs_pct": 2.9493720532113077,
+          "vs_oracle_pct": 3.253135276198793,
+          "actual_regret_pct": 3.628796012551778,
+          "vbs_gap_closed_pct": -1002.5305519049498,
+          "top1": 0.2876886213880252,
+          "top2": 0.8220326896197621,
+          "top3": 0.9421941409704196,
+          "pick_dist": [
+            0.0,
+            0.6952677068773712,
+            0.19208717231936562,
+            0.00032803719656559317,
+            0.11220298371224006,
+            0.00011409989445759762
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.6952677068773712,
+            "MoSES_CaDA": 0.19208717231936562,
+            "MoSES_RF": 0.00032803719656559317,
+            "reld_mt": 0.11220298371224006,
+            "RouteFinder": 0.00011409989445759762
+          },
+          "ce": 1.6673708607756026,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 5.704994722879881e-05,
+            "MVMOE": 0.1777248481045155,
+            "MoSES_CaDA": 0.01202327637846935,
+            "MoSES_RF": 0.0019967481530079583,
+            "reld_mt": 0.8040049062954617,
+            "RouteFinder": 0.004193171121316713
+          },
+          "method_mean_cost": {
+            "MTPOMO": 23.456875883662857,
+            "MVMOE": 20.407449472119488,
+            "MoSES_CaDA": 22.96850345494303,
+            "MoSES_RF": 21.6341626357272,
+            "reld_mt": 18.775183100523225,
+            "RouteFinder": 21.710954748244934
+          },
+          "best_top1": 0.8040049062954617,
+          "best_top2": 0.9817297543999772,
+          "best_top3": 0.9837265025529851,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPBL": {
+          "n": 70114,
+          "mean_cost": 6.428586352944796,
+          "sbs": 6.3591801600721904,
+          "vbs": 6.3429477520036395,
+          "oracle_cost": 6.3429477520036395,
+          "sbs_cost": 6.3591801600721904,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.6869812020423881,
+          "vs_sbs_pct": 1.0914330326476929,
+          "vs_oracle_pct": 1.3501388359080435,
+          "actual_regret_pct": 1.2240704247964507,
+          "vbs_gap_closed_pct": -427.57792053709414,
+          "top1": 0.6869812020423881,
+          "top2": 0.9649000199674815,
+          "top3": 1.0,
+          "pick_dist": [
+            0.0,
+            0.2840659497389965,
+            0.7159340502610035
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.2840659497389965,
+            "reld_mt": 0.7159340502610035
+          },
+          "ce": 0.6702617467274343,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.050574778218330146,
+            "MVMOE": 0.06361069116011067,
+            "reld_mt": 0.8858145306215591
+          },
+          "method_mean_cost": {
+            "MTPOMO": 7.21994730599741,
+            "MVMOE": 7.8721198987187675,
+            "reld_mt": 6.3591801600721904
+          },
+          "best_top1": 0.8858145306215591,
+          "best_top2": 0.9363893088398894,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPBTW": {
+          "n": 70114,
+          "mean_cost": 11.145657536276865,
+          "sbs": 10.625827688673974,
+          "vbs": 10.587621084053806,
+          "oracle_cost": 10.587621084053806,
+          "sbs_cost": 10.625827688673974,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.3719656559317683,
+          "vs_sbs_pct": 4.892135114867102,
+          "vs_oracle_pct": 5.2706500146999735,
+          "actual_regret_pct": 6.124512092169347,
+          "vbs_gap_closed_pct": -1360.5758815021504,
+          "top1": 0.3719656559317683,
+          "top2": 0.8511994751404854,
+          "top3": 1.0,
+          "pick_dist": [
+            0.04478420857460707,
+            0.7438172119690789,
+            0.211398579456314
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.04478420857460707,
+            "MVMOE": 0.7438172119690789,
+            "reld_mt": 0.211398579456314
+          },
+          "ce": 1.7443572157404774,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.16748438257694612,
+            "reld_mt": 0.8325156174230539
+          },
+          "method_mean_cost": {
+            "MTPOMO": 15.22681841300568,
+            "MVMOE": 11.891326931058556,
+            "reld_mt": 10.625827688673974
+          },
+          "best_top1": 0.8325156174230539,
+          "best_top2": 1.0,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPLTW": {
+          "n": 70114,
+          "mean_cost": 10.446010031206141,
+          "sbs": 10.109913379187619,
+          "vbs": 10.084619649815254,
+          "oracle_cost": 10.084619649815254,
+          "sbs_cost": 10.109913379187619,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.31103631229141115,
+          "vs_sbs_pct": 3.324426623777166,
+          "vs_oracle_pct": 3.58357968807983,
+          "actual_regret_pct": 4.064821533809967,
+          "vbs_gap_closed_pct": -1328.7746028694867,
+          "top1": 0.31103631229141115,
+          "top2": 0.8775993382206121,
+          "top3": 0.9730866873948142,
+          "pick_dist": [
+            0.0,
+            0.6989474284736287,
+            0.13737627292694754,
+            7.131243403599852e-05,
+            0.1633910488632798,
+            0.00021393730210799556
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.6989474284736287,
+            "MoSES_CaDA": 0.13737627292694754,
+            "MoSES_RF": 7.131243403599852e-05,
+            "reld_mt": 0.1633910488632798,
+            "RouteFinder": 0.00021393730210799556
+          },
+          "ce": 1.7975215907737772,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "reld_mt",
+            "RouteFinder"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.0,
+            "MVMOE": 0.15273697121830163,
+            "MoSES_CaDA": 0.0061613943007102715,
+            "MoSES_RF": 0.0010126365633111789,
+            "reld_mt": 0.837735687594489,
+            "RouteFinder": 0.002353310323187951
+          },
+          "method_mean_cost": {
+            "MTPOMO": 14.455601920396575,
+            "MVMOE": 11.321139335353465,
+            "MoSES_CaDA": 13.199366552792522,
+            "MoSES_RF": 12.078013545799008,
+            "reld_mt": 10.109913379187619,
+            "RouteFinder": 11.619377029259322
+          },
+          "best_top1": 0.837735687594489,
+          "best_top2": 0.9904726588127906,
+          "best_top3": 0.9928259691359785,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE",
+            "MoSES_CaDA",
+            "MoSES_RF",
+            "RouteFinder"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "VRPBLTW": {
+          "n": 70114,
+          "mean_cost": 20.590776404845545,
+          "sbs": 19.771468264366362,
+          "vbs": 19.681153817794105,
+          "oracle_cost": 19.681153817794105,
+          "sbs_cost": 19.771468264366362,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.36787232221810195,
+          "vs_sbs_pct": 4.143891235208885,
+          "vs_oracle_pct": 4.621795020112263,
+          "actual_regret_pct": 5.1724193764944815,
+          "vbs_gap_closed_pct": -907.172851713908,
+          "top1": 0.36787232221810195,
+          "top2": 0.8706962946059275,
+          "top3": 1.0,
+          "pick_dist": [
+            0.09043842884445331,
+            0.7312234361183216,
+            0.1783381350372251
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.09043842884445331,
+            "MVMOE": 0.7312234361183216,
+            "reld_mt": 0.1783381350372251
+          },
+          "ce": 1.3809826340277949,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 0.0010268990501183786,
+            "MVMOE": 0.20292666229283737,
+            "reld_mt": 0.7960464386570443
+          },
+          "method_mean_cost": {
+            "MTPOMO": 24.863075653995395,
+            "MVMOE": 21.503255695428322,
+            "reld_mt": 19.771468264366362
+          },
+          "best_top1": 0.7960464386570443,
+          "best_top2": 0.9989731009498817,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        },
+        "OVRPBLTW": {
+          "n": 70114,
+          "mean_cost": 11.142806959920105,
+          "sbs": 10.62781337647838,
+          "vbs": 10.589726415731171,
+          "oracle_cost": 10.589726415731171,
+          "sbs_cost": 10.62781337647838,
+          "sbs_name": "reld_mt",
+          "top1_tie_aware": 0.3767721139857946,
+          "vs_sbs_pct": 4.845715343303958,
+          "vs_oracle_pct": 5.222802955205008,
+          "actual_regret_pct": 6.101167766051733,
+          "vbs_gap_closed_pct": -1352.151952632382,
+          "top1": 0.3767721139857946,
+          "top2": 0.86523376215877,
+          "top3": 1.0,
+          "pick_dist": [
+            0.044056821747439884,
+            0.7375559802607182,
+            0.21838719799184186
+          ],
+          "arm_distribution": {
+            "MTPOMO": 0.044056821747439884,
+            "MVMOE": 0.7375559802607182,
+            "reld_mt": 0.21838719799184186
+          },
+          "ce": 1.6390311437956513,
+          "pool": [
+            "MTPOMO",
+            "MVMOE",
+            "reld_mt"
+          ],
+          "method_top1": {
+            "MTPOMO": 4.278746042159911e-05,
+            "MVMOE": 0.16642895855321335,
+            "reld_mt": 0.8335282539863651
+          },
+          "method_mean_cost": {
+            "MTPOMO": 15.245804979670774,
+            "MVMOE": 11.887189896569781,
+            "reld_mt": 10.62781337647838
+          },
+          "best_top1": 0.8335282539863651,
+          "best_top2": 0.9999572125395784,
+          "best_top3": 1.0,
+          "top1_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "top1_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "cost_exceeds_methods": [
+            "MTPOMO",
+            "MVMOE"
+          ],
+          "cost_not_exceeds_methods": [
+            "reld_mt"
+          ],
+          "sbs_selection_split": "train"
+        }
+      }
+    }
+  },
+  "prediction_comparisons": {
+    "fitted_vs_identity": {
+      "rows": 1262052,
+      "changed_predictions": 748729,
+      "corrected_top1": 143169,
+      "broken_top1": 503105,
+      "cost_better_count": 170225,
+      "cost_worse_count": 578468,
+      "top1_delta_pp": -28.51990250797907,
+      "mean_cost_delta": 0.28048637258465664,
+      "actual_regret_delta_pp": 2.365570203995125
+    },
+    "reference_vs_identity": {
+      "rows": 1262052,
+      "changed_predictions": 748754,
+      "corrected_top1": 143176,
+      "broken_top1": 503115,
+      "cost_better_count": 170236,
+      "cost_worse_count": 578482,
+      "top1_delta_pp": -28.520140216092518,
+      "mean_cost_delta": 0.28048776386750096,
+      "actual_regret_delta_pp": 2.365574296181183
+    },
+    "reference_vs_fitted": {
+      "rows": 1262052,
+      "changed_predictions": 27,
+      "corrected_top1": 8,
+      "broken_top1": 11,
+      "cost_better_count": 12,
+      "cost_worse_count": 15,
+      "top1_delta_pp": -0.00023770811345332838,
+      "mean_cost_delta": 1.3912828442885013e-06,
+      "actual_regret_delta_pp": 4.092186058262058e-06
+    }
+  },
+  "per_problem_prediction_changes": [
+    {
+      "problem": "TSP",
+      "comparison": "fitted_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 24819,
+      "corrected_top1": 5444,
+      "broken_top1": 9428,
+      "cost_better_count": 9471,
+      "cost_worse_count": 15348,
+      "top1_delta_pp": -5.682174743988362,
+      "mean_cost_delta": 0.002416768631303306,
+      "actual_regret_delta_pp": 0.030630956463393266,
+      "signed_cost_delta_sum": 169.4493158152,
+      "signed_regret_delta_sum_pct": 2147.6588814743554
+    },
+    {
+      "problem": "TSP",
+      "comparison": "reference_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 24819,
+      "corrected_top1": 5444,
+      "broken_top1": 9428,
+      "cost_better_count": 9471,
+      "cost_worse_count": 15348,
+      "top1_delta_pp": -5.682174743988362,
+      "mean_cost_delta": 0.002416768631303306,
+      "actual_regret_delta_pp": 0.030630956463393266,
+      "signed_cost_delta_sum": 169.4493158152,
+      "signed_regret_delta_sum_pct": 2147.6588814743554
+    },
+    {
+      "problem": "TSP",
+      "comparison": "reference_vs_fitted",
+      "rows": 70114,
+      "changed_predictions": 0,
+      "corrected_top1": 0,
+      "broken_top1": 0,
+      "cost_better_count": 0,
+      "cost_worse_count": 0,
+      "top1_delta_pp": 0.0,
+      "mean_cost_delta": 0.0,
+      "actual_regret_delta_pp": 0.0,
+      "signed_cost_delta_sum": 0.0,
+      "signed_regret_delta_sum_pct": 0.0
+    },
+    {
+      "problem": "CVRP",
+      "comparison": "fitted_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 49664,
+      "corrected_top1": 7050,
+      "broken_top1": 14035,
+      "cost_better_count": 19937,
+      "cost_worse_count": 29727,
+      "top1_delta_pp": -9.962347034828992,
+      "mean_cost_delta": 0.04276022639846964,
+      "actual_regret_delta_pp": 0.15745983183838083,
+      "signed_cost_delta_sum": 2998.0905137023,
+      "signed_regret_delta_sum_pct": 11040.138649516233
+    },
+    {
+      "problem": "CVRP",
+      "comparison": "reference_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 49678,
+      "corrected_top1": 7053,
+      "broken_top1": 14040,
+      "cost_better_count": 19943,
+      "cost_worse_count": 29735,
+      "top1_delta_pp": -9.965199532190432,
+      "mean_cost_delta": 0.04278858404314544,
+      "actual_regret_delta_pp": 0.15756170426801389,
+      "signed_cost_delta_sum": 3000.0787816010998,
+      "signed_regret_delta_sum_pct": 11047.281333047526
+    },
+    {
+      "problem": "CVRP",
+      "comparison": "reference_vs_fitted",
+      "rows": 70114,
+      "changed_predictions": 14,
+      "corrected_top1": 3,
+      "broken_top1": 5,
+      "cost_better_count": 6,
+      "cost_worse_count": 8,
+      "top1_delta_pp": -0.0028524973614399408,
+      "mean_cost_delta": 2.8357644675813577e-05,
+      "actual_regret_delta_pp": 0.00010187242963302427,
+      "signed_cost_delta_sum": 1.988267898799993,
+      "signed_regret_delta_sum_pct": 7.1426835312898636
+    },
+    {
+      "problem": "ATSP",
+      "comparison": "fitted_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 12298,
+      "corrected_top1": 4740,
+      "broken_top1": 7275,
+      "cost_better_count": 4813,
+      "cost_worse_count": 7485,
+      "top1_delta_pp": -3.615540405625125,
+      "mean_cost_delta": 0.011586545129673102,
+      "actual_regret_delta_pp": 0.741949570984192,
+      "signed_cost_delta_sum": 812.3790252219,
+      "signed_regret_delta_sum_pct": 52021.052219985635
+    },
+    {
+      "problem": "ATSP",
+      "comparison": "reference_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 12298,
+      "corrected_top1": 4740,
+      "broken_top1": 7275,
+      "cost_better_count": 4813,
+      "cost_worse_count": 7485,
+      "top1_delta_pp": -3.615540405625125,
+      "mean_cost_delta": 0.011586545129673102,
+      "actual_regret_delta_pp": 0.741949570984192,
+      "signed_cost_delta_sum": 812.3790252219,
+      "signed_regret_delta_sum_pct": 52021.052219985635
+    },
+    {
+      "problem": "ATSP",
+      "comparison": "reference_vs_fitted",
+      "rows": 70114,
+      "changed_predictions": 0,
+      "corrected_top1": 0,
+      "broken_top1": 0,
+      "cost_better_count": 0,
+      "cost_worse_count": 0,
+      "top1_delta_pp": 0.0,
+      "mean_cost_delta": 0.0,
+      "actual_regret_delta_pp": 0.0,
+      "signed_cost_delta_sum": 0.0,
+      "signed_regret_delta_sum_pct": 0.0
+    },
+    {
+      "problem": "OVRP",
+      "comparison": "fitted_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 29265,
+      "corrected_top1": 2483,
+      "broken_top1": 10470,
+      "cost_better_count": 4080,
+      "cost_worse_count": 25159,
+      "top1_delta_pp": -11.391448212910403,
+      "mean_cost_delta": 0.08236222130185411,
+      "actual_regret_delta_pp": 1.0122485609392753,
+      "signed_cost_delta_sum": 5774.7447843581995,
+      "signed_regret_delta_sum_pct": 70972.79560169634
+    },
+    {
+      "problem": "OVRP",
+      "comparison": "reference_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 29273,
+      "corrected_top1": 2486,
+      "broken_top1": 10474,
+      "cost_better_count": 4084,
+      "cost_worse_count": 25163,
+      "top1_delta_pp": -11.392874461591123,
+      "mean_cost_delta": 0.08236312834931397,
+      "actual_regret_delta_pp": 1.0122580027302177,
+      "signed_cost_delta_sum": 5774.8083810838,
+      "signed_regret_delta_sum_pct": 70973.45760342649
+    },
+    {
+      "problem": "OVRP",
+      "comparison": "reference_vs_fitted",
+      "rows": 70114,
+      "changed_predictions": 8,
+      "corrected_top1": 3,
+      "broken_top1": 4,
+      "cost_better_count": 4,
+      "cost_worse_count": 4,
+      "top1_delta_pp": -0.0014262486807199704,
+      "mean_cost_delta": 9.07047459851088e-07,
+      "actual_regret_delta_pp": 9.441790942645279e-06,
+      "signed_cost_delta_sum": 0.06359672559999918,
+      "signed_regret_delta_sum_pct": 0.6620017301526311
+    },
+    {
+      "problem": "VRPB",
+      "comparison": "fitted_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 30280,
+      "corrected_top1": 7686,
+      "broken_top1": 21953,
+      "cost_better_count": 7864,
+      "cost_worse_count": 22416,
+      "top1_delta_pp": -20.348289927831818,
+      "mean_cost_delta": 0.08550837600546822,
+      "actual_regret_delta_pp": 0.9355289659141925,
+      "signed_cost_delta_sum": 5995.334275247399,
+      "signed_regret_delta_sum_pct": 65593.6779161077
+    },
+    {
+      "problem": "VRPB",
+      "comparison": "reference_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 30280,
+      "corrected_top1": 7686,
+      "broken_top1": 21953,
+      "cost_better_count": 7864,
+      "cost_worse_count": 22416,
+      "top1_delta_pp": -20.348289927831818,
+      "mean_cost_delta": 0.08550837600546822,
+      "actual_regret_delta_pp": 0.9355289659141925,
+      "signed_cost_delta_sum": 5995.334275247399,
+      "signed_regret_delta_sum_pct": 65593.6779161077
+    },
+    {
+      "problem": "VRPB",
+      "comparison": "reference_vs_fitted",
+      "rows": 70114,
+      "changed_predictions": 0,
+      "corrected_top1": 0,
+      "broken_top1": 0,
+      "cost_better_count": 0,
+      "cost_worse_count": 0,
+      "top1_delta_pp": 0.0,
+      "mean_cost_delta": 0.0,
+      "actual_regret_delta_pp": 0.0,
+      "signed_cost_delta_sum": 0.0,
+      "signed_regret_delta_sum_pct": 0.0
+    },
+    {
+      "problem": "VRPL",
+      "comparison": "fitted_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 38523,
+      "corrected_top1": 3829,
+      "broken_top1": 10218,
+      "cost_better_count": 9015,
+      "cost_worse_count": 29508,
+      "top1_delta_pp": -9.11230282111989,
+      "mean_cost_delta": 0.09544963174555295,
+      "actual_regret_delta_pp": 0.8149463108359464,
+      "signed_cost_delta_sum": 6692.3554802077,
+      "signed_regret_delta_sum_pct": 57139.145637951544
+    },
+    {
+      "problem": "VRPL",
+      "comparison": "reference_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 38524,
+      "corrected_top1": 3829,
+      "broken_top1": 10218,
+      "cost_better_count": 9015,
+      "cost_worse_count": 29509,
+      "top1_delta_pp": -9.11230282111989,
+      "mean_cost_delta": 0.0954450229363023,
+      "actual_regret_delta_pp": 0.8149007727926977,
+      "signed_cost_delta_sum": 6692.0323381559,
+      "signed_regret_delta_sum_pct": 57135.95278358721
+    },
+    {
+      "problem": "VRPL",
+      "comparison": "reference_vs_fitted",
+      "rows": 70114,
+      "changed_predictions": 3,
+      "corrected_top1": 1,
+      "broken_top1": 1,
+      "cost_better_count": 1,
+      "cost_worse_count": 2,
+      "top1_delta_pp": 0.0,
+      "mean_cost_delta": -4.608809250648964e-06,
+      "actual_regret_delta_pp": -4.5538043248829434e-05,
+      "signed_cost_delta_sum": -0.32314205180000144,
+      "signed_regret_delta_sum_pct": -3.192854364348427
+    },
+    {
+      "problem": "VRPTW",
+      "comparison": "fitted_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 62334,
+      "corrected_top1": 12699,
+      "broken_top1": 48722,
+      "cost_better_count": 12910,
+      "cost_worse_count": 49424,
+      "top1_delta_pp": -51.37775622557549,
+      "mean_cost_delta": 0.565040721547082,
+      "actual_regret_delta_pp": 3.3676589952213867,
+      "signed_cost_delta_sum": 39617.265150552106,
+      "signed_regret_delta_sum_pct": 236120.0427909523
+    },
+    {
+      "problem": "VRPTW",
+      "comparison": "reference_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 62334,
+      "corrected_top1": 12699,
+      "broken_top1": 48722,
+      "cost_better_count": 12910,
+      "cost_worse_count": 49424,
+      "top1_delta_pp": -51.37775622557549,
+      "mean_cost_delta": 0.565040721547082,
+      "actual_regret_delta_pp": 3.3676589952213867,
+      "signed_cost_delta_sum": 39617.265150552106,
+      "signed_regret_delta_sum_pct": 236120.0427909523
+    },
+    {
+      "problem": "VRPTW",
+      "comparison": "reference_vs_fitted",
+      "rows": 70114,
+      "changed_predictions": 0,
+      "corrected_top1": 0,
+      "broken_top1": 0,
+      "cost_better_count": 0,
+      "cost_worse_count": 0,
+      "top1_delta_pp": 0.0,
+      "mean_cost_delta": 0.0,
+      "actual_regret_delta_pp": 0.0,
+      "signed_cost_delta_sum": 0.0,
+      "signed_regret_delta_sum_pct": 0.0
+    },
+    {
+      "problem": "OVRPTW",
+      "comparison": "fitted_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 59543,
+      "corrected_top1": 10677,
+      "broken_top1": 48448,
+      "cost_better_count": 10759,
+      "cost_worse_count": 48784,
+      "top1_delta_pp": -53.870838919474,
+      "mean_cost_delta": 0.3540046451863607,
+      "actual_regret_delta_pp": 4.024582868712978,
+      "signed_cost_delta_sum": 24820.681692596496,
+      "signed_regret_delta_sum_pct": 282179.6032569417
+    },
+    {
+      "problem": "OVRPTW",
+      "comparison": "reference_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 59543,
+      "corrected_top1": 10677,
+      "broken_top1": 48448,
+      "cost_better_count": 10759,
+      "cost_worse_count": 48784,
+      "top1_delta_pp": -53.870838919474,
+      "mean_cost_delta": 0.3540046451863607,
+      "actual_regret_delta_pp": 4.024582868712978,
+      "signed_cost_delta_sum": 24820.681692596496,
+      "signed_regret_delta_sum_pct": 282179.6032569417
+    },
+    {
+      "problem": "OVRPTW",
+      "comparison": "reference_vs_fitted",
+      "rows": 70114,
+      "changed_predictions": 0,
+      "corrected_top1": 0,
+      "broken_top1": 0,
+      "cost_better_count": 0,
+      "cost_worse_count": 0,
+      "top1_delta_pp": 0.0,
+      "mean_cost_delta": 0.0,
+      "actual_regret_delta_pp": 0.0,
+      "signed_cost_delta_sum": 0.0,
+      "signed_regret_delta_sum_pct": 0.0
+    },
+    {
+      "problem": "OVRPB",
+      "comparison": "fitted_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 20411,
+      "corrected_top1": 2620,
+      "broken_top1": 16901,
+      "cost_better_count": 2800,
+      "cost_worse_count": 17611,
+      "top1_delta_pp": -20.368257409361895,
+      "mean_cost_delta": 0.07658119874207149,
+      "actual_regret_delta_pp": 1.1044456722898208,
+      "signed_cost_delta_sum": 5369.4141686016,
+      "signed_regret_delta_sum_pct": 77437.1038669285
+    },
+    {
+      "problem": "OVRPB",
+      "comparison": "reference_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 20411,
+      "corrected_top1": 2620,
+      "broken_top1": 16901,
+      "cost_better_count": 2800,
+      "cost_worse_count": 17611,
+      "top1_delta_pp": -20.368257409361895,
+      "mean_cost_delta": 0.07658119874207149,
+      "actual_regret_delta_pp": 1.1044456722898208,
+      "signed_cost_delta_sum": 5369.4141686016,
+      "signed_regret_delta_sum_pct": 77437.1038669285
+    },
+    {
+      "problem": "OVRPB",
+      "comparison": "reference_vs_fitted",
+      "rows": 70114,
+      "changed_predictions": 0,
+      "corrected_top1": 0,
+      "broken_top1": 0,
+      "cost_better_count": 0,
+      "cost_worse_count": 0,
+      "top1_delta_pp": 0.0,
+      "mean_cost_delta": 0.0,
+      "actual_regret_delta_pp": 0.0,
+      "signed_cost_delta_sum": 0.0,
+      "signed_regret_delta_sum_pct": 0.0
+    },
+    {
+      "problem": "OVRPL",
+      "comparison": "fitted_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 28019,
+      "corrected_top1": 2731,
+      "broken_top1": 9405,
+      "cost_better_count": 4731,
+      "cost_worse_count": 23279,
+      "top1_delta_pp": -9.518783695125082,
+      "mean_cost_delta": 0.06959363031053854,
+      "actual_regret_delta_pp": 0.8276786250374876,
+      "signed_cost_delta_sum": 4879.4877955931,
+      "signed_regret_delta_sum_pct": 58031.859115878404
+    },
+    {
+      "problem": "OVRPL",
+      "comparison": "reference_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 28021,
+      "corrected_top1": 2732,
+      "broken_top1": 9406,
+      "cost_better_count": 4732,
+      "cost_worse_count": 23280,
+      "top1_delta_pp": -9.518783695125082,
+      "mean_cost_delta": 0.06959401751885073,
+      "actual_regret_delta_pp": 0.8276865082092094,
+      "signed_cost_delta_sum": 4879.5149443167,
+      "signed_regret_delta_sum_pct": 58032.41183658051
+    },
+    {
+      "problem": "OVRPL",
+      "comparison": "reference_vs_fitted",
+      "rows": 70114,
+      "changed_predictions": 2,
+      "corrected_top1": 1,
+      "broken_top1": 1,
+      "cost_better_count": 1,
+      "cost_worse_count": 1,
+      "top1_delta_pp": 0.0,
+      "mean_cost_delta": 3.87208312177322e-07,
+      "actual_regret_delta_pp": 7.883171721876926e-06,
+      "signed_cost_delta_sum": 0.027148723600000757,
+      "signed_regret_delta_sum_pct": 0.5527207021076788
+    },
+    {
+      "problem": "VRPBL",
+      "comparison": "fitted_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 27929,
+      "corrected_top1": 7655,
+      "broken_top1": 19739,
+      "cost_better_count": 7796,
+      "cost_worse_count": 20133,
+      "top1_delta_pp": -17.234789057820123,
+      "mean_cost_delta": 0.05943491342122829,
+      "actual_regret_delta_pp": 0.6259187278620267,
+      "signed_cost_delta_sum": 4167.219519616,
+      "signed_regret_delta_sum_pct": 43885.66568531814
+    },
+    {
+      "problem": "VRPBL",
+      "comparison": "reference_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 27929,
+      "corrected_top1": 7655,
+      "broken_top1": 19739,
+      "cost_better_count": 7796,
+      "cost_worse_count": 20133,
+      "top1_delta_pp": -17.234789057820123,
+      "mean_cost_delta": 0.05943491342122829,
+      "actual_regret_delta_pp": 0.6259187278620267,
+      "signed_cost_delta_sum": 4167.219519616,
+      "signed_regret_delta_sum_pct": 43885.66568531814
+    },
+    {
+      "problem": "VRPBL",
+      "comparison": "reference_vs_fitted",
+      "rows": 70114,
+      "changed_predictions": 0,
+      "corrected_top1": 0,
+      "broken_top1": 0,
+      "cost_better_count": 0,
+      "cost_worse_count": 0,
+      "top1_delta_pp": 0.0,
+      "mean_cost_delta": 0.0,
+      "actual_regret_delta_pp": 0.0,
+      "signed_cost_delta_sum": 0.0,
+      "signed_regret_delta_sum_pct": 0.0
+    },
+    {
+      "problem": "VRPBTW",
+      "comparison": "fitted_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 57118,
+      "corrected_top1": 13567,
+      "broken_top1": 43115,
+      "cost_better_count": 13576,
+      "cost_worse_count": 43542,
+      "top1_delta_pp": -42.14279601791368,
+      "mean_cost_delta": 0.7906314083832073,
+      "actual_regret_delta_pp": 4.555903554720011,
+      "signed_cost_delta_sum": 55434.3305673802,
+      "signed_regret_delta_sum_pct": 319432.6218356388
+    },
+    {
+      "problem": "VRPBTW",
+      "comparison": "reference_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 57118,
+      "corrected_top1": 13567,
+      "broken_top1": 43115,
+      "cost_better_count": 13576,
+      "cost_worse_count": 43542,
+      "top1_delta_pp": -42.14279601791368,
+      "mean_cost_delta": 0.7906314083832073,
+      "actual_regret_delta_pp": 4.555903554720011,
+      "signed_cost_delta_sum": 55434.3305673802,
+      "signed_regret_delta_sum_pct": 319432.6218356388
+    },
+    {
+      "problem": "VRPBTW",
+      "comparison": "reference_vs_fitted",
+      "rows": 70114,
+      "changed_predictions": 0,
+      "corrected_top1": 0,
+      "broken_top1": 0,
+      "cost_better_count": 0,
+      "cost_worse_count": 0,
+      "top1_delta_pp": 0.0,
+      "mean_cost_delta": 0.0,
+      "actual_regret_delta_pp": 0.0,
+      "signed_cost_delta_sum": 0.0,
+      "signed_regret_delta_sum_pct": 0.0
+    },
+    {
+      "problem": "VRPLTW",
+      "comparison": "fitted_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 62247,
+      "corrected_top1": 12541,
+      "broken_top1": 48742,
+      "cost_better_count": 12762,
+      "cost_worse_count": 49485,
+      "top1_delta_pp": -51.631628490743644,
+      "mean_cost_delta": 0.5537500033060815,
+      "actual_regret_delta_pp": 3.3190235611637133,
+      "signed_cost_delta_sum": 38825.6277318026,
+      "signed_regret_delta_sum_pct": 232710.0179674326
+    },
+    {
+      "problem": "VRPLTW",
+      "comparison": "reference_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 62247,
+      "corrected_top1": 12541,
+      "broken_top1": 48742,
+      "cost_better_count": 12762,
+      "cost_worse_count": 49485,
+      "top1_delta_pp": -51.631628490743644,
+      "mean_cost_delta": 0.5537500033060815,
+      "actual_regret_delta_pp": 3.3190235611637133,
+      "signed_cost_delta_sum": 38825.6277318026,
+      "signed_regret_delta_sum_pct": 232710.0179674326
+    },
+    {
+      "problem": "VRPLTW",
+      "comparison": "reference_vs_fitted",
+      "rows": 70114,
+      "changed_predictions": 0,
+      "corrected_top1": 0,
+      "broken_top1": 0,
+      "cost_better_count": 0,
+      "cost_worse_count": 0,
+      "top1_delta_pp": 0.0,
+      "mean_cost_delta": 0.0,
+      "actual_regret_delta_pp": 0.0,
+      "signed_cost_delta_sum": 0.0,
+      "signed_regret_delta_sum_pct": 0.0
+    },
+    {
+      "problem": "OVRPBL",
+      "comparison": "fitted_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 19917,
+      "corrected_top1": 2544,
+      "broken_top1": 16485,
+      "cost_better_count": 2710,
+      "cost_worse_count": 17207,
+      "top1_delta_pp": -19.883332857917107,
+      "mean_cost_delta": 0.06940619287260603,
+      "actual_regret_delta_pp": 0.9608585808818809,
+      "signed_cost_delta_sum": 4866.3458070699,
+      "signed_regret_delta_sum_pct": 67369.6385399522
+    },
+    {
+      "problem": "OVRPBL",
+      "comparison": "reference_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 19917,
+      "corrected_top1": 2544,
+      "broken_top1": 16485,
+      "cost_better_count": 2710,
+      "cost_worse_count": 17207,
+      "top1_delta_pp": -19.883332857917107,
+      "mean_cost_delta": 0.06940619287260603,
+      "actual_regret_delta_pp": 0.9608585808818809,
+      "signed_cost_delta_sum": 4866.3458070699,
+      "signed_regret_delta_sum_pct": 67369.6385399522
+    },
+    {
+      "problem": "OVRPBL",
+      "comparison": "reference_vs_fitted",
+      "rows": 70114,
+      "changed_predictions": 0,
+      "corrected_top1": 0,
+      "broken_top1": 0,
+      "cost_better_count": 0,
+      "cost_worse_count": 0,
+      "top1_delta_pp": 0.0,
+      "mean_cost_delta": 0.0,
+      "actual_regret_delta_pp": 0.0,
+      "signed_cost_delta_sum": 0.0,
+      "signed_regret_delta_sum_pct": 0.0
+    },
+    {
+      "problem": "OVRPBTW",
+      "comparison": "fitted_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 55292,
+      "corrected_top1": 11414,
+      "broken_top1": 43705,
+      "cost_better_count": 11414,
+      "cost_worse_count": 43878,
+      "top1_delta_pp": -46.05499614912856,
+      "mean_cost_delta": 0.5198298476028939,
+      "actual_regret_delta_pp": 5.787663348147509,
+      "signed_cost_delta_sum": 36447.3499348293,
+      "signed_regret_delta_sum_pct": 405796.2279920145
+    },
+    {
+      "problem": "OVRPBTW",
+      "comparison": "reference_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 55292,
+      "corrected_top1": 11414,
+      "broken_top1": 43705,
+      "cost_better_count": 11414,
+      "cost_worse_count": 43878,
+      "top1_delta_pp": -46.05499614912856,
+      "mean_cost_delta": 0.5198298476028939,
+      "actual_regret_delta_pp": 5.787663348147509,
+      "signed_cost_delta_sum": 36447.3499348293,
+      "signed_regret_delta_sum_pct": 405796.2279920145
+    },
+    {
+      "problem": "OVRPBTW",
+      "comparison": "reference_vs_fitted",
+      "rows": 70114,
+      "changed_predictions": 0,
+      "corrected_top1": 0,
+      "broken_top1": 0,
+      "cost_better_count": 0,
+      "cost_worse_count": 0,
+      "top1_delta_pp": 0.0,
+      "mean_cost_delta": 0.0,
+      "actual_regret_delta_pp": 0.0,
+      "signed_cost_delta_sum": 0.0,
+      "signed_regret_delta_sum_pct": 0.0
+    },
+    {
+      "problem": "OVRPLTW",
+      "comparison": "fitted_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 58658,
+      "corrected_top1": 10621,
+      "broken_top1": 47550,
+      "cost_better_count": 10706,
+      "cost_worse_count": 47951,
+      "top1_delta_pp": -52.669937530307784,
+      "mean_cost_delta": 0.33609665201852124,
+      "actual_regret_delta_pp": 3.816768676564153,
+      "signed_cost_delta_sum": 23565.080659626597,
+      "signed_regret_delta_sum_pct": 267608.918988619
+    },
+    {
+      "problem": "OVRPLTW",
+      "comparison": "reference_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 58658,
+      "corrected_top1": 10621,
+      "broken_top1": 47550,
+      "cost_better_count": 10706,
+      "cost_worse_count": 47951,
+      "top1_delta_pp": -52.669937530307784,
+      "mean_cost_delta": 0.33609665201852124,
+      "actual_regret_delta_pp": 3.816768676564153,
+      "signed_cost_delta_sum": 23565.080659626597,
+      "signed_regret_delta_sum_pct": 267608.918988619
+    },
+    {
+      "problem": "OVRPLTW",
+      "comparison": "reference_vs_fitted",
+      "rows": 70114,
+      "changed_predictions": 0,
+      "corrected_top1": 0,
+      "broken_top1": 0,
+      "cost_better_count": 0,
+      "cost_worse_count": 0,
+      "top1_delta_pp": 0.0,
+      "mean_cost_delta": 0.0,
+      "actual_regret_delta_pp": 0.0,
+      "signed_cost_delta_sum": 0.0,
+      "signed_regret_delta_sum_pct": 0.0
+    },
+    {
+      "problem": "VRPBLTW",
+      "comparison": "fitted_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 57610,
+      "corrected_top1": 13558,
+      "broken_top1": 43579,
+      "cost_better_count": 13570,
+      "cost_worse_count": 44040,
+      "top1_delta_pp": -42.81741164389423,
+      "mean_cost_delta": 0.8193081404791824,
+      "actual_regret_delta_pp": 4.731991610426773,
+      "signed_cost_delta_sum": 57444.970961557396,
+      "signed_regret_delta_sum_pct": 331778.85977346275
+    },
+    {
+      "problem": "VRPBLTW",
+      "comparison": "reference_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 57610,
+      "corrected_top1": 13558,
+      "broken_top1": 43579,
+      "cost_better_count": 13570,
+      "cost_worse_count": 44040,
+      "top1_delta_pp": -42.81741164389423,
+      "mean_cost_delta": 0.8193081404791824,
+      "actual_regret_delta_pp": 4.731991610426773,
+      "signed_cost_delta_sum": 57444.970961557396,
+      "signed_regret_delta_sum_pct": 331778.85977346275
+    },
+    {
+      "problem": "VRPBLTW",
+      "comparison": "reference_vs_fitted",
+      "rows": 70114,
+      "changed_predictions": 0,
+      "corrected_top1": 0,
+      "broken_top1": 0,
+      "cost_better_count": 0,
+      "cost_worse_count": 0,
+      "top1_delta_pp": 0.0,
+      "mean_cost_delta": 0.0,
+      "actual_regret_delta_pp": 0.0,
+      "signed_cost_delta_sum": 0.0,
+      "signed_regret_delta_sum_pct": 0.0
+    },
+    {
+      "problem": "OVRPBLTW",
+      "comparison": "fitted_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 54802,
+      "corrected_top1": 11310,
+      "broken_top1": 43335,
+      "cost_better_count": 11311,
+      "cost_worse_count": 43491,
+      "top1_delta_pp": -45.67561400005705,
+      "mean_cost_delta": 0.514993583441725,
+      "actual_regret_delta_pp": 5.765005253909132,
+      "signed_cost_delta_sum": 36108.260109433104,
+      "signed_regret_delta_sum_pct": 404207.5783725849
+    },
+    {
+      "problem": "OVRPBLTW",
+      "comparison": "reference_vs_identity",
+      "rows": 70114,
+      "changed_predictions": 54802,
+      "corrected_top1": 11310,
+      "broken_top1": 43335,
+      "cost_better_count": 11311,
+      "cost_worse_count": 43491,
+      "top1_delta_pp": -45.67561400005705,
+      "mean_cost_delta": 0.514993583441725,
+      "actual_regret_delta_pp": 5.765005253909132,
+      "signed_cost_delta_sum": 36108.260109433104,
+      "signed_regret_delta_sum_pct": 404207.5783725849
+    },
+    {
+      "problem": "OVRPBLTW",
+      "comparison": "reference_vs_fitted",
+      "rows": 70114,
+      "changed_predictions": 0,
+      "corrected_top1": 0,
+      "broken_top1": 0,
+      "cost_better_count": 0,
+      "cost_worse_count": 0,
+      "top1_delta_pp": 0.0,
+      "mean_cost_delta": 0.0,
+      "actual_regret_delta_pp": 0.0,
+      "signed_cost_delta_sum": 0.0,
+      "signed_regret_delta_sum_pct": 0.0
+    }
+  ],
+  "margins": [
+    {
+      "problem": "TSP",
+      "rows": 70114,
+      "full_K_epsilon_inf": 4.418386548854514e-07,
+      "twice_epsilon": 8.836773097709028e-07,
+      "fitted_margin_min": 3.657736876272466e-06,
+      "fitted_margin_mean": 0.6965545676506915,
+      "fitted_margin_p05": 0.06922243683204107,
+      "fitted_margin_median": 0.6945712864398956,
+      "fitted_margin_max": 2.0223737360413416,
+      "certified_stable_count": 70114,
+      "not_certified_stable_count": 0,
+      "changed_predictions": 0,
+      "changed_above_stability_bound": 0
+    },
+    {
+      "problem": "CVRP",
+      "rows": 70114,
+      "full_K_epsilon_inf": 0.0001818516011824478,
+      "twice_epsilon": 0.0003637032023648956,
+      "fitted_margin_min": 2.157784618495029e-05,
+      "fitted_margin_mean": 0.29757054301895614,
+      "fitted_margin_p05": 0.025076909315566043,
+      "fitted_margin_median": 0.2750289548850493,
+      "fitted_margin_max": 1.5961240299268082,
+      "certified_stable_count": 70065,
+      "not_certified_stable_count": 49,
+      "changed_predictions": 14,
+      "changed_above_stability_bound": 0
+    },
+    {
+      "problem": "ATSP",
+      "rows": 70114,
+      "full_K_epsilon_inf": 9.452442828461471e-09,
+      "twice_epsilon": 1.8904885656922943e-08,
+      "fitted_margin_min": 1.8095847675425603e-05,
+      "fitted_margin_mean": 1.6021123078243018,
+      "fitted_margin_p05": 0.3003402361416192,
+      "fitted_margin_median": 1.6950811655131421,
+      "fitted_margin_max": 3.9996462820735665,
+      "certified_stable_count": 70114,
+      "not_certified_stable_count": 0,
+      "changed_predictions": 0,
+      "changed_above_stability_bound": 0
+    },
+    {
+      "problem": "OVRP",
+      "rows": 70114,
+      "full_K_epsilon_inf": 0.00012933978147611214,
+      "twice_epsilon": 0.0002586795629522243,
+      "fitted_margin_min": 6.5980009609223345e-06,
+      "fitted_margin_mean": 0.42686129442326787,
+      "fitted_margin_p05": 0.024678862328094863,
+      "fitted_margin_median": 0.20532194948716698,
+      "fitted_margin_max": 1.885563780299705,
+      "certified_stable_count": 70078,
+      "not_certified_stable_count": 36,
+      "changed_predictions": 8,
+      "changed_above_stability_bound": 0
+    },
+    {
+      "problem": "VRPB",
+      "rows": 70114,
+      "full_K_epsilon_inf": 2.056001888739445e-07,
+      "twice_epsilon": 4.11200377747889e-07,
+      "fitted_margin_min": 8.219632996309123e-05,
+      "fitted_margin_mean": 1.2126012298763267,
+      "fitted_margin_p05": 0.14384325192419645,
+      "fitted_margin_median": 1.1447550058364868,
+      "fitted_margin_max": 5.632197211101871,
+      "certified_stable_count": 70114,
+      "not_certified_stable_count": 0,
+      "changed_predictions": 0,
+      "changed_above_stability_bound": 0
+    },
+    {
+      "problem": "VRPL",
+      "rows": 70114,
+      "full_K_epsilon_inf": 4.750621927052112e-05,
+      "twice_epsilon": 9.501243854104224e-05,
+      "fitted_margin_min": 1.3915495555516522e-05,
+      "fitted_margin_mean": 0.7047175883889969,
+      "fitted_margin_p05": 0.027224705250766767,
+      "fitted_margin_median": 0.39744293689727783,
+      "fitted_margin_max": 2.2060372256917686,
+      "certified_stable_count": 70106,
+      "not_certified_stable_count": 8,
+      "changed_predictions": 3,
+      "changed_above_stability_bound": 0
+    },
+    {
+      "problem": "VRPTW",
+      "rows": 70114,
+      "full_K_epsilon_inf": 2.8463388090926856e-08,
+      "twice_epsilon": 5.692677618185371e-08,
+      "fitted_margin_min": 1.6366172617798824e-05,
+      "fitted_margin_mean": 1.6215444521344193,
+      "fitted_margin_p05": 0.18307349230110842,
+      "fitted_margin_median": 1.7220652757273236,
+      "fitted_margin_max": 4.398045022738578,
+      "certified_stable_count": 70114,
+      "not_certified_stable_count": 0,
+      "changed_predictions": 0,
+      "changed_above_stability_bound": 0
+    },
+    {
+      "problem": "OVRPTW",
+      "rows": 70114,
+      "full_K_epsilon_inf": 9.2252675720772e-08,
+      "twice_epsilon": 1.84505351441544e-07,
+      "fitted_margin_min": 2.916484631354521e-06,
+      "fitted_margin_mean": 2.0202205689376673,
+      "fitted_margin_p05": 0.20849235580936726,
+      "fitted_margin_median": 2.201758222814887,
+      "fitted_margin_max": 4.683427837036573,
+      "certified_stable_count": 70114,
+      "not_certified_stable_count": 0,
+      "changed_predictions": 0,
+      "changed_above_stability_bound": 0
+    },
+    {
+      "problem": "OVRPB",
+      "rows": 70114,
+      "full_K_epsilon_inf": 2.711394411214485e-07,
+      "twice_epsilon": 5.42278882242897e-07,
+      "fitted_margin_min": 6.448413370385708e-06,
+      "fitted_margin_mean": 1.3047373910485947,
+      "fitted_margin_p05": 0.14487192368073415,
+      "fitted_margin_median": 1.1118387040137143,
+      "fitted_margin_max": 5.826211202953817,
+      "certified_stable_count": 70114,
+      "not_certified_stable_count": 0,
+      "changed_predictions": 0,
+      "changed_above_stability_bound": 0
+    },
+    {
+      "problem": "OVRPL",
+      "rows": 70114,
+      "full_K_epsilon_inf": 1.1391802237081805e-05,
+      "twice_epsilon": 2.278360447416361e-05,
+      "fitted_margin_min": 5.894605810130571e-06,
+      "fitted_margin_mean": 0.4136624402419953,
+      "fitted_margin_p05": 0.021838160654593475,
+      "fitted_margin_median": 0.23828541889471522,
+      "fitted_margin_max": 1.809833937589819,
+      "certified_stable_count": 70107,
+      "not_certified_stable_count": 7,
+      "changed_predictions": 2,
+      "changed_above_stability_bound": 0
+    },
+    {
+      "problem": "VRPBL",
+      "rows": 70114,
+      "full_K_epsilon_inf": 5.446580808587953e-08,
+      "twice_epsilon": 1.0893161617175906e-07,
+      "fitted_margin_min": 1.7986184368101732e-05,
+      "fitted_margin_mean": 1.195949012723527,
+      "fitted_margin_p05": 0.13387616440236855,
+      "fitted_margin_median": 0.9872863779474819,
+      "fitted_margin_max": 5.552223198131616,
+      "certified_stable_count": 70114,
+      "not_certified_stable_count": 0,
+      "changed_predictions": 0,
+      "changed_above_stability_bound": 0
+    },
+    {
+      "problem": "VRPBTW",
+      "rows": 70114,
+      "full_K_epsilon_inf": 5.942370151501564e-09,
+      "twice_epsilon": 1.1884740303003127e-08,
+      "fitted_margin_min": 4.253126988817968e-06,
+      "fitted_margin_mean": 1.5756872312295045,
+      "fitted_margin_p05": 0.1191196157838214,
+      "fitted_margin_median": 1.6862086476732436,
+      "fitted_margin_max": 3.2327155056653334,
+      "certified_stable_count": 70114,
+      "not_certified_stable_count": 0,
+      "changed_predictions": 0,
+      "changed_above_stability_bound": 0
+    },
+    {
+      "problem": "VRPLTW",
+      "rows": 70114,
+      "full_K_epsilon_inf": 4.186171675968353e-08,
+      "twice_epsilon": 8.372343351936706e-08,
+      "fitted_margin_min": 1.8967984708684327e-05,
+      "fitted_margin_mean": 1.6807323193316588,
+      "fitted_margin_p05": 0.19332215014928217,
+      "fitted_margin_median": 1.8290058228298562,
+      "fitted_margin_max": 4.128354043920977,
+      "certified_stable_count": 70114,
+      "not_certified_stable_count": 0,
+      "changed_predictions": 0,
+      "changed_above_stability_bound": 0
+    },
+    {
+      "problem": "OVRPBL",
+      "rows": 70114,
+      "full_K_epsilon_inf": 1.3178116820000696e-07,
+      "twice_epsilon": 2.635623364000139e-07,
+      "fitted_margin_min": 2.293611028036935e-05,
+      "fitted_margin_mean": 1.458148079566331,
+      "fitted_margin_p05": 0.18722156310536703,
+      "fitted_margin_median": 1.2834401420748132,
+      "fitted_margin_max": 5.7027867899773135,
+      "certified_stable_count": 70114,
+      "not_certified_stable_count": 0,
+      "changed_predictions": 0,
+      "changed_above_stability_bound": 0
+    },
+    {
+      "problem": "OVRPBTW",
+      "rows": 70114,
+      "full_K_epsilon_inf": 5.995727470065049e-09,
+      "twice_epsilon": 1.1991454940130097e-08,
+      "fitted_margin_min": 3.5279623431971885e-05,
+      "fitted_margin_mean": 2.0969694270674637,
+      "fitted_margin_p05": 0.1711751440498529,
+      "fitted_margin_median": 2.2644248678302485,
+      "fitted_margin_max": 3.7134230220664612,
+      "certified_stable_count": 70114,
+      "not_certified_stable_count": 0,
+      "changed_predictions": 0,
+      "changed_above_stability_bound": 0
+    },
+    {
+      "problem": "OVRPLTW",
+      "rows": 70114,
+      "full_K_epsilon_inf": 9.043835458300009e-08,
+      "twice_epsilon": 1.8087670916600018e-07,
+      "fitted_margin_min": 0.00019123417060051828,
+      "fitted_margin_mean": 1.9799025849884004,
+      "fitted_margin_p05": 0.21266982979246202,
+      "fitted_margin_median": 2.1501309526072765,
+      "fitted_margin_max": 4.21548578876336,
+      "certified_stable_count": 70114,
+      "not_certified_stable_count": 0,
+      "changed_predictions": 0,
+      "changed_above_stability_bound": 0
+    },
+    {
+      "problem": "VRPBLTW",
+      "rows": 70114,
+      "full_K_epsilon_inf": 1.0266127947744508e-08,
+      "twice_epsilon": 2.0532255895489016e-08,
+      "fitted_margin_min": 2.086552397739805e-05,
+      "fitted_margin_mean": 1.5422050380594268,
+      "fitted_margin_p05": 0.11592728778298388,
+      "fitted_margin_median": 1.6581527777214053,
+      "fitted_margin_max": 2.988870009933157,
+      "certified_stable_count": 70114,
+      "not_certified_stable_count": 0,
+      "changed_predictions": 0,
+      "changed_above_stability_bound": 0
+    },
+    {
+      "problem": "OVRPBLTW",
+      "rows": 70114,
+      "full_K_epsilon_inf": 8.312444066405078e-10,
+      "twice_epsilon": 1.6624888132810156e-09,
+      "fitted_margin_min": 4.7835659350070614e-05,
+      "fitted_margin_mean": 1.9632575695602863,
+      "fitted_margin_p05": 0.15788929068981977,
+      "fitted_margin_median": 2.110434535676428,
+      "fitted_margin_max": 3.4508222668879878,
+      "certified_stable_count": 70114,
+      "not_certified_stable_count": 0,
+      "changed_predictions": 0,
+      "changed_above_stability_bound": 0
+    }
+  ],
+  "fitted_reference_changed_rows": [
+    {
+      "problem": "CVRP",
+      "train_index": 9744,
+      "winner_global_id": 14,
+      "fitted_global_id": 5,
+      "reference_global_id": 15,
+      "fitted_top2_margin": 0.00024258993945958096,
+      "full_K_epsilon_inf": 0.0001818516011824478,
+      "fitted_cost": 23.455663681,
+      "reference_cost": 23.6430358887,
+      "regret_delta_pp": 0.801456175720235
+    },
+    {
+      "problem": "CVRP",
+      "train_index": 12813,
+      "winner_global_id": 15,
+      "fitted_global_id": 5,
+      "reference_global_id": 15,
+      "fitted_top2_margin": 7.060073696019131e-05,
+      "full_K_epsilon_inf": 0.0001818516011824478,
+      "fitted_cost": 14.2892436981,
+      "reference_cost": 13.9886455536,
+      "regret_delta_pp": -2.148872407612336
+    },
+    {
+      "problem": "CVRP",
+      "train_index": 24709,
+      "winner_global_id": 14,
+      "fitted_global_id": 14,
+      "reference_global_id": 15,
+      "fitted_top2_margin": 9.853734736009478e-05,
+      "full_K_epsilon_inf": 0.0001818516011824478,
+      "fitted_cost": 23.8168869019,
+      "reference_cost": 24.6547164917,
+      "regret_delta_pp": 3.517796399046442
+    },
+    {
+      "problem": "CVRP",
+      "train_index": 24912,
+      "winner_global_id": 14,
+      "fitted_global_id": 14,
+      "reference_global_id": 15,
+      "fitted_top2_margin": 0.0001365055060820186,
+      "full_K_epsilon_inf": 0.0001818516011824478,
+      "fitted_cost": 16.4849300385,
+      "reference_cost": 16.7768955231,
+      "regret_delta_pp": 1.7711053909123242
+    },
+    {
+      "problem": "CVRP",
+      "train_index": 33125,
+      "winner_global_id": 7,
+      "fitted_global_id": 5,
+      "reference_global_id": 15,
+      "fitted_top2_margin": 0.00016140841327549893,
+      "full_K_epsilon_inf": 0.0001818516011824478,
+      "fitted_cost": 27.5071601868,
+      "reference_cost": 27.2974300385,
+      "regret_delta_pp": -0.770430177988343
+    },
+    {
+      "problem": "CVRP",
+      "train_index": 34525,
+      "winner_global_id": 7,
+      "fitted_global_id": 5,
+      "reference_global_id": 15,
+      "fitted_top2_margin": 0.000165997970923204,
+      "full_K_epsilon_inf": 0.0001818516011824478,
+      "fitted_cost": 9.5008897781,
+      "reference_cost": 9.7283039093,
+      "regret_delta_pp": 2.474086578517376
+    },
+    {
+      "problem": "CVRP",
+      "train_index": 39086,
+      "winner_global_id": 5,
+      "fitted_global_id": 5,
+      "reference_global_id": 15,
+      "fitted_top2_margin": 3.659628711583096e-05,
+      "full_K_epsilon_inf": 0.0001818516011824478,
+      "fitted_cost": 17.1801834106,
+      "reference_cost": 17.4176940918,
+      "regret_delta_pp": 1.3824688335600546
+    },
+    {
+      "problem": "CVRP",
+      "train_index": 40476,
+      "winner_global_id": 14,
+      "fitted_global_id": 14,
+      "reference_global_id": 15,
+      "fitted_top2_margin": 8.536472086473346e-05,
+      "full_K_epsilon_inf": 0.0001818516011824478,
+      "fitted_cost": 30.6620750427,
+      "reference_cost": 30.8349151611,
+      "regret_delta_pp": 0.5636934817989415
+    },
+    {
+      "problem": "CVRP",
+      "train_index": 41109,
+      "winner_global_id": 7,
+      "fitted_global_id": 5,
+      "reference_global_id": 15,
+      "fitted_top2_margin": 0.00017255448184849698,
+      "full_K_epsilon_inf": 0.0001818516011824478,
+      "fitted_cost": 12.8884029388,
+      "reference_cost": 12.6529045105,
+      "regret_delta_pp": -1.8940624943888247
+    },
+    {
+      "problem": "CVRP",
+      "train_index": 49807,
+      "winner_global_id": 7,
+      "fitted_global_id": 5,
+      "reference_global_id": 15,
+      "fitted_top2_margin": 2.99801715457626e-05,
+      "full_K_epsilon_inf": 0.0001818516011824478,
+      "fitted_cost": 12.6291255951,
+      "reference_cost": 12.5427093506,
+      "regret_delta_pp": -0.7016007264608539
+    },
+    {
+      "problem": "CVRP",
+      "train_index": 60015,
+      "winner_global_id": 15,
+      "fitted_global_id": 14,
+      "reference_global_id": 15,
+      "fitted_top2_margin": 2.7279994531115292e-05,
+      "full_K_epsilon_inf": 0.0001818516011824478,
+      "fitted_cost": 18.06300354,
+      "reference_cost": 18.0391368866,
+      "regret_delta_pp": -0.13230485222232435
+    },
+    {
+      "problem": "CVRP",
+      "train_index": 64320,
+      "winner_global_id": 14,
+      "fitted_global_id": 5,
+      "reference_global_id": 15,
+      "fitted_top2_margin": 0.00018036269031407315,
+      "full_K_epsilon_inf": 0.0001818516011824478,
+      "fitted_cost": 16.5744514465,
+      "reference_cost": 16.68816185,
+      "regret_delta_pp": 0.6918970740328247
+    },
+    {
+      "problem": "CVRP",
+      "train_index": 67839,
+      "winner_global_id": 5,
+      "fitted_global_id": 5,
+      "reference_global_id": 15,
+      "fitted_top2_margin": 0.000204144943579454,
+      "full_K_epsilon_inf": 0.0001818516011824478,
+      "fitted_cost": 42.6963882446,
+      "reference_cost": 43.5242424011,
+      "regret_delta_pp": 1.9389325199062895
+    },
+    {
+      "problem": "CVRP",
+      "train_index": 68821,
+      "winner_global_id": 15,
+      "fitted_global_id": 5,
+      "reference_global_id": 15,
+      "fitted_top2_margin": 0.0002416958697879501,
+      "full_K_epsilon_inf": 0.0001818516011824478,
+      "fitted_cost": 14.8805360794,
+      "reference_cost": 14.8284168243,
+      "regret_delta_pp": -0.35148226353194184
+    },
+    {
+      "problem": "OVRP",
+      "train_index": 18797,
+      "winner_global_id": 13,
+      "fitted_global_id": 12,
+      "reference_global_id": 13,
+      "fitted_top2_margin": 3.26218553012847e-05,
+      "full_K_epsilon_inf": 0.00012933978147611214,
+      "fitted_cost": 5.6237711906,
+      "reference_cost": 5.5342154503,
+      "regret_delta_pp": -1.618219259879845
+    },
+    {
+      "problem": "OVRP",
+      "train_index": 25703,
+      "winner_global_id": 12,
+      "fitted_global_id": 12,
+      "reference_global_id": 13,
+      "fitted_top2_margin": 4.811906294288626e-05,
+      "full_K_epsilon_inf": 0.00012933978147611214,
+      "fitted_cost": 6.8617043495,
+      "reference_cost": 6.863735199,
+      "regret_delta_pp": 0.029596866850546227
+    },
+    {
+      "problem": "OVRP",
+      "train_index": 28149,
+      "winner_global_id": 13,
+      "fitted_global_id": 12,
+      "reference_global_id": 13,
+      "fitted_top2_margin": 8.698129133644095e-05,
+      "full_K_epsilon_inf": 0.00012933978147611214,
+      "fitted_cost": 5.5277070999,
+      "reference_cost": 5.4594488144,
+      "regret_delta_pp": -1.2502779643241597
+    },
+    {
+      "problem": "OVRP",
+      "train_index": 29173,
+      "winner_global_id": 13,
+      "fitted_global_id": 12,
+      "reference_global_id": 13,
+      "fitted_top2_margin": 0.00014157914595069876,
+      "full_K_epsilon_inf": 0.00012933978147611214,
+      "fitted_cost": 6.2030696869,
+      "reference_cost": 6.1567754745,
+      "regret_delta_pp": -0.7519230251572546
+    },
+    {
+      "problem": "OVRP",
+      "train_index": 35798,
+      "winner_global_id": 12,
+      "fitted_global_id": 12,
+      "reference_global_id": 13,
+      "fitted_top2_margin": 0.00013073110060157767,
+      "full_K_epsilon_inf": 0.00012933978147611214,
+      "fitted_cost": 5.2771964073,
+      "reference_cost": 5.4022665024,
+      "regret_delta_pp": 2.3700102373864493
+    },
+    {
+      "problem": "OVRP",
+      "train_index": 43855,
+      "winner_global_id": 12,
+      "fitted_global_id": 12,
+      "reference_global_id": 13,
+      "fitted_top2_margin": 0.00015040063337745657,
+      "full_K_epsilon_inf": 0.00012933978147611214,
+      "fitted_cost": 7.6057534218,
+      "reference_cost": 7.6083965302,
+      "regret_delta_pp": 0.03475143425533919
+    },
+    {
+      "problem": "OVRP",
+      "train_index": 52250,
+      "winner_global_id": 12,
+      "fitted_global_id": 12,
+      "reference_global_id": 13,
+      "fitted_top2_margin": 0.00011165761427345267,
+      "full_K_epsilon_inf": 0.00012933978147611214,
+      "fitted_cost": 7.3664803505,
+      "reference_cost": 7.5158576965,
+      "regret_delta_pp": 2.027798064917957
+    },
+    {
+      "problem": "OVRP",
+      "train_index": 54841,
+      "winner_global_id": 18,
+      "fitted_global_id": 12,
+      "reference_global_id": 13,
+      "fitted_top2_margin": 6.56428285068511e-05,
+      "full_K_epsilon_inf": 0.00012933978147611214,
+      "fitted_cost": 6.4262733459,
+      "reference_cost": 6.4148569107,
+      "regret_delta_pp": -0.17973462389640127
+    },
+    {
+      "problem": "VRPL",
+      "train_index": 996,
+      "winner_global_id": 13,
+      "fitted_global_id": 13,
+      "reference_global_id": 12,
+      "fitted_top2_margin": 7.480618188093757e-05,
+      "full_K_epsilon_inf": 4.750621927052112e-05,
+      "fitted_cost": 9.4176864624,
+      "reference_cost": 9.4220085144,
+      "regret_delta_pp": 0.045892927283732295
+    },
+    {
+      "problem": "VRPL",
+      "train_index": 15344,
+      "winner_global_id": 12,
+      "fitted_global_id": 10,
+      "reference_global_id": 12,
+      "fitted_top2_margin": 1.3915495555516522e-05,
+      "full_K_epsilon_inf": 4.750621927052112e-05,
+      "fitted_cost": 10.4769687653,
+      "reference_cost": 10.1387014389,
+      "regret_delta_pp": -3.336396958116767
+    },
+    {
+      "problem": "VRPL",
+      "train_index": 44458,
+      "winner_global_id": 18,
+      "fitted_global_id": 13,
+      "reference_global_id": 12,
+      "fitted_top2_margin": 7.134911248396492e-05,
+      "full_K_epsilon_inf": 4.750621927052112e-05,
+      "fitted_cost": 11.5085010529,
+      "reference_cost": 11.5193042755,
+      "regret_delta_pp": 0.0976496664846076
+    },
+    {
+      "problem": "OVRPL",
+      "train_index": 8288,
+      "winner_global_id": 12,
+      "fitted_global_id": 12,
+      "reference_global_id": 13,
+      "fitted_top2_margin": 1.3295266203972034e-05,
+      "full_K_epsilon_inf": 1.1391802237081805e-05,
+      "fitted_cost": 5.8220119476,
+      "reference_cost": 5.8802447319,
+      "regret_delta_pp": 1.0002175334594694
+    },
+    {
+      "problem": "OVRPL",
+      "train_index": 53118,
+      "winner_global_id": 13,
+      "fitted_global_id": 12,
+      "reference_global_id": 13,
+      "fitted_top2_margin": 1.1626336150261096e-05,
+      "full_K_epsilon_inf": 1.1391802237081805e-05,
+      "fitted_cost": 6.9772920609,
+      "reference_cost": 6.9462080002,
+      "regret_delta_pp": -0.44749683135179064
+    }
+  ],
+  "reference_intercepts": {
+    "TSP": {
+      "pool": [
+        "BQ",
+        "DIFUSCO",
+        "DIFUSCO500",
+        "ELG",
+        "LEHD",
+        "OMNI",
+        "T2T",
+        "T2T500"
+      ],
+      "pool_ids": [
+        0,
+        1,
+        2,
+        3,
+        7,
+        14,
+        19,
+        20
+      ],
+      "bias": [
+        -1.2318190798940876,
+        -0.6403632741417066,
+        1.1836815157845495,
+        0.7090894595923923,
+        -1.1200516857578855,
+        1.2975640566093787,
+        -0.5645356792673533,
+        0.3664346870747125
+      ],
+      "diagnostic_only": true
+    },
+    "CVRP": {
+      "pool": [
+        "BQ",
+        "ELG",
+        "ICAM",
+        "LEHD",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "OMNI",
+        "RELD_CVRP",
+        "RouteFinder"
+      ],
+      "pool_ids": [
+        0,
+        3,
+        5,
+        7,
+        11,
+        12,
+        13,
+        14,
+        15,
+        18
+      ],
+      "bias": [
+        -1.3911298743201603,
+        0.8363047716645456,
+        -1.3704538499166508,
+        -1.4245781248691092,
+        1.006043767136167,
+        1.9520489789461832,
+        1.6631650717652515,
+        -1.6547952411603262,
+        -0.7162567502416224,
+        1.0996512509957215
+      ],
+      "diagnostic_only": true
+    },
+    "ATSP": {
+      "pool": [
+        "GLOP",
+        "ICAM_ATSP",
+        "MATNET",
+        "MATPOENET",
+        "UNICO_MatPOENet"
+      ],
+      "pool_ids": [
+        4,
+        6,
+        8,
+        9,
+        21
+      ],
+      "bias": [
+        1.5742213693021554,
+        -1.00998104981206,
+        1.7851224709805045,
+        -0.8061630616918151,
+        -1.5431997287787846
+      ],
+      "diagnostic_only": true
+    },
+    "OVRP": {
+      "pool": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "pool_ids": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        18
+      ],
+      "bias": [
+        1.306906161694827,
+        2.937860515122688,
+        -1.25067574247901,
+        -1.1693861991616255,
+        -0.6838700655199563,
+        -1.1408346696569236
+      ],
+      "diagnostic_only": true
+    },
+    "VRPB": {
+      "pool": [
+        "MTPOMO",
+        "MVMOE",
+        "reld_mt"
+      ],
+      "pool_ids": [
+        10,
+        11,
+        16
+      ],
+      "bias": [
+        0.16980536807434865,
+        1.083331468560932,
+        -1.2531368366352806
+      ],
+      "diagnostic_only": true
+    },
+    "VRPL": {
+      "pool": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "pool_ids": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        18
+      ],
+      "bias": [
+        0.9932125447213378,
+        2.1656500152612645,
+        -0.7351188444529425,
+        -0.8133681317981851,
+        -0.8607468126083176,
+        -0.7496287711231574
+      ],
+      "diagnostic_only": true
+    },
+    "VRPTW": {
+      "pool": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "pool_ids": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        18
+      ],
+      "bias": [
+        2.370244982439484,
+        -0.5016031523107871,
+        0.9616445327450213,
+        0.799072002633408,
+        -3.927176664994402,
+        0.29781829948727573
+      ],
+      "diagnostic_only": true
+    },
+    "OVRPTW": {
+      "pool": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "pool_ids": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        18
+      ],
+      "bias": [
+        2.4269372942265974,
+        -0.230872567147607,
+        1.1318717332506485,
+        0.8999451331867978,
+        -4.428862221826245,
+        0.20098062830980812
+      ],
+      "diagnostic_only": true
+    },
+    "OVRPB": {
+      "pool": [
+        "MTPOMO",
+        "MVMOE",
+        "reld_mt"
+      ],
+      "pool_ids": [
+        10,
+        11,
+        16
+      ],
+      "bias": [
+        0.1625378385688569,
+        1.4382449821744379,
+        -1.6007828207432946
+      ],
+      "diagnostic_only": true
+    },
+    "OVRPL": {
+      "pool": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "pool_ids": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        18
+      ],
+      "bias": [
+        1.50878974149661,
+        2.861452428883575,
+        -1.2726261509124037,
+        -1.2025844415527827,
+        -0.7719324148005148,
+        -1.123099163114484
+      ],
+      "diagnostic_only": true
+    },
+    "VRPBL": {
+      "pool": [
+        "MTPOMO",
+        "MVMOE",
+        "reld_mt"
+      ],
+      "pool_ids": [
+        10,
+        11,
+        16
+      ],
+      "bias": [
+        0.3099509138587165,
+        0.8294748530899262,
+        -1.1394257669486427
+      ],
+      "diagnostic_only": true
+    },
+    "VRPBTW": {
+      "pool": [
+        "MTPOMO",
+        "MVMOE",
+        "reld_mt"
+      ],
+      "pool_ids": [
+        10,
+        11,
+        16
+      ],
+      "bias": [
+        2.708033370797743,
+        0.369084371194858,
+        -3.077117741992601
+      ],
+      "diagnostic_only": true
+    },
+    "VRPLTW": {
+      "pool": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "pool_ids": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        18
+      ],
+      "bias": [
+        2.3139962195834682,
+        -0.5997075666925495,
+        1.1109202003569458,
+        0.8638377643012682,
+        -4.0381304540405925,
+        0.34908383649145996
+      ],
+      "diagnostic_only": true
+    },
+    "OVRPBL": {
+      "pool": [
+        "MTPOMO",
+        "MVMOE",
+        "reld_mt"
+      ],
+      "pool_ids": [
+        10,
+        11,
+        16
+      ],
+      "bias": [
+        0.2273198838809955,
+        1.308908487966549,
+        -1.5362283718475445
+      ],
+      "diagnostic_only": true
+    },
+    "OVRPBTW": {
+      "pool": [
+        "MTPOMO",
+        "MVMOE",
+        "reld_mt"
+      ],
+      "pool_ids": [
+        10,
+        11,
+        16
+      ],
+      "bias": [
+        2.9759304119618895,
+        0.6740462483851175,
+        -3.6499766603470074
+      ],
+      "diagnostic_only": true
+    },
+    "OVRPLTW": {
+      "pool": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "pool_ids": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        18
+      ],
+      "bias": [
+        2.3597068271199966,
+        -0.30135274673293033,
+        1.2618409859177888,
+        0.8741105020327484,
+        -4.421544272295347,
+        0.22723870395774343
+      ],
+      "diagnostic_only": true
+    },
+    "VRPBLTW": {
+      "pool": [
+        "MTPOMO",
+        "MVMOE",
+        "reld_mt"
+      ],
+      "pool_ids": [
+        10,
+        11,
+        16
+      ],
+      "bias": [
+        2.783699438982024,
+        0.3021457746889529,
+        -3.0858452136709773
+      ],
+      "diagnostic_only": true
+    },
+    "OVRPBLTW": {
+      "pool": [
+        "MTPOMO",
+        "MVMOE",
+        "reld_mt"
+      ],
+      "pool_ids": [
+        10,
+        11,
+        16
+      ],
+      "bias": [
+        2.9517377738466966,
+        0.5579736859679493,
+        -3.509711459814646
+      ],
+      "diagnostic_only": true
+    }
+  },
+  "fixed14_fitted_arithmetic_bounds": {
+    "fixed_converged_tasks": 14,
+    "remaining_tasks": 4,
+    "best_possible_macro_top1_pct": 57.40547933048717,
+    "best_possible_macro_actual_regret_pct": 2.4850690322976785
+  },
+  "reference_worsens_all_three_task_count": 18,
+  "next_phase": "waiting_R77_final_trainval_distributions",
+  "goal_complete": false
+}

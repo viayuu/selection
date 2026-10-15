@@ -1,0 +1,1768 @@
+{
+  "experiment": "R77",
+  "saved_utc": "2026-10-14T20:07:16.781015+00:00",
+  "complete": true,
+  "input_splits": [
+    "train",
+    "val"
+  ],
+  "inference_performed": false,
+  "train_rerun": false,
+  "test_inputs_read": false,
+  "storage": "hard links to already saved evaluation files; no copied dataset",
+  "array_key_prefix": "<problem>__",
+  "arrays": {
+    "logits": "raw scores, columns in pool slot order; not calibrated probabilities",
+    "pool": "solver names in score/cost column order",
+    "pool_ids": "global solver IDs, one per pool slot",
+    "costs": "native unnormalized R76 cached solver cost matrix, not geometric normalization",
+    "winner": "original winner in local pool slot space",
+    "nodes": "valid node counts, not coordinates",
+    "indices": "local evaluation row IDs",
+    "source_indices": "row IDs in the original R76 split"
+  },
+  "source_cache_manifest": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/source_cache_manifest.json",
+  "shared_input_cache": "/public/home/shiys/0selection2/code/V4/runs/R76_R45A_single_reld_mt/cache",
+  "arms": {
+    "A": {
+      "ready": true,
+      "arm": "A",
+      "saved_utc": "2026-10-14T19:47:15.504337+00:00",
+      "selected_update": 16146,
+      "evaluation_point": 13,
+      "completed_successful_updates": 49680,
+      "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/A_10k_seed2/best.pt",
+      "checkpoint_sha256": "0d1dcd0417c98d714906e91901e8f55f2d0b4cf4dc9d50f307503219cb1b0b51",
+      "selected_without_test": true,
+      "data_root": "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+      "files": {
+        "train": {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/selected_train_val_predictions/A/train.npz",
+          "source_path": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/A_10k_seed2/evaluation/train/selected_best/rank000.npz",
+          "sha256": "bc567127d3569ad6de7e3ca6215f969eb32ad976b82137fded76495a9a4287a1",
+          "metrics_path": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/selected_train_val_predictions/A/train_metrics.json",
+          "rows": 180000,
+          "rows_per_problem": {
+            "TSP": 10000,
+            "CVRP": 10000,
+            "ATSP": 10000,
+            "OVRP": 10000,
+            "VRPB": 10000,
+            "VRPL": 10000,
+            "VRPTW": 10000,
+            "OVRPTW": 10000,
+            "OVRPB": 10000,
+            "OVRPL": 10000,
+            "VRPBL": 10000,
+            "VRPBTW": 10000,
+            "VRPLTW": 10000,
+            "OVRPBL": 10000,
+            "OVRPBTW": 10000,
+            "OVRPLTW": 10000,
+            "VRPBLTW": 10000,
+            "OVRPBLTW": 10000
+          }
+        },
+        "val": {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/selected_train_val_predictions/A/val.npz",
+          "source_path": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/A_10k_seed2/evaluation/val/epoch013/rank000.npz",
+          "sha256": "2370271a988335e218f9790d048c53a2e56afa55bc942d1ddb3249d65c57dede",
+          "metrics_path": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/selected_train_val_predictions/A/val_metrics.json",
+          "rows": 70110,
+          "rows_per_problem": {
+            "TSP": 3895,
+            "CVRP": 3895,
+            "ATSP": 3895,
+            "OVRP": 3895,
+            "VRPB": 3895,
+            "VRPL": 3895,
+            "VRPTW": 3895,
+            "OVRPTW": 3895,
+            "OVRPB": 3895,
+            "OVRPL": 3895,
+            "VRPBL": 3895,
+            "VRPBTW": 3895,
+            "VRPLTW": 3895,
+            "OVRPBL": 3895,
+            "OVRPBTW": 3895,
+            "OVRPLTW": 3895,
+            "VRPBLTW": 3895,
+            "OVRPBLTW": 3895
+          }
+        }
+      },
+      "common_train_sbs": {
+        "TSP": {
+          "sbs_solver": "T2T",
+          "sbs_slot": 6,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "BQ": 7.718419738710515,
+            "DIFUSCO": 7.740539687174941,
+            "DIFUSCO500": 7.913212170253916,
+            "ELG": 7.774105597586999,
+            "LEHD": 7.761481161972221,
+            "OMNI": 7.869381122439238,
+            "T2T": 7.658740371906901,
+            "T2T500": 7.806000427236764
+          },
+          "mean_relative_regret_by_solver": {
+            "BQ": 0.016361799700610663,
+            "DIFUSCO": 0.016168637085795655,
+            "DIFUSCO500": 0.037635284073284696,
+            "ELG": 0.01864956241811824,
+            "LEHD": 0.022502585255812595,
+            "OMNI": 0.031918083597450755,
+            "T2T": 0.0057913708906276356,
+            "T2T500": 0.023705266672458595
+          },
+          "minimum_mean_relative_regret_solver": "T2T",
+          "majority_winner_solver": "T2T"
+        },
+        "CVRP": {
+          "sbs_solver": "RELD_CVRP",
+          "sbs_slot": 8,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "BQ": 18.38766784753254,
+            "ELG": 18.425514994281883,
+            "ICAM": 18.145098887347523,
+            "LEHD": 18.449957587080696,
+            "MVMOE": 19.363815866989764,
+            "MoSES_CaDA": 19.087202047572173,
+            "MoSES_RF": 20.10840874863926,
+            "OMNI": 18.201455312817583,
+            "RELD_CVRP": 18.08167448976078,
+            "RouteFinder": 18.690927057906514
+          },
+          "mean_relative_regret_by_solver": {
+            "BQ": 0.028717329518309485,
+            "ELG": 0.03314427497623923,
+            "ICAM": 0.018531040010770505,
+            "LEHD": 0.03246119032001233,
+            "MVMOE": 0.08306532179477098,
+            "MoSES_CaDA": 0.06749331468374384,
+            "MoSES_RF": 0.14701845492966595,
+            "OMNI": 0.024227315715659142,
+            "RELD_CVRP": 0.011485985272452268,
+            "RouteFinder": 0.04543633391857107
+          },
+          "minimum_mean_relative_regret_solver": "RELD_CVRP",
+          "majority_winner_solver": "OMNI"
+        },
+        "ATSP": {
+          "sbs_solver": "UNICO_MatPOENet",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "GLOP": 1.9307446030878113,
+            "ICAM_ATSP": 1.7141565689004237,
+            "MATNET": 2.3101392186544487,
+            "MATPOENET": 1.725548583767149,
+            "UNICO_MatPOENet": 1.6786440012738184
+          },
+          "mean_relative_regret_by_solver": {
+            "GLOP": 0.18264597454763395,
+            "ICAM_ATSP": 0.0489051220306966,
+            "MATNET": 0.421500521119705,
+            "MATPOENET": 0.056551429401740544,
+            "UNICO_MatPOENet": 0.027677003154012968
+          },
+          "minimum_mean_relative_regret_solver": "UNICO_MatPOENet",
+          "majority_winner_solver": "UNICO_MatPOENet"
+        },
+        "OVRP": {
+          "sbs_solver": "MoSES_RF",
+          "sbs_slot": 3,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 8.364112907455441,
+            "MVMOE": 9.191530408891145,
+            "MoSES_CaDA": 7.459420620692829,
+            "MoSES_RF": 7.453426893276933,
+            "reld_mt": 7.629936280074982,
+            "RouteFinder": 7.471160473528848
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.13885305740774612,
+            "MVMOE": 0.27065002984253594,
+            "MoSES_CaDA": 0.008501187883418122,
+            "MoSES_RF": 0.007747710627030528,
+            "reld_mt": 0.03353834081803198,
+            "RouteFinder": 0.010164472455346199
+          },
+          "minimum_mean_relative_regret_solver": "MoSES_RF",
+          "majority_winner_solver": "MoSES_CaDA"
+        },
+        "VRPB": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 10.729432702884013,
+            "MVMOE": 11.68793228361713,
+            "reld_mt": 9.357769237550087
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.153679160102468,
+            "MVMOE": 0.273518975064005,
+            "reld_mt": 0.004161568337513725
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "VRPL": {
+          "sbs_solver": "MoSES_RF",
+          "sbs_slot": 3,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 13.400922014691627,
+            "MVMOE": 14.188011836423557,
+            "MoSES_CaDA": 12.398698581673651,
+            "MoSES_RF": 12.39716842018313,
+            "reld_mt": 12.531558705841162,
+            "RouteFinder": 12.419604198834222
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.08661226242669087,
+            "MVMOE": 0.16074049979453459,
+            "MoSES_CaDA": 0.00471165549596437,
+            "MoSES_RF": 0.004710566396320821,
+            "reld_mt": 0.016150517824660326,
+            "RouteFinder": 0.006538552017919403
+          },
+          "minimum_mean_relative_regret_solver": "MoSES_RF",
+          "majority_winner_solver": "MoSES_RF"
+        },
+        "VRPTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 23.50449378274113,
+            "MVMOE": 20.445820107491212,
+            "MoSES_CaDA": 22.85174172927085,
+            "MoSES_RF": 21.73084248536036,
+            "reld_mt": 18.81545674796452,
+            "RouteFinder": 21.76642406670598
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.2526589888216081,
+            "MVMOE": 0.09770931826718803,
+            "MoSES_CaDA": 0.20917621151490182,
+            "MoSES_RF": 0.159246062871091,
+            "reld_mt": 0.0031179119450918348,
+            "RouteFinder": 0.15678794885258596
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 14.461218758052622,
+            "MVMOE": 11.33480077112612,
+            "MoSES_CaDA": 13.108648779119795,
+            "MoSES_RF": 12.088299448309039,
+            "reld_mt": 10.119165380940911,
+            "RouteFinder": 11.649492711958633
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.4368076148025282,
+            "MVMOE": 0.14159058815898995,
+            "MoSES_CaDA": 0.2784520939527944,
+            "MoSES_RF": 0.19144490051343416,
+            "reld_mt": 0.0024581342962009187,
+            "RouteFinder": 0.14934239266436528
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPB": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 7.312356388554981,
+            "MVMOE": 8.2736193447243,
+            "reld_mt": 6.36321315753966
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.16918430696983247,
+            "MVMOE": 0.3541708759767857,
+            "reld_mt": 0.002712426745029851
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPL": {
+          "sbs_solver": "MoSES_RF",
+          "sbs_slot": 3,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 8.306216681065312,
+            "MVMOE": 9.041230620084393,
+            "MoSES_CaDA": 7.459269570992244,
+            "MoSES_RF": 7.4529368940932414,
+            "reld_mt": 7.632910260074201,
+            "RouteFinder": 7.474671944099132
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.13059480268607387,
+            "MVMOE": 0.24851620428669804,
+            "MoSES_CaDA": 0.008339190513027948,
+            "MoSES_RF": 0.007608135940665512,
+            "reld_mt": 0.03383557140379955,
+            "RouteFinder": 0.010549864580758541
+          },
+          "minimum_mean_relative_regret_solver": "MoSES_RF",
+          "majority_winner_solver": "MoSES_CaDA"
+        },
+        "VRPBL": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 10.63622523113093,
+            "MVMOE": 11.19678936736543,
+            "reld_mt": 9.402794261882867
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.13797638540247806,
+            "MVMOE": 0.21227149343115248,
+            "reld_mt": 0.004287080345522007
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "VRPBTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 24.821552536860715,
+            "MVMOE": 21.45834565028019,
+            "reld_mt": 19.7408163437067
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.2657661218211825,
+            "MVMOE": 0.10143603937733316,
+            "reld_mt": 0.004447660235727877
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "VRPLTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 23.456875883662857,
+            "MVMOE": 20.407449472119488,
+            "MoSES_CaDA": 22.96850345494303,
+            "MoSES_RF": 21.6341626357272,
+            "reld_mt": 18.775183100523225,
+            "RouteFinder": 21.710954748244934
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.253018053135655,
+            "MVMOE": 0.09818905515517427,
+            "MoSES_CaDA": 0.21696628709317975,
+            "MoSES_RF": 0.1559737043625909,
+            "reld_mt": 0.0030977245138806508,
+            "RouteFinder": 0.15572437408453654
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPBL": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 7.21994730599741,
+            "MVMOE": 7.8721198987187675,
+            "reld_mt": 6.3591801600721904
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.1527231666528853,
+            "MVMOE": 0.2801108171790479,
+            "reld_mt": 0.0026321184391456982
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPBTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 15.22681841300568,
+            "MVMOE": 11.891326931058556,
+            "reld_mt": 10.625827688673974
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.44677152555807464,
+            "MVMOE": 0.1443014349325748,
+            "reld_mt": 0.0033684874402183707
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPLTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 14.455601920396575,
+            "MVMOE": 11.321139335353465,
+            "MoSES_CaDA": 13.199366552792522,
+            "MoSES_RF": 12.078013545799008,
+            "reld_mt": 10.109913379187619,
+            "RouteFinder": 11.619377029259322
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.43788911467835345,
+            "MVMOE": 0.14173703918485278,
+            "MoSES_CaDA": 0.2886527795145602,
+            "MoSES_RF": 0.19123473060984414,
+            "reld_mt": 0.002480528572458136,
+            "RouteFinder": 0.1477011948369883
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "VRPBLTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 24.863075653995395,
+            "MVMOE": 21.503255695428322,
+            "reld_mt": 19.771468264366362
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.2658674531541063,
+            "MVMOE": 0.1020304925212763,
+            "reld_mt": 0.00440427766067709
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPBLTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 15.245804979670774,
+            "MVMOE": 11.887189896569781,
+            "reld_mt": 10.62781337647838
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.44820624582773205,
+            "MVMOE": 0.14357487019605142,
+            "reld_mt": 0.0033616251214260155
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        }
+      },
+      "own_train_sbs": {
+        "TSP": {
+          "sbs_solver": "T2T",
+          "sbs_slot": 6,
+          "selection_split": "train",
+          "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+          "mean_cost_by_solver": {
+            "BQ": 7.708590088415077,
+            "DIFUSCO": 7.726661550405377,
+            "DIFUSCO500": 7.8952084333466175,
+            "ELG": 7.758481130742855,
+            "LEHD": 7.748328121876999,
+            "OMNI": 7.853573083281676,
+            "T2T": 7.644039865292567,
+            "T2T500": 7.790551053773247
+          },
+          "mean_relative_regret_by_solver": {
+            "BQ": 0.016884055359851338,
+            "DIFUSCO": 0.016213070361791277,
+            "DIFUSCO500": 0.03713301713712658,
+            "ELG": 0.018458131756630268,
+            "LEHD": 0.022529826926585183,
+            "OMNI": 0.031650981968353135,
+            "T2T": 0.005692630592921635,
+            "T2T500": 0.023549118708499402
+          },
+          "minimum_mean_relative_regret_solver": "T2T",
+          "majority_winner_solver": "T2T",
+          "train_rows": 10000
+        },
+        "CVRP": {
+          "sbs_solver": "RELD_CVRP",
+          "sbs_slot": 8,
+          "selection_split": "train",
+          "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+          "mean_cost_by_solver": {
+            "BQ": 18.375470016765217,
+            "ELG": 18.417544402312902,
+            "ICAM": 18.135139903688508,
+            "LEHD": 18.434521663522524,
+            "MVMOE": 19.348379909229212,
+            "MoSES_CaDA": 19.0873865688324,
+            "MoSES_RF": 20.12116076755483,
+            "OMNI": 18.19954166932117,
+            "RELD_CVRP": 18.07655291624095,
+            "RouteFinder": 18.690729520272928
+          },
+          "mean_relative_regret_by_solver": {
+            "BQ": 0.02858418786587496,
+            "ELG": 0.03296161532795138,
+            "ICAM": 0.018271885419241365,
+            "LEHD": 0.03211610148455616,
+            "MVMOE": 0.08237102473961698,
+            "MoSES_CaDA": 0.06792910188495183,
+            "MoSES_RF": 0.14817905879864623,
+            "OMNI": 0.024468527024248003,
+            "RELD_CVRP": 0.011515542613634383,
+            "RouteFinder": 0.045785630658538086
+          },
+          "minimum_mean_relative_regret_solver": "RELD_CVRP",
+          "majority_winner_solver": "OMNI",
+          "train_rows": 10000
+        },
+        "ATSP": {
+          "sbs_solver": "UNICO_MatPOENet",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+          "mean_cost_by_solver": {
+            "GLOP": 1.9282977356434359,
+            "ICAM_ATSP": 1.7110965626356374,
+            "MATNET": 2.3050836635351732,
+            "MATPOENET": 1.7230966131449597,
+            "UNICO_MatPOENet": 1.6763179179672094
+          },
+          "mean_relative_regret_by_solver": {
+            "GLOP": 0.18308267172592413,
+            "ICAM_ATSP": 0.04870226806836841,
+            "MATNET": 0.4203965887281677,
+            "MATPOENET": 0.0566690321381445,
+            "UNICO_MatPOENet": 0.027864707808885402
+          },
+          "minimum_mean_relative_regret_solver": "UNICO_MatPOENet",
+          "majority_winner_solver": "UNICO_MatPOENet",
+          "train_rows": 10000
+        },
+        "OVRP": {
+          "sbs_solver": "MoSES_RF",
+          "sbs_slot": 3,
+          "selection_split": "train",
+          "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+          "mean_cost_by_solver": {
+            "MTPOMO": 8.378529513335428,
+            "MVMOE": 9.21781607031878,
+            "MoSES_CaDA": 7.461326921868295,
+            "MoSES_RF": 7.455896287370453,
+            "reld_mt": 7.631121280550648,
+            "RouteFinder": 7.4741891826870965
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.1411398208056546,
+            "MVMOE": 0.27431487586669706,
+            "MoSES_CaDA": 0.008387481191607335,
+            "MoSES_RF": 0.00773783322998643,
+            "reld_mt": 0.033336580500126334,
+            "RouteFinder": 0.010263656375034211
+          },
+          "minimum_mean_relative_regret_solver": "MoSES_RF",
+          "majority_winner_solver": "MoSES_CaDA",
+          "train_rows": 10000
+        },
+        "VRPB": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+          "mean_cost_by_solver": {
+            "MTPOMO": 10.742747700262123,
+            "MVMOE": 11.665041894483505,
+            "reld_mt": 9.360622227882878
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.1548320453723468,
+            "MVMOE": 0.27178669130811134,
+            "reld_mt": 0.004081330225292002
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt",
+          "train_rows": 10000
+        },
+        "VRPL": {
+          "sbs_solver": "MoSES_RF",
+          "sbs_slot": 3,
+          "selection_split": "train",
+          "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+          "mean_cost_by_solver": {
+            "MTPOMO": 13.388898341608193,
+            "MVMOE": 14.199852211284993,
+            "MoSES_CaDA": 12.389175575351603,
+            "MoSES_RF": 12.385684050417122,
+            "reld_mt": 12.52502698445338,
+            "RouteFinder": 12.411125248193537
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.08632754244292792,
+            "MVMOE": 0.1641897778148083,
+            "MoSES_CaDA": 0.00477792618818634,
+            "MoSES_RF": 0.004628942517422949,
+            "reld_mt": 0.01647390099514157,
+            "RouteFinder": 0.006672934835237342
+          },
+          "minimum_mean_relative_regret_solver": "MoSES_RF",
+          "majority_winner_solver": "MoSES_RF",
+          "train_rows": 10000
+        },
+        "VRPTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+          "mean_cost_by_solver": {
+            "MTPOMO": 23.362022788524914,
+            "MVMOE": 20.334880989313135,
+            "MoSES_CaDA": 22.711710770225412,
+            "MoSES_RF": 21.59776360774029,
+            "reld_mt": 18.702879694223363,
+            "RouteFinder": 21.63541634306907
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.2521640942834458,
+            "MVMOE": 0.09803646569358927,
+            "MoSES_CaDA": 0.20877283615163597,
+            "MoSES_RF": 0.15884511408435148,
+            "reld_mt": 0.0031326675541427443,
+            "RouteFinder": 0.15646737450409356
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt",
+          "train_rows": 10000
+        },
+        "OVRPTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+          "mean_cost_by_solver": {
+            "MTPOMO": 14.473775899505172,
+            "MVMOE": 11.335988873291106,
+            "MoSES_CaDA": 13.132500951576326,
+            "MoSES_RF": 12.108601789926569,
+            "reld_mt": 10.133698644828693,
+            "RouteFinder": 11.666426155852742
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.4357485698181043,
+            "MVMOE": 0.1402239423435594,
+            "MoSES_CaDA": 0.2784730022064473,
+            "MoSES_RF": 0.1914809974481516,
+            "reld_mt": 0.0024743478689728277,
+            "RouteFinder": 0.14927781794882145
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt",
+          "train_rows": 10000
+        },
+        "OVRPB": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+          "mean_cost_by_solver": {
+            "MTPOMO": 7.286609397006066,
+            "MVMOE": 8.24300830738525,
+            "reld_mt": 6.357983694243089
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.16548259168683205,
+            "MVMOE": 0.35031958409393776,
+            "reld_mt": 0.002614343022578689
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt",
+          "train_rows": 10000
+        },
+        "OVRPL": {
+          "sbs_solver": "MoSES_RF",
+          "sbs_slot": 3,
+          "selection_split": "train",
+          "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+          "mean_cost_by_solver": {
+            "MTPOMO": 8.27655469355569,
+            "MVMOE": 9.004116614579983,
+            "MoSES_CaDA": 7.434065692138766,
+            "MoSES_RF": 7.427264129257412,
+            "reld_mt": 7.607396919179225,
+            "RouteFinder": 7.448308191609957
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.13066880322397822,
+            "MVMOE": 0.24829558231147503,
+            "MoSES_CaDA": 0.008348041988647296,
+            "MoSES_RF": 0.0075746289070525675,
+            "reld_mt": 0.03390542776032907,
+            "RouteFinder": 0.010411214662578577
+          },
+          "minimum_mean_relative_regret_solver": "MoSES_RF",
+          "majority_winner_solver": "MoSES_RF",
+          "train_rows": 10000
+        },
+        "VRPBL": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+          "mean_cost_by_solver": {
+            "MTPOMO": 10.605734093856515,
+            "MVMOE": 11.187002085590414,
+            "reld_mt": 9.395525032091465
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.13533645814841683,
+            "MVMOE": 0.21082575994255084,
+            "reld_mt": 0.004051283841091296
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt",
+          "train_rows": 10000
+        },
+        "VRPBTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+          "mean_cost_by_solver": {
+            "MTPOMO": 24.85086500024795,
+            "MVMOE": 21.456365857362794,
+            "reld_mt": 19.765162137269787
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.2660029909675205,
+            "MVMOE": 0.09999179271903522,
+            "reld_mt": 0.0046940988507656045
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt",
+          "train_rows": 10000
+        },
+        "VRPLTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+          "mean_cost_by_solver": {
+            "MTPOMO": 23.39392775998129,
+            "MVMOE": 20.353927381848965,
+            "MoSES_CaDA": 22.89482658190728,
+            "MoSES_RF": 21.566485923767516,
+            "reld_mt": 18.724719317865574,
+            "RouteFinder": 21.654878385925567
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.25262156100506483,
+            "MVMOE": 0.09782858054327369,
+            "MoSES_CaDA": 0.21582038162498993,
+            "MoSES_RF": 0.15537018929079147,
+            "reld_mt": 0.0031110231216165745,
+            "RouteFinder": 0.15545064876414316
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt",
+          "train_rows": 10000
+        },
+        "OVRPBL": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+          "mean_cost_by_solver": {
+            "MTPOMO": 7.217960217380492,
+            "MVMOE": 7.859209616994548,
+            "reld_mt": 6.359624311637856
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.1524148000996115,
+            "MVMOE": 0.27742435543073535,
+            "reld_mt": 0.0025400310982588176
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt",
+          "train_rows": 10000
+        },
+        "OVRPBTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+          "mean_cost_by_solver": {
+            "MTPOMO": 15.228537856602017,
+            "MVMOE": 11.909905595874866,
+            "reld_mt": 10.65004653029471
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.4433409551312806,
+            "MVMOE": 0.1436157729193114,
+            "reld_mt": 0.003419751637353626
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt",
+          "train_rows": 10000
+        },
+        "OVRPLTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+          "mean_cost_by_solver": {
+            "MTPOMO": 14.478479232120375,
+            "MVMOE": 11.345153825283415,
+            "MoSES_CaDA": 13.215580604648745,
+            "MoSES_RF": 12.09266304569229,
+            "reld_mt": 10.120821946596882,
+            "RouteFinder": 11.632623934053768
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.43846506587711803,
+            "MVMOE": 0.14375073659259344,
+            "MoSES_CaDA": 0.2892497336460836,
+            "MoSES_RF": 0.19138348815392256,
+            "reld_mt": 0.002488184396216984,
+            "RouteFinder": 0.147834760125337
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt",
+          "train_rows": 10000
+        },
+        "VRPBLTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+          "mean_cost_by_solver": {
+            "MTPOMO": 24.98176181240082,
+            "MVMOE": 21.572632356738964,
+            "reld_mt": 19.85427535576872
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.26690899912251076,
+            "MVMOE": 0.10154120549792836,
+            "reld_mt": 0.004446076623652584
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt",
+          "train_rows": 10000
+        },
+        "OVRPBLTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+          "mean_cost_by_solver": {
+            "MTPOMO": 15.2170089922903,
+            "MVMOE": 11.87698824510579,
+            "reld_mt": 10.61403368768766
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.44772147945683827,
+            "MVMOE": 0.14479772176835845,
+            "reld_mt": 0.0034220560332855173
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt",
+          "train_rows": 10000
+        }
+      },
+      "geometry_normalization": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/A_10k_seed2/geometry_stats.json"
+    },
+    "B": {
+      "ready": true,
+      "arm": "B",
+      "saved_utc": "2026-10-14T20:07:16.779607+00:00",
+      "selected_update": 34776,
+      "evaluation_point": 28,
+      "completed_successful_updates": 49680,
+      "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/B_full_seed2/best.pt",
+      "checkpoint_sha256": "31c0c75d66b1bde6ad533909a9c04b0036e80af4c4a5775b01b957ce310e6d1b",
+      "selected_without_test": true,
+      "data_root": "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+      "files": {
+        "train": {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/selected_train_val_predictions/B/train.npz",
+          "source_path": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/B_full_seed2/evaluation/train/selected_best/rank000.npz",
+          "sha256": "e7aaa557e28a09f5a7e25c3013a05861d81ce94a2ccd8e2bc9ee31e578238611",
+          "metrics_path": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/selected_train_val_predictions/B/train_metrics.json",
+          "rows": 1262052,
+          "rows_per_problem": {
+            "TSP": 70114,
+            "CVRP": 70114,
+            "ATSP": 70114,
+            "OVRP": 70114,
+            "VRPB": 70114,
+            "VRPL": 70114,
+            "VRPTW": 70114,
+            "OVRPTW": 70114,
+            "OVRPB": 70114,
+            "OVRPL": 70114,
+            "VRPBL": 70114,
+            "VRPBTW": 70114,
+            "VRPLTW": 70114,
+            "OVRPBL": 70114,
+            "OVRPBTW": 70114,
+            "OVRPLTW": 70114,
+            "VRPBLTW": 70114,
+            "OVRPBLTW": 70114
+          }
+        },
+        "val": {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/selected_train_val_predictions/B/val.npz",
+          "source_path": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/B_full_seed2/evaluation/val/epoch028/rank000.npz",
+          "sha256": "2bb2736e65eb190318f12da54c746ec82b3565f85c8bc14a1aea0798579a458b",
+          "metrics_path": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/selected_train_val_predictions/B/val_metrics.json",
+          "rows": 70110,
+          "rows_per_problem": {
+            "TSP": 3895,
+            "CVRP": 3895,
+            "ATSP": 3895,
+            "OVRP": 3895,
+            "VRPB": 3895,
+            "VRPL": 3895,
+            "VRPTW": 3895,
+            "OVRPTW": 3895,
+            "OVRPB": 3895,
+            "OVRPL": 3895,
+            "VRPBL": 3895,
+            "VRPBTW": 3895,
+            "VRPLTW": 3895,
+            "OVRPBL": 3895,
+            "OVRPBTW": 3895,
+            "OVRPLTW": 3895,
+            "VRPBLTW": 3895,
+            "OVRPBLTW": 3895
+          }
+        }
+      },
+      "common_train_sbs": {
+        "TSP": {
+          "sbs_solver": "T2T",
+          "sbs_slot": 6,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "BQ": 7.718419738710515,
+            "DIFUSCO": 7.740539687174941,
+            "DIFUSCO500": 7.913212170253916,
+            "ELG": 7.774105597586999,
+            "LEHD": 7.761481161972221,
+            "OMNI": 7.869381122439238,
+            "T2T": 7.658740371906901,
+            "T2T500": 7.806000427236764
+          },
+          "mean_relative_regret_by_solver": {
+            "BQ": 0.016361799700610663,
+            "DIFUSCO": 0.016168637085795655,
+            "DIFUSCO500": 0.037635284073284696,
+            "ELG": 0.01864956241811824,
+            "LEHD": 0.022502585255812595,
+            "OMNI": 0.031918083597450755,
+            "T2T": 0.0057913708906276356,
+            "T2T500": 0.023705266672458595
+          },
+          "minimum_mean_relative_regret_solver": "T2T",
+          "majority_winner_solver": "T2T"
+        },
+        "CVRP": {
+          "sbs_solver": "RELD_CVRP",
+          "sbs_slot": 8,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "BQ": 18.38766784753254,
+            "ELG": 18.425514994281883,
+            "ICAM": 18.145098887347523,
+            "LEHD": 18.449957587080696,
+            "MVMOE": 19.363815866989764,
+            "MoSES_CaDA": 19.087202047572173,
+            "MoSES_RF": 20.10840874863926,
+            "OMNI": 18.201455312817583,
+            "RELD_CVRP": 18.08167448976078,
+            "RouteFinder": 18.690927057906514
+          },
+          "mean_relative_regret_by_solver": {
+            "BQ": 0.028717329518309485,
+            "ELG": 0.03314427497623923,
+            "ICAM": 0.018531040010770505,
+            "LEHD": 0.03246119032001233,
+            "MVMOE": 0.08306532179477098,
+            "MoSES_CaDA": 0.06749331468374384,
+            "MoSES_RF": 0.14701845492966595,
+            "OMNI": 0.024227315715659142,
+            "RELD_CVRP": 0.011485985272452268,
+            "RouteFinder": 0.04543633391857107
+          },
+          "minimum_mean_relative_regret_solver": "RELD_CVRP",
+          "majority_winner_solver": "OMNI"
+        },
+        "ATSP": {
+          "sbs_solver": "UNICO_MatPOENet",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "GLOP": 1.9307446030878113,
+            "ICAM_ATSP": 1.7141565689004237,
+            "MATNET": 2.3101392186544487,
+            "MATPOENET": 1.725548583767149,
+            "UNICO_MatPOENet": 1.6786440012738184
+          },
+          "mean_relative_regret_by_solver": {
+            "GLOP": 0.18264597454763395,
+            "ICAM_ATSP": 0.0489051220306966,
+            "MATNET": 0.421500521119705,
+            "MATPOENET": 0.056551429401740544,
+            "UNICO_MatPOENet": 0.027677003154012968
+          },
+          "minimum_mean_relative_regret_solver": "UNICO_MatPOENet",
+          "majority_winner_solver": "UNICO_MatPOENet"
+        },
+        "OVRP": {
+          "sbs_solver": "MoSES_RF",
+          "sbs_slot": 3,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 8.364112907455441,
+            "MVMOE": 9.191530408891145,
+            "MoSES_CaDA": 7.459420620692829,
+            "MoSES_RF": 7.453426893276933,
+            "reld_mt": 7.629936280074982,
+            "RouteFinder": 7.471160473528848
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.13885305740774612,
+            "MVMOE": 0.27065002984253594,
+            "MoSES_CaDA": 0.008501187883418122,
+            "MoSES_RF": 0.007747710627030528,
+            "reld_mt": 0.03353834081803198,
+            "RouteFinder": 0.010164472455346199
+          },
+          "minimum_mean_relative_regret_solver": "MoSES_RF",
+          "majority_winner_solver": "MoSES_CaDA"
+        },
+        "VRPB": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 10.729432702884013,
+            "MVMOE": 11.68793228361713,
+            "reld_mt": 9.357769237550087
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.153679160102468,
+            "MVMOE": 0.273518975064005,
+            "reld_mt": 0.004161568337513725
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "VRPL": {
+          "sbs_solver": "MoSES_RF",
+          "sbs_slot": 3,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 13.400922014691627,
+            "MVMOE": 14.188011836423557,
+            "MoSES_CaDA": 12.398698581673651,
+            "MoSES_RF": 12.39716842018313,
+            "reld_mt": 12.531558705841162,
+            "RouteFinder": 12.419604198834222
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.08661226242669087,
+            "MVMOE": 0.16074049979453459,
+            "MoSES_CaDA": 0.00471165549596437,
+            "MoSES_RF": 0.004710566396320821,
+            "reld_mt": 0.016150517824660326,
+            "RouteFinder": 0.006538552017919403
+          },
+          "minimum_mean_relative_regret_solver": "MoSES_RF",
+          "majority_winner_solver": "MoSES_RF"
+        },
+        "VRPTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 23.50449378274113,
+            "MVMOE": 20.445820107491212,
+            "MoSES_CaDA": 22.85174172927085,
+            "MoSES_RF": 21.73084248536036,
+            "reld_mt": 18.81545674796452,
+            "RouteFinder": 21.76642406670598
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.2526589888216081,
+            "MVMOE": 0.09770931826718803,
+            "MoSES_CaDA": 0.20917621151490182,
+            "MoSES_RF": 0.159246062871091,
+            "reld_mt": 0.0031179119450918348,
+            "RouteFinder": 0.15678794885258596
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 14.461218758052622,
+            "MVMOE": 11.33480077112612,
+            "MoSES_CaDA": 13.108648779119795,
+            "MoSES_RF": 12.088299448309039,
+            "reld_mt": 10.119165380940911,
+            "RouteFinder": 11.649492711958633
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.4368076148025282,
+            "MVMOE": 0.14159058815898995,
+            "MoSES_CaDA": 0.2784520939527944,
+            "MoSES_RF": 0.19144490051343416,
+            "reld_mt": 0.0024581342962009187,
+            "RouteFinder": 0.14934239266436528
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPB": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 7.312356388554981,
+            "MVMOE": 8.2736193447243,
+            "reld_mt": 6.36321315753966
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.16918430696983247,
+            "MVMOE": 0.3541708759767857,
+            "reld_mt": 0.002712426745029851
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPL": {
+          "sbs_solver": "MoSES_RF",
+          "sbs_slot": 3,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 8.306216681065312,
+            "MVMOE": 9.041230620084393,
+            "MoSES_CaDA": 7.459269570992244,
+            "MoSES_RF": 7.4529368940932414,
+            "reld_mt": 7.632910260074201,
+            "RouteFinder": 7.474671944099132
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.13059480268607387,
+            "MVMOE": 0.24851620428669804,
+            "MoSES_CaDA": 0.008339190513027948,
+            "MoSES_RF": 0.007608135940665512,
+            "reld_mt": 0.03383557140379955,
+            "RouteFinder": 0.010549864580758541
+          },
+          "minimum_mean_relative_regret_solver": "MoSES_RF",
+          "majority_winner_solver": "MoSES_CaDA"
+        },
+        "VRPBL": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 10.63622523113093,
+            "MVMOE": 11.19678936736543,
+            "reld_mt": 9.402794261882867
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.13797638540247806,
+            "MVMOE": 0.21227149343115248,
+            "reld_mt": 0.004287080345522007
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "VRPBTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 24.821552536860715,
+            "MVMOE": 21.45834565028019,
+            "reld_mt": 19.7408163437067
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.2657661218211825,
+            "MVMOE": 0.10143603937733316,
+            "reld_mt": 0.004447660235727877
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "VRPLTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 23.456875883662857,
+            "MVMOE": 20.407449472119488,
+            "MoSES_CaDA": 22.96850345494303,
+            "MoSES_RF": 21.6341626357272,
+            "reld_mt": 18.775183100523225,
+            "RouteFinder": 21.710954748244934
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.253018053135655,
+            "MVMOE": 0.09818905515517427,
+            "MoSES_CaDA": 0.21696628709317975,
+            "MoSES_RF": 0.1559737043625909,
+            "reld_mt": 0.0030977245138806508,
+            "RouteFinder": 0.15572437408453654
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPBL": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 7.21994730599741,
+            "MVMOE": 7.8721198987187675,
+            "reld_mt": 6.3591801600721904
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.1527231666528853,
+            "MVMOE": 0.2801108171790479,
+            "reld_mt": 0.0026321184391456982
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPBTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 15.22681841300568,
+            "MVMOE": 11.891326931058556,
+            "reld_mt": 10.625827688673974
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.44677152555807464,
+            "MVMOE": 0.1443014349325748,
+            "reld_mt": 0.0033684874402183707
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPLTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 14.455601920396575,
+            "MVMOE": 11.321139335353465,
+            "MoSES_CaDA": 13.199366552792522,
+            "MoSES_RF": 12.078013545799008,
+            "reld_mt": 10.109913379187619,
+            "RouteFinder": 11.619377029259322
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.43788911467835345,
+            "MVMOE": 0.14173703918485278,
+            "MoSES_CaDA": 0.2886527795145602,
+            "MoSES_RF": 0.19123473060984414,
+            "reld_mt": 0.002480528572458136,
+            "RouteFinder": 0.1477011948369883
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "VRPBLTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 24.863075653995395,
+            "MVMOE": 21.503255695428322,
+            "reld_mt": 19.771468264366362
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.2658674531541063,
+            "MVMOE": 0.1020304925212763,
+            "reld_mt": 0.00440427766067709
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPBLTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 15.245804979670774,
+            "MVMOE": 11.887189896569781,
+            "reld_mt": 10.62781337647838
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.44820624582773205,
+            "MVMOE": 0.14357487019605142,
+            "reld_mt": 0.0033616251214260155
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        }
+      },
+      "own_train_sbs": {
+        "TSP": {
+          "sbs_solver": "T2T",
+          "sbs_slot": 6,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "BQ": 7.718419738710515,
+            "DIFUSCO": 7.740539687174941,
+            "DIFUSCO500": 7.913212170253916,
+            "ELG": 7.774105597586999,
+            "LEHD": 7.761481161972221,
+            "OMNI": 7.869381122439238,
+            "T2T": 7.658740371906901,
+            "T2T500": 7.806000427236764
+          },
+          "mean_relative_regret_by_solver": {
+            "BQ": 0.016361799700610663,
+            "DIFUSCO": 0.016168637085795655,
+            "DIFUSCO500": 0.037635284073284696,
+            "ELG": 0.01864956241811824,
+            "LEHD": 0.022502585255812595,
+            "OMNI": 0.031918083597450755,
+            "T2T": 0.0057913708906276356,
+            "T2T500": 0.023705266672458595
+          },
+          "minimum_mean_relative_regret_solver": "T2T",
+          "majority_winner_solver": "T2T"
+        },
+        "CVRP": {
+          "sbs_solver": "RELD_CVRP",
+          "sbs_slot": 8,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "BQ": 18.38766784753254,
+            "ELG": 18.425514994281883,
+            "ICAM": 18.145098887347523,
+            "LEHD": 18.449957587080696,
+            "MVMOE": 19.363815866989764,
+            "MoSES_CaDA": 19.087202047572173,
+            "MoSES_RF": 20.10840874863926,
+            "OMNI": 18.201455312817583,
+            "RELD_CVRP": 18.08167448976078,
+            "RouteFinder": 18.690927057906514
+          },
+          "mean_relative_regret_by_solver": {
+            "BQ": 0.028717329518309485,
+            "ELG": 0.03314427497623923,
+            "ICAM": 0.018531040010770505,
+            "LEHD": 0.03246119032001233,
+            "MVMOE": 0.08306532179477098,
+            "MoSES_CaDA": 0.06749331468374384,
+            "MoSES_RF": 0.14701845492966595,
+            "OMNI": 0.024227315715659142,
+            "RELD_CVRP": 0.011485985272452268,
+            "RouteFinder": 0.04543633391857107
+          },
+          "minimum_mean_relative_regret_solver": "RELD_CVRP",
+          "majority_winner_solver": "OMNI"
+        },
+        "ATSP": {
+          "sbs_solver": "UNICO_MatPOENet",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "GLOP": 1.9307446030878113,
+            "ICAM_ATSP": 1.7141565689004237,
+            "MATNET": 2.3101392186544487,
+            "MATPOENET": 1.725548583767149,
+            "UNICO_MatPOENet": 1.6786440012738184
+          },
+          "mean_relative_regret_by_solver": {
+            "GLOP": 0.18264597454763395,
+            "ICAM_ATSP": 0.0489051220306966,
+            "MATNET": 0.421500521119705,
+            "MATPOENET": 0.056551429401740544,
+            "UNICO_MatPOENet": 0.027677003154012968
+          },
+          "minimum_mean_relative_regret_solver": "UNICO_MatPOENet",
+          "majority_winner_solver": "UNICO_MatPOENet"
+        },
+        "OVRP": {
+          "sbs_solver": "MoSES_RF",
+          "sbs_slot": 3,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 8.364112907455441,
+            "MVMOE": 9.191530408891145,
+            "MoSES_CaDA": 7.459420620692829,
+            "MoSES_RF": 7.453426893276933,
+            "reld_mt": 7.629936280074982,
+            "RouteFinder": 7.471160473528848
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.13885305740774612,
+            "MVMOE": 0.27065002984253594,
+            "MoSES_CaDA": 0.008501187883418122,
+            "MoSES_RF": 0.007747710627030528,
+            "reld_mt": 0.03353834081803198,
+            "RouteFinder": 0.010164472455346199
+          },
+          "minimum_mean_relative_regret_solver": "MoSES_RF",
+          "majority_winner_solver": "MoSES_CaDA"
+        },
+        "VRPB": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 10.729432702884013,
+            "MVMOE": 11.68793228361713,
+            "reld_mt": 9.357769237550087
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.153679160102468,
+            "MVMOE": 0.273518975064005,
+            "reld_mt": 0.004161568337513725
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "VRPL": {
+          "sbs_solver": "MoSES_RF",
+          "sbs_slot": 3,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 13.400922014691627,
+            "MVMOE": 14.188011836423557,
+            "MoSES_CaDA": 12.398698581673651,
+            "MoSES_RF": 12.39716842018313,
+            "reld_mt": 12.531558705841162,
+            "RouteFinder": 12.419604198834222
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.08661226242669087,
+            "MVMOE": 0.16074049979453459,
+            "MoSES_CaDA": 0.00471165549596437,
+            "MoSES_RF": 0.004710566396320821,
+            "reld_mt": 0.016150517824660326,
+            "RouteFinder": 0.006538552017919403
+          },
+          "minimum_mean_relative_regret_solver": "MoSES_RF",
+          "majority_winner_solver": "MoSES_RF"
+        },
+        "VRPTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 23.50449378274113,
+            "MVMOE": 20.445820107491212,
+            "MoSES_CaDA": 22.85174172927085,
+            "MoSES_RF": 21.73084248536036,
+            "reld_mt": 18.81545674796452,
+            "RouteFinder": 21.76642406670598
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.2526589888216081,
+            "MVMOE": 0.09770931826718803,
+            "MoSES_CaDA": 0.20917621151490182,
+            "MoSES_RF": 0.159246062871091,
+            "reld_mt": 0.0031179119450918348,
+            "RouteFinder": 0.15678794885258596
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 14.461218758052622,
+            "MVMOE": 11.33480077112612,
+            "MoSES_CaDA": 13.108648779119795,
+            "MoSES_RF": 12.088299448309039,
+            "reld_mt": 10.119165380940911,
+            "RouteFinder": 11.649492711958633
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.4368076148025282,
+            "MVMOE": 0.14159058815898995,
+            "MoSES_CaDA": 0.2784520939527944,
+            "MoSES_RF": 0.19144490051343416,
+            "reld_mt": 0.0024581342962009187,
+            "RouteFinder": 0.14934239266436528
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPB": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 7.312356388554981,
+            "MVMOE": 8.2736193447243,
+            "reld_mt": 6.36321315753966
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.16918430696983247,
+            "MVMOE": 0.3541708759767857,
+            "reld_mt": 0.002712426745029851
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPL": {
+          "sbs_solver": "MoSES_RF",
+          "sbs_slot": 3,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 8.306216681065312,
+            "MVMOE": 9.041230620084393,
+            "MoSES_CaDA": 7.459269570992244,
+            "MoSES_RF": 7.4529368940932414,
+            "reld_mt": 7.632910260074201,
+            "RouteFinder": 7.474671944099132
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.13059480268607387,
+            "MVMOE": 0.24851620428669804,
+            "MoSES_CaDA": 0.008339190513027948,
+            "MoSES_RF": 0.007608135940665512,
+            "reld_mt": 0.03383557140379955,
+            "RouteFinder": 0.010549864580758541
+          },
+          "minimum_mean_relative_regret_solver": "MoSES_RF",
+          "majority_winner_solver": "MoSES_CaDA"
+        },
+        "VRPBL": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 10.63622523113093,
+            "MVMOE": 11.19678936736543,
+            "reld_mt": 9.402794261882867
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.13797638540247806,
+            "MVMOE": 0.21227149343115248,
+            "reld_mt": 0.004287080345522007
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "VRPBTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 24.821552536860715,
+            "MVMOE": 21.45834565028019,
+            "reld_mt": 19.7408163437067
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.2657661218211825,
+            "MVMOE": 0.10143603937733316,
+            "reld_mt": 0.004447660235727877
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "VRPLTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 23.456875883662857,
+            "MVMOE": 20.407449472119488,
+            "MoSES_CaDA": 22.96850345494303,
+            "MoSES_RF": 21.6341626357272,
+            "reld_mt": 18.775183100523225,
+            "RouteFinder": 21.710954748244934
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.253018053135655,
+            "MVMOE": 0.09818905515517427,
+            "MoSES_CaDA": 0.21696628709317975,
+            "MoSES_RF": 0.1559737043625909,
+            "reld_mt": 0.0030977245138806508,
+            "RouteFinder": 0.15572437408453654
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPBL": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 7.21994730599741,
+            "MVMOE": 7.8721198987187675,
+            "reld_mt": 6.3591801600721904
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.1527231666528853,
+            "MVMOE": 0.2801108171790479,
+            "reld_mt": 0.0026321184391456982
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPBTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 15.22681841300568,
+            "MVMOE": 11.891326931058556,
+            "reld_mt": 10.625827688673974
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.44677152555807464,
+            "MVMOE": 0.1443014349325748,
+            "reld_mt": 0.0033684874402183707
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPLTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 4,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 14.455601920396575,
+            "MVMOE": 11.321139335353465,
+            "MoSES_CaDA": 13.199366552792522,
+            "MoSES_RF": 12.078013545799008,
+            "reld_mt": 10.109913379187619,
+            "RouteFinder": 11.619377029259322
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.43788911467835345,
+            "MVMOE": 0.14173703918485278,
+            "MoSES_CaDA": 0.2886527795145602,
+            "MoSES_RF": 0.19123473060984414,
+            "reld_mt": 0.002480528572458136,
+            "RouteFinder": 0.1477011948369883
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "VRPBLTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 24.863075653995395,
+            "MVMOE": 21.503255695428322,
+            "reld_mt": 19.771468264366362
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.2658674531541063,
+            "MVMOE": 0.1020304925212763,
+            "reld_mt": 0.00440427766067709
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        },
+        "OVRPBLTW": {
+          "sbs_solver": "reld_mt",
+          "sbs_slot": 2,
+          "selection_split": "train",
+          "selection_rule": "minimum train mean raw cost, independently for each problem",
+          "mean_cost_by_solver": {
+            "MTPOMO": 15.245804979670774,
+            "MVMOE": 11.887189896569781,
+            "reld_mt": 10.62781337647838
+          },
+          "mean_relative_regret_by_solver": {
+            "MTPOMO": 0.44820624582773205,
+            "MVMOE": 0.14357487019605142,
+            "reld_mt": 0.0033616251214260155
+          },
+          "minimum_mean_relative_regret_solver": "reld_mt",
+          "majority_winner_solver": "reld_mt"
+        }
+      },
+      "geometry_normalization": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/B_full_seed2/geometry_stats.json"
+    }
+  }
+}

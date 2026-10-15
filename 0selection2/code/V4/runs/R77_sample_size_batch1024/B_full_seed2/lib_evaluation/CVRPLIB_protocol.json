@@ -1,0 +1,158 @@
+{
+  "experiment": "R77",
+  "model_version": "R77B",
+  "dataset": "CVRPLIB",
+  "problem": "CVRP",
+  "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/B_full_seed2/best.pt",
+  "checkpoint_sha256": "31c0c75d66b1bde6ad533909a9c04b0036e80af4c4a5775b01b957ce310e6d1b",
+  "checkpoint_epoch": 28,
+  "checkpoint_update": 34776,
+  "selected_without_test": true,
+  "selection_rule": "strict minimum complete VAL macro_vs_sbs_pct using common FULL TRAIN SBS",
+  "per_problem_assembly": false,
+  "candidate_pool": [
+    "BQ",
+    "ELG",
+    "ICAM",
+    "LEHD",
+    "MVMOE",
+    "MoSES_CaDA",
+    "MoSES_RF",
+    "OMNI",
+    "RELD_CVRP",
+    "RouteFinder"
+  ],
+  "pool_ids": [
+    0,
+    3,
+    5,
+    7,
+    11,
+    12,
+    13,
+    14,
+    15,
+    18
+  ],
+  "n": 100,
+  "data_version": "original native LIB / historical NSS comparison, not R77 new-data TEST",
+  "sources": {
+    "dataset.pkl": {
+      "path": "/public/home/shiys/0selection2/data/CVRPLIB/dataset.pkl",
+      "sha256": "aa3f0a01f61b99682b8de4e5f6b0c4017313087a3facdac1f4d1308557cc1a44"
+    },
+    "raw_label.pkl": {
+      "path": "/public/home/shiys/0selection2/data/CVRPLIB/raw_label.pkl",
+      "sha256": "a7812970fbaf857fd9d280bf1ebfa42d1a9113ac3c684dd0d326fc848d598802"
+    }
+  },
+  "training_data_root": "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+  "normalization": "R77B TRAIN buffers from best.pt; no LIB refitting",
+  "geometry_mean": [
+    0.15595082938671112,
+    0.11512637883424759,
+    0.31176313757896423,
+    0.5735180974006653,
+    0.2406129240989685,
+    0.16248540580272675,
+    0.3572331666946411,
+    0.45038577914237976,
+    0.3953046202659607,
+    0.2452951818704605,
+    0.40876704454421997,
+    0.4284079968929291
+  ],
+  "geometry_std": [
+    0.1526573896408081,
+    0.11063677072525024,
+    0.16010519862174988,
+    0.23388394713401794,
+    0.22605682909488678,
+    0.14755408465862274,
+    0.14595983922481537,
+    0.21175280213356018,
+    0.33199578523635864,
+    0.20603987574577332,
+    0.17860762774944305,
+    0.2222570925951004
+  ],
+  "decision": "single forward, greedy maximin-logit argmax; exact score ties use ascending stable global ID",
+  "top1_primary": "native FP64 raw_label ind",
+  "top1_nss_comparison": "FP32 cost argmin",
+  "topk_definition": "native winner contained in score top-k; stable global-ID tie rule",
+  "sbs": "LIB posthoc minimum mean FP64 cost, historical NSS comparison only",
+  "auxiliary_sbs": "R77B FULL TRAIN-selected fixed solver evaluated on native LIB costs",
+  "train_sbs": {
+    "sbs_solver": "RELD_CVRP",
+    "sbs_slot": 8,
+    "selection_split": "train",
+    "selection_rule": "minimum train mean raw cost, independently for each problem",
+    "mean_cost_by_solver": {
+      "BQ": 18.38766784753254,
+      "ELG": 18.425514994281883,
+      "ICAM": 18.145098887347523,
+      "LEHD": 18.449957587080696,
+      "MVMOE": 19.363815866989764,
+      "MoSES_CaDA": 19.087202047572173,
+      "MoSES_RF": 20.10840874863926,
+      "OMNI": 18.201455312817583,
+      "RELD_CVRP": 18.08167448976078,
+      "RouteFinder": 18.690927057906514
+    },
+    "mean_relative_regret_by_solver": {
+      "BQ": 0.028717329518309485,
+      "ELG": 0.03314427497623923,
+      "ICAM": 0.018531040010770505,
+      "LEHD": 0.03246119032001233,
+      "MVMOE": 0.08306532179477098,
+      "MoSES_CaDA": 0.06749331468374384,
+      "MoSES_RF": 0.14701845492966595,
+      "OMNI": 0.024227315715659142,
+      "RELD_CVRP": 0.011485985272452268,
+      "RouteFinder": 0.04543633391857107
+    },
+    "minimum_mean_relative_regret_solver": "RELD_CVRP",
+    "majority_winner_solver": "OMNI"
+  },
+  "metric_formulas": {
+    "vs_sbs_pct": "100 * (mean_cost / sbs_cost - 1)",
+    "vs_oracle_pct": "100 * (mean_cost / oracle_cost - 1)",
+    "actual_regret_pct": "mean_i(100 * (selected_cost_i - min_j cost_ij) / min_j cost_ij)"
+  },
+  "batch_size": 2,
+  "precision": "FP32 model, FP64 costs and metrics; no autocast",
+  "augmentation": false,
+  "solver_execution": false,
+  "training": false,
+  "checkpoint_reselection": false,
+  "ignore_coord_dist": true,
+  "device": "cpu",
+  "availability": {
+    "query": [
+      "nvidia-smi",
+      "--query-gpu=index,memory.used,utilization.gpu",
+      "--format=csv,noheader,nounits"
+    ],
+    "returncode": 9,
+    "stdout": "NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.",
+    "stderr": ""
+  },
+  "prediction_file": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/B_full_seed2/lib_evaluation/predictions/CVRPLIB.npz",
+  "prediction_schema": {
+    "scores": "float32 [n,k], actual maximin decision scores",
+    "logits": "float32 [n,k], model maximin logits (identical to scores)",
+    "pred": "int64 [n], local candidate slot; score ties use lowest global ID",
+    "costs": "float64 [n,k], unchanged original native costs",
+    "winner": "int64 [n], original native raw_label ind",
+    "winner_fp32_argmin": "int64 [n], historical NSS compatibility labels",
+    "pool": "unicode [k], original candidate names in column order",
+    "pool_ids": "int64 [k], stable global solver IDs",
+    "nodes": "int64 [n], input graph sizes",
+    "indices": "int64 [n], original zero-based instance order",
+    "checkpoint_sha256": "unicode scalar",
+    "checkpoint_epoch": "int64 scalar, one-based locked epoch",
+    "checkpoint_update": "int64 scalar, locked successful update"
+  },
+  "host": "admin01",
+  "created_utc": "2026-10-15T09:34:32.782388+00:00"
+}

@@ -1,0 +1,64 @@
+{
+  "state": "released",
+  "captured_utc": "2026-10-15T04:44:03.128686+00:00",
+  "captured_cst": "2026-10-15T12:44:03.128686+08:00",
+  "node": "gpu05",
+  "allocation": "1475",
+  "allocation_retained_for_reuse": true,
+  "gpu_query_step": "1475.23",
+  "gpu_query_exit_code": 0,
+  "gpu_query_count": 1,
+  "cards": [
+    {
+      "uuid": "GPU-71479e7e-f8bd-e430-66ed-f8db9f0d47be",
+      "name": "NVIDIA GeForce RTX 4090",
+      "memory_used": "2 MiB",
+      "gpu_util": "0 %",
+      "processes": []
+    },
+    {
+      "uuid": "GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d",
+      "name": "NVIDIA GeForce RTX 4090",
+      "memory_used": "2 MiB",
+      "gpu_util": "0 %",
+      "processes": []
+    }
+  ],
+  "all_compute_processes_absent": true,
+  "pipeline_tmux_session": "R79_NSS_new_data_batch1024",
+  "pipeline_tmux_session_exited": true,
+  "monitor_tmux_session": "R79_NSS_readonly_monitor",
+  "monitor_tmux_session_exited": true,
+  "remaining_active_allocation_steps": ["1475.batch", "1475.extern"],
+  "completed_gpu_steps": [
+    {
+      "step": "1475.21",
+      "phase": "train",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "start_cst": "2026-10-15T04:35:57",
+      "end_cst": "2026-10-15T12:37:45"
+    },
+    {
+      "step": "1475.22",
+      "phase": "evaluate",
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "start_cst": "2026-10-15T12:37:53",
+      "end_cst": "2026-10-15T12:38:07"
+    }
+  ],
+  "completion_receipt": "completion.json",
+  "evaluation_receipts": [
+    "TSP/test_once.json",
+    "TSP/TSPLIB_once.json",
+    "CVRP/test_once.json",
+    "CVRP/CVRPLIB_once.json"
+  ],
+  "authoritative_evaluation_logs": ["TSP_evaluate.log", "CVRP_evaluate.log"],
+  "authoritative_completion_log": "readonly_monitor.log",
+  "pipeline_log_note": "pipeline.log mixes historical gpu03 failures with the final freeze output and a trailing shell syntax message. Do not interpret its historical tail as a current GPU failure. single4090_pipeline.log is an empty late pane tap, not evidence.",
+  "current_launcher_bash_n_exit_code": 0,
+  "outer_controller_exit_status_recorded": false,
+  "inference_repeated_for_this_receipt": false
+}

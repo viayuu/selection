@@ -1,0 +1,96 @@
+{
+  "task": "CVRP",
+  "formal_updates_before": 548,
+  "formal_updates_after": 548,
+  "input_path": "gpu_resident",
+  "batch_unit": "augmented_training_samples",
+  "augmentation": "8 deterministic XY transformations, not cross-validation",
+  "cross_sample_normalization": false,
+  "normalization": "rezero",
+  "dropout": false,
+  "same_original_augmentation_and_padding": true,
+  "same_cpu_shuffle_rng": true,
+  "resident_cache_mib": 229.3324203491211,
+  "telemetry_before": {
+    "uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+    "nvml_used_mib": 596.0,
+    "total_mib": 24576.0,
+    "gpu_util_pct": 0.0,
+    "memory_util_pct": 0.0,
+    "captured_unix": 1791996897.7511148
+  },
+  "trials": [
+    {
+      "requested_micro": 64,
+      "micro_batch": 64,
+      "logical_batch": 1024,
+      "accumulation_steps": 16,
+      "loss": 10.919374465942383,
+      "gradient_norm_sum": 51.88315200805664,
+      "relative_gradient_error": 0.0,
+      "absolute_loss_error": 0.0,
+      "seconds": 2.342081335373223,
+      "samples_per_second": 437.21794992094937,
+      "oom_retries": [],
+      "peak_allocated_gib": 4.473584175109863,
+      "peak_reserved_gib": 4.60546875,
+      "telemetry": {
+        "uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+        "nvml_used_mib": 5042.0,
+        "total_mib": 24576.0,
+        "gpu_util_pct": 82.0,
+        "memory_util_pct": 67.0,
+        "captured_unix": 1791996902.8507428
+      }
+    },
+    {
+      "requested_micro": 128,
+      "micro_batch": 128,
+      "logical_batch": 1024,
+      "accumulation_steps": 8,
+      "loss": 10.919376373291016,
+      "gradient_norm_sum": 51.88313674926758,
+      "relative_gradient_error": 2.018683176174818e-07,
+      "absolute_loss_error": 1.9073486328125e-06,
+      "seconds": 2.420512977987528,
+      "samples_per_second": 423.0508199346148,
+      "oom_retries": [],
+      "peak_allocated_gib": 8.672354698181152,
+      "peak_reserved_gib": 9.05859375,
+      "telemetry": {
+        "uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+        "nvml_used_mib": 9602.0,
+        "total_mib": 24576.0,
+        "gpu_util_pct": 86.0,
+        "memory_util_pct": 75.0,
+        "captured_unix": 1791996905.4732716
+      }
+    },
+    {
+      "requested_micro": 192,
+      "micro_batch": 192,
+      "logical_batch": 1024,
+      "accumulation_steps": 6,
+      "loss": 10.919376373291016,
+      "gradient_norm_sum": 51.883148193359375,
+      "relative_gradient_error": 2.747260055002698e-07,
+      "absolute_loss_error": 1.9073486328125e-06,
+      "seconds": 2.631933405995369,
+      "samples_per_second": 389.0675948211289,
+      "oom_retries": [],
+      "peak_allocated_gib": 12.86658239364624,
+      "peak_reserved_gib": 13.201171875,
+      "telemetry": {
+        "uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+        "nvml_used_mib": 13844.0,
+        "total_mib": 24576.0,
+        "gpu_util_pct": 50.0,
+        "memory_util_pct": 41.0,
+        "captured_unix": 1791996908.4870245
+      }
+    }
+  ],
+  "selected_micro": 64,
+  "optimizer_steps": "one per logical batch; isolated probe steps discarded by full state restore",
+  "numeric_change": "FP32 GEMM/gradient reduction order; no RNG-consuming augmentation or layers"
+}

@@ -69,7 +69,7 @@ class BehaviorBank(nn.Module):
 
 
 def attach_query_ids(loaders):
-    report = {}
+    report = {} 
     for problem, loader in loaders.items():
         loader.batch['base_id'] = base_instance_ids(loader.batch)
         loader.batch['instance_index'] = torch.arange(loader.size, device=loader.batch['n'].device)
@@ -118,7 +118,6 @@ def shuffled_behavior(memory, seed=4702):
         report[problem] = dict(rows=len(permutation), moved=int((permutation != torch.arange(len(permutation))).sum()),
                                permutation=permutation.tolist())
     return original, report
-
 
 def restore_behavior(memory, original):
     for problem, values in original.items():

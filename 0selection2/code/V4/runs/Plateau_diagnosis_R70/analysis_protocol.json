@@ -1,0 +1,26 @@
+{
+  "scope": "existing frozen models through R70; no R71 data",
+  "seed": 2,
+  "analysis_only": true,
+  "neural_training": false,
+  "checkpoint_reselection": false,
+  "cost_labels": "original FP64, native ind",
+  "macro": "equal task weights, ALL18 only for complete 18-problem coverage",
+  "permutation": {
+    "repeats": 100,
+    "strata": "same problem and exact true size",
+    "singleton": "unchanged, eligible-only separately",
+    "operation": "random single-cycle shifts of shuffled group rows; not all permutations uniformly"
+  },
+  "bootstrap": "400 paired instance resamples per problem; descriptive intervals, not across-seed significance or adaptive-test valid inference",
+  "portfolios": "trained on train costs/frequencies only; k>1 diagnostics require multiple executions",
+  "limitations": [
+    "legacy B semantic conflict deferred by user",
+    "many previous test exposures; exploratory rather than confirmatory",
+    "one seed per model; epochs and versions are not independent repetitions",
+    "original NSS paper per-instance predictions unavailable",
+    "accuracy softmax calibration is descriptive; score semantics differ across losses",
+    "same data identity assumed from raw arrays/pool alignment; no new solver validity audit"
+  ],
+  "prediction_sets": 718
+}

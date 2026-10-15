@@ -1,5 +1,10 @@
 # R74 Paused
 
+Subsequent user instruction: terminate R74 and release its GPU memory, but keep
+disk files. This has been completed; see `TERMINATED.json`. The process-state
+observations below describe the earlier pause, not a currently retained process.
+The durable checkpoint remains update60; the later in-memory state is gone.
+
 User requested pause of the active goal and R74 on 2026-10-13.
 The goal API now reports `paused`. No automatic continuation is authorized.
 

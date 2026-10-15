@@ -1,0 +1,176 @@
+{
+  "seed": 2,
+  "global_batch": 1024,
+  "augmented_train_rows": 560912,
+  "updates_per_epoch": 548,
+  "updates_per_model": 27400,
+  "last_batch_rows": 784,
+  "data_root": "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+  "original_sources": {
+    "model.py": "18e35f07bf6f582ed5a37a38e5fc028862ed1c05f89100f386eff089609066c8",
+    "loss.py": "8c059f94a8fa72d1f4d72e1b56c1921703f7fd714031e5c9709e082ae57e6677",
+    "dataset.py": "f2efbd438c9c0c8f96d2c9c9e66bb75ca70cfbccc010f7d25550fef7c1759079",
+    "utils.py": "6b1a1397ec25f792e2da69de26d67262d3870b26e6674f4cb5e8a923639340cf",
+    "trainer.py": "949f1bc8a7833be08d3ecaddf895d950323e9000b9ca357badfabfbeb9062713",
+    "config_TSP_ours.yml": "7dcba07900939e91c6864434c9e72146181e6de1d5ebf19d39f763c113492cdd",
+    "config_CVRP_ours.yml": "61b3a0a2fe463e16f23a99f8ac3377a0b5163e61b44175c090b1436941515cf8"
+  },
+  "tasks": {
+    "TSP": {
+      "original_config": {
+        "name": "TSPtrain",
+        "problem_type": "TSP",
+        "cuda_device_num": 0,
+        "logger": "no_logger",
+        "load_path": null,
+        "seed": 2024,
+        "train_params": {
+          "num_classes": 8,
+          "start_epochs": 0,
+          "num_epochs": 50,
+          "train_batch_size": 64,
+          "test_batch_size": 8,
+          "learning_rate": 0.0001,
+          "weight_decay": 1e-06,
+          "save_interval": 1,
+          "loss": "rank",
+          "manual_feature": false,
+          "ns_feature": false,
+          "data_aug": true
+        },
+        "model_params": {
+          "pooling": true,
+          "downsample_ratio": 0.8,
+          "embedding_dim": 128,
+          "encoder_layer_num": 2,
+          "block_num": 2,
+          "head_num": 8,
+          "qkv_dim": 16,
+          "ff_hidden_dim": 512,
+          "norm": "rezero"
+        }
+      },
+      "effective_config": {
+        "name": "TSPtrain",
+        "problem_type": "TSP",
+        "cuda_device_num": 0,
+        "logger": "no_logger",
+        "load_path": null,
+        "seed": 2,
+        "train_params": {
+          "num_classes": 8,
+          "start_epochs": 0,
+          "num_epochs": 50,
+          "train_batch_size": 1024,
+          "test_batch_size": 8,
+          "learning_rate": 0.0001,
+          "weight_decay": 1e-06,
+          "save_interval": 1,
+          "loss": "rank",
+          "manual_feature": false,
+          "ns_feature": false,
+          "data_aug": true
+        },
+        "model_params": {
+          "pooling": true,
+          "downsample_ratio": 0.8,
+          "embedding_dim": 128,
+          "encoder_layer_num": 2,
+          "block_num": 2,
+          "head_num": 8,
+          "qkv_dim": 16,
+          "ff_hidden_dim": 512,
+          "norm": "rezero"
+        }
+      },
+      "train_sbs": "T2T",
+      "lib_root": "/public/home/shiys/0selection2/data/TSPLIB"
+    },
+    "CVRP": {
+      "original_config": {
+        "name": "CVRPtrain",
+        "problem_type": "CVRP",
+        "cuda_device_num": 1,
+        "logger": "no_logger",
+        "load_path": null,
+        "seed": 2024,
+        "train_params": {
+          "num_classes": 10,
+          "start_epochs": 0,
+          "num_epochs": 50,
+          "train_batch_size": 64,
+          "test_batch_size": 8,
+          "learning_rate": 0.0001,
+          "weight_decay": 1e-06,
+          "save_interval": 1,
+          "loss": "rank",
+          "manual_feature": false,
+          "ns_feature": false,
+          "data_aug": true
+        },
+        "model_params": {
+          "pooling": true,
+          "downsample_ratio": 0.8,
+          "embedding_dim": 128,
+          "encoder_layer_num": 2,
+          "block_num": 2,
+          "head_num": 8,
+          "qkv_dim": 16,
+          "ff_hidden_dim": 512,
+          "norm": "rezero"
+        }
+      },
+      "effective_config": {
+        "name": "CVRPtrain",
+        "problem_type": "CVRP",
+        "cuda_device_num": 1,
+        "logger": "no_logger",
+        "load_path": null,
+        "seed": 2,
+        "train_params": {
+          "num_classes": 10,
+          "start_epochs": 0,
+          "num_epochs": 50,
+          "train_batch_size": 1024,
+          "test_batch_size": 8,
+          "learning_rate": 0.0001,
+          "weight_decay": 1e-06,
+          "save_interval": 1,
+          "loss": "rank",
+          "manual_feature": false,
+          "ns_feature": false,
+          "data_aug": true
+        },
+        "model_params": {
+          "pooling": true,
+          "downsample_ratio": 0.8,
+          "embedding_dim": 128,
+          "encoder_layer_num": 2,
+          "block_num": 2,
+          "head_num": 8,
+          "qkv_dim": 16,
+          "ff_hidden_dim": 512,
+          "norm": "rezero"
+        }
+      },
+      "train_sbs": "RELD_CVRP",
+      "lib_root": "/public/home/shiys/0selection2/data/CVRPLIB"
+    }
+  },
+  "cuda_uuids": {
+    "TSP": "GPU-cb24f168-9f18-f0d5-6f4a-6d2406958f50",
+    "CVRP": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d"
+  },
+  "validation_rule": "min mean top-1 gap; raw cost only if all gaps are zero; strict improvement",
+  "runtime_estimate_hours": {
+    "TSP": [
+      15,
+      30
+    ],
+    "CVRP": [
+      18,
+      40
+    ]
+  },
+  "runtime_estimate_status": "unmeasured 3090 FP32 estimate; replaced by first actual updates"
+}

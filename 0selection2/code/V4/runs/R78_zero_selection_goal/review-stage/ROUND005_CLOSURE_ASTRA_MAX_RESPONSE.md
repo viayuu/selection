@@ -1,0 +1,7 @@
+review_independence=same-family；acceptance_status=provisional。仅依据请求文件，未独立核验。
+
+claim_supported=no：固定集成的Top1下降，两项成本指标均升高，三项准入条件全部失败；CE改善不能支持“该固定集成改善获准选择”的主张。
+
+支持关闭本次固定等权路线并保留锁定B。fallback_B是回退选择，不能算作集成成功。该有限关闭无需新增证据。
+
+最应避免把复用VAL上的这一规则失败外推为信息上限或所有集成都无效；现有结果也不足以确立过拟合或特定错误相关性为原因。

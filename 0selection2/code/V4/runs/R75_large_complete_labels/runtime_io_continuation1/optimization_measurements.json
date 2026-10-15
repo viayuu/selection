@@ -1,0 +1,132 @@
+{
+  "utc": "2026-10-14T03:21:57.499788+00:00",
+  "source": "actual official training updates, no extra benchmark updates",
+  "report_source_sha256": "b6cc258fc804ea010be355c26eef578d129103bbcfa3c29becdea088fb81dd20",
+  "boundary_update": 16860,
+  "existing_logged_updates_replayed": 0,
+  "discarded_uncommitted_inflight_groups_upper_bound": 1,
+  "before": {
+    "updates": 120,
+    "mean_step_seconds": 2.3714770643118146,
+    "rows_per_second": 485.7731990481223,
+    "tasks": {
+      "OVRPL": 20,
+      "VRPBTW": 20,
+      "VRPBLTW": 20,
+      "OVRPLTW": 20,
+      "CVRP": 20,
+      "OVRPBTW": 20,
+      "VRPBL": 20,
+      "ATSP": 20,
+      "TSP": 20,
+      "OVRP": 20,
+      "VRPLTW": 20,
+      "OVRPBLTW": 20,
+      "VRPB": 20,
+      "OVRPB": 20,
+      "OVRPBL": 20,
+      "OVRPTW": 20,
+      "VRPTW": 20,
+      "VRPL": 20
+    },
+    "retries": 0,
+    "all_finite": true
+  },
+  "after": {
+    "updates": 120,
+    "mean_step_seconds": 0.4080901201503972,
+    "rows_per_second": 2822.905880631079,
+    "tasks": {
+      "OVRPBL": 20,
+      "OVRPBTW": 20,
+      "CVRP": 20,
+      "VRPBTW": 20,
+      "OVRPLTW": 20,
+      "ATSP": 20,
+      "TSP": 20,
+      "VRPB": 20,
+      "OVRPTW": 20,
+      "OVRPBLTW": 20,
+      "OVRPB": 20,
+      "OVRP": 20,
+      "VRPTW": 20,
+      "VRPL": 20,
+      "VRPBL": 20,
+      "VRPLTW": 20,
+      "OVRPL": 20,
+      "VRPBLTW": 20
+    },
+    "retries": 0,
+    "all_finite": true
+  },
+  "speedup": 5.811160200197526,
+  "window_rule": "last120 before versus120 after excluding first6 cold updates; full three-task groups; all18 tasks20 times each",
+  "paired_batches": false,
+  "stage_samples": 24,
+  "warm_stage_samples": 18,
+  "stage_means_seconds": {
+    "gather_seconds": 0.010589528945274651,
+    "pin_seconds": 0.006953091787484785,
+    "h2d_seconds": 0.001137855999171734,
+    "update_wall_seconds": 0.5244979174652448,
+    "update_stream_span_seconds": 0.5244671751658122
+  },
+  "warm_stage_means_seconds": {
+    "gather_seconds": 0.009814920369535685,
+    "pin_seconds": 0.001329583012395435,
+    "h2d_seconds": 0.0010172017796172036,
+    "update_wall_seconds": 0.3956625661295321,
+    "update_stream_span_seconds": 0.39563138410780163
+  },
+  "stream_span_not_pure_kernel_busy_time": true,
+  "gpu_utilization_sample_mean_percent": {
+    "before": 18.166666666666668,
+    "after": 94.25
+  },
+  "gpu_utilization_scope": "12 one-second observations per window; not a full-run guarantee",
+  "major_faults": {
+    "before": 2037,
+    "after": 0
+  },
+  "input_disk_read_bytes": {
+    "before": 4714536960,
+    "after": 0
+  },
+  "probe_seconds": {
+    "before": 12.396466439589858,
+    "after": 12.365417106077075
+  },
+  "ram_input_bytes": 14028854536,
+  "observed_latest_update": 18833,
+  "remaining_training_hours_estimate": 4.965889970396792,
+  "estimate_excludes_future_full_train_evaluations_and_final_cache_reload": true,
+  "unchanged": [
+    "batch384",
+    "seed2",
+    "model",
+    "loss",
+    "optimizer state",
+    "RNG and sample order",
+    "geometry normalization",
+    "precision",
+    "40-epoch budget",
+    "VAL selection",
+    "one locked TEST"
+  ],
+  "changed": [
+    "lossless compact anonymous CPU RAM inputs",
+    "bounded per-problem host pinned staging",
+    "Slurm step16GiB to19GiB",
+    "24-update runtime timing wrapper"
+  ],
+  "files_added": [
+    "r75_fast_input.py",
+    "r75_fast_runner.py",
+    "run_v4_r75_fast.sh",
+    "r75_checkpoint_boundary.py",
+    "r75_runtime_probe.py",
+    "r75_runtime_report.py"
+  ],
+  "original_scientific_source_files_modified": false,
+  "mixed_epoch_note": "Epoch11 spans old/new IO. Its saved optimization.seconds is post-resume wall only; do not use it as a whole-epoch timing."
+}

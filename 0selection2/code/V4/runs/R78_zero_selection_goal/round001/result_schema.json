@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "R78 Round001 Result Summary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "round", "tasks", "aggregation", "evaluation_outcome", "original_execution_outcome", "numerical_fit_outcome", "candidate_accepted", "improvement_certified", "selected_rule", "test_opened", "original_execution_outputs_unchanged", "metrics", "val_gate", "fit", "future_training_policy", "references"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "run_id": {"const": "R78_zero_selection_goal"},
+    "round": {"const": 1},
+    "tasks": {"const": 18},
+    "aggregation": {"const": "equal_weight_fixed_18_tasks"},
+    "evaluation_outcome": {"const": "negative_no_certified_gain"},
+    "original_execution_outcome": {"const": "inconclusive"},
+    "numerical_fit_outcome": {"const": "inconclusive"},
+    "candidate_accepted": {"const": false},
+    "improvement_certified": {"const": false},
+    "selected_rule": {"const": "identity"},
+    "test_opened": {"const": false},
+    "original_execution_outputs_unchanged": {"const": true},
+    "metrics": {
+      "type": "object", "additionalProperties": false, "required": ["train", "val"],
+      "properties": {"train": {"$ref": "#/definitions/comparison"}, "val": {"$ref": "#/definitions/comparison"}}
+    },
+    "val_gate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["all_train_fits_converged", "all18_macro_top1_improved", "macro_mean_cost_not_worse", "macro_actual_regret_not_worse", "cost_degradation_tolerance", "macro_vs_sbs_role"],
+      "properties": {
+        "all_train_fits_converged": {"const": false}, "all18_macro_top1_improved": {"const": true},
+        "macro_mean_cost_not_worse": {"const": false}, "macro_actual_regret_not_worse": {"const": false},
+        "cost_degradation_tolerance": {"const": 0.0}, "macro_vs_sbs_role": {"const": "reporting_only"}
+      }
+    },
+    "fit": {
+      "type": "object", "additionalProperties": false,
+      "required": ["device", "seed", "logical_batch_size", "updates_per_task", "total_updates", "converged_tasks", "converged_count", "prior_precision"],
+      "properties": {
+        "device": {"const": "cpu"}, "seed": {"const": 2}, "logical_batch_size": {"const": 1024},
+        "updates_per_task": {"const": 30000}, "total_updates": {"const": 540000},
+        "converged_tasks": {"const": ["OVRPBTW"]}, "converged_count": {"const": 1}, "prior_precision": {"const": 1.0}
+      }
+    },
+    "future_training_policy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["no_unplanned_broad_retraining", "user_authorized_all18_training_allowed", "requires"],
+      "properties": {
+        "no_unplanned_broad_retraining": {"const": true}, "user_authorized_all18_training_allowed": {"const": true},
+        "requires": {"type": "string"}
+      }
+    },
+    "references": {
+      "type": "object", "required": ["schema", "train", "val", "decision", "candidate", "handoff"],
+      "additionalProperties": {"type": "string"}
+    }
+  },
+  "definitions": {
+    "comparison": {
+      "type": "object", "additionalProperties": false, "required": ["identity", "candidate"],
+      "properties": {"identity": {"$ref": "#/definitions/metrics"}, "candidate": {"$ref": "#/definitions/metrics"}}
+    },
+    "metrics": {
+      "description": "Top1 is a fraction; regret and VS are percentage units. Values are unrounded FP64-score macro metrics.",
+      "type": "object", "additionalProperties": false, "required": ["top1", "ce", "mean_cost", "actual_regret_pct", "vs_sbs_pct"],
+      "properties": {
+        "top1": {"type": "number", "minimum": 0, "maximum": 1}, "ce": {"type": "number", "minimum": 0},
+        "mean_cost": {"type": "number", "exclusiveMinimum": 0}, "actual_regret_pct": {"type": "number", "minimum": 0},
+        "vs_sbs_pct": {"type": "number"}
+      }
+    }
+  }
+}

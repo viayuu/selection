@@ -1,0 +1,20 @@
+{
+  "scientific_optimizer_updates": 0,
+  "real_smoke_updates": 0,
+  "scientific_result": "not_assessed",
+  "failures_before_model_forward": [
+    {
+      "attempt": 1,
+      "error": "RuntimeError: The exact approved UUID must expose one CUDA device",
+      "resolution": "A one-GPU Slurm step did not expose the requested UUID. Use the explicitly user-permitted two-GPU merged step scope, with each independent CUDA program bound to just its assigned UUID."
+    },
+    {
+      "attempt": 2,
+      "error": "ValueError: Keep the explicitly approved round003 research protocol",
+      "observed_device_uuid": "cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+      "resolution": "Latest Astra PLAN changed only the hardware authorization paragraph. Preserve preparation fingerprint and record launch fingerprint; scientific protocol and every prepared target/LR artifact unchanged."
+    }
+  ],
+  "no_failed_attempt_weights_saved": true,
+  "no_gpu_capacity_probe_or_extra_scientific_check": true
+}

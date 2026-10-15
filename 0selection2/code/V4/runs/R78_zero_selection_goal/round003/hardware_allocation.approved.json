@@ -1,0 +1,21 @@
+{
+  "approved": true,
+  "state": "approved_smoke_then_parallel_training",
+  "priority": "NSS runs single-card on gpu05 two4090; this R78 pair owns only the two assigned gpu03 RTX3090 cards",
+  "approval_source": "Explicit user launch authorization on2026-10-15; prior NSS gpu03 steps exited and the user just confirmed0%/2MiB. No repeated resource preflight.",
+  "approved_utc": "2026-10-14T22:13:20+00:00",
+  "arms": {
+    "control": {"approved": true, "job_id": 1465, "node": "gpu03", "gpu_uuid": "GPU-cb24f168-9f18-f0d5-6f4a-6d2406958f50", "gpu_type": "RTX3090"},
+    "treatment": {"approved": true, "job_id": 1465, "node": "gpu03", "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d", "gpu_type": "RTX3090", "research_name": "monotone_newrisk"}
+  },
+  "one_run_per_gpu": true,
+  "cpus_per_task": 4,
+  "threads": 2,
+  "slurm_memory_per_arm": "9G",
+  "matched_training_step": "one existing-job step: cpu8 mem18G gpu2, with two independent UUID-bound processes and two threads per process",
+  "smoke_step": "cpu4 mem9G gpu2 access scope, but exactly one UUID-bound CUDA device/program; no use of the other GPU",
+  "transport": "existing-job srun --overlap --exact --nodes=1 --ntasks=1; never SSH GPU execution",
+  "future_smoke": "one disposable real TRAIN/TSP batch1024 treatment update, then fresh matched starts; zero smoke weights retained",
+  "microbatch_caps": {"TSP": 352, "CVRP": 352, "other_tasks": 1024},
+  "NSS_DP_note": "User reports DP rejected because ReZero isinstance(nn.Parameter) replicas are not equivalent; DP0 formal updates. Not an R78 implementation change."
+}
