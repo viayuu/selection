@@ -1,0 +1,63 @@
+{
+  "started_utc": "2026-10-21T18:03:28.082454+00:00",
+  "slot": "3090_1",
+  "node": "gpu03",
+  "state": "complete",
+  "stages": [
+    {
+      "name": "allocation_GPU_pipeline",
+      "device": "gpu",
+      "argv": [
+        "srun",
+        "--jobid=1465",
+        "--overlap",
+        "--exact",
+        "--gres=none",
+        "--immediate=5",
+        "-N1",
+        "-n1",
+        "--nodelist=gpu03",
+        "--cpus-per-task=4",
+        "--mem=9G",
+        "bash",
+        "-lc",
+        "set -euo pipefail\nsource /public/home/shiys/miniconda3/etc/profile.d/conda.sh\nconda activate easynco\ncd /public/home/shiys/0selection2\nexport PYTHONDONTWRITEBYTECODE=1\nexec /public/home/shiys/miniconda3/envs/easynco/bin/python -B -u -m code.V4.r93_launch entry --spec /public/home/shiys/0selection2/code/V4/runs/R93_launch/specs/A.json --slot 3090_1 --token 5973fcc49db34c89842a7f283df41125"
+      ],
+      "started_utc": "2026-10-21T18:03:28.082784+00:00",
+      "state": "complete",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R93_launch/A/allocation_GPU_pipeline.log",
+      "pid": 4151262,
+      "exit_status": 0,
+      "finished_utc": "2026-10-21T21:35:47.105211+00:00"
+    },
+    {
+      "name": "PDF",
+      "device": "cpu",
+      "argv": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r93_reporting",
+        "report",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R93_plain_classification",
+        "--arm",
+        "A",
+        "--device",
+        "cpu"
+      ],
+      "started_utc": "2026-10-21T21:35:47.746284+00:00",
+      "state": "complete",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R93_launch/A/PDF.log",
+      "pid": 847628,
+      "exit_status": 0,
+      "finished_utc": "2026-10-21T21:36:19.575548+00:00"
+    }
+  ],
+  "automatic_retry": false,
+  "phase": "PDF",
+  "exit_status": 0,
+  "gpu_finished_utc": "2026-10-21T21:35:47.106015+00:00",
+  "finished_utc": "2026-10-21T21:36:19.576207+00:00"
+}
