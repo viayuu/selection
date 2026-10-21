@@ -1,0 +1,25 @@
+{
+  "state": "complete",
+  "started_utc": "2026-10-21T17:32:41.699366+00:00",
+  "argv": [
+    "srun",
+    "--jobid=1465",
+    "--overlap",
+    "--exact",
+    "--gres=none",
+    "--immediate=5",
+    "-N1",
+    "-n1",
+    "--nodelist=gpu03",
+    "--cpus-per-task=4",
+    "--mem=9G",
+    "bash",
+    "-lc",
+    "set -euo pipefail\nsource /public/home/shiys/miniconda3/etc/profile.d/conda.sh\nconda activate easynco\ncd /public/home/shiys/0selection2\nexport PYTHONDONTWRITEBYTECODE=1\nexec sudo -n /usr/bin/ai_docker exec -u 2022 -e CUDA_VISIBLE_DEVICES= -e SLURM_JOB_ID=1465 -e OMP_NUM_THREADS=2 -e MKL_NUM_THREADS=2 -e OPENBLAS_NUM_THREADS=2 b8ced5d8a8cdafdc5006f827a0d36c319c61056a65316af4ff9937453fa0635c taskset -c 16,17,64,65 bash /public/home/shiys/0selection2/code/V4/run_v4_r92recovery.sh finish-test"
+  ],
+  "CPU_only": true,
+  "no_GPU_claim": true,
+  "automatic_retry": false,
+  "exit_status": 0,
+  "completed_utc": "2026-10-21T17:33:02.381572+00:00"
+}

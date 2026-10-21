@@ -1,0 +1,169 @@
+{
+  "captured_utc": "2026-10-21T17:05:38.248238+00:00",
+  "node": "gpu03",
+  "allocation": {
+    "job": 1465,
+    "state": "RUNNING",
+    "node": "gpu03",
+    "cpus": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      64,
+      65,
+      66,
+      67
+    ],
+    "cpu_limit": 10,
+    "memory_bytes": 21474836480,
+    "gpu_count": 2
+  },
+  "container": {
+    "name": "1465_gpu03",
+    "id": "b8ced5d8a8cdafdc5006f827a0d36c319c61056a65316af4ff9937453fa0635c",
+    "memory_limit_bytes": 21474836480,
+    "allowed_cpus": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      64,
+      65,
+      66,
+      67
+    ]
+  },
+  "memory": {
+    "limit_bytes": 21474836480,
+    "usage_bytes": 21461524480,
+    "rss_bytes": 1575673856,
+    "file_cache_bytes": 19490361344,
+    "headroom_excluding_reclaimable_cache_bytes": 19899162624
+  },
+  "allowed_cpus": [
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    64,
+    65,
+    66,
+    67
+  ],
+  "processes": [
+    {
+      "pid": 1490595,
+      "namespace_pids": [
+        1490595,
+        2798086
+      ],
+      "cpus": [
+        12,
+        13,
+        14,
+        15
+      ],
+      "command": [
+        "python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r92_launch",
+        "worker",
+        "--spec",
+        "/public/home/shiys/0selection2/code/V4/runs/R92_launch/specs/A.json",
+        "--slot",
+        "3090_0",
+        "--token",
+        "774e3853cf5844f0a67f77c23988e024"
+      ]
+    },
+    {
+      "pid": 1491417,
+      "namespace_pids": [
+        1491417,
+        2798096
+      ],
+      "cpus": [
+        12,
+        13,
+        14,
+        15
+      ],
+      "command": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r92_experiment",
+        "train",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R92_broad_learning",
+        "--arm",
+        "A",
+        "--prepared-root",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+        "--data-root",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+        "--cache-root",
+        "/tmp/shiys_R84_new90k_cache",
+        "--protocol-lock",
+        "/public/home/shiys/0selection2/code/V4/runs/R92_broad_learning/protocol_lock.json",
+        "--gpu-type",
+        "3090",
+        "--large-micro-cap",
+        "352",
+        "--eval-batch-size",
+        "256",
+        "--device",
+        "cuda:0",
+        "--wandb-mode",
+        "offline"
+      ]
+    }
+  ],
+  "gpus": {
+    "3090_0": {
+      "uuid": "GPU-cb24f168-9f18-f0d5-6f4a-6d2406958f50",
+      "index": 0,
+      "nvml_index": 0,
+      "authorized_logical_index": 0,
+      "identity_rule": "exact UUID + hardware type; ordinal is informational",
+      "name": "NVIDIA GeForce RTX 3090",
+      "memory_used_mib": 6244,
+      "memory_total_mib": 24576,
+      "utilization_pct": 86,
+      "compute_processes": [
+        [
+          "GPU-cb24f168-9f18-f0d5-6f4a-6d2406958f50",
+          "2798096",
+          "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+          "0"
+        ]
+      ],
+      "query_transport": "inside_allocation_container",
+      "api": "NVML via nvidia-smi; no CUDA context or training probe"
+    },
+    "3090_1": {
+      "uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+      "index": 1,
+      "nvml_index": 1,
+      "authorized_logical_index": 1,
+      "identity_rule": "exact UUID + hardware type; ordinal is informational",
+      "name": "NVIDIA GeForce RTX 3090",
+      "memory_used_mib": 2,
+      "memory_total_mib": 24576,
+      "utilization_pct": 0,
+      "compute_processes": [],
+      "query_transport": "inside_allocation_container",
+      "api": "NVML via nvidia-smi; no CUDA context or training probe"
+    }
+  }
+}

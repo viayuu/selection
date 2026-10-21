@@ -1,0 +1,39 @@
+{
+  "started_utc": "2026-10-21T17:05:35.650733+00:00",
+  "slot": "3090_1",
+  "node": "gpu03",
+  "state": "failed",
+  "stages": [
+    {
+      "name": "allocation_GPU_pipeline",
+      "device": "gpu",
+      "argv": [
+        "srun",
+        "--jobid=1465",
+        "--overlap",
+        "--exact",
+        "--gres=none",
+        "--immediate=5",
+        "-N1",
+        "-n1",
+        "--nodelist=gpu03",
+        "--cpus-per-task=4",
+        "--mem=9G",
+        "bash",
+        "-lc",
+        "set -euo pipefail\nsource /public/home/shiys/miniconda3/etc/profile.d/conda.sh\nconda activate easynco\ncd /public/home/shiys/0selection2\nexport PYTHONDONTWRITEBYTECODE=1\nexec /public/home/shiys/miniconda3/envs/easynco/bin/python -B -u -m code.V4.r92_launch entry --spec /public/home/shiys/0selection2/code/V4/runs/R92_launch/specs/C.json --slot 3090_1 --token 7107b8bf64c846d7b980df94f8256d71"
+      ],
+      "started_utc": "2026-10-21T17:05:35.651048+00:00",
+      "state": "failed",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R92_launch/C/allocation_GPU_pipeline.log",
+      "pid": 3878560,
+      "exit_status": 1,
+      "finished_utc": "2026-10-21T17:18:20.882703+00:00"
+    }
+  ],
+  "automatic_retry": false,
+  "phase": "allocation_GPU_pipeline",
+  "exit_status": 1,
+  "error": "allocation_GPU_pipeline exit=1; no later stages or automatic retry",
+  "finished_utc": "2026-10-21T17:18:20.883214+00:00"
+}
