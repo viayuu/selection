@@ -30,7 +30,8 @@ class ScoreDifferenceSelector(DualStreamSelector):
         utility = self.score_head(features).squeeze(-1).float()
         margins = utility[:, :, None] - utility[:, None, :]
         margins = margins.masked_fill(~(mask[:, :, None] & mask[:, None, :]), 0.)
-        return dict(logits=maximin_logits(margins, mask), pair_margin=margins, solver_mask=mask)
+        return dict(logits=maximin_logits(margins, mask), pair_margin=margins, solver_mask=mask,
+                    utility=utility)
 
 
 class ExplicitPairSelector(DualStreamSelector):

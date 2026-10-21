@@ -269,55 +269,69 @@ def setup_style():
 
 
 def plot_distribution(problem, pool, panels, data_version, lock):
-    four = len(panels) == 4
-    fig, axes = plt.subplots(1, len(panels), figsize=(24 if four else 15, 8.6))
-    fig.subplots_adjust(left=0.075 if four else 0.12, right=0.98, top=0.70,
-                        bottom=0.20, wspace=0.70 if four else 0.50)
-    fig.text(0.025, 0.945, f"R77B | {problem} | \u65b9\u6cd5\u5206\u5e03", fontsize=22, va="top")
-    fig.text(0.025, 0.878,
+    datasets = sorted(set(panel["split"] for panel in panels), key=lambda split: (split != "TEST", split))
+    paired = len(datasets) == 2
+    fig, axes = plt.subplots(1, len(datasets), figsize=(21 if paired else 12.5, 9))
+    fig.subplots_adjust(left=0.105 if paired else 0.19, right=0.985 if paired else 0.96,
+                        top=0.71, bottom=0.20, wspace=0.47)
+    fig.text(0.035, 0.955, f"R77B | {problem} | \u65b9\u6cd5\u5206\u5e03",
+             fontsize=21, fontweight="bold", color="#093f45", va="top")
+    fig.text(0.035, 0.895,
              f"\u540c\u4e00\u9501\u5b9a\u6a21\u578b: epoch {lock['epoch']} / update {lock['selected_update']} / SHA256 {SHA256[:16]}",
              fontsize=11.5)
-    fig.text(0.025, 0.837, f"\u65b0 TEST \u6570\u636e\u7248\u672c: {data_version}", fontsize=10.5)
-    lib_text = (f"LIB: data/{LIBS[problem][0]} (original native LIB / historical NSS comparison)"
-                if four else "\u6807\u7b7e: \u539f\u751f native/FP64 ind; \u4ec5\u8bfb\u9501\u5b9a\u9884\u6d4b")
-    fig.text(0.025, 0.797, lib_text, fontsize=11)
-    for ax, panel in zip(np.atleast_1d(axes), panels):
-        selection = panel["kind"] == "model_selection"
-        title = ("LIB " if panel["split"] != "TEST" else "TEST ")
-        title += MODEL_SELECTION if selection else TRUE_WINNER
-        accuracy = f"{MODEL_TOP1}={panel['top1']:.2f}%" if selection and panel["top1"] is not None else "native/FP64 ind"
-        ax.set_title(f"{title}\n{panel['split']} | n={panel['n']:,}\n{accuracy}",
-                     fontsize=13, pad=14)
-        if panel["counts"] is None:
-            ax.text(0.5, 0.5, "MISSING: awaiting same-lock LIB predictions", ha="center", va="center",
-                    transform=ax.transAxes, wrap=True, color="#b23a38", fontsize=10)
+    fig.text(0.035, 0.855, f"\u65b0 TEST \u6570\u636e\u7248\u672c: {data_version}", fontsize=10.5)
+    lib_text = (f"LIB: data/{LIBS[problem][0]} | native/FP64 ind"
+                if paired else "\u6807\u7b7e: \u539f\u751f native/FP64 ind; \u4ec5\u8bfb\u9501\u5b9a\u9884\u6d4b")
+    fig.text(0.035, 0.815, lib_text, fontsize=11)
+    for ax, split in zip(np.atleast_1d(axes), datasets):
+        series = {panel["kind"]: panel for panel in panels if panel["split"] == split}
+        choice, winner = series["model_selection"], series["true_winner"]
+        dataset = f"{problem} TEST" if split == "TEST" else split
+        if choice["counts"] is None or winner["counts"] is None:
+            ax.set_title(f"{dataset} | {choice['n']:,} \u4f8b | {MODEL_TOP1}=MISSING", fontsize=16)
+            ax.text(0.5, 0.5, "MISSING: awaiting same-lock predictions", ha="center", va="center",
+                    transform=ax.transAxes, wrap=True, color="#b23a38", fontsize=12)
             ax.set_axis_off()
             continue
-        percentages = panel["counts"] * 100 / panel["n"]
+        if choice["n"] != winner["n"]:
+            raise ValueError(f"Model/winner populations differ: {problem} {split}")
+        ax.set_title(f"{dataset}: {choice['n']:,} \u4f8b | {MODEL_TOP1}={choice['top1']:.2f}%",
+                     fontsize=17, fontweight="bold", color="#093f45", pad=23)
         y = np.arange(len(pool))
-        ax.barh(y, percentages, height=0.60, color="#177e89" if selection else "#c45358", zorder=3)
-        ax.set_yticks(y, labels=pool, fontsize=10.5)
-        ax.set_ylim(len(pool) - 0.4, -0.6)
+        for panel, offset, color, label in (
+            (choice, -0.16, "#197d85", MODEL_SELECTION),
+            (winner, 0.16, "#c44f58", "\u771f\u5b9e\u6700\u4f18\u65b9\u6cd5"),
+        ):
+            percentages = panel["counts"] * 100 / panel["n"]
+            ax.barh(y + offset, percentages, height=0.27, color=color, label=label, zorder=3)
+            for row, (count, pct) in enumerate(zip(panel["counts"], percentages)):
+                inside = pct >= 80
+                ax.text(pct - 1.2 if inside else pct + 0.9, row + offset,
+                        f"{pct:.2f}% ({int(count):,})", ha="right" if inside else "left",
+                        va="center", fontsize=12, color="white" if inside else color)
+        ax.set_yticks(y, labels=pool, fontsize=14)
+        ax.set_ylim(len(pool) - 0.45, -0.65)
         ax.set_xlim(0, 100)
         ax.set_xticks(np.arange(0, 101, 20))
         ax.xaxis.set_major_formatter(PercentFormatter(xmax=100, decimals=0))
-        ax.tick_params(axis="y", length=0)
-        ax.tick_params(axis="x", labelsize=10)
-        ax.grid(axis="x", color="#e1e6e8", linewidth=0.7, zorder=0)
+        ax.tick_params(axis="both", length=0, labelsize=13.5, pad=9)
+        ax.set_axisbelow(True)
+        ax.grid(axis="x", color="#dfe6e9", linewidth=0.9)
         for side in ("top", "right", "left"):
             ax.spines[side].set_visible(False)
         ax.spines["bottom"].set_color("#aab2b7")
-        ax.set_xlabel("Share of instances (%)", fontsize=10.5, labelpad=9)
-        for row, (count, pct) in enumerate(zip(panel["counts"], percentages)):
-            inside = pct >= 55
-            ax.text(pct - 1.5 if inside else pct + 1.2, row, f"{int(count):,} / {pct:.2f}%",
-                    ha="right" if inside else "left", va="center", fontsize=9.5,
-                    color="white" if inside else "#242b30")
-    fig.text(0.025, 0.105,
-             "\u6807\u6ce8\u4e3a count / %; \u5019\u9009\u6309 TEST \u540d\u79f0\u56fa\u5b9a\u987a\u5e8f\u5bf9\u9f50\uff0c\u542b\u96f6\u6b21\u6570\u5019\u9009\u3002", fontsize=11)
-    fig.text(0.025, 0.065,
+        ax.set_xlabel("\u5360\u5b9e\u4f8b\u6570\u7684\u6bd4\u4f8b (%)", fontsize=12, labelpad=10)
+    for ax in np.atleast_1d(axes):
+        handles, labels = ax.get_legend_handles_labels()
+        if handles:
+            fig.legend(handles, labels, loc="upper right", bbox_to_anchor=(0.985, 0.977),
+                       ncol=2, frameon=False, fontsize=14.5, handlelength=1.4, columnspacing=2.0)
+            break
+    fig.text(0.035, 0.105,
+             "\u6807\u6ce8: % (\u6b21\u6570); \u5019\u9009\u6309 TEST \u540d\u79f0\u5bf9\u9f50\uff0c\u5305\u542b\u96f6\u6b21\u6570\u5019\u9009\u3002", fontsize=11)
+    fig.text(0.035, 0.065,
              f"{MODEL_TOP1} = 100 * mean(pred == saved native winner); \u4e0d\u662f\u6700\u5927\u9009\u62e9\u9891\u7387\u3002", fontsize=11)
-    fig.text(0.025, 0.025,
+    fig.text(0.035, 0.025,
              "R77B: stable global solver-ID score ties. No training, inference, checkpoint reselection or Rxx mixing.",
              fontsize=10.5)
     return fig
@@ -627,8 +641,10 @@ def main():
         test_status="TEST has partly informed subsequent multi-round R&D; not a fully untouched blind set. No reselection here.",
         data_root=str(data_root), data_version=version,
         legal_candidate_order={p: predictions["TEST", p].pool for p in problems},
-        panel_order_tsp_cvrp=["LIB model selection", "LIB native true winner", "TEST model selection", "TEST native true winner"],
-        panel_order_others=["TEST model selection", "TEST native true winner"],
+        distribution_layout="Grouped horizontal bars: model selection and native true winner share one axis per dataset",
+        panel_order_tsp_cvrp=["TEST model selection + native true winner", "LIB model selection + native true winner"],
+        panel_order_others=["TEST model selection + native true winner"],
+        distribution_csv_series_order="Unchanged: LIB pred/winner then TEST pred/winner; grouped figure order is TEST then LIB",
         population=dict(val_per_problem=3895, test_per_problem=3895, problems=18, val_total=70110,
                         test_total=70110, TSPLIB=49, CVRPLIB=100),
         inputs=dict(test_predictions=str(test_path), val_predictions=str(val_path),
@@ -653,6 +669,7 @@ def main():
             "| Split | ALL native Top1 (%) | ALL actual regret (%) |", "|---|---:|---:|"]
     text.extend(f"| {s} | {all_rows[s]['top1_pct']:.7f} | {all_rows[s]['actual_regret_pct']:.7f} |" for s in ("VAL", "TEST"))
     text.extend(["", "ALL is equal-weight across 18 problems. SBS identities were fixed on FULL TRAIN; LIB posthoc SBS is supplementary only.",
+                 "Each dataset's model selections and native true winners share one grouped horizontal-bar plot; TSP/CVRP show TEST then LIB.",
                  "Primary Top1 uses saved native/FP64 winners. NSS original FP32 Top1 is a separate compatibility column.",
                  f"New VAL/TEST data version: `{version}`; LIB uses original native TSPLIB/CVRPLIB, not old TEST.",
                  "TEST has partly informed subsequent research; this is not a claim of a completely untouched blind set.",

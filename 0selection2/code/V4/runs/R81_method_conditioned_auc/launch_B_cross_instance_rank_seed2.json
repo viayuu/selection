@@ -1,0 +1,139 @@
+{
+  "state": "failed",
+  "started_utc": "2026-10-15T16:18:10.333537+00:00",
+  "worker_pid": 278902,
+  "worker_host": "76045731f6b4",
+  "tmux": "r81b_once",
+  "group": "B_cross_instance_rank_seed2",
+  "proposal_alias": "requestedR80B",
+  "candidate": "B_batch512",
+  "gpu_uuid": "GPU-71479e7e-f8bd-e430-66ed-f8db9f0d47be",
+  "stages": [
+    {
+      "stage": "train_uniqueVALlock_fullTEST",
+      "command": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r81_experiment",
+        "train",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R81_method_conditioned_auc",
+        "--group",
+        "B_cross_instance_rank_seed2",
+        "--data-root",
+        "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+        "--cache-root",
+        "/tmp/shiys_R76_R45A_single_reld_mt_cache",
+        "--gpu-type",
+        "4090",
+        "--large-micro-cap",
+        "352",
+        "--device",
+        "cuda:0",
+        "--eval-batch-size",
+        "256",
+        "--log-every",
+        "18",
+        "--wandb-mode",
+        "offline",
+        "--prepared-root",
+        "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024"
+      ],
+      "state": "complete",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R81_method_conditioned_auc/B_cross_instance_rank_seed2/train.log",
+      "started_utc": "2026-10-15T16:18:13.692723+00:00",
+      "pid": 278950,
+      "exit_status": 0,
+      "finished_utc": "2026-10-15T21:06:51.162513+00:00"
+    },
+    {
+      "stage": "twoLIB_and_PDF",
+      "command": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r81_reporting",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R81_method_conditioned_auc",
+        "--group",
+        "B_cross_instance_rank_seed2",
+        "--device",
+        "cuda:0"
+      ],
+      "state": "failed",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R81_method_conditioned_auc/B_cross_instance_rank_seed2/reporting.log",
+      "started_utc": "2026-10-15T21:06:51.203401+00:00",
+      "pid": 357444,
+      "exit_status": 1,
+      "finished_utc": "2026-10-15T21:06:56.712634+00:00"
+    }
+  ],
+  "container": {
+    "id": "76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6",
+    "cgroup": "12:memory:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n11:cpuset:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n10:blkio:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n9:hugetlb:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n8:devices:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n7:perf_event:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n6:rdma:/\n5:freezer:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n4:pids:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n3:net_cls,net_prio:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n2:cpu,cpuacct:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n1:name=systemd:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n",
+    "assigned_cpus": [
+      0,
+      1,
+      72,
+      73
+    ],
+    "job": 1475
+  },
+  "gpu_preflight": {
+    "uuid": "GPU-71479e7e-f8bd-e430-66ed-f8db9f0d47be",
+    "index": 0,
+    "nvml_index": 0,
+    "authorized_logical_index": 0,
+    "identity_rule": "exact UUID + hardware type; ordinal is informational",
+    "name": "NVIDIA GeForce RTX 4090",
+    "memory_used_mib": 2,
+    "memory_total_mib": 24564,
+    "utilization_pct": 0,
+    "compute_processes": [],
+    "query_transport": "inside_allocation_container",
+    "api": "NVML via nvidia-smi; no CUDA context or training probe"
+  },
+  "cache": {
+    "root": "/tmp/shiys_R76_R45A_single_reld_mt_cache",
+    "files": 375,
+    "bytes": 17026558189,
+    "reused": true,
+    "copied_files": 0,
+    "validation": "54 metadata identities + all 321 array sizes; no heldout cost values inspected"
+  },
+  "wandb": {
+    "enabled": true,
+    "project": "selector",
+    "entity": "yjkds-southern-university-of-science-technology",
+    "lookup": "standard W&B environment/settings/netrc; no prompt, no key recorded",
+    "selected_mode": "offline",
+    "credential_present": false,
+    "offline_reason": "No existing W&B credential found; explicit offline mode"
+  },
+  "phase": "twoLIB_and_PDF",
+  "failed_stage": "twoLIB_and_PDF",
+  "exit_status": 1,
+  "finished_utc": "2026-10-15T21:06:56.713547+00:00",
+  "reservation": {
+    "checked_utc": "2026-10-15T21:06:56.799215+00:00",
+    "gpu": {
+      "uuid": "GPU-71479e7e-f8bd-e430-66ed-f8db9f0d47be",
+      "index": 0,
+      "nvml_index": 0,
+      "authorized_logical_index": 0,
+      "identity_rule": "exact UUID + hardware type; ordinal is informational",
+      "name": "NVIDIA GeForce RTX 4090",
+      "memory_used_mib": 2,
+      "memory_total_mib": 24564,
+      "utilization_pct": 0,
+      "compute_processes": [],
+      "query_transport": "inside_allocation_container",
+      "api": "NVML via nvidia-smi; no CUDA context or training probe"
+    },
+    "released": true,
+    "claim_reusable": false
+  }
+}

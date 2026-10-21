@@ -1,0 +1,72 @@
+{
+  "scope": "R88 resource/launcher CPU and exact CLI preparation only",
+  "state": "RESOURCE_CPU_CLI_READY_FOR_MAIN_PREPARE_START",
+  "model_root": "/public/home/shiys/0selection2/code/V4/runs/R88_execution_role_inputs",
+  "launcher_module": "code.V4.r88_launch",
+  "launcher_wrapper": "code/V4/run_v4_r88_launch.sh",
+  "documentation": "code/V4/R88_LAUNCH.md",
+  "runner_owner": "Einstein 01a154d3-23a9-7463-97b3-5be3b7ca0719",
+  "model_owner": "Wegener",
+  "launcher_CPU_tests": {
+    "command": "python -B -m unittest code.V4.test_r88_launch",
+    "passed": 7,
+    "failures": 0,
+    "errors": 0
+  },
+  "actual_argv_parsed": 8,
+  "CLI_evidence": "code/V4/runs/R88_launch/spec_parse.json",
+  "protocol_lock_sha256": "daf185778ce01318ba8bd0f87dffd34f5184cb67cdb3b3de238d7f4de950aecc",
+  "allocation": {"job": 1465, "node": "gpu03", "new_allocation": false},
+  "container_id": "b8ced5d8a8cdafdc5006f827a0d36c319c61056a65316af4ff9937453fa0635c",
+  "arms": {
+    "A_canonical_anchor": {
+      "slot": "3090_0",
+      "gpu_uuid": "GPU-cb24f168-9f18-f0d5-6f4a-6d2406958f50",
+      "predecessor": "R85/A_ovr_control",
+      "tmux_if_main_starts": "r88_A_canonical_anchor",
+      "wait_for_full_train_TEST_LIB_PDF_rc0": true
+    },
+    "B_execution_anchor": {
+      "slot": "3090_1",
+      "gpu_uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d",
+      "predecessor": "R85/B_gradient_balance",
+      "tmux_if_main_starts": "r88_B_execution_anchor",
+      "wait_for_full_train_TEST_LIB_PDF_rc0": true
+    }
+  },
+  "matched_controls": {
+    "seed": 2,
+    "logical_batch": 1024,
+    "large_micro_cap": 352,
+    "eval_batch": 256,
+    "successful_updates": 57600,
+    "warmup_updates": 4320,
+    "evaluation_every_updates": 1440,
+    "cpus_per_arm": 4,
+    "memory_gib_per_arm": 9,
+    "role_slot": 3,
+    "A_canonical_exact_ties": "inclusive",
+    "extra_model_parameters": 0,
+    "task_scope": "full18"
+  },
+  "cache_root": "/tmp/shiys_R84_new90k_cache",
+  "cache_copied_bytes": 0,
+  "cache_audit_repeated": false,
+  "GPU_resource_probe_repeated_during_preparation": false,
+  "W_and_B": "worker standard env/settings/netrc lookup; explicit offline and reason if no credential",
+  "main_thread_ready": false,
+  "source_hashes_frozen": false,
+  "training_started": false,
+  "tmux_started": false,
+  "GPU_claimed": false,
+  "historical_source_edits": false,
+  "R87_or_gpu05_touched": false,
+  "automatic_retry": false,
+  "Git_operations": false,
+  "notifications": false,
+  "remaining": [
+    "Main confirms model/runner CPU-ready and freezes final source plans",
+    "Main alone starts both controllers after explicit ready",
+    "Each controller waits for its own R85 predecessor full delivery rc0 before claiming a UUID"
+  ]
+}

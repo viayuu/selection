@@ -1,0 +1,158 @@
+{
+  "started_utc": "2026-10-15T16:35:14.458767+00:00",
+  "pid": 2049151,
+  "host": "gpu05",
+  "job": 1475,
+  "step": "61",
+  "container_name": "1475_gpu05",
+  "container_id": "76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6",
+  "resource_recheck": {
+    "captured_utc": "2026-10-15T16:35:13.445529+00:00",
+    "candidate": "D_code_embedding",
+    "allocation": {
+      "job": 1475,
+      "state": "RUNNING",
+      "node": "gpu05",
+      "cpus": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        72,
+        73,
+        74,
+        75
+      ],
+      "cpu_limit": 10,
+      "memory_bytes": 21474836480,
+      "gpu_count": 2
+    },
+    "container": {
+      "name": "1475_gpu05",
+      "id": "76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6",
+      "memory_limit_bytes": 21474836480,
+      "allowed_cpus": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        72,
+        73,
+        74,
+        75
+      ]
+    },
+    "processes": {
+      "B_batch512": [
+        {
+          "pid": 2033897,
+          "command": [
+            "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+            "-B",
+            "-u",
+            "-m",
+            "code.V4.r81_experiment",
+            "train",
+            "--root",
+            "/public/home/shiys/0selection2/code/V4/runs/R81_method_conditioned_auc",
+            "--group",
+            "B_cross_instance_rank_seed2",
+            "--data-root",
+            "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+            "--cache-root",
+            "/tmp/shiys_R76_R45A_single_reld_mt_cache",
+            "--gpu-type",
+            "4090",
+            "--large-micro-cap",
+            "352",
+            "--device",
+            "cuda:0",
+            "--eval-batch-size",
+            "256",
+            "--log-every",
+            "18",
+            "--wandb-mode",
+            "offline",
+            "--prepared-root",
+            "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024",
+            ""
+          ],
+          "namespace_pids": [
+            2033897,
+            278950
+          ],
+          "cpus": [
+            0,
+            1,
+            72,
+            73
+          ]
+        }
+      ],
+      "D_code_embedding": []
+    },
+    "allowed_cpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      72,
+      73,
+      74,
+      75
+    ],
+    "cpu_only": false,
+    "gpu": {
+      "uuid": "GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d",
+      "index": 1,
+      "nvml_index": 1,
+      "authorized_logical_index": 1,
+      "identity_rule": "exact UUID + hardware type; ordinal is informational",
+      "name": "NVIDIA GeForce RTX 4090",
+      "memory_used_mib": 2,
+      "memory_total_mib": 24564,
+      "utilization_pct": 0,
+      "compute_processes": [],
+      "query_transport": "verified_allocation_container_exec",
+      "api": "NVML via nvidia-smi; no CUDA context or training probe"
+    },
+    "selected_cpus": [
+      2,
+      3,
+      74,
+      4
+    ]
+  },
+  "command": [
+    "sudo",
+    "-n",
+    "/usr/bin/ai_docker",
+    "exec",
+    "-u",
+    "2022",
+    "-e",
+    "CUDA_VISIBLE_DEVICES=GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d",
+    "-e",
+    "SLURM_JOB_ID=1475",
+    "-e",
+    "SLURM_STEP_ID=existing_allocation_container",
+    "-e",
+    "R82_QUEUE_TOKEN=233aab086aa14894b2a7775107771264",
+    "-e",
+    "R82_ASSIGNED_CPUS=2,3,4,74",
+    "1475_gpu05",
+    "bash",
+    "/public/home/shiys/0selection2/code/V4/run_v4_r82.sh",
+    "container-worker",
+    "--candidate",
+    "D_code_embedding",
+    "--token",
+    "233aab086aa14894b2a7775107771264"
+  ]
+}

@@ -31,12 +31,20 @@ def derangement(size=M_GLOBAL, seed=4502):
     raise RuntimeError('Failed to construct the fixed derangement')
 
 
-def check_vectors(vectors, mask):
+def check_vectors(vectors, mask, empty_model_solvers=()):
     if vectors.shape != (M_GLOBAL, len(ROLES), CODE_DIM) or mask.shape != (M_GLOBAL, len(ROLES)):
         raise ValueError('Code embeddings must align with GLOBAL_SOLVERS and the four fixed roles')
     if vectors.dtype != torch.float32 or mask.dtype != torch.bool or not torch.isfinite(vectors).all():
         raise ValueError('Expected finite FP32 code vectors and a boolean role mask')
-    if not mask[:, :2].all():
+    if set(empty_model_solvers) - {'GLOP'}:
+        raise ValueError('Only the documented GLOP initialization deployment has no neural model')
+    required = torch.ones(M_GLOBAL, dtype=torch.bool, device=mask.device)
+    for name in empty_model_solvers:
+        row = GLOBAL_SOLVERS.index(name)
+        required[row] = False
+        if mask[row].any():
+            raise ValueError('An explicitly model-free solver cannot carry source-role embeddings')
+    if not mask[required, :2].all():
         raise ValueError('Missing encoder/decision source is not a valid absent role')
     if not torch.allclose(vectors.norm(dim=-1)[mask], torch.ones_like(vectors.norm(dim=-1)[mask]), atol=1e-5):
         raise ValueError('Present code vectors must be L2 normalized')
@@ -60,9 +68,10 @@ def check_components(vectors, indices, role_mask):
 
 
 class SolverCodeEncoder(nn.Module):
-    def __init__(self, vectors, mask, rows, components=None, **params):
+    def __init__(self, vectors, mask, rows, components=None, empty_model_solvers=(), **params):
         super().__init__()
-        check_vectors(vectors, mask)
+        check_vectors(vectors, mask, empty_model_solvers)
+        self.has_model_free_rows = bool(empty_model_solvers)
         d = params['embedding_dim']
         if d % len(ROLES):
             raise ValueError('embedding_dim must be divisible by four')
@@ -97,6 +106,8 @@ class SolverCodeEncoder(nn.Module):
         projected = [self.project_role(rows, role) * mask[..., role, None]
                      for role in range(len(ROLES))]
         code = self.fusion(torch.cat(projected + [mask.to(projected[0].dtype)], dim=-1))
+        if self.has_model_free_rows:
+            code = code * mask.any(dim=-1, keepdim=True).to(code.dtype)
         return self.norm(self.solver_emb(solver_ids) + code)
 
     def project_role(self, rows, role):
@@ -129,10 +140,12 @@ def make_r45_model(params, bundle=None, state_dict=None):
     model = ScoreDifferenceSelector(**params)
     if mode != 'handcrafted':
         components = None
+        empty_model_solvers = ()
         if state_dict is not None:
             vectors = state_dict['solver_encoder.code_vectors'].cpu()
             mask = state_dict['solver_encoder.role_mask'].cpu()
             rows = state_dict['solver_encoder.semantic_rows'].cpu()
+            empty_model_solvers = tuple(GLOBAL_SOLVERS[i] for i in range(M_GLOBAL) if not mask[i].any())
             if 'solver_encoder.chunk_vectors' in state_dict:
                 components = {name: state_dict['solver_encoder.' + name].cpu()
                               for name in ('chunk_vectors', 'chunk_indices')}
@@ -142,6 +155,7 @@ def make_r45_model(params, bundle=None, state_dict=None):
             from .solver_code_embeddings import validate_bundle
             validate_bundle(bundle)
             vectors, mask = bundle['vectors'], bundle['role_mask']
+            empty_model_solvers = tuple(bundle.get('model_only_scope', {}).get('no_neural_model_solvers', ()))
             if 'chunk_vectors' in bundle:
                 components = {name: bundle[name] for name in ('chunk_vectors', 'chunk_indices')}
             rows = derangement(seed=params.get('permutation_seed', 4502)) if mode == 'shuffled_code' else torch.arange(M_GLOBAL)
@@ -153,7 +167,8 @@ def make_r45_model(params, bundle=None, state_dict=None):
         previous = model.solver_encoder
         with torch.random.fork_rng(devices=[]):
             torch.manual_seed(params.get('code_init_seed', 450002))
-            model.solver_encoder = SolverCodeEncoder(vectors, mask, rows, components=components, **params)
+            model.solver_encoder = SolverCodeEncoder(vectors, mask, rows, components=components,
+                                                     empty_model_solvers=empty_model_solvers, **params)
         model.solver_encoder.solver_emb.load_state_dict(previous.solver_emb.state_dict())
         model.solver_encoder.norm.load_state_dict(previous.norm.state_dict())
     if state_dict is not None:

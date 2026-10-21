@@ -1,0 +1,40 @@
+{
+  "experiment": "R89",
+  "main_thread_ready": true,
+  "date_local": "2026-10-20",
+  "arms": ["A_adamw", "B_muon_hybrid"],
+  "main_review": "One focused source/interface review; optimizer_metrics interface aligned before launch. No global Torch/shared-engine mutation; identical original model and logical-batch objective.",
+  "optimizer_tests": {
+    "command": "python -B -m unittest code.V4.test_r89_optim",
+    "executor": "Sol optimizer owner",
+    "tests": 8,
+    "passed": true,
+    "evidence": "owner completion notification: 01a154d6-f785-7b43-8930-ca17f4538553"
+  },
+  "runner_tests": {
+    "command": "OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 python -B -m unittest code.V4.test_r89_experiment",
+    "executor": "main thread",
+    "tests": 7,
+    "duration_seconds": 1.934,
+    "exit_status": 0,
+    "passed": true
+  },
+  "launcher_tests": {
+    "command": "python -B -m unittest code.V4.test_r89_launch",
+    "tests": 8,
+    "passed": true,
+    "evidence": "/public/home/shiys/0selection2/code/V4/runs/R89_launch/HANDOFF.json"
+  },
+  "actual_cli_parse": {"commands": 8, "passed": true},
+  "monitor_tests": {"mocked_cases": 4, "passed": true, "GPU_training_started_by_monitor": false},
+  "resources": "Released authorized gpu05 job1475 two4090 GPUs, existing allocation container, four CPU/nine GiB per arm",
+  "R88": "Existing gpu03 workers untouched; live host PIDs1824715/1862030 verified before this launch",
+  "cache": "Reuse existing frozen NEW90k cache; no copying, rebuilding or repeated array audit",
+  "startup_verification": "After actual start, one bounded full18 witness including actual Muon applications and finite update RMS; no VAL wait or automatic retry",
+  "actual_startup_evidence": "/public/home/shiys/0selection2/code/V4/runs/R89_launch/launch_startup_check.json",
+  "actual_startup_all_two_pass": true,
+  "actual_startup_completed_utc": "2026-10-20T03:42:32.744681+00:00",
+  "test_used_for_selection": false,
+  "goal_status": "active_unresolved",
+  "goal_complete": false
+}

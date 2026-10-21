@@ -1,0 +1,102 @@
+{
+  "started_utc": "2026-10-20T03:39:16.664436+00:00",
+  "container_id": "76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6",
+  "slot": "4090_1",
+  "gpu_uuid": "GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d",
+  "cpus": [
+    4,
+    5,
+    72,
+    73
+  ],
+  "state": "complete",
+  "automatic_retry": false,
+  "stages": [
+    {
+      "name": "train_VALlock_TEST",
+      "device": "gpu",
+      "argv": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r89_experiment",
+        "train",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry",
+        "--arm",
+        "B_muon_hybrid",
+        "--prepared-root",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+        "--data-root",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+        "--cache-root",
+        "/tmp/shiys_R84_new90k_cache",
+        "--protocol-lock",
+        "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry/protocol_lock.json",
+        "--gpu-type",
+        "4090",
+        "--large-micro-cap",
+        "352",
+        "--eval-batch-size",
+        "256",
+        "--device",
+        "cuda:0",
+        "--wandb-mode",
+        "offline"
+      ],
+      "started_utc": "2026-10-20T03:39:16.667177+00:00",
+      "state": "complete",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R89_launch/B_muon_hybrid/train_VALlock_TEST.log",
+      "pid": 1271564,
+      "exit_status": 0,
+      "finished_utc": "2026-10-20T09:14:33.930741+00:00"
+    },
+    {
+      "name": "LIB",
+      "device": "gpu",
+      "argv": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r89_reporting",
+        "lib",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry",
+        "--arm",
+        "B_muon_hybrid",
+        "--device",
+        "cuda:0",
+        "--lib-batch-size",
+        "2"
+      ],
+      "started_utc": "2026-10-20T09:14:33.931992+00:00",
+      "state": "complete",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R89_launch/B_muon_hybrid/LIB.log",
+      "pid": 1327856,
+      "exit_status": 0,
+      "finished_utc": "2026-10-20T09:14:39.459061+00:00"
+    }
+  ],
+  "cache": {
+    "root": "/tmp/shiys_R84_new90k_cache",
+    "bytes": 19005947954,
+    "files": 250,
+    "identity_sha256": "e070f4c96a6059ddb41f50032713e9b85dbfa978b74383c0ca1189aa64c6b93a",
+    "splits": [
+      "train",
+      "val"
+    ],
+    "mode": "existing_read_only",
+    "copied_bytes": 0,
+    "preprocessing": false,
+    "array_contents_read": false,
+    "test_cache_ignored": true,
+    "cache_audit_repeated": false,
+    "validation_snapshot": "/public/home/shiys/0selection2/code/V4/runs/R85_launch/resources.json"
+  },
+  "phase": "LIB",
+  "exit_status": 0,
+  "finished_utc": "2026-10-20T09:14:39.460687+00:00"
+}

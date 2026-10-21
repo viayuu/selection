@@ -1,0 +1,49 @@
+{
+  "experiment": "R89",
+  "updated_utc": "2026-10-20T03:36:37.181859+00:00",
+  "state": "PREPARE_PATH_FIXED_MAIN_RERUN_REQUIRED",
+  "failure": {
+    "reported_by_main": true,
+    "exception": "FileNotFoundError",
+    "missing_path": "/public/home/shiys/0selection2/code/V4/runs/R87_launch/resources.json",
+    "inherited_function": "r87_launch.prepare",
+    "preserved_partial_plan": "/public/home/shiys/0selection2/code/V4/runs/R89_launch/prepare_A_failed_partial_plan_20261020T033107Z.json"
+  },
+  "correction": {
+    "source": "/public/home/shiys/0selection2/code/V4/r89_launch.py",
+    "prepare_implementation": "generic engine._prepare plus explicit actual provenance",
+    "cache_evidence": "/public/home/shiys/0selection2/code/V4/runs/R85_launch/resources.json",
+    "predecessor_receipts": "/public/home/shiys/0selection2/code/V4/runs/R87_launch",
+    "spec_regeneration_required": false,
+    "main_rerun_prepare_both_arms": true
+  },
+  "regression": {
+    "command": "python -B -m unittest code.V4.test_r89_launch",
+    "actual_tests": 9,
+    "passed": true,
+    "exit_status": 0,
+    "specific_test": "test_prepare_keeps_R85_cache_evidence_separate_from_R87_predecessor"
+  },
+  "actual_prepare_rerun_by_worker": false,
+  "actual_start_by_worker": false,
+  "historical_resources_fabricated": false,
+  "frozen_R87_R88_sources_modified": false,
+  "cache_copy_bytes": 0,
+  "cache_audit_repeated": false,
+  "commands": [
+    [
+      "bash",
+      "/public/home/shiys/0selection2/code/V4/run_v4_r89_launch.sh",
+      "prepare",
+      "--spec",
+      "/public/home/shiys/0selection2/code/V4/runs/R89_launch/specs/A_adamw.json"
+    ],
+    [
+      "bash",
+      "/public/home/shiys/0selection2/code/V4/run_v4_r89_launch.sh",
+      "prepare",
+      "--spec",
+      "/public/home/shiys/0selection2/code/V4/runs/R89_launch/specs/B_muon_hybrid.json"
+    ]
+  ]
+}

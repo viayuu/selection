@@ -1,0 +1,74 @@
+{
+  "experiment": "R82",
+  "group": "B_context_matched_rank_seed2",
+  "arm": "B_context_matched_rank_seed2",
+  "dataset": "CVRPLIB",
+  "problem": "CVRP",
+  "checkpoint_sha256": "139e5c1735e51fd985c73204807d63b773f81af0a0b37b82bd9026a96b112566",
+  "epoch": 26,
+  "selected_update": 32292,
+  "state_hash": "9c61c5a3e8f227d8b645479271d1c2f9fd3dec796b3f6f72870c7106f7ad7938",
+  "model_state_sha256": "550f28a263c9b397b40c1a8b9ae34e30f7582def5a0929457fc5e9cdbc58c23e",
+  "candidate_pool": [
+    "BQ",
+    "ELG",
+    "ICAM",
+    "LEHD",
+    "MVMOE",
+    "MoSES_CaDA",
+    "MoSES_RF",
+    "OMNI",
+    "RELD_CVRP",
+    "RouteFinder"
+  ],
+  "pool_ids": [
+    0,
+    3,
+    5,
+    7,
+    11,
+    12,
+    13,
+    14,
+    15,
+    18
+  ],
+  "winner_rule": "native/FP64 ind primary; FP32 argmin compatibility only",
+  "model_factory": "code.V4.r82_experiment.load_checkpoint",
+  "inference_rule": "eval mode, original R77 maximin scores, stable ascending-global-solver-ID tie break",
+  "normalization": "all checkpoint TRAIN buffers restored; no refit",
+  "data_version": "original native LIB",
+  "batch_size": 2,
+  "device": "cuda:0",
+  "training": false,
+  "solver_execution": false,
+  "embedding_api": false,
+  "checkpoint_reselection": false,
+  "sources": {
+    "dataset.pkl": {
+      "path": "/public/home/shiys/0selection2/data/CVRPLIB/dataset.pkl",
+      "sha256": "aa3f0a01f61b99682b8de4e5f6b0c4017313087a3facdac1f4d1308557cc1a44"
+    },
+    "raw_label.pkl": {
+      "path": "/public/home/shiys/0selection2/data/CVRPLIB/raw_label.pkl",
+      "sha256": "a7812970fbaf857fd9d280bf1ebfa42d1a9113ac3c684dd0d326fc848d598802"
+    }
+  },
+  "prediction_schema": {
+    "scores": "float32 [n,k], actual maximin decision scores",
+    "logits": "float32 [n,k], model maximin logits (identical to scores)",
+    "pred": "int64 [n], local candidate slot; score ties use lowest global ID",
+    "costs": "float64 [n,k], unchanged original native costs",
+    "winner": "int64 [n], original native raw_label ind",
+    "winner_fp32_argmin": "int64 [n], historical NSS compatibility labels",
+    "pool": "unicode [k], original candidate names in column order",
+    "pool_ids": "int64 [k], stable global solver IDs",
+    "nodes": "int64 [n], input graph sizes",
+    "indices": "int64 [n], original zero-based instance order",
+    "checkpoint_sha256": "unicode scalar",
+    "checkpoint_epoch": "int64 scalar, one-based locked epoch",
+    "checkpoint_update": "int64 scalar, locked successful update",
+    "utility": "float32 [n,k], actual raw score-head utilities"
+  },
+  "created_utc": "2026-10-15T21:37:27.084703+00:00"
+}

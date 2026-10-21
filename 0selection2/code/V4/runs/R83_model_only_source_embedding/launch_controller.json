@@ -1,0 +1,63 @@
+{
+  "started_utc": "2026-10-17T04:21:10.273952+00:00",
+  "group": "model_only_seed2",
+  "candidate": "A_ce_only",
+  "gpu_uuid": "GPU-cb24f168-9f18-f0d5-6f4a-6d2406958f50",
+  "stages": [
+    {
+      "stage": "allocation_train_TEST_LIB",
+      "argv": [
+        "srun",
+        "--jobid=1465",
+        "--overlap",
+        "--exact",
+        "--gres=none",
+        "--immediate=5",
+        "-N1",
+        "-n1",
+        "--nodelist=gpu03",
+        "--cpus-per-task=4",
+        "--mem=9G",
+        "bash",
+        "-lc",
+        "set -euo pipefail\nsource /public/home/shiys/miniconda3/etc/profile.d/conda.sh\nconda activate easynco\ncd /public/home/shiys/0selection2\nexport PYTHONDONTWRITEBYTECODE=1\nexec /public/home/shiys/miniconda3/envs/easynco/bin/python -B -u -m code.V4.r83_launch container-entry --candidate A_ce_only --token d465af9de11f449fb3b1f3eddf5e2aac"
+      ],
+      "started_utc": "2026-10-17T04:21:10.274251+00:00",
+      "state": "complete",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R83_model_only_source_embedding/launch_allocation_train_TEST_LIB.log",
+      "pid": 3045453,
+      "exit_status": 0,
+      "finished_utc": "2026-10-17T09:18:41.430190+00:00"
+    },
+    {
+      "stage": "CPU_saved_predictions_PDF",
+      "argv": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r83_reporting",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R83_model_only_source_embedding",
+        "--group",
+        "model_only_seed2",
+        "--device",
+        "cpu",
+        "--lib-batch-size",
+        "2"
+      ],
+      "started_utc": "2026-10-17T09:18:41.753505+00:00",
+      "state": "failed",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R83_model_only_source_embedding/launch_CPU_saved_predictions_PDF.log",
+      "pid": 3645132,
+      "exit_status": 1,
+      "finished_utc": "2026-10-17T09:18:44.900072+00:00"
+    }
+  ],
+  "automatic_retry": false,
+  "state": "failed",
+  "phase": "CPU_saved_predictions_PDF",
+  "exit_status": 1,
+  "finished_utc": "2026-10-17T09:18:44.900997+00:00",
+  "error": "RuntimeError: CPU_saved_predictions_PDF exit=1; no later stage and no automatic retry"
+}

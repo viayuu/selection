@@ -1,0 +1,141 @@
+{
+  "experiment": "R89",
+  "updated_utc": "2026-10-20T03:19:48.660166+00:00",
+  "state": "RESOURCE_CPU_CLI_READY_FOR_MAIN_PREPARE_START",
+  "owned_files": [
+    "r89_launch.py",
+    "run_v4_r89_launch.sh",
+    "R89_LAUNCH.md",
+    "test_r89_launch.py"
+  ],
+  "cpu_tests": {
+    "command": "python -B -m unittest code.V4.test_r89_launch",
+    "tests": 8,
+    "passed": true,
+    "observed_exit_status": 0,
+    "observed_duration_seconds": 0.062
+  },
+  "actual_CLI_parser": {
+    "parsed_count": 8,
+    "passed": true,
+    "evidence": "/public/home/shiys/0selection2/code/V4/runs/R89_launch/spec_parse.json",
+    "protocol_sha256": "f4235dcd72c944468119491284050e4b15f196b5d78361f1337270464d2160b2"
+  },
+  "slots": {
+    "A_adamw": {
+      "slot": "4090_0",
+      "job": 1475,
+      "node": "gpu05",
+      "index": 0,
+      "gpu_type": "4090",
+      "cap": 352,
+      "uuid": "GPU-71479e7e-f8bd-e430-66ed-f8db9f0d47be"
+    },
+    "B_muon_hybrid": {
+      "slot": "4090_1",
+      "job": 1475,
+      "node": "gpu05",
+      "index": 1,
+      "gpu_type": "4090",
+      "cap": 352,
+      "uuid": "GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d"
+    }
+  },
+  "predecessor_gates": {
+    "A_adamw": {
+      "predecessor": "A_shared_residual",
+      "complete": true,
+      "failed": false,
+      "reason": "R87 train/TEST/LIB/PDF and comparison complete rc0",
+      "round_comparison": {
+        "path": "/public/home/shiys/0selection2/code/V4/runs/R87_private_method_residual/goal_compare_receipt.json",
+        "state": "complete",
+        "exit_status": 0
+      }
+    },
+    "B_muon_hybrid": {
+      "predecessor": "B_private_residual",
+      "complete": true,
+      "failed": false,
+      "reason": "R87 train/TEST/LIB/PDF and comparison complete rc0",
+      "round_comparison": {
+        "path": "/public/home/shiys/0selection2/code/V4/runs/R87_private_method_residual/goal_compare_receipt.json",
+        "state": "complete",
+        "exit_status": 0
+      }
+    }
+  },
+  "actual_main_prepare_executed": false,
+  "source_hashes_frozen": false,
+  "actual_start_executed": false,
+  "training_started_by_resource_owner": false,
+  "ready_gate_created": false,
+  "new_GPU_probe": false,
+  "cache_copy_bytes": 0,
+  "cache_audit_repeated": false,
+  "frozen_R84_R85_R87_R88_sources_modified": false,
+  "R88_gpu03_untouched": true,
+  "wandb_worker_policy": "enabled; standard environment/settings/netrc lookup; explicit offline with reason if no credential; no secret recording",
+  "deferred_startup_witness": {
+    "after_main_actual_start_only": true,
+    "max_one_bounded_first_full18_observation": true,
+    "real_PID_UUID_cgroup": true,
+    "finite_PART_KEYS": true,
+    "logical_batch": 1024,
+    "large_micro_cap": 352,
+    "eval_batch": 256,
+    "B_actual_optimizer_type_and_groups": true,
+    "B_muon_step_applied_positive": true,
+    "muon_step_applied_is_per_step_not_cumulative": true,
+    "B_muon_matrices_updated_positive": true,
+    "B_muon_direction_and_momentum_RMS_finite": true,
+    "forward_FP16": true,
+    "NS5_internal_BF16": true,
+    "no_validation_wait": true,
+    "no_automatic_retry": true
+  },
+  "main_commands": [
+    {
+      "arm": "A_adamw",
+      "prepare": [
+        "bash",
+        "/public/home/shiys/0selection2/code/V4/run_v4_r89_launch.sh",
+        "prepare",
+        "--spec",
+        "/public/home/shiys/0selection2/code/V4/runs/R89_launch/specs/A_adamw.json"
+      ],
+      "start": [
+        "bash",
+        "/public/home/shiys/0selection2/code/V4/run_v4_r89_launch.sh",
+        "start",
+        "--spec",
+        "/public/home/shiys/0selection2/code/V4/runs/R89_launch/specs/A_adamw.json",
+        "--runner-tests-passed",
+        "--main-ready-evidence",
+        "MAIN_PROVIDES_FINAL_READY"
+      ]
+    },
+    {
+      "arm": "B_muon_hybrid",
+      "prepare": [
+        "bash",
+        "/public/home/shiys/0selection2/code/V4/run_v4_r89_launch.sh",
+        "prepare",
+        "--spec",
+        "/public/home/shiys/0selection2/code/V4/runs/R89_launch/specs/B_muon_hybrid.json"
+      ],
+      "start": [
+        "bash",
+        "/public/home/shiys/0selection2/code/V4/run_v4_r89_launch.sh",
+        "start",
+        "--spec",
+        "/public/home/shiys/0selection2/code/V4/runs/R89_launch/specs/B_muon_hybrid.json",
+        "--runner-tests-passed",
+        "--main-ready-evidence",
+        "MAIN_PROVIDES_FINAL_READY"
+      ]
+    }
+  ],
+  "Git_operations": false,
+  "notifications": false
+}

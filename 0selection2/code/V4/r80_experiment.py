@@ -55,6 +55,15 @@ WINNER_RULE = 'native int64 ind from locked source cache, verified against origi
 SOURCE_BUFFERS = ('code_vectors', 'role_mask', 'semantic_rows', 'solver_identity', 'chunk_vectors', 'chunk_indices')
 
 
+def engine_arm(args):
+    """A named source-only run may reuse a fixed R80 arm without borrowing its identity."""
+    return getattr(args, 'engine_arm', args.arm)
+
+
+def experiment_name(args):
+    return getattr(args, 'experiment', 'R80')
+
+
 @dataclass(frozen=True)
 class ArmSpec:
     arm: str
@@ -179,18 +188,18 @@ def initialize_shared(initial, geometry, arm, device='cpu', bundle=None):
     return model.to(device), params, receipt
 
 
-def load_checkpoint(path, device='cpu'):
+def load_checkpoint(path, device='cpu', *, experiment='R80', arms=ARMS, bundle_validator=None):
     """Unified reporter/runner factory. No API calls or historical-weight fallbacks."""
     state = torch.load(path, map_location='cpu', weights_only=False)
     config = state['args']
-    if (config.get('experiment') != 'R80' or config.get('arm') not in ARMS
+    if (config.get('experiment') != experiment or config.get('arm') not in arms
             or config.get('initialization') != 'scratch_shared_r77'
             or config.get('solver_names') != GLOBAL_SOLVERS or state.get('state_hash') != json_hash(config)):
-        raise ValueError('Checkpoint is not an unchanged R80 from-scratch state')
-    if config['arm'] == 'D_code_embedding':
+        raise ValueError(f'Checkpoint is not an unchanged {experiment} from-scratch state')
+    if config.get('engine_arm', config['arm']) == 'D_code_embedding':
         tensors = {name: state['model']['solver_encoder.' + name] for name in
                    ('chunk_vectors', 'chunk_indices') if 'solver_encoder.' + name in state['model']}
-        validate_bundle(dict(config['embedding_provenance'], vectors=state['model']['solver_encoder.code_vectors'],
+        (bundle_validator or validate_bundle)(dict(config['embedding_provenance'], vectors=state['model']['solver_encoder.code_vectors'],
             role_mask=state['model']['solver_encoder.role_mask'], **tensors))
     model = make_r45_model(config['model_params'], state_dict=state['model'])
     if frozen_source_hash(model) != state['initialization']['frozen_source_sha256']:
@@ -224,8 +233,8 @@ def prepared_config(args):
 
 
 def protocol(args, ready, manifest, geometry, baselines, params, bundle, order, caps):
-    spec = arm_spec(args.arm)
-    return dict(experiment='R80', schema_version=1, arm=args.arm, seed=2,
+    spec = arm_spec(engine_arm(args))
+    return dict(experiment=experiment_name(args), schema_version=1, arm=args.arm, seed=2,
         initialization='scratch_shared_r77', model_params=params, solver_names=GLOBAL_SOLVERS,
         data_root=str(args.data_root.resolve()), cache_root=str(args.cache_root.resolve()),
         prepared_root=str(args.prepared_root.resolve()), preparation_sha256=file_hash(args.prepared_root / 'prepared.json'),
@@ -238,8 +247,8 @@ def protocol(args, ready, manifest, geometry, baselines, params, bundle, order, 
         eval_every_updates=spec.eval_every, warmup_updates=spec.warmup_updates, rdrop_ramp_updates=spec.warmup_updates,
         lr=dict(rule='successful sample-exposure warmup then cosine, independent of VAL', peak=spec.peak_lr,
             end=spec.end_lr, warmup_updates=spec.warmup_updates, max_updates=spec.max_updates),
-        loss=dict(ce=.35, comparison=0., risk=0., kl=0., dropout_passes=2) if args.arm == 'A_ce_only' else LOSS_RECIPE,
-        rdrop_weight=0. if args.arm == 'A_ce_only' else .35, dropout=.1, optimizer='AdamW',
+        loss=dict(ce=.35, comparison=0., risk=0., kl=0., dropout_passes=2) if spec.arm == 'A_ce_only' else LOSS_RECIPE,
+        rdrop_weight=0. if spec.arm == 'A_ce_only' else .35, dropout=.1, optimizer='AdamW',
         weight_decay=1e-4, grad_clip=1., fixed_budget=True, early_stop=False,
         checkpoint_rule='strict minimum full VAL macro_vs_sbs_pct with common FULL TRAIN-fitted SBS; first wins ties',
         inference_rule='eval mode, original R77 maximin scores, stable ascending-global-solver-ID tie break',
@@ -262,8 +271,9 @@ def protocol(args, ready, manifest, geometry, baselines, params, bundle, order, 
 def wandb_run(args, config):
     import wandb
     root = args.root / args.arm
+    experiment = experiment_name(args)
     settings = dict(project='selector', entity='yjkds-southern-university-of-science-technology',
-        name='R80_' + args.arm, id='r80-' + hashlib.sha256((str(args.root) + args.arm).encode()).hexdigest()[:16],
+        name=experiment + '_' + args.arm, id=experiment.lower() + '-' + hashlib.sha256((str(args.root) + args.arm).encode()).hexdigest()[:16],
         config=config, dir=str(root), settings=wandb.Settings(init_timeout=30))
     requested = args.wandb_mode
     mode = 'online' if requested == 'auto' else requested
@@ -272,7 +282,7 @@ def wandb_run(args, config):
         run = wandb.init(**settings, mode=mode, resume='allow' if mode == 'online' else None)
     except Exception as error:
         fallback_reason = type(error).__name__ + ': ' + str(error)
-        print('[R80 W&B] online initialization failed; using offline: ' + type(error).__name__, flush=True)
+        print(f'[{experiment} W&B] online initialization failed; using offline: ' + type(error).__name__, flush=True)
         wandb.finish(exit_code=1)
         mode = 'offline'
         run = wandb.init(**settings, mode=mode)
@@ -286,10 +296,10 @@ def status_update(args, phase, step=None, **values):
     root = args.root / args.arm
     path = root / 'status.json'
     previous = read_json(path) if path.exists() else {}
-    spec = arm_spec(args.arm)
+    spec = arm_spec(engine_arm(args))
     if step is None:
         step = previous.get('successful_updates', 0)
-    previous.update(experiment='R80', arm=args.arm, phase=phase, pid=os.getpid(), host=socket.gethostname(),
+    previous.update(experiment=experiment_name(args), arm=args.arm, phase=phase, pid=os.getpid(), host=socket.gethostname(),
         gpu=os.environ.get('CUDA_VISIBLE_DEVICES', 'external allocation'), gpu_type=args.gpu_type,
         device=str(args.device), updated_utc=utc(), successful_updates=step, step=step,
         max_successful_updates=spec.max_updates, sample_exposures=step * spec.batch_size,
@@ -323,7 +333,7 @@ def evaluate(selector, args, manifest, baselines, split, tag, step, state_hash, 
     root = args.root / args.arm
     directory = root / 'evaluation' / split / tag
     directory.mkdir(parents=True, exist_ok=True)
-    identity = dict(experiment='R80', arm=args.arm, split=split, tag=tag, successful_updates=step,
+    identity = dict(experiment=experiment_name(args), arm=args.arm, split=split, tag=tag, successful_updates=step,
         state_hash=state_hash, model_state_sha256=parameter_hash(selector.state_dict()),
         checkpoint_sha256=checkpoint_sha256, winner_rule=WINNER_RULE)
     receipt_path = directory / 'identity.json'
@@ -347,7 +357,7 @@ def evaluate(selector, args, manifest, baselines, split, tag, step, state_hash, 
             else:
                 cache = open_cache(args.cache_root, split, problem, manifest, args.data_root)
                 try:
-                    batch_size = min(args.eval_batch_size, micro_caps(args.arm, args.gpu_type, args.large_micro_cap)[problem])
+                    batch_size = min(args.eval_batch_size, micro_caps(engine_arm(args), args.gpu_type, args.large_micro_cap)[problem])
                     requests = ((problem, torch.arange(start, min(start + batch_size, cache.size)),
                         min(batch_size, cache.size - start)) for start in range(0, cache.size, batch_size))
                     scores = []
@@ -384,11 +394,11 @@ def evaluate(selector, args, manifest, baselines, split, tag, step, state_hash, 
     save_npz(directory / 'rank000.npz', arrays)
     result = summarize(per_problem)
     result.update(seconds=time.monotonic() - started, tag=tag, successful_updates=step,
-        sample_exposures=step * arm_spec(args.arm).batch_size, identity=identity,
+        sample_exposures=step * arm_spec(engine_arm(args)).batch_size, identity=identity,
         prediction_archive=str((directory / 'rank000.npz').resolve()),
         own_train_sbs=summarize(per_problem))
     write_json(directory / 'metrics.json', result)
-    print('[R80 eval] ' + json.dumps(dict(arm=args.arm, split=split, tag=tag, **result['macro'])), flush=True)
+    print(f'[{experiment_name(args)} eval] ' + json.dumps(dict(arm=args.arm, split=split, tag=tag, **result['macro'])), flush=True)
     return result
 
 
@@ -424,24 +434,25 @@ def validate_resume(state, config, spec):
         raise ValueError('Resume task counts/source cursors disagree with successful exposures')
 
 
-def train(args, device):
-    root, spec = args.root / args.arm, arm_spec(args.arm)
+def train(args, device, *, checkpoint_loader=None, bundle_loader=None, protocol_builder=None):
+    loader = checkpoint_loader or load_checkpoint
+    root, spec = args.root / args.arm, arm_spec(engine_arm(args))
     if (root / 'training_complete.json').exists():
-        print('[R80] Training complete; reusing fixed checkpoint and finishing/reusing TEST', flush=True)
-        return test(args, device)
+        print(f'[{experiment_name(args)}] Training complete; reusing fixed checkpoint and finishing/reusing TEST', flush=True)
+        return test(args, device, checkpoint_loader=loader)
     ready, manifest, geometry, baselines = prepared_config(args)
-    order, caps = task_order(), micro_caps(args.arm, args.gpu_type, args.large_micro_cap)
-    bundle = load_bundle(args.embeddings) if args.arm == 'D_code_embedding' else None
+    order, caps = task_order(), micro_caps(engine_arm(args), args.gpu_type, args.large_micro_cap)
+    bundle = (bundle_loader or load_bundle)(args.embeddings) if spec.arm == 'D_code_embedding' else None
     params = dict(ready['model_params'])
     if bundle is not None:
         params['solver_representation'] = 'code'
-    config = protocol(args, ready, manifest, geometry, baselines, params, bundle, order, caps)
+    config = (protocol_builder or protocol)(args, ready, manifest, geometry, baselines, params, bundle, order, caps)
     state_hash = json_hash(config)
     if args.state_hash is not None and args.state_hash != state_hash:
         raise ValueError(f'Expected state hash {args.state_hash}, actual {state_hash}')
     protocol_path = root / 'protocol.json'
     if protocol_path.exists() and read_json(protocol_path) != config:
-        raise ValueError('Existing R80 protocol differs; preserve it and use a different run root')
+        raise ValueError(f'Existing {experiment_name(args)} protocol differs; preserve it and use a different run root')
     last = root / 'last.pt'
     if last.exists() and not args.resume:
         raise ValueError('Use --resume to continue this arm; no existing state will be overwritten')
@@ -449,12 +460,12 @@ def train(args, device):
     write_json(protocol_path, config)
     checkpoint = None
     if last.exists():
-        selector, checkpoint = load_checkpoint(last, device)
+        selector, checkpoint = loader(last, device)
         validate_resume(checkpoint, config, spec)
         initialization = checkpoint['initialization']
     else:
         initial = torch.load(args.prepared_root / 'identicalinit_seed2.pt', map_location='cpu', weights_only=False)
-        selector, actual_params, initialization = initialize_shared(initial, geometry, args.arm, device, bundle)
+        selector, actual_params, initialization = initialize_shared(initial, geometry, engine_arm(args), device, bundle)
         if actual_params != params or initial['trainable_sha256'] != ready['trainable_sha256']:
             raise ValueError('Fresh parameter source differs from the locked preparation')
         write_json(root / 'initialization.json', initialization)
@@ -462,7 +473,7 @@ def train(args, device):
     del bundle
     optimizer = torch.optim.AdamW(selector.parameters(), lr=spec.peak_lr, weight_decay=1e-4)
     scaler = torch.amp.GradScaler('cuda', enabled=device.type == 'cuda')
-    objective = CEOnlyObjective(selector) if args.arm == 'A_ce_only' else RDropObjective(selector)
+    objective = CEOnlyObjective(selector) if spec.arm == 'A_ce_only' else RDropObjective(selector)
     runtime = Runtime(0, 1, device)
     history, best, successful, retries_total, pending = [], None, 0, 0, None
     counts, cursors = Counter(), dict.fromkeys(PROBLEMS, 0)
@@ -539,7 +550,7 @@ def train(args, device):
                                 key: value for key, value in info.items() if key != 'successful_updates'})
                             with (root / 'updates.jsonl').open('a') as stream:
                                 stream.write(json.dumps(dict(updated_utc=utc(), **info), allow_nan=False) + '\n')
-                            print('[R80 train] ' + json.dumps(dict(arm=args.arm, **info)), flush=True)
+                            print(f'[{experiment_name(args)} train] ' + json.dumps(dict(arm=args.arm, **info)), flush=True)
                             if tracker is not None:
                                 tracker.log({**{'optimization/' + key: info[key] for key in PART_KEYS},
                                     'successful_updates': successful, 'sample_exposures': info['sample_exposures'],
@@ -585,7 +596,7 @@ def train(args, device):
             cache.close()
         caches.clear()
         del objective, optimizer, scaler, selector
-        selector, selected = load_checkpoint(root / 'best.pt', device)
+        selector, selected = loader(root / 'best.pt', device)
         if selected['args'] != config or selected['successful_updates'] != best['successful_updates']:
             raise ValueError('The unique VAL-best checkpoint disagrees with training history')
         del selected
@@ -621,11 +632,11 @@ def train(args, device):
             cache.close()
         if tracker is not None:
             tracker.finish()
-    return test(args, device)
+    return test(args, device, checkpoint_loader=loader)
 
 
 def lock_best(root, best, config, state_hash):
-    record = dict(experiment='R80', arm=config['arm'], checkpoint=str((root / 'best.pt').resolve()),
+    record = dict(experiment=config['experiment'], arm=config['arm'], checkpoint=str((root / 'best.pt').resolve()),
         checkpoint_sha256=file_hash(root / 'best.pt'), state_hash=state_hash,
         epoch=best['epoch'], selected_update=best['successful_updates'], rule=config['checkpoint_rule'],
         selected_without_test=True, per_problem_assembly=False, val=best['val']['macro'],
@@ -642,26 +653,27 @@ def lock_best(root, best, config, state_hash):
 
 
 def authorize_test(args):
-    root, spec = args.root / args.arm, arm_spec(args.arm)
+    root, spec = args.root / args.arm, arm_spec(engine_arm(args))
     complete_path = root / 'training_complete.json'
     if not complete_path.exists() or read_json(complete_path).get('successful_updates') != spec.max_updates:
         raise PermissionError('Finish the fixed training budget before opening any TEST input')
     lock, config = read_json(root / 'final_test_lock.json'), read_json(root / 'protocol.json')
-    if (lock.get('experiment') != 'R80' or lock.get('arm') != args.arm
+    if (lock.get('experiment') != experiment_name(args) or config.get('experiment') != experiment_name(args)
+            or lock.get('arm') != args.arm
             or not lock.get('selected_without_test') or lock.get('per_problem_assembly') is not False
             or lock.get('state_hash') != json_hash(config) or config.get('arm') != args.arm
             or config['max_successful_updates'] != spec.max_updates
             or Path(lock['checkpoint']).resolve() != (root / 'best.pt').resolve()
             or lock['checkpoint_sha256'] != file_hash(root / 'best.pt')
             or Path(config['data_root']).resolve() != args.data_root.resolve()):
-        raise PermissionError('TEST requires the unchanged unique R80 best/configuration lock')
+        raise PermissionError(f'TEST requires the unchanged unique {experiment_name(args)} best/configuration lock')
     if args.state_hash is not None and args.state_hash != lock['state_hash']:
         raise ValueError('Expected state hash differs from the immutable TEST lock')
     return lock, config
 
 
-def test(args, device):
-    root, spec = args.root / args.arm, arm_spec(args.arm)
+def test(args, device, *, checkpoint_loader=None):
+    root, spec = args.root / args.arm, arm_spec(engine_arm(args))
     lock, config = authorize_test(args)
     result_path = root / 'test_results.json'
     if result_path.exists():
@@ -670,12 +682,12 @@ def test(args, device):
                 or saved.get('state_hash') != lock['state_hash']):
             raise PermissionError('Saved TEST result differs from the immutable lock')
         result = saved['result']
-        print('[R80] Reusing saved full TEST; no repeated training/inference', flush=True)
+        print(f'[{experiment_name(args)}] Reusing saved full TEST; no repeated training/inference', flush=True)
     else:
         args.cache_root = Path(config['cache_root']) if args.cache_root is None else args.cache_root
         args.gpu_type, args.eval_batch_size = config['gpu_type'], config['eval_batch_size']
         args.large_micro_cap = config['microbatch_caps']['TSP']
-        selector, state = load_checkpoint(root / 'best.pt', device)
+        selector, state = (checkpoint_loader or load_checkpoint)(root / 'best.pt', device)
         if state['args'] != config or state['successful_updates'] != lock['selected_update']:
             raise PermissionError('TEST model does not match its frozen selection')
         del state
@@ -699,7 +711,7 @@ def test(args, device):
         checkpoint_sha256=lock['checkpoint_sha256'], saved_predictions_reusable=True))
     status_update(args, 'test_complete', spec.max_updates, selected_update=lock['selected_update'],
         test=result['macro'], eta_seconds=0., state_hash=lock['state_hash'])
-    print(f'[R80 ready for reporting] {root}', flush=True)
+    print(f'[{experiment_name(args)} ready for reporting] {root}', flush=True)
     return result
 
 
@@ -723,15 +735,19 @@ def parser():
     return result
 
 
-def main(argv=None):
-    args = parser().parse_args(argv)
+def run(args, *, train_fn=None, test_fn=None):
+    """Shared CLI dispatch; identity/source hooks do not change the training engine."""
     for name in ('root', 'prepared_root', 'data_root', 'cache_root', 'embeddings'):
         if getattr(args, name) is not None:
             setattr(args, name, getattr(args, name).expanduser().resolve())
     if args.command == 'describe':
-        print(json.dumps(dict(arm_spec(args.arm).__dict__, root=str(args.root / args.arm),
-            microbatch_caps=micro_caps(args.arm, args.gpu_type, args.large_micro_cap),
-            total_sample_exposures=BASE_BATCH * BASE_MAX), indent=2))
+        description = dict(arm_spec(engine_arm(args)).__dict__, root=str(args.root / args.arm),
+            microbatch_caps=micro_caps(engine_arm(args), args.gpu_type, args.large_micro_cap),
+            total_sample_exposures=BASE_BATCH * BASE_MAX)
+        if experiment_name(args) != 'R80':
+            description.update(experiment=experiment_name(args), arm=args.arm, engine_arm=engine_arm(args),
+                embeddings=str(args.embeddings), seed=2, checkpoint_rule='strict minimum full VAL macro_vs_sbs_pct; first wins ties')
+        print(json.dumps(description, indent=2))
         return
     if args.command == 'status':
         print(json.dumps(read_json(args.root / args.arm / 'status.json'), indent=2))
@@ -744,7 +760,7 @@ def main(argv=None):
         try:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:
-            raise SystemExit(f'R80 {args.arm} is already running; do not start a duplicate') from None
+            raise SystemExit(f'{experiment_name(args)} {args.arm} is already running; do not start a duplicate') from None
         try:
             torch.set_num_threads(2)
             torch.set_num_interop_threads(2)
@@ -753,16 +769,20 @@ def main(argv=None):
             if device.type != 'cuda':
                 raise ValueError('Formal training/inference requires the externally allocated CUDA device; tests are CPU-only')
             if args.command == 'train':
-                train(args, device)
+                (train_fn or train)(args, device)
             else:
-                test(args, device)
+                (test_fn or test)(args, device)
         except BaseException as error:
             message = dict(type=type(error).__name__, message=str(error), updated_utc=utc(),
                 traceback=traceback.format_exc(), pid=os.getpid(), host=socket.gethostname())
             write_json(root / 'error.json', message)
             status_update(args, 'failed', error=message)
-            print(f'[R80 error] {message["type"]}: {message["message"]}', file=sys.stderr, flush=True)
+            print(f'[{experiment_name(args)} error] {message["type"]}: {message["message"]}', file=sys.stderr, flush=True)
             raise
+
+
+def main(argv=None):
+    return run(parser().parse_args(argv))
 
 
 if __name__ == '__main__':

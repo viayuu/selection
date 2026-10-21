@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "run_id": "B_private_residual",
+  "run_dir": "/public/home/shiys/0selection2/code/V4/runs/R87_private_method_residual/B_private_residual",
+  "common_root": "/public/home/shiys/0selection2/code/V4/runs/R87_private_method_residual",
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "prepared_root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+  "cache_source": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache",
+  "cache_root": "/tmp/shiys_R84_new90k_cache",
+  "slots": [
+    "4090_1"
+  ],
+  "cpu_count": 4,
+  "memory_gib": 9,
+  "wandb_mode": "auto",
+  "source_files": [
+    "/public/home/shiys/0selection2/code/V4/r87_experiment.py",
+    "/public/home/shiys/0selection2/code/V4/r87_model.py",
+    "/public/home/shiys/0selection2/code/V4/r87_reporting.py",
+    "/public/home/shiys/0selection2/code/V4/r85_experiment.py",
+    "/public/home/shiys/0selection2/code/V4/r85_reporting.py",
+    "/public/home/shiys/0selection2/code/V4/r84_experiment.py",
+    "/public/home/shiys/0selection2/code/V4/r84_reporting.py",
+    "/public/home/shiys/0selection2/code/V4/r84_prepare.py",
+    "/public/home/shiys/0selection2/code/V4/r76_experiment.py",
+    "/public/home/shiys/0selection2/code/V4/r77_experiment.py",
+    "/public/home/shiys/0selection2/code/V4/r80_experiment.py",
+    "/public/home/shiys/0selection2/code/V4/r80_reporting.py",
+    "/public/home/shiys/0selection2/code/V4/r77_best_model_report.py",
+    "/public/home/shiys/0selection2/code/V4/pairwise_selector.py",
+    "/public/home/shiys/0selection2/code/V4/pairwise_objective.py",
+    "/public/home/shiys/0selection2/code/V4/solver_code_encoder.py",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared/prepared.json",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared/geometry_stats.json",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared/common_full_train_sbs.json",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared/identicalinit_seed2.pt",
+    "/public/home/shiys/0selection2/code/V4/runs/R87_private_method_residual/protocol_lock.json"
+  ],
+  "protocol": {
+    "initialization": "scratch",
+    "training_splits": [
+      "train",
+      "val"
+    ],
+    "seed": 2,
+    "logical_batch": 1024,
+    "max_successful_updates": 57600,
+    "warmup_updates": 4320,
+    "evaluation_every_updates": 1440,
+    "evaluation_batch": 256,
+    "large_instance_micro_cap": 352
+  },
+  "stages": [
+    {
+      "name": "train_VALlock_TEST",
+      "device": "gpu",
+      "argv": [
+        "{python}",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r87_experiment",
+        "train",
+        "--root",
+        "{common_root}",
+        "--arm",
+        "B_private_residual",
+        "--prepared-root",
+        "{prepared_root}",
+        "--data-root",
+        "{data_root}",
+        "--cache-root",
+        "{cache_root}",
+        "--protocol-lock",
+        "{common_root}/protocol_lock.json",
+        "--gpu-type",
+        "4090",
+        "--large-micro-cap",
+        "352",
+        "--eval-batch-size",
+        "256",
+        "--device",
+        "{device}",
+        "--wandb-mode",
+        "{wandb_mode}"
+      ]
+    },
+    {
+      "name": "LIB",
+      "device": "gpu",
+      "argv": [
+        "{python}",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r87_reporting",
+        "lib",
+        "--root",
+        "{common_root}",
+        "--arm",
+        "B_private_residual",
+        "--device",
+        "{device}",
+        "--lib-batch-size",
+        "2"
+      ]
+    },
+    {
+      "name": "PDF",
+      "device": "cpu",
+      "argv": [
+        "{python}",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r87_reporting",
+        "report",
+        "--root",
+        "{common_root}",
+        "--arm",
+        "B_private_residual",
+        "--device",
+        "{device}"
+      ]
+    }
+  ]
+}

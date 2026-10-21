@@ -1,5 +1,6 @@
 """CPU-only R79 distribution report from four saved prediction archives."""
 
+import argparse
 import csv
 import json
 from datetime import datetime, timezone
@@ -143,6 +144,80 @@ def plot_task(task, pool, panels, checkpoint, sources):
     return fig
 
 
+def plot_grouped_task(task, pool, panels, checkpoint, sources):
+    fig, axes = plt.subplots(1, 2, figsize=(21, 9))
+    fig.subplots_adjust(left=0.105, right=0.985, top=0.79, bottom=0.19, wspace=0.47)
+    fig.text(
+        0.035, 0.955, f"NSS | {task} / {TASKS[task][0]}",
+        fontsize=21, fontweight="bold", color="#093f45", va="top",
+    )
+    fig.text(
+        0.035, 0.905,
+        "\u6700\u65b0\u6570\u636e\u91cd\u8bad | "
+        f"R79 | seed=2 | {task} best epoch={checkpoint.get('best_epoch', 'unknown')}",
+        fontsize=12.5, color="#566368",
+    )
+    by_key = {panel["key"]: panel for panel in panels}
+    highest = max(float(panel["percentages"].max()) for panel in panels)
+    xmax = min(100, 10 * np.ceil((highest + 18) / 10))
+    colors = {"pred": "#197d85", "winner": "#c44f58"}
+    for ax, group in zip(axes, ("test", "lib")):
+        choice = by_key[f"{group}_model_selection"]
+        winner = by_key[f"{group}_true_winner"]
+        y = np.arange(len(pool))
+        for panel, offset, label in (
+            (choice, -0.16, MODEL_SELECTION),
+            (winner, 0.16, "\u771f\u5b9e\u6700\u4f18\u65b9\u6cd5"),
+        ):
+            color = colors[panel["field"]]
+            ax.barh(
+                y + offset, panel["percentages"], height=0.27,
+                color=color, label=label, zorder=3,
+            )
+            for row, (count, pct) in enumerate(zip(panel["counts"], panel["percentages"])):
+                inside = pct > xmax - 16
+                ax.text(
+                    pct - 1.0 if inside else pct + 0.7, row + offset,
+                    f"{pct:.2f}% ({count:,})", va="center",
+                    ha="right" if inside else "left", fontsize=12,
+                    color="white" if inside else color,
+                )
+        ax.set_yticks(y, labels=pool, fontsize=14)
+        ax.set_ylim(len(pool) - 0.45, -0.65)
+        ax.set_xlim(0, xmax)
+        ax.set_xticks(np.unique(np.append(np.arange(0, xmax + 1, 20), xmax)))
+        ax.xaxis.set_major_formatter(PercentFormatter(xmax=100, decimals=0))
+        ax.tick_params(axis="both", length=0, labelsize=13.5, pad=9)
+        ax.set_axisbelow(True)
+        ax.grid(axis="x", color="#dfe6e9", linewidth=0.9)
+        for side in ("top", "right", "left"):
+            ax.spines[side].set_visible(False)
+        ax.spines["bottom"].set_color("#9baab2")
+        dataset = f"{task} Test" if group == "test" else choice["split"]
+        ax.set_title(
+            f"{dataset}: {choice['n']:,} \u4f8b | "
+            f"{MODEL_TOP1}={choice['model_top1_native_pct']:.2f}%",
+            fontsize=17, fontweight="bold", color="#093f45", pad=24,
+        )
+        ax.set_xlabel("\u5360\u5b9e\u4f8b\u6570\u7684\u6bd4\u4f8b (%)", fontsize=12, labelpad=10)
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(
+        handles, labels, loc="upper right", bbox_to_anchor=(0.985, 0.973),
+        ncol=2, frameon=False, fontsize=16, handlelength=1.4, columnspacing=2.8,
+    )
+    test_source = Path(sources["test"]["original_directory"])
+    fig.text(0.035, 0.082, f"TEST: {test_source.parent.name}", fontsize=10.5, color="#566368")
+    fig.text(
+        0.035, 0.037,
+        "\u6807\u6ce8: \u6bd4\u4f8b (\u6b21\u6570) | "
+        "\u771f\u5b9e\u6700\u4f18\u65b9\u6cd5: native/FP64 ind | "
+        "\u6a21\u578bTop1: \u9010\u5b9e\u4f8b pred == winner | "
+        "\u540c\u4e00\u95ee\u9898 TEST / LIB \u590d\u7528\u540c\u4e00\u9501\u5b9a\u6743\u91cd",
+        fontsize=11, color="#566368",
+    )
+    return fig
+
+
 def write_csv(path, rows):
     with path.open("w", encoding="utf-8-sig", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
@@ -151,6 +226,10 @@ def write_csv(path, rows):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--layout", choices=("separate", "grouped"), default="grouped")
+    args = parser.parse_args()
+    output = OUTPUT if args.layout == "separate" else ROOT / "selection_distribution_grouped"
     if not FONT.is_file():
         raise FileNotFoundError(FONT)
     font_manager.fontManager.addfont(str(FONT))
@@ -176,6 +255,8 @@ def main():
         "model_top1_csv_scope": "Dataset-level accuracy repeated only on model-selection rows; blank on true-winner rows",
         "historical_nss_top1_rule": "FP32 cost argmin; not recomputed or mixed into this report",
         "panel_order": ["lib_model_selection", "lib_true_winner", "test_model_selection", "test_true_winner"],
+        "layout": args.layout,
+        "figure_dataset_order": ["test", "lib"] if args.layout == "grouped" else ["lib", "test"],
         "candidate_order": "Each task's test_predictions.npz pool; LIB counts aligned by name",
         "percentages": "100 * count / panel sample count; include zero-count solvers",
         "checkpoint_hash_policy": "Copy existing metadata only; never open or rehash weights",
@@ -267,12 +348,13 @@ def main():
         }
         task_reports.append((task, pool, panels, checkpoint, sources))
 
-    figures = OUTPUT / "figures"
+    figures = output / "figures"
     figures.mkdir(parents=True, exist_ok=True)
-    with PdfPages(OUTPUT / "selection_distributions.pdf") as pdf:
+    with PdfPages(output / "selection_distributions.pdf") as pdf:
         pdf.infodict().update({"Title": "R79 NSS new-data selection distributions", "Subject": FOOTNOTE})
         for task, pool, panels, checkpoint, sources in task_reports:
-            fig = plot_task(task, pool, panels, checkpoint, sources)
+            plot = plot_grouped_task if args.layout == "grouped" else plot_task
+            fig = plot(task, pool, panels, checkpoint, sources)
             pdf.savefig(fig)
             fig.savefig(figures / f"{task}.pdf")
             fig.savefig(figures / f"{task}.png", dpi=160)
@@ -289,12 +371,12 @@ def main():
         protocol["pdf_pages"] = pdf.get_pagecount()
         if protocol["pdf_pages"] != 2:
             raise ValueError("The combined PDF must contain exactly two pages")
-    write_csv(OUTPUT / "selection_distribution.csv", long_rows)
-    write_csv(OUTPUT / "comparison.csv", wide_rows)
-    with (OUTPUT / "protocol.json").open("w", encoding="utf-8") as handle:
+    write_csv(output / "selection_distribution.csv", long_rows)
+    write_csv(output / "comparison.csv", wide_rows)
+    with (output / "protocol.json").open("w", encoding="utf-8") as handle:
         json.dump(protocol, handle, ensure_ascii=False, indent=2)
         handle.write("\n")
-    print(f"Wrote {len(long_rows)} long rows, {len(wide_rows)} comparison rows, 2 PDF pages to {OUTPUT}")
+    print(f"Wrote {len(long_rows)} long rows, {len(wide_rows)} comparison rows, 2 PDF pages to {output}")
 
 
 if __name__ == "__main__":

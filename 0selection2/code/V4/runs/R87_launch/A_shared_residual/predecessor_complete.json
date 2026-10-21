@@ -1,0 +1,141 @@
+{
+  "predecessor": "C_cost_profile",
+  "complete": true,
+  "failed": false,
+  "records": {
+    "controller": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R85_launch/C_cost_profile/controller.json",
+      "state": "complete",
+      "exit_status": 0,
+      "stages": [
+        {
+          "name": "allocation_GPU_pipeline",
+          "device": "gpu",
+          "argv": [
+            "srun",
+            "--jobid=1475",
+            "--overlap",
+            "--exact",
+            "--gres=none",
+            "--immediate=5",
+            "-N1",
+            "-n1",
+            "--nodelist=gpu05",
+            "--cpus-per-task=4",
+            "--mem=9G",
+            "bash",
+            "-lc",
+            "set -euo pipefail\nsource /public/home/shiys/miniconda3/etc/profile.d/conda.sh\nconda activate easynco\ncd /public/home/shiys/0selection2\nexport PYTHONDONTWRITEBYTECODE=1\nexec /public/home/shiys/miniconda3/envs/easynco/bin/python -B -u -m code.V4.r85_launch entry --spec /public/home/shiys/0selection2/code/V4/runs/R85_launch/specs/C_cost_profile.json --slot 4090_0 --token e79f95b097a949ff80b4e98b8b010fee"
+          ],
+          "started_utc": "2026-10-19T16:30:38.311380+00:00",
+          "state": "complete",
+          "log": "/public/home/shiys/0selection2/code/V4/runs/R85_launch/C_cost_profile/allocation_GPU_pipeline.log",
+          "pid": 1181940,
+          "exit_status": 0,
+          "finished_utc": "2026-10-19T21:04:03.795749+00:00"
+        },
+        {
+          "name": "PDF",
+          "device": "cpu",
+          "argv": [
+            "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+            "-B",
+            "-u",
+            "-m",
+            "code.V4.r85_reporting",
+            "report",
+            "--root",
+            "/public/home/shiys/0selection2/code/V4/runs/R85_zero_selection_research",
+            "--arm",
+            "C_cost_profile",
+            "--device",
+            "cpu",
+            "--lib-batch-size",
+            "2"
+          ],
+          "started_utc": "2026-10-19T21:04:03.796742+00:00",
+          "state": "complete",
+          "log": "/public/home/shiys/0selection2/code/V4/runs/R85_launch/C_cost_profile/PDF.log",
+          "pid": 2169615,
+          "exit_status": 0,
+          "finished_utc": "2026-10-19T21:04:43.311705+00:00"
+        }
+      ]
+    },
+    "worker": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R85_launch/C_cost_profile/worker.json",
+      "state": "complete",
+      "exit_status": 0,
+      "stages": [
+        {
+          "name": "train_VALlock_TEST",
+          "device": "gpu",
+          "argv": [
+            "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+            "-B",
+            "-u",
+            "-m",
+            "code.V4.r85_experiment",
+            "train",
+            "--root",
+            "/public/home/shiys/0selection2/code/V4/runs/R85_zero_selection_research",
+            "--arm",
+            "C_cost_profile",
+            "--prepared-root",
+            "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+            "--data-root",
+            "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+            "--cache-root",
+            "/tmp/shiys_R84_new90k_cache",
+            "--protocol-lock",
+            "/public/home/shiys/0selection2/code/V4/runs/R85_zero_selection_research/protocol_lock.json",
+            "--device",
+            "cuda:0",
+            "--gpu-type",
+            "4090",
+            "--large-micro-cap",
+            "352",
+            "--eval-batch-size",
+            "256",
+            "--wandb-mode",
+            "offline"
+          ],
+          "started_utc": "2026-10-19T16:30:42.394684+00:00",
+          "state": "complete",
+          "log": "/public/home/shiys/0selection2/code/V4/runs/R85_launch/C_cost_profile/train_VALlock_TEST.log",
+          "pid": 1101642,
+          "exit_status": 0,
+          "finished_utc": "2026-10-19T21:03:56.775132+00:00"
+        },
+        {
+          "name": "LIB",
+          "device": "gpu",
+          "argv": [
+            "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+            "-B",
+            "-u",
+            "-m",
+            "code.V4.r85_reporting",
+            "lib",
+            "--root",
+            "/public/home/shiys/0selection2/code/V4/runs/R85_zero_selection_research",
+            "--arm",
+            "C_cost_profile",
+            "--device",
+            "cuda:0",
+            "--lib-batch-size",
+            "2"
+          ],
+          "started_utc": "2026-10-19T21:03:56.776617+00:00",
+          "state": "complete",
+          "log": "/public/home/shiys/0selection2/code/V4/runs/R85_launch/C_cost_profile/LIB.log",
+          "pid": 1172565,
+          "exit_status": 0,
+          "finished_utc": "2026-10-19T21:04:03.737840+00:00"
+        }
+      ]
+    }
+  },
+  "reason": "predecessor full delivery complete rc0",
+  "report_receipt": "/public/home/shiys/0selection2/code/V4/runs/R85_zero_selection_research/C_cost_profile/postprocess_status.json"
+}

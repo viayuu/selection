@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "experiment": "R89",
+  "runner_core_ready": true,
+  "runtime_frozen": true,
+  "evidence_collected_utc": "2026-10-20T03:25:20.336132+00:00",
+  "owner": "runner_reporting_adapter",
+  "arms": [
+    "A_adamw",
+    "B_muon_hybrid"
+  ],
+  "cpu_tests": {
+    "command": "python -B -m unittest code.V4.test_r89_experiment",
+    "environment": "easynco",
+    "actually_executed": true,
+    "session_id": 99145,
+    "completion_chunk_id": "730e0c",
+    "exit_code": 0,
+    "tests_passed": 7,
+    "failures": 0,
+    "errors": 0,
+    "duration_seconds": 2.351,
+    "terminal_summary": "Ran 7 tests in 2.351s\n\nOK",
+    "coverage": [
+      "CLI, full18 schedule and original stateless R77 objective",
+      "Private Torch facade isolation and actual optimizer types and complete parameter groups",
+      "Identical fresh model initialization for both optimizer arms",
+      "Control update, optimizer state, losses and Dropout RNG equal to original AdamW",
+      "Actual Muon step metrics, AMP retry and optimizer checkpoint/resume continuation",
+      "Strict model-only checkpoint reconstruction without constructing an optimizer",
+      "Protocol lock rejects unlocked training and a fivefold learning-rate multiplier"
+    ]
+  },
+  "cli_checks": {
+    "actually_executed": true,
+    "method": "Argument-parser checks only; no GPU training, TEST or LIB execution",
+    "session_id": 50138,
+    "completion_chunk_id": "42f449",
+    "exit_code": 0,
+    "parsed_count": 8,
+    "cases": [
+      {"module": "code.V4.r89_experiment", "command": "train", "arm": "A_adamw", "parsed": true},
+      {"module": "code.V4.r89_experiment", "command": "test", "arm": "A_adamw", "parsed": true},
+      {"module": "code.V4.r89_experiment", "command": "train", "arm": "B_muon_hybrid", "parsed": true},
+      {"module": "code.V4.r89_experiment", "command": "test", "arm": "B_muon_hybrid", "parsed": true},
+      {"module": "code.V4.r89_reporting", "command": "lib", "arm": "A_adamw", "parsed": true},
+      {"module": "code.V4.r89_reporting", "command": "report", "arm": "A_adamw", "parsed": true},
+      {"module": "code.V4.r89_reporting", "command": "lib", "arm": "B_muon_hybrid", "parsed": true},
+      {"module": "code.V4.r89_reporting", "command": "report", "arm": "B_muon_hybrid", "parsed": true}
+    ],
+    "actual_main_protocol_lock_validated": true
+  },
+  "fixed_launch_settings": {
+    "model_role_arm": "B_execution_anchor",
+    "new_neural_parameters": 0,
+    "seed": 2,
+    "logical_batch_size": 1024,
+    "successful_updates": 57600,
+    "warmup_updates": 4320,
+    "evaluation_interval_updates": 1440,
+    "gpu_type": "4090",
+    "large_micro_cap": 352,
+    "eval_batch_size": 256
+  },
+  "handoff": {
+    "known_blockers": [],
+    "no_gpu_launched_by_runner_owner": true,
+    "no_environment_upgrade": true,
+    "no_data_rebuild": true,
+    "no_shared_or_frozen_engine_edit": true,
+    "no_global_torch_mutation": true,
+    "pdf_rendering_not_a_launch_gate": true,
+    "launch_authority": "main_and_resource_owner",
+    "main_independent_test_result": "Not claimed here; main is running its own focused test command.",
+    "owner_test_scope": "Only the seven runner tests above were executed by this owner; optimizer-owner and launcher tests are not claimed as repeated."
+  },
+  "protocol_lock_sha256": "f4235dcd72c944468119491284050e4b15f196b5d78361f1337270464d2160b2",
+  "source_hash_base": "/public/home/shiys/0selection2/code/V4",
+  "source_sha256": {
+    "r89_experiment.py": "d0c029d8e3bd043a05635605e41a8388ad09266e098de839dd1b3b58117d6e85",
+    "r89_reporting.py": "88a83323533b5c407a4212f717a2c59401684d5e967d1441232a331e010d241a",
+    "r89_engine_adapter.py": "c03e0064247c8cba943ae69ff15040e3e30bbc856368afec3f8b30cfc1ecbe15",
+    "test_r89_experiment.py": "75a1d3e9a6a7ff8b2331f168c31771bea444ca75f14c82d9d0c62c4fb9eedb17",
+    "R89_README.md": "2b7c0d2af1965340696399fe263c1b6dac607c5cd5596530b45b32d0bd76feb7",
+    "r89_optim.py": "0ff6074d5ad7886105d375dfabcaf0dda8c54d4559001b015ef0697592b6f6b4",
+    "r88_model.py": "06bf522b68370ebd3b48d91fd959cb07fe864e45d3757415a4e65a0c88a589dc",
+    "r88_reporting.py": "22a469d65e17c49b5a51f94cce285d92a44b67194b5641f41ac2536290454b0c",
+    "r87_experiment.py": "80c30a53f5f78c263bae42b758a569e43cb0d417dcdd0289a49f9b869e7f59ec",
+    "r87_reporting.py": "bff6dbb458d0c3de44f414e27d20ba8e9c6243502fc3ff148820bcde71dee3d4",
+    "r84_experiment.py": "834ac040a12b3787089636d01b994082adf6e268a2b3ff32b61649f8ae79d1ec",
+    "r84_prepare.py": "9f46f5cc1ed71cff94d6c57b93b931ef256196b979c9fb42ba9fbc44ff27d733",
+    "r84_reporting.py": "3dd207717f5fb0459b82c9376964e0cb88c8dc33439706ee23713389444a1d05",
+    "r85_experiment.py": "574f658a2279bf25107906e6a847ce5ad314a0d2db3869039fe1418f5026d6a8",
+    "r85_reporting.py": "fa0f6c3a3f894c9582fcaed21beb703f3d91ae9942f93cc10717e2aa9cc99a88",
+    "r80_reporting.py": "d2cbb5a9d5876d55835aa6fd74ba477e9332b3ef93793f860f13d8b3fa9014fd",
+    "r76_experiment.py": "609b937bccda91fbeeabde960b79eacabb40005263fad7903e7c66c1a253549e",
+    "r77_experiment.py": "7656b3513a8f0cbe174f1bb7140537cf8d5235c96a97e0081bd919c07bfcf093",
+    "pairwise_selector.py": "37e5e36dce0941ddc802e14308315fb080c15d86bd6368df15a6f12f55b6f0de",
+    "pairwise_objective.py": "3f487cc91a2819fe7bad5c3ea98fe11fead57e59921f1d43529c617002654a0a",
+    "solver_code_encoder.py": "7278864fa13e6e68d832096051830f03be2c5c525bcc552ec85bdcda54e898d1"
+  }
+}

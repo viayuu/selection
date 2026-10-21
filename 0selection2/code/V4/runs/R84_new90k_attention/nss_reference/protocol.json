@@ -1,0 +1,62 @@
+{
+  "experiment": "R84_NSS_historical_reference",
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "historical_training_data_root": "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+  "weights_description": "R79 historical VALID-selected NSS weights; not retrained on R84/new90k",
+  "retrained_on_new90k": false,
+  "expected_test_rows_per_task": 4500,
+  "winner_rule": "saved native ind verified against original FP64 cost argmin; never FP32 argmin",
+  "original_sources": {
+    "model.py": "18e35f07bf6f582ed5a37a38e5fc028862ed1c05f89100f386eff089609066c8",
+    "loss.py": "8c059f94a8fa72d1f4d72e1b56c1921703f7fd714031e5c9709e082ae57e6677",
+    "dataset.py": "f2efbd438c9c0c8f96d2c9c9e66bb75ca70cfbccc010f7d25550fef7c1759079",
+    "utils.py": "6b1a1397ec25f792e2da69de26d67262d3870b26e6674f4cb5e8a923639340cf",
+    "trainer.py": "949f1bc8a7833be08d3ecaddf895d950323e9000b9ca357badfabfbeb9062713",
+    "config_TSP_ours.yml": "7dcba07900939e91c6864434c9e72146181e6de1d5ebf19d39f763c113492cdd",
+    "config_CVRP_ours.yml": "61b3a0a2fe463e16f23a99f8ac3377a0b5163e61b44175c090b1436941515cf8"
+  },
+  "checkpoints": {
+    "TSP": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/TSP/best.pt",
+      "sha256": "c677a8cd4ee473ee47bdedff871050827f75717c321ae9d551a3edc7bc78994b",
+      "best_epoch": 47,
+      "val_top_1": 0.389351487159729,
+      "criterion": "gap",
+      "validation_predictions": {
+        "path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/TSP/best_val_predictions.npz",
+        "sha256": "0f6c546c83c43afed8f443671b2e5acc0178b6ca77c17e9139ec51863b4e6b74",
+        "rows": 3895,
+        "split": "val"
+      }
+    },
+    "CVRP": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/CVRP/best.pt",
+      "sha256": "b1e7595eb16a89e3bdf526c3c4d8b05ce3d7d4dc39ab1241667657924e3fc574",
+      "best_epoch": 39,
+      "val_top_1": 0.6208471655845642,
+      "criterion": "gap",
+      "validation_predictions": {
+        "path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/CVRP/best_val_predictions.npz",
+        "sha256": "9f71f3e4f41b0d017989e8ed4a2dfcb5801a511a1e0efed32fd73dedf4315449",
+        "rows": 3895,
+        "split": "val"
+      }
+    }
+  },
+  "current_model_lock": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/D_attention_focal/final_test_lock.json",
+    "checkpoint_sha256": "addbfaff33b5720dfec357a4b5685e75e161deea62d7bde04b15f48fb39b3efe",
+    "state_hash": "cf68a9fee9a2ee06e03a73e617e7f97d87b712c4f8ee840e1673f5aeea5c9a7c",
+    "selected_update": 43200
+  },
+  "evaluation": {
+    "batch_size": 8,
+    "augmentation": false,
+    "inference_rule": "original NSS softmax then torch.topk(1), without output adjustment"
+  },
+  "sbs": {
+    "TSP": "T2T",
+    "CVRP": "RELD_CVRP"
+  },
+  "validation_test_history": "Retained old holdout members were used in prior research; not fully blind."
+}

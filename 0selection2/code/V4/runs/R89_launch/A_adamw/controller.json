@@ -1,0 +1,62 @@
+{
+  "started_utc": "2026-10-20T03:38:41.029963+00:00",
+  "slot": "4090_0",
+  "node": "gpu05",
+  "state": "complete",
+  "stages": [
+    {
+      "name": "allocation_GPU_pipeline",
+      "device": "gpu",
+      "argv": [
+        "srun",
+        "--jobid=1475",
+        "--overlap",
+        "--exact",
+        "--gres=none",
+        "--immediate=5",
+        "-N1",
+        "-n1",
+        "--nodelist=gpu05",
+        "--cpus-per-task=4",
+        "--mem=9G",
+        "bash",
+        "-lc",
+        "set -euo pipefail\nsource /public/home/shiys/miniconda3/etc/profile.d/conda.sh\nconda activate easynco\ncd /public/home/shiys/0selection2\nexport PYTHONDONTWRITEBYTECODE=1\nexec /public/home/shiys/miniconda3/envs/easynco/bin/python -B -u -m code.V4.r89_launch entry --spec /public/home/shiys/0selection2/code/V4/runs/R89_launch/specs/A_adamw.json --slot 4090_0 --token 6e2a534e5c2a43f9b9aee2bb85def067"
+      ],
+      "started_utc": "2026-10-20T03:38:41.030284+00:00",
+      "state": "complete",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R89_launch/A_adamw/allocation_GPU_pipeline.log",
+      "pid": 3869101,
+      "exit_status": 0,
+      "finished_utc": "2026-10-20T08:32:54.841902+00:00"
+    },
+    {
+      "name": "PDF",
+      "device": "cpu",
+      "argv": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r89_reporting",
+        "report",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry",
+        "--arm",
+        "A_adamw",
+        "--device",
+        "cpu"
+      ],
+      "started_utc": "2026-10-20T08:32:54.842955+00:00",
+      "state": "complete",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R89_launch/A_adamw/PDF.log",
+      "pid": 1046811,
+      "exit_status": 0,
+      "finished_utc": "2026-10-20T08:34:45.238054+00:00"
+    }
+  ],
+  "automatic_retry": false,
+  "phase": "PDF",
+  "exit_status": 0,
+  "finished_utc": "2026-10-20T08:34:45.238634+00:00"
+}

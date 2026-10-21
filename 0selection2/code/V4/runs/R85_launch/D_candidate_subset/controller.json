@@ -1,0 +1,64 @@
+{
+  "started_utc": "2026-10-19T16:31:08.631388+00:00",
+  "slot": "4090_1",
+  "node": "gpu05",
+  "state": "complete",
+  "stages": [
+    {
+      "name": "allocation_GPU_pipeline",
+      "device": "gpu",
+      "argv": [
+        "srun",
+        "--jobid=1475",
+        "--overlap",
+        "--exact",
+        "--gres=none",
+        "--immediate=5",
+        "-N1",
+        "-n1",
+        "--nodelist=gpu05",
+        "--cpus-per-task=4",
+        "--mem=9G",
+        "bash",
+        "-lc",
+        "set -euo pipefail\nsource /public/home/shiys/miniconda3/etc/profile.d/conda.sh\nconda activate easynco\ncd /public/home/shiys/0selection2\nexport PYTHONDONTWRITEBYTECODE=1\nexec /public/home/shiys/miniconda3/envs/easynco/bin/python -B -u -m code.V4.r85_launch entry --spec /public/home/shiys/0selection2/code/V4/runs/R85_launch/specs/D_candidate_subset.json --slot 4090_1 --token 601ac8c007a042f8836b3d8f29d4ae67"
+      ],
+      "started_utc": "2026-10-19T16:31:08.631724+00:00",
+      "state": "complete",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R85_launch/D_candidate_subset/allocation_GPU_pipeline.log",
+      "pid": 1184261,
+      "exit_status": 0,
+      "finished_utc": "2026-10-19T21:44:56.524260+00:00"
+    },
+    {
+      "name": "PDF",
+      "device": "cpu",
+      "argv": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r85_reporting",
+        "report",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R85_zero_selection_research",
+        "--arm",
+        "D_candidate_subset",
+        "--device",
+        "cpu",
+        "--lib-batch-size",
+        "2"
+      ],
+      "started_utc": "2026-10-19T21:44:56.525338+00:00",
+      "state": "complete",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R85_launch/D_candidate_subset/PDF.log",
+      "pid": 2320003,
+      "exit_status": 0,
+      "finished_utc": "2026-10-19T21:45:30.964185+00:00"
+    }
+  ],
+  "automatic_retry": false,
+  "phase": "PDF",
+  "exit_status": 0,
+  "finished_utc": "2026-10-19T21:45:30.964762+00:00"
+}

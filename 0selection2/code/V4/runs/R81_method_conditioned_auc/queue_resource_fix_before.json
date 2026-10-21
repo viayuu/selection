@@ -1,0 +1,103 @@
+{
+  "captured_utc": "2026-10-15T16:17:38.269722+00:00",
+  "resource_only": true,
+  "old_pid": 2786026,
+  "no_claim": true,
+  "no_worker": true,
+  "no_training": true,
+  "old_status": {
+    "experiment": "R81B",
+    "proposal_alias": "requestedR80B",
+    "group": "B_cross_instance_rank_seed2",
+    "state": "pending",
+    "phase": "pending",
+    "updated_utc": "2026-10-15T16:16:45.904786+00:00",
+    "tmux": "r81b_once",
+    "controller_pid": 2786026,
+    "controller_host": "admin01",
+    "loaded_queue_sha256": "449b094fced4d325b8851429936dda674015828a10c1f4fc3ed03517d1032f11",
+    "poll_seconds": 60,
+    "continuous_model_monitor": false,
+    "main_thread_ready": true,
+    "GPU_training_started": false,
+    "candidates": {
+      "A_ce_only": {
+        "eligible": false,
+        "reason": "R80 full pipeline is not terminal (train_complete alone never qualifies)",
+        "old_state": "running"
+      },
+      "C_lr3e4": {
+        "eligible": false,
+        "reason": "R80 full pipeline is not terminal (train_complete alone never qualifies)",
+        "old_state": "running"
+      },
+      "B_batch512": {
+        "eligible": false,
+        "reason": "RuntimeError: srun --jobid=1475 --overlap --exact --gres=none --immediate=5 -N1 -n1 --nodelist=gpu05 --cpus-per-task=1 --mem=256M bash /public/home/shiys/0selection2/code/V4/run_v4_r81.sh probe-node --candidate B_batch512: exit=1: Traceback (most recent call last):\n  File \"/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/runpy.py\", line 197, in _run_module_as_main\n    return _run_code(code, main_globals, None,\n  File \"/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/runpy.py\", line 87, in _run_code\n    exec(code, run_globals)\n  File \"/public/home/shiys/0selection2/code/V4/r81_queue.py\", line 909, in <module>\n    sys.exit(main())\n  File \"/public/home/shiys/0selection2/code/V4/r81_queue.py\", line 897, in main\n    print(json.dumps(node_probe(args.candidate, args.baseline_only)))\n  File \"/public/home/shiys/0selection2/code/V4/r81_queue.py\", line 299, in node_probe\n    result.update(gpu=gpu_inventory(candidate, container),\n  File \"/public/home/shiys/0selection2/code/V4/r81_queue.py\", line 255, in gpu_inventory\n    raise RuntimeError('NVML GPU identity query failed')\nRuntimeError: NVML GPU identity query failed\nsrun: error: gpu05: task 0: Exited with exit code 1\nsrun: launch/slurm: _step_signal: Terminating StepId=1475.55\n"
+      },
+      "D_code_embedding": {
+        "eligible": false,
+        "reason": "RuntimeError: srun --jobid=1475 --overlap --exact --gres=none --immediate=5 -N1 -n1 --nodelist=gpu05 --cpus-per-task=1 --mem=256M bash /public/home/shiys/0selection2/code/V4/run_v4_r81.sh probe-node --candidate D_code_embedding: exit=1: Traceback (most recent call last):\n  File \"/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/runpy.py\", line 197, in _run_module_as_main\n    return _run_code(code, main_globals, None,\n  File \"/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/runpy.py\", line 87, in _run_code\n    exec(code, run_globals)\n  File \"/public/home/shiys/0selection2/code/V4/r81_queue.py\", line 909, in <module>\n    sys.exit(main())\n  File \"/public/home/shiys/0selection2/code/V4/r81_queue.py\", line 897, in main\n    print(json.dumps(node_probe(args.candidate, args.baseline_only)))\n  File \"/public/home/shiys/0selection2/code/V4/r81_queue.py\", line 299, in node_probe\n    result.update(gpu=gpu_inventory(candidate, container),\n  File \"/public/home/shiys/0selection2/code/V4/r81_queue.py\", line 255, in gpu_inventory\n    raise RuntimeError('NVML GPU identity query failed')\nRuntimeError: NVML GPU identity query failed\nsrun: error: gpu05: task 0: Exited with exit code 1\nsrun: launch/slurm: _step_signal: Terminating StepId=1475.56\n"
+      }
+    },
+    "reason": "No authorized GPU has passed every full-pipeline/allocation/container/CPU/NVML gate"
+  },
+  "old_tmux": {
+    "created_utc": "2026-10-15T15:29:12.241484+00:00",
+    "tmux": "r81b_once",
+    "state": "preparing",
+    "command": "bash /public/home/shiys/0selection2/code/V4/run_v4_r81.sh loop",
+    "queue_source_sha256": "449b094fced4d325b8851429936dda674015828a10c1f4fc3ed03517d1032f11",
+    "main_thread_ready": false,
+    "creator_pid": 2786020,
+    "host": "admin01",
+    "tmux_exit_status": 0,
+    "pane_pid": 2786026,
+    "pane_id": "%212"
+  },
+  "old_ready": {
+    "confirmed_utc": "2026-10-15T15:29:40.451428+00:00",
+    "main_thread_ready": true,
+    "objective_cpu_tests_passed": true,
+    "runner_cpu_tests_passed": true,
+    "evidence": "MAIN-THREAD FINAL READY 2026-10-15: /public/home/shiys/0selection2/code/V4/runs/R81_method_conditioned_auc/prepared/code_ready.json confirms CPU15/15 and TRAIN supports; /public/home/shiys/0selection2/code/V4/R81_INTERFACE.md stable. UUID-only identity and verified allocation-container NVML fix tested; queue_nvml_container_probe.json PASS; safe pre-arm standby refresh receipt preserved. User authorized R81B only, seed2, existing allocations only.",
+    "preparation_receipt": "/public/home/shiys/0selection2/code/V4/runs/R81_method_conditioned_auc/prepared/prepared.json",
+    "preparation_sha256": "a07eee8a4131504173c7a52ccc713988fd22f5d4dd80c1697dc9efbd005dd700",
+    "source_sha256": {
+      "/public/home/shiys/0selection2/code/V4/r81_queue.py": "449b094fced4d325b8851429936dda674015828a10c1f4fc3ed03517d1032f11",
+      "/public/home/shiys/0selection2/code/V4/run_v4_r81.sh": "39ea3cdfca000d3193d38564a2d660327d0c8b7d926f578889f7eee1f0e7a9e9",
+      "/public/home/shiys/0selection2/code/V4/r81_experiment.py": "535582971265c25ec5d8b0ca860e5d7a426936e635c30d37493e04e5c7b620d5",
+      "/public/home/shiys/0selection2/code/V4/r81_reporting.py": "81aa74327cef190c1b828b6d074b9101b4f14687002edd990b597ab9302ed5ca",
+      "/public/home/shiys/0selection2/code/V4/method_auc_objective.py": "97f40d6dc31494765cf4b4a8a626c661a565c3d1ec94a9c966c3014acaf49aee",
+      "/public/home/shiys/0selection2/code/V4/pairwise_selector.py": "37e5e36dce0941ddc802e14308315fb080c15d86bd6368df15a6f12f55b6f0de",
+      "/public/home/shiys/0selection2/code/V4/pairwise_objective.py": "3f487cc91a2819fe7bad5c3ea98fe11fead57e59921f1d43529c617002654a0a",
+      "/public/home/shiys/0selection2/code/V4/r80_experiment.py": "df11f0a18b9d0649743f5a736a0756c839d7ebf7fcdd8b5c5d04d93996a0f5cb",
+      "/public/home/shiys/0selection2/code/V4/r80_reporting.py": "ba3681260b436bc64e5a96a7310d414f726a5d870bc0bed3ed7c262e7b61e0d8",
+      "/public/home/shiys/0selection2/code/V4/r77_experiment.py": "7656b3513a8f0cbe174f1bb7140537cf8d5235c96a97e0081bd919c07bfcf093",
+      "/public/home/shiys/0selection2/code/V4/R81_INTERFACE.md": "8e093d088a3b24edce9fe6bed0604e477a015b18aae5fa55b73050ab9a474247",
+      "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/identicalinit_seed2.pt": "291266bf421075ed05cd663b1c4df207063081d4562278b2d9c0068ab0b51e9b"
+    },
+    "group": "B_cross_instance_rank_seed2",
+    "proposal_alias": "requestedR80B"
+  },
+  "source_sha256_before": {
+    "/public/home/shiys/0selection2/code/V4/r81_queue.py": "449b094fced4d325b8851429936dda674015828a10c1f4fc3ed03517d1032f11",
+    "/public/home/shiys/0selection2/code/V4/run_v4_r81.sh": "39ea3cdfca000d3193d38564a2d660327d0c8b7d926f578889f7eee1f0e7a9e9",
+    "/public/home/shiys/0selection2/code/V4/r81_experiment.py": "535582971265c25ec5d8b0ca860e5d7a426936e635c30d37493e04e5c7b620d5",
+    "/public/home/shiys/0selection2/code/V4/r81_reporting.py": "81aa74327cef190c1b828b6d074b9101b4f14687002edd990b597ab9302ed5ca",
+    "/public/home/shiys/0selection2/code/V4/method_auc_objective.py": "97f40d6dc31494765cf4b4a8a626c661a565c3d1ec94a9c966c3014acaf49aee",
+    "/public/home/shiys/0selection2/code/V4/pairwise_selector.py": "37e5e36dce0941ddc802e14308315fb080c15d86bd6368df15a6f12f55b6f0de",
+    "/public/home/shiys/0selection2/code/V4/pairwise_objective.py": "3f487cc91a2819fe7bad5c3ea98fe11fead57e59921f1d43529c617002654a0a",
+    "/public/home/shiys/0selection2/code/V4/r80_experiment.py": "df11f0a18b9d0649743f5a736a0756c839d7ebf7fcdd8b5c5d04d93996a0f5cb",
+    "/public/home/shiys/0selection2/code/V4/r80_reporting.py": "ba3681260b436bc64e5a96a7310d414f726a5d870bc0bed3ed7c262e7b61e0d8",
+    "/public/home/shiys/0selection2/code/V4/r77_experiment.py": "7656b3513a8f0cbe174f1bb7140537cf8d5235c96a97e0081bd919c07bfcf093",
+    "/public/home/shiys/0selection2/code/V4/R81_INTERFACE.md": "8e093d088a3b24edce9fe6bed0604e477a015b18aae5fa55b73050ab9a474247",
+    "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/identicalinit_seed2.pt": "291266bf421075ed05cd663b1c4df207063081d4562278b2d9c0068ab0b51e9b"
+  },
+  "observed_readonly_probe": {
+    "uid": 2022,
+    "gpu_raw": "Distribute Task Container.\ntask_id:1475\n0, GPU-71479e7e-f8bd-e430-66ed-f8db9f0d47be, NVIDIA GeForce RTX 4090, 2, 24564, 0\n",
+    "apps_raw": "Distribute Task Container.\ntask_id:1475\n",
+    "cuda_context_created": false
+  }
+}

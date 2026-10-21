@@ -1,0 +1,106 @@
+{
+  "n": 49,
+  "pool": [
+    "BQ",
+    "DIFUSCO",
+    "DIFUSCO500",
+    "ELG",
+    "LEHD",
+    "OMNI",
+    "T2T",
+    "T2T500"
+  ],
+  "top1": 0.20408163265306123,
+  "top1_native_ind": 0.20408163265306123,
+  "top1_fp32_argmin": 0.20408163265306123,
+  "mean_cost": 8.217907074335503,
+  "oracle_cost": 8.142167115105343,
+  "sbs_solver": "T2T",
+  "sbs_cost": 8.240435337935194,
+  "train_sbs_solver": "T2T",
+  "train_sbs_cost": 8.240435337935194,
+  "sbs_selection_split": "R84 TRAIN",
+  "sbs_top1_native_ind": 0.10204081632653061,
+  "posthoc_split_sbs_solver": "T2T500",
+  "posthoc_split_sbs_cost": 8.233445162660358,
+  "vs_sbs_pct": -0.27338681363083817,
+  "vs_oracle_pct": 0.930218677158412,
+  "actual_regret_pct": 0.9731602476530818,
+  "winner_rule": "saved native ind verified against original FP64 cost argmin; never FP32 argmin",
+  "weights_description": "R79 historical VALID-selected NSS weights; not retrained on R84/new90k",
+  "fp32_native_winner_disagreements": 1,
+  "methods": [
+    {
+      "solver": "BQ",
+      "selected_count": 13,
+      "winner_count": 22,
+      "correct_count": 7
+    },
+    {
+      "solver": "DIFUSCO",
+      "selected_count": 0,
+      "winner_count": 3,
+      "correct_count": 0
+    },
+    {
+      "solver": "DIFUSCO500",
+      "selected_count": 0,
+      "winner_count": 3,
+      "correct_count": 0
+    },
+    {
+      "solver": "ELG",
+      "selected_count": 1,
+      "winner_count": 7,
+      "correct_count": 1
+    },
+    {
+      "solver": "LEHD",
+      "selected_count": 1,
+      "winner_count": 4,
+      "correct_count": 0
+    },
+    {
+      "solver": "OMNI",
+      "selected_count": 0,
+      "winner_count": 0,
+      "correct_count": 0
+    },
+    {
+      "solver": "T2T",
+      "selected_count": 34,
+      "winner_count": 5,
+      "correct_count": 2
+    },
+    {
+      "solver": "T2T500",
+      "selected_count": 0,
+      "winner_count": 5,
+      "correct_count": 0
+    }
+  ],
+  "checkpoint": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/TSP/best.pt",
+    "sha256": "c677a8cd4ee473ee47bdedff871050827f75717c321ae9d551a3edc7bc78994b",
+    "best_epoch": 47,
+    "val_top_1": 0.389351487159729,
+    "criterion": "gap",
+    "validation_predictions": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/TSP/best_val_predictions.npz",
+      "sha256": "0f6c546c83c43afed8f443671b2e5acc0178b6ca77c17e9139ec51863b4e6b74",
+      "rows": 3895,
+      "split": "val"
+    }
+  },
+  "task": "TSP",
+  "split": "TSPLIB",
+  "data_root": "original native LIB",
+  "inference_reused": true,
+  "new_inference": false,
+  "retrained_on_new90k": false,
+  "source_prediction": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R79_NSS_new_data_batch1024/TSP/TSPLIB_predictions.npz",
+    "sha256": "87f25d2489327a04a6972e243ea3ff856016fc083383a4d72558d75c3465b206"
+  },
+  "completed_utc": "2026-10-18T00:05:29.408591+00:00"
+}

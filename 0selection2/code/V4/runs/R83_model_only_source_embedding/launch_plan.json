@@ -1,0 +1,119 @@
+{
+  "experiment": "R83",
+  "root": "/public/home/shiys/0selection2/code/V4/runs/R83_model_only_source_embedding",
+  "group": "model_only_seed2",
+  "candidate": "A_ce_only",
+  "resource": {
+    "job": 1465,
+    "node": "gpu03",
+    "index": 0,
+    "gpu_type": "3090",
+    "cap": 384,
+    "uuid": "GPU-cb24f168-9f18-f0d5-6f4a-6d2406958f50"
+  },
+  "container": [
+    "1465_gpu03",
+    "b8ced5d8a8cdafdc5006f827a0d36c319c61056a65316af4ff9937453fa0635c"
+  ],
+  "batch": 1024,
+  "seed": 2,
+  "successful_updates": 49680,
+  "eval_batch_size": 256,
+  "microcap": 384,
+  "cache": "/tmp/shiys_R76_R45A_single_reld_mt_cache",
+  "cache_reuse_only": true,
+  "embeddings": "/public/home/shiys/0selection2/code/V4/runs/R83_model_only_source_embedding/model_only_vectors.pt",
+  "explicit_main_ready_required": true,
+  "training_started": false,
+  "new_allocation": false,
+  "direct_ssh_training": false,
+  "credential_inspection": false,
+  "new_seeds": false,
+  "retries": false,
+  "commits": false,
+  "tmux": "r83_model_only_once",
+  "GPU_stages": [
+    [
+      "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+      "-B",
+      "-u",
+      "-m",
+      "code.V4.r83_experiment",
+      "train",
+      "--root",
+      "/public/home/shiys/0selection2/code/V4/runs/R83_model_only_source_embedding",
+      "--group",
+      "model_only_seed2",
+      "--prepared-root",
+      "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024",
+      "--data-root",
+      "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+      "--cache-root",
+      "/tmp/shiys_R76_R45A_single_reld_mt_cache",
+      "--embeddings",
+      "/public/home/shiys/0selection2/code/V4/runs/R83_model_only_source_embedding/model_only_vectors.pt",
+      "--device",
+      "cuda:0",
+      "--gpu-type",
+      "3090",
+      "--large-micro-cap",
+      "384",
+      "--eval-batch-size",
+      "256",
+      "--log-every",
+      "18",
+      "--wandb-mode",
+      "auto"
+    ],
+    [
+      "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+      "-B",
+      "-u",
+      "-m",
+      "code.V4.r83_launch",
+      "lib-worker",
+      "--candidate",
+      "A_ce_only",
+      "--token",
+      "<ONE_SHOT_CLAIM_TOKEN>"
+    ]
+  ],
+  "admin01_CPU_report": [
+    "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+    "-B",
+    "-u",
+    "-m",
+    "code.V4.r83_reporting",
+    "--root",
+    "/public/home/shiys/0selection2/code/V4/runs/R83_model_only_source_embedding",
+    "--group",
+    "model_only_seed2",
+    "--device",
+    "cpu",
+    "--lib-batch-size",
+    "2"
+  ],
+  "test_policy": "train invokes exactly the locked full TEST; no additional test command",
+  "report_policy": "twoLIB rc0 -> saved-prediction CPU PDF on admin01; never train again",
+  "resource_snapshot": "/public/home/shiys/0selection2/code/V4/runs/R83_model_only_source_embedding/launch_resources.json",
+  "resource_snapshot_utc": "2026-10-17T03:59:58.368622+00:00",
+  "snapshot_eligibility": {
+    "A_ce_only": {
+      "eligible": true,
+      "reason": "Previous full pipelines are terminal; NVML/process/flock gates also required"
+    },
+    "C_lr3e4": {
+      "eligible": true,
+      "reason": "Previous full pipelines are terminal; NVML/process/flock gates also required"
+    },
+    "B_batch512": {
+      "eligible": false,
+      "reason": "Four allocation/container CPUs disjoint from existing model stages are unavailable"
+    },
+    "D_code_embedding": {
+      "eligible": false,
+      "reason": "Selected GPU is not idle: exact UUID, zero compute processes/utilization and <=512 MiB required"
+    }
+  },
+  "recheck_before_claim_and_in_container": true
+}

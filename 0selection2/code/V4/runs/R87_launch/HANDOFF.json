@@ -1,0 +1,98 @@
+{
+  "scope": "R87 resource and launcher preparation only",
+  "state": "STARTUP_VERIFIED_HANDOFF_COMPLETE",
+  "model_root": "/public/home/shiys/0selection2/code/V4/runs/R87_private_method_residual",
+  "launcher_module": "code.V4.r87_launch",
+  "launcher_wrapper": "code/V4/run_v4_r87_launch.sh",
+  "documentation": "code/V4/R87_LAUNCH.md",
+  "runner_owner": "Einstein 01a154d3-23a9-7463-97b3-5be3b7ca0719",
+  "model_owner": "Wegener",
+  "model_owner_reported_tests": {
+    "passed": 5,
+    "main_focused_review": "no findings"
+  },
+  "runner_owner_reported_tests": {
+    "passed": 7,
+    "sources": "FINAL_READY_FROZEN"
+  },
+  "launcher_CPU_tests": {
+    "passed": 8,
+    "failures": 0,
+    "errors": 0
+  },
+  "launcher_CPU_test_receipt": "code/V4/runs/R87_launch/launcher_CPU_tests.json",
+  "train_test_argv_parsed": 4,
+  "CLI_parse_receipt": "code/V4/runs/R87_launch/spec_parse.json",
+  "reporter_parser_confirmed": true,
+  "LIB_report_argv_parsed": 4,
+  "total_actual_argv_parsed": 8,
+  "allocation": {
+    "job": 1475,
+    "node": "gpu05",
+    "new_allocation": false
+  },
+  "container_id": "76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6",
+  "arms": {
+    "A_shared_residual": {
+      "slot": "4090_0",
+      "gpu_uuid": "GPU-71479e7e-f8bd-e430-66ed-f8db9f0d47be",
+      "predecessor": "R85/C_cost_profile",
+      "predecessor_controller_worker_report_rc0_confirmed": true,
+      "tmux_if_main_starts": "r87_A_shared_residual",
+      "physical_host_pid": 1047104,
+      "container_train_pid": 1180297,
+      "actual_gpu_uuid": "GPU-71479e7e-f8bd-e430-66ed-f8db9f0d47be",
+      "first_cycle_finite": true,
+      "first_cycle_amp_retries": 0,
+      "predecessor_full_delivery_rc0": true,
+      "W_and_B_mode": "offline",
+      "cache_copied_bytes": 0
+    },
+    "B_private_residual": {
+      "slot": "4090_1",
+      "gpu_uuid": "GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d",
+      "predecessor": "R85/D_candidate_subset",
+      "wait_for_full_train_TEST_LIB_PDF_rc0": true,
+      "PID_exit_or_idle_GPU_sufficient": false,
+      "tmux_if_main_starts": "r87_B_private_residual",
+      "physical_host_pid": 1061896,
+      "container_train_pid": 1183702,
+      "actual_gpu_uuid": "GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d",
+      "first_cycle_finite": true,
+      "first_cycle_amp_retries": 0,
+      "predecessor_full_delivery_rc0": true,
+      "W_and_B_mode": "offline",
+      "cache_copied_bytes": 0
+    }
+  },
+  "matched_controls": {
+    "seed": 2,
+    "logical_batch": 1024,
+    "evaluation_batch": 256,
+    "large_micro_cap": 352,
+    "successful_updates": 57600,
+    "warmup_updates": 4320,
+    "evaluation_every_updates": 1440,
+    "initialization": "same prepared fresh common weights, not trained R84/R85 weights",
+    "cpus_per_arm": 4,
+    "memory_gib_per_arm": 9
+  },
+  "cache_root": "/tmp/shiys_R84_new90k_cache",
+  "cache_copied_bytes": 0,
+  "cache_array_hash_or_full_file_audit_repeated": false,
+  "W_and_B": "worker standard env/settings/netrc lookup; explicit offline argv and reason if no credential",
+  "main_thread_ready": true,
+  "ready_evidence": "R87 locked two-arm protocol; model5/runner7/launcher8 CPU PASS; matched existing4090 micro352/eval256/logical1024; exact NEW90k warm cache; main performs actual prepare/start",
+  "source_hashes_frozen": true,
+  "training_started": true,
+  "tmux_started": true,
+  "existing_processes_stopped": false,
+  "historical_source_edits": false,
+  "automatic_retry": false,
+  "remaining": [],
+  "startup_receipt": "/public/home/shiys/0selection2/code/V4/runs/R87_launch/launch_startup_check.json",
+  "all_two_first18_pass": true,
+  "main_started_each_controller_once": true,
+  "resource_observation_finished": true,
+  "additional_monitoring_added": false
+}

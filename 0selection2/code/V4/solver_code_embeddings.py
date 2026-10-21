@@ -119,7 +119,14 @@ def validate_bundle(bundle):
     for key in ('corpus_sha256', 'cache_sha256'):
         if len(bundle.get(key, '')) != 64:
             raise ValueError('Missing locked corpus/cache provenance')
-    check_vectors(bundle['vectors'], bundle['role_mask'])
+    scope = bundle.get('model_only_scope')
+    if scope is not None:
+        if (scope.get('kind') != 'model_only' or scope.get('active_roles') != ['encoder', 'decision']
+                or scope.get('no_neural_model_solvers') != ['GLOP']
+                or bundle['role_mask'][:, 2:].any()):
+            raise ValueError('Model-only vectors must exclude inference/config and declare the GLOP ID-only exception')
+    check_vectors(bundle['vectors'], bundle['role_mask'],
+                  () if scope is None else scope['no_neural_model_solvers'])
 
 
 def load_bundle(path):
@@ -236,6 +243,14 @@ def validate_corpus(corpus, snapshot=None):
         check_sensitive(chunk['text'])
         if chunk['text_sha256'] != digest(chunk['text'].encode()) or not 0 < chunk['tokens'] <= limit:
             raise ValueError('Chunk content/token count changed')
+    if 'model_only_scope' in corpus:
+        scope = corpus['model_only_scope']
+        if (scope.get('kind') != 'model_only' or scope.get('active_roles') != ['encoder', 'decision']
+                or scope.get('no_neural_model_solvers') != ['GLOP']
+                or any(c['role'] not in scope['active_roles'] or c.get('config_context') for c in corpus['chunks'])
+                or any(v['roles'][role] for s in corpus['solvers'] for v in s['variants']
+                       for role in ('inference', 'config'))):
+            raise ValueError('Model-only corpus contains excluded role/config content')
     if snapshot is not None:
         if digest(snapshot) != corpus['manifest_sha256']:
             raise ValueError('Source manifest changed; rebuild the corpus')
@@ -327,6 +342,8 @@ def assemble(corpus, cache_dir, output):
     if corpus.get('uses_assumptions'):
         bundle.update({key: corpus[key] for key in ('uses_assumptions', 'historical_bindings_verified',
                                                   'provenance_warnings', 'assumed_configurations')})
+    if 'model_only_scope' in corpus:
+        bundle['model_only_scope'] = corpus['model_only_scope']
     validate_bundle(bundle)
     output = Path(output)
     if output.exists() or output.with_suffix('.lock.json').exists():

@@ -1,0 +1,1393 @@
+{
+  "prepared_utc": "2026-10-17T17:45:37.902340+00:00",
+  "spec": {
+    "schema_version": 1,
+    "run_id": "D_attention_focal",
+    "run_dir": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/D_attention_focal",
+    "common_root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention",
+    "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+    "prepared_root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+    "cache_source": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache",
+    "cache_root": "/tmp/shiys_R84_new90k_cache",
+    "slots": [
+      "4090_1"
+    ],
+    "cpu_count": 4,
+    "memory_gib": 9,
+    "protocol": {
+      "seed": 2,
+      "logical_batch": 1024,
+      "max_successful_updates": 57600,
+      "evaluation_every_updates": 1440,
+      "warmup_updates": 4320,
+      "solver_features": "R77_handcrafted_ID_34d",
+      "training_includes_locked_TEST": true
+    },
+    "source_files": [
+      "/public/home/shiys/0selection2/code/V4/r84_experiment.py",
+      "/public/home/shiys/0selection2/code/V4/r84_reporting.py",
+      "/public/home/shiys/0selection2/code/V4/r84_attention_selector.py",
+      "/public/home/shiys/0selection2/code/V4/r84_objective.py",
+      "/public/home/shiys/0selection2/code/V4/r84_prepare.py",
+      "/public/home/shiys/0selection2/code/V4/r84_nss_reference.py",
+      "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared/prepared.json",
+      "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared/geometry_stats.json",
+      "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared/common_full_train_sbs.json",
+      "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared/identicalinit_seed2.pt"
+    ],
+    "stages": [
+      {
+        "name": "train_VALlock_TEST",
+        "device": "gpu",
+        "argv": [
+          "{python}",
+          "-B",
+          "-u",
+          "-m",
+          "code.V4.r84_experiment",
+          "train",
+          "--root",
+          "{common_root}",
+          "--arm",
+          "D_attention_focal",
+          "--prepared-root",
+          "{prepared_root}",
+          "--data-root",
+          "{data_root}",
+          "--cache-root",
+          "{cache_root}",
+          "--device",
+          "{device}",
+          "--gpu-type",
+          "{gpu_type}",
+          "--large-micro-cap",
+          "{micro_cap}",
+          "--eval-batch-size",
+          "256",
+          "--wandb-mode",
+          "offline"
+        ]
+      },
+      {
+        "name": "LIB",
+        "device": "gpu",
+        "argv": [
+          "{python}",
+          "-B",
+          "-u",
+          "-m",
+          "code.V4.r84_reporting",
+          "lib",
+          "--root",
+          "{common_root}",
+          "--arm",
+          "D_attention_focal",
+          "--device",
+          "{device}",
+          "--lib-batch-size",
+          "2"
+        ]
+      },
+      {
+        "name": "PDF",
+        "device": "cpu",
+        "argv": [
+          "{python}",
+          "-B",
+          "-u",
+          "-m",
+          "code.V4.r84_reporting",
+          "report",
+          "--root",
+          "{common_root}",
+          "--arm",
+          "D_attention_focal",
+          "--device",
+          "{device}",
+          "--lib-batch-size",
+          "2"
+        ]
+      }
+    ]
+  },
+  "cache": {
+    "source": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache",
+    "files": [
+      {
+        "path": "train/ATSP/coord_dist.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/ATSP/costs.npy",
+        "bytes": 3240128
+      },
+      {
+        "path": "train/ATSP/matrix.npy",
+        "bytes": 3240000128
+      },
+      {
+        "path": "train/ATSP/metadata.json",
+        "bytes": 7947,
+        "sha256": "c8152df527f47916f51060d786cbad08445224d8041e7214139125e512ea3b4d"
+      },
+      {
+        "path": "train/ATSP/n.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/ATSP/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "train/ATSP/winner.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/CVRP/coord_dist.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/CVRP/costs.npy",
+        "bytes": 6480128
+      },
+      {
+        "path": "train/CVRP/metadata.json",
+        "bytes": 9599,
+        "sha256": "d692211ad3d2cf8bc64df8224d113b752c4c9ea70ab95bf81eea1cb243cb36a5"
+      },
+      {
+        "path": "train/CVRP/n.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/CVRP/node.npy",
+        "bytes": 648000128
+      },
+      {
+        "path": "train/CVRP/node_geom.npy",
+        "bytes": 1944000128
+      },
+      {
+        "path": "train/CVRP/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "train/CVRP/winner.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRP/coord_dist.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRP/costs.npy",
+        "bytes": 3888128
+      },
+      {
+        "path": "train/OVRP/metadata.json",
+        "bytes": 8710,
+        "sha256": "eefbd735d1136fcd516dfa5f65775d16df63a3505803c50434057b2e7cbcc650"
+      },
+      {
+        "path": "train/OVRP/n.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRP/node.npy",
+        "bytes": 261792128
+      },
+      {
+        "path": "train/OVRP/node_geom.npy",
+        "bytes": 392688128
+      },
+      {
+        "path": "train/OVRP/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "train/OVRP/winner.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPB/coord_dist.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPB/costs.npy",
+        "bytes": 1944128
+      },
+      {
+        "path": "train/OVRPB/metadata.json",
+        "bytes": 7984,
+        "sha256": "b2fcd0cb59118ca0df005e31880ecc243b4c4cc5530c70d2bb1f4baedbc53058"
+      },
+      {
+        "path": "train/OVRPB/n.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPB/node.npy",
+        "bytes": 261792128
+      },
+      {
+        "path": "train/OVRPB/node_geom.npy",
+        "bytes": 392688128
+      },
+      {
+        "path": "train/OVRPB/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "train/OVRPB/winner.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPBL/coord_dist.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPBL/costs.npy",
+        "bytes": 1944128
+      },
+      {
+        "path": "train/OVRPBL/metadata.json",
+        "bytes": 7993,
+        "sha256": "64414ba28d4c9bf8a09bd52fe5fc0073e253624181f9e35f3623b26d6ffb727a"
+      },
+      {
+        "path": "train/OVRPBL/n.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPBL/node.npy",
+        "bytes": 261792128
+      },
+      {
+        "path": "train/OVRPBL/node_geom.npy",
+        "bytes": 392688128
+      },
+      {
+        "path": "train/OVRPBL/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "train/OVRPBL/winner.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPBLTW/coord_dist.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPBLTW/costs.npy",
+        "bytes": 1944128
+      },
+      {
+        "path": "train/OVRPBLTW/metadata.json",
+        "bytes": 8011,
+        "sha256": "e49ad116d2f14f766d04c7ac0d8701dd18252549ac6a319b25ce2ff49ffd33ac"
+      },
+      {
+        "path": "train/OVRPBLTW/n.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPBLTW/node.npy",
+        "bytes": 261792128
+      },
+      {
+        "path": "train/OVRPBLTW/node_geom.npy",
+        "bytes": 392688128
+      },
+      {
+        "path": "train/OVRPBLTW/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "train/OVRPBLTW/winner.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPBTW/coord_dist.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPBTW/costs.npy",
+        "bytes": 1944128
+      },
+      {
+        "path": "train/OVRPBTW/metadata.json",
+        "bytes": 8009,
+        "sha256": "fc622e512bcb9e5a52b3e40157df5f254a3e7ced3f481c64d84cef3c73aa26ed"
+      },
+      {
+        "path": "train/OVRPBTW/n.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPBTW/node.npy",
+        "bytes": 261792128
+      },
+      {
+        "path": "train/OVRPBTW/node_geom.npy",
+        "bytes": 392688128
+      },
+      {
+        "path": "train/OVRPBTW/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "train/OVRPBTW/winner.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPL/coord_dist.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPL/costs.npy",
+        "bytes": 3888128
+      },
+      {
+        "path": "train/OVRPL/metadata.json",
+        "bytes": 8725,
+        "sha256": "5ffd3aebe0aec07072c22204b2bf9db3356a70ce3670dc424049d9d4d71d6011"
+      },
+      {
+        "path": "train/OVRPL/n.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPL/node.npy",
+        "bytes": 261792128
+      },
+      {
+        "path": "train/OVRPL/node_geom.npy",
+        "bytes": 392688128
+      },
+      {
+        "path": "train/OVRPL/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "train/OVRPL/winner.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPLTW/coord_dist.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPLTW/costs.npy",
+        "bytes": 3888128
+      },
+      {
+        "path": "train/OVRPLTW/metadata.json",
+        "bytes": 8744,
+        "sha256": "c5196888545add1a8ad3af02973bf248c94b1a387b8e84f07fe5253ec6988b15"
+      },
+      {
+        "path": "train/OVRPLTW/n.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPLTW/node.npy",
+        "bytes": 261792128
+      },
+      {
+        "path": "train/OVRPLTW/node_geom.npy",
+        "bytes": 392688128
+      },
+      {
+        "path": "train/OVRPLTW/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "train/OVRPLTW/winner.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPTW/coord_dist.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPTW/costs.npy",
+        "bytes": 3888128
+      },
+      {
+        "path": "train/OVRPTW/metadata.json",
+        "bytes": 8731,
+        "sha256": "3128d7aaf7c18cfcc4ce35dc6d43b1aa0e8b8615bf292c7e7ba47c42f740704e"
+      },
+      {
+        "path": "train/OVRPTW/n.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/OVRPTW/node.npy",
+        "bytes": 261792128
+      },
+      {
+        "path": "train/OVRPTW/node_geom.npy",
+        "bytes": 392688128
+      },
+      {
+        "path": "train/OVRPTW/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "train/OVRPTW/winner.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/TSP/coord_dist.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/TSP/costs.npy",
+        "bytes": 5184128
+      },
+      {
+        "path": "train/TSP/metadata.json",
+        "bytes": 9076,
+        "sha256": "279e903e143c8ac21bf6eac3b65f2d6dca45775cccf3fb6735cc206caa1c3e39"
+      },
+      {
+        "path": "train/TSP/n.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/TSP/node.npy",
+        "bytes": 323352128
+      },
+      {
+        "path": "train/TSP/node_geom.npy",
+        "bytes": 1940112128
+      },
+      {
+        "path": "train/TSP/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "train/TSP/winner.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPB/coord_dist.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPB/costs.npy",
+        "bytes": 1944128
+      },
+      {
+        "path": "train/VRPB/metadata.json",
+        "bytes": 7978,
+        "sha256": "620c2848338bcb7f7c635771e034d238d4d88a9518e6649ad250a117958f8ca2"
+      },
+      {
+        "path": "train/VRPB/n.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPB/node.npy",
+        "bytes": 261792128
+      },
+      {
+        "path": "train/VRPB/node_geom.npy",
+        "bytes": 392688128
+      },
+      {
+        "path": "train/VRPB/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "train/VRPB/winner.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPBL/coord_dist.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPBL/costs.npy",
+        "bytes": 1944128
+      },
+      {
+        "path": "train/VRPBL/metadata.json",
+        "bytes": 7984,
+        "sha256": "741f1295508325052ee021c781486c8b6e219a5b62639a5c948ad12c5975d9dc"
+      },
+      {
+        "path": "train/VRPBL/n.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPBL/node.npy",
+        "bytes": 261792128
+      },
+      {
+        "path": "train/VRPBL/node_geom.npy",
+        "bytes": 392688128
+      },
+      {
+        "path": "train/VRPBL/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "train/VRPBL/winner.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPBLTW/coord_dist.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPBLTW/costs.npy",
+        "bytes": 1944128
+      },
+      {
+        "path": "train/VRPBLTW/metadata.json",
+        "bytes": 8005,
+        "sha256": "5d85d4b19bc1ec444f03fcc7a735eb1933ec1fef8f56be5bee8b3ca6c5081e9d"
+      },
+      {
+        "path": "train/VRPBLTW/n.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPBLTW/node.npy",
+        "bytes": 261792128
+      },
+      {
+        "path": "train/VRPBLTW/node_geom.npy",
+        "bytes": 392688128
+      },
+      {
+        "path": "train/VRPBLTW/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "train/VRPBLTW/winner.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPBTW/coord_dist.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPBTW/costs.npy",
+        "bytes": 1944128
+      },
+      {
+        "path": "train/VRPBTW/metadata.json",
+        "bytes": 7994,
+        "sha256": "1126c30f33007fb77f4f42b2c453a2263264a1e2234fe7e26ad525358beeb145"
+      },
+      {
+        "path": "train/VRPBTW/n.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPBTW/node.npy",
+        "bytes": 261792128
+      },
+      {
+        "path": "train/VRPBTW/node_geom.npy",
+        "bytes": 392688128
+      },
+      {
+        "path": "train/VRPBTW/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "train/VRPBTW/winner.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPL/coord_dist.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPL/costs.npy",
+        "bytes": 3888128
+      },
+      {
+        "path": "train/VRPL/metadata.json",
+        "bytes": 8707,
+        "sha256": "376d5740e6c769ba5096681448f1719a18c8ae2c54d64f60246d7e950d58ace4"
+      },
+      {
+        "path": "train/VRPL/n.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPL/node.npy",
+        "bytes": 261792128
+      },
+      {
+        "path": "train/VRPL/node_geom.npy",
+        "bytes": 392688128
+      },
+      {
+        "path": "train/VRPL/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "train/VRPL/winner.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPLTW/coord_dist.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPLTW/costs.npy",
+        "bytes": 3888128
+      },
+      {
+        "path": "train/VRPLTW/metadata.json",
+        "bytes": 8735,
+        "sha256": "678cc95867ce47c0ea13c1789f437d827fd7e753206aefd5d2a8f279c5ffccc4"
+      },
+      {
+        "path": "train/VRPLTW/n.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPLTW/node.npy",
+        "bytes": 261792128
+      },
+      {
+        "path": "train/VRPLTW/node_geom.npy",
+        "bytes": 392688128
+      },
+      {
+        "path": "train/VRPLTW/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "train/VRPLTW/winner.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPTW/coord_dist.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPTW/costs.npy",
+        "bytes": 3888128
+      },
+      {
+        "path": "train/VRPTW/metadata.json",
+        "bytes": 8724,
+        "sha256": "952d2eedbdba3e7abdff4198a40fa12ea5363573b39d25606fcf06de34578cca"
+      },
+      {
+        "path": "train/VRPTW/n.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "train/VRPTW/node.npy",
+        "bytes": 261792128
+      },
+      {
+        "path": "train/VRPTW/node_geom.npy",
+        "bytes": 392688128
+      },
+      {
+        "path": "train/VRPTW/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "train/VRPTW/winner.npy",
+        "bytes": 648128
+      },
+      {
+        "path": "val/ATSP/coord_dist.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/ATSP/costs.npy",
+        "bytes": 180128
+      },
+      {
+        "path": "val/ATSP/matrix.npy",
+        "bytes": 180000128
+      },
+      {
+        "path": "val/ATSP/metadata.json",
+        "bytes": 7907,
+        "sha256": "6b805d0b862f24fd29dd81d2ee7112e17928a632f3e34aed77548618eaebac24"
+      },
+      {
+        "path": "val/ATSP/n.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/ATSP/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "val/ATSP/winner.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/CVRP/coord_dist.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/CVRP/costs.npy",
+        "bytes": 360128
+      },
+      {
+        "path": "val/CVRP/metadata.json",
+        "bytes": 9194,
+        "sha256": "a2aa06407e681cad1dae2ba72eb51bd4ccdf7f3bfa7ae7c6de6031c89241f2dd"
+      },
+      {
+        "path": "val/CVRP/n.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/CVRP/node.npy",
+        "bytes": 36000128
+      },
+      {
+        "path": "val/CVRP/node_geom.npy",
+        "bytes": 108000128
+      },
+      {
+        "path": "val/CVRP/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "val/CVRP/winner.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRP/coord_dist.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRP/costs.npy",
+        "bytes": 216128
+      },
+      {
+        "path": "val/OVRP/metadata.json",
+        "bytes": 8311,
+        "sha256": "136e8d6b653564d5661114fe95e8a7c2afad65e10ae1a199642c3e1b2d2696b1"
+      },
+      {
+        "path": "val/OVRP/n.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRP/node.npy",
+        "bytes": 14544128
+      },
+      {
+        "path": "val/OVRP/node_geom.npy",
+        "bytes": 21816128
+      },
+      {
+        "path": "val/OVRP/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "val/OVRP/winner.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPB/coord_dist.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPB/costs.npy",
+        "bytes": 108128
+      },
+      {
+        "path": "val/OVRPB/metadata.json",
+        "bytes": 7595,
+        "sha256": "4b24b1d497ca59837091fccb9a74602f71cbfe8b71131916dbdabbcd422d2ca8"
+      },
+      {
+        "path": "val/OVRPB/n.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPB/node.npy",
+        "bytes": 14544128
+      },
+      {
+        "path": "val/OVRPB/node_geom.npy",
+        "bytes": 21816128
+      },
+      {
+        "path": "val/OVRPB/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "val/OVRPB/winner.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPBL/coord_dist.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPBL/costs.npy",
+        "bytes": 108128
+      },
+      {
+        "path": "val/OVRPBL/metadata.json",
+        "bytes": 7606,
+        "sha256": "120c17dbddd79344ec9106771bb184e03dd83dd3e85116fe6ca7fb97f6741d96"
+      },
+      {
+        "path": "val/OVRPBL/n.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPBL/node.npy",
+        "bytes": 14544128
+      },
+      {
+        "path": "val/OVRPBL/node_geom.npy",
+        "bytes": 21816128
+      },
+      {
+        "path": "val/OVRPBL/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "val/OVRPBL/winner.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPBLTW/coord_dist.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPBLTW/costs.npy",
+        "bytes": 108128
+      },
+      {
+        "path": "val/OVRPBLTW/metadata.json",
+        "bytes": 7623,
+        "sha256": "5fb1d30b6234c5da954cfc0b17991b7fef0b80e5efa104ee8af36549463bc196"
+      },
+      {
+        "path": "val/OVRPBLTW/n.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPBLTW/node.npy",
+        "bytes": 14544128
+      },
+      {
+        "path": "val/OVRPBLTW/node_geom.npy",
+        "bytes": 21816128
+      },
+      {
+        "path": "val/OVRPBLTW/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "val/OVRPBLTW/winner.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPBTW/coord_dist.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPBTW/costs.npy",
+        "bytes": 108128
+      },
+      {
+        "path": "val/OVRPBTW/metadata.json",
+        "bytes": 7615,
+        "sha256": "1d18d874cc78ce7c80ea6acb3f5db099b17c9f152e51dc7d06136d8d3528c570"
+      },
+      {
+        "path": "val/OVRPBTW/n.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPBTW/node.npy",
+        "bytes": 14544128
+      },
+      {
+        "path": "val/OVRPBTW/node_geom.npy",
+        "bytes": 21816128
+      },
+      {
+        "path": "val/OVRPBTW/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "val/OVRPBTW/winner.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPL/coord_dist.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPL/costs.npy",
+        "bytes": 216128
+      },
+      {
+        "path": "val/OVRPL/metadata.json",
+        "bytes": 8323,
+        "sha256": "5d8545fc5b7114f8cb7bdc02c3218ff955fef5d3b7b5781806c83932c345ba23"
+      },
+      {
+        "path": "val/OVRPL/n.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPL/node.npy",
+        "bytes": 14544128
+      },
+      {
+        "path": "val/OVRPL/node_geom.npy",
+        "bytes": 21816128
+      },
+      {
+        "path": "val/OVRPL/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "val/OVRPL/winner.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPLTW/coord_dist.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPLTW/costs.npy",
+        "bytes": 216128
+      },
+      {
+        "path": "val/OVRPLTW/metadata.json",
+        "bytes": 8349,
+        "sha256": "e504e6035cdedaba1f0400c23646734dfc39ddc78e35de4f3318876eff47cc92"
+      },
+      {
+        "path": "val/OVRPLTW/n.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPLTW/node.npy",
+        "bytes": 14544128
+      },
+      {
+        "path": "val/OVRPLTW/node_geom.npy",
+        "bytes": 21816128
+      },
+      {
+        "path": "val/OVRPLTW/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "val/OVRPLTW/winner.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPTW/coord_dist.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPTW/costs.npy",
+        "bytes": 216128
+      },
+      {
+        "path": "val/OVRPTW/metadata.json",
+        "bytes": 8335,
+        "sha256": "c7816ebc7264d18f6c9414e66b0f25629009040798ec85db1107093d5820e364"
+      },
+      {
+        "path": "val/OVRPTW/n.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/OVRPTW/node.npy",
+        "bytes": 14544128
+      },
+      {
+        "path": "val/OVRPTW/node_geom.npy",
+        "bytes": 21816128
+      },
+      {
+        "path": "val/OVRPTW/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "val/OVRPTW/winner.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/TSP/coord_dist.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/TSP/costs.npy",
+        "bytes": 288128
+      },
+      {
+        "path": "val/TSP/metadata.json",
+        "bytes": 8676,
+        "sha256": "47eea824b14d74e0dcab1a656411817054a245a217ead65982af51481bc548a7"
+      },
+      {
+        "path": "val/TSP/n.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/TSP/node.npy",
+        "bytes": 17964128
+      },
+      {
+        "path": "val/TSP/node_geom.npy",
+        "bytes": 107784128
+      },
+      {
+        "path": "val/TSP/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "val/TSP/winner.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPB/coord_dist.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPB/costs.npy",
+        "bytes": 108128
+      },
+      {
+        "path": "val/VRPB/metadata.json",
+        "bytes": 7587,
+        "sha256": "4db38c0c39e3d6e1c37f3355a6d4f64cdf5241e539726f3885f2e769b16f8717"
+      },
+      {
+        "path": "val/VRPB/n.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPB/node.npy",
+        "bytes": 14544128
+      },
+      {
+        "path": "val/VRPB/node_geom.npy",
+        "bytes": 21816128
+      },
+      {
+        "path": "val/VRPB/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "val/VRPB/winner.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPBL/coord_dist.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPBL/costs.npy",
+        "bytes": 108128
+      },
+      {
+        "path": "val/VRPBL/metadata.json",
+        "bytes": 7595,
+        "sha256": "fc3968007d9ba26c8bf2167852ed4328780716603b3f498cd9749d4b67e97394"
+      },
+      {
+        "path": "val/VRPBL/n.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPBL/node.npy",
+        "bytes": 14544128
+      },
+      {
+        "path": "val/VRPBL/node_geom.npy",
+        "bytes": 21816128
+      },
+      {
+        "path": "val/VRPBL/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "val/VRPBL/winner.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPBLTW/coord_dist.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPBLTW/costs.npy",
+        "bytes": 108128
+      },
+      {
+        "path": "val/VRPBLTW/metadata.json",
+        "bytes": 7614,
+        "sha256": "2c6e38c25ce455c43d66b8152f1552fec78b671870819f8dfc667842a6d20e03"
+      },
+      {
+        "path": "val/VRPBLTW/n.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPBLTW/node.npy",
+        "bytes": 14544128
+      },
+      {
+        "path": "val/VRPBLTW/node_geom.npy",
+        "bytes": 21816128
+      },
+      {
+        "path": "val/VRPBLTW/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "val/VRPBLTW/winner.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPBTW/coord_dist.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPBTW/costs.npy",
+        "bytes": 108128
+      },
+      {
+        "path": "val/VRPBTW/metadata.json",
+        "bytes": 7605,
+        "sha256": "28b12468f08a2f80fece4352c68ec40c56c5f51b0de6d18d6b6be17e05bb2c82"
+      },
+      {
+        "path": "val/VRPBTW/n.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPBTW/node.npy",
+        "bytes": 14544128
+      },
+      {
+        "path": "val/VRPBTW/node_geom.npy",
+        "bytes": 21816128
+      },
+      {
+        "path": "val/VRPBTW/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "val/VRPBTW/winner.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPL/coord_dist.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPL/costs.npy",
+        "bytes": 216128
+      },
+      {
+        "path": "val/VRPL/metadata.json",
+        "bytes": 8312,
+        "sha256": "4d088d8f4b9ce3ebb20425c7853d79f4323a910dcf30532c18859521d1e3adcc"
+      },
+      {
+        "path": "val/VRPL/n.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPL/node.npy",
+        "bytes": 14544128
+      },
+      {
+        "path": "val/VRPL/node_geom.npy",
+        "bytes": 21816128
+      },
+      {
+        "path": "val/VRPL/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "val/VRPL/winner.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPLTW/coord_dist.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPLTW/costs.npy",
+        "bytes": 216128
+      },
+      {
+        "path": "val/VRPLTW/metadata.json",
+        "bytes": 8335,
+        "sha256": "15a20b61695a438bff5ecd987b80e3cd54686e3417633ef495ec9b700aac210e"
+      },
+      {
+        "path": "val/VRPLTW/n.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPLTW/node.npy",
+        "bytes": 14544128
+      },
+      {
+        "path": "val/VRPLTW/node_geom.npy",
+        "bytes": 21816128
+      },
+      {
+        "path": "val/VRPLTW/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "val/VRPLTW/winner.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPTW/coord_dist.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPTW/costs.npy",
+        "bytes": 216128
+      },
+      {
+        "path": "val/VRPTW/metadata.json",
+        "bytes": 8324,
+        "sha256": "9ac576af3fcfaec32598bc78650489d3d105fc8446a81c606efae531807fec74"
+      },
+      {
+        "path": "val/VRPTW/n.npy",
+        "bytes": 36128
+      },
+      {
+        "path": "val/VRPTW/node.npy",
+        "bytes": 14544128
+      },
+      {
+        "path": "val/VRPTW/node_geom.npy",
+        "bytes": 21816128
+      },
+      {
+        "path": "val/VRPTW/prepare.lock",
+        "bytes": 0
+      },
+      {
+        "path": "val/VRPTW/winner.npy",
+        "bytes": 36128
+      }
+    ],
+    "bytes": 19005947954,
+    "identity_sha256": "025163313c3d3f0a3cf7ed01242a94a50da9cca7d9cd6fc68162a65b913fc922"
+  },
+  "source_sha256": {
+    "/public/home/shiys/0selection2/code/V4/r84_launch.py": "157b7e2cd5ba4a059303ce4c614271dd03b20a8629d166a435adeba407cf0a49",
+    "/public/home/shiys/0selection2/code/V4/run_v4_r84_launch.sh": "bc39ea1fc6ebacea5028f56a070467e0fc2b4ec921c41f91b81bee9bd62b2a3b",
+    "/public/home/shiys/0selection2/code/V4/r81_queue.py": "cd614a609198d127ad9a632e08044cdcb7fff27ba8e84d519856973f4c076f67",
+    "/public/home/shiys/0selection2/code/V4/r84_experiment.py": "045c3eed1c600a21b1a09a5f1a58ebab410d96f4cbb8f4d5f3c62b34f4d0091d",
+    "/public/home/shiys/0selection2/code/V4/r84_reporting.py": "943b51259d4a07b81ddeb896fc2f6490d93321378eeaa9afb8240a54e0fbaf21",
+    "/public/home/shiys/0selection2/code/V4/r84_attention_selector.py": "eb0b9086cc734fac24dca990dac010a1f64634728dec8099c13c82f8a98a6edb",
+    "/public/home/shiys/0selection2/code/V4/r84_objective.py": "ff946ed1d26cf79386ef7c26d462122d68dc080904a937b975be79037326f14d",
+    "/public/home/shiys/0selection2/code/V4/r84_prepare.py": "9f46f5cc1ed71cff94d6c57b93b931ef256196b979c9fb42ba9fbc44ff27d733",
+    "/public/home/shiys/0selection2/code/V4/r84_nss_reference.py": "59d698a4bfa3049e02fdb0ee43fd9d26b45f250913fc9be102e66a6008f6da36",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared/prepared.json": "a3877c3d981d18c7e1821314736dc1a0381ecc68e74e9d842b96c24f8fa454f1",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared/geometry_stats.json": "382aba5e74ae4f49ba7dc651b66425efbaaee6bfff64095594e14bc4c388f33b",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared/common_full_train_sbs.json": "d3b99a0ed9cd8bf48572d235c3ee366c4399899015aaaa0cdeb06ae85a0c4c70",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared/identicalinit_seed2.pt": "291266bf421075ed05cd663b1c4df207063081d4562278b2d9c0068ab0b51e9b"
+  },
+  "commands": {
+    "4090_1": [
+      {
+        "name": "train_VALlock_TEST",
+        "device": "gpu",
+        "argv": [
+          "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+          "-B",
+          "-u",
+          "-m",
+          "code.V4.r84_experiment",
+          "train",
+          "--root",
+          "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention",
+          "--arm",
+          "D_attention_focal",
+          "--prepared-root",
+          "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+          "--data-root",
+          "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+          "--cache-root",
+          "/tmp/shiys_R84_new90k_cache",
+          "--device",
+          "cuda:0",
+          "--gpu-type",
+          "4090",
+          "--large-micro-cap",
+          "352",
+          "--eval-batch-size",
+          "256",
+          "--wandb-mode",
+          "offline"
+        ]
+      },
+      {
+        "name": "LIB",
+        "device": "gpu",
+        "argv": [
+          "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+          "-B",
+          "-u",
+          "-m",
+          "code.V4.r84_reporting",
+          "lib",
+          "--root",
+          "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention",
+          "--arm",
+          "D_attention_focal",
+          "--device",
+          "cuda:0",
+          "--lib-batch-size",
+          "2"
+        ]
+      },
+      {
+        "name": "PDF",
+        "device": "cpu",
+        "argv": [
+          "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+          "-B",
+          "-u",
+          "-m",
+          "code.V4.r84_reporting",
+          "report",
+          "--root",
+          "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention",
+          "--arm",
+          "D_attention_focal",
+          "--device",
+          "cpu",
+          "--lib-batch-size",
+          "2"
+        ]
+      }
+    ]
+  },
+  "training_started": false,
+  "main_thread_ready": false
+}

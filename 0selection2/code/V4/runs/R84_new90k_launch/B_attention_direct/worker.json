@@ -1,0 +1,89 @@
+{
+  "started_utc": "2026-10-17T17:45:47.452467+00:00",
+  "container_id": "76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6",
+  "slot": "4090_0",
+  "gpu_uuid": "GPU-71479e7e-f8bd-e430-66ed-f8db9f0d47be",
+  "cpus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "state": "complete",
+  "automatic_retry": false,
+  "stages": [
+    {
+      "name": "train_VALlock_TEST",
+      "device": "gpu",
+      "argv": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r84_experiment",
+        "train",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention",
+        "--arm",
+        "B_attention_direct",
+        "--prepared-root",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+        "--data-root",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+        "--cache-root",
+        "/tmp/shiys_R84_new90k_cache",
+        "--device",
+        "cuda:0",
+        "--gpu-type",
+        "4090",
+        "--large-micro-cap",
+        "352",
+        "--eval-batch-size",
+        "256",
+        "--wandb-mode",
+        "offline"
+      ],
+      "started_utc": "2026-10-17T17:47:33.464121+00:00",
+      "state": "complete",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_launch/B_attention_direct/train_VALlock_TEST.log",
+      "pid": 897114,
+      "exit_status": 0,
+      "finished_utc": "2026-10-17T22:34:32.018287+00:00"
+    },
+    {
+      "name": "LIB",
+      "device": "gpu",
+      "argv": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r84_reporting",
+        "lib",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention",
+        "--arm",
+        "B_attention_direct",
+        "--device",
+        "cuda:0",
+        "--lib-batch-size",
+        "2"
+      ],
+      "started_utc": "2026-10-17T22:34:32.038392+00:00",
+      "state": "complete",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_launch/B_attention_direct/LIB.log",
+      "pid": 973941,
+      "exit_status": 0,
+      "finished_utc": "2026-10-17T22:34:37.673788+00:00"
+    }
+  ],
+  "cache": {
+    "root": "/tmp/shiys_R84_new90k_cache",
+    "bytes": 19005947954,
+    "files": 286,
+    "identity_sha256": "025163313c3d3f0a3cf7ed01242a94a50da9cca7d9cd6fc68162a65b913fc922"
+  },
+  "phase": "LIB",
+  "exit_status": 0,
+  "finished_utc": "2026-10-17T22:34:37.676436+00:00"
+}

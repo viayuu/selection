@@ -1,0 +1,460 @@
+{
+  "captured_utc": "2026-10-15T15:13:22.288428+00:00",
+  "cpu_only": true,
+  "gpu_query": false,
+  "cpus_by_arm": {
+    "A_ce_only": [
+      6,
+      7,
+      62,
+      63
+    ],
+    "C_lr3e4": [
+      8,
+      12,
+      13,
+      14,
+      15,
+      32,
+      64,
+      88
+    ],
+    "B_batch512": [
+      0,
+      1,
+      72,
+      73
+    ],
+    "D_code_embedding": [
+      0,
+      1,
+      2,
+      3,
+      36,
+      74,
+      108
+    ]
+  },
+  "nodes": {
+    "gpu03": {
+      "captured_utc": "2026-10-15T15:13:22.995683+00:00",
+      "candidate": "A_ce_only",
+      "allocation": {
+        "job": 1465,
+        "state": "RUNNING",
+        "node": "gpu03",
+        "cpus": [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          64,
+          65,
+          66,
+          67
+        ],
+        "cpu_limit": 10,
+        "memory_bytes": 21474836480,
+        "gpu_count": 2
+      },
+      "container": {
+        "name": "1465_gpu03",
+        "id": "b8ced5d8a8cdafdc5006f827a0d36c319c61056a65316af4ff9937453fa0635c",
+        "memory_limit_bytes": 21474836480,
+        "allowed_cpus": [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          64,
+          65,
+          66,
+          67
+        ]
+      },
+      "processes": {
+        "A_ce_only": [
+          {
+            "pid": 3893291,
+            "command": [
+              "python",
+              "-B",
+              "-u",
+              "-m",
+              "code.V4.r80_launch",
+              "worker",
+              "A_ce_only",
+              ""
+            ],
+            "namespace_pids": [
+              3893291
+            ],
+            "cpus": [
+              6,
+              7,
+              62,
+              63
+            ]
+          },
+          {
+            "pid": 3896328,
+            "command": [
+              "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+              "-B",
+              "-u",
+              "-m",
+              "code.V4.r80_experiment",
+              "train",
+              "--root",
+              "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation",
+              "--arm",
+              "A_ce_only",
+              "--data-root",
+              "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+              "--cache-root",
+              "/tmp/shiys_R76_R45A_single_reld_mt_cache",
+              "--gpu-type",
+              "3090",
+              "--large-micro-cap",
+              "384",
+              "--device",
+              "cuda:0",
+              "--eval-batch-size",
+              "256",
+              "--log-every",
+              "18",
+              "--wandb-mode",
+              "offline",
+              ""
+            ],
+            "namespace_pids": [
+              3896328
+            ],
+            "cpus": [
+              6,
+              7,
+              62,
+              63
+            ]
+          }
+        ],
+        "C_lr3e4": [
+          {
+            "pid": 898598,
+            "command": [
+              "python",
+              "-B",
+              "-u",
+              "-m",
+              "code.V4.r80_launch",
+              "container-entry",
+              "C_lr3e4",
+              ""
+            ],
+            "namespace_pids": [
+              898598
+            ],
+            "cpus": [
+              8,
+              32,
+              64,
+              88
+            ]
+          },
+          {
+            "pid": 980049,
+            "command": [
+              "python",
+              "-B",
+              "-u",
+              "-m",
+              "code.V4.r80_launch",
+              "container-worker",
+              "C_lr3e4",
+              ""
+            ],
+            "namespace_pids": [
+              980049,
+              1410906
+            ],
+            "cpus": [
+              12,
+              13,
+              14,
+              15
+            ]
+          },
+          {
+            "pid": 983221,
+            "command": [
+              "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+              "-B",
+              "-u",
+              "-m",
+              "code.V4.r80_experiment",
+              "train",
+              "--root",
+              "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation",
+              "--arm",
+              "C_lr3e4",
+              "--data-root",
+              "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+              "--cache-root",
+              "/tmp/shiys_R76_R45A_single_reld_mt_cache",
+              "--gpu-type",
+              "3090",
+              "--large-micro-cap",
+              "384",
+              "--device",
+              "cuda:0",
+              "--eval-batch-size",
+              "256",
+              "--log-every",
+              "18",
+              "--wandb-mode",
+              "offline",
+              ""
+            ],
+            "namespace_pids": [
+              983221,
+              1410954
+            ],
+            "cpus": [
+              12,
+              13,
+              14,
+              15
+            ]
+          }
+        ]
+      },
+      "allowed_cpus": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        64,
+        65,
+        66,
+        67
+      ],
+      "cpu_only": true
+    },
+    "gpu05": {
+      "captured_utc": "2026-10-15T15:13:23.797136+00:00",
+      "candidate": "B_batch512",
+      "allocation": {
+        "job": 1475,
+        "state": "RUNNING",
+        "node": "gpu05",
+        "cpus": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          72,
+          73,
+          74,
+          75
+        ],
+        "cpu_limit": 10,
+        "memory_bytes": 21474836480,
+        "gpu_count": 2
+      },
+      "container": {
+        "name": "1475_gpu05",
+        "id": "76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6",
+        "memory_limit_bytes": 21474836480,
+        "allowed_cpus": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          72,
+          73,
+          74,
+          75
+        ]
+      },
+      "processes": {
+        "B_batch512": [
+          {
+            "pid": 1637422,
+            "command": [
+              "python",
+              "-B",
+              "-u",
+              "-m",
+              "code.V4.r80_launch",
+              "worker",
+              "B_batch512",
+              ""
+            ],
+            "namespace_pids": [
+              1637422
+            ],
+            "cpus": [
+              0,
+              1,
+              72,
+              73
+            ]
+          },
+          {
+            "pid": 1637595,
+            "command": [
+              "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+              "-B",
+              "-u",
+              "-m",
+              "code.V4.r80_experiment",
+              "train",
+              "--root",
+              "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation",
+              "--arm",
+              "B_batch512",
+              "--data-root",
+              "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+              "--cache-root",
+              "/tmp/shiys_R76_R45A_single_reld_mt_cache",
+              "--gpu-type",
+              "4090",
+              "--large-micro-cap",
+              "352",
+              "--device",
+              "cuda:0",
+              "--eval-batch-size",
+              "256",
+              "--log-every",
+              "18",
+              "--wandb-mode",
+              "offline",
+              ""
+            ],
+            "namespace_pids": [
+              1637595
+            ],
+            "cpus": [
+              0,
+              1,
+              72,
+              73
+            ]
+          }
+        ],
+        "D_code_embedding": [
+          {
+            "pid": 1678925,
+            "command": [
+              "python",
+              "-B",
+              "-u",
+              "-m",
+              "code.V4.r80_launch",
+              "container-entry",
+              "D_code_embedding",
+              ""
+            ],
+            "namespace_pids": [
+              1678925
+            ],
+            "cpus": [
+              2,
+              36,
+              74,
+              108
+            ]
+          },
+          {
+            "pid": 1681221,
+            "command": [
+              "python",
+              "-B",
+              "-u",
+              "-m",
+              "code.V4.r80_launch",
+              "container-worker",
+              "D_code_embedding",
+              ""
+            ],
+            "namespace_pids": [
+              1681221,
+              219999
+            ],
+            "cpus": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "pid": 1681397,
+            "command": [
+              "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+              "-B",
+              "-u",
+              "-m",
+              "code.V4.r80_experiment",
+              "train",
+              "--root",
+              "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation",
+              "--arm",
+              "D_code_embedding",
+              "--data-root",
+              "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+              "--cache-root",
+              "/tmp/shiys_R76_R45A_single_reld_mt_cache",
+              "--gpu-type",
+              "4090",
+              "--large-micro-cap",
+              "352",
+              "--device",
+              "cuda:0",
+              "--eval-batch-size",
+              "256",
+              "--log-every",
+              "18",
+              "--wandb-mode",
+              "offline",
+              ""
+            ],
+            "namespace_pids": [
+              1681397,
+              220045
+            ],
+            "cpus": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        ]
+      },
+      "allowed_cpus": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        72,
+        73,
+        74,
+        75
+      ],
+      "cpu_only": true
+    }
+  }
+}

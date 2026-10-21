@@ -1,0 +1,2008 @@
+{
+  "experiment": "R89",
+  "state": "complete",
+  "bounded_observation": true,
+  "bounded_seconds": 300,
+  "captured_utc": "2026-10-20T03:40:22.474562+00:00",
+  "completed_utc": "2026-10-20T03:42:32.744681+00:00",
+  "real_resource_snapshots": 1,
+  "resource_evidence": "/public/home/shiys/0selection2/code/V4/runs/R89_launch/startup_resources_gpu05.json",
+  "transport_evidence": "/public/home/shiys/0selection2/code/V4/runs/R89_launch/startup_resources_transport.json",
+  "no_training_start_or_restart_by_observer": true,
+  "no_source_edits": true,
+  "cache_audit_repeated": false,
+  "cache_copy_bytes": 0,
+  "waited_for_validation": false,
+  "R88_untouched": true,
+  "automatic_retry": false,
+  "arms": {
+    "A_adamw": {
+      "slot": "4090_0",
+      "node": "gpu05",
+      "physical_host_pid": 1561255,
+      "container_train_pid": 1271431,
+      "namespace_pids": [
+        1271431,
+        1561255
+      ],
+      "gpu_uuid": "GPU-71479e7e-f8bd-e430-66ed-f8db9f0d47be",
+      "GPU_utilization_pct": 99,
+      "GPU_memory_used_mib": 19124,
+      "process_cgroup": "12:memory:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n11:cpuset:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n10:blkio:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n9:hugetlb:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n8:devices:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n7:perf_event:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n6:rdma:/\n5:freezer:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n4:pids:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n3:net_cls,net_prio:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n2:cpu,cpuacct:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n1:name=systemd:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n",
+      "process_state": "State:\tR (running)",
+      "container_id": "76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6",
+      "cpus": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "command": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r89_experiment",
+        "train",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry",
+        "--arm",
+        "A_adamw",
+        "--prepared-root",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+        "--data-root",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+        "--cache-root",
+        "/tmp/shiys_R84_new90k_cache",
+        "--protocol-lock",
+        "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry/protocol_lock.json",
+        "--gpu-type",
+        "4090",
+        "--large-micro-cap",
+        "352",
+        "--eval-batch-size",
+        "256",
+        "--device",
+        "cuda:0",
+        "--wandb-mode",
+        "offline"
+      ],
+      "first_full18_cycle": {
+        "updated_utc": "2026-10-20T03:39:03.238433+00:00",
+        "successful_updates": 18,
+        "max_updates": 57600,
+        "problem": "VRPBTW",
+        "lr": 4.166666666666667e-07,
+        "consistency_weight": 0.0014583333333333332,
+        "sample_exposures": 18432,
+        "seconds_per_update": 0.32195684627772103,
+        "samples_per_second": 3180.5504738877157,
+        "amp_retries": 0,
+        "updates_by_problem": {
+          "VRPL": 1,
+          "OVRPBL": 1,
+          "OVRPL": 1,
+          "OVRP": 1,
+          "VRPB": 1,
+          "CVRP": 1,
+          "OVRPB": 1,
+          "VRPBLTW": 1,
+          "OVRPLTW": 1,
+          "VRPLTW": 1,
+          "OVRPTW": 1,
+          "VRPBL": 1,
+          "OVRPBLTW": 1,
+          "OVRPBTW": 1,
+          "TSP": 1,
+          "ATSP": 1,
+          "VRPTW": 1,
+          "VRPBTW": 1
+        },
+        "muon_step_applied": 0.0,
+        "muon_direction_rms": 0.0,
+        "muon_momentum_rms": 0.0,
+        "muon_matrices_updated": 0.0,
+        "optimizer_step_applied": 1.0,
+        "loss": 1.0027659071816337,
+        "ce": 1.4791759629216459,
+        "cmp": 0.6683145886701014,
+        "risk": 12.557091972066296,
+        "kl": 0.0031945721918115546,
+        "true3": 0.6621469705262117,
+        "pred3": 0.677950660077234,
+        "all_pairs": 0.6705496464338567,
+        "grad_norm": 2.0060910880565643
+      },
+      "PART_KEYS": [
+        "loss",
+        "ce",
+        "cmp",
+        "risk",
+        "kl",
+        "true3",
+        "pred3",
+        "all_pairs",
+        "grad_norm"
+      ],
+      "finite_first_PART_KEYS": {
+        "loss": true,
+        "ce": true,
+        "cmp": true,
+        "risk": true,
+        "kl": true,
+        "true3": true,
+        "pred3": true,
+        "all_pairs": true,
+        "grad_norm": true
+      },
+      "latest_status": {
+        "experiment": "R89",
+        "arm": "A_adamw",
+        "phase": "training",
+        "pid": 1271431,
+        "host": "76045731f6b4",
+        "gpu": "GPU-71479e7e-f8bd-e430-66ed-f8db9f0d47be",
+        "gpu_type": "4090",
+        "device": "cuda:0",
+        "updated_utc": "2026-10-20T03:42:29.680293+00:00",
+        "successful_updates": 756,
+        "step": 756,
+        "max_successful_updates": 57600,
+        "sample_exposures": 774144,
+        "state_hash": "8c07cbb75ba1b965f2d89c8b2001d248da535afb4daabdd056625db2b12fb967",
+        "eta_seconds": 15958.280411038386,
+        "max_updates": 57600,
+        "problem": "OVRPBL",
+        "lr": 1.75e-05,
+        "consistency_weight": 0.06124999999999999,
+        "seconds_per_update": 0.28073816781082234,
+        "samples_per_second": 3647.526832511177,
+        "amp_retries": 0,
+        "updates_by_problem": {
+          "VRPL": 42,
+          "OVRPBL": 42,
+          "OVRPL": 42,
+          "OVRP": 42,
+          "VRPB": 42,
+          "CVRP": 42,
+          "OVRPB": 42,
+          "VRPBLTW": 42,
+          "OVRPLTW": 42,
+          "VRPLTW": 42,
+          "OVRPTW": 42,
+          "VRPBL": 42,
+          "OVRPBLTW": 42,
+          "OVRPBTW": 42,
+          "TSP": 42,
+          "ATSP": 42,
+          "VRPTW": 42,
+          "VRPBTW": 42
+        },
+        "muon_step_applied": 0.0,
+        "muon_direction_rms": 0.0,
+        "muon_momentum_rms": 0.0,
+        "muon_matrices_updated": 0.0,
+        "optimizer_step_applied": 1.0,
+        "loss": 0.7479433478669277,
+        "ce": 1.1957847836806819,
+        "cmp": 0.5636032391068521,
+        "risk": 6.599056208427384,
+        "kl": 0.005158021347645363,
+        "true3": 0.5559840300687091,
+        "pred3": 0.5817588745966238,
+        "all_pairs": 0.560364757472324,
+        "grad_norm": 1.6264581744406352
+      },
+      "finite_latest_PART_KEYS": {
+        "loss": true,
+        "ce": true,
+        "cmp": true,
+        "risk": true,
+        "kl": true,
+        "true3": true,
+        "pred3": true,
+        "all_pairs": true,
+        "grad_norm": true
+      },
+      "optimizer_initialization_evidence": "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry/A_adamw/optimizer_initialization.json",
+      "actual_optimizer": {
+        "optimizer_class": "torch.optim.adamw.AdamW",
+        "auxiliary_optimizer_class": null,
+        "groups": [
+          {
+            "name": "group0",
+            "tensor_count": 148,
+            "parameter_count": 1842953,
+            "parameter_names": [
+              "instance_encoder.cls_token",
+              "instance_encoder.coord_bias_scale",
+              "instance_encoder.matrix_bias_scale",
+              "instance_encoder.coord_proj.weight",
+              "instance_encoder.coord_proj.bias",
+              "instance_encoder.geometry_residual.projection.0.weight",
+              "instance_encoder.geometry_residual.projection.0.bias",
+              "instance_encoder.geometry_residual.projection.2.weight",
+              "instance_encoder.geometry_residual.projection.2.bias",
+              "instance_encoder.matrix_proj.weight",
+              "instance_encoder.matrix_proj.bias",
+              "instance_encoder.stats_token_proj.weight",
+              "instance_encoder.stats_token_proj.bias",
+              "instance_encoder.condition_encoder.problem_emb.weight",
+              "instance_encoder.condition_encoder.coord_dist_emb.weight",
+              "instance_encoder.condition_encoder.kind_emb.weight",
+              "instance_encoder.condition_encoder.cbits_proj.weight",
+              "instance_encoder.condition_encoder.desc_proj.weight",
+              "instance_encoder.condition_encoder.stats_proj.weight",
+              "instance_encoder.condition_encoder.stats_proj.bias",
+              "instance_encoder.condition_encoder.n_proj.weight",
+              "instance_encoder.condition_encoder.n_proj.bias",
+              "instance_encoder.condition_encoder.norm.weight",
+              "instance_encoder.condition_encoder.norm.bias",
+              "instance_encoder.layers.0.attn.Wq.weight",
+              "instance_encoder.layers.0.attn.Wk.weight",
+              "instance_encoder.layers.0.attn.Wv.weight",
+              "instance_encoder.layers.0.attn.out.weight",
+              "instance_encoder.layers.0.attn.out.bias",
+              "instance_encoder.layers.0.add_norm_1.norm.weight",
+              "instance_encoder.layers.0.add_norm_1.norm.bias",
+              "instance_encoder.layers.0.ffn.net.0.weight",
+              "instance_encoder.layers.0.ffn.net.0.bias",
+              "instance_encoder.layers.0.ffn.net.3.weight",
+              "instance_encoder.layers.0.ffn.net.3.bias",
+              "instance_encoder.layers.0.add_norm_2.norm.weight",
+              "instance_encoder.layers.0.add_norm_2.norm.bias",
+              "instance_encoder.layers.1.attn.Wq.weight",
+              "instance_encoder.layers.1.attn.Wk.weight",
+              "instance_encoder.layers.1.attn.Wv.weight",
+              "instance_encoder.layers.1.attn.out.weight",
+              "instance_encoder.layers.1.attn.out.bias",
+              "instance_encoder.layers.1.add_norm_1.norm.weight",
+              "instance_encoder.layers.1.add_norm_1.norm.bias",
+              "instance_encoder.layers.1.ffn.net.0.weight",
+              "instance_encoder.layers.1.ffn.net.0.bias",
+              "instance_encoder.layers.1.ffn.net.3.weight",
+              "instance_encoder.layers.1.ffn.net.3.bias",
+              "instance_encoder.layers.1.add_norm_2.norm.weight",
+              "instance_encoder.layers.1.add_norm_2.norm.bias",
+              "instance_encoder.layers.2.attn.Wq.weight",
+              "instance_encoder.layers.2.attn.Wk.weight",
+              "instance_encoder.layers.2.attn.Wv.weight",
+              "instance_encoder.layers.2.attn.out.weight",
+              "instance_encoder.layers.2.attn.out.bias",
+              "instance_encoder.layers.2.add_norm_1.norm.weight",
+              "instance_encoder.layers.2.add_norm_1.norm.bias",
+              "instance_encoder.layers.2.ffn.net.0.weight",
+              "instance_encoder.layers.2.ffn.net.0.bias",
+              "instance_encoder.layers.2.ffn.net.3.weight",
+              "instance_encoder.layers.2.ffn.net.3.bias",
+              "instance_encoder.layers.2.add_norm_2.norm.weight",
+              "instance_encoder.layers.2.add_norm_2.norm.bias",
+              "instance_encoder.layers.3.attn.Wq.weight",
+              "instance_encoder.layers.3.attn.Wk.weight",
+              "instance_encoder.layers.3.attn.Wv.weight",
+              "instance_encoder.layers.3.attn.out.weight",
+              "instance_encoder.layers.3.attn.out.bias",
+              "instance_encoder.layers.3.add_norm_1.norm.weight",
+              "instance_encoder.layers.3.add_norm_1.norm.bias",
+              "instance_encoder.layers.3.ffn.net.0.weight",
+              "instance_encoder.layers.3.ffn.net.0.bias",
+              "instance_encoder.layers.3.ffn.net.3.weight",
+              "instance_encoder.layers.3.ffn.net.3.bias",
+              "instance_encoder.layers.3.add_norm_2.norm.weight",
+              "instance_encoder.layers.3.add_norm_2.norm.bias",
+              "solver_encoder.solver_emb.weight",
+              "solver_encoder.feature_mlp.0.weight",
+              "solver_encoder.feature_mlp.0.bias",
+              "solver_encoder.feature_mlp.3.weight",
+              "solver_encoder.feature_mlp.3.bias",
+              "solver_encoder.norm.weight",
+              "solver_encoder.norm.bias",
+              "joint_layers.0.node_update.attn.Wq.weight",
+              "joint_layers.0.node_update.attn.Wk.weight",
+              "joint_layers.0.node_update.attn.Wv.weight",
+              "joint_layers.0.node_update.attn.out.weight",
+              "joint_layers.0.node_update.attn.out.bias",
+              "joint_layers.0.node_update.ffn.net.0.weight",
+              "joint_layers.0.node_update.ffn.net.0.bias",
+              "joint_layers.0.node_update.ffn.net.3.weight",
+              "joint_layers.0.node_update.ffn.net.3.bias",
+              "joint_layers.0.node_update.norm1.weight",
+              "joint_layers.0.node_update.norm1.bias",
+              "joint_layers.0.node_update.norm2.weight",
+              "joint_layers.0.node_update.norm2.bias",
+              "joint_layers.0.solver_update.attn.Wq.weight",
+              "joint_layers.0.solver_update.attn.Wk.weight",
+              "joint_layers.0.solver_update.attn.Wv.weight",
+              "joint_layers.0.solver_update.attn.out.weight",
+              "joint_layers.0.solver_update.attn.out.bias",
+              "joint_layers.0.solver_update.ffn.net.0.weight",
+              "joint_layers.0.solver_update.ffn.net.0.bias",
+              "joint_layers.0.solver_update.ffn.net.3.weight",
+              "joint_layers.0.solver_update.ffn.net.3.bias",
+              "joint_layers.0.solver_update.norm1.weight",
+              "joint_layers.0.solver_update.norm1.bias",
+              "joint_layers.0.solver_update.norm2.weight",
+              "joint_layers.0.solver_update.norm2.bias",
+              "joint_layers.1.node_update.attn.Wq.weight",
+              "joint_layers.1.node_update.attn.Wk.weight",
+              "joint_layers.1.node_update.attn.Wv.weight",
+              "joint_layers.1.node_update.attn.out.weight",
+              "joint_layers.1.node_update.attn.out.bias",
+              "joint_layers.1.node_update.ffn.net.0.weight",
+              "joint_layers.1.node_update.ffn.net.0.bias",
+              "joint_layers.1.node_update.ffn.net.3.weight",
+              "joint_layers.1.node_update.ffn.net.3.bias",
+              "joint_layers.1.node_update.norm1.weight",
+              "joint_layers.1.node_update.norm1.bias",
+              "joint_layers.1.node_update.norm2.weight",
+              "joint_layers.1.node_update.norm2.bias",
+              "joint_layers.1.solver_update.attn.Wq.weight",
+              "joint_layers.1.solver_update.attn.Wk.weight",
+              "joint_layers.1.solver_update.attn.Wv.weight",
+              "joint_layers.1.solver_update.attn.out.weight",
+              "joint_layers.1.solver_update.attn.out.bias",
+              "joint_layers.1.solver_update.ffn.net.0.weight",
+              "joint_layers.1.solver_update.ffn.net.0.bias",
+              "joint_layers.1.solver_update.ffn.net.3.weight",
+              "joint_layers.1.solver_update.ffn.net.3.bias",
+              "joint_layers.1.solver_update.norm1.weight",
+              "joint_layers.1.solver_update.norm1.bias",
+              "joint_layers.1.solver_update.norm2.weight",
+              "joint_layers.1.solver_update.norm2.bias",
+              "pool.0.weight",
+              "pool.0.bias",
+              "pool.2.weight",
+              "pool.2.bias",
+              "decoder.Wq.weight",
+              "decoder.Wk.weight",
+              "decoder.Wv.weight",
+              "decoder.out.weight",
+              "decoder.out.bias",
+              "score_head.0.weight",
+              "score_head.0.bias",
+              "score_head.3.weight",
+              "score_head.3.bias"
+            ],
+            "parameter_shapes": [
+              [
+                1,
+                1,
+                128
+              ],
+              [
+                4
+              ],
+              [
+                4
+              ],
+              [
+                128,
+                8
+              ],
+              [
+                128
+              ],
+              [
+                64,
+                21
+              ],
+              [
+                64
+              ],
+              [
+                128,
+                64
+              ],
+              [
+                128
+              ],
+              [
+                128,
+                8
+              ],
+              [
+                128
+              ],
+              [
+                128,
+                12
+              ],
+              [
+                128
+              ],
+              [
+                18,
+                128
+              ],
+              [
+                5,
+                128
+              ],
+              [
+                2,
+                128
+              ],
+              [
+                128,
+                5
+              ],
+              [
+                128,
+                16
+              ],
+              [
+                128,
+                12
+              ],
+              [
+                128
+              ],
+              [
+                128,
+                1
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                512,
+                128
+              ],
+              [
+                512
+              ],
+              [
+                128,
+                512
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                512,
+                128
+              ],
+              [
+                512
+              ],
+              [
+                128,
+                512
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                512,
+                128
+              ],
+              [
+                512
+              ],
+              [
+                128,
+                512
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                512,
+                128
+              ],
+              [
+                512
+              ],
+              [
+                128,
+                512
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                22,
+                128
+              ],
+              [
+                128,
+                34
+              ],
+              [
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128
+              ],
+              [
+                512,
+                128
+              ],
+              [
+                512
+              ],
+              [
+                128,
+                512
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128
+              ],
+              [
+                512,
+                128
+              ],
+              [
+                512
+              ],
+              [
+                128,
+                512
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128
+              ],
+              [
+                512,
+                128
+              ],
+              [
+                512
+              ],
+              [
+                128,
+                512
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128
+              ],
+              [
+                512,
+                128
+              ],
+              [
+                512
+              ],
+              [
+                128,
+                512
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128,
+                256
+              ],
+              [
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128
+              ],
+              [
+                256,
+                384
+              ],
+              [
+                256
+              ],
+              [
+                1,
+                256
+              ],
+              [
+                1
+              ]
+            ],
+            "settings": {
+              "lr": 0.0001,
+              "betas": [
+                0.9,
+                0.999
+              ],
+              "eps": 1e-08,
+              "weight_decay": 0.0001,
+              "amsgrad": false,
+              "foreach": null,
+              "maximize": false,
+              "capturable": false,
+              "differentiable": false,
+              "fused": null
+            }
+          }
+        ],
+        "provenance": null,
+        "applied_step_evidence": "first full18 and latest actual optimizer.step diagnostics, not configuration flags",
+        "muon_step_applied_is_per_step_not_cumulative": true,
+        "model_forward_dtype": "original FP16 autocast"
+      },
+      "controls": {
+        "logical_batch": 1024,
+        "large_micro_cap": 352,
+        "eval_batch": 256,
+        "seed": 2,
+        "max_updates": 57600,
+        "warmup_updates": 4320,
+        "eval_every_updates": 1440,
+        "role_slot": 3,
+        "model_role_arm": "B_execution_anchor"
+      },
+      "predecessor_evidence": "/public/home/shiys/0selection2/code/V4/runs/R89_launch/A_adamw/predecessor_complete.json",
+      "cache": {
+        "root": "/tmp/shiys_R84_new90k_cache",
+        "bytes": 19005947954,
+        "files": 250,
+        "identity_sha256": "e070f4c96a6059ddb41f50032713e9b85dbfa978b74383c0ca1189aa64c6b93a",
+        "splits": [
+          "train",
+          "val"
+        ],
+        "mode": "existing_read_only",
+        "copied_bytes": 0,
+        "preprocessing": false,
+        "array_contents_read": false,
+        "test_cache_ignored": true,
+        "cache_audit_repeated": false,
+        "validation_snapshot": "/public/home/shiys/0selection2/code/V4/runs/R85_launch/resources.json"
+      },
+      "wandb_lookup": {
+        "enabled": true,
+        "project": "selector",
+        "entity": "yjkds-southern-university-of-science-technology",
+        "checked_utc": "2026-10-20T03:38:44.881099+00:00",
+        "lookup": "standard W&B API: environment/settings/netrc",
+        "credential_present": false,
+        "selected_mode": "offline",
+        "offline_reason": "No existing W&B credential found; no login prompt was started"
+      },
+      "wandb_receipt": {
+        "requested": "offline",
+        "mode": "offline",
+        "fallback_reason": null,
+        "project": "selector",
+        "entity": "yjkds-southern-university-of-science-technology",
+        "run_id": "r89-5eecfd41602f1960",
+        "url": null,
+        "updated_utc": "2026-10-20T03:38:56.559775+00:00"
+      },
+      "checks": {
+        "predecessor_full_delivery_and_comparison_rc0": true,
+        "exact_UUID": true,
+        "actual_NVML_PID_and_namespace": true,
+        "live_nonterminal_process": true,
+        "exact_container_cgroup": true,
+        "worker_and_runner_PID_agree": true,
+        "exact_train_argv": true,
+        "actual_CPU_affinity": true,
+        "full18_first_cycle": true,
+        "first_PART_KEYS_finite": true,
+        "latest_PART_KEYS_finite": true,
+        "logical_batch1024": true,
+        "large_micro_cap352": true,
+        "eval_batch256": true,
+        "same_execution_role_no_new_params": true,
+        "no_copy_or_preprocess": true,
+        "standard_WandB_lookup": true,
+        "no_recorded_failure": true,
+        "no_automatic_retries": true,
+        "zero_AMP_retries": true,
+        "actual_optimizer_coverage": true,
+        "actual_optimizer_step_applied": true,
+        "original_forward_FP16": true,
+        "shared_training_objects_unmodified": true,
+        "actual_optimizer_AdamW": true,
+        "no_Muon_application": true
+      },
+      "pass_all": true
+    },
+    "B_muon_hybrid": {
+      "slot": "4090_1",
+      "node": "gpu05",
+      "physical_host_pid": 1562095,
+      "container_train_pid": 1271564,
+      "namespace_pids": [
+        1271564,
+        1562095
+      ],
+      "gpu_uuid": "GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d",
+      "GPU_utilization_pct": 96,
+      "GPU_memory_used_mib": 19102,
+      "process_cgroup": "12:memory:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n11:cpuset:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n10:blkio:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n9:hugetlb:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n8:devices:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n7:perf_event:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n6:rdma:/\n5:freezer:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n4:pids:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n3:net_cls,net_prio:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n2:cpu,cpuacct:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n1:name=systemd:/docker/76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6\n",
+      "process_state": "State:\tR (running)",
+      "container_id": "76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6",
+      "cpus": [
+        4,
+        5,
+        72,
+        73
+      ],
+      "command": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r89_experiment",
+        "train",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry",
+        "--arm",
+        "B_muon_hybrid",
+        "--prepared-root",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+        "--data-root",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+        "--cache-root",
+        "/tmp/shiys_R84_new90k_cache",
+        "--protocol-lock",
+        "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry/protocol_lock.json",
+        "--gpu-type",
+        "4090",
+        "--large-micro-cap",
+        "352",
+        "--eval-batch-size",
+        "256",
+        "--device",
+        "cuda:0",
+        "--wandb-mode",
+        "offline"
+      ],
+      "first_full18_cycle": {
+        "updated_utc": "2026-10-20T03:39:33.648181+00:00",
+        "successful_updates": 18,
+        "max_updates": 57600,
+        "problem": "VRPBTW",
+        "lr": 4.166666666666667e-07,
+        "consistency_weight": 0.0014583333333333332,
+        "sample_exposures": 18432,
+        "seconds_per_update": 0.5838801404978666,
+        "samples_per_second": 1753.7846023104146,
+        "amp_retries": 0,
+        "updates_by_problem": {
+          "VRPL": 1,
+          "OVRPBL": 1,
+          "OVRPL": 1,
+          "OVRP": 1,
+          "VRPB": 1,
+          "CVRP": 1,
+          "OVRPB": 1,
+          "VRPBLTW": 1,
+          "OVRPLTW": 1,
+          "VRPLTW": 1,
+          "OVRPTW": 1,
+          "VRPBL": 1,
+          "OVRPBLTW": 1,
+          "OVRPBTW": 1,
+          "TSP": 1,
+          "ATSP": 1,
+          "VRPTW": 1,
+          "VRPBTW": 1
+        },
+        "muon_step_applied": 1.0,
+        "muon_direction_rms": 0.07473413418564531,
+        "muon_momentum_rms": 4.645519579248179e-05,
+        "muon_matrices_updated": 55.0,
+        "optimizer_step_applied": 1.0,
+        "loss": 1.0030525928984084,
+        "ce": 1.4796720246473947,
+        "cmp": 0.6684559185264839,
+        "risk": 12.560271128184265,
+        "kl": 0.0031945543261018526,
+        "true3": 0.6622874298029475,
+        "pred3": 0.6780995627244313,
+        "all_pairs": 0.6706851517988576,
+        "grad_norm": 2.003653072648578
+      },
+      "PART_KEYS": [
+        "loss",
+        "ce",
+        "cmp",
+        "risk",
+        "kl",
+        "true3",
+        "pred3",
+        "all_pairs",
+        "grad_norm"
+      ],
+      "finite_first_PART_KEYS": {
+        "loss": true,
+        "ce": true,
+        "cmp": true,
+        "risk": true,
+        "kl": true,
+        "true3": true,
+        "pred3": true,
+        "all_pairs": true,
+        "grad_norm": true
+      },
+      "latest_status": {
+        "experiment": "R89",
+        "arm": "B_muon_hybrid",
+        "phase": "training",
+        "pid": 1271564,
+        "host": "76045731f6b4",
+        "gpu": "GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d",
+        "gpu_type": "4090",
+        "device": "cuda:0",
+        "updated_utc": "2026-10-20T03:42:30.951498+00:00",
+        "successful_updates": 558,
+        "step": 558,
+        "max_successful_updates": 57600,
+        "sample_exposures": 571392,
+        "state_hash": "4239df64d257e053a0ae478be2d77bff10a6529fa38b71e5256bdb4b87cbca38",
+        "eta_seconds": 19199.451831384842,
+        "max_updates": 57600,
+        "problem": "OVRPBL",
+        "lr": 1.2916666666666668e-05,
+        "consistency_weight": 0.045208333333333336,
+        "seconds_per_update": 0.33658447865405916,
+        "samples_per_second": 3042.3268597969577,
+        "amp_retries": 0,
+        "updates_by_problem": {
+          "VRPL": 31,
+          "OVRPBL": 31,
+          "OVRPL": 31,
+          "OVRP": 31,
+          "VRPB": 31,
+          "CVRP": 31,
+          "OVRPB": 31,
+          "VRPBLTW": 31,
+          "OVRPLTW": 31,
+          "VRPLTW": 31,
+          "OVRPTW": 31,
+          "VRPBL": 31,
+          "OVRPBLTW": 31,
+          "OVRPBTW": 31,
+          "TSP": 31,
+          "ATSP": 31,
+          "VRPTW": 31,
+          "VRPBTW": 31
+        },
+        "muon_step_applied": 1.0,
+        "muon_direction_rms": 0.08245895380374565,
+        "muon_momentum_rms": 0.00011156729835328989,
+        "muon_matrices_updated": 55.0,
+        "optimizer_step_applied": 1.0,
+        "loss": 0.962013552736451,
+        "ce": 1.4157359927932742,
+        "cmp": 0.6512511184332245,
+        "risk": 11.924184589509895,
+        "kl": 0.0035292138928268144,
+        "true3": 0.6462420660194583,
+        "pred3": 0.6586705293593174,
+        "all_pairs": 0.6535456849422346,
+        "grad_norm": 2.181937262042022
+      },
+      "finite_latest_PART_KEYS": {
+        "loss": true,
+        "ce": true,
+        "cmp": true,
+        "risk": true,
+        "kl": true,
+        "true3": true,
+        "pred3": true,
+        "all_pairs": true,
+        "grad_norm": true
+      },
+      "optimizer_initialization_evidence": "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry/B_muon_hybrid/optimizer_initialization.json",
+      "actual_optimizer": {
+        "optimizer_class": "code.V4.r89_optim.MuonHybrid",
+        "auxiliary_optimizer_class": "torch.optim.adamw.AdamW",
+        "groups": [
+          {
+            "name": "muon",
+            "tensor_count": 55,
+            "parameter_count": 1785856,
+            "parameter_names": [
+              "instance_encoder.layers.0.attn.Wq.weight",
+              "instance_encoder.layers.0.attn.Wk.weight",
+              "instance_encoder.layers.0.attn.Wv.weight",
+              "instance_encoder.layers.0.attn.out.weight",
+              "instance_encoder.layers.0.ffn.net.0.weight",
+              "instance_encoder.layers.0.ffn.net.3.weight",
+              "instance_encoder.layers.1.attn.Wq.weight",
+              "instance_encoder.layers.1.attn.Wk.weight",
+              "instance_encoder.layers.1.attn.Wv.weight",
+              "instance_encoder.layers.1.attn.out.weight",
+              "instance_encoder.layers.1.ffn.net.0.weight",
+              "instance_encoder.layers.1.ffn.net.3.weight",
+              "instance_encoder.layers.2.attn.Wq.weight",
+              "instance_encoder.layers.2.attn.Wk.weight",
+              "instance_encoder.layers.2.attn.Wv.weight",
+              "instance_encoder.layers.2.attn.out.weight",
+              "instance_encoder.layers.2.ffn.net.0.weight",
+              "instance_encoder.layers.2.ffn.net.3.weight",
+              "instance_encoder.layers.3.attn.Wq.weight",
+              "instance_encoder.layers.3.attn.Wk.weight",
+              "instance_encoder.layers.3.attn.Wv.weight",
+              "instance_encoder.layers.3.attn.out.weight",
+              "instance_encoder.layers.3.ffn.net.0.weight",
+              "instance_encoder.layers.3.ffn.net.3.weight",
+              "joint_layers.0.node_update.attn.Wq.weight",
+              "joint_layers.0.node_update.attn.Wk.weight",
+              "joint_layers.0.node_update.attn.Wv.weight",
+              "joint_layers.0.node_update.attn.out.weight",
+              "joint_layers.0.node_update.ffn.net.0.weight",
+              "joint_layers.0.node_update.ffn.net.3.weight",
+              "joint_layers.0.solver_update.attn.Wq.weight",
+              "joint_layers.0.solver_update.attn.Wk.weight",
+              "joint_layers.0.solver_update.attn.Wv.weight",
+              "joint_layers.0.solver_update.attn.out.weight",
+              "joint_layers.0.solver_update.ffn.net.0.weight",
+              "joint_layers.0.solver_update.ffn.net.3.weight",
+              "joint_layers.1.node_update.attn.Wq.weight",
+              "joint_layers.1.node_update.attn.Wk.weight",
+              "joint_layers.1.node_update.attn.Wv.weight",
+              "joint_layers.1.node_update.attn.out.weight",
+              "joint_layers.1.node_update.ffn.net.0.weight",
+              "joint_layers.1.node_update.ffn.net.3.weight",
+              "joint_layers.1.solver_update.attn.Wq.weight",
+              "joint_layers.1.solver_update.attn.Wk.weight",
+              "joint_layers.1.solver_update.attn.Wv.weight",
+              "joint_layers.1.solver_update.attn.out.weight",
+              "joint_layers.1.solver_update.ffn.net.0.weight",
+              "joint_layers.1.solver_update.ffn.net.3.weight",
+              "pool.0.weight",
+              "pool.2.weight",
+              "decoder.Wq.weight",
+              "decoder.Wk.weight",
+              "decoder.Wv.weight",
+              "decoder.out.weight",
+              "score_head.0.weight"
+            ],
+            "parameter_shapes": [
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                512,
+                128
+              ],
+              [
+                128,
+                512
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                512,
+                128
+              ],
+              [
+                128,
+                512
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                512,
+                128
+              ],
+              [
+                128,
+                512
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                512,
+                128
+              ],
+              [
+                128,
+                512
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                512,
+                128
+              ],
+              [
+                128,
+                512
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                512,
+                128
+              ],
+              [
+                128,
+                512
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                512,
+                128
+              ],
+              [
+                128,
+                512
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                512,
+                128
+              ],
+              [
+                128,
+                512
+              ],
+              [
+                128,
+                256
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                256,
+                384
+              ]
+            ],
+            "settings": {
+              "algorithm": "muon",
+              "lr": 0.0001,
+              "weight_decay": 0.0001,
+              "momentum": 0.95,
+              "nesterov": true,
+              "ns_steps": 5,
+              "scaling": "0.2*sqrt(max(rows,cols))"
+            }
+          },
+          {
+            "name": "adamw",
+            "tensor_count": 93,
+            "parameter_count": 57097,
+            "parameter_names": [
+              "instance_encoder.cls_token",
+              "instance_encoder.coord_bias_scale",
+              "instance_encoder.matrix_bias_scale",
+              "instance_encoder.coord_proj.weight",
+              "instance_encoder.coord_proj.bias",
+              "instance_encoder.geometry_residual.projection.0.weight",
+              "instance_encoder.geometry_residual.projection.0.bias",
+              "instance_encoder.geometry_residual.projection.2.weight",
+              "instance_encoder.geometry_residual.projection.2.bias",
+              "instance_encoder.matrix_proj.weight",
+              "instance_encoder.matrix_proj.bias",
+              "instance_encoder.stats_token_proj.weight",
+              "instance_encoder.stats_token_proj.bias",
+              "instance_encoder.condition_encoder.problem_emb.weight",
+              "instance_encoder.condition_encoder.coord_dist_emb.weight",
+              "instance_encoder.condition_encoder.kind_emb.weight",
+              "instance_encoder.condition_encoder.cbits_proj.weight",
+              "instance_encoder.condition_encoder.desc_proj.weight",
+              "instance_encoder.condition_encoder.stats_proj.weight",
+              "instance_encoder.condition_encoder.stats_proj.bias",
+              "instance_encoder.condition_encoder.n_proj.weight",
+              "instance_encoder.condition_encoder.n_proj.bias",
+              "instance_encoder.condition_encoder.norm.weight",
+              "instance_encoder.condition_encoder.norm.bias",
+              "instance_encoder.layers.0.attn.out.bias",
+              "instance_encoder.layers.0.add_norm_1.norm.weight",
+              "instance_encoder.layers.0.add_norm_1.norm.bias",
+              "instance_encoder.layers.0.ffn.net.0.bias",
+              "instance_encoder.layers.0.ffn.net.3.bias",
+              "instance_encoder.layers.0.add_norm_2.norm.weight",
+              "instance_encoder.layers.0.add_norm_2.norm.bias",
+              "instance_encoder.layers.1.attn.out.bias",
+              "instance_encoder.layers.1.add_norm_1.norm.weight",
+              "instance_encoder.layers.1.add_norm_1.norm.bias",
+              "instance_encoder.layers.1.ffn.net.0.bias",
+              "instance_encoder.layers.1.ffn.net.3.bias",
+              "instance_encoder.layers.1.add_norm_2.norm.weight",
+              "instance_encoder.layers.1.add_norm_2.norm.bias",
+              "instance_encoder.layers.2.attn.out.bias",
+              "instance_encoder.layers.2.add_norm_1.norm.weight",
+              "instance_encoder.layers.2.add_norm_1.norm.bias",
+              "instance_encoder.layers.2.ffn.net.0.bias",
+              "instance_encoder.layers.2.ffn.net.3.bias",
+              "instance_encoder.layers.2.add_norm_2.norm.weight",
+              "instance_encoder.layers.2.add_norm_2.norm.bias",
+              "instance_encoder.layers.3.attn.out.bias",
+              "instance_encoder.layers.3.add_norm_1.norm.weight",
+              "instance_encoder.layers.3.add_norm_1.norm.bias",
+              "instance_encoder.layers.3.ffn.net.0.bias",
+              "instance_encoder.layers.3.ffn.net.3.bias",
+              "instance_encoder.layers.3.add_norm_2.norm.weight",
+              "instance_encoder.layers.3.add_norm_2.norm.bias",
+              "solver_encoder.solver_emb.weight",
+              "solver_encoder.feature_mlp.0.weight",
+              "solver_encoder.feature_mlp.0.bias",
+              "solver_encoder.feature_mlp.3.weight",
+              "solver_encoder.feature_mlp.3.bias",
+              "solver_encoder.norm.weight",
+              "solver_encoder.norm.bias",
+              "joint_layers.0.node_update.attn.out.bias",
+              "joint_layers.0.node_update.ffn.net.0.bias",
+              "joint_layers.0.node_update.ffn.net.3.bias",
+              "joint_layers.0.node_update.norm1.weight",
+              "joint_layers.0.node_update.norm1.bias",
+              "joint_layers.0.node_update.norm2.weight",
+              "joint_layers.0.node_update.norm2.bias",
+              "joint_layers.0.solver_update.attn.out.bias",
+              "joint_layers.0.solver_update.ffn.net.0.bias",
+              "joint_layers.0.solver_update.ffn.net.3.bias",
+              "joint_layers.0.solver_update.norm1.weight",
+              "joint_layers.0.solver_update.norm1.bias",
+              "joint_layers.0.solver_update.norm2.weight",
+              "joint_layers.0.solver_update.norm2.bias",
+              "joint_layers.1.node_update.attn.out.bias",
+              "joint_layers.1.node_update.ffn.net.0.bias",
+              "joint_layers.1.node_update.ffn.net.3.bias",
+              "joint_layers.1.node_update.norm1.weight",
+              "joint_layers.1.node_update.norm1.bias",
+              "joint_layers.1.node_update.norm2.weight",
+              "joint_layers.1.node_update.norm2.bias",
+              "joint_layers.1.solver_update.attn.out.bias",
+              "joint_layers.1.solver_update.ffn.net.0.bias",
+              "joint_layers.1.solver_update.ffn.net.3.bias",
+              "joint_layers.1.solver_update.norm1.weight",
+              "joint_layers.1.solver_update.norm1.bias",
+              "joint_layers.1.solver_update.norm2.weight",
+              "joint_layers.1.solver_update.norm2.bias",
+              "pool.0.bias",
+              "pool.2.bias",
+              "decoder.out.bias",
+              "score_head.0.bias",
+              "score_head.3.weight",
+              "score_head.3.bias"
+            ],
+            "parameter_shapes": [
+              [
+                1,
+                1,
+                128
+              ],
+              [
+                4
+              ],
+              [
+                4
+              ],
+              [
+                128,
+                8
+              ],
+              [
+                128
+              ],
+              [
+                64,
+                21
+              ],
+              [
+                64
+              ],
+              [
+                128,
+                64
+              ],
+              [
+                128
+              ],
+              [
+                128,
+                8
+              ],
+              [
+                128
+              ],
+              [
+                128,
+                12
+              ],
+              [
+                128
+              ],
+              [
+                18,
+                128
+              ],
+              [
+                5,
+                128
+              ],
+              [
+                2,
+                128
+              ],
+              [
+                128,
+                5
+              ],
+              [
+                128,
+                16
+              ],
+              [
+                128,
+                12
+              ],
+              [
+                128
+              ],
+              [
+                128,
+                1
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                512
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                512
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                512
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                512
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                22,
+                128
+              ],
+              [
+                128,
+                34
+              ],
+              [
+                128
+              ],
+              [
+                128,
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                512
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                512
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                512
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                512
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                128
+              ],
+              [
+                256
+              ],
+              [
+                1,
+                256
+              ],
+              [
+                1
+              ]
+            ],
+            "settings": {
+              "algorithm": "adamw",
+              "lr": 0.0001,
+              "weight_decay": 0.0001,
+              "betas": [
+                0.9,
+                0.999
+              ],
+              "eps": 1e-08,
+              "amsgrad": false,
+              "foreach": null,
+              "maximize": false,
+              "capturable": false,
+              "differentiable": false,
+              "fused": null
+            }
+          }
+        ],
+        "provenance": {
+          "repository": "https://github.com/KellerJordan/Muon",
+          "commit": "f98f1cacc0263b04290753e32be8d498c1efc806",
+          "source_url": "https://github.com/KellerJordan/Muon/blob/f98f1cacc0263b04290753e32be8d498c1efc806/muon.py",
+          "source_sha256": "2479665a90124f62e4df557816665851ca317e42fcfda2af1da02c1f44ab5f3d",
+          "license": "MIT",
+          "copyright": "Copyright (c) 2024 Keller Jordan",
+          "license_url": "https://github.com/KellerJordan/Muon/blob/f98f1cacc0263b04290753e32be8d498c1efc806/LICENSE",
+          "license_sha256": "8c8d17398ecce3dd3fcb1bb77b5d268a427f8250f364ac655c9b38df5b693f6b",
+          "update_scaling": "0.2*sqrt(max(rows,cols))",
+          "scaling_reference": "https://arxiv.org/abs/2502.16982",
+          "scaling_equation": 4,
+          "momentum": 0.95,
+          "nesterov": true,
+          "ns_steps": 5,
+          "ns_dtype": "bfloat16",
+          "parameter_and_momentum_dtype": "float32",
+          "execution": "eager_single_device",
+          "missing_gradient_rule": "skip_without_state_or_decay",
+          "aspect_ratio_scale_applied": false,
+          "extra_lr_multiplier": 1.0,
+          "auxiliary_optimizer": "torch.optim.AdamW"
+        },
+        "applied_step_evidence": "first full18 and latest actual optimizer.step diagnostics, not configuration flags",
+        "muon_step_applied_is_per_step_not_cumulative": true,
+        "model_forward_dtype": "original FP16 autocast"
+      },
+      "controls": {
+        "logical_batch": 1024,
+        "large_micro_cap": 352,
+        "eval_batch": 256,
+        "seed": 2,
+        "max_updates": 57600,
+        "warmup_updates": 4320,
+        "eval_every_updates": 1440,
+        "role_slot": 3,
+        "model_role_arm": "B_execution_anchor"
+      },
+      "predecessor_evidence": "/public/home/shiys/0selection2/code/V4/runs/R89_launch/B_muon_hybrid/predecessor_complete.json",
+      "cache": {
+        "root": "/tmp/shiys_R84_new90k_cache",
+        "bytes": 19005947954,
+        "files": 250,
+        "identity_sha256": "e070f4c96a6059ddb41f50032713e9b85dbfa978b74383c0ca1189aa64c6b93a",
+        "splits": [
+          "train",
+          "val"
+        ],
+        "mode": "existing_read_only",
+        "copied_bytes": 0,
+        "preprocessing": false,
+        "array_contents_read": false,
+        "test_cache_ignored": true,
+        "cache_audit_repeated": false,
+        "validation_snapshot": "/public/home/shiys/0selection2/code/V4/runs/R85_launch/resources.json"
+      },
+      "wandb_lookup": {
+        "enabled": true,
+        "project": "selector",
+        "entity": "yjkds-southern-university-of-science-technology",
+        "checked_utc": "2026-10-20T03:39:15.491905+00:00",
+        "lookup": "standard W&B API: environment/settings/netrc",
+        "credential_present": false,
+        "selected_mode": "offline",
+        "offline_reason": "No existing W&B credential found; no login prompt was started"
+      },
+      "wandb_receipt": {
+        "requested": "offline",
+        "mode": "offline",
+        "fallback_reason": null,
+        "project": "selector",
+        "entity": "yjkds-southern-university-of-science-technology",
+        "run_id": "r89-d2e930138c203b5e",
+        "url": null,
+        "updated_utc": "2026-10-20T03:39:21.931210+00:00"
+      },
+      "checks": {
+        "predecessor_full_delivery_and_comparison_rc0": true,
+        "exact_UUID": true,
+        "actual_NVML_PID_and_namespace": true,
+        "live_nonterminal_process": true,
+        "exact_container_cgroup": true,
+        "worker_and_runner_PID_agree": true,
+        "exact_train_argv": true,
+        "actual_CPU_affinity": true,
+        "full18_first_cycle": true,
+        "first_PART_KEYS_finite": true,
+        "latest_PART_KEYS_finite": true,
+        "logical_batch1024": true,
+        "large_micro_cap352": true,
+        "eval_batch256": true,
+        "same_execution_role_no_new_params": true,
+        "no_copy_or_preprocess": true,
+        "standard_WandB_lookup": true,
+        "no_recorded_failure": true,
+        "no_automatic_retries": true,
+        "zero_AMP_retries": true,
+        "actual_optimizer_coverage": true,
+        "actual_optimizer_step_applied": true,
+        "original_forward_FP16": true,
+        "shared_training_objects_unmodified": true,
+        "actual_optimizer_MuonHybrid": true,
+        "actual_auxiliary_AdamW": true,
+        "two_actual_nonempty_groups": true,
+        "B_actual_Muon_step1": true,
+        "B_actual_updated_matrix_count_positive": true,
+        "B_updated_matrix_count_matches_actual_group": true,
+        "B_actual_RMS_finite": true,
+        "B_nonzero_measured_Muon_RMS": true,
+        "NS5_BF16_successful_execution": true
+      },
+      "pass_all": true
+    }
+  },
+  "checks_joint": {
+    "distinct_GPU_UUIDs": true,
+    "distinct_actual_processes": true,
+    "disjoint_CPU_affinities": true
+  },
+  "all_two_pass": true
+}

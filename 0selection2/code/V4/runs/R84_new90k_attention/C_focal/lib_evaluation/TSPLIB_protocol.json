@@ -1,0 +1,70 @@
+{
+  "experiment": "R84",
+  "arm": "C_focal",
+  "dataset": "TSPLIB",
+  "problem": "TSP",
+  "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/C_focal/best.pt",
+  "checkpoint_sha256": "a7f7626caa770d0dce67c43630e224b965e4015976c8956587d35a1a51a56d77",
+  "epoch": 32,
+  "selected_update": 46080,
+  "candidate_pool": [
+    "BQ",
+    "DIFUSCO",
+    "DIFUSCO500",
+    "ELG",
+    "LEHD",
+    "OMNI",
+    "T2T",
+    "T2T500"
+  ],
+  "state_hash": "d40b094a239eb2df226903e7782f77725bd1d937767d9c9645d542c74eed14ca",
+  "model_state_sha256": "84604766f25bef33aee34dedc72855a9326195f9e021d17e646a63a26c0a6549",
+  "pool_ids": [
+    0,
+    1,
+    2,
+    3,
+    7,
+    14,
+    19,
+    20
+  ],
+  "sources": {
+    "dataset.pkl": {
+      "path": "/public/home/shiys/0selection2/data/TSPLIB/dataset.pkl",
+      "sha256": "92f14d50c2474ca33b3432f16478e06f0cc687ad40009a363d5db31b8641e6f8"
+    },
+    "raw_label.pkl": {
+      "path": "/public/home/shiys/0selection2/data/TSPLIB/raw_label.pkl",
+      "sha256": "7d2cfffe64652728777e01607ca104c1b5ba8c156f6bc24bba366cec5a148a44"
+    }
+  },
+  "winner_rule": "native/FP64 raw_label ind (not FP32 cost argmin)",
+  "data_version": "original native LIB / historical NSS comparison",
+  "model_factory": "code.V4.r84_experiment.load_checkpoint",
+  "inference_rule": "single FP32 forward, logits argmax, lowest global solver ID for exact ties",
+  "locked_inference_rule": "eval mode, original R77 maximin logits, stable ascending-global-solver-ID tie break",
+  "normalization": "all TRAIN buffers restored from same R84 best.pt, no LIB refit",
+  "batch_size": 2,
+  "device": "cuda:0",
+  "training": false,
+  "solver_execution": false,
+  "embedding_api": false,
+  "checkpoint_reselection": false,
+  "prediction_schema": {
+    "scores": "float32 [n,k], actual maximin decision scores",
+    "logits": "float32 [n,k], model maximin logits (identical to scores)",
+    "pred": "int64 [n], local candidate slot; score ties use lowest global ID",
+    "costs": "float64 [n,k], unchanged original native costs",
+    "winner": "int64 [n], original native raw_label ind",
+    "winner_fp32_argmin": "int64 [n], historical NSS compatibility labels",
+    "pool": "unicode [k], original candidate names in column order",
+    "pool_ids": "int64 [k], stable global solver IDs",
+    "nodes": "int64 [n], input graph sizes",
+    "indices": "int64 [n], original zero-based instance order",
+    "checkpoint_sha256": "unicode scalar",
+    "checkpoint_epoch": "int64 scalar, one-based locked epoch",
+    "checkpoint_update": "int64 scalar, locked successful update"
+  },
+  "created_utc": "2026-10-18T00:05:19.761340+00:00"
+}

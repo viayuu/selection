@@ -5,7 +5,7 @@
   "job_id": "1475",
   "step_id": "29",
   "started_utc": "2026-10-15T12:18:50.324335+00:00",
-  "state": "running",
+  "state": "failed",
   "group": {
     "job": 1475,
     "node": "gpu05",
@@ -49,8 +49,69 @@
       ],
       "log": "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation/B_batch512/train.log",
       "started_utc": "2026-10-15T12:18:51.885810+00:00",
-      "state": "running",
-      "pid": 1637595
+      "state": "complete",
+      "pid": 1637595,
+      "exit_status": 0,
+      "finished_utc": "2026-10-15T16:04:08.092840+00:00"
+    },
+    {
+      "stage": "test",
+      "command": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r80_experiment",
+        "test",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation",
+        "--arm",
+        "B_batch512",
+        "--data-root",
+        "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+        "--cache-root",
+        "/tmp/shiys_R76_R45A_single_reld_mt_cache",
+        "--gpu-type",
+        "4090",
+        "--large-micro-cap",
+        "352",
+        "--device",
+        "cuda:0",
+        "--eval-batch-size",
+        "256",
+        "--log-every",
+        "18",
+        "--wandb-mode",
+        "offline"
+      ],
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation/B_batch512/test.log",
+      "started_utc": "2026-10-15T16:04:08.139647+00:00",
+      "state": "complete",
+      "pid": 2018520,
+      "exit_status": 0,
+      "finished_utc": "2026-10-15T16:04:11.341731+00:00"
+    },
+    {
+      "stage": "LIB_and_PDF_report",
+      "command": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r80_reporting",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation",
+        "--arm",
+        "B_batch512",
+        "--device",
+        "cuda:0"
+      ],
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation/B_batch512/reporting.log",
+      "started_utc": "2026-10-15T16:04:11.342619+00:00",
+      "state": "failed",
+      "pid": 2018622,
+      "exit_status": 1,
+      "finished_utc": "2026-10-15T16:04:12.825083+00:00"
     }
   ],
   "gpu_preflight": {
@@ -85,5 +146,8 @@
     "/public/home/shiys/0selection2/code/V4/r80_launch.py": "89902c54619f6319d578a1e0d2ff765872b64eb89082f2943f5bfde5151cae19",
     "/public/home/shiys/0selection2/code/V4/r80_experiment.py": "df11f0a18b9d0649743f5a736a0756c839d7ebf7fcdd8b5c5d04d93996a0f5cb",
     "/public/home/shiys/0selection2/code/V4/r80_reporting.py": "e2aa4528892d620fc6b2f01c462399519deb65cbf5c55e04e90a96c73d6f2eb0"
-  }
+  },
+  "failed_stage": "LIB_and_PDF_report",
+  "exit_status": 1,
+  "finished_utc": "2026-10-15T16:04:12.825948+00:00"
 }

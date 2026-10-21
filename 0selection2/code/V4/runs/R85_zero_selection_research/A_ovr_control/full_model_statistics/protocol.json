@@ -1,0 +1,384 @@
+{
+  "experiment": "R85",
+  "arm": "A_ovr_control",
+  "complete": true,
+  "created_utc": "2026-10-19T22:46:04.019002+00:00",
+  "checkpoint_lock": {
+    "experiment": "R85",
+    "arm": "A_ovr_control",
+    "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R85_zero_selection_research/A_ovr_control/best.pt",
+    "checkpoint_sha256": "3bb6b957cac5bd85f43c7fe63386bc14fdeb5db899e0d249d32aec79ed29e687",
+    "state_hash": "18efb8efeef75aa1581fd81aa5420a530c7f4aa5fce77b99d983ac39044a3dae",
+    "epoch": 26,
+    "selected_update": 37440,
+    "rule": "strict minimum full VAL macro_vs_sbs_pct with common new81000 TRAIN-fitted SBS; first wins ties",
+    "selected_without_test": true,
+    "per_problem_assembly": false,
+    "val": {
+      "macro_ce": 0.9605458709928725,
+      "macro_top1": 0.7096790123456791,
+      "macro_top2": 0.9066913580246916,
+      "macro_top3": 0.962864197530864,
+      "macro_top1_tie_aware": 0.7111851851851851,
+      "macro_mean_cost": 11.417059356205124,
+      "macro_vs_sbs_pct": -0.1902202448376152,
+      "macro_vs_oracle_pct": 0.3974305703132496,
+      "macro_actual_regret_pct": 0.4069005696538894,
+      "macro_vbs_gap_closed_pct": 12.694587520498645,
+      "macro_sbs_cost": 11.427978473494235,
+      "macro_oracle_cost": 11.371691902364589
+    },
+    "inference_rule": "eval mode, original R77 maximin logits, stable ascending-global-solver-ID tie break",
+    "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+    "locked_utc": "2026-10-19T22:43:03.026065+00:00"
+  },
+  "model_factory": "code.V4.r85_experiment.load_checkpoint",
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "rows_per_problem": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "candidate_pools": {
+    "TSP": [
+      "BQ",
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "LEHD",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "CVRP": [
+      "BQ",
+      "ELG",
+      "ICAM",
+      "LEHD",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "ATSP": [
+      "GLOP",
+      "ICAM_ATSP",
+      "MATNET",
+      "MATPOENET",
+      "UNICO_MatPOENet"
+    ],
+    "OVRP": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ]
+  },
+  "scenario_solver_aliases": {
+    "reld_mt": "RELD_MOEL"
+  },
+  "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+  "nss_reference": {
+    "root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference",
+    "prediction_sha256": {
+      "TSP": "d42250eea9547dbeed1afdda9411ae6e691d9ce2ae0a14f50e7da6adb28068d3",
+      "CVRP": "13fbedae686c2af03d44d62115bbd9fcbf15950f6b111942f90786faba66603c"
+    },
+    "retrained": false,
+    "new_inference": false,
+    "exact_test_rows": 4500
+  },
+  "nss_alignment": {
+    "TSP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "TSPLIB": {
+      "instance_key": "indices",
+      "matching_population": 49,
+      "checked_instance_ids": [
+        0,
+        24,
+        48
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRPLIB": {
+      "instance_key": "indices",
+      "matching_population": 100,
+      "checked_instance_ids": [
+        0,
+        50,
+        99
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    }
+  },
+  "training": false,
+  "inference": false,
+  "checkpoint_reselection": false,
+  "distribution_pages": 18,
+  "main_pdf_pages": 22,
+  "diagnostics": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R85_zero_selection_research/A_ovr_control/full_model_statistics/training_and_method_diagnostics.pdf",
+    "pages": 19,
+    "history_status": "complete"
+  },
+  "historical_reference": {
+    "model": "R84A",
+    "run": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline",
+    "checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+    "evidence": "historical reference, not a newly retrained control",
+    "same_data_root": true,
+    "fixed_targets": [
+      {
+        "problem": "TSP",
+        "solver": "DIFUSCO"
+      },
+      {
+        "problem": "TSP",
+        "solver": "DIFUSCO500"
+      },
+      {
+        "problem": "TSP",
+        "solver": "LEHD"
+      },
+      {
+        "problem": "TSP",
+        "solver": "OMNI"
+      },
+      {
+        "problem": "CVRP",
+        "solver": "RouteFinder"
+      },
+      {
+        "problem": "ATSP",
+        "solver": "GLOP"
+      },
+      {
+        "problem": "ATSP",
+        "solver": "MATPOENET"
+      },
+      {
+        "problem": "OVRP",
+        "solver": "MTPOMO"
+      },
+      {
+        "problem": "OVRP",
+        "solver": "MVMOE"
+      },
+      {
+        "problem": "VRPL",
+        "solver": "MTPOMO"
+      },
+      {
+        "problem": "VRPL",
+        "solver": "MVMOE"
+      },
+      {
+        "problem": "VRPTW",
+        "solver": "MoSES_RF"
+      },
+      {
+        "problem": "VRPTW",
+        "solver": "RouteFinder"
+      },
+      {
+        "problem": "OVRPTW",
+        "solver": "MoSES_CaDA"
+      },
+      {
+        "problem": "OVRPTW",
+        "solver": "MoSES_RF"
+      },
+      {
+        "problem": "OVRPTW",
+        "solver": "RouteFinder"
+      },
+      {
+        "problem": "OVRPB",
+        "solver": "MTPOMO"
+      },
+      {
+        "problem": "OVRPL",
+        "solver": "MTPOMO"
+      },
+      {
+        "problem": "OVRPL",
+        "solver": "MVMOE"
+      },
+      {
+        "problem": "VRPBL",
+        "solver": "MTPOMO"
+      },
+      {
+        "problem": "VRPBTW",
+        "solver": "MTPOMO"
+      },
+      {
+        "problem": "VRPLTW",
+        "solver": "MTPOMO"
+      },
+      {
+        "problem": "VRPLTW",
+        "solver": "MoSES_CaDA"
+      },
+      {
+        "problem": "VRPLTW",
+        "solver": "MoSES_RF"
+      },
+      {
+        "problem": "VRPLTW",
+        "solver": "RouteFinder"
+      },
+      {
+        "problem": "OVRPBTW",
+        "solver": "MTPOMO"
+      },
+      {
+        "problem": "OVRPLTW",
+        "solver": "MoSES_RF"
+      },
+      {
+        "problem": "OVRPLTW",
+        "solver": "RouteFinder"
+      },
+      {
+        "problem": "VRPBLTW",
+        "solver": "MTPOMO"
+      }
+    ]
+  },
+  "zero_selection_pdf": "/public/home/shiys/0selection2/code/V4/runs/R85_zero_selection_research/A_ovr_control/full_model_statistics/zero_selection_and_baseline.pdf",
+  "objective": {
+    "classification": "OVR BCE on raw utility",
+    "coefficient": 0.35,
+    "target": "one-hot saved native winner",
+    "class_weights": "none",
+    "reduction": "per-row valid-method mean times log(K)/log(2), then mean real rows"
+  }
+}

@@ -1,0 +1,894 @@
+{
+  "created_utc": "2026-10-19T15:53:19.488458+00:00",
+  "stage": "complete_saved_prediction_analysis",
+  "previous_goal_turn": "progress: NEW90k release, training, locked TEST and reports completed",
+  "goal_complete": false,
+  "analysis_backend": "current Codex execution; no Astra used for results",
+  "scope": "R80 A/B/C/D, R81B, R82B, R83, R84 A/B/C/D; R77B historical reference",
+  "winner_rule": "saved native/FP64 ind; never FP32 argmin",
+  "comparisons": "Within dataset only; OLD77904 vs NEW90k raw costs are not controlled comparisons",
+  "source": "final_metrics.json and final_test_lock.json; never latest validation",
+  "key_evidence": [
+    "All R84 arms have TRAIN Top1 around 71.2-71.3%, close to locked VAL; zero selection already exists in TRAIN.",
+    "R84A/B TRAIN: 26 zero-with-winner groups / 25,627 winner instances; R84C: 23 / 18,259; R84D: 23 / 15,936.",
+    "R84 focal/direct-attention variants do not improve locked VAL Top1 together with cost and regret.",
+    "Next action should address TRAIN method discrimination/argmax recall; generic overfitting is not established by these locked models."
+  ],
+  "runs": [
+    {
+      "model": "R77B",
+      "dataset_group": "OLD77904",
+      "baseline": "R77B",
+      "description": "Original R77 objective",
+      "data_root": "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+      "selected_update": 34776,
+      "checkpoint_sha256": "31c0c75d66b1bde6ad533909a9c04b0036e80af4c4a5775b01b957ce310e6d1b",
+      "splits": {
+        "TRAIN": {
+          "metrics": {
+            "top1": 0.7117670270321667,
+            "ce": 0.7042727553182178,
+            "mean_cost": 11.365977443941617,
+            "actual_regret_pct": 0.39301170016293396,
+            "vs_sbs_pct": -0.1968199813045061,
+            "vs_oracle_pct": 0.385344609762692
+          },
+          "zero_selection": {
+            "groups": 25,
+            "winner_mass": 22458
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/B_full_seed2/evaluation/train/selected_best/rank000.npz"
+        },
+        "VAL": {
+          "metrics": {
+            "top1": 0.7089430894308943,
+            "ce": 0.7136416104104784,
+            "mean_cost": 11.395558343544208,
+            "actual_regret_pct": 0.40132674544775454,
+            "vs_sbs_pct": -0.19211866962082522,
+            "vs_oracle_pct": 0.3911298744321427
+          },
+          "zero_selection": {
+            "groups": 30,
+            "winner_mass": 2648
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/B_full_seed2/evaluation/val/epoch028/rank000.npz"
+        },
+        "TEST": {
+          "metrics": {
+            "top1": 0.7122521751533305,
+            "ce": 0.7074703673521677,
+            "mean_cost": 11.345771171186877,
+            "actual_regret_pct": 0.3940143116816319,
+            "vs_sbs_pct": -0.19404784813951814,
+            "vs_oracle_pct": 0.3856014723726986
+          },
+          "zero_selection": {
+            "groups": 26,
+            "winner_mass": 2166
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R77_sample_size_batch1024/B_full_seed2/evaluation/test/selected_best/rank000.npz"
+        }
+      }
+    },
+    {
+      "model": "R80A",
+      "dataset_group": "OLD77904",
+      "baseline": "R77B",
+      "description": "CE only",
+      "data_root": "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+      "selected_update": 34776,
+      "checkpoint_sha256": "c2a52876d9ff25c715e1ff518f73b1e4b306198373dc894a7609ca97ebdbb708",
+      "splits": {
+        "TRAIN": {
+          "metrics": {
+            "top1": 0.7120705010570086,
+            "ce": 0.6923094325595431,
+            "mean_cost": 11.366575685555627,
+            "actual_regret_pct": 0.3990863288391171,
+            "vs_sbs_pct": -0.19149882767487536,
+            "vs_oracle_pct": 0.3906939777864234
+          },
+          "zero_selection": {
+            "groups": 24,
+            "winner_mass": 16374
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation/A_ce_only/evaluation/train/selected_best/rank000.npz"
+        },
+        "VAL": {
+          "metrics": {
+            "top1": 0.70972757095992,
+            "ce": 0.7015565931797028,
+            "mean_cost": 11.395604094182401,
+            "actual_regret_pct": 0.4021883619574656,
+            "vs_sbs_pct": -0.19158444938022212,
+            "vs_oracle_pct": 0.39166830518126106
+          },
+          "zero_selection": {
+            "groups": 32,
+            "winner_mass": 2870
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation/A_ce_only/evaluation/val/selected_best/rank000.npz"
+        },
+        "TEST": {
+          "metrics": {
+            "top1": 0.7122664384538582,
+            "ce": 0.6966440462403827,
+            "mean_cost": 11.346230197133298,
+            "actual_regret_pct": 0.3977167332461315,
+            "vs_sbs_pct": -0.19110544811032668,
+            "vs_oracle_pct": 0.3885329207596223
+          },
+          "zero_selection": {
+            "groups": 24,
+            "winner_mass": 2059
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation/A_ce_only/evaluation/test/selected_best/rank000.npz"
+        }
+      }
+    },
+    {
+      "model": "R80B",
+      "dataset_group": "OLD77904",
+      "baseline": "R77B",
+      "description": "Batch 512; matched sample exposures",
+      "data_root": "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+      "selected_update": 69552,
+      "checkpoint_sha256": "5ae417e1f939d81c9dd46a7cfc68feffa021d3386cc09e53493994208bf86c79",
+      "splits": {
+        "TRAIN": {
+          "metrics": {
+            "top1": 0.7143818162801534,
+            "ce": 0.6926678336328931,
+            "mean_cost": 11.365316539382327,
+            "actual_regret_pct": 0.3886579197395542,
+            "vs_sbs_pct": -0.2014416708393042,
+            "vs_oracle_pct": 0.3807392498778965
+          },
+          "zero_selection": {
+            "groups": 25,
+            "winner_mass": 22458
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation/B_batch512/evaluation/train/selected_best/rank000.npz"
+        },
+        "VAL": {
+          "metrics": {
+            "top1": 0.7094280416488375,
+            "ce": 0.7107468644777933,
+            "mean_cost": 11.395922267595852,
+            "actual_regret_pct": 0.4067672396103018,
+            "vs_sbs_pct": -0.18776495834376497,
+            "vs_oracle_pct": 0.39554381076831857
+          },
+          "zero_selection": {
+            "groups": 25,
+            "winner_mass": 1297
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation/B_batch512/evaluation/val/selected_best/rank000.npz"
+        },
+        "TEST": {
+          "metrics": {
+            "top1": 0.7131507630865782,
+            "ce": 0.7046019815736346,
+            "mean_cost": 11.345398139097064,
+            "actual_regret_pct": 0.39148014981278434,
+            "vs_sbs_pct": -0.1971616468449523,
+            "vs_oracle_pct": 0.38249536190463956
+          },
+          "zero_selection": {
+            "groups": 22,
+            "winner_mass": 1239
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation/B_batch512/evaluation/test/selected_best/rank000.npz"
+        }
+      }
+    },
+    {
+      "model": "R80C",
+      "dataset_group": "OLD77904",
+      "baseline": "R77B",
+      "description": "Peak learning rate 3e-4",
+      "data_root": "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+      "selected_update": 28566,
+      "checkpoint_sha256": "6959d932e7772c8742cfbcabe7f9e7d087017c0c722c75889a5c27d1e9805f6e",
+      "splits": {
+        "TRAIN": {
+          "metrics": {
+            "top1": 0.7167224488372903,
+            "ce": 0.6781942927175098,
+            "mean_cost": 11.36498141814792,
+            "actual_regret_pct": 0.3854107187808358,
+            "vs_sbs_pct": -0.2042220791354737,
+            "vs_oracle_pct": 0.37793607451594496
+          },
+          "zero_selection": {
+            "groups": 21,
+            "winner_mass": 16013
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation/C_lr3e4/evaluation/train/selected_best/rank000.npz"
+        },
+        "VAL": {
+          "metrics": {
+            "top1": 0.7095706746541149,
+            "ce": 0.7073220279481676,
+            "mean_cost": 11.396097433372557,
+            "actual_regret_pct": 0.40888884390213104,
+            "vs_sbs_pct": -0.18573794852049302,
+            "vs_oracle_pct": 0.39755716808736896
+          },
+          "zero_selection": {
+            "groups": 24,
+            "winner_mass": 1020
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation/C_lr3e4/evaluation/val/selected_best/rank000.npz"
+        },
+        "TEST": {
+          "metrics": {
+            "top1": 0.7117529596348594,
+            "ce": 0.7022296090920767,
+            "mean_cost": 11.346085863017736,
+            "actual_regret_pct": 0.3978152636969658,
+            "vs_sbs_pct": -0.19013394766876296,
+            "vs_oracle_pct": 0.3895394568404968
+          },
+          "zero_selection": {
+            "groups": 25,
+            "winner_mass": 1330
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation/C_lr3e4/evaluation/test/selected_best/rank000.npz"
+        }
+      }
+    },
+    {
+      "model": "R80D",
+      "dataset_group": "OLD77904",
+      "baseline": "R77B",
+      "description": "Four-view source embedding",
+      "data_root": "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+      "selected_update": 34776,
+      "checkpoint_sha256": "503fd3bd856327ff11bf1d2a3ff888772745ccff30314fbf166eade7efe35b15",
+      "splits": {
+        "TRAIN": {
+          "metrics": {
+            "top1": 0.7116806597509453,
+            "ce": 0.7023525536060333,
+            "mean_cost": 11.366038918963618,
+            "actual_regret_pct": 0.39376796931997454,
+            "vs_sbs_pct": -0.19626143725934606,
+            "vs_oracle_pct": 0.3859095429320762
+          },
+          "zero_selection": {
+            "groups": 25,
+            "winner_mass": 22458
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation/D_code_embedding/evaluation/train/selected_best/rank000.npz"
+        },
+        "VAL": {
+          "metrics": {
+            "top1": 0.7088575096277279,
+            "ce": 0.7120488484700521,
+            "mean_cost": 11.395712934032513,
+            "actual_regret_pct": 0.40321876948911295,
+            "vs_sbs_pct": -0.19048014742566147,
+            "vs_oracle_pct": 0.3927812395545232
+          },
+          "zero_selection": {
+            "groups": 29,
+            "winner_mass": 2410
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation/D_code_embedding/evaluation/val/selected_best/rank000.npz"
+        },
+        "TEST": {
+          "metrics": {
+            "top1": 0.7117672229353871,
+            "ce": 0.7054289910528395,
+            "mean_cost": 11.345849404742856,
+            "actual_regret_pct": 0.39358781766472467,
+            "vs_sbs_pct": -0.19416646042491356,
+            "vs_oracle_pct": 0.38546928374777467
+          },
+          "zero_selection": {
+            "groups": 25,
+            "winner_mass": 2281
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R80_training_and_code_ablation/D_code_embedding/evaluation/test/selected_best/rank000.npz"
+        }
+      }
+    },
+    {
+      "model": "R81B",
+      "dataset_group": "OLD77904",
+      "baseline": "R77B",
+      "description": "Method-conditioned cross-instance AUC",
+      "data_root": "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+      "selected_update": 34776,
+      "checkpoint_sha256": "daacf8b70210c3ddcc8aea7c5fb5def675aac5bb0c20abdc6ed346253c846833",
+      "splits": {
+        "TRAIN": {
+          "metrics": {
+            "top1": 0.7112163365693331,
+            "ce": 0.7076760629812876,
+            "mean_cost": 11.366243536386216,
+            "actual_regret_pct": 0.39570711346719534,
+            "vs_sbs_pct": -0.19437577248997603,
+            "vs_oracle_pct": 0.3878041101782902
+          },
+          "zero_selection": {
+            "groups": 24,
+            "winner_mass": 22293
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R81_method_conditioned_auc/B_cross_instance_rank_seed2/evaluation/train/selected_best/rank000.npz"
+        },
+        "VAL": {
+          "metrics": {
+            "top1": 0.7085579803166454,
+            "ce": 0.7221354759401746,
+            "mean_cost": 11.395751763916016,
+            "actual_regret_pct": 0.4046572999755532,
+            "vs_sbs_pct": -0.18907453961280585,
+            "vs_oracle_pct": 0.3941892562743749
+          },
+          "zero_selection": {
+            "groups": 29,
+            "winner_mass": 2239
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R81_method_conditioned_auc/B_cross_instance_rank_seed2/evaluation/val/selected_best/rank000.npz"
+        },
+        "TEST": {
+          "metrics": {
+            "top1": 0.7115104835258879,
+            "ce": 0.7148109243975745,
+            "mean_cost": 11.345797727865243,
+            "actual_regret_pct": 0.3939610324549308,
+            "vs_sbs_pct": -0.194659605783323,
+            "vs_oracle_pct": 0.38496194468432676
+          },
+          "zero_selection": {
+            "groups": 26,
+            "winner_mass": 2327
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R81_method_conditioned_auc/B_cross_instance_rank_seed2/evaluation/test/selected_best/rank000.npz"
+        }
+      }
+    },
+    {
+      "model": "R82B",
+      "dataset_group": "OLD77904",
+      "baseline": "R77B",
+      "description": "Context-matched regret ranking",
+      "data_root": "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+      "selected_update": 32292,
+      "checkpoint_sha256": "139e5c1735e51fd985c73204807d63b773f81af0a0b37b82bd9026a96b112566",
+      "splits": {
+        "TRAIN": {
+          "metrics": {
+            "top1": 0.7114516676016519,
+            "ce": 0.7042320171991984,
+            "mean_cost": 11.366203973410483,
+            "actual_regret_pct": 0.3950877803883004,
+            "vs_sbs_pct": -0.19535458243090603,
+            "vs_oracle_pct": 0.38683123836845934
+          },
+          "zero_selection": {
+            "groups": 24,
+            "winner_mass": 22293
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R82_context_matched_ranking/B_context_matched_rank_seed2/evaluation/train/selected_best/rank000.npz"
+        },
+        "VAL": {
+          "metrics": {
+            "top1": 0.7093139352446156,
+            "ce": 0.7136931849850549,
+            "mean_cost": 11.395610890509356,
+            "actual_regret_pct": 0.4026457726546828,
+            "vs_sbs_pct": -0.19153946785459686,
+            "vs_oracle_pct": 0.3917216022778564
+          },
+          "zero_selection": {
+            "groups": 26,
+            "winner_mass": 2114
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R82_context_matched_ranking/B_context_matched_rank_seed2/evaluation/val/selected_best/rank000.npz"
+        },
+        "TEST": {
+          "metrics": {
+            "top1": 0.7127799172728569,
+            "ce": 0.7082013785839081,
+            "mean_cost": 11.345856130870228,
+            "actual_regret_pct": 0.3933122006755063,
+            "vs_sbs_pct": -0.19568093862796046,
+            "vs_oracle_pct": 0.3839442020323689
+          },
+          "zero_selection": {
+            "groups": 23,
+            "winner_mass": 1876
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R82_context_matched_ranking/B_context_matched_rank_seed2/evaluation/test/selected_best/rank000.npz"
+        }
+      }
+    },
+    {
+      "model": "R83",
+      "dataset_group": "OLD77904",
+      "baseline": "R77B",
+      "description": "Model-only source embedding",
+      "data_root": "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+      "selected_update": 32292,
+      "checkpoint_sha256": "66920175a887dbf88339ca4292a42b39ed08c9de84a90b49f44c367bea991955",
+      "splits": {
+        "TRAIN": {
+          "metrics": {
+            "top1": 0.71130904273358,
+            "ce": 0.703001876672109,
+            "mean_cost": 11.366262837383916,
+            "actual_regret_pct": 0.3957497399127887,
+            "vs_sbs_pct": -0.19427488896819828,
+            "vs_oracle_pct": 0.3879179280853277
+          },
+          "zero_selection": {
+            "groups": 25,
+            "winner_mass": 22458
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R83_model_only_source_embedding/model_only_seed2/evaluation/train/selected_best/rank000.npz"
+        },
+        "VAL": {
+          "metrics": {
+            "top1": 0.7083440308087291,
+            "ce": 0.7119930932919184,
+            "mean_cost": 11.395966927165192,
+            "actual_regret_pct": 0.4056972216509517,
+            "vs_sbs_pct": -0.18824964966010246,
+            "vs_oracle_pct": 0.3950379902281642
+          },
+          "zero_selection": {
+            "groups": 27,
+            "winner_mass": 2159
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R83_model_only_source_embedding/model_only_seed2/evaluation/val/selected_best/rank000.npz"
+        },
+        "TEST": {
+          "metrics": {
+            "top1": 0.7120667522464699,
+            "ce": 0.7058536774582334,
+            "mean_cost": 11.345720350212394,
+            "actual_regret_pct": 0.39336450163043224,
+            "vs_sbs_pct": -0.19494330115000114,
+            "vs_oracle_pct": 0.3846973492178268
+          },
+          "zero_selection": {
+            "groups": 26,
+            "winner_mass": 2474
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R83_model_only_source_embedding/model_only_seed2/evaluation/test/selected_best/rank000.npz"
+        }
+      }
+    },
+    {
+      "model": "R84A",
+      "dataset_group": "NEW90k",
+      "baseline": "R84A",
+      "description": "NEW90k matched baseline",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "selected_update": 37440,
+      "checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "splits": {
+        "TRAIN": {
+          "metrics": {
+            "top1": 0.7124389574759944,
+            "ce": 0.6963813437355889,
+            "mean_cost": 11.389160308621989,
+            "actual_regret_pct": 0.39520686772544855,
+            "vs_sbs_pct": -0.19774099592625252,
+            "vs_oracle_pct": 0.38713140603609963
+          },
+          "zero_selection": {
+            "groups": 26,
+            "winner_mass": 25627
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline/evaluation/train/selected_best/rank000.npz"
+        },
+        "VAL": {
+          "metrics": {
+            "top1": 0.7108518518518517,
+            "ce": 0.7035767336686453,
+            "mean_cost": 11.416611476966297,
+            "actual_regret_pct": 0.40349429480962734,
+            "vs_sbs_pct": -0.1941901714225178,
+            "vs_oracle_pct": 0.3934430435190607
+          },
+          "zero_selection": {
+            "groups": 29,
+            "winner_mass": 2807
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline/evaluation/val/selected_best/rank000.npz"
+        },
+        "TEST": {
+          "metrics": {
+            "top1": 0.712358024691358,
+            "ce": 0.6997594618135028,
+            "mean_cost": 11.373843043954178,
+            "actual_regret_pct": 0.39484678767505227,
+            "vs_sbs_pct": -0.19705341893213293,
+            "vs_oracle_pct": 0.38613964781557913
+          },
+          "zero_selection": {
+            "groups": 25,
+            "winner_mass": 2246
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline/evaluation/test/selected_best/rank000.npz"
+        }
+      }
+    },
+    {
+      "model": "R84B",
+      "dataset_group": "NEW90k",
+      "baseline": "R84A",
+      "description": "Direct attention selection",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "selected_update": 37440,
+      "checkpoint_sha256": "309b90d7a1bc5470465140e3f2d9d73b0745debc2c3bf2c2907f1cf5fb79f9d1",
+      "splits": {
+        "TRAIN": {
+          "metrics": {
+            "top1": 0.7125973936899862,
+            "ce": 0.6913269559542338,
+            "mean_cost": 11.389033090179199,
+            "actual_regret_pct": 0.39333984621325613,
+            "vs_sbs_pct": -0.19967326772880847,
+            "vs_oracle_pct": 0.38518799464276365
+          },
+          "zero_selection": {
+            "groups": 26,
+            "winner_mass": 25627
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/B_attention_direct/evaluation/train/selected_best/rank000.npz"
+        },
+        "VAL": {
+          "metrics": {
+            "top1": 0.7100000000000001,
+            "ce": 0.6975695557064481,
+            "mean_cost": 11.416697455782,
+            "actual_regret_pct": 0.40499912057007764,
+            "vs_sbs_pct": -0.19271879727871563,
+            "vs_oracle_pct": 0.39493011274909107
+          },
+          "zero_selection": {
+            "groups": 25,
+            "winner_mass": 1471
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/B_attention_direct/evaluation/val/selected_best/rank000.npz"
+        },
+        "TEST": {
+          "metrics": {
+            "top1": 0.7122345679012345,
+            "ce": 0.6941397471560372,
+            "mean_cost": 11.37399310515513,
+            "actual_regret_pct": 0.39459215890598665,
+            "vs_sbs_pct": -0.19750907891798947,
+            "vs_oracle_pct": 0.38567546296235256
+          },
+          "zero_selection": {
+            "groups": 23,
+            "winner_mass": 2167
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/B_attention_direct/evaluation/test/selected_best/rank000.npz"
+        }
+      }
+    },
+    {
+      "model": "R84C",
+      "dataset_group": "NEW90k",
+      "baseline": "R84A",
+      "description": "Original head plus focal penalty",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "selected_update": 46080,
+      "checkpoint_sha256": "a7f7626caa770d0dce67c43630e224b965e4015976c8956587d35a1a51a56d77",
+      "splits": {
+        "TRAIN": {
+          "metrics": {
+            "top1": 0.7132338820301782,
+            "ce": 0.6880355576674143,
+            "mean_cost": 11.38924913452178,
+            "actual_regret_pct": 0.396350321762593,
+            "vs_sbs_pct": -0.19726653307366016,
+            "vs_oracle_pct": 0.387621721712265
+          },
+          "zero_selection": {
+            "groups": 23,
+            "winner_mass": 18259
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/C_focal/evaluation/train/selected_best/rank000.npz"
+        },
+        "VAL": {
+          "metrics": {
+            "top1": 0.7102345679012347,
+            "ce": 0.6962791581948599,
+            "mean_cost": 11.41700185295611,
+            "actual_regret_pct": 0.4082958363889605,
+            "vs_sbs_pct": -0.19073443796218484,
+            "vs_oracle_pct": 0.39692811260799465
+          },
+          "zero_selection": {
+            "groups": 26,
+            "winner_mass": 1528
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/C_focal/evaluation/val/selected_best/rank000.npz"
+        },
+        "TEST": {
+          "metrics": {
+            "top1": 0.712716049382716,
+            "ce": 0.6937684085634019,
+            "mean_cost": 11.374011310872516,
+            "actual_regret_pct": 0.3971814791019308,
+            "vs_sbs_pct": -0.19565112929239692,
+            "vs_oracle_pct": 0.38757194449875093
+          },
+          "zero_selection": {
+            "groups": 22,
+            "winner_mass": 1405
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/C_focal/evaluation/test/selected_best/rank000.npz"
+        }
+      }
+    },
+    {
+      "model": "R84D",
+      "dataset_group": "NEW90k",
+      "baseline": "R84A",
+      "description": "Direct attention plus focal penalty",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "selected_update": 43200,
+      "checkpoint_sha256": "addbfaff33b5720dfec357a4b5685e75e161deea62d7bde04b15f48fb39b3efe",
+      "splits": {
+        "TRAIN": {
+          "metrics": {
+            "top1": 0.7131913580246914,
+            "ce": 0.6914197454849879,
+            "mean_cost": 11.389275293282159,
+            "actual_regret_pct": 0.39574227742641754,
+            "vs_sbs_pct": -0.19763852877922408,
+            "vs_oracle_pct": 0.38721931424126055
+          },
+          "zero_selection": {
+            "groups": 23,
+            "winner_mass": 15936
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/D_attention_focal/evaluation/train/update0043200/rank000.npz"
+        },
+        "VAL": {
+          "metrics": {
+            "top1": 0.7095432098765433,
+            "ce": 0.6984532889392641,
+            "mean_cost": 11.417063865970592,
+            "actual_regret_pct": 0.40809695833238696,
+            "vs_sbs_pct": -0.18977826003809878,
+            "vs_oracle_pct": 0.3978756227854251
+          },
+          "zero_selection": {
+            "groups": 23,
+            "winner_mass": 1067
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/D_attention_focal/evaluation/val/selected_best/rank000.npz"
+        },
+        "TEST": {
+          "metrics": {
+            "top1": 0.7121728395061728,
+            "ce": 0.6967426207330492,
+            "mean_cost": 11.373922018266953,
+            "actual_regret_pct": 0.395155037084955,
+            "vs_sbs_pct": -0.1969247717546844,
+            "vs_oracle_pct": 0.38624711404306145
+          },
+          "zero_selection": {
+            "groups": 22,
+            "winner_mass": 1405
+          },
+          "prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/D_attention_focal/evaluation/test/selected_best/rank000.npz"
+        }
+      }
+    }
+  ],
+  "report_complete": true,
+  "summary_csv": "/public/home/shiys/0selection2/code/V4/runs/R85_zero_selection_research/prior_experiments/summary.csv",
+  "pdf": "/public/home/shiys/0selection2/code/V4/runs/R85_zero_selection_research/prior_experiments/PRIOR_EXPERIMENTS.pdf",
+  "findings": [
+    "R80-R83 belong to OLD77904 (70,114/3,895/3,895 per task); R84 belongs to NEW90k (81,000/4,500/4,500). Compare within each release. Raw costs across releases are not a controlled gain.",
+    "The current locked R84 models have TRAIN Top1 around 71.2-71.3%, close to VAL. Zero selection is already present in TRAIN. These models do not show the near-100% TRAIN vs 50% holdout behavior of earlier binary readouts.",
+    "R84A/B TRAIN have 26 zero-with-winner groups / 25,627 winners. Focal C/D leave 23 groups / 18,259 and 15,936 winners. Reducing zero groups does not establish correct recovery or system improvement.",
+    "All three R84 variants have lower locked VAL Top1 and higher mean_cost/actual regret than A. Focal alone has slightly higher TEST Top1 but also higher TEST cost/regret; TEST does not override the failed VAL acceptance gate.",
+    "R81 global AUC, R82 matched ranking, R83 source filtering and the R80 optimizer/loss changes do not provide a clear system-level breakthrough. Same-method ranking evidence must not be confused with becoming the correct cross-method argmax.",
+    "Next action: prioritize method-specific TRAIN winner discrimination and the gap between ranking/probability support and final argmax. A generic longer-training/overfitting narrative is not justified for these locked R84 models. Any new proposal must improve VAL Top1 and reduce missed winner mass without increasing cost.",
+    "All runs use seed 2 only; no multi-seed significance claim. Native/FP64 winner ties follow the saved label. False picks can have zero extra cost if tied. All18 metrics are equal task means; mixed raw mean_cost is descriptive.",
+    "TEST has informed earlier research. This retrospective analysis does not select new checkpoints, thresholds, temperatures or per-task model mixtures. No GPU inference or new training was used."
+  ],
+  "target_VAL_recovery": [
+    {
+      "model": "R77B",
+      "baseline": "R77B",
+      "target_groups": 36,
+      "winner_count": 4358,
+      "correct_count": 8,
+      "rescued": 0,
+      "lost": 0,
+      "new_false_pick_count": 0,
+      "rescued_of_baseline_misses_pct": 0.0
+    },
+    {
+      "model": "R80A",
+      "baseline": "R77B",
+      "target_groups": 36,
+      "winner_count": 4358,
+      "correct_count": 9,
+      "rescued": 5,
+      "lost": 4,
+      "new_false_pick_count": 3,
+      "rescued_of_baseline_misses_pct": 0.11494252873563218
+    },
+    {
+      "model": "R80B",
+      "baseline": "R77B",
+      "target_groups": 36,
+      "winner_count": 4358,
+      "correct_count": 33,
+      "rescued": 25,
+      "lost": 0,
+      "new_false_pick_count": 23,
+      "rescued_of_baseline_misses_pct": 0.5747126436781609
+    },
+    {
+      "model": "R80C",
+      "baseline": "R77B",
+      "target_groups": 36,
+      "winner_count": 4358,
+      "correct_count": 49,
+      "rescued": 42,
+      "lost": 1,
+      "new_false_pick_count": 43,
+      "rescued_of_baseline_misses_pct": 0.9655172413793104
+    },
+    {
+      "model": "R80D",
+      "baseline": "R77B",
+      "target_groups": 36,
+      "winner_count": 4358,
+      "correct_count": 10,
+      "rescued": 4,
+      "lost": 2,
+      "new_false_pick_count": 2,
+      "rescued_of_baseline_misses_pct": 0.09195402298850575
+    },
+    {
+      "model": "R81B",
+      "baseline": "R77B",
+      "target_groups": 36,
+      "winner_count": 4358,
+      "correct_count": 15,
+      "rescued": 8,
+      "lost": 1,
+      "new_false_pick_count": 8,
+      "rescued_of_baseline_misses_pct": 0.1839080459770115
+    },
+    {
+      "model": "R82B",
+      "baseline": "R77B",
+      "target_groups": 36,
+      "winner_count": 4358,
+      "correct_count": 14,
+      "rescued": 7,
+      "lost": 1,
+      "new_false_pick_count": 9,
+      "rescued_of_baseline_misses_pct": 0.16091954022988506
+    },
+    {
+      "model": "R83",
+      "baseline": "R77B",
+      "target_groups": 36,
+      "winner_count": 4358,
+      "correct_count": 11,
+      "rescued": 3,
+      "lost": 0,
+      "new_false_pick_count": 5,
+      "rescued_of_baseline_misses_pct": 0.06896551724137931
+    },
+    {
+      "model": "R84A",
+      "baseline": "R84A",
+      "target_groups": 36,
+      "winner_count": 4625,
+      "correct_count": 11,
+      "rescued": 0,
+      "lost": 0,
+      "new_false_pick_count": 0,
+      "rescued_of_baseline_misses_pct": 0.0
+    },
+    {
+      "model": "R84B",
+      "baseline": "R84A",
+      "target_groups": 36,
+      "winner_count": 4625,
+      "correct_count": 32,
+      "rescued": 21,
+      "lost": 0,
+      "new_false_pick_count": 22,
+      "rescued_of_baseline_misses_pct": 0.45513654096228867
+    },
+    {
+      "model": "R84C",
+      "baseline": "R84A",
+      "target_groups": 36,
+      "winner_count": 4625,
+      "correct_count": 21,
+      "rescued": 10,
+      "lost": 0,
+      "new_false_pick_count": 17,
+      "rescued_of_baseline_misses_pct": 0.21673168617251842
+    },
+    {
+      "model": "R84D",
+      "baseline": "R84A",
+      "target_groups": 36,
+      "winner_count": 4625,
+      "correct_count": 56,
+      "rescued": 46,
+      "lost": 1,
+      "new_false_pick_count": 56,
+      "rescued_of_baseline_misses_pct": 0.9969657563935848
+    }
+  ],
+  "TRAIN_examples": [
+    {
+      "model": "R84A",
+      "problem": "TSP",
+      "solver": "DIFUSCO",
+      "winner_count": 6806,
+      "selected_count": 0,
+      "correct_count": 0,
+      "recall_pct": 0.0
+    },
+    {
+      "model": "R84A",
+      "problem": "TSP",
+      "solver": "LEHD",
+      "winner_count": 14279,
+      "selected_count": 15,
+      "correct_count": 7,
+      "recall_pct": 0.04902304082918972
+    },
+    {
+      "model": "R84A",
+      "problem": "ATSP",
+      "solver": "MATPOENET",
+      "winner_count": 6476,
+      "selected_count": 0,
+      "correct_count": 0,
+      "recall_pct": 0.0
+    },
+    {
+      "model": "R84C",
+      "problem": "TSP",
+      "solver": "DIFUSCO",
+      "winner_count": 6806,
+      "selected_count": 10,
+      "correct_count": 4,
+      "recall_pct": 0.05877167205406994
+    },
+    {
+      "model": "R84C",
+      "problem": "TSP",
+      "solver": "LEHD",
+      "winner_count": 14279,
+      "selected_count": 82,
+      "correct_count": 34,
+      "recall_pct": 0.2381119125989215
+    },
+    {
+      "model": "R84C",
+      "problem": "ATSP",
+      "solver": "MATPOENET",
+      "winner_count": 6476,
+      "selected_count": 0,
+      "correct_count": 0,
+      "recall_pct": 0.0
+    }
+  ]
+}

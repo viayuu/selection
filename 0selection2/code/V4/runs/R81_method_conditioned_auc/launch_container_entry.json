@@ -1,0 +1,113 @@
+{
+  "started_utc": "2026-10-15T16:18:09.386365+00:00",
+  "pid": 2033524,
+  "host": "gpu05",
+  "job": 1475,
+  "step": "58",
+  "container_name": "1475_gpu05",
+  "container_id": "76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6",
+  "resource_recheck": {
+    "captured_utc": "2026-10-15T16:18:08.387478+00:00",
+    "candidate": "B_batch512",
+    "allocation": {
+      "job": 1475,
+      "state": "RUNNING",
+      "node": "gpu05",
+      "cpus": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        72,
+        73,
+        74,
+        75
+      ],
+      "cpu_limit": 10,
+      "memory_bytes": 21474836480,
+      "gpu_count": 2
+    },
+    "container": {
+      "name": "1475_gpu05",
+      "id": "76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6",
+      "memory_limit_bytes": 21474836480,
+      "allowed_cpus": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        72,
+        73,
+        74,
+        75
+      ]
+    },
+    "processes": {
+      "B_batch512": [],
+      "D_code_embedding": []
+    },
+    "allowed_cpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      72,
+      73,
+      74,
+      75
+    ],
+    "cpu_only": false,
+    "gpu": {
+      "uuid": "GPU-71479e7e-f8bd-e430-66ed-f8db9f0d47be",
+      "index": 0,
+      "nvml_index": 0,
+      "authorized_logical_index": 0,
+      "identity_rule": "exact UUID + hardware type; ordinal is informational",
+      "name": "NVIDIA GeForce RTX 4090",
+      "memory_used_mib": 2,
+      "memory_total_mib": 24564,
+      "utilization_pct": 0,
+      "compute_processes": [],
+      "query_transport": "verified_allocation_container_exec",
+      "api": "NVML via nvidia-smi; no CUDA context or training probe"
+    },
+    "selected_cpus": [
+      0,
+      1,
+      72,
+      73
+    ]
+  },
+  "command": [
+    "sudo",
+    "-n",
+    "/usr/bin/ai_docker",
+    "exec",
+    "-u",
+    "2022",
+    "-e",
+    "CUDA_VISIBLE_DEVICES=GPU-71479e7e-f8bd-e430-66ed-f8db9f0d47be",
+    "-e",
+    "SLURM_JOB_ID=1475",
+    "-e",
+    "SLURM_STEP_ID=existing_allocation_container",
+    "-e",
+    "R81_QUEUE_TOKEN=651fb5a3010247b9abbcc1a391bdcd3f",
+    "-e",
+    "R81_ASSIGNED_CPUS=0,1,72,73",
+    "1475_gpu05",
+    "bash",
+    "/public/home/shiys/0selection2/code/V4/run_v4_r81.sh",
+    "container-worker",
+    "--candidate",
+    "B_batch512",
+    "--token",
+    "651fb5a3010247b9abbcc1a391bdcd3f"
+  ]
+}

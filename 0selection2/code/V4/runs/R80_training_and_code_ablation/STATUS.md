@@ -1,14 +1,14 @@
 # R80 Status
 
-Snapshot UTC: 2026-10-15T13:13:19.721578+00:00
+Snapshot UTC: 2026-10-15T15:35:43.301421+00:00
 One-shot snapshot, not a live monitor. Refresh with --status.
 
 | Arm | Runner Phase | Updates / Budget | Progress | ETA Hours | TEST Receipt | Reporting | Updated UTC |
 |---|---|---:|---:|---:|---|---|---|
-| A_ce_only | training | 9540 / 49680 | 19.20% | 3.67 | missing | not_started | 2026-10-15T13:13:14.701461+00:00 |
-| B_batch512 | evaluation | 24840 / 99360 | 25.00% | 2.65 | missing | not_started | 2026-10-15T13:13:18.346649+00:00 |
-| C_lr3e4 | training | 7092 / 49680 | 14.28% | 3.88 | missing | not_started | 2026-10-15T13:13:16.964359+00:00 |
-| D_code_embedding | training | 9684 / 49680 | 19.49% | 2.70 | missing | not_started | 2026-10-15T13:13:16.612943+00:00 |
+| A_ce_only | training | 34002 / 49680 | 68.44% | 1.45 | missing | not_started | 2026-10-15T15:35:39.716259+00:00 |
+| B_batch512 | training | 87462 / 99360 | 88.03% | 0.42 | missing | not_started | 2026-10-15T15:35:42.022507+00:00 |
+| C_lr3e4 | training | 31662 / 49680 | 63.73% | 1.66 | missing | not_started | 2026-10-15T15:35:40.822210+00:00 |
+| D_code_embedding | training | 42894 / 49680 | 86.34% | 0.46 | missing | not_started | 2026-10-15T15:35:39.415041+00:00 |
 
 ## Per-Arm Paths
 

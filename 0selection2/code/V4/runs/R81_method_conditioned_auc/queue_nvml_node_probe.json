@@ -1,0 +1,26 @@
+{
+  "checked_utc": "2026-10-15T15:25:56.851300+00:00",
+  "passed": false,
+  "probe_count": 1,
+  "read_only": true,
+  "training_started": false,
+  "command": [
+    "srun",
+    "--jobid=1465",
+    "--overlap",
+    "--exact",
+    "--gres=none",
+    "--immediate=5",
+    "-N1",
+    "-n1",
+    "--nodelist=gpu03",
+    "--cpus-per-task=1",
+    "--mem=256M",
+    "bash",
+    "/public/home/shiys/0selection2/code/V4/run_v4_r81.sh",
+    "probe-node",
+    "--candidate",
+    "A_ce_only"
+  ],
+  "error": "RuntimeError: srun --jobid=1465 --overlap --exact --gres=none --immediate=5 -N1 -n1 --nodelist=gpu03 --cpus-per-task=1 --mem=256M bash /public/home/shiys/0selection2/code/V4/run_v4_r81.sh probe-node --candidate A_ce_only: exit=1: Traceback (most recent call last):\n  File \"/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/runpy.py\", line 197, in _run_module_as_main\nsrun: error: gpu03: task 0: Exited with exit code 1\nsrun: launch/slurm: _step_signal: Terminating StepId=1465.167\n    return _run_code(code, main_globals, None,\n  File \"/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/runpy.py\", line 87, in _run_code\n    exec(code, run_globals)\n  File \"/public/home/shiys/0selection2/code/V4/r81_queue.py\", line 871, in <module>\n    sys.exit(main())\n  File \"/public/home/shiys/0selection2/code/V4/r81_queue.py\", line 859, in main\n    print(json.dumps(node_probe(args.candidate, args.baseline_only)))\n  File \"/public/home/shiys/0selection2/code/V4/r81_queue.py\", line 289, in node_probe\n    result.update(gpu=gpu_inventory(candidate),\n  File \"/public/home/shiys/0selection2/code/V4/r81_queue.py\", line 243, in gpu_inventory\n    devices = capture(['nvidia-smi', f'--id={candidate[\"uuid\"]}',\n  File \"/public/home/shiys/0selection2/code/V4/r81_queue.py\", line 102, in capture\n    raise RuntimeError(f'{shlex.join(command)}: exit={result.returncode}: {result.stderr[-2000:]}')\nRuntimeError: nvidia-smi --id=GPU-cb24f168-9f18-f0d5-6f4a-6d2406958f50 --query-gpu=index,uuid,name,memory.used,memory.total,utilization.gpu --format=csv,noheader,nounits: exit=6: \n"
+}

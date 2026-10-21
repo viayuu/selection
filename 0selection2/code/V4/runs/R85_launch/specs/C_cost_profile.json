@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "run_id": "C_cost_profile",
+  "run_dir": "/public/home/shiys/0selection2/code/V4/runs/R85_zero_selection_research/C_cost_profile",
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "prepared_root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+  "cache_source": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache",
+  "cache_root": "/tmp/shiys_R84_new90k_cache",
+  "slots": [
+    "4090_0"
+  ],
+  "cpu_count": 4,
+  "memory_gib": 9,
+  "source_files": [
+    "/public/home/shiys/0selection2/code/V4/r85_experiment.py",
+    "/public/home/shiys/0selection2/code/V4/r85_objectives.py",
+    "/public/home/shiys/0selection2/code/V4/r85_candidate_selector.py",
+    "/public/home/shiys/0selection2/code/V4/r85_reporting.py",
+    "/public/home/shiys/0selection2/code/V4/r84_experiment.py",
+    "/public/home/shiys/0selection2/code/V4/r84_prepare.py",
+    "/public/home/shiys/0selection2/code/V4/r84_reporting.py",
+    "/public/home/shiys/0selection2/code/V4/r84_nss_reference.py",
+    "/public/home/shiys/0selection2/code/V4/r76_experiment.py",
+    "/public/home/shiys/0selection2/code/V4/r77_experiment.py",
+    "/public/home/shiys/0selection2/code/V4/r80_experiment.py",
+    "/public/home/shiys/0selection2/code/V4/r80_reporting.py",
+    "/public/home/shiys/0selection2/code/V4/pairwise_selector.py",
+    "/public/home/shiys/0selection2/code/V4/pairwise_objective.py",
+    "/public/home/shiys/0selection2/code/V4/solver_code_encoder.py",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared/prepared.json",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared/geometry_stats.json",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared/common_full_train_sbs.json",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared/identicalinit_seed2.pt",
+    "/public/home/shiys/0selection2/code/V4/runs/R85_zero_selection_research/protocol_lock.json"
+  ],
+  "protocol": {
+    "initialization": "scratch",
+    "training_splits": [
+      "train",
+      "val"
+    ],
+    "seed": 2,
+    "logical_batch": 1024,
+    "max_successful_updates": 57600,
+    "main_protocol": "main_locked_four_R85_arms",
+    "warmup_updates": 4320,
+    "evaluation_every_updates": 1440,
+    "training_includes_locked_TEST": true,
+    "large_instance_micro_cap": 352
+  },
+  "stages": [
+    {
+      "name": "train_VALlock_TEST",
+      "device": "gpu",
+      "argv": [
+        "{python}",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r85_experiment",
+        "train",
+        "--root",
+        "{common_root}",
+        "--arm",
+        "C_cost_profile",
+        "--prepared-root",
+        "{prepared_root}",
+        "--data-root",
+        "{data_root}",
+        "--cache-root",
+        "{cache_root}",
+        "--protocol-lock",
+        "{common_root}/protocol_lock.json",
+        "--device",
+        "{device}",
+        "--gpu-type",
+        "{gpu_type}",
+        "--large-micro-cap",
+        "{micro_cap}",
+        "--eval-batch-size",
+        "256",
+        "--wandb-mode",
+        "offline"
+      ]
+    },
+    {
+      "name": "LIB",
+      "device": "gpu",
+      "argv": [
+        "{python}",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r85_reporting",
+        "lib",
+        "--root",
+        "{common_root}",
+        "--arm",
+        "C_cost_profile",
+        "--device",
+        "{device}",
+        "--lib-batch-size",
+        "2"
+      ]
+    },
+    {
+      "name": "PDF",
+      "device": "cpu",
+      "argv": [
+        "{python}",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r85_reporting",
+        "report",
+        "--root",
+        "{common_root}",
+        "--arm",
+        "C_cost_profile",
+        "--device",
+        "{device}",
+        "--lib-batch-size",
+        "2"
+      ]
+    }
+  ],
+  "common_root": "/public/home/shiys/0selection2/code/V4/runs/R85_zero_selection_research"
+}

@@ -165,7 +165,7 @@ def status_snapshot(root):
 
 def check_identity(record, lock, label, require_epoch=True):
     if record.get("checkpoint_sha256") != lock["checkpoint_sha256"]:
-        raise ValueError(f"{label}: checkpoint SHA256 differs from unique R80 VAL lock")
+        raise ValueError(f"{label}: checkpoint SHA256 differs from unique {lock.get('experiment', 'R80')} VAL lock")
     if require_epoch and record.get("epoch", record.get("checkpoint_epoch")) != lock["epoch"]:
         raise ValueError(f"{label}: epoch differs from unique VAL lock")
     if record.get("selected_update", record.get("checkpoint_update")) != lock["selected_update"]:
@@ -174,25 +174,26 @@ def check_identity(record, lock, label, require_epoch=True):
         raise ValueError(f"{label}: protocol state hash differs from unique VAL lock")
 
 
-def locked_inputs(root, arm):
+def locked_inputs(root, arm, *, experiment="R80", arms=None):
     """Gates precede all TEST prediction reads; no model selection occurs here."""
     run = root / arm
     config = read_json(run / "protocol.json")
     complete = read_json(run / "training_complete.json")
     lock = read_json(run / "final_test_lock.json")
     checkpoint = run / "best.pt"
-    if (config.get("experiment") != "R80" or config.get("arm") != arm
-            or lock.get("experiment") != "R80" or lock.get("arm") != arm
+    budget = (ARMS if arms is None else arms)[arm]
+    if (config.get("experiment") != experiment or config.get("arm") != arm
+            or lock.get("experiment") != experiment or lock.get("arm") != arm
             or lock.get("selected_without_test") is not True
             or lock.get("per_problem_assembly") is not False
-            or complete.get("successful_updates") != ARMS[arm]
-            or config.get("max_successful_updates") != ARMS[arm]
-            or not 0 < int(lock.get("selected_update", 0)) <= ARMS[arm]
+            or complete.get("successful_updates") != budget
+            or config.get("max_successful_updates") != budget
+            or not 0 < int(lock.get("selected_update", 0)) <= budget
             or int(lock.get("epoch", 0)) < 1
             or lock.get("state_hash") != json_hash(config)
             or resolve_record_path(lock["checkpoint"], run) != checkpoint.resolve()
             or file_hash(checkpoint) != lock["checkpoint_sha256"]):
-        raise ValueError("Require completed R80 arm and unchanged unique full-VAL checkpoint lock")
+        raise ValueError(f"Require completed {experiment} arm and unchanged unique full-VAL checkpoint lock")
     if complete.get("selected_best") is not None:
         check_identity(complete["selected_best"], lock, "training completion")
     if lock.get("rule") != config.get("checkpoint_rule") or not lock.get("rule"):
@@ -244,7 +245,7 @@ def metric_row(problem, split, data, saved, baseline, config, lock, source):
     helper = reporting_helpers()
     row = helper.metric_row(problem, split, data, saved, baseline,
                             Path(config["data_root"]).name, source)
-    row.update(model=f"R80/{config['arm']}", checkpoint_sha256=lock["checkpoint_sha256"],
+    row.update(model=f"{config['experiment']}/{config['arm']}", checkpoint_sha256=lock["checkpoint_sha256"],
                winner_rule=WINNER_RULE, sbs_selection_split="FULL TRAIN (fixed before VAL/TEST/LIB)")
     slot = data.pool.index(baseline["sbs_solver"])
     oracle = data.costs.min(1)
@@ -273,9 +274,27 @@ def macro_row(split, rows, saved):
     return row
 
 
+def check_saved_coverage(data, saved, config, split, problem):
+    """Match the locked population and stable IDs, including declared aliases."""
+    from code.unified_selector.registry import GLOBAL_SOLVERS
+    record = config.get("data_manifest", {}).get(split.lower(), {}).get(problem, {})
+    expected_n = record.get("rows", config.get("rows_per_problem", {}).get(
+        split.lower(), config.get("heldout_rows_per_problem", saved["n"])))
+    ids = data.pool_ids.tolist()
+    aliases = {"reld_mt": "RELD_MOEL"}
+    canonical = [aliases.get(name, name) for name in data.pool]
+    expected_ids = record.get("pool_ids", config.get("candidate_pool_ids", {}).get(problem, ids))
+    expected_pool = record.get("pool", config.get("candidate_pools", {}).get(problem, data.pool))
+    if (data.n != saved["n"] or data.n != expected_n
+            or ids != sorted(set(ids)) or any(i < 0 or i >= len(GLOBAL_SOLVERS) for i in ids)
+            or [GLOBAL_SOLVERS[i] for i in ids] != canonical
+            or ids != expected_ids or data.pool != expected_pool):
+        raise ValueError(f"Invalid full new-data coverage or stable pool: {split}/{problem}")
+
+
 def load_saved_splits(run, config, lock, test, val):
     import numpy as np
-    from code.unified_selector.registry import GLOBAL_SOLVERS, PROBLEMS
+    from code.unified_selector.registry import PROBLEMS
     helper = reporting_helpers()
     predictions, metrics, methods = {}, [], []
     expected_model_hash = test["identity"]["model_state_sha256"]
@@ -285,33 +304,31 @@ def load_saved_splits(run, config, lock, test, val):
             ("VAL", val, selected_val_path(run, lock), run / "final_metrics.json"),
             ("TEST", test, run / "evaluation/test/selected_best/rank000.npz", run / "test_results.json")):
         identity = read_json(path.parent / "identity.json")
-        if (identity != result["identity"] or identity.get("experiment") != "R80"
+        if (identity != result["identity"] or identity.get("experiment") != config["experiment"]
                 or identity.get("arm") != config["arm"] or identity.get("split") != split.lower()
                 or identity.get("successful_updates") != lock["selected_update"]
                 or identity.get("state_hash") != lock["state_hash"]
                 or identity.get("model_state_sha256") != expected_model_hash
                 or (split == "TEST" and identity.get("checkpoint_sha256") != lock["checkpoint_sha256"])):
-            raise ValueError(f"Saved {split} prediction identity differs from selected R80 model state")
+            raise ValueError(f"Saved {split} prediction identity differs from selected {config['experiment']} model state")
         rows = []
         with np.load(path, allow_pickle=False) as archive:
             for problem in PROBLEMS:
                 data = helper.load_predictions(archive, path, problem + "__")
-                if (data.n != result["per_problem"][problem]["n"] or data.n != 3895
-                        or data.pool_ids.tolist() != sorted(data.pool_ids.tolist())
-                        or [GLOBAL_SOLVERS[i] for i in data.pool_ids] != data.pool):
-                    raise ValueError(f"Invalid full new-data coverage or stable pool: {split}/{problem}")
+                check_saved_coverage(data, result["per_problem"][problem], config, split, problem)
                 np.testing.assert_array_equal(data.indices, np.arange(data.n))
                 predictions[split, problem] = data
                 saved = result["per_problem"][problem]
                 rows.append(metric_row(problem, split, data, saved, config["baselines"][problem],
                                        config, lock, source))
                 observations = helper.method_rows(problem, split, saved, data, Path(config["data_root"]).name)
-                methods.extend(dict(r, model=f"R80/{config['arm']}") for r in observations)
+                methods.extend(dict(r, model=f"{config['experiment']}/{config['arm']}") for r in observations)
         metrics.extend([macro_row(split, rows, result), *rows])
     return predictions, metrics, methods
 
 
-def r80_lib(root, run, config, lock, device_name, batch_size, phase, expected_model_hash):
+def r80_lib(root, run, config, lock, device_name, batch_size, phase, expected_model_hash,
+            *, factory_module="code.V4.r80_experiment"):
     """R77 data/inference utilities, exclusively the R80 worker's model factory."""
     import numpy as np
     import torch
@@ -321,9 +338,10 @@ def r80_lib(root, run, config, lock, device_name, batch_size, phase, expected_mo
     from .r77_lib import SCHEMA, checked_predictions, checked_raw, summarize
     from .r77_data import parameter_hash
     from .train import configure_torch, make_loader
-    factory = importlib.import_module("code.V4.r80_experiment")
+    factory = importlib.import_module(factory_module)
+    experiment = config["experiment"]
     if not callable(getattr(factory, "load_checkpoint", None)):
-        raise ValueError("R80 worker must expose load_checkpoint(path, device); no historical model fallback")
+        raise ValueError(f"{experiment} worker must expose load_checkpoint(path, device); no historical model fallback")
     configure_torch()
     torch.set_num_threads(2)
     device = torch.device(device_name)
@@ -343,17 +361,17 @@ def r80_lib(root, run, config, lock, device_name, batch_size, phase, expected_mo
         sources = {name: dict(path=str(Path(raw["directory"]) / name),
                              sha256=file_hash(Path(raw["directory"]) / name))
                    for name in ("dataset.pkl", "raw_label.pkl")}
-        identity = dict(experiment="R80", arm=config["arm"], dataset=dataset, problem=problem,
+        identity = dict(experiment=experiment, arm=config["arm"], dataset=dataset, problem=problem,
                         checkpoint=str((run / "best.pt").resolve()),
                         checkpoint_sha256=lock["checkpoint_sha256"], epoch=lock["epoch"],
                         selected_update=lock["selected_update"], candidate_pool=raw["pool"],
                         state_hash=lock["state_hash"], model_state_sha256=expected_model_hash,
                         pool_ids=raw["pool_ids"], sources=sources, winner_rule=WINNER_RULE,
                         data_version="original native LIB / historical NSS comparison",
-                        model_factory="code.V4.r80_experiment.load_checkpoint",
+                        model_factory=factory_module + ".load_checkpoint",
                         inference_rule="single FP32 forward, logits argmax, lowest global solver ID for exact ties",
                         locked_inference_rule=lock["inference_rule"],
-                        normalization="all TRAIN buffers restored from same R80 best.pt, no LIB refit",
+                        normalization=f"all TRAIN buffers restored from same {experiment} best.pt, no LIB refit",
                         batch_size=batch_size, device=str(device), training=False,
                         solver_execution=False, embedding_api=False, checkpoint_reselection=False,
                         prediction_schema=SCHEMA)
@@ -378,17 +396,17 @@ def r80_lib(root, run, config, lock, device_name, batch_size, phase, expected_mo
             if model is None:
                 model, state = factory.load_checkpoint(run / "best.pt", device)
                 if state.get("args") != config or state.get("successful_updates") != lock["selected_update"]:
-                    raise ValueError("R80 factory returned another protocol/checkpoint update")
+                    raise ValueError(f"{experiment} factory returned another protocol/checkpoint update")
                 if state.get("epoch") != lock["epoch"]:
-                    raise ValueError("R80 factory checkpoint epoch differs from one-based VAL lock")
+                    raise ValueError(f"{experiment} factory checkpoint epoch differs from one-based VAL lock")
                 actual, expected = model.state_dict(), state["model"]
                 if set(actual) != set(expected):
-                    raise ValueError("R80 factory did not restore the complete checkpoint state/buffer schema")
+                    raise ValueError(f"{experiment} factory did not restore the complete checkpoint state/buffer schema")
                 if parameter_hash(expected) != expected_model_hash:
-                    raise ValueError("R80 factory model state differs from locked VAL/TEST evaluation identities")
+                    raise ValueError(f"{experiment} factory model state differs from locked VAL/TEST evaluation identities")
                 for key, value in actual.items():
                     torch.testing.assert_close(value.detach().cpu(), expected[key].detach().cpu(),
-                                               rtol=0, atol=0, msg=f"R80 factory state mismatch: {key}")
+                                               rtol=0, atol=0, msg=f"{experiment} factory state mismatch: {key}")
                 model.eval().requires_grad_(False)
                 buffer_reference = {key: value.detach().cpu().clone() for key, value in model.named_buffers()}
             with torch.inference_mode():
@@ -427,10 +445,10 @@ def r80_lib(root, run, config, lock, device_name, batch_size, phase, expected_mo
         result["train_sbs_reference"] = fixed
         write_json(result_path, result)
         results[dataset] = result
-        print(f"[R80 {config['arm']}] {dataset} native Top1={100*fixed['top1']:.6f}% "
+        print(f"[{experiment} {config['arm']}] {dataset} native Top1={100*fixed['top1']:.6f}% "
               f"mean_cost={fixed['mean_cost']:.9f}; reused={reused}", flush=True)
     if file_hash(run / "best.pt") != lock["checkpoint_sha256"]:
-        raise ValueError("Locked R80 checkpoint changed during LIB evaluation")
+        raise ValueError(f"Locked {experiment} checkpoint changed during LIB evaluation")
     return results
 
 
@@ -444,7 +462,7 @@ def nss_comparisons(root, config, lock, predictions, nss_root=None):
     nss_protocol, nss_lock = (read_json(protocol_path), read_json(lock_path)) if available else ({}, {})
     if available and any(Path(record["data_root"]).resolve() != Path(config["data_root"]).resolve()
                          for record in (nss_protocol, nss_lock)):
-        raise ValueError("R79 NSS and R80 do not use the same new-data release")
+        raise ValueError(f"R79 NSS and {config['experiment']} do not use the same new-data release")
     for dataset, problem, split in (("TSP TEST", "TSP", "TEST"), ("CVRP TEST", "CVRP", "TEST"),
                                     ("TSPLIB", "TSP", "TSPLIB"), ("CVRPLIB", "CVRP", "CVRPLIB")):
         current = predictions[split, problem]
@@ -452,7 +470,7 @@ def nss_comparisons(root, config, lock, predictions, nss_root=None):
         metadata_path = path.with_name(path.name.replace("_predictions.npz", "_metrics.json"))
         row = dict(dataset=dataset, problem=problem, n=current.n,
                    data_version=Path(config["data_root"]).name if split == "TEST" else "original native LIB",
-                   nss_model="R79_NSS_new_data_batch1024", current_model=f"R80/{config['arm']}",
+                   nss_model="R79_NSS_new_data_batch1024", current_model=f"{config['experiment']}/{config['arm']}",
                    nss_top1_native_pct=None, current_top1_native_pct=current.top1_pct,
                    nss_mean_cost=None, current_mean_cost=current.mean_cost,
                    nss_original_fp32_top1_pct=None, current_fp32_top1_pct=current.fp32_top1_pct,
@@ -486,7 +504,7 @@ def _page(helper, title, subtitle, model, lock, page):
     return fig
 
 
-def _distribution(helper, problem, pool, panels, version, model, lock):
+def _distribution(helper, problem, pool, panels, version, model, lock, *, no_model_solvers=()):
     fig = helper.plot_distribution(problem, pool, panels, version, lock)
     # Reuse the proven fixed-size R77 layout, but replace every model-specific
     # caption. No R77 epoch, weights, inference claim, or selection is inherited.
@@ -494,12 +512,14 @@ def _distribution(helper, problem, pool, panels, version, model, lock):
         value = text.get_text().replace("R77B", model)
         value = value.replace(helper.SHA256[:16], lock["checkpoint_sha256"][:16])
         value = value.replace("No training, inference, checkpoint reselection or Rxx mixing.",
-                              "Same R80 lock; LIB inference only; no training/reselection/Rxx mixing.")
+                              f"Same {model.split('/')[0]} lock; LIB inference only; no training/reselection/Rxx mixing.")
+        if problem == "ATSP" and "GLOP" in no_model_solvers and "Same " in value:
+            value = "GLOP: no neural model (glop_atsp_init_only random insertion); original trainable ID only. Candidates/IDs unchanged."
         text.set_text(value)
     return fig
 
 
-def diagnostic_pdf(run, output, predictions, methods, model, lock):
+def diagnostic_pdf(run, output, predictions, methods, model, lock, *, loss_labels=None):
     """Required observables from saved history/predictions, never new inference."""
     import numpy as np
     import matplotlib.pyplot as plt
@@ -522,8 +542,8 @@ def diagnostic_pdf(run, output, predictions, methods, model, lock):
                 points = [(step, row["optimization"][name]) for step, row in zip(steps, history)
                           if name in row.get("optimization", {})]
                 if points:
-                    axes[0, 0].plot(*zip(*points), label=name, linewidth=1.5)
-            axes[0, 0].set_title("TRAIN interval-mean loss components")
+                    axes[0, 0].plot(*zip(*points), label=(loss_labels or {}).get(name, name), linewidth=1.5)
+            axes[0, 0].set_title("TRAIN losses and diagnostics" if loss_labels else "TRAIN interval-mean loss components")
             if axes[0, 0].lines:
                 axes[0, 0].legend(fontsize=9)
             traces = ((axes[0, 1], "macro_top1", 100., "VAL ALL native Top1 (%)"),
@@ -591,14 +611,15 @@ def build_reports(root, run, config, lock, test, val, lib_results, predictions, 
         saved = lib_results[dataset]["train_sbs_reference"]
         metrics.append(metric_row(problem, dataset, data, saved, config["baselines"][problem], config, lock,
                                   run / f"lib_evaluation/{dataset}_results.json"))
-        methods.extend(dict(row, model=f"R80/{config['arm']}") for row in
+        methods.extend(dict(row, model=f"{config['experiment']}/{config['arm']}") for row in
                        helper.method_rows(problem, dataset, saved, data, "original native LIB"))
     comparisons, alignment = nss_comparisons(root, config, lock, predictions, nss_root)
     output = run / "full_model_statistics"
     output.mkdir(exist_ok=True)
     figures = output / "figures"
     figures.mkdir(exist_ok=True)
-    model, version = f"R80/{config['arm']}", Path(config["data_root"]).name
+    experiment = config["experiment"]
+    model, version = f"{experiment}/{config['arm']}", Path(config["data_root"]).name
     panel_sets, distributions = {}, []
     for problem in PROBLEMS:
         test_data = predictions["TEST", problem]
@@ -615,7 +636,7 @@ def build_reports(root, run, config, lock, test, val, lib_results, predictions, 
     write_csv(output / "single_method_comparison.csv", methods)
     phase("pdf_generation")
     helper.setup_style()
-    metadata = dict(Title=f"{model} locked model statistics", Author="R80 locked reporting",
+    metadata = dict(Title=f"{model} locked model statistics", Author=f"{experiment} locked reporting",
                     Subject="Native winner metrics, FULL TRAIN SBS, same VAL lock on all datasets")
     pdf = output / "MODEL_STATISTICS.pdf"
     dist_pdf = output / "selection_distributions.pdf"
@@ -636,13 +657,13 @@ def build_reports(root, run, config, lock, test, val, lib_results, predictions, 
                         for split in ("VAL", "TEST")]
             helper.add_table(fig, headings, [helper.metric_cells(r, r["split"] + " ALL") for r in all_rows],
                              [0.045, 0.605, 0.91, 0.12], font=10)
-            fig.text(0.045, 0.561, "NSS vs current R80 | Same native winner definition; saved R79 selections", fontsize=13)
+            fig.text(0.045, 0.561, f"NSS vs current {experiment} | Same native winner definition; saved R79 selections", fontsize=13)
             fmt = lambda row, key, digits=6: "MISSING" if row[key] is None else f"{row[key]:.{digits}f}"
             cells = [[r["dataset"], str(r["n"]), fmt(r, "nss_top1_native_pct"), fmt(r, "current_top1_native_pct"),
                       fmt(r, "nss_mean_cost", 9), fmt(r, "current_mean_cost", 9),
                       fmt(r, "nss_original_fp32_top1_pct"), fmt(r, "current_fp32_top1_pct")] for r in comparisons]
-            helper.add_table(fig, ["Dataset", "n", "NSS native\nTop1 (%)", "R80 native\nTop1 (%)", "NSS mean_cost",
-                                   "R80 mean_cost", "NSS FP32\nTop1 (%)", "R80 FP32\nTop1 (%)"], cells,
+            helper.add_table(fig, ["Dataset", "n", "NSS native\nTop1 (%)", f"{experiment} native\nTop1 (%)", "NSS mean_cost",
+                                   f"{experiment} mean_cost", "NSS FP32\nTop1 (%)", f"{experiment} FP32\nTop1 (%)"], cells,
                              [0.045, 0.315, 0.91, 0.21], widths=[.13, .05, .13, .13, .16, .16, .12, .12], font=10)
             notes = ["Primary Top1 = 100 * mean(pred == native/FP64 ind). FP32 columns are compatibility-only.",
                      "R79 NSS TSP TEST: native 44.338896%; FP32 argmin 43.953786%. No label-definition mixing.",
@@ -650,6 +671,8 @@ def build_reports(root, run, config, lock, test, val, lib_results, predictions, 
                      "ALL = equal-problem mean of each metric; cross-problem raw costs are descriptive only.",
                      "TSP/CVRP TEST: new data; TSPLIB/CVRPLIB: original native LIB, not old TEST results.",
                      "TEST partly informed prior multi-round R&D; not an untouched blind-set claim. No reselection here."]
+            if config.get("model_only_scope", {}).get("no_neural_model_solvers"):
+                notes += ["GLOP = glop_atsp_init_only (random insertion): no neural source; original trainable ID only. Candidates/IDs unchanged."]
             for i, text in enumerate(notes):
                 fig.text(0.045, 0.274 - i * .033, text, fontsize=10.5)
             report.savefig(fig)
@@ -672,7 +695,7 @@ def build_reports(root, run, config, lock, test, val, lib_results, predictions, 
                 plt.close(fig)
             page += 1
             fig = _page(helper, f"{model} | Native LIB And Evaluation Provenance",
-                        "R80 factory and every source/ID/geometry checkpoint buffer restored; no historical R77/R76 LIB scores.", model, lock, page)
+                        f"{experiment} factory and every source/ID/geometry checkpoint buffer restored; no historical R77/R76 LIB scores.", model, lock, page)
             lib_rows = [r for r in metrics if r["split"] in LIBS]
             helper.add_table(fig, headings, [helper.metric_cells(r, f"{r['split']} n={r['n']}") for r in lib_rows],
                              [.045, .72, .91, .12], font=10)
@@ -698,12 +721,13 @@ def build_reports(root, run, config, lock, test, val, lib_results, predictions, 
             with PdfPages(dist_tmp, metadata=metadata) as distribution_pdf:
                 for problem in PROBLEMS:
                     fig = _distribution(helper, problem, predictions["TEST", problem].pool,
-                                        panel_sets[problem], version, model, lock)
+                                        panel_sets[problem], version, model, lock,
+                                        no_model_solvers=config.get("model_only_scope", {}).get("no_neural_model_solvers", ()))
                     fig.savefig(figures / f"{problem}_selection_distribution.pdf")
                     distribution_pdf.savefig(fig)
                     report.savefig(fig)
                     plt.close(fig)
-                    print(f"[R80 {config['arm']}] PDF distribution: {problem}", flush=True)
+                    print(f"[{experiment} {config['arm']}] PDF distribution: {problem}", flush=True)
         pdf_tmp.replace(pdf)
         dist_tmp.replace(dist_pdf)
     finally:
@@ -711,9 +735,9 @@ def build_reports(root, run, config, lock, test, val, lib_results, predictions, 
         dist_tmp.unlink(missing_ok=True)
     diagnostics = diagnostic_pdf(run, output, predictions, methods, model, lock)
     missing = [r["dataset"] for r in comparisons if r["status"] != "complete"]
-    protocol = dict(experiment="R80", arm=config["arm"], created_utc=utc(), complete=not missing,
+    protocol = dict(experiment=experiment, arm=config["arm"], created_utc=utc(), complete=not missing,
                     missing_nss_datasets=missing, checkpoint_lock=lock,
-                    model_factory="code.V4.r80_experiment.load_checkpoint",
+                    model_factory=config.get("model_factory", "code.V4.r80_experiment.load_checkpoint"),
                     source_buffer_policy="strict equality to all tensors in locked checkpoint model state",
                     training=False, test_inference=False, lib_inference=True, checkpoint_reselection=False,
                     winner_rule=WINNER_RULE, nss_decision="saved pred; no argmax recomputation",
@@ -729,12 +753,15 @@ def build_reports(root, run, config, lock, test, val, lib_results, predictions, 
                     model_top1="100*mean(pred==native winner); never largest selection frequency",
                     distribution_pages=18, main_pdf_pages=22, test_not_untouched_blind=True)
     protocol["diagnostics"] = diagnostics
+    for key in ("source_scope", "model_only_scope", "role_policy_exception"):
+        if key in config:
+            protocol[key] = config[key]
     write_json(output / "protocol.json", protocol)
     return dict(output=str(output), complete=not missing, missing_nss_datasets=missing,
                 model_statistics_pdf=str(pdf), selection_distributions_pdf=str(dist_pdf), diagnostics=diagnostics)
 
 
-def report(args):
+def report(args, *, experiment="R80", arms=None, factory_module="code.V4.r80_experiment"):
     root, arm = args.root.resolve(), args.arm
     run = root / arm
     if not run.is_dir():
@@ -744,7 +771,7 @@ def report(args):
             fcntl.flock(claim, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:
             raise RuntimeError(f"Another reporter owns {arm}; no duplicate inference/reporting") from None
-        status = dict(experiment="R80", arm=arm, started_utc=utc(), pid=os.getpid(), training_retained=True,
+        status = dict(experiment=experiment, arm=arm, started_utc=utc(), pid=os.getpid(), training_retained=True,
                       training_started_by_reporter=False)
 
         def phase(name, **fields):
@@ -753,16 +780,16 @@ def report(args):
 
         try:
             phase("checking_unique_val_lock_and_completed_test")
-            run, config, lock, test, val = locked_inputs(root, arm)
+            run, config, lock, test, val = locked_inputs(root, arm, experiment=experiment, arms=arms)
             status["checkpoint_sha256"] = lock["checkpoint_sha256"]
             phase("loading_saved_val_test")
             predictions, metrics, methods = load_saved_splits(run, config, lock, test, val)
             lib_results = r80_lib(root, run, config, lock, args.device, args.lib_batch_size, phase,
-                                  test["identity"]["model_state_sha256"])
+                                  test["identity"]["model_state_sha256"], factory_module=factory_module)
             result = build_reports(root, run, config, lock, test, val, lib_results,
                                    predictions, metrics, methods, phase, args.nss_root)
             if file_hash(run / "best.pt") != lock["checkpoint_sha256"]:
-                raise ValueError("R80 checkpoint changed while generating reports")
+                raise ValueError(f"{experiment} checkpoint changed while generating reports")
             phase("complete" if result["complete"] else "complete_with_missing_NSS", **result, completed_utc=utc())
             print(json.dumps(status, indent=2), flush=True)
             return result
