@@ -1,0 +1,394 @@
+{
+  "experiment": "R95",
+  "arm": "B",
+  "complete": true,
+  "created_utc": "2026-10-22T05:12:07.209655+00:00",
+  "checkpoint_lock": {
+    "experiment": "R95",
+    "arm": "B",
+    "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/B/best.pt",
+    "checkpoint_sha256": "0ec15f55146f9cffb7a4bc7968a556dd865a4f8f1aff1ce7af75810030a37d37",
+    "state_hash": "5739df52a305c8342c3cf6a48ee7533148957645e7a129f175039851f58ca149",
+    "epoch": 26,
+    "selected_update": 37440,
+    "rule": "strict minimum full VAL macro_vs_sbs_pct with common new81000 TRAIN-fitted SBS; first wins ties",
+    "selected_without_test": true,
+    "per_problem_assembly": false,
+    "val": {
+      "macro_ce": 0.7019335478544235,
+      "macro_top1": 0.7109876543209876,
+      "macro_top2": 0.9066296296296296,
+      "macro_top3": 0.9628888888888889,
+      "macro_top1_tie_aware": 0.7123827160493827,
+      "macro_mean_cost": 11.416835654972703,
+      "macro_vs_sbs_pct": -0.19241321308192733,
+      "macro_vs_oracle_pct": 0.39521998608565856,
+      "macro_actual_regret_pct": 0.4057299937357977,
+      "macro_vbs_gap_closed_pct": 12.962330147103101,
+      "macro_sbs_cost": 11.427978473494235,
+      "macro_oracle_cost": 11.371691902364589
+    },
+    "inference_rule": "eval mode; fixed physical-node0 TSP slot3 role; original score MLP, pair differences and maximin; stable ascending-global-solver-ID tie break",
+    "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+    "locked_utc": "2026-10-22T05:09:39.726688+00:00"
+  },
+  "model_factory": "code.V4.r95_experiment.load_checkpoint",
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "rows_per_problem": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "candidate_pools": {
+    "TSP": [
+      "BQ",
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "LEHD",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "CVRP": [
+      "BQ",
+      "ELG",
+      "ICAM",
+      "LEHD",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "ATSP": [
+      "GLOP",
+      "ICAM_ATSP",
+      "MATNET",
+      "MATPOENET",
+      "UNICO_MatPOENet"
+    ],
+    "OVRP": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ]
+  },
+  "scenario_solver_aliases": {
+    "reld_mt": "RELD_MOEL"
+  },
+  "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+  "nss_reference": "R79 historical weights; fresh new4500 TEST inference; existing native LIB predictions",
+  "nss_alignment": {
+    "TSP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "TSPLIB": {
+      "instance_key": "indices",
+      "matching_population": 49,
+      "checked_instance_ids": [
+        0,
+        24,
+        48
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRPLIB": {
+      "instance_key": "indices",
+      "matching_population": 100,
+      "checked_instance_ids": [
+        0,
+        50,
+        99
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    }
+  },
+  "training": false,
+  "inference": false,
+  "checkpoint_reselection": false,
+  "distribution_pages": 18,
+  "main_pdf_pages": 22,
+  "diagnostics": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/B/full_model_statistics/training_and_method_diagnostics.pdf",
+    "pages": 19,
+    "history_status": "complete"
+  },
+  "target_identity": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/comparison_artifacts/target_list.json",
+    "identity": {
+      "baseline_checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "baseline_state_hash": "ad0a6d9c68c6f117b477807f6f8be52662032a8baea348dda6144c46091303e2",
+      "baseline_val_prediction_sha256": "8a1aea9caf608d12fbc83d89704a50eb37d461665c7609ad3e25778cdab932a7",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "threshold_chosen_pct": 0.1,
+      "rule": "A locked VAL: chosen percentage <= 0.1 and native winner count > 0"
+    },
+    "categories": {
+      "TSP/DIFUSCO": "zero",
+      "TSP/DIFUSCO500": "zero",
+      "TSP/LEHD": "zero",
+      "TSP/OMNI": "zero",
+      "CVRP/RouteFinder": "zero",
+      "ATSP/GLOP": "zero",
+      "ATSP/MATPOENET": "zero",
+      "OVRP/MTPOMO": "zero",
+      "OVRP/MVMOE": "zero",
+      "OVRP/reld_mt": "near_zero",
+      "VRPL/MTPOMO": "zero",
+      "VRPL/MVMOE": "zero",
+      "VRPTW/MoSES_CaDA": "near_zero",
+      "VRPTW/MoSES_RF": "zero",
+      "VRPTW/RouteFinder": "zero",
+      "OVRPTW/MoSES_CaDA": "zero",
+      "OVRPTW/MoSES_RF": "zero",
+      "OVRPTW/RouteFinder": "zero",
+      "OVRPB/MTPOMO": "zero",
+      "OVRPB/MVMOE": "near_zero",
+      "OVRPL/MTPOMO": "zero",
+      "OVRPL/MVMOE": "zero",
+      "VRPBL/MTPOMO": "zero",
+      "VRPBTW/MTPOMO": "zero",
+      "VRPLTW/MTPOMO": "zero",
+      "VRPLTW/MoSES_CaDA": "zero",
+      "VRPLTW/MoSES_RF": "zero",
+      "VRPLTW/RouteFinder": "zero",
+      "OVRPBL/MTPOMO": "near_zero",
+      "OVRPBL/MVMOE": "near_zero",
+      "OVRPBTW/MTPOMO": "zero",
+      "OVRPLTW/MVMOE": "near_zero",
+      "OVRPLTW/MoSES_CaDA": "near_zero",
+      "OVRPLTW/MoSES_RF": "zero",
+      "OVRPLTW/RouteFinder": "zero",
+      "VRPBLTW/MTPOMO": "zero"
+    },
+    "sha256": "406ded5a21d8b73c2a41b87dc2bc3cc14330663ae1aa4f59ca6fbfde83770fe4",
+    "target_count": 36
+  },
+  "historical_reference": {
+    "R89B": {
+      "model": "R89B",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry/B_muon_hybrid",
+      "checkpoint_sha256": "41fa4ad8b590fa44e8949b114156d714d7ee2f2d31c847658a26654993057260",
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "role": "main historical reference"
+    },
+    "R84A": {
+      "model": "R84A",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline",
+      "checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "role": "secondary historical reference"
+    }
+  },
+  "objective": {
+    "main": "original maximin CE, same-instance comparison, relative risk and RDrop",
+    "coefficients": {
+      "ce": 0.35,
+      "comparison": 0.35,
+      "risk": 0.02,
+      "rdrop_final": 0.35
+    },
+    "forward_passes": 2,
+    "weighting": "entire per-row objective / (TRAIN_N * draw_probability)",
+    "weight_normalization": "actual arithmetic batch mean; no clipping or self-normalization",
+    "extra_loss": false,
+    "class_rebalancing": false,
+    "mutable_objective_state": false,
+    "gradient_claim": "unbiased sampling estimator BEFORE global gradient clipping/AdamW; not an unbiased optimizer update"
+  },
+  "evidence_boundary": "R89B is the main historical same-data reference; R84A is secondary. Neither is a newly matched control. Both keep the original R88B execution role and original R77 loss/R-Drop. Both use the same natural rows for first7200 updates; then A uses uniform IID replacement, B uses an own-TRAIN adaptive proposal with .5 uniform mixture, refreshed every7200 updates. The entire row objective is corrected by 1/(N*q), arithmetic batch mean, no self-normalization. A uses3090_0 after R92A full delivery; B uses4090_0 after R92B full delivery. Common code/data/fresh initialization/update budget, not bitwise hardware-matched. No guaranteed variance reduction, causal claim, architectural novelty or root-cause proof. Development-exposed TEST; no TEST/LIB selection or per-task assembly. Deterministic eval final-affine gradient norm of CE+comparison+risk, including cancellation; eval R-Drop/KL is zero. Not full-parameter or stochastic-training gradient norm. Inverse correction is before global clipping/AdamW, not an unbiased optimizer-update claim.",
+  "train_ce_probability_link": "maximin",
+  "evaluation_ce_probability_link": "maximin",
+  "one_forward": false,
+  "rdrop": true,
+  "weight_decay_retained": true,
+  "sampling_diagnostics": {
+    "complete": true,
+    "source_sha256": {
+      "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/B/proposals/update0007200.json": "44e946b0a4e97753b78f030c2c92a5decfa4f0a84d33bf1d5b749fa369d397bb",
+      "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/B/proposals/update0014400.json": "39b170e70ba483e1578cbc41c0976292f75c6b8bea584def1194e5a201941350",
+      "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/B/proposals/update0021600.json": "067588eccf387239e00f5ed3778e2605ef03035bbb6653df98f8cb6eba174af7",
+      "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/B/proposals/update0028800.json": "d908b8a40ae893f14c50d163e4bb55717b7dd7be4155377c20099b113e989e1f",
+      "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/B/proposals/update0036000.json": "8111aa16f9b871920898a1cd6c7d92c30ab501fb3299376a4621cbbeaf540542",
+      "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/B/proposals/update0043200.json": "66182e9e7ee400864ae4dac6b553df27c32def07ee495b5909b709da2946ea2a",
+      "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/B/proposals/update0050400.json": "8b5744f44dcb13addfe98a8789e509a8e4d68840ef1c34e122abadd7d5d98db5",
+      "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/B/proposals/update0057600.json": "d4a58a8762e656f00400f6282b9d664992266de254f5944693288257bad15cab"
+    },
+    "sampling": {
+      "warm_natural_updates": 7200,
+      "refresh_every_updates": 7200,
+      "proposal_uniform_mixture": 0.5,
+      "proxy": "deterministic_full_loss_final_affine_gradient_norm",
+      "correction": "1/(N*q)",
+      "normalization": "arithmetic_batch_mean_no_self_normalization"
+    },
+    "proxy_boundary": "Deterministic eval final-affine gradient norm of CE+comparison+risk, including cancellation; eval R-Drop/KL is zero. Not full-parameter or stochastic-training gradient norm. Inverse correction is before global clipping/AdamW, not an unbiased optimizer-update claim.",
+    "applied_to_draws": true,
+    "raw_arrays_read": false,
+    "training": false,
+    "inference": false,
+    "causal_claim": false
+  },
+  "val_empirical_screen": [
+    {
+      "model": "R95/B",
+      "baseline": "R89B",
+      "split": "VAL",
+      "reference_role": "main",
+      "top1_delta_pp": -0.14938271604937325,
+      "mean_cost_delta": 0.0005413714371602651,
+      "actual_regret_delta_pp": 0.005053678432393127,
+      "pass_reference": false,
+      "checkpoint_sha256": "0ec15f55146f9cffb7a4bc7968a556dd865a4f8f1aff1ce7af75810030a37d37",
+      "checkpoint_reselection": false,
+      "newly_matched_control": false,
+      "macro_weighting": "equal weight across all18 problems",
+      "joint_val_pass": false
+    },
+    {
+      "model": "R95/B",
+      "baseline": "R84A",
+      "split": "VAL",
+      "reference_role": "secondary",
+      "top1_delta_pp": 0.013580246913591498,
+      "mean_cost_delta": 0.00022417800640539554,
+      "actual_regret_delta_pp": 0.002235698926170371,
+      "pass_reference": false,
+      "checkpoint_sha256": "0ec15f55146f9cffb7a4bc7968a556dd865a4f8f1aff1ce7af75810030a37d37",
+      "checkpoint_reselection": false,
+      "newly_matched_control": false,
+      "macro_weighting": "equal weight across all18 problems",
+      "joint_val_pass": false
+    }
+  ]
+}

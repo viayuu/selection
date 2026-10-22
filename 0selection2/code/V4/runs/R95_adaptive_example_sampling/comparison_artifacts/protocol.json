@@ -1,0 +1,222 @@
+{
+  "experiment": "R95",
+  "complete": true,
+  "exit_status": 0,
+  "checkpoints": {
+    "A": {
+      "experiment": "R95",
+      "arm": "A",
+      "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/A/best.pt",
+      "checkpoint_sha256": "04a92431b24969881607c41e464f25f6277df05e6893b84e712fd043e35b15e0",
+      "state_hash": "54804294c45000bae516781897b58b33403b2e365718d1c6a3bd2343d5c600e8",
+      "epoch": 25,
+      "selected_update": 36000,
+      "rule": "strict minimum full VAL macro_vs_sbs_pct with common new81000 TRAIN-fitted SBS; first wins ties",
+      "selected_without_test": true,
+      "per_problem_assembly": false,
+      "val": {
+        "macro_ce": 0.7036248313056098,
+        "macro_top1": 0.7100000000000001,
+        "macro_top2": 0.9061481481481481,
+        "macro_top3": 0.9630123456790124,
+        "macro_top1_tie_aware": 0.7114320987654321,
+        "macro_mean_cost": 11.416660493864121,
+        "macro_vs_sbs_pct": -0.19288271059058,
+        "macro_vs_oracle_pct": 0.3947615475326331,
+        "macro_actual_regret_pct": 0.4042356782318709,
+        "macro_vbs_gap_closed_pct": 13.179525204089948,
+        "macro_sbs_cost": 11.427978473494235,
+        "macro_oracle_cost": 11.371691902364589
+      },
+      "inference_rule": "eval mode; fixed physical-node0 TSP slot3 role; original score MLP, pair differences and maximin; stable ascending-global-solver-ID tie break",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "locked_utc": "2026-10-22T07:06:51.739369+00:00"
+    },
+    "B": {
+      "experiment": "R95",
+      "arm": "B",
+      "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/B/best.pt",
+      "checkpoint_sha256": "0ec15f55146f9cffb7a4bc7968a556dd865a4f8f1aff1ce7af75810030a37d37",
+      "state_hash": "5739df52a305c8342c3cf6a48ee7533148957645e7a129f175039851f58ca149",
+      "epoch": 26,
+      "selected_update": 37440,
+      "rule": "strict minimum full VAL macro_vs_sbs_pct with common new81000 TRAIN-fitted SBS; first wins ties",
+      "selected_without_test": true,
+      "per_problem_assembly": false,
+      "val": {
+        "macro_ce": 0.7019335478544235,
+        "macro_top1": 0.7109876543209876,
+        "macro_top2": 0.9066296296296296,
+        "macro_top3": 0.9628888888888889,
+        "macro_top1_tie_aware": 0.7123827160493827,
+        "macro_mean_cost": 11.416835654972703,
+        "macro_vs_sbs_pct": -0.19241321308192733,
+        "macro_vs_oracle_pct": 0.39521998608565856,
+        "macro_actual_regret_pct": 0.4057299937357977,
+        "macro_vbs_gap_closed_pct": 12.962330147103101,
+        "macro_sbs_cost": 11.427978473494235,
+        "macro_oracle_cost": 11.371691902364589
+      },
+      "inference_rule": "eval mode; fixed physical-node0 TSP slot3 role; original score MLP, pair differences and maximin; stable ascending-global-solver-ID tie break",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "locked_utc": "2026-10-22T05:09:39.726688+00:00"
+    }
+  },
+  "comparison_pdf": "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/comparison_artifacts/COMPARISON.pdf",
+  "evidence_boundary": "R89B is the main historical same-data reference; R84A is secondary. Neither is a newly matched control. Both keep the original R88B execution role and original R77 loss/R-Drop. Both use the same natural rows for first7200 updates; then A uses uniform IID replacement, B uses an own-TRAIN adaptive proposal with .5 uniform mixture, refreshed every7200 updates. The entire row objective is corrected by 1/(N*q), arithmetic batch mean, no self-normalization. A uses3090_0 after R92A full delivery; B uses4090_0 after R92B full delivery. Common code/data/fresh initialization/update budget, not bitwise hardware-matched. No guaranteed variance reduction, causal claim, architectural novelty or root-cause proof. Development-exposed TEST; no TEST/LIB selection or per-task assembly. Deterministic eval final-affine gradient norm of CE+comparison+risk, including cancellation; eval R-Drop/KL is zero. Not full-parameter or stochastic-training gradient norm. Inverse correction is before global clipping/AdamW, not an unbiased optimizer-update claim.",
+  "matched_difference": "A uniform replacement versus B inverse-corrected adaptive sampling",
+  "target_identity": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/comparison_artifacts/target_list.json",
+    "identity": {
+      "baseline_checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "baseline_state_hash": "ad0a6d9c68c6f117b477807f6f8be52662032a8baea348dda6144c46091303e2",
+      "baseline_val_prediction_sha256": "8a1aea9caf608d12fbc83d89704a50eb37d461665c7609ad3e25778cdab932a7",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "threshold_chosen_pct": 0.1,
+      "rule": "A locked VAL: chosen percentage <= 0.1 and native winner count > 0"
+    },
+    "categories": {
+      "TSP/DIFUSCO": "zero",
+      "TSP/DIFUSCO500": "zero",
+      "TSP/LEHD": "zero",
+      "TSP/OMNI": "zero",
+      "CVRP/RouteFinder": "zero",
+      "ATSP/GLOP": "zero",
+      "ATSP/MATPOENET": "zero",
+      "OVRP/MTPOMO": "zero",
+      "OVRP/MVMOE": "zero",
+      "OVRP/reld_mt": "near_zero",
+      "VRPL/MTPOMO": "zero",
+      "VRPL/MVMOE": "zero",
+      "VRPTW/MoSES_CaDA": "near_zero",
+      "VRPTW/MoSES_RF": "zero",
+      "VRPTW/RouteFinder": "zero",
+      "OVRPTW/MoSES_CaDA": "zero",
+      "OVRPTW/MoSES_RF": "zero",
+      "OVRPTW/RouteFinder": "zero",
+      "OVRPB/MTPOMO": "zero",
+      "OVRPB/MVMOE": "near_zero",
+      "OVRPL/MTPOMO": "zero",
+      "OVRPL/MVMOE": "zero",
+      "VRPBL/MTPOMO": "zero",
+      "VRPBTW/MTPOMO": "zero",
+      "VRPLTW/MTPOMO": "zero",
+      "VRPLTW/MoSES_CaDA": "zero",
+      "VRPLTW/MoSES_RF": "zero",
+      "VRPLTW/RouteFinder": "zero",
+      "OVRPBL/MTPOMO": "near_zero",
+      "OVRPBL/MVMOE": "near_zero",
+      "OVRPBTW/MTPOMO": "zero",
+      "OVRPLTW/MVMOE": "near_zero",
+      "OVRPLTW/MoSES_CaDA": "near_zero",
+      "OVRPLTW/MoSES_RF": "zero",
+      "OVRPLTW/RouteFinder": "zero",
+      "VRPBLTW/MTPOMO": "zero"
+    },
+    "sha256": "406ded5a21d8b73c2a41b87dc2bc3cc14330663ae1aa4f59ca6fbfde83770fe4",
+    "target_count": 36
+  },
+  "matched_controls": {
+    "experiment": "R95",
+    "matched": true,
+    "arms": [
+      "A",
+      "B"
+    ],
+    "budgets": {
+      "A": 57600,
+      "B": 57600
+    },
+    "sampling": {
+      "warm_natural_updates": 7200,
+      "refresh_every_updates": 7200,
+      "proposal_uniform_mixture": 0.5,
+      "proxy": "deterministic_full_loss_final_affine_gradient_norm",
+      "correction": "1/(N*q)",
+      "normalization": "arithmetic_batch_mean_no_self_normalization"
+    },
+    "dropout": {
+      "A": 0.1,
+      "B": 0.1
+    },
+    "training": false,
+    "inference": false,
+    "matched_difference": "A uniform replacement versus B inverse-corrected adaptive sampling",
+    "bitwise_hardware_matched": false,
+    "causal_claim": false
+  },
+  "sampling": {
+    "warm_natural_updates": 7200,
+    "refresh_every_updates": 7200,
+    "proposal_uniform_mixture": 0.5,
+    "proxy": "deterministic_full_loss_final_affine_gradient_norm",
+    "correction": "1/(N*q)",
+    "normalization": "arithmetic_batch_mean_no_self_normalization"
+  },
+  "sampling_diagnostics": {
+    "A": {
+      "complete": true,
+      "source_sha256": {
+        "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/A/proposals/update0007200.json": "b92b29e1a1cd1b30569fc46aec7f1b707a74829f1409c2e72f7ac7a991984557",
+        "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/A/proposals/update0014400.json": "1b4b949043fa96a802df116fe7a9c82f93556c9fc942c4571673df37fdf2e2ae",
+        "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/A/proposals/update0021600.json": "1146e664e4fe569e6e40606784f5199b8137592810c489353a6a4123dcf49104",
+        "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/A/proposals/update0028800.json": "9b65f4c6c43011fa64febe04549756eacc78e995a9ce582ec2a1153dbe59bfbe",
+        "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/A/proposals/update0036000.json": "883907de5e62c5a8bc2ba5b886c622912ec7c39e79abef1ed20e10d31d68b3a5",
+        "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/A/proposals/update0043200.json": "90837d447025fbd02b9e4bd99666b5385ebaf335b1b1ed4ef2b1671ca785707d",
+        "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/A/proposals/update0050400.json": "fde7d7b4d7ccc18996f9abea301cbc0d9b95f3ab2d12061b6421a0d0372177ad",
+        "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/A/proposals/update0057600.json": "d144610a1cd24cbbf20fe88aef67be7e3800d14ee178f3075b9c8b6ea3d58de3"
+      },
+      "sampling": {
+        "warm_natural_updates": 7200,
+        "refresh_every_updates": 7200,
+        "proposal_uniform_mixture": 0.5,
+        "proxy": "deterministic_full_loss_final_affine_gradient_norm",
+        "correction": "1/(N*q)",
+        "normalization": "arithmetic_batch_mean_no_self_normalization"
+      },
+      "proxy_boundary": "Deterministic eval final-affine gradient norm of CE+comparison+risk, including cancellation; eval R-Drop/KL is zero. Not full-parameter or stochastic-training gradient norm. Inverse correction is before global clipping/AdamW, not an unbiased optimizer-update claim.",
+      "applied_to_draws": false,
+      "raw_arrays_read": false,
+      "training": false,
+      "inference": false,
+      "causal_claim": false
+    },
+    "B": {
+      "complete": true,
+      "source_sha256": {
+        "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/B/proposals/update0007200.json": "44e946b0a4e97753b78f030c2c92a5decfa4f0a84d33bf1d5b749fa369d397bb",
+        "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/B/proposals/update0014400.json": "39b170e70ba483e1578cbc41c0976292f75c6b8bea584def1194e5a201941350",
+        "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/B/proposals/update0021600.json": "067588eccf387239e00f5ed3778e2605ef03035bbb6653df98f8cb6eba174af7",
+        "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/B/proposals/update0028800.json": "d908b8a40ae893f14c50d163e4bb55717b7dd7be4155377c20099b113e989e1f",
+        "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/B/proposals/update0036000.json": "8111aa16f9b871920898a1cd6c7d92c30ab501fb3299376a4621cbbeaf540542",
+        "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/B/proposals/update0043200.json": "66182e9e7ee400864ae4dac6b553df27c32def07ee495b5909b709da2946ea2a",
+        "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/B/proposals/update0050400.json": "8b5744f44dcb13addfe98a8789e509a8e4d68840ef1c34e122abadd7d5d98db5",
+        "/public/home/shiys/0selection2/code/V4/runs/R95_adaptive_example_sampling/B/proposals/update0057600.json": "d4a58a8762e656f00400f6282b9d664992266de254f5944693288257bad15cab"
+      },
+      "sampling": {
+        "warm_natural_updates": 7200,
+        "refresh_every_updates": 7200,
+        "proposal_uniform_mixture": 0.5,
+        "proxy": "deterministic_full_loss_final_affine_gradient_norm",
+        "correction": "1/(N*q)",
+        "normalization": "arithmetic_batch_mean_no_self_normalization"
+      },
+      "proxy_boundary": "Deterministic eval final-affine gradient norm of CE+comparison+risk, including cancellation; eval R-Drop/KL is zero. Not full-parameter or stochastic-training gradient norm. Inverse correction is before global clipping/AdamW, not an unbiased optimizer-update claim.",
+      "applied_to_draws": true,
+      "raw_arrays_read": false,
+      "training": false,
+      "inference": false,
+      "causal_claim": false
+    }
+  },
+  "hardware": {
+    "A": "3090_0",
+    "B": "4090_0"
+  },
+  "bitwise_hardware_matched": false,
+  "causal_claim": false,
+  "guaranteed_variance_reduction": false,
+  "training": false,
+  "inference": false,
+  "checkpoint_reselection": false
+}
