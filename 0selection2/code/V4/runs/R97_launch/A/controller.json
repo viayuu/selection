@@ -1,0 +1,63 @@
+{
+  "started_utc": "2026-10-22T04:34:11.222349+00:00",
+  "slot": "4090_1",
+  "node": "gpu05",
+  "state": "complete",
+  "automatic_retry": false,
+  "stages": [
+    {
+      "name": "allocation_GPU_pipeline",
+      "device": "gpu",
+      "argv": [
+        "srun",
+        "--jobid=1475",
+        "--overlap",
+        "--exact",
+        "--gres=none",
+        "--immediate=5",
+        "-N1",
+        "-n1",
+        "--nodelist=gpu05",
+        "--cpus-per-task=4",
+        "--mem=9G",
+        "bash",
+        "-lc",
+        "set -euo pipefail\nsource /public/home/shiys/miniconda3/etc/profile.d/conda.sh\nconda activate easynco\ncd /public/home/shiys/0selection2\nexport PYTHONDONTWRITEBYTECODE=1\nexec /public/home/shiys/miniconda3/envs/easynco/bin/python -B -u -m code.V4.r97_launch entry --spec /public/home/shiys/0selection2/code/V4/runs/R97_launch/specs/A.json --slot 4090_1 --token c30fd4afd1ad40c7bd3f2239ab896b16"
+      ],
+      "started_utc": "2026-10-22T04:34:15.460507+00:00",
+      "state": "complete",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R97_launch/A/allocation_GPU_pipeline.log",
+      "pid": 3113507,
+      "exit_status": 0,
+      "finished_utc": "2026-10-22T04:39:01.353085+00:00"
+    },
+    {
+      "name": "PDF",
+      "device": "cpu",
+      "argv": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r97_experiment",
+        "report",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R97_tabular_in_context",
+        "--protocol-lock",
+        "/public/home/shiys/0selection2/code/V4/runs/R97_tabular_in_context/protocol_lock.json",
+        "--device",
+        "cpu"
+      ],
+      "started_utc": "2026-10-22T04:39:01.513422+00:00",
+      "state": "complete",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R97_launch/A/PDF.log",
+      "pid": 3140858,
+      "exit_status": 0,
+      "finished_utc": "2026-10-22T04:39:09.731589+00:00"
+    }
+  ],
+  "phase": "PDF",
+  "gpu_finished_utc": "2026-10-22T04:39:01.353858+00:00",
+  "exit_status": 0,
+  "finished_utc": "2026-10-22T04:39:09.732366+00:00"
+}

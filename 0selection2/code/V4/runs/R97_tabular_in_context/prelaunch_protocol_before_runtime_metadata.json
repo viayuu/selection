@@ -1,0 +1,903 @@
+{
+  "experiment": "R97",
+  "arm": "A",
+  "seed": 2,
+  "locked": true,
+  "task_scope": "full18",
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "prepared_root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+  "feature_root": "/public/home/shiys/0selection2/code/V4/runs/R92_broad_learning/features",
+  "library_root": "/public/home/shiys/0selection2/code/V4/runs/R97_tabular_in_context/runtime/python",
+  "rows_per_problem": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "baselines": {
+    "TSP": {
+      "sbs_solver": "T2T",
+      "sbs_slot": 6,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "BQ": 8.084656254909822,
+        "DIFUSCO": 8.112698749017362,
+        "DIFUSCO500": 8.323332693250743,
+        "ELG": 8.169148155954185,
+        "LEHD": 8.12654027205359,
+        "OMNI": 8.278431533383753,
+        "T2T": 8.023959207231373,
+        "T2T500": 8.206647854009713
+      },
+      "mean_relative_regret_by_solver": {
+        "BQ": 0.016589446883540037,
+        "DIFUSCO": 0.01685548366554656,
+        "DIFUSCO500": 0.041461887863121064,
+        "ELG": 0.02157687010471231,
+        "LEHD": 0.022287637899707616,
+        "OMNI": 0.035789430060820644,
+        "T2T": 0.0060830785487698625,
+        "T2T500": 0.026987147942938192
+      },
+      "minimum_mean_relative_regret_solver": "T2T",
+      "majority_winner_solver": "T2T",
+      "train_rows": 81000
+    },
+    "CVRP": {
+      "sbs_solver": "RELD_CVRP",
+      "sbs_slot": 8,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "BQ": 18.45937333402815,
+        "ELG": 18.49947892494554,
+        "ICAM": 18.21394879819729,
+        "LEHD": 18.521651502468007,
+        "MVMOE": 19.460898454607253,
+        "MoSES_CaDA": 19.18050302504914,
+        "MoSES_RF": 20.21590446078334,
+        "OMNI": 18.272885336540398,
+        "RELD_CVRP": 18.15198730124656,
+        "RouteFinder": 18.773263861108614
+      },
+      "mean_relative_regret_by_solver": {
+        "BQ": 0.028748067464355643,
+        "ELG": 0.03327247268294611,
+        "ICAM": 0.01847805682757036,
+        "LEHD": 0.032448733662756635,
+        "MVMOE": 0.08415381637395963,
+        "MoSES_CaDA": 0.06847367747966657,
+        "MoSES_RF": 0.148814357748972,
+        "OMNI": 0.024281954494307135,
+        "RELD_CVRP": 0.011500795081597778,
+        "RouteFinder": 0.04593947352618346
+      },
+      "minimum_mean_relative_regret_solver": "RELD_CVRP",
+      "majority_winner_solver": "OMNI",
+      "train_rows": 81000
+    },
+    "ATSP": {
+      "sbs_solver": "UNICO_MatPOENet",
+      "sbs_slot": 4,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "GLOP": 1.9307272556952693,
+        "ICAM_ATSP": 1.7141856534487865,
+        "MATNET": 2.309711719979476,
+        "MATPOENET": 1.725653809736494,
+        "UNICO_MatPOENet": 1.6786786495718535
+      },
+      "mean_relative_regret_by_solver": {
+        "GLOP": 0.182623280883755,
+        "ICAM_ATSP": 0.04891120598004203,
+        "MATNET": 0.42113394514534414,
+        "MATPOENET": 0.05660226494961894,
+        "UNICO_MatPOENet": 0.027686149368779583
+      },
+      "minimum_mean_relative_regret_solver": "UNICO_MatPOENet",
+      "majority_winner_solver": "UNICO_MatPOENet",
+      "train_rows": 81000
+    },
+    "OVRP": {
+      "sbs_solver": "MoSES_RF",
+      "sbs_slot": 3,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 8.364081419688693,
+        "MVMOE": 9.19622098406458,
+        "MoSES_CaDA": 7.459637796207699,
+        "MoSES_RF": 7.453530567248632,
+        "reld_mt": 7.630102955309023,
+        "RouteFinder": 7.471519006823137
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.13885363329167388,
+        "MVMOE": 0.27132094471573026,
+        "MoSES_CaDA": 0.008512346545610663,
+        "MoSES_RF": 0.007737248368926988,
+        "reld_mt": 0.03353043952664854,
+        "RouteFinder": 0.01019328249865427
+      },
+      "minimum_mean_relative_regret_solver": "MoSES_RF",
+      "majority_winner_solver": "MoSES_CaDA",
+      "train_rows": 81000
+    },
+    "VRPB": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 10.728214068583513,
+        "MVMOE": 11.68547977969087,
+        "reld_mt": 9.357263797206548
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.15355483036450823,
+        "MVMOE": 0.27346044134083625,
+        "reld_mt": 0.004141960774589759
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "VRPL": {
+      "sbs_solver": "MoSES_RF",
+      "sbs_slot": 3,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 13.406389861889709,
+        "MVMOE": 14.190405789893296,
+        "MoSES_CaDA": 12.402391799967868,
+        "MoSES_RF": 12.400882414505778,
+        "reld_mt": 12.535631861898507,
+        "RouteFinder": 12.423433225202075
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.08669803390691544,
+        "MVMOE": 0.16056281792504482,
+        "MoSES_CaDA": 0.00470563331693102,
+        "MoSES_RF": 0.004704045418388002,
+        "reld_mt": 0.01616902563176305,
+        "RouteFinder": 0.006540024804117355
+      },
+      "minimum_mean_relative_regret_solver": "MoSES_RF",
+      "majority_winner_solver": "MoSES_RF",
+      "train_rows": 81000
+    },
+    "VRPTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 4,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 23.49849686087494,
+        "MVMOE": 20.442784682927375,
+        "MoSES_CaDA": 22.847769326674968,
+        "MoSES_RF": 21.7266483654917,
+        "reld_mt": 18.813703310006815,
+        "RouteFinder": 21.763708729749755
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.252456539051322,
+        "MVMOE": 0.09777862045342564,
+        "MoSES_CaDA": 0.20898757525708156,
+        "MoSES_RF": 0.15911259531528035,
+        "reld_mt": 0.0031032304459825935,
+        "RouteFinder": 0.15671836417106447
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 4,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 14.46213650860616,
+        "MVMOE": 11.330968572251603,
+        "MoSES_CaDA": 13.108913305992031,
+        "MoSES_RF": 12.088126960518823,
+        "reld_mt": 10.118639726050072,
+        "RouteFinder": 11.649121564261714
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.43699776523466516,
+        "MVMOE": 0.14127227559726752,
+        "MoSES_CaDA": 0.27849253914027305,
+        "MoSES_RF": 0.19150079092242905,
+        "reld_mt": 0.002481855140849269,
+        "RouteFinder": 0.1493666733834658
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPB": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 7.3109029222212065,
+        "MVMOE": 8.264069609965754,
+        "reld_mt": 6.363229809475488
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.1688527710238286,
+        "MVMOE": 0.3519901354988556,
+        "reld_mt": 0.002694990408942958
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPL": {
+      "sbs_solver": "MoSES_RF",
+      "sbs_slot": 3,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 8.310416814495266,
+        "MVMOE": 9.039461444419135,
+        "MoSES_CaDA": 7.459575016248385,
+        "MoSES_RF": 7.453219449870516,
+        "reld_mt": 7.632744570470027,
+        "RouteFinder": 7.474810907605399
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.1312426024420091,
+        "MVMOE": 0.24839780582309717,
+        "MoSES_CaDA": 0.008342317920173637,
+        "MoSES_RF": 0.007613132544457496,
+        "reld_mt": 0.0337775800314039,
+        "RouteFinder": 0.01053093640110024
+      },
+      "minimum_mean_relative_regret_solver": "MoSES_RF",
+      "majority_winner_solver": "MoSES_CaDA",
+      "train_rows": 81000
+    },
+    "VRPBL": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 10.635488206627937,
+        "MVMOE": 11.195805510120582,
+        "reld_mt": 9.403115061842346
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.13782004114118146,
+        "MVMOE": 0.21219868687225482,
+        "reld_mt": 0.004275063644527669
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "VRPBTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 24.812297379670284,
+        "MVMOE": 21.4533867696186,
+        "reld_mt": 19.73354933708689
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.2658606172260013,
+        "MVMOE": 0.10169167929948128,
+        "reld_mt": 0.004457998769766278
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "VRPLTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 4,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 23.451151820901092,
+        "MVMOE": 20.401712766953523,
+        "MoSES_CaDA": 22.958728604775864,
+        "MoSES_RF": 21.62779859691788,
+        "reld_mt": 18.76995857501926,
+        "RouteFinder": 21.70255258132215
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.2530613771642894,
+        "MVMOE": 0.09835981609296283,
+        "MoSES_CaDA": 0.216815361276073,
+        "MoSES_RF": 0.1559539821642276,
+        "reld_mt": 0.003118261883121054,
+        "RouteFinder": 0.15561434488087159
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPBL": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 7.220458667917147,
+        "MVMOE": 7.870869275678945,
+        "reld_mt": 6.358857184183311
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.1529637454488227,
+        "MVMOE": 0.2799749387737054,
+        "reld_mt": 0.002652144422133522
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPBTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 15.226330125740962,
+        "MVMOE": 11.890219420815747,
+        "reld_mt": 10.624446035461727
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.44684252442506434,
+        "MVMOE": 0.14441094842200522,
+        "reld_mt": 0.003367947155769234
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPLTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 4,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 14.45420823267946,
+        "MVMOE": 11.320988493995827,
+        "MoSES_CaDA": 13.199823503615042,
+        "MoSES_RF": 12.078147095315256,
+        "reld_mt": 10.111265148886892,
+        "RouteFinder": 11.619689210791536
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.43758094647567647,
+        "MVMOE": 0.1413960840790354,
+        "MoSES_CaDA": 0.2885582101264828,
+        "MoSES_RF": 0.19108410389523559,
+        "reld_mt": 0.0025014880850615087,
+        "RouteFinder": 0.14760385715970095
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "VRPBLTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 24.861805060092387,
+        "MVMOE": 21.498429928502986,
+        "reld_mt": 19.770813718301284
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.2659916008523177,
+        "MVMOE": 0.10187296284130469,
+        "reld_mt": 0.004411113784209465
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPBLTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 15.238377519578084,
+        "MVMOE": 11.885810614288616,
+        "reld_mt": 10.625543749052763
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.4477697200950575,
+        "MVMOE": 0.1436695909779314,
+        "reld_mt": 0.003368608291457535
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    }
+  },
+  "candidate_pools": {
+    "TSP": [
+      "BQ",
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "LEHD",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "CVRP": [
+      "BQ",
+      "ELG",
+      "ICAM",
+      "LEHD",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "ATSP": [
+      "GLOP",
+      "ICAM_ATSP",
+      "MATNET",
+      "MATPOENET",
+      "UNICO_MatPOENet"
+    ],
+    "OVRP": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ]
+  },
+  "candidate_pool_ids": {
+    "TSP": [
+      0,
+      1,
+      2,
+      3,
+      7,
+      14,
+      19,
+      20
+    ],
+    "CVRP": [
+      0,
+      3,
+      5,
+      7,
+      11,
+      12,
+      13,
+      14,
+      15,
+      18
+    ],
+    "ATSP": [
+      4,
+      6,
+      8,
+      9,
+      21
+    ],
+    "OVRP": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "VRPB": [
+      10,
+      11,
+      16
+    ],
+    "VRPL": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "VRPTW": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "OVRPTW": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "OVRPB": [
+      10,
+      11,
+      16
+    ],
+    "OVRPL": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "VRPBL": [
+      10,
+      11,
+      16
+    ],
+    "VRPBTW": [
+      10,
+      11,
+      16
+    ],
+    "VRPLTW": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "OVRPBL": [
+      10,
+      11,
+      16
+    ],
+    "OVRPBTW": [
+      10,
+      11,
+      16
+    ],
+    "OVRPLTW": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "VRPBLTW": [
+      10,
+      11,
+      16
+    ],
+    "OVRPBLTW": [
+      10,
+      11,
+      16
+    ]
+  },
+  "solver_names": [
+    "BQ",
+    "DIFUSCO",
+    "DIFUSCO500",
+    "ELG",
+    "GLOP",
+    "ICAM",
+    "ICAM_ATSP",
+    "LEHD",
+    "MATNET",
+    "MATPOENET",
+    "MTPOMO",
+    "MVMOE",
+    "MoSES_CaDA",
+    "MoSES_RF",
+    "OMNI",
+    "RELD_CVRP",
+    "RELD_MOEL",
+    "RELD_MTL",
+    "RouteFinder",
+    "T2T",
+    "T2T500",
+    "UNICO_MatPOENet"
+  ],
+  "contexts": {
+    "TSP": {
+      "metadata_sha256": "f04ccc87a0b8593adc689a690ecd32bd64b5c4230654d05e631a6b023b92418b",
+      "rows": 81000,
+      "columns": 162
+    },
+    "CVRP": {
+      "metadata_sha256": "ffbff5e3da3a452fceb08eebe99183db7eec0e30196f3cf9b07708494ba971f9",
+      "rows": 81000,
+      "columns": 173
+    },
+    "ATSP": {
+      "metadata_sha256": "5038e84c56ce14c6917dc793dabe2cb84e2746f748ff220fbe618e1b9bb1c9db",
+      "rows": 81000,
+      "columns": 100
+    },
+    "OVRP": {
+      "metadata_sha256": "26edca5355f673fe80de5ad72ce031550ec0d28ef2c47dd8adf0c699229e4f6a",
+      "rows": 81000,
+      "columns": 174
+    },
+    "VRPB": {
+      "metadata_sha256": "9312d24ed2ae7d408baaa2e5d7ab66d9b67e0ad0a945b39d986913779a47323e",
+      "rows": 81000,
+      "columns": 175
+    },
+    "VRPL": {
+      "metadata_sha256": "e2f166e8633ac75b4043716a7819027268a4fa057215d58c7bc0e8039e977885",
+      "rows": 81000,
+      "columns": 176
+    },
+    "VRPTW": {
+      "metadata_sha256": "0cda63cf34ceb15369866994f1b84a8721ae47738a86afd0ca7b8ddffc79515b",
+      "rows": 81000,
+      "columns": 214
+    },
+    "OVRPTW": {
+      "metadata_sha256": "bb7c18ce0c114eb51aaf81fd7f974de41f86a46e91c09923b18d580451d80a2f",
+      "rows": 81000,
+      "columns": 214
+    },
+    "OVRPB": {
+      "metadata_sha256": "f803ebdfcb52510e4669dfe83899621add93039da85edbb492d6fe0fa197fa89",
+      "rows": 81000,
+      "columns": 175
+    },
+    "OVRPL": {
+      "metadata_sha256": "b146c41d3c8089a05484f4ebd1397a315507c38775b98f6b472141328d55661c",
+      "rows": 81000,
+      "columns": 176
+    },
+    "VRPBL": {
+      "metadata_sha256": "530ce54970011f9bb71bbf6357430a8f0e792f96d0d02a24aed4d985911b233e",
+      "rows": 81000,
+      "columns": 177
+    },
+    "VRPBTW": {
+      "metadata_sha256": "f236a95917bc5c4e751c034c9aee086fee45cf5e8a54a83f58f5a782dcb5ec2e",
+      "rows": 81000,
+      "columns": 215
+    },
+    "VRPLTW": {
+      "metadata_sha256": "889cb61fd5a24f5301caddd66791864e8154c35fd87e753f8083f25ce06b4d82",
+      "rows": 81000,
+      "columns": 216
+    },
+    "OVRPBL": {
+      "metadata_sha256": "0b3b90a88c74a983723eb17d45a495144ec3a989606f8ca8aba3565d1be3cd3e",
+      "rows": 81000,
+      "columns": 177
+    },
+    "OVRPBTW": {
+      "metadata_sha256": "83aa9fedfcc75d6f11023a15adf5df79484970584236a7c4208cd92938293aa0",
+      "rows": 81000,
+      "columns": 215
+    },
+    "OVRPLTW": {
+      "metadata_sha256": "4e03e3c701ff7c7f0f14482b14b121afe70edcb304670f9c1c5f06a901519004",
+      "rows": 81000,
+      "columns": 216
+    },
+    "VRPBLTW": {
+      "metadata_sha256": "627ef4c69e15d6cdf2971340b46a21551f742c00e24cd90d30922d78067e2e33",
+      "rows": 81000,
+      "columns": 217
+    },
+    "OVRPBLTW": {
+      "metadata_sha256": "9cd92b669c437dda2672ab01b8035e6a7d7d4ba0a74949ebe48cbf4b7f936ff4",
+      "rows": 81000,
+      "columns": 217
+    }
+  },
+  "classifier_parameters": {
+    "n_estimators": 1,
+    "batch_size": 1,
+    "norm_methods": [
+      "none"
+    ],
+    "model_path": "/public/home/shiys/0selection2/code/V4/runs/R97_tabular_in_context/runtime/weights/tabicl-classifier-v2-20260212.ckpt",
+    "allow_auto_download": false,
+    "checkpoint_version": "tabicl-classifier-v2-20260212.ckpt",
+    "use_amp": true,
+    "use_fa3": false,
+    "offload_mode": "gpu",
+    "random_state": 2,
+    "n_jobs": null,
+    "verbose": true,
+    "support_many_classes": false,
+    "inference_config": {
+      "COL_CONFIG": {
+        "offload": "gpu",
+        "safety_factor": 0.1,
+        "min_batch_size": 1,
+        "use_async": false,
+        "max_pinned_memory_mb": 0.0
+      },
+      "ROW_CONFIG": {
+        "offload": "gpu",
+        "safety_factor": 0.1,
+        "min_batch_size": 1,
+        "use_async": false,
+        "max_pinned_memory_mb": 0.0
+      },
+      "ICL_CONFIG": {
+        "offload": "gpu",
+        "safety_factor": 0.1,
+        "min_batch_size": 1,
+        "use_async": false,
+        "max_pinned_memory_mb": 0.0
+      }
+    }
+  },
+  "checkpoint_config": {
+    "max_classes": 10,
+    "num_quantiles": 999,
+    "embed_dim": 128,
+    "col_num_blocks": 3,
+    "col_nhead": 8,
+    "col_num_inds": 128,
+    "col_affine": false,
+    "col_feature_group": "same",
+    "col_feature_group_size": 3,
+    "col_target_aware": true,
+    "col_ssmax": "qassmax-mlp-elementwise",
+    "row_num_blocks": 3,
+    "row_nhead": 8,
+    "row_num_cls": 4,
+    "row_rope_base": 100000,
+    "row_rope_interleaved": false,
+    "icl_num_blocks": 12,
+    "icl_nhead": 8,
+    "icl_ssmax": "qassmax-mlp-elementwise",
+    "ff_factor": 2,
+    "dropout": 0.0,
+    "activation": "gelu",
+    "norm_first": true,
+    "bias_free_ln": false,
+    "recompute": false
+  },
+  "public_checkpoint_sha256": "bdc7dbd5e4ff21f8f0456fcf90c6b7cdf72dbea960f2d05b19bec19f9b3d4ed0",
+  "public_checkpoint_revision": "4dcd344ece2c00be9e831fdd35bed57b5ad83e19",
+  "package_version": "tabicl==2.0.2",
+  "source_revision": "ba4bdbc6bb46b9307da3dbc1685109371ec5085f",
+  "runtime_wheels": {
+    "einops-0.8.1-py3-none-any.whl": "919387eb55330f5757c6bea9165c5ff5cfe63a642682ea788a6d472576d81737",
+    "tabicl-2.0.2-py3-none-any.whl": "00890709ca03b128250b8dac51d1e25180254942eb0f129fe5f8f6950a67125c"
+  },
+  "winner_rule": "native/FP64 raw_label ind; never FP32 argmin",
+  "optimizer_updates": 0,
+  "fine_tuning": false,
+  "historical_TRAIN_labels_in_context": true,
+  "current_query_labels_in_forward": false,
+  "context_rows": "all81000/task, natural order and frequency, no quota/subset",
+  "feature_transform": "only task-TRAIN-constant columns removed, original order retained",
+  "query_batch_rule": "one complete named dataset per predict call; no query labels or mixed splits",
+  "checkpoint_rule": "one frozen predeclared full18 bank; no VAL hyperparameter search",
+  "inference_rule": "legal-class probability argmax; ascending global-ID exact ties",
+  "kv_cache": false,
+  "allow_cpu_offload": false,
+  "flash_attention_only": true,
+  "resource_guard": {
+    "max_rss_gib": 8.5,
+    "max_seconds_per_call": 1800
+  },
+  "witness": {
+    "problem": "TSP",
+    "train_rows": 81000,
+    "query_split": "val",
+    "query_rows": 32,
+    "labels_loaded": false,
+    "accuracy_computed": false
+  },
+  "pretraining_budget_matched": false,
+  "test_development_exposed": true,
+  "wandb_mode": "offline"
+}
