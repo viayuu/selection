@@ -1,0 +1,4236 @@
+{
+  "experiment": "R99",
+  "arm": "A",
+  "complete": true,
+  "created_utc": "2026-10-22T17:09:13.236066+00:00",
+  "checkpoint_lock": {
+    "experiment": "R99",
+    "arm": "A",
+    "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R99_global_competition_input/A/best.pt",
+    "checkpoint_sha256": "37629bc3270a2523c328bf1e7c8d31e501f7bf42edb6e927264168c80dd75d43",
+    "state_hash": "41bdbb95286594417d1eada163eb57f4dae4464252cdda08752fab25339d1a67",
+    "epoch": 39,
+    "selected_update": 56160,
+    "rule": "strict minimum full VAL macro_vs_sbs_pct with common new81000 TRAIN-fitted SBS; first wins ties",
+    "selected_without_test": true,
+    "per_problem_assembly": false,
+    "val": {
+      "macro_ce": 0.7064836637841331,
+      "macro_top1": 0.7109382716049383,
+      "macro_top2": 0.9067037037037038,
+      "macro_top3": 0.963283950617284,
+      "macro_top1_tie_aware": 0.7124074074074074,
+      "macro_mean_cost": 11.416895689286564,
+      "macro_vs_sbs_pct": -0.19239064922817092,
+      "macro_vs_oracle_pct": 0.3952337627676155,
+      "macro_actual_regret_pct": 0.4051597836798919,
+      "macro_vbs_gap_closed_pct": 12.852662206552488,
+      "macro_sbs_cost": 11.427978473494235,
+      "macro_oracle_cost": 11.371691902364589
+    },
+    "inference_rule": "eval input-only distance messages, A row-softmax or B fixed64 Sinkhorn; FP32 transform then FP16 quantization; outgoing/incoming one/two-hop raw8; Linear32to128 before original four instance layers; R88B physical TSP node0; hand34 methodID, joint2, original score MLP/pair differences/maximin; stable ascending-global-solver-ID ties; all18 including directed ATSP; no calibration",
+    "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+    "locked_utc": "2026-10-22T16:38:59.955399+00:00"
+  },
+  "model_factory": "code.V4.r99_experiment.load_checkpoint",
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "rows_per_problem": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "candidate_pools": {
+    "TSP": [
+      "BQ",
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "LEHD",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "CVRP": [
+      "BQ",
+      "ELG",
+      "ICAM",
+      "LEHD",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "ATSP": [
+      "GLOP",
+      "ICAM_ATSP",
+      "MATNET",
+      "MATPOENET",
+      "UNICO_MatPOENet"
+    ],
+    "OVRP": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ]
+  },
+  "scenario_solver_aliases": {
+    "reld_mt": "RELD_MOEL"
+  },
+  "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+  "nss_reference": {
+    "root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference",
+    "prediction_sha256": {
+      "TSP": "d42250eea9547dbeed1afdda9411ae6e691d9ce2ae0a14f50e7da6adb28068d3",
+      "CVRP": "13fbedae686c2af03d44d62115bbd9fcbf15950f6b111942f90786faba66603c"
+    },
+    "retrained": false,
+    "new_inference": false,
+    "exact_test_rows": 4500
+  },
+  "nss_alignment": {
+    "TSP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "TSPLIB": {
+      "instance_key": "indices",
+      "matching_population": 49,
+      "checked_instance_ids": [
+        0,
+        24,
+        48
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRPLIB": {
+      "instance_key": "indices",
+      "matching_population": 100,
+      "checked_instance_ids": [
+        0,
+        50,
+        99
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    }
+  },
+  "training": false,
+  "inference": false,
+  "checkpoint_reselection": false,
+  "distribution_pages": 18,
+  "main_pdf_pages": 22,
+  "diagnostics": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R99_global_competition_input/preparation/postprocess_recovery/report_view/A/full_model_statistics/training_and_method_diagnostics.pdf",
+    "pages": 19,
+    "history_status": "complete"
+  },
+  "r99_schema_version": 1,
+  "model_spec": {
+    "backbone": "R88B_original_R77_full18",
+    "transform": {
+      "format": "r99_competition_messages_v1",
+      "width": 32,
+      "temperature": 0.05,
+      "iterations": 64,
+      "diagonal": "excluded",
+      "scale": "mean_valid_off_diagonal_input_distance",
+      "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+      "role": "R88B_physical_TSP_node0",
+      "precision": "FP32_transform_then_FP16",
+      "matrix_semantics": "directed_input_costs",
+      "vrp_bound": false,
+      "hard_constraint_filter": false,
+      "labels_used": false
+    },
+    "fusion": "original_node_token + Linear32to128(LN_no_affine(messages))",
+    "fusion_location": "before_original_four_instance_layers",
+    "projection_seed": 990003,
+    "selection_head": "original_score_mlp_maximin",
+    "objective": "original_R77",
+    "method_specific_new_parameters": false,
+    "external_pretraining": false
+  },
+  "relation_variant": "row",
+  "relation_transform": {
+    "format": "r99_competition_messages_v1",
+    "width": 32,
+    "temperature": 0.05,
+    "iterations": 64,
+    "diagonal": "excluded",
+    "scale": "mean_valid_off_diagonal_input_distance",
+    "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+    "role": "R88B_physical_TSP_node0",
+    "precision": "FP32_transform_then_FP16",
+    "matrix_semantics": "directed_input_costs",
+    "vrp_bound": false,
+    "hard_constraint_filter": false,
+    "labels_used": false
+  },
+  "initialization": "scratch_shared_r77_plus_input_competition",
+  "target_identity": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/comparison_artifacts/target_list.json",
+    "identity": {
+      "baseline_checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "baseline_state_hash": "ad0a6d9c68c6f117b477807f6f8be52662032a8baea348dda6144c46091303e2",
+      "baseline_val_prediction_sha256": "8a1aea9caf608d12fbc83d89704a50eb37d461665c7609ad3e25778cdab932a7",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "threshold_chosen_pct": 0.1,
+      "rule": "A locked VAL: chosen percentage <= 0.1 and native winner count > 0"
+    },
+    "categories": {
+      "TSP/DIFUSCO": "zero",
+      "TSP/DIFUSCO500": "zero",
+      "TSP/LEHD": "zero",
+      "TSP/OMNI": "zero",
+      "CVRP/RouteFinder": "zero",
+      "ATSP/GLOP": "zero",
+      "ATSP/MATPOENET": "zero",
+      "OVRP/MTPOMO": "zero",
+      "OVRP/MVMOE": "zero",
+      "OVRP/reld_mt": "near_zero",
+      "VRPL/MTPOMO": "zero",
+      "VRPL/MVMOE": "zero",
+      "VRPTW/MoSES_CaDA": "near_zero",
+      "VRPTW/MoSES_RF": "zero",
+      "VRPTW/RouteFinder": "zero",
+      "OVRPTW/MoSES_CaDA": "zero",
+      "OVRPTW/MoSES_RF": "zero",
+      "OVRPTW/RouteFinder": "zero",
+      "OVRPB/MTPOMO": "zero",
+      "OVRPB/MVMOE": "near_zero",
+      "OVRPL/MTPOMO": "zero",
+      "OVRPL/MVMOE": "zero",
+      "VRPBL/MTPOMO": "zero",
+      "VRPBTW/MTPOMO": "zero",
+      "VRPLTW/MTPOMO": "zero",
+      "VRPLTW/MoSES_CaDA": "zero",
+      "VRPLTW/MoSES_RF": "zero",
+      "VRPLTW/RouteFinder": "zero",
+      "OVRPBL/MTPOMO": "near_zero",
+      "OVRPBL/MVMOE": "near_zero",
+      "OVRPBTW/MTPOMO": "zero",
+      "OVRPLTW/MVMOE": "near_zero",
+      "OVRPLTW/MoSES_CaDA": "near_zero",
+      "OVRPLTW/MoSES_RF": "zero",
+      "OVRPLTW/RouteFinder": "zero",
+      "VRPBLTW/MTPOMO": "zero"
+    },
+    "sha256": "406ded5a21d8b73c2a41b87dc2bc3cc14330663ae1aa4f59ca6fbfde83770fe4",
+    "target_count": 36
+  },
+  "historical_reference": {
+    "R89B": {
+      "model": "R89B",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry/B_muon_hybrid",
+      "checkpoint_sha256": "41fa4ad8b590fa44e8949b114156d714d7ee2f2d31c847658a26654993057260",
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "role": "main historical reference"
+    },
+    "R84A": {
+      "model": "R84A",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline",
+      "checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "role": "secondary historical reference"
+    }
+  },
+  "objective": {
+    "main": "unchanged R77 CE/comparison/risk plus symmetric R-Drop",
+    "classification": "original R77 CE .35 / comparison .35 / risk .02 / R-Drop .35",
+    "coefficients": {
+      "ce": 0.35,
+      "comparison": 0.35,
+      "risk": 0.02
+    },
+    "rdrop": "linear ramp to .35 over4320 updates",
+    "forward_passes": 2,
+    "new_target": false,
+    "auxiliary_loss": false,
+    "route_targets": false,
+    "cross_instance_objective": false,
+    "mutable_objective_state": false
+  },
+  "loss": {
+    "ce": 0.35,
+    "comparison": 0.35,
+    "risk": 0.02,
+    "cost_scale": 0.01,
+    "focus_weights": {
+      "true3": 0.5,
+      "predicted3": 0.25,
+      "all_pairs": 0.25
+    }
+  },
+  "evidence_boundary": "A uses row-softmax distance messages; B uses fixed64 Sinkhorn row/column competition. Both use the same input-only32 outgoing/incoming one/two-hop raw-attribute channels, projected before the original four instance layers, including directed matrix ATSP. Identical fresh R84 seed2 parameters plus shared new projection seed990003; no pretrained donor, new target or auxiliary loss. Original R88B physical TSP node0, hand34/methodID, joint2 and score MLP/maximin remain. Original R77 CE=.35, comparison=.35, risk=.02, R-Drop=.35, dropout=.1. Input-only representational accessibility, not new information, an assignment solver, VRP bound, feasibility test or B-semantics repair. Finite64 marginal residuals do not establish exact convergence. R89B main / R84A secondary are historical same-data references, not newly matched controls. Fixed R84 target36; zero-count movement alone is not success. Hardware differences are disclosed, not bitwise hardware matching. Development-exposed TEST; unique full18 minimum VAL macro_vs_sbs checkpoint; no TEST/LIB tuning or per-task assembly. GPU-resident transform+selector excludes I/O and host transfer; cache-hit selector is not full inference. RECOVERY REVISION: cached TEST efficacy is not evidence of exact online efficacy. See private timing schema, explicit FP16/score/prediction differences and numerical-boundary page. Original failed worker/controller receipts remain failed and unchanged.",
+  "inference_timing": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R99_global_competition_input/preparation/postprocess_recovery/report_view/A/inference_timing.json",
+    "sha256": "84f13f0550c803967fd8a9c092ebd99baa11f58aa7f13e8bd29f2e904db33a55",
+    "status": "complete_private_numerical_revision",
+    "measurements": [
+      {
+        "problem": "TSP",
+        "instances": 128,
+        "device": "NVIDIA GeForce RTX 3090",
+        "repetitions": 3,
+        "max_marginal_residual": 1.1579773426055908,
+        "transform_only_ms_per_instance": 0.4580855602398515,
+        "transform_plus_selector_ms_per_instance": 0.8588603668613359,
+        "cache_hit_selector_ms_per_instance": 0.3940640939011549
+      },
+      {
+        "problem": "CVRP",
+        "instances": 128,
+        "device": "NVIDIA GeForce RTX 3090",
+        "repetitions": 3,
+        "max_marginal_residual": 1.2967710494995117,
+        "transform_only_ms_per_instance": 0.5960659473203123,
+        "transform_plus_selector_ms_per_instance": 1.0775410579905536,
+        "cache_hit_selector_ms_per_instance": 0.47875940314649296
+      },
+      {
+        "problem": "ATSP",
+        "instances": 128,
+        "device": "NVIDIA GeForce RTX 3090",
+        "repetitions": 3,
+        "max_marginal_residual": 5.343196868896484,
+        "transform_only_ms_per_instance": 0.012177469519277414,
+        "transform_plus_selector_ms_per_instance": 0.08477265752541523,
+        "cache_hit_selector_ms_per_instance": 0.07241484612071265
+      },
+      {
+        "problem": "OVRP",
+        "instances": 128,
+        "device": "NVIDIA GeForce RTX 3090",
+        "repetitions": 3,
+        "max_marginal_residual": 1.2702927589416504,
+        "transform_only_ms_per_instance": 0.031180805914724864,
+        "transform_plus_selector_ms_per_instance": 0.1017332300155734,
+        "cache_hit_selector_ms_per_instance": 0.07038668748767425
+      },
+      {
+        "problem": "VRPB",
+        "instances": 128,
+        "device": "NVIDIA GeForce RTX 3090",
+        "repetitions": 3,
+        "max_marginal_residual": 1.4868435859680176,
+        "transform_only_ms_per_instance": 0.03127532060413311,
+        "transform_plus_selector_ms_per_instance": 0.10167060827370733,
+        "cache_hit_selector_ms_per_instance": 0.07021632336545736
+      },
+      {
+        "problem": "VRPL",
+        "instances": 128,
+        "device": "NVIDIA GeForce RTX 3090",
+        "repetitions": 3,
+        "max_marginal_residual": 1.3603341579437256,
+        "transform_only_ms_per_instance": 0.031326155294664204,
+        "transform_plus_selector_ms_per_instance": 0.10119711805600673,
+        "cache_hit_selector_ms_per_instance": 0.06991458940319717
+      },
+      {
+        "problem": "VRPTW",
+        "instances": 128,
+        "device": "NVIDIA GeForce RTX 3090",
+        "repetitions": 3,
+        "max_marginal_residual": 1.5004477500915527,
+        "transform_only_ms_per_instance": 0.031272395669172205,
+        "transform_plus_selector_ms_per_instance": 0.10155600709064554,
+        "cache_hit_selector_ms_per_instance": 0.07019296269087742
+      },
+      {
+        "problem": "OVRPTW",
+        "instances": 128,
+        "device": "NVIDIA GeForce RTX 3090",
+        "repetitions": 3,
+        "max_marginal_residual": 1.4401113986968994,
+        "transform_only_ms_per_instance": 0.03168047987855971,
+        "transform_plus_selector_ms_per_instance": 0.10438866350644578,
+        "cache_hit_selector_ms_per_instance": 0.07357953775984545
+      },
+      {
+        "problem": "OVRPB",
+        "instances": 128,
+        "device": "NVIDIA GeForce RTX 3090",
+        "repetitions": 3,
+        "max_marginal_residual": 1.759157419204712,
+        "transform_only_ms_per_instance": 0.03163487417623401,
+        "transform_plus_selector_ms_per_instance": 0.10225206885176401,
+        "cache_hit_selector_ms_per_instance": 0.0710983343500023
+      },
+      {
+        "problem": "OVRPL",
+        "instances": 128,
+        "device": "NVIDIA GeForce RTX 3090",
+        "repetitions": 3,
+        "max_marginal_residual": 1.2662806510925293,
+        "transform_only_ms_per_instance": 0.03130122786387801,
+        "transform_plus_selector_ms_per_instance": 0.10308016013974945,
+        "cache_hit_selector_ms_per_instance": 0.070465558868212
+      },
+      {
+        "problem": "VRPBL",
+        "instances": 128,
+        "device": "NVIDIA GeForce RTX 3090",
+        "repetitions": 3,
+        "max_marginal_residual": 1.282088041305542,
+        "transform_only_ms_per_instance": 0.03129353960199902,
+        "transform_plus_selector_ms_per_instance": 0.10251922261280318,
+        "cache_hit_selector_ms_per_instance": 0.07030876198162635
+      },
+      {
+        "problem": "VRPBTW",
+        "instances": 128,
+        "device": "NVIDIA GeForce RTX 3090",
+        "repetitions": 3,
+        "max_marginal_residual": 1.2141823768615723,
+        "transform_only_ms_per_instance": 0.03112721121093879,
+        "transform_plus_selector_ms_per_instance": 0.1026276780370002,
+        "cache_hit_selector_ms_per_instance": 0.07011318909159552
+      },
+      {
+        "problem": "VRPLTW",
+        "instances": 128,
+        "device": "NVIDIA GeForce RTX 3090",
+        "repetitions": 3,
+        "max_marginal_residual": 1.3616085052490234,
+        "transform_only_ms_per_instance": 0.03259707106432567,
+        "transform_plus_selector_ms_per_instance": 0.10563058215969552,
+        "cache_hit_selector_ms_per_instance": 0.07055195843956123
+      },
+      {
+        "problem": "OVRPBL",
+        "instances": 128,
+        "device": "NVIDIA GeForce RTX 3090",
+        "repetitions": 3,
+        "max_marginal_residual": 1.5099053382873535,
+        "transform_only_ms_per_instance": 0.03134639700874686,
+        "transform_plus_selector_ms_per_instance": 0.10219436565724511,
+        "cache_hit_selector_ms_per_instance": 0.07040402366934966
+      },
+      {
+        "problem": "OVRPBTW",
+        "instances": 128,
+        "device": "NVIDIA GeForce RTX 3090",
+        "repetitions": 3,
+        "max_marginal_residual": 1.2836480140686035,
+        "transform_only_ms_per_instance": 0.031305394562271736,
+        "transform_plus_selector_ms_per_instance": 0.10174376560219874,
+        "cache_hit_selector_ms_per_instance": 0.07107964484021068
+      },
+      {
+        "problem": "OVRPLTW",
+        "instances": 128,
+        "device": "NVIDIA GeForce RTX 3090",
+        "repetitions": 3,
+        "max_marginal_residual": 1.2663543224334717,
+        "transform_only_ms_per_instance": 0.03167227259837091,
+        "transform_plus_selector_ms_per_instance": 0.10178238153457642,
+        "cache_hit_selector_ms_per_instance": 0.07182299547518294
+      },
+      {
+        "problem": "VRPBLTW",
+        "instances": 128,
+        "device": "NVIDIA GeForce RTX 3090",
+        "repetitions": 3,
+        "max_marginal_residual": 1.291724443435669,
+        "transform_only_ms_per_instance": 0.03160840909307202,
+        "transform_plus_selector_ms_per_instance": 0.10230529490703096,
+        "cache_hit_selector_ms_per_instance": 0.07006222343382736
+      },
+      {
+        "problem": "OVRPBLTW",
+        "instances": 128,
+        "device": "NVIDIA GeForce RTX 3090",
+        "repetitions": 3,
+        "max_marginal_residual": 1.389655590057373,
+        "transform_only_ms_per_instance": 0.03113598116518309,
+        "transform_plus_selector_ms_per_instance": 0.10218492631490032,
+        "cache_hit_selector_ms_per_instance": 0.07036928339706112
+      }
+    ],
+    "preprocessing_seconds": 125.73586884513497,
+    "preprocessing": {
+      "experiment": "R99",
+      "arm": "A",
+      "variant": "row",
+      "complete": true,
+      "completed_utc": "2026-10-22T09:01:40.649487+00:00",
+      "feature_root": "/tmp/shiys_R99_A_relation_features",
+      "cache_root": "/tmp/shiys_R84_new90k_cache",
+      "main_protocol_lock_sha256": "43dca731568872dba22dd9b8dd208e83172baac3f7aa4a6b458d6e0015920f39",
+      "splits": [
+        "train",
+        "val"
+      ],
+      "seconds": 125.73586884513497,
+      "feature_receipts": {
+        "train": {
+          "TSP": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "TSP",
+              "split": "train",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "68911e3eb230f3ceeccaa520c47dd00eb9b387421b562b89416e6c372fd6faf2",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      81000
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      81000,
+                      499,
+                      2
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 81000,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T08:59:59.559522+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 81000,
+            "total_real_nodes": 22222691,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              22222691,
+              32
+            ],
+            "max_marginal_residual": 2.158944606781006,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 24.64084910042584,
+            "files": {
+              "messages.npy": 1422252352,
+              "offsets.npy": 648136
+            }
+          },
+          "CVRP": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "CVRP",
+              "split": "train",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "700d9b09a81960b2747934c8e7dc27c84d96066980182b3d92981e8c0bf38dc0",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      81000
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      81000,
+                      500,
+                      4
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 81000,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:00:27.173052+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 81000,
+            "total_real_nodes": 22380435,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              22380435,
+              32
+            ],
+            "max_marginal_residual": 2.1068694591522217,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 27.603050507605076,
+            "files": {
+              "messages.npy": 1432347968,
+              "offsets.npy": 648136
+            }
+          },
+          "ATSP": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "ATSP",
+              "split": "train",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "2f5a9d84c7d15e42a5df010fd903c24fb7589c060ddeba96c978a50f2efc3a58",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      81000
+                    ],
+                    "dtype": "int64"
+                  },
+                  "matrix": {
+                    "file": "matrix.npy",
+                    "shape": [
+                      81000,
+                      100,
+                      100
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 81000,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:00:30.336367+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 81000,
+            "total_real_nodes": 4854078,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              4854078,
+              32
+            ],
+            "max_marginal_residual": 8.830796241760254,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 3.1429681070148945,
+            "files": {
+              "messages.npy": 310661120,
+              "offsets.npy": 648136
+            }
+          },
+          "OVRP": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRP",
+              "split": "train",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "33f59f9724efc05821382e54b117b0c6f4c07dd330233d358fa366531e4edf64",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      81000
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      81000,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 81000,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:00:35.162731+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 81000,
+            "total_real_nodes": 6155270,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              6155270,
+              32
+            ],
+            "max_marginal_residual": 2.3278002738952637,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 4.732131103053689,
+            "files": {
+              "messages.npy": 393937408,
+              "offsets.npy": 648136
+            }
+          },
+          "VRPB": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPB",
+              "split": "train",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "c0e09356ff6511eb0f4422c0e7e68b9fc729199c2a36b1b458af7079195c7f90",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      81000
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      81000,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 81000,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:00:39.624161+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 81000,
+            "total_real_nodes": 6155302,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              6155302,
+              32
+            ],
+            "max_marginal_residual": 1.9730522632598877,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 4.452176809310913,
+            "files": {
+              "messages.npy": 393939456,
+              "offsets.npy": 648136
+            }
+          },
+          "VRPL": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPL",
+              "split": "train",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "47fe6a36fd49e521b8f3e8a479b35e6d6cbf030de9d4dd3cc819717aefe9403f",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      81000
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      81000,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 81000,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:00:44.119149+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 81000,
+            "total_real_nodes": 6155351,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              6155351,
+              32
+            ],
+            "max_marginal_residual": 2.002397060394287,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 4.486266851425171,
+            "files": {
+              "messages.npy": 393942592,
+              "offsets.npy": 648136
+            }
+          },
+          "VRPTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPTW",
+              "split": "train",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "3a062a76b211002450e939088b99720ab981a9b39deb330bbefe632b201062ec",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      81000
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      81000,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 81000,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:00:48.553450+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 81000,
+            "total_real_nodes": 6155461,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              6155461,
+              32
+            ],
+            "max_marginal_residual": 2.1920313835144043,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 4.425791269168258,
+            "files": {
+              "messages.npy": 393949632,
+              "offsets.npy": 648136
+            }
+          },
+          "OVRPTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPTW",
+              "split": "train",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "0b24087bf19b61888712433b5d246a12399d211c4dfe03a54acd09cff0f5f47b",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      81000
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      81000,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 81000,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:00:52.524529+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 81000,
+            "total_real_nodes": 6155354,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              6155354,
+              32
+            ],
+            "max_marginal_residual": 2.4818367958068848,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 3.9624170809984207,
+            "files": {
+              "messages.npy": 393942784,
+              "offsets.npy": 648136
+            }
+          },
+          "OVRPB": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPB",
+              "split": "train",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "c7277ea90b3e27d91e160ab10b4dc1dde95b90ddfe8883531cc2f4f63d32c732",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      81000
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      81000,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 81000,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:00:57.011104+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 81000,
+            "total_real_nodes": 6155341,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              6155341,
+              32
+            ],
+            "max_marginal_residual": 2.3319637775421143,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 4.477944729849696,
+            "files": {
+              "messages.npy": 393941952,
+              "offsets.npy": 648136
+            }
+          },
+          "OVRPL": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPL",
+              "split": "train",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "4bb811b6ff845ee60b617634d87c23a021eb3d51feaefffad2d7421865c0252e",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      81000
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      81000,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 81000,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:01.593073+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 81000,
+            "total_real_nodes": 6155468,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              6155468,
+              32
+            ],
+            "max_marginal_residual": 2.1540699005126953,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 4.573616759851575,
+            "files": {
+              "messages.npy": 393950080,
+              "offsets.npy": 648136
+            }
+          },
+          "VRPBL": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPBL",
+              "split": "train",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "f521587710400f9a2081fb89b108446eabe37119bc0ac98b784477cfba7e28bb",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      81000
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      81000,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 81000,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:04.794957+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 81000,
+            "total_real_nodes": 6155385,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              6155385,
+              32
+            ],
+            "max_marginal_residual": 2.5075151920318604,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 3.1926649417728186,
+            "files": {
+              "messages.npy": 393944768,
+              "offsets.npy": 648136
+            }
+          },
+          "VRPBTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPBTW",
+              "split": "train",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "5f8b1e4357993c44d26e6b5d48e1daa0f540bc0ef4824a747ac88da177f4b691",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      81000
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      81000,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 81000,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:08.773557+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 81000,
+            "total_real_nodes": 6155510,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              6155510,
+              32
+            ],
+            "max_marginal_residual": 2.256521224975586,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 3.9700454231351614,
+            "files": {
+              "messages.npy": 393952768,
+              "offsets.npy": 648136
+            }
+          },
+          "VRPLTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPLTW",
+              "split": "train",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "e5882998bdebbebf41819651df1e9f118ec8ef8daea94a1f95f17e18e3b6d9a4",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      81000
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      81000,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 81000,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:12.687457+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 81000,
+            "total_real_nodes": 6155269,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              6155269,
+              32
+            ],
+            "max_marginal_residual": 2.152015447616577,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 3.905676808208227,
+            "files": {
+              "messages.npy": 393937344,
+              "offsets.npy": 648136
+            }
+          },
+          "OVRPBL": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPBL",
+              "split": "train",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "68bd42edd37908e97a955fe1e0c53d01b6132d8c39160ff0b27e1355863dfb68",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      81000
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      81000,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 81000,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:16.733120+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 81000,
+            "total_real_nodes": 6155279,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              6155279,
+              32
+            ],
+            "max_marginal_residual": 2.1242523193359375,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 4.037079418078065,
+            "files": {
+              "messages.npy": 393937984,
+              "offsets.npy": 648136
+            }
+          },
+          "OVRPBTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPBTW",
+              "split": "train",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "c0b505f2d2897604e1c895a64df0104b7428f2915c2829a4981e83f5eec7db85",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      81000
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      81000,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 81000,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:20.377543+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 81000,
+            "total_real_nodes": 6155250,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              6155250,
+              32
+            ],
+            "max_marginal_residual": 2.2973642349243164,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 3.635684909299016,
+            "files": {
+              "messages.npy": 393936128,
+              "offsets.npy": 648136
+            }
+          },
+          "OVRPLTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPLTW",
+              "split": "train",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "7f108780aa1d7414e7299e00d5efcd63900759a37b98b328da601a8b062d3faf",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      81000
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      81000,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 81000,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:24.194107+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 81000,
+            "total_real_nodes": 6155297,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              6155297,
+              32
+            ],
+            "max_marginal_residual": 1.9661974906921387,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 3.807819241657853,
+            "files": {
+              "messages.npy": 393939136,
+              "offsets.npy": 648136
+            }
+          },
+          "VRPBLTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPBLTW",
+              "split": "train",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "55a52fa3da1922156b09deb08616f8b5663a536c32c2ef7de1943257ed1f2cee",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      81000
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      81000,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 81000,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:28.526811+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 81000,
+            "total_real_nodes": 6155339,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              6155339,
+              32
+            ],
+            "max_marginal_residual": 2.4563636779785156,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 4.324059369042516,
+            "files": {
+              "messages.npy": 393941824,
+              "offsets.npy": 648136
+            }
+          },
+          "OVRPBLTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPBLTW",
+              "split": "train",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "1d71b9a0ae04edd033a5ce73ae3ddd3794a330a6f0d63ec8b11654f6f23314f8",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      81000
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      81000,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 81000,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:32.176740+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 81000,
+            "total_real_nodes": 6155365,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              6155365,
+              32
+            ],
+            "max_marginal_residual": 2.225111961364746,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 3.641538267955184,
+            "files": {
+              "messages.npy": 393943488,
+              "offsets.npy": 648136
+            }
+          }
+        },
+        "val": {
+          "TSP": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "TSP",
+              "split": "val",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "8c344fb8b5bd902b320ee366e2998174075deddcdb1f1f84e1c8d5c14b3c0dbc",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      499,
+                      2
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:34.411175+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 1235204,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              1235204,
+              32
+            ],
+            "max_marginal_residual": 1.7855567932128906,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 2.2231882512569427,
+            "files": {
+              "messages.npy": 79053184,
+              "offsets.npy": 36136
+            }
+          },
+          "CVRP": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "CVRP",
+              "split": "val",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "ddaaf2d0f43ac47a8792d31fc5595858b4b96df33a59181c6abbfcb5af7bfc21",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      500,
+                      4
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:36.441145+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 1243406,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              1243406,
+              32
+            ],
+            "max_marginal_residual": 1.8436193466186523,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 2.0285979006439447,
+            "files": {
+              "messages.npy": 79578112,
+              "offsets.npy": 36136
+            }
+          },
+          "ATSP": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "ATSP",
+              "split": "val",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "da736181fd3e55d32fe2ed63589b7e891e69ca0d3feee3491b996afb8baba756",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "matrix": {
+                    "file": "matrix.npy",
+                    "shape": [
+                      4500,
+                      100,
+                      100
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:36.711369+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 269091,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              269091,
+              32
+            ],
+            "max_marginal_residual": 7.0512847900390625,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.26831681467592716,
+            "files": {
+              "messages.npy": 17221952,
+              "offsets.npy": 36136
+            }
+          },
+          "OVRP": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRP",
+              "split": "val",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "a4ccfd0f6e4a85a6026cbbff71df13872df9f2d059aa86c962b4d29496053c47",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:36.990964+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341925,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341925,
+              32
+            ],
+            "max_marginal_residual": 1.7328686714172363,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.2734372764825821,
+            "files": {
+              "messages.npy": 21883328,
+              "offsets.npy": 36136
+            }
+          },
+          "VRPB": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPB",
+              "split": "val",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "4ba4bb83528bed6f87ede2fdf5d638246064d43779dfe6698c0b92d5caa827a1",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:37.254001+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341906,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341906,
+              32
+            ],
+            "max_marginal_residual": 1.9090790748596191,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.2618107385933399,
+            "files": {
+              "messages.npy": 21882112,
+              "offsets.npy": 36136
+            }
+          },
+          "VRPL": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPL",
+              "split": "val",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "539852db3214d41f4ee558c2d56e025dd4d3eacf7ccc2d1398c088719acb8cea",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:37.509733+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341889,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341889,
+              32
+            ],
+            "max_marginal_residual": 1.9379289150238037,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.25450642965734005,
+            "files": {
+              "messages.npy": 21881024,
+              "offsets.npy": 36136
+            }
+          },
+          "VRPTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPTW",
+              "split": "val",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "c721cbdc8680d94f2077f85ac4d3ce8ed61aa524c1c5286ccdc59734dddd73f2",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:37.777304+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341959,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341959,
+              32
+            ],
+            "max_marginal_residual": 1.9784884452819824,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.26631067506968975,
+            "files": {
+              "messages.npy": 21885504,
+              "offsets.npy": 36136
+            }
+          },
+          "OVRPTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPTW",
+              "split": "val",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "1d182e646ec19061679f2edc2f5e57c284afb9d62886a5c9e41ed5efa982e53e",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:38.039629+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341951,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341951,
+              32
+            ],
+            "max_marginal_residual": 1.9908015727996826,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.261053116992116,
+            "files": {
+              "messages.npy": 21884992,
+              "offsets.npy": 36136
+            }
+          },
+          "OVRPB": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPB",
+              "split": "val",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "126befc92c9b95e23dd1162502b4f14dad968553ceb493d14c922c012d1b76e0",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:38.303184+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341905,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341905,
+              32
+            ],
+            "max_marginal_residual": 1.9652884006500244,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.26218435540795326,
+            "files": {
+              "messages.npy": 21882048,
+              "offsets.npy": 36136
+            }
+          },
+          "OVRPL": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPL",
+              "split": "val",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "80edf37156209b8d63dff8f547ff79cd9f3d42ad420ac839694eee0b982652ea",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:38.563975+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341872,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341872,
+              32
+            ],
+            "max_marginal_residual": 1.8957152366638184,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.25954366475343704,
+            "files": {
+              "messages.npy": 21879936,
+              "offsets.npy": 36136
+            }
+          },
+          "VRPBL": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPBL",
+              "split": "val",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "e9113aa6e27aa062580fa9f34ed60bcfb75b32aacb521a454d3d286211095eb3",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:38.827285+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341949,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341949,
+              32
+            ],
+            "max_marginal_residual": 1.7354223728179932,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.26208657771348953,
+            "files": {
+              "messages.npy": 21884864,
+              "offsets.npy": 36136
+            }
+          },
+          "VRPBTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPBTW",
+              "split": "val",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "a9cbc55cd9a4991b17eba9e9e162a2eaf8880d71861a517248ada46126bb08eb",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:39.089974+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341768,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341768,
+              32
+            ],
+            "max_marginal_residual": 1.9997978210449219,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.2614584434777498,
+            "files": {
+              "messages.npy": 21873280,
+              "offsets.npy": 36136
+            }
+          },
+          "VRPLTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPLTW",
+              "split": "val",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "648b4d200843eb9dd1f7d7bb70c7dc4ef3d115bd9d422bcfa45d7750b3e0305b",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:39.348899+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341957,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341957,
+              32
+            ],
+            "max_marginal_residual": 1.9163522720336914,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.25768289901316166,
+            "files": {
+              "messages.npy": 21885376,
+              "offsets.npy": 36136
+            }
+          },
+          "OVRPBL": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPBL",
+              "split": "val",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "7f3f25eb287401dbb18f991ff61f2051d211d581d48fbbeae1c0c582148c7edc",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:39.615721+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341976,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341976,
+              32
+            ],
+            "max_marginal_residual": 1.9630639553070068,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.26559457182884216,
+            "files": {
+              "messages.npy": 21886592,
+              "offsets.npy": 36136
+            }
+          },
+          "OVRPBTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPBTW",
+              "split": "val",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "38c9982eee29a60ea91af9c6d3159ea9fba32e3463312b94fe5d8edcc2e9e55e",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:39.882224+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341989,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341989,
+              32
+            ],
+            "max_marginal_residual": 1.7601566314697266,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.26528377272188663,
+            "files": {
+              "messages.npy": 21887424,
+              "offsets.npy": 36136
+            }
+          },
+          "OVRPLTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPLTW",
+              "split": "val",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "f5b39e622458bb0463e3b18b81ebd4f09d2388260e81bc98aa86c921a9f6817e",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:40.153296+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341936,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341936,
+              32
+            ],
+            "max_marginal_residual": 1.807365894317627,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.2698379997164011,
+            "files": {
+              "messages.npy": 21884032,
+              "offsets.npy": 36136
+            }
+          },
+          "VRPBLTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPBLTW",
+              "split": "val",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "f07f7d3acafcbe2f65bec70791e7ccf9474d9d47ab15168584c6223bcac6dbfa",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:40.408145+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341872,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341872,
+              32
+            ],
+            "max_marginal_residual": 1.8903822898864746,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.25362726859748363,
+            "files": {
+              "messages.npy": 21879936,
+              "offsets.npy": 36136
+            }
+          },
+          "OVRPBLTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPBLTW",
+              "split": "val",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "5b86ddf073df277e13e3284b81f38bb26091e72ce8a4d7a4757ca5119800cf68",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": null
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T09:01:40.648386+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341901,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341901,
+              32
+            ],
+            "max_marginal_residual": 1.891324758529663,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.23902051523327827,
+            "files": {
+              "messages.npy": 21881792,
+              "offsets.npy": 36136
+            }
+          }
+        }
+      },
+      "labels_used": false,
+      "solver_executed": false,
+      "new_target": false
+    },
+    "test_preprocessing_seconds": 9.838726565241814,
+    "test_preprocessing": {
+      "experiment": "R99",
+      "arm": "A",
+      "variant": "row",
+      "complete": true,
+      "splits": [
+        "test"
+      ],
+      "completed_utc": "2026-10-22T16:41:29.373280+00:00",
+      "checkpoint_sha256": "37629bc3270a2523c328bf1e7c8d31e501f7bf42edb6e927264168c80dd75d43",
+      "state_hash": "41bdbb95286594417d1eada163eb57f4dae4464252cdda08752fab25339d1a67",
+      "seconds": 9.838726565241814,
+      "feature_receipts": {
+        "test": {
+          "TSP": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "TSP",
+              "split": "test",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "e6c9b5c014a49d168cd2db7c93aff914a039ed3ab0efb3acf1d0ad332c0e91e9",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      499,
+                      2
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": "aed9f643a1512d35065be88224f3f9ecee3cedf62396b36d5dab4f5ad2556f2c"
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T16:41:22.132947+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 1234388,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              1234388,
+              32
+            ],
+            "max_marginal_residual": 1.8576269149780273,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 2.5942452047020197,
+            "files": {
+              "messages.npy": 79000960,
+              "offsets.npy": 36136
+            }
+          },
+          "CVRP": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "CVRP",
+              "split": "test",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "ab52841ce0a23140f398587576e452be275ece7ea45f52bba830e7a9b96c943b",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      500,
+                      4
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": "aed9f643a1512d35065be88224f3f9ecee3cedf62396b36d5dab4f5ad2556f2c"
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T16:41:24.178474+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 1245022,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              1245022,
+              32
+            ],
+            "max_marginal_residual": 2.0372018814086914,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 2.043972374871373,
+            "files": {
+              "messages.npy": 79681536,
+              "offsets.npy": 36136
+            }
+          },
+          "ATSP": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "ATSP",
+              "split": "test",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "d5bda91d559c0ce9d69017904af5c89ea09387b07b07d0627ae9b65ea7de89b1",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "matrix": {
+                    "file": "matrix.npy",
+                    "shape": [
+                      4500,
+                      100,
+                      100
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": "aed9f643a1512d35065be88224f3f9ecee3cedf62396b36d5dab4f5ad2556f2c"
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T16:41:24.932051+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 269505,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              269505,
+              32
+            ],
+            "max_marginal_residual": 6.993263244628906,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.7513912841677666,
+            "files": {
+              "messages.npy": 17248448,
+              "offsets.npy": 36136
+            }
+          },
+          "OVRP": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRP",
+              "split": "test",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "2b08fb5085e2679589fde72484b7edb812d6e578498bb19a6b547caf5a1dc287",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": "aed9f643a1512d35065be88224f3f9ecee3cedf62396b36d5dab4f5ad2556f2c"
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T16:41:25.216959+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341959,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341959,
+              32
+            ],
+            "max_marginal_residual": 1.9538393020629883,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.2780215386301279,
+            "files": {
+              "messages.npy": 21885504,
+              "offsets.npy": 36136
+            }
+          },
+          "VRPB": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPB",
+              "split": "test",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "ca4cc028d1ba11a00d1f2af5de7435bd0df3ef58932f5e9c1d6251188fa3766d",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": "aed9f643a1512d35065be88224f3f9ecee3cedf62396b36d5dab4f5ad2556f2c"
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T16:41:25.496974+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341946,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341946,
+              32
+            ],
+            "max_marginal_residual": 1.7692022323608398,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.27864138782024384,
+            "files": {
+              "messages.npy": 21884672,
+              "offsets.npy": 36136
+            }
+          },
+          "VRPL": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPL",
+              "split": "test",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "b8347b12890b8bd192f79c08c413019c05ad07e88842bb90469a3b3425a428b2",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": "aed9f643a1512d35065be88224f3f9ecee3cedf62396b36d5dab4f5ad2556f2c"
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T16:41:25.779627+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341914,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341914,
+              32
+            ],
+            "max_marginal_residual": 2.043067693710327,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.2812552098184824,
+            "files": {
+              "messages.npy": 21882624,
+              "offsets.npy": 36136
+            }
+          },
+          "VRPTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPTW",
+              "split": "test",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "eb73713ec32d7aac913bd088ae63fc25d0cca7cdfe16ae3375d793cf7ba2973d",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": "aed9f643a1512d35065be88224f3f9ecee3cedf62396b36d5dab4f5ad2556f2c"
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T16:41:26.068723+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341734,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341734,
+              32
+            ],
+            "max_marginal_residual": 1.8682861328125,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.2876883018761873,
+            "files": {
+              "messages.npy": 21871104,
+              "offsets.npy": 36136
+            }
+          },
+          "OVRPTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPTW",
+              "split": "test",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "abc4753af9834382dd7cd17e1fbaf099478e62c9508303cfe83d6fc23d2ebef8",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": "aed9f643a1512d35065be88224f3f9ecee3cedf62396b36d5dab4f5ad2556f2c"
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T16:41:26.357779+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341849,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341849,
+              32
+            ],
+            "max_marginal_residual": 1.9242768287658691,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.28340426459908485,
+            "files": {
+              "messages.npy": 21878464,
+              "offsets.npy": 36136
+            }
+          },
+          "OVRPB": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPB",
+              "split": "test",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "6667b0d054f9bc078ca2fd09851a60a371d7b935e2256d57b88913fdb688ca06",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": "aed9f643a1512d35065be88224f3f9ecee3cedf62396b36d5dab4f5ad2556f2c"
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T16:41:26.651870+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341908,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341908,
+              32
+            ],
+            "max_marginal_residual": 2.007140636444092,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.2926800437271595,
+            "files": {
+              "messages.npy": 21882240,
+              "offsets.npy": 36136
+            }
+          },
+          "OVRPL": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPL",
+              "split": "test",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "508149ebe915f8956501df81cffc0f368f2ea1536718032f327c5f3f06a0816d",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": "aed9f643a1512d35065be88224f3f9ecee3cedf62396b36d5dab4f5ad2556f2c"
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T16:41:26.934367+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341814,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341814,
+              32
+            ],
+            "max_marginal_residual": 1.7590436935424805,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.27729460410773754,
+            "files": {
+              "messages.npy": 21876224,
+              "offsets.npy": 36136
+            }
+          },
+          "VRPBL": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPBL",
+              "split": "test",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "470faba493907da66aeda00a9b6f0e526fc112ab3e898173766eca3fd8f65bcb",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": "aed9f643a1512d35065be88224f3f9ecee3cedf62396b36d5dab4f5ad2556f2c"
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T16:41:27.214698+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341820,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341820,
+              32
+            ],
+            "max_marginal_residual": 1.9808850288391113,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.27774433605372906,
+            "files": {
+              "messages.npy": 21876608,
+              "offsets.npy": 36136
+            }
+          },
+          "VRPBTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPBTW",
+              "split": "test",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "195a5c218b2819a65d4e60a9cea2170035a6331b5a64bb96d05fb3e8ff0910e3",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": "aed9f643a1512d35065be88224f3f9ecee3cedf62396b36d5dab4f5ad2556f2c"
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T16:41:27.493271+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341876,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341876,
+              32
+            ],
+            "max_marginal_residual": 1.9135189056396484,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.2758097555488348,
+            "files": {
+              "messages.npy": 21880192,
+              "offsets.npy": 36136
+            }
+          },
+          "VRPLTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPLTW",
+              "split": "test",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "631603cc72292c795529b73d96d24962afea4d4dfcc06d36793e6016403efc39",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": "aed9f643a1512d35065be88224f3f9ecee3cedf62396b36d5dab4f5ad2556f2c"
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T16:41:27.787148+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341928,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341928,
+              32
+            ],
+            "max_marginal_residual": 1.7988560199737549,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.28966869227588177,
+            "files": {
+              "messages.npy": 21883520,
+              "offsets.npy": 36136
+            }
+          },
+          "OVRPBL": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPBL",
+              "split": "test",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "51121368d55942810a780500281cd27a5a0ff35827c2a7c2f06827f12ef0eef6",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": "aed9f643a1512d35065be88224f3f9ecee3cedf62396b36d5dab4f5ad2556f2c"
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T16:41:28.065530+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341899,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341899,
+              32
+            ],
+            "max_marginal_residual": 1.9876141548156738,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.27674963138997555,
+            "files": {
+              "messages.npy": 21881664,
+              "offsets.npy": 36136
+            }
+          },
+          "OVRPBTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPBTW",
+              "split": "test",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "7e00eb0a967f331d7688532609a2dbd4d9ceb197ad9d5e9b3a92a820a16f6e1a",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": "aed9f643a1512d35065be88224f3f9ecee3cedf62396b36d5dab4f5ad2556f2c"
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T16:41:28.389195+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341915,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341915,
+              32
+            ],
+            "max_marginal_residual": 1.8944706916809082,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.318444088101387,
+            "files": {
+              "messages.npy": 21882688,
+              "offsets.npy": 36136
+            }
+          },
+          "OVRPLTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPLTW",
+              "split": "test",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "c31ce5dba28d2a2d33c8d8b52db07696daa52297928b23dc2af743c793670e7d",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": "aed9f643a1512d35065be88224f3f9ecee3cedf62396b36d5dab4f5ad2556f2c"
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T16:41:28.722096+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341921,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341921,
+              32
+            ],
+            "max_marginal_residual": 1.9188296794891357,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.32945188879966736,
+            "files": {
+              "messages.npy": 21883072,
+              "offsets.npy": 36136
+            }
+          },
+          "VRPBLTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "VRPBLTW",
+              "split": "test",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "cc511029606c4bf8f381ddfcdd8e25cb5829e4b1054cf2d42893b9cfcf9be17c",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": "aed9f643a1512d35065be88224f3f9ecee3cedf62396b36d5dab4f5ad2556f2c"
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T16:41:29.042800+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341943,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341943,
+              32
+            ],
+            "max_marginal_residual": 2.399138927459717,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.3177636042237282,
+            "files": {
+              "messages.npy": 21884480,
+              "offsets.npy": 36136
+            }
+          },
+          "OVRPBLTW": {
+            "identity": {
+              "format": "r99_ragged_input_messages_v1",
+              "problem": "OVRPBLTW",
+              "split": "test",
+              "variant": "row",
+              "transform": {
+                "format": "r99_competition_messages_v1",
+                "width": 32,
+                "temperature": 0.05,
+                "iterations": 64,
+                "diagonal": "excluded",
+                "scale": "mean_valid_off_diagonal_input_distance",
+                "channels": "outgoing8,incoming8,outgoing_twostep8,incoming_twostep8",
+                "role": "R88B_physical_TSP_node0",
+                "precision": "FP32_transform_then_FP16",
+                "matrix_semantics": "directed_input_costs",
+                "vrp_bound": false,
+                "hard_constraint_filter": false,
+                "labels_used": false
+              },
+              "source_identity": {
+                "metadata_sha256": "328fa9c39d3ef0312f9b04336e45ad7c5532c69e3eb4798470a7353f4425dd68",
+                "arrays": {
+                  "n": {
+                    "file": "n.npy",
+                    "shape": [
+                      4500
+                    ],
+                    "dtype": "int64"
+                  },
+                  "node": {
+                    "file": "node.npy",
+                    "shape": [
+                      4500,
+                      101,
+                      8
+                    ],
+                    "dtype": "float32"
+                  }
+                }
+              },
+              "rows": 4500,
+              "input_only": true,
+              "labels_opened": false,
+              "test_lock_sha256": "aed9f643a1512d35065be88224f3f9ecee3cedf62396b36d5dab4f5ad2556f2c"
+            },
+            "complete": true,
+            "completed_utc": "2026-10-22T16:41:29.371789+00:00",
+            "source_cache_root": "/tmp/shiys_R84_new90k_cache",
+            "rows_written": 4500,
+            "total_real_nodes": 341888,
+            "dtype": "float16",
+            "width": 32,
+            "shape": [
+              341888,
+              32
+            ],
+            "max_marginal_residual": 1.8251371383666992,
+            "finite_iteration_convergence_not_assumed": true,
+            "seconds": 0.32518079690635204,
+            "files": {
+              "messages.npy": 21880960,
+              "offsets.npy": 36136
+            }
+          }
+        }
+      }
+    },
+    "transform_plus_selector_measured": true,
+    "full_system_measured": false,
+    "end_to_end_measured": false,
+    "pdf_panel": true,
+    "scope": "same first128 TEST input rows/task, GPU-resident original inputs; synchronized wall time",
+    "excludes": "dataset I/O, host transfer and feature-cache preparation; cache-hit is not full inference",
+    "note": "Unchanged locked weights/decision rule. Measured path=mixed, TF32 policy=default. Bitwise FP16 equality on first128 rows/task=False; original mixed-online equivalence=False. Full TEST efficacy comes from untouched cached predictions, not a demonstrated exact online run.",
+    "recovery_schema": "r99_postprocess_recovery_v1",
+    "online_fp16_matches_cache": false,
+    "original_inference_equivalence": false,
+    "timing_path": "mixed",
+    "requested_tf32_policy": "default",
+    "efficacy_reused_as_exact_online": false,
+    "numerical_disclosure": "Unchanged locked weights/decision rule. Measured path=mixed, TF32 policy=default. Bitwise FP16 equality on first128 rows/task=False; original mixed-online equivalence=False. Full TEST efficacy comes from untouched cached predictions, not a demonstrated exact online run."
+  },
+  "rdrop": true,
+  "external_pretraining": false,
+  "val_empirical_screen": [
+    {
+      "model": "R99/A",
+      "baseline": "R89B",
+      "split": "VAL",
+      "reference_role": "main",
+      "top1_delta_pp": -0.15432098765431057,
+      "mean_cost_delta": 0.0006014057510217441,
+      "actual_regret_delta_pp": 0.004483468376487332,
+      "pass_reference": false,
+      "checkpoint_sha256": "37629bc3270a2523c328bf1e7c8d31e501f7bf42edb6e927264168c80dd75d43",
+      "checkpoint_reselection": false,
+      "newly_matched_control": false,
+      "macro_weighting": "equal weight across all18 problems",
+      "joint_val_pass": false
+    },
+    {
+      "model": "R99/A",
+      "baseline": "R84A",
+      "split": "VAL",
+      "reference_role": "secondary",
+      "top1_delta_pp": 0.008641975308654182,
+      "mean_cost_delta": 0.0002842123202668745,
+      "actual_regret_delta_pp": 0.0016654888702645754,
+      "pass_reference": false,
+      "checkpoint_sha256": "37629bc3270a2523c328bf1e7c8d31e501f7bf42edb6e927264168c80dd75d43",
+      "checkpoint_reselection": false,
+      "newly_matched_control": false,
+      "macro_weighting": "equal weight across all18 problems",
+      "joint_val_pass": false
+    }
+  ],
+  "projection_seed": 990003
+}
