@@ -1,0 +1,595 @@
+{
+  "experiment": "R94",
+  "arm": "A",
+  "complete": true,
+  "created_utc": "2026-10-22T06:21:48.616658+00:00",
+  "checkpoint_lock": {
+    "experiment": "R94",
+    "arm": "A",
+    "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/A/best.pt",
+    "checkpoint_sha256": "872315c1bded11e1de128c5006b683b47b9aa30b9314d793bb3d0e871e6b5c42",
+    "state_hash": "ed52051a1da500e30dcc787729b1c26a320680da29c57707af043b3a71e6a3c0",
+    "epoch": 28,
+    "selected_update": 40320,
+    "rule": "strict minimum full VAL macro_vs_sbs_pct with common new81000 TRAIN-fitted SBS; first wins ties",
+    "selected_without_test": true,
+    "per_problem_assembly": false,
+    "val": {
+      "macro_ce": 0.7077098306682374,
+      "macro_top1": 0.7099876543209878,
+      "macro_top2": 0.9059753086419753,
+      "macro_top3": 0.9627283950617284,
+      "macro_top1_tie_aware": 0.7113580246913581,
+      "macro_mean_cost": 11.417197449211626,
+      "macro_vs_sbs_pct": -0.18880719354167969,
+      "macro_vs_oracle_pct": 0.39888216437887514,
+      "macro_actual_regret_pct": 0.4095211946720309,
+      "macro_vbs_gap_closed_pct": 12.462936547402666,
+      "macro_sbs_cost": 11.427978473494235,
+      "macro_oracle_cost": 11.371691902364589
+    },
+    "inference_rule": "eval frozen native static encoder on exact real nodes; early node fusion; original four-layer instance processor, two joint layers, score MLP/pair differences/maximin; stable ascending-global-solver-ID ties; TSP/ATSP raw-only; no calibration",
+    "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+    "locked_utc": "2026-10-22T06:17:14.773523+00:00"
+  },
+  "model_factory": "code.V4.r94_experiment.load_checkpoint",
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "rows_per_problem": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "candidate_pools": {
+    "TSP": [
+      "BQ",
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "LEHD",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "CVRP": [
+      "BQ",
+      "ELG",
+      "ICAM",
+      "LEHD",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "ATSP": [
+      "GLOP",
+      "ICAM_ATSP",
+      "MATNET",
+      "MATPOENET",
+      "UNICO_MatPOENet"
+    ],
+    "OVRP": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ]
+  },
+  "scenario_solver_aliases": {
+    "reld_mt": "RELD_MOEL"
+  },
+  "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+  "nss_reference": {
+    "root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference",
+    "prediction_sha256": {
+      "TSP": "d42250eea9547dbeed1afdda9411ae6e691d9ce2ae0a14f50e7da6adb28068d3",
+      "CVRP": "13fbedae686c2af03d44d62115bbd9fcbf15950f6b111942f90786faba66603c"
+    },
+    "retrained": false,
+    "new_inference": false,
+    "exact_test_rows": 4500
+  },
+  "nss_alignment": {
+    "TSP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "TSPLIB": {
+      "instance_key": "indices",
+      "matching_population": 49,
+      "checked_instance_ids": [
+        0,
+        24,
+        48
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRPLIB": {
+      "instance_key": "indices",
+      "matching_population": 100,
+      "checked_instance_ids": [
+        0,
+        50,
+        99
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    }
+  },
+  "training": false,
+  "inference": false,
+  "checkpoint_reselection": false,
+  "distribution_pages": 18,
+  "main_pdf_pages": 22,
+  "diagnostics": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/A/full_model_statistics/training_and_method_diagnostics.pdf",
+    "pages": 19,
+    "history_status": "complete"
+  },
+  "r94_schema_version": 1,
+  "model_spec": {
+    "r94_schema_version": 1,
+    "backbone": "original_full18_r88b_r77_dualstream",
+    "model_role_arm": "B_execution_anchor",
+    "role_slot": 3,
+    "donor": "frozen_static_reld_moel_encoder",
+    "donor_width": 128,
+    "covered_problems": [
+      "CVRP",
+      "OVRP",
+      "VRPB",
+      "VRPL",
+      "VRPTW",
+      "OVRPTW",
+      "OVRPB",
+      "OVRPL",
+      "VRPBL",
+      "VRPBTW",
+      "VRPLTW",
+      "OVRPBL",
+      "OVRPBTW",
+      "OVRPLTW",
+      "VRPBLTW",
+      "OVRPBLTW"
+    ],
+    "unsupported_problems": [
+      "TSP",
+      "ATSP"
+    ],
+    "fusion": "coord_proj(raw8)+geometry_residual+linear(layernorm(stopgrad(H)))",
+    "fusion_location": "before_first_original_instance_encoder_layer",
+    "layer_norm_affine": false,
+    "projection_bias": false,
+    "projection_seed": 940003,
+    "raw_fallback_quantization": "float16_like_frozen_feature_cache",
+    "new_trainable_parameter_names": [
+      "instance_encoder.nco_projection.weight"
+    ],
+    "encoder_layer_num": 4,
+    "joint_layer_num": 2,
+    "solver_features": 34,
+    "dropout": 0.1,
+    "selection_head": "original_score_mlp_maximin",
+    "objective": "original_r77_ce_comparison_risk_rdrop"
+  },
+  "frozen_donor": {
+    "variant": "random",
+    "frozen": true,
+    "eval_only": true,
+    "pretraining_source": "none: fixed random donor seed940002",
+    "known_unknowns": "not applicable: no pretrained weights loaded"
+  },
+  "initialization": "scratch_shared_r77_plus_node_fusion",
+  "target_identity": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/comparison_artifacts/target_list.json",
+    "identity": {
+      "baseline_checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "baseline_state_hash": "ad0a6d9c68c6f117b477807f6f8be52662032a8baea348dda6144c46091303e2",
+      "baseline_val_prediction_sha256": "8a1aea9caf608d12fbc83d89704a50eb37d461665c7609ad3e25778cdab932a7",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "threshold_chosen_pct": 0.1,
+      "rule": "A locked VAL: chosen percentage <= 0.1 and native winner count > 0"
+    },
+    "categories": {
+      "TSP/DIFUSCO": "zero",
+      "TSP/DIFUSCO500": "zero",
+      "TSP/LEHD": "zero",
+      "TSP/OMNI": "zero",
+      "CVRP/RouteFinder": "zero",
+      "ATSP/GLOP": "zero",
+      "ATSP/MATPOENET": "zero",
+      "OVRP/MTPOMO": "zero",
+      "OVRP/MVMOE": "zero",
+      "OVRP/reld_mt": "near_zero",
+      "VRPL/MTPOMO": "zero",
+      "VRPL/MVMOE": "zero",
+      "VRPTW/MoSES_CaDA": "near_zero",
+      "VRPTW/MoSES_RF": "zero",
+      "VRPTW/RouteFinder": "zero",
+      "OVRPTW/MoSES_CaDA": "zero",
+      "OVRPTW/MoSES_RF": "zero",
+      "OVRPTW/RouteFinder": "zero",
+      "OVRPB/MTPOMO": "zero",
+      "OVRPB/MVMOE": "near_zero",
+      "OVRPL/MTPOMO": "zero",
+      "OVRPL/MVMOE": "zero",
+      "VRPBL/MTPOMO": "zero",
+      "VRPBTW/MTPOMO": "zero",
+      "VRPLTW/MTPOMO": "zero",
+      "VRPLTW/MoSES_CaDA": "zero",
+      "VRPLTW/MoSES_RF": "zero",
+      "VRPLTW/RouteFinder": "zero",
+      "OVRPBL/MTPOMO": "near_zero",
+      "OVRPBL/MVMOE": "near_zero",
+      "OVRPBTW/MTPOMO": "zero",
+      "OVRPLTW/MVMOE": "near_zero",
+      "OVRPLTW/MoSES_CaDA": "near_zero",
+      "OVRPLTW/MoSES_RF": "zero",
+      "OVRPLTW/RouteFinder": "zero",
+      "VRPBLTW/MTPOMO": "zero"
+    },
+    "sha256": "406ded5a21d8b73c2a41b87dc2bc3cc14330663ae1aa4f59ca6fbfde83770fe4",
+    "target_count": 36
+  },
+  "historical_reference": {
+    "R89B": {
+      "model": "R89B",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry/B_muon_hybrid",
+      "checkpoint_sha256": "41fa4ad8b590fa44e8949b114156d714d7ee2f2d31c847658a26654993057260",
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "role": "main historical reference"
+    },
+    "R84A": {
+      "model": "R84A",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline",
+      "checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "role": "secondary historical reference"
+    }
+  },
+  "objective": {
+    "main": "unchanged R77 CE/comparison/risk plus symmetric R-Drop",
+    "coefficients": {
+      "ce": 0.35,
+      "comparison": 0.35,
+      "risk": 0.02
+    },
+    "rdrop": "linear ramp to .35 over4320 updates",
+    "forward_passes": 2,
+    "teacher_gradients": false,
+    "teacher_auxiliary_loss": false,
+    "route_targets": false,
+    "cross_instance_objective": false,
+    "mutable_objective_state": false
+  },
+  "loss": {
+    "ce": 0.35,
+    "comparison": 0.35,
+    "risk": 0.02,
+    "cost_scale": 0.01,
+    "focus_weights": {
+      "true3": 0.5,
+      "predicted3": 0.25,
+      "all_pairs": 0.25
+    }
+  },
+  "evidence_boundary": "A is the matched random-frozen ReLD128 donor control; B uses pinned pretrained weights in the same frozen donor. Both use identical fresh trainable selectors and early node-fusion projections before the original four inter-node layers. Full18 raw inputs; donor input coverage is16 routing tasks, not16-task pretraining. TSP/ATSP raw paths are unchanged. Original R77 CE=.35, comparison=.35, risk=.02, R-Drop=.35 and dropout=.1 are retained, not R93 pure CE. R89B is the main historical reference; R84A is secondary, neither newly matched. External donor pretraining compute/data are not budget-matched to scratch; provenance/overlap limits remain. R50 is negative evidence for pool-first readout, not proof that early trainable inter-node recomputation succeeds. No solver decoder, routes, cost-derived new labels, or restored ReLD MTL. Hardware differences must be disclosed; matching code/batches is not bitwise hardware matching. Development-exposed TEST; unique full18 VAL macro_vs_sbs lock, no TEST/LIB selection or per-task model assembly. Cached-feature selector latency is not full-system inference latency.",
+  "inference_timing": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/A/inference_timing.json",
+    "status": "complete",
+    "sha256": "494d0b998a8c2007b197a60bbc5556ea385697d3b1cc43dc0e087409665ddeda",
+    "measurements": [
+      {
+        "problem": "TSP",
+        "instances": 128,
+        "device": "cuda:0",
+        "repetitions": 3,
+        "donor_plus_selector_ms_per_instance": 0.4036374642358472,
+        "cache_hit_selector_ms_per_instance": 0.39327841174478334
+      },
+      {
+        "problem": "CVRP",
+        "instances": 128,
+        "device": "cuda:0",
+        "repetitions": 3,
+        "donor_plus_selector_ms_per_instance": 0.4887990313970173,
+        "cache_hit_selector_ms_per_instance": 0.48866242286749184
+      },
+      {
+        "problem": "ATSP",
+        "instances": 128,
+        "device": "cuda:0",
+        "repetitions": 3,
+        "donor_plus_selector_ms_per_instance": 0.07119252404663712,
+        "cache_hit_selector_ms_per_instance": 0.07089830372327317
+      },
+      {
+        "problem": "OVRP",
+        "instances": 128,
+        "device": "cuda:0",
+        "repetitions": 3,
+        "donor_plus_selector_ms_per_instance": 0.07345629758977641,
+        "cache_hit_selector_ms_per_instance": 0.07297701570981492
+      },
+      {
+        "problem": "VRPB",
+        "instances": 128,
+        "device": "cuda:0",
+        "repetitions": 3,
+        "donor_plus_selector_ms_per_instance": 0.07315028536443909,
+        "cache_hit_selector_ms_per_instance": 0.0729269862252598
+      },
+      {
+        "problem": "VRPL",
+        "instances": 128,
+        "device": "cuda:0",
+        "repetitions": 3,
+        "donor_plus_selector_ms_per_instance": 0.07330139245217045,
+        "cache_hit_selector_ms_per_instance": 0.07298987475223839
+      },
+      {
+        "problem": "VRPTW",
+        "instances": 128,
+        "device": "cuda:0",
+        "repetitions": 3,
+        "donor_plus_selector_ms_per_instance": 0.07316540480436136,
+        "cache_hit_selector_ms_per_instance": 0.07340121373999864
+      },
+      {
+        "problem": "OVRPTW",
+        "instances": 128,
+        "device": "cuda:0",
+        "repetitions": 3,
+        "donor_plus_selector_ms_per_instance": 0.07317072595469654,
+        "cache_hit_selector_ms_per_instance": 0.07310713893578698
+      },
+      {
+        "problem": "OVRPB",
+        "instances": 128,
+        "device": "cuda:0",
+        "repetitions": 3,
+        "donor_plus_selector_ms_per_instance": 0.07338495925068855,
+        "cache_hit_selector_ms_per_instance": 0.07288145328251024
+      },
+      {
+        "problem": "OVRPL",
+        "instances": 128,
+        "device": "cuda:0",
+        "repetitions": 3,
+        "donor_plus_selector_ms_per_instance": 0.07307975708196561,
+        "cache_hit_selector_ms_per_instance": 0.0730380997993052
+      },
+      {
+        "problem": "VRPBL",
+        "instances": 128,
+        "device": "cuda:0",
+        "repetitions": 3,
+        "donor_plus_selector_ms_per_instance": 0.0736308575142175,
+        "cache_hit_selector_ms_per_instance": 0.07304137398023158
+      },
+      {
+        "problem": "VRPBTW",
+        "instances": 128,
+        "device": "cuda:0",
+        "repetitions": 3,
+        "donor_plus_selector_ms_per_instance": 0.07291535924499233,
+        "cache_hit_selector_ms_per_instance": 0.07281654688995332
+      },
+      {
+        "problem": "VRPLTW",
+        "instances": 128,
+        "device": "cuda:0",
+        "repetitions": 3,
+        "donor_plus_selector_ms_per_instance": 0.07327576167881489,
+        "cache_hit_selector_ms_per_instance": 0.0730001920601353
+      },
+      {
+        "problem": "OVRPBL",
+        "instances": 128,
+        "device": "cuda:0",
+        "repetitions": 3,
+        "donor_plus_selector_ms_per_instance": 0.07286442754169305,
+        "cache_hit_selector_ms_per_instance": 0.07299234857782722
+      },
+      {
+        "problem": "OVRPBTW",
+        "instances": 128,
+        "device": "cuda:0",
+        "repetitions": 3,
+        "donor_plus_selector_ms_per_instance": 0.07309697684831917,
+        "cache_hit_selector_ms_per_instance": 0.07287709740921855
+      },
+      {
+        "problem": "OVRPLTW",
+        "instances": 128,
+        "device": "cuda:0",
+        "repetitions": 3,
+        "donor_plus_selector_ms_per_instance": 0.07322837579219292,
+        "cache_hit_selector_ms_per_instance": 0.07319634702677529
+      },
+      {
+        "problem": "VRPBLTW",
+        "instances": 128,
+        "device": "cuda:0",
+        "repetitions": 3,
+        "donor_plus_selector_ms_per_instance": 0.07294179522432387,
+        "cache_hit_selector_ms_per_instance": 0.07296837672280769
+      },
+      {
+        "problem": "OVRPBLTW",
+        "instances": 128,
+        "device": "cuda:0",
+        "repetitions": 3,
+        "donor_plus_selector_ms_per_instance": 0.07312509114854038,
+        "cache_hit_selector_ms_per_instance": 0.07300179277081043
+      }
+    ],
+    "donor_plus_selector_measured": true,
+    "full_system_measured": false,
+    "end_to_end_measured": false,
+    "pdf_panel": true,
+    "scope": "same first128 TEST input rows per task; inputs already on GPU; synchronized wall time",
+    "excludes": "dataset I/O and one-time feature cache preparation; cache-hit latency is not full inference",
+    "note": "GPU-resident donor+selector excludes I/O/one-time preparation; cache-hit selector is not full-system latency."
+  },
+  "rdrop": true,
+  "external_pretraining_budget_matched": false,
+  "val_empirical_screen": [
+    {
+      "model": "R94/A",
+      "baseline": "R89B",
+      "split": "VAL",
+      "reference_role": "main",
+      "top1_delta_pp": -0.24938271604936224,
+      "mean_cost_delta": 0.0009031656760836171,
+      "actual_regret_delta_pp": 0.008844879368626324,
+      "pass_reference": false,
+      "checkpoint_sha256": "872315c1bded11e1de128c5006b683b47b9aa30b9314d793bb3d0e871e6b5c42",
+      "checkpoint_reselection": false,
+      "newly_matched_control": false,
+      "macro_weighting": "equal weight across all18 problems",
+      "joint_val_pass": false
+    },
+    {
+      "model": "R94/A",
+      "baseline": "R84A",
+      "split": "VAL",
+      "reference_role": "secondary",
+      "top1_delta_pp": -0.08641975308639749,
+      "mean_cost_delta": 0.0005859722453287475,
+      "actual_regret_delta_pp": 0.0060268998624035675,
+      "pass_reference": false,
+      "checkpoint_sha256": "872315c1bded11e1de128c5006b683b47b9aa30b9314d793bb3d0e871e6b5c42",
+      "checkpoint_reselection": false,
+      "newly_matched_control": false,
+      "macro_weighting": "equal weight across all18 problems",
+      "joint_val_pass": false
+    }
+  ]
+}

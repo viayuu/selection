@@ -1,0 +1,162 @@
+{
+  "seed": 2,
+  "initialization": "scratch_shared_r77_plus_node_fusion",
+  "historical_selector_checkpoint_loaded": false,
+  "external_solver_pretraining": false,
+  "r77_fresh_trainable_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+  "common_parameter_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+  "trainable_sha256": "9db3df55a91ca0f331880cfcc4688ffab82b83bb66e80f9cebe9d6978e903cb4",
+  "new_parameter_sha256": "525e49aae91c836c60494c9e7466825007da4ecfb964d9112ce3f530cf6dd48d",
+  "new_parameter_names": [
+    "instance_encoder.nco_projection.weight"
+  ],
+  "new_common_seed": 940003,
+  "trainable_parameter_count": 1859337,
+  "frozen_parameter_count": 3562368,
+  "frozen_donor": {
+    "variant": "random",
+    "checkpoint_path": null,
+    "checkpoint_sha256": null,
+    "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+    "native_source_files": {
+      "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d",
+      "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd"
+    },
+    "output_dim": 128,
+    "supported_problems": [
+      "CVRP",
+      "OVRP",
+      "VRPB",
+      "VRPL",
+      "VRPTW",
+      "OVRPTW",
+      "OVRPB",
+      "OVRPL",
+      "VRPBL",
+      "VRPBTW",
+      "VRPLTW",
+      "OVRPBL",
+      "OVRPBTW",
+      "OVRPLTW",
+      "VRPBLTW",
+      "OVRPBLTW"
+    ],
+    "random_seed": 940002,
+    "checkpoint_pin": {
+      "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+      "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+    },
+    "spec": {
+      "format": "r94_static_reld_moel_v1",
+      "output_dim": 128,
+      "native_precision": {
+        "dtype": "float32",
+        "autocast": false,
+        "matmul_tf32": false,
+        "cudnn_tf32": false
+      },
+      "supported_problems": [
+        "CVRP",
+        "OVRP",
+        "VRPB",
+        "VRPL",
+        "VRPTW",
+        "OVRPTW",
+        "OVRPB",
+        "OVRPL",
+        "VRPBL",
+        "VRPBTW",
+        "VRPLTW",
+        "OVRPBL",
+        "OVRPBTW",
+        "OVRPLTW",
+        "VRPBLTW",
+        "OVRPBLTW"
+      ],
+      "raw_cvrp_fields": [
+        "x",
+        "y",
+        "demand",
+        "depotflag"
+      ],
+      "raw_mvrp_fields": [
+        "x",
+        "y",
+        "demand",
+        "depotflag",
+        "L",
+        "service",
+        "TWstart",
+        "TWend"
+      ],
+      "native_fields": {
+        "depot_xy": [
+          "x",
+          "y"
+        ],
+        "node_xy_demand_tw": [
+          "x",
+          "y",
+          "signed_demand",
+          "TWstart",
+          "TWend"
+        ]
+      },
+      "disabled_tw": [
+        0.0,
+        0.0
+      ],
+      "units": "unchanged native input units; demand already capacity-normalized",
+      "extraction": "exact valid N per row; depot first; preserve customer identities",
+      "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+      "model_params": {
+        "embedding_dim": 128,
+        "sqrt_embedding_dim": 11.313708498984761,
+        "encoder_layer_num": 6,
+        "decoder_layer_num": 1,
+        "qkv_dim": 16,
+        "head_num": 8,
+        "logit_clipping": 10,
+        "ff_hidden_dim": 512,
+        "num_experts": 4,
+        "eval_type": "argmax",
+        "norm": "none",
+        "norm_loc": "norm_last",
+        "expert_loc": [
+          "Enc0",
+          "Enc1",
+          "Enc2",
+          "Enc3",
+          "Enc4",
+          "Enc5",
+          "Dec"
+        ],
+        "problem": "Train_ALL",
+        "topk": 2,
+        "routing_level": "node",
+        "routing_method": "input_choice",
+        "ffidt": true
+      }
+    },
+    "known_unknown_pretraining_source": {
+      "applies_to_loaded_weights": false,
+      "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+      "training_tasks": [
+        "CVRP",
+        "OVRP",
+        "VRPB",
+        "VRPL",
+        "VRPTW",
+        "OVRPTW"
+      ],
+      "unknown": [
+        "historical CLI",
+        "training instance manifest",
+        "exact trajectory",
+        "overlap with selector inputs"
+      ],
+      "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate"
+    }
+  },
+  "geometry_fitted_on": "frozen R84 new81000 TRAIN only"
+}

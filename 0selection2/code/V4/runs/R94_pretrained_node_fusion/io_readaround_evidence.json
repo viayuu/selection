@@ -1,0 +1,433 @@
+{
+  "schema_version": 2,
+  "experiment": "R94",
+  "report_kind": "cpu_io_recovery_with_observed_accepted_B_gpu_startup_restored_not_model_quality",
+  "generated_utc": "2026-10-21T21:14:36.206738+00:00",
+  "provenance": {
+    "locally_read_small_files": [
+      "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/startup_slow_io_attempt1/ARCHIVE.json",
+      "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/startup_slow_io_attempt1/B/status.json",
+      "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/startup_slow_io_attempt1/B/updates.jsonl",
+      "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/io_runtime_recovery.json"
+    ],
+    "archive_authoritative": true,
+    "archive_sha256": "47cbdbdf0e9aa6b26af0e9b34b648a85dd3d0be80ff52bed953fe6fb678d1e0a",
+    "archive_snapshot": {
+      "experiment": "R94",
+      "archived_utc": "2026-10-21T21:08:09.531430+00:00",
+      "reason": "explicit resource correction after measured mmap read amplification; no numerical failure or scientific reselection",
+      "old_logged_successful_updates_lower_bound": 108,
+      "old_actual_successful_updates_upper_bound": 125,
+      "old_durable_successful_updates": 0,
+      "old_optimizer_state_empty": true,
+      "no_VAL_or_TEST_or_LIB": true,
+      "discarded_startup_not_resumed": true,
+      "accepted_run_will_start_fresh_seed2": true,
+      "TRAIN_VAL_feature_cache_preserved": true,
+      "feature_root": "/tmp/shiys_R94_B_node_features",
+      "other_three_GPU_runs_untouched": true,
+      "original_controller_worker_failures_preserved": true,
+      "automatic_retry": false,
+      "original_protocol_lock_sha256": "54ea04fbdf06d6d63d38550b6f313e4b3b10648dc9f29f307064e245a6846d85",
+      "source_archive": "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/startup_slow_io_attempt1/sources",
+      "launch_archive": "/public/home/shiys/0selection2/code/V4/runs/R94_launch/startup_slow_io_attempt1"
+    },
+    "microbenchmark_source": "Exact records supplied in the user/main-controller handoff; not rerun by this report worker",
+    "source_hash_invariants_source": "Current main-controller handoff reports exact scientific model/loss/initialization/native/order source-hash and metadata equality; frozen sources not rehashed by this worker",
+    "parity_checks_source": "Supplied main-controller handoff; not rerun by this report worker",
+    "runtime_recovery_source": "Complete small root io_runtime_recovery.json read locally and embedded; actual GPU run verified by main, not re-executed by report worker"
+  },
+  "old_startup": {
+    "stopped_by_main_only": [
+      "very slow first R94B startup",
+      "unstarted R94A queue"
+    ],
+    "healthy_untouched_peers_supplied": [
+      "R92A",
+      "R92B",
+      "R93A"
+    ],
+    "peer_status_polled_here": false,
+    "logged_successful_updates": 108,
+    "actual_successful_updates_inclusive_bounds": [
+      108,
+      125
+    ],
+    "actual_successful_updates_exact": null,
+    "durable_last_pt_successful_updates": 0,
+    "durable_optimizer_state_empty": true,
+    "VAL_TEST_LIB_performed": false,
+    "resumed": false,
+    "termination": "Original controller/worker SIGTERM failures preserved, per handoff and archive preservation flag",
+    "launch_archive": "/public/home/shiys/0selection2/code/V4/runs/R94_launch/startup_slow_io_attempt1",
+    "log_timing_records": [
+      {
+        "successful_updates": 1,
+        "seconds_per_update": 6.988137496053241,
+        "updated_utc": "2026-10-21T20:51:45.428657+00:00"
+      },
+      {
+        "successful_updates": 18,
+        "seconds_per_update": 7.488721667834195,
+        "updated_utc": "2026-10-21T20:53:53.237298+00:00"
+      },
+      {
+        "successful_updates": 36,
+        "seconds_per_update": 7.407064979055172,
+        "updated_utc": "2026-10-21T20:56:05.094490+00:00"
+      },
+      {
+        "successful_updates": 54,
+        "seconds_per_update": 7.408464065093237,
+        "updated_utc": "2026-10-21T20:58:18.497239+00:00"
+      },
+      {
+        "successful_updates": 72,
+        "seconds_per_update": 7.335204633876048,
+        "updated_utc": "2026-10-21T21:00:26.575022+00:00"
+      },
+      {
+        "successful_updates": 90,
+        "seconds_per_update": 7.568640094967042,
+        "updated_utc": "2026-10-21T21:02:59.617884+00:00"
+      },
+      {
+        "successful_updates": 108,
+        "seconds_per_update": 7.647451070398178,
+        "updated_utc": "2026-10-21T21:05:24.364869+00:00"
+      }
+    ],
+    "gpu_idle_with_about_19_GB_allocated": {
+      "source": "supplied handoff",
+      "verified_by_this_worker": false
+    }
+  },
+  "microbenchmark": {
+    "executor_reported": "Sol",
+    "execution_context_reported": "job-1475-owned container, unused CPU 74",
+    "cpu_input_only": true,
+    "gpu_used": false,
+    "labels_used": false,
+    "shape": [
+      1024,
+      101,
+      128
+    ],
+    "dtype": "float16",
+    "requested_bytes_per_record": 26476544,
+    "sampling": "disjoint fixed-random TRAIN rows",
+    "other_jobs_running": true,
+    "statistically_controlled": false,
+    "paired_records": false,
+    "cache_or_contention_state_controlled": false,
+    "training_throughput_measurement": false,
+    "ratio_definition": "physical_read_bytes / requested_bytes_per_record",
+    "ratio_below_one_caveat": "Resident/cache-served pages can reduce physical reads below logical requests; not evidence of missing values",
+    "records": [
+      {
+        "policy": "NORMAL",
+        "record": 1,
+        "seconds": 12.626987545983866,
+        "physical_read_bytes": 2680324096,
+        "requested_bytes": 26476544,
+        "physical_to_requested_ratio": 101.23391089108911
+      },
+      {
+        "policy": "NORMAL",
+        "record": 2,
+        "seconds": 6.585617791977711,
+        "physical_read_bytes": 1203400704,
+        "requested_bytes": 26476544,
+        "physical_to_requested_ratio": 45.45157797029703
+      },
+      {
+        "policy": "MADV_RANDOM only",
+        "record": 1,
+        "seconds": 29.093818635912612,
+        "physical_read_bytes": 18288640,
+        "requested_bytes": 26476544,
+        "physical_to_requested_ratio": 0.6907487623762376
+      },
+      {
+        "policy": "MADV_RANDOM only",
+        "record": 2,
+        "seconds": 16.18923562206328,
+        "physical_read_bytes": 9932800,
+        "requested_bytes": 26476544,
+        "physical_to_requested_ratio": 0.375154702970297
+      },
+      {
+        "policy": "RANDOM + span WILLNEED",
+        "record": 1,
+        "seconds": 0.10263891401700675,
+        "physical_read_bytes": 30584832,
+        "requested_bytes": 26476544,
+        "physical_to_requested_ratio": 1.1551670792079207
+      },
+      {
+        "policy": "RANDOM + span WILLNEED",
+        "record": 2,
+        "seconds": 0.1129256869899109,
+        "physical_read_bytes": 30564352,
+        "requested_bytes": 26476544,
+        "physical_to_requested_ratio": 1.1543935643564356
+      }
+    ],
+    "rejected_policy": "MADV_RANDOM only",
+    "rejection_reason": "Fewer physical bytes but slower than NORMAL in both supplied records; byte reduction is not sufficient",
+    "adopted_policy": [
+      "MADV_RANDOM on mapping",
+      "POSIX_FADV_RANDOM on file descriptor",
+      "Asynchronous POSIX_FADV_WILLNEED for explicit requested-row spans before unchanged gather"
+    ],
+    "conclusion_scope": "CPU input-probe evidence only; the separate observed_end_to_end_startup section records actual accepted B GPU startup; neither is a controlled causal speedup benchmark"
+  },
+  "scientific_boundary": {
+    "unchanged_per_handoff": [
+      "feature values",
+      "sample order",
+      "labels",
+      "padding",
+      "gradient definitions",
+      "RNG",
+      "logical batch",
+      "loss definitions",
+      "model",
+      "objective",
+      "initialization",
+      "native encoder",
+      "launcher",
+      "inference",
+      "report source"
+    ],
+    "source_hash_groups_unchanged_per_handoff": [
+      "model",
+      "objective",
+      "initialization",
+      "order",
+      "native encoder",
+      "launcher",
+      "inference",
+      "report source"
+    ],
+    "changed_per_handoff_only": [
+      "sidecar I/O",
+      "publication files"
+    ],
+    "native_online_encoder_fallback": false,
+    "feature_cache": {
+      "splits": [
+        "TRAIN",
+        "VAL"
+      ],
+      "size_approx_GB": 41,
+      "root": "/tmp/shiys_R94_B_node_features",
+      "preserved": true,
+      "regenerated": false,
+      "verification": "Preservation asserted by archive; reuse time recorded in embedded runtime JSON; size/no-regeneration supplied by main; cache arrays not opened",
+      "accepted_reuse_seconds": 0.5114917299943045
+    },
+    "accepted_A_B": {
+      "fresh_start": true,
+      "seed": 2,
+      "same_original_locked_initialization": true,
+      "resume_discarded_state": false,
+      "scientific_protocol_changed": false
+    },
+    "original_protocol_lock_sha256": "54ea04fbdf06d6d63d38550b6f313e4b3b10648dc9f29f307064e245a6846d85",
+    "source_and_metadata_exact_equality_per_current_handoff": [
+      "scientific model",
+      "loss",
+      "initialization",
+      "native encoder",
+      "sample order"
+    ],
+    "initial_trainable_parameter_sha256": "9db3df55a91ca0f331880cfcc4688ffab82b83bb66e80f9cebe9d6978e903cb4",
+    "initial_trainable_parameter_sha256_same_as_original_per_handoff": true,
+    "GPU_numerical_bitwise_equivalence_claimed": false,
+    "common_logged_prefix_numerical_agreement": {
+      "steps": [
+        1,
+        18,
+        36,
+        54,
+        72,
+        90,
+        108
+      ],
+      "maximum_absolute_objective_part_difference": {
+        "loss": 3.166151819611329e-07,
+        "ce": 5.473417263868186e-07,
+        "cmp": 6.834872895433719e-07,
+        "risk": 4.115617937117122e-06,
+        "kl": 4.057033543706026e-08,
+        "true3": 1.443205056572694e-07,
+        "pred3": 2.953534325000895e-06,
+        "all_pairs": 1.3749080673974845e-07,
+        "grad_norm": 0.00010379652182290755
+      },
+      "interpretation": "Close but not bitwise-equal GPU arithmetic; byte-for-byte CPU input parity is a separate check"
+    },
+    "no_VAL_or_TEST_read_or_used_for_fix": true
+  },
+  "restart_budget": {
+    "old_A_queue_had_started": false,
+    "B_configured_successful_update_budget": 57600,
+    "discarded_updates_separate_overhead_inclusive_bounds": [
+      108,
+      125
+    ],
+    "discarded_sample_exposures_inclusive_bounds": [
+      110592,
+      128000
+    ],
+    "discarded_overhead_percent_of_B_budget_bounds": [
+      0.1875,
+      0.2170138888888889
+    ],
+    "old_updates_count_as_accepted_progress": false,
+    "subtract_discarded_updates_from_fresh_budget": false,
+    "scientific_reselection": false,
+    "automatic_retry": false,
+    "accepted_budget_changed_by_report": false
+  },
+  "checks": {
+    "new_unit_checks_reported_passed": [
+      "byte-for-byte parity",
+      "row order",
+      "file-descriptor cleanup"
+    ],
+    "whole_cpu_suite_status": "Main-owned; counts not refreshed, read, inferred or awaited by this report update",
+    "whole_cpu_suite_counts": null,
+    "whole_cpu_suite_count_owner": "main controller",
+    "whole_cpu_suite_count_destination": "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/cpu_checks.json",
+    "accepted_fresh_run_throughput": {
+      "status": "observed_restored_startup",
+      "arm": "B",
+      "successful_updates": 270,
+      "seconds_per_update": 0.4247711722924443,
+      "source": "Embedded io_runtime_recovery"
+    },
+    "new_VAL_TEST_LIB_results": null,
+    "controlled_causal_training_speedup_claim": false,
+    "model_quality_improvement_claim": false
+  },
+  "report_worker_scope": {
+    "allowed_outputs": [
+      "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/IO_PIPELINE_RECOVERY.md",
+      "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/IO_PIPELINE_RECOVERY.pdf",
+      "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/io_readaround_evidence.json"
+    ],
+    "environment": "easynco",
+    "CUDA_VISIBLE_DEVICES": "",
+    "thread_limit": 2,
+    "process_cpu_affinity": [
+      0,
+      1
+    ],
+    "read_model_sources_or_arrays_or_weights": false,
+    "ran_microbenchmark_or_cpu_test_suite": false,
+    "used_GPU_SSH_training_launch_commit_or_subagents": false,
+    "changed_or_reverted_other_files": false,
+    "queue_and_source_freeze_owner": "main controller",
+    "new_forward_passes_or_profiling": false,
+    "frozen_runtime_files_changed": false
+  },
+  "document": {
+    "markdown_sha256": "4a0448f4af9c563d56f975b9b4c8d861091f3c31bd3cd0a865134f381c1cae43",
+    "pdf_pages": 2,
+    "font_file": "/usr/share/fonts/google-noto-cjk/NotoSansCJK-Regular.ttc",
+    "font_setup": "Existing project reporting pattern: Agg, addfont, PDF/PS fonttype 42",
+    "pdf_sha256": "649021cfa312099fda011b3027adca972781945559f8edeaf09f28952586e563",
+    "pdf_font_normalization": {
+      "tool": "pdftocairo -pdf",
+      "reason": "Normalize Matplotlib CFF font encapsulation to remove font-type mismatch warning",
+      "final_inspection_warnings": [],
+      "page_count_verified": 2,
+      "all_six_records_text_extraction_verified": true,
+      "startup_observation_and_non_bitwise_text_verified": true
+    }
+  },
+  "updated_utc": "2026-10-21T21:21:48.331811+00:00",
+  "io_runtime_recovery": {
+    "experiment": "R94",
+    "arm": "B",
+    "checked_utc": "2026-10-21T21:14:58.827089+00:00",
+    "main_attempt": 2,
+    "phase": "training",
+    "successful_updates": 270,
+    "all18_finite": true,
+    "namespace_pid": 1490640,
+    "gpu_uuid": "GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d",
+    "container": "76045731f6b4",
+    "new_seconds_per_update": 0.4247711722924443,
+    "old_seconds_per_update": 7.408464065093237,
+    "common_prefix_logged_steps": [
+      1,
+      18,
+      36,
+      54,
+      72,
+      90,
+      108
+    ],
+    "maximum_absolute_objective_part_difference": {
+      "loss": 3.166151819611329e-07,
+      "ce": 5.473417263868186e-07,
+      "cmp": 6.834872895433719e-07,
+      "risk": 4.115617937117122e-06,
+      "kl": 4.057033543706026e-08,
+      "true3": 1.443205056572694e-07,
+      "pred3": 2.953534325000895e-06,
+      "all_pairs": 1.3749080673974845e-07,
+      "grad_norm": 0.00010379652182290755
+    },
+    "parameter_initialization_sha256": "9db3df55a91ca0f331880cfcc4688ffab82b83bb66e80f9cebe9d6978e903cb4",
+    "input_feature_cache_reused_seconds": 0.5114917299943045,
+    "no_scientific_protocol_change": true,
+    "no_VAL_or_TEST_used_for_fix": true,
+    "source_path": "sidecar mmap advice and explicit requested-range asynchronous prefetch only",
+    "discarded_startup": "code/V4/runs/R94_pretrained_node_fusion/startup_slow_io_attempt1/ARCHIVE.json",
+    "old_speed_window_successful_updates": 54,
+    "speed_window_note": "old54 before the extra CPU I/O probe; new270; startup observations under live co-resident jobs, not a controlled throughput benchmark",
+    "observed_speed_ratio": 17.441070741949254,
+    "host_pid": 1021109
+  },
+  "io_runtime_recovery_provenance": {
+    "source_path": "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/io_runtime_recovery.json",
+    "source_sha256": "cfeaecc8aa6468cedb0e97c815553564f3dbe9833a2dfa93c640e98d75e5c891",
+    "source_size_bytes": 1593,
+    "complete_source_object_embedded": true,
+    "checked_utc": "2026-10-21T21:14:58.827089+00:00",
+    "source_read_only_by_report_worker": true,
+    "new_forward_profile_or_training_run": false
+  },
+  "observed_end_to_end_startup": {
+    "status": "restored_at_recorded_accepted_B_startup_observation",
+    "arm": "B",
+    "checked_utc": "2026-10-21T21:14:58.827089+00:00",
+    "phase": "training",
+    "all18_finite": true,
+    "old_successful_update_window": 54,
+    "new_successful_update_window": 270,
+    "old_seconds_per_update": 7.408464065093237,
+    "new_seconds_per_update": 0.4247711722924443,
+    "observed_old_to_new_ratio": 17.441070741949254,
+    "ratio_display": "17.4411x",
+    "ratio_precision_note": "Exact source numbers yield 17.441070741949254 (approximately 17.44x); this is descriptive arithmetic, not precision of a causal estimate",
+    "old_window_before_extra_CPU_IO_probe": true,
+    "co_resident_other_jobs_active": true,
+    "equal_timing_windows": false,
+    "controlled_benchmark": false,
+    "precise_causal_speedup_factor_claimed": false,
+    "model_quality_improvement_claimed": false,
+    "cache_preparation": {
+      "original_seconds": 747.88,
+      "original_seconds_source": "Current user/main-controller handoff, not a field in io_runtime_recovery.json",
+      "accepted_reuse_seconds": 0.5114917299943045,
+      "accepted_seconds_source": "Embedded io_runtime_recovery.json input_feature_cache_reused_seconds",
+      "feature_cache_reused": true,
+      "feature_cache_regenerated": false
+    }
+  }
+}

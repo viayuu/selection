@@ -1,0 +1,492 @@
+{
+  "experiment": "R94",
+  "r94_schema_version": 1,
+  "complete": true,
+  "exit_status": 0,
+  "checkpoints": {
+    "A": {
+      "experiment": "R94",
+      "arm": "A",
+      "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/A/best.pt",
+      "checkpoint_sha256": "872315c1bded11e1de128c5006b683b47b9aa30b9314d793bb3d0e871e6b5c42",
+      "state_hash": "ed52051a1da500e30dcc787729b1c26a320680da29c57707af043b3a71e6a3c0",
+      "epoch": 28,
+      "selected_update": 40320,
+      "rule": "strict minimum full VAL macro_vs_sbs_pct with common new81000 TRAIN-fitted SBS; first wins ties",
+      "selected_without_test": true,
+      "per_problem_assembly": false,
+      "val": {
+        "macro_ce": 0.7077098306682374,
+        "macro_top1": 0.7099876543209878,
+        "macro_top2": 0.9059753086419753,
+        "macro_top3": 0.9627283950617284,
+        "macro_top1_tie_aware": 0.7113580246913581,
+        "macro_mean_cost": 11.417197449211626,
+        "macro_vs_sbs_pct": -0.18880719354167969,
+        "macro_vs_oracle_pct": 0.39888216437887514,
+        "macro_actual_regret_pct": 0.4095211946720309,
+        "macro_vbs_gap_closed_pct": 12.462936547402666,
+        "macro_sbs_cost": 11.427978473494235,
+        "macro_oracle_cost": 11.371691902364589
+      },
+      "inference_rule": "eval frozen native static encoder on exact real nodes; early node fusion; original four-layer instance processor, two joint layers, score MLP/pair differences/maximin; stable ascending-global-solver-ID ties; TSP/ATSP raw-only; no calibration",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "locked_utc": "2026-10-22T06:17:14.773523+00:00"
+    },
+    "B": {
+      "experiment": "R94",
+      "arm": "B",
+      "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/B/best.pt",
+      "checkpoint_sha256": "8e797150d22ea138db246536f36a1b7dfa6ef3b516ee065a3303a6b6e579c3ee",
+      "state_hash": "e38f0cbc63f3fa4850c3e21a2e738940d5bfc1247e152172b0e3f743b2e022ec",
+      "epoch": 38,
+      "selected_update": 54720,
+      "rule": "strict minimum full VAL macro_vs_sbs_pct with common new81000 TRAIN-fitted SBS; first wins ties",
+      "selected_without_test": true,
+      "per_problem_assembly": false,
+      "val": {
+        "macro_ce": 0.6967709279722638,
+        "macro_top1": 0.7142839506172839,
+        "macro_top2": 0.9082962962962964,
+        "macro_top3": 0.9642469135802467,
+        "macro_top1_tie_aware": 0.7157654320987654,
+        "macro_mean_cost": 11.416278963162295,
+        "macro_vs_sbs_pct": -0.19865888588147837,
+        "macro_vs_oracle_pct": 0.38893234524112197,
+        "macro_actual_regret_pct": 0.39907925856669624,
+        "macro_vbs_gap_closed_pct": 14.357862368634686,
+        "macro_sbs_cost": 11.427978473494235,
+        "macro_oracle_cost": 11.371691902364589
+      },
+      "inference_rule": "eval frozen native static encoder on exact real nodes; early node fusion; original four-layer instance processor, two joint layers, score MLP/pair differences/maximin; stable ascending-global-solver-ID ties; TSP/ATSP raw-only; no calibration",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "locked_utc": "2026-10-22T04:29:19.399615+00:00"
+    }
+  },
+  "comparison_pdf": "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/comparison_artifacts/COMPARISON.pdf",
+  "evidence_boundary": "A is the matched random-frozen ReLD128 donor control; B uses pinned pretrained weights in the same frozen donor. Both use identical fresh trainable selectors and early node-fusion projections before the original four inter-node layers. Full18 raw inputs; donor input coverage is16 routing tasks, not16-task pretraining. TSP/ATSP raw paths are unchanged. Original R77 CE=.35, comparison=.35, risk=.02, R-Drop=.35 and dropout=.1 are retained, not R93 pure CE. R89B is the main historical reference; R84A is secondary, neither newly matched. External donor pretraining compute/data are not budget-matched to scratch; provenance/overlap limits remain. R50 is negative evidence for pool-first readout, not proof that early trainable inter-node recomputation succeeds. No solver decoder, routes, cost-derived new labels, or restored ReLD MTL. Hardware differences must be disclosed; matching code/batches is not bitwise hardware matching. Development-exposed TEST; unique full18 VAL macro_vs_sbs lock, no TEST/LIB selection or per-task model assembly. Cached-feature selector latency is not full-system inference latency.",
+  "matched_difference": "B pinned pretrained versus A random weights in the same frozen ReLD128 donor",
+  "target_identity": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/comparison_artifacts/target_list.json",
+    "identity": {
+      "baseline_checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "baseline_state_hash": "ad0a6d9c68c6f117b477807f6f8be52662032a8baea348dda6144c46091303e2",
+      "baseline_val_prediction_sha256": "8a1aea9caf608d12fbc83d89704a50eb37d461665c7609ad3e25778cdab932a7",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "threshold_chosen_pct": 0.1,
+      "rule": "A locked VAL: chosen percentage <= 0.1 and native winner count > 0"
+    },
+    "categories": {
+      "TSP/DIFUSCO": "zero",
+      "TSP/DIFUSCO500": "zero",
+      "TSP/LEHD": "zero",
+      "TSP/OMNI": "zero",
+      "CVRP/RouteFinder": "zero",
+      "ATSP/GLOP": "zero",
+      "ATSP/MATPOENET": "zero",
+      "OVRP/MTPOMO": "zero",
+      "OVRP/MVMOE": "zero",
+      "OVRP/reld_mt": "near_zero",
+      "VRPL/MTPOMO": "zero",
+      "VRPL/MVMOE": "zero",
+      "VRPTW/MoSES_CaDA": "near_zero",
+      "VRPTW/MoSES_RF": "zero",
+      "VRPTW/RouteFinder": "zero",
+      "OVRPTW/MoSES_CaDA": "zero",
+      "OVRPTW/MoSES_RF": "zero",
+      "OVRPTW/RouteFinder": "zero",
+      "OVRPB/MTPOMO": "zero",
+      "OVRPB/MVMOE": "near_zero",
+      "OVRPL/MTPOMO": "zero",
+      "OVRPL/MVMOE": "zero",
+      "VRPBL/MTPOMO": "zero",
+      "VRPBTW/MTPOMO": "zero",
+      "VRPLTW/MTPOMO": "zero",
+      "VRPLTW/MoSES_CaDA": "zero",
+      "VRPLTW/MoSES_RF": "zero",
+      "VRPLTW/RouteFinder": "zero",
+      "OVRPBL/MTPOMO": "near_zero",
+      "OVRPBL/MVMOE": "near_zero",
+      "OVRPBTW/MTPOMO": "zero",
+      "OVRPLTW/MVMOE": "near_zero",
+      "OVRPLTW/MoSES_CaDA": "near_zero",
+      "OVRPLTW/MoSES_RF": "zero",
+      "OVRPLTW/RouteFinder": "zero",
+      "VRPBLTW/MTPOMO": "zero"
+    },
+    "sha256": "406ded5a21d8b73c2a41b87dc2bc3cc14330663ae1aa4f59ca6fbfde83770fe4",
+    "target_count": 36
+  },
+  "hardware": {
+    "arms": {
+      "A": {
+        "gpu_type": "3090"
+      },
+      "B": {
+        "gpu_type": "4090"
+      }
+    },
+    "same_reported_hardware": false,
+    "bitwise_hardware_matched": false,
+    "note": "Hardware differences are disclosed; identical code/batches does not establish bitwise matching."
+  },
+  "inference_timing": {
+    "A": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/A/inference_timing.json",
+      "status": "complete",
+      "sha256": "494d0b998a8c2007b197a60bbc5556ea385697d3b1cc43dc0e087409665ddeda",
+      "measurements": [
+        {
+          "problem": "TSP",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.4036374642358472,
+          "cache_hit_selector_ms_per_instance": 0.39327841174478334
+        },
+        {
+          "problem": "CVRP",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.4887990313970173,
+          "cache_hit_selector_ms_per_instance": 0.48866242286749184
+        },
+        {
+          "problem": "ATSP",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.07119252404663712,
+          "cache_hit_selector_ms_per_instance": 0.07089830372327317
+        },
+        {
+          "problem": "OVRP",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.07345629758977641,
+          "cache_hit_selector_ms_per_instance": 0.07297701570981492
+        },
+        {
+          "problem": "VRPB",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.07315028536443909,
+          "cache_hit_selector_ms_per_instance": 0.0729269862252598
+        },
+        {
+          "problem": "VRPL",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.07330139245217045,
+          "cache_hit_selector_ms_per_instance": 0.07298987475223839
+        },
+        {
+          "problem": "VRPTW",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.07316540480436136,
+          "cache_hit_selector_ms_per_instance": 0.07340121373999864
+        },
+        {
+          "problem": "OVRPTW",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.07317072595469654,
+          "cache_hit_selector_ms_per_instance": 0.07310713893578698
+        },
+        {
+          "problem": "OVRPB",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.07338495925068855,
+          "cache_hit_selector_ms_per_instance": 0.07288145328251024
+        },
+        {
+          "problem": "OVRPL",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.07307975708196561,
+          "cache_hit_selector_ms_per_instance": 0.0730380997993052
+        },
+        {
+          "problem": "VRPBL",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.0736308575142175,
+          "cache_hit_selector_ms_per_instance": 0.07304137398023158
+        },
+        {
+          "problem": "VRPBTW",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.07291535924499233,
+          "cache_hit_selector_ms_per_instance": 0.07281654688995332
+        },
+        {
+          "problem": "VRPLTW",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.07327576167881489,
+          "cache_hit_selector_ms_per_instance": 0.0730001920601353
+        },
+        {
+          "problem": "OVRPBL",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.07286442754169305,
+          "cache_hit_selector_ms_per_instance": 0.07299234857782722
+        },
+        {
+          "problem": "OVRPBTW",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.07309697684831917,
+          "cache_hit_selector_ms_per_instance": 0.07287709740921855
+        },
+        {
+          "problem": "OVRPLTW",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.07322837579219292,
+          "cache_hit_selector_ms_per_instance": 0.07319634702677529
+        },
+        {
+          "problem": "VRPBLTW",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.07294179522432387,
+          "cache_hit_selector_ms_per_instance": 0.07296837672280769
+        },
+        {
+          "problem": "OVRPBLTW",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.07312509114854038,
+          "cache_hit_selector_ms_per_instance": 0.07300179277081043
+        }
+      ],
+      "donor_plus_selector_measured": true,
+      "full_system_measured": false,
+      "end_to_end_measured": false,
+      "pdf_panel": true,
+      "scope": "same first128 TEST input rows per task; inputs already on GPU; synchronized wall time",
+      "excludes": "dataset I/O and one-time feature cache preparation; cache-hit latency is not full inference",
+      "note": "GPU-resident donor+selector excludes I/O/one-time preparation; cache-hit selector is not full-system latency."
+    },
+    "B": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/B/inference_timing.json",
+      "status": "complete",
+      "sha256": "905f4add0995c78cd595a0e166947316c280572153969a83911372291bc9a9a8",
+      "measurements": [
+        {
+          "problem": "TSP",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.262168439803645,
+          "cache_hit_selector_ms_per_instance": 0.26150023465258226
+        },
+        {
+          "problem": "CVRP",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.31799933579653344,
+          "cache_hit_selector_ms_per_instance": 0.3174283983753412
+        },
+        {
+          "problem": "ATSP",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.06455228382643934,
+          "cache_hit_selector_ms_per_instance": 0.0641292032620792
+        },
+        {
+          "problem": "OVRP",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.06853853634917566,
+          "cache_hit_selector_ms_per_instance": 0.06838094547371536
+        },
+        {
+          "problem": "VRPB",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.06899752861500019,
+          "cache_hit_selector_ms_per_instance": 0.06847238000773359
+        },
+        {
+          "problem": "VRPL",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.0687354452869234,
+          "cache_hit_selector_ms_per_instance": 0.06851737513594951
+        },
+        {
+          "problem": "VRPTW",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.06880186447233427,
+          "cache_hit_selector_ms_per_instance": 0.06869293247291353
+        },
+        {
+          "problem": "OVRPTW",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.06867165605702515,
+          "cache_hit_selector_ms_per_instance": 0.06861565149544428
+        },
+        {
+          "problem": "OVRPB",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.0689217680095074,
+          "cache_hit_selector_ms_per_instance": 0.06874785443263438
+        },
+        {
+          "problem": "OVRPL",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.06878433062714369,
+          "cache_hit_selector_ms_per_instance": 0.06853083899234964
+        },
+        {
+          "problem": "VRPBL",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.0694426040960631,
+          "cache_hit_selector_ms_per_instance": 0.06875272417043259
+        },
+        {
+          "problem": "VRPBTW",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.06877706528030103,
+          "cache_hit_selector_ms_per_instance": 0.06845973954720345
+        },
+        {
+          "problem": "VRPLTW",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.06895171130357387,
+          "cache_hit_selector_ms_per_instance": 0.06853651545194832
+        },
+        {
+          "problem": "OVRPBL",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.06872722163582996,
+          "cache_hit_selector_ms_per_instance": 0.06799056003122435
+        },
+        {
+          "problem": "OVRPBTW",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.06867141109978547,
+          "cache_hit_selector_ms_per_instance": 0.0683243388266419
+        },
+        {
+          "problem": "OVRPLTW",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.06863494521288278,
+          "cache_hit_selector_ms_per_instance": 0.06858885141506714
+        },
+        {
+          "problem": "VRPBLTW",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.06885801576572703,
+          "cache_hit_selector_ms_per_instance": 0.0686244817795038
+        },
+        {
+          "problem": "OVRPBLTW",
+          "instances": 128,
+          "device": "cuda:0",
+          "repetitions": 3,
+          "donor_plus_selector_ms_per_instance": 0.06873919270825961,
+          "cache_hit_selector_ms_per_instance": 0.06863943720721484
+        }
+      ],
+      "donor_plus_selector_measured": true,
+      "full_system_measured": false,
+      "end_to_end_measured": false,
+      "pdf_panel": true,
+      "scope": "same first128 TEST input rows per task; inputs already on GPU; synchronized wall time",
+      "excludes": "dataset I/O and one-time feature cache preparation; cache-hit latency is not full inference",
+      "note": "GPU-resident donor+selector excludes I/O/one-time preparation; cache-hit selector is not full-system latency."
+    }
+  },
+  "matched_controls": {
+    "experiment": "R94",
+    "matched": true,
+    "arms": [
+      "A",
+      "B"
+    ],
+    "budgets": {
+      "A": 57600,
+      "B": 57600
+    },
+    "initialization": "scratch_shared_r77_plus_node_fusion",
+    "common_trainable_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+    "node_fusion_initialization_sha256": "9db3df55a91ca0f331880cfcc4688ffab82b83bb66e80f9cebe9d6978e903cb4",
+    "task_order_sha256": "c20d37da44771d3d03f262546f29ebd263391de8a5f67354274669c0daf46405",
+    "preparation_sha256": "a3877c3d981d18c7e1821314736dc1a0381ecc68e74e9d842b96c24f8fa454f1",
+    "donor_variants": {
+      "A": "random",
+      "B": "pretrained"
+    },
+    "hardware": {
+      "arms": {
+        "A": {
+          "gpu_type": "3090"
+        },
+        "B": {
+          "gpu_type": "4090"
+        }
+      },
+      "same_reported_hardware": false,
+      "bitwise_hardware_matched": false,
+      "note": "Hardware differences are disclosed; identical code/batches does not establish bitwise matching."
+    },
+    "external_pretraining_budget_matched": false,
+    "training": false,
+    "inference": false
+  },
+  "external_pretraining_budget_matched": false,
+  "training": false,
+  "inference": false,
+  "checkpoint_reselection": false
+}
