@@ -1,0 +1,5391 @@
+{
+  "experiment": "R101",
+  "arm": "A",
+  "complete": true,
+  "created_utc": "2026-10-22T16:26:00.324703+00:00",
+  "checkpoint_lock": {
+    "experiment": "R101",
+    "arm": "A",
+    "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R101_hint_pretraining/A/best.pt",
+    "checkpoint_sha256": "e96d42b96ec03155d8ae60e698459605bcf382e0d9f5d488a224fd809d0e23d9",
+    "state_hash": "0415bfa4557c1e7e0ed196b41351ac56994dd7c0030281dd1018bf63d4e8bfbd",
+    "epoch": 29,
+    "selected_update": 41760,
+    "rule": "strict minimum full VAL macro_vs_sbs_pct with common new81000 TRAIN-fitted SBS; first wins ties",
+    "selected_without_test": true,
+    "per_problem_assembly": false,
+    "val": {
+      "macro_ce": 0.7030366112788519,
+      "macro_top1": 0.7115185185185186,
+      "macro_top2": 0.9065679012345681,
+      "macro_top3": 0.9636790123456791,
+      "macro_top1_tie_aware": 0.7129876543209877,
+      "macro_mean_cost": 11.416571916665175,
+      "macro_vs_sbs_pct": -0.19492940953688143,
+      "macro_vs_oracle_pct": 0.39269507242757107,
+      "macro_actual_regret_pct": 0.4026093666283954,
+      "macro_vbs_gap_closed_pct": 13.625440473883353,
+      "macro_sbs_cost": 11.427978473494235,
+      "macro_oracle_cost": 11.371691902364589
+    },
+    "inference_rule": "eval mode, original R88B physical TSP node0 slot3; original R77 hand34/methodID, joint2, score MLP/pair differences/maximin; stable ascending global-solver-ID ties; original inputs only; no teacher, hint, adapter or calibration",
+    "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+    "locked_utc": "2026-10-22T16:23:34.995262+00:00"
+  },
+  "model_factory": "code.V4.r101_experiment.load_checkpoint",
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "rows_per_problem": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "candidate_pools": {
+    "TSP": [
+      "BQ",
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "LEHD",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "CVRP": [
+      "BQ",
+      "ELG",
+      "ICAM",
+      "LEHD",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "ATSP": [
+      "GLOP",
+      "ICAM_ATSP",
+      "MATNET",
+      "MATPOENET",
+      "UNICO_MatPOENet"
+    ],
+    "OVRP": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ]
+  },
+  "scenario_solver_aliases": {
+    "reld_mt": "RELD_MOEL"
+  },
+  "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+  "nss_reference": {
+    "root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference",
+    "prediction_sha256": {
+      "TSP": "d42250eea9547dbeed1afdda9411ae6e691d9ce2ae0a14f50e7da6adb28068d3",
+      "CVRP": "13fbedae686c2af03d44d62115bbd9fcbf15950f6b111942f90786faba66603c"
+    },
+    "retrained": false,
+    "new_inference": false,
+    "exact_test_rows": 4500
+  },
+  "nss_alignment": {
+    "TSP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "TSPLIB": {
+      "instance_key": "indices",
+      "matching_population": 49,
+      "checked_instance_ids": [
+        0,
+        24,
+        48
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRPLIB": {
+      "instance_key": "indices",
+      "matching_population": 100,
+      "checked_instance_ids": [
+        0,
+        50,
+        99
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    }
+  },
+  "training": false,
+  "inference": false,
+  "checkpoint_reselection": false,
+  "distribution_pages": 18,
+  "main_pdf_pages": 24,
+  "diagnostics": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R101_hint_pretraining/A/full_model_statistics/training_and_method_diagnostics.pdf",
+    "pages": 19,
+    "history_status": "complete"
+  },
+  "r101_schema_version": 1,
+  "model_spec": {
+    "r101_schema_version": 1,
+    "backbone": "original_R88B_R77_full18",
+    "architecture_unchanged": true,
+    "trainable_parameter_count": 1842953,
+    "added_parameters": 0,
+    "embedding_dim": 128,
+    "encoder_layers": 4,
+    "joint_layers": 2,
+    "solver_features": 34,
+    "solver_ID": true,
+    "physical_TSP_anchor": "original_node0",
+    "selection_head": "original_score_mlp_maximin",
+    "dropout": 0.1,
+    "transfer": "only instance_encoder from this run fixed TRAIN hint endpoint",
+    "stageII_hint_loss": false,
+    "teacher_at_inference": false,
+    "learned_alignment_adapter": false,
+    "route_or_cost_auxiliary_head": false,
+    "original_raw_inputs_and_geometry_retained": true
+  },
+  "initialization": "fresh_R84_with_TRAIN_hint_pretrained_instance_encoder",
+  "pretraining_lineage": {
+    "experiment": "R101",
+    "arm": "A",
+    "complete": true,
+    "successful_updates": 12800,
+    "encoder_sha256": "1267da285be94fe4ff642cffcf4bac3b84d5bfb2ce6f6b5b255af3308dab02bb",
+    "initial_trainable_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+    "unchanged_non_encoder_sha256": "970a8aa2a548f9034f34b73d060662f71808e46359335185ce07bfc5b1bb2fa6",
+    "teacher_identity": {
+      "variant": "random",
+      "split": "train",
+      "rows_per_task": 81000,
+      "metadata_sha256": {
+        "CVRP": "e67685f4f4950ba6dfce309cfcbacc7529478da788d39c097bc033de142401d1",
+        "OVRP": "053caefbaaec68eef3b68f513cba4784420f21cd78c49cafad8ab22df51d1551",
+        "VRPB": "a34623ef9df919b9a8209f7b525513dcf0d717982ef7bfd02708d5869730e1cd",
+        "VRPL": "1aec2211a77ed0443c20005432c0824a37f138c6942c4297d425a525c92fd95d",
+        "VRPTW": "3e1e137860b8777b93ba7d4df4dbbc32259be6bc0b931c9cdcb7ab26407bafe7",
+        "OVRPTW": "02f3b4c699fc3fce5cd500ad6c9abe61ba0ba7477c0cf8a4104c51b1395d3537",
+        "OVRPB": "a5aa1757a5676b77966e892c535d84dba6a978217f06ad8c51a8ebfd0fa918b2",
+        "OVRPL": "ebf35285d8bc9d2df705b8fa0ded0e894429d959f8e7347de5f47ca5c26a837b",
+        "VRPBL": "9533d1b99f4f08336a02925f9dba382bdab9dfb037479e6364d1e80c8dffced9",
+        "VRPBTW": "85c6bbd320e559390f9e8348f494f3ba9fdc7a25d28c3a9b51e7e95630ddf187",
+        "VRPLTW": "7f0cb3fa823e991586cafec1478f13e837a77620a6fb234872c922f8c6532d3e",
+        "OVRPBL": "2eb2f93d918351d6800de6aa5dd239cc3ce978dcf140c7d7c3cb4ace6be9ccda",
+        "OVRPBTW": "60c684e087e076288eedceed631de520fdacdb13677c039d697f803c03ea587b",
+        "OVRPLTW": "eec6dd9e3128e2b47d8229e896f6f65756ed91fecf4da92962be745fa0105900",
+        "VRPBLTW": "ae69a06f1a85f0ad09d0c44b75fb3dda20cd6d2daa76c03109446c47eeddbc70",
+        "OVRPBLTW": "1c2133c0ff2a938b923b9ad2dd707db5761388fafa7d5fa6afa308fc8725a481"
+      },
+      "donor": {
+        "CVRP": {
+          "checkpoint_path": null,
+          "checkpoint_pin": {
+            "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+          },
+          "checkpoint_sha256": null,
+          "known_unknown_pretraining_source": {
+            "applies_to_loaded_weights": false,
+            "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+            "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+            "training_tasks": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW"
+            ],
+            "unknown": [
+              "historical CLI",
+              "training instance manifest",
+              "exact trajectory",
+              "overlap with selector inputs"
+            ]
+          },
+          "native_source_files": {
+            "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+            "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+          },
+          "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+          "output_dim": 128,
+          "random_seed": 940002,
+          "spec": {
+            "disabled_tw": [
+              0.0,
+              0.0
+            ],
+            "extraction": "exact valid N per row; depot first; preserve customer identities",
+            "format": "r94_static_reld_moel_v1",
+            "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+            "model_params": {
+              "decoder_layer_num": 1,
+              "embedding_dim": 128,
+              "encoder_layer_num": 6,
+              "eval_type": "argmax",
+              "expert_loc": [
+                "Enc0",
+                "Enc1",
+                "Enc2",
+                "Enc3",
+                "Enc4",
+                "Enc5",
+                "Dec"
+              ],
+              "ff_hidden_dim": 512,
+              "ffidt": true,
+              "head_num": 8,
+              "logit_clipping": 10,
+              "norm": "none",
+              "norm_loc": "norm_last",
+              "num_experts": 4,
+              "problem": "Train_ALL",
+              "qkv_dim": 16,
+              "routing_level": "node",
+              "routing_method": "input_choice",
+              "sqrt_embedding_dim": 11.313708498984761,
+              "topk": 2
+            },
+            "native_fields": {
+              "depot_xy": [
+                "x",
+                "y"
+              ],
+              "node_xy_demand_tw": [
+                "x",
+                "y",
+                "signed_demand",
+                "TWstart",
+                "TWend"
+              ]
+            },
+            "native_precision": {
+              "autocast": false,
+              "cudnn_tf32": false,
+              "dtype": "float32",
+              "matmul_tf32": false
+            },
+            "output_dim": 128,
+            "raw_cvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag"
+            ],
+            "raw_mvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag",
+              "L",
+              "service",
+              "TWstart",
+              "TWend"
+            ],
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "units": "unchanged native input units; demand already capacity-normalized"
+          },
+          "supported_problems": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW",
+            "OVRPB",
+            "OVRPL",
+            "VRPBL",
+            "VRPBTW",
+            "VRPLTW",
+            "OVRPBL",
+            "OVRPBTW",
+            "OVRPLTW",
+            "VRPBLTW",
+            "OVRPBLTW"
+          ],
+          "variant": "random"
+        },
+        "OVRP": {
+          "checkpoint_path": null,
+          "checkpoint_pin": {
+            "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+          },
+          "checkpoint_sha256": null,
+          "known_unknown_pretraining_source": {
+            "applies_to_loaded_weights": false,
+            "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+            "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+            "training_tasks": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW"
+            ],
+            "unknown": [
+              "historical CLI",
+              "training instance manifest",
+              "exact trajectory",
+              "overlap with selector inputs"
+            ]
+          },
+          "native_source_files": {
+            "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+            "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+          },
+          "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+          "output_dim": 128,
+          "random_seed": 940002,
+          "spec": {
+            "disabled_tw": [
+              0.0,
+              0.0
+            ],
+            "extraction": "exact valid N per row; depot first; preserve customer identities",
+            "format": "r94_static_reld_moel_v1",
+            "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+            "model_params": {
+              "decoder_layer_num": 1,
+              "embedding_dim": 128,
+              "encoder_layer_num": 6,
+              "eval_type": "argmax",
+              "expert_loc": [
+                "Enc0",
+                "Enc1",
+                "Enc2",
+                "Enc3",
+                "Enc4",
+                "Enc5",
+                "Dec"
+              ],
+              "ff_hidden_dim": 512,
+              "ffidt": true,
+              "head_num": 8,
+              "logit_clipping": 10,
+              "norm": "none",
+              "norm_loc": "norm_last",
+              "num_experts": 4,
+              "problem": "Train_ALL",
+              "qkv_dim": 16,
+              "routing_level": "node",
+              "routing_method": "input_choice",
+              "sqrt_embedding_dim": 11.313708498984761,
+              "topk": 2
+            },
+            "native_fields": {
+              "depot_xy": [
+                "x",
+                "y"
+              ],
+              "node_xy_demand_tw": [
+                "x",
+                "y",
+                "signed_demand",
+                "TWstart",
+                "TWend"
+              ]
+            },
+            "native_precision": {
+              "autocast": false,
+              "cudnn_tf32": false,
+              "dtype": "float32",
+              "matmul_tf32": false
+            },
+            "output_dim": 128,
+            "raw_cvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag"
+            ],
+            "raw_mvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag",
+              "L",
+              "service",
+              "TWstart",
+              "TWend"
+            ],
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "units": "unchanged native input units; demand already capacity-normalized"
+          },
+          "supported_problems": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW",
+            "OVRPB",
+            "OVRPL",
+            "VRPBL",
+            "VRPBTW",
+            "VRPLTW",
+            "OVRPBL",
+            "OVRPBTW",
+            "OVRPLTW",
+            "VRPBLTW",
+            "OVRPBLTW"
+          ],
+          "variant": "random"
+        },
+        "VRPB": {
+          "checkpoint_path": null,
+          "checkpoint_pin": {
+            "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+          },
+          "checkpoint_sha256": null,
+          "known_unknown_pretraining_source": {
+            "applies_to_loaded_weights": false,
+            "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+            "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+            "training_tasks": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW"
+            ],
+            "unknown": [
+              "historical CLI",
+              "training instance manifest",
+              "exact trajectory",
+              "overlap with selector inputs"
+            ]
+          },
+          "native_source_files": {
+            "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+            "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+          },
+          "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+          "output_dim": 128,
+          "random_seed": 940002,
+          "spec": {
+            "disabled_tw": [
+              0.0,
+              0.0
+            ],
+            "extraction": "exact valid N per row; depot first; preserve customer identities",
+            "format": "r94_static_reld_moel_v1",
+            "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+            "model_params": {
+              "decoder_layer_num": 1,
+              "embedding_dim": 128,
+              "encoder_layer_num": 6,
+              "eval_type": "argmax",
+              "expert_loc": [
+                "Enc0",
+                "Enc1",
+                "Enc2",
+                "Enc3",
+                "Enc4",
+                "Enc5",
+                "Dec"
+              ],
+              "ff_hidden_dim": 512,
+              "ffidt": true,
+              "head_num": 8,
+              "logit_clipping": 10,
+              "norm": "none",
+              "norm_loc": "norm_last",
+              "num_experts": 4,
+              "problem": "Train_ALL",
+              "qkv_dim": 16,
+              "routing_level": "node",
+              "routing_method": "input_choice",
+              "sqrt_embedding_dim": 11.313708498984761,
+              "topk": 2
+            },
+            "native_fields": {
+              "depot_xy": [
+                "x",
+                "y"
+              ],
+              "node_xy_demand_tw": [
+                "x",
+                "y",
+                "signed_demand",
+                "TWstart",
+                "TWend"
+              ]
+            },
+            "native_precision": {
+              "autocast": false,
+              "cudnn_tf32": false,
+              "dtype": "float32",
+              "matmul_tf32": false
+            },
+            "output_dim": 128,
+            "raw_cvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag"
+            ],
+            "raw_mvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag",
+              "L",
+              "service",
+              "TWstart",
+              "TWend"
+            ],
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "units": "unchanged native input units; demand already capacity-normalized"
+          },
+          "supported_problems": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW",
+            "OVRPB",
+            "OVRPL",
+            "VRPBL",
+            "VRPBTW",
+            "VRPLTW",
+            "OVRPBL",
+            "OVRPBTW",
+            "OVRPLTW",
+            "VRPBLTW",
+            "OVRPBLTW"
+          ],
+          "variant": "random"
+        },
+        "VRPL": {
+          "checkpoint_path": null,
+          "checkpoint_pin": {
+            "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+          },
+          "checkpoint_sha256": null,
+          "known_unknown_pretraining_source": {
+            "applies_to_loaded_weights": false,
+            "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+            "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+            "training_tasks": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW"
+            ],
+            "unknown": [
+              "historical CLI",
+              "training instance manifest",
+              "exact trajectory",
+              "overlap with selector inputs"
+            ]
+          },
+          "native_source_files": {
+            "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+            "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+          },
+          "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+          "output_dim": 128,
+          "random_seed": 940002,
+          "spec": {
+            "disabled_tw": [
+              0.0,
+              0.0
+            ],
+            "extraction": "exact valid N per row; depot first; preserve customer identities",
+            "format": "r94_static_reld_moel_v1",
+            "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+            "model_params": {
+              "decoder_layer_num": 1,
+              "embedding_dim": 128,
+              "encoder_layer_num": 6,
+              "eval_type": "argmax",
+              "expert_loc": [
+                "Enc0",
+                "Enc1",
+                "Enc2",
+                "Enc3",
+                "Enc4",
+                "Enc5",
+                "Dec"
+              ],
+              "ff_hidden_dim": 512,
+              "ffidt": true,
+              "head_num": 8,
+              "logit_clipping": 10,
+              "norm": "none",
+              "norm_loc": "norm_last",
+              "num_experts": 4,
+              "problem": "Train_ALL",
+              "qkv_dim": 16,
+              "routing_level": "node",
+              "routing_method": "input_choice",
+              "sqrt_embedding_dim": 11.313708498984761,
+              "topk": 2
+            },
+            "native_fields": {
+              "depot_xy": [
+                "x",
+                "y"
+              ],
+              "node_xy_demand_tw": [
+                "x",
+                "y",
+                "signed_demand",
+                "TWstart",
+                "TWend"
+              ]
+            },
+            "native_precision": {
+              "autocast": false,
+              "cudnn_tf32": false,
+              "dtype": "float32",
+              "matmul_tf32": false
+            },
+            "output_dim": 128,
+            "raw_cvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag"
+            ],
+            "raw_mvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag",
+              "L",
+              "service",
+              "TWstart",
+              "TWend"
+            ],
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "units": "unchanged native input units; demand already capacity-normalized"
+          },
+          "supported_problems": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW",
+            "OVRPB",
+            "OVRPL",
+            "VRPBL",
+            "VRPBTW",
+            "VRPLTW",
+            "OVRPBL",
+            "OVRPBTW",
+            "OVRPLTW",
+            "VRPBLTW",
+            "OVRPBLTW"
+          ],
+          "variant": "random"
+        },
+        "VRPTW": {
+          "checkpoint_path": null,
+          "checkpoint_pin": {
+            "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+          },
+          "checkpoint_sha256": null,
+          "known_unknown_pretraining_source": {
+            "applies_to_loaded_weights": false,
+            "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+            "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+            "training_tasks": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW"
+            ],
+            "unknown": [
+              "historical CLI",
+              "training instance manifest",
+              "exact trajectory",
+              "overlap with selector inputs"
+            ]
+          },
+          "native_source_files": {
+            "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+            "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+          },
+          "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+          "output_dim": 128,
+          "random_seed": 940002,
+          "spec": {
+            "disabled_tw": [
+              0.0,
+              0.0
+            ],
+            "extraction": "exact valid N per row; depot first; preserve customer identities",
+            "format": "r94_static_reld_moel_v1",
+            "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+            "model_params": {
+              "decoder_layer_num": 1,
+              "embedding_dim": 128,
+              "encoder_layer_num": 6,
+              "eval_type": "argmax",
+              "expert_loc": [
+                "Enc0",
+                "Enc1",
+                "Enc2",
+                "Enc3",
+                "Enc4",
+                "Enc5",
+                "Dec"
+              ],
+              "ff_hidden_dim": 512,
+              "ffidt": true,
+              "head_num": 8,
+              "logit_clipping": 10,
+              "norm": "none",
+              "norm_loc": "norm_last",
+              "num_experts": 4,
+              "problem": "Train_ALL",
+              "qkv_dim": 16,
+              "routing_level": "node",
+              "routing_method": "input_choice",
+              "sqrt_embedding_dim": 11.313708498984761,
+              "topk": 2
+            },
+            "native_fields": {
+              "depot_xy": [
+                "x",
+                "y"
+              ],
+              "node_xy_demand_tw": [
+                "x",
+                "y",
+                "signed_demand",
+                "TWstart",
+                "TWend"
+              ]
+            },
+            "native_precision": {
+              "autocast": false,
+              "cudnn_tf32": false,
+              "dtype": "float32",
+              "matmul_tf32": false
+            },
+            "output_dim": 128,
+            "raw_cvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag"
+            ],
+            "raw_mvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag",
+              "L",
+              "service",
+              "TWstart",
+              "TWend"
+            ],
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "units": "unchanged native input units; demand already capacity-normalized"
+          },
+          "supported_problems": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW",
+            "OVRPB",
+            "OVRPL",
+            "VRPBL",
+            "VRPBTW",
+            "VRPLTW",
+            "OVRPBL",
+            "OVRPBTW",
+            "OVRPLTW",
+            "VRPBLTW",
+            "OVRPBLTW"
+          ],
+          "variant": "random"
+        },
+        "OVRPTW": {
+          "checkpoint_path": null,
+          "checkpoint_pin": {
+            "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+          },
+          "checkpoint_sha256": null,
+          "known_unknown_pretraining_source": {
+            "applies_to_loaded_weights": false,
+            "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+            "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+            "training_tasks": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW"
+            ],
+            "unknown": [
+              "historical CLI",
+              "training instance manifest",
+              "exact trajectory",
+              "overlap with selector inputs"
+            ]
+          },
+          "native_source_files": {
+            "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+            "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+          },
+          "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+          "output_dim": 128,
+          "random_seed": 940002,
+          "spec": {
+            "disabled_tw": [
+              0.0,
+              0.0
+            ],
+            "extraction": "exact valid N per row; depot first; preserve customer identities",
+            "format": "r94_static_reld_moel_v1",
+            "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+            "model_params": {
+              "decoder_layer_num": 1,
+              "embedding_dim": 128,
+              "encoder_layer_num": 6,
+              "eval_type": "argmax",
+              "expert_loc": [
+                "Enc0",
+                "Enc1",
+                "Enc2",
+                "Enc3",
+                "Enc4",
+                "Enc5",
+                "Dec"
+              ],
+              "ff_hidden_dim": 512,
+              "ffidt": true,
+              "head_num": 8,
+              "logit_clipping": 10,
+              "norm": "none",
+              "norm_loc": "norm_last",
+              "num_experts": 4,
+              "problem": "Train_ALL",
+              "qkv_dim": 16,
+              "routing_level": "node",
+              "routing_method": "input_choice",
+              "sqrt_embedding_dim": 11.313708498984761,
+              "topk": 2
+            },
+            "native_fields": {
+              "depot_xy": [
+                "x",
+                "y"
+              ],
+              "node_xy_demand_tw": [
+                "x",
+                "y",
+                "signed_demand",
+                "TWstart",
+                "TWend"
+              ]
+            },
+            "native_precision": {
+              "autocast": false,
+              "cudnn_tf32": false,
+              "dtype": "float32",
+              "matmul_tf32": false
+            },
+            "output_dim": 128,
+            "raw_cvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag"
+            ],
+            "raw_mvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag",
+              "L",
+              "service",
+              "TWstart",
+              "TWend"
+            ],
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "units": "unchanged native input units; demand already capacity-normalized"
+          },
+          "supported_problems": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW",
+            "OVRPB",
+            "OVRPL",
+            "VRPBL",
+            "VRPBTW",
+            "VRPLTW",
+            "OVRPBL",
+            "OVRPBTW",
+            "OVRPLTW",
+            "VRPBLTW",
+            "OVRPBLTW"
+          ],
+          "variant": "random"
+        },
+        "OVRPB": {
+          "checkpoint_path": null,
+          "checkpoint_pin": {
+            "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+          },
+          "checkpoint_sha256": null,
+          "known_unknown_pretraining_source": {
+            "applies_to_loaded_weights": false,
+            "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+            "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+            "training_tasks": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW"
+            ],
+            "unknown": [
+              "historical CLI",
+              "training instance manifest",
+              "exact trajectory",
+              "overlap with selector inputs"
+            ]
+          },
+          "native_source_files": {
+            "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+            "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+          },
+          "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+          "output_dim": 128,
+          "random_seed": 940002,
+          "spec": {
+            "disabled_tw": [
+              0.0,
+              0.0
+            ],
+            "extraction": "exact valid N per row; depot first; preserve customer identities",
+            "format": "r94_static_reld_moel_v1",
+            "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+            "model_params": {
+              "decoder_layer_num": 1,
+              "embedding_dim": 128,
+              "encoder_layer_num": 6,
+              "eval_type": "argmax",
+              "expert_loc": [
+                "Enc0",
+                "Enc1",
+                "Enc2",
+                "Enc3",
+                "Enc4",
+                "Enc5",
+                "Dec"
+              ],
+              "ff_hidden_dim": 512,
+              "ffidt": true,
+              "head_num": 8,
+              "logit_clipping": 10,
+              "norm": "none",
+              "norm_loc": "norm_last",
+              "num_experts": 4,
+              "problem": "Train_ALL",
+              "qkv_dim": 16,
+              "routing_level": "node",
+              "routing_method": "input_choice",
+              "sqrt_embedding_dim": 11.313708498984761,
+              "topk": 2
+            },
+            "native_fields": {
+              "depot_xy": [
+                "x",
+                "y"
+              ],
+              "node_xy_demand_tw": [
+                "x",
+                "y",
+                "signed_demand",
+                "TWstart",
+                "TWend"
+              ]
+            },
+            "native_precision": {
+              "autocast": false,
+              "cudnn_tf32": false,
+              "dtype": "float32",
+              "matmul_tf32": false
+            },
+            "output_dim": 128,
+            "raw_cvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag"
+            ],
+            "raw_mvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag",
+              "L",
+              "service",
+              "TWstart",
+              "TWend"
+            ],
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "units": "unchanged native input units; demand already capacity-normalized"
+          },
+          "supported_problems": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW",
+            "OVRPB",
+            "OVRPL",
+            "VRPBL",
+            "VRPBTW",
+            "VRPLTW",
+            "OVRPBL",
+            "OVRPBTW",
+            "OVRPLTW",
+            "VRPBLTW",
+            "OVRPBLTW"
+          ],
+          "variant": "random"
+        },
+        "OVRPL": {
+          "checkpoint_path": null,
+          "checkpoint_pin": {
+            "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+          },
+          "checkpoint_sha256": null,
+          "known_unknown_pretraining_source": {
+            "applies_to_loaded_weights": false,
+            "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+            "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+            "training_tasks": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW"
+            ],
+            "unknown": [
+              "historical CLI",
+              "training instance manifest",
+              "exact trajectory",
+              "overlap with selector inputs"
+            ]
+          },
+          "native_source_files": {
+            "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+            "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+          },
+          "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+          "output_dim": 128,
+          "random_seed": 940002,
+          "spec": {
+            "disabled_tw": [
+              0.0,
+              0.0
+            ],
+            "extraction": "exact valid N per row; depot first; preserve customer identities",
+            "format": "r94_static_reld_moel_v1",
+            "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+            "model_params": {
+              "decoder_layer_num": 1,
+              "embedding_dim": 128,
+              "encoder_layer_num": 6,
+              "eval_type": "argmax",
+              "expert_loc": [
+                "Enc0",
+                "Enc1",
+                "Enc2",
+                "Enc3",
+                "Enc4",
+                "Enc5",
+                "Dec"
+              ],
+              "ff_hidden_dim": 512,
+              "ffidt": true,
+              "head_num": 8,
+              "logit_clipping": 10,
+              "norm": "none",
+              "norm_loc": "norm_last",
+              "num_experts": 4,
+              "problem": "Train_ALL",
+              "qkv_dim": 16,
+              "routing_level": "node",
+              "routing_method": "input_choice",
+              "sqrt_embedding_dim": 11.313708498984761,
+              "topk": 2
+            },
+            "native_fields": {
+              "depot_xy": [
+                "x",
+                "y"
+              ],
+              "node_xy_demand_tw": [
+                "x",
+                "y",
+                "signed_demand",
+                "TWstart",
+                "TWend"
+              ]
+            },
+            "native_precision": {
+              "autocast": false,
+              "cudnn_tf32": false,
+              "dtype": "float32",
+              "matmul_tf32": false
+            },
+            "output_dim": 128,
+            "raw_cvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag"
+            ],
+            "raw_mvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag",
+              "L",
+              "service",
+              "TWstart",
+              "TWend"
+            ],
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "units": "unchanged native input units; demand already capacity-normalized"
+          },
+          "supported_problems": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW",
+            "OVRPB",
+            "OVRPL",
+            "VRPBL",
+            "VRPBTW",
+            "VRPLTW",
+            "OVRPBL",
+            "OVRPBTW",
+            "OVRPLTW",
+            "VRPBLTW",
+            "OVRPBLTW"
+          ],
+          "variant": "random"
+        },
+        "VRPBL": {
+          "checkpoint_path": null,
+          "checkpoint_pin": {
+            "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+          },
+          "checkpoint_sha256": null,
+          "known_unknown_pretraining_source": {
+            "applies_to_loaded_weights": false,
+            "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+            "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+            "training_tasks": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW"
+            ],
+            "unknown": [
+              "historical CLI",
+              "training instance manifest",
+              "exact trajectory",
+              "overlap with selector inputs"
+            ]
+          },
+          "native_source_files": {
+            "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+            "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+          },
+          "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+          "output_dim": 128,
+          "random_seed": 940002,
+          "spec": {
+            "disabled_tw": [
+              0.0,
+              0.0
+            ],
+            "extraction": "exact valid N per row; depot first; preserve customer identities",
+            "format": "r94_static_reld_moel_v1",
+            "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+            "model_params": {
+              "decoder_layer_num": 1,
+              "embedding_dim": 128,
+              "encoder_layer_num": 6,
+              "eval_type": "argmax",
+              "expert_loc": [
+                "Enc0",
+                "Enc1",
+                "Enc2",
+                "Enc3",
+                "Enc4",
+                "Enc5",
+                "Dec"
+              ],
+              "ff_hidden_dim": 512,
+              "ffidt": true,
+              "head_num": 8,
+              "logit_clipping": 10,
+              "norm": "none",
+              "norm_loc": "norm_last",
+              "num_experts": 4,
+              "problem": "Train_ALL",
+              "qkv_dim": 16,
+              "routing_level": "node",
+              "routing_method": "input_choice",
+              "sqrt_embedding_dim": 11.313708498984761,
+              "topk": 2
+            },
+            "native_fields": {
+              "depot_xy": [
+                "x",
+                "y"
+              ],
+              "node_xy_demand_tw": [
+                "x",
+                "y",
+                "signed_demand",
+                "TWstart",
+                "TWend"
+              ]
+            },
+            "native_precision": {
+              "autocast": false,
+              "cudnn_tf32": false,
+              "dtype": "float32",
+              "matmul_tf32": false
+            },
+            "output_dim": 128,
+            "raw_cvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag"
+            ],
+            "raw_mvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag",
+              "L",
+              "service",
+              "TWstart",
+              "TWend"
+            ],
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "units": "unchanged native input units; demand already capacity-normalized"
+          },
+          "supported_problems": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW",
+            "OVRPB",
+            "OVRPL",
+            "VRPBL",
+            "VRPBTW",
+            "VRPLTW",
+            "OVRPBL",
+            "OVRPBTW",
+            "OVRPLTW",
+            "VRPBLTW",
+            "OVRPBLTW"
+          ],
+          "variant": "random"
+        },
+        "VRPBTW": {
+          "checkpoint_path": null,
+          "checkpoint_pin": {
+            "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+          },
+          "checkpoint_sha256": null,
+          "known_unknown_pretraining_source": {
+            "applies_to_loaded_weights": false,
+            "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+            "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+            "training_tasks": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW"
+            ],
+            "unknown": [
+              "historical CLI",
+              "training instance manifest",
+              "exact trajectory",
+              "overlap with selector inputs"
+            ]
+          },
+          "native_source_files": {
+            "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+            "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+          },
+          "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+          "output_dim": 128,
+          "random_seed": 940002,
+          "spec": {
+            "disabled_tw": [
+              0.0,
+              0.0
+            ],
+            "extraction": "exact valid N per row; depot first; preserve customer identities",
+            "format": "r94_static_reld_moel_v1",
+            "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+            "model_params": {
+              "decoder_layer_num": 1,
+              "embedding_dim": 128,
+              "encoder_layer_num": 6,
+              "eval_type": "argmax",
+              "expert_loc": [
+                "Enc0",
+                "Enc1",
+                "Enc2",
+                "Enc3",
+                "Enc4",
+                "Enc5",
+                "Dec"
+              ],
+              "ff_hidden_dim": 512,
+              "ffidt": true,
+              "head_num": 8,
+              "logit_clipping": 10,
+              "norm": "none",
+              "norm_loc": "norm_last",
+              "num_experts": 4,
+              "problem": "Train_ALL",
+              "qkv_dim": 16,
+              "routing_level": "node",
+              "routing_method": "input_choice",
+              "sqrt_embedding_dim": 11.313708498984761,
+              "topk": 2
+            },
+            "native_fields": {
+              "depot_xy": [
+                "x",
+                "y"
+              ],
+              "node_xy_demand_tw": [
+                "x",
+                "y",
+                "signed_demand",
+                "TWstart",
+                "TWend"
+              ]
+            },
+            "native_precision": {
+              "autocast": false,
+              "cudnn_tf32": false,
+              "dtype": "float32",
+              "matmul_tf32": false
+            },
+            "output_dim": 128,
+            "raw_cvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag"
+            ],
+            "raw_mvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag",
+              "L",
+              "service",
+              "TWstart",
+              "TWend"
+            ],
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "units": "unchanged native input units; demand already capacity-normalized"
+          },
+          "supported_problems": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW",
+            "OVRPB",
+            "OVRPL",
+            "VRPBL",
+            "VRPBTW",
+            "VRPLTW",
+            "OVRPBL",
+            "OVRPBTW",
+            "OVRPLTW",
+            "VRPBLTW",
+            "OVRPBLTW"
+          ],
+          "variant": "random"
+        },
+        "VRPLTW": {
+          "checkpoint_path": null,
+          "checkpoint_pin": {
+            "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+          },
+          "checkpoint_sha256": null,
+          "known_unknown_pretraining_source": {
+            "applies_to_loaded_weights": false,
+            "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+            "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+            "training_tasks": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW"
+            ],
+            "unknown": [
+              "historical CLI",
+              "training instance manifest",
+              "exact trajectory",
+              "overlap with selector inputs"
+            ]
+          },
+          "native_source_files": {
+            "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+            "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+          },
+          "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+          "output_dim": 128,
+          "random_seed": 940002,
+          "spec": {
+            "disabled_tw": [
+              0.0,
+              0.0
+            ],
+            "extraction": "exact valid N per row; depot first; preserve customer identities",
+            "format": "r94_static_reld_moel_v1",
+            "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+            "model_params": {
+              "decoder_layer_num": 1,
+              "embedding_dim": 128,
+              "encoder_layer_num": 6,
+              "eval_type": "argmax",
+              "expert_loc": [
+                "Enc0",
+                "Enc1",
+                "Enc2",
+                "Enc3",
+                "Enc4",
+                "Enc5",
+                "Dec"
+              ],
+              "ff_hidden_dim": 512,
+              "ffidt": true,
+              "head_num": 8,
+              "logit_clipping": 10,
+              "norm": "none",
+              "norm_loc": "norm_last",
+              "num_experts": 4,
+              "problem": "Train_ALL",
+              "qkv_dim": 16,
+              "routing_level": "node",
+              "routing_method": "input_choice",
+              "sqrt_embedding_dim": 11.313708498984761,
+              "topk": 2
+            },
+            "native_fields": {
+              "depot_xy": [
+                "x",
+                "y"
+              ],
+              "node_xy_demand_tw": [
+                "x",
+                "y",
+                "signed_demand",
+                "TWstart",
+                "TWend"
+              ]
+            },
+            "native_precision": {
+              "autocast": false,
+              "cudnn_tf32": false,
+              "dtype": "float32",
+              "matmul_tf32": false
+            },
+            "output_dim": 128,
+            "raw_cvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag"
+            ],
+            "raw_mvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag",
+              "L",
+              "service",
+              "TWstart",
+              "TWend"
+            ],
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "units": "unchanged native input units; demand already capacity-normalized"
+          },
+          "supported_problems": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW",
+            "OVRPB",
+            "OVRPL",
+            "VRPBL",
+            "VRPBTW",
+            "VRPLTW",
+            "OVRPBL",
+            "OVRPBTW",
+            "OVRPLTW",
+            "VRPBLTW",
+            "OVRPBLTW"
+          ],
+          "variant": "random"
+        },
+        "OVRPBL": {
+          "checkpoint_path": null,
+          "checkpoint_pin": {
+            "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+          },
+          "checkpoint_sha256": null,
+          "known_unknown_pretraining_source": {
+            "applies_to_loaded_weights": false,
+            "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+            "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+            "training_tasks": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW"
+            ],
+            "unknown": [
+              "historical CLI",
+              "training instance manifest",
+              "exact trajectory",
+              "overlap with selector inputs"
+            ]
+          },
+          "native_source_files": {
+            "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+            "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+          },
+          "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+          "output_dim": 128,
+          "random_seed": 940002,
+          "spec": {
+            "disabled_tw": [
+              0.0,
+              0.0
+            ],
+            "extraction": "exact valid N per row; depot first; preserve customer identities",
+            "format": "r94_static_reld_moel_v1",
+            "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+            "model_params": {
+              "decoder_layer_num": 1,
+              "embedding_dim": 128,
+              "encoder_layer_num": 6,
+              "eval_type": "argmax",
+              "expert_loc": [
+                "Enc0",
+                "Enc1",
+                "Enc2",
+                "Enc3",
+                "Enc4",
+                "Enc5",
+                "Dec"
+              ],
+              "ff_hidden_dim": 512,
+              "ffidt": true,
+              "head_num": 8,
+              "logit_clipping": 10,
+              "norm": "none",
+              "norm_loc": "norm_last",
+              "num_experts": 4,
+              "problem": "Train_ALL",
+              "qkv_dim": 16,
+              "routing_level": "node",
+              "routing_method": "input_choice",
+              "sqrt_embedding_dim": 11.313708498984761,
+              "topk": 2
+            },
+            "native_fields": {
+              "depot_xy": [
+                "x",
+                "y"
+              ],
+              "node_xy_demand_tw": [
+                "x",
+                "y",
+                "signed_demand",
+                "TWstart",
+                "TWend"
+              ]
+            },
+            "native_precision": {
+              "autocast": false,
+              "cudnn_tf32": false,
+              "dtype": "float32",
+              "matmul_tf32": false
+            },
+            "output_dim": 128,
+            "raw_cvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag"
+            ],
+            "raw_mvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag",
+              "L",
+              "service",
+              "TWstart",
+              "TWend"
+            ],
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "units": "unchanged native input units; demand already capacity-normalized"
+          },
+          "supported_problems": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW",
+            "OVRPB",
+            "OVRPL",
+            "VRPBL",
+            "VRPBTW",
+            "VRPLTW",
+            "OVRPBL",
+            "OVRPBTW",
+            "OVRPLTW",
+            "VRPBLTW",
+            "OVRPBLTW"
+          ],
+          "variant": "random"
+        },
+        "OVRPBTW": {
+          "checkpoint_path": null,
+          "checkpoint_pin": {
+            "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+          },
+          "checkpoint_sha256": null,
+          "known_unknown_pretraining_source": {
+            "applies_to_loaded_weights": false,
+            "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+            "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+            "training_tasks": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW"
+            ],
+            "unknown": [
+              "historical CLI",
+              "training instance manifest",
+              "exact trajectory",
+              "overlap with selector inputs"
+            ]
+          },
+          "native_source_files": {
+            "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+            "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+          },
+          "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+          "output_dim": 128,
+          "random_seed": 940002,
+          "spec": {
+            "disabled_tw": [
+              0.0,
+              0.0
+            ],
+            "extraction": "exact valid N per row; depot first; preserve customer identities",
+            "format": "r94_static_reld_moel_v1",
+            "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+            "model_params": {
+              "decoder_layer_num": 1,
+              "embedding_dim": 128,
+              "encoder_layer_num": 6,
+              "eval_type": "argmax",
+              "expert_loc": [
+                "Enc0",
+                "Enc1",
+                "Enc2",
+                "Enc3",
+                "Enc4",
+                "Enc5",
+                "Dec"
+              ],
+              "ff_hidden_dim": 512,
+              "ffidt": true,
+              "head_num": 8,
+              "logit_clipping": 10,
+              "norm": "none",
+              "norm_loc": "norm_last",
+              "num_experts": 4,
+              "problem": "Train_ALL",
+              "qkv_dim": 16,
+              "routing_level": "node",
+              "routing_method": "input_choice",
+              "sqrt_embedding_dim": 11.313708498984761,
+              "topk": 2
+            },
+            "native_fields": {
+              "depot_xy": [
+                "x",
+                "y"
+              ],
+              "node_xy_demand_tw": [
+                "x",
+                "y",
+                "signed_demand",
+                "TWstart",
+                "TWend"
+              ]
+            },
+            "native_precision": {
+              "autocast": false,
+              "cudnn_tf32": false,
+              "dtype": "float32",
+              "matmul_tf32": false
+            },
+            "output_dim": 128,
+            "raw_cvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag"
+            ],
+            "raw_mvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag",
+              "L",
+              "service",
+              "TWstart",
+              "TWend"
+            ],
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "units": "unchanged native input units; demand already capacity-normalized"
+          },
+          "supported_problems": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW",
+            "OVRPB",
+            "OVRPL",
+            "VRPBL",
+            "VRPBTW",
+            "VRPLTW",
+            "OVRPBL",
+            "OVRPBTW",
+            "OVRPLTW",
+            "VRPBLTW",
+            "OVRPBLTW"
+          ],
+          "variant": "random"
+        },
+        "OVRPLTW": {
+          "checkpoint_path": null,
+          "checkpoint_pin": {
+            "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+          },
+          "checkpoint_sha256": null,
+          "known_unknown_pretraining_source": {
+            "applies_to_loaded_weights": false,
+            "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+            "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+            "training_tasks": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW"
+            ],
+            "unknown": [
+              "historical CLI",
+              "training instance manifest",
+              "exact trajectory",
+              "overlap with selector inputs"
+            ]
+          },
+          "native_source_files": {
+            "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+            "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+          },
+          "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+          "output_dim": 128,
+          "random_seed": 940002,
+          "spec": {
+            "disabled_tw": [
+              0.0,
+              0.0
+            ],
+            "extraction": "exact valid N per row; depot first; preserve customer identities",
+            "format": "r94_static_reld_moel_v1",
+            "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+            "model_params": {
+              "decoder_layer_num": 1,
+              "embedding_dim": 128,
+              "encoder_layer_num": 6,
+              "eval_type": "argmax",
+              "expert_loc": [
+                "Enc0",
+                "Enc1",
+                "Enc2",
+                "Enc3",
+                "Enc4",
+                "Enc5",
+                "Dec"
+              ],
+              "ff_hidden_dim": 512,
+              "ffidt": true,
+              "head_num": 8,
+              "logit_clipping": 10,
+              "norm": "none",
+              "norm_loc": "norm_last",
+              "num_experts": 4,
+              "problem": "Train_ALL",
+              "qkv_dim": 16,
+              "routing_level": "node",
+              "routing_method": "input_choice",
+              "sqrt_embedding_dim": 11.313708498984761,
+              "topk": 2
+            },
+            "native_fields": {
+              "depot_xy": [
+                "x",
+                "y"
+              ],
+              "node_xy_demand_tw": [
+                "x",
+                "y",
+                "signed_demand",
+                "TWstart",
+                "TWend"
+              ]
+            },
+            "native_precision": {
+              "autocast": false,
+              "cudnn_tf32": false,
+              "dtype": "float32",
+              "matmul_tf32": false
+            },
+            "output_dim": 128,
+            "raw_cvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag"
+            ],
+            "raw_mvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag",
+              "L",
+              "service",
+              "TWstart",
+              "TWend"
+            ],
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "units": "unchanged native input units; demand already capacity-normalized"
+          },
+          "supported_problems": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW",
+            "OVRPB",
+            "OVRPL",
+            "VRPBL",
+            "VRPBTW",
+            "VRPLTW",
+            "OVRPBL",
+            "OVRPBTW",
+            "OVRPLTW",
+            "VRPBLTW",
+            "OVRPBLTW"
+          ],
+          "variant": "random"
+        },
+        "VRPBLTW": {
+          "checkpoint_path": null,
+          "checkpoint_pin": {
+            "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+          },
+          "checkpoint_sha256": null,
+          "known_unknown_pretraining_source": {
+            "applies_to_loaded_weights": false,
+            "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+            "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+            "training_tasks": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW"
+            ],
+            "unknown": [
+              "historical CLI",
+              "training instance manifest",
+              "exact trajectory",
+              "overlap with selector inputs"
+            ]
+          },
+          "native_source_files": {
+            "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+            "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+          },
+          "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+          "output_dim": 128,
+          "random_seed": 940002,
+          "spec": {
+            "disabled_tw": [
+              0.0,
+              0.0
+            ],
+            "extraction": "exact valid N per row; depot first; preserve customer identities",
+            "format": "r94_static_reld_moel_v1",
+            "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+            "model_params": {
+              "decoder_layer_num": 1,
+              "embedding_dim": 128,
+              "encoder_layer_num": 6,
+              "eval_type": "argmax",
+              "expert_loc": [
+                "Enc0",
+                "Enc1",
+                "Enc2",
+                "Enc3",
+                "Enc4",
+                "Enc5",
+                "Dec"
+              ],
+              "ff_hidden_dim": 512,
+              "ffidt": true,
+              "head_num": 8,
+              "logit_clipping": 10,
+              "norm": "none",
+              "norm_loc": "norm_last",
+              "num_experts": 4,
+              "problem": "Train_ALL",
+              "qkv_dim": 16,
+              "routing_level": "node",
+              "routing_method": "input_choice",
+              "sqrt_embedding_dim": 11.313708498984761,
+              "topk": 2
+            },
+            "native_fields": {
+              "depot_xy": [
+                "x",
+                "y"
+              ],
+              "node_xy_demand_tw": [
+                "x",
+                "y",
+                "signed_demand",
+                "TWstart",
+                "TWend"
+              ]
+            },
+            "native_precision": {
+              "autocast": false,
+              "cudnn_tf32": false,
+              "dtype": "float32",
+              "matmul_tf32": false
+            },
+            "output_dim": 128,
+            "raw_cvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag"
+            ],
+            "raw_mvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag",
+              "L",
+              "service",
+              "TWstart",
+              "TWend"
+            ],
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "units": "unchanged native input units; demand already capacity-normalized"
+          },
+          "supported_problems": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW",
+            "OVRPB",
+            "OVRPL",
+            "VRPBL",
+            "VRPBTW",
+            "VRPLTW",
+            "OVRPBL",
+            "OVRPBTW",
+            "OVRPLTW",
+            "VRPBLTW",
+            "OVRPBLTW"
+          ],
+          "variant": "random"
+        },
+        "OVRPBLTW": {
+          "checkpoint_path": null,
+          "checkpoint_pin": {
+            "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+          },
+          "checkpoint_sha256": null,
+          "known_unknown_pretraining_source": {
+            "applies_to_loaded_weights": false,
+            "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+            "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+            "training_tasks": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW"
+            ],
+            "unknown": [
+              "historical CLI",
+              "training instance manifest",
+              "exact trajectory",
+              "overlap with selector inputs"
+            ]
+          },
+          "native_source_files": {
+            "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+            "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+          },
+          "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+          "output_dim": 128,
+          "random_seed": 940002,
+          "spec": {
+            "disabled_tw": [
+              0.0,
+              0.0
+            ],
+            "extraction": "exact valid N per row; depot first; preserve customer identities",
+            "format": "r94_static_reld_moel_v1",
+            "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+            "model_params": {
+              "decoder_layer_num": 1,
+              "embedding_dim": 128,
+              "encoder_layer_num": 6,
+              "eval_type": "argmax",
+              "expert_loc": [
+                "Enc0",
+                "Enc1",
+                "Enc2",
+                "Enc3",
+                "Enc4",
+                "Enc5",
+                "Dec"
+              ],
+              "ff_hidden_dim": 512,
+              "ffidt": true,
+              "head_num": 8,
+              "logit_clipping": 10,
+              "norm": "none",
+              "norm_loc": "norm_last",
+              "num_experts": 4,
+              "problem": "Train_ALL",
+              "qkv_dim": 16,
+              "routing_level": "node",
+              "routing_method": "input_choice",
+              "sqrt_embedding_dim": 11.313708498984761,
+              "topk": 2
+            },
+            "native_fields": {
+              "depot_xy": [
+                "x",
+                "y"
+              ],
+              "node_xy_demand_tw": [
+                "x",
+                "y",
+                "signed_demand",
+                "TWstart",
+                "TWend"
+              ]
+            },
+            "native_precision": {
+              "autocast": false,
+              "cudnn_tf32": false,
+              "dtype": "float32",
+              "matmul_tf32": false
+            },
+            "output_dim": 128,
+            "raw_cvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag"
+            ],
+            "raw_mvrp_fields": [
+              "x",
+              "y",
+              "demand",
+              "depotflag",
+              "L",
+              "service",
+              "TWstart",
+              "TWend"
+            ],
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "units": "unchanged native input units; demand already capacity-normalized"
+          },
+          "supported_problems": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW",
+            "OVRPB",
+            "OVRPL",
+            "VRPBL",
+            "VRPBTW",
+            "VRPLTW",
+            "OVRPBL",
+            "OVRPBTW",
+            "OVRPLTW",
+            "VRPBLTW",
+            "OVRPBLTW"
+          ],
+          "variant": "random"
+        }
+      },
+      "interface_coverage_not_pretraining_task_coverage": true,
+      "no_teacher_in_final_model": true
+    },
+    "pretrain_spec": {
+      "stage": "TRAIN_node_hint_pretraining",
+      "teacher_width": 128,
+      "loss": "separate non-affine per-node LayerNorm MSE; channel/node/instance mean",
+      "teacher_scope": [
+        "CVRP",
+        "OVRP",
+        "VRPB",
+        "VRPL",
+        "VRPTW",
+        "OVRPTW",
+        "OVRPB",
+        "OVRPL",
+        "VRPBL",
+        "VRPBTW",
+        "VRPLTW",
+        "OVRPBL",
+        "OVRPBTW",
+        "OVRPLTW",
+        "VRPBLTW",
+        "OVRPBLTW"
+      ],
+      "teacher_split": "train",
+      "label_inputs": false,
+      "updates": 12800,
+      "logical_batch": 1024,
+      "warmup": 960,
+      "optimizer": "AdamW",
+      "peak_lr": 0.0001,
+      "end_lr": 1e-06,
+      "weight_decay": 0.0001,
+      "grad_clip": 1.0,
+      "dropout": 0.1,
+      "dropout_passes": 1,
+      "learned_adapter": false,
+      "optimizer_scope": "instance_encoder only",
+      "endpoint": "fixed budget; no VAL selection"
+    },
+    "protocol_sha256": "3204866f1754fa99a797c79bbd181f7dad71c924aa3d671c8172b66ff596c05b",
+    "checkpoint_sha256": "19ac3eff7c3dbc5a558702ef18b84bbec9d6cf95ac6a817a3d6e5079673a1bf3"
+  },
+  "hint_pretraining": {
+    "stage": "TRAIN_node_hint_pretraining",
+    "teacher_width": 128,
+    "loss": "separate non-affine per-node LayerNorm MSE; channel/node/instance mean",
+    "teacher_scope": [
+      "CVRP",
+      "OVRP",
+      "VRPB",
+      "VRPL",
+      "VRPTW",
+      "OVRPTW",
+      "OVRPB",
+      "OVRPL",
+      "VRPBL",
+      "VRPBTW",
+      "VRPLTW",
+      "OVRPBL",
+      "OVRPBTW",
+      "OVRPLTW",
+      "VRPBLTW",
+      "OVRPBLTW"
+    ],
+    "teacher_split": "train",
+    "label_inputs": false,
+    "updates": 12800,
+    "logical_batch": 1024,
+    "warmup": 960,
+    "optimizer": "AdamW",
+    "peak_lr": 0.0001,
+    "end_lr": 1e-06,
+    "weight_decay": 0.0001,
+    "grad_clip": 1.0,
+    "dropout": 0.1,
+    "dropout_passes": 1,
+    "learned_adapter": false,
+    "optimizer_scope": "instance_encoder only",
+    "endpoint": "fixed budget; no VAL selection"
+  },
+  "pretraining_evidence": {
+    "receipt_path": "/public/home/shiys/0selection2/code/V4/runs/R101_hint_pretraining/A/pretrain_complete.json",
+    "receipt_sha256": "bfce118d27d62f10ec9855005c58a8a1753478cd1cc585ce2f38c93812a6d5b6",
+    "trace_path": "/public/home/shiys/0selection2/code/V4/runs/R101_hint_pretraining/A/pretrain_updates.jsonl",
+    "trace_sha256": "126dee76e6a470421b1b6d3cb105e9ded97f9b1e6f412909c6644a642d8b86dd",
+    "endpoint_updates": 12800,
+    "teacher_split": "train",
+    "teacher_validation_used": false,
+    "endpoint_selected_without_validation": true,
+    "lineage": {
+      "experiment": "R101",
+      "arm": "A",
+      "complete": true,
+      "successful_updates": 12800,
+      "encoder_sha256": "1267da285be94fe4ff642cffcf4bac3b84d5bfb2ce6f6b5b255af3308dab02bb",
+      "initial_trainable_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+      "unchanged_non_encoder_sha256": "970a8aa2a548f9034f34b73d060662f71808e46359335185ce07bfc5b1bb2fa6",
+      "teacher_identity": {
+        "variant": "random",
+        "split": "train",
+        "rows_per_task": 81000,
+        "metadata_sha256": {
+          "CVRP": "e67685f4f4950ba6dfce309cfcbacc7529478da788d39c097bc033de142401d1",
+          "OVRP": "053caefbaaec68eef3b68f513cba4784420f21cd78c49cafad8ab22df51d1551",
+          "VRPB": "a34623ef9df919b9a8209f7b525513dcf0d717982ef7bfd02708d5869730e1cd",
+          "VRPL": "1aec2211a77ed0443c20005432c0824a37f138c6942c4297d425a525c92fd95d",
+          "VRPTW": "3e1e137860b8777b93ba7d4df4dbbc32259be6bc0b931c9cdcb7ab26407bafe7",
+          "OVRPTW": "02f3b4c699fc3fce5cd500ad6c9abe61ba0ba7477c0cf8a4104c51b1395d3537",
+          "OVRPB": "a5aa1757a5676b77966e892c535d84dba6a978217f06ad8c51a8ebfd0fa918b2",
+          "OVRPL": "ebf35285d8bc9d2df705b8fa0ded0e894429d959f8e7347de5f47ca5c26a837b",
+          "VRPBL": "9533d1b99f4f08336a02925f9dba382bdab9dfb037479e6364d1e80c8dffced9",
+          "VRPBTW": "85c6bbd320e559390f9e8348f494f3ba9fdc7a25d28c3a9b51e7e95630ddf187",
+          "VRPLTW": "7f0cb3fa823e991586cafec1478f13e837a77620a6fb234872c922f8c6532d3e",
+          "OVRPBL": "2eb2f93d918351d6800de6aa5dd239cc3ce978dcf140c7d7c3cb4ace6be9ccda",
+          "OVRPBTW": "60c684e087e076288eedceed631de520fdacdb13677c039d697f803c03ea587b",
+          "OVRPLTW": "eec6dd9e3128e2b47d8229e896f6f65756ed91fecf4da92962be745fa0105900",
+          "VRPBLTW": "ae69a06f1a85f0ad09d0c44b75fb3dda20cd6d2daa76c03109446c47eeddbc70",
+          "OVRPBLTW": "1c2133c0ff2a938b923b9ad2dd707db5761388fafa7d5fa6afa308fc8725a481"
+        },
+        "donor": {
+          "CVRP": {
+            "checkpoint_path": null,
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+            },
+            "checkpoint_sha256": null,
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": false,
+              "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+              "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+              "training_tasks": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW"
+              ],
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs"
+              ]
+            },
+            "native_source_files": {
+              "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+              "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+            },
+            "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+            "output_dim": 128,
+            "random_seed": 940002,
+            "spec": {
+              "disabled_tw": [
+                0.0,
+                0.0
+              ],
+              "extraction": "exact valid N per row; depot first; preserve customer identities",
+              "format": "r94_static_reld_moel_v1",
+              "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+              "model_params": {
+                "decoder_layer_num": 1,
+                "embedding_dim": 128,
+                "encoder_layer_num": 6,
+                "eval_type": "argmax",
+                "expert_loc": [
+                  "Enc0",
+                  "Enc1",
+                  "Enc2",
+                  "Enc3",
+                  "Enc4",
+                  "Enc5",
+                  "Dec"
+                ],
+                "ff_hidden_dim": 512,
+                "ffidt": true,
+                "head_num": 8,
+                "logit_clipping": 10,
+                "norm": "none",
+                "norm_loc": "norm_last",
+                "num_experts": 4,
+                "problem": "Train_ALL",
+                "qkv_dim": 16,
+                "routing_level": "node",
+                "routing_method": "input_choice",
+                "sqrt_embedding_dim": 11.313708498984761,
+                "topk": 2
+              },
+              "native_fields": {
+                "depot_xy": [
+                  "x",
+                  "y"
+                ],
+                "node_xy_demand_tw": [
+                  "x",
+                  "y",
+                  "signed_demand",
+                  "TWstart",
+                  "TWend"
+                ]
+              },
+              "native_precision": {
+                "autocast": false,
+                "cudnn_tf32": false,
+                "dtype": "float32",
+                "matmul_tf32": false
+              },
+              "output_dim": 128,
+              "raw_cvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag"
+              ],
+              "raw_mvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag",
+                "L",
+                "service",
+                "TWstart",
+                "TWend"
+              ],
+              "supported_problems": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW",
+                "OVRPB",
+                "OVRPL",
+                "VRPBL",
+                "VRPBTW",
+                "VRPLTW",
+                "OVRPBL",
+                "OVRPBTW",
+                "OVRPLTW",
+                "VRPBLTW",
+                "OVRPBLTW"
+              ],
+              "units": "unchanged native input units; demand already capacity-normalized"
+            },
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "variant": "random"
+          },
+          "OVRP": {
+            "checkpoint_path": null,
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+            },
+            "checkpoint_sha256": null,
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": false,
+              "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+              "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+              "training_tasks": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW"
+              ],
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs"
+              ]
+            },
+            "native_source_files": {
+              "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+              "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+            },
+            "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+            "output_dim": 128,
+            "random_seed": 940002,
+            "spec": {
+              "disabled_tw": [
+                0.0,
+                0.0
+              ],
+              "extraction": "exact valid N per row; depot first; preserve customer identities",
+              "format": "r94_static_reld_moel_v1",
+              "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+              "model_params": {
+                "decoder_layer_num": 1,
+                "embedding_dim": 128,
+                "encoder_layer_num": 6,
+                "eval_type": "argmax",
+                "expert_loc": [
+                  "Enc0",
+                  "Enc1",
+                  "Enc2",
+                  "Enc3",
+                  "Enc4",
+                  "Enc5",
+                  "Dec"
+                ],
+                "ff_hidden_dim": 512,
+                "ffidt": true,
+                "head_num": 8,
+                "logit_clipping": 10,
+                "norm": "none",
+                "norm_loc": "norm_last",
+                "num_experts": 4,
+                "problem": "Train_ALL",
+                "qkv_dim": 16,
+                "routing_level": "node",
+                "routing_method": "input_choice",
+                "sqrt_embedding_dim": 11.313708498984761,
+                "topk": 2
+              },
+              "native_fields": {
+                "depot_xy": [
+                  "x",
+                  "y"
+                ],
+                "node_xy_demand_tw": [
+                  "x",
+                  "y",
+                  "signed_demand",
+                  "TWstart",
+                  "TWend"
+                ]
+              },
+              "native_precision": {
+                "autocast": false,
+                "cudnn_tf32": false,
+                "dtype": "float32",
+                "matmul_tf32": false
+              },
+              "output_dim": 128,
+              "raw_cvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag"
+              ],
+              "raw_mvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag",
+                "L",
+                "service",
+                "TWstart",
+                "TWend"
+              ],
+              "supported_problems": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW",
+                "OVRPB",
+                "OVRPL",
+                "VRPBL",
+                "VRPBTW",
+                "VRPLTW",
+                "OVRPBL",
+                "OVRPBTW",
+                "OVRPLTW",
+                "VRPBLTW",
+                "OVRPBLTW"
+              ],
+              "units": "unchanged native input units; demand already capacity-normalized"
+            },
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "variant": "random"
+          },
+          "VRPB": {
+            "checkpoint_path": null,
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+            },
+            "checkpoint_sha256": null,
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": false,
+              "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+              "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+              "training_tasks": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW"
+              ],
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs"
+              ]
+            },
+            "native_source_files": {
+              "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+              "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+            },
+            "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+            "output_dim": 128,
+            "random_seed": 940002,
+            "spec": {
+              "disabled_tw": [
+                0.0,
+                0.0
+              ],
+              "extraction": "exact valid N per row; depot first; preserve customer identities",
+              "format": "r94_static_reld_moel_v1",
+              "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+              "model_params": {
+                "decoder_layer_num": 1,
+                "embedding_dim": 128,
+                "encoder_layer_num": 6,
+                "eval_type": "argmax",
+                "expert_loc": [
+                  "Enc0",
+                  "Enc1",
+                  "Enc2",
+                  "Enc3",
+                  "Enc4",
+                  "Enc5",
+                  "Dec"
+                ],
+                "ff_hidden_dim": 512,
+                "ffidt": true,
+                "head_num": 8,
+                "logit_clipping": 10,
+                "norm": "none",
+                "norm_loc": "norm_last",
+                "num_experts": 4,
+                "problem": "Train_ALL",
+                "qkv_dim": 16,
+                "routing_level": "node",
+                "routing_method": "input_choice",
+                "sqrt_embedding_dim": 11.313708498984761,
+                "topk": 2
+              },
+              "native_fields": {
+                "depot_xy": [
+                  "x",
+                  "y"
+                ],
+                "node_xy_demand_tw": [
+                  "x",
+                  "y",
+                  "signed_demand",
+                  "TWstart",
+                  "TWend"
+                ]
+              },
+              "native_precision": {
+                "autocast": false,
+                "cudnn_tf32": false,
+                "dtype": "float32",
+                "matmul_tf32": false
+              },
+              "output_dim": 128,
+              "raw_cvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag"
+              ],
+              "raw_mvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag",
+                "L",
+                "service",
+                "TWstart",
+                "TWend"
+              ],
+              "supported_problems": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW",
+                "OVRPB",
+                "OVRPL",
+                "VRPBL",
+                "VRPBTW",
+                "VRPLTW",
+                "OVRPBL",
+                "OVRPBTW",
+                "OVRPLTW",
+                "VRPBLTW",
+                "OVRPBLTW"
+              ],
+              "units": "unchanged native input units; demand already capacity-normalized"
+            },
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "variant": "random"
+          },
+          "VRPL": {
+            "checkpoint_path": null,
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+            },
+            "checkpoint_sha256": null,
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": false,
+              "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+              "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+              "training_tasks": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW"
+              ],
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs"
+              ]
+            },
+            "native_source_files": {
+              "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+              "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+            },
+            "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+            "output_dim": 128,
+            "random_seed": 940002,
+            "spec": {
+              "disabled_tw": [
+                0.0,
+                0.0
+              ],
+              "extraction": "exact valid N per row; depot first; preserve customer identities",
+              "format": "r94_static_reld_moel_v1",
+              "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+              "model_params": {
+                "decoder_layer_num": 1,
+                "embedding_dim": 128,
+                "encoder_layer_num": 6,
+                "eval_type": "argmax",
+                "expert_loc": [
+                  "Enc0",
+                  "Enc1",
+                  "Enc2",
+                  "Enc3",
+                  "Enc4",
+                  "Enc5",
+                  "Dec"
+                ],
+                "ff_hidden_dim": 512,
+                "ffidt": true,
+                "head_num": 8,
+                "logit_clipping": 10,
+                "norm": "none",
+                "norm_loc": "norm_last",
+                "num_experts": 4,
+                "problem": "Train_ALL",
+                "qkv_dim": 16,
+                "routing_level": "node",
+                "routing_method": "input_choice",
+                "sqrt_embedding_dim": 11.313708498984761,
+                "topk": 2
+              },
+              "native_fields": {
+                "depot_xy": [
+                  "x",
+                  "y"
+                ],
+                "node_xy_demand_tw": [
+                  "x",
+                  "y",
+                  "signed_demand",
+                  "TWstart",
+                  "TWend"
+                ]
+              },
+              "native_precision": {
+                "autocast": false,
+                "cudnn_tf32": false,
+                "dtype": "float32",
+                "matmul_tf32": false
+              },
+              "output_dim": 128,
+              "raw_cvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag"
+              ],
+              "raw_mvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag",
+                "L",
+                "service",
+                "TWstart",
+                "TWend"
+              ],
+              "supported_problems": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW",
+                "OVRPB",
+                "OVRPL",
+                "VRPBL",
+                "VRPBTW",
+                "VRPLTW",
+                "OVRPBL",
+                "OVRPBTW",
+                "OVRPLTW",
+                "VRPBLTW",
+                "OVRPBLTW"
+              ],
+              "units": "unchanged native input units; demand already capacity-normalized"
+            },
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "variant": "random"
+          },
+          "VRPTW": {
+            "checkpoint_path": null,
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+            },
+            "checkpoint_sha256": null,
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": false,
+              "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+              "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+              "training_tasks": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW"
+              ],
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs"
+              ]
+            },
+            "native_source_files": {
+              "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+              "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+            },
+            "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+            "output_dim": 128,
+            "random_seed": 940002,
+            "spec": {
+              "disabled_tw": [
+                0.0,
+                0.0
+              ],
+              "extraction": "exact valid N per row; depot first; preserve customer identities",
+              "format": "r94_static_reld_moel_v1",
+              "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+              "model_params": {
+                "decoder_layer_num": 1,
+                "embedding_dim": 128,
+                "encoder_layer_num": 6,
+                "eval_type": "argmax",
+                "expert_loc": [
+                  "Enc0",
+                  "Enc1",
+                  "Enc2",
+                  "Enc3",
+                  "Enc4",
+                  "Enc5",
+                  "Dec"
+                ],
+                "ff_hidden_dim": 512,
+                "ffidt": true,
+                "head_num": 8,
+                "logit_clipping": 10,
+                "norm": "none",
+                "norm_loc": "norm_last",
+                "num_experts": 4,
+                "problem": "Train_ALL",
+                "qkv_dim": 16,
+                "routing_level": "node",
+                "routing_method": "input_choice",
+                "sqrt_embedding_dim": 11.313708498984761,
+                "topk": 2
+              },
+              "native_fields": {
+                "depot_xy": [
+                  "x",
+                  "y"
+                ],
+                "node_xy_demand_tw": [
+                  "x",
+                  "y",
+                  "signed_demand",
+                  "TWstart",
+                  "TWend"
+                ]
+              },
+              "native_precision": {
+                "autocast": false,
+                "cudnn_tf32": false,
+                "dtype": "float32",
+                "matmul_tf32": false
+              },
+              "output_dim": 128,
+              "raw_cvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag"
+              ],
+              "raw_mvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag",
+                "L",
+                "service",
+                "TWstart",
+                "TWend"
+              ],
+              "supported_problems": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW",
+                "OVRPB",
+                "OVRPL",
+                "VRPBL",
+                "VRPBTW",
+                "VRPLTW",
+                "OVRPBL",
+                "OVRPBTW",
+                "OVRPLTW",
+                "VRPBLTW",
+                "OVRPBLTW"
+              ],
+              "units": "unchanged native input units; demand already capacity-normalized"
+            },
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "variant": "random"
+          },
+          "OVRPTW": {
+            "checkpoint_path": null,
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+            },
+            "checkpoint_sha256": null,
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": false,
+              "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+              "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+              "training_tasks": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW"
+              ],
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs"
+              ]
+            },
+            "native_source_files": {
+              "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+              "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+            },
+            "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+            "output_dim": 128,
+            "random_seed": 940002,
+            "spec": {
+              "disabled_tw": [
+                0.0,
+                0.0
+              ],
+              "extraction": "exact valid N per row; depot first; preserve customer identities",
+              "format": "r94_static_reld_moel_v1",
+              "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+              "model_params": {
+                "decoder_layer_num": 1,
+                "embedding_dim": 128,
+                "encoder_layer_num": 6,
+                "eval_type": "argmax",
+                "expert_loc": [
+                  "Enc0",
+                  "Enc1",
+                  "Enc2",
+                  "Enc3",
+                  "Enc4",
+                  "Enc5",
+                  "Dec"
+                ],
+                "ff_hidden_dim": 512,
+                "ffidt": true,
+                "head_num": 8,
+                "logit_clipping": 10,
+                "norm": "none",
+                "norm_loc": "norm_last",
+                "num_experts": 4,
+                "problem": "Train_ALL",
+                "qkv_dim": 16,
+                "routing_level": "node",
+                "routing_method": "input_choice",
+                "sqrt_embedding_dim": 11.313708498984761,
+                "topk": 2
+              },
+              "native_fields": {
+                "depot_xy": [
+                  "x",
+                  "y"
+                ],
+                "node_xy_demand_tw": [
+                  "x",
+                  "y",
+                  "signed_demand",
+                  "TWstart",
+                  "TWend"
+                ]
+              },
+              "native_precision": {
+                "autocast": false,
+                "cudnn_tf32": false,
+                "dtype": "float32",
+                "matmul_tf32": false
+              },
+              "output_dim": 128,
+              "raw_cvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag"
+              ],
+              "raw_mvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag",
+                "L",
+                "service",
+                "TWstart",
+                "TWend"
+              ],
+              "supported_problems": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW",
+                "OVRPB",
+                "OVRPL",
+                "VRPBL",
+                "VRPBTW",
+                "VRPLTW",
+                "OVRPBL",
+                "OVRPBTW",
+                "OVRPLTW",
+                "VRPBLTW",
+                "OVRPBLTW"
+              ],
+              "units": "unchanged native input units; demand already capacity-normalized"
+            },
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "variant": "random"
+          },
+          "OVRPB": {
+            "checkpoint_path": null,
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+            },
+            "checkpoint_sha256": null,
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": false,
+              "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+              "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+              "training_tasks": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW"
+              ],
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs"
+              ]
+            },
+            "native_source_files": {
+              "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+              "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+            },
+            "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+            "output_dim": 128,
+            "random_seed": 940002,
+            "spec": {
+              "disabled_tw": [
+                0.0,
+                0.0
+              ],
+              "extraction": "exact valid N per row; depot first; preserve customer identities",
+              "format": "r94_static_reld_moel_v1",
+              "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+              "model_params": {
+                "decoder_layer_num": 1,
+                "embedding_dim": 128,
+                "encoder_layer_num": 6,
+                "eval_type": "argmax",
+                "expert_loc": [
+                  "Enc0",
+                  "Enc1",
+                  "Enc2",
+                  "Enc3",
+                  "Enc4",
+                  "Enc5",
+                  "Dec"
+                ],
+                "ff_hidden_dim": 512,
+                "ffidt": true,
+                "head_num": 8,
+                "logit_clipping": 10,
+                "norm": "none",
+                "norm_loc": "norm_last",
+                "num_experts": 4,
+                "problem": "Train_ALL",
+                "qkv_dim": 16,
+                "routing_level": "node",
+                "routing_method": "input_choice",
+                "sqrt_embedding_dim": 11.313708498984761,
+                "topk": 2
+              },
+              "native_fields": {
+                "depot_xy": [
+                  "x",
+                  "y"
+                ],
+                "node_xy_demand_tw": [
+                  "x",
+                  "y",
+                  "signed_demand",
+                  "TWstart",
+                  "TWend"
+                ]
+              },
+              "native_precision": {
+                "autocast": false,
+                "cudnn_tf32": false,
+                "dtype": "float32",
+                "matmul_tf32": false
+              },
+              "output_dim": 128,
+              "raw_cvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag"
+              ],
+              "raw_mvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag",
+                "L",
+                "service",
+                "TWstart",
+                "TWend"
+              ],
+              "supported_problems": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW",
+                "OVRPB",
+                "OVRPL",
+                "VRPBL",
+                "VRPBTW",
+                "VRPLTW",
+                "OVRPBL",
+                "OVRPBTW",
+                "OVRPLTW",
+                "VRPBLTW",
+                "OVRPBLTW"
+              ],
+              "units": "unchanged native input units; demand already capacity-normalized"
+            },
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "variant": "random"
+          },
+          "OVRPL": {
+            "checkpoint_path": null,
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+            },
+            "checkpoint_sha256": null,
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": false,
+              "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+              "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+              "training_tasks": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW"
+              ],
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs"
+              ]
+            },
+            "native_source_files": {
+              "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+              "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+            },
+            "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+            "output_dim": 128,
+            "random_seed": 940002,
+            "spec": {
+              "disabled_tw": [
+                0.0,
+                0.0
+              ],
+              "extraction": "exact valid N per row; depot first; preserve customer identities",
+              "format": "r94_static_reld_moel_v1",
+              "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+              "model_params": {
+                "decoder_layer_num": 1,
+                "embedding_dim": 128,
+                "encoder_layer_num": 6,
+                "eval_type": "argmax",
+                "expert_loc": [
+                  "Enc0",
+                  "Enc1",
+                  "Enc2",
+                  "Enc3",
+                  "Enc4",
+                  "Enc5",
+                  "Dec"
+                ],
+                "ff_hidden_dim": 512,
+                "ffidt": true,
+                "head_num": 8,
+                "logit_clipping": 10,
+                "norm": "none",
+                "norm_loc": "norm_last",
+                "num_experts": 4,
+                "problem": "Train_ALL",
+                "qkv_dim": 16,
+                "routing_level": "node",
+                "routing_method": "input_choice",
+                "sqrt_embedding_dim": 11.313708498984761,
+                "topk": 2
+              },
+              "native_fields": {
+                "depot_xy": [
+                  "x",
+                  "y"
+                ],
+                "node_xy_demand_tw": [
+                  "x",
+                  "y",
+                  "signed_demand",
+                  "TWstart",
+                  "TWend"
+                ]
+              },
+              "native_precision": {
+                "autocast": false,
+                "cudnn_tf32": false,
+                "dtype": "float32",
+                "matmul_tf32": false
+              },
+              "output_dim": 128,
+              "raw_cvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag"
+              ],
+              "raw_mvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag",
+                "L",
+                "service",
+                "TWstart",
+                "TWend"
+              ],
+              "supported_problems": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW",
+                "OVRPB",
+                "OVRPL",
+                "VRPBL",
+                "VRPBTW",
+                "VRPLTW",
+                "OVRPBL",
+                "OVRPBTW",
+                "OVRPLTW",
+                "VRPBLTW",
+                "OVRPBLTW"
+              ],
+              "units": "unchanged native input units; demand already capacity-normalized"
+            },
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "variant": "random"
+          },
+          "VRPBL": {
+            "checkpoint_path": null,
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+            },
+            "checkpoint_sha256": null,
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": false,
+              "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+              "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+              "training_tasks": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW"
+              ],
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs"
+              ]
+            },
+            "native_source_files": {
+              "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+              "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+            },
+            "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+            "output_dim": 128,
+            "random_seed": 940002,
+            "spec": {
+              "disabled_tw": [
+                0.0,
+                0.0
+              ],
+              "extraction": "exact valid N per row; depot first; preserve customer identities",
+              "format": "r94_static_reld_moel_v1",
+              "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+              "model_params": {
+                "decoder_layer_num": 1,
+                "embedding_dim": 128,
+                "encoder_layer_num": 6,
+                "eval_type": "argmax",
+                "expert_loc": [
+                  "Enc0",
+                  "Enc1",
+                  "Enc2",
+                  "Enc3",
+                  "Enc4",
+                  "Enc5",
+                  "Dec"
+                ],
+                "ff_hidden_dim": 512,
+                "ffidt": true,
+                "head_num": 8,
+                "logit_clipping": 10,
+                "norm": "none",
+                "norm_loc": "norm_last",
+                "num_experts": 4,
+                "problem": "Train_ALL",
+                "qkv_dim": 16,
+                "routing_level": "node",
+                "routing_method": "input_choice",
+                "sqrt_embedding_dim": 11.313708498984761,
+                "topk": 2
+              },
+              "native_fields": {
+                "depot_xy": [
+                  "x",
+                  "y"
+                ],
+                "node_xy_demand_tw": [
+                  "x",
+                  "y",
+                  "signed_demand",
+                  "TWstart",
+                  "TWend"
+                ]
+              },
+              "native_precision": {
+                "autocast": false,
+                "cudnn_tf32": false,
+                "dtype": "float32",
+                "matmul_tf32": false
+              },
+              "output_dim": 128,
+              "raw_cvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag"
+              ],
+              "raw_mvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag",
+                "L",
+                "service",
+                "TWstart",
+                "TWend"
+              ],
+              "supported_problems": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW",
+                "OVRPB",
+                "OVRPL",
+                "VRPBL",
+                "VRPBTW",
+                "VRPLTW",
+                "OVRPBL",
+                "OVRPBTW",
+                "OVRPLTW",
+                "VRPBLTW",
+                "OVRPBLTW"
+              ],
+              "units": "unchanged native input units; demand already capacity-normalized"
+            },
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "variant": "random"
+          },
+          "VRPBTW": {
+            "checkpoint_path": null,
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+            },
+            "checkpoint_sha256": null,
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": false,
+              "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+              "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+              "training_tasks": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW"
+              ],
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs"
+              ]
+            },
+            "native_source_files": {
+              "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+              "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+            },
+            "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+            "output_dim": 128,
+            "random_seed": 940002,
+            "spec": {
+              "disabled_tw": [
+                0.0,
+                0.0
+              ],
+              "extraction": "exact valid N per row; depot first; preserve customer identities",
+              "format": "r94_static_reld_moel_v1",
+              "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+              "model_params": {
+                "decoder_layer_num": 1,
+                "embedding_dim": 128,
+                "encoder_layer_num": 6,
+                "eval_type": "argmax",
+                "expert_loc": [
+                  "Enc0",
+                  "Enc1",
+                  "Enc2",
+                  "Enc3",
+                  "Enc4",
+                  "Enc5",
+                  "Dec"
+                ],
+                "ff_hidden_dim": 512,
+                "ffidt": true,
+                "head_num": 8,
+                "logit_clipping": 10,
+                "norm": "none",
+                "norm_loc": "norm_last",
+                "num_experts": 4,
+                "problem": "Train_ALL",
+                "qkv_dim": 16,
+                "routing_level": "node",
+                "routing_method": "input_choice",
+                "sqrt_embedding_dim": 11.313708498984761,
+                "topk": 2
+              },
+              "native_fields": {
+                "depot_xy": [
+                  "x",
+                  "y"
+                ],
+                "node_xy_demand_tw": [
+                  "x",
+                  "y",
+                  "signed_demand",
+                  "TWstart",
+                  "TWend"
+                ]
+              },
+              "native_precision": {
+                "autocast": false,
+                "cudnn_tf32": false,
+                "dtype": "float32",
+                "matmul_tf32": false
+              },
+              "output_dim": 128,
+              "raw_cvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag"
+              ],
+              "raw_mvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag",
+                "L",
+                "service",
+                "TWstart",
+                "TWend"
+              ],
+              "supported_problems": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW",
+                "OVRPB",
+                "OVRPL",
+                "VRPBL",
+                "VRPBTW",
+                "VRPLTW",
+                "OVRPBL",
+                "OVRPBTW",
+                "OVRPLTW",
+                "VRPBLTW",
+                "OVRPBLTW"
+              ],
+              "units": "unchanged native input units; demand already capacity-normalized"
+            },
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "variant": "random"
+          },
+          "VRPLTW": {
+            "checkpoint_path": null,
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+            },
+            "checkpoint_sha256": null,
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": false,
+              "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+              "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+              "training_tasks": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW"
+              ],
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs"
+              ]
+            },
+            "native_source_files": {
+              "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+              "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+            },
+            "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+            "output_dim": 128,
+            "random_seed": 940002,
+            "spec": {
+              "disabled_tw": [
+                0.0,
+                0.0
+              ],
+              "extraction": "exact valid N per row; depot first; preserve customer identities",
+              "format": "r94_static_reld_moel_v1",
+              "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+              "model_params": {
+                "decoder_layer_num": 1,
+                "embedding_dim": 128,
+                "encoder_layer_num": 6,
+                "eval_type": "argmax",
+                "expert_loc": [
+                  "Enc0",
+                  "Enc1",
+                  "Enc2",
+                  "Enc3",
+                  "Enc4",
+                  "Enc5",
+                  "Dec"
+                ],
+                "ff_hidden_dim": 512,
+                "ffidt": true,
+                "head_num": 8,
+                "logit_clipping": 10,
+                "norm": "none",
+                "norm_loc": "norm_last",
+                "num_experts": 4,
+                "problem": "Train_ALL",
+                "qkv_dim": 16,
+                "routing_level": "node",
+                "routing_method": "input_choice",
+                "sqrt_embedding_dim": 11.313708498984761,
+                "topk": 2
+              },
+              "native_fields": {
+                "depot_xy": [
+                  "x",
+                  "y"
+                ],
+                "node_xy_demand_tw": [
+                  "x",
+                  "y",
+                  "signed_demand",
+                  "TWstart",
+                  "TWend"
+                ]
+              },
+              "native_precision": {
+                "autocast": false,
+                "cudnn_tf32": false,
+                "dtype": "float32",
+                "matmul_tf32": false
+              },
+              "output_dim": 128,
+              "raw_cvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag"
+              ],
+              "raw_mvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag",
+                "L",
+                "service",
+                "TWstart",
+                "TWend"
+              ],
+              "supported_problems": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW",
+                "OVRPB",
+                "OVRPL",
+                "VRPBL",
+                "VRPBTW",
+                "VRPLTW",
+                "OVRPBL",
+                "OVRPBTW",
+                "OVRPLTW",
+                "VRPBLTW",
+                "OVRPBLTW"
+              ],
+              "units": "unchanged native input units; demand already capacity-normalized"
+            },
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "variant": "random"
+          },
+          "OVRPBL": {
+            "checkpoint_path": null,
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+            },
+            "checkpoint_sha256": null,
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": false,
+              "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+              "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+              "training_tasks": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW"
+              ],
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs"
+              ]
+            },
+            "native_source_files": {
+              "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+              "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+            },
+            "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+            "output_dim": 128,
+            "random_seed": 940002,
+            "spec": {
+              "disabled_tw": [
+                0.0,
+                0.0
+              ],
+              "extraction": "exact valid N per row; depot first; preserve customer identities",
+              "format": "r94_static_reld_moel_v1",
+              "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+              "model_params": {
+                "decoder_layer_num": 1,
+                "embedding_dim": 128,
+                "encoder_layer_num": 6,
+                "eval_type": "argmax",
+                "expert_loc": [
+                  "Enc0",
+                  "Enc1",
+                  "Enc2",
+                  "Enc3",
+                  "Enc4",
+                  "Enc5",
+                  "Dec"
+                ],
+                "ff_hidden_dim": 512,
+                "ffidt": true,
+                "head_num": 8,
+                "logit_clipping": 10,
+                "norm": "none",
+                "norm_loc": "norm_last",
+                "num_experts": 4,
+                "problem": "Train_ALL",
+                "qkv_dim": 16,
+                "routing_level": "node",
+                "routing_method": "input_choice",
+                "sqrt_embedding_dim": 11.313708498984761,
+                "topk": 2
+              },
+              "native_fields": {
+                "depot_xy": [
+                  "x",
+                  "y"
+                ],
+                "node_xy_demand_tw": [
+                  "x",
+                  "y",
+                  "signed_demand",
+                  "TWstart",
+                  "TWend"
+                ]
+              },
+              "native_precision": {
+                "autocast": false,
+                "cudnn_tf32": false,
+                "dtype": "float32",
+                "matmul_tf32": false
+              },
+              "output_dim": 128,
+              "raw_cvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag"
+              ],
+              "raw_mvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag",
+                "L",
+                "service",
+                "TWstart",
+                "TWend"
+              ],
+              "supported_problems": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW",
+                "OVRPB",
+                "OVRPL",
+                "VRPBL",
+                "VRPBTW",
+                "VRPLTW",
+                "OVRPBL",
+                "OVRPBTW",
+                "OVRPLTW",
+                "VRPBLTW",
+                "OVRPBLTW"
+              ],
+              "units": "unchanged native input units; demand already capacity-normalized"
+            },
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "variant": "random"
+          },
+          "OVRPBTW": {
+            "checkpoint_path": null,
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+            },
+            "checkpoint_sha256": null,
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": false,
+              "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+              "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+              "training_tasks": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW"
+              ],
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs"
+              ]
+            },
+            "native_source_files": {
+              "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+              "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+            },
+            "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+            "output_dim": 128,
+            "random_seed": 940002,
+            "spec": {
+              "disabled_tw": [
+                0.0,
+                0.0
+              ],
+              "extraction": "exact valid N per row; depot first; preserve customer identities",
+              "format": "r94_static_reld_moel_v1",
+              "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+              "model_params": {
+                "decoder_layer_num": 1,
+                "embedding_dim": 128,
+                "encoder_layer_num": 6,
+                "eval_type": "argmax",
+                "expert_loc": [
+                  "Enc0",
+                  "Enc1",
+                  "Enc2",
+                  "Enc3",
+                  "Enc4",
+                  "Enc5",
+                  "Dec"
+                ],
+                "ff_hidden_dim": 512,
+                "ffidt": true,
+                "head_num": 8,
+                "logit_clipping": 10,
+                "norm": "none",
+                "norm_loc": "norm_last",
+                "num_experts": 4,
+                "problem": "Train_ALL",
+                "qkv_dim": 16,
+                "routing_level": "node",
+                "routing_method": "input_choice",
+                "sqrt_embedding_dim": 11.313708498984761,
+                "topk": 2
+              },
+              "native_fields": {
+                "depot_xy": [
+                  "x",
+                  "y"
+                ],
+                "node_xy_demand_tw": [
+                  "x",
+                  "y",
+                  "signed_demand",
+                  "TWstart",
+                  "TWend"
+                ]
+              },
+              "native_precision": {
+                "autocast": false,
+                "cudnn_tf32": false,
+                "dtype": "float32",
+                "matmul_tf32": false
+              },
+              "output_dim": 128,
+              "raw_cvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag"
+              ],
+              "raw_mvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag",
+                "L",
+                "service",
+                "TWstart",
+                "TWend"
+              ],
+              "supported_problems": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW",
+                "OVRPB",
+                "OVRPL",
+                "VRPBL",
+                "VRPBTW",
+                "VRPLTW",
+                "OVRPBL",
+                "OVRPBTW",
+                "OVRPLTW",
+                "VRPBLTW",
+                "OVRPBLTW"
+              ],
+              "units": "unchanged native input units; demand already capacity-normalized"
+            },
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "variant": "random"
+          },
+          "OVRPLTW": {
+            "checkpoint_path": null,
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+            },
+            "checkpoint_sha256": null,
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": false,
+              "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+              "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+              "training_tasks": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW"
+              ],
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs"
+              ]
+            },
+            "native_source_files": {
+              "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+              "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+            },
+            "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+            "output_dim": 128,
+            "random_seed": 940002,
+            "spec": {
+              "disabled_tw": [
+                0.0,
+                0.0
+              ],
+              "extraction": "exact valid N per row; depot first; preserve customer identities",
+              "format": "r94_static_reld_moel_v1",
+              "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+              "model_params": {
+                "decoder_layer_num": 1,
+                "embedding_dim": 128,
+                "encoder_layer_num": 6,
+                "eval_type": "argmax",
+                "expert_loc": [
+                  "Enc0",
+                  "Enc1",
+                  "Enc2",
+                  "Enc3",
+                  "Enc4",
+                  "Enc5",
+                  "Dec"
+                ],
+                "ff_hidden_dim": 512,
+                "ffidt": true,
+                "head_num": 8,
+                "logit_clipping": 10,
+                "norm": "none",
+                "norm_loc": "norm_last",
+                "num_experts": 4,
+                "problem": "Train_ALL",
+                "qkv_dim": 16,
+                "routing_level": "node",
+                "routing_method": "input_choice",
+                "sqrt_embedding_dim": 11.313708498984761,
+                "topk": 2
+              },
+              "native_fields": {
+                "depot_xy": [
+                  "x",
+                  "y"
+                ],
+                "node_xy_demand_tw": [
+                  "x",
+                  "y",
+                  "signed_demand",
+                  "TWstart",
+                  "TWend"
+                ]
+              },
+              "native_precision": {
+                "autocast": false,
+                "cudnn_tf32": false,
+                "dtype": "float32",
+                "matmul_tf32": false
+              },
+              "output_dim": 128,
+              "raw_cvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag"
+              ],
+              "raw_mvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag",
+                "L",
+                "service",
+                "TWstart",
+                "TWend"
+              ],
+              "supported_problems": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW",
+                "OVRPB",
+                "OVRPL",
+                "VRPBL",
+                "VRPBTW",
+                "VRPLTW",
+                "OVRPBL",
+                "OVRPBTW",
+                "OVRPLTW",
+                "VRPBLTW",
+                "OVRPBLTW"
+              ],
+              "units": "unchanged native input units; demand already capacity-normalized"
+            },
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "variant": "random"
+          },
+          "VRPBLTW": {
+            "checkpoint_path": null,
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+            },
+            "checkpoint_sha256": null,
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": false,
+              "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+              "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+              "training_tasks": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW"
+              ],
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs"
+              ]
+            },
+            "native_source_files": {
+              "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+              "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+            },
+            "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+            "output_dim": 128,
+            "random_seed": 940002,
+            "spec": {
+              "disabled_tw": [
+                0.0,
+                0.0
+              ],
+              "extraction": "exact valid N per row; depot first; preserve customer identities",
+              "format": "r94_static_reld_moel_v1",
+              "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+              "model_params": {
+                "decoder_layer_num": 1,
+                "embedding_dim": 128,
+                "encoder_layer_num": 6,
+                "eval_type": "argmax",
+                "expert_loc": [
+                  "Enc0",
+                  "Enc1",
+                  "Enc2",
+                  "Enc3",
+                  "Enc4",
+                  "Enc5",
+                  "Dec"
+                ],
+                "ff_hidden_dim": 512,
+                "ffidt": true,
+                "head_num": 8,
+                "logit_clipping": 10,
+                "norm": "none",
+                "norm_loc": "norm_last",
+                "num_experts": 4,
+                "problem": "Train_ALL",
+                "qkv_dim": 16,
+                "routing_level": "node",
+                "routing_method": "input_choice",
+                "sqrt_embedding_dim": 11.313708498984761,
+                "topk": 2
+              },
+              "native_fields": {
+                "depot_xy": [
+                  "x",
+                  "y"
+                ],
+                "node_xy_demand_tw": [
+                  "x",
+                  "y",
+                  "signed_demand",
+                  "TWstart",
+                  "TWend"
+                ]
+              },
+              "native_precision": {
+                "autocast": false,
+                "cudnn_tf32": false,
+                "dtype": "float32",
+                "matmul_tf32": false
+              },
+              "output_dim": 128,
+              "raw_cvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag"
+              ],
+              "raw_mvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag",
+                "L",
+                "service",
+                "TWstart",
+                "TWend"
+              ],
+              "supported_problems": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW",
+                "OVRPB",
+                "OVRPL",
+                "VRPBL",
+                "VRPBTW",
+                "VRPLTW",
+                "OVRPBL",
+                "OVRPBTW",
+                "OVRPLTW",
+                "VRPBLTW",
+                "OVRPBLTW"
+              ],
+              "units": "unchanged native input units; demand already capacity-normalized"
+            },
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "variant": "random"
+          },
+          "OVRPBLTW": {
+            "checkpoint_path": null,
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+            },
+            "checkpoint_sha256": null,
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": false,
+              "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+              "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate",
+              "training_tasks": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW"
+              ],
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs"
+              ]
+            },
+            "native_source_files": {
+              "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd",
+              "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d"
+            },
+            "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+            "output_dim": 128,
+            "random_seed": 940002,
+            "spec": {
+              "disabled_tw": [
+                0.0,
+                0.0
+              ],
+              "extraction": "exact valid N per row; depot first; preserve customer identities",
+              "format": "r94_static_reld_moel_v1",
+              "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+              "model_params": {
+                "decoder_layer_num": 1,
+                "embedding_dim": 128,
+                "encoder_layer_num": 6,
+                "eval_type": "argmax",
+                "expert_loc": [
+                  "Enc0",
+                  "Enc1",
+                  "Enc2",
+                  "Enc3",
+                  "Enc4",
+                  "Enc5",
+                  "Dec"
+                ],
+                "ff_hidden_dim": 512,
+                "ffidt": true,
+                "head_num": 8,
+                "logit_clipping": 10,
+                "norm": "none",
+                "norm_loc": "norm_last",
+                "num_experts": 4,
+                "problem": "Train_ALL",
+                "qkv_dim": 16,
+                "routing_level": "node",
+                "routing_method": "input_choice",
+                "sqrt_embedding_dim": 11.313708498984761,
+                "topk": 2
+              },
+              "native_fields": {
+                "depot_xy": [
+                  "x",
+                  "y"
+                ],
+                "node_xy_demand_tw": [
+                  "x",
+                  "y",
+                  "signed_demand",
+                  "TWstart",
+                  "TWend"
+                ]
+              },
+              "native_precision": {
+                "autocast": false,
+                "cudnn_tf32": false,
+                "dtype": "float32",
+                "matmul_tf32": false
+              },
+              "output_dim": 128,
+              "raw_cvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag"
+              ],
+              "raw_mvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag",
+                "L",
+                "service",
+                "TWstart",
+                "TWend"
+              ],
+              "supported_problems": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW",
+                "OVRPB",
+                "OVRPL",
+                "VRPBL",
+                "VRPBTW",
+                "VRPLTW",
+                "OVRPBL",
+                "OVRPBTW",
+                "OVRPLTW",
+                "VRPBLTW",
+                "OVRPBLTW"
+              ],
+              "units": "unchanged native input units; demand already capacity-normalized"
+            },
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "variant": "random"
+          }
+        },
+        "interface_coverage_not_pretraining_task_coverage": true,
+        "no_teacher_in_final_model": true
+      },
+      "pretrain_spec": {
+        "stage": "TRAIN_node_hint_pretraining",
+        "teacher_width": 128,
+        "loss": "separate non-affine per-node LayerNorm MSE; channel/node/instance mean",
+        "teacher_scope": [
+          "CVRP",
+          "OVRP",
+          "VRPB",
+          "VRPL",
+          "VRPTW",
+          "OVRPTW",
+          "OVRPB",
+          "OVRPL",
+          "VRPBL",
+          "VRPBTW",
+          "VRPLTW",
+          "OVRPBL",
+          "OVRPBTW",
+          "OVRPLTW",
+          "VRPBLTW",
+          "OVRPBLTW"
+        ],
+        "teacher_split": "train",
+        "label_inputs": false,
+        "updates": 12800,
+        "logical_batch": 1024,
+        "warmup": 960,
+        "optimizer": "AdamW",
+        "peak_lr": 0.0001,
+        "end_lr": 1e-06,
+        "weight_decay": 0.0001,
+        "grad_clip": 1.0,
+        "dropout": 0.1,
+        "dropout_passes": 1,
+        "learned_adapter": false,
+        "optimizer_scope": "instance_encoder only",
+        "endpoint": "fixed budget; no VAL selection"
+      },
+      "protocol_sha256": "3204866f1754fa99a797c79bbd181f7dad71c924aa3d671c8172b66ff596c05b",
+      "checkpoint_sha256": "19ac3eff7c3dbc5a558702ef18b84bbec9d6cf95ac6a817a3d6e5079673a1bf3"
+    }
+  },
+  "target_identity": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/comparison_artifacts/target_list.json",
+    "identity": {
+      "baseline_checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "baseline_state_hash": "ad0a6d9c68c6f117b477807f6f8be52662032a8baea348dda6144c46091303e2",
+      "baseline_val_prediction_sha256": "8a1aea9caf608d12fbc83d89704a50eb37d461665c7609ad3e25778cdab932a7",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "threshold_chosen_pct": 0.1,
+      "rule": "A locked VAL: chosen percentage <= 0.1 and native winner count > 0"
+    },
+    "categories": {
+      "TSP/DIFUSCO": "zero",
+      "TSP/DIFUSCO500": "zero",
+      "TSP/LEHD": "zero",
+      "TSP/OMNI": "zero",
+      "CVRP/RouteFinder": "zero",
+      "ATSP/GLOP": "zero",
+      "ATSP/MATPOENET": "zero",
+      "OVRP/MTPOMO": "zero",
+      "OVRP/MVMOE": "zero",
+      "OVRP/reld_mt": "near_zero",
+      "VRPL/MTPOMO": "zero",
+      "VRPL/MVMOE": "zero",
+      "VRPTW/MoSES_CaDA": "near_zero",
+      "VRPTW/MoSES_RF": "zero",
+      "VRPTW/RouteFinder": "zero",
+      "OVRPTW/MoSES_CaDA": "zero",
+      "OVRPTW/MoSES_RF": "zero",
+      "OVRPTW/RouteFinder": "zero",
+      "OVRPB/MTPOMO": "zero",
+      "OVRPB/MVMOE": "near_zero",
+      "OVRPL/MTPOMO": "zero",
+      "OVRPL/MVMOE": "zero",
+      "VRPBL/MTPOMO": "zero",
+      "VRPBTW/MTPOMO": "zero",
+      "VRPLTW/MTPOMO": "zero",
+      "VRPLTW/MoSES_CaDA": "zero",
+      "VRPLTW/MoSES_RF": "zero",
+      "VRPLTW/RouteFinder": "zero",
+      "OVRPBL/MTPOMO": "near_zero",
+      "OVRPBL/MVMOE": "near_zero",
+      "OVRPBTW/MTPOMO": "zero",
+      "OVRPLTW/MVMOE": "near_zero",
+      "OVRPLTW/MoSES_CaDA": "near_zero",
+      "OVRPLTW/MoSES_RF": "zero",
+      "OVRPLTW/RouteFinder": "zero",
+      "VRPBLTW/MTPOMO": "zero"
+    },
+    "sha256": "406ded5a21d8b73c2a41b87dc2bc3cc14330663ae1aa4f59ca6fbfde83770fe4",
+    "target_count": 36
+  },
+  "historical_reference": {
+    "R89B": {
+      "model": "R89B",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry/B_muon_hybrid",
+      "checkpoint_sha256": "41fa4ad8b590fa44e8949b114156d714d7ee2f2d31c847658a26654993057260",
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "role": "main historical reference",
+      "total_budget_matched": false,
+      "reason": "Historical selector lacks the extra12800 TRAIN hint updates"
+    },
+    "R84A": {
+      "model": "R84A",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline",
+      "checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "role": "secondary historical reference",
+      "total_budget_matched": false,
+      "reason": "Historical selector lacks the extra12800 TRAIN hint updates"
+    }
+  },
+  "objective": {
+    "classification": "original R77 native CE",
+    "coefficients": {
+      "ce": 0.35,
+      "comparison": 0.35,
+      "risk": 0.02
+    },
+    "consistency": "original symmetric R-Drop ramp to .35 over4320 updates",
+    "forward_passes": 2,
+    "stageII_hint_loss": false,
+    "extra_loss": false,
+    "mutable_objective_state": false
+  },
+  "loss": {
+    "ce": 0.35,
+    "comparison": 0.35,
+    "risk": 0.02,
+    "cost_scale": 0.01,
+    "focus_weights": {
+      "true3": 0.5,
+      "predicted3": 0.25,
+      "all_pairs": 0.25
+    }
+  },
+  "evidence_boundary": "Matched A/B: random R94A versus pinned pretrained R94B TRAIN node representations; both12800 hint updates +57600 original full18 R77 updates, seed2/logical batch1024. Same original fresh R84 initialization and TRAIN geometry; transfer instance_encoder only. Original R88B physical TSP node0, hand34/methodID, joint2, score MLP/maximin,1842953 parameters. No added head/adapter, teacher input or hint MSE in Stage II or deployment. Original CE=.35, comparison=.35, risk=.02, R-Drop=.35, dropout=.1. Stage I uses TRAIN81000/task over CVRP+15MVRP, no outcome labels or teacher VAL/TEST; fixed endpoint, no VAL selection. Stage II resets optimizer/scaler/RNG/task/sample streams. R89B main / R84A secondary are historical same-data references, not total-budget-matched controls. R94B has additional external donor pretraining history of partly unknown provenance; 16-task interface coverage is not16-task source pretraining. The paper memo is conditional motivation, not measured success or an algorithmic novelty claim. Fixed R84 target36; selection proportions and zero-count movement are not winner accuracy or true recovery. Native/FP64 ind winners, original legal pools, TRAIN-fitted SBS; ALL is task-equal. Development-exposed TEST; one unique minimum full18 VAL macro_vs_sbs checkpoint; no TEST/LIB tuning or per-task assembly. Latency measures only the original deployed student on GPU-resident original inputs; excludes I/O/host transfer; no speed claim from R94 cached latency.",
+  "inference_timing": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R101_hint_pretraining/A/inference_timing.json",
+    "sha256": "f18f258b402d7751c298fd885c6414929431cb5d86e51e223f8227e882042eca",
+    "status": "measured_original_student_only",
+    "measurements": [
+      {
+        "problem": "TSP",
+        "instances": 128,
+        "device": "cuda:0",
+        "student_ms_per_instance": 0.24389332793361973,
+        "repetitions": 3
+      },
+      {
+        "problem": "CVRP",
+        "instances": 128,
+        "device": "cuda:0",
+        "student_ms_per_instance": 0.29111746607668465,
+        "repetitions": 3
+      },
+      {
+        "problem": "ATSP",
+        "instances": 128,
+        "device": "cuda:0",
+        "student_ms_per_instance": 0.06596357313052674,
+        "repetitions": 3
+      },
+      {
+        "problem": "OVRP",
+        "instances": 128,
+        "device": "cuda:0",
+        "student_ms_per_instance": 0.06491457043011906,
+        "repetitions": 3
+      },
+      {
+        "problem": "VRPB",
+        "instances": 128,
+        "device": "cuda:0",
+        "student_ms_per_instance": 0.06511308856715914,
+        "repetitions": 3
+      },
+      {
+        "problem": "VRPL",
+        "instances": 128,
+        "device": "cuda:0",
+        "student_ms_per_instance": 0.06501273734708472,
+        "repetitions": 3
+      },
+      {
+        "problem": "VRPTW",
+        "instances": 128,
+        "device": "cuda:0",
+        "student_ms_per_instance": 0.06488975547351099,
+        "repetitions": 3
+      },
+      {
+        "problem": "OVRPTW",
+        "instances": 128,
+        "device": "cuda:0",
+        "student_ms_per_instance": 0.06548958572238917,
+        "repetitions": 3
+      },
+      {
+        "problem": "OVRPB",
+        "instances": 128,
+        "device": "cuda:0",
+        "student_ms_per_instance": 0.06494128410849953,
+        "repetitions": 3
+      },
+      {
+        "problem": "OVRPL",
+        "instances": 128,
+        "device": "cuda:0",
+        "student_ms_per_instance": 0.06491128897323506,
+        "repetitions": 3
+      },
+      {
+        "problem": "VRPBL",
+        "instances": 128,
+        "device": "cuda:0",
+        "student_ms_per_instance": 0.06533272183636048,
+        "repetitions": 3
+      },
+      {
+        "problem": "VRPBTW",
+        "instances": 128,
+        "device": "cuda:0",
+        "student_ms_per_instance": 0.06509908356141143,
+        "repetitions": 3
+      },
+      {
+        "problem": "VRPLTW",
+        "instances": 128,
+        "device": "cuda:0",
+        "student_ms_per_instance": 0.06498214861494489,
+        "repetitions": 3
+      },
+      {
+        "problem": "OVRPBL",
+        "instances": 128,
+        "device": "cuda:0",
+        "student_ms_per_instance": 0.06508107253466733,
+        "repetitions": 3
+      },
+      {
+        "problem": "OVRPBTW",
+        "instances": 128,
+        "device": "cuda:0",
+        "student_ms_per_instance": 0.06513669237998936,
+        "repetitions": 3
+      },
+      {
+        "problem": "OVRPLTW",
+        "instances": 128,
+        "device": "cuda:0",
+        "student_ms_per_instance": 0.06481065095916468,
+        "repetitions": 3
+      },
+      {
+        "problem": "VRPBLTW",
+        "instances": 128,
+        "device": "cuda:0",
+        "student_ms_per_instance": 0.06515791149771151,
+        "repetitions": 3
+      },
+      {
+        "problem": "OVRPBLTW",
+        "instances": 128,
+        "device": "cuda:0",
+        "student_ms_per_instance": 0.06509377332501269,
+        "repetitions": 3
+      }
+    ],
+    "scope": "first128 locked TEST input rows/task; GPU-resident original inputs; synchronized wall time",
+    "excludes": "dataset I/O, host transfer, TRAIN hint pretraining and solver execution",
+    "student_only": true,
+    "teacher_arrays_opened": false,
+    "r94_cached_latency_used": false,
+    "full_system_measured": false,
+    "end_to_end_measured": false
+  },
+  "rdrop": true,
+  "deployment_teacher": false,
+  "external_pretraining": false,
+  "val_empirical_screen": [
+    {
+      "model": "R101/A",
+      "baseline": "R89B",
+      "split": "VAL",
+      "reference_role": "main",
+      "top1_delta_pp": -0.09629629629628322,
+      "mean_cost_delta": 0.00027763312963280384,
+      "actual_regret_delta_pp": 0.001933051324990831,
+      "pass_reference": false,
+      "checkpoint_sha256": "e96d42b96ec03155d8ae60e698459605bcf382e0d9f5d488a224fd809d0e23d9",
+      "checkpoint_reselection": false,
+      "newly_matched_control": false,
+      "macro_weighting": "equal weight across all18 problems",
+      "joint_val_pass": false,
+      "total_budget_matched": false
+    },
+    {
+      "model": "R101/A",
+      "baseline": "R84A",
+      "split": "VAL",
+      "reference_role": "secondary",
+      "top1_delta_pp": 0.06666666666668153,
+      "mean_cost_delta": -3.9560301122065766e-05,
+      "actual_regret_delta_pp": -0.0008849281812319254,
+      "pass_reference": true,
+      "checkpoint_sha256": "e96d42b96ec03155d8ae60e698459605bcf382e0d9f5d488a224fd809d0e23d9",
+      "checkpoint_reselection": false,
+      "newly_matched_control": false,
+      "macro_weighting": "equal weight across all18 problems",
+      "joint_val_pass": false,
+      "total_budget_matched": false
+    }
+  ]
+}

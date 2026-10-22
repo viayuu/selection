@@ -1,0 +1,1952 @@
+{
+  "started_utc": "2026-10-22T10:06:46.580021+00:00",
+  "container_id": "76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6",
+  "slot": "4090_1",
+  "gpu_uuid": "GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d",
+  "cpus": [
+    4,
+    5,
+    72,
+    73
+  ],
+  "state": "complete",
+  "automatic_retry": false,
+  "stages": [
+    {
+      "name": "pretrain",
+      "device": "gpu",
+      "argv": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r101_experiment",
+        "pretrain",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R101_hint_pretraining",
+        "--arm",
+        "A",
+        "--prepared-root",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+        "--data-root",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+        "--cache-root",
+        "/tmp/shiys_R84_new90k_cache",
+        "--protocol-lock",
+        "/public/home/shiys/0selection2/code/V4/runs/R101_hint_pretraining/protocol_lock.json",
+        "--gpu-type",
+        "4090",
+        "--large-micro-cap",
+        "352",
+        "--eval-batch-size",
+        "256",
+        "--device",
+        "cuda:0",
+        "--wandb-mode",
+        "offline",
+        "--teacher-root",
+        "/tmp/shiys_R101_A_teacher"
+      ],
+      "started_utc": "2026-10-22T10:12:11.696262+00:00",
+      "state": "complete",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R98_parallel_dispatch/R101_A/pretrain.log",
+      "pid": 1680875,
+      "exit_status": 0,
+      "finished_utc": "2026-10-22T10:56:32.381640+00:00"
+    },
+    {
+      "name": "train",
+      "device": "gpu",
+      "argv": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r101_experiment",
+        "train",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R101_hint_pretraining",
+        "--arm",
+        "A",
+        "--prepared-root",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+        "--data-root",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+        "--cache-root",
+        "/tmp/shiys_R84_new90k_cache",
+        "--protocol-lock",
+        "/public/home/shiys/0selection2/code/V4/runs/R101_hint_pretraining/protocol_lock.json",
+        "--gpu-type",
+        "4090",
+        "--large-micro-cap",
+        "352",
+        "--eval-batch-size",
+        "256",
+        "--device",
+        "cuda:0",
+        "--wandb-mode",
+        "offline",
+        "--teacher-root",
+        "/tmp/shiys_R101_A_teacher"
+      ],
+      "started_utc": "2026-10-22T10:56:32.388290+00:00",
+      "state": "complete",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R98_parallel_dispatch/R101_A/train.log",
+      "pid": 1692257,
+      "exit_status": 0,
+      "finished_utc": "2026-10-22T16:25:19.913867+00:00"
+    },
+    {
+      "name": "TEST",
+      "device": "gpu",
+      "argv": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r101_experiment",
+        "test",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R101_hint_pretraining",
+        "--arm",
+        "A",
+        "--prepared-root",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+        "--data-root",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+        "--cache-root",
+        "/tmp/shiys_R84_new90k_cache",
+        "--protocol-lock",
+        "/public/home/shiys/0selection2/code/V4/runs/R101_hint_pretraining/protocol_lock.json",
+        "--gpu-type",
+        "4090",
+        "--large-micro-cap",
+        "352",
+        "--eval-batch-size",
+        "256",
+        "--device",
+        "cuda:0",
+        "--wandb-mode",
+        "offline"
+      ],
+      "started_utc": "2026-10-22T16:25:19.929562+00:00",
+      "state": "complete",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R98_parallel_dispatch/R101_A/TEST.log",
+      "pid": 1779396,
+      "exit_status": 0,
+      "finished_utc": "2026-10-22T16:25:22.287795+00:00"
+    },
+    {
+      "name": "timing",
+      "device": "gpu",
+      "argv": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r101_experiment",
+        "timing",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R101_hint_pretraining",
+        "--arm",
+        "A",
+        "--prepared-root",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+        "--data-root",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+        "--cache-root",
+        "/tmp/shiys_R84_new90k_cache",
+        "--protocol-lock",
+        "/public/home/shiys/0selection2/code/V4/runs/R101_hint_pretraining/protocol_lock.json",
+        "--gpu-type",
+        "4090",
+        "--large-micro-cap",
+        "352",
+        "--eval-batch-size",
+        "256",
+        "--device",
+        "cuda:0",
+        "--wandb-mode",
+        "offline"
+      ],
+      "started_utc": "2026-10-22T16:25:22.292164+00:00",
+      "state": "complete",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R98_parallel_dispatch/R101_A/timing.log",
+      "pid": 1779461,
+      "exit_status": 0,
+      "finished_utc": "2026-10-22T16:25:26.312791+00:00"
+    },
+    {
+      "name": "LIB",
+      "device": "gpu",
+      "argv": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r101_reporting",
+        "lib",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R101_hint_pretraining",
+        "--arm",
+        "A",
+        "--device",
+        "cuda:0",
+        "--lib-batch-size",
+        "2"
+      ],
+      "started_utc": "2026-10-22T16:25:26.317392+00:00",
+      "state": "complete",
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R98_parallel_dispatch/R101_A/LIB.log",
+      "pid": 1779551,
+      "exit_status": 0,
+      "finished_utc": "2026-10-22T16:25:30.730611+00:00"
+    }
+  ],
+  "cache": {
+    "root": "/tmp/shiys_R84_new90k_cache",
+    "bytes": 19005947954,
+    "files": 286,
+    "identity_sha256": "025163313c3d3f0a3cf7ed01242a94a50da9cca7d9cd6fc68162a65b913fc922",
+    "teacher": {
+      "format": "r101_existing_teacher_train_v1",
+      "complete": true,
+      "split": "train",
+      "arm": "A",
+      "variant": "random",
+      "root": "/tmp/shiys_R101_A_teacher/train",
+      "problems": [
+        "CVRP",
+        "OVRP",
+        "VRPB",
+        "VRPL",
+        "VRPTW",
+        "OVRPTW",
+        "OVRPB",
+        "OVRPL",
+        "VRPBL",
+        "VRPBTW",
+        "VRPLTW",
+        "OVRPBL",
+        "OVRPBTW",
+        "OVRPLTW",
+        "VRPBLTW",
+        "OVRPBLTW"
+      ],
+      "tasks": {
+        "CVRP": {
+          "arm": "A",
+          "variant": "random",
+          "r84_metadata_sha256": "700d9b09a81960b2747934c8e7dc27c84d96066980182b3d92981e8c0bf38dc0",
+          "teacher_metadata_sha256": "e67685f4f4950ba6dfce309cfcbacc7529478da788d39c097bc033de142401d1",
+          "donor_sha256": "92b48abef45758777aa5868c12e8d411a0a3a68099c1f5ae4a60c02b1a90c805",
+          "origin": "/tmp/shiys_R84_new90k_cache/train/CVRP",
+          "transport_policy": "Path and mtime are transport observations, not content hashes. Identity is original R94 provenance, immutable original R84 metadata, input schema and full TRAIN origin, plus actual n in original row order. R94 validation is unchanged.",
+          "transport_observations": {
+            "n": {
+              "original": {
+                "bytes": 648128,
+                "mtime_ns": 1792259162079793744,
+                "path": "/tmp/shiys_R84_new90k_cache/train/CVRP/n.npy",
+                "spec": {
+                  "dtype": "int64",
+                  "file": "n.npy",
+                  "shape": [
+                    81000
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/CVRP/n.npy",
+                "bytes": 648128,
+                "mtime_ns": 1792259162130300453
+              },
+              "mtime_differs": true
+            },
+            "node": {
+              "original": {
+                "bytes": 648000128,
+                "mtime_ns": 1792259163733806282,
+                "path": "/tmp/shiys_R84_new90k_cache/train/CVRP/node.npy",
+                "spec": {
+                  "dtype": "float32",
+                  "file": "node.npy",
+                  "shape": [
+                    81000,
+                    500,
+                    4
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/CVRP/node.npy",
+                "bytes": 648000128,
+                "mtime_ns": 1792259163735301390
+              },
+              "mtime_differs": true
+            }
+          },
+          "canonical_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/CVRP",
+          "actual_n_sha256": "b2b691764766cdd6ef7682d7de733ee89ffa1c980836ca0636483cb723cbfa2a",
+          "row_alignment": "original R84 rows; exact full n vector; R94 writes original row slots",
+          "rows": 81000,
+          "shape": [
+            81000,
+            500,
+            128
+          ],
+          "files": {
+            "metadata.json": {
+              "source_sha256": "58e55c007b5de8b501a0cb0e35c2d347731a8980a7dd94bf2e2d130f7b70f5d3",
+              "target_sha256": "58e55c007b5de8b501a0cb0e35c2d347731a8980a7dd94bf2e2d130f7b70f5d3",
+              "bytes": 4767,
+              "source_stat": {
+                "bytes": 4767,
+                "mtime_ns": 1792661857398946609
+              },
+              "target_stat": {
+                "bytes": 4767,
+                "mtime_ns": 1792663609316623888
+              },
+              "seconds": 0.007666558958590031,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            },
+            "nco_nodes.npy": {
+              "source_sha256": "7e96bf89401339518bf85dffb6daea74496c74baf5fd0555219b4efa3635babc",
+              "target_sha256": "7e96bf89401339518bf85dffb6daea74496c74baf5fd0555219b4efa3635babc",
+              "bytes": 10368000128,
+              "source_stat": {
+                "bytes": 10368000128,
+                "mtime_ns": 1792661885784175115
+              },
+              "target_stat": {
+                "bytes": 10368000128,
+                "mtime_ns": 1792663654089672409
+              },
+              "seconds": 73.20829179789871,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            }
+          }
+        },
+        "OVRP": {
+          "arm": "A",
+          "variant": "random",
+          "r84_metadata_sha256": "33f59f9724efc05821382e54b117b0c6f4c07dd330233d358fa366531e4edf64",
+          "teacher_metadata_sha256": "053caefbaaec68eef3b68f513cba4784420f21cd78c49cafad8ab22df51d1551",
+          "donor_sha256": "92b48abef45758777aa5868c12e8d411a0a3a68099c1f5ae4a60c02b1a90c805",
+          "origin": "/tmp/shiys_R84_new90k_cache/train/OVRP",
+          "transport_policy": "Path and mtime are transport observations, not content hashes. Identity is original R94 provenance, immutable original R84 metadata, input schema and full TRAIN origin, plus actual n in original row order. R94 validation is unchanged.",
+          "transport_observations": {
+            "n": {
+              "original": {
+                "bytes": 648128,
+                "mtime_ns": 1792259168717843364,
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRP/n.npy",
+                "spec": {
+                  "dtype": "int64",
+                  "file": "n.npy",
+                  "shape": [
+                    81000
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRP/n.npy",
+                "bytes": 648128,
+                "mtime_ns": 1792259168718304297
+              },
+              "mtime_differs": true
+            },
+            "node": {
+              "original": {
+                "bytes": 261792128,
+                "mtime_ns": 1792259170588856889,
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRP/node.npy",
+                "spec": {
+                  "dtype": "float32",
+                  "file": "node.npy",
+                  "shape": [
+                    81000,
+                    101,
+                    8
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRP/node.npy",
+                "bytes": 261792128,
+                "mtime_ns": 1792259170588305388
+              },
+              "mtime_differs": true
+            }
+          },
+          "canonical_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRP",
+          "actual_n_sha256": "5c9341237ec9e5b9e8b3f86480341c44b43b4fcd13135720ac4b139f0d48ddcb",
+          "row_alignment": "original R84 rows; exact full n vector; R94 writes original row slots",
+          "rows": 81000,
+          "shape": [
+            81000,
+            101,
+            128
+          ],
+          "files": {
+            "metadata.json": {
+              "source_sha256": "5814d4594af17df19ee871d8e59594e6aca6a7385cdbf3a18fb5f5be12fc7c57",
+              "target_sha256": "5814d4594af17df19ee871d8e59594e6aca6a7385cdbf3a18fb5f5be12fc7c57",
+              "bytes": 4767,
+              "source_stat": {
+                "bytes": 4767,
+                "mtime_ns": 1792661903150314916
+              },
+              "target_stat": {
+                "bytes": 4767,
+                "mtime_ns": 1792663682530704693
+              },
+              "seconds": 0.0016224839491769671,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            },
+            "nco_nodes.npy": {
+              "source_sha256": "435aea776fe2ce45865fcf1ead5eda24fec37d97db976fad30b3822c1ef3de7a",
+              "target_sha256": "435aea776fe2ce45865fcf1ead5eda24fec37d97db976fad30b3822c1ef3de7a",
+              "bytes": 2094336128,
+              "source_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792661911631383190
+              },
+              "target_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792663691105714524
+              },
+              "seconds": 16.086028152960353,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            }
+          }
+        },
+        "VRPB": {
+          "arm": "A",
+          "variant": "random",
+          "r84_metadata_sha256": "c0e09356ff6511eb0f4422c0e7e68b9fc729199c2a36b1b458af7079195c7f90",
+          "teacher_metadata_sha256": "a34623ef9df919b9a8209f7b525513dcf0d717982ef7bfd02708d5869730e1cd",
+          "donor_sha256": "92b48abef45758777aa5868c12e8d411a0a3a68099c1f5ae4a60c02b1a90c805",
+          "origin": "/tmp/shiys_R84_new90k_cache/train/VRPB",
+          "transport_policy": "Path and mtime are transport observations, not content hashes. Identity is original R94 provenance, immutable original R84 metadata, input schema and full TRAIN origin, plus actual n in original row order. R94 validation is unchanged.",
+          "transport_observations": {
+            "n": {
+              "original": {
+                "bytes": 648128,
+                "mtime_ns": 1792259228570275063,
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPB/n.npy",
+                "spec": {
+                  "dtype": "int64",
+                  "file": "n.npy",
+                  "shape": [
+                    81000
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPB/n.npy",
+                "bytes": 648128,
+                "mtime_ns": 1792259228571340377
+              },
+              "mtime_differs": true
+            },
+            "node": {
+              "original": {
+                "bytes": 261792128,
+                "mtime_ns": 1792259229265280083,
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPB/node.npy",
+                "spec": {
+                  "dtype": "float32",
+                  "file": "node.npy",
+                  "shape": [
+                    81000,
+                    101,
+                    8
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPB/node.npy",
+                "bytes": 261792128,
+                "mtime_ns": 1792259229246340838
+              },
+              "mtime_differs": true
+            }
+          },
+          "canonical_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPB",
+          "actual_n_sha256": "c1762e9402c0a15997a08214d09a4427dd78a4bcf902d8bb7a4871fc7a422a3c",
+          "row_alignment": "original R84 rows; exact full n vector; R94 writes original row slots",
+          "rows": 81000,
+          "shape": [
+            81000,
+            101,
+            128
+          ],
+          "files": {
+            "metadata.json": {
+              "source_sha256": "2d3d8c298baf22288da64140219602ce61462b82c3c650f27fcc4020c09ef594",
+              "target_sha256": "2d3d8c298baf22288da64140219602ce61462b82c3c650f27fcc4020c09ef594",
+              "bytes": 4767,
+              "source_stat": {
+                "bytes": 4767,
+                "mtime_ns": 1792661913964401971
+              },
+              "target_stat": {
+                "bytes": 4767,
+                "mtime_ns": 1792663698619723673
+              },
+              "seconds": 0.002401940990239382,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            },
+            "nco_nodes.npy": {
+              "source_sha256": "e99e387282d1ebb00dc2157777dd398d562ad303ae8dbe6b6a6f854fc03112fd",
+              "target_sha256": "e99e387282d1ebb00dc2157777dd398d562ad303ae8dbe6b6a6f854fc03112fd",
+              "bytes": 2094336128,
+              "source_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792661921813465158
+              },
+              "target_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792663708837736154
+              },
+              "seconds": 17.67363762902096,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            }
+          }
+        },
+        "VRPL": {
+          "arm": "A",
+          "variant": "random",
+          "r84_metadata_sha256": "47fe6a36fd49e521b8f3e8a479b35e6d6cbf030de9d4dd3cc819717aefe9403f",
+          "teacher_metadata_sha256": "1aec2211a77ed0443c20005432c0824a37f138c6942c4297d425a525c92fd95d",
+          "donor_sha256": "92b48abef45758777aa5868c12e8d411a0a3a68099c1f5ae4a60c02b1a90c805",
+          "origin": "/tmp/shiys_R84_new90k_cache/train/VRPL",
+          "transport_policy": "Path and mtime are transport observations, not content hashes. Identity is original R94 provenance, immutable original R84 metadata, input schema and full TRAIN origin, plus actual n in original row order. R94 validation is unchanged.",
+          "transport_observations": {
+            "n": {
+              "original": {
+                "bytes": 648128,
+                "mtime_ns": 1792259237426339031,
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPL/n.npy",
+                "spec": {
+                  "dtype": "int64",
+                  "file": "n.npy",
+                  "shape": [
+                    81000
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPL/n.npy",
+                "bytes": 648128,
+                "mtime_ns": 1792259237425346419
+              },
+              "mtime_differs": true
+            },
+            "node": {
+              "original": {
+                "bytes": 261792128,
+                "mtime_ns": 1792259238627347695,
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPL/node.npy",
+                "spec": {
+                  "dtype": "float32",
+                  "file": "node.npy",
+                  "shape": [
+                    81000,
+                    101,
+                    8
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPL/node.npy",
+                "bytes": 261792128,
+                "mtime_ns": 1792259238628347240
+              },
+              "mtime_differs": true
+            }
+          },
+          "canonical_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPL",
+          "actual_n_sha256": "49f07469db337cfc589b41d7bb838607e3d61ea4a45903a5263169b3f9627259",
+          "row_alignment": "original R84 rows; exact full n vector; R94 writes original row slots",
+          "rows": 81000,
+          "shape": [
+            81000,
+            101,
+            128
+          ],
+          "files": {
+            "metadata.json": {
+              "source_sha256": "618083f15dba2b37bbeefc990819a38fd59dc4bf5bd9bd34f78b3a62f8a9b918",
+              "target_sha256": "618083f15dba2b37bbeefc990819a38fd59dc4bf5bd9bd34f78b3a62f8a9b918",
+              "bytes": 4767,
+              "source_stat": {
+                "bytes": 4767,
+                "mtime_ns": 1792661923963482466
+              },
+              "target_stat": {
+                "bytes": 4767,
+                "mtime_ns": 1792663716295744890
+              },
+              "seconds": 0.002419374999590218,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            },
+            "nco_nodes.npy": {
+              "source_sha256": "569317fd0eda35ff1a7caf1645c6fba6ac15aef490ac79bda7ea421cc56d09eb",
+              "target_sha256": "569317fd0eda35ff1a7caf1645c6fba6ac15aef490ac79bda7ea421cc56d09eb",
+              "bytes": 2094336128,
+              "source_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792661931997547141
+              },
+              "target_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792663726045755706
+              },
+              "seconds": 17.3720759350108,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            }
+          }
+        },
+        "VRPTW": {
+          "arm": "A",
+          "variant": "random",
+          "r84_metadata_sha256": "3a062a76b211002450e939088b99720ab981a9b39deb330bbefe632b201062ec",
+          "teacher_metadata_sha256": "3e1e137860b8777b93ba7d4df4dbbc32259be6bc0b931c9cdcb7ab26407bafe7",
+          "donor_sha256": "92b48abef45758777aa5868c12e8d411a0a3a68099c1f5ae4a60c02b1a90c805",
+          "origin": "/tmp/shiys_R84_new90k_cache/train/VRPTW",
+          "transport_policy": "Path and mtime are transport observations, not content hashes. Identity is original R94 provenance, immutable original R84 metadata, input schema and full TRAIN origin, plus actual n in original row order. R94 validation is unchanged.",
+          "transport_observations": {
+            "n": {
+              "original": {
+                "bytes": 648128,
+                "mtime_ns": 1792259243720384343,
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPTW/n.npy",
+                "spec": {
+                  "dtype": "int64",
+                  "file": "n.npy",
+                  "shape": [
+                    81000
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPTW/n.npy",
+                "bytes": 648128,
+                "mtime_ns": 1792259243719350331
+              },
+              "mtime_differs": true
+            },
+            "node": {
+              "original": {
+                "bytes": 261792128,
+                "mtime_ns": 1792259245008393611,
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPTW/node.npy",
+                "spec": {
+                  "dtype": "float32",
+                  "file": "node.npy",
+                  "shape": [
+                    81000,
+                    101,
+                    8
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPTW/node.npy",
+                "bytes": 261792128,
+                "mtime_ns": 1792259245009351087
+              },
+              "mtime_differs": true
+            }
+          },
+          "canonical_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPTW",
+          "actual_n_sha256": "ad1e108066a7e17658bd4ad413b1db6fe3ecdcb0978c4f791d62a1cc4b9d286b",
+          "row_alignment": "original R84 rows; exact full n vector; R94 writes original row slots",
+          "rows": 81000,
+          "shape": [
+            81000,
+            101,
+            128
+          ],
+          "files": {
+            "metadata.json": {
+              "source_sha256": "7ba9ccff24b2b71c86afdfea0186306e9356d01c366233bf128da90da6280d96",
+              "target_sha256": "7ba9ccff24b2b71c86afdfea0186306e9356d01c366233bf128da90da6280d96",
+              "bytes": 4771,
+              "source_stat": {
+                "bytes": 4771,
+                "mtime_ns": 1792661935679576782
+              },
+              "target_stat": {
+                "bytes": 4771,
+                "mtime_ns": 1792663733670764029
+              },
+              "seconds": 0.0019344049505889416,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            },
+            "nco_nodes.npy": {
+              "source_sha256": "0e02d203b7389353a13a02e0bbf530aaf0cdccef96a918c80db9c1b6d7527076",
+              "target_sha256": "0e02d203b7389353a13a02e0bbf530aaf0cdccef96a918c80db9c1b6d7527076",
+              "bytes": 2094336128,
+              "source_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792661942754633738
+              },
+              "target_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792663743718774998
+              },
+              "seconds": 17.762264221091755,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            }
+          }
+        },
+        "OVRPTW": {
+          "arm": "A",
+          "variant": "random",
+          "r84_metadata_sha256": "0b24087bf19b61888712433b5d246a12399d211c4dfe03a54acd09cff0f5f47b",
+          "teacher_metadata_sha256": "02f3b4c699fc3fce5cd500ad6c9abe61ba0ba7477c0cf8a4104c51b1395d3537",
+          "donor_sha256": "92b48abef45758777aa5868c12e8d411a0a3a68099c1f5ae4a60c02b1a90c805",
+          "origin": "/tmp/shiys_R84_new90k_cache/train/OVRPTW",
+          "transport_policy": "Path and mtime are transport observations, not content hashes. Identity is original R94 provenance, immutable original R84 metadata, input schema and full TRAIN origin, plus actual n in original row order. R94 validation is unchanged.",
+          "transport_observations": {
+            "n": {
+              "original": {
+                "bytes": 648128,
+                "mtime_ns": 1792259214747175337,
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPTW/n.npy",
+                "spec": {
+                  "dtype": "int64",
+                  "file": "n.npy",
+                  "shape": [
+                    81000
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPTW/n.npy",
+                "bytes": 648128,
+                "mtime_ns": 1792259214747331576
+              },
+              "mtime_differs": true
+            },
+            "node": {
+              "original": {
+                "bytes": 261792128,
+                "mtime_ns": 1792259215854183315,
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPTW/node.npy",
+                "spec": {
+                  "dtype": "float32",
+                  "file": "node.npy",
+                  "shape": [
+                    81000,
+                    101,
+                    8
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPTW/node.npy",
+                "bytes": 261792128,
+                "mtime_ns": 1792259215854332216
+              },
+              "mtime_differs": true
+            }
+          },
+          "canonical_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPTW",
+          "actual_n_sha256": "8388c384735f4784a774b69e4748798a0df22a70b34344662fb3156f9b35ae83",
+          "row_alignment": "original R84 rows; exact full n vector; R94 writes original row slots",
+          "rows": 81000,
+          "shape": [
+            81000,
+            101,
+            128
+          ],
+          "files": {
+            "metadata.json": {
+              "source_sha256": "357e3c8d471df8de05610bb65401e649807b66c2042e091067359845fc673443",
+              "target_sha256": "357e3c8d471df8de05610bb65401e649807b66c2042e091067359845fc673443",
+              "bytes": 4775,
+              "source_stat": {
+                "bytes": 4775,
+                "mtime_ns": 1792661946712665601
+              },
+              "target_stat": {
+                "bytes": 4775,
+                "mtime_ns": 1792663751435783421
+              },
+              "seconds": 0.002148217987269163,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            },
+            "nco_nodes.npy": {
+              "source_sha256": "f514e05c7daf1864d068f40891e082984acd9b48c3863e565344f1a0f6ad5339",
+              "target_sha256": "f514e05c7daf1864d068f40891e082984acd9b48c3863e565344f1a0f6ad5339",
+              "bytes": 2094336128,
+              "source_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792661953280718475
+              },
+              "target_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792663762567795840
+              },
+              "seconds": 18.498963503050618,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            }
+          }
+        },
+        "OVRPB": {
+          "arm": "A",
+          "variant": "random",
+          "r84_metadata_sha256": "c7277ea90b3e27d91e160ab10b4dc1dde95b90ddfe8883531cc2f4f63d32c732",
+          "teacher_metadata_sha256": "a5aa1757a5676b77966e892c535d84dba6a978217f06ad8c51a8ebfd0fa918b2",
+          "donor_sha256": "92b48abef45758777aa5868c12e8d411a0a3a68099c1f5ae4a60c02b1a90c805",
+          "origin": "/tmp/shiys_R84_new90k_cache/train/OVRPB",
+          "transport_policy": "Path and mtime are transport observations, not content hashes. Identity is original R94 provenance, immutable original R84 metadata, input schema and full TRAIN origin, plus actual n in original row order. R94 validation is unchanged.",
+          "transport_observations": {
+            "n": {
+              "original": {
+                "bytes": 648128,
+                "mtime_ns": 1792259173603878683,
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPB/n.npy",
+                "spec": {
+                  "dtype": "int64",
+                  "file": "n.npy",
+                  "shape": [
+                    81000
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPB/n.npy",
+                "bytes": 648128,
+                "mtime_ns": 1792259173604307183
+              },
+              "mtime_differs": true
+            },
+            "node": {
+              "original": {
+                "bytes": 261792128,
+                "mtime_ns": 1792259175747894183,
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPB/node.npy",
+                "spec": {
+                  "dtype": "float32",
+                  "file": "node.npy",
+                  "shape": [
+                    81000,
+                    101,
+                    8
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPB/node.npy",
+                "bytes": 261792128,
+                "mtime_ns": 1792259175750308509
+              },
+              "mtime_differs": true
+            }
+          },
+          "canonical_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPB",
+          "actual_n_sha256": "e01020a093b0fe6eef343912200c4e8ea177c8b6e57cd86930ad9226d9c5eb43",
+          "row_alignment": "original R84 rows; exact full n vector; R94 writes original row slots",
+          "rows": 81000,
+          "shape": [
+            81000,
+            101,
+            128
+          ],
+          "files": {
+            "metadata.json": {
+              "source_sha256": "ce330fef6f26154aafe6848685aed62e212cae8373446fc31a844790b6871784",
+              "target_sha256": "ce330fef6f26154aafe6848685aed62e212cae8373446fc31a844790b6871784",
+              "bytes": 4771,
+              "source_stat": {
+                "bytes": 4771,
+                "mtime_ns": 1792661956836747102
+              },
+              "target_stat": {
+                "bytes": 4771,
+                "mtime_ns": 1792663769937804186
+              },
+              "seconds": 0.0018781449180096388,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            },
+            "nco_nodes.npy": {
+              "source_sha256": "60ece419e822daa8a256d45d7d262486464ec28614e26c7c90cc56f1f2b19bae",
+              "target_sha256": "60ece419e822daa8a256d45d7d262486464ec28614e26c7c90cc56f1f2b19bae",
+              "bytes": 2094336128,
+              "source_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792661963846803534
+              },
+              "target_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792663778346813708
+              },
+              "seconds": 15.872245638049208,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            }
+          }
+        },
+        "OVRPL": {
+          "arm": "A",
+          "variant": "random",
+          "r84_metadata_sha256": "4bb811b6ff845ee60b617634d87c23a021eb3d51feaefffad2d7421865c0252e",
+          "teacher_metadata_sha256": "ebf35285d8bc9d2df705b8fa0ded0e894429d959f8e7347de5f47ca5c26a837b",
+          "donor_sha256": "92b48abef45758777aa5868c12e8d411a0a3a68099c1f5ae4a60c02b1a90c805",
+          "origin": "/tmp/shiys_R84_new90k_cache/train/OVRPL",
+          "transport_policy": "Path and mtime are transport observations, not content hashes. Identity is original R94 provenance, immutable original R84 metadata, input schema and full TRAIN origin, plus actual n in original row order. R94 validation is unchanged.",
+          "transport_observations": {
+            "n": {
+              "original": {
+                "bytes": 648128,
+                "mtime_ns": 1792259210288143201,
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPL/n.npy",
+                "spec": {
+                  "dtype": "int64",
+                  "file": "n.npy",
+                  "shape": [
+                    81000
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPL/n.npy",
+                "bytes": 648128,
+                "mtime_ns": 1792259210287328995
+              },
+              "mtime_differs": true
+            },
+            "node": {
+              "original": {
+                "bytes": 261792128,
+                "mtime_ns": 1792259211695153341,
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPL/node.npy",
+                "spec": {
+                  "dtype": "float32",
+                  "file": "node.npy",
+                  "shape": [
+                    81000,
+                    101,
+                    8
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPL/node.npy",
+                "bytes": 261792128,
+                "mtime_ns": 1792259211695329810
+              },
+              "mtime_differs": true
+            }
+          },
+          "canonical_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPL",
+          "actual_n_sha256": "3ea95f8169e8e328add2517bfc505983850b5ccc71303a7f1942ad23faa0ee57",
+          "row_alignment": "original R84 rows; exact full n vector; R94 writes original row slots",
+          "rows": 81000,
+          "shape": [
+            81000,
+            101,
+            128
+          ],
+          "files": {
+            "metadata.json": {
+              "source_sha256": "cd57b8d0bd1697814e3d1cbdf7b0af37ef1edbfaa5eede2e624ba4a2e43f6ad0",
+              "target_sha256": "cd57b8d0bd1697814e3d1cbdf7b0af37ef1edbfaa5eede2e624ba4a2e43f6ad0",
+              "bytes": 4771,
+              "source_stat": {
+                "bytes": 4771,
+                "mtime_ns": 1792661967718834705
+              },
+              "target_stat": {
+                "bytes": 4771,
+                "mtime_ns": 1792663785811822161
+              },
+              "seconds": 0.0017834579339250922,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            },
+            "nco_nodes.npy": {
+              "source_sha256": "128b30b965ff5db1d5ad22de6c592d6b17d12d51aeb75d226fabb9337d336206",
+              "target_sha256": "128b30b965ff5db1d5ad22de6c592d6b17d12d51aeb75d226fabb9337d336206",
+              "bytes": 2094336128,
+              "source_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792661973753883288
+              },
+              "target_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792663794533832676
+              },
+              "seconds": 16.467512628994882,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            }
+          }
+        },
+        "VRPBL": {
+          "arm": "A",
+          "variant": "random",
+          "r84_metadata_sha256": "f521587710400f9a2081fb89b108446eabe37119bc0ac98b784477cfba7e28bb",
+          "teacher_metadata_sha256": "9533d1b99f4f08336a02925f9dba382bdab9dfb037479e6364d1e80c8dffced9",
+          "donor_sha256": "92b48abef45758777aa5868c12e8d411a0a3a68099c1f5ae4a60c02b1a90c805",
+          "origin": "/tmp/shiys_R84_new90k_cache/train/VRPBL",
+          "transport_policy": "Path and mtime are transport observations, not content hashes. Identity is original R94 provenance, immutable original R84 metadata, input schema and full TRAIN origin, plus actual n in original row order. R94 validation is unchanged.",
+          "transport_observations": {
+            "n": {
+              "original": {
+                "bytes": 648128,
+                "mtime_ns": 1792259230378288122,
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPBL/n.npy",
+                "spec": {
+                  "dtype": "int64",
+                  "file": "n.npy",
+                  "shape": [
+                    81000
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPBL/n.npy",
+                "bytes": 648128,
+                "mtime_ns": 1792259230378341610
+              },
+              "mtime_differs": true
+            },
+            "node": {
+              "original": {
+                "bytes": 261792128,
+                "mtime_ns": 1792259231269294558,
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPBL/node.npy",
+                "spec": {
+                  "dtype": "float32",
+                  "file": "node.npy",
+                  "shape": [
+                    81000,
+                    101,
+                    8
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPBL/node.npy",
+                "bytes": 261792128,
+                "mtime_ns": 1792259231268342218
+              },
+              "mtime_differs": true
+            }
+          },
+          "canonical_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBL",
+          "actual_n_sha256": "b32b57e6814b9c774a3ceb125260b07fcbde3152151631ce45d24b18c17310f8",
+          "row_alignment": "original R84 rows; exact full n vector; R94 writes original row slots",
+          "rows": 81000,
+          "shape": [
+            81000,
+            101,
+            128
+          ],
+          "files": {
+            "metadata.json": {
+              "source_sha256": "1778de2a06c489be76735a3adb4f90c7443a3fb952a411985a8b976f6f7a43f8",
+              "target_sha256": "1778de2a06c489be76735a3adb4f90c7443a3fb952a411985a8b976f6f7a43f8",
+              "bytes": 4771,
+              "source_stat": {
+                "bytes": 4771,
+                "mtime_ns": 1792661977341912172
+              },
+              "target_stat": {
+                "bytes": 4771,
+                "mtime_ns": 1792663802281842217
+              },
+              "seconds": 0.0017591249197721481,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            },
+            "nco_nodes.npy": {
+              "source_sha256": "783fd0b46d7ff54f0ebd7666d18e0a9e91d1f1a71b1255850c286360d9af8de7",
+              "target_sha256": "783fd0b46d7ff54f0ebd7666d18e0a9e91d1f1a71b1255850c286360d9af8de7",
+              "bytes": 2094336128,
+              "source_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792661983184959210
+              },
+              "target_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792663810678854252
+              },
+              "seconds": 16.451827386044897,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            }
+          }
+        },
+        "VRPBTW": {
+          "arm": "A",
+          "variant": "random",
+          "r84_metadata_sha256": "5f8b1e4357993c44d26e6b5d48e1daa0f540bc0ef4824a747ac88da177f4b691",
+          "teacher_metadata_sha256": "85c6bbd320e559390f9e8348f494f3ba9fdc7a25d28c3a9b51e7e95630ddf187",
+          "donor_sha256": "92b48abef45758777aa5868c12e8d411a0a3a68099c1f5ae4a60c02b1a90c805",
+          "origin": "/tmp/shiys_R84_new90k_cache/train/VRPBTW",
+          "transport_policy": "Path and mtime are transport observations, not content hashes. Identity is original R94 provenance, immutable original R84 metadata, input schema and full TRAIN origin, plus actual n in original row order. R94 validation is unchanged.",
+          "transport_observations": {
+            "n": {
+              "original": {
+                "bytes": 648128,
+                "mtime_ns": 1792259234032314515,
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPBTW/n.npy",
+                "spec": {
+                  "dtype": "int64",
+                  "file": "n.npy",
+                  "shape": [
+                    81000
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPBTW/n.npy",
+                "bytes": 648128,
+                "mtime_ns": 1792259234032344104
+              },
+              "mtime_differs": true
+            },
+            "node": {
+              "original": {
+                "bytes": 261792128,
+                "mtime_ns": 1792259235387324303,
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPBTW/node.npy",
+                "spec": {
+                  "dtype": "float32",
+                  "file": "node.npy",
+                  "shape": [
+                    81000,
+                    101,
+                    8
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPBTW/node.npy",
+                "bytes": 261792128,
+                "mtime_ns": 1792259235386345028
+              },
+              "mtime_differs": true
+            }
+          },
+          "canonical_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBTW",
+          "actual_n_sha256": "aee23f0fb0af840d9bf234de42284eaf68848748c88c26bee359f1b3e5b4937f",
+          "row_alignment": "original R84 rows; exact full n vector; R94 writes original row slots",
+          "rows": 81000,
+          "shape": [
+            81000,
+            101,
+            128
+          ],
+          "files": {
+            "metadata.json": {
+              "source_sha256": "72debbf802b1c9c79525988163ee543991bfa170c46349495bafc12d158e2839",
+              "target_sha256": "72debbf802b1c9c79525988163ee543991bfa170c46349495bafc12d158e2839",
+              "bytes": 4775,
+              "source_stat": {
+                "bytes": 4775,
+                "mtime_ns": 1792661986763988022
+              },
+              "target_stat": {
+                "bytes": 4775,
+                "mtime_ns": 1792663818735863553
+              },
+              "seconds": 0.013866611989215016,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            },
+            "nco_nodes.npy": {
+              "source_sha256": "b00152ecb7b2f25d30c89b38fb0f5f75cb83231b8eaee4aed3a368a81ca608f1",
+              "target_sha256": "b00152ecb7b2f25d30c89b38fb0f5f75cb83231b8eaee4aed3a368a81ca608f1",
+              "bytes": 2094336128,
+              "source_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792661993630043295
+              },
+              "target_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792663828520874189
+              },
+              "seconds": 17.465121870976873,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            }
+          }
+        },
+        "VRPLTW": {
+          "arm": "A",
+          "variant": "random",
+          "r84_metadata_sha256": "e5882998bdebbebf41819651df1e9f118ec8ef8daea94a1f95f17e18e3b6d9a4",
+          "teacher_metadata_sha256": "7f0cb3fa823e991586cafec1478f13e837a77620a6fb234872c922f8c6532d3e",
+          "donor_sha256": "92b48abef45758777aa5868c12e8d411a0a3a68099c1f5ae4a60c02b1a90c805",
+          "origin": "/tmp/shiys_R84_new90k_cache/train/VRPLTW",
+          "transport_policy": "Path and mtime are transport observations, not content hashes. Identity is original R94 provenance, immutable original R84 metadata, input schema and full TRAIN origin, plus actual n in original row order. R94 validation is unchanged.",
+          "transport_observations": {
+            "n": {
+              "original": {
+                "bytes": 648128,
+                "mtime_ns": 1792259240410360525,
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPLTW/n.npy",
+                "spec": {
+                  "dtype": "int64",
+                  "file": "n.npy",
+                  "shape": [
+                    81000
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPLTW/n.npy",
+                "bytes": 648128,
+                "mtime_ns": 1792259240410348391
+              },
+              "mtime_differs": true
+            },
+            "node": {
+              "original": {
+                "bytes": 261792128,
+                "mtime_ns": 1792259241731370031,
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPLTW/node.npy",
+                "spec": {
+                  "dtype": "float32",
+                  "file": "node.npy",
+                  "shape": [
+                    81000,
+                    101,
+                    8
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPLTW/node.npy",
+                "bytes": 261792128,
+                "mtime_ns": 1792259241731349166
+              },
+              "mtime_differs": true
+            }
+          },
+          "canonical_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPLTW",
+          "actual_n_sha256": "b8aa973408ccf0d39e25ac11e6319a6e1bb48afe0f6eee2efeedf20a652a0f5d",
+          "row_alignment": "original R84 rows; exact full n vector; R94 writes original row slots",
+          "rows": 81000,
+          "shape": [
+            81000,
+            101,
+            128
+          ],
+          "files": {
+            "metadata.json": {
+              "source_sha256": "60075fb26bdfda03863801809ed1269b8e09f7e7fb44c6a32cc7b59b1235d783",
+              "target_sha256": "60075fb26bdfda03863801809ed1269b8e09f7e7fb44c6a32cc7b59b1235d783",
+              "bytes": 4775,
+              "source_stat": {
+                "bytes": 4775,
+                "mtime_ns": 1792661995955062012
+              },
+              "target_stat": {
+                "bytes": 4775,
+                "mtime_ns": 1792663836224882480
+              },
+              "seconds": 0.002286653034389019,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            },
+            "nco_nodes.npy": {
+              "source_sha256": "5c2fd0ea5cac4749bfc0b35e06ae3cea9e8e098a4874ddc389bf66a63068a4c6",
+              "target_sha256": "5c2fd0ea5cac4749bfc0b35e06ae3cea9e8e098a4874ddc389bf66a63068a4c6",
+              "bytes": 2094336128,
+              "source_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792662003390121866
+              },
+              "target_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792663844623891981
+              },
+              "seconds": 16.135893294005655,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            }
+          }
+        },
+        "OVRPBL": {
+          "arm": "A",
+          "variant": "random",
+          "r84_metadata_sha256": "68bd42edd37908e97a955fe1e0c53d01b6132d8c39160ff0b27e1355863dfb68",
+          "teacher_metadata_sha256": "2eb2f93d918351d6800de6aa5dd239cc3ce978dcf140c7d7c3cb4ace6be9ccda",
+          "donor_sha256": "92b48abef45758777aa5868c12e8d411a0a3a68099c1f5ae4a60c02b1a90c805",
+          "origin": "/tmp/shiys_R84_new90k_cache/train/OVRPBL",
+          "transport_policy": "Path and mtime are transport observations, not content hashes. Identity is original R94 provenance, immutable original R84 metadata, input schema and full TRAIN origin, plus actual n in original row order. R94 validation is unchanged.",
+          "transport_observations": {
+            "n": {
+              "original": {
+                "bytes": 648128,
+                "mtime_ns": 1792259198195056158,
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPBL/n.npy",
+                "spec": {
+                  "dtype": "int64",
+                  "file": "n.npy",
+                  "shape": [
+                    81000
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPBL/n.npy",
+                "bytes": 648128,
+                "mtime_ns": 1792259198194321999
+              },
+              "mtime_differs": true
+            },
+            "node": {
+              "original": {
+                "bytes": 261792128,
+                "mtime_ns": 1792259202732088792,
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPBL/node.npy",
+                "spec": {
+                  "dtype": "float32",
+                  "file": "node.npy",
+                  "shape": [
+                    81000,
+                    101,
+                    8
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPBL/node.npy",
+                "bytes": 261792128,
+                "mtime_ns": 1792259202732324625
+              },
+              "mtime_differs": true
+            }
+          },
+          "canonical_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBL",
+          "actual_n_sha256": "76a331b05475ebe36e3095549e0395671128679fb9fedcbc889ca83491d4a2c9",
+          "row_alignment": "original R84 rows; exact full n vector; R94 writes original row slots",
+          "rows": 81000,
+          "shape": [
+            81000,
+            101,
+            128
+          ],
+          "files": {
+            "metadata.json": {
+              "source_sha256": "9f174fcea79d841742ec6da0f0be575c1a2829822c5e44f9298b1d5f39fb7319",
+              "target_sha256": "9f174fcea79d841742ec6da0f0be575c1a2829822c5e44f9298b1d5f39fb7319",
+              "bytes": 4775,
+              "source_stat": {
+                "bytes": 4775,
+                "mtime_ns": 1792662007185152417
+              },
+              "target_stat": {
+                "bytes": 4775,
+                "mtime_ns": 1792663852362900771
+              },
+              "seconds": 0.0018125730566680431,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            },
+            "nco_nodes.npy": {
+              "source_sha256": "e31de27da021dbd52ad50fc69661c24413e5dde9b255dc13b204d1946f6eab5f",
+              "target_sha256": "e31de27da021dbd52ad50fc69661c24413e5dde9b255dc13b204d1946f6eab5f",
+              "bytes": 2094336128,
+              "source_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792662013360202127
+              },
+              "target_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792663860211909589
+              },
+              "seconds": 15.448127312003635,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            }
+          }
+        },
+        "OVRPBTW": {
+          "arm": "A",
+          "variant": "random",
+          "r84_metadata_sha256": "c0b505f2d2897604e1c895a64df0104b7428f2915c2829a4981e83f5eec7db85",
+          "teacher_metadata_sha256": "60c684e087e076288eedceed631de520fdacdb13677c039d697f803c03ea587b",
+          "donor_sha256": "92b48abef45758777aa5868c12e8d411a0a3a68099c1f5ae4a60c02b1a90c805",
+          "origin": "/tmp/shiys_R84_new90k_cache/train/OVRPBTW",
+          "transport_policy": "Path and mtime are transport observations, not content hashes. Identity is original R94 provenance, immutable original R84 metadata, input schema and full TRAIN origin, plus actual n in original row order. R94 validation is unchanged.",
+          "transport_observations": {
+            "n": {
+              "original": {
+                "bytes": 648128,
+                "mtime_ns": 1792259207947126329,
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPBTW/n.npy",
+                "spec": {
+                  "dtype": "int64",
+                  "file": "n.npy",
+                  "shape": [
+                    81000
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPBTW/n.npy",
+                "bytes": 648128,
+                "mtime_ns": 1792259207946327641
+              },
+              "mtime_differs": true
+            },
+            "node": {
+              "original": {
+                "bytes": 261792128,
+                "mtime_ns": 1792259208984133803,
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPBTW/node.npy",
+                "spec": {
+                  "dtype": "float32",
+                  "file": "node.npy",
+                  "shape": [
+                    81000,
+                    101,
+                    8
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPBTW/node.npy",
+                "bytes": 261792128,
+                "mtime_ns": 1792259208983328241
+              },
+              "mtime_differs": true
+            }
+          },
+          "canonical_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBTW",
+          "actual_n_sha256": "3bd3ad6aa48333dd1e989e23cc781c1ec5f37853b6be844be13e922df063837e",
+          "row_alignment": "original R84 rows; exact full n vector; R94 writes original row slots",
+          "rows": 81000,
+          "shape": [
+            81000,
+            101,
+            128
+          ],
+          "files": {
+            "metadata.json": {
+              "source_sha256": "38175b4d3b24a869a2dc1d2470dd98a7a45ab6b2ec43526cc46f3b66ea05ef0d",
+              "target_sha256": "38175b4d3b24a869a2dc1d2470dd98a7a45ab6b2ec43526cc46f3b66ea05ef0d",
+              "bytes": 4779,
+              "source_stat": {
+                "bytes": 4779,
+                "mtime_ns": 1792662016928230851
+              },
+              "target_stat": {
+                "bytes": 4779,
+                "mtime_ns": 1792663867824918136
+              },
+              "seconds": 0.060883845086209476,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            },
+            "nco_nodes.npy": {
+              "source_sha256": "c3da05a18d9ffde684cbbd3ce336e32a94a3a9bf917facf01fbc40019565b13d",
+              "target_sha256": "c3da05a18d9ffde684cbbd3ce336e32a94a3a9bf917facf01fbc40019565b13d",
+              "bytes": 2094336128,
+              "source_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792662022753277743
+              },
+              "target_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792663876712928229
+              },
+              "seconds": 16.15697571297642,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            }
+          }
+        },
+        "OVRPLTW": {
+          "arm": "A",
+          "variant": "random",
+          "r84_metadata_sha256": "7f108780aa1d7414e7299e00d5efcd63900759a37b98b328da601a8b062d3faf",
+          "teacher_metadata_sha256": "eec6dd9e3128e2b47d8229e896f6f65756ed91fecf4da92962be745fa0105900",
+          "donor_sha256": "92b48abef45758777aa5868c12e8d411a0a3a68099c1f5ae4a60c02b1a90c805",
+          "origin": "/tmp/shiys_R84_new90k_cache/train/OVRPLTW",
+          "transport_policy": "Path and mtime are transport observations, not content hashes. Identity is original R94 provenance, immutable original R84 metadata, input schema and full TRAIN origin, plus actual n in original row order. R94 validation is unchanged.",
+          "transport_observations": {
+            "n": {
+              "original": {
+                "bytes": 648128,
+                "mtime_ns": 1792259212862161752,
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPLTW/n.npy",
+                "spec": {
+                  "dtype": "int64",
+                  "file": "n.npy",
+                  "shape": [
+                    81000
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPLTW/n.npy",
+                "bytes": 648128,
+                "mtime_ns": 1792259212862330485
+              },
+              "mtime_differs": true
+            },
+            "node": {
+              "original": {
+                "bytes": 261792128,
+                "mtime_ns": 1792259213613167164,
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPLTW/node.npy",
+                "spec": {
+                  "dtype": "float32",
+                  "file": "node.npy",
+                  "shape": [
+                    81000,
+                    101,
+                    8
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPLTW/node.npy",
+                "bytes": 261792128,
+                "mtime_ns": 1792259213616330921
+              },
+              "mtime_differs": true
+            }
+          },
+          "canonical_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPLTW",
+          "actual_n_sha256": "151f461b8c0f24765acdc0968b1f49dfcd699e0cafead8044fa1857a3664ca0a",
+          "row_alignment": "original R84 rows; exact full n vector; R94 writes original row slots",
+          "rows": 81000,
+          "shape": [
+            81000,
+            101,
+            128
+          ],
+          "files": {
+            "metadata.json": {
+              "source_sha256": "248017a75775ce0181d0eb8661e6e3456781d6f11fb67a273aaf4ca36a660ef9",
+              "target_sha256": "248017a75775ce0181d0eb8661e6e3456781d6f11fb67a273aaf4ca36a660ef9",
+              "bytes": 4779,
+              "source_stat": {
+                "bytes": 4779,
+                "mtime_ns": 1792662026309306370
+              },
+              "target_stat": {
+                "bytes": 4779,
+                "mtime_ns": 1792663884043936568
+              },
+              "seconds": 0.0019672500202432275,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            },
+            "nco_nodes.npy": {
+              "source_sha256": "11700f8cd01fbeba9a2df581725a195a9d1e05e9001ecd0ef9b2252c1997f501",
+              "target_sha256": "11700f8cd01fbeba9a2df581725a195a9d1e05e9001ecd0ef9b2252c1997f501",
+              "bytes": 2094336128,
+              "source_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792662033435363736
+              },
+              "target_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792663893036948701
+              },
+              "seconds": 16.721806769957766,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            }
+          }
+        },
+        "VRPBLTW": {
+          "arm": "A",
+          "variant": "random",
+          "r84_metadata_sha256": "55a52fa3da1922156b09deb08616f8b5663a536c32c2ef7de1943257ed1f2cee",
+          "teacher_metadata_sha256": "ae69a06f1a85f0ad09d0c44b75fb3dda20cd6d2daa76c03109446c47eeddbc70",
+          "donor_sha256": "92b48abef45758777aa5868c12e8d411a0a3a68099c1f5ae4a60c02b1a90c805",
+          "origin": "/tmp/shiys_R84_new90k_cache/train/VRPBLTW",
+          "transport_policy": "Path and mtime are transport observations, not content hashes. Identity is original R94 provenance, immutable original R84 metadata, input schema and full TRAIN origin, plus actual n in original row order. R94 validation is unchanged.",
+          "transport_observations": {
+            "n": {
+              "original": {
+                "bytes": 648128,
+                "mtime_ns": 1792259232487303356,
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPBLTW/n.npy",
+                "spec": {
+                  "dtype": "int64",
+                  "file": "n.npy",
+                  "shape": [
+                    81000
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPBLTW/n.npy",
+                "bytes": 648128,
+                "mtime_ns": 1792259232488343050
+              },
+              "mtime_differs": true
+            },
+            "node": {
+              "original": {
+                "bytes": 261792128,
+                "mtime_ns": 1792259233125307964,
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPBLTW/node.npy",
+                "spec": {
+                  "dtype": "float32",
+                  "file": "node.npy",
+                  "shape": [
+                    81000,
+                    101,
+                    8
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/VRPBLTW/node.npy",
+                "bytes": 261792128,
+                "mtime_ns": 1792259233150343502
+              },
+              "mtime_differs": true
+            }
+          },
+          "canonical_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBLTW",
+          "actual_n_sha256": "9afc59ec3492434dfa6925b29337c82f97a35d6cb00495f336f6ec77b5e6588e",
+          "row_alignment": "original R84 rows; exact full n vector; R94 writes original row slots",
+          "rows": 81000,
+          "shape": [
+            81000,
+            101,
+            128
+          ],
+          "files": {
+            "metadata.json": {
+              "source_sha256": "5152fc5890fe431817de5e97e99234369491ef4854441565aaaa8ca7b0ca4a3e",
+              "target_sha256": "5152fc5890fe431817de5e97e99234369491ef4854441565aaaa8ca7b0ca4a3e",
+              "bytes": 4779,
+              "source_stat": {
+                "bytes": 4779,
+                "mtime_ns": 1792662037020392596
+              },
+              "target_stat": {
+                "bytes": 4779,
+                "mtime_ns": 1792663900766958968
+              },
+              "seconds": 0.0020604070741683245,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            },
+            "nco_nodes.npy": {
+              "source_sha256": "fa5a0457677c7a8e0bdbbd6ad6c5f0be293bbae0ecb6c62042139caefa9655ec",
+              "target_sha256": "fa5a0457677c7a8e0bdbbd6ad6c5f0be293bbae0ecb6c62042139caefa9655ec",
+              "bytes": 2094336128,
+              "source_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792662043027440954
+              },
+              "target_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792663908695968124
+              },
+              "seconds": 15.643241093028337,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            }
+          }
+        },
+        "OVRPBLTW": {
+          "arm": "A",
+          "variant": "random",
+          "r84_metadata_sha256": "1d71b9a0ae04edd033a5ce73ae3ddd3794a330a6f0d63ec8b11654f6f23314f8",
+          "teacher_metadata_sha256": "1c2133c0ff2a938b923b9ad2dd707db5761388fafa7d5fa6afa308fc8725a481",
+          "donor_sha256": "92b48abef45758777aa5868c12e8d411a0a3a68099c1f5ae4a60c02b1a90c805",
+          "origin": "/tmp/shiys_R84_new90k_cache/train/OVRPBLTW",
+          "transport_policy": "Path and mtime are transport observations, not content hashes. Identity is original R94 provenance, immutable original R84 metadata, input schema and full TRAIN origin, plus actual n in original row order. R94 validation is unchanged.",
+          "transport_observations": {
+            "n": {
+              "original": {
+                "bytes": 648128,
+                "mtime_ns": 1792259205199106536,
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPBLTW/n.npy",
+                "spec": {
+                  "dtype": "int64",
+                  "file": "n.npy",
+                  "shape": [
+                    81000
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPBLTW/n.npy",
+                "bytes": 648128,
+                "mtime_ns": 1792259205199326052
+              },
+              "mtime_differs": true
+            },
+            "node": {
+              "original": {
+                "bytes": 261792128,
+                "mtime_ns": 1792259206269114236,
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPBLTW/node.npy",
+                "spec": {
+                  "dtype": "float32",
+                  "file": "node.npy",
+                  "shape": [
+                    81000,
+                    101,
+                    8
+                  ]
+                }
+              },
+              "runtime": {
+                "path": "/tmp/shiys_R84_new90k_cache/train/OVRPBLTW/node.npy",
+                "bytes": 261792128,
+                "mtime_ns": 1792259206269326671
+              },
+              "mtime_differs": true
+            }
+          },
+          "canonical_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBLTW",
+          "actual_n_sha256": "be1ab68f71dd208c21350231e153d04127a4c9d070f16699ce84f65f8fc56ead",
+          "row_alignment": "original R84 rows; exact full n vector; R94 writes original row slots",
+          "rows": 81000,
+          "shape": [
+            81000,
+            101,
+            128
+          ],
+          "files": {
+            "metadata.json": {
+              "source_sha256": "3083a529c85999df69d1319fc56c58a14ae1d4a7b3de1d6cdc8f1997d02001bf",
+              "target_sha256": "3083a529c85999df69d1319fc56c58a14ae1d4a7b3de1d6cdc8f1997d02001bf",
+              "bytes": 4783,
+              "source_stat": {
+                "bytes": 4783,
+                "mtime_ns": 1792662046554469347
+              },
+              "target_stat": {
+                "bytes": 4783,
+                "mtime_ns": 1792663916429977055
+              },
+              "seconds": 0.04472312796860933,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            },
+            "nco_nodes.npy": {
+              "source_sha256": "58ff0797e689f77b3ae3fd5d0f2c17601550f14e69b42342857e48fc09f51065",
+              "target_sha256": "58ff0797e689f77b3ae3fd5d0f2c17601550f14e69b42342857e48fc09f51065",
+              "bytes": 2094336128,
+              "source_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792662053687526770
+              },
+              "target_stat": {
+                "bytes": 2094336128,
+                "mtime_ns": 1792663924408986268
+              },
+              "seconds": 15.22964672499802,
+              "source_passes": 1,
+              "target_verification_passes": 1
+            }
+          }
+        }
+      },
+      "bytes": 41783118420,
+      "gib": 38.913561422377825,
+      "inspection_seconds": 0.5969980340451002,
+      "labels_read": false,
+      "encoder_executed": false,
+      "teacher_payload_read": false,
+      "teacher_provenance": {
+        "variant": "random",
+        "checkpoint_path": null,
+        "checkpoint_sha256": null,
+        "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+        "native_source_files": {
+          "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d",
+          "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd"
+        },
+        "output_dim": 128,
+        "supported_problems": [
+          "CVRP",
+          "OVRP",
+          "VRPB",
+          "VRPL",
+          "VRPTW",
+          "OVRPTW",
+          "OVRPB",
+          "OVRPL",
+          "VRPBL",
+          "VRPBTW",
+          "VRPLTW",
+          "OVRPBL",
+          "OVRPBTW",
+          "OVRPLTW",
+          "VRPBLTW",
+          "OVRPBLTW"
+        ],
+        "random_seed": 940002,
+        "checkpoint_pin": {
+          "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+          "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+        },
+        "spec": {
+          "format": "r94_static_reld_moel_v1",
+          "output_dim": 128,
+          "native_precision": {
+            "dtype": "float32",
+            "autocast": false,
+            "matmul_tf32": false,
+            "cudnn_tf32": false
+          },
+          "supported_problems": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW",
+            "OVRPB",
+            "OVRPL",
+            "VRPBL",
+            "VRPBTW",
+            "VRPLTW",
+            "OVRPBL",
+            "OVRPBTW",
+            "OVRPLTW",
+            "VRPBLTW",
+            "OVRPBLTW"
+          ],
+          "raw_cvrp_fields": [
+            "x",
+            "y",
+            "demand",
+            "depotflag"
+          ],
+          "raw_mvrp_fields": [
+            "x",
+            "y",
+            "demand",
+            "depotflag",
+            "L",
+            "service",
+            "TWstart",
+            "TWend"
+          ],
+          "native_fields": {
+            "depot_xy": [
+              "x",
+              "y"
+            ],
+            "node_xy_demand_tw": [
+              "x",
+              "y",
+              "signed_demand",
+              "TWstart",
+              "TWend"
+            ]
+          },
+          "disabled_tw": [
+            0.0,
+            0.0
+          ],
+          "units": "unchanged native input units; demand already capacity-normalized",
+          "extraction": "exact valid N per row; depot first; preserve customer identities",
+          "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+          "model_params": {
+            "embedding_dim": 128,
+            "sqrt_embedding_dim": 11.313708498984761,
+            "encoder_layer_num": 6,
+            "decoder_layer_num": 1,
+            "qkv_dim": 16,
+            "head_num": 8,
+            "logit_clipping": 10,
+            "ff_hidden_dim": 512,
+            "num_experts": 4,
+            "eval_type": "argmax",
+            "norm": "none",
+            "norm_loc": "norm_last",
+            "expert_loc": [
+              "Enc0",
+              "Enc1",
+              "Enc2",
+              "Enc3",
+              "Enc4",
+              "Enc5",
+              "Dec"
+            ],
+            "problem": "Train_ALL",
+            "topk": 2,
+            "routing_level": "node",
+            "routing_method": "input_choice",
+            "ffidt": true
+          }
+        },
+        "known_unknown_pretraining_source": {
+          "applies_to_loaded_weights": false,
+          "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+          "training_tasks": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW"
+          ],
+          "unknown": [
+            "historical CLI",
+            "training instance manifest",
+            "exact trajectory",
+            "overlap with selector inputs"
+          ],
+          "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate"
+        }
+      },
+      "transport_policy": "Path and mtime are transport observations, not content hashes. Identity is original R94 provenance, immutable original R84 metadata, input schema and full TRAIN origin, plus actual n in original row order. R94 validation is unchanged.",
+      "source_disk_available_bytes": 14045597925376,
+      "unmeasured_time_projection": {
+        "note": "Illustrations only, not measured throughput; include one source read, write and target read",
+        "seconds_at_combined_io_mib_s": {
+          "50": 2390.8492137908934,
+          "100": 1195.4246068954467,
+          "200": 597.7123034477233
+        }
+      },
+      "source_root": "/public/home/shiys/0selection2/code/V4/runs/R101_hint_pretraining/teacher_cache/A/train",
+      "mode": "stream_copy_verified",
+      "copied": true,
+      "payload_sha256_verified": true,
+      "buffer_bytes": 8388608,
+      "disk_available_before_bytes": 173572239360,
+      "created_utc": "2026-10-22T10:12:11.688644+00:00",
+      "host": "76045731f6b4",
+      "seconds": 322.9740354178939,
+      "automatic_retries": false,
+      "source_files_modified": false,
+      "weights_opened": false
+    }
+  },
+  "phase": "LIB",
+  "exit_status": 0,
+  "finished_utc": "2026-10-22T16:25:30.734856+00:00"
+}
