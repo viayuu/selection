@@ -1,0 +1,25 @@
+{
+  "scope": "R98 data/model sidecar only; no GPU, SGD, protocol lock, or results",
+  "status": "implementation, official checkpoint and full18 all81000 TRAIN targets ready",
+  "target_root": "/public/home/shiys/0selection2/code/V4/runs/R98_performance_context/targets",
+  "target_receipt": "preparation/targets_ready.json",
+  "api": {
+    "prepare_targets": "code.V4.r98_data.prepare_targets(data_root, context_root, output_root, problems=None) -> dict[problem, Path(identity.json)]",
+    "load_targets": "code.V4.r98_data.load_targets(output_root, problem) -> table with .g, .metadata, .close()",
+    "model": "code.V4.r98_model.FrozenPerformanceContext(context, targets, regressor_factory)",
+    "predict_features": "predict_features(query_features, query_source_ids) -> float64[N,K] raw GAP means; reduced R97 input feature width",
+    "predict": "predict(query_features, query_source_ids) -> raw mean argmin local candidate IDs",
+    "factory": "code.V4.r98_model.public_regressor(config, device); config keys library_root and regressor_parameters",
+    "requires_separate_fit": false,
+    "fit_arguments": "regressor.fit(X_train, G_train[:,method], kv_cache=False)",
+    "predict_arguments": "regressor.predict(query_features, output_type=mean)",
+    "runtime_metadata": "runtime/runtime_metadata.json and runtime/provenance.json (identical config-ready receipts, written after verified checkpoint download)"
+  },
+  "decisions": [
+    {"id": "D1", "source": "user", "value": "Use native TRAIN raw_label.pkl only, never held-out labels or FP32 caches"},
+    {"id": "D2", "source": "implementation", "value": "Target output root contains PROBLEM/G.npy and PROBLEM/identity.json; preserve existing directories and reject mismatched identity"},
+    {"id": "D3", "source": "R97 compatibility", "value": "Queries use already-transformed reduced-width R97 features, never feature plus supervision dictionaries"},
+    {"id": "D4", "source": "user", "value": "Sequential lazy scalar fit(kv_cache=False) then predict(output_type=mean); release each regressor before constructing the next"},
+    {"id": "D5", "source": "implementation", "value": "Native public regressor internally applies float32 and affine target scaling; sidecar computes, stores and supplies raw FP64 relative gaps without nonlinear transforms"}
+  ]
+}

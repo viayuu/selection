@@ -1,0 +1,38 @@
+{
+  "ready": true,
+  "experiment": "R98",
+  "scope": "data/model implementation and CPU preparation only, not experimental results",
+  "files": [
+    "code/V4/r98_data.py",
+    "code/V4/r98_model.py",
+    "code/V4/test_r98_data.py",
+    "code/V4/test_r98_model.py"
+  ],
+  "runtime_metadata": "runtime/runtime_metadata.json",
+  "official_checkpoint_provenance": "runtime/provenance.json",
+  "target_receipt": "preparation/targets_ready.json",
+  "target_root": "/public/home/shiys/0selection2/code/V4/runs/R98_performance_context/targets",
+  "api_contract": "preparation/implementation_contract.json",
+  "test_command_after_conda_activate_easynco": "CUDA_VISIBLE_DEVICES='' python -B -m unittest code.V4.test_r98_data code.V4.test_r98_model -v",
+  "tests_passed": 18,
+  "test_seconds": 0.167,
+  "cpu_checks": [
+    "Official pinned Hugging Face revision lists exact regressor checkpoint; download size and LFS SHA256 match",
+    "Isolated public_regressor constructor succeeds without loading model weights or using GPU",
+    "Checkpoint loaded on CPU: regression max_classes=0, embed_dim=128, num_quantiles=999",
+    "CPU architecture exposes exactly three inference managers for per-instance GPU-only guards",
+    "All18 target tables validate against R97 context metadata, pool order, source IDs and kept columns; all81000 rows per task"
+  ],
+  "public_checkpoint_revision": "4dcd344ece2c00be9e831fdd35bed57b5ad83e19",
+  "public_checkpoint_sha256": "0db9cb538f114e79026bf08f45f41ad8dd7ad2de2aaca9a5ca8cd3bd9748ae7a",
+  "no_separate_fit_required": true,
+  "predict_features_return": "FP64 N,K raw gap means, exact frozen legal pool order",
+  "gpu_used": false,
+  "optimizer_updates": 0,
+  "real_predictions_run": false,
+  "query_outcomes_read": false,
+  "git_operations": false,
+  "r97_files_modified": false,
+  "protocol_lock_written": false,
+  "results_written": false
+}
