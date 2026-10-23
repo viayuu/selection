@@ -1,0 +1,408 @@
+{
+  "experiment": "R106",
+  "arm": "B_finetune",
+  "scope": "input-driven memory and gradient witness",
+  "started_utc": "2026-10-23T08:41:25.829649+00:00",
+  "resources": {
+    "slot": "4090_1",
+    "gpu_uuid": "GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d",
+    "container_id": "76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6",
+    "cpus": [
+      4,
+      5,
+      72,
+      73
+    ],
+    "cpu_count": 4,
+    "allocation_memory": "9G",
+    "gpu_mutex": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R81_method_conditioned_auc/queue_gpu_GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d.json",
+      "device": 51,
+      "inode": 563598119
+    }
+  },
+  "optimizer_steps": 0,
+  "formal_train_started": false,
+  "labels_used_for_scalar_or_cap_selection": false,
+  "model_selection": false,
+  "TEST_or_LIB_opened": false,
+  "TRAIN_target_arrays_mapped_by_original_cache_loader": true,
+  "row_selection": "largest true N TRAIN rows, stable ordering; never costs or winners",
+  "automatic_retry": false,
+  "shapes": [
+    {
+      "problem": "TSP",
+      "cap": 64
+    },
+    {
+      "problem": "CVRP",
+      "cap": 64
+    },
+    {
+      "problem": "ATSP",
+      "cap": 128
+    },
+    {
+      "problem": "VRPBLTW",
+      "cap": 256
+    }
+  ],
+  "source_sha256": {
+    "r106_memory_witness.py": "02fd675ef3f625970580ac6e15852220d63c3a57b544fe5d8cb654678aec521c",
+    "r106_model.py": "6ffc7660df0bfb806a652c8be458f8339e22e7b3dfda017e523b64f01b376dbf",
+    "r106_donor.py": "e7c04db6ff9423b8e154bd932c976abf9eef24eb0cac6797a105eeb8a8ddff14"
+  },
+  "complete": true,
+  "exit_status": 0,
+  "completed_utc": "2026-10-23T08:41:30.087255+00:00",
+  "initialization": {
+    "seed": 2,
+    "initialization": "fresh_r84_seed2_plus_r102_projections_and_pinned_r102b_native",
+    "historical_selector_checkpoint_loaded": false,
+    "common_parameter_count": 1842953,
+    "common_parameter_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+    "new_parameter_sha256": "eadae4398372b6c1c4603979dbc697d7408aa62f292e27d66a85910a405d5312",
+    "selector_parameter_sha256": "79a823efa328b528cad136b7b3fbc878fd34e87fac1ae108a65a7aee23befe73",
+    "initial_state_sha256": "7381a063ecba3c898ed2ebabcb9d06a4bf30a70db6767ecf09cf230c165b0e41",
+    "native_state_sha256": "bcb04a1ce2aca695c48c608fb2d1738112e92afcdec19b3e8e212cc5be19a233",
+    "parameter_counts": {
+      "total": 11965097,
+      "trainable": 11965097,
+      "selector": 1941257,
+      "selector_trainable": 1941257,
+      "projections": 98304,
+      "native": 10023840,
+      "native_trainable": 10023840,
+      "native_by_component": {
+        "tsp": 1187712,
+        "atsp": 5273760,
+        "routing": 3562368
+      }
+    },
+    "trainable_parameter_count": 11965097,
+    "total_parameter_count": 11965097,
+    "selector_trainable_parameter_count": 1941257,
+    "native_trainable_parameter_count": 10023840,
+    "new_parameter_names": [
+      "instance_encoder.nco_projections.ATSP.weight",
+      "instance_encoder.nco_projections.TSP.weight",
+      "instance_encoder.nco_projections.VRP.weight"
+    ],
+    "new_parameter_shapes": {
+      "instance_encoder.nco_projections.TSP.weight": [
+        128,
+        128
+      ],
+      "instance_encoder.nco_projections.ATSP.weight": [
+        128,
+        512
+      ],
+      "instance_encoder.nco_projections.VRP.weight": [
+        128,
+        128
+      ]
+    },
+    "native_donor": {
+      "trainable": true,
+      "mode": "eval",
+      "provenance": {
+        "format": "r106_differentiable_native_v1",
+        "source_identity": "R102-B originals",
+        "components": {
+          "TSP": {
+            "variant": "pretrained",
+            "output_dim": 128,
+            "supported_problems": [
+              "TSP"
+            ],
+            "native_source_files": {
+              "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/ELG/TSP/models.py": "8c88d6312cc1849cd82a6fafae050ace6e8a283ed027bc0d7bb3bb8a8f61fe55"
+            },
+            "native_source_sha256": "46990e346f1b1d4015f2bd0a429f38fbdeb65c7c189fa108e73446022ae29ceb",
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/ELG/TSP/weights/ELG.pt",
+              "sha256": "94448cce3ba413388286449886eae05f27c03f94996ff45daea37ebdce88fcdf",
+              "state_key": "model_state_dict",
+              "prefix": "encoder."
+            },
+            "checkpoint_sha256": "94448cce3ba413388286449886eae05f27c03f94996ff45daea37ebdce88fcdf",
+            "checkpoint_path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/ELG/TSP/weights/ELG.pt",
+            "random_seed": null,
+            "max_checkpoint_bytes": 16777216,
+            "model_params": {
+              "embedding_dim": 128,
+              "encoder_layer_num": 6,
+              "head_num": 8,
+              "qkv_dim": 16,
+              "ff_hidden_dim": 512
+            },
+            "input_fields": [
+              "xy"
+            ],
+            "roles": "original node order; node 0 is not a depot",
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": true,
+              "known": "Pinned native ELG TSP encoder",
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs",
+                "historical solver cost recipe"
+              ],
+              "historical_cost_recipe_certified": false
+            }
+          },
+          "ATSP": {
+            "variant": "pretrained",
+            "output_dim": 512,
+            "supported_problems": [
+              "ATSP"
+            ],
+            "native_source_files": {
+              "/public/home/shiys/EasyNCO/neural_solvers/methods/matnet/matnet_encoder.py": "35738284914ecc50090e2553ef085ff1724737d6db11c253832844d9465e8f3e",
+              "/public/home/shiys/EasyNCO/neural_solvers/backbones/Transformer/attr_component.py": "d6cc61586fb97a54cfdc7dc4e2eaa436cbc16772c04397cd17f5ea677fc5e5d0"
+            },
+            "native_source_sha256": "ac518d326ae5c1903e414eefc1438a261c8e45eb1940f13eedfd47ae8e21ff63",
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/EasyNCO/pretrained/matnet_pretrain/matnet_atsp100.ckpt",
+              "sha256": "a86d1ab1d8db62088e6a9d54118db92ebe8472c316dc046fcf755ca61280b5ca",
+              "state_key": "state_dict",
+              "prefix": "encoder."
+            },
+            "checkpoint_sha256": "a86d1ab1d8db62088e6a9d54118db92ebe8472c316dc046fcf755ca61280b5ca",
+            "checkpoint_path": "/public/home/shiys/EasyNCO/pretrained/matnet_pretrain/matnet_atsp100.ckpt",
+            "random_seed": null,
+            "max_checkpoint_bytes": 33554432,
+            "model_params": {
+              "embedding_dim": 256,
+              "encoder_layer_num": 5,
+              "head_num": 16,
+              "qkv_dim": 16,
+              "ms_hidden_dim": 16,
+              "ff_hidden_dim": 512,
+              "ms_layer1_init": 0.7071067811865476,
+              "ms_layer2_init": 0.25
+            },
+            "input_fields": [
+              "matrix",
+              "fixed identity roles"
+            ],
+            "roles": {
+              "from_role": "all zeros",
+              "to_role": "identity onehot columns first N of 256",
+              "fixed_for": "all instances, arms and datasets",
+              "max_n": 256,
+              "historical_random_role_recipe_reproduced": false,
+              "output": "concatenate FROM256 then TO256, never sum or average"
+            },
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": true,
+              "known": "Pinned native MatNet ATSP100 encoder",
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs",
+                "historical solver cost recipe"
+              ],
+              "historical_cost_recipe_certified": false
+            }
+          },
+          "VRP": {
+            "variant": "pretrained",
+            "checkpoint_path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "checkpoint_sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3",
+            "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+            "native_source_files": {
+              "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d",
+              "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd"
+            },
+            "output_dim": 128,
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "random_seed": null,
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+            },
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": true,
+              "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+              "training_tasks": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW"
+              ],
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs"
+              ],
+              "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate"
+            },
+            "model_params": {
+              "embedding_dim": 128,
+              "sqrt_embedding_dim": 11.313708498984761,
+              "encoder_layer_num": 6,
+              "decoder_layer_num": 1,
+              "qkv_dim": 16,
+              "head_num": 8,
+              "logit_clipping": 10,
+              "ff_hidden_dim": 512,
+              "num_experts": 4,
+              "eval_type": "argmax",
+              "norm": "none",
+              "norm_loc": "norm_last",
+              "expert_loc": [
+                "Enc0",
+                "Enc1",
+                "Enc2",
+                "Enc3",
+                "Enc4",
+                "Enc5",
+                "Dec"
+              ],
+              "problem": "Train_ALL",
+              "topk": 2,
+              "routing_level": "node",
+              "routing_method": "input_choice",
+              "ffidt": true
+            }
+          }
+        },
+        "spec": {
+          "format": "r106_differentiable_native_v1",
+          "weights": "all three original pinned R102-B pretrained encoders in both arms",
+          "native_precision": {
+            "dtype": "float32",
+            "autocast": false,
+            "matmul_tf32": false,
+            "cudnn_tf32": false
+          },
+          "execution": "one masked padded execution per homogeneous microbatch, no exact-N loop",
+          "TSP": "ELG128: masked attention and valid-node affine InstanceNorm",
+          "ATSP": "MatNet FROM256 concat TO256; original distance mixed-score, masked InstanceNorm",
+          "VRP": "ReLD128 norm=none; original eval node-level input-choice topk2 MoE",
+          "atsp_roles": {
+            "from_role": "all zeros",
+            "to_role": "identity onehot columns first N of 256",
+            "fixed_for": "all instances, arms and datasets",
+            "max_n": 256,
+            "historical_random_role_recipe_reproduced": false,
+            "output": "concatenate FROM256 then TO256, never sum or average"
+          },
+          "dropout": false,
+          "decoder": false,
+          "native_auxiliary_loss": false,
+          "mode": "native always eval; eval does not disable B autograd",
+          "padding": "preserve physical node order; invalid inputs sanitized and output zero",
+          "comparison": "numerical agreement only, not bitwise equivalence"
+        }
+      }
+    },
+    "geometry_fitted_on": "frozen R84 new81000 TRAIN only",
+    "requires_grad_excluded_from_state_hash": true
+  },
+  "measurements": [
+    {
+      "problem": "TSP",
+      "microbatch": 64,
+      "maximum_n": 499,
+      "minimum_n": 499,
+      "native_calls": 1,
+      "native_gradient_tensors": 80,
+      "selector_gradient_tensors": 145,
+      "nonzero_gradient_tensors": {
+        "native": 80,
+        "selector": 142
+      },
+      "two_dropout_forwards": true,
+      "gradient_scalar": "mean squared legal logits; no target labels",
+      "synthetic_gradient_scale": 1024.0,
+      "seconds": 0.890338544966653,
+      "peak_allocated_mib": 4720.62939453125,
+      "peak_reserved_mib": 4792.0
+    },
+    {
+      "problem": "CVRP",
+      "microbatch": 64,
+      "maximum_n": 500,
+      "minimum_n": 500,
+      "native_calls": 1,
+      "native_gradient_tensors": 136,
+      "selector_gradient_tensors": 145,
+      "nonzero_gradient_tensors": {
+        "native": 136,
+        "selector": 143
+      },
+      "two_dropout_forwards": true,
+      "gradient_scalar": "mean squared legal logits; no target labels",
+      "synthetic_gradient_scale": 1024.0,
+      "seconds": 0.3178088259883225,
+      "peak_allocated_mib": 5437.74853515625,
+      "peak_reserved_mib": 5620.0
+    },
+    {
+      "problem": "ATSP",
+      "microbatch": 128,
+      "maximum_n": 100,
+      "minimum_n": 100,
+      "native_calls": 1,
+      "native_gradient_tensors": 170,
+      "selector_gradient_tensors": 141,
+      "nonzero_gradient_tensors": {
+        "native": 160,
+        "selector": 140
+      },
+      "two_dropout_forwards": true,
+      "gradient_scalar": "mean squared legal logits; no target labels",
+      "synthetic_gradient_scale": 1024.0,
+      "seconds": 0.5830476899864152,
+      "peak_allocated_mib": 19144.013671875,
+      "peak_reserved_mib": 19562.0
+    },
+    {
+      "problem": "VRPBLTW",
+      "microbatch": 256,
+      "maximum_n": 101,
+      "minimum_n": 101,
+      "native_calls": 1,
+      "native_gradient_tensors": 136,
+      "selector_gradient_tensors": 145,
+      "nonzero_gradient_tensors": {
+        "native": 136,
+        "selector": 143
+      },
+      "two_dropout_forwards": true,
+      "gradient_scalar": "mean squared legal logits; no target labels",
+      "synthetic_gradient_scale": 1024.0,
+      "seconds": 0.12740383495111018,
+      "peak_allocated_mib": 3740.99169921875,
+      "peak_reserved_mib": 3880.0
+    }
+  ],
+  "total_device_memory_mib": 24210.3125,
+  "no_training_or_evaluation_metrics": true,
+  "native_parameter_gradient_path_confirmed": true
+}

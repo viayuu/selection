@@ -1,0 +1,477 @@
+{
+  "experiment": "R106",
+  "arm": "B_finetune",
+  "phase": "complete",
+  "exit_status": 0,
+  "completed_utc": "2026-10-23T20:26:02.267015+00:00",
+  "complete": true,
+  "output": "/public/home/shiys/0selection2/code/V4/runs/R106_native_encoder_adaptation/B_finetune/full_model_statistics",
+  "model_statistics_pdf": "/public/home/shiys/0selection2/code/V4/runs/R106_native_encoder_adaptation/B_finetune/full_model_statistics/MODEL_STATISTICS.pdf",
+  "selection_distributions_pdf": "/public/home/shiys/0selection2/code/V4/runs/R106_native_encoder_adaptation/B_finetune/full_model_statistics/selection_distributions.pdf",
+  "target_recovery_pdf": "/public/home/shiys/0selection2/code/V4/runs/R106_native_encoder_adaptation/B_finetune/full_model_statistics/target_recovery_and_train.pdf",
+  "inference_timing": {
+    "experiment": "R106",
+    "arm": "B_finetune",
+    "complete": true,
+    "completed_utc": "2026-10-23T20:25:07.534255+00:00",
+    "checkpoint_sha256": "590bbb1b336446942c00f8dc1d155de462ae45c865333e08a5ae4c4a6b68067a",
+    "state_hash": "b4c8cf30a0386f90019d62a4288067bc8d92290181750e9c822eccef4ba36791",
+    "selected_update": 17280,
+    "model_state_sha256": "ad1f279d61d1076705e143cc4be2b54cdfb5963ef882310ff46f3aec1339cbf6",
+    "model_factory": "code.V4.r106_experiment.load_checkpoint",
+    "inference_rule": "eval online native ELG/MatNet/ReLD plus original full18 selector; native FP32 until normal fusion; physical TSP node0 slot3, instance4/joint2, methodID+hand34, score MLP/utility differences/maximin; ascending-global-solver-ID exact ties; no cached native features, calibration, quotas or per-problem assembly",
+    "device": "cuda:0",
+    "repetitions": 3,
+    "warmup_batches": 1,
+    "sample_policy": "first128 frozen TEST inputs per problem",
+    "total_parameter_count": 11965097,
+    "trainable_parameter_count": 11965097,
+    "core_parameter_count": 1941257,
+    "native_parameter_count": 10023840,
+    "native_trainable_parameter_count": 10023840,
+    "scope": "online_native_plus_selector_GPU_resident_inputs",
+    "batch128_amortized": true,
+    "singleton_measured": false,
+    "all_current_model_included": true,
+    "donor_present": true,
+    "cached_feature_latency_used": false,
+    "end_to_end_measured": false,
+    "input_labels_read": false,
+    "model_reselection": false,
+    "excludes": "dataset I/O, CPU-to-GPU transfer, training and solver decoding/execution",
+    "per_problem": [
+      {
+        "problem": "TSP",
+        "instances": 128,
+        "online_native_plus_selector": {
+          "batch_seconds": [
+            0.058439302956685424,
+            0.05755358200985938,
+            0.056773449992761016
+          ],
+          "mean_seconds_per_instance": 0.00044991233062319225,
+          "donor_calls": [
+            1,
+            1,
+            1
+          ],
+          "warmup_donor_calls": 1,
+          "native_output_dtype": [
+            "torch.float32"
+          ]
+        }
+      },
+      {
+        "problem": "CVRP",
+        "instances": 128,
+        "online_native_plus_selector": {
+          "batch_seconds": [
+            0.07307761104311794,
+            0.0730652769561857,
+            0.07294271502178162
+          ],
+          "mean_seconds_per_instance": 0.0005705354245340762,
+          "donor_calls": [
+            1,
+            1,
+            1
+          ],
+          "warmup_donor_calls": 1,
+          "native_output_dtype": [
+            "torch.float32"
+          ]
+        }
+      },
+      {
+        "problem": "ATSP",
+        "instances": 128,
+        "online_native_plus_selector": {
+          "batch_seconds": [
+            0.14890182006638497,
+            0.14890818507410586,
+            0.149296363000758
+          ],
+          "mean_seconds_per_instance": 0.0011643395003678354,
+          "donor_calls": [
+            1,
+            1,
+            1
+          ],
+          "warmup_donor_calls": 1,
+          "native_output_dtype": [
+            "torch.float32"
+          ]
+        }
+      },
+      {
+        "problem": "OVRP",
+        "instances": 128,
+        "online_native_plus_selector": {
+          "batch_seconds": [
+            0.023030980955809355,
+            0.02305014501325786,
+            0.02307198999915272
+          ],
+          "mean_seconds_per_instance": 0.00018008623950057276,
+          "donor_calls": [
+            1,
+            1,
+            1
+          ],
+          "warmup_donor_calls": 1,
+          "native_output_dtype": [
+            "torch.float32"
+          ]
+        }
+      },
+      {
+        "problem": "VRPB",
+        "instances": 128,
+        "online_native_plus_selector": {
+          "batch_seconds": [
+            0.023354467004537582,
+            0.02354397310409695,
+            0.023199712042696774
+          ],
+          "mean_seconds_per_instance": 0.00018254727122742528,
+          "donor_calls": [
+            1,
+            1,
+            1
+          ],
+          "warmup_donor_calls": 1,
+          "native_output_dtype": [
+            "torch.float32"
+          ]
+        }
+      },
+      {
+        "problem": "VRPL",
+        "instances": 128,
+        "online_native_plus_selector": {
+          "batch_seconds": [
+            0.02292783698067069,
+            0.023013641010038555,
+            0.02296321594621986
+          ],
+          "mean_seconds_per_instance": 0.00017943930712741954,
+          "donor_calls": [
+            1,
+            1,
+            1
+          ],
+          "warmup_donor_calls": 1,
+          "native_output_dtype": [
+            "torch.float32"
+          ]
+        }
+      },
+      {
+        "problem": "VRPTW",
+        "instances": 128,
+        "online_native_plus_selector": {
+          "batch_seconds": [
+            0.023130467045120895,
+            0.02307909692171961,
+            0.023076799931004643
+          ],
+          "mean_seconds_per_instance": 0.00018043323931730507,
+          "donor_calls": [
+            1,
+            1,
+            1
+          ],
+          "warmup_donor_calls": 1,
+          "native_output_dtype": [
+            "torch.float32"
+          ]
+        }
+      },
+      {
+        "problem": "OVRPTW",
+        "instances": 128,
+        "online_native_plus_selector": {
+          "batch_seconds": [
+            0.023216904024593532,
+            0.023085403023287654,
+            0.023074807017110288
+          ],
+          "mean_seconds_per_instance": 0.00018066956787758195,
+          "donor_calls": [
+            1,
+            1,
+            1
+          ],
+          "warmup_donor_calls": 1,
+          "native_output_dtype": [
+            "torch.float32"
+          ]
+        }
+      },
+      {
+        "problem": "OVRPB",
+        "instances": 128,
+        "online_native_plus_selector": {
+          "batch_seconds": [
+            0.02298798004630953,
+            0.023113594041205943,
+            0.02300755202304572
+          ],
+          "mean_seconds_per_instance": 0.00017997168257958643,
+          "donor_calls": [
+            1,
+            1,
+            1
+          ],
+          "warmup_donor_calls": 1,
+          "native_output_dtype": [
+            "torch.float32"
+          ]
+        }
+      },
+      {
+        "problem": "OVRPL",
+        "instances": 128,
+        "online_native_plus_selector": {
+          "batch_seconds": [
+            0.023080880055204034,
+            0.02310607605613768,
+            0.02307783009018749
+          ],
+          "mean_seconds_per_instance": 0.00018037704739981564,
+          "donor_calls": [
+            1,
+            1,
+            1
+          ],
+          "warmup_donor_calls": 1,
+          "native_output_dtype": [
+            "torch.float32"
+          ]
+        }
+      },
+      {
+        "problem": "VRPBL",
+        "instances": 128,
+        "online_native_plus_selector": {
+          "batch_seconds": [
+            0.02305425493977964,
+            0.022997471038252115,
+            0.023031931021250784
+          ],
+          "mean_seconds_per_instance": 0.00017990535676896494,
+          "donor_calls": [
+            1,
+            1,
+            1
+          ],
+          "warmup_donor_calls": 1,
+          "native_output_dtype": [
+            "torch.float32"
+          ]
+        }
+      },
+      {
+        "problem": "VRPBTW",
+        "instances": 128,
+        "online_native_plus_selector": {
+          "batch_seconds": [
+            0.023205264005810022,
+            0.023295526043511927,
+            0.023152729030698538
+          ],
+          "mean_seconds_per_instance": 0.00018138937260422003,
+          "donor_calls": [
+            1,
+            1,
+            1
+          ],
+          "warmup_donor_calls": 1,
+          "native_output_dtype": [
+            "torch.float32"
+          ]
+        }
+      },
+      {
+        "problem": "VRPLTW",
+        "instances": 128,
+        "online_native_plus_selector": {
+          "batch_seconds": [
+            0.02301465894561261,
+            0.023056147969327867,
+            0.023121532052755356
+          ],
+          "mean_seconds_per_instance": 0.00018018838272837456,
+          "donor_calls": [
+            1,
+            1,
+            1
+          ],
+          "warmup_donor_calls": 1,
+          "native_output_dtype": [
+            "torch.float32"
+          ]
+        }
+      },
+      {
+        "problem": "OVRPBL",
+        "instances": 128,
+        "online_native_plus_selector": {
+          "batch_seconds": [
+            0.023060333100147545,
+            0.022963516996242106,
+            0.022958002984523773
+          ],
+          "mean_seconds_per_instance": 0.00017964024239821205,
+          "donor_calls": [
+            1,
+            1,
+            1
+          ],
+          "warmup_donor_calls": 1,
+          "native_output_dtype": [
+            "torch.float32"
+          ]
+        }
+      },
+      {
+        "problem": "OVRPBTW",
+        "instances": 128,
+        "online_native_plus_selector": {
+          "batch_seconds": [
+            0.023246415075846016,
+            0.023299620021134615,
+            0.02328372304327786
+          ],
+          "mean_seconds_per_instance": 0.00018184832849025648,
+          "donor_calls": [
+            1,
+            1,
+            1
+          ],
+          "warmup_donor_calls": 1,
+          "native_output_dtype": [
+            "torch.float32"
+          ]
+        }
+      },
+      {
+        "problem": "OVRPLTW",
+        "instances": 128,
+        "online_native_plus_selector": {
+          "batch_seconds": [
+            0.023095892975106835,
+            0.023103556944988668,
+            0.023007323034107685
+          ],
+          "mean_seconds_per_instance": 0.00018022597123490414,
+          "donor_calls": [
+            1,
+            1,
+            1
+          ],
+          "warmup_donor_calls": 1,
+          "native_output_dtype": [
+            "torch.float32"
+          ]
+        }
+      },
+      {
+        "problem": "VRPBLTW",
+        "instances": 128,
+        "online_native_plus_selector": {
+          "batch_seconds": [
+            0.023228942067362368,
+            0.023088596994057298,
+            0.023056986974552274
+          ],
+          "mean_seconds_per_instance": 0.00018066282821867693,
+          "donor_calls": [
+            1,
+            1,
+            1
+          ],
+          "warmup_donor_calls": 1,
+          "native_output_dtype": [
+            "torch.float32"
+          ]
+        }
+      },
+      {
+        "problem": "OVRPBLTW",
+        "instances": 128,
+        "online_native_plus_selector": {
+          "batch_seconds": [
+            0.023224701988510787,
+            0.02325069101061672,
+            0.023133501992560923
+          ],
+          "mean_seconds_per_instance": 0.00018127316404085528,
+          "donor_calls": [
+            1,
+            1,
+            1
+          ],
+          "warmup_donor_calls": 1,
+          "native_output_dtype": [
+            "torch.float32"
+          ]
+        }
+      }
+    ]
+  },
+  "historical_reference": {
+    "R84A": {
+      "model": "R84A",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline",
+      "checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "selected_update": 37440,
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "parameter_matched": false,
+      "equal_training_compute_claim": false,
+      "pretraining_budget_matched": false,
+      "administrative_empty_fields_are_not_missing_VAL": true,
+      "role": "fixed target36 anchor"
+    },
+    "R94B": {
+      "model": "R94B",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/B",
+      "checkpoint_sha256": "8e797150d22ea138db246536f36a1b7dfa6ef3b516ee065a3303a6b6e579c3ee",
+      "selected_update": 54720,
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "parameter_matched": false,
+      "equal_training_compute_claim": false,
+      "pretraining_budget_matched": false,
+      "administrative_empty_fields_are_not_missing_VAL": true,
+      "role": "historical non-matched reference"
+    },
+    "R102B": {
+      "model": "R102B",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R102_full_type_pretrained_fusion/preparation/postprocess_recovery/report_view/B",
+      "checkpoint_sha256": "7df434c762a0e0b7726ab67211f63f51b55d1f86d108ec307a0aede0060f921f",
+      "selected_update": 20160,
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "parameter_matched": false,
+      "equal_training_compute_claim": false,
+      "pretraining_budget_matched": false,
+      "administrative_empty_fields_are_not_missing_VAL": true,
+      "role": "historical non-matched reference"
+    }
+  },
+  "nss_reference": {
+    "root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference",
+    "prediction_sha256": {
+      "TSP": "d42250eea9547dbeed1afdda9411ae6e691d9ce2ae0a14f50e7da6adb28068d3",
+      "CVRP": "13fbedae686c2af03d44d62115bbd9fcbf15950f6b111942f90786faba66603c"
+    },
+    "retrained": false,
+    "new_inference": false,
+    "exact_test_rows": 4500
+  }
+}

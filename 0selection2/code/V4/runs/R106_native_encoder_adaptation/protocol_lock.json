@@ -1,0 +1,155 @@
+{
+  "experiment": "R106",
+  "locked": true,
+  "arms": [
+    "A_frozen",
+    "B_finetune"
+  ],
+  "seed": 2,
+  "task_scope": "full18",
+  "rows_per_problem": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "batch_size": 1024,
+  "logical_global_batch": 1024,
+  "max_updates": 57600,
+  "warmup_updates": 4320,
+  "eval_every": 1440,
+  "train_eval_every": 7200,
+  "large_micro_cap": 256,
+  "atsp_micro_cap": 128,
+  "other_micro_cap": 1024,
+  "eval_batch_size": 128,
+  "model_role_arm": "B_execution_anchor",
+  "role_feature_slot": 3,
+  "embedding_dim": 128,
+  "encoder_layer_num": 4,
+  "joint_layer_num": 2,
+  "solver_features": 34,
+  "selector_initialization": "fresh_R84_seed2",
+  "native_initialization": "R102B_original_native_pretrained",
+  "identical_complete_fresh_parameters": true,
+  "original_fresh_trainable_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+  "native_execution": "online_all_splits",
+  "native_feature_cache": false,
+  "native_eval": true,
+  "native_pair_context": "one_input_only_native_graph_per_microbatch_shared_by_original_two_dropout_forwards",
+  "native_lr_scale": 0.1,
+  "trainable_parameter_matched": false,
+  "equal_training_compute_claim": false,
+  "current_query_labels_in_forward": false,
+  "historical_TRAIN_label_context_used": false,
+  "external_pretraining": true,
+  "new_targets": false,
+  "auxiliary_loss": false,
+  "optimizer": "AdamW",
+  "peak_lr": 0.0001,
+  "end_lr": 1e-06,
+  "weight_decay": 0.0001,
+  "grad_clip": 1.0,
+  "dropout": 0.1,
+  "loss": {
+    "CE": 0.35,
+    "comparison": 0.35,
+    "relative_risk": 0.02,
+    "RDrop_final": 0.35
+  },
+  "checkpoint_rule": "strict minimum whole18 VAL macro_vs_sbs_pct; first exact tie; common full-TRAIN SBS",
+  "inference_rule": "eval online native ELG/MatNet/ReLD plus original full18 selector; native FP32 until normal fusion; physical TSP node0 slot3, instance4/joint2, methodID+hand34, score MLP/utility differences/maximin; ascending-global-solver-ID exact ties; no cached native features, calibration, quotas or per-problem assembly",
+  "R58_operations": false,
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "prepared_root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+  "primary_cache": "/tmp/shiys_R84_new90k_cache",
+  "locked_utc": "2026-10-23T08:47:56.229242+00:00",
+  "main_decision": "One falsifiable native-parameter adaptation comparison; paper screen DEFERs efficacy, no benefit promise",
+  "model_parameter_counts": {
+    "total": 11965097,
+    "core": 1941257,
+    "native": 10023840,
+    "A_trainable": 1941257,
+    "B_trainable": 11965097,
+    "native_eval_unused_noise": 3072
+  },
+  "common_initial_full_state_sha256": "7381a063ecba3c898ed2ebabcb9d06a4bf30a70db6767ecf09cf230c165b0e41",
+  "hardware_witness": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R106_native_encoder_adaptation/preparation/kernel_witness/final256_1024/complete.json",
+    "sha256": "133c32e073d0437f5700b1653b5765fbb7b7d072c5b4f56d02e7da696e6e2e44",
+    "optimizer_steps": 0,
+    "largest_TRAIN_input_shapes": true,
+    "no_TEST_or_LIB": true,
+    "no_targets_for_cap_selection": true,
+    "measurements": [
+      {
+        "problem": "TSP",
+        "microbatch": 256,
+        "maximum_n": 499,
+        "peak_allocated_mib": 18654.73828125,
+        "seconds": 1.0888304399559274,
+        "native_calls": 1
+      },
+      {
+        "problem": "CVRP",
+        "microbatch": 256,
+        "maximum_n": 500,
+        "peak_allocated_mib": 21519.26611328125,
+        "seconds": 0.6329740240471438,
+        "native_calls": 1
+      },
+      {
+        "problem": "ATSP",
+        "microbatch": 128,
+        "maximum_n": 100,
+        "peak_allocated_mib": 19144.013671875,
+        "seconds": 0.5311358019243926,
+        "native_calls": 1
+      },
+      {
+        "problem": "VRPBLTW",
+        "microbatch": 1024,
+        "maximum_n": 101,
+        "peak_allocated_mib": 14740.10205078125,
+        "seconds": 0.3078978810226545,
+        "native_calls": 1
+      }
+    ]
+  },
+  "arm_slots": {
+    "A_frozen": "4090_0",
+    "B_finetune": "4090_1"
+  },
+  "hardware": {
+    "node": "gpu05",
+    "job": 1475,
+    "container": "76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6",
+    "cpus": {
+      "A_frozen": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "B_finetune": [
+        4,
+        5,
+        72,
+        73
+      ]
+    },
+    "cpus_per_arm": 4,
+    "memory_gib_per_arm": 9
+  },
+  "compute_matched": false,
+  "complete_initial_tensors_matched": true,
+  "external_pretraining_budget_matched": true,
+  "pretraining_data_overlap_known": false,
+  "historical_reference_is_newly_matched": false,
+  "research_TEST_is_development_exposed": true,
+  "MODEL_selection_uses_only_VAL": true,
+  "R105_unchanged": true,
+  "paper_memos": [
+    "docs/research/post_r105_signal_learning_screen.md",
+    "docs/research/native_encoder_adaptation_cautions.md"
+  ]
+}

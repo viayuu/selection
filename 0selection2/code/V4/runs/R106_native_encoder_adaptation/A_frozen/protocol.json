@@ -1,0 +1,2380 @@
+{
+  "experiment": "R106",
+  "schema_version": 1,
+  "arm": "A_frozen",
+  "seed": 2,
+  "initialization": "fresh_r84_seed2_plus_r102_projections_and_pinned_r102b_native",
+  "model_params": {
+    "embedding_dim": 128,
+    "head_num": 4,
+    "qkv_dim": 32,
+    "ff_hidden_dim": 512,
+    "head_hidden_dim": 256,
+    "encoder_layer_num": 4,
+    "solver_set_layer_num": 2,
+    "query_num": 4,
+    "dropout": 0.1,
+    "stats_dim": 12,
+    "rezero": false,
+    "gap_score_weight": 0.25,
+    "pre_score_weight": 0.25,
+    "support_branch": false,
+    "support_generators": 0,
+    "support_hidden": 128,
+    "support_score_weight": 0.0,
+    "support_score_mode": "g0",
+    "support_g0_as_main": false,
+    "support_feature_to_token": true,
+    "support_main_utility_weight": 0.0,
+    "support_main_pre_weight": 0.0,
+    "support_main_gap_weight": 0.0,
+    "solver_feature_spec": {
+      "feature_dim": 34,
+      "index_base": 0,
+      "feature_order": [
+        "\u6784\u9020\u5f0f",
+        "\u6269\u6563\u5f0f",
+        "\u5750\u6807\u4e0e\u8282\u70b9\u5c5e\u6027",
+        "\u6210\u672c\u77e9\u9635",
+        "\u56fe\u4e0e\u8fb9",
+        "MHA\uff0fTransformer",
+        "GNN",
+        "\u77e9\u9635\u53cc\u6d41\u6ce8\u610f\u529b",
+        "\u9759\u6001\u7f16\u7801\u590d\u7528",
+        "\u52a8\u6001\u72b6\u6001\u66f4\u65b0",
+        "\u52a8\u6001\u5c40\u90e8\u66f4\u65b0",
+        "\u8fed\u4ee3\u53bb\u566a",
+        "\u5b9e\u4f8b\u6761\u4ef6",
+        "\u5c5e\u6027\u6761\u4ef6",
+        "\u7ea6\u675f\u6761\u4ef6",
+        "\u5143\u5b66\u4e60\u4efb\u52a1\u6761\u4ef6",
+        "FFN \u4e13\u5bb6",
+        "LoRA \u4e13\u5bb6",
+        "\u76d1\u7763\u5b66\u4e60",
+        "\u5f3a\u5316\u5b66\u4e60",
+        "\u6269\u6563\u8bad\u7ec3",
+        "\u5355\u4efb\u52a1",
+        "\u591a\u4efb\u52a1",
+        "\u5143\u5b66\u4e60",
+        "\u5b50\u95ee\u9898\u91cd\u7f16\u7801",
+        "\u91cd\u89e3\u7801\u5668",
+        "\u68af\u5ea6\u5f15\u5bfc\u641c\u7d22",
+        "\u5168\u5c40\u2014\u5c40\u90e8\u53cc\u7b56\u7565",
+        "\u8fd1\u90bb\u6210\u672c\u8f93\u5165",
+        "\u4f2a one-hot \u8f93\u5165",
+        "\u7edf\u4e00\u77e9\u9635\u8868\u793a",
+        "\u5168\u5c40\u5206\u533a\u4e0e\u5c40\u90e8\u91cd\u6784",
+        "\u89e3\u7801\u5668 FFN \u6b8b\u5dee",
+        "\u5168\u5c40\u5c5e\u6027\u5d4c\u5165"
+      ],
+      "solver_active_indices": {
+        "BQ": [
+          0,
+          2,
+          5,
+          9,
+          18,
+          21,
+          24
+        ],
+        "LEHD": [
+          0,
+          2,
+          5,
+          9,
+          18,
+          21,
+          25
+        ],
+        "DIFUSCO": [
+          1,
+          4,
+          6,
+          11,
+          20,
+          21
+        ],
+        "DIFUSCO500": [
+          1,
+          4,
+          6,
+          11,
+          20,
+          21
+        ],
+        "T2T": [
+          1,
+          4,
+          6,
+          11,
+          20,
+          21,
+          26
+        ],
+        "T2T500": [
+          1,
+          4,
+          6,
+          11,
+          20,
+          21,
+          26
+        ],
+        "ELG": [
+          0,
+          2,
+          5,
+          8,
+          10,
+          19,
+          21,
+          27
+        ],
+        "OMNI": [
+          0,
+          2,
+          5,
+          8,
+          15,
+          19,
+          23
+        ],
+        "ICAM": [
+          0,
+          2,
+          5,
+          8,
+          12,
+          19,
+          21
+        ],
+        "ICAM_ATSP": [
+          0,
+          3,
+          7,
+          8,
+          12,
+          19,
+          21,
+          28
+        ],
+        "MATNET": [
+          0,
+          3,
+          7,
+          8,
+          19,
+          21
+        ],
+        "MATPOENET": [
+          0,
+          3,
+          7,
+          8,
+          19,
+          21,
+          29
+        ],
+        "UNICO_MatPOENet": [
+          0,
+          3,
+          7,
+          8,
+          19,
+          22,
+          29,
+          30
+        ],
+        "GLOP": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          19,
+          31
+        ],
+        "MTPOMO": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          19,
+          22
+        ],
+        "MVMOE": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          16,
+          19,
+          22
+        ],
+        "RELD_CVRP": [
+          0,
+          2,
+          5,
+          8,
+          19,
+          21,
+          32
+        ],
+        "RELD_MTL": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          19,
+          22,
+          32
+        ],
+        "RELD_MOEL": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          16,
+          19,
+          22,
+          32
+        ],
+        "RouteFinder": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          19,
+          22,
+          33
+        ],
+        "MoSES_RF": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          17,
+          22,
+          33
+        ],
+        "MoSES_CaDA": [
+          0,
+          2,
+          5,
+          8,
+          14,
+          17,
+          22
+        ]
+      },
+      "solver_names": [
+        "BQ",
+        "DIFUSCO",
+        "DIFUSCO500",
+        "ELG",
+        "GLOP",
+        "ICAM",
+        "ICAM_ATSP",
+        "LEHD",
+        "MATNET",
+        "MATPOENET",
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "OMNI",
+        "RELD_CVRP",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder",
+        "T2T",
+        "T2T500",
+        "UNICO_MatPOENet"
+      ]
+    },
+    "solver_feature_weight": 1.0,
+    "solver_feature_hidden": 128,
+    "sdpa": true,
+    "architecture": "pairwise",
+    "joint_layer_num": 2,
+    "local_geometry": true,
+    "geometry_mode": "real",
+    "ignore_coord_dist": true,
+    "native_winner": true,
+    "decision_head": "classification",
+    "pair_mode": "score_difference",
+    "solver_representation": "handcrafted",
+    "permutation_seed": 4502,
+    "code_init_seed": 450002,
+    "r106_schema_version": 1,
+    "r106_arm": "A_frozen",
+    "model_spec": {
+      "r106_schema_version": 1,
+      "backbone": "original_full18_r88b_r77_dualstream",
+      "initialization": "fresh_r84_seed2_plus_r102_projections_and_pinned_r102b_native",
+      "arms": [
+        "A_frozen",
+        "B_finetune"
+      ],
+      "coverage": [
+        "TSP",
+        "CVRP",
+        "ATSP",
+        "OVRP",
+        "VRPB",
+        "VRPL",
+        "VRPTW",
+        "OVRPTW",
+        "OVRPB",
+        "OVRPL",
+        "VRPBL",
+        "VRPBTW",
+        "VRPLTW",
+        "OVRPBL",
+        "OVRPBTW",
+        "OVRPLTW",
+        "VRPBLTW",
+        "OVRPBLTW"
+      ],
+      "encoder_layer_num": 4,
+      "joint_layer_num": 2,
+      "embedding_dim": 128,
+      "solver_features": 34,
+      "dropout": 0.1,
+      "selection_head": "original_score_mlp_maximin",
+      "role_arm": "B_execution_anchor",
+      "fusion": "raw_token+linear(nonaffine_normalized_online_native_nodes)",
+      "fusion_location": "before_first_original_instance_layer",
+      "ATSP_normalization": "separate_FROM256_and_TO256_then_concatenate",
+      "projection_bias": false,
+      "projection_seeds": {
+        "TSP": 1020003,
+        "ATSP": 1020004,
+        "VRP": 940003
+      },
+      "native": {
+        "format": "r106_differentiable_native_v1",
+        "weights": "all three original pinned R102-B pretrained encoders in both arms",
+        "native_precision": {
+          "dtype": "float32",
+          "autocast": false,
+          "matmul_tf32": false,
+          "cudnn_tf32": false
+        },
+        "execution": "one masked padded execution per homogeneous microbatch, no exact-N loop",
+        "TSP": "ELG128: masked attention and valid-node affine InstanceNorm",
+        "ATSP": "MatNet FROM256 concat TO256; original distance mixed-score, masked InstanceNorm",
+        "VRP": "ReLD128 norm=none; original eval node-level input-choice topk2 MoE",
+        "atsp_roles": {
+          "from_role": "all zeros",
+          "to_role": "identity onehot columns first N of 256",
+          "fixed_for": "all instances, arms and datasets",
+          "max_n": 256,
+          "historical_random_role_recipe_reproduced": false,
+          "output": "concatenate FROM256 then TO256, never sum or average"
+        },
+        "dropout": false,
+        "decoder": false,
+        "native_auxiliary_loss": false,
+        "mode": "native always eval; eval does not disable B autograd",
+        "padding": "preserve physical node order; invalid inputs sanitized and output zero",
+        "comparison": "numerical agreement only, not bitwise equivalence"
+      },
+      "native_output": "FP32 until selector fusion precision path",
+      "native_lr_multiplier": {
+        "A_frozen": null,
+        "B_finetune": 0.1
+      },
+      "native_lr_owner": "runner, from first successful update, no unfreezing phase",
+      "objective": "unchanged_original_r77_ce_comparison_risk_rdrop",
+      "native_pair_context": "one current-microbatch graph; at most two preparations; finally clear"
+    },
+    "initialization": "fresh_r84_seed2_plus_r102_projections_and_pinned_r102b_native",
+    "role_arm": "B_execution_anchor",
+    "role_spec": {
+      "problem": "TSP",
+      "role_slot": 3,
+      "node_width": 8,
+      "semantics": "customer_anchor_not_depot",
+      "canonical_rule": "lexicographic_min_x_then_y_among_valid_nodes",
+      "exact_coordinate_tie_rule": "mark_all_valid_customers_at_minimum_xy",
+      "execution_rule": "original_physical_node0_first_valid_slot_if_unmarked",
+      "explicit_role_rule": "A_exact_canonical_tie_set_B_legal_one_hot",
+      "non_tsp_rule": "unchanged"
+    },
+    "selection_head": "original_score_mlp_maximin",
+    "native_donor": {
+      "trainable": false,
+      "mode": "eval",
+      "provenance": {
+        "format": "r106_differentiable_native_v1",
+        "source_identity": "R102-B originals",
+        "components": {
+          "TSP": {
+            "variant": "pretrained",
+            "output_dim": 128,
+            "supported_problems": [
+              "TSP"
+            ],
+            "native_source_files": {
+              "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/ELG/TSP/models.py": "8c88d6312cc1849cd82a6fafae050ace6e8a283ed027bc0d7bb3bb8a8f61fe55"
+            },
+            "native_source_sha256": "46990e346f1b1d4015f2bd0a429f38fbdeb65c7c189fa108e73446022ae29ceb",
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/ELG/TSP/weights/ELG.pt",
+              "sha256": "94448cce3ba413388286449886eae05f27c03f94996ff45daea37ebdce88fcdf",
+              "state_key": "model_state_dict",
+              "prefix": "encoder."
+            },
+            "checkpoint_sha256": "94448cce3ba413388286449886eae05f27c03f94996ff45daea37ebdce88fcdf",
+            "checkpoint_path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/ELG/TSP/weights/ELG.pt",
+            "random_seed": null,
+            "max_checkpoint_bytes": 16777216,
+            "model_params": {
+              "embedding_dim": 128,
+              "encoder_layer_num": 6,
+              "head_num": 8,
+              "qkv_dim": 16,
+              "ff_hidden_dim": 512
+            },
+            "input_fields": [
+              "xy"
+            ],
+            "roles": "original node order; node 0 is not a depot",
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": true,
+              "known": "Pinned native ELG TSP encoder",
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs",
+                "historical solver cost recipe"
+              ],
+              "historical_cost_recipe_certified": false
+            }
+          },
+          "ATSP": {
+            "variant": "pretrained",
+            "output_dim": 512,
+            "supported_problems": [
+              "ATSP"
+            ],
+            "native_source_files": {
+              "/public/home/shiys/EasyNCO/neural_solvers/methods/matnet/matnet_encoder.py": "35738284914ecc50090e2553ef085ff1724737d6db11c253832844d9465e8f3e",
+              "/public/home/shiys/EasyNCO/neural_solvers/backbones/Transformer/attr_component.py": "d6cc61586fb97a54cfdc7dc4e2eaa436cbc16772c04397cd17f5ea677fc5e5d0"
+            },
+            "native_source_sha256": "ac518d326ae5c1903e414eefc1438a261c8e45eb1940f13eedfd47ae8e21ff63",
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/EasyNCO/pretrained/matnet_pretrain/matnet_atsp100.ckpt",
+              "sha256": "a86d1ab1d8db62088e6a9d54118db92ebe8472c316dc046fcf755ca61280b5ca",
+              "state_key": "state_dict",
+              "prefix": "encoder."
+            },
+            "checkpoint_sha256": "a86d1ab1d8db62088e6a9d54118db92ebe8472c316dc046fcf755ca61280b5ca",
+            "checkpoint_path": "/public/home/shiys/EasyNCO/pretrained/matnet_pretrain/matnet_atsp100.ckpt",
+            "random_seed": null,
+            "max_checkpoint_bytes": 33554432,
+            "model_params": {
+              "embedding_dim": 256,
+              "encoder_layer_num": 5,
+              "head_num": 16,
+              "qkv_dim": 16,
+              "ms_hidden_dim": 16,
+              "ff_hidden_dim": 512,
+              "ms_layer1_init": 0.7071067811865476,
+              "ms_layer2_init": 0.25
+            },
+            "input_fields": [
+              "matrix",
+              "fixed identity roles"
+            ],
+            "roles": {
+              "from_role": "all zeros",
+              "to_role": "identity onehot columns first N of 256",
+              "fixed_for": "all instances, arms and datasets",
+              "max_n": 256,
+              "historical_random_role_recipe_reproduced": false,
+              "output": "concatenate FROM256 then TO256, never sum or average"
+            },
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": true,
+              "known": "Pinned native MatNet ATSP100 encoder",
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs",
+                "historical solver cost recipe"
+              ],
+              "historical_cost_recipe_certified": false
+            }
+          },
+          "VRP": {
+            "variant": "pretrained",
+            "checkpoint_path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "checkpoint_sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3",
+            "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+            "native_source_files": {
+              "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d",
+              "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd"
+            },
+            "output_dim": 128,
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "random_seed": null,
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+            },
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": true,
+              "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+              "training_tasks": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW"
+              ],
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs"
+              ],
+              "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate"
+            },
+            "model_params": {
+              "embedding_dim": 128,
+              "sqrt_embedding_dim": 11.313708498984761,
+              "encoder_layer_num": 6,
+              "decoder_layer_num": 1,
+              "qkv_dim": 16,
+              "head_num": 8,
+              "logit_clipping": 10,
+              "ff_hidden_dim": 512,
+              "num_experts": 4,
+              "eval_type": "argmax",
+              "norm": "none",
+              "norm_loc": "norm_last",
+              "expert_loc": [
+                "Enc0",
+                "Enc1",
+                "Enc2",
+                "Enc3",
+                "Enc4",
+                "Enc5",
+                "Dec"
+              ],
+              "problem": "Train_ALL",
+              "topk": 2,
+              "routing_level": "node",
+              "routing_method": "input_choice",
+              "ffidt": true
+            }
+          }
+        },
+        "spec": {
+          "format": "r106_differentiable_native_v1",
+          "weights": "all three original pinned R102-B pretrained encoders in both arms",
+          "native_precision": {
+            "dtype": "float32",
+            "autocast": false,
+            "matmul_tf32": false,
+            "cudnn_tf32": false
+          },
+          "execution": "one masked padded execution per homogeneous microbatch, no exact-N loop",
+          "TSP": "ELG128: masked attention and valid-node affine InstanceNorm",
+          "ATSP": "MatNet FROM256 concat TO256; original distance mixed-score, masked InstanceNorm",
+          "VRP": "ReLD128 norm=none; original eval node-level input-choice topk2 MoE",
+          "atsp_roles": {
+            "from_role": "all zeros",
+            "to_role": "identity onehot columns first N of 256",
+            "fixed_for": "all instances, arms and datasets",
+            "max_n": 256,
+            "historical_random_role_recipe_reproduced": false,
+            "output": "concatenate FROM256 then TO256, never sum or average"
+          },
+          "dropout": false,
+          "decoder": false,
+          "native_auxiliary_loss": false,
+          "mode": "native always eval; eval does not disable B autograd",
+          "padding": "preserve physical node order; invalid inputs sanitized and output zero",
+          "comparison": "numerical agreement only, not bitwise equivalence"
+        }
+      }
+    },
+    "r106_initial_state_sha256": "7381a063ecba3c898ed2ebabcb9d06a4bf30a70db6767ecf09cf230c165b0e41"
+  },
+  "model_factory": "code.V4.r106_experiment.load_checkpoint",
+  "solver_names": [
+    "BQ",
+    "DIFUSCO",
+    "DIFUSCO500",
+    "ELG",
+    "GLOP",
+    "ICAM",
+    "ICAM_ATSP",
+    "LEHD",
+    "MATNET",
+    "MATPOENET",
+    "MTPOMO",
+    "MVMOE",
+    "MoSES_CaDA",
+    "MoSES_RF",
+    "OMNI",
+    "RELD_CVRP",
+    "RELD_MOEL",
+    "RELD_MTL",
+    "RouteFinder",
+    "T2T",
+    "T2T500",
+    "UNICO_MatPOENet"
+  ],
+  "scenario_solver_aliases": {
+    "reld_mt": "RELD_MOEL"
+  },
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "cache_root": "/tmp/shiys_R84_new90k_cache",
+  "prepared_root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+  "preparation_sha256": "a3877c3d981d18c7e1821314736dc1a0381ecc68e74e9d842b96c24f8fa454f1",
+  "common_trainable_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+  "rows_per_problem": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "train_rows_per_problem": 81000,
+  "heldout_rows_per_problem": 4500,
+  "candidate_pools": {
+    "TSP": [
+      "BQ",
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "LEHD",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "CVRP": [
+      "BQ",
+      "ELG",
+      "ICAM",
+      "LEHD",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "ATSP": [
+      "GLOP",
+      "ICAM_ATSP",
+      "MATNET",
+      "MATPOENET",
+      "UNICO_MatPOENet"
+    ],
+    "OVRP": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ]
+  },
+  "candidate_pool_ids": {
+    "TSP": [
+      0,
+      1,
+      2,
+      3,
+      7,
+      14,
+      19,
+      20
+    ],
+    "CVRP": [
+      0,
+      3,
+      5,
+      7,
+      11,
+      12,
+      13,
+      14,
+      15,
+      18
+    ],
+    "ATSP": [
+      4,
+      6,
+      8,
+      9,
+      21
+    ],
+    "OVRP": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "VRPB": [
+      10,
+      11,
+      16
+    ],
+    "VRPL": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "VRPTW": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "OVRPTW": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "OVRPB": [
+      10,
+      11,
+      16
+    ],
+    "OVRPL": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "VRPBL": [
+      10,
+      11,
+      16
+    ],
+    "VRPBTW": [
+      10,
+      11,
+      16
+    ],
+    "VRPLTW": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "OVRPBL": [
+      10,
+      11,
+      16
+    ],
+    "OVRPBTW": [
+      10,
+      11,
+      16
+    ],
+    "OVRPLTW": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "VRPBLTW": [
+      10,
+      11,
+      16
+    ],
+    "OVRPBLTW": [
+      10,
+      11,
+      16
+    ]
+  },
+  "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+  "baselines": {
+    "TSP": {
+      "sbs_solver": "T2T",
+      "sbs_slot": 6,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "BQ": 8.084656254909822,
+        "DIFUSCO": 8.112698749017362,
+        "DIFUSCO500": 8.323332693250743,
+        "ELG": 8.169148155954185,
+        "LEHD": 8.12654027205359,
+        "OMNI": 8.278431533383753,
+        "T2T": 8.023959207231373,
+        "T2T500": 8.206647854009713
+      },
+      "mean_relative_regret_by_solver": {
+        "BQ": 0.016589446883540037,
+        "DIFUSCO": 0.01685548366554656,
+        "DIFUSCO500": 0.041461887863121064,
+        "ELG": 0.02157687010471231,
+        "LEHD": 0.022287637899707616,
+        "OMNI": 0.035789430060820644,
+        "T2T": 0.0060830785487698625,
+        "T2T500": 0.026987147942938192
+      },
+      "minimum_mean_relative_regret_solver": "T2T",
+      "majority_winner_solver": "T2T",
+      "train_rows": 81000
+    },
+    "CVRP": {
+      "sbs_solver": "RELD_CVRP",
+      "sbs_slot": 8,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "BQ": 18.45937333402815,
+        "ELG": 18.49947892494554,
+        "ICAM": 18.21394879819729,
+        "LEHD": 18.521651502468007,
+        "MVMOE": 19.460898454607253,
+        "MoSES_CaDA": 19.18050302504914,
+        "MoSES_RF": 20.21590446078334,
+        "OMNI": 18.272885336540398,
+        "RELD_CVRP": 18.15198730124656,
+        "RouteFinder": 18.773263861108614
+      },
+      "mean_relative_regret_by_solver": {
+        "BQ": 0.028748067464355643,
+        "ELG": 0.03327247268294611,
+        "ICAM": 0.01847805682757036,
+        "LEHD": 0.032448733662756635,
+        "MVMOE": 0.08415381637395963,
+        "MoSES_CaDA": 0.06847367747966657,
+        "MoSES_RF": 0.148814357748972,
+        "OMNI": 0.024281954494307135,
+        "RELD_CVRP": 0.011500795081597778,
+        "RouteFinder": 0.04593947352618346
+      },
+      "minimum_mean_relative_regret_solver": "RELD_CVRP",
+      "majority_winner_solver": "OMNI",
+      "train_rows": 81000
+    },
+    "ATSP": {
+      "sbs_solver": "UNICO_MatPOENet",
+      "sbs_slot": 4,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "GLOP": 1.9307272556952693,
+        "ICAM_ATSP": 1.7141856534487865,
+        "MATNET": 2.309711719979476,
+        "MATPOENET": 1.725653809736494,
+        "UNICO_MatPOENet": 1.6786786495718535
+      },
+      "mean_relative_regret_by_solver": {
+        "GLOP": 0.182623280883755,
+        "ICAM_ATSP": 0.04891120598004203,
+        "MATNET": 0.42113394514534414,
+        "MATPOENET": 0.05660226494961894,
+        "UNICO_MatPOENet": 0.027686149368779583
+      },
+      "minimum_mean_relative_regret_solver": "UNICO_MatPOENet",
+      "majority_winner_solver": "UNICO_MatPOENet",
+      "train_rows": 81000
+    },
+    "OVRP": {
+      "sbs_solver": "MoSES_RF",
+      "sbs_slot": 3,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 8.364081419688693,
+        "MVMOE": 9.19622098406458,
+        "MoSES_CaDA": 7.459637796207699,
+        "MoSES_RF": 7.453530567248632,
+        "reld_mt": 7.630102955309023,
+        "RouteFinder": 7.471519006823137
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.13885363329167388,
+        "MVMOE": 0.27132094471573026,
+        "MoSES_CaDA": 0.008512346545610663,
+        "MoSES_RF": 0.007737248368926988,
+        "reld_mt": 0.03353043952664854,
+        "RouteFinder": 0.01019328249865427
+      },
+      "minimum_mean_relative_regret_solver": "MoSES_RF",
+      "majority_winner_solver": "MoSES_CaDA",
+      "train_rows": 81000
+    },
+    "VRPB": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 10.728214068583513,
+        "MVMOE": 11.68547977969087,
+        "reld_mt": 9.357263797206548
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.15355483036450823,
+        "MVMOE": 0.27346044134083625,
+        "reld_mt": 0.004141960774589759
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "VRPL": {
+      "sbs_solver": "MoSES_RF",
+      "sbs_slot": 3,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 13.406389861889709,
+        "MVMOE": 14.190405789893296,
+        "MoSES_CaDA": 12.402391799967868,
+        "MoSES_RF": 12.400882414505778,
+        "reld_mt": 12.535631861898507,
+        "RouteFinder": 12.423433225202075
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.08669803390691544,
+        "MVMOE": 0.16056281792504482,
+        "MoSES_CaDA": 0.00470563331693102,
+        "MoSES_RF": 0.004704045418388002,
+        "reld_mt": 0.01616902563176305,
+        "RouteFinder": 0.006540024804117355
+      },
+      "minimum_mean_relative_regret_solver": "MoSES_RF",
+      "majority_winner_solver": "MoSES_RF",
+      "train_rows": 81000
+    },
+    "VRPTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 4,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 23.49849686087494,
+        "MVMOE": 20.442784682927375,
+        "MoSES_CaDA": 22.847769326674968,
+        "MoSES_RF": 21.7266483654917,
+        "reld_mt": 18.813703310006815,
+        "RouteFinder": 21.763708729749755
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.252456539051322,
+        "MVMOE": 0.09777862045342564,
+        "MoSES_CaDA": 0.20898757525708156,
+        "MoSES_RF": 0.15911259531528035,
+        "reld_mt": 0.0031032304459825935,
+        "RouteFinder": 0.15671836417106447
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 4,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 14.46213650860616,
+        "MVMOE": 11.330968572251603,
+        "MoSES_CaDA": 13.108913305992031,
+        "MoSES_RF": 12.088126960518823,
+        "reld_mt": 10.118639726050072,
+        "RouteFinder": 11.649121564261714
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.43699776523466516,
+        "MVMOE": 0.14127227559726752,
+        "MoSES_CaDA": 0.27849253914027305,
+        "MoSES_RF": 0.19150079092242905,
+        "reld_mt": 0.002481855140849269,
+        "RouteFinder": 0.1493666733834658
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPB": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 7.3109029222212065,
+        "MVMOE": 8.264069609965754,
+        "reld_mt": 6.363229809475488
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.1688527710238286,
+        "MVMOE": 0.3519901354988556,
+        "reld_mt": 0.002694990408942958
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPL": {
+      "sbs_solver": "MoSES_RF",
+      "sbs_slot": 3,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 8.310416814495266,
+        "MVMOE": 9.039461444419135,
+        "MoSES_CaDA": 7.459575016248385,
+        "MoSES_RF": 7.453219449870516,
+        "reld_mt": 7.632744570470027,
+        "RouteFinder": 7.474810907605399
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.1312426024420091,
+        "MVMOE": 0.24839780582309717,
+        "MoSES_CaDA": 0.008342317920173637,
+        "MoSES_RF": 0.007613132544457496,
+        "reld_mt": 0.0337775800314039,
+        "RouteFinder": 0.01053093640110024
+      },
+      "minimum_mean_relative_regret_solver": "MoSES_RF",
+      "majority_winner_solver": "MoSES_CaDA",
+      "train_rows": 81000
+    },
+    "VRPBL": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 10.635488206627937,
+        "MVMOE": 11.195805510120582,
+        "reld_mt": 9.403115061842346
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.13782004114118146,
+        "MVMOE": 0.21219868687225482,
+        "reld_mt": 0.004275063644527669
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "VRPBTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 24.812297379670284,
+        "MVMOE": 21.4533867696186,
+        "reld_mt": 19.73354933708689
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.2658606172260013,
+        "MVMOE": 0.10169167929948128,
+        "reld_mt": 0.004457998769766278
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "VRPLTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 4,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 23.451151820901092,
+        "MVMOE": 20.401712766953523,
+        "MoSES_CaDA": 22.958728604775864,
+        "MoSES_RF": 21.62779859691788,
+        "reld_mt": 18.76995857501926,
+        "RouteFinder": 21.70255258132215
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.2530613771642894,
+        "MVMOE": 0.09835981609296283,
+        "MoSES_CaDA": 0.216815361276073,
+        "MoSES_RF": 0.1559539821642276,
+        "reld_mt": 0.003118261883121054,
+        "RouteFinder": 0.15561434488087159
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPBL": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 7.220458667917147,
+        "MVMOE": 7.870869275678945,
+        "reld_mt": 6.358857184183311
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.1529637454488227,
+        "MVMOE": 0.2799749387737054,
+        "reld_mt": 0.002652144422133522
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPBTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 15.226330125740962,
+        "MVMOE": 11.890219420815747,
+        "reld_mt": 10.624446035461727
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.44684252442506434,
+        "MVMOE": 0.14441094842200522,
+        "reld_mt": 0.003367947155769234
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPLTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 4,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 14.45420823267946,
+        "MVMOE": 11.320988493995827,
+        "MoSES_CaDA": 13.199823503615042,
+        "MoSES_RF": 12.078147095315256,
+        "reld_mt": 10.111265148886892,
+        "RouteFinder": 11.619689210791536
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.43758094647567647,
+        "MVMOE": 0.1413960840790354,
+        "MoSES_CaDA": 0.2885582101264828,
+        "MoSES_RF": 0.19108410389523559,
+        "reld_mt": 0.0025014880850615087,
+        "RouteFinder": 0.14760385715970095
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "VRPBLTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 24.861805060092387,
+        "MVMOE": 21.498429928502986,
+        "reld_mt": 19.770813718301284
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.2659916008523177,
+        "MVMOE": 0.10187296284130469,
+        "reld_mt": 0.004411113784209465
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPBLTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 15.238377519578084,
+        "MVMOE": 11.885810614288616,
+        "reld_mt": 10.625543749052763
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.4477697200950575,
+        "MVMOE": 0.1436695909779314,
+        "reld_mt": 0.003368608291457535
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    }
+  },
+  "own_train_sbs": {
+    "TSP": {
+      "sbs_solver": "T2T",
+      "sbs_slot": 6,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "BQ": 8.084656254909822,
+        "DIFUSCO": 8.112698749017362,
+        "DIFUSCO500": 8.323332693250743,
+        "ELG": 8.169148155954185,
+        "LEHD": 8.12654027205359,
+        "OMNI": 8.278431533383753,
+        "T2T": 8.023959207231373,
+        "T2T500": 8.206647854009713
+      },
+      "mean_relative_regret_by_solver": {
+        "BQ": 0.016589446883540037,
+        "DIFUSCO": 0.01685548366554656,
+        "DIFUSCO500": 0.041461887863121064,
+        "ELG": 0.02157687010471231,
+        "LEHD": 0.022287637899707616,
+        "OMNI": 0.035789430060820644,
+        "T2T": 0.0060830785487698625,
+        "T2T500": 0.026987147942938192
+      },
+      "minimum_mean_relative_regret_solver": "T2T",
+      "majority_winner_solver": "T2T",
+      "train_rows": 81000
+    },
+    "CVRP": {
+      "sbs_solver": "RELD_CVRP",
+      "sbs_slot": 8,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "BQ": 18.45937333402815,
+        "ELG": 18.49947892494554,
+        "ICAM": 18.21394879819729,
+        "LEHD": 18.521651502468007,
+        "MVMOE": 19.460898454607253,
+        "MoSES_CaDA": 19.18050302504914,
+        "MoSES_RF": 20.21590446078334,
+        "OMNI": 18.272885336540398,
+        "RELD_CVRP": 18.15198730124656,
+        "RouteFinder": 18.773263861108614
+      },
+      "mean_relative_regret_by_solver": {
+        "BQ": 0.028748067464355643,
+        "ELG": 0.03327247268294611,
+        "ICAM": 0.01847805682757036,
+        "LEHD": 0.032448733662756635,
+        "MVMOE": 0.08415381637395963,
+        "MoSES_CaDA": 0.06847367747966657,
+        "MoSES_RF": 0.148814357748972,
+        "OMNI": 0.024281954494307135,
+        "RELD_CVRP": 0.011500795081597778,
+        "RouteFinder": 0.04593947352618346
+      },
+      "minimum_mean_relative_regret_solver": "RELD_CVRP",
+      "majority_winner_solver": "OMNI",
+      "train_rows": 81000
+    },
+    "ATSP": {
+      "sbs_solver": "UNICO_MatPOENet",
+      "sbs_slot": 4,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "GLOP": 1.9307272556952693,
+        "ICAM_ATSP": 1.7141856534487865,
+        "MATNET": 2.309711719979476,
+        "MATPOENET": 1.725653809736494,
+        "UNICO_MatPOENet": 1.6786786495718535
+      },
+      "mean_relative_regret_by_solver": {
+        "GLOP": 0.182623280883755,
+        "ICAM_ATSP": 0.04891120598004203,
+        "MATNET": 0.42113394514534414,
+        "MATPOENET": 0.05660226494961894,
+        "UNICO_MatPOENet": 0.027686149368779583
+      },
+      "minimum_mean_relative_regret_solver": "UNICO_MatPOENet",
+      "majority_winner_solver": "UNICO_MatPOENet",
+      "train_rows": 81000
+    },
+    "OVRP": {
+      "sbs_solver": "MoSES_RF",
+      "sbs_slot": 3,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 8.364081419688693,
+        "MVMOE": 9.19622098406458,
+        "MoSES_CaDA": 7.459637796207699,
+        "MoSES_RF": 7.453530567248632,
+        "reld_mt": 7.630102955309023,
+        "RouteFinder": 7.471519006823137
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.13885363329167388,
+        "MVMOE": 0.27132094471573026,
+        "MoSES_CaDA": 0.008512346545610663,
+        "MoSES_RF": 0.007737248368926988,
+        "reld_mt": 0.03353043952664854,
+        "RouteFinder": 0.01019328249865427
+      },
+      "minimum_mean_relative_regret_solver": "MoSES_RF",
+      "majority_winner_solver": "MoSES_CaDA",
+      "train_rows": 81000
+    },
+    "VRPB": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 10.728214068583513,
+        "MVMOE": 11.68547977969087,
+        "reld_mt": 9.357263797206548
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.15355483036450823,
+        "MVMOE": 0.27346044134083625,
+        "reld_mt": 0.004141960774589759
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "VRPL": {
+      "sbs_solver": "MoSES_RF",
+      "sbs_slot": 3,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 13.406389861889709,
+        "MVMOE": 14.190405789893296,
+        "MoSES_CaDA": 12.402391799967868,
+        "MoSES_RF": 12.400882414505778,
+        "reld_mt": 12.535631861898507,
+        "RouteFinder": 12.423433225202075
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.08669803390691544,
+        "MVMOE": 0.16056281792504482,
+        "MoSES_CaDA": 0.00470563331693102,
+        "MoSES_RF": 0.004704045418388002,
+        "reld_mt": 0.01616902563176305,
+        "RouteFinder": 0.006540024804117355
+      },
+      "minimum_mean_relative_regret_solver": "MoSES_RF",
+      "majority_winner_solver": "MoSES_RF",
+      "train_rows": 81000
+    },
+    "VRPTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 4,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 23.49849686087494,
+        "MVMOE": 20.442784682927375,
+        "MoSES_CaDA": 22.847769326674968,
+        "MoSES_RF": 21.7266483654917,
+        "reld_mt": 18.813703310006815,
+        "RouteFinder": 21.763708729749755
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.252456539051322,
+        "MVMOE": 0.09777862045342564,
+        "MoSES_CaDA": 0.20898757525708156,
+        "MoSES_RF": 0.15911259531528035,
+        "reld_mt": 0.0031032304459825935,
+        "RouteFinder": 0.15671836417106447
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 4,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 14.46213650860616,
+        "MVMOE": 11.330968572251603,
+        "MoSES_CaDA": 13.108913305992031,
+        "MoSES_RF": 12.088126960518823,
+        "reld_mt": 10.118639726050072,
+        "RouteFinder": 11.649121564261714
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.43699776523466516,
+        "MVMOE": 0.14127227559726752,
+        "MoSES_CaDA": 0.27849253914027305,
+        "MoSES_RF": 0.19150079092242905,
+        "reld_mt": 0.002481855140849269,
+        "RouteFinder": 0.1493666733834658
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPB": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 7.3109029222212065,
+        "MVMOE": 8.264069609965754,
+        "reld_mt": 6.363229809475488
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.1688527710238286,
+        "MVMOE": 0.3519901354988556,
+        "reld_mt": 0.002694990408942958
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPL": {
+      "sbs_solver": "MoSES_RF",
+      "sbs_slot": 3,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 8.310416814495266,
+        "MVMOE": 9.039461444419135,
+        "MoSES_CaDA": 7.459575016248385,
+        "MoSES_RF": 7.453219449870516,
+        "reld_mt": 7.632744570470027,
+        "RouteFinder": 7.474810907605399
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.1312426024420091,
+        "MVMOE": 0.24839780582309717,
+        "MoSES_CaDA": 0.008342317920173637,
+        "MoSES_RF": 0.007613132544457496,
+        "reld_mt": 0.0337775800314039,
+        "RouteFinder": 0.01053093640110024
+      },
+      "minimum_mean_relative_regret_solver": "MoSES_RF",
+      "majority_winner_solver": "MoSES_CaDA",
+      "train_rows": 81000
+    },
+    "VRPBL": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 10.635488206627937,
+        "MVMOE": 11.195805510120582,
+        "reld_mt": 9.403115061842346
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.13782004114118146,
+        "MVMOE": 0.21219868687225482,
+        "reld_mt": 0.004275063644527669
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "VRPBTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 24.812297379670284,
+        "MVMOE": 21.4533867696186,
+        "reld_mt": 19.73354933708689
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.2658606172260013,
+        "MVMOE": 0.10169167929948128,
+        "reld_mt": 0.004457998769766278
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "VRPLTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 4,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 23.451151820901092,
+        "MVMOE": 20.401712766953523,
+        "MoSES_CaDA": 22.958728604775864,
+        "MoSES_RF": 21.62779859691788,
+        "reld_mt": 18.76995857501926,
+        "RouteFinder": 21.70255258132215
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.2530613771642894,
+        "MVMOE": 0.09835981609296283,
+        "MoSES_CaDA": 0.216815361276073,
+        "MoSES_RF": 0.1559539821642276,
+        "reld_mt": 0.003118261883121054,
+        "RouteFinder": 0.15561434488087159
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPBL": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 7.220458667917147,
+        "MVMOE": 7.870869275678945,
+        "reld_mt": 6.358857184183311
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.1529637454488227,
+        "MVMOE": 0.2799749387737054,
+        "reld_mt": 0.002652144422133522
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPBTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 15.226330125740962,
+        "MVMOE": 11.890219420815747,
+        "reld_mt": 10.624446035461727
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.44684252442506434,
+        "MVMOE": 0.14441094842200522,
+        "reld_mt": 0.003367947155769234
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPLTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 4,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 14.45420823267946,
+        "MVMOE": 11.320988493995827,
+        "MoSES_CaDA": 13.199823503615042,
+        "MoSES_RF": 12.078147095315256,
+        "reld_mt": 10.111265148886892,
+        "RouteFinder": 11.619689210791536
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.43758094647567647,
+        "MVMOE": 0.1413960840790354,
+        "MoSES_CaDA": 0.2885582101264828,
+        "MoSES_RF": 0.19108410389523559,
+        "reld_mt": 0.0025014880850615087,
+        "RouteFinder": 0.14760385715970095
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "VRPBLTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 24.861805060092387,
+        "MVMOE": 21.498429928502986,
+        "reld_mt": 19.770813718301284
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.2659916008523177,
+        "MVMOE": 0.10187296284130469,
+        "reld_mt": 0.004411113784209465
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    },
+    "OVRPBLTW": {
+      "sbs_solver": "reld_mt",
+      "sbs_slot": 2,
+      "selection_split": "train",
+      "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+      "mean_cost_by_solver": {
+        "MTPOMO": 15.238377519578084,
+        "MVMOE": 11.885810614288616,
+        "reld_mt": 10.625543749052763
+      },
+      "mean_relative_regret_by_solver": {
+        "MTPOMO": 0.4477697200950575,
+        "MVMOE": 0.1436695909779314,
+        "reld_mt": 0.003368608291457535
+      },
+      "minimum_mean_relative_regret_solver": "reld_mt",
+      "majority_winner_solver": "reld_mt",
+      "train_rows": 81000
+    }
+  },
+  "geometry_stats": {
+    "fields": [
+      "k4_radius",
+      "k4_mean_distance",
+      "k4_distance_cv",
+      "k4_anisotropy",
+      "k8_radius",
+      "k8_mean_distance",
+      "k8_distance_cv",
+      "k8_anisotropy",
+      "k16_radius",
+      "k16_mean_distance",
+      "k16_distance_cv",
+      "k16_anisotropy"
+    ],
+    "scales": [
+      4,
+      8,
+      16
+    ],
+    "mean": [
+      0.15380455230663703,
+      0.11356870597432586,
+      0.3115036844588207,
+      0.5733220251154173,
+      0.23715942241343968,
+      0.160222208952848,
+      0.3566225948644789,
+      0.44944623590594,
+      0.3892015249795133,
+      0.2417007190760252,
+      0.4073450251605117,
+      0.4260877074809605
+    ],
+    "std": [
+      0.1516570742566992,
+      0.10994191355474184,
+      0.15987903497976538,
+      0.23380921936162957,
+      0.2249038893473757,
+      0.1467670689113568,
+      0.14536046279430534,
+      0.21138001828079656,
+      0.33104803159633933,
+      0.2053047832468581,
+      0.17734015314534082,
+      0.22178403129058485
+    ],
+    "fitted_on": "all coordinate training valid nodes only",
+    "valid_train_nodes": 136933367,
+    "valid_nodes_by_problem": {
+      "TSP": 22222691,
+      "CVRP": 22380435,
+      "OVRP": 6155270,
+      "VRPB": 6155302,
+      "VRPL": 6155351,
+      "VRPTW": 6155461,
+      "OVRPTW": 6155354,
+      "OVRPB": 6155341,
+      "OVRPL": 6155468,
+      "VRPBL": 6155385,
+      "VRPBTW": 6155510,
+      "VRPLTW": 6155269,
+      "OVRPBL": 6155279,
+      "OVRPBTW": 6155250,
+      "OVRPLTW": 6155297,
+      "VRPBLTW": 6155339,
+      "OVRPBLTW": 6155365
+    },
+    "sources": {
+      "train/TSP": {
+        "path": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/TSPtrain/dataset.pkl",
+        "size_bytes": 201800435,
+        "mtime_ns": 1792257494841745428
+      },
+      "train/CVRP": {
+        "path": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/CVRPtrain/dataset.pkl",
+        "size_bytes": 340526686,
+        "mtime_ns": 1792257538166094197
+      },
+      "train/OVRP": {
+        "path": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPtrain/dataset.pkl",
+        "size_bytes": 192703035,
+        "mtime_ns": 1792257579374425932
+      },
+      "train/VRPB": {
+        "path": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBtrain/dataset.pkl",
+        "size_bytes": 192704027,
+        "mtime_ns": 1792257596144560935
+      },
+      "train/VRPL": {
+        "path": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPLtrain/dataset.pkl",
+        "size_bytes": 193596684,
+        "mtime_ns": 1792257625251795254
+      },
+      "train/VRPTW": {
+        "path": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPTWtrain/dataset.pkl",
+        "size_bytes": 358200157,
+        "mtime_ns": 1792257656912050125
+      },
+      "train/OVRPTW": {
+        "path": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPTWtrain/dataset.pkl",
+        "size_bytes": 358193951,
+        "mtime_ns": 1792257675046196108
+      },
+      "train/OVRPB": {
+        "path": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBtrain/dataset.pkl",
+        "size_bytes": 192705236,
+        "mtime_ns": 1792257690464320227
+      },
+      "train/OVRPL": {
+        "path": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPLtrain/dataset.pkl",
+        "size_bytes": 193600311,
+        "mtime_ns": 1792257704072429775
+      },
+      "train/VRPBL": {
+        "path": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBLtrain/dataset.pkl",
+        "size_bytes": 193597738,
+        "mtime_ns": 1792257718924549337
+      },
+      "train/VRPBTW": {
+        "path": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBTWtrain/dataset.pkl",
+        "size_bytes": 358202999,
+        "mtime_ns": 1792257735621683752
+      },
+      "train/VRPLTW": {
+        "path": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPLTWtrain/dataset.pkl",
+        "size_bytes": 359080238,
+        "mtime_ns": 1792257753730829535
+      },
+      "train/OVRPBL": {
+        "path": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBLtrain/dataset.pkl",
+        "size_bytes": 193594452,
+        "mtime_ns": 1792257768803950876
+      },
+      "train/OVRPBTW": {
+        "path": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBTWtrain/dataset.pkl",
+        "size_bytes": 358187919,
+        "mtime_ns": 1792257786475093131
+      },
+      "train/OVRPLTW": {
+        "path": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPLTWtrain/dataset.pkl",
+        "size_bytes": 359081783,
+        "mtime_ns": 1792257803793232546
+      },
+      "train/VRPBLTW": {
+        "path": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBLTWtrain/dataset.pkl",
+        "size_bytes": 359084219,
+        "mtime_ns": 1792257822321381701
+      },
+      "train/OVRPBLTW": {
+        "path": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBLTWtrain/dataset.pkl",
+        "size_bytes": 359085727,
+        "mtime_ns": 1792257839767522146
+      }
+    },
+    "feature_sources": [
+      {
+        "path": "/public/home/shiys/0selection2/code/unified_selector/data.py",
+        "size_bytes": 9672,
+        "mtime_ns": 1779283215537838128
+      },
+      {
+        "path": "/public/home/shiys/0selection2/code/unified_selector/registry.py",
+        "size_bytes": 6214,
+        "mtime_ns": 1779283308033582736
+      },
+      {
+        "path": "/public/home/shiys/0selection2/code/V4/r75_data.py",
+        "size_bytes": 9836,
+        "mtime_ns": 1791906787023475773
+      },
+      {
+        "path": "/public/home/shiys/0selection2/code/V4/r75_cache.py",
+        "size_bytes": 20533,
+        "mtime_ns": 1791906787023475773
+      },
+      {
+        "path": "/public/home/shiys/0selection2/code/V4/new_split_data.py",
+        "size_bytes": 7560,
+        "mtime_ns": 1791968936825794338
+      },
+      {
+        "path": "/public/home/shiys/0selection2/code/V4/local_geometry.py",
+        "size_bytes": 3437,
+        "mtime_ns": 1790747649468181418
+      },
+      {
+        "path": "/public/home/shiys/0selection2/code/V4/pairwise_objective.py",
+        "size_bytes": 3188,
+        "mtime_ns": 1790818579619183586
+      },
+      {
+        "path": "/public/home/shiys/0selection2/code/V4/r76_cache.py",
+        "size_bytes": 28141,
+        "mtime_ns": 1791970991557335319
+      },
+      {
+        "path": "/public/home/shiys/0selection2/code/V4/r84_prepare.py",
+        "size_bytes": 18502,
+        "mtime_ns": 1792257719285552243
+      }
+    ],
+    "calculation_dtype": "float64",
+    "cache_dtype": "float32",
+    "statistics_dtype": "float64",
+    "statistics_input": "cached float32 geometry converted to float64",
+    "std_floor": 1e-06,
+    "sum": [
+      21060975.207275424,
+      15551345.294897456,
+      42655248.34585189,
+      78506915.27431266,
+      32475038.226847563,
+      21939766.54009102,
+      48833532.66307,
+      61544186.36807666,
+      53294675.25697937,
+      33096893.26940126,
+      55779125.825928584,
+      58345624.42267901
+    ],
+    "squared_sum": [
+      6388723.252258237,
+      3421290.4900636375,
+      16787462.692918137,
+      52495445.9360239,
+      14628091.938126534,
+      6464860.980800494,
+      20308497.18948954,
+      33779192.80341748,
+      35749279.879975714,
+      13771291.719140355,
+      27027839.435180195,
+      31595853.242733933
+    ],
+    "neighbor_policy": "exclude self/padding; include all kth-distance ties; use all when fewer than k"
+  },
+  "global_batch_size": 1024,
+  "logical_global_batch": 1024,
+  "max_successful_updates": 57600,
+  "updates_per_problem": 3200,
+  "total_sample_exposures": 58982400,
+  "eval_every_updates": 1440,
+  "warmup_updates": 4320,
+  "rdrop_ramp_updates": 4320,
+  "lr": {
+    "rule": "successful-update warmup then cosine, independent of VAL",
+    "peak": 0.0001,
+    "end": 1e-06,
+    "warmup_updates": 4320,
+    "max_updates": 57600
+  },
+  "loss": {
+    "ce": 0.35,
+    "comparison": 0.35,
+    "risk": 0.02,
+    "cost_scale": 0.01,
+    "focus_weights": {
+      "true3": 0.5,
+      "predicted3": 0.25,
+      "all_pairs": 0.25
+    }
+  },
+  "rdrop_weight": 0.35,
+  "dropout": 0.1,
+  "optimizer": "AdamW",
+  "weight_decay": 0.0001,
+  "grad_clip": 1.0,
+  "fixed_budget": true,
+  "early_stop": false,
+  "checkpoint_rule": "strict minimum whole18 VAL macro_vs_sbs_pct; first exact tie; common full-TRAIN SBS",
+  "inference_rule": "eval online native ELG/MatNet/ReLD plus original full18 selector; native FP32 until normal fusion; physical TSP node0 slot3, instance4/joint2, methodID+hand34, score MLP/utility differences/maximin; ascending-global-solver-ID exact ties; no cached native features, calibration, quotas or per-problem assembly",
+  "selection_head": "original_score_mlp_maximin",
+  "task_order_sha256": "c20d37da44771d3d03f262546f29ebd263391de8a5f67354274669c0daf46405",
+  "source_plan": "common seed2 full18 natural stream; exact1024 rows, shuffled tails carried across cycles",
+  "microbatch_caps": {
+    "TSP": 256,
+    "CVRP": 256,
+    "ATSP": 128,
+    "OVRP": 1024,
+    "VRPB": 1024,
+    "VRPL": 1024,
+    "VRPTW": 1024,
+    "OVRPTW": 1024,
+    "OVRPB": 1024,
+    "OVRPL": 1024,
+    "VRPBL": 1024,
+    "VRPBTW": 1024,
+    "VRPLTW": 1024,
+    "OVRPBL": 1024,
+    "OVRPBTW": 1024,
+    "OVRPLTW": 1024,
+    "VRPBLTW": 1024,
+    "OVRPBLTW": 1024
+  },
+  "gpu_type": "4090",
+  "threads": 2,
+  "prefetch_buffers": 2,
+  "world_size": 1,
+  "gradients": "micro rows / global1024; one clip/step; AMP overflow replays same batch and RNG",
+  "train_eval": "full TRAIN every5 VAL points plus the selected best if absent",
+  "eval_batch_size": 128,
+  "test": "one full TEST after unique VAL-best lock; saved predictions reusable",
+  "test_rnd_disclosure": "TEST informed earlier R&D; preserved old holdouts plus previously unused input-stratified extensions",
+  "nss_reference": "locked R79 weights, fresh predictions on the same new4500 TEST; no NSS retraining",
+  "source_sha256": {
+    "r106_experiment.py": "93b44274fd4daed99761eedb4e302595bf08d61b5f812e789214921beabda3bd",
+    "r106_model.py": "6ffc7660df0bfb806a652c8be458f8339e22e7b3dfda017e523b64f01b376dbf",
+    "r106_donor.py": "e7c04db6ff9423b8e154bd932c976abf9eef24eb0cac6797a105eeb8a8ddff14",
+    "r106_reporting.py": "2739923e2cf5032a96bc5dd733b166333432cb7799af457751a80e7d0c4c775b",
+    "r84_experiment.py": "834ac040a12b3787089636d01b994082adf6e268a2b3ff32b61649f8ae79d1ec",
+    "r84_prepare.py": "9f46f5cc1ed71cff94d6c57b93b931ef256196b979c9fb42ba9fbc44ff27d733",
+    "r88_model.py": "06bf522b68370ebd3b48d91fd959cb07fe864e45d3757415a4e65a0c88a589dc",
+    "r102_model.py": "93c4800667506ae226341c36be129b3d6ead42598930364d0236207b0e6ba1f9",
+    "r102_donor.py": "3fb6063b815d62b8de2352be45b783fe949aa102e6bc125b56ae1951d53d798f",
+    "r94_donor.py": "a9805a3629e84fd0d53faa0bc1f1aadbf0e619fd58b474ce4cbacadc1958eb81",
+    "r76_cache.py": "71251f7d4d02850494fade44fb98b6a74237a8cc740d68679eaff32ad18e6e27",
+    "r75_cache.py": "1eee2758dfbf3e819cbd8a04478b0450a4010c05850a96f51210314dac83aabf",
+    "pairwise_selector.py": "37e5e36dce0941ddc802e14308315fb080c15d86bd6368df15a6f12f55b6f0de",
+    "pairwise_objective.py": "3f487cc91a2819fe7bad5c3ea98fe11fead57e59921f1d43529c617002654a0a",
+    "dual_stream.py": "20b2adc0f5c01a6c5e0674be8c2b5fa6f6781fd34bf8195b0023ec1d09a3b0e9",
+    "V4Model.py": "50bff946ab08cc38d66d41d86f76fa016dcd064624d4aefd1d5168a30e3b3aea",
+    "r76_experiment.py": "609b937bccda91fbeeabde960b79eacabb40005263fad7903e7c66c1a253549e",
+    "r77_experiment.py": "7656b3513a8f0cbe174f1bb7140537cf8d5235c96a97e0081bd919c07bfcf093"
+  },
+  "wandb": true,
+  "wandb_mode": "offline",
+  "r106_schema_version": 1,
+  "main_protocol_lock": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R106_native_encoder_adaptation/protocol_lock.json",
+    "sha256": "76ab14852d72f2420daffc64fa5e7005533a627b1f78b18d12df3e3f6a6d8d3d",
+    "record": {
+      "experiment": "R106",
+      "locked": true,
+      "arms": [
+        "A_frozen",
+        "B_finetune"
+      ],
+      "seed": 2,
+      "task_scope": "full18",
+      "rows_per_problem": {
+        "train": 81000,
+        "val": 4500,
+        "test": 4500
+      },
+      "batch_size": 1024,
+      "logical_global_batch": 1024,
+      "max_updates": 57600,
+      "warmup_updates": 4320,
+      "eval_every": 1440,
+      "train_eval_every": 7200,
+      "large_micro_cap": 256,
+      "atsp_micro_cap": 128,
+      "other_micro_cap": 1024,
+      "eval_batch_size": 128,
+      "model_role_arm": "B_execution_anchor",
+      "role_feature_slot": 3,
+      "embedding_dim": 128,
+      "encoder_layer_num": 4,
+      "joint_layer_num": 2,
+      "solver_features": 34,
+      "selector_initialization": "fresh_R84_seed2",
+      "native_initialization": "R102B_original_native_pretrained",
+      "identical_complete_fresh_parameters": true,
+      "original_fresh_trainable_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+      "native_execution": "online_all_splits",
+      "native_feature_cache": false,
+      "native_eval": true,
+      "native_pair_context": "one_input_only_native_graph_per_microbatch_shared_by_original_two_dropout_forwards",
+      "native_lr_scale": 0.1,
+      "trainable_parameter_matched": false,
+      "equal_training_compute_claim": false,
+      "current_query_labels_in_forward": false,
+      "historical_TRAIN_label_context_used": false,
+      "external_pretraining": true,
+      "new_targets": false,
+      "auxiliary_loss": false,
+      "optimizer": "AdamW",
+      "peak_lr": 0.0001,
+      "end_lr": 1e-06,
+      "weight_decay": 0.0001,
+      "grad_clip": 1.0,
+      "dropout": 0.1,
+      "loss": {
+        "CE": 0.35,
+        "comparison": 0.35,
+        "relative_risk": 0.02,
+        "RDrop_final": 0.35
+      },
+      "checkpoint_rule": "strict minimum whole18 VAL macro_vs_sbs_pct; first exact tie; common full-TRAIN SBS",
+      "inference_rule": "eval online native ELG/MatNet/ReLD plus original full18 selector; native FP32 until normal fusion; physical TSP node0 slot3, instance4/joint2, methodID+hand34, score MLP/utility differences/maximin; ascending-global-solver-ID exact ties; no cached native features, calibration, quotas or per-problem assembly",
+      "R58_operations": false,
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "prepared_root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+      "primary_cache": "/tmp/shiys_R84_new90k_cache",
+      "locked_utc": "2026-10-23T08:47:56.229242+00:00",
+      "main_decision": "One falsifiable native-parameter adaptation comparison; paper screen DEFERs efficacy, no benefit promise",
+      "model_parameter_counts": {
+        "total": 11965097,
+        "core": 1941257,
+        "native": 10023840,
+        "A_trainable": 1941257,
+        "B_trainable": 11965097,
+        "native_eval_unused_noise": 3072
+      },
+      "common_initial_full_state_sha256": "7381a063ecba3c898ed2ebabcb9d06a4bf30a70db6767ecf09cf230c165b0e41",
+      "hardware_witness": {
+        "path": "/public/home/shiys/0selection2/code/V4/runs/R106_native_encoder_adaptation/preparation/kernel_witness/final256_1024/complete.json",
+        "sha256": "133c32e073d0437f5700b1653b5765fbb7b7d072c5b4f56d02e7da696e6e2e44",
+        "optimizer_steps": 0,
+        "largest_TRAIN_input_shapes": true,
+        "no_TEST_or_LIB": true,
+        "no_targets_for_cap_selection": true,
+        "measurements": [
+          {
+            "problem": "TSP",
+            "microbatch": 256,
+            "maximum_n": 499,
+            "peak_allocated_mib": 18654.73828125,
+            "seconds": 1.0888304399559274,
+            "native_calls": 1
+          },
+          {
+            "problem": "CVRP",
+            "microbatch": 256,
+            "maximum_n": 500,
+            "peak_allocated_mib": 21519.26611328125,
+            "seconds": 0.6329740240471438,
+            "native_calls": 1
+          },
+          {
+            "problem": "ATSP",
+            "microbatch": 128,
+            "maximum_n": 100,
+            "peak_allocated_mib": 19144.013671875,
+            "seconds": 0.5311358019243926,
+            "native_calls": 1
+          },
+          {
+            "problem": "VRPBLTW",
+            "microbatch": 1024,
+            "maximum_n": 101,
+            "peak_allocated_mib": 14740.10205078125,
+            "seconds": 0.3078978810226545,
+            "native_calls": 1
+          }
+        ]
+      },
+      "arm_slots": {
+        "A_frozen": "4090_0",
+        "B_finetune": "4090_1"
+      },
+      "hardware": {
+        "node": "gpu05",
+        "job": 1475,
+        "container": "76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6",
+        "cpus": {
+          "A_frozen": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "B_finetune": [
+            4,
+            5,
+            72,
+            73
+          ]
+        },
+        "cpus_per_arm": 4,
+        "memory_gib_per_arm": 9
+      },
+      "compute_matched": false,
+      "complete_initial_tensors_matched": true,
+      "external_pretraining_budget_matched": true,
+      "pretraining_data_overlap_known": false,
+      "historical_reference_is_newly_matched": false,
+      "research_TEST_is_development_exposed": true,
+      "MODEL_selection_uses_only_VAL": true,
+      "R105_unchanged": true,
+      "paper_memos": [
+        "docs/research/post_r105_signal_learning_screen.md",
+        "docs/research/native_encoder_adaptation_cautions.md"
+      ]
+    }
+  },
+  "model_spec": {
+    "r106_schema_version": 1,
+    "backbone": "original_full18_r88b_r77_dualstream",
+    "initialization": "fresh_r84_seed2_plus_r102_projections_and_pinned_r102b_native",
+    "arms": [
+      "A_frozen",
+      "B_finetune"
+    ],
+    "coverage": [
+      "TSP",
+      "CVRP",
+      "ATSP",
+      "OVRP",
+      "VRPB",
+      "VRPL",
+      "VRPTW",
+      "OVRPTW",
+      "OVRPB",
+      "OVRPL",
+      "VRPBL",
+      "VRPBTW",
+      "VRPLTW",
+      "OVRPBL",
+      "OVRPBTW",
+      "OVRPLTW",
+      "VRPBLTW",
+      "OVRPBLTW"
+    ],
+    "encoder_layer_num": 4,
+    "joint_layer_num": 2,
+    "embedding_dim": 128,
+    "solver_features": 34,
+    "dropout": 0.1,
+    "selection_head": "original_score_mlp_maximin",
+    "role_arm": "B_execution_anchor",
+    "fusion": "raw_token+linear(nonaffine_normalized_online_native_nodes)",
+    "fusion_location": "before_first_original_instance_layer",
+    "ATSP_normalization": "separate_FROM256_and_TO256_then_concatenate",
+    "projection_bias": false,
+    "projection_seeds": {
+      "TSP": 1020003,
+      "ATSP": 1020004,
+      "VRP": 940003
+    },
+    "native": {
+      "format": "r106_differentiable_native_v1",
+      "weights": "all three original pinned R102-B pretrained encoders in both arms",
+      "native_precision": {
+        "dtype": "float32",
+        "autocast": false,
+        "matmul_tf32": false,
+        "cudnn_tf32": false
+      },
+      "execution": "one masked padded execution per homogeneous microbatch, no exact-N loop",
+      "TSP": "ELG128: masked attention and valid-node affine InstanceNorm",
+      "ATSP": "MatNet FROM256 concat TO256; original distance mixed-score, masked InstanceNorm",
+      "VRP": "ReLD128 norm=none; original eval node-level input-choice topk2 MoE",
+      "atsp_roles": {
+        "from_role": "all zeros",
+        "to_role": "identity onehot columns first N of 256",
+        "fixed_for": "all instances, arms and datasets",
+        "max_n": 256,
+        "historical_random_role_recipe_reproduced": false,
+        "output": "concatenate FROM256 then TO256, never sum or average"
+      },
+      "dropout": false,
+      "decoder": false,
+      "native_auxiliary_loss": false,
+      "mode": "native always eval; eval does not disable B autograd",
+      "padding": "preserve physical node order; invalid inputs sanitized and output zero",
+      "comparison": "numerical agreement only, not bitwise equivalence"
+    },
+    "native_output": "FP32 until selector fusion precision path",
+    "native_lr_multiplier": {
+      "A_frozen": null,
+      "B_finetune": 0.1
+    },
+    "native_lr_owner": "runner, from first successful update, no unfreezing phase",
+    "objective": "unchanged_original_r77_ce_comparison_risk_rdrop",
+    "native_pair_context": "one current-microbatch graph; at most two preparations; finally clear"
+  },
+  "core_parameter_count": 1941257,
+  "total_parameter_count": 11965097,
+  "trainable_parameter_count": 1941257,
+  "native_parameter_count": 10023840,
+  "native_trainable_parameter_count": 0,
+  "initial_model_state_sha256": "7381a063ecba3c898ed2ebabcb9d06a4bf30a70db6767ecf09cf230c165b0e41",
+  "large_micro_cap": 256,
+  "atsp_micro_cap": 128,
+  "other_micro_cap": 1024,
+  "train_eval_every_updates": 7200,
+  "role_arm": "B_execution_anchor",
+  "selected_val_binding_rule": "exact_selected_checkpoint_model_state_protocol_state_and_successful_update",
+  "native_pair_context": "one_input_only_native_graph_per_microbatch_shared_by_original_two_dropout_forwards",
+  "native_execution": "online_all_splits",
+  "native_feature_cache": false,
+  "native_eval": true,
+  "native_trainable": false,
+  "native_lr_scale": 0.1,
+  "optimizer_groups": {
+    "core": {
+      "lr_scale": 1.0
+    },
+    "native": {
+      "lr_scale": 0.1,
+      "marker": "_r106_native"
+    }
+  },
+  "identical_complete_fresh_parameters": true,
+  "trainable_parameter_matched": false,
+  "equal_training_compute_claim": false,
+  "native_pretraining_is_not_selector_continuation": true,
+  "objective": {
+    "classification": "original R77 native CE",
+    "forward_passes": 2,
+    "comparison": true,
+    "relative_risk": true,
+    "symmetric_rdrop": true,
+    "mutable_objective_state": false
+  },
+  "external_pretraining": true,
+  "external_pretraining_data_overlap": "unknown",
+  "current_query_labels_in_forward": false,
+  "historical_TRAIN_label_context_used": false,
+  "new_targets": false,
+  "auxiliary_loss": false,
+  "solver_quotas": false,
+  "R58_operations": false,
+  "cache_policy": "direct frozen raw R84 reuse; no copy/build/native feature cache",
+  "oom_policy": "fail without automatic cap shrink; one main input-only hardware witness before TRAIN",
+  "timing_scope": "all18 online native+selector, GPU-resident batch128 amortized; not singleton or I/O end-to-end",
+  "historical_references": [
+    "R94B",
+    "R102B"
+  ],
+  "historical_references_matched": false
+}

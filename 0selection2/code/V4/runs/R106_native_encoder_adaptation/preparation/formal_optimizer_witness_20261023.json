@@ -1,0 +1,33 @@
+{
+  "experiment": "R106",
+  "observed_utc": "2026-10-23T09:16Z",
+  "source": "Both normal durable last.pt checkpoints, read-only CPU metadata extraction",
+  "source_successful_updates": {"A_frozen": 1440, "B_finetune": 1440},
+  "extra_checkpoint_requested": false,
+  "training_interrupted": false,
+  "TEST_or_LIB_read": false,
+  "optimizer_roles_and_scales": [["core", 1.0], ["native", 0.1]],
+  "A_frozen_first_update": {
+    "successful_update": 1,
+    "native_gradient_tensors": 0,
+    "native_gradient_finite": true,
+    "native_trainable": false,
+    "common_lr": 2.3148148148148148e-08,
+    "native_effective_lr": 2.3148148148148148e-09,
+    "native_sample_changed": false
+  },
+  "B_finetune_first_update": {
+    "successful_update": 1,
+    "native_gradient_tensors": 136,
+    "native_gradient_finite": true,
+    "native_trainable": true,
+    "common_lr": 2.3148148148148148e-08,
+    "native_effective_lr": 2.3148148148148148e-09,
+    "native_sample_changed": true
+  },
+  "scope": "First task VRPL, hence the routing branch. Changed sample means the optimizer's recorded 32-element slice, not every native parameter. A has no eligible sample because it has no native gradients. This is not a full-parameter change audit.",
+  "all_three_branches_GPU_gradient_evidence": "kernel_witness/final256_1024/complete.json",
+  "model_or_objective_changed": false,
+  "selection_effectiveness_evidence": false,
+  "goal_complete": false
+}
