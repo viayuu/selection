@@ -1,0 +1,2138 @@
+{
+  "experiment": "R104",
+  "arm": "A_width256",
+  "complete": true,
+  "created_utc": "2026-10-23T03:20:50.138383+00:00",
+  "checkpoint_lock": {
+    "experiment": "R104",
+    "arm": "A_width256",
+    "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R104_capacity_scaling/A_width256/best.pt",
+    "checkpoint_sha256": "8f01ca82e75f2d863b9f77709d9285da17655e708503dea531ef98369af8c321",
+    "state_hash": "a4451682a0da0d3c804a8972751859fe0d0e629bb29277e2360c98f4153de72c",
+    "epoch": 24,
+    "selected_update": 34560,
+    "rule": "strict minimum full VAL macro_vs_sbs_pct with common new81000 TRAIN-fitted SBS; first wins ties",
+    "selected_without_test": true,
+    "per_problem_assembly": false,
+    "val": {
+      "macro_ce": 0.71194236808353,
+      "macro_top1": 0.7095185185185185,
+      "macro_top2": 0.9059259259259258,
+      "macro_top3": 0.9622962962962964,
+      "macro_top1_tie_aware": 0.7110617283950617,
+      "macro_mean_cost": 11.417017862959826,
+      "macro_vs_sbs_pct": -0.18998985486034636,
+      "macro_vs_oracle_pct": 0.39774044784164847,
+      "macro_actual_regret_pct": 0.40889991869628234,
+      "macro_vbs_gap_closed_pct": 13.67544097100169,
+      "macro_sbs_cost": 11.427978473494235,
+      "macro_oracle_cost": 11.371691902364589
+    },
+    "inference_rule": "eval mode, complete R104 capacity model; original R88B physical TSP node0 slot3, methodID+34, synchronous two-way interaction, original score MLP, FP32 utility differences/maximin; stable ascending-global-solver-ID ties; original inputs only",
+    "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+    "locked_utc": "2026-10-23T03:15:33.431009+00:00"
+  },
+  "model_factory": "code.V4.r104_experiment.load_checkpoint",
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "rows_per_problem": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "candidate_pools": {
+    "TSP": [
+      "BQ",
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "LEHD",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "CVRP": [
+      "BQ",
+      "ELG",
+      "ICAM",
+      "LEHD",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "ATSP": [
+      "GLOP",
+      "ICAM_ATSP",
+      "MATNET",
+      "MATPOENET",
+      "UNICO_MatPOENet"
+    ],
+    "OVRP": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ]
+  },
+  "scenario_solver_aliases": {
+    "reld_mt": "RELD_MOEL"
+  },
+  "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+  "nss_reference": "R79 historical weights; fresh new4500 TEST inference; existing native LIB predictions",
+  "nss_alignment": {
+    "TSP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "TSPLIB": {
+      "instance_key": "indices",
+      "matching_population": 49,
+      "checked_instance_ids": [
+        0,
+        24,
+        48
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRPLIB": {
+      "instance_key": "indices",
+      "matching_population": 100,
+      "checked_instance_ids": [
+        0,
+        50,
+        99
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    }
+  },
+  "training": false,
+  "inference": false,
+  "checkpoint_reselection": false,
+  "distribution_pages": 18,
+  "main_pdf_pages": 22,
+  "diagnostics": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R104_capacity_scaling/A_width256/full_model_statistics/training_and_method_diagnostics.pdf",
+    "pages": 19,
+    "history_status": "complete"
+  },
+  "model_spec": {
+    "experiment": "R104",
+    "scope": "model_only",
+    "parent": "full18_R88B_R77_score_path",
+    "role_arm": "B_execution_anchor",
+    "role_spec": {
+      "problem": "TSP",
+      "role_slot": 3,
+      "node_width": 8,
+      "semantics": "customer_anchor_not_depot",
+      "canonical_rule": "lexicographic_min_x_then_y_among_valid_nodes",
+      "exact_coordinate_tie_rule": "mark_all_valid_customers_at_minimum_xy",
+      "execution_rule": "original_physical_node0_first_valid_slot_if_unmarked",
+      "explicit_role_rule": "A_exact_canonical_tie_set_B_legal_one_hot",
+      "non_tsp_rule": "unchanged"
+    },
+    "selection_head": "original_score_mlp_maximin",
+    "fresh_seed": 2,
+    "capacity_init_seed": 104002,
+    "capacity_fields": [
+      "embedding_dim",
+      "encoder_layer_num",
+      "joint_layer_num",
+      "head_num",
+      "qkv_dim",
+      "ff_hidden_dim",
+      "head_hidden_dim",
+      "solver_feature_hidden"
+    ],
+    "original": {
+      "embedding_dim": 128,
+      "encoder_layer_num": 4,
+      "joint_layer_num": 2,
+      "head_num": 4,
+      "qkv_dim": 32,
+      "ff_hidden_dim": 512,
+      "head_hidden_dim": 256,
+      "solver_feature_hidden": 128
+    },
+    "arms": {
+      "A_width256": {
+        "embedding_dim": 256,
+        "encoder_layer_num": 4,
+        "joint_layer_num": 2,
+        "head_num": 4,
+        "qkv_dim": 64,
+        "ff_hidden_dim": 1024,
+        "head_hidden_dim": 512,
+        "solver_feature_hidden": 256
+      },
+      "B_depth8": {
+        "embedding_dim": 128,
+        "encoder_layer_num": 8,
+        "joint_layer_num": 4,
+        "head_num": 4,
+        "qkv_dim": 32,
+        "ff_hidden_dim": 512,
+        "head_hidden_dim": 256,
+        "solver_feature_hidden": 128
+      }
+    },
+    "head_policy": "same_four_heads_qkv_equals_width_divided_by_four",
+    "scaling": "FF=4d_score_hidden=2d_method_feature_hidden=d_geometry_hidden=64",
+    "comparison": "two_capacity_axes_not_parameter_matched_AB"
+  },
+  "capacity": {
+    "embedding_dim": 256,
+    "encoder_layer_num": 4,
+    "joint_layer_num": 2,
+    "head_num": 4,
+    "qkv_dim": 64,
+    "ff_hidden_dim": 1024,
+    "head_hidden_dim": 512,
+    "solver_feature_hidden": 256
+  },
+  "trainable_parameter_count": 7288969,
+  "initialization": {
+    "common_parameter_names": [
+      "instance_encoder.coord_bias_scale",
+      "instance_encoder.geometry_residual.projection.0.bias",
+      "instance_encoder.geometry_residual.projection.0.weight",
+      "instance_encoder.matrix_bias_scale",
+      "score_head.3.bias"
+    ],
+    "common_parameter_sha256": "8bb9a79212c865b98aea95a78f151869f09e69541715c0a008d163939911b128",
+    "common_parameter_count": 1417,
+    "resized_parameter_shapes": {
+      "decoder.Wk.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "decoder.Wq.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "decoder.Wv.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "decoder.out.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "decoder.out.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "instance_encoder.cls_token": {
+        "original": [
+          1,
+          1,
+          128
+        ],
+        "actual": [
+          1,
+          1,
+          256
+        ]
+      },
+      "instance_encoder.condition_encoder.cbits_proj.weight": {
+        "original": [
+          128,
+          5
+        ],
+        "actual": [
+          256,
+          5
+        ]
+      },
+      "instance_encoder.condition_encoder.coord_dist_emb.weight": {
+        "original": [
+          5,
+          128
+        ],
+        "actual": [
+          5,
+          256
+        ]
+      },
+      "instance_encoder.condition_encoder.desc_proj.weight": {
+        "original": [
+          128,
+          16
+        ],
+        "actual": [
+          256,
+          16
+        ]
+      },
+      "instance_encoder.condition_encoder.kind_emb.weight": {
+        "original": [
+          2,
+          128
+        ],
+        "actual": [
+          2,
+          256
+        ]
+      },
+      "instance_encoder.condition_encoder.n_proj.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.condition_encoder.n_proj.weight": {
+        "original": [
+          128,
+          1
+        ],
+        "actual": [
+          256,
+          1
+        ]
+      },
+      "instance_encoder.condition_encoder.norm.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.condition_encoder.norm.weight": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.condition_encoder.problem_emb.weight": {
+        "original": [
+          18,
+          128
+        ],
+        "actual": [
+          18,
+          256
+        ]
+      },
+      "instance_encoder.condition_encoder.stats_proj.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.condition_encoder.stats_proj.weight": {
+        "original": [
+          128,
+          12
+        ],
+        "actual": [
+          256,
+          12
+        ]
+      },
+      "instance_encoder.coord_proj.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.coord_proj.weight": {
+        "original": [
+          128,
+          8
+        ],
+        "actual": [
+          256,
+          8
+        ]
+      },
+      "instance_encoder.geometry_residual.projection.2.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.geometry_residual.projection.2.weight": {
+        "original": [
+          128,
+          64
+        ],
+        "actual": [
+          256,
+          64
+        ]
+      },
+      "instance_encoder.layers.0.add_norm_1.norm.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.0.add_norm_1.norm.weight": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.0.add_norm_2.norm.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.0.add_norm_2.norm.weight": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.0.attn.Wk.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "instance_encoder.layers.0.attn.Wq.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "instance_encoder.layers.0.attn.Wv.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "instance_encoder.layers.0.attn.out.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.0.attn.out.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "instance_encoder.layers.0.ffn.net.0.bias": {
+        "original": [
+          512
+        ],
+        "actual": [
+          1024
+        ]
+      },
+      "instance_encoder.layers.0.ffn.net.0.weight": {
+        "original": [
+          512,
+          128
+        ],
+        "actual": [
+          1024,
+          256
+        ]
+      },
+      "instance_encoder.layers.0.ffn.net.3.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.0.ffn.net.3.weight": {
+        "original": [
+          128,
+          512
+        ],
+        "actual": [
+          256,
+          1024
+        ]
+      },
+      "instance_encoder.layers.1.add_norm_1.norm.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.1.add_norm_1.norm.weight": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.1.add_norm_2.norm.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.1.add_norm_2.norm.weight": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.1.attn.Wk.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "instance_encoder.layers.1.attn.Wq.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "instance_encoder.layers.1.attn.Wv.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "instance_encoder.layers.1.attn.out.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.1.attn.out.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "instance_encoder.layers.1.ffn.net.0.bias": {
+        "original": [
+          512
+        ],
+        "actual": [
+          1024
+        ]
+      },
+      "instance_encoder.layers.1.ffn.net.0.weight": {
+        "original": [
+          512,
+          128
+        ],
+        "actual": [
+          1024,
+          256
+        ]
+      },
+      "instance_encoder.layers.1.ffn.net.3.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.1.ffn.net.3.weight": {
+        "original": [
+          128,
+          512
+        ],
+        "actual": [
+          256,
+          1024
+        ]
+      },
+      "instance_encoder.layers.2.add_norm_1.norm.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.2.add_norm_1.norm.weight": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.2.add_norm_2.norm.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.2.add_norm_2.norm.weight": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.2.attn.Wk.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "instance_encoder.layers.2.attn.Wq.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "instance_encoder.layers.2.attn.Wv.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "instance_encoder.layers.2.attn.out.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.2.attn.out.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "instance_encoder.layers.2.ffn.net.0.bias": {
+        "original": [
+          512
+        ],
+        "actual": [
+          1024
+        ]
+      },
+      "instance_encoder.layers.2.ffn.net.0.weight": {
+        "original": [
+          512,
+          128
+        ],
+        "actual": [
+          1024,
+          256
+        ]
+      },
+      "instance_encoder.layers.2.ffn.net.3.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.2.ffn.net.3.weight": {
+        "original": [
+          128,
+          512
+        ],
+        "actual": [
+          256,
+          1024
+        ]
+      },
+      "instance_encoder.layers.3.add_norm_1.norm.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.3.add_norm_1.norm.weight": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.3.add_norm_2.norm.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.3.add_norm_2.norm.weight": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.3.attn.Wk.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "instance_encoder.layers.3.attn.Wq.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "instance_encoder.layers.3.attn.Wv.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "instance_encoder.layers.3.attn.out.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.3.attn.out.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "instance_encoder.layers.3.ffn.net.0.bias": {
+        "original": [
+          512
+        ],
+        "actual": [
+          1024
+        ]
+      },
+      "instance_encoder.layers.3.ffn.net.0.weight": {
+        "original": [
+          512,
+          128
+        ],
+        "actual": [
+          1024,
+          256
+        ]
+      },
+      "instance_encoder.layers.3.ffn.net.3.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.layers.3.ffn.net.3.weight": {
+        "original": [
+          128,
+          512
+        ],
+        "actual": [
+          256,
+          1024
+        ]
+      },
+      "instance_encoder.matrix_proj.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.matrix_proj.weight": {
+        "original": [
+          128,
+          8
+        ],
+        "actual": [
+          256,
+          8
+        ]
+      },
+      "instance_encoder.stats_token_proj.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "instance_encoder.stats_token_proj.weight": {
+        "original": [
+          128,
+          12
+        ],
+        "actual": [
+          256,
+          12
+        ]
+      },
+      "joint_layers.0.node_update.attn.Wk.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "joint_layers.0.node_update.attn.Wq.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "joint_layers.0.node_update.attn.Wv.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "joint_layers.0.node_update.attn.out.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.0.node_update.attn.out.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "joint_layers.0.node_update.ffn.net.0.bias": {
+        "original": [
+          512
+        ],
+        "actual": [
+          1024
+        ]
+      },
+      "joint_layers.0.node_update.ffn.net.0.weight": {
+        "original": [
+          512,
+          128
+        ],
+        "actual": [
+          1024,
+          256
+        ]
+      },
+      "joint_layers.0.node_update.ffn.net.3.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.0.node_update.ffn.net.3.weight": {
+        "original": [
+          128,
+          512
+        ],
+        "actual": [
+          256,
+          1024
+        ]
+      },
+      "joint_layers.0.node_update.norm1.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.0.node_update.norm1.weight": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.0.node_update.norm2.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.0.node_update.norm2.weight": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.0.solver_update.attn.Wk.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "joint_layers.0.solver_update.attn.Wq.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "joint_layers.0.solver_update.attn.Wv.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "joint_layers.0.solver_update.attn.out.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.0.solver_update.attn.out.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "joint_layers.0.solver_update.ffn.net.0.bias": {
+        "original": [
+          512
+        ],
+        "actual": [
+          1024
+        ]
+      },
+      "joint_layers.0.solver_update.ffn.net.0.weight": {
+        "original": [
+          512,
+          128
+        ],
+        "actual": [
+          1024,
+          256
+        ]
+      },
+      "joint_layers.0.solver_update.ffn.net.3.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.0.solver_update.ffn.net.3.weight": {
+        "original": [
+          128,
+          512
+        ],
+        "actual": [
+          256,
+          1024
+        ]
+      },
+      "joint_layers.0.solver_update.norm1.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.0.solver_update.norm1.weight": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.0.solver_update.norm2.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.0.solver_update.norm2.weight": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.1.node_update.attn.Wk.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "joint_layers.1.node_update.attn.Wq.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "joint_layers.1.node_update.attn.Wv.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "joint_layers.1.node_update.attn.out.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.1.node_update.attn.out.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "joint_layers.1.node_update.ffn.net.0.bias": {
+        "original": [
+          512
+        ],
+        "actual": [
+          1024
+        ]
+      },
+      "joint_layers.1.node_update.ffn.net.0.weight": {
+        "original": [
+          512,
+          128
+        ],
+        "actual": [
+          1024,
+          256
+        ]
+      },
+      "joint_layers.1.node_update.ffn.net.3.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.1.node_update.ffn.net.3.weight": {
+        "original": [
+          128,
+          512
+        ],
+        "actual": [
+          256,
+          1024
+        ]
+      },
+      "joint_layers.1.node_update.norm1.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.1.node_update.norm1.weight": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.1.node_update.norm2.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.1.node_update.norm2.weight": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.1.solver_update.attn.Wk.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "joint_layers.1.solver_update.attn.Wq.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "joint_layers.1.solver_update.attn.Wv.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "joint_layers.1.solver_update.attn.out.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.1.solver_update.attn.out.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "joint_layers.1.solver_update.ffn.net.0.bias": {
+        "original": [
+          512
+        ],
+        "actual": [
+          1024
+        ]
+      },
+      "joint_layers.1.solver_update.ffn.net.0.weight": {
+        "original": [
+          512,
+          128
+        ],
+        "actual": [
+          1024,
+          256
+        ]
+      },
+      "joint_layers.1.solver_update.ffn.net.3.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.1.solver_update.ffn.net.3.weight": {
+        "original": [
+          128,
+          512
+        ],
+        "actual": [
+          256,
+          1024
+        ]
+      },
+      "joint_layers.1.solver_update.norm1.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.1.solver_update.norm1.weight": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.1.solver_update.norm2.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "joint_layers.1.solver_update.norm2.weight": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "pool.0.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "pool.0.weight": {
+        "original": [
+          128,
+          256
+        ],
+        "actual": [
+          256,
+          512
+        ]
+      },
+      "pool.2.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "pool.2.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "score_head.0.bias": {
+        "original": [
+          256
+        ],
+        "actual": [
+          512
+        ]
+      },
+      "score_head.0.weight": {
+        "original": [
+          256,
+          384
+        ],
+        "actual": [
+          512,
+          768
+        ]
+      },
+      "score_head.3.weight": {
+        "original": [
+          1,
+          256
+        ],
+        "actual": [
+          1,
+          512
+        ]
+      },
+      "solver_encoder.feature_mlp.0.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "solver_encoder.feature_mlp.0.weight": {
+        "original": [
+          128,
+          34
+        ],
+        "actual": [
+          256,
+          34
+        ]
+      },
+      "solver_encoder.feature_mlp.3.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "solver_encoder.feature_mlp.3.weight": {
+        "original": [
+          128,
+          128
+        ],
+        "actual": [
+          256,
+          256
+        ]
+      },
+      "solver_encoder.norm.bias": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "solver_encoder.norm.weight": {
+        "original": [
+          128
+        ],
+        "actual": [
+          256
+        ]
+      },
+      "solver_encoder.solver_emb.weight": {
+        "original": [
+          22,
+          128
+        ],
+        "actual": [
+          22,
+          256
+        ]
+      }
+    },
+    "new_parameter_names": [],
+    "removed_parameter_names": [],
+    "independently_initialized_parameter_names": [
+      "decoder.Wk.weight",
+      "decoder.Wq.weight",
+      "decoder.Wv.weight",
+      "decoder.out.bias",
+      "decoder.out.weight",
+      "instance_encoder.cls_token",
+      "instance_encoder.condition_encoder.cbits_proj.weight",
+      "instance_encoder.condition_encoder.coord_dist_emb.weight",
+      "instance_encoder.condition_encoder.desc_proj.weight",
+      "instance_encoder.condition_encoder.kind_emb.weight",
+      "instance_encoder.condition_encoder.n_proj.bias",
+      "instance_encoder.condition_encoder.n_proj.weight",
+      "instance_encoder.condition_encoder.norm.bias",
+      "instance_encoder.condition_encoder.norm.weight",
+      "instance_encoder.condition_encoder.problem_emb.weight",
+      "instance_encoder.condition_encoder.stats_proj.bias",
+      "instance_encoder.condition_encoder.stats_proj.weight",
+      "instance_encoder.coord_proj.bias",
+      "instance_encoder.coord_proj.weight",
+      "instance_encoder.geometry_residual.projection.2.bias",
+      "instance_encoder.geometry_residual.projection.2.weight",
+      "instance_encoder.layers.0.add_norm_1.norm.bias",
+      "instance_encoder.layers.0.add_norm_1.norm.weight",
+      "instance_encoder.layers.0.add_norm_2.norm.bias",
+      "instance_encoder.layers.0.add_norm_2.norm.weight",
+      "instance_encoder.layers.0.attn.Wk.weight",
+      "instance_encoder.layers.0.attn.Wq.weight",
+      "instance_encoder.layers.0.attn.Wv.weight",
+      "instance_encoder.layers.0.attn.out.bias",
+      "instance_encoder.layers.0.attn.out.weight",
+      "instance_encoder.layers.0.ffn.net.0.bias",
+      "instance_encoder.layers.0.ffn.net.0.weight",
+      "instance_encoder.layers.0.ffn.net.3.bias",
+      "instance_encoder.layers.0.ffn.net.3.weight",
+      "instance_encoder.layers.1.add_norm_1.norm.bias",
+      "instance_encoder.layers.1.add_norm_1.norm.weight",
+      "instance_encoder.layers.1.add_norm_2.norm.bias",
+      "instance_encoder.layers.1.add_norm_2.norm.weight",
+      "instance_encoder.layers.1.attn.Wk.weight",
+      "instance_encoder.layers.1.attn.Wq.weight",
+      "instance_encoder.layers.1.attn.Wv.weight",
+      "instance_encoder.layers.1.attn.out.bias",
+      "instance_encoder.layers.1.attn.out.weight",
+      "instance_encoder.layers.1.ffn.net.0.bias",
+      "instance_encoder.layers.1.ffn.net.0.weight",
+      "instance_encoder.layers.1.ffn.net.3.bias",
+      "instance_encoder.layers.1.ffn.net.3.weight",
+      "instance_encoder.layers.2.add_norm_1.norm.bias",
+      "instance_encoder.layers.2.add_norm_1.norm.weight",
+      "instance_encoder.layers.2.add_norm_2.norm.bias",
+      "instance_encoder.layers.2.add_norm_2.norm.weight",
+      "instance_encoder.layers.2.attn.Wk.weight",
+      "instance_encoder.layers.2.attn.Wq.weight",
+      "instance_encoder.layers.2.attn.Wv.weight",
+      "instance_encoder.layers.2.attn.out.bias",
+      "instance_encoder.layers.2.attn.out.weight",
+      "instance_encoder.layers.2.ffn.net.0.bias",
+      "instance_encoder.layers.2.ffn.net.0.weight",
+      "instance_encoder.layers.2.ffn.net.3.bias",
+      "instance_encoder.layers.2.ffn.net.3.weight",
+      "instance_encoder.layers.3.add_norm_1.norm.bias",
+      "instance_encoder.layers.3.add_norm_1.norm.weight",
+      "instance_encoder.layers.3.add_norm_2.norm.bias",
+      "instance_encoder.layers.3.add_norm_2.norm.weight",
+      "instance_encoder.layers.3.attn.Wk.weight",
+      "instance_encoder.layers.3.attn.Wq.weight",
+      "instance_encoder.layers.3.attn.Wv.weight",
+      "instance_encoder.layers.3.attn.out.bias",
+      "instance_encoder.layers.3.attn.out.weight",
+      "instance_encoder.layers.3.ffn.net.0.bias",
+      "instance_encoder.layers.3.ffn.net.0.weight",
+      "instance_encoder.layers.3.ffn.net.3.bias",
+      "instance_encoder.layers.3.ffn.net.3.weight",
+      "instance_encoder.matrix_proj.bias",
+      "instance_encoder.matrix_proj.weight",
+      "instance_encoder.stats_token_proj.bias",
+      "instance_encoder.stats_token_proj.weight",
+      "joint_layers.0.node_update.attn.Wk.weight",
+      "joint_layers.0.node_update.attn.Wq.weight",
+      "joint_layers.0.node_update.attn.Wv.weight",
+      "joint_layers.0.node_update.attn.out.bias",
+      "joint_layers.0.node_update.attn.out.weight",
+      "joint_layers.0.node_update.ffn.net.0.bias",
+      "joint_layers.0.node_update.ffn.net.0.weight",
+      "joint_layers.0.node_update.ffn.net.3.bias",
+      "joint_layers.0.node_update.ffn.net.3.weight",
+      "joint_layers.0.node_update.norm1.bias",
+      "joint_layers.0.node_update.norm1.weight",
+      "joint_layers.0.node_update.norm2.bias",
+      "joint_layers.0.node_update.norm2.weight",
+      "joint_layers.0.solver_update.attn.Wk.weight",
+      "joint_layers.0.solver_update.attn.Wq.weight",
+      "joint_layers.0.solver_update.attn.Wv.weight",
+      "joint_layers.0.solver_update.attn.out.bias",
+      "joint_layers.0.solver_update.attn.out.weight",
+      "joint_layers.0.solver_update.ffn.net.0.bias",
+      "joint_layers.0.solver_update.ffn.net.0.weight",
+      "joint_layers.0.solver_update.ffn.net.3.bias",
+      "joint_layers.0.solver_update.ffn.net.3.weight",
+      "joint_layers.0.solver_update.norm1.bias",
+      "joint_layers.0.solver_update.norm1.weight",
+      "joint_layers.0.solver_update.norm2.bias",
+      "joint_layers.0.solver_update.norm2.weight",
+      "joint_layers.1.node_update.attn.Wk.weight",
+      "joint_layers.1.node_update.attn.Wq.weight",
+      "joint_layers.1.node_update.attn.Wv.weight",
+      "joint_layers.1.node_update.attn.out.bias",
+      "joint_layers.1.node_update.attn.out.weight",
+      "joint_layers.1.node_update.ffn.net.0.bias",
+      "joint_layers.1.node_update.ffn.net.0.weight",
+      "joint_layers.1.node_update.ffn.net.3.bias",
+      "joint_layers.1.node_update.ffn.net.3.weight",
+      "joint_layers.1.node_update.norm1.bias",
+      "joint_layers.1.node_update.norm1.weight",
+      "joint_layers.1.node_update.norm2.bias",
+      "joint_layers.1.node_update.norm2.weight",
+      "joint_layers.1.solver_update.attn.Wk.weight",
+      "joint_layers.1.solver_update.attn.Wq.weight",
+      "joint_layers.1.solver_update.attn.Wv.weight",
+      "joint_layers.1.solver_update.attn.out.bias",
+      "joint_layers.1.solver_update.attn.out.weight",
+      "joint_layers.1.solver_update.ffn.net.0.bias",
+      "joint_layers.1.solver_update.ffn.net.0.weight",
+      "joint_layers.1.solver_update.ffn.net.3.bias",
+      "joint_layers.1.solver_update.ffn.net.3.weight",
+      "joint_layers.1.solver_update.norm1.bias",
+      "joint_layers.1.solver_update.norm1.weight",
+      "joint_layers.1.solver_update.norm2.bias",
+      "joint_layers.1.solver_update.norm2.weight",
+      "pool.0.bias",
+      "pool.0.weight",
+      "pool.2.bias",
+      "pool.2.weight",
+      "score_head.0.bias",
+      "score_head.0.weight",
+      "score_head.3.weight",
+      "solver_encoder.feature_mlp.0.bias",
+      "solver_encoder.feature_mlp.0.weight",
+      "solver_encoder.feature_mlp.3.bias",
+      "solver_encoder.feature_mlp.3.weight",
+      "solver_encoder.norm.bias",
+      "solver_encoder.norm.weight",
+      "solver_encoder.solver_emb.weight"
+    ],
+    "independently_initialized_parameter_count": 7287552,
+    "original_parameter_count": 1842953,
+    "parameter_count": 7288969,
+    "trainable_sha256": "1d948707364fd25a294faa8b2fb3de15cbf67ddb1cd3bf1677076ba2dc08d482",
+    "seed": 2,
+    "capacity_init_seed": 104002,
+    "initialization": "scratch_seed2_common_plus_isolated_capacity",
+    "fresh_source": "validated_in_memory_R84_scratch_seed2",
+    "r84_fresh_trainable_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+    "actual_dimensions": {
+      "embedding_dim": 256,
+      "encoder_layer_num": 4,
+      "joint_layer_num": 2,
+      "head_num": 4,
+      "qkv_dim": 64,
+      "attention_projection_dim": 256,
+      "attention_modules": 9,
+      "ff_hidden_dim": 1024,
+      "head_hidden_dim": 512,
+      "score_head_input_dim": 768,
+      "solver_feature_hidden": 256,
+      "solver_feature_dim": 34,
+      "method_id_rows": 22,
+      "geometry_input_dim": 21,
+      "geometry_hidden_dim": 64,
+      "geometry_output_dim": 256
+    },
+    "historical_checkpoint_loaded": false,
+    "state_dict_restored": false,
+    "geometry_fitted_on": "frozen R84 new81000 TRAIN only",
+    "trainable_parameter_count": 7288969,
+    "identical_full_initialization": false
+  },
+  "target_identity": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/comparison_artifacts/target_list.json",
+    "identity": {
+      "baseline_checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "baseline_state_hash": "ad0a6d9c68c6f117b477807f6f8be52662032a8baea348dda6144c46091303e2",
+      "baseline_val_prediction_sha256": "8a1aea9caf608d12fbc83d89704a50eb37d461665c7609ad3e25778cdab932a7",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "threshold_chosen_pct": 0.1,
+      "rule": "A locked VAL: chosen percentage <= 0.1 and native winner count > 0"
+    },
+    "categories": {
+      "TSP/DIFUSCO": "zero",
+      "TSP/DIFUSCO500": "zero",
+      "TSP/LEHD": "zero",
+      "TSP/OMNI": "zero",
+      "CVRP/RouteFinder": "zero",
+      "ATSP/GLOP": "zero",
+      "ATSP/MATPOENET": "zero",
+      "OVRP/MTPOMO": "zero",
+      "OVRP/MVMOE": "zero",
+      "OVRP/reld_mt": "near_zero",
+      "VRPL/MTPOMO": "zero",
+      "VRPL/MVMOE": "zero",
+      "VRPTW/MoSES_CaDA": "near_zero",
+      "VRPTW/MoSES_RF": "zero",
+      "VRPTW/RouteFinder": "zero",
+      "OVRPTW/MoSES_CaDA": "zero",
+      "OVRPTW/MoSES_RF": "zero",
+      "OVRPTW/RouteFinder": "zero",
+      "OVRPB/MTPOMO": "zero",
+      "OVRPB/MVMOE": "near_zero",
+      "OVRPL/MTPOMO": "zero",
+      "OVRPL/MVMOE": "zero",
+      "VRPBL/MTPOMO": "zero",
+      "VRPBTW/MTPOMO": "zero",
+      "VRPLTW/MTPOMO": "zero",
+      "VRPLTW/MoSES_CaDA": "zero",
+      "VRPLTW/MoSES_RF": "zero",
+      "VRPLTW/RouteFinder": "zero",
+      "OVRPBL/MTPOMO": "near_zero",
+      "OVRPBL/MVMOE": "near_zero",
+      "OVRPBTW/MTPOMO": "zero",
+      "OVRPLTW/MVMOE": "near_zero",
+      "OVRPLTW/MoSES_CaDA": "near_zero",
+      "OVRPLTW/MoSES_RF": "zero",
+      "OVRPLTW/RouteFinder": "zero",
+      "VRPBLTW/MTPOMO": "zero"
+    },
+    "target_count": 36,
+    "sha256": "406ded5a21d8b73c2a41b87dc2bc3cc14330663ae1aa4f59ca6fbfde83770fe4"
+  },
+  "historical_reference": {
+    "R89B": {
+      "model": "R89B",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry/B_muon_hybrid",
+      "checkpoint_sha256": "41fa4ad8b590fa44e8949b114156d714d7ee2f2d31c847658a26654993057260",
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "role": "main historical reference",
+      "optimizer": "Muon hybrid",
+      "optimizer_matched": false,
+      "parameter_matched": false,
+      "equal_flops": false,
+      "identical_full_initialization": false
+    },
+    "R84A": {
+      "model": "R84A",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline",
+      "checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "role": "secondary historical reference",
+      "parameter_matched": false,
+      "equal_flops": false,
+      "identical_full_initialization": false
+    },
+    "R89A": {
+      "model": "R89A",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry/A_adamw",
+      "checkpoint_sha256": "f7b995ea7d5d6c31c014657e6087fb84b64cdb0611c727f37f95d8d67b41cafe",
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "optimizer": "AdamW",
+      "parameter_matched": false,
+      "equal_flops": false,
+      "identical_full_initialization": false
+    }
+  },
+  "inference_timing": {
+    "experiment": "R104",
+    "arm": "A_width256",
+    "complete": true,
+    "completed_utc": "2026-10-23T03:20:05.521147+00:00",
+    "checkpoint_sha256": "8f01ca82e75f2d863b9f77709d9285da17655e708503dea531ef98369af8c321",
+    "state_hash": "a4451682a0da0d3c804a8972751859fe0d0e629bb29277e2360c98f4153de72c",
+    "inference_rule": "eval mode, complete R104 capacity model; original R88B physical TSP node0 slot3, methodID+34, synchronous two-way interaction, original score MLP, FP32 utility differences/maximin; stable ascending-global-solver-ID ties; original inputs only",
+    "device": "cuda:0",
+    "repetitions": 3,
+    "warmup_batches": 1,
+    "parameter_count": 7288969,
+    "original_parameter_count": 1842953,
+    "scope": "complete_standalone_model_original_GPU_resident_inputs",
+    "all_current_model_included": true,
+    "donor_present": false,
+    "cached_feature_latency_used": false,
+    "end_to_end_measured": false,
+    "excludes": "dataset I/O, host transfer, training and solver execution",
+    "per_problem": [
+      {
+        "problem": "TSP",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.06720952689647675,
+            0.0668701734393835,
+            0.0650828592479229
+          ],
+          "mean_seconds_per_instance": 0.000518652498916102
+        }
+      },
+      {
+        "problem": "CVRP",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.07829384319484234,
+            0.07824711874127388,
+            0.0783162321895361
+          ],
+          "mean_seconds_per_instance": 0.0006116072763688862
+        }
+      },
+      {
+        "problem": "ATSP",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.012776462361216545,
+            0.012732898816466331,
+            0.012709831818938255
+          ],
+          "mean_seconds_per_instance": 9.952914842870086e-05
+        }
+      },
+      {
+        "problem": "OVRP",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.0124099962413311,
+            0.01242886297404766,
+            0.012436553835868835
+          ],
+          "mean_seconds_per_instance": 9.707138815429062e-05
+        }
+      },
+      {
+        "problem": "VRPB",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.01230328157544136,
+            0.012288780882954597,
+            0.012325271964073181
+          ],
+          "mean_seconds_per_instance": 9.613889172518005e-05
+        }
+      },
+      {
+        "problem": "VRPL",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.012350056320428848,
+            0.012410484254360199,
+            0.012470943853259087
+          ],
+          "mean_seconds_per_instance": 9.695699069804202e-05
+        }
+      },
+      {
+        "problem": "VRPTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.012413907796144485,
+            0.012356000021100044,
+            0.012429755181074142
+          ],
+          "mean_seconds_per_instance": 9.687412239145488e-05
+        }
+      },
+      {
+        "problem": "OVRPTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.012326294556260109,
+            0.012368850409984589,
+            0.012345213443040848
+          ],
+          "mean_seconds_per_instance": 9.645926669084777e-05
+        }
+      },
+      {
+        "problem": "OVRPB",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.012323614209890366,
+            0.012321526184678078,
+            0.012312501668930054
+          ],
+          "mean_seconds_per_instance": 9.624385954036067e-05
+        }
+      },
+      {
+        "problem": "OVRPL",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.012360921129584312,
+            0.012452514842152596,
+            0.01249697059392929
+          ],
+          "mean_seconds_per_instance": 9.716251709808905e-05
+        }
+      },
+      {
+        "problem": "VRPBL",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.012336816638708115,
+            0.012287722900509834,
+            0.012350227683782578
+          ],
+          "mean_seconds_per_instance": 9.62884563098972e-05
+        }
+      },
+      {
+        "problem": "VRPBTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.012279663234949112,
+            0.012272732332348824,
+            0.012277364730834961
+          ],
+          "mean_seconds_per_instance": 9.591083410972108e-05
+        }
+      },
+      {
+        "problem": "VRPLTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.01238461583852768,
+            0.012400250881910324,
+            0.012403098866343498
+          ],
+          "mean_seconds_per_instance": 9.68436603822435e-05
+        }
+      },
+      {
+        "problem": "OVRPBL",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.01226881705224514,
+            0.01228056289255619,
+            0.012332364916801453
+          ],
+          "mean_seconds_per_instance": 9.604621057709058e-05
+        }
+      },
+      {
+        "problem": "OVRPBTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.012297416105866432,
+            0.01230866089463234,
+            0.01233811303973198
+          ],
+          "mean_seconds_per_instance": 9.620882822976758e-05
+        }
+      },
+      {
+        "problem": "OVRPLTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.012384463101625443,
+            0.012353826314210892,
+            0.01240556500852108
+          ],
+          "mean_seconds_per_instance": 9.672878756343077e-05
+        }
+      },
+      {
+        "problem": "VRPBLTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.0123341865837574,
+            0.012279009446501732,
+            0.012340167537331581
+          ],
+          "mean_seconds_per_instance": 9.623271762393415e-05
+        }
+      },
+      {
+        "problem": "OVRPBLTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.012306760996580124,
+            0.012376025319099426,
+            0.012369083240628242
+          ],
+          "mean_seconds_per_instance": 9.64892436362182e-05
+        }
+      }
+    ],
+    "model_reselection": false
+  },
+  "evidence_boundary": "Width256 instance4/joint2 and width128 instance8/joint4 are two capacity axes, not equal-parameter, equal-FLOPs or identical-full-initialization A/B controls. Same-name/shape fresh R84 seed2 parameters are copied; resized/new parameters use isolated seed104002. Original R88B physical TSP node0, raw inputs/geometry/distance, methodID+34, original full score MLP, utility differences/maximin and R77 CE/comparison/risk/two-view R-Drop remain. No teacher, context labels, features, routes or new targets. R89A AdamW, R89B Muon and R84A are historical same-data references, not freshly matched controls; R89B differs in optimizer. Hardware and microbatch differences preclude a clean capacity-only causal claim. Fixed R84 target36, true rescues/losses, false picks and net cost are separate from selection frequency. Native/FP64 ind and legal pools; TRAIN-fitted SBS; ALL task-equal. TEST is development-exposed; one whole-model minimum full18 VAL lock, no TEST/LIB reselection. Timing includes the complete current standalone model on original GPU-resident inputs, not donor/cached-feature latency; excludes dataset I/O, transfer and solver execution.",
+  "selected_val_binding": {
+    "rule": "exact_selected_checkpoint_model_state_protocol_state_and_successful_update",
+    "checkpoint_sha256": "8f01ca82e75f2d863b9f77709d9285da17655e708503dea531ef98369af8c321",
+    "model_state_sha256": "acbfd4604456334eaddbf22bf8f2f0fe1aed65ae9e3f5e36affd539737abb98a",
+    "state_hash": "a4451682a0da0d3c804a8972751859fe0d0e629bb29277e2360c98f4153de72c",
+    "selected_update": 34560,
+    "archive_capture_checkpoint_sha256": null,
+    "archive_identity_unchanged": true
+  }
+}

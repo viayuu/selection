@@ -1,0 +1,71 @@
+{
+  "experiment": "R104",
+  "complete": true,
+  "matched": false,
+  "parameter_matched": false,
+  "equal_flops": false,
+  "identical_full_initialization": false,
+  "evidence_boundary": "Width256 instance4/joint2 and width128 instance8/joint4 are two capacity axes, not equal-parameter, equal-FLOPs or identical-full-initialization A/B controls. Same-name/shape fresh R84 seed2 parameters are copied; resized/new parameters use isolated seed104002. Original R88B physical TSP node0, raw inputs/geometry/distance, methodID+34, original full score MLP, utility differences/maximin and R77 CE/comparison/risk/two-view R-Drop remain. No teacher, context labels, features, routes or new targets. R89A AdamW, R89B Muon and R84A are historical same-data references, not freshly matched controls; R89B differs in optimizer. Hardware and microbatch differences preclude a clean capacity-only causal claim. Fixed R84 target36, true rescues/losses, false picks and net cost are separate from selection frequency. Native/FP64 ind and legal pools; TRAIN-fitted SBS; ALL task-equal. TEST is development-exposed; one whole-model minimum full18 VAL lock, no TEST/LIB reselection. Timing includes the complete current standalone model on original GPU-resident inputs, not donor/cached-feature latency; excludes dataset I/O, transfer and solver execution.",
+  "checkpoints": {
+    "A_width256": {
+      "experiment": "R104",
+      "arm": "A_width256",
+      "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R104_capacity_scaling/A_width256/best.pt",
+      "checkpoint_sha256": "8f01ca82e75f2d863b9f77709d9285da17655e708503dea531ef98369af8c321",
+      "state_hash": "a4451682a0da0d3c804a8972751859fe0d0e629bb29277e2360c98f4153de72c",
+      "epoch": 24,
+      "selected_update": 34560,
+      "rule": "strict minimum full VAL macro_vs_sbs_pct with common new81000 TRAIN-fitted SBS; first wins ties",
+      "selected_without_test": true,
+      "per_problem_assembly": false,
+      "val": {
+        "macro_ce": 0.71194236808353,
+        "macro_top1": 0.7095185185185185,
+        "macro_top2": 0.9059259259259258,
+        "macro_top3": 0.9622962962962964,
+        "macro_top1_tie_aware": 0.7110617283950617,
+        "macro_mean_cost": 11.417017862959826,
+        "macro_vs_sbs_pct": -0.18998985486034636,
+        "macro_vs_oracle_pct": 0.39774044784164847,
+        "macro_actual_regret_pct": 0.40889991869628234,
+        "macro_vbs_gap_closed_pct": 13.67544097100169,
+        "macro_sbs_cost": 11.427978473494235,
+        "macro_oracle_cost": 11.371691902364589
+      },
+      "inference_rule": "eval mode, complete R104 capacity model; original R88B physical TSP node0 slot3, methodID+34, synchronous two-way interaction, original score MLP, FP32 utility differences/maximin; stable ascending-global-solver-ID ties; original inputs only",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "locked_utc": "2026-10-23T03:15:33.431009+00:00"
+    },
+    "B_depth8": {
+      "experiment": "R104",
+      "arm": "B_depth8",
+      "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R104_capacity_scaling/B_depth8/best.pt",
+      "checkpoint_sha256": "532ca192d4c9434c8fc4577598c320f9193a8933e07782b6c82dd549b0e30370",
+      "state_hash": "eb520a918e5124988fb0390ea654bbbaaf9a5fde33bf6ddbc96d7046ab7cbca7",
+      "epoch": 25,
+      "selected_update": 36000,
+      "rule": "strict minimum full VAL macro_vs_sbs_pct with common new81000 TRAIN-fitted SBS; first wins ties",
+      "selected_without_test": true,
+      "per_problem_assembly": false,
+      "val": {
+        "macro_ce": 0.7001588195562363,
+        "macro_top1": 0.7109135802469136,
+        "macro_top2": 0.9072962962962963,
+        "macro_top3": 0.963320987654321,
+        "macro_top1_tie_aware": 0.712358024691358,
+        "macro_mean_cost": 11.416440079736297,
+        "macro_vs_sbs_pct": -0.1949208785606461,
+        "macro_vs_oracle_pct": 0.39272564718096803,
+        "macro_actual_regret_pct": 0.4019947816720594,
+        "macro_vbs_gap_closed_pct": 14.033462370231122,
+        "macro_sbs_cost": 11.427978473494235,
+        "macro_oracle_cost": 11.371691902364589
+      },
+      "inference_rule": "eval mode, complete R104 capacity model; original R88B physical TSP node0 slot3, methodID+34, synchronous two-way interaction, original score MLP, FP32 utility differences/maximin; stable ascending-global-solver-ID ties; original inputs only",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "locked_utc": "2026-10-23T04:34:07.154703+00:00"
+    }
+  },
+  "training": false,
+  "inference": false
+}
