@@ -1,0 +1,30 @@
+{
+  "experiment": "R102",
+  "arm": "B",
+  "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R102_full_type_pretrained_fusion/B/best.pt",
+  "checkpoint_sha256": "7df434c762a0e0b7726ab67211f63f51b55d1f86d108ec307a0aede0060f921f",
+  "state_hash": "d71f97eb83ab65830d5349ec4e0c297591fdad7fa84d669fb52bbd7a9a7a636d",
+  "epoch": 14,
+  "selected_update": 20160,
+  "rule": "strict minimum full VAL macro_vs_sbs_pct with common new81000 TRAIN-fitted SBS; first wins ties",
+  "selection_split": "val",
+  "selected_without_test": true,
+  "per_problem_assembly": false,
+  "val": {
+    "macro_ce": 0.7032556020551257,
+    "macro_top1": 0.711320987654321,
+    "macro_top2": 0.9054444444444445,
+    "macro_top3": 0.9632592592592594,
+    "macro_top1_tie_aware": 0.7127654320987654,
+    "macro_mean_cost": 11.416322668191384,
+    "macro_vs_sbs_pct": -0.19684819656646196,
+    "macro_vs_oracle_pct": 0.39079030971929973,
+    "macro_actual_regret_pct": 0.40084464584833635,
+    "macro_vbs_gap_closed_pct": 14.92361309092909,
+    "macro_sbs_cost": 11.427978473494235,
+    "macro_oracle_cost": 11.371691902364589
+  },
+  "inference_rule": "eval frozen TSP ELG128 / ATSP MatNet row256+col256 / routing ReLD128; ATSP fixed identity onehot columns firstN, not historical RNG certification; FP32 donor output quantized FP16; affine-free normalization and three projections before original four instance layers; original physical TSP node0 slot3 raw role; hand34/methodID, joint2, score MLP/pair differences/maximin; stable ascending-global-solver-ID ties; all legal pools; no calibration",
+  "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+  "locked_utc": "2026-10-23T06:33:33.588299+00:00"
+}

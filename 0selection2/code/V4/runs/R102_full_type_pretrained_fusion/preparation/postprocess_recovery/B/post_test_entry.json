@@ -1,0 +1,166 @@
+{
+  "schema": "r102_recovery_entry_v1",
+  "experiment": "R102",
+  "arm": "B",
+  "stage": "post-test",
+  "state": "complete",
+  "started_utc": "2026-10-23T07:40:04.516523+00:00",
+  "argv": [
+    "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+    "-B",
+    "-u",
+    "-m",
+    "code.V4.r102_postprocess_recovery",
+    "finish-gpu",
+    "--root",
+    "/public/home/shiys/0selection2/code/V4/runs/R102_full_type_pretrained_fusion",
+    "--arm",
+    "B",
+    "--device",
+    "cuda:0",
+    "--cache-root",
+    "/tmp/shiys_R84_new90k_cache",
+    "--feature-root",
+    "/tmp/shiys_R102_B_extra_nodes",
+    "--routing-feature-root",
+    "/tmp/shiys_R94_B_node_features"
+  ],
+  "main_ready_evidence": "R102_explicit_post_TEST_original_timing_observation_CPU42_no_TRAIN_or_TEST_rerun",
+  "original": {
+    "checkpoint_lock": {
+      "experiment": "R102",
+      "arm": "B",
+      "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R102_full_type_pretrained_fusion/B/best.pt",
+      "checkpoint_sha256": "7df434c762a0e0b7726ab67211f63f51b55d1f86d108ec307a0aede0060f921f",
+      "state_hash": "d71f97eb83ab65830d5349ec4e0c297591fdad7fa84d669fb52bbd7a9a7a636d",
+      "epoch": 14,
+      "selected_update": 20160,
+      "rule": "strict minimum full VAL macro_vs_sbs_pct with common new81000 TRAIN-fitted SBS; first wins ties",
+      "selection_split": "val",
+      "selected_without_test": true,
+      "per_problem_assembly": false,
+      "val": {
+        "macro_ce": 0.7032556020551257,
+        "macro_top1": 0.711320987654321,
+        "macro_top2": 0.9054444444444445,
+        "macro_top3": 0.9632592592592594,
+        "macro_top1_tie_aware": 0.7127654320987654,
+        "macro_mean_cost": 11.416322668191384,
+        "macro_vs_sbs_pct": -0.19684819656646196,
+        "macro_vs_oracle_pct": 0.39079030971929973,
+        "macro_actual_regret_pct": 0.40084464584833635,
+        "macro_vbs_gap_closed_pct": 14.92361309092909,
+        "macro_sbs_cost": 11.427978473494235,
+        "macro_oracle_cost": 11.371691902364589
+      },
+      "inference_rule": "eval frozen TSP ELG128 / ATSP MatNet row256+col256 / routing ReLD128; ATSP fixed identity onehot columns firstN, not historical RNG certification; FP32 donor output quantized FP16; affine-free normalization and three projections before original four instance layers; original physical TSP node0 slot3 raw role; hand34/methodID, joint2, score MLP/pair differences/maximin; stable ascending-global-solver-ID ties; all legal pools; no calibration",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "locked_utc": "2026-10-23T06:33:33.588299+00:00"
+    },
+    "sha256": {
+      "protocol.json": "081749aab6137211707e90759d4c003c2c96e1cf97c5cb9a83b3eb69b3f20ece",
+      "initialization.json": "c72a5ee476013b5490f08e54bc0dd94260a5c1af218da0fa1c1847e32f6d24bd",
+      "final_test_lock.json": "2501a08fe7b840bf59aba68ae0d253d181a81d6a3c1ef75702ea73ed855748ec",
+      "training_complete.json": "7c1f30b85ee7ca564075320cea9ec26453f12309fcb411c982ae12436899a6b4",
+      "final_metrics.json": "dd2dda426dedcef304f568bbae1039f32d66cd8ce0d0f1795ed748a1d1c0f054",
+      "status.json": "821f89ca55a0ff449d6b2478499e13562ae6903bd5401e495f33d3ce3b032513",
+      "error.json": "502eaebb991abaac03f20851ebdb7fe506295a75322984d51aff19b96b5b05e9",
+      "test_started.json": "07bcee8f796b06c0e1b13c49935569400fb431656744c7be9d4747b2d061ee6f",
+      "worker.json": "7a5202d41d094724f4f5e4a3a8950698fac9d4570c80eba08992b9aa28c29e6c",
+      "controller.json": "82b9ca9fe5f49b989a7b0e3970b7ff7bb7238cbe5e9a283558f7f704c6b54a04",
+      "goal_watch_receipt.json": "9861e068873566496dffd658d40ed34c64b1e5ce297155d027eb08a13e6a5351"
+    }
+  },
+  "original_worker_sha256": "7a5202d41d094724f4f5e4a3a8950698fac9d4570c80eba08992b9aa28c29e6c",
+  "original_controller_sha256": "82b9ca9fe5f49b989a7b0e3970b7ff7bb7238cbe5e9a283558f7f704c6b54a04",
+  "source_sha256": {
+    "/public/home/shiys/0selection2/code/V4/r102_gpu_recovery_entry.py": "716a649258bb8f8855ade94a40015d30f7c68385cf70d3138945f243b674dff0",
+    "/public/home/shiys/0selection2/code/V4/run_v4_r102_gpu_recovery.sh": "c6a3d43c382d8eeb24cf02fad35d363235219eeed9e3708a356c34ae7f4846d3",
+    "/public/home/shiys/0selection2/code/V4/r102_postprocess_recovery.py": "6496d21cfa262a1ae24696d35939ef39eca77794e11ae8090f350b559ded398e",
+    "/public/home/shiys/0selection2/code/V4/r102_cache_identity_probe.py": "d8de576f30f3daa812663a369faea791af6ab7acae89336c79c04fd8238c3642",
+    "/public/home/shiys/0selection2/code/V4/run_v4_r102_cache_probe.sh": "6b110cb099e5d930e53a636013716185db1cee4ddcc2c764fa2e9937f3f09ec8"
+  },
+  "checkpoint_lock": {
+    "experiment": "R102",
+    "arm": "B",
+    "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R102_full_type_pretrained_fusion/B/best.pt",
+    "checkpoint_sha256": "7df434c762a0e0b7726ab67211f63f51b55d1f86d108ec307a0aede0060f921f",
+    "state_hash": "d71f97eb83ab65830d5349ec4e0c297591fdad7fa84d669fb52bbd7a9a7a636d",
+    "epoch": 14,
+    "selected_update": 20160,
+    "rule": "strict minimum full VAL macro_vs_sbs_pct with common new81000 TRAIN-fitted SBS; first wins ties",
+    "selection_split": "val",
+    "selected_without_test": true,
+    "per_problem_assembly": false,
+    "val": {
+      "macro_ce": 0.7032556020551257,
+      "macro_top1": 0.711320987654321,
+      "macro_top2": 0.9054444444444445,
+      "macro_top3": 0.9632592592592594,
+      "macro_top1_tie_aware": 0.7127654320987654,
+      "macro_mean_cost": 11.416322668191384,
+      "macro_vs_sbs_pct": -0.19684819656646196,
+      "macro_vs_oracle_pct": 0.39079030971929973,
+      "macro_actual_regret_pct": 0.40084464584833635,
+      "macro_vbs_gap_closed_pct": 14.92361309092909,
+      "macro_sbs_cost": 11.427978473494235,
+      "macro_oracle_cost": 11.371691902364589
+    },
+    "inference_rule": "eval frozen TSP ELG128 / ATSP MatNet row256+col256 / routing ReLD128; ATSP fixed identity onehot columns firstN, not historical RNG certification; FP32 donor output quantized FP16; affine-free normalization and three projections before original four instance layers; original physical TSP node0 slot3 raw role; hand34/methodID, joint2, score MLP/pair differences/maximin; stable ascending-global-solver-ID ties; all legal pools; no calibration",
+    "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+    "locked_utc": "2026-10-23T06:33:33.588299+00:00"
+  },
+  "resources": {
+    "slot": "4090_1",
+    "gpu_uuid": "GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d",
+    "container_id": "76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6",
+    "cpus": [
+      4,
+      5,
+      72,
+      73
+    ],
+    "cpu_count": 4,
+    "allocation_memory": "9G",
+    "gpu_mutex": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R81_method_conditioned_auc/queue_gpu_GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d.json",
+      "device": 51,
+      "inode": 563598119
+    }
+  },
+  "automatic_retry": false,
+  "training": false,
+  "optimizer": false,
+  "model_reselection": false,
+  "first_full_TEST": false,
+  "original_failure_preserved": true,
+  "post_test_continuation": true,
+  "test_rerun": false,
+  "inference_rule_changed": false,
+  "uuid_preflight_observation": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R102_full_type_pretrained_fusion/preparation/postprocess_recovery/uuid_preflight_observation.json",
+    "sha256": "7248bc53e8b74c22e14755f02a2f08b2b27e4b34ce4e10d3205ecd9c9f14d459"
+  },
+  "preserved_gpu_entry": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R102_full_type_pretrained_fusion/preparation/postprocess_recovery/B/gpu_entry.json",
+    "sha256": "560c466c1ffc33563912bee86225e5b2c30153160735eb6a31f2e4007af71de8"
+  },
+  "preserved_gpu_log": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R102_full_type_pretrained_fusion/preparation/postprocess_recovery/B_gpu.log",
+    "sha256": "c33f909c9305872bf1c2ea8a24610882f4304761c5abb05e34ba10597341de78"
+  },
+  "preserved_uuid_correction_entry": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R102_full_type_pretrained_fusion/preparation/postprocess_recovery/B/gpu_uuid_format_correction_entry.json",
+    "sha256": "d4e49848bd80c2669f528b900c14239090ebe23ba80929ca3c1af51fc1a5c0ec"
+  },
+  "preserved_first_error": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R102_full_type_pretrained_fusion/preparation/postprocess_recovery/B/first_error.json",
+    "sha256": "6f3fea8148f550d018281ecdceafc49277aa36ca6dd4e46bff0c385c2b364017"
+  },
+  "preserved_completed_test": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R102_full_type_pretrained_fusion/preparation/postprocess_recovery/report_view/B/test_results.json",
+    "sha256": "52e18da11d0e958e0345b8996d1fbd0d3b1e10a8e2541bd4122b6f2d77d92a80"
+  },
+  "exit_status": 0,
+  "completed_utc": "2026-10-23T07:41:22.173714+00:00"
+}

@@ -1,0 +1,153 @@
+{
+  "schema": "r102_recovery_entry_v1",
+  "experiment": "R102",
+  "arm": "A",
+  "stage": "gpu",
+  "state": "failed",
+  "started_utc": "2026-10-23T07:16:27.576943+00:00",
+  "argv": [
+    "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+    "-B",
+    "-u",
+    "-m",
+    "code.V4.r102_postprocess_recovery",
+    "gpu",
+    "--root",
+    "/public/home/shiys/0selection2/code/V4/runs/R102_full_type_pretrained_fusion",
+    "--arm",
+    "A",
+    "--device",
+    "cuda:0",
+    "--cache-root",
+    "/tmp/shiys_R84_new90k_cache",
+    "--feature-root",
+    "/tmp/shiys_R102_A_extra_nodes",
+    "--routing-feature-root",
+    "/tmp/shiys_R94_B_node_features"
+  ],
+  "main_ready_evidence": "R102_explicit_UUID_format_correction_CPU34_fixed_original_VALmodels_no_TRAIN",
+  "original": {
+    "checkpoint_lock": {
+      "experiment": "R102",
+      "arm": "A",
+      "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R102_full_type_pretrained_fusion/A/best.pt",
+      "checkpoint_sha256": "10694b4d0fed80f1baec0d5e7de15cceec210eca5dfa846623783c4b9d6e7a2c",
+      "state_hash": "994ac726ec6e6968e6f9e7bad61a45a3f110d3e3fe0edf4b5b55364cd1070279",
+      "epoch": 23,
+      "selected_update": 33120,
+      "rule": "strict minimum full VAL macro_vs_sbs_pct with common new81000 TRAIN-fitted SBS; first wins ties",
+      "selection_split": "val",
+      "selected_without_test": true,
+      "per_problem_assembly": false,
+      "val": {
+        "macro_ce": 0.6978542125887341,
+        "macro_top1": 0.7130123456790123,
+        "macro_top2": 0.9078888888888889,
+        "macro_top3": 0.964320987654321,
+        "macro_top1_tie_aware": 0.7145061728395061,
+        "macro_mean_cost": 11.415997119971566,
+        "macro_vs_sbs_pct": -0.20036283161563398,
+        "macro_vs_oracle_pct": 0.38721182441153373,
+        "macro_actual_regret_pct": 0.396175368936597,
+        "macro_vbs_gap_closed_pct": 14.828961461152751,
+        "macro_sbs_cost": 11.427978473494235,
+        "macro_oracle_cost": 11.371691902364589
+      },
+      "inference_rule": "eval frozen TSP ELG128 / ATSP MatNet row256+col256 / routing ReLD128; ATSP fixed identity onehot columns firstN, not historical RNG certification; FP32 donor output quantized FP16; affine-free normalization and three projections before original four instance layers; original physical TSP node0 slot3 raw role; hand34/methodID, joint2, score MLP/pair differences/maximin; stable ascending-global-solver-ID ties; all legal pools; no calibration",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "locked_utc": "2026-10-23T06:25:40.739607+00:00"
+    },
+    "sha256": {
+      "protocol.json": "3696acd3d7eb8cedf5d613b3e8b2bca75957db41c4d597ca8d087b0a845e306b",
+      "initialization.json": "1d9fccd1815320655f28e315cc67f7be4afffc8bf6e3983cfc3111c7b847277e",
+      "final_test_lock.json": "8128c84509c708b5332a5af094ef251ab24de7abb7cac3b75cec7358ab654716",
+      "training_complete.json": "ce1b0f5e5239f1dbe397bd82e67e2a46a4f9161930337a5eff80b78d04581ab3",
+      "final_metrics.json": "aa7aa36d850497a61a7dca76b1679897773e82482f6309e82fb55c78510b9c97",
+      "status.json": "47761da04bcdaa8460c9ed6e6b5adf8147444ac1eecd87d3ae1692321f80b47b",
+      "error.json": "cb95394e9299cbbe79688d6ad64cf582fe1eb472c6c26b64eaf9ab8067c1f22f",
+      "test_started.json": "0f5d7031c089408faac01f8b06158a0fe5a97c060a55a8a1b704598972b0a3e1",
+      "worker.json": "d7c14b33947e2c4e9c54c1479418c668d8e946acaff63f40bec27ab443c41cb9",
+      "controller.json": "eebf3eb1b9abc5a7e91118395c1e9066f406a6b6805ebbf5f16fb6a02f38a038",
+      "goal_watch_receipt.json": "9861e068873566496dffd658d40ed34c64b1e5ce297155d027eb08a13e6a5351"
+    }
+  },
+  "original_worker_sha256": "d7c14b33947e2c4e9c54c1479418c668d8e946acaff63f40bec27ab443c41cb9",
+  "original_controller_sha256": "eebf3eb1b9abc5a7e91118395c1e9066f406a6b6805ebbf5f16fb6a02f38a038",
+  "source_sha256": {
+    "/public/home/shiys/0selection2/code/V4/r102_gpu_recovery_entry.py": "4b97cbe0cf695d30f71ca8ac17aabaa7e3becd3d236960d97806dc30fe9c301e",
+    "/public/home/shiys/0selection2/code/V4/run_v4_r102_gpu_recovery.sh": "c6a3d43c382d8eeb24cf02fad35d363235219eeed9e3708a356c34ae7f4846d3",
+    "/public/home/shiys/0selection2/code/V4/r102_postprocess_recovery.py": "728fba9b75bd79687b3b6225fe1cd4869823a5c79ed4d45fb78a4f35f52a9fd3",
+    "/public/home/shiys/0selection2/code/V4/r102_cache_identity_probe.py": "d8de576f30f3daa812663a369faea791af6ab7acae89336c79c04fd8238c3642",
+    "/public/home/shiys/0selection2/code/V4/run_v4_r102_cache_probe.sh": "6b110cb099e5d930e53a636013716185db1cee4ddcc2c764fa2e9937f3f09ec8"
+  },
+  "checkpoint_lock": {
+    "experiment": "R102",
+    "arm": "A",
+    "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R102_full_type_pretrained_fusion/A/best.pt",
+    "checkpoint_sha256": "10694b4d0fed80f1baec0d5e7de15cceec210eca5dfa846623783c4b9d6e7a2c",
+    "state_hash": "994ac726ec6e6968e6f9e7bad61a45a3f110d3e3fe0edf4b5b55364cd1070279",
+    "epoch": 23,
+    "selected_update": 33120,
+    "rule": "strict minimum full VAL macro_vs_sbs_pct with common new81000 TRAIN-fitted SBS; first wins ties",
+    "selection_split": "val",
+    "selected_without_test": true,
+    "per_problem_assembly": false,
+    "val": {
+      "macro_ce": 0.6978542125887341,
+      "macro_top1": 0.7130123456790123,
+      "macro_top2": 0.9078888888888889,
+      "macro_top3": 0.964320987654321,
+      "macro_top1_tie_aware": 0.7145061728395061,
+      "macro_mean_cost": 11.415997119971566,
+      "macro_vs_sbs_pct": -0.20036283161563398,
+      "macro_vs_oracle_pct": 0.38721182441153373,
+      "macro_actual_regret_pct": 0.396175368936597,
+      "macro_vbs_gap_closed_pct": 14.828961461152751,
+      "macro_sbs_cost": 11.427978473494235,
+      "macro_oracle_cost": 11.371691902364589
+    },
+    "inference_rule": "eval frozen TSP ELG128 / ATSP MatNet row256+col256 / routing ReLD128; ATSP fixed identity onehot columns firstN, not historical RNG certification; FP32 donor output quantized FP16; affine-free normalization and three projections before original four instance layers; original physical TSP node0 slot3 raw role; hand34/methodID, joint2, score MLP/pair differences/maximin; stable ascending-global-solver-ID ties; all legal pools; no calibration",
+    "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+    "locked_utc": "2026-10-23T06:25:40.739607+00:00"
+  },
+  "resources": {
+    "slot": "4090_0",
+    "gpu_uuid": "GPU-71479e7e-f8bd-e430-66ed-f8db9f0d47be",
+    "container_id": "76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6",
+    "cpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "cpu_count": 4,
+    "allocation_memory": "9G",
+    "gpu_mutex": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R81_method_conditioned_auc/queue_gpu_GPU-71479e7e-f8bd-e430-66ed-f8db9f0d47be.json",
+      "device": 51,
+      "inode": 563597744
+    }
+  },
+  "automatic_retry": false,
+  "training": false,
+  "optimizer": false,
+  "model_reselection": false,
+  "first_full_TEST": true,
+  "original_failure_preserved": true,
+  "uuid_format_correction": true,
+  "uuid_preflight_observation": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R102_full_type_pretrained_fusion/preparation/postprocess_recovery/uuid_preflight_observation.json",
+    "sha256": "7248bc53e8b74c22e14755f02a2f08b2b27e4b34ce4e10d3205ecd9c9f14d459"
+  },
+  "preserved_gpu_entry": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R102_full_type_pretrained_fusion/preparation/postprocess_recovery/A/gpu_entry.json",
+    "sha256": "a3daf752fb9f13646a28ee86fc1622159c2f99ffbbeed3c56439ca1071cb3a01"
+  },
+  "preserved_gpu_log": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R102_full_type_pretrained_fusion/preparation/postprocess_recovery/A_gpu.log",
+    "sha256": "327f171f27141fd4d0ce6dfd90190501fcfe7f9a9d3f6b5914571e9ad461296e"
+  },
+  "exit_status": 1,
+  "error": "Recovery needs rc0 AND validated completion evidence; no retry",
+  "completed_utc": "2026-10-23T07:17:04.122371+00:00"
+}
