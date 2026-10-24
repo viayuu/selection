@@ -1,0 +1,85 @@
+{
+  "experiment": "R108",
+  "round": 1,
+  "status": "final_review_ready",
+  "review_type": "engineering_math_not_efficacy",
+  "blocking_findings": [],
+  "required_main_corrections": [],
+  "warnings": [],
+  "resolved_findings": [
+    {
+      "id": "R108-P2-01",
+      "priority": "P2",
+      "reference": "code/V4/r108_experiment.py:310",
+      "summary": "Main bound the private zero consistency callback; original runner test verifies zero and shared engine isolation",
+      "status": "resolved_and_retested",
+      "observed_numerical_loss_contamination": false
+    },
+    {
+      "id": "R108-P3-01",
+      "priority": "P3",
+      "reference": "code/V4/r108_experiment.py:465",
+      "summary": "Main changed describe to eval256; both arm descriptions pass original runner contract",
+      "status": "resolved_and_retested"
+    }
+  ],
+  "judgment": "final_engineering_review_ready_no_open_findings",
+  "final_review_ready": true,
+  "engineering_readiness_score": 8,
+  "score_scale": 10,
+  "formal_ready_set_by_reviewer": false,
+  "efficacy_certified": false,
+  "reviewer_cpu_tests": {
+    "command": "CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 python -m unittest code.V4.test_r108_experiment -v",
+    "test_methods": 5,
+    "passed_methods": 5,
+    "failed_methods": 0,
+    "failed_subcases": 0,
+    "seconds": 2.718,
+    "synthetic_only": true
+  },
+  "initial_reviewer_cpu_tests": {
+    "test_methods": 5,
+    "passed_methods": 4,
+    "failed_methods": 1,
+    "failed_subcases": 3,
+    "seconds": 2.761,
+    "superseded_by_final_repair_verification": true
+  },
+  "worker_reported_cpu_tests": {"passed": 12, "reviewer_rerun": false},
+  "main_reported_combined_cpu_tests": {
+    "passed": 57,
+    "scope": "model/objective/report/admin",
+    "reviewer_rerun": false
+  },
+  "common_caps": {"large": 512, "other": 1024, "evaluation": 256},
+  "logical_batch": 1024,
+  "successful_update_budget": 57600,
+  "trainable_count_each_arm": 1842953,
+  "same_forward_and_complete_fresh_state": true,
+  "active_parameter_matched": false,
+  "gradient_scale_equality_claim": false,
+  "main_reported_gpu_witness": {
+    "arm": "A_prior_ce",
+    "device": "4090",
+    "complete": true,
+    "maximum_allocated_mib": 13367,
+    "maximum_reserved_mib": 17366,
+    "reviewer_ran": false,
+    "reviewer_independently_audited": false
+  },
+  "real_train_arrays_read": false,
+  "real_checkpoints_read": false,
+  "real_priors_audited": false,
+  "production_source_edits": false,
+  "r107_source_edits": false,
+  "gpu_commands_by_reviewer": false,
+  "jobs_started_by_reviewer": false,
+  "secondary_model_invoked": false,
+  "new_literature_used": false,
+  "process_deviations": [
+    "One accidental initial read-only git diff --stat; no writes or subsequent Git commands",
+    "Initial bare conda activation failed; shell hook and easynco activation used before Python tests"
+  ],
+  "next_round": "none; original five-test runner repair verification complete, no expanded checks requested"
+}

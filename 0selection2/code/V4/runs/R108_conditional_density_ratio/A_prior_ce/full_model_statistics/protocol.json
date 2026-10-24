@@ -1,0 +1,1033 @@
+{
+  "experiment": "R108",
+  "arm": "A_prior_ce",
+  "complete": true,
+  "created_utc": "2026-10-23T20:48:57.354588+00:00",
+  "checkpoint_lock": {
+    "experiment": "R108",
+    "arm": "A_prior_ce",
+    "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R108_conditional_density_ratio/A_prior_ce/best.pt",
+    "checkpoint_sha256": "5406920bc923f83b3d33a6c22beeaac5472ff734aca7a9ceb05f8aaafc3ab78e",
+    "state_hash": "df42911db3ea46c616f71e0657f2bad8135dd7ae4539b48dd923ed2b3ac146db",
+    "epoch": 30,
+    "selected_update": 43200,
+    "rule": "strict minimum whole18 VAL macro_vs_sbs_pct; first exact tie; common full-TRAIN SBS",
+    "selected_without_test": true,
+    "per_problem_assembly": false,
+    "val": {
+      "macro_ce": 0.7853165119886398,
+      "macro_top1": 0.7108024691358025,
+      "macro_top2": 0.9066666666666667,
+      "macro_top3": 0.9630493827160495,
+      "macro_top1_tie_aware": 0.712283950617284,
+      "macro_mean_cost": 11.417570292464212,
+      "macro_vs_sbs_pct": -0.19115533965532883,
+      "macro_vs_oracle_pct": 0.39643140249527986,
+      "macro_actual_regret_pct": 0.4088976748285937,
+      "macro_vbs_gap_closed_pct": 12.561179074524814,
+      "macro_sbs_cost": 11.427978473494235,
+      "macro_oracle_cost": 11.371691902364589
+    },
+    "inference_rule": "fixed TRAIN conditional log prior plus learned residual utility; original differences/maximin argmax; no quota or posthoc tuning",
+    "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+    "locked_utc": "2026-10-23T20:47:57.689397+00:00"
+  },
+  "model_factory": "code.V4.r108_experiment.load_checkpoint",
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "rows_per_problem": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "candidate_pools": {
+    "TSP": [
+      "BQ",
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "LEHD",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "CVRP": [
+      "BQ",
+      "ELG",
+      "ICAM",
+      "LEHD",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "ATSP": [
+      "GLOP",
+      "ICAM_ATSP",
+      "MATNET",
+      "MATPOENET",
+      "UNICO_MatPOENet"
+    ],
+    "OVRP": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ]
+  },
+  "scenario_solver_aliases": {
+    "reld_mt": "RELD_MOEL"
+  },
+  "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+  "nss_reference": "R79 historical weights; fresh new4500 TEST inference; existing native LIB predictions",
+  "nss_alignment": {
+    "TSP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "TSPLIB": {
+      "instance_key": "indices",
+      "matching_population": 49,
+      "checked_instance_ids": [
+        0,
+        24,
+        48
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRPLIB": {
+      "instance_key": "indices",
+      "matching_population": 100,
+      "checked_instance_ids": [
+        0,
+        50,
+        99
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    }
+  },
+  "training": false,
+  "inference": false,
+  "checkpoint_reselection": false,
+  "distribution_pages": 18,
+  "main_pdf_pages": 22,
+  "diagnostics": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R108_conditional_density_ratio/A_prior_ce/full_model_statistics/training_and_method_diagnostics.pdf",
+    "pages": 19,
+    "history_status": "complete"
+  },
+  "phase": "complete",
+  "model_spec": {
+    "experiment": "R108",
+    "parent": "original R88B/R77 full18 score-difference selector",
+    "original": {
+      "embedding_dim": 128,
+      "encoder_layer_num": 4,
+      "joint_layer_num": 2,
+      "head_num": 4,
+      "qkv_dim": 32,
+      "ff_hidden_dim": 512,
+      "head_hidden_dim": 256,
+      "solver_feature_hidden": 128,
+      "stats_dim": 12,
+      "dropout": 0.1,
+      "rezero": false
+    },
+    "role_arm": "B_execution_anchor",
+    "role_spec": {
+      "problem": "TSP",
+      "role_slot": 3,
+      "node_width": 8,
+      "semantics": "customer_anchor_not_depot",
+      "canonical_rule": "lexicographic_min_x_then_y_among_valid_nodes",
+      "exact_coordinate_tie_rule": "mark_all_valid_customers_at_minimum_xy",
+      "execution_rule": "original_physical_node0_first_valid_slot_if_unmarked",
+      "explicit_role_rule": "A_exact_canonical_tie_set_B_legal_one_hot",
+      "non_tsp_rule": "unchanged"
+    },
+    "selection_head": "original_score_mlp_maximin",
+    "prior_spec": {
+      "version": 1,
+      "fitted_on": "frozen R84 new81000 TRAIN only",
+      "condition": [
+        "problem",
+        "exact_true_n"
+      ],
+      "winner": "native FP64 filtered-pool winner.npy",
+      "global_laplace": 1.0,
+      "conditional_shrink": 20.0,
+      "unseen_n": "task_prior",
+      "global_ids": "original model IDs; reld_mt aliases RELD_MOEL",
+      "semantics": "fixed aggregate learned classifier buffers, not per-query context"
+    },
+    "fresh_seed": 2,
+    "parameter_counts": {
+      "original": 1842953,
+      "A_prior_ce": 1842953,
+      "B_density_ratio": 1842953
+    },
+    "new_trainable_parameters": 0,
+    "same_forward_both_arms": true,
+    "utility": "s=log(pi(problem,exact_true_n))+original_utility_t",
+    "inference": "original utility differences and maximin; final argmax s",
+    "forward_inputs": "original inputs plus fixed classifier buffers; no labels, costs or instance IDs",
+    "arms": {
+      "A_prior_ce": "ordinary legal CE(s)",
+      "B_density_ratio": "canonical half-positive half-product-noise density ratio"
+    },
+    "efficacy": "low-priority precise falsification; no certified efficacy"
+  },
+  "prior_spec": {
+    "version": 1,
+    "fitted_on": "frozen R84 new81000 TRAIN only",
+    "condition": [
+      "problem",
+      "exact_true_n"
+    ],
+    "winner": "native FP64 filtered-pool winner.npy",
+    "global_laplace": 1.0,
+    "conditional_shrink": 20.0,
+    "unseen_n": "task_prior",
+    "global_ids": "original model IDs; reld_mt aliases RELD_MOEL",
+    "semantics": "fixed aggregate learned classifier buffers, not per-query context"
+  },
+  "prior_provenance": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R108_conditional_density_ratio/prepared/priors.json",
+    "sha256": "a763633f8fd7b7177c7a5a1574c6e31dcd6e3ba25cb6940e1372081f45ea23de",
+    "fit_split": "train",
+    "identity_sha256": "690a8623d0f1f3ea85392aa4f5c1360ec29409b8b2e4c8c21784992bb00feb82",
+    "rows_per_problem": 81000,
+    "source_identity": {
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "model_global_solvers": [
+        "BQ",
+        "DIFUSCO",
+        "DIFUSCO500",
+        "ELG",
+        "GLOP",
+        "ICAM",
+        "ICAM_ATSP",
+        "LEHD",
+        "MATNET",
+        "MATPOENET",
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "OMNI",
+        "RELD_CVRP",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder",
+        "T2T",
+        "T2T500",
+        "UNICO_MatPOENet"
+      ],
+      "scenario_global_solver_ids": {
+        "BQ": 0,
+        "DIFUSCO": 1,
+        "DIFUSCO500": 2,
+        "ELG": 3,
+        "GLOP": 4,
+        "ICAM": 5,
+        "ICAM_ATSP": 6,
+        "LEHD": 7,
+        "MATNET": 8,
+        "MATPOENET": 9,
+        "MTPOMO": 10,
+        "MVMOE": 11,
+        "MoSES_CaDA": 12,
+        "MoSES_RF": 13,
+        "OMNI": 14,
+        "RELD_CVRP": 15,
+        "RouteFinder": 18,
+        "T2T": 19,
+        "T2T500": 20,
+        "UNICO_MatPOENet": 21,
+        "reld_mt": 16
+      },
+      "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+      "scenario_solver_aliases": {
+        "reld_mt": "RELD_MOEL"
+      },
+      "scenario_source": {
+        "mtime_ns": 1792257843167549517,
+        "path": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/scenario_manifest.json",
+        "size_bytes": 88537
+      }
+    },
+    "conditioning": [
+      "problem",
+      "exactN"
+    ],
+    "fixed_buffers": true,
+    "feature_cache": false,
+    "current_query_labels_used": false,
+    "specification": {
+      "version": 1,
+      "fitted_on": "frozen R84 new81000 TRAIN only",
+      "condition": [
+        "problem",
+        "exact_true_n"
+      ],
+      "winner": "native FP64 filtered-pool winner.npy",
+      "global_laplace": 1.0,
+      "conditional_shrink": 20.0,
+      "unseen_n": "task_prior",
+      "global_ids": "original model IDs; reld_mt aliases RELD_MOEL",
+      "semantics": "fixed aggregate learned classifier buffers, not per-query context"
+    }
+  },
+  "objective": {
+    "classification": "raw prior-adjusted utility CE",
+    "positive_label": "native TRAIN winner",
+    "negative_term_includes_true_label": true,
+    "learned_prior": "TRAIN only problem and exact true N; global Laplace1 plus conditional shrink20",
+    "forward_passes": 1,
+    "dropout": 0.1,
+    "comparison": false,
+    "risk": false,
+    "rdrop": false,
+    "extra_head": false,
+    "mutable_objective_state": false,
+    "cost_supervision": false,
+    "inference": "argmax(log_prior + residual_utility), via original maximin ordering",
+    "evaluation_ce": "maximin CE diagnostic, not the classification training objective",
+    "probability_boundary": "ratio sigmoid is not champion probability; CE and ratio share ideal Bayes argmax, not gradient scale"
+  },
+  "loss": {
+    "ce_or_density_ratio": 1.0,
+    "comparison": 0.0,
+    "risk": 0.0,
+    "kl": 0.0,
+    "dropout_passes": 1
+  },
+  "conditional_prior_reference": {
+    "csv": "/public/home/shiys/0selection2/code/V4/runs/R108_conditional_density_ratio/A_prior_ce/full_model_statistics/conditional_prior_reference.csv",
+    "reference": "TRAIN winner-frequency prior, not cost-optimal SBS; t=0; no fit or model inference",
+    "gain_direction": "positive is better",
+    "all_by_split": {
+      "VAL": {
+        "split": "VAL",
+        "problem": "ALL",
+        "n": 81000,
+        "reference": "TRAIN winner-frequency conditional prior (t=0); not cost-optimal SBS",
+        "fit_split": "train",
+        "inference_rule": "argmax logpi(problem, exactN); unseenN task prior; global-ID ties",
+        "model": "R108/A_prior_ce",
+        "checkpoint_sha256": "5406920bc923f83b3d33a6c22beeaac5472ff734aca7a9ceb05f8aaafc3ab78e",
+        "priors_sha256": "a763633f8fd7b7177c7a5a1574c6e31dcd6e3ba25cb6940e1372081f45ea23de",
+        "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+        "aggregation": "equal weight across 18 problems; raw costs descriptive only",
+        "gain_direction": "positive is better",
+        "prior_top1_pct": 68.94444444444444,
+        "prior_mean_cost": 11.430470539351507,
+        "prior_actual_regret_pct": 0.5148573582431447,
+        "model_top1_pct": 71.08024691358025,
+        "model_mean_cost": 11.417570292464212,
+        "model_actual_regret_pct": 0.4088976748285937,
+        "model_gain_top1_pp": 2.135802469135801,
+        "model_gain_mean_cost": 0.012900246887293422,
+        "model_gain_actual_regret_pp": 0.10595968341455103
+      },
+      "TEST": {
+        "split": "TEST",
+        "problem": "ALL",
+        "n": 81000,
+        "reference": "TRAIN winner-frequency conditional prior (t=0); not cost-optimal SBS",
+        "fit_split": "train",
+        "inference_rule": "argmax logpi(problem, exactN); unseenN task prior; global-ID ties",
+        "model": "R108/A_prior_ce",
+        "checkpoint_sha256": "5406920bc923f83b3d33a6c22beeaac5472ff734aca7a9ceb05f8aaafc3ab78e",
+        "priors_sha256": "a763633f8fd7b7177c7a5a1574c6e31dcd6e3ba25cb6940e1372081f45ea23de",
+        "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+        "aggregation": "equal weight across 18 problems; raw costs descriptive only",
+        "gain_direction": "positive is better",
+        "prior_top1_pct": 69.16543209876544,
+        "prior_mean_cost": 11.387401181536553,
+        "prior_actual_regret_pct": 0.5094603089620895,
+        "model_top1_pct": 71.33827160493826,
+        "model_mean_cost": 11.374470850691631,
+        "model_actual_regret_pct": 0.40025211606076405,
+        "model_gain_top1_pp": 2.172839506172841,
+        "model_gain_mean_cost": 0.01293033084492132,
+        "model_gain_actual_regret_pp": 0.10920819290132534
+      }
+    }
+  },
+  "training_evaluation_ce_differ": true,
+  "equal_gradient_scale_claim": false,
+  "total_parameter_matched": true,
+  "active_parameter_matched": false,
+  "equal_flops_claim": false,
+  "trainable_parameter_count": 1842953,
+  "initialization": {
+    "seed": 2,
+    "initialization": "scratch_seed2_with_fixed_TRAIN_priors",
+    "historical_checkpoint_loaded": false,
+    "fresh_initialization": true,
+    "state_dict_restored": false,
+    "r84_fresh_trainable_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+    "fresh_trainable_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+    "trainable_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+    "fresh_state_sha256": "aad59760cf70070c675f91e34386a5c5caa072dcd05438e8155cab25f22fcd84",
+    "state_sha256": "aad59760cf70070c675f91e34386a5c5caa072dcd05438e8155cab25f22fcd84",
+    "parameter_count": 1842953,
+    "original_parameter_count": 1842953,
+    "common_parameter_count": 1842953,
+    "common_parameter_names": [
+      "decoder.Wk.weight",
+      "decoder.Wq.weight",
+      "decoder.Wv.weight",
+      "decoder.out.bias",
+      "decoder.out.weight",
+      "instance_encoder.cls_token",
+      "instance_encoder.condition_encoder.cbits_proj.weight",
+      "instance_encoder.condition_encoder.coord_dist_emb.weight",
+      "instance_encoder.condition_encoder.desc_proj.weight",
+      "instance_encoder.condition_encoder.kind_emb.weight",
+      "instance_encoder.condition_encoder.n_proj.bias",
+      "instance_encoder.condition_encoder.n_proj.weight",
+      "instance_encoder.condition_encoder.norm.bias",
+      "instance_encoder.condition_encoder.norm.weight",
+      "instance_encoder.condition_encoder.problem_emb.weight",
+      "instance_encoder.condition_encoder.stats_proj.bias",
+      "instance_encoder.condition_encoder.stats_proj.weight",
+      "instance_encoder.coord_bias_scale",
+      "instance_encoder.coord_proj.bias",
+      "instance_encoder.coord_proj.weight",
+      "instance_encoder.geometry_residual.projection.0.bias",
+      "instance_encoder.geometry_residual.projection.0.weight",
+      "instance_encoder.geometry_residual.projection.2.bias",
+      "instance_encoder.geometry_residual.projection.2.weight",
+      "instance_encoder.layers.0.add_norm_1.norm.bias",
+      "instance_encoder.layers.0.add_norm_1.norm.weight",
+      "instance_encoder.layers.0.add_norm_2.norm.bias",
+      "instance_encoder.layers.0.add_norm_2.norm.weight",
+      "instance_encoder.layers.0.attn.Wk.weight",
+      "instance_encoder.layers.0.attn.Wq.weight",
+      "instance_encoder.layers.0.attn.Wv.weight",
+      "instance_encoder.layers.0.attn.out.bias",
+      "instance_encoder.layers.0.attn.out.weight",
+      "instance_encoder.layers.0.ffn.net.0.bias",
+      "instance_encoder.layers.0.ffn.net.0.weight",
+      "instance_encoder.layers.0.ffn.net.3.bias",
+      "instance_encoder.layers.0.ffn.net.3.weight",
+      "instance_encoder.layers.1.add_norm_1.norm.bias",
+      "instance_encoder.layers.1.add_norm_1.norm.weight",
+      "instance_encoder.layers.1.add_norm_2.norm.bias",
+      "instance_encoder.layers.1.add_norm_2.norm.weight",
+      "instance_encoder.layers.1.attn.Wk.weight",
+      "instance_encoder.layers.1.attn.Wq.weight",
+      "instance_encoder.layers.1.attn.Wv.weight",
+      "instance_encoder.layers.1.attn.out.bias",
+      "instance_encoder.layers.1.attn.out.weight",
+      "instance_encoder.layers.1.ffn.net.0.bias",
+      "instance_encoder.layers.1.ffn.net.0.weight",
+      "instance_encoder.layers.1.ffn.net.3.bias",
+      "instance_encoder.layers.1.ffn.net.3.weight",
+      "instance_encoder.layers.2.add_norm_1.norm.bias",
+      "instance_encoder.layers.2.add_norm_1.norm.weight",
+      "instance_encoder.layers.2.add_norm_2.norm.bias",
+      "instance_encoder.layers.2.add_norm_2.norm.weight",
+      "instance_encoder.layers.2.attn.Wk.weight",
+      "instance_encoder.layers.2.attn.Wq.weight",
+      "instance_encoder.layers.2.attn.Wv.weight",
+      "instance_encoder.layers.2.attn.out.bias",
+      "instance_encoder.layers.2.attn.out.weight",
+      "instance_encoder.layers.2.ffn.net.0.bias",
+      "instance_encoder.layers.2.ffn.net.0.weight",
+      "instance_encoder.layers.2.ffn.net.3.bias",
+      "instance_encoder.layers.2.ffn.net.3.weight",
+      "instance_encoder.layers.3.add_norm_1.norm.bias",
+      "instance_encoder.layers.3.add_norm_1.norm.weight",
+      "instance_encoder.layers.3.add_norm_2.norm.bias",
+      "instance_encoder.layers.3.add_norm_2.norm.weight",
+      "instance_encoder.layers.3.attn.Wk.weight",
+      "instance_encoder.layers.3.attn.Wq.weight",
+      "instance_encoder.layers.3.attn.Wv.weight",
+      "instance_encoder.layers.3.attn.out.bias",
+      "instance_encoder.layers.3.attn.out.weight",
+      "instance_encoder.layers.3.ffn.net.0.bias",
+      "instance_encoder.layers.3.ffn.net.0.weight",
+      "instance_encoder.layers.3.ffn.net.3.bias",
+      "instance_encoder.layers.3.ffn.net.3.weight",
+      "instance_encoder.matrix_bias_scale",
+      "instance_encoder.matrix_proj.bias",
+      "instance_encoder.matrix_proj.weight",
+      "instance_encoder.stats_token_proj.bias",
+      "instance_encoder.stats_token_proj.weight",
+      "joint_layers.0.node_update.attn.Wk.weight",
+      "joint_layers.0.node_update.attn.Wq.weight",
+      "joint_layers.0.node_update.attn.Wv.weight",
+      "joint_layers.0.node_update.attn.out.bias",
+      "joint_layers.0.node_update.attn.out.weight",
+      "joint_layers.0.node_update.ffn.net.0.bias",
+      "joint_layers.0.node_update.ffn.net.0.weight",
+      "joint_layers.0.node_update.ffn.net.3.bias",
+      "joint_layers.0.node_update.ffn.net.3.weight",
+      "joint_layers.0.node_update.norm1.bias",
+      "joint_layers.0.node_update.norm1.weight",
+      "joint_layers.0.node_update.norm2.bias",
+      "joint_layers.0.node_update.norm2.weight",
+      "joint_layers.0.solver_update.attn.Wk.weight",
+      "joint_layers.0.solver_update.attn.Wq.weight",
+      "joint_layers.0.solver_update.attn.Wv.weight",
+      "joint_layers.0.solver_update.attn.out.bias",
+      "joint_layers.0.solver_update.attn.out.weight",
+      "joint_layers.0.solver_update.ffn.net.0.bias",
+      "joint_layers.0.solver_update.ffn.net.0.weight",
+      "joint_layers.0.solver_update.ffn.net.3.bias",
+      "joint_layers.0.solver_update.ffn.net.3.weight",
+      "joint_layers.0.solver_update.norm1.bias",
+      "joint_layers.0.solver_update.norm1.weight",
+      "joint_layers.0.solver_update.norm2.bias",
+      "joint_layers.0.solver_update.norm2.weight",
+      "joint_layers.1.node_update.attn.Wk.weight",
+      "joint_layers.1.node_update.attn.Wq.weight",
+      "joint_layers.1.node_update.attn.Wv.weight",
+      "joint_layers.1.node_update.attn.out.bias",
+      "joint_layers.1.node_update.attn.out.weight",
+      "joint_layers.1.node_update.ffn.net.0.bias",
+      "joint_layers.1.node_update.ffn.net.0.weight",
+      "joint_layers.1.node_update.ffn.net.3.bias",
+      "joint_layers.1.node_update.ffn.net.3.weight",
+      "joint_layers.1.node_update.norm1.bias",
+      "joint_layers.1.node_update.norm1.weight",
+      "joint_layers.1.node_update.norm2.bias",
+      "joint_layers.1.node_update.norm2.weight",
+      "joint_layers.1.solver_update.attn.Wk.weight",
+      "joint_layers.1.solver_update.attn.Wq.weight",
+      "joint_layers.1.solver_update.attn.Wv.weight",
+      "joint_layers.1.solver_update.attn.out.bias",
+      "joint_layers.1.solver_update.attn.out.weight",
+      "joint_layers.1.solver_update.ffn.net.0.bias",
+      "joint_layers.1.solver_update.ffn.net.0.weight",
+      "joint_layers.1.solver_update.ffn.net.3.bias",
+      "joint_layers.1.solver_update.ffn.net.3.weight",
+      "joint_layers.1.solver_update.norm1.bias",
+      "joint_layers.1.solver_update.norm1.weight",
+      "joint_layers.1.solver_update.norm2.bias",
+      "joint_layers.1.solver_update.norm2.weight",
+      "pool.0.bias",
+      "pool.0.weight",
+      "pool.2.bias",
+      "pool.2.weight",
+      "score_head.0.bias",
+      "score_head.0.weight",
+      "score_head.3.bias",
+      "score_head.3.weight",
+      "solver_encoder.feature_mlp.0.bias",
+      "solver_encoder.feature_mlp.0.weight",
+      "solver_encoder.feature_mlp.3.bias",
+      "solver_encoder.feature_mlp.3.weight",
+      "solver_encoder.norm.bias",
+      "solver_encoder.norm.weight",
+      "solver_encoder.solver_emb.weight"
+    ],
+    "common_parameter_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+    "new_parameter_names": [],
+    "removed_parameter_names": [],
+    "independently_initialized_parameter_names": [],
+    "independently_initialized_parameter_count": 0,
+    "new_trainable_parameter_count": 0,
+    "prior_identity_sha256": "690a8623d0f1f3ea85392aa4f5c1360ec29409b8b2e4c8c21784992bb00feb82",
+    "prior_buffers_sha256": "3eae446454a2e2b7cb7a1225935b307da2cb23415b2c432a11e408eb2b07f965",
+    "prior_fit_split": "train",
+    "fixed_aggregate_prior_not_query_context": true,
+    "fresh_source": "validated_in_memory_R84_scratch_seed2",
+    "geometry_fitted_on": "frozen R84 new81000 TRAIN only",
+    "trainable_parameter_count": 1842953,
+    "identical_complete_fresh_parameters": true,
+    "common_fresh_model_state_sha256": "aad59760cf70070c675f91e34386a5c5caa072dcd05438e8155cab25f22fcd84",
+    "cross_arm_complete_state_verified": true,
+    "priors_sha256": "a763633f8fd7b7177c7a5a1574c6e31dcd6e3ba25cb6940e1372081f45ea23de",
+    "active_functional_freedom_matched": false,
+    "forward_function_matched": true,
+    "translation_boundary": "CE has a common-shift gauge; ratio loss identifies its absolute origin"
+  },
+  "target_identity": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/comparison_artifacts/target_list.json",
+    "identity": {
+      "baseline_checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "baseline_state_hash": "ad0a6d9c68c6f117b477807f6f8be52662032a8baea348dda6144c46091303e2",
+      "baseline_val_prediction_sha256": "8a1aea9caf608d12fbc83d89704a50eb37d461665c7609ad3e25778cdab932a7",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "threshold_chosen_pct": 0.1,
+      "rule": "A locked VAL: chosen percentage <= 0.1 and native winner count > 0"
+    },
+    "categories": {
+      "TSP/DIFUSCO": "zero",
+      "TSP/DIFUSCO500": "zero",
+      "TSP/LEHD": "zero",
+      "TSP/OMNI": "zero",
+      "CVRP/RouteFinder": "zero",
+      "ATSP/GLOP": "zero",
+      "ATSP/MATPOENET": "zero",
+      "OVRP/MTPOMO": "zero",
+      "OVRP/MVMOE": "zero",
+      "OVRP/reld_mt": "near_zero",
+      "VRPL/MTPOMO": "zero",
+      "VRPL/MVMOE": "zero",
+      "VRPTW/MoSES_CaDA": "near_zero",
+      "VRPTW/MoSES_RF": "zero",
+      "VRPTW/RouteFinder": "zero",
+      "OVRPTW/MoSES_CaDA": "zero",
+      "OVRPTW/MoSES_RF": "zero",
+      "OVRPTW/RouteFinder": "zero",
+      "OVRPB/MTPOMO": "zero",
+      "OVRPB/MVMOE": "near_zero",
+      "OVRPL/MTPOMO": "zero",
+      "OVRPL/MVMOE": "zero",
+      "VRPBL/MTPOMO": "zero",
+      "VRPBTW/MTPOMO": "zero",
+      "VRPLTW/MTPOMO": "zero",
+      "VRPLTW/MoSES_CaDA": "zero",
+      "VRPLTW/MoSES_RF": "zero",
+      "VRPLTW/RouteFinder": "zero",
+      "OVRPBL/MTPOMO": "near_zero",
+      "OVRPBL/MVMOE": "near_zero",
+      "OVRPBTW/MTPOMO": "zero",
+      "OVRPLTW/MVMOE": "near_zero",
+      "OVRPLTW/MoSES_CaDA": "near_zero",
+      "OVRPLTW/MoSES_RF": "zero",
+      "OVRPLTW/RouteFinder": "zero",
+      "VRPBLTW/MTPOMO": "zero"
+    },
+    "target_count": 36,
+    "sha256": "406ded5a21d8b73c2a41b87dc2bc3cc14330663ae1aa4f59ca6fbfde83770fe4"
+  },
+  "historical_reference": {
+    "R89A": {
+      "model": "R89A",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry/A_adamw",
+      "checkpoint_sha256": "f7b995ea7d5d6c31c014657e6087fb84b64cdb0611c727f37f95d8d67b41cafe",
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "optimizer": "AdamW",
+      "parameter_matched": false,
+      "equal_flops": false,
+      "identical_full_initialization": false
+    },
+    "R89B": {
+      "model": "R89B",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry/B_muon_hybrid",
+      "checkpoint_sha256": "41fa4ad8b590fa44e8949b114156d714d7ee2f2d31c847658a26654993057260",
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "optimizer": "Muon hybrid",
+      "parameter_matched": false,
+      "equal_flops": false,
+      "identical_full_initialization": false
+    },
+    "R84A": {
+      "model": "R84A",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline",
+      "checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "optimizer": "AdamW",
+      "parameter_matched": false,
+      "equal_flops": false,
+      "identical_full_initialization": false
+    }
+  },
+  "optional_historical": {
+    "R94B": {
+      "required": false,
+      "status": "not_requested"
+    }
+  },
+  "arm_description": "pure cross entropy on s=logpi+t",
+  "inference_timing": {
+    "experiment": "R108",
+    "arm": "A_prior_ce",
+    "complete": true,
+    "completed_utc": "2026-10-23T20:48:13.422006+00:00",
+    "checkpoint_sha256": "5406920bc923f83b3d33a6c22beeaac5472ff734aca7a9ceb05f8aaafc3ab78e",
+    "state_hash": "df42911db3ea46c616f71e0657f2bad8135dd7ae4539b48dd923ed2b3ac146db",
+    "selected_update": 43200,
+    "model_state_sha256": "1a107e86905e6e2c5ff563e2e7ec5d698d6fa331ea1cb0e7411fceda35b36530",
+    "model_factory": "code.V4.r108_experiment.load_checkpoint",
+    "inference_rule": "fixed TRAIN conditional log prior plus learned residual utility; original differences/maximin argmax; no quota or posthoc tuning",
+    "device": "cuda:0",
+    "repetitions": 3,
+    "warmup_batches": 1,
+    "sample_policy": "first128 frozen TEST inputs per problem",
+    "parameter_count": 1842953,
+    "original_parameter_count": 1842953,
+    "scope": "complete_standalone_model_original_GPU_resident_inputs",
+    "all_current_model_included": true,
+    "prior_lookup_and_residual_computation_included": true,
+    "donor_present": false,
+    "cached_feature_latency_used": false,
+    "end_to_end_measured": false,
+    "excludes": "dataset I/O, CPU-to-GPU transfer, training and solver execution",
+    "input_labels_read": false,
+    "per_problem": [
+      {
+        "problem": "TSP",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.03201187402009964,
+            0.0318508290220052,
+            0.031795824063010514
+          ],
+          "mean_seconds_per_instance": 0.00024911074766957125
+        }
+      },
+      {
+        "problem": "CVRP",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.03851950098760426,
+            0.038505746982991695,
+            0.03836553497239947
+          ],
+          "mean_seconds_per_instance": 0.00030049683058071725
+        }
+      },
+      {
+        "problem": "ATSP",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.00880076689645648,
+            0.008802030002698302,
+            0.0087809800170362
+          ],
+          "mean_seconds_per_instance": 6.870775238591402e-05
+        }
+      },
+      {
+        "problem": "OVRP",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.008708767010830343,
+            0.0087444840464741,
+            0.008714049006812274
+          ],
+          "mean_seconds_per_instance": 6.814401058363728e-05
+        }
+      },
+      {
+        "problem": "VRPB",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.00875158200506121,
+            0.008764734957367182,
+            0.008766300976276398
+          ],
+          "mean_seconds_per_instance": 6.844431754871039e-05
+        }
+      },
+      {
+        "problem": "VRPL",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.008742174017243087,
+            0.008727755979634821,
+            0.008743883925490081
+          ],
+          "mean_seconds_per_instance": 6.826514042283331e-05
+        }
+      },
+      {
+        "problem": "VRPTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.008694791002199054,
+            0.008736060000956059,
+            0.008715173928067088
+          ],
+          "mean_seconds_per_instance": 6.808860659172448e-05
+        }
+      },
+      {
+        "problem": "OVRPTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.00871044595260173,
+            0.00874105398543179,
+            0.00876316602807492
+          ],
+          "mean_seconds_per_instance": 6.826735928674073e-05
+        }
+      },
+      {
+        "problem": "OVRPB",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.00875996402464807,
+            0.008754367008805275,
+            0.008773774956353009
+          ],
+          "mean_seconds_per_instance": 6.845860934845405e-05
+        }
+      },
+      {
+        "problem": "OVRPL",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.008700757985934615,
+            0.008710173075087368,
+            0.008753168978728354
+          ],
+          "mean_seconds_per_instance": 6.813567718684983e-05
+        }
+      },
+      {
+        "problem": "VRPBL",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.008736175950616598,
+            0.008786574006080627,
+            0.008738111006096005
+          ],
+          "mean_seconds_per_instance": 6.838765875727404e-05
+        }
+      },
+      {
+        "problem": "VRPBTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.008721366990357637,
+            0.00874944997485727,
+            0.008714558905921876
+          ],
+          "mean_seconds_per_instance": 6.819108299775205e-05
+        }
+      },
+      {
+        "problem": "VRPLTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.008729845052585006,
+            0.008705471060238779,
+            0.008736968971788883
+          ],
+          "mean_seconds_per_instance": 6.815699240784549e-05
+        }
+      },
+      {
+        "problem": "OVRPBL",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.008713669958524406,
+            0.008704755920916796,
+            0.008699237019754946
+          ],
+          "mean_seconds_per_instance": 6.80147471333233e-05
+        }
+      },
+      {
+        "problem": "OVRPBTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.008735260926187038,
+            0.008720857906155288,
+            0.00871916301548481
+          ],
+          "mean_seconds_per_instance": 6.81647964787165e-05
+        }
+      },
+      {
+        "problem": "OVRPLTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.008725552004761994,
+            0.008699323982000351,
+            0.008726777043193579
+          ],
+          "mean_seconds_per_instance": 6.810326309884356e-05
+        }
+      },
+      {
+        "problem": "VRPBLTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.008736775955185294,
+            0.008752070018090308,
+            0.008745774975977838
+          ],
+          "mean_seconds_per_instance": 6.831932538868084e-05
+        }
+      },
+      {
+        "problem": "OVRPBLTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.008739657001569867,
+            0.008727920008823276,
+            0.008714594994671643
+          ],
+          "mean_seconds_per_instance": 6.818273959652288e-05
+        }
+      }
+    ],
+    "model_reselection": false,
+    "routing_calibration": false
+  },
+  "evidence_boundary": "R108 uses the original scratch R84/R88B full18 selector with 1,842,953 trainables. Both arms share the same complete fresh tensors, fixed TRAIN-only (problem, exactN) prior buffers, forward computation and original maximin inference on s=logpi+t. Active gradient freedom is not identical: CE common-shift gauge cancels the shared last-bias data gradient, whereas the ratio anchors the utility origin. t is the original learned utility. A trains pure CE(s); B trains the canonical product-noise binary ratio: half positive softplus(-t_y) plus half pi-weighted softplus(t). Its normalization differs from CE; no equal gradient-scale claim. The ratio sigmoid is not a champion probability. Training classification losses and evaluation maximin CE are different diagnostics and are not compared as equal losses. Single forward, dropout0.1; comparison/risk/KL/RDrop weights and RDrop ramp are zero. 57,600 updates, logical batch1024, seed2, AdamW1e-4 to1e-6. Prior tables are small frozen aggregate TRAIN-fit classifier parameters, not per-instance features or query labels. Priors alone do not demonstrate instance learning: the saved VAL/TEST t=0 reference is a TRAIN winner-frequency conditional prior, not a cost-optimal SBS. Model gains versus that reference are reported separately from gains versus SBS. No new feature cache, donor, additional path module, teacher, context labels, new targets, calibration, quota or auxiliary loss. R89A AdamW, R89B Muon and R84A are saved historical references, not rerun or newly parameter/FLOP-matched controls; R94B is optional, never a prerequisite. Fixed36 rescues, losses, false picks and aligned net costs/regret are separate from choice frequency. Native/FP64 ind and legal pools; TRAIN-fitted SBS; ALL task-equal. TEST is development-exposed; one whole-model full18 VAL checkpoint for full TRAIN/VAL/TEST/LIB; no TEST/LIB reselection. Actual standalone GPU-resident-input timing includes complete model prior lookup and residual computation, excludes dataset I/O, CPU transfer and solvers, and is not end-to-end dataset latency. No routing-summary requirement. No online W&B equality/availability is asserted.",
+  "selected_train_capture_proof": {
+    "rule": "exact_selected_checkpoint_model_state_protocol_state_and_successful_update",
+    "checkpoint_sha256": "5406920bc923f83b3d33a6c22beeaac5472ff734aca7a9ceb05f8aaafc3ab78e",
+    "model_state_sha256": "1a107e86905e6e2c5ff563e2e7ec5d698d6fa331ea1cb0e7411fceda35b36530",
+    "state_hash": "df42911db3ea46c616f71e0657f2bad8135dd7ae4539b48dd923ed2b3ac146db",
+    "selected_update": 43200,
+    "archive_capture_checkpoint_sha256": null,
+    "archive_identity_unchanged": true
+  },
+  "selected_val_binding": {
+    "rule": "exact_selected_checkpoint_model_state_protocol_state_and_successful_update",
+    "checkpoint_sha256": "5406920bc923f83b3d33a6c22beeaac5472ff734aca7a9ceb05f8aaafc3ab78e",
+    "model_state_sha256": "1a107e86905e6e2c5ff563e2e7ec5d698d6fa331ea1cb0e7411fceda35b36530",
+    "state_hash": "df42911db3ea46c616f71e0657f2bad8135dd7ae4539b48dd923ed2b3ac146db",
+    "selected_update": 43200,
+    "archive_capture_checkpoint_sha256": null,
+    "archive_identity_unchanged": true
+  }
+}

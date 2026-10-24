@@ -1,0 +1,183 @@
+{
+  "experiment": "R108",
+  "locked": true,
+  "arms": [
+    "A_prior_ce",
+    "B_density_ratio"
+  ],
+  "seed": 2,
+  "task_scope": "full18",
+  "rows_per_problem": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "batch_size": 1024,
+  "logical_global_batch": 1024,
+  "max_updates": 57600,
+  "warmup_updates": 4320,
+  "eval_every": 1440,
+  "train_eval_every": 7200,
+  "large_micro_cap": 512,
+  "other_micro_cap": 1024,
+  "eval_batch_size": 256,
+  "model_role_arm": "B_execution_anchor",
+  "role_feature_slot": 3,
+  "embedding_dim": 128,
+  "encoder_layer_num": 4,
+  "joint_layer_num": 2,
+  "head_num": 4,
+  "prior_spec": {
+    "version": 1,
+    "fitted_on": "frozen R84 new81000 TRAIN only",
+    "condition": [
+      "problem",
+      "exact_true_n"
+    ],
+    "winner": "native FP64 filtered-pool winner.npy",
+    "global_laplace": 1,
+    "conditional_shrink": 20,
+    "unseen_n": "task_prior",
+    "global_ids": "original model IDs; reld_mt aliases RELD_MOEL",
+    "semantics": "fixed aggregate learned classifier buffers, not per-query context"
+  },
+  "priors_path": "/public/home/shiys/0selection2/code/V4/runs/R108_conditional_density_ratio/prepared/priors.json",
+  "priors_sha256": "a763633f8fd7b7177c7a5a1574c6e31dcd6e3ba25cb6940e1372081f45ea23de",
+  "trainable_parameters": {
+    "original": 1842953,
+    "A_prior_ce": 1842953,
+    "B_density_ratio": 1842953
+  },
+  "identical_complete_fresh_parameters": true,
+  "original_fresh_trainable_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+  "current_query_labels_in_forward": false,
+  "historical_TRAIN_label_context_used": false,
+  "external_pretraining": false,
+  "new_targets": false,
+  "auxiliary_loss": false,
+  "optimizer": "AdamW",
+  "peak_lr": 0.0001,
+  "end_lr": 0.000001,
+  "weight_decay": 0.0001,
+  "grad_clip": 1,
+  "dropout": 0.1,
+  "loss": {
+    "ce_or_density_ratio": 1,
+    "comparison": 0,
+    "risk": 0,
+    "kl": 0,
+    "dropout_passes": 1
+  },
+  "checkpoint_rule": "strict minimum whole18 VAL macro_vs_sbs_pct; first exact tie; common full-TRAIN SBS",
+  "inference_rule": "fixed TRAIN conditional log prior plus learned residual utility; original differences/maximin argmax; no quota or posthoc tuning",
+  "R58_operations": false,
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "prepared_root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+  "primary_cache": "/tmp/shiys_R84_new90k_cache",
+  "model_spec": {
+    "experiment": "R108",
+    "parent": "original R88B/R77 full18 score-difference selector",
+    "original": {
+      "embedding_dim": 128,
+      "encoder_layer_num": 4,
+      "joint_layer_num": 2,
+      "head_num": 4,
+      "qkv_dim": 32,
+      "ff_hidden_dim": 512,
+      "head_hidden_dim": 256,
+      "solver_feature_hidden": 128,
+      "stats_dim": 12,
+      "dropout": 0.1,
+      "rezero": false
+    },
+    "role_arm": "B_execution_anchor",
+    "role_spec": {
+      "problem": "TSP",
+      "role_slot": 3,
+      "node_width": 8,
+      "semantics": "customer_anchor_not_depot",
+      "canonical_rule": "lexicographic_min_x_then_y_among_valid_nodes",
+      "exact_coordinate_tie_rule": "mark_all_valid_customers_at_minimum_xy",
+      "execution_rule": "original_physical_node0_first_valid_slot_if_unmarked",
+      "explicit_role_rule": "A_exact_canonical_tie_set_B_legal_one_hot",
+      "non_tsp_rule": "unchanged"
+    },
+    "selection_head": "original_score_mlp_maximin",
+    "prior_spec": {
+      "version": 1,
+      "fitted_on": "frozen R84 new81000 TRAIN only",
+      "condition": [
+        "problem",
+        "exact_true_n"
+      ],
+      "winner": "native FP64 filtered-pool winner.npy",
+      "global_laplace": 1,
+      "conditional_shrink": 20,
+      "unseen_n": "task_prior",
+      "global_ids": "original model IDs; reld_mt aliases RELD_MOEL",
+      "semantics": "fixed aggregate learned classifier buffers, not per-query context"
+    },
+    "fresh_seed": 2,
+    "parameter_counts": {
+      "original": 1842953,
+      "A_prior_ce": 1842953,
+      "B_density_ratio": 1842953
+    },
+    "new_trainable_parameters": 0,
+    "same_forward_both_arms": true,
+    "utility": "s=log(pi(problem,exact_true_n))+original_utility_t",
+    "inference": "original utility differences and maximin; final argmax s",
+    "forward_inputs": "original inputs plus fixed classifier buffers; no labels, costs or instance IDs",
+    "arms": {
+      "A_prior_ce": "ordinary legal CE(s)",
+      "B_density_ratio": "canonical half-positive half-product-noise density ratio"
+    },
+    "efficacy": "low-priority precise falsification; no certified efficacy"
+  },
+  "objective_by_arm": {
+    "A_prior_ce": {
+      "classification": "raw prior-adjusted utility CE",
+      "positive_label": "native TRAIN winner",
+      "negative_term_includes_true_label": true,
+      "learned_prior": "TRAIN only problem and exact true N; global Laplace1 plus conditional shrink20",
+      "forward_passes": 1,
+      "dropout": 0.1,
+      "comparison": false,
+      "risk": false,
+      "rdrop": false,
+      "extra_head": false,
+      "mutable_objective_state": false,
+      "cost_supervision": false,
+      "inference": "argmax(log_prior + residual_utility), via original maximin ordering",
+      "evaluation_ce": "maximin CE diagnostic, not the classification training objective",
+      "probability_boundary": "ratio sigmoid is not champion probability; CE and ratio share ideal Bayes argmax, not gradient scale"
+    },
+    "B_density_ratio": {
+      "classification": "half positive softplus plus half prior-weighted product-noise softplus",
+      "positive_label": "native TRAIN winner",
+      "negative_term_includes_true_label": true,
+      "learned_prior": "TRAIN only problem and exact true N; global Laplace1 plus conditional shrink20",
+      "forward_passes": 1,
+      "dropout": 0.1,
+      "comparison": false,
+      "risk": false,
+      "rdrop": false,
+      "extra_head": false,
+      "mutable_objective_state": false,
+      "cost_supervision": false,
+      "inference": "argmax(log_prior + residual_utility), via original maximin ordering",
+      "evaluation_ce": "maximin CE diagnostic, not the classification training objective",
+      "probability_boundary": "ratio sigmoid is not champion probability; CE and ratio share ideal Bayes argmax, not gradient scale"
+    }
+  },
+  "rdrop_weight": 0,
+  "trainable_parameter_matched": true,
+  "active_parameter_matched": false,
+  "same_forward_both_arms": true,
+  "memory_witness": "preparation/kernel_witness/A_single512_1024/complete.json",
+  "prior_only_reference": true,
+  "test_development_exposed": true,
+  "new_solver_runs": false,
+  "research_goal_complete": false,
+  "research_input": "docs/research/deep_direction_review_v2_20261023/REPORT.pdf"
+}
