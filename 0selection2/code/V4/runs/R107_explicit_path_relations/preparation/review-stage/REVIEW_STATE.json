@@ -1,0 +1,54 @@
+{
+  "experiment": "R107",
+  "round": 1,
+  "status": "focused_round_complete",
+  "review_type": "engineering_prelaunch_not_efficacy",
+  "astra_invoked": false,
+  "secondary_model_invoked": false,
+  "blocking_findings": [],
+  "warnings": [
+    {
+      "id": "R107-W01",
+      "priority": "P3",
+      "blocking": false,
+      "reference": "code/V4/r107_model.py:202",
+      "summary": "depot_walk_billed_travel denotes physical local-walk arithmetic, not certified native billed length or feasibility"
+    }
+  ],
+  "judgment": "provisionally_engineering_ready_pending_main_finalization",
+  "engineering_readiness_score": 8,
+  "score_scale": 10,
+  "formal_ready_set_by_reviewer": false,
+  "main_owned_pending": [
+    "finish final 256/1024/eval128 admin synchronization and source freeze",
+    "finish reported reporting mock plotting-shape repair and existing final tests"
+  ],
+  "common_caps": {"large": 256, "other": 1024, "evaluation": 128},
+  "logical_batch": 1024,
+  "reviewer_cpu_tests": {"passed": 43, "failed": 0, "snapshot": "before final cap/admin edits"},
+  "main_reported_later_cpu_tests": {"model_passed": 8, "runner_passed": 4},
+  "reviewer_spot_checks": {"exact_directed_paths": 100, "padding_arm_problem_cases": 6, "passed": true},
+  "main_gpu_witness": {
+    "path": "preparation/kernel_witness/B_larger256_1024/complete.json",
+    "reviewer_read_only": true,
+    "complete": true,
+    "exit_status": 0,
+    "optimizer_steps": 0,
+    "maximum_allocated_mib": 18856.4560546875,
+    "maximum_reserved_mib": 21618.0,
+    "scope": "B four largest-TRAIN shapes, two-dropout synthetic-gradient backward; not full-objective or LIB coverage"
+  },
+  "observed_source_sha256_not_a_frozen_test_receipt": {
+    "r107_model.py": "ecb95f0d41e8a5f1e6246bfcccf306a019a1c33bf093d9d8cc4f7ad7178e7b76",
+    "r107_experiment.py": "512745f260939c74e317fb45f15a587c58dfb3cf8d1d18e26f34c09d9c99d0c8",
+    "r107_launch.py": "52c2a44aa98ee873f368e941924ff06778964729812adb9dd3e67d96ab243ce4",
+    "r107_reporting.py": "cafb43d078cfb5ca6ba4cba1820604283354c992c10458038747882aa02be467"
+  },
+  "train_bridge": "five-task descriptive ridge negative preserved; learned composition untested by that proxy; no search recommendation",
+  "efficacy_certified": false,
+  "source_edits_by_reviewer": false,
+  "training_started_by_reviewer": false,
+  "gpu_commands_by_reviewer": false,
+  "git_commands_by_reviewer": false,
+  "next_round": "none unless an actual critical defect is found"
+}

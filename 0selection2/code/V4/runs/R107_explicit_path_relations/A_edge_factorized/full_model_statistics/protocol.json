@@ -1,0 +1,1055 @@
+{
+  "experiment": "R107",
+  "arm": "A_edge_factorized",
+  "complete": true,
+  "created_utc": "2026-10-24T05:01:39.106482+00:00",
+  "checkpoint_lock": {
+    "experiment": "R107",
+    "arm": "A_edge_factorized",
+    "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R107_explicit_path_relations/A_edge_factorized/best.pt",
+    "checkpoint_sha256": "074788d55df5074e8cf42e8f77a7fc8d19601bbc7c269b6bd2df8279a7151150",
+    "state_hash": "dab298041485e580480e580fd6dc4b8209a02067e44cce1435a7235043c34de4",
+    "epoch": 26,
+    "selected_update": 37440,
+    "rule": "strict minimum whole18 VAL macro_vs_sbs_pct; first exact tie; common full-TRAIN SBS",
+    "selected_without_test": true,
+    "per_problem_assembly": false,
+    "val": {
+      "macro_ce": 0.7034593787458208,
+      "macro_top1": 0.7105679012345679,
+      "macro_top2": 0.9065925925925925,
+      "macro_top3": 0.9629753086419753,
+      "macro_top1_tie_aware": 0.7119753086419753,
+      "macro_mean_cost": 11.41687929812047,
+      "macro_vs_sbs_pct": -0.19211279159212008,
+      "macro_vs_oracle_pct": 0.39553049121082584,
+      "macro_actual_regret_pct": 0.40670036880628513,
+      "macro_vbs_gap_closed_pct": 12.921340224142561,
+      "macro_sbs_cost": 11.427978473494235,
+      "macro_oracle_cost": 11.371691902364589
+    },
+    "inference_rule": "original score MLP utility differences and maximin; no calibration or solver quotas",
+    "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+    "locked_utc": "2026-10-24T04:54:21.653391+00:00"
+  },
+  "model_factory": "code.V4.r107_experiment.load_checkpoint",
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "rows_per_problem": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "candidate_pools": {
+    "TSP": [
+      "BQ",
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "LEHD",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "CVRP": [
+      "BQ",
+      "ELG",
+      "ICAM",
+      "LEHD",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "ATSP": [
+      "GLOP",
+      "ICAM_ATSP",
+      "MATNET",
+      "MATPOENET",
+      "UNICO_MatPOENet"
+    ],
+    "OVRP": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ]
+  },
+  "scenario_solver_aliases": {
+    "reld_mt": "RELD_MOEL"
+  },
+  "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+  "nss_reference": "R79 historical weights; fresh new4500 TEST inference; existing native LIB predictions",
+  "nss_alignment": {
+    "TSP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "TSPLIB": {
+      "instance_key": "indices",
+      "matching_population": 49,
+      "checked_instance_ids": [
+        0,
+        24,
+        48
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRPLIB": {
+      "instance_key": "indices",
+      "matching_population": 100,
+      "checked_instance_ids": [
+        0,
+        50,
+        99
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    }
+  },
+  "training": false,
+  "inference": false,
+  "checkpoint_reselection": false,
+  "distribution_pages": 18,
+  "main_pdf_pages": 22,
+  "diagnostics": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R107_explicit_path_relations/A_edge_factorized/full_model_statistics/training_and_method_diagnostics.pdf",
+    "pages": 19,
+    "history_status": "complete"
+  },
+  "phase": "complete",
+  "model_spec": {
+    "experiment": "R107",
+    "scope": "model_only",
+    "parent": "full18_R88B_R77_score_path",
+    "role_arm": "B_execution_anchor",
+    "role_spec": {
+      "problem": "TSP",
+      "role_slot": 3,
+      "node_width": 8,
+      "semantics": "customer_anchor_not_depot",
+      "canonical_rule": "lexicographic_min_x_then_y_among_valid_nodes",
+      "exact_coordinate_tie_rule": "mark_all_valid_customers_at_minimum_xy",
+      "execution_rule": "original_physical_node0_first_valid_slot_if_unmarked",
+      "explicit_role_rule": "A_exact_canonical_tie_set_B_legal_one_hot",
+      "non_tsp_rule": "unchanged"
+    },
+    "selection_head": "original_score_mlp_maximin",
+    "fresh_seed": 2,
+    "path_init_seed": 107002,
+    "path_spec": {
+      "neighbors": 4,
+      "max_paths_per_source": 16,
+      "relation_dim": 32,
+      "hidden_dim": 64,
+      "after_encoder_layers": [
+        1,
+        3
+      ],
+      "edge_fields": [
+        "source_raw_0",
+        "source_raw_1",
+        "source_raw_2",
+        "source_raw_3",
+        "source_raw_4",
+        "source_raw_5",
+        "source_raw_6",
+        "source_raw_7",
+        "target_raw_0",
+        "target_raw_1",
+        "target_raw_2",
+        "target_raw_3",
+        "target_raw_4",
+        "target_raw_5",
+        "target_raw_6",
+        "target_raw_7",
+        "travel",
+        "reverse_travel",
+        "scaled_travel",
+        "scaled_reverse_travel",
+        "arrival",
+        "service_start",
+        "departure",
+        "signed_target_demand",
+        "window_slack",
+        "C",
+        "O",
+        "B",
+        "L",
+        "TW"
+      ],
+      "composed_fields": [
+        "travel_sum",
+        "scaled_travel_sum",
+        "shortcut_ik",
+        "closure_ki",
+        "triangle_travel",
+        "detour",
+        "reverse_travel_sum",
+        "depot_walk_billed_travel",
+        "route_limit_slack",
+        "arrival_j",
+        "service_start_j",
+        "departure_j",
+        "arrival_k",
+        "service_start_k",
+        "departure_k",
+        "window_slack_j",
+        "window_slack_k",
+        "waiting_sum_jk",
+        "signed_prefix_i",
+        "signed_prefix_j",
+        "signed_prefix_k",
+        "signed_prefix_min",
+        "signed_prefix_max",
+        "signed_prefix_span",
+        "positive_demand_sum",
+        "negative_demand_magnitude_sum",
+        "demand_product_ij",
+        "demand_product_jk",
+        "is_depot_i",
+        "is_depot_j",
+        "is_depot_k",
+        "service_sum"
+      ],
+      "edge_input_dim": 94,
+      "phi_input_dim": 252,
+      "routing": "reserve_one_actual_depot_neighbor_for_each_customer",
+      "neighbor_rule": "directed_top4_drop_only_overflowing_boundary_tie_class",
+      "path_rule": "valid_distinct_i_j_k_no_feasibility_filter_no_depot_reset",
+      "time_rule": "time0_depot_start_wait_then_service_no_depot_zero_deadline",
+      "demand_rule": "stored_signed_prefix_extrema_not_onboard_load_or_classical_B",
+      "length_rule": "raw_distance_only_open_omits_final_depot_return",
+      "injection": "masked_path_mean_Linear32to128_times_0.1_after_layers1and3",
+      "control": "phi(edge,edge,zero_composition,previous_edge)_then_average",
+      "connected": "phi(edge_ij,edge_jk,composed_resources,previous_path)",
+      "initial_relation": "mean_projected_endpoints_A_or_three_connected_nodes_B",
+      "inactive_control_composed_weights": 4096,
+      "comparison": "equal_complete_tensors_not_equal_active_freedom_or_FLOPs"
+    },
+    "original": {
+      "embedding_dim": 128,
+      "encoder_layer_num": 4,
+      "joint_layer_num": 2,
+      "head_num": 4,
+      "qkv_dim": 32,
+      "ff_hidden_dim": 512,
+      "head_hidden_dim": 256,
+      "solver_feature_hidden": 128,
+      "stats_dim": 12,
+      "dropout": 0.1,
+      "rezero": false
+    },
+    "parameter_counts": {
+      "original": 1842953,
+      "A_edge_factorized": 1892233,
+      "B_connected_paths": 1892233
+    },
+    "new_parameter_count": 49280,
+    "label_or_route_inputs": false,
+    "arms": {
+      "A_edge_factorized": "independent_edge_recurrence_additive_fragment_content",
+      "B_connected_paths": "connected_path_recurrence_with_explicit_composed_resources"
+    },
+    "equal_total_parameters_not_equal_active_freedom": true,
+    "equal_flops_claim": false
+  },
+  "path_spec": {
+    "neighbors": 4,
+    "max_paths_per_source": 16,
+    "relation_dim": 32,
+    "hidden_dim": 64,
+    "after_encoder_layers": [
+      1,
+      3
+    ],
+    "edge_fields": [
+      "source_raw_0",
+      "source_raw_1",
+      "source_raw_2",
+      "source_raw_3",
+      "source_raw_4",
+      "source_raw_5",
+      "source_raw_6",
+      "source_raw_7",
+      "target_raw_0",
+      "target_raw_1",
+      "target_raw_2",
+      "target_raw_3",
+      "target_raw_4",
+      "target_raw_5",
+      "target_raw_6",
+      "target_raw_7",
+      "travel",
+      "reverse_travel",
+      "scaled_travel",
+      "scaled_reverse_travel",
+      "arrival",
+      "service_start",
+      "departure",
+      "signed_target_demand",
+      "window_slack",
+      "C",
+      "O",
+      "B",
+      "L",
+      "TW"
+    ],
+    "composed_fields": [
+      "travel_sum",
+      "scaled_travel_sum",
+      "shortcut_ik",
+      "closure_ki",
+      "triangle_travel",
+      "detour",
+      "reverse_travel_sum",
+      "depot_walk_billed_travel",
+      "route_limit_slack",
+      "arrival_j",
+      "service_start_j",
+      "departure_j",
+      "arrival_k",
+      "service_start_k",
+      "departure_k",
+      "window_slack_j",
+      "window_slack_k",
+      "waiting_sum_jk",
+      "signed_prefix_i",
+      "signed_prefix_j",
+      "signed_prefix_k",
+      "signed_prefix_min",
+      "signed_prefix_max",
+      "signed_prefix_span",
+      "positive_demand_sum",
+      "negative_demand_magnitude_sum",
+      "demand_product_ij",
+      "demand_product_jk",
+      "is_depot_i",
+      "is_depot_j",
+      "is_depot_k",
+      "service_sum"
+    ],
+    "edge_input_dim": 94,
+    "phi_input_dim": 252,
+    "routing": "reserve_one_actual_depot_neighbor_for_each_customer",
+    "neighbor_rule": "directed_top4_drop_only_overflowing_boundary_tie_class",
+    "path_rule": "valid_distinct_i_j_k_no_feasibility_filter_no_depot_reset",
+    "time_rule": "time0_depot_start_wait_then_service_no_depot_zero_deadline",
+    "demand_rule": "stored_signed_prefix_extrema_not_onboard_load_or_classical_B",
+    "length_rule": "raw_distance_only_open_omits_final_depot_return",
+    "injection": "masked_path_mean_Linear32to128_times_0.1_after_layers1and3",
+    "control": "phi(edge,edge,zero_composition,previous_edge)_then_average",
+    "connected": "phi(edge_ij,edge_jk,composed_resources,previous_path)",
+    "initial_relation": "mean_projected_endpoints_A_or_three_connected_nodes_B",
+    "inactive_control_composed_weights": 4096,
+    "comparison": "equal_complete_tensors_not_equal_active_freedom_or_FLOPs"
+  },
+  "trainable_parameter_count": 1892233,
+  "initialization": {
+    "common_parameter_names": [
+      "decoder.Wk.weight",
+      "decoder.Wq.weight",
+      "decoder.Wv.weight",
+      "decoder.out.bias",
+      "decoder.out.weight",
+      "instance_encoder.cls_token",
+      "instance_encoder.condition_encoder.cbits_proj.weight",
+      "instance_encoder.condition_encoder.coord_dist_emb.weight",
+      "instance_encoder.condition_encoder.desc_proj.weight",
+      "instance_encoder.condition_encoder.kind_emb.weight",
+      "instance_encoder.condition_encoder.n_proj.bias",
+      "instance_encoder.condition_encoder.n_proj.weight",
+      "instance_encoder.condition_encoder.norm.bias",
+      "instance_encoder.condition_encoder.norm.weight",
+      "instance_encoder.condition_encoder.problem_emb.weight",
+      "instance_encoder.condition_encoder.stats_proj.bias",
+      "instance_encoder.condition_encoder.stats_proj.weight",
+      "instance_encoder.coord_bias_scale",
+      "instance_encoder.coord_proj.bias",
+      "instance_encoder.coord_proj.weight",
+      "instance_encoder.geometry_residual.projection.0.bias",
+      "instance_encoder.geometry_residual.projection.0.weight",
+      "instance_encoder.geometry_residual.projection.2.bias",
+      "instance_encoder.geometry_residual.projection.2.weight",
+      "instance_encoder.layers.0.add_norm_1.norm.bias",
+      "instance_encoder.layers.0.add_norm_1.norm.weight",
+      "instance_encoder.layers.0.add_norm_2.norm.bias",
+      "instance_encoder.layers.0.add_norm_2.norm.weight",
+      "instance_encoder.layers.0.attn.Wk.weight",
+      "instance_encoder.layers.0.attn.Wq.weight",
+      "instance_encoder.layers.0.attn.Wv.weight",
+      "instance_encoder.layers.0.attn.out.bias",
+      "instance_encoder.layers.0.attn.out.weight",
+      "instance_encoder.layers.0.ffn.net.0.bias",
+      "instance_encoder.layers.0.ffn.net.0.weight",
+      "instance_encoder.layers.0.ffn.net.3.bias",
+      "instance_encoder.layers.0.ffn.net.3.weight",
+      "instance_encoder.layers.1.add_norm_1.norm.bias",
+      "instance_encoder.layers.1.add_norm_1.norm.weight",
+      "instance_encoder.layers.1.add_norm_2.norm.bias",
+      "instance_encoder.layers.1.add_norm_2.norm.weight",
+      "instance_encoder.layers.1.attn.Wk.weight",
+      "instance_encoder.layers.1.attn.Wq.weight",
+      "instance_encoder.layers.1.attn.Wv.weight",
+      "instance_encoder.layers.1.attn.out.bias",
+      "instance_encoder.layers.1.attn.out.weight",
+      "instance_encoder.layers.1.ffn.net.0.bias",
+      "instance_encoder.layers.1.ffn.net.0.weight",
+      "instance_encoder.layers.1.ffn.net.3.bias",
+      "instance_encoder.layers.1.ffn.net.3.weight",
+      "instance_encoder.layers.2.add_norm_1.norm.bias",
+      "instance_encoder.layers.2.add_norm_1.norm.weight",
+      "instance_encoder.layers.2.add_norm_2.norm.bias",
+      "instance_encoder.layers.2.add_norm_2.norm.weight",
+      "instance_encoder.layers.2.attn.Wk.weight",
+      "instance_encoder.layers.2.attn.Wq.weight",
+      "instance_encoder.layers.2.attn.Wv.weight",
+      "instance_encoder.layers.2.attn.out.bias",
+      "instance_encoder.layers.2.attn.out.weight",
+      "instance_encoder.layers.2.ffn.net.0.bias",
+      "instance_encoder.layers.2.ffn.net.0.weight",
+      "instance_encoder.layers.2.ffn.net.3.bias",
+      "instance_encoder.layers.2.ffn.net.3.weight",
+      "instance_encoder.layers.3.add_norm_1.norm.bias",
+      "instance_encoder.layers.3.add_norm_1.norm.weight",
+      "instance_encoder.layers.3.add_norm_2.norm.bias",
+      "instance_encoder.layers.3.add_norm_2.norm.weight",
+      "instance_encoder.layers.3.attn.Wk.weight",
+      "instance_encoder.layers.3.attn.Wq.weight",
+      "instance_encoder.layers.3.attn.Wv.weight",
+      "instance_encoder.layers.3.attn.out.bias",
+      "instance_encoder.layers.3.attn.out.weight",
+      "instance_encoder.layers.3.ffn.net.0.bias",
+      "instance_encoder.layers.3.ffn.net.0.weight",
+      "instance_encoder.layers.3.ffn.net.3.bias",
+      "instance_encoder.layers.3.ffn.net.3.weight",
+      "instance_encoder.matrix_bias_scale",
+      "instance_encoder.matrix_proj.bias",
+      "instance_encoder.matrix_proj.weight",
+      "instance_encoder.stats_token_proj.bias",
+      "instance_encoder.stats_token_proj.weight",
+      "joint_layers.0.node_update.attn.Wk.weight",
+      "joint_layers.0.node_update.attn.Wq.weight",
+      "joint_layers.0.node_update.attn.Wv.weight",
+      "joint_layers.0.node_update.attn.out.bias",
+      "joint_layers.0.node_update.attn.out.weight",
+      "joint_layers.0.node_update.ffn.net.0.bias",
+      "joint_layers.0.node_update.ffn.net.0.weight",
+      "joint_layers.0.node_update.ffn.net.3.bias",
+      "joint_layers.0.node_update.ffn.net.3.weight",
+      "joint_layers.0.node_update.norm1.bias",
+      "joint_layers.0.node_update.norm1.weight",
+      "joint_layers.0.node_update.norm2.bias",
+      "joint_layers.0.node_update.norm2.weight",
+      "joint_layers.0.solver_update.attn.Wk.weight",
+      "joint_layers.0.solver_update.attn.Wq.weight",
+      "joint_layers.0.solver_update.attn.Wv.weight",
+      "joint_layers.0.solver_update.attn.out.bias",
+      "joint_layers.0.solver_update.attn.out.weight",
+      "joint_layers.0.solver_update.ffn.net.0.bias",
+      "joint_layers.0.solver_update.ffn.net.0.weight",
+      "joint_layers.0.solver_update.ffn.net.3.bias",
+      "joint_layers.0.solver_update.ffn.net.3.weight",
+      "joint_layers.0.solver_update.norm1.bias",
+      "joint_layers.0.solver_update.norm1.weight",
+      "joint_layers.0.solver_update.norm2.bias",
+      "joint_layers.0.solver_update.norm2.weight",
+      "joint_layers.1.node_update.attn.Wk.weight",
+      "joint_layers.1.node_update.attn.Wq.weight",
+      "joint_layers.1.node_update.attn.Wv.weight",
+      "joint_layers.1.node_update.attn.out.bias",
+      "joint_layers.1.node_update.attn.out.weight",
+      "joint_layers.1.node_update.ffn.net.0.bias",
+      "joint_layers.1.node_update.ffn.net.0.weight",
+      "joint_layers.1.node_update.ffn.net.3.bias",
+      "joint_layers.1.node_update.ffn.net.3.weight",
+      "joint_layers.1.node_update.norm1.bias",
+      "joint_layers.1.node_update.norm1.weight",
+      "joint_layers.1.node_update.norm2.bias",
+      "joint_layers.1.node_update.norm2.weight",
+      "joint_layers.1.solver_update.attn.Wk.weight",
+      "joint_layers.1.solver_update.attn.Wq.weight",
+      "joint_layers.1.solver_update.attn.Wv.weight",
+      "joint_layers.1.solver_update.attn.out.bias",
+      "joint_layers.1.solver_update.attn.out.weight",
+      "joint_layers.1.solver_update.ffn.net.0.bias",
+      "joint_layers.1.solver_update.ffn.net.0.weight",
+      "joint_layers.1.solver_update.ffn.net.3.bias",
+      "joint_layers.1.solver_update.ffn.net.3.weight",
+      "joint_layers.1.solver_update.norm1.bias",
+      "joint_layers.1.solver_update.norm1.weight",
+      "joint_layers.1.solver_update.norm2.bias",
+      "joint_layers.1.solver_update.norm2.weight",
+      "pool.0.bias",
+      "pool.0.weight",
+      "pool.2.bias",
+      "pool.2.weight",
+      "score_head.0.bias",
+      "score_head.0.weight",
+      "score_head.3.bias",
+      "score_head.3.weight",
+      "solver_encoder.feature_mlp.0.bias",
+      "solver_encoder.feature_mlp.0.weight",
+      "solver_encoder.feature_mlp.3.bias",
+      "solver_encoder.feature_mlp.3.weight",
+      "solver_encoder.norm.bias",
+      "solver_encoder.norm.weight",
+      "solver_encoder.solver_emb.weight"
+    ],
+    "common_parameter_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+    "common_parameter_count": 1842953,
+    "new_parameter_names": [
+      "instance_encoder.path_node_projection.0.weight",
+      "instance_encoder.path_node_projection.1.bias",
+      "instance_encoder.path_node_projection.1.weight",
+      "instance_encoder.path_rounds.0.phi.0.bias",
+      "instance_encoder.path_rounds.0.phi.0.weight",
+      "instance_encoder.path_rounds.0.phi.2.bias",
+      "instance_encoder.path_rounds.0.phi.2.weight",
+      "instance_encoder.path_rounds.0.phi.3.bias",
+      "instance_encoder.path_rounds.0.phi.3.weight",
+      "instance_encoder.path_rounds.0.to_nodes.bias",
+      "instance_encoder.path_rounds.0.to_nodes.weight",
+      "instance_encoder.path_rounds.1.phi.0.bias",
+      "instance_encoder.path_rounds.1.phi.0.weight",
+      "instance_encoder.path_rounds.1.phi.2.bias",
+      "instance_encoder.path_rounds.1.phi.2.weight",
+      "instance_encoder.path_rounds.1.phi.3.bias",
+      "instance_encoder.path_rounds.1.phi.3.weight",
+      "instance_encoder.path_rounds.1.to_nodes.bias",
+      "instance_encoder.path_rounds.1.to_nodes.weight"
+    ],
+    "removed_parameter_names": [],
+    "independently_initialized_parameter_names": [
+      "instance_encoder.path_node_projection.0.weight",
+      "instance_encoder.path_node_projection.1.bias",
+      "instance_encoder.path_node_projection.1.weight",
+      "instance_encoder.path_rounds.0.phi.0.bias",
+      "instance_encoder.path_rounds.0.phi.0.weight",
+      "instance_encoder.path_rounds.0.phi.2.bias",
+      "instance_encoder.path_rounds.0.phi.2.weight",
+      "instance_encoder.path_rounds.0.phi.3.bias",
+      "instance_encoder.path_rounds.0.phi.3.weight",
+      "instance_encoder.path_rounds.0.to_nodes.bias",
+      "instance_encoder.path_rounds.0.to_nodes.weight",
+      "instance_encoder.path_rounds.1.phi.0.bias",
+      "instance_encoder.path_rounds.1.phi.0.weight",
+      "instance_encoder.path_rounds.1.phi.2.bias",
+      "instance_encoder.path_rounds.1.phi.2.weight",
+      "instance_encoder.path_rounds.1.phi.3.bias",
+      "instance_encoder.path_rounds.1.phi.3.weight",
+      "instance_encoder.path_rounds.1.to_nodes.bias",
+      "instance_encoder.path_rounds.1.to_nodes.weight"
+    ],
+    "independently_initialized_parameter_count": 49280,
+    "original_parameter_count": 1842953,
+    "parameter_count": 1892233,
+    "seed": 2,
+    "path_init_seed": 107002,
+    "initialization": "scratch_seed2_common_plus_isolated_path_relations",
+    "fresh_source": "validated_in_memory_R84_scratch_seed2",
+    "r84_fresh_trainable_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+    "historical_checkpoint_loaded": false,
+    "fresh_initialization": true,
+    "state_dict_restored": false,
+    "fresh_trainable_sha256": "24851df5b732e255738e4134ae24fcddad38723dcf9d1dab5d2b9c5fc4e45319",
+    "trainable_sha256": "24851df5b732e255738e4134ae24fcddad38723dcf9d1dab5d2b9c5fc4e45319",
+    "fresh_state_sha256": "f3601dbe3c0be981baca0cc3f1f46ed4f6a3455685d05a8ceb1ca0bec5673e75",
+    "state_sha256": "f3601dbe3c0be981baca0cc3f1f46ed4f6a3455685d05a8ceb1ca0bec5673e75",
+    "intentionally_inactive_composed_weight_count": 4096,
+    "restricted_control": "duplicated_edge_inputs_collapse_first_two_affine_blocks_to_their_sum",
+    "equal_total_parameters_not_equal_active_freedom": true,
+    "equal_flops_claim": false,
+    "parameter_count_arithmetic": "1842953 + 4160 + 2*(16192+2080+64+4224) = 1892233",
+    "geometry_fitted_on": "frozen R84 new81000 TRAIN only",
+    "trainable_parameter_count": 1892233,
+    "identical_complete_fresh_parameters": true,
+    "common_fresh_model_state_sha256": "f3601dbe3c0be981baca0cc3f1f46ed4f6a3455685d05a8ceb1ca0bec5673e75",
+    "cross_arm_complete_state_verified": true,
+    "active_functional_freedom_matched": false,
+    "comparison_boundary": "shared complete tensors, distinct factorized versus joint path computation"
+  },
+  "target_identity": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/comparison_artifacts/target_list.json",
+    "identity": {
+      "baseline_checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "baseline_state_hash": "ad0a6d9c68c6f117b477807f6f8be52662032a8baea348dda6144c46091303e2",
+      "baseline_val_prediction_sha256": "8a1aea9caf608d12fbc83d89704a50eb37d461665c7609ad3e25778cdab932a7",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "threshold_chosen_pct": 0.1,
+      "rule": "A locked VAL: chosen percentage <= 0.1 and native winner count > 0"
+    },
+    "categories": {
+      "TSP/DIFUSCO": "zero",
+      "TSP/DIFUSCO500": "zero",
+      "TSP/LEHD": "zero",
+      "TSP/OMNI": "zero",
+      "CVRP/RouteFinder": "zero",
+      "ATSP/GLOP": "zero",
+      "ATSP/MATPOENET": "zero",
+      "OVRP/MTPOMO": "zero",
+      "OVRP/MVMOE": "zero",
+      "OVRP/reld_mt": "near_zero",
+      "VRPL/MTPOMO": "zero",
+      "VRPL/MVMOE": "zero",
+      "VRPTW/MoSES_CaDA": "near_zero",
+      "VRPTW/MoSES_RF": "zero",
+      "VRPTW/RouteFinder": "zero",
+      "OVRPTW/MoSES_CaDA": "zero",
+      "OVRPTW/MoSES_RF": "zero",
+      "OVRPTW/RouteFinder": "zero",
+      "OVRPB/MTPOMO": "zero",
+      "OVRPB/MVMOE": "near_zero",
+      "OVRPL/MTPOMO": "zero",
+      "OVRPL/MVMOE": "zero",
+      "VRPBL/MTPOMO": "zero",
+      "VRPBTW/MTPOMO": "zero",
+      "VRPLTW/MTPOMO": "zero",
+      "VRPLTW/MoSES_CaDA": "zero",
+      "VRPLTW/MoSES_RF": "zero",
+      "VRPLTW/RouteFinder": "zero",
+      "OVRPBL/MTPOMO": "near_zero",
+      "OVRPBL/MVMOE": "near_zero",
+      "OVRPBTW/MTPOMO": "zero",
+      "OVRPLTW/MVMOE": "near_zero",
+      "OVRPLTW/MoSES_CaDA": "near_zero",
+      "OVRPLTW/MoSES_RF": "zero",
+      "OVRPLTW/RouteFinder": "zero",
+      "VRPBLTW/MTPOMO": "zero"
+    },
+    "target_count": 36,
+    "sha256": "406ded5a21d8b73c2a41b87dc2bc3cc14330663ae1aa4f59ca6fbfde83770fe4"
+  },
+  "historical_reference": {
+    "R89A": {
+      "model": "R89A",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry/A_adamw",
+      "checkpoint_sha256": "f7b995ea7d5d6c31c014657e6087fb84b64cdb0611c727f37f95d8d67b41cafe",
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "optimizer": "AdamW",
+      "parameter_matched": false,
+      "equal_flops": false,
+      "identical_full_initialization": false
+    },
+    "R89B": {
+      "model": "R89B",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R89_optimizer_geometry/B_muon_hybrid",
+      "checkpoint_sha256": "41fa4ad8b590fa44e8949b114156d714d7ee2f2d31c847658a26654993057260",
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "optimizer": "Muon hybrid",
+      "parameter_matched": false,
+      "equal_flops": false,
+      "identical_full_initialization": false
+    },
+    "R84A": {
+      "model": "R84A",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline",
+      "checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "same_data": true,
+      "retrained": false,
+      "newly_matched_control": false,
+      "optimizer": "AdamW",
+      "parameter_matched": false,
+      "equal_flops": false,
+      "identical_full_initialization": false
+    }
+  },
+  "optional_historical": {
+    "R94B": {
+      "required": false,
+      "status": "not_requested"
+    }
+  },
+  "arm_description": "factorized edge/path evidence",
+  "inference_timing": {
+    "experiment": "R107",
+    "arm": "A_edge_factorized",
+    "complete": true,
+    "completed_utc": "2026-10-24T05:00:56.081053+00:00",
+    "checkpoint_sha256": "074788d55df5074e8cf42e8f77a7fc8d19601bbc7c269b6bd2df8279a7151150",
+    "state_hash": "dab298041485e580480e580fd6dc4b8209a02067e44cce1435a7235043c34de4",
+    "selected_update": 37440,
+    "model_state_sha256": "da515e527d24a8d6d4120137d4e500819e6a8c34ef3eaa62fcef9cc9c7a11741",
+    "model_factory": "code.V4.r107_experiment.load_checkpoint",
+    "inference_rule": "original score MLP utility differences and maximin; no calibration or solver quotas",
+    "device": "cuda:0",
+    "repetitions": 3,
+    "warmup_batches": 1,
+    "sample_policy": "first128 frozen TEST inputs per problem",
+    "parameter_count": 1892233,
+    "original_parameter_count": 1842953,
+    "scope": "complete_standalone_model_original_GPU_resident_inputs",
+    "all_current_model_included": true,
+    "explicit_path_computation_included": true,
+    "donor_present": false,
+    "cached_feature_latency_used": false,
+    "end_to_end_measured": false,
+    "excludes": "dataset I/O, CPU-to-GPU transfer, training and solver execution",
+    "input_labels_read": false,
+    "per_problem": [
+      {
+        "problem": "TSP",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.12171793729066849,
+            0.12152898870408535,
+            0.11680805869400501
+          ],
+          "mean_seconds_per_instance": 0.0009376431892936429
+        }
+      },
+      {
+        "problem": "CVRP",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.14408198185265064,
+            0.14431889168918133,
+            0.1445955354720354
+          ],
+          "mean_seconds_per_instance": 0.0011275948151402797
+        }
+      },
+      {
+        "problem": "ATSP",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013899765908718109,
+            0.013838514685630798,
+            0.013802487403154373
+          ],
+          "mean_seconds_per_instance": 0.00010817908332683146
+        }
+      },
+      {
+        "problem": "OVRP",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.016492584720253944,
+            0.016459427773952484,
+            0.016453269869089127
+          ],
+          "mean_seconds_per_instance": 0.00012865958948774883
+        }
+      },
+      {
+        "problem": "VRPB",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.016435887664556503,
+            0.01645526848733425,
+            0.016438685357570648
+          ],
+          "mean_seconds_per_instance": 0.00012846312893088907
+        }
+      },
+      {
+        "problem": "VRPL",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.016438335180282593,
+            0.016446102410554886,
+            0.016445724293589592
+          ],
+          "mean_seconds_per_instance": 0.0001284639632406955
+        }
+      },
+      {
+        "problem": "VRPTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.01645739935338497,
+            0.016433944925665855,
+            0.01646212488412857
+          ],
+          "mean_seconds_per_instance": 0.00012852465927911302
+        }
+      },
+      {
+        "problem": "OVRPTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.016466524451971054,
+            0.0164470411837101,
+            0.01644655130803585
+          ],
+          "mean_seconds_per_instance": 0.00012854197120759636
+        }
+      },
+      {
+        "problem": "OVRPB",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.016432907432317734,
+            0.016488216817378998,
+            0.01643345132470131
+          ],
+          "mean_seconds_per_instance": 0.00012852754055832824
+        }
+      },
+      {
+        "problem": "OVRPL",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.016425520181655884,
+            0.016431335359811783,
+            0.016420479863882065
+          ],
+          "mean_seconds_per_instance": 0.00012832639428476492
+        }
+      },
+      {
+        "problem": "VRPBL",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.01641164720058441,
+            0.01639813743531704,
+            0.016425764188170433
+          ],
+          "mean_seconds_per_instance": 0.0001282175750626872
+        }
+      },
+      {
+        "problem": "VRPBTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.01641758903861046,
+            0.016423815861344337,
+            0.01643933542072773
+          ],
+          "mean_seconds_per_instance": 0.0001283352612517774
+        }
+      },
+      {
+        "problem": "VRPLTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.01642169989645481,
+            0.016433358192443848,
+            0.01640835776925087
+          ],
+          "mean_seconds_per_instance": 0.00012829014546393105
+        }
+      },
+      {
+        "problem": "OVRPBL",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.016421383246779442,
+            0.016525354236364365,
+            0.016433609649538994
+          ],
+          "mean_seconds_per_instance": 0.00012859465399136147
+        }
+      },
+      {
+        "problem": "OVRPBTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.01644074358046055,
+            0.01644139550626278,
+            0.016419202089309692
+          ],
+          "mean_seconds_per_instance": 0.00012838890931258598
+        }
+      },
+      {
+        "problem": "OVRPLTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.016420360654592514,
+            0.016456667333841324,
+            0.01642218790948391
+          ],
+          "mean_seconds_per_instance": 0.0001283833747341608
+        }
+      },
+      {
+        "problem": "VRPBLTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.016412165015935898,
+            0.01642078161239624,
+            0.0164322592318058
+          ],
+          "mean_seconds_per_instance": 0.00012829480692744255
+        }
+      },
+      {
+        "problem": "OVRPBLTW",
+        "instances": 128,
+        "standalone_model": {
+          "batch_seconds": [
+            0.016436010599136353,
+            0.016482094302773476,
+            0.0164288729429245
+          ],
+          "mean_seconds_per_instance": 0.00012850775480425605
+        }
+      }
+    ],
+    "model_reselection": false,
+    "routing_calibration": false
+  },
+  "evidence_boundary": "R107 adds an explicit short-path module to the fresh R84/R88B full18 selector. A_edge_factorized uses factorized evidence; B_connected_paths uses joint connected-path computation. This is not a MoE FFN or learned expert-routing experiment. Same complete fresh tensors and total parameter counts require actual factory/initialization proof; they do not imply equal active functional freedom or equal FLOPs. Actual counts and path specification come from the locked model, never estimates. Factorization is conditional on each round incoming node states, not global selector additivity. A retains trunk interactions; B also receives explicit composed fields, so this is not an isolated topology-only causal comparison. Original R88B physical TSP node0 role, methodID+34, geometry/distance, score MLP/maximin and original CE/comparison/risk/two-forward RDropObjective remain; 57,600 updates, logical batch1024. No donor, teacher, context labels, new targets, calibration, quota or auxiliary loss. R89A AdamW, R89B Muon and R84A are saved historical references, not rerun or newly parameter/FLOP-matched controls; R94B is optional, never a prerequisite. Fixed36 rescues, losses, false picks and aligned net costs/regret are separate from choice frequency. Native/FP64 ind and legal pools; TRAIN-fitted SBS; ALL task-equal. TEST is development-exposed; one whole-model full18 VAL checkpoint for full TRAIN/VAL/TEST/LIB; no TEST/LIB reselection. Actual standalone GPU-resident-input timing includes complete model graph/path construction and computation, excludes dataset I/O, CPU transfer and solvers, and is not end-to-end dataset latency. No routing-summary requirement. No online W&B equality/availability is asserted.",
+  "selected_train_capture_proof": {
+    "rule": "exact_selected_checkpoint_model_state_protocol_state_and_successful_update",
+    "checkpoint_sha256": "074788d55df5074e8cf42e8f77a7fc8d19601bbc7c269b6bd2df8279a7151150",
+    "model_state_sha256": "da515e527d24a8d6d4120137d4e500819e6a8c34ef3eaa62fcef9cc9c7a11741",
+    "state_hash": "dab298041485e580480e580fd6dc4b8209a02067e44cce1435a7235043c34de4",
+    "selected_update": 37440,
+    "archive_capture_checkpoint_sha256": "074788d55df5074e8cf42e8f77a7fc8d19601bbc7c269b6bd2df8279a7151150",
+    "archive_identity_unchanged": true
+  },
+  "selected_val_binding": {
+    "rule": "exact_selected_checkpoint_model_state_protocol_state_and_successful_update",
+    "checkpoint_sha256": "074788d55df5074e8cf42e8f77a7fc8d19601bbc7c269b6bd2df8279a7151150",
+    "model_state_sha256": "da515e527d24a8d6d4120137d4e500819e6a8c34ef3eaa62fcef9cc9c7a11741",
+    "state_hash": "dab298041485e580480e580fd6dc4b8209a02067e44cce1435a7235043c34de4",
+    "selected_update": 37440,
+    "archive_capture_checkpoint_sha256": null,
+    "archive_identity_unchanged": true
+  }
+}
