@@ -1,0 +1,40 @@
+{
+  "state": "failed",
+  "started_utc": "2026-10-25T08:00:50.020325+00:00",
+  "pid": 110596,
+  "host": "admin01",
+  "stages": [
+    {
+      "name": "allocation_pipeline",
+      "argv": [
+        "srun",
+        "--jobid=1475",
+        "--overlap",
+        "--exact",
+        "--gres=none",
+        "--immediate=5",
+        "-N1",
+        "-n1",
+        "--nodelist=gpu05",
+        "--cpus-per-task=8",
+        "--mem=18G",
+        "bash",
+        "-lc",
+        "set -euo pipefail\nsource /public/home/shiys/miniconda3/etc/profile.d/conda.sh\nconda activate easynco\ncd /public/home/shiys/0selection2\nexport PYTHONDONTWRITEBYTECODE=1\nexec /public/home/shiys/miniconda3/envs/easynco/bin/python -B -u -m code.V4.r112_launch entry --root /public/home/shiys/0selection2/code/V4/runs/R112_region_interfaces --action launch"
+      ],
+      "state": "failed",
+      "started_utc": "2026-10-25T08:00:51.708790+00:00",
+      "pid": 111003,
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R112_region_interfaces/preparation/dispatch/allocation_pipeline.log",
+      "exit_status": 1,
+      "finished_utc": "2026-10-25T13:21:11.597239+00:00",
+      "child_exit_status": 1
+    }
+  ],
+  "automatic_retry": false,
+  "implicit_resume": false,
+  "phase": "allocation_pipeline",
+  "exit_status": 1,
+  "error": "allocation_pipeline exit=1; no automatic retry/resume",
+  "finished_utc": "2026-10-25T13:21:11.598130+00:00"
+}
