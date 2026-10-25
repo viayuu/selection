@@ -1,0 +1,70 @@
+{
+  "experiment": "R111",
+  "arm": "A_family_conditional",
+  "dataset": "TSPLIB",
+  "problem": "TSP",
+  "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R111_family_conditional_features/A_family_conditional/best.pt",
+  "checkpoint_sha256": "2c6011ea4cc80373810f1435c07d38d703665dcd1ca262ef99b72b89f6245d9f",
+  "epoch": 29,
+  "selected_update": 41760,
+  "candidate_pool": [
+    "BQ",
+    "DIFUSCO",
+    "DIFUSCO500",
+    "ELG",
+    "LEHD",
+    "OMNI",
+    "T2T",
+    "T2T500"
+  ],
+  "state_hash": "dbe7172d33a6196ff6c77f4658bb667901a3f274b93d55d62213961edd601089",
+  "model_state_sha256": "52aedf4c7a3c9dba21f86458e016438f29fd0003b1be6965ef6c66e7f0c987ea",
+  "pool_ids": [
+    0,
+    1,
+    2,
+    3,
+    7,
+    14,
+    19,
+    20
+  ],
+  "sources": {
+    "dataset.pkl": {
+      "path": "/public/home/shiys/0selection2/data/TSPLIB/dataset.pkl",
+      "sha256": "92f14d50c2474ca33b3432f16478e06f0cc687ad40009a363d5db31b8641e6f8"
+    },
+    "raw_label.pkl": {
+      "path": "/public/home/shiys/0selection2/data/TSPLIB/raw_label.pkl",
+      "sha256": "7d2cfffe64652728777e01607ca104c1b5ba8c156f6bc24bba366cec5a148a44"
+    }
+  },
+  "winner_rule": "native/FP64 raw_label ind (not FP32 cost argmin)",
+  "data_version": "original native LIB / historical NSS comparison",
+  "model_factory": "code.V4.r111_experiment.load_checkpoint",
+  "inference_rule": "single FP32 forward, logits argmax, lowest global solver ID for exact ties",
+  "locked_inference_rule": "eval, argmax normalized family-times-within-family probability; stable global-ID ties",
+  "normalization": "all TRAIN buffers restored from same R111 best.pt, no LIB refit",
+  "batch_size": 2,
+  "device": "cuda:0",
+  "training": false,
+  "solver_execution": false,
+  "embedding_api": false,
+  "checkpoint_reselection": false,
+  "prediction_schema": {
+    "scores": "float32 [n,k], actual maximin decision scores",
+    "logits": "float32 [n,k], model maximin logits (identical to scores)",
+    "pred": "int64 [n], local candidate slot; score ties use lowest global ID",
+    "costs": "float64 [n,k], unchanged original native costs",
+    "winner": "int64 [n], original native raw_label ind",
+    "winner_fp32_argmin": "int64 [n], historical NSS compatibility labels",
+    "pool": "unicode [k], original candidate names in column order",
+    "pool_ids": "int64 [k], stable global solver IDs",
+    "nodes": "int64 [n], input graph sizes",
+    "indices": "int64 [n], original zero-based instance order",
+    "checkpoint_sha256": "unicode scalar",
+    "checkpoint_epoch": "int64 scalar, one-based locked epoch",
+    "checkpoint_update": "int64 scalar, locked successful update"
+  },
+  "created_utc": "2026-10-25T06:27:17.892644+00:00"
+}
