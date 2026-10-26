@@ -1,0 +1,59 @@
+{
+  "initialization": {
+    "A_static": {
+      "trainable_sha256": "a6f46342085126b7e6cb452b21ee66b0ee0de59d0f1eaf0fba8e2f96bd81e46f",
+      "parameter_layout_sha256": "54b823acaf9f0014339f15d48fdf5e488cf25009e9696990f7b28906e4752bbf",
+      "trainable_parameter_count": 1775849,
+      "fresh_reference_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93"
+    },
+    "B_subset": {
+      "trainable_sha256": "a6f46342085126b7e6cb452b21ee66b0ee0de59d0f1eaf0fba8e2f96bd81e46f",
+      "parameter_layout_sha256": "54b823acaf9f0014339f15d48fdf5e488cf25009e9696990f7b28906e4752bbf",
+      "trainable_parameter_count": 1775849,
+      "fresh_reference_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93"
+    }
+  },
+  "models": {
+    "A_static": {
+      "selected_update": 28440,
+      "checkpoint_sha256": "c8a1288efe99aab41f56d97a409fdb69aee46c987438dfc660cf849a95d74f1a",
+      "data_version": "selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "trainable_parameter_count": 1775849
+    },
+    "B_subset": {
+      "selected_update": 25596,
+      "checkpoint_sha256": "d3e19c297fe94b31080393ab28b7171581bed449afd16cad35250d225dacba26",
+      "data_version": "selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "trainable_parameter_count": 1775849
+    }
+  },
+  "common_training_fields": [
+    "seed",
+    "global_batch_size",
+    "logical_global_batch",
+    "task_order_sha256",
+    "max_successful_updates",
+    "lr",
+    "optimizer",
+    "weight_decay",
+    "loss",
+    "dropout",
+    "microbatch_caps",
+    "eval_batch_size",
+    "checkpoint_rule",
+    "inference_rule",
+    "model_spec",
+    "main_protocol_lock",
+    "source_sha256"
+  ],
+  "same_logical_batch": 1024,
+  "common_original_reference_hash_is_not_retained_subset_hash": true,
+  "order_boundary": "same seeded task/shuffle protocol; actual per-update sample IDs not independently archived",
+  "statistical_boundary": "single seed2; no multi-seed significance or automatic promotion",
+  "historical_boundary": "whole saved historical models; not fresh parameter/budget matched controls",
+  "test_boundary": "TEST participated in earlier R&D; not a pristine blind test; no finish-stage reselection",
+  "metric_boundary": "ALL equal-problem; ratios of means differ from actual per-instance regret",
+  "W_definition": "100*mean(current_cost < baseline_cost), cost win rate",
+  "G_definition": "100*mean((baseline_cost-current_cost)/baseline_cost), mean relative cost improvement",
+  "both_wrong_definition": "contribution divided by all rows in that problem, not only both-wrong rows"
+}

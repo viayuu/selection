@@ -1,0 +1,100 @@
+{
+  "status": "complete",
+  "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/comparison_artifacts/target_list.json",
+  "sha256": "406ded5a21d8b73c2a41b87dc2bc3cc14330663ae1aa4f59ca6fbfde83770fe4",
+  "identity": {
+    "baseline_checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+    "baseline_state_hash": "ad0a6d9c68c6f117b477807f6f8be52662032a8baea348dda6144c46091303e2",
+    "baseline_val_prediction_sha256": "8a1aea9caf608d12fbc83d89704a50eb37d461665c7609ad3e25778cdab932a7",
+    "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+    "threshold_chosen_pct": 0.1,
+    "rule": "A locked VAL: chosen percentage <= 0.1 and native winner count > 0"
+  },
+  "count": 36,
+  "post_lock_report_only": true,
+  "model_change": false,
+  "checkpoint_change": false,
+  "protocol_change": false,
+  "target_reselection": false,
+  "inference": false,
+  "original_gate_unchanged": true,
+  "original_decision_gate": {
+    "experiment": "R116",
+    "complete": true,
+    "evaluated_on": "locked whole18 VAL only",
+    "matched_comparison": "B_subset vs A_static; same new objective; not an R77 loss ablation",
+    "top1_delta_pp": 0.035802469135814974,
+    "actual_regret_delta_pp": 0.001591310967813897,
+    "vs_sbs_delta_pp": 0.00041168884291681307,
+    "per_problem_regret_delta_pp": {
+      "TSP": -0.002237157487443464,
+      "CVRP": 0.049833390184691906,
+      "ATSP": 0.0017101241751207308,
+      "OVRP": -0.0077536854894341145,
+      "VRPB": -0.024402770533337947,
+      "VRPL": -0.002661154811329336,
+      "VRPTW": 0.0018447213365558879,
+      "OVRPTW": 0.006992640315688747,
+      "OVRPB": 0.0,
+      "OVRPL": 0.006775789524227527,
+      "VRPBL": 0.001345837719867904,
+      "VRPBTW": -0.009926363720013931,
+      "VRPLTW": 0.002274553292445136,
+      "OVRPBL": 0.0009250555833192897,
+      "OVRPBTW": 0.007169825234000893,
+      "OVRPLTW": -0.006946518948374003,
+      "VRPBLTW": 0.0079120884042847,
+      "OVRPBLTW": -0.004212777359619946
+    },
+    "worst_regret_harm_pp": 0.049833390184691906,
+    "thresholds": {
+      "top1_gain_pp": 0.2,
+      "macro_regret_harm_pp": 0.005,
+      "max_task_regret_harm_pp": 0.05,
+      "vs_sbs_must_not_worsen": true,
+      "max_p95_ratio": 2
+    },
+    "scientific_gate_passed": false,
+    "deployment_p95_gate_passed": true,
+    "recommend_deployment": false,
+    "single_seed": true,
+    "max_task_p95_ratio": {
+      "A_static": 1.0953307030274726,
+      "B_subset": 1.085560253867814
+    },
+    "TEST_used_for_gate": false,
+    "checkpoint_reselection": false,
+    "automatic_next_arms": false
+  },
+  "supplement_generator": "/public/home/shiys/0selection2/code/V4/r116_mechanism_finish.py",
+  "supplement_generator_sha256": "753014bd983d553cce7cf69141d2b031f1de4a9a5da2432f6cbb8e75b60fb986",
+  "baseline_run": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline",
+  "baseline_checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+  "comparisons": [
+    "B_subset vs A_static",
+    "A_static vs R84/A_baseline",
+    "B_subset vs R84/A_baseline",
+    "A_static vs R94B",
+    "B_subset vs R94B"
+  ],
+  "historical_references": {
+    "R84/A_baseline": {
+      "status": "complete",
+      "checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f"
+    },
+    "R94B": {
+      "status": "complete",
+      "checkpoint_sha256": "8e797150d22ea138db246536f36a1b7dfa6ef3b516ee065a3303a6b6e579c3ee"
+    }
+  },
+  "font": {
+    "path": "/public/home/shiys/.cache/selector_fonts/20261026/NotoSansCJK-Regular.ttc",
+    "sha256": "5dcd1c336cc9344cb77c03a0cd8982ca8a7dc97d620fd6c9c434e02dcb1ceeb3",
+    "embedding": "PDF subset only; never embed entire font file"
+  },
+  "denominator": "native TP / native winner count; precision = native TP / chosen count; zero denominators undefined",
+  "false_pick_definition": "new FP: current predicted method is in group, wrong native winner, and differs from baseline prediction",
+  "cost_partition": "cost/regret and both-wrong changes partition by native winner; new-FP columns partition by current prediction",
+  "ALL": "cost/regret equal weight over all18; recall/precision from pooled group counts; mixed raw cost descriptive",
+  "interpretation": "selected counts and zero-count reduction are not success; original predeclared VAL gate is primary"
+}

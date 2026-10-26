@@ -1,0 +1,2225 @@
+{
+  "experiment": "R116",
+  "arm": "B_subset",
+  "complete": true,
+  "created_utc": "2026-10-26T17:52:48.841430+00:00",
+  "checkpoint_lock": {
+    "experiment": "R116",
+    "arm": "B_subset",
+    "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R116_subset_elimination/B_subset/best.pt",
+    "checkpoint_sha256": "d3e19c297fe94b31080393ab28b7171581bed449afd16cad35250d225dacba26",
+    "state_hash": "804f5fbb94dfca487b6a5b9a73f1dfc2dbae162d8b5db79e2b03ef6f2b25db37",
+    "epoch": 18,
+    "selected_update": 25596,
+    "rule": "strict maximum full18 VAL macro_top1; exact Top1 ties: minimum macro_actual_regret_pct; exact double ties: first checkpoint",
+    "selected_without_test": true,
+    "per_problem_assembly": false,
+    "val": {
+      "macro_ce": 0.6961470180087619,
+      "macro_top1": 0.7093333333333334,
+      "macro_top2": 0.906753086419753,
+      "macro_top3": 0.9624567901234568,
+      "macro_top1_tie_aware": 0.7108271604938271,
+      "macro_mean_cost": 11.41776523807052,
+      "macro_vs_sbs_pct": -0.1863844182962118,
+      "macro_vs_oracle_pct": 0.4013080383060573,
+      "macro_actual_regret_pct": 0.41238589852067215,
+      "macro_vbs_gap_closed_pct": 12.361565451935405,
+      "macro_sbs_cost": 11.427978473494235,
+      "macro_oracle_cost": 11.371691902364589,
+      "macro_loss": 0.6307114865750126,
+      "macro_champion_nll": 0.6961470181566518,
+      "macro_ranking_nll": 0.5652759545574448
+    },
+    "inference_rule": "eval mode; exact all-subset elimination log-champion DP; argmax log q; stable ascending-global-solver-ID ties; no maximin",
+    "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+    "locked_utc": "2026-10-26T17:49:36.242738+00:00"
+  },
+  "model_factory": "code.V4.r116_experiment.load_checkpoint",
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "rows_per_problem": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "candidate_pools": {
+    "TSP": [
+      "BQ",
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "LEHD",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "CVRP": [
+      "BQ",
+      "ELG",
+      "ICAM",
+      "LEHD",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "ATSP": [
+      "GLOP",
+      "ICAM_ATSP",
+      "MATNET",
+      "MATPOENET",
+      "UNICO_MatPOENet"
+    ],
+    "OVRP": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ]
+  },
+  "scenario_solver_aliases": {
+    "reld_mt": "RELD_MOEL"
+  },
+  "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+  "nss_reference": [
+    {
+      "dataset": "TSP TEST",
+      "problem": "TSP",
+      "n": 4500,
+      "current_model": "R116/B_subset",
+      "current_model_factory": "code.V4.r116_experiment.load_checkpoint",
+      "current_top1_native_pct": 47.08888888888889,
+      "current_mean_cost": 7.97226367014469,
+      "current_checkpoint_sha256": "d3e19c297fe94b31080393ab28b7171581bed449afd16cad35250d225dacba26",
+      "current_state_hash": "804f5fbb94dfca487b6a5b9a73f1dfc2dbae162d8b5db79e2b03ef6f2b25db37",
+      "current_selected_update": 25596,
+      "current_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R116_subset_elimination/B_subset/evaluation/test/selected_best/rank000.npz",
+      "nss_model": "R79 saved historical weights; not retrained on new90k",
+      "data_version": "selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "candidate_pool": "[\"BQ\", \"DIFUSCO\", \"DIFUSCO500\", \"ELG\", \"LEHD\", \"OMNI\", \"T2T\", \"T2T500\"]",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "status": "complete",
+      "nss_top1_native_pct": 45.88888888888889,
+      "nss_mean_cost": 7.9704007194012005,
+      "nss_checkpoint_sha256": "c677a8cd4ee473ee47bdedff871050827f75717c321ae9d551a3edc7bc78994b",
+      "nss_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/TSP/test_predictions.npz"
+    },
+    {
+      "dataset": "CVRP TEST",
+      "problem": "CVRP",
+      "n": 4500,
+      "current_model": "R116/B_subset",
+      "current_model_factory": "code.V4.r116_experiment.load_checkpoint",
+      "current_top1_native_pct": 47.13333333333333,
+      "current_mean_cost": 18.020067315420132,
+      "current_checkpoint_sha256": "d3e19c297fe94b31080393ab28b7171581bed449afd16cad35250d225dacba26",
+      "current_state_hash": "804f5fbb94dfca487b6a5b9a73f1dfc2dbae162d8b5db79e2b03ef6f2b25db37",
+      "current_selected_update": 25596,
+      "current_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R116_subset_elimination/B_subset/evaluation/test/selected_best/rank000.npz",
+      "nss_model": "R79 saved historical weights; not retrained on new90k",
+      "data_version": "selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "candidate_pool": "[\"BQ\", \"ELG\", \"ICAM\", \"LEHD\", \"MVMOE\", \"MoSES_CaDA\", \"MoSES_RF\", \"OMNI\", \"RELD_CVRP\", \"RouteFinder\"]",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "status": "complete",
+      "nss_top1_native_pct": 45.97777777777778,
+      "nss_mean_cost": 18.00480236763458,
+      "nss_checkpoint_sha256": "b1e7595eb16a89e3bdf526c3c4d8b05ce3d7d4dc39ab1241667657924e3fc574",
+      "nss_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/CVRP/test_predictions.npz"
+    },
+    {
+      "dataset": "TSPLIB",
+      "problem": "TSP",
+      "n": 49,
+      "current_model": "R116/B_subset",
+      "current_model_factory": "code.V4.r116_experiment.load_checkpoint",
+      "current_top1_native_pct": 24.489795918367346,
+      "current_mean_cost": 8.211730043243968,
+      "current_checkpoint_sha256": "d3e19c297fe94b31080393ab28b7171581bed449afd16cad35250d225dacba26",
+      "current_state_hash": "804f5fbb94dfca487b6a5b9a73f1dfc2dbae162d8b5db79e2b03ef6f2b25db37",
+      "current_selected_update": 25596,
+      "current_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R116_subset_elimination/B_subset/lib_evaluation/predictions/TSPLIB.npz",
+      "nss_model": "R79 saved historical weights; not retrained on new90k",
+      "data_version": "original native TSPLIB",
+      "candidate_pool": "[\"BQ\", \"DIFUSCO\", \"DIFUSCO500\", \"ELG\", \"LEHD\", \"OMNI\", \"T2T\", \"T2T500\"]",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "status": "complete",
+      "nss_top1_native_pct": 20.408163265306122,
+      "nss_mean_cost": 8.217907074335503,
+      "nss_checkpoint_sha256": "c677a8cd4ee473ee47bdedff871050827f75717c321ae9d551a3edc7bc78994b",
+      "nss_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/TSP/TSPLIB_predictions.npz"
+    },
+    {
+      "dataset": "CVRPLIB",
+      "problem": "CVRP",
+      "n": 100,
+      "current_model": "R116/B_subset",
+      "current_model_factory": "code.V4.r116_experiment.load_checkpoint",
+      "current_top1_native_pct": 44.0,
+      "current_mean_cost": 67.63394207954501,
+      "current_checkpoint_sha256": "d3e19c297fe94b31080393ab28b7171581bed449afd16cad35250d225dacba26",
+      "current_state_hash": "804f5fbb94dfca487b6a5b9a73f1dfc2dbae162d8b5db79e2b03ef6f2b25db37",
+      "current_selected_update": 25596,
+      "current_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R116_subset_elimination/B_subset/lib_evaluation/predictions/CVRPLIB.npz",
+      "nss_model": "R79 saved historical weights; not retrained on new90k",
+      "data_version": "original native CVRPLIB",
+      "candidate_pool": "[\"BQ\", \"ELG\", \"ICAM\", \"LEHD\", \"MVMOE\", \"MoSES_CaDA\", \"MoSES_RF\", \"OMNI\", \"RELD_CVRP\", \"RouteFinder\"]",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "status": "complete",
+      "nss_top1_native_pct": 70.0,
+      "nss_mean_cost": 67.10111171722467,
+      "nss_checkpoint_sha256": "b1e7595eb16a89e3bdf526c3c4d8b05ce3d7d4dc39ab1241667657924e3fc574",
+      "nss_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/CVRP/CVRPLIB_predictions.npz"
+    }
+  ],
+  "nss_alignment": {
+    "TSP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "TSPLIB": {
+      "instance_key": "indices",
+      "matching_population": 49,
+      "checked_instance_ids": [
+        0,
+        24,
+        48
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRPLIB": {
+      "instance_key": "indices",
+      "matching_population": 100,
+      "checked_instance_ids": [
+        0,
+        50,
+        99
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    }
+  },
+  "training": false,
+  "inference": false,
+  "checkpoint_reselection": false,
+  "distribution_pages": 18,
+  "main_pdf_pages": 22,
+  "diagnostics": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R116_subset_elimination/B_subset/full_model_statistics/training_and_method_diagnostics.pdf",
+    "pages": 19,
+    "history_status": "complete"
+  },
+  "checkpoint_rule": "strict maximum full18 VAL macro_top1; exact Top1 ties: minimum macro_actual_regret_pct; exact double ties: first checkpoint",
+  "main_protocol_lock": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R116_subset_elimination/protocol_lock.json",
+    "sha256": "115bd4e56ab4152c59e3da234f74792011f3cc86e484fefd49ec5d120a97a765",
+    "record": {
+      "experiment": "R116",
+      "locked": true,
+      "arms": [
+        "A_static",
+        "B_subset"
+      ],
+      "seed": 2,
+      "task_scope": "full18",
+      "rows_per_problem": {
+        "train": 81000,
+        "val": 4500,
+        "test": 4500
+      },
+      "logical_global_batch": 1024,
+      "max_successful_updates": 28440,
+      "warmup_updates": 4266,
+      "eval_every_updates": 1422,
+      "train_eval_every_updates": 7110,
+      "optimizer": "AdamW",
+      "peak_lr": 0.0001,
+      "end_lr": 1e-06,
+      "weight_decay": 0.0001,
+      "grad_clip": 1.0,
+      "dropout": 0.1,
+      "checkpoint_rule": "strict maximum full18 VAL macro_top1; exact Top1 ties: minimum macro_actual_regret_pct; exact double ties: first checkpoint",
+      "inference_rule": "eval mode; exact all-subset elimination log-champion DP; argmax log q; stable ascending-global-solver-ID ties; no maximin",
+      "loss": {
+        "champion_nll_weight": 0.5,
+        "ranking_nll_weight": 0.5,
+        "classification": "native CE on exact champion log probabilities",
+        "champion_target": "native ind",
+        "ranking_target": "original FP64 cost, native winner first in minimum tie, global ID ties",
+        "ranking_reduction": "per instance mean over K-1 eliminations, then mean over real rows",
+        "forward_passes": 1,
+        "rdrop": false,
+        "comparison": false,
+        "relative_risk": false,
+        "quotas": false
+      },
+      "max_train_epochs": 20,
+      "combined_gpu_hours_cap": 28,
+      "per_arm_gpu_hours_cap": 14,
+      "gpu_type": "3090",
+      "wandb_mode": "offline",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "prepared_root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+      "primary_cache": "/tmp/shiys_R84_new90k_cache",
+      "microbatch_caps": {
+        "TSP": 256,
+        "CVRP": 256,
+        "ATSP": 256,
+        "OVRP": 512,
+        "VRPB": 512,
+        "VRPL": 512,
+        "VRPTW": 512,
+        "OVRPTW": 512,
+        "OVRPB": 512,
+        "OVRPL": 512,
+        "VRPBL": 512,
+        "VRPBTW": 512,
+        "VRPLTW": 512,
+        "OVRPBL": 512,
+        "OVRPBTW": 512,
+        "OVRPLTW": 512,
+        "VRPBLTW": 512,
+        "OVRPBLTW": 512
+      },
+      "eval_batch_size": 256,
+      "capacity_witness": "/public/home/shiys/0selection2/code/V4/runs/R116_subset_elimination/preparation/resources/capacity/B_subset/capacity.json",
+      "capacity_witness_sha256": "23e7e7749b1e1d54379bf531eba1eab292aa74cf16b4f4af284fd72a020eff39",
+      "authorized_slots": {
+        "3090_0": {
+          "job": 1465,
+          "node": "gpu03",
+          "index": 0,
+          "gpu_type": "3090",
+          "uuid": "GPU-cb24f168-9f18-f0d5-6f4a-6d2406958f50"
+        },
+        "3090_1": {
+          "job": 1465,
+          "node": "gpu03",
+          "index": 1,
+          "gpu_type": "3090",
+          "uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d"
+        }
+      },
+      "gpu_budget_hours_per_arm": 14,
+      "complete_gpu_budget_hours": 28,
+      "no_4090": true
+    }
+  },
+  "model_params": {
+    "embedding_dim": 128,
+    "head_num": 4,
+    "qkv_dim": 32,
+    "ff_hidden_dim": 512,
+    "head_hidden_dim": 256,
+    "encoder_layer_num": 4,
+    "solver_set_layer_num": 2,
+    "query_num": 4,
+    "dropout": 0.1,
+    "stats_dim": 12,
+    "rezero": false,
+    "gap_score_weight": 0.25,
+    "pre_score_weight": 0.25,
+    "support_branch": false,
+    "support_generators": 0,
+    "support_hidden": 128,
+    "support_score_weight": 0.0,
+    "support_score_mode": "g0",
+    "support_g0_as_main": false,
+    "support_feature_to_token": true,
+    "support_main_utility_weight": 0.0,
+    "support_main_pre_weight": 0.0,
+    "support_main_gap_weight": 0.0,
+    "solver_feature_spec": {
+      "feature_dim": 34,
+      "index_base": 0,
+      "feature_order": [
+        "\u6784\u9020\u5f0f",
+        "\u6269\u6563\u5f0f",
+        "\u5750\u6807\u4e0e\u8282\u70b9\u5c5e\u6027",
+        "\u6210\u672c\u77e9\u9635",
+        "\u56fe\u4e0e\u8fb9",
+        "MHA\uff0fTransformer",
+        "GNN",
+        "\u77e9\u9635\u53cc\u6d41\u6ce8\u610f\u529b",
+        "\u9759\u6001\u7f16\u7801\u590d\u7528",
+        "\u52a8\u6001\u72b6\u6001\u66f4\u65b0",
+        "\u52a8\u6001\u5c40\u90e8\u66f4\u65b0",
+        "\u8fed\u4ee3\u53bb\u566a",
+        "\u5b9e\u4f8b\u6761\u4ef6",
+        "\u5c5e\u6027\u6761\u4ef6",
+        "\u7ea6\u675f\u6761\u4ef6",
+        "\u5143\u5b66\u4e60\u4efb\u52a1\u6761\u4ef6",
+        "FFN \u4e13\u5bb6",
+        "LoRA \u4e13\u5bb6",
+        "\u76d1\u7763\u5b66\u4e60",
+        "\u5f3a\u5316\u5b66\u4e60",
+        "\u6269\u6563\u8bad\u7ec3",
+        "\u5355\u4efb\u52a1",
+        "\u591a\u4efb\u52a1",
+        "\u5143\u5b66\u4e60",
+        "\u5b50\u95ee\u9898\u91cd\u7f16\u7801",
+        "\u91cd\u89e3\u7801\u5668",
+        "\u68af\u5ea6\u5f15\u5bfc\u641c\u7d22",
+        "\u5168\u5c40\u2014\u5c40\u90e8\u53cc\u7b56\u7565",
+        "\u8fd1\u90bb\u6210\u672c\u8f93\u5165",
+        "\u4f2a one-hot \u8f93\u5165",
+        "\u7edf\u4e00\u77e9\u9635\u8868\u793a",
+        "\u5168\u5c40\u5206\u533a\u4e0e\u5c40\u90e8\u91cd\u6784",
+        "\u89e3\u7801\u5668 FFN \u6b8b\u5dee",
+        "\u5168\u5c40\u5c5e\u6027\u5d4c\u5165"
+      ],
+      "solver_active_indices": {
+        "BQ": [
+          0,
+          2,
+          5,
+          9,
+          18,
+          21,
+          24
+        ],
+        "LEHD": [
+          0,
+          2,
+          5,
+          9,
+          18,
+          21,
+          25
+        ],
+        "DIFUSCO": [
+          1,
+          4,
+          6,
+          11,
+          20,
+          21
+        ],
+        "DIFUSCO500": [
+          1,
+          4,
+          6,
+          11,
+          20,
+          21
+        ],
+        "T2T": [
+          1,
+          4,
+          6,
+          11,
+          20,
+          21,
+          26
+        ],
+        "T2T500": [
+          1,
+          4,
+          6,
+          11,
+          20,
+          21,
+          26
+        ],
+        "ELG": [
+          0,
+          2,
+          5,
+          8,
+          10,
+          19,
+          21,
+          27
+        ],
+        "OMNI": [
+          0,
+          2,
+          5,
+          8,
+          15,
+          19,
+          23
+        ],
+        "ICAM": [
+          0,
+          2,
+          5,
+          8,
+          12,
+          19,
+          21
+        ],
+        "ICAM_ATSP": [
+          0,
+          3,
+          7,
+          8,
+          12,
+          19,
+          21,
+          28
+        ],
+        "MATNET": [
+          0,
+          3,
+          7,
+          8,
+          19,
+          21
+        ],
+        "MATPOENET": [
+          0,
+          3,
+          7,
+          8,
+          19,
+          21,
+          29
+        ],
+        "UNICO_MatPOENet": [
+          0,
+          3,
+          7,
+          8,
+          19,
+          22,
+          29,
+          30
+        ],
+        "GLOP": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          19,
+          31
+        ],
+        "MTPOMO": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          19,
+          22
+        ],
+        "MVMOE": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          16,
+          19,
+          22
+        ],
+        "RELD_CVRP": [
+          0,
+          2,
+          5,
+          8,
+          19,
+          21,
+          32
+        ],
+        "RELD_MTL": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          19,
+          22,
+          32
+        ],
+        "RELD_MOEL": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          16,
+          19,
+          22,
+          32
+        ],
+        "RouteFinder": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          19,
+          22,
+          33
+        ],
+        "MoSES_RF": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          17,
+          22,
+          33
+        ],
+        "MoSES_CaDA": [
+          0,
+          2,
+          5,
+          8,
+          14,
+          17,
+          22
+        ]
+      },
+      "solver_names": [
+        "BQ",
+        "DIFUSCO",
+        "DIFUSCO500",
+        "ELG",
+        "GLOP",
+        "ICAM",
+        "ICAM_ATSP",
+        "LEHD",
+        "MATNET",
+        "MATPOENET",
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "OMNI",
+        "RELD_CVRP",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder",
+        "T2T",
+        "T2T500",
+        "UNICO_MatPOENet"
+      ]
+    },
+    "solver_feature_weight": 1.0,
+    "solver_feature_hidden": 128,
+    "sdpa": true,
+    "architecture": "pairwise",
+    "joint_layer_num": 2,
+    "local_geometry": true,
+    "geometry_mode": "real",
+    "ignore_coord_dist": true,
+    "native_winner": true,
+    "decision_head": "classification",
+    "pair_mode": "score_difference",
+    "solver_representation": "handcrafted",
+    "permutation_seed": 4502,
+    "code_init_seed": 450002,
+    "r116_arm": "B_subset",
+    "r116_spec": {
+      "experiment": "R116",
+      "schema_version": 1,
+      "role_arm": "B_execution_anchor",
+      "node_layers": 4,
+      "joint_layers": 2,
+      "embedding_dim": 128,
+      "candidate_features": "original decoded 3d",
+      "feature_width": 64,
+      "set_width": 32,
+      "maximum_candidates": 10,
+      "static": "full-set mean and full-set size reused in every subset",
+      "dynamic": "remaining-set mean and size recomputed before nonlinear candidate interaction",
+      "compute_match": "same all-subset head tensor shapes in both arms; not greedy vs DP",
+      "deployment": "exact log-space sequential-elimination champion marginal, then argmax",
+      "no_scalar_score_bypass": true,
+      "current_query_labels_in_forward": false,
+      "new_labels": false,
+      "branch_seed": 116002
+    },
+    "role_arm": "B_execution_anchor",
+    "selection_head": "exact_elimination_champion_marginal"
+  },
+  "trainable_parameter_count": 1775849,
+  "inference_timing": {
+    "experiment": "R116",
+    "arm": "B_subset",
+    "complete": true,
+    "completed_utc": "2026-10-26T17:52:26.094218+00:00",
+    "checkpoint_sha256": "d3e19c297fe94b31080393ab28b7171581bed449afd16cad35250d225dacba26",
+    "state_hash": "804f5fbb94dfca487b6a5b9a73f1dfc2dbae162d8b5db79e2b03ef6f2b25db37",
+    "selected_update": 25596,
+    "model_state_sha256": "9136dad6b90a033dbaef71c7c086862ec7e0f0340b3efee1309d6d77adbe7290",
+    "model_factory": "code.V4.r116_experiment.load_checkpoint",
+    "inference_rule": "eval mode; exact all-subset elimination log-champion DP; argmax log q; stable ascending-global-solver-ID ties; no maximin",
+    "device": "cuda:0",
+    "device_name": "NVIDIA GeForce RTX 3090",
+    "repetitions": 10,
+    "warmup_batches": 2,
+    "eval_batch_size": 256,
+    "parameter_count": 1775849,
+    "scope": "GPU-resident fixed input batch; complete graph encoder, all subset heads and exact champion DP",
+    "sample_policy": "first min(eval_batch_size, locked task microcap) frozen TEST inputs per task",
+    "p95_definition": "numpy percentile95 of 10 synchronized full-batch forwards, divided by real batch rows",
+    "all_current_model_included": true,
+    "all_subsets_and_exact_dp_included": true,
+    "end_to_end_measured": false,
+    "input_labels_read": false,
+    "model_reselection": false,
+    "point_selector": {
+      "factory": "code.V4.r84_experiment.make_model",
+      "arm": "A_baseline",
+      "initialization": "fresh never-trained R84 seed2; timing only; identical inputs and batch sizes",
+      "trainable_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+      "checkpoint_used": false
+    },
+    "excludes": "dataset I/O, CPU-to-GPU transfer, training and solver execution",
+    "per_problem": [
+      {
+        "problem": "TSP",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.0881506148725748,
+            0.08825497142970562,
+            0.08813440427184105,
+            0.08809392899274826,
+            0.0880554597824812,
+            0.08817988820374012,
+            0.08825445361435413,
+            0.08825142309069633,
+            0.0886001568287611,
+            0.08956167474389076
+          ],
+          "mean_seconds_per_instance": 0.0003451316311839037,
+          "p95_seconds_per_instance": 0.0003481601237581344
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.08618937246501446,
+            0.08611704967916012,
+            0.08599069155752659,
+            0.08596986904740334,
+            0.08615075051784515,
+            0.08670445531606674,
+            0.08616296388208866,
+            0.08659353852272034,
+            0.08688977360725403,
+            0.08728923834860325
+          ],
+          "mean_seconds_per_instance": 0.00033752254021237606,
+          "p95_seconds_per_instance": 0.0003402714031835785
+        },
+        "p95_ratio": 1.0231836131415954,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "CVRP",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.11292687989771366,
+            0.1128219161182642,
+            0.11290770769119263,
+            0.11279760114848614,
+            0.11326616629958153,
+            0.11398537643253803,
+            0.11416174843907356,
+            0.11385991796851158,
+            0.11323744244873524,
+            0.11283424310386181
+          ],
+          "mean_seconds_per_instance": 0.00044249960919842126,
+          "p95_seconds_per_instance": 0.0004456343009223929
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.10682618618011475,
+            0.1070998553186655,
+            0.10774042457342148,
+            0.10779172740876675,
+            0.10772032663226128,
+            0.10752654075622559,
+            0.10692917183041573,
+            0.1066681295633316,
+            0.10672269575297832,
+            0.10678945295512676
+          ],
+          "mean_seconds_per_instance": 0.0004186775433481671,
+          "p95_seconds_per_instance": 0.00042097125442523974
+        },
+        "p95_ratio": 1.058586058401603,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "ATSP",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.014142734929919243,
+            0.014091884717345238,
+            0.014047682285308838,
+            0.014032525941729546,
+            0.014058781787753105,
+            0.014055078849196434,
+            0.014119017869234085,
+            0.014127902686595917,
+            0.014128899201750755,
+            0.014108406379818916
+          ],
+          "mean_seconds_per_instance": 5.504410728462972e-05,
+          "p95_seconds_per_instance": 5.5220737704075876e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.013061093166470528,
+            0.013139596208930016,
+            0.013152988627552986,
+            0.013126874342560768,
+            0.013142004609107971,
+            0.01312950998544693,
+            0.013148495927453041,
+            0.013148011639714241,
+            0.01317836157977581,
+            0.01315171830356121
+          ],
+          "mean_seconds_per_instance": 5.131978687131777e-05,
+          "p95_seconds_per_instance": 5.143337402842007e-05
+        },
+        "p95_ratio": 1.0736363061377823,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "OVRP",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013574492186307907,
+            0.013598479330539703,
+            0.013593997806310654,
+            0.013596460223197937,
+            0.013530556112527847,
+            0.013553369790315628,
+            0.013566512614488602,
+            0.013549968600273132,
+            0.01359199546277523,
+            0.013614468276500702
+          ],
+          "mean_seconds_per_instance": 5.303527359501459e-05,
+          "p95_seconds_per_instance": 5.31534111360088e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012505143880844116,
+            0.012512346729636192,
+            0.012530986219644547,
+            0.012577937915921211,
+            0.0125759057700634,
+            0.012537948787212372,
+            0.012488976120948792,
+            0.012544119730591774,
+            0.012545047327876091,
+            0.012496866285800934
+          ],
+          "mean_seconds_per_instance": 4.895128076896071e-05,
+          "p95_seconds_per_instance": 4.912899785267655e-05
+        },
+        "p95_ratio": 1.0819152325353814,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "VRPB",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013242479413747787,
+            0.013264879584312439,
+            0.013232208788394928,
+            0.013172931969165802,
+            0.01324479654431343,
+            0.01325237937271595,
+            0.01320921815931797,
+            0.013259150087833405,
+            0.013211965560913086,
+            0.013254605233669281
+          ],
+          "mean_seconds_per_instance": 5.1697115122806284e-05,
+          "p95_seconds_per_instance": 5.180586449569091e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012431511655449867,
+            0.012469802051782608,
+            0.01246972568333149,
+            0.012421723455190659,
+            0.012444943189620972,
+            0.012414179742336273,
+            0.012457063421607018,
+            0.012447791174054146,
+            0.012421827763319016,
+            0.0125163234770298
+          ],
+          "mean_seconds_per_instance": 4.8630817036610094e-05,
+          "p95_seconds_per_instance": 4.8810112639330326e-05
+        },
+        "p95_ratio": 1.061375639070881,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "VRPL",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013609210029244423,
+            0.013591371476650238,
+            0.013619592413306236,
+            0.013658665120601654,
+            0.013583233579993248,
+            0.013564176857471466,
+            0.013584116473793983,
+            0.013546228408813477,
+            0.013581471517682076,
+            0.013538803905248642
+          ],
+          "mean_seconds_per_instance": 5.307690225890838e-05,
+          "p95_seconds_per_instance": 5.328547813405748e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012509802356362343,
+            0.012479368597269058,
+            0.01252465695142746,
+            0.012543467804789543,
+            0.012551143765449524,
+            0.012539422139525414,
+            0.012553069740533829,
+            0.012578580528497696,
+            0.012610536068677902,
+            0.01261388510465622
+          ],
+          "mean_seconds_per_instance": 4.9024973850464446e-05,
+          "p95_seconds_per_instance": 4.9267101712757724e-05
+        },
+        "p95_ratio": 1.0815630772178992,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "VRPTW",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013544172048568726,
+            0.013563834130764008,
+            0.013537786900997162,
+            0.013627836480736732,
+            0.013589581474661827,
+            0.013552358373999596,
+            0.013579100370407104,
+            0.013559931889176369,
+            0.01353391632437706,
+            0.013574367389082909
+          ],
+          "mean_seconds_per_instance": 5.2993314602645115e-05,
+          "p95_seconds_per_instance": 5.316649112501182e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012521099299192429,
+            0.012521602213382721,
+            0.012496693059802055,
+            0.012543734163045883,
+            0.01253935880959034,
+            0.012527910992503166,
+            0.012526610866189003,
+            0.012532146647572517,
+            0.01253589242696762,
+            0.012557096779346466
+          ],
+          "mean_seconds_per_instance": 4.8946150491246955e-05,
+          "p95_seconds_per_instance": 4.9027670320356266e-05
+        },
+        "p95_ratio": 1.0844180597938204,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "OVRPTW",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013556838035583496,
+            0.01359032653272152,
+            0.013564065098762512,
+            0.013615399599075317,
+            0.013596491888165474,
+            0.013542227447032928,
+            0.013561384752392769,
+            0.013583308085799217,
+            0.013534540310502052,
+            0.013580838218331337
+          ],
+          "mean_seconds_per_instance": 5.301774217514321e-05,
+          "p95_seconds_per_instance": 5.315191847330425e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012524491176009178,
+            0.012579197064042091,
+            0.012521764263510704,
+            0.012550314888358116,
+            0.012549987062811852,
+            0.012528033927083015,
+            0.012650253251194954,
+            0.012512274086475372,
+            0.01252816990017891,
+            0.012565836310386658
+          ],
+          "mean_seconds_per_instance": 4.902746950392611e-05,
+          "p95_seconds_per_instance": 4.929014830850065e-05
+        },
+        "p95_ratio": 1.078347708362192,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "OVRPB",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013214176520705223,
+            0.01317334920167923,
+            0.013240087777376175,
+            0.013230759650468826,
+            0.013199891895055771,
+            0.013256927952170372,
+            0.013224432244896889,
+            0.013171523809432983,
+            0.013248488306999207,
+            0.013254055753350258
+          ],
+          "mean_seconds_per_instance": 5.1645973871927706e-05,
+          "p95_seconds_per_instance": 5.177982602617703e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012359349057078362,
+            0.012413758784532547,
+            0.012388180941343307,
+            0.012409763410687447,
+            0.012445991858839989,
+            0.012439301237463951,
+            0.012419715523719788,
+            0.012440545484423637,
+            0.012446388602256775,
+            0.012454532086849213
+          ],
+          "mean_seconds_per_instance": 4.8522471479373054e-05,
+          "p95_seconds_per_instance": 4.863620124524459e-05
+        },
+        "p95_ratio": 1.0646354916799718,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "OVRPL",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.01352381519973278,
+            0.013541188091039658,
+            0.013569079339504242,
+            0.013539247214794159,
+            0.013604270294308662,
+            0.013584325090050697,
+            0.013498872518539429,
+            0.013629565015435219,
+            0.013610951602458954,
+            0.013562660664319992
+          ],
+          "mean_seconds_per_instance": 5.2993740246165545e-05,
+          "p95_seconds_per_instance": 5.3207769451546485e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012499310076236725,
+            0.0125309769064188,
+            0.012530120089650154,
+            0.012533968314528465,
+            0.012566804885864258,
+            0.012596188113093376,
+            0.012529687955975533,
+            0.012522786855697632,
+            0.012545041739940643,
+            0.012506088241934776
+          ],
+          "mean_seconds_per_instance": 4.896913014817983e-05,
+          "p95_seconds_per_instance": 4.9152209612657316e-05
+        },
+        "p95_ratio": 1.0825102242777873,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "VRPBL",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013217009603977203,
+            0.013245025649666786,
+            0.013246303424239159,
+            0.013240672647953033,
+            0.013229673728346825,
+            0.01324688270688057,
+            0.013219935819506645,
+            0.013239666819572449,
+            0.013222523033618927,
+            0.013187499716877937
+          ],
+          "mean_seconds_per_instance": 5.1677809824468565e-05,
+          "p95_seconds_per_instance": 5.174461730348412e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012432115152478218,
+            0.012460272759199142,
+            0.012417001649737358,
+            0.012455424293875694,
+            0.012475309893488884,
+            0.012463035061955452,
+            0.012459108605980873,
+            0.012432454153895378,
+            0.012502120807766914,
+            0.012477647513151169
+          ],
+          "mean_seconds_per_instance": 4.866191011387855e-05,
+          "p95_seconds_per_instance": 4.879338994214777e-05
+        },
+        "p95_ratio": 1.0604841632203765,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "VRPBTW",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.01333571970462799,
+            0.01325594075024128,
+            0.013228781521320343,
+            0.013198496773838997,
+            0.013207308948040009,
+            0.013268370181322098,
+            0.013248132541775703,
+            0.013202941045165062,
+            0.013228179886937141,
+            0.013261811807751656
+          ],
+          "mean_seconds_per_instance": 5.1732688734773544e-05,
+          "p95_seconds_per_instance": 5.197426726226695e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012446096166968346,
+            0.012530853971838951,
+            0.012531034648418427,
+            0.01252441294491291,
+            0.0125112384557724,
+            0.012449156492948532,
+            0.012462019920349121,
+            0.012396438047289848,
+            0.012394580990076065,
+            0.012388158589601517
+          ],
+          "mean_seconds_per_instance": 4.86851524328813e-05,
+          "p95_seconds_per_instance": 4.894903649983462e-05
+        },
+        "p95_ratio": 1.0618036835606062,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "VRPLTW",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013626918196678162,
+            0.013620829209685326,
+            0.01360085979104042,
+            0.013652265071868896,
+            0.013628525659441948,
+            0.013611728325486183,
+            0.013584461063146591,
+            0.013549860566854477,
+            0.013593796640634537,
+            0.01358649879693985
+          ],
+          "mean_seconds_per_instance": 5.31467747350689e-05,
+          "p95_seconds_per_instance": 5.328743100108113e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012448213994503021,
+            0.01252065785229206,
+            0.01249539665877819,
+            0.012503787875175476,
+            0.012539701536297798,
+            0.012524481862783432,
+            0.012529999017715454,
+            0.01259072870016098,
+            0.012596677988767624,
+            0.012610498815774918
+          ],
+          "mean_seconds_per_instance": 4.8968806368066e-05,
+          "p95_seconds_per_instance": 4.9235466576647013e-05
+        },
+        "p95_ratio": 1.082297674951983,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "OVRPBL",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013287987560033798,
+            0.013315854594111443,
+            0.013273503631353378,
+            0.01326306164264679,
+            0.013304432854056358,
+            0.01330086775124073,
+            0.013209464028477669,
+            0.013255482539534569,
+            0.013254350051283836,
+            0.01318293996155262
+          ],
+          "mean_seconds_per_instance": 5.1815603364957495e-05,
+          "p95_seconds_per_instance": 5.199497973080724e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012410106137394905,
+            0.012452663853764534,
+            0.01245189644396305,
+            0.012440796941518784,
+            0.012452606111764908,
+            0.012495137751102448,
+            0.012532873079180717,
+            0.012475945055484772,
+            0.012470033019781113,
+            0.012470953166484833
+          ],
+          "mean_seconds_per_instance": 4.86925826407969e-05,
+          "p95_seconds_per_instance": 4.8890203834162095e-05
+        },
+        "p95_ratio": 1.0635050716330965,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "OVRPBTW",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013211838901042938,
+            0.013284094631671906,
+            0.013219688087701797,
+            0.013261770829558372,
+            0.01326001062989235,
+            0.013198189437389374,
+            0.013239867985248566,
+            0.013274652883410454,
+            0.013253780081868172,
+            0.013311976566910744
+          ],
+          "mean_seconds_per_instance": 5.1764011732302603e-05,
+          "p95_seconds_per_instance": 5.1950897250208074e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012492220848798752,
+            0.01254669576883316,
+            0.012487450614571571,
+            0.012454790994524956,
+            0.01244080439209938,
+            0.012525530532002449,
+            0.012457216158509254,
+            0.012418514117598534,
+            0.01242765225470066,
+            0.012446355074644089
+          ],
+          "mean_seconds_per_instance": 4.870985576417297e-05,
+          "p95_seconds_per_instance": 4.897332582913805e-05
+        },
+        "p95_ratio": 1.0607998613665408,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "OVRPLTW",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013561099767684937,
+            0.013534002006053925,
+            0.013593468815088272,
+            0.013666480779647827,
+            0.013560440391302109,
+            0.013581030070781708,
+            0.013600535690784454,
+            0.01354978047311306,
+            0.013577006757259369,
+            0.013553500175476074
+          ],
+          "mean_seconds_per_instance": 5.303802536218427e-05,
+          "p95_seconds_per_instance": 5.326877144398168e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012472357600927353,
+            0.012496953830122948,
+            0.012558449059724808,
+            0.012564901262521744,
+            0.012525519356131554,
+            0.012542108073830605,
+            0.01254417933523655,
+            0.012525491416454315,
+            0.012523384764790535,
+            0.012534769251942635
+          ],
+          "mean_seconds_per_instance": 4.894066951237619e-05,
+          "p95_seconds_per_instance": 4.9070303793996574e-05
+        },
+        "p95_ratio": 1.085560253867814,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "VRPBLTW",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013292200863361359,
+            0.013257762417197227,
+            0.013247355818748474,
+            0.01322847604751587,
+            0.01321098767220974,
+            0.013236353173851967,
+            0.013210685923695564,
+            0.013244174420833588,
+            0.013219088315963745,
+            0.013249050825834274
+          ],
+          "mean_seconds_per_instance": 5.1717240421567115e-05,
+          "p95_seconds_per_instance": 5.186212329135742e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012390408664941788,
+            0.0124738160520792,
+            0.012425022199749947,
+            0.012424970045685768,
+            0.012425124645233154,
+            0.01246403343975544,
+            0.012425947934389114,
+            0.012458385899662971,
+            0.01245434395968914,
+            0.012490779161453247
+          ],
+          "mean_seconds_per_instance": 4.860657500103116e-05,
+          "p95_seconds_per_instance": 4.876228813373018e-05
+        },
+        "p95_ratio": 1.0635703383960566,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "OVRPBLTW",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013306019827723503,
+            0.01321498490869999,
+            0.013169310986995697,
+            0.013239240273833275,
+            0.013228509575128555,
+            0.013196269050240517,
+            0.01324346475303173,
+            0.01322147436439991,
+            0.01319638080894947,
+            0.013225885108113289
+          ],
+          "mean_seconds_per_instance": 5.165685142856091e-05,
+          "p95_seconds_per_instance": 5.1866679859813304e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012475578114390373,
+            0.012516152113676071,
+            0.012453356757760048,
+            0.012448133900761604,
+            0.012466607615351677,
+            0.012441104277968407,
+            0.01242978498339653,
+            0.012448105961084366,
+            0.01249060407280922,
+            0.012468243017792702
+          ],
+          "mean_seconds_per_instance": 4.868659016210586e-05,
+          "p95_seconds_per_instance": 4.884631052846089e-05
+        },
+        "p95_ratio": 1.0618341344243913,
+        "p95_ratio_le_2": true
+      }
+    ],
+    "max_task_p95_ratio": 1.085560253867814,
+    "p95_ratio_le_2": true
+  },
+  "evidence_boundary": "TEST development-exposed; VAL-only checkpoint selection; ALL problem-equal; TRAIN-only SBS; missing NSS references are not retrained or inferred",
+  "objective": {
+    "champion_nll_weight": 0.5,
+    "ranking_nll_weight": 0.5,
+    "classification": "native CE on exact champion log probabilities",
+    "champion_target": "native ind",
+    "ranking_target": "original FP64 cost, native winner first in minimum tie, global ID ties",
+    "ranking_reduction": "per instance mean over K-1 eliminations, then mean over real rows",
+    "forward_passes": 1,
+    "rdrop": false,
+    "comparison": false,
+    "relative_risk": false,
+    "quotas": false
+  },
+  "historical_comparison": "R77 is historical, not an isolated loss ablation; both R116 arms use new objective",
+  "all_subset_dp_timing": {
+    "experiment": "R116",
+    "arm": "B_subset",
+    "complete": true,
+    "completed_utc": "2026-10-26T17:52:26.094218+00:00",
+    "checkpoint_sha256": "d3e19c297fe94b31080393ab28b7171581bed449afd16cad35250d225dacba26",
+    "state_hash": "804f5fbb94dfca487b6a5b9a73f1dfc2dbae162d8b5db79e2b03ef6f2b25db37",
+    "selected_update": 25596,
+    "model_state_sha256": "9136dad6b90a033dbaef71c7c086862ec7e0f0340b3efee1309d6d77adbe7290",
+    "model_factory": "code.V4.r116_experiment.load_checkpoint",
+    "inference_rule": "eval mode; exact all-subset elimination log-champion DP; argmax log q; stable ascending-global-solver-ID ties; no maximin",
+    "device": "cuda:0",
+    "device_name": "NVIDIA GeForce RTX 3090",
+    "repetitions": 10,
+    "warmup_batches": 2,
+    "eval_batch_size": 256,
+    "parameter_count": 1775849,
+    "scope": "GPU-resident fixed input batch; complete graph encoder, all subset heads and exact champion DP",
+    "sample_policy": "first min(eval_batch_size, locked task microcap) frozen TEST inputs per task",
+    "p95_definition": "numpy percentile95 of 10 synchronized full-batch forwards, divided by real batch rows",
+    "all_current_model_included": true,
+    "all_subsets_and_exact_dp_included": true,
+    "end_to_end_measured": false,
+    "input_labels_read": false,
+    "model_reselection": false,
+    "point_selector": {
+      "factory": "code.V4.r84_experiment.make_model",
+      "arm": "A_baseline",
+      "initialization": "fresh never-trained R84 seed2; timing only; identical inputs and batch sizes",
+      "trainable_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+      "checkpoint_used": false
+    },
+    "excludes": "dataset I/O, CPU-to-GPU transfer, training and solver execution",
+    "per_problem": [
+      {
+        "problem": "TSP",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.0881506148725748,
+            0.08825497142970562,
+            0.08813440427184105,
+            0.08809392899274826,
+            0.0880554597824812,
+            0.08817988820374012,
+            0.08825445361435413,
+            0.08825142309069633,
+            0.0886001568287611,
+            0.08956167474389076
+          ],
+          "mean_seconds_per_instance": 0.0003451316311839037,
+          "p95_seconds_per_instance": 0.0003481601237581344
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.08618937246501446,
+            0.08611704967916012,
+            0.08599069155752659,
+            0.08596986904740334,
+            0.08615075051784515,
+            0.08670445531606674,
+            0.08616296388208866,
+            0.08659353852272034,
+            0.08688977360725403,
+            0.08728923834860325
+          ],
+          "mean_seconds_per_instance": 0.00033752254021237606,
+          "p95_seconds_per_instance": 0.0003402714031835785
+        },
+        "p95_ratio": 1.0231836131415954,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "CVRP",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.11292687989771366,
+            0.1128219161182642,
+            0.11290770769119263,
+            0.11279760114848614,
+            0.11326616629958153,
+            0.11398537643253803,
+            0.11416174843907356,
+            0.11385991796851158,
+            0.11323744244873524,
+            0.11283424310386181
+          ],
+          "mean_seconds_per_instance": 0.00044249960919842126,
+          "p95_seconds_per_instance": 0.0004456343009223929
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.10682618618011475,
+            0.1070998553186655,
+            0.10774042457342148,
+            0.10779172740876675,
+            0.10772032663226128,
+            0.10752654075622559,
+            0.10692917183041573,
+            0.1066681295633316,
+            0.10672269575297832,
+            0.10678945295512676
+          ],
+          "mean_seconds_per_instance": 0.0004186775433481671,
+          "p95_seconds_per_instance": 0.00042097125442523974
+        },
+        "p95_ratio": 1.058586058401603,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "ATSP",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.014142734929919243,
+            0.014091884717345238,
+            0.014047682285308838,
+            0.014032525941729546,
+            0.014058781787753105,
+            0.014055078849196434,
+            0.014119017869234085,
+            0.014127902686595917,
+            0.014128899201750755,
+            0.014108406379818916
+          ],
+          "mean_seconds_per_instance": 5.504410728462972e-05,
+          "p95_seconds_per_instance": 5.5220737704075876e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.013061093166470528,
+            0.013139596208930016,
+            0.013152988627552986,
+            0.013126874342560768,
+            0.013142004609107971,
+            0.01312950998544693,
+            0.013148495927453041,
+            0.013148011639714241,
+            0.01317836157977581,
+            0.01315171830356121
+          ],
+          "mean_seconds_per_instance": 5.131978687131777e-05,
+          "p95_seconds_per_instance": 5.143337402842007e-05
+        },
+        "p95_ratio": 1.0736363061377823,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "OVRP",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013574492186307907,
+            0.013598479330539703,
+            0.013593997806310654,
+            0.013596460223197937,
+            0.013530556112527847,
+            0.013553369790315628,
+            0.013566512614488602,
+            0.013549968600273132,
+            0.01359199546277523,
+            0.013614468276500702
+          ],
+          "mean_seconds_per_instance": 5.303527359501459e-05,
+          "p95_seconds_per_instance": 5.31534111360088e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012505143880844116,
+            0.012512346729636192,
+            0.012530986219644547,
+            0.012577937915921211,
+            0.0125759057700634,
+            0.012537948787212372,
+            0.012488976120948792,
+            0.012544119730591774,
+            0.012545047327876091,
+            0.012496866285800934
+          ],
+          "mean_seconds_per_instance": 4.895128076896071e-05,
+          "p95_seconds_per_instance": 4.912899785267655e-05
+        },
+        "p95_ratio": 1.0819152325353814,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "VRPB",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013242479413747787,
+            0.013264879584312439,
+            0.013232208788394928,
+            0.013172931969165802,
+            0.01324479654431343,
+            0.01325237937271595,
+            0.01320921815931797,
+            0.013259150087833405,
+            0.013211965560913086,
+            0.013254605233669281
+          ],
+          "mean_seconds_per_instance": 5.1697115122806284e-05,
+          "p95_seconds_per_instance": 5.180586449569091e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012431511655449867,
+            0.012469802051782608,
+            0.01246972568333149,
+            0.012421723455190659,
+            0.012444943189620972,
+            0.012414179742336273,
+            0.012457063421607018,
+            0.012447791174054146,
+            0.012421827763319016,
+            0.0125163234770298
+          ],
+          "mean_seconds_per_instance": 4.8630817036610094e-05,
+          "p95_seconds_per_instance": 4.8810112639330326e-05
+        },
+        "p95_ratio": 1.061375639070881,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "VRPL",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013609210029244423,
+            0.013591371476650238,
+            0.013619592413306236,
+            0.013658665120601654,
+            0.013583233579993248,
+            0.013564176857471466,
+            0.013584116473793983,
+            0.013546228408813477,
+            0.013581471517682076,
+            0.013538803905248642
+          ],
+          "mean_seconds_per_instance": 5.307690225890838e-05,
+          "p95_seconds_per_instance": 5.328547813405748e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012509802356362343,
+            0.012479368597269058,
+            0.01252465695142746,
+            0.012543467804789543,
+            0.012551143765449524,
+            0.012539422139525414,
+            0.012553069740533829,
+            0.012578580528497696,
+            0.012610536068677902,
+            0.01261388510465622
+          ],
+          "mean_seconds_per_instance": 4.9024973850464446e-05,
+          "p95_seconds_per_instance": 4.9267101712757724e-05
+        },
+        "p95_ratio": 1.0815630772178992,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "VRPTW",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013544172048568726,
+            0.013563834130764008,
+            0.013537786900997162,
+            0.013627836480736732,
+            0.013589581474661827,
+            0.013552358373999596,
+            0.013579100370407104,
+            0.013559931889176369,
+            0.01353391632437706,
+            0.013574367389082909
+          ],
+          "mean_seconds_per_instance": 5.2993314602645115e-05,
+          "p95_seconds_per_instance": 5.316649112501182e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012521099299192429,
+            0.012521602213382721,
+            0.012496693059802055,
+            0.012543734163045883,
+            0.01253935880959034,
+            0.012527910992503166,
+            0.012526610866189003,
+            0.012532146647572517,
+            0.01253589242696762,
+            0.012557096779346466
+          ],
+          "mean_seconds_per_instance": 4.8946150491246955e-05,
+          "p95_seconds_per_instance": 4.9027670320356266e-05
+        },
+        "p95_ratio": 1.0844180597938204,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "OVRPTW",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013556838035583496,
+            0.01359032653272152,
+            0.013564065098762512,
+            0.013615399599075317,
+            0.013596491888165474,
+            0.013542227447032928,
+            0.013561384752392769,
+            0.013583308085799217,
+            0.013534540310502052,
+            0.013580838218331337
+          ],
+          "mean_seconds_per_instance": 5.301774217514321e-05,
+          "p95_seconds_per_instance": 5.315191847330425e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012524491176009178,
+            0.012579197064042091,
+            0.012521764263510704,
+            0.012550314888358116,
+            0.012549987062811852,
+            0.012528033927083015,
+            0.012650253251194954,
+            0.012512274086475372,
+            0.01252816990017891,
+            0.012565836310386658
+          ],
+          "mean_seconds_per_instance": 4.902746950392611e-05,
+          "p95_seconds_per_instance": 4.929014830850065e-05
+        },
+        "p95_ratio": 1.078347708362192,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "OVRPB",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013214176520705223,
+            0.01317334920167923,
+            0.013240087777376175,
+            0.013230759650468826,
+            0.013199891895055771,
+            0.013256927952170372,
+            0.013224432244896889,
+            0.013171523809432983,
+            0.013248488306999207,
+            0.013254055753350258
+          ],
+          "mean_seconds_per_instance": 5.1645973871927706e-05,
+          "p95_seconds_per_instance": 5.177982602617703e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012359349057078362,
+            0.012413758784532547,
+            0.012388180941343307,
+            0.012409763410687447,
+            0.012445991858839989,
+            0.012439301237463951,
+            0.012419715523719788,
+            0.012440545484423637,
+            0.012446388602256775,
+            0.012454532086849213
+          ],
+          "mean_seconds_per_instance": 4.8522471479373054e-05,
+          "p95_seconds_per_instance": 4.863620124524459e-05
+        },
+        "p95_ratio": 1.0646354916799718,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "OVRPL",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.01352381519973278,
+            0.013541188091039658,
+            0.013569079339504242,
+            0.013539247214794159,
+            0.013604270294308662,
+            0.013584325090050697,
+            0.013498872518539429,
+            0.013629565015435219,
+            0.013610951602458954,
+            0.013562660664319992
+          ],
+          "mean_seconds_per_instance": 5.2993740246165545e-05,
+          "p95_seconds_per_instance": 5.3207769451546485e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012499310076236725,
+            0.0125309769064188,
+            0.012530120089650154,
+            0.012533968314528465,
+            0.012566804885864258,
+            0.012596188113093376,
+            0.012529687955975533,
+            0.012522786855697632,
+            0.012545041739940643,
+            0.012506088241934776
+          ],
+          "mean_seconds_per_instance": 4.896913014817983e-05,
+          "p95_seconds_per_instance": 4.9152209612657316e-05
+        },
+        "p95_ratio": 1.0825102242777873,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "VRPBL",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013217009603977203,
+            0.013245025649666786,
+            0.013246303424239159,
+            0.013240672647953033,
+            0.013229673728346825,
+            0.01324688270688057,
+            0.013219935819506645,
+            0.013239666819572449,
+            0.013222523033618927,
+            0.013187499716877937
+          ],
+          "mean_seconds_per_instance": 5.1677809824468565e-05,
+          "p95_seconds_per_instance": 5.174461730348412e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012432115152478218,
+            0.012460272759199142,
+            0.012417001649737358,
+            0.012455424293875694,
+            0.012475309893488884,
+            0.012463035061955452,
+            0.012459108605980873,
+            0.012432454153895378,
+            0.012502120807766914,
+            0.012477647513151169
+          ],
+          "mean_seconds_per_instance": 4.866191011387855e-05,
+          "p95_seconds_per_instance": 4.879338994214777e-05
+        },
+        "p95_ratio": 1.0604841632203765,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "VRPBTW",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.01333571970462799,
+            0.01325594075024128,
+            0.013228781521320343,
+            0.013198496773838997,
+            0.013207308948040009,
+            0.013268370181322098,
+            0.013248132541775703,
+            0.013202941045165062,
+            0.013228179886937141,
+            0.013261811807751656
+          ],
+          "mean_seconds_per_instance": 5.1732688734773544e-05,
+          "p95_seconds_per_instance": 5.197426726226695e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012446096166968346,
+            0.012530853971838951,
+            0.012531034648418427,
+            0.01252441294491291,
+            0.0125112384557724,
+            0.012449156492948532,
+            0.012462019920349121,
+            0.012396438047289848,
+            0.012394580990076065,
+            0.012388158589601517
+          ],
+          "mean_seconds_per_instance": 4.86851524328813e-05,
+          "p95_seconds_per_instance": 4.894903649983462e-05
+        },
+        "p95_ratio": 1.0618036835606062,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "VRPLTW",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013626918196678162,
+            0.013620829209685326,
+            0.01360085979104042,
+            0.013652265071868896,
+            0.013628525659441948,
+            0.013611728325486183,
+            0.013584461063146591,
+            0.013549860566854477,
+            0.013593796640634537,
+            0.01358649879693985
+          ],
+          "mean_seconds_per_instance": 5.31467747350689e-05,
+          "p95_seconds_per_instance": 5.328743100108113e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012448213994503021,
+            0.01252065785229206,
+            0.01249539665877819,
+            0.012503787875175476,
+            0.012539701536297798,
+            0.012524481862783432,
+            0.012529999017715454,
+            0.01259072870016098,
+            0.012596677988767624,
+            0.012610498815774918
+          ],
+          "mean_seconds_per_instance": 4.8968806368066e-05,
+          "p95_seconds_per_instance": 4.9235466576647013e-05
+        },
+        "p95_ratio": 1.082297674951983,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "OVRPBL",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013287987560033798,
+            0.013315854594111443,
+            0.013273503631353378,
+            0.01326306164264679,
+            0.013304432854056358,
+            0.01330086775124073,
+            0.013209464028477669,
+            0.013255482539534569,
+            0.013254350051283836,
+            0.01318293996155262
+          ],
+          "mean_seconds_per_instance": 5.1815603364957495e-05,
+          "p95_seconds_per_instance": 5.199497973080724e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012410106137394905,
+            0.012452663853764534,
+            0.01245189644396305,
+            0.012440796941518784,
+            0.012452606111764908,
+            0.012495137751102448,
+            0.012532873079180717,
+            0.012475945055484772,
+            0.012470033019781113,
+            0.012470953166484833
+          ],
+          "mean_seconds_per_instance": 4.86925826407969e-05,
+          "p95_seconds_per_instance": 4.8890203834162095e-05
+        },
+        "p95_ratio": 1.0635050716330965,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "OVRPBTW",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013211838901042938,
+            0.013284094631671906,
+            0.013219688087701797,
+            0.013261770829558372,
+            0.01326001062989235,
+            0.013198189437389374,
+            0.013239867985248566,
+            0.013274652883410454,
+            0.013253780081868172,
+            0.013311976566910744
+          ],
+          "mean_seconds_per_instance": 5.1764011732302603e-05,
+          "p95_seconds_per_instance": 5.1950897250208074e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012492220848798752,
+            0.01254669576883316,
+            0.012487450614571571,
+            0.012454790994524956,
+            0.01244080439209938,
+            0.012525530532002449,
+            0.012457216158509254,
+            0.012418514117598534,
+            0.01242765225470066,
+            0.012446355074644089
+          ],
+          "mean_seconds_per_instance": 4.870985576417297e-05,
+          "p95_seconds_per_instance": 4.897332582913805e-05
+        },
+        "p95_ratio": 1.0607998613665408,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "OVRPLTW",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013561099767684937,
+            0.013534002006053925,
+            0.013593468815088272,
+            0.013666480779647827,
+            0.013560440391302109,
+            0.013581030070781708,
+            0.013600535690784454,
+            0.01354978047311306,
+            0.013577006757259369,
+            0.013553500175476074
+          ],
+          "mean_seconds_per_instance": 5.303802536218427e-05,
+          "p95_seconds_per_instance": 5.326877144398168e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012472357600927353,
+            0.012496953830122948,
+            0.012558449059724808,
+            0.012564901262521744,
+            0.012525519356131554,
+            0.012542108073830605,
+            0.01254417933523655,
+            0.012525491416454315,
+            0.012523384764790535,
+            0.012534769251942635
+          ],
+          "mean_seconds_per_instance": 4.894066951237619e-05,
+          "p95_seconds_per_instance": 4.9070303793996574e-05
+        },
+        "p95_ratio": 1.085560253867814,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "VRPBLTW",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013292200863361359,
+            0.013257762417197227,
+            0.013247355818748474,
+            0.01322847604751587,
+            0.01321098767220974,
+            0.013236353173851967,
+            0.013210685923695564,
+            0.013244174420833588,
+            0.013219088315963745,
+            0.013249050825834274
+          ],
+          "mean_seconds_per_instance": 5.1717240421567115e-05,
+          "p95_seconds_per_instance": 5.186212329135742e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012390408664941788,
+            0.0124738160520792,
+            0.012425022199749947,
+            0.012424970045685768,
+            0.012425124645233154,
+            0.01246403343975544,
+            0.012425947934389114,
+            0.012458385899662971,
+            0.01245434395968914,
+            0.012490779161453247
+          ],
+          "mean_seconds_per_instance": 4.860657500103116e-05,
+          "p95_seconds_per_instance": 4.876228813373018e-05
+        },
+        "p95_ratio": 1.0635703383960566,
+        "p95_ratio_le_2": true
+      },
+      {
+        "problem": "OVRPBLTW",
+        "instances": 256,
+        "standalone_model": {
+          "batch_seconds": [
+            0.013306019827723503,
+            0.01321498490869999,
+            0.013169310986995697,
+            0.013239240273833275,
+            0.013228509575128555,
+            0.013196269050240517,
+            0.01324346475303173,
+            0.01322147436439991,
+            0.01319638080894947,
+            0.013225885108113289
+          ],
+          "mean_seconds_per_instance": 5.165685142856091e-05,
+          "p95_seconds_per_instance": 5.1866679859813304e-05
+        },
+        "point_selector": {
+          "batch_seconds": [
+            0.012475578114390373,
+            0.012516152113676071,
+            0.012453356757760048,
+            0.012448133900761604,
+            0.012466607615351677,
+            0.012441104277968407,
+            0.01242978498339653,
+            0.012448105961084366,
+            0.01249060407280922,
+            0.012468243017792702
+          ],
+          "mean_seconds_per_instance": 4.868659016210586e-05,
+          "p95_seconds_per_instance": 4.884631052846089e-05
+        },
+        "p95_ratio": 1.0618341344243913,
+        "p95_ratio_le_2": true
+      }
+    ],
+    "max_task_p95_ratio": 1.085560253867814,
+    "p95_ratio_le_2": true
+  },
+  "objective_diagnostics": "objective_diagnostics.csv",
+  "no_rdrop": true,
+  "no_old_maximin": true
+}
