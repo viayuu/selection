@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["action_id", "model", "reasoning_effort", "status", "made_progress", "summary", "artifacts", "needs_user_action"],
+  "properties": {
+    "action_id": {"type": "string"},
+    "model": {"type": "string"},
+    "reasoning_effort": {"type": "string", "enum": ["max"]},
+    "status": {"type": "string", "enum": ["complete", "blocked", "model_unavailable"]},
+    "made_progress": {"type": "boolean"},
+    "summary": {"type": "string"},
+    "artifacts": {"type": "array", "items": {"type": "string"}},
+    "needs_user_action": {"type": "string"}
+  }
+}
