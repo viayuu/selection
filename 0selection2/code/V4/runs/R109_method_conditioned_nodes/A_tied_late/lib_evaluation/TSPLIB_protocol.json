@@ -1,0 +1,70 @@
+{
+  "experiment": "R109",
+  "arm": "A_tied_late",
+  "dataset": "TSPLIB",
+  "problem": "TSP",
+  "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R109_method_conditioned_nodes/A_tied_late/best.pt",
+  "checkpoint_sha256": "2ba5345464b9b022974cc6bf91303a4728376e3b91b59948921bee8122127b96",
+  "epoch": 26,
+  "selected_update": 37440,
+  "candidate_pool": [
+    "BQ",
+    "DIFUSCO",
+    "DIFUSCO500",
+    "ELG",
+    "LEHD",
+    "OMNI",
+    "T2T",
+    "T2T500"
+  ],
+  "state_hash": "25379b3975fa1341d02b8c54aeba9ce45344d1f9d3f44fdb36035d4d0dcaac79",
+  "model_state_sha256": "0862cca184835784074b7834c87045faa2bda35bf6746d35043219eb990f1b44",
+  "pool_ids": [
+    0,
+    1,
+    2,
+    3,
+    7,
+    14,
+    19,
+    20
+  ],
+  "sources": {
+    "dataset.pkl": {
+      "path": "/public/home/shiys/0selection2/data/TSPLIB/dataset.pkl",
+      "sha256": "92f14d50c2474ca33b3432f16478e06f0cc687ad40009a363d5db31b8641e6f8"
+    },
+    "raw_label.pkl": {
+      "path": "/public/home/shiys/0selection2/data/TSPLIB/raw_label.pkl",
+      "sha256": "7d2cfffe64652728777e01607ca104c1b5ba8c156f6bc24bba366cec5a148a44"
+    }
+  },
+  "winner_rule": "native/FP64 raw_label ind (not FP32 cost argmin)",
+  "data_version": "original native LIB / historical NSS comparison",
+  "model_factory": "code.V4.r109_experiment.load_checkpoint",
+  "inference_rule": "single FP32 forward, logits argmax, lowest global solver ID for exact ties",
+  "locked_inference_rule": "original score MLP utility differences and maximin; no calibration or solver quotas",
+  "normalization": "all TRAIN buffers restored from same R109 best.pt, no LIB refit",
+  "batch_size": 2,
+  "device": "cuda:0",
+  "training": false,
+  "solver_execution": false,
+  "embedding_api": false,
+  "checkpoint_reselection": false,
+  "prediction_schema": {
+    "scores": "float32 [n,k], actual maximin decision scores",
+    "logits": "float32 [n,k], model maximin logits (identical to scores)",
+    "pred": "int64 [n], local candidate slot; score ties use lowest global ID",
+    "costs": "float64 [n,k], unchanged original native costs",
+    "winner": "int64 [n], original native raw_label ind",
+    "winner_fp32_argmin": "int64 [n], historical NSS compatibility labels",
+    "pool": "unicode [k], original candidate names in column order",
+    "pool_ids": "int64 [k], stable global solver IDs",
+    "nodes": "int64 [n], input graph sizes",
+    "indices": "int64 [n], original zero-based instance order",
+    "checkpoint_sha256": "unicode scalar",
+    "checkpoint_epoch": "int64 scalar, one-based locked epoch",
+    "checkpoint_update": "int64 scalar, locked successful update"
+  },
+  "created_utc": "2026-10-25T19:51:26.318559+00:00"
+}
