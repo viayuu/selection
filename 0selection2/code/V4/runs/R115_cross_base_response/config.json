@@ -1,0 +1,77 @@
+{
+  "version": "R115_cross_base_response",
+  "seed": 2,
+  "scope": "TRAIN-only two-fold cross-base response pilot; not a selector training/test",
+  "source_labels": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/finish/tensor_boundary_combined_20261026/combined_labels.json",
+    "sha256": "f598bf53092375cc0b1c8362760b6b58ac67106c4c2dde5f7675153b8f808045"
+  },
+  "source_manifest": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/production_inputs/manifest.json",
+    "sha256": "d414f0c4cb4bf3d03049e95b632faf21ee70a1acbb926ea20a8d722f6f57ef68"
+  },
+  "research": {
+    "path": "/public/home/shiys/0selection2/docs/research/post_major_paradigm_results_20261026/REPORT.md",
+    "sha256": "3f4fc3096d85857d8ac01a5d4e4073490e90510e2ee60fbef8f95dcac907f727"
+  },
+  "folds_sha256": "ccf559e7a87b3b941684155ed2b571323865bca3b0865a545a322aabd9d489ee",
+  "feature": {
+    "source": "Existing input-only R92 357 statistics",
+    "columns": 714,
+    "representation": "concat(phi(original), phi(changed)-phi(original)); no arm/family/row-ID feature",
+    "geometry": "Existing CPU local geometry; demand/TW-to-geometry correlations retained",
+    "coord_dist": "fixed missing=0; never infer generator distribution from an index"
+  },
+  "predictor": {
+    "type": "multioutput linear ridge",
+    "alpha": 1.0,
+    "intercept": true,
+    "sharing": "One identical formula fit per problem/family and training fold; arms pooled",
+    "preprocessing": "Training-fold means/std only; discard std <=1e-10; no tuning"
+  },
+  "target": "(cost_after-cost_before minus its candidate mean) / fixed TRAIN-fold problem scale",
+  "scale": "Mean of original endpoint costs over ALL candidates and unique training-fold bases of that problem",
+  "controls": [
+    "zero response",
+    "training-fold problem/family average response, arms pooled"
+  ],
+  "aggregation": "Mean over candidates, then both arms, then independent base; no endpoint counted as a new base",
+  "order_metric": "Sign agreement of predicted vs true candidate-pair RESPONSE differences, excluding true exact ties; NOT selection accuracy",
+  "signal_conditions": [
+    [
+      "CVRP",
+      "demand"
+    ],
+    [
+      "VRPL",
+      "demand"
+    ]
+  ],
+  "guard_conditions": [
+    [
+      "OVRPL",
+      "demand"
+    ],
+    [
+      "OVRPTW",
+      "tw_center"
+    ]
+  ],
+  "proceed_rule": "Both signal conditions: MAE <=90% of BOTH controls; both guards <=110% of BOTH controls",
+  "budget": {
+    "cpu_core_hours_max": 8,
+    "wall_seconds_max": 14400,
+    "cpu_threads": 2,
+    "gpu_hours": 0,
+    "new_labels": 0,
+    "validation_reads": 0,
+    "test_reads": 0,
+    "lib_reads": 0
+  },
+  "source_files": {
+    "/public/home/shiys/0selection2/code/V4/r115_pilot.py": "b8e2fb4208c5895b7113c483ed1655f74c241ab11d5d7eb9ce242c20b62d3d8a",
+    "/public/home/shiys/0selection2/code/V4/r115_features.py": "1ecc7abb3c2f616b0d672218d97113108183f16e2aab2e1294bc762ad22b4220",
+    "/public/home/shiys/0selection2/code/V4/r92_tree_features.py": "3f77115096e688c5187b21d5be6c418bb1fe2d877a788d7f0637fe940083c98c",
+    "/public/home/shiys/0selection2/code/V4/local_geometry.py": "5cecafaf06e39595b847438d2e974ededf086954cab95ff83d232875f86fd581"
+  }
+}
