@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "resource_only_migration": true,
+  "root": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process",
+  "protocol_lock": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/protocol_lock.json",
+  "directory": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/preparation/migration_3090_portable_inode_20261026",
+  "slots": {
+    "3090_0": {
+      "job": 1465,
+      "node": "gpu03",
+      "index": 0,
+      "gpu_type": "3090",
+      "uuid": "GPU-cb24f168-9f18-f0d5-6f4a-6d2406958f50"
+    },
+    "3090_1": {
+      "job": 1465,
+      "node": "gpu03",
+      "index": 1,
+      "gpu_type": "3090",
+      "uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d"
+    }
+  },
+  "cpu_count": 4,
+  "memory_gib": 9,
+  "idle_memory_mib": 512,
+  "automatic_training_retry": false,
+  "jobs": [
+    {
+      "job_id": "A_scratch",
+      "allowed_slots": [
+        "3090_0",
+        "3090_1"
+      ]
+    },
+    {
+      "job_id": "C_transition",
+      "allowed_slots": [
+        "3090_0",
+        "3090_1"
+      ]
+    },
+    {
+      "job_id": "B_snapshot",
+      "allowed_slots": [
+        "3090_0",
+        "3090_1"
+      ]
+    },
+    {
+      "job_id": "R114_labels",
+      "allowed_slots": [
+        "3090_0",
+        "3090_1"
+      ]
+    }
+  ],
+  "operations_receipt": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/preparation/migration_3090_20261026/stop_4090_receipt.json",
+  "r112_readiness": "/public/home/shiys/0selection2/code/V4/runs/R112_region_interfaces/preparation/recovery_20261026/readiness.json",
+  "r112_gpu_jobs": [],
+  "r112_watcher_owner": "main",
+  "r114": {
+    "plan": "/public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/grouped_execution/queue_v1/plan.json",
+    "timeout_seconds": 3600
+  },
+  "capacity_policy": "one_shared_fresh_selector_check_same_locked_caps_no_auto_retry",
+  "hardware_explanation": "Resource-only 4090 to 3090 migration. B/C keep gpu_type=4090 in their historical protocol for exact resume equality; pretraining really completed on 4090. Every new worker executes on an NVML-proved RTX3090 UUID. Model, loss, order, caps, budget and selection rules are unchanged. Unsaved updates are replayed, not recovered."
+}

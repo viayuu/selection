@@ -1,0 +1,526 @@
+{
+  "experiment": "R113_pretrain",
+  "arm": "C_transition",
+  "seed": 2,
+  "arms": [
+    "B_snapshot",
+    "C_transition"
+  ],
+  "logical_global_batch": 512,
+  "max_successful_updates": 8640,
+  "warmup_updates": 432,
+  "peak_lr": 0.0003,
+  "end_lr": 1e-05,
+  "optimizer": "AdamW",
+  "weight_decay": 0.0001,
+  "grad_clip": 1.0,
+  "checkpoint_every_updates": 432,
+  "loss_weights": {
+    "scalar_state": 1.0,
+    "scalar_transition": 1.0,
+    "binary_state": 1.0,
+    "pointer_state": 1.0,
+    "compatible": 1.0,
+    "reached": 1.0,
+    "frontier": 1.0
+  },
+  "stream_rule": "seed2 task round-robin shuffle; per-task shuffled shards/rows; carry cycle tails",
+  "checkpoint_rule": "last successful update; no validation or checkpoint selection",
+  "processor_only": true,
+  "teacher_forcing": false,
+  "context": null,
+  "mode": "transition",
+  "dataset": {
+    "manifest": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/process_train_v1/manifest.json",
+    "manifest_sha256": "975282dea4458cfb0009d042a6e369b2afe415988929dfd1b29418926dafbcce",
+    "source_manifest_sha256": "a95691c11593c5132b96c33ef8aefe8fd7aea3caa08cc38a5074f3ad887dc7ce",
+    "schema_sha256": "9f7008404c8a52a739855590db54edb7e4fb29a80164dd2928809392abf6bc27",
+    "tensor_schema_sha256": "ada2ce92204726063a06aa85ad9dea474b87f79f20bc149061dda29b3d41311e",
+    "generator_sha256": "db006ed0319028f7b8ba377c76b797d7c5045f24229897f4df6cb6846d07bc9c",
+    "rows": 1458000,
+    "rows_per_problem": 81000,
+    "split": "train",
+    "program_version": "r113_typed_fragment_v1",
+    "spec": {
+      "max_steps": 12,
+      "neighbors": 2
+    },
+    "source_policy": "Only raw TRAIN input arrays and source IDs; no native labels, costs or routes"
+  },
+  "main_protocol_lock": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/protocol_lock.json",
+    "sha256": "678685bd573d3c034fb17d6410fc089c63302867b88c4eb3c67dfd91f86b7a3e",
+    "record": {
+      "experiment": "R113",
+      "locked": true,
+      "arms": [
+        "A_scratch",
+        "B_snapshot",
+        "C_transition"
+      ],
+      "seed": 2,
+      "task_scope": "full18",
+      "rows_per_problem": {
+        "train": 81000,
+        "val": 4500,
+        "test": 4500
+      },
+      "logical_global_batch": 512,
+      "max_successful_updates": 57600,
+      "warmup_updates": 4320,
+      "eval_every_updates": 2880,
+      "train_eval_every_updates": 14400,
+      "optimizer": "AdamW",
+      "peak_lr": 0.0001,
+      "end_lr": 1e-06,
+      "weight_decay": 0.0001,
+      "grad_clip": 1,
+      "dropout": 0.1,
+      "checkpoint_rule": "strict maximum full18 VAL macro_top1; exact Top1 ties: minimum macro_actual_regret_pct; exact double ties: first checkpoint",
+      "inference_rule": "eval mode; self-initialized predicted-state transition feedback; original R77 score-difference maximin; stable ascending-global-solver-ID ties",
+      "pretraining": {
+        "arms": [
+          "B_snapshot",
+          "C_transition"
+        ],
+        "logical_global_batch": 512,
+        "max_successful_updates": 8640,
+        "warmup_updates": 432,
+        "peak_lr": 0.0003,
+        "end_lr": 1e-05,
+        "optimizer": "AdamW",
+        "weight_decay": 0.0001,
+        "grad_clip": 1,
+        "checkpoint_every_updates": 432,
+        "loss_weights": {
+          "scalar_state": 1,
+          "scalar_transition": 1,
+          "binary_state": 1,
+          "pointer_state": 1,
+          "compatible": 1,
+          "reached": 1,
+          "frontier": 1
+        },
+        "stream_rule": "seed2 task round-robin shuffle; per-task shuffled shards/rows; carry cycle tails",
+        "checkpoint_rule": "last successful update; no validation or checkpoint selection",
+        "processor_only": true,
+        "teacher_forcing": false,
+        "context": null
+      },
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "prepared_root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+      "primary_cache": "/tmp/shiys_R84_new90k_cache",
+      "pretrain_root": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/pretrain",
+      "process_manifest": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/process_train_v1/manifest.json",
+      "process_manifest_sha256": "975282dea4458cfb0009d042a6e369b2afe415988929dfd1b29418926dafbcce",
+      "microbatch_caps": {
+        "TSP": 384,
+        "CVRP": 384,
+        "ATSP": 512,
+        "OVRP": 512,
+        "VRPB": 512,
+        "VRPL": 512,
+        "VRPTW": 512,
+        "OVRPTW": 512,
+        "OVRPB": 512,
+        "OVRPL": 512,
+        "VRPBL": 512,
+        "VRPBTW": 512,
+        "VRPLTW": 512,
+        "OVRPBL": 512,
+        "OVRPBTW": 512,
+        "OVRPLTW": 512,
+        "VRPBLTW": 512,
+        "OVRPBLTW": 512
+      },
+      "pretrain_microbatch_caps": {
+        "TSP": 512,
+        "CVRP": 512,
+        "ATSP": 512,
+        "OVRP": 512,
+        "VRPB": 512,
+        "VRPL": 512,
+        "VRPTW": 512,
+        "OVRPTW": 512,
+        "OVRPB": 512,
+        "OVRPL": 512,
+        "VRPBL": 512,
+        "VRPBTW": 512,
+        "VRPLTW": 512,
+        "OVRPBL": 512,
+        "OVRPBTW": 512,
+        "OVRPLTW": 512,
+        "VRPBLTW": 512,
+        "OVRPBLTW": 512
+      },
+      "eval_batch_size": 512,
+      "capacity_rule": "Once assigned, one disposable capacity witness before formal updates. On OOM/nonfinite failure stop and preserve receipt; never silently shrink caps or retry training.",
+      "postlock_process_diagnostics": {
+        "split": "val",
+        "rows_per_problem": 64,
+        "selection": "seed2 size-stratified input-only; same fixed rows for all arms",
+        "purpose": "report only after unique checkpoint lock; never train, select or feed teacher states"
+      },
+      "execution_note": "One independent allocated GPU per arm; common logical512 and caps across both GPU types. User authorized batch and validation-rule redesign; new TRAIN process supervision independently versioned.",
+      "scientific_boundary": "Declared synthetic typed programs, not native solver routes or a uniform certification of historical B semantics. No claim of wholly unseen TEST after prior research."
+    }
+  },
+  "initial_full_state_sha256": "95791a650b09425f0c1cfc362d50565a38b4ae45752f004cfec100bdbc41db14",
+  "initial_processor_sha256": "09f8e3d1649599ff108cafd293e1c6e24db24f924b70b5fb80e869ac65466a7b",
+  "fresh_reference_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+  "processor_parameter_schema": {
+    "node_encoder.0.weight": {
+      "shape": [
+        64,
+        13
+      ],
+      "dtype": "torch.float32"
+    },
+    "node_encoder.0.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "node_encoder.2.weight": {
+      "shape": [
+        64,
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "node_encoder.2.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "task_encoder.weight": {
+      "shape": [
+        64,
+        7
+      ],
+      "dtype": "torch.float32"
+    },
+    "task_encoder.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "problem_embedding.weight": {
+      "shape": [
+        18,
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "resource_operator.0.weight": {
+      "shape": [
+        64,
+        222
+      ],
+      "dtype": "torch.float32"
+    },
+    "resource_operator.0.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "resource_operator.2.weight": {
+      "shape": [
+        8,
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "resource_operator.2.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "torch.float32"
+    },
+    "distance_operator.0.weight": {
+      "shape": [
+        64,
+        222
+      ],
+      "dtype": "torch.float32"
+    },
+    "distance_operator.0.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "distance_operator.2.weight": {
+      "shape": [
+        2,
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "distance_operator.2.bias": {
+      "shape": [
+        2
+      ],
+      "dtype": "torch.float32"
+    },
+    "time_operator.0.weight": {
+      "shape": [
+        64,
+        222
+      ],
+      "dtype": "torch.float32"
+    },
+    "time_operator.0.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "time_operator.2.weight": {
+      "shape": [
+        5,
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "time_operator.2.bias": {
+      "shape": [
+        5
+      ],
+      "dtype": "torch.float32"
+    },
+    "limit_operator.0.weight": {
+      "shape": [
+        64,
+        222
+      ],
+      "dtype": "torch.float32"
+    },
+    "limit_operator.0.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "limit_operator.2.weight": {
+      "shape": [
+        1,
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "limit_operator.2.bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "torch.float32"
+    },
+    "flag_operator.0.weight": {
+      "shape": [
+        64,
+        222
+      ],
+      "dtype": "torch.float32"
+    },
+    "flag_operator.0.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "flag_operator.2.weight": {
+      "shape": [
+        7,
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "flag_operator.2.bias": {
+      "shape": [
+        7
+      ],
+      "dtype": "torch.float32"
+    },
+    "pointer_query.weight": {
+      "shape": [
+        64,
+        222
+      ],
+      "dtype": "torch.float32"
+    },
+    "pointer_query.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "compatibility_operators.0.0.weight": {
+      "shape": [
+        64,
+        131
+      ],
+      "dtype": "torch.float32"
+    },
+    "compatibility_operators.0.0.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "compatibility_operators.0.2.weight": {
+      "shape": [
+        1,
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "compatibility_operators.0.2.bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "torch.float32"
+    },
+    "compatibility_operators.1.0.weight": {
+      "shape": [
+        64,
+        131
+      ],
+      "dtype": "torch.float32"
+    },
+    "compatibility_operators.1.0.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "compatibility_operators.1.2.weight": {
+      "shape": [
+        1,
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "compatibility_operators.1.2.bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "torch.float32"
+    },
+    "compatibility_operators.2.0.weight": {
+      "shape": [
+        64,
+        131
+      ],
+      "dtype": "torch.float32"
+    },
+    "compatibility_operators.2.0.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "compatibility_operators.2.2.weight": {
+      "shape": [
+        1,
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "compatibility_operators.2.2.bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "torch.float32"
+    },
+    "graph_type.weight": {
+      "shape": [
+        3,
+        8
+      ],
+      "dtype": "torch.float32"
+    },
+    "graph_state.0.weight": {
+      "shape": [
+        64,
+        140
+      ],
+      "dtype": "torch.float32"
+    },
+    "graph_state.0.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "graph_state.2.weight": {
+      "shape": [
+        2,
+        64
+      ],
+      "dtype": "torch.float32"
+    },
+    "graph_state.2.bias": {
+      "shape": [
+        2
+      ],
+      "dtype": "torch.float32"
+    }
+  },
+  "r113_spec": {
+    "experiment": "R113",
+    "schema_version": 1,
+    "node_stem_layers": 2,
+    "hidden_dim": 64,
+    "max_steps": 12,
+    "neighbors": 2,
+    "deployment": "self_initialized_predicted_feedback",
+    "decision": "candidate interaction with global and node trajectories plus final directed state; no old-score bypass",
+    "program_supervision": "new TRAIN-only typed fragments, not native solver routes or winners",
+    "role_arm": "B_execution_anchor",
+    "processor_seed": 113002,
+    "pretraining_modes": {
+      "A_scratch": null,
+      "B_snapshot": "snapshot",
+      "C_transition": "transition"
+    },
+    "snapshot_definition": "independent input/time-conditioned predictions; same target states and posthoc deltas",
+    "process_targets_in_query_forward": false
+  },
+  "microbatch_caps": {
+    "TSP": 512,
+    "CVRP": 512,
+    "ATSP": 512,
+    "OVRP": 512,
+    "VRPB": 512,
+    "VRPL": 512,
+    "VRPTW": 512,
+    "OVRPTW": 512,
+    "OVRPB": 512,
+    "OVRPL": 512,
+    "VRPBL": 512,
+    "VRPBTW": 512,
+    "VRPLTW": 512,
+    "OVRPBL": 512,
+    "OVRPBTW": 512,
+    "OVRPLTW": 512,
+    "VRPBLTW": 512,
+    "OVRPBLTW": 512
+  },
+  "task_order_sha256": "1f4ef6b932f723c6fffd0c9c0851a370ee9af0cc62c184fbb8dd09265c86133e",
+  "source_sha256": {
+    "r113_pretrain.py": "72484e17564e7bf1547a3209f5be6c83eaa51ac9936e6534e70be8d47cce54b1",
+    "r113_experiment.py": "80e8da5648c475115e4aaf6e36cf8a0213affaad472d713baa7ebeba84dc2eb0",
+    "r113_model.py": "e861ab0884ba33becabbda0784974fbbed8501f3399f45ae9603545c1f00a010",
+    "r113_processor.py": "54714c120ef434380d42466aa065e895422738719b70c0dace3d8e8507fab5f9",
+    "r113_process_data.py": "db006ed0319028f7b8ba377c76b797d7c5045f24229897f4df6cb6846d07bc9c"
+  },
+  "model_source": "full selector initialize_shared; extract instance_encoder.processor",
+  "query_labels_in_forward": false,
+  "native_solver_calls": 0,
+  "wandb": true,
+  "wandb_mode": "offline"
+}

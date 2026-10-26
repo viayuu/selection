@@ -1,0 +1,688 @@
+{
+  "run_id": "R113_process_train_v1",
+  "split": "train",
+  "seed": 2,
+  "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+  "config": {
+    "run_id": "R113_process_train_v1",
+    "program_version": "r113_typed_fragment_v1",
+    "seed": 2,
+    "required_host": "admin01",
+    "cpu_threads": 2,
+    "tmux_session": "r113_process_train_v1",
+    "split": "train",
+    "rows_per_problem": 81000,
+    "shard_size": 256,
+    "max_steps": 12,
+    "neighbors": 2,
+    "cache_root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache",
+    "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+    "problems": [
+      "TSP",
+      "CVRP",
+      "ATSP",
+      "OVRP",
+      "VRPB",
+      "VRPL",
+      "VRPTW",
+      "OVRPTW",
+      "OVRPB",
+      "OVRPL",
+      "VRPBL",
+      "VRPBTW",
+      "VRPLTW",
+      "OVRPBL",
+      "OVRPBTW",
+      "OVRPLTW",
+      "VRPBLTW",
+      "OVRPBLTW"
+    ],
+    "gpu_allowed": false,
+    "native_solver_calls_allowed": false,
+    "training_allowed": false,
+    "input_policy": "frozen TRAIN raw input whitelist only; no labels/costs/routes/VAL/TEST/LIB",
+    "determinism": "input-derived programs; NumPy and CPU Torch seed 2; no random program sampling"
+  },
+  "source_files_sha256": {
+    "source/r113_process_data.py": "db006ed0319028f7b8ba377c76b797d7c5045f24229897f4df6cb6846d07bc9c",
+    "source/SCHEMA.md": "3acb718bd4ed9799ac17fdb9cafd7c7bff293e1d239770f9594be8e0e4b86f90",
+    "schema.json": "ada2ce92204726063a06aa85ad9dea474b87f79f20bc149061dda29b3d41311e",
+    "generate_train.py": "dd5ee323843988977ca2d4b5a123505b57b11c6111737c3953621518df9939f5",
+    "launch.sh": "bf328c0e05899db53349a62491ad5a2cf4b70c6f3e8fe910fa149ac542082292",
+    "run_config.json": "ace84d5c397b0bdabeae781b17339091b36455d17ece8acb9ec4576ca042b29b"
+  },
+  "sourcehash_sha256": "4bf2dc7a8db3e5d14b17bf27a5054021c79e8cd688775f4ded49e8737f5e5705",
+  "sources": [
+    {
+      "problem": "TSP",
+      "split": "train",
+      "rows": 81000,
+      "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+      "cache_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/TSP",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "metadata_sha256": "279e903e143c8ac21bf6eac3b65f2d6dca45775cccf3fb6735cc206caa1c3e39",
+      "source_ids_sha256": "2da91ee33e04c3be79bc923c2af8f347f0bb23d4ec856a956ae9b8b410d04c8b",
+      "input_files": [
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/TSP/n.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258455217476637
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/TSP/coord_dist.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258455217476637
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/TSP/node.npy",
+          "size_bytes": 323352128,
+          "mtime_ns": 1792258455220476661
+        }
+      ],
+      "opened_paths": [
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/TSP/metadata.json",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/TSP/n.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/TSP/coord_dist.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/TSP/node.npy",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/TSPtrain/input_metadata.npz"
+      ],
+      "row_hash": "sha256(task UTF8 + true_n int64 + cropped cached raw FP32 C bytes)"
+    },
+    {
+      "problem": "CVRP",
+      "split": "train",
+      "rows": 81000,
+      "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+      "cache_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/CVRP",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "metadata_sha256": "d692211ad3d2cf8bc64df8224d113b752c4c9ea70ab95bf81eea1cb243cb36a5",
+      "source_ids_sha256": "de00538dbf5958170c4aa5550c2c79d7f23e36b94aeaa8f98fd671f454a93333",
+      "input_files": [
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/CVRP/n.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258463677544742
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/CVRP/coord_dist.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258463679544758
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/CVRP/node.npy",
+          "size_bytes": 648000128,
+          "mtime_ns": 1792258463744545282
+        }
+      ],
+      "opened_paths": [
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/CVRP/metadata.json",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/CVRP/n.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/CVRP/coord_dist.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/CVRP/node.npy",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/CVRPtrain/input_metadata.npz"
+      ],
+      "row_hash": "sha256(task UTF8 + true_n int64 + cropped cached raw FP32 C bytes)"
+    },
+    {
+      "problem": "ATSP",
+      "split": "train",
+      "rows": 81000,
+      "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+      "cache_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/ATSP",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "metadata_sha256": "c8152df527f47916f51060d786cbad08445224d8041e7214139125e512ea3b4d",
+      "source_ids_sha256": "5ce8f778a39ed12260c45e7e839692df3f4fc66562da9225274ba140ea28eb72",
+      "input_files": [
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/ATSP/n.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258426655246705
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/ATSP/coord_dist.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258426656246714
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/ATSP/matrix.npy",
+          "size_bytes": 3240000128,
+          "mtime_ns": 1792258427023249668
+        }
+      ],
+      "opened_paths": [
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/ATSP/metadata.json",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/ATSP/n.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/ATSP/coord_dist.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/ATSP/matrix.npy",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/ATSPtrain/input_metadata.npz"
+      ],
+      "row_hash": "sha256(task UTF8 + true_n int64 + cropped cached raw FP32 C bytes)"
+    },
+    {
+      "problem": "OVRP",
+      "split": "train",
+      "rows": 81000,
+      "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+      "cache_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRP",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "metadata_sha256": "eefbd735d1136fcd516dfa5f65775d16df63a3505803c50434057b2e7cbcc650",
+      "source_ids_sha256": "b5df48a505f032258ebd02e8b007300a05f2e902cee5aac27af86a742a77481b",
+      "input_files": [
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRP/n.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258427991257461
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRP/coord_dist.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258427992257469
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRP/node.npy",
+          "size_bytes": 261792128,
+          "mtime_ns": 1792258428022257710
+        }
+      ],
+      "opened_paths": [
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRP/metadata.json",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRP/n.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRP/coord_dist.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRP/node.npy",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPtrain/input_metadata.npz"
+      ],
+      "row_hash": "sha256(task UTF8 + true_n int64 + cropped cached raw FP32 C bytes)"
+    },
+    {
+      "problem": "VRPB",
+      "split": "train",
+      "rows": 81000,
+      "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+      "cache_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPB",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "metadata_sha256": "620c2848338bcb7f7c635771e034d238d4d88a9518e6649ad250a117958f8ca2",
+      "source_ids_sha256": "aac535563dd5a6a3b77a60ecc758a2b4f5a898e6701ab46c0acf47fc89ca1246",
+      "input_files": [
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPB/n.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258478831666736
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPB/coord_dist.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258478833666752
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPB/node.npy",
+          "size_bytes": 261792128,
+          "mtime_ns": 1792258478895667251
+        }
+      ],
+      "opened_paths": [
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPB/metadata.json",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPB/n.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPB/coord_dist.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPB/node.npy",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBtrain/input_metadata.npz"
+      ],
+      "row_hash": "sha256(task UTF8 + true_n int64 + cropped cached raw FP32 C bytes)"
+    },
+    {
+      "problem": "VRPL",
+      "split": "train",
+      "rows": 81000,
+      "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+      "cache_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPL",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "metadata_sha256": "376d5740e6c769ba5096681448f1719a18c8ae2c54d64f60246d7e950d58ace4",
+      "source_ids_sha256": "e52909e5a326f6f074fca8e8ece3f28f0a67c406a198d6f8d5860a5fe91fa23d",
+      "input_files": [
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPL/n.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258500126838166
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPL/coord_dist.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258500128838182
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPL/node.npy",
+          "size_bytes": 261792128,
+          "mtime_ns": 1792258500164838472
+        }
+      ],
+      "opened_paths": [
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPL/metadata.json",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPL/n.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPL/coord_dist.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPL/node.npy",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPLtrain/input_metadata.npz"
+      ],
+      "row_hash": "sha256(task UTF8 + true_n int64 + cropped cached raw FP32 C bytes)"
+    },
+    {
+      "problem": "VRPTW",
+      "split": "train",
+      "rows": 81000,
+      "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+      "cache_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPTW",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "metadata_sha256": "952d2eedbdba3e7abdff4198a40fa12ea5363573b39d25606fcf06de34578cca",
+      "source_ids_sha256": "11f138a13840557ab6f173dc03ae74a1e5ff518c3e9528a1b34a2d8fb51a862c",
+      "input_files": [
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPTW/n.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258458010499121
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPTW/coord_dist.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258458012499137
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPTW/node.npy",
+          "size_bytes": 261792128,
+          "mtime_ns": 1792258458057499500
+        }
+      ],
+      "opened_paths": [
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPTW/metadata.json",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPTW/n.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPTW/coord_dist.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPTW/node.npy",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPTWtrain/input_metadata.npz"
+      ],
+      "row_hash": "sha256(task UTF8 + true_n int64 + cropped cached raw FP32 C bytes)"
+    },
+    {
+      "problem": "OVRPTW",
+      "split": "train",
+      "rows": 81000,
+      "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+      "cache_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPTW",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "metadata_sha256": "3128d7aaf7c18cfcc4ce35dc6d43b1aa0e8b8615bf292c7e7ba47c42f740704e",
+      "source_ids_sha256": "6e7d15308448405e5833c02b6248e0f7933d2567846aff2dc7614276cb921a47",
+      "input_files": [
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPTW/n.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258465373558395
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPTW/coord_dist.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258465378558436
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPTW/node.npy",
+          "size_bytes": 261792128,
+          "mtime_ns": 1792258465535559700
+        }
+      ],
+      "opened_paths": [
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPTW/metadata.json",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPTW/n.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPTW/coord_dist.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPTW/node.npy",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPTWtrain/input_metadata.npz"
+      ],
+      "row_hash": "sha256(task UTF8 + true_n int64 + cropped cached raw FP32 C bytes)"
+    },
+    {
+      "problem": "OVRPB",
+      "split": "train",
+      "rows": 81000,
+      "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+      "cache_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPB",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "metadata_sha256": "b2fcd0cb59118ca0df005e31880ecc243b4c4cc5530c70d2bb1f4baedbc53058",
+      "source_ids_sha256": "63ffff98caa018729274237b806d86990b9fbd8581cfc317eacc3beed9c4f3f3",
+      "input_files": [
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPB/n.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258515478961754
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPB/coord_dist.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258515480961770
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPB/node.npy",
+          "size_bytes": 261792128,
+          "mtime_ns": 1792258515554962365
+        }
+      ],
+      "opened_paths": [
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPB/metadata.json",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPB/n.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPB/coord_dist.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPB/node.npy",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBtrain/input_metadata.npz"
+      ],
+      "row_hash": "sha256(task UTF8 + true_n int64 + cropped cached raw FP32 C bytes)"
+    },
+    {
+      "problem": "OVRPL",
+      "split": "train",
+      "rows": 81000,
+      "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+      "cache_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPL",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "metadata_sha256": "5ffd3aebe0aec07072c22204b2bf9db3356a70ce3670dc424049d9d4d71d6011",
+      "source_ids_sha256": "b09de4c1769211f9107e853ef59a76239bebbfc3bc1585cba6b46e13c14d622b",
+      "input_files": [
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPL/n.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258528383065634
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPL/coord_dist.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258528386065659
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPL/node.npy",
+          "size_bytes": 261792128,
+          "mtime_ns": 1792258528442066109
+        }
+      ],
+      "opened_paths": [
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPL/metadata.json",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPL/n.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPL/coord_dist.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPL/node.npy",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPLtrain/input_metadata.npz"
+      ],
+      "row_hash": "sha256(task UTF8 + true_n int64 + cropped cached raw FP32 C bytes)"
+    },
+    {
+      "problem": "VRPBL",
+      "split": "train",
+      "rows": 81000,
+      "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+      "cache_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBL",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "metadata_sha256": "741f1295508325052ee021c781486c8b6e219a5b62639a5c948ad12c5975d9dc",
+      "source_ids_sha256": "ea087a26ce9456a9e90bc61b3892ed7fad29a13d637e26381f101bc8efad6757",
+      "input_files": [
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBL/n.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258480977684012
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBL/coord_dist.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258480980684036
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBL/node.npy",
+          "size_bytes": 261792128,
+          "mtime_ns": 1792258481079684833
+        }
+      ],
+      "opened_paths": [
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBL/metadata.json",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBL/n.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBL/coord_dist.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBL/node.npy",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBLtrain/input_metadata.npz"
+      ],
+      "row_hash": "sha256(task UTF8 + true_n int64 + cropped cached raw FP32 C bytes)"
+    },
+    {
+      "problem": "VRPBTW",
+      "split": "train",
+      "rows": 81000,
+      "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+      "cache_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBTW",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "metadata_sha256": "1126c30f33007fb77f4f42b2c453a2263264a1e2234fe7e26ad525358beeb145",
+      "source_ids_sha256": "71ca2e621e5e815edba76471ceea328c9f2581073861d6a106a8bcad05aac61c",
+      "input_files": [
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBTW/n.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258507135894590
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBTW/coord_dist.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258507138894614
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBTW/node.npy",
+          "size_bytes": 261792128,
+          "mtime_ns": 1792258507244895468
+        }
+      ],
+      "opened_paths": [
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBTW/metadata.json",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBTW/n.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBTW/coord_dist.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBTW/node.npy",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBTWtrain/input_metadata.npz"
+      ],
+      "row_hash": "sha256(task UTF8 + true_n int64 + cropped cached raw FP32 C bytes)"
+    },
+    {
+      "problem": "VRPLTW",
+      "split": "train",
+      "rows": 81000,
+      "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+      "cache_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPLTW",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "metadata_sha256": "678cc95867ce47c0ea13c1789f437d827fd7e753206aefd5d2a8f279c5ffccc4",
+      "source_ids_sha256": "1ed550291601ef12da1636f96d624ad8f78ce62dda247008555342b9cd546a57",
+      "input_files": [
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPLTW/n.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258542474179070
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPLTW/coord_dist.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258542481179127
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPLTW/node.npy",
+          "size_bytes": 261792128,
+          "mtime_ns": 1792258542704180922
+        }
+      ],
+      "opened_paths": [
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPLTW/metadata.json",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPLTW/n.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPLTW/coord_dist.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPLTW/node.npy",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPLTWtrain/input_metadata.npz"
+      ],
+      "row_hash": "sha256(task UTF8 + true_n int64 + cropped cached raw FP32 C bytes)"
+    },
+    {
+      "problem": "OVRPBL",
+      "split": "train",
+      "rows": 81000,
+      "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+      "cache_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBL",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "metadata_sha256": "64414ba28d4c9bf8a09bd52fe5fc0073e253624181f9e35f3623b26d6ffb727a",
+      "source_ids_sha256": "84d11d75e643f48c15e1f4e077fd4e300fff7f0f3074842cb392dec116da242d",
+      "input_files": [
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBL/n.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258554814278410
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBL/coord_dist.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258554819278451
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBL/node.npy",
+          "size_bytes": 261792128,
+          "mtime_ns": 1792258555043280254
+        }
+      ],
+      "opened_paths": [
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBL/metadata.json",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBL/n.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBL/coord_dist.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBL/node.npy",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBLtrain/input_metadata.npz"
+      ],
+      "row_hash": "sha256(task UTF8 + true_n int64 + cropped cached raw FP32 C bytes)"
+    },
+    {
+      "problem": "OVRPBTW",
+      "split": "train",
+      "rows": 81000,
+      "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+      "cache_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBTW",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "metadata_sha256": "fc622e512bcb9e5a52b3e40157df5f254a3e7ced3f481c64d84cef3c73aa26ed",
+      "source_ids_sha256": "d550b07557cc75658dc802c8f130a39575b1fa350fa049ccc36c4ae7a369ae7f",
+      "input_files": [
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBTW/n.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258525170039769
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBTW/coord_dist.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258525171039777
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBTW/node.npy",
+          "size_bytes": 261792128,
+          "mtime_ns": 1792258525192039946
+        }
+      ],
+      "opened_paths": [
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBTW/metadata.json",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBTW/n.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBTW/coord_dist.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBTW/node.npy",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBTWtrain/input_metadata.npz"
+      ],
+      "row_hash": "sha256(task UTF8 + true_n int64 + cropped cached raw FP32 C bytes)"
+    },
+    {
+      "problem": "OVRPLTW",
+      "split": "train",
+      "rows": 81000,
+      "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+      "cache_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPLTW",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "metadata_sha256": "c5196888545add1a8ad3af02973bf248c94b1a387b8e84f07fe5253ec6988b15",
+      "source_ids_sha256": "1f5fb038becfc67ac6c4aa9b67972be01926d97cb32c7f96e1ef68bd7ab1c63e",
+      "input_files": [
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPLTW/n.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258541366170151
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPLTW/coord_dist.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258541368170167
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPLTW/node.npy",
+          "size_bytes": 261792128,
+          "mtime_ns": 1792258541407170481
+        }
+      ],
+      "opened_paths": [
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPLTW/metadata.json",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPLTW/n.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPLTW/coord_dist.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPLTW/node.npy",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPLTWtrain/input_metadata.npz"
+      ],
+      "row_hash": "sha256(task UTF8 + true_n int64 + cropped cached raw FP32 C bytes)"
+    },
+    {
+      "problem": "VRPBLTW",
+      "split": "train",
+      "rows": 81000,
+      "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+      "cache_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBLTW",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "metadata_sha256": "5d85d4b19bc1ec444f03fcc7a735eb1933ec1fef8f56be5bee8b3ca6c5081e9d",
+      "source_ids_sha256": "561d5c29d9dae665d454cc774722eb0cf7451d25dc8bc6ebdbe6bbce3efec95f",
+      "input_files": [
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBLTW/n.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258568852391420
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBLTW/coord_dist.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258568853391428
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBLTW/node.npy",
+          "size_bytes": 261792128,
+          "mtime_ns": 1792258569065393135
+        }
+      ],
+      "opened_paths": [
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBLTW/metadata.json",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBLTW/n.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBLTW/coord_dist.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/VRPBLTW/node.npy",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBLTWtrain/input_metadata.npz"
+      ],
+      "row_hash": "sha256(task UTF8 + true_n int64 + cropped cached raw FP32 C bytes)"
+    },
+    {
+      "problem": "OVRPBLTW",
+      "split": "train",
+      "rows": 81000,
+      "scenario_id": "new90k_seed2_B_filtered_MOEL_as_reld_mt_v1",
+      "cache_directory": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBLTW",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "metadata_sha256": "e49ad116d2f14f766d04c7ac0d8701dd18252549ac6a319b25ce2ff49ffd33ac",
+      "source_ids_sha256": "d9d433889a2317d98e6a9267d42d1f3a2c5b28a8effb96392e8aa1ab74f55147",
+      "input_files": [
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBLTW/n.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258586667534835
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBLTW/coord_dist.npy",
+          "size_bytes": 648128,
+          "mtime_ns": 1792258586669534851
+        },
+        {
+          "path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBLTW/node.npy",
+          "size_bytes": 261792128,
+          "mtime_ns": 1792258586699535093
+        }
+      ],
+      "opened_paths": [
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBLTW/metadata.json",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBLTW/n.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBLTW/coord_dist.npy",
+        "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/input_cache/train/OVRPBLTW/node.npy",
+        "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBLTWtrain/input_metadata.npz"
+      ],
+      "row_hash": "sha256(task UTF8 + true_n int64 + cropped cached raw FP32 C bytes)"
+    }
+  ],
+  "source_policy": "Only raw TRAIN input arrays and source IDs; no native labels, costs or routes"
+}

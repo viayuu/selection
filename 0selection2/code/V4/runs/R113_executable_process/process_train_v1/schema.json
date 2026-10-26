@@ -1,0 +1,68 @@
+{
+  "version": "r113_typed_fragment_v1",
+  "split": "train",
+  "dimensions": {
+    "B": "actual batch rows",
+    "K": "configured max_steps, default 12",
+    "L": "min(K, n-1, ceil(sqrt(n-1))) per row, from input only",
+    "F": 16,
+    "H": 7,
+    "G": 3,
+    "D": "processor hidden_dim, default 64"
+  },
+  "inputs": {
+    "nodes": {"dtype": "float32", "shape": ["B", "K", 12]},
+    "anchor": {"dtype": "float32", "shape": ["B", 12]},
+    "edge_features": {"dtype": "float32", "shape": ["B", "K", "K", 2]},
+    "topology": {"dtype": "bool", "shape": ["B", "K", "K"]},
+    "node_mask": {"dtype": "bool", "shape": ["B", "K"]},
+    "sequence": {"dtype": "int64", "shape": ["B", "K"], "padding": -1},
+    "anchor_index": {"dtype": "int64", "shape": ["B"]},
+    "steps": {"dtype": "int64", "shape": ["B"], "source": "L from input"},
+    "n": {"dtype": "int64", "shape": ["B"]},
+    "problem_id": {"dtype": "int64", "shape": ["B"]},
+    "coord_dist": {"dtype": "int64", "shape": ["B"], "meaning": "distribution category, not travel"},
+    "task_flags": {"dtype": "bool", "shape": ["B", 7]},
+    "graph_mask": {"dtype": "bool", "shape": ["B", 3]},
+    "scalar_mask": {"dtype": "bool", "shape": ["B", 16]},
+    "binary_mask": {"dtype": "bool", "shape": ["B", 7]}
+  },
+  "targets": {
+    "scalar": {"dtype": "float32", "shape": ["B", "K+1", 16]},
+    "binary": {"dtype": "bool", "shape": ["B", "K+1", 7]},
+    "pointer": {"dtype": "int64", "shape": ["B", "K+1"], "anchor_class": "K"},
+    "reached": {"dtype": "bool", "shape": ["B", "K+1", 3, "K"]},
+    "frontier": {"dtype": "bool", "shape": ["B", "K+1", 3, "K"]},
+    "compatible": {"dtype": "bool", "shape": ["B", 3, "K", "K"]},
+    "scalar_delta": {"dtype": "float32", "shape": ["B", "K", 16]},
+    "state_mask": {"dtype": "bool", "shape": ["B", "K+1"]},
+    "transition_mask": {"dtype": "bool", "shape": ["B", "K"]}
+  },
+  "outputs": {
+    "scalar": {"dtype": "float", "shape": ["B", "K+1", 16]},
+    "binary": {"dtype": "float_probability", "shape": ["B", "K+1", 7]},
+    "pointer": {"dtype": "float_categorical_probability", "shape": ["B", "K+1", "K+1"]},
+    "reached": {"dtype": "float_probability", "shape": ["B", "K+1", 3, "K"]},
+    "frontier": {"dtype": "float_probability", "shape": ["B", "K+1", 3, "K"]},
+    "compatible": {"dtype": "float_probability", "shape": ["B", "K+1", 3, "K", "K"]},
+    "scalar_delta": {"dtype": "float", "shape": ["B", "K", 16]},
+    "representation": {"dtype": "float", "shape": ["B", "D"]}
+  },
+  "provenance": {
+    "row_index": {"dtype": "int64", "shape": ["B"]},
+    "source_index": {"dtype": "int64", "shape": ["B"]},
+    "input_sha256": {"dtype": "S64", "shape": ["B"]},
+    "version": {"dtype": "unicode", "shape": []},
+    "split": {"dtype": "unicode", "shape": []}
+  },
+  "task_fields": ["capacity", "open", "backhaul", "length", "time", "matrix", "has_depot"],
+  "graph_fields": ["structural", "signed_interval", "classical_B"],
+  "node_fields": ["x", "y", "signed_demand", "is_depot", "route_limit", "service", "window_start", "window_end", "from_anchor", "to_anchor", "mean_outgoing", "mean_incoming"],
+  "edge_fields": ["directed_travel", "reverse_travel"],
+  "scalar_fields": ["demand_sum", "demand_prefix_min", "demand_prefix_max", "initial_remaining_lo", "initial_remaining_hi", "delivery_sum", "pickup_sum", "path_length", "billed_fragment_length", "arrival", "service_start", "departure", "waiting_sum", "min_window_slack", "route_limit_slack", "remaining_if_start_full"],
+  "binary_fields": ["signed_interval_ok", "signed_full_start_ok", "classical_capacity_ok", "classical_precedence_ok", "time_prefix_ok", "length_prefix_ok", "classical_B_resource_ok"],
+  "absolute_tolerance": 0.000002,
+  "teacher_arithmetic": "FP64 on compiled FP32 inputs; saved scalars/deltas FP32",
+  "target_semantics": "declared input-derived programs, not native solver trajectories or native feasibility",
+  "deployment": "input-only initialization; bounded input-derived schedule; predicted state feedback; no targets or teacher hint lengths"
+}

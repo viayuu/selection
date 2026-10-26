@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "root": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process",
+  "protocol_lock": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/protocol_lock.json",
+  "cpu_count": 4,
+  "memory_gib": 9,
+  "idle_memory_mib": 512,
+  "automatic_training_retry": false,
+  "diagnostic_inputs": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/process_diagnostic_inputs.json",
+  "diagnostic_subset_sha256": "50cb1e5b4206c4356ba84e8eafb2309be093097a2488e28a3805a3e66b9147b4",
+  "r114": {
+    "plan": "/public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/grouped_execution/queue_v1/plan.json",
+    "ready_receipt": "/public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/grouped_execution/READY_RECEIPT.json",
+    "timeout_seconds": 3600,
+    "cpu_ids": "first two of four assigned slot CPUs; R114_CPU_IDS and taskset",
+    "numerical_threads": 1
+  },
+  "slots": {
+    "3090_0": {"job": 1465, "node": "gpu03", "index": 0, "gpu_type": "3090", "uuid": "GPU-cb24f168-9f18-f0d5-6f4a-6d2406958f50"},
+    "3090_1": {"job": 1465, "node": "gpu03", "index": 1, "gpu_type": "3090", "uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d"},
+    "4090_0": {"job": 1475, "node": "gpu05", "index": 0, "gpu_type": "4090", "uuid": "GPU-71479e7e-f8bd-e430-66ed-f8db9f0d47be"},
+    "4090_1": {"job": 1475, "node": "gpu05", "index": 1, "gpu_type": "4090", "uuid": "GPU-597c682a-4b7f-7609-80a6-8ced791f5c5d"}
+  },
+  "jobs": [
+    {"job_id": "C_transition", "allowed_slots": ["4090_0", "4090_1"]},
+    {"job_id": "B_snapshot", "allowed_slots": ["4090_0", "4090_1"]},
+    {"job_id": "A_scratch", "allowed_slots": ["3090_0", "3090_1", "4090_0", "4090_1"]},
+    {"job_id": "R114_labels", "allowed_slots": ["3090_0", "3090_1", "4090_0", "4090_1"]}
+  ],
+  "ready_conditions": [
+    "Wait never approves or initializes CUDA; main alone creates the exclusive ready receipt.",
+    "Main confirms locked R113 protocol SHA256, final source-set SHA256 and finalized R114 plan canonical SHA256.",
+    "R113 protocol owns BOTH hardware-independent microbatch maps and eval size. Historical r98 slot caps are not used.",
+    "Main supplies exact finalized grouped R114 queue plan and timeout; r114_run_queue --execute --finalize owns gates, partial masks and analysis.",
+    "Each R113 arm runs its own bounded r113_witness once, then A train/finalize or B/C pretrain/train/finalize.",
+    "Worker holds the ORIGINAL r81 UUID mutex inode across capacity and all formal children; GPU memory <=512MiB and no compute process before initialization.",
+    "No new allocation, SSH, witness-transport reuse, kills, automatic cap changes, training retry, resume, or cache rebuild."
+  ],
+  "wandb_mode": "offline",
+  "wandb_reason": "Retain the authorized existing allocation offline setting; no credential lookup or online preflight.",
+  "hardware_note": "C/B prefer the first available 4090 slots; A and R114 use remaining free slots. Record actual UUID/type per attempt; execution caps remain identical."
+}

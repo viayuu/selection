@@ -1,0 +1,1037 @@
+{
+  "experiment": "R113",
+  "arm": "A_scratch",
+  "complete": true,
+  "created_utc": "2026-10-26T10:06:11.877362+00:00",
+  "checkpoint_lock": {
+    "experiment": "R113",
+    "arm": "A_scratch",
+    "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/A_scratch/best.pt",
+    "checkpoint_sha256": "7bbe2d341261c17d03966ac75af91764d0dceacc1aac6d794f8024aa8619596b",
+    "state_hash": "294291ad8f854347185b27de44d2b69711a96b6426cbc606d91e7f1fec1620ef",
+    "epoch": 14,
+    "selected_update": 40320,
+    "rule": "strict maximum full18 VAL macro_top1; exact Top1 ties: minimum macro_actual_regret_pct; exact double ties: first checkpoint",
+    "selected_without_test": true,
+    "per_problem_assembly": false,
+    "val": {
+      "macro_ce": 0.7125114268726773,
+      "macro_top1": 0.7092716049382717,
+      "macro_top2": 0.9048395061728394,
+      "macro_top3": 0.9621481481481481,
+      "macro_top1_tie_aware": 0.7107654320987654,
+      "macro_mean_cost": 11.417807412134273,
+      "macro_vs_sbs_pct": -0.18530914891609382,
+      "macro_vs_oracle_pct": 0.4023903252765421,
+      "macro_actual_regret_pct": 0.41341418735735214,
+      "macro_vbs_gap_closed_pct": 11.924859334119626,
+      "macro_sbs_cost": 11.427978473494235,
+      "macro_oracle_cost": 11.371691902364589
+    },
+    "inference_rule": "eval mode; self-initialized predicted-state transition feedback; original R77 score-difference maximin; stable ascending-global-solver-ID ties",
+    "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+    "locked_utc": "2026-10-26T10:01:40.732027+00:00"
+  },
+  "model_factory": "code.V4.r113_experiment.load_checkpoint",
+  "main_protocol_lock": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/protocol_lock.json",
+    "sha256": "678685bd573d3c034fb17d6410fc089c63302867b88c4eb3c67dfd91f86b7a3e",
+    "record": {
+      "experiment": "R113",
+      "locked": true,
+      "arms": [
+        "A_scratch",
+        "B_snapshot",
+        "C_transition"
+      ],
+      "seed": 2,
+      "task_scope": "full18",
+      "rows_per_problem": {
+        "train": 81000,
+        "val": 4500,
+        "test": 4500
+      },
+      "logical_global_batch": 512,
+      "max_successful_updates": 57600,
+      "warmup_updates": 4320,
+      "eval_every_updates": 2880,
+      "train_eval_every_updates": 14400,
+      "optimizer": "AdamW",
+      "peak_lr": 0.0001,
+      "end_lr": 1e-06,
+      "weight_decay": 0.0001,
+      "grad_clip": 1,
+      "dropout": 0.1,
+      "checkpoint_rule": "strict maximum full18 VAL macro_top1; exact Top1 ties: minimum macro_actual_regret_pct; exact double ties: first checkpoint",
+      "inference_rule": "eval mode; self-initialized predicted-state transition feedback; original R77 score-difference maximin; stable ascending-global-solver-ID ties",
+      "pretraining": {
+        "arms": [
+          "B_snapshot",
+          "C_transition"
+        ],
+        "logical_global_batch": 512,
+        "max_successful_updates": 8640,
+        "warmup_updates": 432,
+        "peak_lr": 0.0003,
+        "end_lr": 1e-05,
+        "optimizer": "AdamW",
+        "weight_decay": 0.0001,
+        "grad_clip": 1,
+        "checkpoint_every_updates": 432,
+        "loss_weights": {
+          "scalar_state": 1,
+          "scalar_transition": 1,
+          "binary_state": 1,
+          "pointer_state": 1,
+          "compatible": 1,
+          "reached": 1,
+          "frontier": 1
+        },
+        "stream_rule": "seed2 task round-robin shuffle; per-task shuffled shards/rows; carry cycle tails",
+        "checkpoint_rule": "last successful update; no validation or checkpoint selection",
+        "processor_only": true,
+        "teacher_forcing": false,
+        "context": null
+      },
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "prepared_root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+      "primary_cache": "/tmp/shiys_R84_new90k_cache",
+      "pretrain_root": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/pretrain",
+      "process_manifest": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/process_train_v1/manifest.json",
+      "process_manifest_sha256": "975282dea4458cfb0009d042a6e369b2afe415988929dfd1b29418926dafbcce",
+      "microbatch_caps": {
+        "TSP": 384,
+        "CVRP": 384,
+        "ATSP": 512,
+        "OVRP": 512,
+        "VRPB": 512,
+        "VRPL": 512,
+        "VRPTW": 512,
+        "OVRPTW": 512,
+        "OVRPB": 512,
+        "OVRPL": 512,
+        "VRPBL": 512,
+        "VRPBTW": 512,
+        "VRPLTW": 512,
+        "OVRPBL": 512,
+        "OVRPBTW": 512,
+        "OVRPLTW": 512,
+        "VRPBLTW": 512,
+        "OVRPBLTW": 512
+      },
+      "pretrain_microbatch_caps": {
+        "TSP": 512,
+        "CVRP": 512,
+        "ATSP": 512,
+        "OVRP": 512,
+        "VRPB": 512,
+        "VRPL": 512,
+        "VRPTW": 512,
+        "OVRPTW": 512,
+        "OVRPB": 512,
+        "OVRPL": 512,
+        "VRPBL": 512,
+        "VRPBTW": 512,
+        "VRPLTW": 512,
+        "OVRPBL": 512,
+        "OVRPBTW": 512,
+        "OVRPLTW": 512,
+        "VRPBLTW": 512,
+        "OVRPBLTW": 512
+      },
+      "eval_batch_size": 512,
+      "capacity_rule": "Once assigned, one disposable capacity witness before formal updates. On OOM/nonfinite failure stop and preserve receipt; never silently shrink caps or retry training.",
+      "postlock_process_diagnostics": {
+        "split": "val",
+        "rows_per_problem": 64,
+        "selection": "seed2 size-stratified input-only; same fixed rows for all arms",
+        "purpose": "report only after unique checkpoint lock; never train, select or feed teacher states"
+      },
+      "execution_note": "One independent allocated GPU per arm; common logical512 and caps across both GPU types. User authorized batch and validation-rule redesign; new TRAIN process supervision independently versioned.",
+      "scientific_boundary": "Declared synthetic typed programs, not native solver routes or a uniform certification of historical B semantics. No claim of wholly unseen TEST after prior research."
+    }
+  },
+  "model_params": {
+    "embedding_dim": 128,
+    "head_num": 4,
+    "qkv_dim": 32,
+    "ff_hidden_dim": 512,
+    "head_hidden_dim": 256,
+    "encoder_layer_num": 4,
+    "solver_set_layer_num": 2,
+    "query_num": 4,
+    "dropout": 0.1,
+    "stats_dim": 12,
+    "rezero": false,
+    "gap_score_weight": 0.25,
+    "pre_score_weight": 0.25,
+    "support_branch": false,
+    "support_generators": 0,
+    "support_hidden": 128,
+    "support_score_weight": 0.0,
+    "support_score_mode": "g0",
+    "support_g0_as_main": false,
+    "support_feature_to_token": true,
+    "support_main_utility_weight": 0.0,
+    "support_main_pre_weight": 0.0,
+    "support_main_gap_weight": 0.0,
+    "solver_feature_spec": {
+      "feature_dim": 34,
+      "index_base": 0,
+      "feature_order": [
+        "\u6784\u9020\u5f0f",
+        "\u6269\u6563\u5f0f",
+        "\u5750\u6807\u4e0e\u8282\u70b9\u5c5e\u6027",
+        "\u6210\u672c\u77e9\u9635",
+        "\u56fe\u4e0e\u8fb9",
+        "MHA\uff0fTransformer",
+        "GNN",
+        "\u77e9\u9635\u53cc\u6d41\u6ce8\u610f\u529b",
+        "\u9759\u6001\u7f16\u7801\u590d\u7528",
+        "\u52a8\u6001\u72b6\u6001\u66f4\u65b0",
+        "\u52a8\u6001\u5c40\u90e8\u66f4\u65b0",
+        "\u8fed\u4ee3\u53bb\u566a",
+        "\u5b9e\u4f8b\u6761\u4ef6",
+        "\u5c5e\u6027\u6761\u4ef6",
+        "\u7ea6\u675f\u6761\u4ef6",
+        "\u5143\u5b66\u4e60\u4efb\u52a1\u6761\u4ef6",
+        "FFN \u4e13\u5bb6",
+        "LoRA \u4e13\u5bb6",
+        "\u76d1\u7763\u5b66\u4e60",
+        "\u5f3a\u5316\u5b66\u4e60",
+        "\u6269\u6563\u8bad\u7ec3",
+        "\u5355\u4efb\u52a1",
+        "\u591a\u4efb\u52a1",
+        "\u5143\u5b66\u4e60",
+        "\u5b50\u95ee\u9898\u91cd\u7f16\u7801",
+        "\u91cd\u89e3\u7801\u5668",
+        "\u68af\u5ea6\u5f15\u5bfc\u641c\u7d22",
+        "\u5168\u5c40\u2014\u5c40\u90e8\u53cc\u7b56\u7565",
+        "\u8fd1\u90bb\u6210\u672c\u8f93\u5165",
+        "\u4f2a one-hot \u8f93\u5165",
+        "\u7edf\u4e00\u77e9\u9635\u8868\u793a",
+        "\u5168\u5c40\u5206\u533a\u4e0e\u5c40\u90e8\u91cd\u6784",
+        "\u89e3\u7801\u5668 FFN \u6b8b\u5dee",
+        "\u5168\u5c40\u5c5e\u6027\u5d4c\u5165"
+      ],
+      "solver_active_indices": {
+        "BQ": [
+          0,
+          2,
+          5,
+          9,
+          18,
+          21,
+          24
+        ],
+        "LEHD": [
+          0,
+          2,
+          5,
+          9,
+          18,
+          21,
+          25
+        ],
+        "DIFUSCO": [
+          1,
+          4,
+          6,
+          11,
+          20,
+          21
+        ],
+        "DIFUSCO500": [
+          1,
+          4,
+          6,
+          11,
+          20,
+          21
+        ],
+        "T2T": [
+          1,
+          4,
+          6,
+          11,
+          20,
+          21,
+          26
+        ],
+        "T2T500": [
+          1,
+          4,
+          6,
+          11,
+          20,
+          21,
+          26
+        ],
+        "ELG": [
+          0,
+          2,
+          5,
+          8,
+          10,
+          19,
+          21,
+          27
+        ],
+        "OMNI": [
+          0,
+          2,
+          5,
+          8,
+          15,
+          19,
+          23
+        ],
+        "ICAM": [
+          0,
+          2,
+          5,
+          8,
+          12,
+          19,
+          21
+        ],
+        "ICAM_ATSP": [
+          0,
+          3,
+          7,
+          8,
+          12,
+          19,
+          21,
+          28
+        ],
+        "MATNET": [
+          0,
+          3,
+          7,
+          8,
+          19,
+          21
+        ],
+        "MATPOENET": [
+          0,
+          3,
+          7,
+          8,
+          19,
+          21,
+          29
+        ],
+        "UNICO_MatPOENet": [
+          0,
+          3,
+          7,
+          8,
+          19,
+          22,
+          29,
+          30
+        ],
+        "GLOP": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          19,
+          31
+        ],
+        "MTPOMO": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          19,
+          22
+        ],
+        "MVMOE": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          16,
+          19,
+          22
+        ],
+        "RELD_CVRP": [
+          0,
+          2,
+          5,
+          8,
+          19,
+          21,
+          32
+        ],
+        "RELD_MTL": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          19,
+          22,
+          32
+        ],
+        "RELD_MOEL": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          16,
+          19,
+          22,
+          32
+        ],
+        "RouteFinder": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          19,
+          22,
+          33
+        ],
+        "MoSES_RF": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          17,
+          22,
+          33
+        ],
+        "MoSES_CaDA": [
+          0,
+          2,
+          5,
+          8,
+          14,
+          17,
+          22
+        ]
+      },
+      "solver_names": [
+        "BQ",
+        "DIFUSCO",
+        "DIFUSCO500",
+        "ELG",
+        "GLOP",
+        "ICAM",
+        "ICAM_ATSP",
+        "LEHD",
+        "MATNET",
+        "MATPOENET",
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "OMNI",
+        "RELD_CVRP",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder",
+        "T2T",
+        "T2T500",
+        "UNICO_MatPOENet"
+      ]
+    },
+    "solver_feature_weight": 1.0,
+    "solver_feature_hidden": 128,
+    "sdpa": true,
+    "architecture": "pairwise",
+    "joint_layer_num": 2,
+    "local_geometry": true,
+    "geometry_mode": "real",
+    "ignore_coord_dist": true,
+    "native_winner": true,
+    "decision_head": "classification",
+    "pair_mode": "score_difference",
+    "solver_representation": "handcrafted",
+    "permutation_seed": 4502,
+    "code_init_seed": 450002,
+    "r113_arm": "A_scratch",
+    "r113_spec": {
+      "experiment": "R113",
+      "schema_version": 1,
+      "node_stem_layers": 2,
+      "hidden_dim": 64,
+      "max_steps": 12,
+      "neighbors": 2,
+      "deployment": "self_initialized_predicted_feedback",
+      "decision": "candidate interaction with global and node trajectories plus final directed state; no old-score bypass",
+      "program_supervision": "new TRAIN-only typed fragments, not native solver routes or winners",
+      "role_arm": "B_execution_anchor",
+      "processor_seed": 113002,
+      "pretraining_modes": {
+        "A_scratch": null,
+        "B_snapshot": "snapshot",
+        "C_transition": "transition"
+      },
+      "snapshot_definition": "independent input/time-conditioned predictions; same target states and posthoc deltas",
+      "process_targets_in_query_forward": false
+    }
+  },
+  "trainable_parameter_count": 1659453,
+  "fresh_state_sha256": "95791a650b09425f0c1cfc362d50565a38b4ae45752f004cfec100bdbc41db14",
+  "processor_pretraining": null,
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "rows_per_problem": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "candidate_pools": {
+    "TSP": [
+      "BQ",
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "LEHD",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "CVRP": [
+      "BQ",
+      "ELG",
+      "ICAM",
+      "LEHD",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "ATSP": [
+      "GLOP",
+      "ICAM_ATSP",
+      "MATNET",
+      "MATPOENET",
+      "UNICO_MatPOENet"
+    ],
+    "OVRP": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ]
+  },
+  "scenario_solver_aliases": {
+    "reld_mt": "RELD_MOEL"
+  },
+  "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+  "checkpoint_rule": "strict maximum full18 VAL macro_top1; exact Top1 ties: minimum macro_actual_regret_pct; exact double ties: first checkpoint",
+  "nss_reference": [
+    {
+      "dataset": "TSP TEST",
+      "problem": "TSP",
+      "n": 4500,
+      "current_model": "R113/A_scratch",
+      "current_model_factory": "code.V4.r113_experiment.load_checkpoint",
+      "current_top1_native_pct": 46.82222222222222,
+      "current_mean_cost": 7.972356008048511,
+      "current_checkpoint_sha256": "7bbe2d341261c17d03966ac75af91764d0dceacc1aac6d794f8024aa8619596b",
+      "current_state_hash": "294291ad8f854347185b27de44d2b69711a96b6426cbc606d91e7f1fec1620ef",
+      "current_selected_update": 40320,
+      "current_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/A_scratch/evaluation/test/selected_best/rank000.npz",
+      "nss_model": "R79 saved historical weights; not retrained on new90k",
+      "data_version": "selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "candidate_pool": "[\"BQ\", \"DIFUSCO\", \"DIFUSCO500\", \"ELG\", \"LEHD\", \"OMNI\", \"T2T\", \"T2T500\"]",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "status": "complete",
+      "nss_top1_native_pct": 45.88888888888889,
+      "nss_mean_cost": 7.9704007194012005,
+      "nss_checkpoint_sha256": "c677a8cd4ee473ee47bdedff871050827f75717c321ae9d551a3edc7bc78994b",
+      "nss_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/TSP/test_predictions.npz"
+    },
+    {
+      "dataset": "CVRP TEST",
+      "problem": "CVRP",
+      "n": 4500,
+      "current_model": "R113/A_scratch",
+      "current_model_factory": "code.V4.r113_experiment.load_checkpoint",
+      "current_top1_native_pct": 46.77777777777778,
+      "current_mean_cost": 18.0185778857344,
+      "current_checkpoint_sha256": "7bbe2d341261c17d03966ac75af91764d0dceacc1aac6d794f8024aa8619596b",
+      "current_state_hash": "294291ad8f854347185b27de44d2b69711a96b6426cbc606d91e7f1fec1620ef",
+      "current_selected_update": 40320,
+      "current_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/A_scratch/evaluation/test/selected_best/rank000.npz",
+      "nss_model": "R79 saved historical weights; not retrained on new90k",
+      "data_version": "selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "candidate_pool": "[\"BQ\", \"ELG\", \"ICAM\", \"LEHD\", \"MVMOE\", \"MoSES_CaDA\", \"MoSES_RF\", \"OMNI\", \"RELD_CVRP\", \"RouteFinder\"]",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "status": "complete",
+      "nss_top1_native_pct": 45.97777777777778,
+      "nss_mean_cost": 18.00480236763458,
+      "nss_checkpoint_sha256": "b1e7595eb16a89e3bdf526c3c4d8b05ce3d7d4dc39ab1241667657924e3fc574",
+      "nss_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/CVRP/test_predictions.npz"
+    },
+    {
+      "dataset": "TSPLIB",
+      "problem": "TSP",
+      "n": 49,
+      "current_model": "R113/A_scratch",
+      "current_model_factory": "code.V4.r113_experiment.load_checkpoint",
+      "current_top1_native_pct": 24.489795918367346,
+      "current_mean_cost": 8.209452472840642,
+      "current_checkpoint_sha256": "7bbe2d341261c17d03966ac75af91764d0dceacc1aac6d794f8024aa8619596b",
+      "current_state_hash": "294291ad8f854347185b27de44d2b69711a96b6426cbc606d91e7f1fec1620ef",
+      "current_selected_update": 40320,
+      "current_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/A_scratch/lib_evaluation/predictions/TSPLIB.npz",
+      "nss_model": "R79 saved historical weights; not retrained on new90k",
+      "data_version": "original native TSPLIB",
+      "candidate_pool": "[\"BQ\", \"DIFUSCO\", \"DIFUSCO500\", \"ELG\", \"LEHD\", \"OMNI\", \"T2T\", \"T2T500\"]",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "status": "complete",
+      "nss_top1_native_pct": 20.408163265306122,
+      "nss_mean_cost": 8.217907074335503,
+      "nss_checkpoint_sha256": "c677a8cd4ee473ee47bdedff871050827f75717c321ae9d551a3edc7bc78994b",
+      "nss_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/TSP/TSPLIB_predictions.npz"
+    },
+    {
+      "dataset": "CVRPLIB",
+      "problem": "CVRP",
+      "n": 100,
+      "current_model": "R113/A_scratch",
+      "current_model_factory": "code.V4.r113_experiment.load_checkpoint",
+      "current_top1_native_pct": 48.0,
+      "current_mean_cost": 67.59979729652468,
+      "current_checkpoint_sha256": "7bbe2d341261c17d03966ac75af91764d0dceacc1aac6d794f8024aa8619596b",
+      "current_state_hash": "294291ad8f854347185b27de44d2b69711a96b6426cbc606d91e7f1fec1620ef",
+      "current_selected_update": 40320,
+      "current_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/A_scratch/lib_evaluation/predictions/CVRPLIB.npz",
+      "nss_model": "R79 saved historical weights; not retrained on new90k",
+      "data_version": "original native CVRPLIB",
+      "candidate_pool": "[\"BQ\", \"ELG\", \"ICAM\", \"LEHD\", \"MVMOE\", \"MoSES_CaDA\", \"MoSES_RF\", \"OMNI\", \"RELD_CVRP\", \"RouteFinder\"]",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "status": "complete",
+      "nss_top1_native_pct": 70.0,
+      "nss_mean_cost": 67.10111171722467,
+      "nss_checkpoint_sha256": "b1e7595eb16a89e3bdf526c3c4d8b05ce3d7d4dc39ab1241667657924e3fc574",
+      "nss_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/CVRP/CVRPLIB_predictions.npz"
+    }
+  ],
+  "nss_alignment": {
+    "TSP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "TSPLIB": {
+      "instance_key": "indices",
+      "matching_population": 49,
+      "checked_instance_ids": [
+        0,
+        24,
+        48
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRPLIB": {
+      "instance_key": "indices",
+      "matching_population": 100,
+      "checked_instance_ids": [
+        0,
+        50,
+        99
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    }
+  },
+  "inference_timing": {
+    "experiment": "R113",
+    "arm": "A_scratch",
+    "complete": true,
+    "completed_utc": "2026-10-26T10:05:34.778450+00:00",
+    "checkpoint_sha256": "7bbe2d341261c17d03966ac75af91764d0dceacc1aac6d794f8024aa8619596b",
+    "state_hash": "294291ad8f854347185b27de44d2b69711a96b6426cbc606d91e7f1fec1620ef",
+    "selected_update": 40320,
+    "model_state_sha256": "1f1b1e1dd2ee5b194f3eb6b6fb7acf05890c86aa618e3abf1c7f8a6fc1a58d80",
+    "model_factory": "code.V4.r113_experiment.load_checkpoint",
+    "inference_rule": "eval mode; self-initialized predicted-state transition feedback; original R77 score-difference maximin; stable ascending-global-solver-ID ties",
+    "device": "cuda:0",
+    "device_name": "NVIDIA GeForce RTX 3090",
+    "repetitions": 3,
+    "warmup_batches": 1,
+    "eval_batch_size": 512,
+    "parameter_count": 1659453,
+    "scope": "complete_standalone_model_original_GPU_resident_inputs",
+    "sample_policy": "first512 frozen TEST inputs per problem",
+    "all_current_model_included": true,
+    "end_to_end_measured": false,
+    "input_labels_read": false,
+    "excludes": "dataset I/O, CPU-to-GPU transfer, training and solver execution",
+    "per_problem": [
+      {
+        "problem": "TSP",
+        "instances": 512,
+        "standalone_model": {
+          "batch_seconds": [
+            0.1257621217519045,
+            0.12378574721515179,
+            0.12221230380237103
+          ],
+          "mean_seconds_per_instance": 0.0002420313624800959
+        }
+      },
+      {
+        "problem": "CVRP",
+        "instances": 512,
+        "standalone_model": {
+          "batch_seconds": [
+            0.1555311158299446,
+            0.15614011511206627,
+            0.1557841431349516
+          ],
+          "mean_seconds_per_instance": 0.0003043329258313558
+        }
+      },
+      {
+        "problem": "ATSP",
+        "instances": 512,
+        "standalone_model": {
+          "batch_seconds": [
+            0.05652991496026516,
+            0.05640175938606262,
+            0.05657616816461086
+          ],
+          "mean_seconds_per_instance": 0.00011035666830139235
+        }
+      },
+      {
+        "problem": "OVRP",
+        "instances": 512,
+        "standalone_model": {
+          "batch_seconds": [
+            0.05582650005817413,
+            0.0559645164757967,
+            0.05591450445353985
+          ],
+          "mean_seconds_per_instance": 0.0001091832818929106
+        }
+      },
+      {
+        "problem": "VRPB",
+        "instances": 512,
+        "standalone_model": {
+          "batch_seconds": [
+            0.05616895481944084,
+            0.05592782609164715,
+            0.055862726643681526
+          ],
+          "mean_seconds_per_instance": 0.00010934863773096974
+        }
+      },
+      {
+        "problem": "VRPL",
+        "instances": 512,
+        "standalone_model": {
+          "batch_seconds": [
+            0.05630047060549259,
+            0.05644052289426327,
+            0.05625789985060692
+          ],
+          "mean_seconds_per_instance": 0.00011002532119164243
+        }
+      },
+      {
+        "problem": "VRPTW",
+        "instances": 512,
+        "standalone_model": {
+          "batch_seconds": [
+            0.05636117048561573,
+            0.055944761261343956,
+            0.0564127191901207
+          ],
+          "mean_seconds_per_instance": 0.00010984287170382838
+        }
+      },
+      {
+        "problem": "OVRPTW",
+        "instances": 512,
+        "standalone_model": {
+          "batch_seconds": [
+            0.05637476406991482,
+            0.05625387094914913,
+            0.055987196043133736
+          ],
+          "mean_seconds_per_instance": 0.00010977593168111828
+        }
+      },
+      {
+        "problem": "OVRPB",
+        "instances": 512,
+        "standalone_model": {
+          "batch_seconds": [
+            0.0556461438536644,
+            0.0559543464332819,
+            0.05612057074904442
+          ],
+          "mean_seconds_per_instance": 0.00010919339911197312
+        }
+      },
+      {
+        "problem": "OVRPL",
+        "instances": 512,
+        "standalone_model": {
+          "batch_seconds": [
+            0.05624835193157196,
+            0.05604797601699829,
+            0.0563126802444458
+          ],
+          "mean_seconds_per_instance": 0.00010977148970899482
+        }
+      },
+      {
+        "problem": "VRPBL",
+        "instances": 512,
+        "standalone_model": {
+          "batch_seconds": [
+            0.05583677813410759,
+            0.05591017194092274,
+            0.056283947080373764
+          ],
+          "mean_seconds_per_instance": 0.00010939511533554953
+        }
+      },
+      {
+        "problem": "VRPBTW",
+        "instances": 512,
+        "standalone_model": {
+          "batch_seconds": [
+            0.055910997092723846,
+            0.055651312693953514,
+            0.055567191913723946
+          ],
+          "mean_seconds_per_instance": 0.00010880826933619876
+        }
+      },
+      {
+        "problem": "VRPLTW",
+        "instances": 512,
+        "standalone_model": {
+          "batch_seconds": [
+            0.056170275434851646,
+            0.056261926889419556,
+            0.05588573031127453
+          ],
+          "mean_seconds_per_instance": 0.00010958198739293341
+        }
+      },
+      {
+        "problem": "OVRPBL",
+        "instances": 512,
+        "standalone_model": {
+          "batch_seconds": [
+            0.05560117959976196,
+            0.055466823279857635,
+            0.05572100728750229
+          ],
+          "mean_seconds_per_instance": 0.00010858659516088665
+        }
+      },
+      {
+        "problem": "OVRPBTW",
+        "instances": 512,
+        "standalone_model": {
+          "batch_seconds": [
+            0.055820610374212265,
+            0.055658530443906784,
+            0.05562031269073486
+          ],
+          "mean_seconds_per_instance": 0.00010878870671149343
+        }
+      },
+      {
+        "problem": "OVRPLTW",
+        "instances": 512,
+        "standalone_model": {
+          "batch_seconds": [
+            0.05597987212240696,
+            0.056197987869381905,
+            0.05613416060805321
+          ],
+          "mean_seconds_per_instance": 0.00010957813841135551
+        }
+      },
+      {
+        "problem": "VRPBLTW",
+        "instances": 512,
+        "standalone_model": {
+          "batch_seconds": [
+            0.056425267830491066,
+            0.05599008500576019,
+            0.055864473804831505
+          ],
+          "mean_seconds_per_instance": 0.00010955717880278826
+        }
+      },
+      {
+        "problem": "OVRPBLTW",
+        "instances": 512,
+        "standalone_model": {
+          "batch_seconds": [
+            0.056168802082538605,
+            0.05612226575613022,
+            0.0558447428047657
+          ],
+          "mean_seconds_per_instance": 0.00010946341838765268
+        }
+      }
+    ],
+    "model_reselection": false
+  },
+  "training": false,
+  "inference": false,
+  "checkpoint_reselection": false,
+  "distribution_pages": 18,
+  "main_pdf_pages": 27,
+  "diagnostics": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/A_scratch/full_model_statistics/training_and_method_diagnostics.pdf",
+    "pages": 19,
+    "history_status": "complete"
+  },
+  "process_diagnostics": {
+    "status": "complete",
+    "files": {
+      "json": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/A_scratch/process_diagnostics/process_diagnostics.json",
+      "csv": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/A_scratch/process_diagnostics/process_diagnostics.csv",
+      "pdf": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/A_scratch/process_diagnostics/process_diagnostics.pdf"
+    },
+    "complete_flag": "/public/home/shiys/0selection2/code/V4/runs/R113_executable_process/A_scratch/process_diagnostics_complete.json",
+    "subset_sha256": "50cb1e5b4206c4356ba84e8eafb2309be093097a2488e28a3805a3e66b9147b4"
+  },
+  "evidence_boundary": "development-exposed TEST; unique VAL checkpoint; ALL problem-equal; TRAIN SBS; no NSS retraining"
+}
