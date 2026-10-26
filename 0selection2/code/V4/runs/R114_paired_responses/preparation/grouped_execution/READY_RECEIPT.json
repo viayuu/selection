@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "status": "implementation_ready_not_runtime_qualified",
+  "scope": "research_4.4_512_train_bases_pilot",
+  "source_freeze": "R114 execution sources frozen at this receipt; no more CPU audit requested",
+  "source_sha256": {
+    "r114_response_data.py": "d56214f7bd26367eab1db41c4053afd2f9a59bd4030ce7b5ad8f895a789b1345",
+    "r114_label_queue.py": "d226fa7608cacd01d0bef5b8dd8899d9d6664bc563e38fe19bd8cb4b355af823",
+    "r114_group_worker.py": "a64a4a13f50f8b6584af03984f7619f325fdab4a7da36d1db229949971369276",
+    "r114_run_queue.py": "4bb9858b5b31dd5b150a33d816e6dcd7f82381d805b25beef2db9ec71912e4ef",
+    "r114_response_analysis.py": "9441a067a746a52df6d2a20654370a128e2a87e2bf4f19925eec00da7c6ef439",
+    "test_r114_response_data.py": "1c574cf96d42758b0d6309f27461e51f32c5dc4eec44e6d901ee8e6b14be38d1",
+    "test_r114_run_queue.py": "ba8ec7b75c7314dcc3d5df8d82082f974b9d80bdba1251fdfedd93a2b6389da1"
+  },
+  "plan_path": "/public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/grouped_execution/queue_v1/plan.json",
+  "plan_sha256": "b314d2d643bbac142b6890ae6aa3b8792a7a6469be1c217af63bb7c219120ea2",
+  "manifest_path": "/public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/production_inputs/manifest.json",
+  "manifest_sha256": "0fc7ad4797bf4e4953c1c1f47ba6c75d7cc2c3be5598df7857966d792b676277",
+  "deployment_lock_path": "/public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/grouped_execution/queue_v1/deployments.grouped.lock.json",
+  "deployment_lock_sha256": "f935df8d7e94738f1251cf4b970194c3c3f9ac8640489fdc22ae0547f97c110a",
+  "reference_lock_path": "/public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/production_execution/deployments.production.lock.json",
+  "reference_lock_sha256": "d07cb9896c9b14bef8552a442856de335ad90c9bb32a11e4c5f188add4c01bce",
+  "counts": {
+    "applicable_problems": 16,
+    "bases_per_problem": 32,
+    "train_bases": 512,
+    "endpoints": 2048,
+    "pairs": 1536,
+    "label_solver_calls": 9600,
+    "runtime_groups": 76,
+    "label_groups": 76,
+    "exact_deployment_buckets": 100,
+    "grouped_probe_calls": 252,
+    "seeded_replay_calls": 100,
+    "eager_cold_reference_calls": 52,
+    "total_runtime_calls": 404,
+    "source_only_route_hooks": 76,
+    "actual_gpu_labels": 0,
+    "actual_runtime_qualified_deployments": 0
+  },
+  "checks": {
+    "bounded_cpu_tests": 56,
+    "cpu_test_wall_seconds": 7.960,
+    "cpu_test_timeout_seconds": 120,
+    "cpu_affinity": [0, 1],
+    "numerical_threads": 1,
+    "gpu_hidden": true,
+    "result": "passed",
+    "production_metadata_dry_run": "passed_without_binding_solver_import_or_state_write",
+    "analysis_cli_wiring": "CPU mock tested; real postlabel analysis not yet executed"
+  },
+  "execution": {
+    "launched": false,
+    "gpu_binding": null,
+    "single_gpu": true,
+    "external_gpu_mutex_owned_by_resource_worker": true,
+    "required_environment": {
+      "CUDA_VISIBLE_DEVICES": "exactly one assigned physical GPU-... UUID",
+      "R114_CPU_IDS": "one or two assigned CPU IDs"
+    },
+    "cwd": "/public/home/shiys/0selection2",
+    "conda_environment": "easynco",
+    "timeout_seconds_per_active_stage": 3600,
+    "automatic_retry": false,
+    "automatic_protocol_change": false,
+    "failure_scope": "stop and mask whole problem; continue independent problems",
+    "assembly": "every finalized invocation including partial failures and interruption; unique per-run snapshot",
+    "analysis": "after actual export+assemble; python -B -m code.V4.r114_response_analysis --manifest FULLMANIFEST --labels ACTUAL_ASSEMBLED_JSON --output UNIQUE_RUN_ANALYSIS_DIR; CUDA hidden",
+    "scheduler_command": "taskset -c \"${R114_CPU_IDS:?assigned CPU IDs required}\" python -B -m code.V4.r114_run_queue --plan /public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/grouped_execution/queue_v1/plan.json --manifest /public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/production_inputs/manifest.json --deployment-lock /public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/grouped_execution/queue_v1/deployments.grouped.lock.json --host \"$(hostname -s)\" --gpu-uuid \"${CUDA_VISIBLE_DEVICES:?physical GPU UUID required}\" --cpu-ids \"$R114_CPU_IDS\" --timeout-seconds 3600 --execute --finalize"
+  },
+  "coordination": {
+    "target_agent": "SolagentJason01a1727e-587d-7c13-8361-261044077ba1",
+    "role": "fourth independent single-GPU job alongside R113 three arms; transport owned by Jason",
+    "direct_message_delivered": false,
+    "reason": "No Sol messaging tool exposed; bounded managed-daemon contact attempts were rejected",
+    "handoff_path": "/public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/production_execution/QUEUE_HANDOFF.md"
+  },
+  "preservation": {
+    "root_production_inputs_unchanged": true,
+    "old_source_lock_unchanged": true,
+    "native_budgets_profiles_and_seed_source_unchanged": true,
+    "main_owned_analysis_sources_not_edited": true,
+    "other_versions_not_edited": true,
+    "git_commit_made": false
+  }
+}

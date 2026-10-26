@@ -1,0 +1,46 @@
+{
+  "adapter_source": "class OriginalELGBackend:\n    def __init__(self, problem, method, device):\n        import yaml\n        if method != \"ELG\" or problem not in {\"TSP\", \"CVRP\"}:\n            raise ValueError(\"Original ELG supports TSP/CVRP\")\n        self.problem = problem\n        self.method = method\n        self.device = torch.device(device)\n        self.repo = SOURCE_ROOT / \"ELG\" / problem\n        self.config = yaml.safe_load((self.repo / \"config.yml\").read_text())\n        self.params = self.config[\"model_params\"]\n        self.utils = relocated_module(f\"train100k_elg_{problem}_utils\", self.repo / \"utils.py\")\n        definitions = relocated_module(f\"train100k_elg_{problem}_definitions\", self.repo / \"models.py\")\n        saved_modules = {name: sys.modules.get(name) for name in (\"utils\", \"models\")}\n        try:\n            sys.modules[\"utils\"] = self.utils\n            sys.modules[\"models\"] = definitions\n            model_module = relocated_module(f\"train100k_elg_{problem}_model\", self.repo / f\"{problem}Model.py\")\n            environment_module = relocated_module(f\"train100k_elg_{problem}_environment\", self.repo / f\"{problem}Env.py\")\n        finally:\n            for name, module in saved_modules.items():\n                if module is None:\n                    sys.modules.pop(name, None)\n                else:\n                    sys.modules[name] = module\n        self.model = getattr(model_module, f\"{problem}Model\")(**self.params).to(self.device)\n        self.model.decoder.add_local_policy(self.device)\n        self.checkpoint = self.repo / \"weights\" / (\"ELG*.pt\" if problem == \"TSP\" else \"ELG.pt\")\n        checkpoint = torch.load(self.checkpoint, map_location=self.device, weights_only=False)\n        self.model.load_state_dict(checkpoint[\"model_state_dict\"], strict=True)\n        self.model.eval().requires_grad_(False)\n        self.environment_class = getattr(environment_module, f\"{problem}Env\")\n        torch.set_float32_matmul_precision(\"highest\")\n\n    def profile(self):\n        return dict(backend=\"original_elg\", method=self.method, problem=self.problem,\n                    checkpoint=str(self.checkpoint), checkpoint_sha256=file_hash(self.checkpoint),\n                    source_sha256=source_hashes(self.repo), adapter_source=inspect.getsource(type(self)),\n                    model_params=self.params,\n                    budget=dict(starts=\"min(N,100), original configured multiple_width\", augmentation=8,\n                                decoding=\"greedy\", precision=\"float32\"),\n                    normalization=\"Original coordinates and normalized demands; no change to input attributes.\")\n\n    def run(self, items):\n        scale = sample_scale(self.problem, items[0])\n        starts = min(scale, int(self.config[\"params\"][\"multiple_width\"]))\n        environment = self.environment_class(multi_width=starts, device=str(self.device))\n        if self.problem == \"TSP\":\n            batch = torch.cat(items, dim=0).to(self.device)\n        else:\n            batch = {key: torch.cat([item[key] for item in items], dim=0).to(self.device)\n                     for key in (\"loc\", \"demand\", \"depot\")}\n        with torch.no_grad():\n            environment.load_random_problems(batch, aug_factor=8)\n            reset_state, _, _ = environment.reset()\n            self.model.pre_forward(reset_state)\n            solutions, _, reward = self.utils.rollout(self.model, environment, eval_type=\"greedy\")\n        rewards = reward.reshape(8, len(items), starts)\n        costs, tours = [], []\n        for index in range(len(items)):\n            chosen = int(rewards[:, index].reshape(-1).argmax().item())\n            augmentation, start = divmod(chosen, starts)\n            tours.append(solutions[augmentation * len(items) + index, start].detach().cpu().tolist())\n            costs.append(float(-rewards[augmentation, index, start].item()))\n        return InferenceResult(costs, tours, audit_tours(self.problem, items, tours, costs))\n",
+  "backend": "original_elg",
+  "budget": {
+    "augmentation": 8,
+    "decoding": "greedy",
+    "precision": "float32",
+    "starts": "min(N,100), original configured multiple_width"
+  },
+  "checkpoint": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/ELG/CVRP/weights/ELG.pt",
+  "checkpoint_sha256": "44dca663dae43105c4526a65d483117c325bb5ef180131acc89dd715c4ecfe71",
+  "method": "ELG",
+  "model_params": {
+    "demand": true,
+    "distance_penalty": true,
+    "embedding_dim": 128,
+    "encoder_layer_num": 6,
+    "ensemble": true,
+    "ensemble_size": 1,
+    "euclidean": false,
+    "ff_hidden_dim": 512,
+    "head_num": 8,
+    "local_att_head_num": 4,
+    "local_att_hidden_dim": 32,
+    "local_att_qkv_dim": 8,
+    "local_size": [
+      40
+    ],
+    "logit_clipping": 50,
+    "positional": true,
+    "qkv_dim": 16,
+    "xi": -1
+  },
+  "normalization": "Original coordinates and normalized demands; no change to input attributes.",
+  "problem": "CVRP",
+  "source_sha256": {
+    "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/ELG/CVRP/CVRPEnv.py": "c0f6ae603585664b3e429439b5fc8837bebec709e4c052d6ce5f1f820fd45ca0",
+    "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/ELG/CVRP/CVRPModel.py": "2c0c4149392ae52f88eb1bf4535caa2381cfc11e7d2809851fb3d1e7a5e23f46",
+    "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/ELG/CVRP/generate_data.py": "dc0ed2da1ef17f87f508c7aab9e2965e9f07be6ee5e16e98bb738ff782e73ea6",
+    "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/ELG/CVRP/models.py": "7ad04690defb575764d8a760e7ca3f153f8b1a26619f3c487db288748bace8d4",
+    "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/ELG/CVRP/test.py": "c4e6a38fe2995d3ad63a897fe12c8af41fb1bc4fbc13ae27fcb378ec103187b4",
+    "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/ELG/CVRP/test_vrplib.py": "d75065184cbe076d849632c7fea59381727246a3f9dcf7a615a80a4aa0160372",
+    "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/ELG/CVRP/train.py": "386722f8a5e0358978e8569302a0c88a18ac1fd50c0649161aae595553e59bab",
+    "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/ELG/CVRP/utils.py": "6917e319d55127e9239b703fd1a32ac4554d207d2963883732387cf0aba907f5"
+  }
+}

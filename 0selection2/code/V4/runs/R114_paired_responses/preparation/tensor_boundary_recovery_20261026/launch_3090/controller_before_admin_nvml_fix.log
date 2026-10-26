@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/public/home/shiys/0selection2/code/V4/r114_recovery_launch.py", line 211, in <module>
+    raise SystemExit(main())
+  File "/public/home/shiys/0selection2/code/V4/r114_recovery_launch.py", line 206, in main
+    return wait(args.poll_seconds)
+  File "/public/home/shiys/0selection2/code/V4/r114_recovery_launch.py", line 163, in wait
+    gpu = resource.original.r81_queue.gpu_inventory(resource.require_slot(SLOT))
+  File "/public/home/shiys/0selection2/code/V4/r81_queue.py", line 276, in gpu_inventory
+    devices = capture(prefix + ['nvidia-smi', f'--id={candidate["uuid"]}',
+  File "/public/home/shiys/0selection2/code/V4/r81_queue.py", line 110, in capture
+    raise RuntimeError(f'{shlex.join(command)}: exit={result.returncode}: {result.stderr[-2000:]}')
+RuntimeError: nvidia-smi --id=GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d --query-gpu=index,uuid,name,memory.used,memory.total,utilization.gpu --format=csv,noheader,nounits: exit=9: 

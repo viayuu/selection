@@ -1,0 +1,12 @@
+--- a/train_100k_backends.py
++++ b/train_100k_backends.py
+@@ -54,6 +54,9 @@
+ 
+ 
+ def audit_tours(problem, items, tours, costs):
++    if problem == "CVRP":
++        from code.V4.r114_tensor_boundary_recovery import cpu_numpy_view
++        items = cpu_numpy_view(items)
+     if len(items) != len(tours) or len(items) != len(costs):
+         raise ValueError("Solver output count changed")
+     maximum_cost_error = 0.0

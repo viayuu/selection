@@ -1,0 +1,313 @@
+{
+  "cvrp_deployments": {
+    "CVRP/BQ": {
+      "backend": "original_bq",
+      "budget": {
+        "augmentation": 1,
+        "beam_size": 1,
+        "decoding": "greedy",
+        "knns": -1,
+        "precision": "float32"
+      },
+      "checkpoints": [
+        {
+          "path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/bq-nco/pretrained_models/cvrp.best",
+          "sha256": "9a21eb23eca1fa0d2b2b37bcd3b0c93335cd79e74002b89a39aeee8dd70aab60"
+        }
+      ],
+      "profile_path": "/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/labels/CVRP/BQ/profile.json",
+      "profile_sha256": "584c2e8654b759fe891d86a2d4df6d94fd6e3cfb176c0ead109f5249c0fe2c3b"
+    },
+    "CVRP/ELG": {
+      "backend": "original_elg",
+      "budget": {
+        "augmentation": 8,
+        "decoding": "greedy",
+        "precision": "float32",
+        "starts": "min(N,100), original configured multiple_width"
+      },
+      "checkpoints": [
+        {
+          "path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/ELG/CVRP/weights/ELG.pt",
+          "sha256": "44dca663dae43105c4526a65d483117c325bb5ef180131acc89dd715c4ecfe71"
+        }
+      ],
+      "profile_path": "/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/labels/CVRP/ELG/profile.json",
+      "profile_sha256": "c78edb72826d61effe18d8806ee4baffd25f268a9b7db72a842d059d16ff50e4"
+    },
+    "CVRP/ICAM": {
+      "backend": "original_icam_cvrp",
+      "budget": {
+        "augmentation": 8,
+        "decoding": "greedy",
+        "iteration_steps": 0,
+        "precision": "float32",
+        "starts": "N"
+      },
+      "checkpoints": [
+        {
+          "path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/ICAM/pretrained/icam_cvrp.pt",
+          "sha256": "0be593d3b996c6e5d2e27c8282c17ebe9f7b261e1c53a0ce3c06561bcc1b7cec"
+        }
+      ],
+      "profile_path": "/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/labels/CVRP/ICAM/profile.json",
+      "profile_sha256": "0635c5c2362543d2254f46fce9b2ec8186a5bc795972daed260470b9e751e2a9"
+    },
+    "CVRP/LEHD": {
+      "backend": "original_lehd_cvrp_greedy",
+      "budget": {
+        "augmentation": 1,
+        "decoding": "greedy",
+        "precision": "float32, matmul_precision=highest",
+        "rrc_steps": 0,
+        "starts": 1
+      },
+      "checkpoints": [
+        {
+          "path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/NCO_code/single_objective/LEHD/CVRP/result/20230817_235537_train/checkpoint-40.pt",
+          "sha256": "7a3cd8359f94c07ee5674758ef2aa834890e9a3fcd9fc5d35bd6140be1a3551b"
+        }
+      ],
+      "profile_path": "/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/labels/CVRP/LEHD/profile.json",
+      "profile_sha256": "c681d03e1611af9caf1d6c2bbf82bd7e29fe40cd61d44985cec269a426072bd7"
+    },
+    "CVRP/MVMOE": {
+      "backend": "easynco_mvmoe_nss_cvrp_budget",
+      "budget": {
+        "augmentation": 8,
+        "decoding": "greedy",
+        "iteration_steps": 0,
+        "precision": "float32, matmul_precision=highest",
+        "starts": "min(N,100)"
+      },
+      "checkpoints": [
+        {
+          "path": "/public/home/shiys/EasyNCO/pretrained/mvmoe/mvmoe/mvmoe_mvrp100.ckpt",
+          "sha256": "713e92dfee8e37bfae8d7c00e18da3edf8b7bff6666b277d5931ccfaf2d7f715"
+        }
+      ],
+      "profile_path": "/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/labels/CVRP/MVMOE/profile.json",
+      "profile_sha256": "e35032d2f57c1bfa7136a24db61f2c2f8be137c560fcd64393af9cd8746ca151"
+    },
+    "CVRP/MoSES_CaDA": {
+      "backend": "original_routefinder_family",
+      "budget": {
+        "augment_fn": "dihedral8",
+        "augmentation": 8,
+        "checkpoint_bucket": "50 if N<=75, otherwise 100",
+        "decoding": "Original phase=test",
+        "precision": "Original CUDA autocast",
+        "starts": "Original env.get_num_starts(N)"
+      },
+      "checkpoints": [
+        {
+          "path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/moses_vrp/pretrained_moses_model/cada/100/multilora_denseroute_sigmoid.ckpt",
+          "sha256": "2eac9b038ae4655581aa73e4dbe8ad529aefd1963368c9a92d254b6269f8aabf"
+        },
+        {
+          "path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/moses_vrp/pretrained_moses_model/cada/50/multilora_denseroute_sigmoid.ckpt",
+          "sha256": "1aa499f3fce5d3412c2544c9632bbb9709309a7299b4298b535fa7e9014ef803"
+        }
+      ],
+      "profile_path": "/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/labels/CVRP/MoSES_CaDA/profile.json",
+      "profile_sha256": "5c247b321a77966a10ba243867b857fb4c3d0037c6d608653570143ea0ce73f1"
+    },
+    "CVRP/MoSES_RF": {
+      "backend": "original_routefinder_family",
+      "budget": {
+        "augment_fn": "dihedral8",
+        "augmentation": 8,
+        "checkpoint_bucket": "50 if N<=75, otherwise 100",
+        "decoding": "Original phase=test",
+        "precision": "Original CUDA autocast",
+        "starts": "Original env.get_num_starts(N)"
+      },
+      "checkpoints": [
+        {
+          "path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/moses_vrp/pretrained_moses_model/rf/100/multilora_denseroute_softplus.ckpt",
+          "sha256": "00666f0b088e2451a7a1dd2494ea54ef6e03fd291294472a17b3eb78b46c7a89"
+        },
+        {
+          "path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/moses_vrp/pretrained_moses_model/rf/50/multilora_denseroute_softplus.ckpt",
+          "sha256": "4c08f6b52b947ed29da5361f6e565ceba46034291f99517277723e550d0f06d5"
+        }
+      ],
+      "profile_path": "/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/labels/CVRP/MoSES_RF/profile.json",
+      "profile_sha256": "e27388fd360c536dd8cb3b68e1bf1f595397ffbaf843ca607a1df8f753feeeab"
+    },
+    "CVRP/OMNI": {
+      "backend": "original_omni_cvrp_nss_budget",
+      "budget": {
+        "augmentation": 8,
+        "decoding": "argmax",
+        "fine_tuning_steps": 0,
+        "inference_batch_size": 1,
+        "precision": "float32, matmul_precision=highest",
+        "starts": "min(N,100)"
+      },
+      "checkpoints": [
+        {
+          "path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/Omni-VRP/pretrained/POMO-CVRP/maml-fomaml-checkpoint-250000-batch-no-track.pt",
+          "sha256": "8bd358d3dcfcc13d4c8358aaeb6b8ab762c4e52a0bf236a9fa82a854a1d1de8d"
+        }
+      ],
+      "profile_path": "/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/labels/CVRP/OMNI/profile.json",
+      "profile_sha256": "6f60d7ce5cc7bd908cab26835cc33a4cd053d19fec567f3e8264c2720f2cbce6"
+    },
+    "CVRP/RELD_CVRP": {
+      "backend": "original_reld",
+      "budget": {
+        "augmentation": 1,
+        "decoding": "greedy",
+        "precision": "float32",
+        "sample_size": 1,
+        "starts": "min(N,100)"
+      },
+      "checkpoints": [
+        {
+          "path": "/public/home/shiys/reld-nco-main/CVRP/weights/ReLD/model_epoch_90.pt",
+          "sha256": "5779a7de9f7c77a4cc5a7b152bda58b90aef2e07441b9ac6eb0f55c1df360aa6"
+        }
+      ],
+      "profile_path": "/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/labels/CVRP/RELD_CVRP/profile.json",
+      "profile_sha256": "99f45ce51d13283e6bf135cb826723b5a5c401ef0ec47a02e7bfb93dada020ea"
+    },
+    "CVRP/RouteFinder": {
+      "backend": "original_routefinder_family",
+      "budget": {
+        "augment_fn": "dihedral8",
+        "augmentation": 8,
+        "checkpoint_bucket": "50 if N<=75, otherwise 100",
+        "decoding": "Original phase=test",
+        "precision": "Original CUDA autocast",
+        "starts": "Original env.get_num_starts(N)"
+      },
+      "checkpoints": [
+        {
+          "path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/routefinder/checkpoints/100/rf-transformer.ckpt",
+          "sha256": "eb09cee46108bac04012c2702f7cd4aac64341064167363255f02f2e63167f90"
+        },
+        {
+          "path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/routefinder/checkpoints/50/rf-transformer.ckpt",
+          "sha256": "2110637a8e41de6e3f243973c4907362f9a4852821111164f2c9afa6d2ce5d62"
+        }
+      ],
+      "profile_path": "/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/labels/CVRP/RouteFinder/profile.json",
+      "profile_sha256": "fb38dbfd93795e0699ebb506478e1da71a844657f2dc28a21f87285e543af689"
+    }
+  },
+  "cvrp_pool": [
+    {
+      "global_id": 0,
+      "method": "BQ",
+      "source_method": "BQ"
+    },
+    {
+      "global_id": 3,
+      "method": "ELG",
+      "source_method": "ELG"
+    },
+    {
+      "global_id": 5,
+      "method": "ICAM",
+      "source_method": "ICAM"
+    },
+    {
+      "global_id": 7,
+      "method": "LEHD",
+      "source_method": "LEHD"
+    },
+    {
+      "global_id": 11,
+      "method": "MVMOE",
+      "source_method": "MVMOE"
+    },
+    {
+      "global_id": 12,
+      "method": "MoSES_CaDA",
+      "source_method": "MoSES_CaDA"
+    },
+    {
+      "global_id": 13,
+      "method": "MoSES_RF",
+      "source_method": "MoSES_RF"
+    },
+    {
+      "global_id": 14,
+      "method": "OMNI",
+      "source_method": "OMNI"
+    },
+    {
+      "global_id": 15,
+      "method": "RELD_CVRP",
+      "source_method": "RELD_CVRP"
+    },
+    {
+      "global_id": 18,
+      "method": "RouteFinder",
+      "source_method": "RouteFinder"
+    }
+  ],
+  "frozen_evidence_sha256": {
+    "/public/home/shiys/0selection2/code/V4/r114_group_worker.py": "a64a4a13f50f8b6584af03984f7619f325fdab4a7da36d1db229949971369276",
+    "/public/home/shiys/0selection2/code/V4/r114_response_data.py": "d56214f7bd26367eab1db41c4053afd2f9a59bd4030ce7b5ad8f895a789b1345",
+    "/public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/grouped_execution/queue_v1/attempts/runtime_group__CVRP__ICAM/attempt_0001/cold/CVRP_src53138_original__ICAM.command.json": "80ad88d0c0a55115f36508d0d1a1ab5b84c7d605d651e38d29cefbe23cfed321",
+    "/public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/grouped_execution/queue_v1/attempts/runtime_group__CVRP__ICAM/attempt_0001/cold/CVRP_src53138_original__ICAM.json": "d6826cf0468bb946264e3af9f565b3187b0c0fa98a1f0ef87a67f1ea69c26be3",
+    "/public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/grouped_execution/queue_v1/deployments.grouped.lock.json": "f4d5254b5411e41d2323e72db4ddeda603848b11ada06fbc7e5593f1a60f5fa9",
+    "/public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/grouped_execution/queue_v1/plan.json": "00d9f8a6360b85d2812c973c198a8584b675a9a63324f81e7a1bcba02e9e97ff",
+    "/public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/production_execution/deployments.production.lock.json": "12d96e7d24a32493d816ac50e6670d33a53259338abacd51030dcf3226398424",
+    "/public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/production_inputs/manifest.json": "d414f0c4cb4bf3d03049e95b632faf21ee70a1acbb926ea20a8d722f6f57ef68",
+    "/public/home/shiys/easynco_v3_bridge/scripts/train_100k_alias_weights.py": "97d931dbc045df653647f895aae040c6b0c2d73297e1c98a0c83e3fc4dc96373",
+    "/public/home/shiys/easynco_v3_bridge/scripts/train_100k_backends.py": "46a1dd32b169366673218a6315aee1f44d256393b7bacb54968ec0122500d117",
+    "/public/home/shiys/easynco_v3_bridge/scripts/train_100k_common.py": "bb216e8d7f8ecf3ae55b9f1ea5d6e25c1388a77beaee530fec7d277b5af82d1a",
+    "/public/home/shiys/easynco_v3_bridge/scripts/train_100k_icam.py": "85daee5d315830fd678d021e2f9bbb91c0d66c305ae774ef00114cd5254590e7",
+    "/public/home/shiys/easynco_v3_bridge/scripts/train_100k_nss_ar.py": "068073f3854756002ef3b723daea0cd357b81920ed8cace695151e625c9d4fe0"
+  },
+  "full_pool_complete": false,
+  "gpu_probes": false,
+  "helper": {
+    "path": "/public/home/shiys/0selection2/code/V4/r114_tensor_boundary_recovery.py",
+    "sha256": "8ab05115aca8fec4f607c8158fc3959a3b5dbf84ac7adb4fc916f00a056ba808"
+  },
+  "historical_reproduction": false,
+  "integration_required": [
+    "Wait for main to authorize a new source/plan/lock revision; never edit queue_v1",
+    "Apply patch only to an isolated complete scripts freeze; pin this helper too",
+    "Preserve native path bindings; regenerate all source-dependent profiles and locks",
+    "Use the same revised scripts/helper in both cold and grouped processes",
+    "Requalify every legal CVRP deployment under existing exact-equivalence gates",
+    "Keep v1 errors and receipts; new receipts must carry the new lock provenance"
+  ],
+  "invariants": [
+    "same manifest, input hashes, tasks, solver seeds and full legal pool",
+    "same solver tensors, default device, weights, precision and budgets",
+    "same route validation, thresholds and cost recomputation",
+    "same cold/grouped qualification and lazy-runner lifecycle",
+    "only detached host views at the CVRP audit boundary"
+  ],
+  "native_runtime_verified": false,
+  "original_failure": {
+    "boundary_evidence": "frozen_source_trace_and_CPU_tests",
+    "classification": "tensor_to_numpy_interface_error_not_native_paradigm_failure",
+    "error": "can't convert cuda:0 device type tensor to numpy. Use Tensor.cpu() to copy the tensor to host memory first.",
+    "error_type": "TypeError",
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/grouped_execution/queue_v1/attempts/runtime_group__CVRP__ICAM/attempt_0001/cold/CVRP_src53138_original__ICAM.json",
+    "sha256": "d6826cf0468bb946264e3af9f565b3187b0c0fa98a1f0ef87a67f1ea69c26be3",
+    "traceback_available": false
+  },
+  "parent_cold_lock_sha256": "d07cb9896c9b14bef8552a442856de335ad90c9bb32a11e4c5f188add4c01bce",
+  "parent_grouped_lock_sha256": "f935df8d7e94738f1251cf4b970194c3c3f9ac8640489fdc22ae0547f97c110a",
+  "parent_manifest_sha256": "0fc7ad4797bf4e4953c1c1f47ba6c75d7cc2c3be5598df7857966d792b676277",
+  "patch": {
+    "original_sha256": "46a1dd32b169366673218a6315aee1f44d256393b7bacb54968ec0122500d117",
+    "original_source": "/public/home/shiys/easynco_v3_bridge/scripts/train_100k_backends.py",
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R114_paired_responses/preparation/tensor_boundary_recovery_20261026/source_revision/train_100k_backends.py.patch",
+    "revised_sha256": "d96cb17f2cea865b8478bc8590b63ce50c47eb6b006b9f6faf633b40af9267ba",
+    "sha256": "ceac4a0e091022c2290f56343e964bbf6dda432b9e68339eb6e790af0514c502"
+  },
+  "ready_for_scheduling": false,
+  "revision": "r114_cvrp_audit_tensor_boundary_v1_20261026",
+  "schema_version": 1,
+  "solver_execution": false,
+  "status": "prepared_not_integrated_not_executed"
+}

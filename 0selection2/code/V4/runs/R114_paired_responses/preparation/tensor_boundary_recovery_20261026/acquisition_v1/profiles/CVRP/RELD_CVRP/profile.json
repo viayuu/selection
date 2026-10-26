@@ -1,0 +1,36 @@
+{
+  "adapter_source": "class RELDBackend:\n    def __init__(self, problem, method, device):\n        self.problem = problem\n        self.method = method\n        self.device = torch.device(device)\n        self.common = relocated_module(\"reld_bridge_common\", SCRIPT_ROOT / \"reld_bridge_common.py\")\n        torch.set_float32_matmul_precision(\"highest\")\n        if method == \"RELD_CVRP\":\n            if problem != \"CVRP\":\n                raise ValueError(\"RELD_CVRP supports CVRP only\")\n            self.module = relocated_module(\"train100k_reld_single\", SCRIPT_ROOT / \"run_reld_cvrp_single_bridge.py\")\n            self.model, self.params = self.module.instantiate_single_cvrp_model(self.device)\n            self.repo = WORKSPACE / \"reld-nco-main/CVRP\"\n            self.checkpoint = self.repo / \"weights/ReLD/model_epoch_90.pt\"\n        else:\n            self.key = {\"RELD_MTL\": \"reld_mtl\", \"RELD_MOEL\": \"reld_moel\"}[method]\n            self.model, self.params = self.common.instantiate_reld_model(self.key, self.device)\n            self.env_class = self.common.get_env_class(problem)\n            self.repo = WORKSPACE / \"reld-nco-main/Multi-Task\"\n            self.checkpoint = self.common.MODEL_SPECS[self.key][\"checkpoint\"]\n\n    def profile(self):\n        return dict(backend=\"original_reld\", method=self.method, problem=self.problem,\n                    checkpoint=str(self.checkpoint), checkpoint_sha256=file_hash(self.checkpoint),\n                    source_sha256=source_hashes(self.repo), adapter_source=inspect.getsource(type(self)),\n                    params=self.params,\n                    budget=dict(starts=\"min(N,100)\" if self.method == \"RELD_CVRP\" else \"N customers\",\n                                augmentation=1, sample_size=1, decoding=\"greedy\", precision=\"float32\"),\n                    normalization=\"Reuse original bridge collation without changing original instance attributes.\")\n\n    def run(self, items):\n        captured = []\n        scale = sample_scale(self.problem, items[0])\n        if self.method == \"RELD_CVRP\":\n            environment_module = importlib.import_module(\"CVRPEnv\")\n            original_class = environment_module.CVRPEnv\n        else:\n            original_class = self.env_class\n\n        class WitnessEnv(original_class):\n            def __init__(environment, *arguments, **keywords):\n                super().__init__(*arguments, **keywords)\n                captured.append(environment)\n\n            def step(environment, *arguments, **keywords):\n                result = super().step(*arguments, **keywords)\n                if result[-1]:\n                    environment.witness_reward = result[1].detach()\n                return result\n\n        indices = list(range(len(items)))\n        if self.method == \"RELD_CVRP\":\n            batch, _ = self.module.collate_batch(items, indices)\n            environment_module.CVRPEnv = WitnessEnv\n            try:\n                scores = self.module.run_no_aug_scores(self.model, batch, scale, self.device)\n            finally:\n                environment_module.CVRPEnv = original_class\n        else:\n            batch, _ = self.common.collate_problem_batch(f\"{self.problem}train\", items, indices)\n            scores = self.common._run_no_aug_batch(self.model, WitnessEnv, batch, scale, self.device)\n        environment = captured[0]\n        reward = environment.witness_reward\n        selected = reward.argmax(dim=1)\n        tours = environment.selected_node_list[torch.arange(len(items), device=self.device), selected].cpu().tolist()\n        costs = scores.tolist()\n        return InferenceResult(costs, tours, audit_tours(self.problem, items, tours, costs))\n",
+  "backend": "original_reld",
+  "budget": {
+    "augmentation": 1,
+    "decoding": "greedy",
+    "precision": "float32",
+    "sample_size": 1,
+    "starts": "min(N,100)"
+  },
+  "checkpoint": "/public/home/shiys/reld-nco-main/CVRP/weights/ReLD/model_epoch_90.pt",
+  "checkpoint_sha256": "5779a7de9f7c77a4cc5a7b152bda58b90aef2e07441b9ac6eb0f55c1df360aa6",
+  "method": "RELD_CVRP",
+  "normalization": "Reuse original bridge collation without changing original instance attributes.",
+  "params": {
+    "embedding_dim": 128,
+    "encoder_layer_num": 6,
+    "eval_type": "greedy",
+    "ff_hidden_dim": 512,
+    "forcing_first_step": false,
+    "head_num": 8,
+    "logit_clipping": 50,
+    "qkv_dim": 16
+  },
+  "problem": "CVRP",
+  "source_sha256": {
+    "/public/home/shiys/reld-nco-main/CVRP/CVRPEnv.py": "f603eed08afed48a5952dfddf96ff6d821bea5ec2efe45b4a85a45cac3838909",
+    "/public/home/shiys/reld-nco-main/CVRP/CVRPModel.py": "d5482c8825400a5f63d99f6f4e9a1138255ba831e6d80b4bd4069d0d5c1f4bdd",
+    "/public/home/shiys/reld-nco-main/CVRP/CVRPTester.py": "70c56abaa5b60ed5623eefd3b9bd8d1371f6d62f714584013c4b94923406a4c7",
+    "/public/home/shiys/reld-nco-main/CVRP/generate_data.py": "62d6e873dd3bd9558c152c4522e756bff109bd814ac7006da6fdce876ecf66bb",
+    "/public/home/shiys/reld-nco-main/CVRP/test.py": "5e319f6b18a91cbe69eaba4db6b72df5398ce08953816fc65e8f3f9d318cd784",
+    "/public/home/shiys/reld-nco-main/CVRP/test_vrplib.py": "ff47cdbb99159dc0addda7addb302752652f3982705e562db8a57f9db2966558",
+    "/public/home/shiys/reld-nco-main/CVRP/train.py": "4ad9af5909d5fc243feb0fbc19d6b36f160260f76194265ef97acd064ad43668",
+    "/public/home/shiys/reld-nco-main/CVRP/utils.py": "1792f2cd296fc3d1408c400fd56683b74a5dd9d832a38e6888d11ae53af7b182"
+  }
+}
