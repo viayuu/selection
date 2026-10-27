@@ -1,0 +1,2978 @@
+{
+  "experiment": "R117",
+  "arm": "B",
+  "complete": true,
+  "created_utc": "2026-10-27T05:19:58.665730+00:00",
+  "checkpoint_lock": {
+    "experiment": "R117",
+    "arm": "B",
+    "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R117_native_computation/B/best.pt",
+    "checkpoint_sha256": "7157ed93b116c038c0ae956588141893007996f671dfcf8de19c1c8c263929ae",
+    "state_hash": "b7d38ad0f9a026d27449732f22bc00d7d139c0dfca693951262093db424616ec",
+    "epoch": 19,
+    "selected_update": 27018,
+    "rule": "strict maximum full18 VAL macro_top1; exact Top1 ties: minimum macro_actual_regret_pct; exact double ties: first checkpoint",
+    "selected_without_test": true,
+    "selection_split": "val",
+    "per_problem_assembly": false,
+    "val": {
+      "macro_ce": 0.6966645320256551,
+      "macro_top1": 0.7134197530864197,
+      "macro_top2": 0.9072469135802468,
+      "macro_top3": 0.963888888888889,
+      "macro_top1_tie_aware": 0.7149259259259259,
+      "macro_mean_cost": 11.416666475254925,
+      "macro_vs_sbs_pct": -0.19455785001386067,
+      "macro_vs_oracle_pct": 0.39306447312465403,
+      "macro_actual_regret_pct": 0.4029312790824602,
+      "macro_vbs_gap_closed_pct": 13.53658863373791,
+      "macro_sbs_cost": 11.427978473494235,
+      "macro_oracle_cost": 11.371691902364589
+    },
+    "inference_rule": "eval frozen native computation; original R77 score-difference maximin; stable ascending-global-solver-ID ties; no calibration or task stitching",
+    "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+    "locked_utc": "2026-10-27T05:12:16.853752+00:00"
+  },
+  "model_factory": "code.V4.r117_experiment.load_checkpoint",
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "rows_per_problem": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "candidate_pools": {
+    "TSP": [
+      "BQ",
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "LEHD",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "CVRP": [
+      "BQ",
+      "ELG",
+      "ICAM",
+      "LEHD",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "ATSP": [
+      "GLOP",
+      "ICAM_ATSP",
+      "MATNET",
+      "MATPOENET",
+      "UNICO_MatPOENet"
+    ],
+    "OVRP": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ]
+  },
+  "scenario_solver_aliases": {
+    "reld_mt": "RELD_MOEL"
+  },
+  "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+  "nss_reference": [
+    {
+      "dataset": "TSP TEST",
+      "problem": "TSP",
+      "n": 4500,
+      "current_model": "R117/B",
+      "current_model_factory": "code.V4.r117_experiment.load_checkpoint",
+      "current_top1_native_pct": 46.91111111111111,
+      "current_mean_cost": 7.971445483469401,
+      "current_checkpoint_sha256": "7157ed93b116c038c0ae956588141893007996f671dfcf8de19c1c8c263929ae",
+      "current_state_hash": "b7d38ad0f9a026d27449732f22bc00d7d139c0dfca693951262093db424616ec",
+      "current_selected_update": 27018,
+      "current_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R117_native_computation/B/evaluation/test/selected_best/rank000.npz",
+      "nss_model": "R79 saved historical weights; not retrained on new90k",
+      "data_version": "selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "candidate_pool": "[\"BQ\", \"DIFUSCO\", \"DIFUSCO500\", \"ELG\", \"LEHD\", \"OMNI\", \"T2T\", \"T2T500\"]",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "status": "complete",
+      "nss_top1_native_pct": 45.88888888888889,
+      "nss_mean_cost": 7.9704007194012005,
+      "nss_checkpoint_sha256": "c677a8cd4ee473ee47bdedff871050827f75717c321ae9d551a3edc7bc78994b",
+      "nss_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/TSP/test_predictions.npz"
+    },
+    {
+      "dataset": "CVRP TEST",
+      "problem": "CVRP",
+      "n": 4500,
+      "current_model": "R117/B",
+      "current_model_factory": "code.V4.r117_experiment.load_checkpoint",
+      "current_top1_native_pct": 48.66666666666667,
+      "current_mean_cost": 18.008767121103645,
+      "current_checkpoint_sha256": "7157ed93b116c038c0ae956588141893007996f671dfcf8de19c1c8c263929ae",
+      "current_state_hash": "b7d38ad0f9a026d27449732f22bc00d7d139c0dfca693951262093db424616ec",
+      "current_selected_update": 27018,
+      "current_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R117_native_computation/B/evaluation/test/selected_best/rank000.npz",
+      "nss_model": "R79 saved historical weights; not retrained on new90k",
+      "data_version": "selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "candidate_pool": "[\"BQ\", \"ELG\", \"ICAM\", \"LEHD\", \"MVMOE\", \"MoSES_CaDA\", \"MoSES_RF\", \"OMNI\", \"RELD_CVRP\", \"RouteFinder\"]",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "status": "complete",
+      "nss_top1_native_pct": 45.97777777777778,
+      "nss_mean_cost": 18.00480236763458,
+      "nss_checkpoint_sha256": "b1e7595eb16a89e3bdf526c3c4d8b05ce3d7d4dc39ab1241667657924e3fc574",
+      "nss_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/CVRP/test_predictions.npz"
+    },
+    {
+      "dataset": "TSPLIB",
+      "problem": "TSP",
+      "n": 49,
+      "current_model": "R117/B",
+      "current_model_factory": "code.V4.r117_experiment.load_checkpoint",
+      "current_top1_native_pct": 18.367346938775512,
+      "current_mean_cost": 8.220240881806394,
+      "current_checkpoint_sha256": "7157ed93b116c038c0ae956588141893007996f671dfcf8de19c1c8c263929ae",
+      "current_state_hash": "b7d38ad0f9a026d27449732f22bc00d7d139c0dfca693951262093db424616ec",
+      "current_selected_update": 27018,
+      "current_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R117_native_computation/B/lib_evaluation/predictions/TSPLIB.npz",
+      "nss_model": "R79 saved historical weights; not retrained on new90k",
+      "data_version": "original native TSPLIB",
+      "candidate_pool": "[\"BQ\", \"DIFUSCO\", \"DIFUSCO500\", \"ELG\", \"LEHD\", \"OMNI\", \"T2T\", \"T2T500\"]",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "status": "complete",
+      "nss_top1_native_pct": 20.408163265306122,
+      "nss_mean_cost": 8.217907074335503,
+      "nss_checkpoint_sha256": "c677a8cd4ee473ee47bdedff871050827f75717c321ae9d551a3edc7bc78994b",
+      "nss_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/TSP/TSPLIB_predictions.npz"
+    },
+    {
+      "dataset": "CVRPLIB",
+      "problem": "CVRP",
+      "n": 100,
+      "current_model": "R117/B",
+      "current_model_factory": "code.V4.r117_experiment.load_checkpoint",
+      "current_top1_native_pct": 67.0,
+      "current_mean_cost": 67.09319920539856,
+      "current_checkpoint_sha256": "7157ed93b116c038c0ae956588141893007996f671dfcf8de19c1c8c263929ae",
+      "current_state_hash": "b7d38ad0f9a026d27449732f22bc00d7d139c0dfca693951262093db424616ec",
+      "current_selected_update": 27018,
+      "current_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R117_native_computation/B/lib_evaluation/predictions/CVRPLIB.npz",
+      "nss_model": "R79 saved historical weights; not retrained on new90k",
+      "data_version": "original native CVRPLIB",
+      "candidate_pool": "[\"BQ\", \"ELG\", \"ICAM\", \"LEHD\", \"MVMOE\", \"MoSES_CaDA\", \"MoSES_RF\", \"OMNI\", \"RELD_CVRP\", \"RouteFinder\"]",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+      "status": "complete",
+      "nss_top1_native_pct": 70.0,
+      "nss_mean_cost": 67.10111171722467,
+      "nss_checkpoint_sha256": "b1e7595eb16a89e3bdf526c3c4d8b05ce3d7d4dc39ab1241667657924e3fc574",
+      "nss_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/CVRP/CVRPLIB_predictions.npz"
+    }
+  ],
+  "nss_alignment": {
+    "TSP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRP TEST": {
+      "instance_key": "indices",
+      "matching_population": 4500,
+      "checked_instance_ids": [
+        0,
+        2250,
+        4499
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": false,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "TSPLIB": {
+      "instance_key": "indices",
+      "matching_population": 49,
+      "checked_instance_ids": [
+        0,
+        24,
+        48
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    },
+    "CVRPLIB": {
+      "instance_key": "indices",
+      "matching_population": 100,
+      "checked_instance_ids": [
+        0,
+        50,
+        99
+      ],
+      "checked_rows": 3,
+      "costs": "FP64, columns aligned by name, atol=1e-12",
+      "native_winners": "sampled solver names match",
+      "sampled_source_indices_equal": null,
+      "source_index_note": "R77 uses split-local IDs; NSS may retain pre-resplit IDs. Match the same data version by indices."
+    }
+  },
+  "training": false,
+  "inference": false,
+  "checkpoint_reselection": false,
+  "distribution_pages": 18,
+  "main_pdf_pages": 22,
+  "diagnostics": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R117_native_computation/B/full_model_statistics/training_and_method_diagnostics.pdf",
+    "pages": 19,
+    "history_status": "complete"
+  },
+  "checkpoint_rule": "strict maximum full18 VAL macro_top1; exact Top1 ties: minimum macro_actual_regret_pct; exact double ties: first checkpoint",
+  "main_protocol_lock": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R117_native_computation/protocol_lock.json",
+    "sha256": "4056e8102500aa7734ac53f6eb4183b109a853191141f55b790bafed10f1b292",
+    "record": {
+      "experiment": "R117",
+      "locked": true,
+      "arms": [
+        "A",
+        "B"
+      ],
+      "seed": 2,
+      "task_scope": "full18",
+      "rows_per_problem": {
+        "train": 81000,
+        "val": 4500,
+        "test": 4500
+      },
+      "logical_global_batch": 1024,
+      "max_successful_updates": 28440,
+      "warmup_updates": 4266,
+      "eval_every_updates": 1422,
+      "train_eval_every_updates": 7110,
+      "optimizer": "AdamW",
+      "peak_lr": 0.0001,
+      "end_lr": 1e-06,
+      "weight_decay": 0.0001,
+      "grad_clip": 1.0,
+      "dropout": 0.1,
+      "checkpoint_rule": "strict maximum full18 VAL macro_top1; exact Top1 ties: minimum macro_actual_regret_pct; exact double ties: first checkpoint",
+      "inference_rule": "eval frozen native computation; original R77 score-difference maximin; stable ascending-global-solver-ID ties; no calibration or task stitching",
+      "loss": {
+        "ce": 0.35,
+        "comparison": 0.35,
+        "risk": 0.02,
+        "cost_scale": 0.01,
+        "focus_weights": {
+          "true3": 0.5,
+          "predicted3": 0.25,
+          "all_pairs": 0.25
+        }
+      },
+      "rdrop_weight": 0.35,
+      "rdrop_ramp_updates": 4266,
+      "val_gate": {
+        "top1_gain_pp": 0.2,
+        "macro_regret_harm_pp": 0.0,
+        "max_task_regret_harm_pp": 0.05,
+        "vs_sbs_must_not_worsen": true,
+        "evaluated_on": "locked whole18 VAL only"
+      },
+      "max_train_epochs": 20,
+      "native_extraction_batch_size": 128,
+      "per_arm_gpu_hours_cap": 14,
+      "combined_gpu_hours_cap": 28,
+      "gpu_type": "3090",
+      "wandb_mode": "offline",
+      "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "prepared_root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+      "primary_cache": "/tmp/shiys_R84_new90k_cache",
+      "microbatch_caps": {
+        "TSP": 256,
+        "CVRP": 256,
+        "ATSP": 256,
+        "OVRP": 512,
+        "VRPB": 512,
+        "VRPL": 512,
+        "VRPTW": 512,
+        "OVRPTW": 512,
+        "OVRPB": 512,
+        "OVRPL": 512,
+        "VRPBL": 512,
+        "VRPBTW": 512,
+        "VRPLTW": 512,
+        "OVRPBL": 512,
+        "OVRPBTW": 512,
+        "OVRPLTW": 512,
+        "VRPBLTW": 512,
+        "OVRPBLTW": 512
+      },
+      "eval_batch_size": 256,
+      "lib_batch_size": 128,
+      "capacity_witness": "/public/home/shiys/0selection2/code/V4/runs/R117_native_computation/preparation/resources/capacity/B/capacity.json",
+      "capacity_witness_sha256": "ab5ee8f75f3d39ea9cbe7886ebc551a76178cecf55018dca28c35fe0d79aa4dc",
+      "feature_roots": {
+        "A": "/tmp/shiys_R117_A_native_features",
+        "B": "/tmp/shiys_R117_B_native_features"
+      },
+      "common_feature_root": "/tmp/shiys_R117_common_base",
+      "authorized_slots": {
+        "3090_0": {
+          "job": 1465,
+          "node": "gpu03",
+          "index": 0,
+          "gpu_type": "3090",
+          "uuid": "GPU-cb24f168-9f18-f0d5-6f4a-6d2406958f50"
+        },
+        "3090_1": {
+          "job": 1465,
+          "node": "gpu03",
+          "index": 1,
+          "gpu_type": "3090",
+          "uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d"
+        }
+      },
+      "gpu_budget_hours_per_arm": 14,
+      "complete_gpu_budget_hours": 28,
+      "no_4090": true
+    }
+  },
+  "model_params": {
+    "embedding_dim": 128,
+    "head_num": 4,
+    "qkv_dim": 32,
+    "ff_hidden_dim": 512,
+    "head_hidden_dim": 256,
+    "encoder_layer_num": 4,
+    "solver_set_layer_num": 2,
+    "query_num": 4,
+    "dropout": 0.1,
+    "stats_dim": 12,
+    "rezero": false,
+    "gap_score_weight": 0.25,
+    "pre_score_weight": 0.25,
+    "support_branch": false,
+    "support_generators": 0,
+    "support_hidden": 128,
+    "support_score_weight": 0.0,
+    "support_score_mode": "g0",
+    "support_g0_as_main": false,
+    "support_feature_to_token": true,
+    "support_main_utility_weight": 0.0,
+    "support_main_pre_weight": 0.0,
+    "support_main_gap_weight": 0.0,
+    "solver_feature_spec": {
+      "feature_dim": 34,
+      "index_base": 0,
+      "feature_order": [
+        "\u6784\u9020\u5f0f",
+        "\u6269\u6563\u5f0f",
+        "\u5750\u6807\u4e0e\u8282\u70b9\u5c5e\u6027",
+        "\u6210\u672c\u77e9\u9635",
+        "\u56fe\u4e0e\u8fb9",
+        "MHA\uff0fTransformer",
+        "GNN",
+        "\u77e9\u9635\u53cc\u6d41\u6ce8\u610f\u529b",
+        "\u9759\u6001\u7f16\u7801\u590d\u7528",
+        "\u52a8\u6001\u72b6\u6001\u66f4\u65b0",
+        "\u52a8\u6001\u5c40\u90e8\u66f4\u65b0",
+        "\u8fed\u4ee3\u53bb\u566a",
+        "\u5b9e\u4f8b\u6761\u4ef6",
+        "\u5c5e\u6027\u6761\u4ef6",
+        "\u7ea6\u675f\u6761\u4ef6",
+        "\u5143\u5b66\u4e60\u4efb\u52a1\u6761\u4ef6",
+        "FFN \u4e13\u5bb6",
+        "LoRA \u4e13\u5bb6",
+        "\u76d1\u7763\u5b66\u4e60",
+        "\u5f3a\u5316\u5b66\u4e60",
+        "\u6269\u6563\u8bad\u7ec3",
+        "\u5355\u4efb\u52a1",
+        "\u591a\u4efb\u52a1",
+        "\u5143\u5b66\u4e60",
+        "\u5b50\u95ee\u9898\u91cd\u7f16\u7801",
+        "\u91cd\u89e3\u7801\u5668",
+        "\u68af\u5ea6\u5f15\u5bfc\u641c\u7d22",
+        "\u5168\u5c40\u2014\u5c40\u90e8\u53cc\u7b56\u7565",
+        "\u8fd1\u90bb\u6210\u672c\u8f93\u5165",
+        "\u4f2a one-hot \u8f93\u5165",
+        "\u7edf\u4e00\u77e9\u9635\u8868\u793a",
+        "\u5168\u5c40\u5206\u533a\u4e0e\u5c40\u90e8\u91cd\u6784",
+        "\u89e3\u7801\u5668 FFN \u6b8b\u5dee",
+        "\u5168\u5c40\u5c5e\u6027\u5d4c\u5165"
+      ],
+      "solver_active_indices": {
+        "BQ": [
+          0,
+          2,
+          5,
+          9,
+          18,
+          21,
+          24
+        ],
+        "LEHD": [
+          0,
+          2,
+          5,
+          9,
+          18,
+          21,
+          25
+        ],
+        "DIFUSCO": [
+          1,
+          4,
+          6,
+          11,
+          20,
+          21
+        ],
+        "DIFUSCO500": [
+          1,
+          4,
+          6,
+          11,
+          20,
+          21
+        ],
+        "T2T": [
+          1,
+          4,
+          6,
+          11,
+          20,
+          21,
+          26
+        ],
+        "T2T500": [
+          1,
+          4,
+          6,
+          11,
+          20,
+          21,
+          26
+        ],
+        "ELG": [
+          0,
+          2,
+          5,
+          8,
+          10,
+          19,
+          21,
+          27
+        ],
+        "OMNI": [
+          0,
+          2,
+          5,
+          8,
+          15,
+          19,
+          23
+        ],
+        "ICAM": [
+          0,
+          2,
+          5,
+          8,
+          12,
+          19,
+          21
+        ],
+        "ICAM_ATSP": [
+          0,
+          3,
+          7,
+          8,
+          12,
+          19,
+          21,
+          28
+        ],
+        "MATNET": [
+          0,
+          3,
+          7,
+          8,
+          19,
+          21
+        ],
+        "MATPOENET": [
+          0,
+          3,
+          7,
+          8,
+          19,
+          21,
+          29
+        ],
+        "UNICO_MatPOENet": [
+          0,
+          3,
+          7,
+          8,
+          19,
+          22,
+          29,
+          30
+        ],
+        "GLOP": [
+          0,
+          3,
+          4,
+          6,
+          7,
+          19,
+          31
+        ],
+        "MTPOMO": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          19,
+          22
+        ],
+        "MVMOE": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          16,
+          19,
+          22
+        ],
+        "RELD_CVRP": [
+          0,
+          2,
+          5,
+          8,
+          19,
+          21,
+          32
+        ],
+        "RELD_MTL": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          19,
+          22,
+          32
+        ],
+        "RELD_MOEL": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          16,
+          19,
+          22,
+          32
+        ],
+        "RouteFinder": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          19,
+          22,
+          33
+        ],
+        "MoSES_RF": [
+          0,
+          2,
+          5,
+          8,
+          13,
+          17,
+          22,
+          33
+        ],
+        "MoSES_CaDA": [
+          0,
+          2,
+          5,
+          8,
+          14,
+          17,
+          22
+        ]
+      },
+      "solver_names": [
+        "BQ",
+        "DIFUSCO",
+        "DIFUSCO500",
+        "ELG",
+        "GLOP",
+        "ICAM",
+        "ICAM_ATSP",
+        "LEHD",
+        "MATNET",
+        "MATPOENET",
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "OMNI",
+        "RELD_CVRP",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder",
+        "T2T",
+        "T2T500",
+        "UNICO_MatPOENet"
+      ]
+    },
+    "solver_feature_weight": 1.0,
+    "solver_feature_hidden": 128,
+    "sdpa": true,
+    "architecture": "pairwise",
+    "joint_layer_num": 2,
+    "local_geometry": true,
+    "geometry_mode": "real",
+    "ignore_coord_dist": true,
+    "native_winner": true,
+    "decision_head": "classification",
+    "pair_mode": "score_difference",
+    "solver_representation": "handcrafted",
+    "permutation_seed": 4502,
+    "code_init_seed": 450002,
+    "role_arm": "B_execution_anchor",
+    "role_spec": {
+      "problem": "TSP",
+      "role_slot": 3,
+      "node_width": 8,
+      "semantics": "customer_anchor_not_depot",
+      "canonical_rule": "lexicographic_min_x_then_y_among_valid_nodes",
+      "exact_coordinate_tie_rule": "mark_all_valid_customers_at_minimum_xy",
+      "execution_rule": "original_physical_node0_first_valid_slot_if_unmarked",
+      "explicit_role_rule": "A_exact_canonical_tie_set_B_legal_one_hot",
+      "non_tsp_rule": "unchanged"
+    },
+    "selection_head": "original_score_mlp_maximin",
+    "initialization": "fresh_r84_plus_frozen_native_computation",
+    "model_spec": {
+      "format": "r117_typed_native_computation_v1",
+      "arms": {
+        "A": "added_random",
+        "B": "added_pretrained"
+      },
+      "role_arm": "B_execution_anchor",
+      "full18": true,
+      "original_four_instance_layers": true,
+      "original_two_joint_layers": true,
+      "original_hand34_id_score_mlp_maximin": true,
+      "common": "identical frozen pretrained ReLD static nodes for CVRP+15MVRP",
+      "added": {
+        "TSP": "LEHD heavy decoder initial-boundary nodes",
+        "CVRP": "LEHD heavy decoder empty-history full-capacity nodes",
+        "VRP": "ReLD independent reference-current decoder hidden nodes",
+        "ATSP": "MatNet FROM-current TO-key decoder glimpses"
+      },
+      "fusion": "separate affine-free node norms and bias-free projections before first instance layer",
+      "widths": {
+        "TSP": 128,
+        "CVRP": 128,
+        "ATSP": 256,
+        "OVRP": 128,
+        "VRPB": 128,
+        "VRPL": 128,
+        "VRPTW": 128,
+        "OVRPTW": 128,
+        "OVRPB": 128,
+        "OVRPL": 128,
+        "VRPBL": 128,
+        "VRPBTW": 128,
+        "VRPLTW": 128,
+        "OVRPBL": 128,
+        "OVRPBTW": 128,
+        "OVRPLTW": 128,
+        "VRPBLTW": 128,
+        "OVRPBLTW": 128
+      },
+      "frozen": true,
+      "no_actions": true,
+      "no_new_targets": true,
+      "no_diffusion_coverage": true,
+      "native_precision": "FP32 TF32off, FP16 cache and online quantization",
+      "projection_seeds": {
+        "TSP": 1170003,
+        "CVRP": 1170004,
+        "VRP": 1170005,
+        "ATSP": 1170006
+      },
+      "common_projection_seed": 940003
+    },
+    "r117_schema_version": 1,
+    "frozen_donor": {
+      "variant": "added_pretrained",
+      "provenance": {
+        "format": "r117_bounded_native_computation_v1",
+        "arm": "B",
+        "variant": "added_pretrained",
+        "components": {
+          "TSP": {
+            "variant": "pretrained",
+            "output_dim": 128,
+            "native_source_files": {
+              "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/NCO_code/single_objective/LEHD/TSP/TSPModel.py": "fc0849ac77080ce44bc8625d9217e04d072ac93f3a3ae557fcbe31b8887f2b56"
+            },
+            "native_source_sha256": "7626f53ee4a0b7932872e8509593f47dfdb78d3570cc3a576a223b6bf9bd51ff",
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/NCO_code/single_objective/LEHD/TSP/result/20230509_153705_train/checkpoint-150.pt",
+              "sha256": "ead8dc462d9b1f6a09fa77025ac8a0c594660f3f1f02fb0d104eeffe48fffa8c",
+              "state_key": "model_state_dict",
+              "prefixes": [
+                "encoder.",
+                "decoder."
+              ]
+            },
+            "checkpoint_sha256": "ead8dc462d9b1f6a09fa77025ac8a0c594660f3f1f02fb0d104eeffe48fffa8c",
+            "checkpoint_path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/NCO_code/single_objective/LEHD/TSP/result/20230509_153705_train/checkpoint-150.pt",
+            "max_checkpoint_bytes": 25165824,
+            "random_seed": null,
+            "model_params": {
+              "embedding_dim": 128,
+              "head_num": 8,
+              "qkv_dim": 16,
+              "ff_hidden_dim": 512,
+              "decoder_layer_num": 6,
+              "mode": "test"
+            },
+            "input_scope": [
+              "raw xy"
+            ],
+            "training_instance_manifest": "unknown",
+            "historical_cost_recipe_certified": false
+          },
+          "CVRP": {
+            "variant": "pretrained",
+            "output_dim": 128,
+            "native_source_files": {
+              "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/NCO_code/single_objective/LEHD/CVRP/VRPModel.py": "b2f90996a73ac617747ee9bd1db3d3c147340d4bb484e8fbce22427fdb810e92"
+            },
+            "native_source_sha256": "c89bc89a1e9bce341f93c3144c0f14f936def0692b493f4aa0f9249eb7460d6b",
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/NCO_code/single_objective/LEHD/CVRP/result/20230817_235537_train/checkpoint-40.pt",
+              "sha256": "7a3cd8359f94c07ee5674758ef2aa834890e9a3fcd9fc5d35bd6140be1a3551b",
+              "state_key": "model_state_dict",
+              "prefixes": [
+                "encoder.",
+                "decoder."
+              ]
+            },
+            "checkpoint_sha256": "7a3cd8359f94c07ee5674758ef2aa834890e9a3fcd9fc5d35bd6140be1a3551b",
+            "checkpoint_path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/NCO_code/single_objective/LEHD/CVRP/result/20230817_235537_train/checkpoint-40.pt",
+            "max_checkpoint_bytes": 25165824,
+            "random_seed": null,
+            "model_params": {
+              "embedding_dim": 128,
+              "head_num": 8,
+              "qkv_dim": 16,
+              "ff_hidden_dim": 512,
+              "decoder_layer_num": 6,
+              "mode": "test"
+            },
+            "input_scope": [
+              "raw xy, normalized demand, depot flag"
+            ],
+            "training_instance_manifest": "unknown",
+            "historical_cost_recipe_certified": false
+          },
+          "VRP": {
+            "variant": "pretrained",
+            "output_dim": 128,
+            "native_source_files": {
+              "/public/home/shiys/reld-nco-main/Multi-Task/models/MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d",
+              "/public/home/shiys/reld-nco-main/Multi-Task/models/MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd"
+            },
+            "native_source_sha256": "da60e7ae746f7f3a98c008bfc0b92c358d3b341f1b5ce23688eb014693e0a047",
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3",
+              "state_key": "model_state_dict",
+              "prefixes": [
+                "decoder."
+              ]
+            },
+            "checkpoint_sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3",
+            "checkpoint_path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "max_checkpoint_bytes": 47185920,
+            "random_seed": null,
+            "model_params": {
+              "embedding_dim": 128,
+              "sqrt_embedding_dim": 11.313708498984761,
+              "encoder_layer_num": 6,
+              "decoder_layer_num": 1,
+              "qkv_dim": 16,
+              "head_num": 8,
+              "logit_clipping": 10,
+              "ff_hidden_dim": 512,
+              "num_experts": 4,
+              "eval_type": "argmax",
+              "norm": "none",
+              "norm_loc": "norm_last",
+              "expert_loc": [
+                "Enc0",
+                "Enc1",
+                "Enc2",
+                "Enc3",
+                "Enc4",
+                "Enc5",
+                "Dec"
+              ],
+              "problem": "Train_ALL",
+              "topk": 2,
+              "routing_level": "node",
+              "routing_method": "input_choice",
+              "ffidt": true
+            },
+            "input_scope": [
+              "raw xy, normalized signed demand, depot flag, L, service, TWstart, TWend"
+            ],
+            "training_instance_manifest": "unknown",
+            "historical_cost_recipe_certified": false
+          },
+          "ATSP": {
+            "variant": "pretrained",
+            "output_dim": 256,
+            "native_source_files": {
+              "/public/home/shiys/EasyNCO/neural_solvers/methods/matnet/matnet_encoder.py": "35738284914ecc50090e2553ef085ff1724737d6db11c253832844d9465e8f3e",
+              "/public/home/shiys/EasyNCO/neural_solvers/backbones/Transformer/attr_component.py": "d6cc61586fb97a54cfdc7dc4e2eaa436cbc16772c04397cd17f5ea677fc5e5d0",
+              "/public/home/shiys/EasyNCO/neural_solvers/methods/matnet/matnet_decoder.py": "f2bf1a9a384c14e780d9855583e2a484525cdfa286898b4205a7ed720015ebed"
+            },
+            "native_source_sha256": "8241841024fa3b316b2217dfc7c8658190ec6cf99c59d3f11a12367e26186ef2",
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/EasyNCO/pretrained/matnet_pretrain/matnet_atsp100.ckpt",
+              "sha256": "a86d1ab1d8db62088e6a9d54118db92ebe8472c316dc046fcf755ca61280b5ca",
+              "state_key": "state_dict",
+              "prefixes": [
+                "encoder.",
+                "decoder."
+              ]
+            },
+            "checkpoint_sha256": "a86d1ab1d8db62088e6a9d54118db92ebe8472c316dc046fcf755ca61280b5ca",
+            "checkpoint_path": "/public/home/shiys/EasyNCO/pretrained/matnet_pretrain/matnet_atsp100.ckpt",
+            "max_checkpoint_bytes": 33554432,
+            "random_seed": null,
+            "model_params": {
+              "encoder": {
+                "embedding_dim": 256,
+                "encoder_layer_num": 5,
+                "head_num": 16,
+                "qkv_dim": 16,
+                "ms_hidden_dim": 16,
+                "ff_hidden_dim": 512,
+                "ms_layer1_init": 0.7071067811865476,
+                "ms_layer2_init": 0.25
+              },
+              "decoder": {
+                "head_num": 16,
+                "embedding_dim": 256,
+                "qkv_dim": 16,
+                "logit_clipping": 10.0
+              }
+            },
+            "input_scope": [
+              "raw directed matrix",
+              "fixed zero FROM and identity TO roles"
+            ],
+            "training_instance_manifest": "unknown",
+            "historical_cost_recipe_certified": false
+          },
+          "base": {
+            "variant": "pretrained",
+            "checkpoint_path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+            "checkpoint_sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3",
+            "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+            "native_source_files": {
+              "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d",
+              "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd"
+            },
+            "output_dim": 128,
+            "supported_problems": [
+              "CVRP",
+              "OVRP",
+              "VRPB",
+              "VRPL",
+              "VRPTW",
+              "OVRPTW",
+              "OVRPB",
+              "OVRPL",
+              "VRPBL",
+              "VRPBTW",
+              "VRPLTW",
+              "OVRPBL",
+              "OVRPBTW",
+              "OVRPLTW",
+              "VRPBLTW",
+              "OVRPBLTW"
+            ],
+            "random_seed": null,
+            "checkpoint_pin": {
+              "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+              "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+            },
+            "spec": {
+              "format": "r94_static_reld_moel_v1",
+              "output_dim": 128,
+              "native_precision": {
+                "dtype": "float32",
+                "autocast": false,
+                "matmul_tf32": false,
+                "cudnn_tf32": false
+              },
+              "supported_problems": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW",
+                "OVRPB",
+                "OVRPL",
+                "VRPBL",
+                "VRPBTW",
+                "VRPLTW",
+                "OVRPBL",
+                "OVRPBTW",
+                "OVRPLTW",
+                "VRPBLTW",
+                "OVRPBLTW"
+              ],
+              "raw_cvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag"
+              ],
+              "raw_mvrp_fields": [
+                "x",
+                "y",
+                "demand",
+                "depotflag",
+                "L",
+                "service",
+                "TWstart",
+                "TWend"
+              ],
+              "native_fields": {
+                "depot_xy": [
+                  "x",
+                  "y"
+                ],
+                "node_xy_demand_tw": [
+                  "x",
+                  "y",
+                  "signed_demand",
+                  "TWstart",
+                  "TWend"
+                ]
+              },
+              "disabled_tw": [
+                0.0,
+                0.0
+              ],
+              "units": "unchanged native input units; demand already capacity-normalized",
+              "extraction": "exact valid N per row; depot first; preserve customer identities",
+              "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+              "model_params": {
+                "embedding_dim": 128,
+                "sqrt_embedding_dim": 11.313708498984761,
+                "encoder_layer_num": 6,
+                "decoder_layer_num": 1,
+                "qkv_dim": 16,
+                "head_num": 8,
+                "logit_clipping": 10,
+                "ff_hidden_dim": 512,
+                "num_experts": 4,
+                "eval_type": "argmax",
+                "norm": "none",
+                "norm_loc": "norm_last",
+                "expert_loc": [
+                  "Enc0",
+                  "Enc1",
+                  "Enc2",
+                  "Enc3",
+                  "Enc4",
+                  "Enc5",
+                  "Dec"
+                ],
+                "problem": "Train_ALL",
+                "topk": 2,
+                "routing_level": "node",
+                "routing_method": "input_choice",
+                "ffidt": true
+              }
+            },
+            "known_unknown_pretraining_source": {
+              "applies_to_loaded_weights": true,
+              "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+              "training_tasks": [
+                "CVRP",
+                "OVRP",
+                "VRPB",
+                "VRPL",
+                "VRPTW",
+                "OVRPTW"
+              ],
+              "unknown": [
+                "historical CLI",
+                "training instance manifest",
+                "exact trajectory",
+                "overlap with selector inputs"
+              ],
+              "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate"
+            }
+          }
+        },
+        "random_initialization_seeds": {
+          "TSP": 1170102,
+          "CVRP": 1170103,
+          "VRP": 1170104,
+          "ATSP": 1170105
+        },
+        "external_pretraining_by_component": {
+          "base": true,
+          "TSP": true,
+          "CVRP": true,
+          "VRP": true,
+          "ATSP": true
+        },
+        "reused_adapter_source_files": {
+          "/public/home/shiys/0selection2/code/V4/r94_donor.py": "a9805a3629e84fd0d53faa0bc1f1aadbf0e619fd58b474ce4cbacadc1958eb81",
+          "/public/home/shiys/0selection2/code/V4/r102_donor.py": "3fb6063b815d62b8de2352be45b783fe949aa102e6bc125b56ae1951d53d798f"
+        },
+        "spec": {
+          "format": "r117_bounded_native_computation_v1",
+          "arms": {
+            "A": "added_random",
+            "B": "added_pretrained"
+          },
+          "supported_problems": [
+            "TSP",
+            "CVRP",
+            "ATSP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW",
+            "OVRPB",
+            "OVRPL",
+            "VRPBL",
+            "VRPBTW",
+            "VRPLTW",
+            "OVRPBL",
+            "OVRPBTW",
+            "OVRPLTW",
+            "VRPBLTW",
+            "OVRPBLTW"
+          ],
+          "widths": {
+            "TSP": 128,
+            "CVRP": 128,
+            "ATSP": 256,
+            "OVRP": 128,
+            "VRPB": 128,
+            "VRPL": 128,
+            "VRPTW": 128,
+            "OVRPTW": 128,
+            "OVRPB": 128,
+            "OVRPL": 128,
+            "VRPBL": 128,
+            "VRPBTW": 128,
+            "VRPLTW": 128,
+            "OVRPBL": 128,
+            "OVRPBTW": 128,
+            "OVRPLTW": 128,
+            "VRPBLTW": 128,
+            "OVRPBLTW": 128
+          },
+          "common_base": "same pinned pretrained ReLD-MOEL static128 for CVRP and 15 MVRP",
+          "input_allowlist": [
+            "node",
+            "matrix",
+            "n",
+            "node_mask",
+            "problem_id",
+            "problem_name"
+          ],
+          "input_scopes": {
+            "TSP": [
+              "raw xy"
+            ],
+            "CVRP": [
+              "raw xy, normalized demand, depot flag"
+            ],
+            "VRP": [
+              "raw xy, normalized signed demand, depot flag, L, service, TWstart, TWend"
+            ],
+            "ATSP": [
+              "raw directed matrix",
+              "fixed zero FROM and identity TO roles"
+            ]
+          },
+          "native_precision": {
+            "dtype": "float32",
+            "autocast": false,
+            "matmul_tf32": false,
+            "cudnn_tf32": false
+          },
+          "base_quantization": "static base -> float16 -> float32 BEFORE ReLD reference decoder, online AND cache",
+          "cache_contract": "forward_extra returns only native_nodes; supplied base must match instance, mask and pinned identity",
+          "grouping": "sorted exact valid N; gather in original node order; no padded native execution; zero output padding",
+          "first_physical_node": 0,
+          "tsp_reference": "only node0 selected; first=last=node0; endpoint embeddings plus all six native decoder layers; no Linear_final",
+          "cvrp_reference": "empty selected customer list; capacity=remaining_capacity=1; first=last=depot; all six native layers; no Linear_final",
+          "lehd_alignment": "customers retain physical identities; node0 is mean of final first/last endpoint representations",
+          "vrp_reference": {
+            "currents": "every physical node independently, in parallel",
+            "load": 1.0,
+            "time": 0.0,
+            "length": "raw per-node L if enabled, else 0",
+            "open": "float('O' in problem_name)",
+            "available": "all valid nodes except current self; diagonal-only mask",
+            "extraction": "native feed_forward output[0] plus its residual input, before single-head score",
+            "feasible_execution_claim": false,
+            "constraint_simulation": false
+          },
+          "atsp_reference": {
+            "from_role": "zeros256",
+            "to_role": "first N identity256 rows",
+            "min_n": 3,
+            "max_n": 256,
+            "currents": "all encoded FROM nodes",
+            "first": "encoded FROM physical node0",
+            "keys_values": "encoded TO nodes",
+            "mask": "exclude current diagonal and first node0; row0 excludes node0 only once",
+            "extraction": "native decoder.multi_head_combine output256",
+            "historical_random_roles_reproduced": false
+          },
+          "frozen": true,
+          "no_actions": true,
+          "no_environments": true,
+          "no_teacher_inputs": true,
+          "diffusion_covered": false,
+          "all_candidate_computations_covered": false,
+          "training_instance_manifest": "unknown for external pretrained weights; overlap uncertified",
+          "historical_cost_recipe_certified": false,
+          "numerical_warning": "native FP32 batch partitioning need not be bitwise invariant"
+        }
+      }
+    },
+    "r117_arm": "B",
+    "r117_fresh_trainable_sha256": "146ee81e94bf03dd87c1e178efc41a192a3ae9348318bd26862341033e48f7b5"
+  },
+  "trainable_parameter_count": 1941257,
+  "inference_timing": {
+    "experiment": "R117",
+    "arm": "B",
+    "complete": true,
+    "completed_utc": "2026-10-27T05:19:36.755014+00:00",
+    "checkpoint_sha256": "7157ed93b116c038c0ae956588141893007996f671dfcf8de19c1c8c263929ae",
+    "state_hash": "b7d38ad0f9a026d27449732f22bc00d7d139c0dfca693951262093db424616ec",
+    "selected_update": 27018,
+    "model_state_sha256": "35d018d876349feaa1c8845e8f4c9c13cd21c16aeaa28bb752eac73aae29832f",
+    "model_factory": "code.V4.r117_experiment.load_checkpoint",
+    "inference_rule": "eval frozen native computation; original R77 score-difference maximin; stable ascending-global-solver-ID ties; no calibration or task stitching",
+    "parameter_count": 1941257,
+    "device": "cuda:0",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 3090",
+      "uuid": "cb626bdb-4319-2f5e-b91f-17fcaa44a83d"
+    },
+    "repetitions": 3,
+    "warmup_batches": 1,
+    "timing_scopes": [
+      "native_computation_plus_selector",
+      "cache_hit_selector"
+    ],
+    "scope": "GPU-resident original inputs: native computation plus selector; cached selector separately",
+    "all_current_model_included": true,
+    "end_to_end_measured": false,
+    "input_labels_read": false,
+    "cache_is_not_deployed_latency": true,
+    "model_reselection": false,
+    "per_problem": [
+      {
+        "problem": "TSP",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.6294483263045549,
+            0.6292081698775291,
+            0.6294754091650248
+          ],
+          "mean_seconds_per_instance": 0.0024585050850873813,
+          "p95_seconds_per_instance": 0.002458877737808507
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.08721552044153214,
+            0.08742936700582504,
+            0.08747760765254498
+          ],
+          "mean_seconds_per_instance": 0.0003413053321613309,
+          "p95_seconds_per_instance": 0.00034169056089012885
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.6294483263045549,
+            0.6292081698775291,
+            0.6294754091650248
+          ],
+          "mean_seconds_per_instance": 0.0024585050850873813,
+          "p95_seconds_per_instance": 0.002458877737808507
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "CVRP",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            2.3493359070271254,
+            2.3506015352904797,
+            2.352330831810832
+          ],
+          "mean_seconds_per_instance": 0.00918264098193807,
+          "p95_seconds_per_instance": 0.0091881168053078
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.10892359353601933,
+            0.10927766561508179,
+            0.10913091711699963
+          ],
+          "mean_seconds_per_instance": 0.0004262137711824228,
+          "p95_seconds_per_instance": 0.0004268085576768499
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            2.3493359070271254,
+            2.3506015352904797,
+            2.352330831810832
+          ],
+          "mean_seconds_per_instance": 0.00918264098193807,
+          "p95_seconds_per_instance": 0.0091881168053078
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "ATSP",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.7326138336211443,
+            0.7322323750704527,
+            0.7305859047919512
+          ],
+          "mean_seconds_per_instance": 0.002858635564431703,
+          "p95_seconds_per_instance": 0.002861623780336231
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.01345168985426426,
+            0.01355382427573204,
+            0.013583607971668243
+          ],
+          "mean_seconds_per_instance": 5.285041940320904e-05,
+          "p95_seconds_per_instance": 5.3049334383103997e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.7326138336211443,
+            0.7322323750704527,
+            0.7305859047919512
+          ],
+          "mean_seconds_per_instance": 0.002858635564431703,
+          "p95_seconds_per_instance": 0.002861623780336231
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "OVRP",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5153472069650888,
+            0.5216641444712877,
+            0.5183773282915354
+          ],
+          "mean_seconds_per_instance": 0.002025245676729052,
+          "p95_seconds_per_instance": 0.0020364666517707517
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013657467439770699,
+            0.013667752966284752,
+            0.013691110536456108
+          ],
+          "mean_seconds_per_instance": 5.340668091472859e-05,
+          "p95_seconds_per_instance": 5.3471776482183486e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5153472069650888,
+            0.5216641444712877,
+            0.5183773282915354
+          ],
+          "mean_seconds_per_instance": 0.002025245676729052,
+          "p95_seconds_per_instance": 0.0020364666517707517
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "VRPB",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.526344196870923,
+            0.5253860652446747,
+            0.5298616476356983
+          ],
+          "mean_seconds_per_instance": 0.002059364465822,
+          "p95_seconds_per_instance": 0.0020683980568719563
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013570573180913925,
+            0.013571185991168022,
+            0.013564063236117363
+          ],
+          "mean_seconds_per_instance": 5.3002372927342854e-05,
+          "p95_seconds_per_instance": 5.301220589899458e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.526344196870923,
+            0.5253860652446747,
+            0.5298616476356983
+          ],
+          "mean_seconds_per_instance": 0.002059364465822,
+          "p95_seconds_per_instance": 0.0020683980568719563
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "VRPL",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5279924273490906,
+            0.5274545438587666,
+            0.5276944693177938
+          ],
+          "mean_seconds_per_instance": 0.0020613820840177746,
+          "p95_seconds_per_instance": 0.0020623540294764098
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013855064287781715,
+            0.013851188123226166,
+            0.013421935960650444
+          ],
+          "mean_seconds_per_instance": 5.355232860893011e-05,
+          "p95_seconds_per_instance": 5.411983074736782e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5279924273490906,
+            0.5274545438587666,
+            0.5276944693177938
+          ],
+          "mean_seconds_per_instance": 0.0020613820840177746,
+          "p95_seconds_per_instance": 0.0020623540294764098
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "VRPTW",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5311462469398975,
+            0.5282112322747707,
+            0.5305842123925686
+          ],
+          "mean_seconds_per_instance": 0.00207023657761359,
+          "p95_seconds_per_instance": 0.0020745704823639244
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.01376386173069477,
+            0.013722643256187439,
+            0.013696817681193352
+          ],
+          "mean_seconds_per_instance": 5.3624118057390056e-05,
+          "p95_seconds_per_instance": 5.374898391892202e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5311462469398975,
+            0.5282112322747707,
+            0.5305842123925686
+          ],
+          "mean_seconds_per_instance": 0.00207023657761359,
+          "p95_seconds_per_instance": 0.0020745704823639244
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "OVRPTW",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5209220871329308,
+            0.5179363936185837,
+            0.523559395223856
+          ],
+          "mean_seconds_per_instance": 0.002034398276009597,
+          "p95_seconds_per_instance": 0.00204412368912017
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.01381661370396614,
+            0.013713095337152481,
+            0.013712987303733826
+          ],
+          "mean_seconds_per_instance": 5.370142753235996e-05,
+          "p95_seconds_per_instance": 5.3930710419081154e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5209220871329308,
+            0.5179363936185837,
+            0.523559395223856
+          ],
+          "mean_seconds_per_instance": 0.002034398276009597,
+          "p95_seconds_per_instance": 0.00204412368912017
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "OVRPB",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5283512901514769,
+            0.5289666205644608,
+            0.5268837530165911
+          ],
+          "mean_seconds_per_instance": 0.0020627625829850635,
+          "p95_seconds_per_instance": 0.002066035498137353
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013572735711932182,
+            0.013580380007624626,
+            0.013567211106419563
+          ],
+          "mean_seconds_per_instance": 5.3021258887990065e-05,
+          "p95_seconds_per_instance": 5.304537335177883e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5283512901514769,
+            0.5289666205644608,
+            0.5268837530165911
+          ],
+          "mean_seconds_per_instance": 0.0020627625829850635,
+          "p95_seconds_per_instance": 0.002066035498137353
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "OVRPL",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5259209014475346,
+            0.5283827222883701,
+            0.5265345815569162
+          ],
+          "mean_seconds_per_instance": 0.0020583830798083604,
+          "p95_seconds_per_instance": 0.0020632730789657216
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.01379520446062088,
+            0.013723399490118027,
+            0.013717390596866608
+          ],
+          "mean_seconds_per_instance": 5.369270123386135e-05,
+          "p95_seconds_per_instance": 5.3859468607697636e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5259209014475346,
+            0.5283827222883701,
+            0.5265345815569162
+          ],
+          "mean_seconds_per_instance": 0.0020583830798083604,
+          "p95_seconds_per_instance": 0.0020632730789657216
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "VRPBL",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.529521593824029,
+            0.525885034352541,
+            0.5303133334964514
+          ],
+          "mean_seconds_per_instance": 0.0020647395334284133,
+          "p95_seconds_per_instance": 0.0020712271856609733
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013568563386797905,
+            0.013583105057477951,
+            0.013596706092357635
+          ],
+          "mean_seconds_per_instance": 5.305777934457486e-05,
+          "p95_seconds_per_instance": 5.3106820269022136e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.529521593824029,
+            0.525885034352541,
+            0.5303133334964514
+          ],
+          "mean_seconds_per_instance": 0.0020647395334284133,
+          "p95_seconds_per_instance": 0.0020712271856609733
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "VRPBTW",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5290311519056559,
+            0.5300858914852142,
+            0.5288806837052107
+          ],
+          "mean_seconds_per_instance": 0.002067705373823022,
+          "p95_seconds_per_instance": 0.0020702360059658533
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013631502166390419,
+            0.013636931777000427,
+            0.013588761910796165
+          ],
+          "mean_seconds_per_instance": 5.319947376847267e-05,
+          "p95_seconds_per_instance": 5.3267143812263384e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5290311519056559,
+            0.5300858914852142,
+            0.5288806837052107
+          ],
+          "mean_seconds_per_instance": 0.002067705373823022,
+          "p95_seconds_per_instance": 0.0020702360059658533
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "VRPLTW",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5266650877892971,
+            0.52833759970963,
+            0.5266774073243141
+          ],
+          "mean_seconds_per_instance": 0.0020594792901344285,
+          "p95_seconds_per_instance": 0.0020631702362152284
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013751165941357613,
+            0.013735001906752586,
+            0.013702163472771645
+          ],
+          "mean_seconds_per_instance": 5.363063974073157e-05,
+          "p95_seconds_per_instance": 5.370917788241059e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5266650877892971,
+            0.52833759970963,
+            0.5266774073243141
+          ],
+          "mean_seconds_per_instance": 0.0020594792901344285,
+          "p95_seconds_per_instance": 0.0020631702362152284
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "OVRPBL",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.526801522821188,
+            0.5260598380118608,
+            0.5289214737713337
+          ],
+          "mean_seconds_per_instance": 0.002059613065891123,
+          "p95_seconds_per_instance": 0.0020652714010793716
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013666639104485512,
+            0.013656431809067726,
+            0.01366274431347847
+          ],
+          "mean_seconds_per_instance": 5.3366946910197534e-05,
+          "p95_seconds_per_instance": 5.338378759915941e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.526801522821188,
+            0.5260598380118608,
+            0.5289214737713337
+          ],
+          "mean_seconds_per_instance": 0.002059613065891123,
+          "p95_seconds_per_instance": 0.0020652714010793716
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "OVRPBTW",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5321513265371323,
+            0.5328083299100399,
+            0.5301728937774897
+          ],
+          "mean_seconds_per_instance": 0.0020769955081050284,
+          "p95_seconds_per_instance": 0.002081025896768551
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013551879674196243,
+            0.013577431440353394,
+            0.013550892472267151
+          ],
+          "mean_seconds_per_instance": 5.2969015087001026e-05,
+          "p95_seconds_per_instance": 5.302686040522531e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5321513265371323,
+            0.5328083299100399,
+            0.5301728937774897
+          ],
+          "mean_seconds_per_instance": 0.0020769955081050284,
+          "p95_seconds_per_instance": 0.002081025896768551
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "OVRPLTW",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.519434254616499,
+            0.5199092272669077,
+            0.5195122919976711
+          ],
+          "mean_seconds_per_instance": 0.0020297601222409867,
+          "p95_seconds_per_instance": 0.0020307403661718126
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013665709644556046,
+            0.013678494840860367,
+            0.013325933367013931
+          ],
+          "mean_seconds_per_instance": 5.295590866201868e-05,
+          "p95_seconds_per_instance": 5.342662625480443e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.519434254616499,
+            0.5199092272669077,
+            0.5195122919976711
+          ],
+          "mean_seconds_per_instance": 0.0020297601222409867,
+          "p95_seconds_per_instance": 0.0020307403661718126
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "VRPBLTW",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5290445666760206,
+            0.5289214700460434,
+            0.5304153505712748
+          ],
+          "mean_seconds_per_instance": 0.0020682049313715347,
+          "p95_seconds_per_instance": 0.0020713995007099585
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013713955879211426,
+            0.013732990249991417,
+            0.013712311163544655
+          ],
+          "mean_seconds_per_instance": 5.359278293326497e-05,
+          "p95_seconds_per_instance": 5.3637057862943036e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5290445666760206,
+            0.5289214700460434,
+            0.5304153505712748
+          ],
+          "mean_seconds_per_instance": 0.0020682049313715347,
+          "p95_seconds_per_instance": 0.0020713995007099585
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "OVRPBLTW",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5319707076996565,
+            0.5328568387776613,
+            0.5329281948506832
+          ],
+          "mean_seconds_per_instance": 0.0020804111215208345,
+          "p95_seconds_per_instance": 0.0020817228876694573
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013706125319004059,
+            0.013703281059861183,
+            0.013750240206718445
+          ],
+          "mean_seconds_per_instance": 5.359328982497876e-05,
+          "p95_seconds_per_instance": 5.369464342948049e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5319707076996565,
+            0.5328568387776613,
+            0.5329281948506832
+          ],
+          "mean_seconds_per_instance": 0.0020804111215208345,
+          "p95_seconds_per_instance": 0.0020817228876694573
+        },
+        "online_cache_logits_identical": true
+      }
+    ],
+    "excludes": "dataset I/O, CPU-to-GPU transfer, training and complete solver execution"
+  },
+  "evidence_boundary": "TEST development-exposed; VAL-only checkpoint selection; ALL problem-equal; TRAIN-only SBS; missing NSS references are not retrained or inferred",
+  "objective": {
+    "main": "unchanged original R77 CE/comparison/risk plus symmetric R-Drop",
+    "coefficients": {
+      "ce": 0.35,
+      "comparison": 0.35,
+      "risk": 0.02
+    },
+    "forward_passes": 2,
+    "rdrop_weight": 0.35,
+    "rdrop_ramp_updates": 4266,
+    "donor_preparations_per_pair": 1,
+    "auxiliary_loss": false,
+    "route_targets": false,
+    "cross_instance_objective": false,
+    "mutable_objective_state": false
+  },
+  "val_gate": {
+    "top1_gain_pp": 0.2,
+    "macro_regret_harm_pp": 0.0,
+    "max_task_regret_harm_pp": 0.05,
+    "vs_sbs_must_not_worsen": true,
+    "evaluated_on": "locked whole18 VAL only"
+  },
+  "frozen_donor": {
+    "format": "r117_bounded_native_computation_v1",
+    "arm": "B",
+    "variant": "added_pretrained",
+    "components": {
+      "TSP": {
+        "variant": "pretrained",
+        "output_dim": 128,
+        "native_source_files": {
+          "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/NCO_code/single_objective/LEHD/TSP/TSPModel.py": "fc0849ac77080ce44bc8625d9217e04d072ac93f3a3ae557fcbe31b8887f2b56"
+        },
+        "native_source_sha256": "7626f53ee4a0b7932872e8509593f47dfdb78d3570cc3a576a223b6bf9bd51ff",
+        "checkpoint_pin": {
+          "path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/NCO_code/single_objective/LEHD/TSP/result/20230509_153705_train/checkpoint-150.pt",
+          "sha256": "ead8dc462d9b1f6a09fa77025ac8a0c594660f3f1f02fb0d104eeffe48fffa8c",
+          "state_key": "model_state_dict",
+          "prefixes": [
+            "encoder.",
+            "decoder."
+          ]
+        },
+        "checkpoint_sha256": "ead8dc462d9b1f6a09fa77025ac8a0c594660f3f1f02fb0d104eeffe48fffa8c",
+        "checkpoint_path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/NCO_code/single_objective/LEHD/TSP/result/20230509_153705_train/checkpoint-150.pt",
+        "max_checkpoint_bytes": 25165824,
+        "random_seed": null,
+        "model_params": {
+          "embedding_dim": 128,
+          "head_num": 8,
+          "qkv_dim": 16,
+          "ff_hidden_dim": 512,
+          "decoder_layer_num": 6,
+          "mode": "test"
+        },
+        "input_scope": [
+          "raw xy"
+        ],
+        "training_instance_manifest": "unknown",
+        "historical_cost_recipe_certified": false
+      },
+      "CVRP": {
+        "variant": "pretrained",
+        "output_dim": 128,
+        "native_source_files": {
+          "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/NCO_code/single_objective/LEHD/CVRP/VRPModel.py": "b2f90996a73ac617747ee9bd1db3d3c147340d4bb484e8fbce22427fdb810e92"
+        },
+        "native_source_sha256": "c89bc89a1e9bce341f93c3144c0f14f936def0692b493f4aa0f9249eb7460d6b",
+        "checkpoint_pin": {
+          "path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/NCO_code/single_objective/LEHD/CVRP/result/20230817_235537_train/checkpoint-40.pt",
+          "sha256": "7a3cd8359f94c07ee5674758ef2aa834890e9a3fcd9fc5d35bd6140be1a3551b",
+          "state_key": "model_state_dict",
+          "prefixes": [
+            "encoder.",
+            "decoder."
+          ]
+        },
+        "checkpoint_sha256": "7a3cd8359f94c07ee5674758ef2aa834890e9a3fcd9fc5d35bd6140be1a3551b",
+        "checkpoint_path": "/public/home/shiys/methods\u8bba\u6587_mineru_output/source_code/NCO_code/single_objective/LEHD/CVRP/result/20230817_235537_train/checkpoint-40.pt",
+        "max_checkpoint_bytes": 25165824,
+        "random_seed": null,
+        "model_params": {
+          "embedding_dim": 128,
+          "head_num": 8,
+          "qkv_dim": 16,
+          "ff_hidden_dim": 512,
+          "decoder_layer_num": 6,
+          "mode": "test"
+        },
+        "input_scope": [
+          "raw xy, normalized demand, depot flag"
+        ],
+        "training_instance_manifest": "unknown",
+        "historical_cost_recipe_certified": false
+      },
+      "VRP": {
+        "variant": "pretrained",
+        "output_dim": 128,
+        "native_source_files": {
+          "/public/home/shiys/reld-nco-main/Multi-Task/models/MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d",
+          "/public/home/shiys/reld-nco-main/Multi-Task/models/MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd"
+        },
+        "native_source_sha256": "da60e7ae746f7f3a98c008bfc0b92c358d3b341f1b5ce23688eb014693e0a047",
+        "checkpoint_pin": {
+          "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+          "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3",
+          "state_key": "model_state_dict",
+          "prefixes": [
+            "decoder."
+          ]
+        },
+        "checkpoint_sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3",
+        "checkpoint_path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+        "max_checkpoint_bytes": 47185920,
+        "random_seed": null,
+        "model_params": {
+          "embedding_dim": 128,
+          "sqrt_embedding_dim": 11.313708498984761,
+          "encoder_layer_num": 6,
+          "decoder_layer_num": 1,
+          "qkv_dim": 16,
+          "head_num": 8,
+          "logit_clipping": 10,
+          "ff_hidden_dim": 512,
+          "num_experts": 4,
+          "eval_type": "argmax",
+          "norm": "none",
+          "norm_loc": "norm_last",
+          "expert_loc": [
+            "Enc0",
+            "Enc1",
+            "Enc2",
+            "Enc3",
+            "Enc4",
+            "Enc5",
+            "Dec"
+          ],
+          "problem": "Train_ALL",
+          "topk": 2,
+          "routing_level": "node",
+          "routing_method": "input_choice",
+          "ffidt": true
+        },
+        "input_scope": [
+          "raw xy, normalized signed demand, depot flag, L, service, TWstart, TWend"
+        ],
+        "training_instance_manifest": "unknown",
+        "historical_cost_recipe_certified": false
+      },
+      "ATSP": {
+        "variant": "pretrained",
+        "output_dim": 256,
+        "native_source_files": {
+          "/public/home/shiys/EasyNCO/neural_solvers/methods/matnet/matnet_encoder.py": "35738284914ecc50090e2553ef085ff1724737d6db11c253832844d9465e8f3e",
+          "/public/home/shiys/EasyNCO/neural_solvers/backbones/Transformer/attr_component.py": "d6cc61586fb97a54cfdc7dc4e2eaa436cbc16772c04397cd17f5ea677fc5e5d0",
+          "/public/home/shiys/EasyNCO/neural_solvers/methods/matnet/matnet_decoder.py": "f2bf1a9a384c14e780d9855583e2a484525cdfa286898b4205a7ed720015ebed"
+        },
+        "native_source_sha256": "8241841024fa3b316b2217dfc7c8658190ec6cf99c59d3f11a12367e26186ef2",
+        "checkpoint_pin": {
+          "path": "/public/home/shiys/EasyNCO/pretrained/matnet_pretrain/matnet_atsp100.ckpt",
+          "sha256": "a86d1ab1d8db62088e6a9d54118db92ebe8472c316dc046fcf755ca61280b5ca",
+          "state_key": "state_dict",
+          "prefixes": [
+            "encoder.",
+            "decoder."
+          ]
+        },
+        "checkpoint_sha256": "a86d1ab1d8db62088e6a9d54118db92ebe8472c316dc046fcf755ca61280b5ca",
+        "checkpoint_path": "/public/home/shiys/EasyNCO/pretrained/matnet_pretrain/matnet_atsp100.ckpt",
+        "max_checkpoint_bytes": 33554432,
+        "random_seed": null,
+        "model_params": {
+          "encoder": {
+            "embedding_dim": 256,
+            "encoder_layer_num": 5,
+            "head_num": 16,
+            "qkv_dim": 16,
+            "ms_hidden_dim": 16,
+            "ff_hidden_dim": 512,
+            "ms_layer1_init": 0.7071067811865476,
+            "ms_layer2_init": 0.25
+          },
+          "decoder": {
+            "head_num": 16,
+            "embedding_dim": 256,
+            "qkv_dim": 16,
+            "logit_clipping": 10.0
+          }
+        },
+        "input_scope": [
+          "raw directed matrix",
+          "fixed zero FROM and identity TO roles"
+        ],
+        "training_instance_manifest": "unknown",
+        "historical_cost_recipe_certified": false
+      },
+      "base": {
+        "variant": "pretrained",
+        "checkpoint_path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+        "checkpoint_sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3",
+        "native_source_sha256": "d3dc79e687af2aff2a1d8499f651ca6a982bda3e0c7fa56cb7328895c4d6ab0e",
+        "native_source_files": {
+          "MOEModel_Light.py": "ff7e6d57c94f456aa3467962468fb9a7e2d648bf48e7d9e280c8ae498166d50d",
+          "MOELayer.py": "78ef61ac38479ded25a2ec664419746199b1a122c565d466db5703b65d4723cd"
+        },
+        "output_dim": 128,
+        "supported_problems": [
+          "CVRP",
+          "OVRP",
+          "VRPB",
+          "VRPL",
+          "VRPTW",
+          "OVRPTW",
+          "OVRPB",
+          "OVRPL",
+          "VRPBL",
+          "VRPBTW",
+          "VRPLTW",
+          "OVRPBL",
+          "OVRPBTW",
+          "OVRPLTW",
+          "VRPBLTW",
+          "OVRPBLTW"
+        ],
+        "random_seed": null,
+        "checkpoint_pin": {
+          "path": "/public/home/shiys/reld-nco-main/Multi-Task/pretrained/reld_moe_light/epoch-5000.pt",
+          "sha256": "2ce5fb49950c4c9f51d2015a125744be9960aa0c60c609cfe235e74d44ad4be3"
+        },
+        "spec": {
+          "format": "r94_static_reld_moel_v1",
+          "output_dim": 128,
+          "native_precision": {
+            "dtype": "float32",
+            "autocast": false,
+            "matmul_tf32": false,
+            "cudnn_tf32": false
+          },
+          "supported_problems": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW",
+            "OVRPB",
+            "OVRPL",
+            "VRPBL",
+            "VRPBTW",
+            "VRPLTW",
+            "OVRPBL",
+            "OVRPBTW",
+            "OVRPLTW",
+            "VRPBLTW",
+            "OVRPBLTW"
+          ],
+          "raw_cvrp_fields": [
+            "x",
+            "y",
+            "demand",
+            "depotflag"
+          ],
+          "raw_mvrp_fields": [
+            "x",
+            "y",
+            "demand",
+            "depotflag",
+            "L",
+            "service",
+            "TWstart",
+            "TWend"
+          ],
+          "native_fields": {
+            "depot_xy": [
+              "x",
+              "y"
+            ],
+            "node_xy_demand_tw": [
+              "x",
+              "y",
+              "signed_demand",
+              "TWstart",
+              "TWend"
+            ]
+          },
+          "disabled_tw": [
+            0.0,
+            0.0
+          ],
+          "units": "unchanged native input units; demand already capacity-normalized",
+          "extraction": "exact valid N per row; depot first; preserve customer identities",
+          "fusion": "raw plus frozen per-node residual before trainable inter-node layers",
+          "model_params": {
+            "embedding_dim": 128,
+            "sqrt_embedding_dim": 11.313708498984761,
+            "encoder_layer_num": 6,
+            "decoder_layer_num": 1,
+            "qkv_dim": 16,
+            "head_num": 8,
+            "logit_clipping": 10,
+            "ff_hidden_dim": 512,
+            "num_experts": 4,
+            "eval_type": "argmax",
+            "norm": "none",
+            "norm_loc": "norm_last",
+            "expert_loc": [
+              "Enc0",
+              "Enc1",
+              "Enc2",
+              "Enc3",
+              "Enc4",
+              "Enc5",
+              "Dec"
+            ],
+            "problem": "Train_ALL",
+            "topk": 2,
+            "routing_level": "node",
+            "routing_method": "input_choice",
+            "ffidt": true
+          }
+        },
+        "known_unknown_pretraining_source": {
+          "applies_to_loaded_weights": true,
+          "known": "R48 pinned ReLD-MOEL epoch5000/Train_ALL; six source training tasks",
+          "training_tasks": [
+            "CVRP",
+            "OVRP",
+            "VRPB",
+            "VRPL",
+            "VRPTW",
+            "OVRPTW"
+          ],
+          "unknown": [
+            "historical CLI",
+            "training instance manifest",
+            "exact trajectory",
+            "overlap with selector inputs"
+          ],
+          "note": "16-task input coverage is not 16-task pretraining or a feasibility certificate"
+        }
+      }
+    },
+    "random_initialization_seeds": {
+      "TSP": 1170102,
+      "CVRP": 1170103,
+      "VRP": 1170104,
+      "ATSP": 1170105
+    },
+    "external_pretraining_by_component": {
+      "base": true,
+      "TSP": true,
+      "CVRP": true,
+      "VRP": true,
+      "ATSP": true
+    },
+    "reused_adapter_source_files": {
+      "/public/home/shiys/0selection2/code/V4/r94_donor.py": "a9805a3629e84fd0d53faa0bc1f1aadbf0e619fd58b474ce4cbacadc1958eb81",
+      "/public/home/shiys/0selection2/code/V4/r102_donor.py": "3fb6063b815d62b8de2352be45b783fe949aa102e6bc125b56ae1951d53d798f"
+    },
+    "spec": {
+      "format": "r117_bounded_native_computation_v1",
+      "arms": {
+        "A": "added_random",
+        "B": "added_pretrained"
+      },
+      "supported_problems": [
+        "TSP",
+        "CVRP",
+        "ATSP",
+        "OVRP",
+        "VRPB",
+        "VRPL",
+        "VRPTW",
+        "OVRPTW",
+        "OVRPB",
+        "OVRPL",
+        "VRPBL",
+        "VRPBTW",
+        "VRPLTW",
+        "OVRPBL",
+        "OVRPBTW",
+        "OVRPLTW",
+        "VRPBLTW",
+        "OVRPBLTW"
+      ],
+      "widths": {
+        "TSP": 128,
+        "CVRP": 128,
+        "ATSP": 256,
+        "OVRP": 128,
+        "VRPB": 128,
+        "VRPL": 128,
+        "VRPTW": 128,
+        "OVRPTW": 128,
+        "OVRPB": 128,
+        "OVRPL": 128,
+        "VRPBL": 128,
+        "VRPBTW": 128,
+        "VRPLTW": 128,
+        "OVRPBL": 128,
+        "OVRPBTW": 128,
+        "OVRPLTW": 128,
+        "VRPBLTW": 128,
+        "OVRPBLTW": 128
+      },
+      "common_base": "same pinned pretrained ReLD-MOEL static128 for CVRP and 15 MVRP",
+      "input_allowlist": [
+        "node",
+        "matrix",
+        "n",
+        "node_mask",
+        "problem_id",
+        "problem_name"
+      ],
+      "input_scopes": {
+        "TSP": [
+          "raw xy"
+        ],
+        "CVRP": [
+          "raw xy, normalized demand, depot flag"
+        ],
+        "VRP": [
+          "raw xy, normalized signed demand, depot flag, L, service, TWstart, TWend"
+        ],
+        "ATSP": [
+          "raw directed matrix",
+          "fixed zero FROM and identity TO roles"
+        ]
+      },
+      "native_precision": {
+        "dtype": "float32",
+        "autocast": false,
+        "matmul_tf32": false,
+        "cudnn_tf32": false
+      },
+      "base_quantization": "static base -> float16 -> float32 BEFORE ReLD reference decoder, online AND cache",
+      "cache_contract": "forward_extra returns only native_nodes; supplied base must match instance, mask and pinned identity",
+      "grouping": "sorted exact valid N; gather in original node order; no padded native execution; zero output padding",
+      "first_physical_node": 0,
+      "tsp_reference": "only node0 selected; first=last=node0; endpoint embeddings plus all six native decoder layers; no Linear_final",
+      "cvrp_reference": "empty selected customer list; capacity=remaining_capacity=1; first=last=depot; all six native layers; no Linear_final",
+      "lehd_alignment": "customers retain physical identities; node0 is mean of final first/last endpoint representations",
+      "vrp_reference": {
+        "currents": "every physical node independently, in parallel",
+        "load": 1.0,
+        "time": 0.0,
+        "length": "raw per-node L if enabled, else 0",
+        "open": "float('O' in problem_name)",
+        "available": "all valid nodes except current self; diagonal-only mask",
+        "extraction": "native feed_forward output[0] plus its residual input, before single-head score",
+        "feasible_execution_claim": false,
+        "constraint_simulation": false
+      },
+      "atsp_reference": {
+        "from_role": "zeros256",
+        "to_role": "first N identity256 rows",
+        "min_n": 3,
+        "max_n": 256,
+        "currents": "all encoded FROM nodes",
+        "first": "encoded FROM physical node0",
+        "keys_values": "encoded TO nodes",
+        "mask": "exclude current diagonal and first node0; row0 excludes node0 only once",
+        "extraction": "native decoder.multi_head_combine output256",
+        "historical_random_roles_reproduced": false
+      },
+      "frozen": true,
+      "no_actions": true,
+      "no_environments": true,
+      "no_teacher_inputs": true,
+      "diffusion_covered": false,
+      "all_candidate_computations_covered": false,
+      "training_instance_manifest": "unknown for external pretrained weights; overlap uncertified",
+      "historical_cost_recipe_certified": false,
+      "numerical_warning": "native FP32 batch partitioning need not be bitwise invariant"
+    }
+  },
+  "native_timing": {
+    "experiment": "R117",
+    "arm": "B",
+    "complete": true,
+    "completed_utc": "2026-10-27T05:19:36.755014+00:00",
+    "checkpoint_sha256": "7157ed93b116c038c0ae956588141893007996f671dfcf8de19c1c8c263929ae",
+    "state_hash": "b7d38ad0f9a026d27449732f22bc00d7d139c0dfca693951262093db424616ec",
+    "selected_update": 27018,
+    "model_state_sha256": "35d018d876349feaa1c8845e8f4c9c13cd21c16aeaa28bb752eac73aae29832f",
+    "model_factory": "code.V4.r117_experiment.load_checkpoint",
+    "inference_rule": "eval frozen native computation; original R77 score-difference maximin; stable ascending-global-solver-ID ties; no calibration or task stitching",
+    "parameter_count": 1941257,
+    "device": "cuda:0",
+    "gpu": {
+      "name": "NVIDIA GeForce RTX 3090",
+      "uuid": "cb626bdb-4319-2f5e-b91f-17fcaa44a83d"
+    },
+    "repetitions": 3,
+    "warmup_batches": 1,
+    "timing_scopes": [
+      "native_computation_plus_selector",
+      "cache_hit_selector"
+    ],
+    "scope": "GPU-resident original inputs: native computation plus selector; cached selector separately",
+    "all_current_model_included": true,
+    "end_to_end_measured": false,
+    "input_labels_read": false,
+    "cache_is_not_deployed_latency": true,
+    "model_reselection": false,
+    "per_problem": [
+      {
+        "problem": "TSP",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.6294483263045549,
+            0.6292081698775291,
+            0.6294754091650248
+          ],
+          "mean_seconds_per_instance": 0.0024585050850873813,
+          "p95_seconds_per_instance": 0.002458877737808507
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.08721552044153214,
+            0.08742936700582504,
+            0.08747760765254498
+          ],
+          "mean_seconds_per_instance": 0.0003413053321613309,
+          "p95_seconds_per_instance": 0.00034169056089012885
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.6294483263045549,
+            0.6292081698775291,
+            0.6294754091650248
+          ],
+          "mean_seconds_per_instance": 0.0024585050850873813,
+          "p95_seconds_per_instance": 0.002458877737808507
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "CVRP",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            2.3493359070271254,
+            2.3506015352904797,
+            2.352330831810832
+          ],
+          "mean_seconds_per_instance": 0.00918264098193807,
+          "p95_seconds_per_instance": 0.0091881168053078
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.10892359353601933,
+            0.10927766561508179,
+            0.10913091711699963
+          ],
+          "mean_seconds_per_instance": 0.0004262137711824228,
+          "p95_seconds_per_instance": 0.0004268085576768499
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            2.3493359070271254,
+            2.3506015352904797,
+            2.352330831810832
+          ],
+          "mean_seconds_per_instance": 0.00918264098193807,
+          "p95_seconds_per_instance": 0.0091881168053078
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "ATSP",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.7326138336211443,
+            0.7322323750704527,
+            0.7305859047919512
+          ],
+          "mean_seconds_per_instance": 0.002858635564431703,
+          "p95_seconds_per_instance": 0.002861623780336231
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.01345168985426426,
+            0.01355382427573204,
+            0.013583607971668243
+          ],
+          "mean_seconds_per_instance": 5.285041940320904e-05,
+          "p95_seconds_per_instance": 5.3049334383103997e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.7326138336211443,
+            0.7322323750704527,
+            0.7305859047919512
+          ],
+          "mean_seconds_per_instance": 0.002858635564431703,
+          "p95_seconds_per_instance": 0.002861623780336231
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "OVRP",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5153472069650888,
+            0.5216641444712877,
+            0.5183773282915354
+          ],
+          "mean_seconds_per_instance": 0.002025245676729052,
+          "p95_seconds_per_instance": 0.0020364666517707517
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013657467439770699,
+            0.013667752966284752,
+            0.013691110536456108
+          ],
+          "mean_seconds_per_instance": 5.340668091472859e-05,
+          "p95_seconds_per_instance": 5.3471776482183486e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5153472069650888,
+            0.5216641444712877,
+            0.5183773282915354
+          ],
+          "mean_seconds_per_instance": 0.002025245676729052,
+          "p95_seconds_per_instance": 0.0020364666517707517
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "VRPB",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.526344196870923,
+            0.5253860652446747,
+            0.5298616476356983
+          ],
+          "mean_seconds_per_instance": 0.002059364465822,
+          "p95_seconds_per_instance": 0.0020683980568719563
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013570573180913925,
+            0.013571185991168022,
+            0.013564063236117363
+          ],
+          "mean_seconds_per_instance": 5.3002372927342854e-05,
+          "p95_seconds_per_instance": 5.301220589899458e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.526344196870923,
+            0.5253860652446747,
+            0.5298616476356983
+          ],
+          "mean_seconds_per_instance": 0.002059364465822,
+          "p95_seconds_per_instance": 0.0020683980568719563
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "VRPL",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5279924273490906,
+            0.5274545438587666,
+            0.5276944693177938
+          ],
+          "mean_seconds_per_instance": 0.0020613820840177746,
+          "p95_seconds_per_instance": 0.0020623540294764098
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013855064287781715,
+            0.013851188123226166,
+            0.013421935960650444
+          ],
+          "mean_seconds_per_instance": 5.355232860893011e-05,
+          "p95_seconds_per_instance": 5.411983074736782e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5279924273490906,
+            0.5274545438587666,
+            0.5276944693177938
+          ],
+          "mean_seconds_per_instance": 0.0020613820840177746,
+          "p95_seconds_per_instance": 0.0020623540294764098
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "VRPTW",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5311462469398975,
+            0.5282112322747707,
+            0.5305842123925686
+          ],
+          "mean_seconds_per_instance": 0.00207023657761359,
+          "p95_seconds_per_instance": 0.0020745704823639244
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.01376386173069477,
+            0.013722643256187439,
+            0.013696817681193352
+          ],
+          "mean_seconds_per_instance": 5.3624118057390056e-05,
+          "p95_seconds_per_instance": 5.374898391892202e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5311462469398975,
+            0.5282112322747707,
+            0.5305842123925686
+          ],
+          "mean_seconds_per_instance": 0.00207023657761359,
+          "p95_seconds_per_instance": 0.0020745704823639244
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "OVRPTW",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5209220871329308,
+            0.5179363936185837,
+            0.523559395223856
+          ],
+          "mean_seconds_per_instance": 0.002034398276009597,
+          "p95_seconds_per_instance": 0.00204412368912017
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.01381661370396614,
+            0.013713095337152481,
+            0.013712987303733826
+          ],
+          "mean_seconds_per_instance": 5.370142753235996e-05,
+          "p95_seconds_per_instance": 5.3930710419081154e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5209220871329308,
+            0.5179363936185837,
+            0.523559395223856
+          ],
+          "mean_seconds_per_instance": 0.002034398276009597,
+          "p95_seconds_per_instance": 0.00204412368912017
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "OVRPB",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5283512901514769,
+            0.5289666205644608,
+            0.5268837530165911
+          ],
+          "mean_seconds_per_instance": 0.0020627625829850635,
+          "p95_seconds_per_instance": 0.002066035498137353
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013572735711932182,
+            0.013580380007624626,
+            0.013567211106419563
+          ],
+          "mean_seconds_per_instance": 5.3021258887990065e-05,
+          "p95_seconds_per_instance": 5.304537335177883e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5283512901514769,
+            0.5289666205644608,
+            0.5268837530165911
+          ],
+          "mean_seconds_per_instance": 0.0020627625829850635,
+          "p95_seconds_per_instance": 0.002066035498137353
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "OVRPL",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5259209014475346,
+            0.5283827222883701,
+            0.5265345815569162
+          ],
+          "mean_seconds_per_instance": 0.0020583830798083604,
+          "p95_seconds_per_instance": 0.0020632730789657216
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.01379520446062088,
+            0.013723399490118027,
+            0.013717390596866608
+          ],
+          "mean_seconds_per_instance": 5.369270123386135e-05,
+          "p95_seconds_per_instance": 5.3859468607697636e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5259209014475346,
+            0.5283827222883701,
+            0.5265345815569162
+          ],
+          "mean_seconds_per_instance": 0.0020583830798083604,
+          "p95_seconds_per_instance": 0.0020632730789657216
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "VRPBL",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.529521593824029,
+            0.525885034352541,
+            0.5303133334964514
+          ],
+          "mean_seconds_per_instance": 0.0020647395334284133,
+          "p95_seconds_per_instance": 0.0020712271856609733
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013568563386797905,
+            0.013583105057477951,
+            0.013596706092357635
+          ],
+          "mean_seconds_per_instance": 5.305777934457486e-05,
+          "p95_seconds_per_instance": 5.3106820269022136e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.529521593824029,
+            0.525885034352541,
+            0.5303133334964514
+          ],
+          "mean_seconds_per_instance": 0.0020647395334284133,
+          "p95_seconds_per_instance": 0.0020712271856609733
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "VRPBTW",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5290311519056559,
+            0.5300858914852142,
+            0.5288806837052107
+          ],
+          "mean_seconds_per_instance": 0.002067705373823022,
+          "p95_seconds_per_instance": 0.0020702360059658533
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013631502166390419,
+            0.013636931777000427,
+            0.013588761910796165
+          ],
+          "mean_seconds_per_instance": 5.319947376847267e-05,
+          "p95_seconds_per_instance": 5.3267143812263384e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5290311519056559,
+            0.5300858914852142,
+            0.5288806837052107
+          ],
+          "mean_seconds_per_instance": 0.002067705373823022,
+          "p95_seconds_per_instance": 0.0020702360059658533
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "VRPLTW",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5266650877892971,
+            0.52833759970963,
+            0.5266774073243141
+          ],
+          "mean_seconds_per_instance": 0.0020594792901344285,
+          "p95_seconds_per_instance": 0.0020631702362152284
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013751165941357613,
+            0.013735001906752586,
+            0.013702163472771645
+          ],
+          "mean_seconds_per_instance": 5.363063974073157e-05,
+          "p95_seconds_per_instance": 5.370917788241059e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5266650877892971,
+            0.52833759970963,
+            0.5266774073243141
+          ],
+          "mean_seconds_per_instance": 0.0020594792901344285,
+          "p95_seconds_per_instance": 0.0020631702362152284
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "OVRPBL",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.526801522821188,
+            0.5260598380118608,
+            0.5289214737713337
+          ],
+          "mean_seconds_per_instance": 0.002059613065891123,
+          "p95_seconds_per_instance": 0.0020652714010793716
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013666639104485512,
+            0.013656431809067726,
+            0.01366274431347847
+          ],
+          "mean_seconds_per_instance": 5.3366946910197534e-05,
+          "p95_seconds_per_instance": 5.338378759915941e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.526801522821188,
+            0.5260598380118608,
+            0.5289214737713337
+          ],
+          "mean_seconds_per_instance": 0.002059613065891123,
+          "p95_seconds_per_instance": 0.0020652714010793716
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "OVRPBTW",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5321513265371323,
+            0.5328083299100399,
+            0.5301728937774897
+          ],
+          "mean_seconds_per_instance": 0.0020769955081050284,
+          "p95_seconds_per_instance": 0.002081025896768551
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013551879674196243,
+            0.013577431440353394,
+            0.013550892472267151
+          ],
+          "mean_seconds_per_instance": 5.2969015087001026e-05,
+          "p95_seconds_per_instance": 5.302686040522531e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5321513265371323,
+            0.5328083299100399,
+            0.5301728937774897
+          ],
+          "mean_seconds_per_instance": 0.0020769955081050284,
+          "p95_seconds_per_instance": 0.002081025896768551
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "OVRPLTW",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.519434254616499,
+            0.5199092272669077,
+            0.5195122919976711
+          ],
+          "mean_seconds_per_instance": 0.0020297601222409867,
+          "p95_seconds_per_instance": 0.0020307403661718126
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013665709644556046,
+            0.013678494840860367,
+            0.013325933367013931
+          ],
+          "mean_seconds_per_instance": 5.295590866201868e-05,
+          "p95_seconds_per_instance": 5.342662625480443e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.519434254616499,
+            0.5199092272669077,
+            0.5195122919976711
+          ],
+          "mean_seconds_per_instance": 0.0020297601222409867,
+          "p95_seconds_per_instance": 0.0020307403661718126
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "VRPBLTW",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5290445666760206,
+            0.5289214700460434,
+            0.5304153505712748
+          ],
+          "mean_seconds_per_instance": 0.0020682049313715347,
+          "p95_seconds_per_instance": 0.0020713995007099585
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013713955879211426,
+            0.013732990249991417,
+            0.013712311163544655
+          ],
+          "mean_seconds_per_instance": 5.359278293326497e-05,
+          "p95_seconds_per_instance": 5.3637057862943036e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5290445666760206,
+            0.5289214700460434,
+            0.5304153505712748
+          ],
+          "mean_seconds_per_instance": 0.0020682049313715347,
+          "p95_seconds_per_instance": 0.0020713995007099585
+        },
+        "online_cache_logits_identical": true
+      },
+      {
+        "problem": "OVRPBLTW",
+        "instances": 256,
+        "native_computation_plus_selector": {
+          "batch_seconds": [
+            0.5319707076996565,
+            0.5328568387776613,
+            0.5329281948506832
+          ],
+          "mean_seconds_per_instance": 0.0020804111215208345,
+          "p95_seconds_per_instance": 0.0020817228876694573
+        },
+        "cache_hit_selector": {
+          "batch_seconds": [
+            0.013706125319004059,
+            0.013703281059861183,
+            0.013750240206718445
+          ],
+          "mean_seconds_per_instance": 5.359328982497876e-05,
+          "p95_seconds_per_instance": 5.369464342948049e-05
+        },
+        "standalone_model": {
+          "batch_seconds": [
+            0.5319707076996565,
+            0.5328568387776613,
+            0.5329281948506832
+          ],
+          "mean_seconds_per_instance": 0.0020804111215208345,
+          "p95_seconds_per_instance": 0.0020817228876694573
+        },
+        "online_cache_logits_identical": true
+      }
+    ],
+    "excludes": "dataset I/O, CPU-to-GPU transfer, training and complete solver execution"
+  },
+  "common_base_pretrained_in_both_arms": true,
+  "cache_is_not_deployed_latency": true,
+  "historical_comparison": "R94B is historical, not a matched pretraining/control comparison",
+  "native_scope": "finite LEHD/ReLD/MatNet reference computation; no actions, route prefixes or DIFUSCO claim"
+}

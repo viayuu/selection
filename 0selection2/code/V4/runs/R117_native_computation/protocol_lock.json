@@ -1,0 +1,105 @@
+{
+  "experiment": "R117",
+  "locked": true,
+  "arms": [
+    "A",
+    "B"
+  ],
+  "seed": 2,
+  "task_scope": "full18",
+  "rows_per_problem": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "logical_global_batch": 1024,
+  "max_successful_updates": 28440,
+  "warmup_updates": 4266,
+  "eval_every_updates": 1422,
+  "train_eval_every_updates": 7110,
+  "optimizer": "AdamW",
+  "peak_lr": 0.0001,
+  "end_lr": 1e-06,
+  "weight_decay": 0.0001,
+  "grad_clip": 1.0,
+  "dropout": 0.1,
+  "checkpoint_rule": "strict maximum full18 VAL macro_top1; exact Top1 ties: minimum macro_actual_regret_pct; exact double ties: first checkpoint",
+  "inference_rule": "eval frozen native computation; original R77 score-difference maximin; stable ascending-global-solver-ID ties; no calibration or task stitching",
+  "loss": {
+    "ce": 0.35,
+    "comparison": 0.35,
+    "risk": 0.02,
+    "cost_scale": 0.01,
+    "focus_weights": {
+      "true3": 0.5,
+      "predicted3": 0.25,
+      "all_pairs": 0.25
+    }
+  },
+  "rdrop_weight": 0.35,
+  "rdrop_ramp_updates": 4266,
+  "val_gate": {
+    "top1_gain_pp": 0.2,
+    "macro_regret_harm_pp": 0.0,
+    "max_task_regret_harm_pp": 0.05,
+    "vs_sbs_must_not_worsen": true,
+    "evaluated_on": "locked whole18 VAL only"
+  },
+  "max_train_epochs": 20,
+  "native_extraction_batch_size": 128,
+  "per_arm_gpu_hours_cap": 14,
+  "combined_gpu_hours_cap": 28,
+  "gpu_type": "3090",
+  "wandb_mode": "offline",
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "prepared_root": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/prepared",
+  "primary_cache": "/tmp/shiys_R84_new90k_cache",
+  "microbatch_caps": {
+    "TSP": 256,
+    "CVRP": 256,
+    "ATSP": 256,
+    "OVRP": 512,
+    "VRPB": 512,
+    "VRPL": 512,
+    "VRPTW": 512,
+    "OVRPTW": 512,
+    "OVRPB": 512,
+    "OVRPL": 512,
+    "VRPBL": 512,
+    "VRPBTW": 512,
+    "VRPLTW": 512,
+    "OVRPBL": 512,
+    "OVRPBTW": 512,
+    "OVRPLTW": 512,
+    "VRPBLTW": 512,
+    "OVRPBLTW": 512
+  },
+  "eval_batch_size": 256,
+  "lib_batch_size": 128,
+  "capacity_witness": "/public/home/shiys/0selection2/code/V4/runs/R117_native_computation/preparation/resources/capacity/B/capacity.json",
+  "capacity_witness_sha256": "ab5ee8f75f3d39ea9cbe7886ebc551a76178cecf55018dca28c35fe0d79aa4dc",
+  "feature_roots": {
+    "A": "/tmp/shiys_R117_A_native_features",
+    "B": "/tmp/shiys_R117_B_native_features"
+  },
+  "common_feature_root": "/tmp/shiys_R117_common_base",
+  "authorized_slots": {
+    "3090_0": {
+      "job": 1465,
+      "node": "gpu03",
+      "index": 0,
+      "gpu_type": "3090",
+      "uuid": "GPU-cb24f168-9f18-f0d5-6f4a-6d2406958f50"
+    },
+    "3090_1": {
+      "job": 1465,
+      "node": "gpu03",
+      "index": 1,
+      "gpu_type": "3090",
+      "uuid": "GPU-cb626bdb-4319-2f5e-b91f-17fcaa44a83d"
+    }
+  },
+  "gpu_budget_hours_per_arm": 14,
+  "complete_gpu_budget_hours": 28,
+  "no_4090": true
+}
