@@ -1,0 +1,26 @@
+/public/home/shiys/easynco_v3_bridge/scripts/run_reld_cvrp_single_bridge.py:173: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(CVRP_ROOT / "weights" / "ReLD" / "model_epoch_90.pt", map_location=device)
+Traceback (most recent call last):
+  File "/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/public/home/shiys/miniconda3/envs/easynco/lib/python3.9/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/public/home/shiys/0selection2/code/V4/r118_trace_assets.py", line 212, in <module>
+    raise SystemExit(main())
+  File "/public/home/shiys/0selection2/code/V4/r118_trace_assets.py", line 208, in main
+    return run_problem(args.problem)
+  File "/public/home/shiys/0selection2/code/V4/r118_trace_assets.py", line 156, in run_problem
+    result, arrays, info = capture(backend, [item], max_bytes=plan["max_array_bytes"])
+  File "/public/home/shiys/0selection2/code/V4/r118_reld_trace.py", line 206, in capture_reld
+    result = backend.run(items)
+  File "/public/home/shiys/easynco_v3_bridge/scripts/train_100k_backends.py", line 240, in run
+    scores = self.module.run_no_aug_scores(self.model, batch, scale, self.device)
+  File "/public/home/shiys/easynco_v3_bridge/scripts/run_reld_cvrp_single_bridge.py", line 198, in run_no_aug_scores
+    state, reward, done = env.step(selected)
+  File "/public/home/shiys/easynco_v3_bridge/scripts/train_100k_backends.py", line 230, in step
+    result = super().step(*arguments, **keywords)
+  File "/public/home/shiys/0selection2/code/V4/r118_reld_trace.py", line 195, in step
+    row = trace.before(environment, selected)
+  File "/public/home/shiys/0selection2/code/V4/r118_reld_trace.py", line 105, in before
+    self.arrays["pomo_idx"] = self.copy(env.POMO_IDX, shape)
+AttributeError: 'WitnessEnv' object has no attribute 'POMO_IDX'
