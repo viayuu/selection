@@ -1,0 +1,108 @@
+{
+  "schema": "return18-resource-v1",
+  "name": "r123_locked_LIB_PDF_v1",
+  "main_approved": true,
+  "approved_by": "main thread: full7200TRAIN and unique-lock TEST complete; same GPU03_0 for train capture, sparse live-router LIB/timing and full18 reports; no expert change/reselection/retrain; resource path flag applies only to TRAIN",
+  "approved_utc": "2026-10-29T20:15:16+00:00",
+  "protocol": {
+    "path": "code/V4/runs/R123_heterogeneous_moe/model/protocol.json",
+    "sha256": "f02dea641191efd63c2544c932f3d9b28bd4e1fa02b87ee6c24cdfe5e8ebc625"
+  },
+  "source_sha256": {
+    "code/V4/return18_launch.py": "c2971efab4e863eaf2cceab98d318b7ccee131e7b920a416b132e2dae1d3a5d8",
+    "code/V4/run_v4_return18.sh": "f96ffae480bb3d45708d6e843f8c87ab34cfb1446095b2bef9cdba5a8fba28bf",
+    "code/V4/r120_launch.py": "d1ce6b3f179529553de38cb37f5183587ab7c068e9310a996fb6e537bbd3a85a",
+    "code/V4/r81_queue.py": "cd614a609198d127ad9a632e08044cdcb7fff27ba8e84d519856973f4c076f67",
+    "code/V4/r123_experiment.py": "a5e334ab047c696ac6187fee7085c35089709f9e39cc23a482b249d87844c4fb",
+    "code/V4/r123_model.py": "43a3ce251b2ff55cc8d427e40823bf69642c28e3d7a421fd22966efc70f0eecf",
+    "code/V4/r123_meta_data.py": "86f73d45edcb5dde6655b855a9e3aa1771c686eb9d57508e18528f3a804054cb",
+    "code/V4/r123_prediction_cache.py": "35ac20b813e1281deac0b11429a1eca750a21256482d3e777a02022b8037b32b",
+    "code/V4/r123_finish.py": "3f0cd5c4fa714b176d4c3e9be20e0a9c326ebe30db2f6a44e51f940d5a42d995"
+  },
+  "jobs": [
+    {
+      "id": "R123_locked_LIB_PDF",
+      "arm": "R123",
+      "slot": "gpu03_0",
+      "root": "code/V4/runs/R123_heterogeneous_moe",
+      "stages": [
+        {
+          "id": "selected_metaTRAIN_capture",
+          "kind": "report",
+          "argv": [
+            "python",
+            "-B",
+            "-u",
+            "-m",
+            "code.V4.r123_finish",
+            "capture-train",
+            "--root",
+            "/public/home/shiys/0selection2/code/V4/runs/R123_heterogeneous_moe",
+            "--device",
+            "cuda:0",
+            "--bank-root",
+            "/public/home/shiys/0selection2/code/V4/runs/R123_heterogeneous_moe",
+            "--input-cache-root",
+            "/tmp/shiys_R84_new90k_cache",
+            "--predict-batch",
+            "128"
+          ]
+        },
+        {
+          "id": "same_lock_LIB",
+          "kind": "report",
+          "argv": [
+            "python",
+            "-B",
+            "-u",
+            "-m",
+            "code.V4.r123_finish",
+            "lib",
+            "--root",
+            "/public/home/shiys/0selection2/code/V4/runs/R123_heterogeneous_moe",
+            "--device",
+            "cuda:0",
+            "--lib-batch",
+            "1"
+          ]
+        },
+        {
+          "id": "live_sparse_router_timing",
+          "kind": "report",
+          "argv": [
+            "python",
+            "-B",
+            "-u",
+            "-m",
+            "code.V4.r123_finish",
+            "timing",
+            "--root",
+            "/public/home/shiys/0selection2/code/V4/runs/R123_heterogeneous_moe",
+            "--device",
+            "cuda:0",
+            "--predict-batch",
+            "128",
+            "--timing-rows",
+            "128"
+          ]
+        },
+        {
+          "id": "same_lock_PDF_CSV",
+          "kind": "report",
+          "argv": [
+            "python",
+            "-B",
+            "-u",
+            "-m",
+            "code.V4.r123_finish",
+            "report",
+            "--root",
+            "/public/home/shiys/0selection2/code/V4/runs/R123_heterogeneous_moe",
+            "--device",
+            "cpu"
+          ]
+        }
+      ]
+    }
+  ]
+}

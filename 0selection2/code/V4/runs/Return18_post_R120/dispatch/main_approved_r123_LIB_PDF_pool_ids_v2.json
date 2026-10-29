@@ -1,0 +1,86 @@
+{
+  "schema": "return18-resource-v1",
+  "name": "r123_locked_LIB_PDF_pool_ids_v2",
+  "main_approved": true,
+  "approved_by": "main thread: preserve completed195948 metaTRAIN capture and failed first LIB attempt; positive live-query whitelist now retains public pool IDs/masks, excludes all current labels; no learned-source/checkpoint/rule change. Only LIB/timing/report re-executed.",
+  "approved_utc": "2026-10-29T20:40:00+00:00",
+  "protocol": {
+    "path": "code/V4/runs/R123_heterogeneous_moe/model/protocol.json",
+    "sha256": "f02dea641191efd63c2544c932f3d9b28bd4e1fa02b87ee6c24cdfe5e8ebc625"
+  },
+  "source_sha256": {
+    "code/V4/return18_launch.py": "c2971efab4e863eaf2cceab98d318b7ccee131e7b920a416b132e2dae1d3a5d8",
+    "code/V4/run_v4_return18.sh": "f96ffae480bb3d45708d6e843f8c87ab34cfb1446095b2bef9cdba5a8fba28bf",
+    "code/V4/r120_launch.py": "d1ce6b3f179529553de38cb37f5183587ab7c068e9310a996fb6e537bbd3a85a",
+    "code/V4/r81_queue.py": "cd614a609198d127ad9a632e08044cdcb7fff27ba8e84d519856973f4c076f67",
+    "code/V4/r123_experiment.py": "a5e334ab047c696ac6187fee7085c35089709f9e39cc23a482b249d87844c4fb",
+    "code/V4/r123_model.py": "43a3ce251b2ff55cc8d427e40823bf69642c28e3d7a421fd22966efc70f0eecf",
+    "code/V4/r123_meta_data.py": "86f73d45edcb5dde6655b855a9e3aa1771c686eb9d57508e18528f3a804054cb",
+    "code/V4/r123_prediction_cache.py": "35ac20b813e1281deac0b11429a1eca750a21256482d3e777a02022b8037b32b",
+    "code/V4/r123_finish.py": "5b7c2c65688105c4af50c218eb9a3f4a084dde76af8a0a8fddcf90b973f0c426"
+  },
+  "jobs": [
+    {
+      "id": "R123_locked_LIB_PDF_pool_ids",
+      "arm": "R123",
+      "slot": "gpu03_0",
+      "root": "code/V4/runs/R123_heterogeneous_moe",
+      "stages": [
+        {
+          "id": "same_lock_LIB",
+          "kind": "report",
+          "argv": [
+            "python",
+            "-B",
+            "-u",
+            "-m",
+            "code.V4.r123_finish",
+            "lib",
+            "--root",
+            "/public/home/shiys/0selection2/code/V4/runs/R123_heterogeneous_moe",
+            "--device",
+            "cuda:0",
+            "--lib-batch",
+            "1"
+          ]
+        },
+        {
+          "id": "live_sparse_router_timing",
+          "kind": "report",
+          "argv": [
+            "python",
+            "-B",
+            "-u",
+            "-m",
+            "code.V4.r123_finish",
+            "timing",
+            "--root",
+            "/public/home/shiys/0selection2/code/V4/runs/R123_heterogeneous_moe",
+            "--device",
+            "cuda:0",
+            "--predict-batch",
+            "128",
+            "--timing-rows",
+            "128"
+          ]
+        },
+        {
+          "id": "same_lock_PDF_CSV",
+          "kind": "report",
+          "argv": [
+            "python",
+            "-B",
+            "-u",
+            "-m",
+            "code.V4.r123_finish",
+            "report",
+            "--root",
+            "/public/home/shiys/0selection2/code/V4/runs/R123_heterogeneous_moe",
+            "--device",
+            "cpu"
+          ]
+        }
+      ]
+    }
+  ]
+}

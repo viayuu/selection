@@ -1,0 +1,62 @@
+{
+  "artifacts": {
+    "CVRPLIB.npz": "94c97ffb310c1f7cb13d303eb8bda2a86bc3c88791ca85077cf0fcf3f5be874e",
+    "CVRPLIB_receipt.json": "3cb57db7ddbc91fe3417502125a6389b46c47fa9f01618f863aeb9e2dcd8284d",
+    "TSPLIB.npz": "c3aefb59b7fec4911769659db1a8693d1b276875c6f652b12acf547c871ac970",
+    "TSPLIB_receipt.json": "6d1f9911502849cd188934350bc3dbc8df3dc1f640a8df2b358502e74f90be22"
+  },
+  "checkpoint_sha256": "cec914fe375d0b7d60eadacbdd0fe85d912a5ff7a22bdce80d153ef2904d8800",
+  "kind": "live_sparse_LIB",
+  "protocol_sha256": "7c76f4b6e4a8bec31515b4fdc31f25abf7db9f6d4f7e2b7c65bf460c161e6fb3",
+  "query_labels_used_in_forward": false,
+  "schema": "r123_post_test_finish_v1",
+  "selected_update": 1440,
+  "sources": {
+    "CVRPLIB": {
+      "/public/home/shiys/0selection2/data/CVRPLIB/dataset.pkl": "aa3f0a01f61b99682b8de4e5f6b0c4017313087a3facdac1f4d1308557cc1a44",
+      "/public/home/shiys/0selection2/data/CVRPLIB/raw_label.pkl": "a7812970fbaf857fd9d280bf1ebfa42d1a9113ac3c684dd0d326fc848d598802"
+    },
+    "TSPLIB": {
+      "/public/home/shiys/0selection2/data/TSPLIB/dataset.pkl": "92f14d50c2474ca33b3432f16478e06f0cc687ad40009a363d5db31b8641e6f8",
+      "/public/home/shiys/0selection2/data/TSPLIB/raw_label.pkl": "7d2cfffe64652728777e01607ca104c1b5ba8c156f6bc24bba366cec5a148a44"
+    }
+  },
+  "timing": {
+    "CVRPLIB": {
+      "batch_size": 1,
+      "device": "cuda:0",
+      "excluded": "input/geometry preparation, batch gather, host transfer, warmup, output CPU copy, bank cache generation",
+      "expected_experts_per_query": 1,
+      "expert_executed_rows": [
+        0,
+        94,
+        6
+      ],
+      "forward_ms_per_query": 9.860676657408476,
+      "forward_seconds": 0.9860676657408476,
+      "gather_seconds": 0.011668529361486435,
+      "host_transfer_seconds": 0.011877942830324173,
+      "included": "raw-input gate plus only selected complete expert, dispatch and execution hooks",
+      "input_geometry_preparation_seconds": 11.531775766983628,
+      "n": 100,
+      "precision": "FP32, TF32 disabled, eval, inference_mode, no autocast",
+      "total_expert_executed_rows": 100,
+      "warmup_batches_excluded": 1
+    },
+    "TSPLIB": {
+      "batch_size": null,
+      "execution_count_basis": "Saved selected routes; legacy producer checked live hooks before saving",
+      "expected_experts_per_query": 1,
+      "expert_executed_rows": [
+        0,
+        42,
+        7
+      ],
+      "forward_ms_per_query": null,
+      "forward_seconds": null,
+      "measurement_status": "Elapsed timing lost before failed provenance write; NOT zero or remeasured",
+      "n": 49,
+      "total_expert_executed_rows": 49
+    }
+  }
+}
