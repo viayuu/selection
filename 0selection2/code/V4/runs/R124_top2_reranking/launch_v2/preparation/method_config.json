@@ -1,0 +1,226 @@
+{
+  "experiment": "R124",
+  "first_stage": "frozen COMPLETE full18 R77B update34776",
+  "train_rows_per_problem": 10886,
+  "train_total": 195948,
+  "rows": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "seed": 2,
+  "batch_size": 1024,
+  "max_updates": 7200,
+  "warmup_updates": 540,
+  "eval_every": 720,
+  "architecture": "independent4layer128; two method ID+34 tokens; 2 bidirectional JointLayers",
+  "optimizer": "AdamW",
+  "weight_decay": 0.0001,
+  "dropout": 0.1,
+  "grad_clip": 1.0,
+  "lr": {
+    "peak": 0.0001,
+    "end": 1e-06,
+    "warmup_updates": 540,
+    "max_updates": 7200,
+    "rule": "successful-update warmup then cosine"
+  },
+  "initialization": "R84 certified scratch-compatible independent weights; new heads seed2; never trained-selector initialization",
+  "native_head": "shared role-equivariant scoring; difference is antisymmetric in eval",
+  "quality_head": "separate shared scoring; antisymmetric cost-quality difference",
+  "loss": {
+    "native": "indicator(Y in S2) * BCE(native pair label, sigmoid(d)); mean over ALL logical rows",
+    "quality": "separate antisymmetric prediction of (C_b-C_a)/C_*; Huber(pred/.01, target/.01)",
+    "quality_scale": 0.01,
+    "quality_coefficient": 1.0,
+    "huber_beta": 1.0,
+    "expected_risk": false,
+    "label_precision": "original native int64 winner; unchanged FP64 costs; exact ties retained"
+  },
+  "checkpoint_rule": "strict minimum full18 VAL macro_actual_regret_pct; higher native macro_top1; earliest update",
+  "inference_rule": "frozen complete R77B actual legal Top2, pair-native sigmoid(d); replace only Top2 ordering and keep both above rank3; ascending-global-method-ID exact ties; quality head is not an action",
+  "model_factory": "code.V4.r124_experiment.load_checkpoint",
+  "membership": "source-record certificate only, not content/base deduplication",
+  "microbatch_caps": {
+    "TSP": 128,
+    "CVRP": 128,
+    "ATSP": 1024,
+    "OVRP": 1024,
+    "VRPB": 1024,
+    "VRPL": 1024,
+    "VRPTW": 1024,
+    "OVRPTW": 1024,
+    "OVRPB": 1024,
+    "OVRPL": 1024,
+    "VRPBL": 1024,
+    "VRPBTW": 1024,
+    "VRPLTW": 1024,
+    "OVRPBL": 1024,
+    "OVRPBTW": 1024,
+    "OVRPLTW": 1024,
+    "VRPBLTW": 1024,
+    "OVRPBLTW": 1024
+  },
+  "deployment_cost": "one complete frozen R77B plus one independent reranker; not readout-only",
+  "eval_batch_caps": {
+    "TSP": 128,
+    "CVRP": 128,
+    "ATSP": 512,
+    "OVRP": 512,
+    "VRPB": 512,
+    "VRPL": 512,
+    "VRPTW": 512,
+    "OVRPTW": 512,
+    "OVRPB": 512,
+    "OVRPL": 512,
+    "VRPBL": 512,
+    "VRPBTW": 512,
+    "VRPLTW": 512,
+    "OVRPBL": 512,
+    "OVRPBTW": 512,
+    "OVRPLTW": 512,
+    "VRPBLTW": 512,
+    "OVRPBLTW": 512
+  },
+  "science_identity": "explicit Astra request; returned identity unverified",
+  "gpu_or_solver_launched": false,
+  "prelaunch_method_frozen": true,
+  "formal_launch_performed": false,
+  "first_stage_checkpoint_sha256": "31c0c75d66b1bde6ad533909a9c04b0036e80af4c4a5775b01b957ce310e6d1b",
+  "fresh_trainable_sha256": "dad87d8598f7560e6f170ef048ba1bf515edeb03cef7ec42e16839a36af4ef93",
+  "meta_indices_sha256": "de1c2eb7e2b6e925eabcb6e9769de2f742c353852cfab87d216dd0264e3157c3",
+  "scenario_sha256": "e981358542d3f2b791129bee679d55f7b1b89bb632208c0b3670ea7c53ba1421",
+  "candidate_pools": {
+    "TSP": [
+      "BQ",
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "LEHD",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "CVRP": [
+      "BQ",
+      "ELG",
+      "ICAM",
+      "LEHD",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "ATSP": [
+      "GLOP",
+      "ICAM_ATSP",
+      "MATNET",
+      "MATPOENET",
+      "UNICO_MatPOENet"
+    ],
+    "OVRP": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ]
+  },
+  "software_source_sha256": {
+    "r124_model.py": "56e8aec0d79e3cf90a5ba1c866d0856d9842408921c81e46f14d7553da8134f9",
+    "r124_experiment.py": "37af7ec6693de7d4bd9bf24ed715da8bf83a7f7dd847f4af8188d6b51af3d815",
+    "test_r124_model.py": "b9e1fb9ccb597cbdab974a32e05a24e6e1edcd7a6bd1b62b10fab1c0d1ef5143",
+    "test_r124_experiment.py": "9958080cd732a71bb7c2bea995aa6922ac16e375911dd16bf00266f560a4d505"
+  }
+}

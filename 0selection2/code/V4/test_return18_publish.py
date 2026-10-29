@@ -1,5 +1,6 @@
 """Four bounded CPU tests. All Git operations and model gates are mocked."""
 
+import csv
 import json
 from pathlib import Path
 import subprocess
@@ -124,6 +125,62 @@ class PublicationTests(unittest.TestCase):
         with patch.object(pub, 'git', side_effect=fake), self.assertRaisesRegex(RuntimeError, 'staged changes'):
             pub.publish(self.root, 'R122', apply=True)
         self.assertFalse((self.root / 'github_publication.json').exists())
+
+    def test_r124_pdf_only_receipt_plus_real_csvs_have_explicit_late_hashes(self):
+        root = self.v4 / 'runs/R124_top2_reranking/launch_v2'
+        run, output = root / 'model', root / 'model/finish/reports'
+        config = dict(data_root='/frozen/new90k', candidate_pools={'TSP': ['a'], 'CVRP': ['b']},
+                      candidate_pool_ids={'TSP': [1], 'CVRP': [2]})
+        identity = dict(self.lock, experiment='R124', winner_rule='native FP64', first_stage_checkpoint_sha256='stage1')
+        outputs = {key: str(self.put(output / name, 'PDF fixture')) for key, name in
+                   (('report_pdf', 'R124_FULL18.pdf'), ('distributions_pdf', 'selection_distributions.pdf'))}
+        receipt = self.put(output / 'finish_receipt.json', dict(complete=True, identity=identity, inputs={},
+            outputs=outputs, output_sha256={k: pub.sha(v) for k, v in outputs.items()}))
+        receipt_sha = pub.sha(receipt)
+        lib = {}
+        for dataset in ('TSPLIB', 'CVRPLIB'):
+            prediction = self.put(run / 'finish/lib_evaluation/predictions' / (dataset + '.npz'), 'pinned fixture')
+            lib[dataset] = dict(complete=True, protocol=identity, predictions_sha256=pub.sha(prediction))
+        self.put(run / 'finish/lib_complete.json', dict(complete=True, identity=identity, datasets=lib))
+        self.put(run / 'finish/identity.json', identity)
+        groups = [('VAL', 'TSP', 4500), ('VAL', 'CVRP', 4500), ('TEST', 'TSP', 4500), ('TEST', 'CVRP', 4500),
+                  ('TSPLIB', 'TSP', 49), ('CVRPLIB', 'CVRP', 100)]
+        for name, fields in pub.R124_CSV_FIELDS.items():
+            nss, methods = name == 'nss_four_datasets.csv', 'method' in fields.split()
+            headers = sorted(set(fields.split()) | set(('winner_rule data_version' if nss else 'split problem n winner_rule data_version').split()))
+            selected = [g for g in groups if g[0] != 'VAL'] if nss else list(groups)
+            if not nss and not methods:
+                selected += [('VAL', 'ALL', 9000), ('TEST', 'ALL', 9000)]
+            with (output / name).open('w', encoding='utf-8-sig', newline='') as stream:
+                writer = csv.DictWriter(stream, fieldnames=headers)
+                writer.writeheader()
+                for split, problem, n in selected:
+                    row = dict.fromkeys(headers, '0')
+                    row.update(n=n, winner_rule=identity['winner_rule'], data_version='new90k' if split in ('VAL', 'TEST') else 'original native ' + (split if nss else 'LIB'))
+                    if nss:
+                        row.update(dataset=problem + ' TEST' if split == 'TEST' else split,
+                            r124_checkpoint_sha256=identity['checkpoint_sha256'], r77b_checkpoint_sha256='stage1', nss_status='complete')
+                    else:
+                        row.update(split=split, problem=problem)
+                        if methods:
+                            row.update(method=config['candidate_pools'][problem][0], global_id=config['candidate_pool_ids'][problem][0])
+                        if name == 'r77b_comparison.csv':
+                            row['first_stage_checkpoint_sha256'] = 'stage1'
+                    writer.writerow(row)
+        finish = SimpleNamespace(locked_inputs=Mock(return_value=(run, config, self.lock, {}, identity)))
+        with patch.object(pub.importlib, 'import_module', return_value=finish), patch.object(pub, 'git') as git:
+            with patch.object(pub, 'curated_paths', side_effect=lambda r, e, reports: {str(p): pub.sha(p) for p in reports}):
+                result = pub.publish(root, 'R124')
+            late = result['late_publication_hashes']
+            self.assertTrue(result['ready'])
+            self.assertEqual(late['kind'], 'LATE_PUBLICATION_HASH')
+            self.assertFalse(late['original_finish_receipt_signed_these_csvs'])
+            self.assertEqual({Path(p).name for p in late['csv_sha256']}, set(pub.R124_CSV_FIELDS))
+            self.assertEqual(pub.sha(receipt), receipt_sha)
+            (output / 'metrics.csv').write_text('wrong_header\n0\n')
+            with self.assertRaisesRegex(ValueError, 'headers'):
+                pub.completion_gate(root, 'R124')
+            git.assert_not_called()
 
     def test_one_commit_failed_push_retry_and_failed_commit_never_recommits(self):
         self.ready()

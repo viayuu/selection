@@ -4,6 +4,7 @@ No finish/inference/training commands are invoked. Git is only run with --apply.
 """
 
 import argparse
+import csv
 from datetime import datetime, timezone
 import fcntl
 import hashlib
@@ -28,6 +29,15 @@ CODE = {
 }
 COMMON = 'return18_publish.py test_return18_publish.py return18_launch.py test_return18_launch.py run_v4_return18.sh r120_closeout.py'
 SUFFIXES = {'.py', '.sh', '.md', '.pdf', '.csv', '.json'}
+R124_CSV_FIELDS = {
+    'metrics.csv': 'top1_pct mean_cost actual_regret_pct',
+    'r77b_comparison.csv': 'r124_top1_pct r124_actual_regret_pct first_stage_checkpoint_sha256',
+    'reranking.csv': 'final_top1_pct actual_regret_pct corrected_count damaged_count',
+    'candidate_coverage.csv': 'method global_id native_winner_count',
+    'selection_distribution.csv': 'method global_id model_selected_count native_winner_count',
+    'inference_cost.csv': 'seconds full_stage0_plus_reranker',
+    'nss_four_datasets.csv': 'dataset n r124_checkpoint_sha256 r77b_checkpoint_sha256 nss_status',
+}
 
 
 def read(path):
@@ -42,7 +52,52 @@ def sha(path):
     return digest.hexdigest()
 
 
-def completion_gate(root, experiment):
+def r124_csvs(output, config, identity):
+    """Check only fixed report tables; these checks do NOT retroactively sign them."""
+    pools, ids = config['candidate_pools'], config['candidate_pool_ids']
+    populations = {(s, p): 4500 for s in ('VAL', 'TEST') for p in pools}
+    populations.update({('TSPLIB', 'TSP'): 49, ('CVRPLIB', 'CVRP'): 100})
+    populations.update({(s, 'ALL'): 4500 * len(pools) for s in ('VAL', 'TEST')})
+    datasets = {'TSP TEST': ('TEST', 'TSP'), 'CVRP TEST': ('TEST', 'CVRP'),
+                'TSPLIB': ('TSPLIB', 'TSP'), 'CVRPLIB': ('CVRPLIB', 'CVRP')}
+    hashes = {}
+    for name, fields in R124_CSV_FIELDS.items():
+        path = output / name
+        if path.is_symlink() or not path.is_file() or path.stat().st_size >= 8 * 1024**2:
+            raise ValueError('Missing/unsafe R124 report CSV: ' + str(path))
+        hashes[path] = sha(path)
+        nss, methods = name == 'nss_four_datasets.csv', 'method' in fields.split()
+        required = set(fields.split()) | set(('winner_rule data_version' if nss else 'split problem n winner_rule data_version').split())
+        with path.open(encoding='utf-8-sig', newline='') as stream:
+            reader = csv.DictReader(stream)
+            if not required <= set(reader.fieldnames or ()) or len(set(reader.fieldnames)) != len(reader.fieldnames):
+                raise ValueError('R124 CSV headers differ: ' + name)
+            rows = list(reader)
+        expected = set(datasets) if nss else {k for k in populations if not methods or k[1] != 'ALL'}
+        if methods:
+            expected = {(s, p, m) for s, p in expected for m in pools[p]}
+        observed = []
+        for row in rows:
+            s, p = datasets[row['dataset']] if nss else (row['split'], row['problem'])
+            observed.append(row['dataset'] if nss else (s, p, row['method']) if methods else (s, p))
+            version = Path(config['data_root']).name if s in ('VAL', 'TEST') else 'original native ' + (s if nss else 'LIB')
+            if (None in row or (s, p) not in populations or int(row['n']) != populations[s, p]
+                    or p != 'ALL' and (row['winner_rule'] != identity['winner_rule'] or row['data_version'] != version)):
+                raise ValueError('R124 CSV population/native/data identity differs: ' + name)
+            if methods and int(row['global_id']) != ids[p][pools[p].index(row['method'])]:
+                raise ValueError('R124 CSV candidate identity differs: ' + name)
+            if nss and (row['r124_checkpoint_sha256'] != identity['checkpoint_sha256']
+                        or row['r77b_checkpoint_sha256'] != identity['first_stage_checkpoint_sha256']
+                        or row['nss_status'] != 'complete'):
+                raise ValueError('R124 NSS CSV checkpoint identity differs')
+            if name == 'r77b_comparison.csv' and p != 'ALL' and row['first_stage_checkpoint_sha256'] != identity['first_stage_checkpoint_sha256']:
+                raise ValueError('R124 CSV first-stage identity differs')
+        if len(observed) != len(expected) or set(observed) != expected:
+            raise ValueError('R124 CSV incomplete/duplicate dataset rows: ' + name)
+    return hashes
+
+
+def completion_gate(root, experiment, *, late_hashes=None):
     os.environ['CUDA_VISIBLE_DEVICES'] = ''
     finish = importlib.import_module('code.V4.' + experiment.lower() + '_finish')
     run, extras = root / 'model', []
@@ -78,7 +133,7 @@ def completion_gate(root, experiment):
             raise ValueError('R123 report producer source changed')
         artifacts = {output / name: digest for name, digest in receipt['artifacts'].items()}
     else:
-        run, _, lock, _, identity = finish.locked_inputs(SimpleNamespace(root=root))
+        run, config, lock, _, identity = finish.locked_inputs(SimpleNamespace(root=root))
         output, path = run / 'finish/reports', run / 'finish/reports/finish_receipt.json'
         receipt, lib = read(path), read(run / 'finish/lib_complete.json')
         if receipt['identity'] != identity or lib.get('complete') is not True or lib['identity'] != identity:
@@ -91,6 +146,13 @@ def completion_gate(root, experiment):
         if any(sha(v['path']) != v['sha256'] for v in receipt['inputs'].values()):
             raise ValueError('R124 report prediction inputs changed')
         artifacts = {Path(value): receipt['output_sha256'][key] for key, value in receipt['outputs'].items()}
+        unsigned = {p: h for p, h in r124_csvs(output, config, identity).items() if p not in artifacts}
+        artifacts.update(unsigned)
+        if unsigned and late_hashes is not None:
+            late_hashes.update(kind='LATE_PUBLICATION_HASH', original_finish_receipt_signed_these_csvs=False,
+                recorded_utc=datetime.now(timezone.utc).isoformat(), finish_receipt_sha256=sha(path),
+                checkpoint_identity=identity, csv_sha256={str(p): h for p, h in unsigned.items()},
+                limitation='Current files/headers/populations/identities checked; NOT historical CSV producer attribution')
         extras = [run / 'finish/lib_complete.json', run / 'finish/identity.json']
     if receipt.get('complete') is not True or not artifacts:
         raise ValueError('Final report is incomplete; never start/retry missing stages here')
@@ -145,11 +207,12 @@ def git(*args):
 def publish(root, experiment, *, apply=False):
     root = root.resolve()
     root.relative_to(V4 / 'runs')
-    lock, reports = completion_gate(root, experiment)
+    late_hashes = {}
+    lock, reports = completion_gate(root, experiment, late_hashes=late_hashes)
     files = curated_paths(root, experiment, reports)
     identity = dict(experiment=experiment, root=str(root), checkpoint_sha256=lock['checkpoint_sha256'])
     if not apply:
-        return dict(identity, ready=True, applied=False, files=files)
+        return dict(identity, ready=True, applied=False, files=files, late_publication_hashes=late_hashes)
     path = root / 'github_publication.json'
     def save(value):
         temporary = path.with_suffix('.json.tmp')
@@ -170,7 +233,8 @@ def publish(root, experiment, *, apply=False):
             raise RuntimeError('Prior staging/commit attempt preserved; manual inspection required, no extra auto-commit')
         if record and git('rev-parse', 'HEAD') != record['commit']:
             raise RuntimeError('Failed-push commit is no longer HEAD; preserve it for inspection')
-        record = record or dict(identity, complete=False, publisher_sha256=sha(__file__), files=files)
+        record = record or dict(identity, complete=False, publisher_sha256=sha(__file__), files=files,
+                               late_publication_hashes=late_hashes)
         try:
             if not record.get('commit'):
                 record.update(phase='staging', before=git('rev-parse', 'HEAD'))

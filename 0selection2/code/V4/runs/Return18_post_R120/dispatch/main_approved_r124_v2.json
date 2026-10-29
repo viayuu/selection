@@ -1,0 +1,103 @@
+{
+  "schema": "return18-resource-v1",
+  "name": "r124_top2_logging_recovery_v2",
+  "main_approved": true,
+  "approved_by": "main thread: logging-only pre-initialization recovery; old failure kept; zero previous optimizer updates; same model/loss/budget/scores/scratch parameters",
+  "approved_utc": "2026-10-29T19:34:58+00:00",
+  "protocol": {
+    "path": "code/V4/runs/R124_top2_reranking/launch_v2/preparation/method_config.json",
+    "sha256": "6f0b1870d65837a43c7d116d5163989f2dfc3e0c238b143c1731db7b7b4a570e"
+  },
+  "source_sha256": {
+    "code/V4/return18_launch.py": "c2971efab4e863eaf2cceab98d318b7ccee131e7b920a416b132e2dae1d3a5d8",
+    "code/V4/run_v4_return18.sh": "f96ffae480bb3d45708d6e843f8c87ab34cfb1446095b2bef9cdba5a8fba28bf",
+    "code/V4/r120_launch.py": "d1ce6b3f179529553de38cb37f5183587ab7c068e9310a996fb6e537bbd3a85a",
+    "code/V4/r81_queue.py": "cd614a609198d127ad9a632e08044cdcb7fff27ba8e84d519856973f4c076f67",
+    "code/V4/r124_experiment.py": "37af7ec6693de7d4bd9bf24ed715da8bf83a7f7dd847f4af8188d6b51af3d815",
+    "code/V4/r124_model.py": "56e8aec0d79e3cf90a5ba1c866d0856d9842408921c81e46f14d7553da8134f9",
+    "code/V4/r123_prediction_cache.py": "35ac20b813e1281deac0b11429a1eca750a21256482d3e777a02022b8037b32b",
+    "code/V4/r123_meta_data.py": "86f73d45edcb5dde6655b855a9e3aa1771c686eb9d57508e18528f3a804054cb"
+  },
+  "jobs": [
+    {
+      "id": "R124_model_first_updates",
+      "arm": "R124",
+      "slot": "gpu03_1",
+      "root": "code/V4/runs/R124_top2_reranking/launch_v2",
+      "stages": [
+        {
+          "id": "reuse_frozen_stage1_scores",
+          "kind": "cache",
+          "argv": [
+            "python",
+            "-B",
+            "-u",
+            "-m",
+            "code.V4.r124_experiment",
+            "cache",
+            "--root",
+            "/public/home/shiys/0selection2/code/V4/runs/R124_top2_reranking/launch_v2",
+            "--cache-root",
+            "/tmp/shiys_R84_new90k_cache",
+            "--shared-bank-root",
+            "/public/home/shiys/0selection2/code/V4/runs/R123_heterogeneous_moe",
+            "--score-root",
+            "/public/home/shiys/0selection2/code/V4/runs/R124_top2_reranking/preparation/stage1_cache",
+            "--wandb-mode",
+            "auto",
+            "--device",
+            "cpu"
+          ]
+        },
+        {
+          "id": "train",
+          "kind": "train",
+          "argv": [
+            "python",
+            "-B",
+            "-u",
+            "-m",
+            "code.V4.r124_experiment",
+            "train",
+            "--root",
+            "/public/home/shiys/0selection2/code/V4/runs/R124_top2_reranking/launch_v2",
+            "--cache-root",
+            "/tmp/shiys_R84_new90k_cache",
+            "--shared-bank-root",
+            "/public/home/shiys/0selection2/code/V4/runs/R123_heterogeneous_moe",
+            "--score-root",
+            "/public/home/shiys/0selection2/code/V4/runs/R124_top2_reranking/preparation/stage1_cache",
+            "--wandb-mode",
+            "auto",
+            "--device",
+            "cuda:0"
+          ]
+        },
+        {
+          "id": "test",
+          "kind": "test",
+          "argv": [
+            "python",
+            "-B",
+            "-u",
+            "-m",
+            "code.V4.r124_experiment",
+            "test",
+            "--root",
+            "/public/home/shiys/0selection2/code/V4/runs/R124_top2_reranking/launch_v2",
+            "--cache-root",
+            "/tmp/shiys_R84_new90k_cache",
+            "--shared-bank-root",
+            "/public/home/shiys/0selection2/code/V4/runs/R123_heterogeneous_moe",
+            "--score-root",
+            "/public/home/shiys/0selection2/code/V4/runs/R124_top2_reranking/preparation/stage1_cache",
+            "--wandb-mode",
+            "auto",
+            "--device",
+            "cuda:0"
+          ]
+        }
+      ]
+    }
+  ]
+}
