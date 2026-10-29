@@ -1,0 +1,1087 @@
+{
+  "created_utc": "2026-10-29T06:51:47.834826+00:00",
+  "data_seed": 20261029,
+  "full_pool_complete": false,
+  "include_native_AS": false,
+  "nonrouting": {
+    "BPP": {
+      "candidate_inventory": [
+        {
+          "execution": "one_complete_construction",
+          "function": "bin_packing",
+          "objective_direction": "min",
+          "parameters": {},
+          "solver_id": "BPP/BFD/deterministic_v1",
+          "source": "/public/home/shiys/nonrouting_selector_20261023/solvers.py",
+          "source_sha256": "181e4d657aabcaf0c7ac57e59c6d2d2a6f78b8335e7916782becb319d3bf4550",
+          "tie_break": "stable item/job ID"
+        },
+        {
+          "execution": "one_complete_construction",
+          "function": "bin_packing",
+          "objective_direction": "min",
+          "parameters": {},
+          "solver_id": "BPP/FFD/deterministic_v1",
+          "source": "/public/home/shiys/nonrouting_selector_20261023/solvers.py",
+          "source_sha256": "181e4d657aabcaf0c7ac57e59c6d2d2a6f78b8335e7916782becb319d3bf4550",
+          "tie_break": "stable item/job ID"
+        },
+        {
+          "budget": "no short cap, no VNS",
+          "complete_enumeration": true,
+          "doi": "10.1016/S0305-0548(00)00082-4",
+          "fixed_largest_seed": true,
+          "implementation_sha256": "7355064443385b9cf6adae481a12584325d009b099325b982b32c391695b8cda",
+          "pruning": [
+            "equal-size siblings",
+            "remaining-sum bound",
+            "smallest-item bound"
+          ],
+          "solver_id": "BPP/MBS_prime/fleszar_hindi2002_v1",
+          "source": "Fleszar-Hindi 2002 sections 2 and 3.1",
+          "stop_at_zero_slack": true,
+          "tie_break": "first strict best in descending size / stable ID order"
+        }
+      ],
+      "candidate_solver_ids": [
+        "BPP/BFD/deterministic_v1",
+        "BPP/FFD/deterministic_v1",
+        "BPP/MBS_prime/fleszar_hindi2002_v1"
+      ],
+      "deferred_candidates": [],
+      "full_pool_complete": false,
+      "objective_direction": "min",
+      "pending_reason": null,
+      "ready_for_selector_training": true,
+      "source_available_counts": {
+        "test": 1000,
+        "train": 10000,
+        "val": 1000
+      },
+      "splits": {
+        "test": {
+          "candidate_solver_ids": [
+            "BPP/BFD/deterministic_v1",
+            "BPP/FFD/deterministic_v1",
+            "BPP/MBS_prime/fleszar_hindi2002_v1"
+          ],
+          "canonical_winner_policy": "first_best_in_fixed_solver_id_order_not_native_unique",
+          "count": 1000,
+          "dataset_versions": [
+            "nonrouting_supplement_v1_20261029"
+          ],
+          "directory": "/public/home/shiys/nonrouting_supplement_20261029/prepared_cpu/nonrouting/BPP/test",
+          "files": {
+            "all_best_mask.npy": {
+              "bytes": 3128,
+              "sha256": "d65848ab349d76c85b38301e9631ca36deef3c4e263162029b41893e07d06f9d"
+            },
+            "canonical_winner_index.npy": {
+              "bytes": 8128,
+              "sha256": "4c355a3ca4239db9f0b9031277d6423272f3a01dd5574d7b3cc4f529b4ebb4bd"
+            },
+            "input_capacity.bin": {
+              "bytes": 8000,
+              "sha256": "8fae5b46336ec584314cd0696e8996debd35bf6ea6e65143103387d944772b99"
+            },
+            "input_capacity_offsets.npy": {
+              "bytes": 8136,
+              "sha256": "fd0bc2ba783ff3364badd9f9c7cdf1ddcbedd146a6948290708065aac45c6738"
+            },
+            "input_capacity_shapes.npy": {
+              "bytes": 128,
+              "sha256": "c1cff7255f075a1aaaad76f31b177ba648ae51b4244f942c7d23a09fc6e57b28"
+            },
+            "input_sizes.bin": {
+              "bytes": 2242560,
+              "sha256": "346eaedfd04d4a0b021771503df9a4f0801e5dfb090c47d0aff5e47eefc8bee8"
+            },
+            "input_sizes_offsets.npy": {
+              "bytes": 8136,
+              "sha256": "ba346aa5a45c010af4d86bff6cf3f7d4b6ee9c98c433a3deb6375f4042db3055"
+            },
+            "input_sizes_shapes.npy": {
+              "bytes": 4128,
+              "sha256": "7d0ac5a142fa25888b162115f4e3871aa7be3cd2948b4e0cda44f44711703a06"
+            },
+            "metadata.jsonl": {
+              "bytes": 1373893,
+              "sha256": "38784742797d15e4573edf2a7ea25c3f4d0a7120ca55c6873ea63313b730867a"
+            },
+            "metadata_offsets.npy": {
+              "bytes": 8136,
+              "sha256": "5dd6c3230007fd545d098f7ac9d49f4d7773ed56e338cf925633ecd6a5e4e6e3"
+            },
+            "native_objective.npy": {
+              "bytes": 24128,
+              "sha256": "6db193f9938a9a0539acf897a524d734fe97c62e0132d46f288e2f4a4be23d36"
+            },
+            "observed_mask.npy": {
+              "bytes": 3128,
+              "sha256": "45eeb74e6c422f7afbc199cd2da06df22e5133622f120e667aca5760ce051b5a"
+            },
+            "runtime_s.npy": {
+              "bytes": 24128,
+              "sha256": "7e9c7b5c78ed1b64a3625b8e28af1578e3f8e88607c578b9f3fe44607e1814ba"
+            }
+          },
+          "full_pool_complete": false,
+          "input_fields": {
+            "capacity": {
+              "dtype": "<i8",
+              "elements": 1000,
+              "ndim": 0
+            },
+            "sizes": {
+              "dtype": "<i8",
+              "elements": 280320,
+              "ndim": 1
+            }
+          },
+          "measured_pool_complete": true,
+          "objective_direction": "min",
+          "observed_labels": 3000,
+          "problem": "BPP",
+          "schema_version": "nonrouting_raw_v1",
+          "split": "test",
+          "tied_instances": 126
+        },
+        "train": {
+          "candidate_solver_ids": [
+            "BPP/BFD/deterministic_v1",
+            "BPP/FFD/deterministic_v1",
+            "BPP/MBS_prime/fleszar_hindi2002_v1"
+          ],
+          "canonical_winner_policy": "first_best_in_fixed_solver_id_order_not_native_unique",
+          "count": 10000,
+          "dataset_versions": [
+            "nonrouting_v2_20261025"
+          ],
+          "directory": "/public/home/shiys/nonrouting_supplement_20261029/prepared_cpu/nonrouting/BPP/train",
+          "files": {
+            "all_best_mask.npy": {
+              "bytes": 30128,
+              "sha256": "503f5c93cabb6d4c5b3b56fb7d1c0cbe3e63d07663bbb3f4d71a54e0f846c775"
+            },
+            "canonical_winner_index.npy": {
+              "bytes": 80128,
+              "sha256": "64199a259d934838e7472a8b3b955c00d8ef27689367509d849595945a608b3f"
+            },
+            "input_capacity.bin": {
+              "bytes": 80000,
+              "sha256": "d30d418ee9216506b8a3d5625052506652e6c4b4c692647b2cb6f9710373c12e"
+            },
+            "input_capacity_offsets.npy": {
+              "bytes": 80136,
+              "sha256": "e8c6bff77fb5d59a5720fcd8ada9eab655a4032dd724f9503c192d009b2dc06e"
+            },
+            "input_capacity_shapes.npy": {
+              "bytes": 128,
+              "sha256": "4b1796bcee53062288cb0aa1478eca785dbd57d505283428ac93c6305f0b9339"
+            },
+            "input_sizes.bin": {
+              "bytes": 22401600,
+              "sha256": "90d82961b9ea9d7a6c62b60ea098fe466689ff4eb173da27b0eeafa9b7c562f0"
+            },
+            "input_sizes_offsets.npy": {
+              "bytes": 80136,
+              "sha256": "1cd5f85ab07ffa39a34336774980e09839cd8199081c70861b3dca446a8ac60b"
+            },
+            "input_sizes_shapes.npy": {
+              "bytes": 40128,
+              "sha256": "ade911673034e19a30c7a572663984690523eb1dc1aaa5de8c603d1517a3e2e1"
+            },
+            "metadata.jsonl": {
+              "bytes": 20717074,
+              "sha256": "958a45728b7dd666248d99397fb9325efbde7a873d116432c156b7d1f1703207"
+            },
+            "metadata_offsets.npy": {
+              "bytes": 80136,
+              "sha256": "9cdfde9c3b2d40d47a95bab45c3a53b8a7ca71b0ea423351c6cfdb12662f0739"
+            },
+            "native_objective.npy": {
+              "bytes": 240128,
+              "sha256": "407e5599ef17fb1223ef6b387aba9a2c453d8cffdf55ab6b142239daaae8f426"
+            },
+            "observed_mask.npy": {
+              "bytes": 30128,
+              "sha256": "8d0cb8ec10c2ded913163ef88e17bc806f138202302ea8ca7e4f6b72f1b58ce4"
+            },
+            "runtime_s.npy": {
+              "bytes": 240128,
+              "sha256": "9d84a4b4ac1ee012db9ab3ae35d5c9f4d28297b9309bf587de9d09e85135e08b"
+            }
+          },
+          "full_pool_complete": false,
+          "input_fields": {
+            "capacity": {
+              "dtype": "<i8",
+              "elements": 10000,
+              "ndim": 0
+            },
+            "sizes": {
+              "dtype": "<i8",
+              "elements": 2800200,
+              "ndim": 1
+            }
+          },
+          "measured_pool_complete": true,
+          "objective_direction": "min",
+          "observed_labels": 30000,
+          "problem": "BPP",
+          "schema_version": "nonrouting_raw_v1",
+          "split": "train",
+          "tied_instances": 1354
+        },
+        "val": {
+          "candidate_solver_ids": [
+            "BPP/BFD/deterministic_v1",
+            "BPP/FFD/deterministic_v1",
+            "BPP/MBS_prime/fleszar_hindi2002_v1"
+          ],
+          "canonical_winner_policy": "first_best_in_fixed_solver_id_order_not_native_unique",
+          "count": 1000,
+          "dataset_versions": [
+            "nonrouting_supplement_v1_20261029"
+          ],
+          "directory": "/public/home/shiys/nonrouting_supplement_20261029/prepared_cpu/nonrouting/BPP/val",
+          "files": {
+            "all_best_mask.npy": {
+              "bytes": 3128,
+              "sha256": "f66aa6516fea650207d226d59d8da8d7561f64221f4d7ba854bd00999fa07c3c"
+            },
+            "canonical_winner_index.npy": {
+              "bytes": 8128,
+              "sha256": "3054922635c30400596cc807e88ca99e840896a2535309b56211b5c6f04e96ae"
+            },
+            "input_capacity.bin": {
+              "bytes": 8000,
+              "sha256": "ec2070c1156204837d0fa0513a3be85f3b6825fc23efb43545e864c80dc7cc43"
+            },
+            "input_capacity_offsets.npy": {
+              "bytes": 8136,
+              "sha256": "fd0bc2ba783ff3364badd9f9c7cdf1ddcbedd146a6948290708065aac45c6738"
+            },
+            "input_capacity_shapes.npy": {
+              "bytes": 128,
+              "sha256": "c1cff7255f075a1aaaad76f31b177ba648ae51b4244f942c7d23a09fc6e57b28"
+            },
+            "input_sizes.bin": {
+              "bytes": 2241600,
+              "sha256": "7237dd7dda6bcaa89ed321d7001d6ecdc582f2626dbc371fc48e53d1545374c6"
+            },
+            "input_sizes_offsets.npy": {
+              "bytes": 8136,
+              "sha256": "265f7024cc613c89ca1a6d4bed931d82798dea5f29cb2b59e5db5a6d22d70cb4"
+            },
+            "input_sizes_shapes.npy": {
+              "bytes": 4128,
+              "sha256": "c721e28a5822de607e99d46c8ab08fe9564451ae09dc82465b125299868bfa35"
+            },
+            "metadata.jsonl": {
+              "bytes": 1369903,
+              "sha256": "2930c3bb053be4c019f652d3ff01f482e8255d87eee0c26f10209c9f6a8122ed"
+            },
+            "metadata_offsets.npy": {
+              "bytes": 8136,
+              "sha256": "576b49e91d0560c2e674fce6288ff588c3a0548ce994b2772fc2872ba860d22a"
+            },
+            "native_objective.npy": {
+              "bytes": 24128,
+              "sha256": "5853a4208faca793e49c874a1ca6bb1227758d667fc873f4fb8cd3067532a1a6"
+            },
+            "observed_mask.npy": {
+              "bytes": 3128,
+              "sha256": "45eeb74e6c422f7afbc199cd2da06df22e5133622f120e667aca5760ce051b5a"
+            },
+            "runtime_s.npy": {
+              "bytes": 24128,
+              "sha256": "ce70776d939f1e22f44e8dda037fa2611aa31e10e74a6d6649043d75e8d20d3f"
+            }
+          },
+          "full_pool_complete": false,
+          "input_fields": {
+            "capacity": {
+              "dtype": "<i8",
+              "elements": 1000,
+              "ndim": 0
+            },
+            "sizes": {
+              "dtype": "<i8",
+              "elements": 280200,
+              "ndim": 1
+            }
+          },
+          "measured_pool_complete": true,
+          "objective_direction": "min",
+          "observed_labels": 3000,
+          "problem": "BPP",
+          "schema_version": "nonrouting_raw_v1",
+          "split": "val",
+          "tied_instances": 123
+        }
+      },
+      "status": "ready"
+    },
+    "MKP": {
+      "candidate_inventory": [
+        {
+          "alpha": 1,
+          "beta": 1,
+          "capacity_mapping": "original W.T * (n//2) / original capacities; default and input dtype float64",
+          "decay": 0.9,
+          "elitist": false,
+          "iterations": 100,
+          "learned_heuristic": false,
+          "min_max": false,
+          "n_ants": 20,
+          "native_output": "unmodified alltime_best_sol; original integer certificate; no repair",
+          "rng_scope": "per instance torch.fork_rng; CPU/GPU streams not claimed identical",
+          "seed_policy": "first 32 SHA256 bits of [20261029,input_identity,solver_id]",
+          "solver_id": "MKP/AntSystem/deepaco_native20x100_fp64_v1",
+          "source": "https://github.com/henry-yeh/DeepACO/blob/9a756a3fe6cf9627ecc166110a02fdbb61f2a0d7/mkp/aco.py",
+          "source_sha256": "7da5f26b10dcae34d5f9e37f967a7acce4056e38f53fd1e68b6344d9dd5aedd9"
+        },
+        {
+          "backend": "scipy.optimize.linprog highs-ds",
+          "dual_sign": "negative inequality marginals of min(-profit)",
+          "implementation_sha256": "7355064443385b9cf6adae481a12584325d009b099325b982b32c391695b8cda",
+          "negative_roundoff_tolerance": 1e-09,
+          "options": {
+            "parallel": false,
+            "threads": 1
+          },
+          "repair": false,
+          "restarts": 0,
+          "section": "3.5 equation 7, unbiassed profits",
+          "solver_id": "MKP/LPDualGreedy/highs_ds_v1",
+          "source": "https://www.ac.tuwien.ac.at/files/pub/raidl-04a.pdf",
+          "zero_denominator": "+infinity priority; stable item ID"
+        },
+        {
+          "execution": "one_complete_construction",
+          "function": "surrogate_greedy",
+          "objective_direction": "max",
+          "parameters": {},
+          "solver_id": "MKP/SurrogateGreedy/deterministic_v1",
+          "source": "/public/home/shiys/nonrouting_selector_20261023/solvers.py",
+          "source_sha256": "181e4d657aabcaf0c7ac57e59c6d2d2a6f78b8335e7916782becb319d3bf4550",
+          "tie_break": "stable item/job ID"
+        }
+      ],
+      "candidate_solver_ids": [
+        "MKP/AntSystem/deepaco_native20x100_fp64_v1",
+        "MKP/LPDualGreedy/highs_ds_v1",
+        "MKP/SurrogateGreedy/deterministic_v1"
+      ],
+      "deferred_candidates": [],
+      "full_pool_complete": false,
+      "objective_direction": "max",
+      "pending_reason": "Native AS or failed labels/formal counts not complete",
+      "ready_for_selector_training": false,
+      "source_available_counts": {
+        "test": 1350,
+        "train": 10000,
+        "val": 1350
+      },
+      "splits": {
+        "test": {
+          "candidate_solver_ids": [
+            "MKP/AntSystem/deepaco_native20x100_fp64_v1",
+            "MKP/LPDualGreedy/highs_ds_v1",
+            "MKP/SurrogateGreedy/deterministic_v1"
+          ],
+          "canonical_winner_policy": "first_best_in_fixed_solver_id_order_not_native_unique",
+          "count": 1350,
+          "dataset_versions": [
+            "nonrouting_supplement_v1_20261029"
+          ],
+          "directory": "/public/home/shiys/nonrouting_supplement_20261029/prepared_cpu/nonrouting/MKP/test",
+          "files": {
+            "all_best_mask.npy": {
+              "bytes": 4178,
+              "sha256": "8a89893cbb51d424149937dca2f85fbb656dafc4dab0d450665824e59c3c7fb8"
+            },
+            "canonical_winner_index.npy": {
+              "bytes": 10928,
+              "sha256": "106ca548802d72f573a00badf5563f18a27c70cb907510df4a787c702938948f"
+            },
+            "input_capacities.bin": {
+              "bytes": 162000,
+              "sha256": "47f757450869ffe4c76fe6de73400ee19d692fb20a63e32c3f00846fdd7690ff"
+            },
+            "input_capacities_offsets.npy": {
+              "bytes": 10936,
+              "sha256": "b3c6c24dc5abf0ac77a57054611eec51c216029c445e7b2ad1a71ce620160bf3"
+            },
+            "input_capacities_shapes.npy": {
+              "bytes": 5528,
+              "sha256": "522c4095d8481120d17a57419868dd81756f1bac0df683d599ba88618604c22c"
+            },
+            "input_profits.bin": {
+              "bytes": 3060000,
+              "sha256": "53b0c3a71592e4f6bc57193c86a1d81871b0fbd92557d591d7d511707e86eb11"
+            },
+            "input_profits_offsets.npy": {
+              "bytes": 10936,
+              "sha256": "48ba2eca0f86a96842f675db3d532c47b7e93d799c280d09c6f70370d97b27f4"
+            },
+            "input_profits_shapes.npy": {
+              "bytes": 5528,
+              "sha256": "344e2e15dc6d7d74298a0b29de1e208ded903d773ecd9602add98481cc4a6a65"
+            },
+            "input_resources.bin": {
+              "bytes": 45900000,
+              "sha256": "a4ca811124e4531de8501c50c99b9a0c34767560a2ab92bb621686836f101b9f"
+            },
+            "input_resources_offsets.npy": {
+              "bytes": 10936,
+              "sha256": "6eb1695e5be457e805972cc1e17ec7d0f76d34c583531a2f58fc96d4065d1e82"
+            },
+            "input_resources_shapes.npy": {
+              "bytes": 10928,
+              "sha256": "ad6af0284300f936e8b3caae43f1eb362e94da05e2116f717aa8a230a96e1500"
+            },
+            "metadata.jsonl": {
+              "bytes": 2065293,
+              "sha256": "587139d577b21ac76d60de28ebcc9e61ae0533f84496c1c6cd1b85c053db177c"
+            },
+            "metadata_offsets.npy": {
+              "bytes": 10936,
+              "sha256": "68b50eb2acda51cda91c913e21a2a2aee651855b26c9789fa0d5a6454deaa43d"
+            },
+            "native_objective.npy": {
+              "bytes": 32528,
+              "sha256": "a5da4dea0a88a3986b336f83ff7e3f33afaaafb29f0b0b1619b3b72497b9c78d"
+            },
+            "observed_mask.npy": {
+              "bytes": 4178,
+              "sha256": "a9b3afb350c7492d67746e4fb0f10ff9113bbd35b4f89f4213e3875d6f70af8a"
+            },
+            "runtime_s.npy": {
+              "bytes": 32528,
+              "sha256": "b6e3c444552d08aa6cc356203033e2ca78fcac43ceecd87884e87ec0435e3871"
+            }
+          },
+          "full_pool_complete": false,
+          "input_fields": {
+            "capacities": {
+              "dtype": "<i8",
+              "elements": 20250,
+              "ndim": 1
+            },
+            "profits": {
+              "dtype": "<i8",
+              "elements": 382500,
+              "ndim": 1
+            },
+            "resources": {
+              "dtype": "<i8",
+              "elements": 5737500,
+              "ndim": 2
+            }
+          },
+          "measured_pool_complete": false,
+          "objective_direction": "max",
+          "observed_labels": 2700,
+          "problem": "MKP",
+          "schema_version": "nonrouting_raw_v1",
+          "split": "test",
+          "tied_instances": 0
+        },
+        "train": {
+          "candidate_solver_ids": [
+            "MKP/AntSystem/deepaco_native20x100_fp64_v1",
+            "MKP/LPDualGreedy/highs_ds_v1",
+            "MKP/SurrogateGreedy/deterministic_v1"
+          ],
+          "canonical_winner_policy": "first_best_in_fixed_solver_id_order_not_native_unique",
+          "count": 10000,
+          "dataset_versions": [
+            "nonrouting_supplement_v1_20261029"
+          ],
+          "directory": "/public/home/shiys/nonrouting_supplement_20261029/prepared_cpu/nonrouting/MKP/train",
+          "files": {
+            "all_best_mask.npy": {
+              "bytes": 30128,
+              "sha256": "6b2ab61529d787e737dbedf4f8c82347320a38adb37e7a988918b9e6f7a3938d"
+            },
+            "canonical_winner_index.npy": {
+              "bytes": 80128,
+              "sha256": "1976354abe5b72e7ba2c253b4730f982fc0a22ce128c6db9d7e04a815a87b688"
+            },
+            "input_capacities.bin": {
+              "bytes": 1199920,
+              "sha256": "f986ba16a3b783c6a24d68cfbae8d9b9a9bba20c8800221959b1ce153d675843"
+            },
+            "input_capacities_offsets.npy": {
+              "bytes": 80136,
+              "sha256": "a155b6969a898bf5aa0a26cc283867edadf839b5a364a6d399b541376c17f72c"
+            },
+            "input_capacities_shapes.npy": {
+              "bytes": 40128,
+              "sha256": "5a29838b59526b65a121996ba1e67203cda8e7e28edd00c3a946f31f884d252e"
+            },
+            "input_profits.bin": {
+              "bytes": 22668400,
+              "sha256": "4ec1dee57b63ceddbeb5bbf7dd118189f82f8b0c2ec7e2e2e2a8f276f565215e"
+            },
+            "input_profits_offsets.npy": {
+              "bytes": 80136,
+              "sha256": "83e1aefe6880ab95901cf66b6e021c0810456b034b0f53765f720a2311aad598"
+            },
+            "input_profits_shapes.npy": {
+              "bytes": 40128,
+              "sha256": "9b3d8c5d91bb9166daecd9de960f83a7b268759c40c023bf26f6191ad1e9cdc0"
+            },
+            "input_resources.bin": {
+              "bytes": 340042000,
+              "sha256": "243a6712fadc0506dbee820f3ac769c21790cee6f83f54131a2a9144aebe82e9"
+            },
+            "input_resources_offsets.npy": {
+              "bytes": 80136,
+              "sha256": "ab66dc4941cef7fb0d677044df0021e708928b42457c6a54198bf42e35648c41"
+            },
+            "input_resources_shapes.npy": {
+              "bytes": 80128,
+              "sha256": "e3c8281e1b5f4cb25fc15767f9b62d67ac1954f63a543605c28f9ecdef69a5e5"
+            },
+            "metadata.jsonl": {
+              "bytes": 15345560,
+              "sha256": "7e6528b92323cdb2c4d6275bef94228bf624e5aca285ffc76e7dd02131cb7307"
+            },
+            "metadata_offsets.npy": {
+              "bytes": 80136,
+              "sha256": "d1959256ffb7bd84bf6225ded3d703ff9b15cbeee9cb51cb4bea698bfe2b0207"
+            },
+            "native_objective.npy": {
+              "bytes": 240128,
+              "sha256": "5339f6b5e8215d504829d2312204fa87e179c20467345ed88e996cd6e5cb8816"
+            },
+            "observed_mask.npy": {
+              "bytes": 30128,
+              "sha256": "c791a5a0f367b605ed2103f879c2ace764bf8de0951026c0c4fb030bca54a537"
+            },
+            "runtime_s.npy": {
+              "bytes": 240128,
+              "sha256": "9656c9310c1e06fc8e5de2fa3e0beb96567154ec24617ec0073f1511332983c3"
+            }
+          },
+          "full_pool_complete": false,
+          "input_fields": {
+            "capacities": {
+              "dtype": "<i8",
+              "elements": 149990,
+              "ndim": 1
+            },
+            "profits": {
+              "dtype": "<i8",
+              "elements": 2833550,
+              "ndim": 1
+            },
+            "resources": {
+              "dtype": "<i8",
+              "elements": 42505250,
+              "ndim": 2
+            }
+          },
+          "measured_pool_complete": false,
+          "objective_direction": "max",
+          "observed_labels": 20000,
+          "problem": "MKP",
+          "schema_version": "nonrouting_raw_v1",
+          "split": "train",
+          "tied_instances": 14
+        },
+        "val": {
+          "candidate_solver_ids": [
+            "MKP/AntSystem/deepaco_native20x100_fp64_v1",
+            "MKP/LPDualGreedy/highs_ds_v1",
+            "MKP/SurrogateGreedy/deterministic_v1"
+          ],
+          "canonical_winner_policy": "first_best_in_fixed_solver_id_order_not_native_unique",
+          "count": 1350,
+          "dataset_versions": [
+            "nonrouting_supplement_v1_20261029"
+          ],
+          "directory": "/public/home/shiys/nonrouting_supplement_20261029/prepared_cpu/nonrouting/MKP/val",
+          "files": {
+            "all_best_mask.npy": {
+              "bytes": 4178,
+              "sha256": "a6d462967ec19671b2eb202e6ae963c3bb52387ca908c5aa66e4dd88ae369bb7"
+            },
+            "canonical_winner_index.npy": {
+              "bytes": 10928,
+              "sha256": "0062fd464c458ccd2e102c59149c2ba49104270f5ad13b614bd3bdd6bb48c6a6"
+            },
+            "input_capacities.bin": {
+              "bytes": 162000,
+              "sha256": "bc8c78d45c378d81ab63989b0238559cd653532eeb2794bf175c3bed59eaf59a"
+            },
+            "input_capacities_offsets.npy": {
+              "bytes": 10936,
+              "sha256": "b676f603befb8e28a542a3dfbcc75576dca8b3d977beea02885f8535822d34d9"
+            },
+            "input_capacities_shapes.npy": {
+              "bytes": 5528,
+              "sha256": "759868e843001025c1b092f72acc86bb04c4652118b786150e654c62ffb504ab"
+            },
+            "input_profits.bin": {
+              "bytes": 3060000,
+              "sha256": "e17c6950a867dc91edf8ad6201b073d616fc807752bc39f38eb8aaf5241eb2c3"
+            },
+            "input_profits_offsets.npy": {
+              "bytes": 10936,
+              "sha256": "9c0e3adbe43ca379e2e21c0865f397439d87f97380419668f05e380ace968e8d"
+            },
+            "input_profits_shapes.npy": {
+              "bytes": 5528,
+              "sha256": "17f153abfd2f08e9fd15d1f09e6f2c4657ed6092f7bc3bd00cd83d871d9d930c"
+            },
+            "input_resources.bin": {
+              "bytes": 45900000,
+              "sha256": "a3c1ca1d52eff7f1e7a04cff1fde0b4b8ede6a27ad81a7b277cb03a43acebedf"
+            },
+            "input_resources_offsets.npy": {
+              "bytes": 10936,
+              "sha256": "a6853f7976dc2dabd6326fad9acf6c05bcc8e172699bd7853e0283b6f5aa422c"
+            },
+            "input_resources_shapes.npy": {
+              "bytes": 10928,
+              "sha256": "c7ae1bf740af4dfcc83141f6d474f23379703b450fd4a511f867bdaeb203b2ec"
+            },
+            "metadata.jsonl": {
+              "bytes": 2059893,
+              "sha256": "e39e6be09885370a99b0c33c0cc60877ccf36f6a19a788df6cef668708b85c50"
+            },
+            "metadata_offsets.npy": {
+              "bytes": 10936,
+              "sha256": "7795eb82ef1de77eb098f6d03b1fb715136018a612f71d4826ef240ef9b05029"
+            },
+            "native_objective.npy": {
+              "bytes": 32528,
+              "sha256": "e58ae802c90c27bc23d87b1ab7a035201cb21597cf4c8529f074766a4876144d"
+            },
+            "observed_mask.npy": {
+              "bytes": 4178,
+              "sha256": "a9b3afb350c7492d67746e4fb0f10ff9113bbd35b4f89f4213e3875d6f70af8a"
+            },
+            "runtime_s.npy": {
+              "bytes": 32528,
+              "sha256": "024200cf21f0542d057dc9134c0f1bc811580f7dfad151375e36078bc387050a"
+            }
+          },
+          "full_pool_complete": false,
+          "input_fields": {
+            "capacities": {
+              "dtype": "<i8",
+              "elements": 20250,
+              "ndim": 1
+            },
+            "profits": {
+              "dtype": "<i8",
+              "elements": 382500,
+              "ndim": 1
+            },
+            "resources": {
+              "dtype": "<i8",
+              "elements": 5737500,
+              "ndim": 2
+            }
+          },
+          "measured_pool_complete": false,
+          "objective_direction": "max",
+          "observed_labels": 2700,
+          "problem": "MKP",
+          "schema_version": "nonrouting_raw_v1",
+          "split": "val",
+          "tied_instances": 4
+        }
+      },
+      "status": "incomplete"
+    },
+    "SMTWTP": {
+      "candidate_inventory": [
+        {
+          "execution": "one_complete_construction",
+          "function": "single_machine",
+          "objective_direction": "min",
+          "parameters": {
+            "k": 2.0,
+            "mean_processing": "remaining_jobs"
+          },
+          "solver_id": "SMTWTP/ATC/deterministic_v1",
+          "source": "/public/home/shiys/nonrouting_selector_20261023/solvers.py",
+          "source_sha256": "181e4d657aabcaf0c7ac57e59c6d2d2a6f78b8335e7916782becb319d3bf4550",
+          "tie_break": "stable item/job ID"
+        },
+        {
+          "execution": "one_complete_construction",
+          "function": "single_machine",
+          "objective_direction": "min",
+          "parameters": {},
+          "solver_id": "SMTWTP/EDD/deterministic_v1",
+          "source": "/public/home/shiys/nonrouting_selector_20261023/solvers.py",
+          "source_sha256": "181e4d657aabcaf0c7ac57e59c6d2d2a6f78b8335e7916782becb319d3bf4550",
+          "tie_break": "stable item/job ID"
+        },
+        {
+          "execution": "one_complete_construction",
+          "function": "single_machine",
+          "objective_direction": "min",
+          "parameters": {},
+          "solver_id": "SMTWTP/WSPT/deterministic_v1",
+          "source": "/public/home/shiys/nonrouting_selector_20261023/solvers.py",
+          "source_sha256": "181e4d657aabcaf0c7ac57e59c6d2d2a6f78b8335e7916782becb319d3bf4550",
+          "tie_break": "stable item/job ID"
+        }
+      ],
+      "candidate_solver_ids": [
+        "SMTWTP/ATC/deterministic_v1",
+        "SMTWTP/EDD/deterministic_v1",
+        "SMTWTP/WSPT/deterministic_v1"
+      ],
+      "deferred_candidates": [],
+      "full_pool_complete": false,
+      "objective_direction": "min",
+      "pending_reason": null,
+      "ready_for_selector_training": true,
+      "source_available_counts": {
+        "test": 3750,
+        "train": 10000,
+        "val": 3750
+      },
+      "splits": {
+        "test": {
+          "candidate_solver_ids": [
+            "SMTWTP/ATC/deterministic_v1",
+            "SMTWTP/EDD/deterministic_v1",
+            "SMTWTP/WSPT/deterministic_v1"
+          ],
+          "canonical_winner_policy": "first_best_in_fixed_solver_id_order_not_native_unique",
+          "count": 3750,
+          "dataset_versions": [
+            "nonrouting_supplement_v1_20261029"
+          ],
+          "directory": "/public/home/shiys/nonrouting_supplement_20261029/prepared_cpu/nonrouting/SMTWTP/test",
+          "files": {
+            "all_best_mask.npy": {
+              "bytes": 11378,
+              "sha256": "119ede6838ab4efccd882137627169a21faf6121a9321da452a739cf832c53eb"
+            },
+            "canonical_winner_index.npy": {
+              "bytes": 30128,
+              "sha256": "75cf53e5578abc2e73320241bca316f8e5a7c57c9a6b478899b805ac935516c1"
+            },
+            "input_d.bin": {
+              "bytes": 1900000,
+              "sha256": "f905705230b867887725ecd2e79db6860174083042efe7e0215c378f0e972c7e"
+            },
+            "input_d_offsets.npy": {
+              "bytes": 30136,
+              "sha256": "1b7d3dfa37946b125dba530537783c6226527a3f110ab27c8382d94979cc7c69"
+            },
+            "input_d_shapes.npy": {
+              "bytes": 15128,
+              "sha256": "7cd42a0f739c210030e2848190e30336fdbc5b94818d4ec0c88970eb9f460cfc"
+            },
+            "input_p.bin": {
+              "bytes": 1900000,
+              "sha256": "f524b23943eb9e710cd495644b10b677b277116afc93cefb3ec9dfd6d40aa581"
+            },
+            "input_p_offsets.npy": {
+              "bytes": 30136,
+              "sha256": "1b7d3dfa37946b125dba530537783c6226527a3f110ab27c8382d94979cc7c69"
+            },
+            "input_p_shapes.npy": {
+              "bytes": 15128,
+              "sha256": "7cd42a0f739c210030e2848190e30336fdbc5b94818d4ec0c88970eb9f460cfc"
+            },
+            "input_w.bin": {
+              "bytes": 1900000,
+              "sha256": "461e2640b55a0256c45942e44e6c00c2ebda050d7d072fb5fd2bde7b6424e604"
+            },
+            "input_w_offsets.npy": {
+              "bytes": 30136,
+              "sha256": "1b7d3dfa37946b125dba530537783c6226527a3f110ab27c8382d94979cc7c69"
+            },
+            "input_w_shapes.npy": {
+              "bytes": 15128,
+              "sha256": "7cd42a0f739c210030e2848190e30336fdbc5b94818d4ec0c88970eb9f460cfc"
+            },
+            "metadata.jsonl": {
+              "bytes": 5445143,
+              "sha256": "c690cf89ff16ceae421bbccd2dac63bb245f40fa3cbe7b7742ea2a20c7d37172"
+            },
+            "metadata_offsets.npy": {
+              "bytes": 30136,
+              "sha256": "5943fd64a57297171a52eae2a893ee283932b80d19c1b6fad3431c50c1fb6b71"
+            },
+            "native_objective.npy": {
+              "bytes": 90128,
+              "sha256": "b4765943ac9251ed95166ce54d7f0b4792e7c9c2a52ddaead32de91e1555e43a"
+            },
+            "observed_mask.npy": {
+              "bytes": 11378,
+              "sha256": "7f1d730a73586a0eeebc65f9eb837df6eeb1ad4d2382bebf31908dfc3b42f959"
+            },
+            "runtime_s.npy": {
+              "bytes": 90128,
+              "sha256": "99c5439673a483e067cc949b8aaaa0ba32d3d6474a1513861f1d238d1c224e29"
+            }
+          },
+          "full_pool_complete": false,
+          "input_fields": {
+            "d": {
+              "dtype": "<i8",
+              "elements": 237500,
+              "ndim": 1
+            },
+            "p": {
+              "dtype": "<i8",
+              "elements": 237500,
+              "ndim": 1
+            },
+            "w": {
+              "dtype": "<i8",
+              "elements": 237500,
+              "ndim": 1
+            }
+          },
+          "measured_pool_complete": true,
+          "objective_direction": "min",
+          "observed_labels": 11250,
+          "problem": "SMTWTP",
+          "schema_version": "nonrouting_raw_v1",
+          "split": "test",
+          "tied_instances": 510
+        },
+        "train": {
+          "candidate_solver_ids": [
+            "SMTWTP/ATC/deterministic_v1",
+            "SMTWTP/EDD/deterministic_v1",
+            "SMTWTP/WSPT/deterministic_v1"
+          ],
+          "canonical_winner_policy": "first_best_in_fixed_solver_id_order_not_native_unique",
+          "count": 10000,
+          "dataset_versions": [
+            "nonrouting_supplement_v1_20261029"
+          ],
+          "directory": "/public/home/shiys/nonrouting_supplement_20261029/prepared_cpu/nonrouting/SMTWTP/train",
+          "files": {
+            "all_best_mask.npy": {
+              "bytes": 30128,
+              "sha256": "d80ca025411185157452a17cf0772719d5ac19ec6286bc38ed8683620b34df0b"
+            },
+            "canonical_winner_index.npy": {
+              "bytes": 80128,
+              "sha256": "73191431425845469c949f7682e540fec7c86eadaef07f181fcdbcca7c201806"
+            },
+            "input_d.bin": {
+              "bytes": 5066160,
+              "sha256": "3a5bf864134d0f331c116a71035a36c940d3c8807d1bb846d17895462628d131"
+            },
+            "input_d_offsets.npy": {
+              "bytes": 80136,
+              "sha256": "8b1258e1f2852d3aacf9d655538c5ee25bf8913d469071a0153b23fd71fc5c46"
+            },
+            "input_d_shapes.npy": {
+              "bytes": 40128,
+              "sha256": "173144cc4bbe208bea5d4174c40406175f74872a35e797578730acb0f8343b7c"
+            },
+            "input_p.bin": {
+              "bytes": 5066160,
+              "sha256": "53c04b10d8346ee5f026d80d4e460ce0c4245e8f8373847640505178d3a7112a"
+            },
+            "input_p_offsets.npy": {
+              "bytes": 80136,
+              "sha256": "8b1258e1f2852d3aacf9d655538c5ee25bf8913d469071a0153b23fd71fc5c46"
+            },
+            "input_p_shapes.npy": {
+              "bytes": 40128,
+              "sha256": "173144cc4bbe208bea5d4174c40406175f74872a35e797578730acb0f8343b7c"
+            },
+            "input_w.bin": {
+              "bytes": 5066160,
+              "sha256": "5d0a2b6dc589a319cbe81b153e0057445cf2a36cc32aaa9982002bad7901598b"
+            },
+            "input_w_offsets.npy": {
+              "bytes": 80136,
+              "sha256": "8b1258e1f2852d3aacf9d655538c5ee25bf8913d469071a0153b23fd71fc5c46"
+            },
+            "input_w_shapes.npy": {
+              "bytes": 40128,
+              "sha256": "173144cc4bbe208bea5d4174c40406175f74872a35e797578730acb0f8343b7c"
+            },
+            "metadata.jsonl": {
+              "bytes": 14562226,
+              "sha256": "f35cadec08efb739b85f4defcde8c8f389c9f4e484fb6d8f5f4e0f40289e30fd"
+            },
+            "metadata_offsets.npy": {
+              "bytes": 80136,
+              "sha256": "bfce5b6f5bba958940325460b43bf6786a9cbd97db41bfe5fefbf80216f22c2e"
+            },
+            "native_objective.npy": {
+              "bytes": 240128,
+              "sha256": "c2189d4284ec03b4cf26f5e07a6dab904a3f5678a4bbb3131acc0c8d88c5bd3d"
+            },
+            "observed_mask.npy": {
+              "bytes": 30128,
+              "sha256": "8d0cb8ec10c2ded913163ef88e17bc806f138202302ea8ca7e4f6b72f1b58ce4"
+            },
+            "runtime_s.npy": {
+              "bytes": 240128,
+              "sha256": "cfd2aa4e17e9afef9e01cb683d81a3e35e2c096bee3214ea49ee09b421e1f95e"
+            }
+          },
+          "full_pool_complete": false,
+          "input_fields": {
+            "d": {
+              "dtype": "<i8",
+              "elements": 633270,
+              "ndim": 1
+            },
+            "p": {
+              "dtype": "<i8",
+              "elements": 633270,
+              "ndim": 1
+            },
+            "w": {
+              "dtype": "<i8",
+              "elements": 633270,
+              "ndim": 1
+            }
+          },
+          "measured_pool_complete": true,
+          "objective_direction": "min",
+          "observed_labels": 30000,
+          "problem": "SMTWTP",
+          "schema_version": "nonrouting_raw_v1",
+          "split": "train",
+          "tied_instances": 1362
+        },
+        "val": {
+          "candidate_solver_ids": [
+            "SMTWTP/ATC/deterministic_v1",
+            "SMTWTP/EDD/deterministic_v1",
+            "SMTWTP/WSPT/deterministic_v1"
+          ],
+          "canonical_winner_policy": "first_best_in_fixed_solver_id_order_not_native_unique",
+          "count": 3750,
+          "dataset_versions": [
+            "nonrouting_supplement_v1_20261029"
+          ],
+          "directory": "/public/home/shiys/nonrouting_supplement_20261029/prepared_cpu/nonrouting/SMTWTP/val",
+          "files": {
+            "all_best_mask.npy": {
+              "bytes": 11378,
+              "sha256": "d3945f8f2531e76e4cae0297c9f302c0b5a484ea602a642ff9ed86701d2eead6"
+            },
+            "canonical_winner_index.npy": {
+              "bytes": 30128,
+              "sha256": "64e4751b5bae4fa5345986411dee59e8139863d657b70731124ec4f17e003534"
+            },
+            "input_d.bin": {
+              "bytes": 1900000,
+              "sha256": "29671bf7ce6c5789c96e5ff212dc1d139658ac33954a6d5a2d9da2dee50cf7d8"
+            },
+            "input_d_offsets.npy": {
+              "bytes": 30136,
+              "sha256": "84aa70d4e4e365122c6f7167d3d51b55b8797bc0c9941b79152ca3088d917877"
+            },
+            "input_d_shapes.npy": {
+              "bytes": 15128,
+              "sha256": "39e7c113b5d60f3eb53656f8c59e036e6e0e7b21187ffca0364e1ef27cf436be"
+            },
+            "input_p.bin": {
+              "bytes": 1900000,
+              "sha256": "03d4a4a0be497209c01c2c7e2160b3b4f57c82ce968bb53e04f3ee21f882f91f"
+            },
+            "input_p_offsets.npy": {
+              "bytes": 30136,
+              "sha256": "84aa70d4e4e365122c6f7167d3d51b55b8797bc0c9941b79152ca3088d917877"
+            },
+            "input_p_shapes.npy": {
+              "bytes": 15128,
+              "sha256": "39e7c113b5d60f3eb53656f8c59e036e6e0e7b21187ffca0364e1ef27cf436be"
+            },
+            "input_w.bin": {
+              "bytes": 1900000,
+              "sha256": "373c60cdf17dc670ad673a94a88b001f07c614f0a76352393dacb7aab14f29b0"
+            },
+            "input_w_offsets.npy": {
+              "bytes": 30136,
+              "sha256": "84aa70d4e4e365122c6f7167d3d51b55b8797bc0c9941b79152ca3088d917877"
+            },
+            "input_w_shapes.npy": {
+              "bytes": 15128,
+              "sha256": "39e7c113b5d60f3eb53656f8c59e036e6e0e7b21187ffca0364e1ef27cf436be"
+            },
+            "metadata.jsonl": {
+              "bytes": 5430143,
+              "sha256": "1507912a76a891775b01db3c77d689a0cc4cbf88d2590bb57b65de5048244012"
+            },
+            "metadata_offsets.npy": {
+              "bytes": 30136,
+              "sha256": "79483e52f1b7322d37d1abd09431882f7a99d1bed30a1ea045ab344f1ce2cca1"
+            },
+            "native_objective.npy": {
+              "bytes": 90128,
+              "sha256": "46486183a635aa8de403f46641bc349ada5d42c7a12f24a1ae504d5458d7e9b6"
+            },
+            "observed_mask.npy": {
+              "bytes": 11378,
+              "sha256": "7f1d730a73586a0eeebc65f9eb837df6eeb1ad4d2382bebf31908dfc3b42f959"
+            },
+            "runtime_s.npy": {
+              "bytes": 90128,
+              "sha256": "6be09a67e8a90439f100486cfbdde9047aae5ca507bea9eb0848c90538d7c3c6"
+            }
+          },
+          "full_pool_complete": false,
+          "input_fields": {
+            "d": {
+              "dtype": "<i8",
+              "elements": 237500,
+              "ndim": 1
+            },
+            "p": {
+              "dtype": "<i8",
+              "elements": 237500,
+              "ndim": 1
+            },
+            "w": {
+              "dtype": "<i8",
+              "elements": 237500,
+              "ndim": 1
+            }
+          },
+          "measured_pool_complete": true,
+          "objective_direction": "min",
+          "observed_labels": 11250,
+          "problem": "SMTWTP",
+          "schema_version": "nonrouting_raw_v1",
+          "split": "val",
+          "tied_instances": 505
+        }
+      },
+      "status": "ready"
+    }
+  },
+  "prepared_version": "nonrouting_supplement_v1_20261029",
+  "schema_version": "nonrouting_raw_v1",
+  "source_manifest": {
+    "path": "/public/home/shiys/nonrouting_supplement_20261029/manifest.json",
+    "sha256": "32bb54b0db8016b5a25bc0948818963036b6bc86c2ccab0df12d5e669166ce55"
+  },
+  "sources_sha256": {
+    "/public/home/shiys/0selection2/code/V4/nonrouting_supplement.py": "7355064443385b9cf6adae481a12584325d009b099325b982b32c391695b8cda",
+    "/public/home/shiys/0selection2/code/V4/test_nonrouting_supplement.py": "87ae325bc9c6b8b762903d5470c75e37a0f1e04b1dba72aa4decec66f5dfbc52",
+    "/public/home/shiys/nonrouting_selector_20261023/production_v2/data.py": "5491702eb321587cc6b1a44caefa5daef5a00cbe0aae6991ba217ac46bc7ec93",
+    "/public/home/shiys/nonrouting_selector_20261023/production_v2/protocol.py": "f7ed601f1bf16fe4a55c12b7a3c8a7251eb0b35770f59a5c959cc9321bcd6db8",
+    "/public/home/shiys/nonrouting_selector_20261023/refine-logs/20261028_\u4e09\u7c7b\u95ee\u9898\u8865\u9f50\u51c6\u5907/\u6570\u636e\u751f\u6210\u7ea6\u5b9a.json": "ec5db74e79e0fa2133a65d2363cdbf90a8067eecd1e771be389ab6e48a273409",
+    "/public/home/shiys/nonrouting_selector_20261023/solvers.py": "181e4d657aabcaf0c7ac57e59c6d2d2a6f78b8335e7916782becb319d3bf4550",
+    "/public/home/shiys/nonrouting_selector_20261023/validation.py": "4c4191b575e3df25b573792b08d80a62a2cbee47028cf164c23aea59721a9f01",
+    "/public/home/shiys/nonrouting_supplement_20261029/sources/deepaco_mkp_aco.py": "7da5f26b10dcae34d5f9e37f967a7acce4056e38f53fd1e68b6344d9dd5aedd9"
+  }
+}
