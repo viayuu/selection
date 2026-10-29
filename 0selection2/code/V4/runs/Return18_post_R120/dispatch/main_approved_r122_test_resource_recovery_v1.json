@@ -1,0 +1,68 @@
+{
+  "schema": "return18-resource-v1",
+  "name": "r122_locked_test_resource_recovery_v1",
+  "main_approved": true,
+  "approved_by": "main thread: preserve completed14400 training and unique VAL lock; explicit TEST-only six-cosmetic-field cache adapter, then same-checkpoint LIB/PDF; old failures retained; no retrain/reselection",
+  "approved_utc": "2026-10-29T20:04:30+00:00",
+  "protocol": {
+    "path": "code/V4/runs/R122_hard_decision_constraints/model/protocol.json",
+    "sha256": "cf73608b7c8091ba19bcd277d44f676d092d8b1012c2e4144f10b0215f59815b"
+  },
+  "source_sha256": {
+    "code/V4/return18_launch.py": "c2971efab4e863eaf2cceab98d318b7ccee131e7b920a416b132e2dae1d3a5d8",
+    "code/V4/run_v4_return18.sh": "f96ffae480bb3d45708d6e843f8c87ab34cfb1446095b2bef9cdba5a8fba28bf",
+    "code/V4/r120_launch.py": "d1ce6b3f179529553de38cb37f5183587ab7c068e9310a996fb6e537bbd3a85a",
+    "code/V4/r81_queue.py": "cd614a609198d127ad9a632e08044cdcb7fff27ba8e84d519856973f4c076f67",
+    "code/V4/r122_experiment.py": "c4e16747b99ebe79c7a068e8309407e6f5c6bfa7d795ae263a70420182a66eb0",
+    "code/V4/r122_objective.py": "b23c73e1f0ed799a7d1a756f19ec871fc77c4b2c44d35f7f59e4b7337dcb0110",
+    "code/V4/r122_test_recovery.py": "c539c6c34f6e249326fff0f726f7b38c4428c168e82bb307b2abe71decaf5e2b",
+    "code/V4/r122_finish.py": "8effecc4b4611a2ffff739b72c2484076cf12d81383b3a66cde6a89cb67e91a6"
+  },
+  "jobs": [
+    {
+      "id": "R122_locked_TEST_reports",
+      "arm": "R122",
+      "slot": "gpu05_0",
+      "root": "code/V4/runs/R122_hard_decision_constraints",
+      "stages": [
+        {
+          "id": "locked_test_resource_adapter",
+          "kind": "test",
+          "argv": [
+            "python",
+            "-B",
+            "-u",
+            "-m",
+            "code.V4.r122_test_recovery",
+            "--root",
+            "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints",
+            "--device",
+            "cuda:0",
+            "--cache-root",
+            "/tmp/shiys_R84_new90k_cache"
+          ]
+        },
+        {
+          "id": "locked_LIB_and_reports",
+          "kind": "report",
+          "argv": [
+            "python",
+            "-B",
+            "-u",
+            "-m",
+            "code.V4.r122_finish",
+            "finish",
+            "--root",
+            "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints",
+            "--arm",
+            "model",
+            "--device",
+            "cuda:0",
+            "--lib-batch-size",
+            "2"
+          ]
+        }
+      ]
+    }
+  ]
+}

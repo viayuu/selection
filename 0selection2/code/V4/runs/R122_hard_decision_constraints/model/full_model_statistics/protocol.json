@@ -1,0 +1,1044 @@
+{
+  "experiment": "R122",
+  "arm": "model",
+  "complete": true,
+  "checkpoint_lock": {
+    "experiment": "R122",
+    "arm": "model",
+    "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/best.pt",
+    "checkpoint_sha256": "f342aedf161db09a0883264d0eb2a003b63de93d4da4174a9f7fde332240ad6b",
+    "state_hash": "7495fd2ae09e6956102ee3425a58062792a947da36bf7427675ff7f8493540a6",
+    "model_state_sha256": "adecb586a35d64b243115816592fc7017048f5e080afb8037367b86aa9b574ce",
+    "selected_update": 14400,
+    "epoch": 20,
+    "rule": "full18 VAL only: feasible iff hard macro actual regret and unconditional fixed36 missed frequency <= separate saved R84A VAL references; among feasible maximize native Top1, then minimize actual regret, then earliest; if none feasible minimize sum of positive violations / max(reference,1e-12), then maximize native Top1, minimize actual regret, earliest",
+    "inference_rule": "eval mode, original R77 maximin logits, stable ascending-global-solver-ID tie break",
+    "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+    "selected_without_test": true,
+    "per_problem_assembly": false,
+    "full18": true,
+    "selection_key": [
+      1,
+      0.24763563554207577,
+      -0.6844814814814815,
+      0.005029766109480357,
+      14400
+    ],
+    "feasible": false,
+    "val": {
+      "macro_ce": 1.3641931447717879,
+      "macro_top1": 0.6844814814814815,
+      "macro_top2": 0.8656790123456789,
+      "macro_top3": 0.946925925925926,
+      "macro_top1_tie_aware": 0.6863086419753086,
+      "macro_mean_cost": 11.435260524601153,
+      "macro_vs_sbs_pct": -0.08156649107050606,
+      "macro_vs_oracle_pct": 0.5074385820763916,
+      "macro_actual_regret_pct": 0.5029766109480357,
+      "macro_vbs_gap_closed_pct": 2.9289447177904346,
+      "macro_sbs_cost": 11.427978473494235,
+      "macro_oracle_cost": 11.371691902364589
+    },
+    "hard_val": {
+      "hard_regret": 0.005029766109480357,
+      "hard_fixed_miss": 0.057024691358024696,
+      "fixed_population": 0.05709876543209876,
+      "native_top1": 0.6844814814814815
+    },
+    "preparation_lock": {
+      "experiment": "R122",
+      "locked": true,
+      "schema_version": 1,
+      "constraint_reference": {
+        "path": "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/preparation/v2/constraint_reference.json",
+        "sha256": "ae60d0557b71c4e7bf70183a97677f010d9aa28fd2eb576d5b30da8efc20fc4d"
+      },
+      "cpu_only": true,
+      "training_started": false,
+      "test_read": false
+    }
+  },
+  "model_factory": "code.V4.r122_experiment.load_checkpoint",
+  "lib_adapter": "code.V4.r122_finish.load_checkpoint",
+  "data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "rows_per_problem": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "candidate_pools": {
+    "TSP": [
+      "BQ",
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "LEHD",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "CVRP": [
+      "BQ",
+      "ELG",
+      "ICAM",
+      "LEHD",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "ATSP": [
+      "GLOP",
+      "ICAM_ATSP",
+      "MATNET",
+      "MATPOENET",
+      "UNICO_MatPOENet"
+    ],
+    "OVRP": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ]
+  },
+  "candidate_pool_ids": {
+    "TSP": [
+      0,
+      1,
+      2,
+      3,
+      7,
+      14,
+      19,
+      20
+    ],
+    "CVRP": [
+      0,
+      3,
+      5,
+      7,
+      11,
+      12,
+      13,
+      14,
+      15,
+      18
+    ],
+    "ATSP": [
+      4,
+      6,
+      8,
+      9,
+      21
+    ],
+    "OVRP": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "VRPB": [
+      10,
+      11,
+      16
+    ],
+    "VRPL": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "VRPTW": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "OVRPTW": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "OVRPB": [
+      10,
+      11,
+      16
+    ],
+    "OVRPL": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "VRPBL": [
+      10,
+      11,
+      16
+    ],
+    "VRPBTW": [
+      10,
+      11,
+      16
+    ],
+    "VRPLTW": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "OVRPBL": [
+      10,
+      11,
+      16
+    ],
+    "OVRPBTW": [
+      10,
+      11,
+      16
+    ],
+    "OVRPLTW": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "VRPBLTW": [
+      10,
+      11,
+      16
+    ],
+    "OVRPBLTW": [
+      10,
+      11,
+      16
+    ]
+  },
+  "winner_rule": "native int64 ind verified against original FP64 costs; never FP32 argmin",
+  "all_aggregation": "equal-task; raw macro costs descriptive",
+  "train_constraint_reference": {
+    "source_split": "train",
+    "use": "dual TRAIN budgets",
+    "per_problem": {
+      "TSP": {
+        "n": 81000,
+        "hard_regret": 0.004211429438773719,
+        "hard_fixed_miss": 0.27598765432098765,
+        "fixed_population": 0.2760740740740741,
+        "native_top1": 0.46009876543209877,
+        "fixed_count": 22362,
+        "fixed_missed_count": 22355
+      },
+      "CVRP": {
+        "n": 81000,
+        "hard_regret": 0.006734103119132569,
+        "hard_fixed_miss": 0.01671604938271605,
+        "fixed_population": 0.01671604938271605,
+        "native_top1": 0.47374074074074074,
+        "fixed_count": 1354,
+        "fixed_missed_count": 1354
+      },
+      "ATSP": {
+        "n": 81000,
+        "hard_regret": 0.003732959050835666,
+        "hard_fixed_miss": 0.08282716049382716,
+        "fixed_population": 0.08282716049382716,
+        "native_top1": 0.7674197530864197,
+        "fixed_count": 6709,
+        "fixed_missed_count": 6709
+      },
+      "OVRP": {
+        "n": 81000,
+        "hard_regret": 0.006350989336477885,
+        "hard_fixed_miss": 0.08001234567901234,
+        "fixed_population": 0.08046913580246913,
+        "native_top1": 0.4118024691358025,
+        "fixed_count": 6518,
+        "fixed_missed_count": 6481
+      },
+      "VRPB": {
+        "n": 81000,
+        "hard_regret": 0.0039539169825782245,
+        "hard_fixed_miss": 0.0,
+        "fixed_population": 0.0,
+        "native_top1": 0.8058395061728395,
+        "fixed_count": 0,
+        "fixed_missed_count": 0
+      },
+      "VRPL": {
+        "n": 81000,
+        "hard_regret": 0.004077386439175877,
+        "hard_fixed_miss": 0.06604938271604938,
+        "fixed_population": 0.06604938271604938,
+        "native_top1": 0.37579012345679014,
+        "fixed_count": 5350,
+        "fixed_missed_count": 5350
+      },
+      "VRPTW": {
+        "n": 81000,
+        "hard_regret": 0.0030565876514089853,
+        "hard_fixed_miss": 0.01680246913580247,
+        "fixed_population": 0.01693827160493827,
+        "native_top1": 0.8034938271604938,
+        "fixed_count": 1372,
+        "fixed_missed_count": 1361
+      },
+      "OVRPTW": {
+        "n": 81000,
+        "hard_regret": 0.0024208889601844367,
+        "hard_fixed_miss": 0.007814814814814814,
+        "fixed_population": 0.007876543209876543,
+        "native_top1": 0.8387777777777777,
+        "fixed_count": 638,
+        "fixed_missed_count": 633
+      },
+      "OVRPB": {
+        "n": 81000,
+        "hard_regret": 0.0026622768685327135,
+        "hard_fixed_miss": 0.11574074074074074,
+        "fixed_population": 0.11641975308641975,
+        "native_top1": 0.8838888888888888,
+        "fixed_count": 9430,
+        "fixed_missed_count": 9375
+      },
+      "OVRPL": {
+        "n": 81000,
+        "hard_regret": 0.006360554343421264,
+        "hard_fixed_miss": 0.014901234567901234,
+        "fixed_population": 0.014901234567901234,
+        "native_top1": 0.415962962962963,
+        "fixed_count": 1207,
+        "fixed_missed_count": 1207
+      },
+      "VRPBL": {
+        "n": 81000,
+        "hard_regret": 0.004124590383118436,
+        "hard_fixed_miss": 0.05167901234567901,
+        "fixed_population": 0.05207407407407407,
+        "native_top1": 0.7983703703703704,
+        "fixed_count": 4218,
+        "fixed_missed_count": 4186
+      },
+      "VRPBTW": {
+        "n": 81000,
+        "hard_regret": 0.004378329789246107,
+        "hard_fixed_miss": 0.0011975308641975308,
+        "fixed_population": 0.0011975308641975308,
+        "native_top1": 0.7959012345679012,
+        "fixed_count": 97,
+        "fixed_missed_count": 97
+      },
+      "VRPLTW": {
+        "n": 81000,
+        "hard_regret": 0.003034807838195494,
+        "hard_fixed_miss": 0.018246913580246913,
+        "fixed_population": 0.018444444444444444,
+        "native_top1": 0.8049506172839506,
+        "fixed_count": 1494,
+        "fixed_missed_count": 1478
+      },
+      "OVRPBL": {
+        "n": 81000,
+        "hard_regret": 0.0026495999988499245,
+        "hard_fixed_miss": 0.11382716049382716,
+        "fixed_population": 0.11444444444444445,
+        "native_top1": 0.8859382716049383,
+        "fixed_count": 9270,
+        "fixed_missed_count": 9220
+      },
+      "OVRPBTW": {
+        "n": 81000,
+        "hard_regret": 0.0032932185587368815,
+        "hard_fixed_miss": 1.2345679012345678e-05,
+        "fixed_population": 1.2345679012345678e-05,
+        "native_top1": 0.8329012345679012,
+        "fixed_count": 1,
+        "fixed_missed_count": 1
+      },
+      "OVRPLTW": {
+        "n": 81000,
+        "hard_regret": 0.002440834013053919,
+        "hard_fixed_miss": 0.16164197530864197,
+        "fixed_population": 0.16267901234567902,
+        "native_top1": 0.8379135802469135,
+        "fixed_count": 13177,
+        "fixed_missed_count": 13093
+      },
+      "VRPBLTW": {
+        "n": 81000,
+        "hard_regret": 0.004340478311865335,
+        "hard_fixed_miss": 0.0010123456790123457,
+        "fixed_population": 0.0010123456790123457,
+        "native_top1": 0.797074074074074,
+        "fixed_count": 82,
+        "fixed_missed_count": 82
+      },
+      "OVRPBLTW": {
+        "n": 81000,
+        "hard_regret": 0.003314285106993314,
+        "hard_fixed_miss": 0.0,
+        "fixed_population": 0.0,
+        "native_top1": 0.834037037037037,
+        "fixed_count": 0,
+        "fixed_missed_count": 0
+      }
+    },
+    "macro": {
+      "hard_regret": 0.003952068677254486,
+      "hard_fixed_miss": 0.05691495198902606,
+      "fixed_population": 0.05711865569272977,
+      "native_top1": 0.7124389574759944
+    },
+    "identity": {
+      "experiment": "R84",
+      "arm": "A_baseline",
+      "split": "train",
+      "tag": "selected_best",
+      "successful_updates": 37440,
+      "state_hash": "ad0a6d9c68c6f117b477807f6f8be52662032a8baea348dda6144c46091303e2",
+      "model_state_sha256": "016624d6b46291283ee3ab5c0fcae4dfe5f70c1bbf923b634d84fe3b407ba56b",
+      "checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin"
+    }
+  },
+  "val_selection_only_reference": {
+    "source_split": "val",
+    "use": "VAL selection only; never dual feedback",
+    "per_problem": {
+      "TSP": {
+        "n": 4500,
+        "hard_regret": 0.004196976685488446,
+        "hard_fixed_miss": 0.2733333333333333,
+        "fixed_population": 0.2733333333333333,
+        "native_top1": 0.46755555555555556,
+        "fixed_count": 1230,
+        "fixed_missed_count": 1230
+      },
+      "CVRP": {
+        "n": 4500,
+        "hard_regret": 0.006944265826210864,
+        "hard_fixed_miss": 0.020444444444444446,
+        "fixed_population": 0.020444444444444446,
+        "native_top1": 0.4693333333333333,
+        "fixed_count": 92,
+        "fixed_missed_count": 92
+      },
+      "ATSP": {
+        "n": 4500,
+        "hard_regret": 0.003802190613228564,
+        "hard_fixed_miss": 0.08533333333333333,
+        "fixed_population": 0.08533333333333333,
+        "native_top1": 0.7704444444444445,
+        "fixed_count": 384,
+        "fixed_missed_count": 384
+      },
+      "OVRP": {
+        "n": 4500,
+        "hard_regret": 0.006291099356618797,
+        "hard_fixed_miss": 0.074,
+        "fixed_population": 0.07444444444444444,
+        "native_top1": 0.4071111111111111,
+        "fixed_count": 335,
+        "fixed_missed_count": 333
+      },
+      "VRPB": {
+        "n": 4500,
+        "hard_regret": 0.003743833744356603,
+        "hard_fixed_miss": 0.0,
+        "fixed_population": 0.0,
+        "native_top1": 0.812,
+        "fixed_count": 0,
+        "fixed_missed_count": 0
+      },
+      "VRPL": {
+        "n": 4500,
+        "hard_regret": 0.003939334845870218,
+        "hard_fixed_miss": 0.06755555555555555,
+        "fixed_population": 0.06755555555555555,
+        "native_top1": 0.3808888888888889,
+        "fixed_count": 304,
+        "fixed_missed_count": 304
+      },
+      "VRPTW": {
+        "n": 4500,
+        "hard_regret": 0.0029861106888841296,
+        "hard_fixed_miss": 0.01622222222222222,
+        "fixed_population": 0.016444444444444446,
+        "native_top1": 0.7995555555555556,
+        "fixed_count": 74,
+        "fixed_missed_count": 73
+      },
+      "OVRPTW": {
+        "n": 4500,
+        "hard_regret": 0.0025841083575740796,
+        "hard_fixed_miss": 0.011333333333333334,
+        "fixed_population": 0.011333333333333334,
+        "native_top1": 0.8382222222222222,
+        "fixed_count": 51,
+        "fixed_missed_count": 51
+      },
+      "OVRPB": {
+        "n": 4500,
+        "hard_regret": 0.00264946477757503,
+        "hard_fixed_miss": 0.11488888888888889,
+        "fixed_population": 0.11488888888888889,
+        "native_top1": 0.8848888888888888,
+        "fixed_count": 517,
+        "fixed_missed_count": 517
+      },
+      "OVRPL": {
+        "n": 4500,
+        "hard_regret": 0.006616866277587307,
+        "hard_fixed_miss": 0.016888888888888887,
+        "fixed_population": 0.016888888888888887,
+        "native_top1": 0.4122222222222222,
+        "fixed_count": 76,
+        "fixed_missed_count": 76
+      },
+      "VRPBL": {
+        "n": 4500,
+        "hard_regret": 0.004262441517219841,
+        "hard_fixed_miss": 0.052,
+        "fixed_population": 0.052,
+        "native_top1": 0.7902222222222223,
+        "fixed_count": 234,
+        "fixed_missed_count": 234
+      },
+      "VRPBTW": {
+        "n": 4500,
+        "hard_regret": 0.00462076198783408,
+        "hard_fixed_miss": 0.0008888888888888889,
+        "fixed_population": 0.0008888888888888889,
+        "native_top1": 0.7851111111111111,
+        "fixed_count": 4,
+        "fixed_missed_count": 4
+      },
+      "VRPLTW": {
+        "n": 4500,
+        "hard_regret": 0.0031971602328855044,
+        "hard_fixed_miss": 0.02022222222222222,
+        "fixed_population": 0.02022222222222222,
+        "native_top1": 0.7882222222222223,
+        "fixed_count": 91,
+        "fixed_missed_count": 91
+      },
+      "OVRPBL": {
+        "n": 4500,
+        "hard_regret": 0.0027356068422758847,
+        "hard_fixed_miss": 0.1068888888888889,
+        "fixed_population": 0.108,
+        "native_top1": 0.8931111111111111,
+        "fixed_count": 486,
+        "fixed_missed_count": 481
+      },
+      "OVRPBTW": {
+        "n": 4500,
+        "hard_regret": 0.003450702391887966,
+        "hard_fixed_miss": 0.00022222222222222223,
+        "fixed_population": 0.00022222222222222223,
+        "native_top1": 0.8348888888888889,
+        "fixed_count": 1,
+        "fixed_missed_count": 1
+      },
+      "OVRPLTW": {
+        "n": 4500,
+        "hard_regret": 0.0027404901658266358,
+        "hard_fixed_miss": 0.16444444444444445,
+        "fixed_population": 0.1651111111111111,
+        "native_top1": 0.8351111111111111,
+        "fixed_count": 743,
+        "fixed_missed_count": 740
+      },
+      "VRPBLTW": {
+        "n": 4500,
+        "hard_regret": 0.00434612643885612,
+        "hard_fixed_miss": 0.0006666666666666666,
+        "fixed_population": 0.0006666666666666666,
+        "native_top1": 0.7946666666666666,
+        "fixed_count": 3,
+        "fixed_missed_count": 3
+      },
+      "OVRPBLTW": {
+        "n": 4500,
+        "hard_regret": 0.0035214323155528513,
+        "hard_fixed_miss": 0.0,
+        "fixed_population": 0.0,
+        "native_top1": 0.8317777777777777,
+        "fixed_count": 0,
+        "fixed_missed_count": 0
+      }
+    },
+    "macro": {
+      "hard_regret": 0.004034942948096274,
+      "hard_fixed_miss": 0.05696296296296296,
+      "fixed_population": 0.05709876543209876,
+      "native_top1": 0.7108518518518517
+    },
+    "identity": {
+      "experiment": "R84",
+      "arm": "A_baseline",
+      "split": "val",
+      "tag": "update0037440",
+      "successful_updates": 37440,
+      "state_hash": "ad0a6d9c68c6f117b477807f6f8be52662032a8baea348dda6144c46091303e2",
+      "model_state_sha256": "016624d6b46291283ee3ab5c0fcae4dfe5f70c1bbf923b634d84fe3b407ba56b",
+      "checkpoint_sha256": null,
+      "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin"
+    }
+  },
+  "objective": {
+    "classification_proxy": "native winner CE / log(2)",
+    "regret_proxy": "sum full-pool FP64 relative regret * softplus(utility - max_other) / log(2)",
+    "fixed_miss_proxy": "fixed36 native-winner indicator * classification_proxy",
+    "hard_feedback": "one post-successful-update commit; equal-task macro per full18 cycle",
+    "forward_passes": 1,
+    "rdrop": false,
+    "comparison": false
+  },
+  "controller": {
+    "risk_unit": 0.01,
+    "dual_lr": 0.05,
+    "dual_cap": 20.0,
+    "ema_decay": 0.9
+  },
+  "checkpoint_rule": "full18 VAL only: feasible iff hard macro actual regret and unconditional fixed36 missed frequency <= separate saved R84A VAL references; among feasible maximize native Top1, then minimize actual regret, then earliest; if none feasible minimize sum of positive violations / max(reference,1e-12), then maximize native Top1, minimize actual regret, earliest",
+  "inference_rule": "eval mode, original R77 maximin logits, stable ascending-global-solver-ID tie break",
+  "selection_audit": {
+    "audit_only": true,
+    "checkpoint_reselected": false,
+    "selected_feasible": false,
+    "feasible_checkpoints": 0,
+    "fallback_used": true,
+    "selected_update": 14400,
+    "selected_key": [
+      1,
+      0.24763563554207577,
+      -0.6844814814814815,
+      0.005029766109480357,
+      14400
+    ],
+    "val_reference": {
+      "hard_regret": 0.004034942948096274,
+      "hard_fixed_miss": 0.05696296296296296,
+      "fixed_population": 0.05709876543209876,
+      "native_top1": 0.7108518518518517
+    },
+    "failure_disclosure": "No feasible VAL checkpoint: constraints NOT satisfied"
+  },
+  "scientific_claims": {
+    "selected_val_feasible": false,
+    "fallback_used": true,
+    "train_constraints_satisfied": false,
+    "val_constraints_satisfied": false,
+    "failed_train_val_constraints": [
+      "TRAIN/hard_macro_actual_regret",
+      "TRAIN/fixed36_unconditional_missed_frequency",
+      "VAL/hard_macro_actual_regret",
+      "VAL/fixed36_unconditional_missed_frequency"
+    ],
+    "test_development_exposed": true,
+    "new_blind_confirmation": false,
+    "automatic_promotion": false,
+    "quotas": false,
+    "selection_counts_are_success": false,
+    "joint_observed_test_improvement_vs_R84A": false,
+    "boundary": "Descriptive full18 Top1/regret and fixed36 true misses; not a causal matched-control or statistical generalization claim",
+    "true_fixed36_net_tp_vs_R84A": -2,
+    "new_false_fixed36_picks_vs_R84A": 7
+  },
+  "historical_references": [
+    {
+      "model": "R84A",
+      "status": "complete",
+      "checkpoint_sha256": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline",
+      "model_matched": true,
+      "architecture_matched": true,
+      "training_protocol_matched": false,
+      "newly_matched_control": false,
+      "same90k": true,
+      "reference_budget": 57600,
+      "current_budget": 14400,
+      "boundary": "R84A same original model; objective/budget differ"
+    },
+    {
+      "model": "R94B",
+      "status": "complete",
+      "checkpoint_sha256": "8e797150d22ea138db246536f36a1b7dfa6ef3b516ee065a3303a6b6e579c3ee",
+      "run": "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/B",
+      "model_matched": false,
+      "architecture_matched": false,
+      "training_protocol_matched": false,
+      "newly_matched_control": false,
+      "same90k": true,
+      "reference_budget": 57600,
+      "current_budget": 14400,
+      "boundary": "R94B model_matched=false; frozen pretrained node fusion / extra donor compute"
+    }
+  ],
+  "nss_reference": "historical70114-trained R79; saved exact4500 TEST/native LIB; no retraining",
+  "nss_status": [
+    {
+      "dataset": "TSP TEST",
+      "problem": "TSP",
+      "split": "TEST",
+      "n": 4500,
+      "current_model": "R122/model",
+      "current_top1_native_pct": 44.06666666666666,
+      "current_mean_cost": 7.973099223383556,
+      "current_checkpoint_sha256": "f342aedf161db09a0883264d0eb2a003b63de93d4da4174a9f7fde332240ad6b",
+      "nss_top1_native_pct": 45.88888888888889,
+      "nss_mean_cost": 7.9704007194012005,
+      "nss_checkpoint_sha256": "c677a8cd4ee473ee47bdedff871050827f75717c321ae9d551a3edc7bc78994b",
+      "nss_model": "R79 historical70114 TRAIN NSS; NOT new90k retraining",
+      "current_training_data": "new81000 TRAIN / task",
+      "evaluation_data": "selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "candidate_pool": "[\"BQ\", \"DIFUSCO\", \"DIFUSCO500\", \"ELG\", \"LEHD\", \"OMNI\", \"T2T\", \"T2T500\"]",
+      "winner_rule": "native int64 ind verified against original FP64 costs; never FP32 argmin",
+      "status": "complete",
+      "retrained": false,
+      "new_nss_inference": false,
+      "aligned_rows": 4500,
+      "source_index_note": "split-local indices plus ALL FP64 costs/native winners aligned; NSS source IDs may be pre-resplit"
+    },
+    {
+      "dataset": "CVRP TEST",
+      "problem": "CVRP",
+      "split": "TEST",
+      "n": 4500,
+      "current_model": "R122/model",
+      "current_top1_native_pct": 15.555555555555555,
+      "current_mean_cost": 18.327227601687223,
+      "current_checkpoint_sha256": "f342aedf161db09a0883264d0eb2a003b63de93d4da4174a9f7fde332240ad6b",
+      "nss_top1_native_pct": 45.97777777777778,
+      "nss_mean_cost": 18.00480236763458,
+      "nss_checkpoint_sha256": "b1e7595eb16a89e3bdf526c3c4d8b05ce3d7d4dc39ab1241667657924e3fc574",
+      "nss_model": "R79 historical70114 TRAIN NSS; NOT new90k retraining",
+      "current_training_data": "new81000 TRAIN / task",
+      "evaluation_data": "selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "candidate_pool": "[\"BQ\", \"ELG\", \"ICAM\", \"LEHD\", \"MVMOE\", \"MoSES_CaDA\", \"MoSES_RF\", \"OMNI\", \"RELD_CVRP\", \"RouteFinder\"]",
+      "winner_rule": "native int64 ind verified against original FP64 costs; never FP32 argmin",
+      "status": "complete",
+      "retrained": false,
+      "new_nss_inference": false,
+      "aligned_rows": 4500,
+      "source_index_note": "split-local indices plus ALL FP64 costs/native winners aligned; NSS source IDs may be pre-resplit"
+    },
+    {
+      "dataset": "TSPLIB",
+      "problem": "TSP",
+      "split": "TSPLIB",
+      "n": 49,
+      "current_model": "R122/model",
+      "current_top1_native_pct": 26.53061224489796,
+      "current_mean_cost": 8.205766973805762,
+      "current_checkpoint_sha256": "f342aedf161db09a0883264d0eb2a003b63de93d4da4174a9f7fde332240ad6b",
+      "nss_top1_native_pct": 20.408163265306122,
+      "nss_mean_cost": 8.217907074335503,
+      "nss_checkpoint_sha256": "c677a8cd4ee473ee47bdedff871050827f75717c321ae9d551a3edc7bc78994b",
+      "nss_model": "R79 historical70114 TRAIN NSS; NOT new90k retraining",
+      "current_training_data": "new81000 TRAIN / task",
+      "evaluation_data": "original native TSPLIB",
+      "candidate_pool": "[\"BQ\", \"DIFUSCO\", \"DIFUSCO500\", \"ELG\", \"LEHD\", \"OMNI\", \"T2T\", \"T2T500\"]",
+      "winner_rule": "native int64 ind verified against original FP64 costs; never FP32 argmin",
+      "status": "complete",
+      "retrained": false,
+      "new_nss_inference": false,
+      "aligned_rows": 49,
+      "source_index_note": "split-local indices plus ALL FP64 costs/native winners aligned; NSS source IDs may be pre-resplit"
+    },
+    {
+      "dataset": "CVRPLIB",
+      "problem": "CVRP",
+      "split": "CVRPLIB",
+      "n": 100,
+      "current_model": "R122/model",
+      "current_top1_native_pct": 4.0,
+      "current_mean_cost": 69.45764423370362,
+      "current_checkpoint_sha256": "f342aedf161db09a0883264d0eb2a003b63de93d4da4174a9f7fde332240ad6b",
+      "nss_top1_native_pct": 70.0,
+      "nss_mean_cost": 67.10111171722467,
+      "nss_checkpoint_sha256": "b1e7595eb16a89e3bdf526c3c4d8b05ce3d7d4dc39ab1241667657924e3fc574",
+      "nss_model": "R79 historical70114 TRAIN NSS; NOT new90k retraining",
+      "current_training_data": "new81000 TRAIN / task",
+      "evaluation_data": "original native CVRPLIB",
+      "candidate_pool": "[\"BQ\", \"ELG\", \"ICAM\", \"LEHD\", \"MVMOE\", \"MoSES_CaDA\", \"MoSES_RF\", \"OMNI\", \"RELD_CVRP\", \"RouteFinder\"]",
+      "winner_rule": "native int64 ind verified against original FP64 costs; never FP32 argmin",
+      "status": "complete",
+      "retrained": false,
+      "new_nss_inference": false,
+      "aligned_rows": 100,
+      "source_index_note": "split-local indices plus ALL FP64 costs/native winners aligned; NSS source IDs may be pre-resplit"
+    }
+  ],
+  "distribution_pages": 18,
+  "current_dataset_panels": 20,
+  "source_sha256": {
+    "r122_finish.py": "8effecc4b4611a2ffff739b72c2484076cf12d81383b3a66cde6a89cb67e91a6",
+    "r80_reporting.py": "d2cbb5a9d5876d55835aa6fd74ba477e9332b3ef93793f860f13d8b3fa9014fd",
+    "r77_lib.py": "259e34fcdce17135adc2dc65a955c1da3582428d264830d39c726e171a3fb5ba",
+    "nss_comparison.py": "8ebd160af247dc279cf5400e6d95934fa2cef7c3a053c230f04563522fe79e9f",
+    "r41_frozen_evaluation.py": "f32e63d1ce66e1f03b2a14e082eb705ccd1deb0d4a5f600371777f277d4a898e",
+    "r76_experiment.py": "609b937bccda91fbeeabde960b79eacabb40005263fad7903e7c66c1a253549e",
+    "r116_mechanism_finish.py": "753014bd983d553cce7cf69141d2b031f1de4a9a5da2432f6cbb8e75b60fb986",
+    "performance_evaluation.py": "4f2cc3392a33f31ac1b61b0503f4702e98d4220b8266bbdedd4e20554cd5a361"
+  },
+  "inputs": {
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/protocol.json": "cf73608b7c8091ba19bcd277d44f676d092d8b1012c2e4144f10b0215f59815b",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/training_complete.json": "51a5d9b1c31b895573885bfbaac333fc0f177400d6e7e27459b29bb0807faade",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/final_test_lock.json": "2b32a30219962623b0bf2b1c97090c4ffdfb5bcb75ad1bacf5f0c2c2313c442a",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/test_results.json": "43d431a2f39571fe0ab95bbdd008038c9ba5e8b7fcbcbfa32da319369954721f",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/test_complete.json": "95dabe68b9a3c4054cc3809984cec2369bc5d14fc088459883165241d35c3e8e",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/final_metrics.json": "f55bda26a562105bd112f95a0bb50a0074c062e2ef6f9ff634e6e048916c11e9",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/history.json": "f75ae8a717a1f47b039742b6d93f326676f8767e3377d964288c58567d539c9e",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/best.pt": "f342aedf161db09a0883264d0eb2a003b63de93d4da4174a9f7fde332240ad6b",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/preparation/v2/prepared.json": "3f0d6a300cb08aabe1718a058c0f778a9867232281be5e137a8d4a165c8ba055",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/preparation/v2/constraint_reference.json": "ae60d0557b71c4e7bf70183a97677f010d9aa28fd2eb576d5b30da8efc20fc4d",
+    "/public/home/shiys/0selection2/code/V4/r122_finish.py": "8effecc4b4611a2ffff739b72c2484076cf12d81383b3a66cde6a89cb67e91a6",
+    "/public/home/shiys/0selection2/code/V4/r80_reporting.py": "d2cbb5a9d5876d55835aa6fd74ba477e9332b3ef93793f860f13d8b3fa9014fd",
+    "/public/home/shiys/0selection2/code/V4/r77_lib.py": "259e34fcdce17135adc2dc65a955c1da3582428d264830d39c726e171a3fb5ba",
+    "/public/home/shiys/0selection2/code/V4/nss_comparison.py": "8ebd160af247dc279cf5400e6d95934fa2cef7c3a053c230f04563522fe79e9f",
+    "/public/home/shiys/0selection2/code/V4/r41_frozen_evaluation.py": "f32e63d1ce66e1f03b2a14e082eb705ccd1deb0d4a5f600371777f277d4a898e",
+    "/public/home/shiys/0selection2/code/V4/r76_experiment.py": "609b937bccda91fbeeabde960b79eacabb40005263fad7903e7c66c1a253549e",
+    "/public/home/shiys/0selection2/code/V4/r116_mechanism_finish.py": "753014bd983d553cce7cf69141d2b031f1de4a9a5da2432f6cbb8e75b60fb986",
+    "/public/home/shiys/0selection2/code/V4/performance_evaluation.py": "4f2cc3392a33f31ac1b61b0503f4702e98d4220b8266bbdedd4e20554cd5a361",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/evaluation/train/selected_best/identity.json": "ac6a9e02702b7ccfcabd2e92abf78fb46a86e80efce37e006adca780ebaa929f",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/evaluation/train/selected_best/rank000.npz": "132dcc6c7e6588c644303833d0000c1f51cf0b10dcef0639a04da8f26facdae0",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/TSPtrain/input_metadata.npz": "2da91ee33e04c3be79bc923c2af8f347f0bb23d4ec856a956ae9b8b410d04c8b",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/CVRPtrain/input_metadata.npz": "de00538dbf5958170c4aa5550c2c79d7f23e36b94aeaa8f98fd671f454a93333",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/ATSPtrain/input_metadata.npz": "5ce8f778a39ed12260c45e7e839692df3f4fc66562da9225274ba140ea28eb72",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPtrain/input_metadata.npz": "b5df48a505f032258ebd02e8b007300a05f2e902cee5aac27af86a742a77481b",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBtrain/input_metadata.npz": "aac535563dd5a6a3b77a60ecc758a2b4f5a898e6701ab46c0acf47fc89ca1246",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPLtrain/input_metadata.npz": "e52909e5a326f6f074fca8e8ece3f28f0a67c406a198d6f8d5860a5fe91fa23d",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPTWtrain/input_metadata.npz": "11f138a13840557ab6f173dc03ae74a1e5ff518c3e9528a1b34a2d8fb51a862c",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPTWtrain/input_metadata.npz": "6e7d15308448405e5833c02b6248e0f7933d2567846aff2dc7614276cb921a47",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBtrain/input_metadata.npz": "63ffff98caa018729274237b806d86990b9fbd8581cfc317eacc3beed9c4f3f3",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPLtrain/input_metadata.npz": "b09de4c1769211f9107e853ef59a76239bebbfc3bc1585cba6b46e13c14d622b",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBLtrain/input_metadata.npz": "ea087a26ce9456a9e90bc61b3892ed7fad29a13d637e26381f101bc8efad6757",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBTWtrain/input_metadata.npz": "71ca2e621e5e815edba76471ceea328c9f2581073861d6a106a8bcad05aac61c",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPLTWtrain/input_metadata.npz": "1ed550291601ef12da1636f96d624ad8f78ce62dda247008555342b9cd546a57",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBLtrain/input_metadata.npz": "84d11d75e643f48c15e1f4e077fd4e300fff7f0f3074842cb392dec116da242d",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBTWtrain/input_metadata.npz": "d550b07557cc75658dc802c8f130a39575b1fa350fa049ccc36c4ae7a369ae7f",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPLTWtrain/input_metadata.npz": "1f5fb038becfc67ac6c4aa9b67972be01926d97cb32c7f96e1ef68bd7ab1c63e",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBLTWtrain/input_metadata.npz": "561d5c29d9dae665d454cc774722eb0cf7451d25dc8bc6ebdbe6bbce3efec95f",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBLTWtrain/input_metadata.npz": "d9d433889a2317d98e6a9267d42d1f3a2c5b28a8effb96392e8aa1ab74f55147",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/evaluation/val/selected_best/identity.json": "16da164337221a51f10a11956199fbd5f251cfcecad2cbca553b9687ea9238cc",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/evaluation/val/selected_best/rank000.npz": "4347d8669f9da4e71b718f9eaf77e97aa0cab4cc5e7f9f3cbc50de5e765ff11e",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/TSPval/input_metadata.npz": "1a3932fa7ab9a86772a1f074abfa4fcad1c89c0302c91eaf4ad0858c91124cae",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/CVRPval/input_metadata.npz": "c693a375a41947553f48c86969daa8a94115e616f466cdb7383ed9528c295ac9",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/ATSPval/input_metadata.npz": "838aeb90ed4368a04c207462b60b6018f28fcdb6e3b41d2bf9d7a96ed3a6ec3c",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPval/input_metadata.npz": "8c86f59108f9809696485f39f9cacf81c8296ca465ae214d67006b89f02d2d2d",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBval/input_metadata.npz": "d0da3b908d80e64389ef7a3921a868d01caf070c3e70982615eca5832f4e68b7",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPLval/input_metadata.npz": "0f3d0516fa30df2b915e4321f8cd18702080ad31c3550c8aefa2b1d97c49aeb2",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPTWval/input_metadata.npz": "05f3575fe9d720ff6ab0b8c54274cfd02bcda109c54f0dcd39ff1d1b7021b64e",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPTWval/input_metadata.npz": "6fd21c765c12859a2c7fd2f2f29cedd21463ab2eebf37c947cff9e7ac1bd7d7f",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBval/input_metadata.npz": "46ec1f2ebf52bd51a3f85f56d15c03c88e0a2bcf1dd1eee28764f18073af68dc",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPLval/input_metadata.npz": "229b564697413962bb63498dea041ea144325ca9ff4d39a483e46c84d33bc97b",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBLval/input_metadata.npz": "2f05219e6c58454a7049c2318cdbc9258132f3af34dd4b1416a6f138020acf27",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBTWval/input_metadata.npz": "41a07e010f4c5fd2a895a9bb7ad39e8ca99ce30aba112832ae9a94997f0c2656",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPLTWval/input_metadata.npz": "49e728ab067d2d3e799c9af025e3378b06be06335ad3cb222d88c54c12cbc1d3",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBLval/input_metadata.npz": "bce1545d52366eb4625eba5af366d267d52933c12eb871ac5330774cbb2ca729",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBTWval/input_metadata.npz": "b91f07da864b0d09c8b358d9db315f99be9fdad814bc7c5140b2328fb3fce1ee",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPLTWval/input_metadata.npz": "c0fe479486e2b75bff70b4abc8548b1d562f8e0fd4eb2c9e2942493963e83bc5",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBLTWval/input_metadata.npz": "ae3ae28401ed6ba91ecb453ac852f3ea7a71161ed1beddf95058532c1eb41053",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBLTWval/input_metadata.npz": "25b1061ff9360592d1ed2246fde06d14cef1d13c77f8d2ce4aedd993f5851299",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/evaluation/test/selected_best/identity.json": "0c054480522e9de34731774688c34467b801313532bcc7b9dbb17834e4b4af82",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/evaluation/test/selected_best/rank000.npz": "599daa198ce462eed4a00b1c323641312de1821a5fde10902fab0588a61c3d3b",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/TSPtest/input_metadata.npz": "6321e77d7d44e524e5c398e4393085750e8c7cb1fb1b57b980022d4d664bb9c5",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/CVRPtest/input_metadata.npz": "9bc52ec1e1bae402b89fdccc518a4dac07a3eaff263c9136b7acb9cac1c8435f",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/ATSPtest/input_metadata.npz": "abda887cfbebb57571341fa45f90c1200f9bbf348d2690e93c2c937dbc175d8f",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPtest/input_metadata.npz": "e3c8f4e2159bb1d37f8ceae69ece363996e27693aae795cde7c2471dce4a0b4a",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBtest/input_metadata.npz": "f108596d788c4cef1d1a0e51bdc5dad3ec8068465243f979799ead10c6a7e6e4",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPLtest/input_metadata.npz": "ac7bb182fbf435c2a014e2ceeae471fbae5ef71f9ae09327289763ac9c68c2df",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPTWtest/input_metadata.npz": "1edf58acfa0f17af5c81702ee97bb66730535b0212490023f7fd9b9f1b81dc6e",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPTWtest/input_metadata.npz": "9389b41bebbd3667b7d249ee9e2c972645fc6b74b793aa074478c87ee62c73f0",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBtest/input_metadata.npz": "decf1a436450e6684205551b849e23895864dc10359ea75772dcdf5b63e49d06",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPLtest/input_metadata.npz": "aa96a86e279293c8d391b6d9e0069b7a6fc77c05d3b760e01ade35cfba69fcfa",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBLtest/input_metadata.npz": "920fc6869b8aa718b9b42a1f20007314bd6e4e085939ce4e4ebffd25d15ad74e",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBTWtest/input_metadata.npz": "e4a12c516e111a5df3711465783b5a8c0982a58cd3e7f127d8faf096df01e54c",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPLTWtest/input_metadata.npz": "f34920b3042aa0971ee50cf4e064fbb51238d981a49162083c4004e52e9014e4",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBLtest/input_metadata.npz": "4228be64db43d9732591ce07cc668387c70163f2ab331a2dd3b38dc08493d6d2",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBTWtest/input_metadata.npz": "24e690c8630cc5ee019f3f88031d33316fecb911ed77a2fd6d908b3ff9e2a017",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPLTWtest/input_metadata.npz": "04cc99e24737b0f8675ba57933c2e2ad3d91a7dc2a61e644d8019c15ba59a101",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/VRPBLTWtest/input_metadata.npz": "26705c81cf0add3b876fbc4fa9e2b6fdbb930ca686fd0c1a7775740cd5e0d79a",
+    "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018/OVRPBLTWtest/input_metadata.npz": "5631cc896713526b9f62a7f279c74de66d30ca2f0b4645f030cfdcb9eaa6cbab",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/lib_stage_complete.json": "55f15f7cc8ed1ee7618d07d19b2375176ede4af6b677a4cbf8e25d7c835c6857",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/lib_evaluation/TSPLIB_results.json": "33b47c8dff7d2035a50631ab268cf6c3f5ace47acf226ac71cc6988859e03470",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/lib_evaluation/predictions/TSPLIB.npz": "f8a6efe50d9046c7084e0eb3780d22801a1795b36f90c3680a3f0715dc941c6f",
+    "/public/home/shiys/0selection2/data/TSPLIB/dataset.pkl": "92f14d50c2474ca33b3432f16478e06f0cc687ad40009a363d5db31b8641e6f8",
+    "/public/home/shiys/0selection2/data/TSPLIB/raw_label.pkl": "7d2cfffe64652728777e01607ca104c1b5ba8c156f6bc24bba366cec5a148a44",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/lib_evaluation/CVRPLIB_results.json": "b4092f96a32f522b714f1ba39a861f8314af51de1d00d273d51e1c2388de287c",
+    "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/lib_evaluation/predictions/CVRPLIB.npz": "7c06c4267b6ccda2e3730d27a69232ef598ca0dea289e19dd8a83f2a0c8f3ce2",
+    "/public/home/shiys/0selection2/data/CVRPLIB/dataset.pkl": "aa3f0a01f61b99682b8de4e5f6b0c4017313087a3facdac1f4d1308557cc1a44",
+    "/public/home/shiys/0selection2/data/CVRPLIB/raw_label.pkl": "a7812970fbaf857fd9d280bf1ebfa42d1a9113ac3c684dd0d326fc848d598802",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/comparison_artifacts/target_list.json": "406ded5a21d8b73c2a41b87dc2bc3cc14330663ae1aa4f59ca6fbfde83770fe4",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/protocol.json": "0bcb5f28e2b823d56103dd6f031ad929f5ab9eae0f37653dafaec39e3ce653eb",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/TSP/test_metrics.json": "2802e0eb8603b611f571d07d92db24cf848d25366fe6d4dfcb9554a9ca31ad28",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/TSP/test_once.json": "8140f581b6a42f753f48a9cf8775701a99c579e6da796987aff39ae6ee2fd8ba",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/TSP/test_predictions.npz": "d42250eea9547dbeed1afdda9411ae6e691d9ce2ae0a14f50e7da6adb28068d3",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/CVRP/test_metrics.json": "e7e5306ed515a3069c04f840f1f1a9b1eb555e723b9e8eb4922d8dd07f21c44c",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/CVRP/test_once.json": "4e6769a408d3bbfb607838b2bff23e7cc80ec5c79017d6c8422d5b516edbf102",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/CVRP/test_predictions.npz": "13fbedae686c2af03d44d62115bbd9fcbf15950f6b111942f90786faba66603c",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/TSP/TSPLIB_metrics.json": "ce70efb9b523ceeb432888140df613b5cc40cfb16a5e6145865b38b1ce9ebf01",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/TSP/TSPLIB_predictions.npz": "87f25d2489327a04a6972e243ea3ff856016fc083383a4d72558d75c3465b206",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/CVRP/CVRPLIB_metrics.json": "c284979388701ef1215d3b237953f1512c1fb73c54decdb1779d620f3bef56a7",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/CVRP/CVRPLIB_predictions.npz": "78c850e64cc744bcedd7408a44c551587e28f6684d5130a647fb49c55332bf9e",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline/protocol.json": "8951afd703f6e1988a338cf753b4f4f574d6f0925daebe5e80a8b1f746eb2476",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline/final_test_lock.json": "49e88c35b116e3e77d3a0d196d1f7e00bb6871dd5f1b457b1d697392440b5378",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline/training_complete.json": "f7eaf9cbcb959bde321b8a0197a3e36d05be528cedb3f6cca185fefe2a337015",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline/test_results.json": "93c46b3f3cc3ee0bb01bcfa6682b2beda3ffb162531e3455ec71b0f1f6f00ba3",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline/final_metrics.json": "764eb82253d2298626ee9a40a90e1b1b4b609d58faa1c910ef1207f7ee66b96a",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline/best.pt": "23fb9a5cf621045138fcdcfe5e6613a1bfd061c8d4dfeca108db3548dbf8031f",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline/evaluation/val/update0037440/identity.json": "4efbd515b4864991420b8ba399ef29157171c4a7775eda949a3ba52fa9fe5780",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline/evaluation/val/update0037440/rank000.npz": "8a1aea9caf608d12fbc83d89704a50eb37d461665c7609ad3e25778cdab932a7",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline/evaluation/test/selected_best/identity.json": "de0112216bb3a7c21e876f404a27dacd735ef2c30e225cad4a93ed91d8ec5c1d",
+    "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/A_baseline/evaluation/test/selected_best/rank000.npz": "7940e142a4cd18d6ed577032a750e315b78ef6be14ff566065b3ebe460ec0b82",
+    "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/B/protocol.json": "146c209c3c1ec08a44d2c7f4820279b3523bbcfbb5f1fab9f792badfd570cf11",
+    "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/B/final_test_lock.json": "4897321d001fa5f41ff7d7f799d1cfdd57fe2153832ffdb0b92417251735eb0e",
+    "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/B/training_complete.json": "fc76fc3d89fc2581d8da106c76c500c7770e70bec2cf8e4527a1444db1a42d95",
+    "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/B/test_results.json": "819df8cd5f5bf2535ab21ce17e929131e950fca6bfeb01e69bf1af496eb9bf24",
+    "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/B/final_metrics.json": "30bb8fb347912eba71f7c9193024c7d895c902ade067d66ef554e32ae36fcfce",
+    "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/B/best.pt": "8e797150d22ea138db246536f36a1b7dfa6ef3b516ee065a3303a6b6e579c3ee",
+    "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/B/evaluation/val/update0054720/identity.json": "52a3662437e4d141a69ed07aba6cebed84b89b7910605aa448ae2ff4813728bb",
+    "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/B/evaluation/val/update0054720/rank000.npz": "cbf25e00b1bb9ec788d47dcdeb13fdd971a29714955a389d2c3456d2c8975784",
+    "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/B/evaluation/test/selected_best/identity.json": "713946a2a9d1c3d80c2f1b5b22b83a11a9f153e31dc86a23422f901cbc7fedd6",
+    "/public/home/shiys/0selection2/code/V4/runs/R94_pretrained_node_fusion/B/evaluation/test/selected_best/rank000.npz": "4a19b9e9da8cbde65657f50df4885868a681a1b45fbd4c160c7eaa2fe65c0cb1"
+  },
+  "outputs": {
+    "nss_comparison.csv": "3a50f26482470915787c843907677140d8c725ee3ffff8a1b89a5eb1e57189c9",
+    "historical_metrics.csv": "ea1c889454ceabab533aefb56422b1fd0dbeedbb93d81a0386ccd6c006ac79bd",
+    "science_claims.json": "7f0c663c2bf3c38d2d7783d420211877c95b4abe04b0b49c959a2af646764860",
+    "constraint_status.csv": "aa1c03f526f33901dbf9636ac0941de7d3c7d0cc4a3c9b032a8ab61fab129666",
+    "nss_selection_distribution.csv": "f57af0a50c5699c45d48497a61ffc5ec5ad6a22bc5a5d8be53b260d7c072d8aa",
+    "learning_curves.pdf": "c38c91baebd158cf39111949e97e30eb5923609821f0eccf3a64923ffd3bb266",
+    "learning_curves.csv": "85ae4e1cd09303a508126724789076211bb7e7ed74cae6aa80ebdc8f12163f8f",
+    "metrics_by_problem.csv": "9324fdd3a63c4b52f2824db0f9b58da0df100f258a875209caf8566cb2e93105",
+    "learning_curves_by_problem.csv": "b622b1ac1b7684c6b054c468fba99514953eea740461903a98831bb201bc2ee3",
+    "RESULTS.md": "8db7fbfdc21febc2792b0f56391f6adccd2f4103e41d04826969f932d65a41a8",
+    "paired_changes.csv": "87649776f0e78465be94c99ea408aba6dfcd7916aa1ff072576e5c5af19aa2f9",
+    "MODEL_STATISTICS.pdf": "3af3b0e260ae67b2ea9a4e18d7538faa42fb7195818d6ee5af51324f693fc6f8",
+    "historical_references.csv": "7f7acca3e27a408bfa85f5cbfa8e273f9b334d7f8406459aa82ab55301325ad3",
+    "fixed36_recovery.pdf": "4afa0984c3f42d8cd5459fe1a40bed9a776e65e979a17f1089cfbb77c3ff9e6d",
+    "single_method_comparison.csv": "70874381eed31035f84d3d57057723217ee56396d776c2da0a62cb312b253e8a",
+    "nss_selection_distributions.pdf": "eeb02ac73e689036833cab75b3e160111914ead1a746ddf09572d4c506357b7a",
+    "selection_distributions.pdf": "0aae764c461acefd67b302253dc2cf858266ccf6becc059545249acdbdc345d0",
+    "selection_distribution.csv": "e2cc14f55404f464290e3a3e2459f476e749ceabe95275a82040e692218b6852",
+    "natural_fixed36_error_budgets.csv": "b42eac72cd0bd5de37de41376b4c2bbda28ad9acf43afb7e3661b5f4e7485761",
+    "target_recovery.csv": "a38139b217eab6c66941235a8803fa5591d0d9bff9f24786d47781f5ee6d89b6",
+    "target_recovery_summary.csv": "15292487e756d5c5b75d44c344201be42ab2e7c69a8a4371556efcf0bfc48e9e",
+    "training_and_method_diagnostics.pdf": "50123f722ed546905ed0692c625dece16c238045518ef0b4b4278524656ce619"
+  },
+  "completed_utc": "2026-10-29T20:05:51.166221+00:00",
+  "training": false,
+  "inference": false,
+  "test_rerun": false,
+  "solver_execution": false,
+  "checkpoint_reselection": false,
+  "per_problem_assembly": false
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Return18 Literal Resource Plan v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "name", "main_approved", "approved_by", "approved_utc", "protocol", "source_sha256", "jobs"],
+  "properties": {
+    "schema": {"const": "return18-resource-v1"},
+    "name": {"$ref": "#/$defs/id"},
+    "main_approved": {"const": true},
+    "approved_by": {"type": "string", "minLength": 1},
+    "approved_utc": {"type": "string", "format": "date-time"},
+    "protocol": {"$ref": "#/$defs/pinned"},
+    "cache_test_recovery": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/pinned"}]},
+    "source_sha256": {
+      "type": "object",
+      "required": ["code/V4/return18_launch.py", "code/V4/run_v4_return18.sh", "code/V4/r120_launch.py", "code/V4/r81_queue.py"],
+      "additionalProperties": {"$ref": "#/$defs/hash"}
+    },
+    "jobs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/job"}}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,79}$"},
+    "hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "pinned": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"$ref": "#/$defs/hash"}}
+    },
+    "stage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "kind", "argv"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "kind": {"enum": ["collect", "cache", "train", "test", "lib", "report"]},
+        "argv": {"type": "array", "minItems": 2, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "job": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "arm", "slot", "root", "stages"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "arm": {"enum": ["R121", "R122", "R123", "R124"]},
+        "slot": {"enum": ["gpu03_0", "gpu03_1", "gpu05_0", "gpu05_1"]},
+        "root": {"type": "string", "minLength": 1},
+        "depends_on": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "stages": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/stage"}}
+      }
+    }
+  }
+}

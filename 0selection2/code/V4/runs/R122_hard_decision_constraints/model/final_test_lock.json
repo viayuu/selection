@@ -1,0 +1,56 @@
+{
+  "experiment": "R122",
+  "arm": "model",
+  "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/model/best.pt",
+  "checkpoint_sha256": "f342aedf161db09a0883264d0eb2a003b63de93d4da4174a9f7fde332240ad6b",
+  "state_hash": "7495fd2ae09e6956102ee3425a58062792a947da36bf7427675ff7f8493540a6",
+  "model_state_sha256": "adecb586a35d64b243115816592fc7017048f5e080afb8037367b86aa9b574ce",
+  "selected_update": 14400,
+  "epoch": 20,
+  "rule": "full18 VAL only: feasible iff hard macro actual regret and unconditional fixed36 missed frequency <= separate saved R84A VAL references; among feasible maximize native Top1, then minimize actual regret, then earliest; if none feasible minimize sum of positive violations / max(reference,1e-12), then maximize native Top1, minimize actual regret, earliest",
+  "inference_rule": "eval mode, original R77 maximin logits, stable ascending-global-solver-ID tie break",
+  "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+  "selected_without_test": true,
+  "per_problem_assembly": false,
+  "full18": true,
+  "selection_key": [
+    1,
+    0.24763563554207577,
+    -0.6844814814814815,
+    0.005029766109480357,
+    14400
+  ],
+  "feasible": false,
+  "val": {
+    "macro_ce": 1.3641931447717879,
+    "macro_top1": 0.6844814814814815,
+    "macro_top2": 0.8656790123456789,
+    "macro_top3": 0.946925925925926,
+    "macro_top1_tie_aware": 0.6863086419753086,
+    "macro_mean_cost": 11.435260524601153,
+    "macro_vs_sbs_pct": -0.08156649107050606,
+    "macro_vs_oracle_pct": 0.5074385820763916,
+    "macro_actual_regret_pct": 0.5029766109480357,
+    "macro_vbs_gap_closed_pct": 2.9289447177904346,
+    "macro_sbs_cost": 11.427978473494235,
+    "macro_oracle_cost": 11.371691902364589
+  },
+  "hard_val": {
+    "hard_regret": 0.005029766109480357,
+    "hard_fixed_miss": 0.057024691358024696,
+    "fixed_population": 0.05709876543209876,
+    "native_top1": 0.6844814814814815
+  },
+  "preparation_lock": {
+    "experiment": "R122",
+    "locked": true,
+    "schema_version": 1,
+    "constraint_reference": {
+      "path": "/public/home/shiys/0selection2/code/V4/runs/R122_hard_decision_constraints/preparation/v2/constraint_reference.json",
+      "sha256": "ae60d0557b71c4e7bf70183a97677f010d9aa28fd2eb576d5b30da8efc20fc4d"
+    },
+    "cpu_only": true,
+    "training_started": false,
+    "test_read": false
+  }
+}
