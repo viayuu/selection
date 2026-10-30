@@ -1,0 +1,100 @@
+{
+  "schema_version": "r121_structural_interface_v1",
+  "version": "r121_d1_structural_native_recipe_v1_seed2_20261030",
+  "status": "bounded_CPU_preparation_complete_not_label_collection_complete",
+  "module": "code.V4.r121_structural_data",
+  "module_path": "/public/home/shiys/0selection2/code/V4/r121_structural_data.py",
+  "module_sha256": "719511ae34a02b0a1db417c70761d9289cc380a6a654b473f12b69bcc32d1771",
+  "core_source_changed_in_this_closeout": false,
+  "scientific_sources": {
+    "primary": {
+      "path": "/public/home/shiys/0selection2/docs/research/post_r119_global_reassessment_20261028/HANDOFF.md",
+      "sha256": "2881a531d9119c92267402c899ba86442249b5578db41a468ac40fdd3d83e310",
+      "role": "frozen_primary_D1_specification"
+    },
+    "secondary": {
+      "path": "/public/home/shiys/0selection2/docs/research/return18_major_routes_20261030/HANDOFF.md",
+      "sha256": "0589e1f0ec9d195ecfee0bfff84ab5437c4bb4cb03018264e735dde81a4bdc16",
+      "role": "advisory_only_scientific_model_identity_unverified_not_claimed_Astra"
+    }
+  },
+  "plan": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R121_structural_families/preparation/planned_v1/collection_plan.json",
+    "plan_sha256": "06362b8fe87fe0540778b68073e8f69fb5140f9fcae8a33e73a078913ced644e",
+    "problems": 18,
+    "legal_deployments": 89,
+    "planned_bases_per_problem": 256,
+    "planned_bases": 4608,
+    "endpoints_per_base": 5,
+    "planned_endpoints": 23040,
+    "planned_label_tasks": 113920,
+    "population": "original plus two substantive task-specific axes in a 2x2 factorial",
+    "execution_state": "not_launched",
+    "budget_is_scientifically_sufficient": "unestablished"
+  },
+  "actual_CPU_preparation": {
+    "manifest_path": "/public/home/shiys/0selection2/code/V4/runs/R121_structural_families/preparation/cpu_smoke_v1/manifest.json",
+    "manifest_sha256": "5a60ecd34b38d10293eb493e2c5925dcbd357f004d118e7c2bd2a2c92204cd50",
+    "problems": ["TSP", "ATSP", "VRPBLTW"],
+    "TRAIN_bases": 3,
+    "endpoints": 15,
+    "not_run_label_tasks": 80,
+    "actual_solver_labels": 0,
+    "full18_real_inputs_materialized": false,
+    "additional_generation_in_this_closeout": false,
+    "unit_test_log": "/public/home/shiys/0selection2/code/V4/runs/R121_structural_families/preparation/cpu_interface_tests.log"
+  },
+  "public_API": {
+    "prepare_plan(output, data_root=DATA_ROOT, count=256, seed=2)": "CPU-only full18 selection, protocol, deployment inventory and compact collection plan",
+    "load_plan(path)": "returns plan, selection, inventory, protocol with bound immutable identities",
+    "prepare_inputs(plan_path, output, problems=None, limit=1)": "CPU-only native endpoint files and complete legal-pool NOT-RUN tasks; default bounded prefix",
+    "make_family(problem, original, proposal)": "original plus four distinct native endpoints with explicit axes and feasibility certificates",
+    "full_pool_targets(pool, records)": "saved-only complete endpoint supervision; rejects partial/failed/preflight/mixed-version receipts",
+    "run_task(manifest_path, task_id, output, execute=False, ...)": "dry by default; explicit main R120 release and physical binding precede any backend load"
+  },
+  "native_input_contract": {
+    "path": "manifest.endpoints[i].input_path",
+    "selector_forward_value": "JSON payload['item'] ONLY",
+    "metadata_not_forward_inputs": ["base_id", "group_id", "family_id", "axis_state", "family_partition", "costs", "winner", "solver_seed", "solver_routes"],
+    "family_grouping": "manifest.families: original_id, endpoint_ids, response_edges, group_id, partition",
+    "partition_rule": "exact native base geometry/matrix hash mod5; all related endpoints stay together; both partitions are frozen TRAIN-only",
+    "natural_VAL_TEST_unchanged": true
+  },
+  "R122_supervision_mapping": {
+    "input": "result of full_pool_targets(pool, completed_label_receipts)",
+    "costs": "native_cost_fp64 -> detached float64 tensor [B,K], in global_ids order",
+    "pool_ids": "global_ids -> int64 tensor [K] or [B,K], matching the SAME utility/cost columns",
+    "winner": "global_ids.index(native_winner_global_id) -> int64 LOCAL column [B]; NEVER pass global ID as column",
+    "legal_mask": "frozen legal pool columns true; padding only false; NEVER drop a failed legal candidate by calling it illegal",
+    "all_best_mask": "exact native ties; winner remains stable-global-ID canonical winner",
+    "fixed_target": "external main-owned frozen fixed36 membership by (problem,native_winner_global_id); bool [B]; no new dynamic-zero list",
+    "advantage": "centered_log_advantage; family responses are differences of complete endpoint vectors",
+    "missing_cost_policy": "no epsilon/zero fill; do not feed partial new-family supervision into a full-pool loss",
+    "readiness": "schema_ready_but_actual_family_supervision_NOT_ready_until_new_labels_complete"
+  },
+  "deployment_summary": {
+    "recorded_recipes": 89,
+    "missing_recipe_files_found": 0,
+    "small_source_drift_found": 0,
+    "current_R121_runtime_qualified": 0,
+    "runtime_pending": 89,
+    "TSP_ATSP_deployments_absent_from_old_R114_response_collection": 13,
+    "TSP_missing_runtime_methods": ["BQ", "DIFUSCO", "DIFUSCO500", "ELG", "LEHD", "OMNI", "T2T", "T2T500"],
+    "ATSP_missing_runtime_methods": ["GLOP", "ICAM_ATSP", "MATNET", "MATPOENET", "UNICO_MatPOENet"],
+    "historical_MATNET_role_draw_restored": false,
+    "new_execution_identity": "new seeded native roles/random draws; recorded old recipe/profile must still match; not historical scalar replay",
+    "large_weight_content_verification": "deferred",
+    "inventory_path": "/public/home/shiys/0selection2/code/V4/runs/R121_structural_families/preparation/planned_v1/deployments.json"
+  },
+  "execution_gate": {
+    "R120_user_report": "still live; no resource release inferred or inspected here",
+    "automatic_launch": false,
+    "GPU_probes_or_solver_calls": 0,
+    "requires": ["main-authored completed R120 TEST/LIB/report release evidence", "explicit physical GPU UUID/host/CPU binding", "new-protocol acknowledgement", "matching per-deployment preflight before production labels"],
+    "full_CPU_generation_command": "source /public/home/shiys/miniconda3/etc/profile.d/conda.sh && conda activate easynco && cd /public/home/shiys/0selection2 && CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 python -B -m code.V4.r121_structural_data prepare --plan /public/home/shiys/0selection2/code/V4/runs/R121_structural_families/preparation/planned_v1/collection_plan.json --output /public/home/shiys/0selection2/code/V4/runs/R121_structural_families/preparation/full18_inputs_v1 --limit 256",
+    "command_environment": "source /public/home/shiys/miniconda3/etc/profile.d/conda.sh && conda activate easynco; CPU generation uses CUDA_VISIBLE_DEVICES='' and numerical threads=1; long jobs tmux/log",
+    "future_collection_CLI": "source /public/home/shiys/miniconda3/etc/profile.d/conda.sh && conda activate easynco && cd /public/home/shiys/0selection2 && CUDA_VISIBLE_DEVICES=${MAIN_GPU_UUID:?after_R120_release_only} OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 taskset -c ${MAIN_CPU_SET:?main_binding} python -B -m code.V4.r121_structural_data task --manifest INPUT_MANIFEST --task-id TASK_ID --output NEW_ATTEMPT_RECEIPT --execute --acknowledge-new-protocol --device cuda:0 --release MAIN_R120_RELEASE --binding MAIN_PHYSICAL_BINDING --stage preflight",
+    "full_command_schemas": "/public/home/shiys/0selection2/code/V4/runs/R121_structural_families/preparation/SCHEMA.md"
+  },
+  "preserved": ["old R114/R115/R120 sources and labels", "frozen new90k18 membership", "B filtering and historical signed-load semantics", "single reld_mt identity", "R58 deferral", "ongoing R120 chain", "all unrelated work"]
+}
