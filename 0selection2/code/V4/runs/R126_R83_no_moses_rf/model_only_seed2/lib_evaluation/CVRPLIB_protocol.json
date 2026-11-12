@@ -1,0 +1,57 @@
+{
+  "experiment": "R126",
+  "arm": "model_only_seed2",
+  "dataset": "CVRPLIB",
+  "problem": "CVRP",
+  "checkpoint_sha256": "e6292042b06e20934908c335538eed82e2b82433e3ee097f17e1e1d10ab97293",
+  "epoch": 26,
+  "selected_update": 37440,
+  "state_hash": "649ba4c802c1d0b65b76ef35e961c2b67549fcb997f5afc6955d4d990cfe07b7",
+  "model_state_sha256": "cf88ea4a2d5665c340c15e44d124b72047fe5a67c0afded769cf03ab18f6e3ec",
+  "candidate_pool": [
+    "BQ",
+    "ELG",
+    "ICAM",
+    "LEHD",
+    "MVMOE",
+    "MoSES_CaDA",
+    "OMNI",
+    "RELD_CVRP",
+    "RouteFinder"
+  ],
+  "pool_ids": [
+    0,
+    3,
+    5,
+    7,
+    11,
+    12,
+    14,
+    15,
+    18
+  ],
+  "model_factory": "code.V4.r126_experiment.load_checkpoint",
+  "winner_rule": "native FP64 argmin in the legal pool after removing MoSES_RF where present; exact ties use ascending global solver ID; not FP32 argmin",
+  "removed_candidates": [
+    "MoSES_RF"
+  ],
+  "data_version": "original native LIB; existing FP64 costs sliced to R126 pool",
+  "sources": {
+    "dataset.pkl": {
+      "path": "/public/home/shiys/0selection2/data/CVRPLIB/dataset.pkl",
+      "sha256": "aa3f0a01f61b99682b8de4e5f6b0c4017313087a3facdac1f4d1308557cc1a44"
+    },
+    "raw_label.pkl": {
+      "path": "/public/home/shiys/0selection2/data/CVRPLIB/raw_label.pkl",
+      "sha256": "a7812970fbaf857fd9d280bf1ebfa42d1a9113ac3c684dd0d326fc848d598802"
+    }
+  },
+  "inference_rule": "original utility score differences and maximin; no MoSES_RF; ascending-global-ID tie break",
+  "batch_size": 2,
+  "training": false,
+  "solver_execution": false,
+  "new_solver_answers": false,
+  "checkpoint_reselection": false,
+  "device": "cuda:0",
+  "created_utc": "2026-11-12T13:38:44.738355+00:00"
+}

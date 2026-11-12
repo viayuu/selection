@@ -1,0 +1,168 @@
+{
+  "protocol": {
+    "experiment": "R126",
+    "arm": "model_only_seed2",
+    "dataset": "CVRPLIB",
+    "problem": "CVRP",
+    "checkpoint_sha256": "e6292042b06e20934908c335538eed82e2b82433e3ee097f17e1e1d10ab97293",
+    "epoch": 26,
+    "selected_update": 37440,
+    "state_hash": "649ba4c802c1d0b65b76ef35e961c2b67549fcb997f5afc6955d4d990cfe07b7",
+    "model_state_sha256": "cf88ea4a2d5665c340c15e44d124b72047fe5a67c0afded769cf03ab18f6e3ec",
+    "candidate_pool": [
+      "BQ",
+      "ELG",
+      "ICAM",
+      "LEHD",
+      "MVMOE",
+      "MoSES_CaDA",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "pool_ids": [
+      0,
+      3,
+      5,
+      7,
+      11,
+      12,
+      14,
+      15,
+      18
+    ],
+    "model_factory": "code.V4.r126_experiment.load_checkpoint",
+    "winner_rule": "native FP64 argmin in the legal pool after removing MoSES_RF where present; exact ties use ascending global solver ID; not FP32 argmin",
+    "removed_candidates": [
+      "MoSES_RF"
+    ],
+    "data_version": "original native LIB; existing FP64 costs sliced to R126 pool",
+    "sources": {
+      "dataset.pkl": {
+        "path": "/public/home/shiys/0selection2/data/CVRPLIB/dataset.pkl",
+        "sha256": "aa3f0a01f61b99682b8de4e5f6b0c4017313087a3facdac1f4d1308557cc1a44"
+      },
+      "raw_label.pkl": {
+        "path": "/public/home/shiys/0selection2/data/CVRPLIB/raw_label.pkl",
+        "sha256": "a7812970fbaf857fd9d280bf1ebfa42d1a9113ac3c684dd0d326fc848d598802"
+      }
+    },
+    "inference_rule": "original utility score differences and maximin; no MoSES_RF; ascending-global-ID tie break",
+    "batch_size": 2,
+    "training": false,
+    "solver_execution": false,
+    "new_solver_answers": false,
+    "checkpoint_reselection": false,
+    "device": "cuda:0",
+    "created_utc": "2026-11-12T13:38:44.738355+00:00"
+  },
+  "train_sbs_reference": {
+    "n": 100,
+    "mean_cost": 67.24423531532294,
+    "sbs": 67.245364284519,
+    "vbs": 66.94509314537362,
+    "oracle_cost": 66.94509314537362,
+    "sbs_cost": 67.245364284519,
+    "sbs_name": "RELD_CVRP",
+    "top1_tie_aware": 0.63,
+    "vs_sbs_pct": -0.0016788803333445124,
+    "vs_oracle_pct": 0.44684704418846977,
+    "actual_regret_pct": 0.539379267864119,
+    "vbs_gap_closed_pct": 0.3759832527605211,
+    "top1": 0.63,
+    "top2": 0.8,
+    "top3": 0.89,
+    "pick_dist": [
+      0.01,
+      0.0,
+      0.63,
+      0.0,
+      0.03,
+      0.01,
+      0.04,
+      0.28,
+      0.0
+    ],
+    "arm_distribution": {
+      "BQ": 0.01,
+      "ELG": 0.0,
+      "ICAM": 0.63,
+      "LEHD": 0.0,
+      "MVMOE": 0.03,
+      "MoSES_CaDA": 0.01,
+      "OMNI": 0.04,
+      "RELD_CVRP": 0.28,
+      "RouteFinder": 0.0
+    },
+    "ce": 1.1628601551055908,
+    "pool": [
+      "BQ",
+      "ELG",
+      "ICAM",
+      "LEHD",
+      "MVMOE",
+      "MoSES_CaDA",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "method_top1": {
+      "BQ": 0.03,
+      "ELG": 0.03,
+      "ICAM": 0.38,
+      "LEHD": 0.02,
+      "MVMOE": 0.01,
+      "MoSES_CaDA": 0.02,
+      "OMNI": 0.05,
+      "RELD_CVRP": 0.45,
+      "RouteFinder": 0.01
+    },
+    "method_mean_cost": {
+      "BQ": 72.44957595825196,
+      "ELG": 68.79263690948487,
+      "ICAM": 67.67861845016479,
+      "LEHD": 77.29454415321351,
+      "MVMOE": 76.17476872444153,
+      "MoSES_CaDA": 71.24523769378662,
+      "OMNI": 69.05328610420227,
+      "RELD_CVRP": 67.245364284519,
+      "RouteFinder": 70.26318448066712
+    },
+    "best_top1": 0.45,
+    "best_top2": 0.83,
+    "best_top3": 0.86,
+    "top1_exceeds_methods": [
+      "BQ",
+      "ELG",
+      "ICAM",
+      "LEHD",
+      "MVMOE",
+      "MoSES_CaDA",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "top1_not_exceeds_methods": [],
+    "cost_exceeds_methods": [
+      "BQ",
+      "ELG",
+      "ICAM",
+      "LEHD",
+      "MVMOE",
+      "MoSES_CaDA",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "cost_not_exceeds_methods": [],
+    "native_correct": 63,
+    "posthoc_split_sbs_cost": 67.245364284519,
+    "posthoc_split_sbs_name": "RELD_CVRP",
+    "posthoc_split_vs_sbs_pct": -0.0016788803333445124,
+    "train_sbs_mean_cost": 18.15198730124656,
+    "sbs_selection_split": "train"
+  },
+  "inference_reused": false,
+  "seconds": 1.3480472839437425,
+  "completed_utc": "2026-11-12T13:38:46.162776+00:00"
+}
