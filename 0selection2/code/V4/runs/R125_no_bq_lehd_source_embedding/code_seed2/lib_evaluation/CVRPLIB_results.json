@@ -1,0 +1,161 @@
+{
+  "protocol": {
+    "experiment": "R125",
+    "arm": "code_seed2",
+    "dataset": "CVRPLIB",
+    "problem": "CVRP",
+    "checkpoint_sha256": "38c4b4c540a9e352294d2bc1439ea74137fa140d3d44e913b5b6bb52f3264bf0",
+    "epoch": 28,
+    "selected_update": 40320,
+    "state_hash": "2d61e500aec967f9c8ac08e2e97c6f6b21ed6a6fcab1b53eb6683694f08e9eb7",
+    "model_state_sha256": "84faa10c7a9f08f67c68a7199aa8886350eb49a8f17ecd4b7515952d7b4398bc",
+    "candidate_pool": [
+      "ELG",
+      "ICAM",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "pool_ids": [
+      3,
+      5,
+      11,
+      12,
+      13,
+      14,
+      15,
+      18
+    ],
+    "model_factory": "code.V4.r125_experiment.load_checkpoint",
+    "winner_rule": "native FP64 costs, argmin after deleting BQ/LEHD; not FP32 argmin",
+    "removed_candidates": [
+      "BQ",
+      "LEHD"
+    ],
+    "data_version": "original native LIB; existing FP64 costs sliced to R125 pool",
+    "sources": {
+      "dataset.pkl": {
+        "path": "/public/home/shiys/0selection2/data/CVRPLIB/dataset.pkl",
+        "sha256": "aa3f0a01f61b99682b8de4e5f6b0c4017313087a3facdac1f4d1308557cc1a44"
+      },
+      "raw_label.pkl": {
+        "path": "/public/home/shiys/0selection2/data/CVRPLIB/raw_label.pkl",
+        "sha256": "a7812970fbaf857fd9d280bf1ebfa42d1a9113ac3c684dd0d326fc848d598802"
+      }
+    },
+    "inference_rule": "original utility score differences and maximin; reduced candidates; ascending-global-ID tie break",
+    "batch_size": 2,
+    "training": false,
+    "solver_execution": false,
+    "new_solver_answers": false,
+    "checkpoint_reselection": false,
+    "device": "cuda:0",
+    "created_utc": "2026-11-12T11:16:09.050883+00:00"
+  },
+  "train_sbs_reference": {
+    "n": 100,
+    "mean_cost": 67.29271498680163,
+    "sbs": 67.245364284519,
+    "vbs": 66.96161339760161,
+    "oracle_cost": 66.96161339760161,
+    "sbs_cost": 67.245364284519,
+    "sbs_name": "RELD_CVRP",
+    "top1_tie_aware": 0.63,
+    "vs_sbs_pct": 0.07041482009420008,
+    "vs_oracle_pct": 0.49446477227783614,
+    "actual_regret_pct": 0.556331843741507,
+    "vbs_gap_closed_pct": -16.68742001021972,
+    "top1": 0.63,
+    "top2": 0.85,
+    "top3": 0.94,
+    "pick_dist": [
+      0.0,
+      0.65,
+      0.01,
+      0.0,
+      0.0,
+      0.09,
+      0.25,
+      0.0
+    ],
+    "arm_distribution": {
+      "ELG": 0.0,
+      "ICAM": 0.65,
+      "MVMOE": 0.01,
+      "MoSES_CaDA": 0.0,
+      "MoSES_RF": 0.0,
+      "OMNI": 0.09,
+      "RELD_CVRP": 0.25,
+      "RouteFinder": 0.0
+    },
+    "ce": 1.1240142583847046,
+    "pool": [
+      "ELG",
+      "ICAM",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "method_top1": {
+      "ELG": 0.03,
+      "ICAM": 0.4,
+      "MVMOE": 0.01,
+      "MoSES_CaDA": 0.02,
+      "MoSES_RF": 0.0,
+      "OMNI": 0.05,
+      "RELD_CVRP": 0.48,
+      "RouteFinder": 0.01
+    },
+    "method_mean_cost": {
+      "ELG": 68.79263690948487,
+      "ICAM": 67.67861845016479,
+      "MVMOE": 76.17476872444153,
+      "MoSES_CaDA": 71.24523769378662,
+      "MoSES_RF": 71.06185589790344,
+      "OMNI": 69.05328610420227,
+      "RELD_CVRP": 67.245364284519,
+      "RouteFinder": 70.26318448066712
+    },
+    "best_top1": 0.48,
+    "best_top2": 0.88,
+    "best_top3": 0.91,
+    "top1_exceeds_methods": [
+      "ELG",
+      "ICAM",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "top1_not_exceeds_methods": [],
+    "cost_exceeds_methods": [
+      "ELG",
+      "ICAM",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RouteFinder"
+    ],
+    "cost_not_exceeds_methods": [
+      "RELD_CVRP"
+    ],
+    "native_correct": 63,
+    "posthoc_split_sbs_cost": 67.245364284519,
+    "posthoc_split_sbs_name": "RELD_CVRP",
+    "posthoc_split_vs_sbs_pct": 0.07041482009420008,
+    "train_sbs_mean_cost": 18.15198730124658,
+    "sbs_selection_split": "train"
+  },
+  "inference_reused": false,
+  "seconds": 0.9414351982995868,
+  "completed_utc": "2026-11-12T11:16:09.992923+00:00"
+}

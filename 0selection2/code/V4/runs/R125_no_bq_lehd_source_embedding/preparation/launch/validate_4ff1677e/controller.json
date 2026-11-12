@@ -1,0 +1,27 @@
+{
+  "state": "complete",
+  "pid": 1654549,
+  "host": "admin01",
+  "mode": "validate",
+  "started_utc": "2026-11-12T06:19:21.918629+00:00",
+  "stages": [],
+  "automatic_retry": false,
+  "argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "-o",
+    "ServerAliveInterval=30",
+    "-o",
+    "ServerAliveCountMax=3",
+    "gpu05",
+    "sudo -n /usr/bin/ai_docker exec -u 2022 -e CUDA_VISIBLE_DEVICES= -e PYTHONPATH=/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/python_compat:/public/home/shiys/0selection2 -e PYTHONDONTWRITEBYTECODE=1 -e OMP_NUM_THREADS=2 -e MKL_NUM_THREADS=2 -e OPENBLAS_NUM_THREADS=2 -e NUMEXPR_NUM_THREADS=2 -e PYTHONUNBUFFERED=1 -e MPLBACKEND=Agg -e PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True -e WANDB_PROJECT=selector -e WANDB_ENTITY=yjkds-southern-university-of-science-technology -e WANDB_MODE=offline -e SLURM_JOB_ID=1475 -e R125_LAUNCH_TOKEN=3623e61e170a4b59a60bfd1c758eb828 76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6 bash /public/home/shiys/0selection2/run_v4_r125.sh worker --attempt /public/home/shiys/0selection2/code/V4/runs/R125_no_bq_lehd_source_embedding/preparation/launch/validate_4ff1677e"
+  ],
+  "log": "/public/home/shiys/0selection2/code/V4/runs/R125_no_bq_lehd_source_embedding/preparation/launch/validate_4ff1677e/transport.log",
+  "transport_pid": 1654562,
+  "worker_state": "complete",
+  "exit_status": 0,
+  "finished_utc": "2026-11-12T06:19:25.937671+00:00"
+}

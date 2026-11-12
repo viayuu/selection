@@ -1,0 +1,67 @@
+{
+  "state": "running",
+  "pid": 1660483,
+  "host": "admin01",
+  "mode": "train",
+  "started_utc": "2026-11-12T06:20:30.641221+00:00",
+  "stages": [
+    {
+      "stage": "report",
+      "state": "complete",
+      "argv": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r125_reporting",
+        "report",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R125_no_bq_lehd_source_embedding",
+        "--arm",
+        "code_seed2",
+        "--device",
+        "cpu"
+      ],
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R125_no_bq_lehd_source_embedding/preparation/launch/train/report.log",
+      "started_utc": "2026-11-12T11:16:11.071605+00:00",
+      "pid": 2834246,
+      "exit_status": 0,
+      "finished_utc": "2026-11-12T11:16:37.118584+00:00"
+    },
+    {
+      "stage": "publish",
+      "state": "running",
+      "argv": [
+        "/public/home/shiys/miniconda3/envs/easynco/bin/python",
+        "-B",
+        "-u",
+        "-m",
+        "code.V4.r125_publish",
+        "--root",
+        "/public/home/shiys/0selection2/code/V4/runs/R125_no_bq_lehd_source_embedding",
+        "--push"
+      ],
+      "log": "/public/home/shiys/0selection2/code/V4/runs/R125_no_bq_lehd_source_embedding/preparation/launch/train/publish.log",
+      "started_utc": "2026-11-12T11:16:37.119259+00:00",
+      "pid": 2835512
+    }
+  ],
+  "automatic_retry": false,
+  "argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "-o",
+    "ServerAliveInterval=30",
+    "-o",
+    "ServerAliveCountMax=3",
+    "gpu05",
+    "sudo -n /usr/bin/ai_docker exec -u 2022 -e CUDA_VISIBLE_DEVICES=GPU-71479e7e-f8bd-e430-66ed-f8db9f0d47be -e PYTHONPATH=/public/home/shiys/easynco_v3_bridge/exports/train_100k_20261002/python_compat:/public/home/shiys/0selection2 -e PYTHONDONTWRITEBYTECODE=1 -e OMP_NUM_THREADS=2 -e MKL_NUM_THREADS=2 -e OPENBLAS_NUM_THREADS=2 -e NUMEXPR_NUM_THREADS=2 -e PYTHONUNBUFFERED=1 -e MPLBACKEND=Agg -e PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True -e WANDB_PROJECT=selector -e WANDB_ENTITY=yjkds-southern-university-of-science-technology -e WANDB_MODE=offline -e SLURM_JOB_ID=1475 -e R125_LAUNCH_TOKEN=4ee0da9f29284e0a8898ca5081a73591 76045731f6b453443fe18a9bce671599bdbf17c2713b8edcdd090925eea14bf6 bash /public/home/shiys/0selection2/run_v4_r125.sh worker --attempt /public/home/shiys/0selection2/code/V4/runs/R125_no_bq_lehd_source_embedding/preparation/launch/train"
+  ],
+  "log": "/public/home/shiys/0selection2/code/V4/runs/R125_no_bq_lehd_source_embedding/preparation/launch/train/transport.log",
+  "transport_pid": 1660507,
+  "worker_state": "complete",
+  "phase": "publish"
+}

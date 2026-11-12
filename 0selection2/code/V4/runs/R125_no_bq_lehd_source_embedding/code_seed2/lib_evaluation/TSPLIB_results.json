@@ -1,0 +1,143 @@
+{
+  "protocol": {
+    "experiment": "R125",
+    "arm": "code_seed2",
+    "dataset": "TSPLIB",
+    "problem": "TSP",
+    "checkpoint_sha256": "38c4b4c540a9e352294d2bc1439ea74137fa140d3d44e913b5b6bb52f3264bf0",
+    "epoch": 28,
+    "selected_update": 40320,
+    "state_hash": "2d61e500aec967f9c8ac08e2e97c6f6b21ed6a6fcab1b53eb6683694f08e9eb7",
+    "model_state_sha256": "84faa10c7a9f08f67c68a7199aa8886350eb49a8f17ecd4b7515952d7b4398bc",
+    "candidate_pool": [
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "pool_ids": [
+      1,
+      2,
+      3,
+      14,
+      19,
+      20
+    ],
+    "model_factory": "code.V4.r125_experiment.load_checkpoint",
+    "winner_rule": "native FP64 costs, argmin after deleting BQ/LEHD; not FP32 argmin",
+    "removed_candidates": [
+      "BQ",
+      "LEHD"
+    ],
+    "data_version": "original native LIB; existing FP64 costs sliced to R125 pool",
+    "sources": {
+      "dataset.pkl": {
+        "path": "/public/home/shiys/0selection2/data/TSPLIB/dataset.pkl",
+        "sha256": "92f14d50c2474ca33b3432f16478e06f0cc687ad40009a363d5db31b8641e6f8"
+      },
+      "raw_label.pkl": {
+        "path": "/public/home/shiys/0selection2/data/TSPLIB/raw_label.pkl",
+        "sha256": "7d2cfffe64652728777e01607ca104c1b5ba8c156f6bc24bba366cec5a148a44"
+      }
+    },
+    "inference_rule": "original utility score differences and maximin; reduced candidates; ascending-global-ID tie break",
+    "batch_size": 2,
+    "training": false,
+    "solver_execution": false,
+    "new_solver_answers": false,
+    "checkpoint_reselection": false,
+    "device": "cuda:0",
+    "created_utc": "2026-11-12T11:16:07.868331+00:00"
+  },
+  "train_sbs_reference": {
+    "n": 49,
+    "mean_cost": 8.224522297724254,
+    "sbs": 8.240435337935194,
+    "vbs": 8.171163867552618,
+    "oracle_cost": 8.171163867552618,
+    "sbs_cost": 8.240435337935194,
+    "sbs_name": "T2T",
+    "top1_tie_aware": 0.22448979591836735,
+    "vs_sbs_pct": -0.19310921763663336,
+    "vs_oracle_pct": 0.6530089352817958,
+    "actual_regret_pct": 0.6269307215172677,
+    "vbs_gap_closed_pct": 22.971997162835418,
+    "top1": 0.22448979591836735,
+    "top2": 0.32653061224489793,
+    "top3": 0.6326530612244898,
+    "pick_dist": [
+      0.0,
+      0.0,
+      0.22448979591836735,
+      0.0,
+      0.7755102040816326,
+      0.0
+    ],
+    "arm_distribution": {
+      "DIFUSCO": 0.0,
+      "DIFUSCO500": 0.0,
+      "ELG": 0.22448979591836735,
+      "OMNI": 0.0,
+      "T2T": 0.7755102040816326,
+      "T2T500": 0.0
+    },
+    "ce": 3.233635425567627,
+    "pool": [
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "method_top1": {
+      "DIFUSCO": 0.12244897959183673,
+      "DIFUSCO500": 0.1836734693877551,
+      "ELG": 0.30612244897959184,
+      "OMNI": 0.02040816326530612,
+      "T2T": 0.12244897959183673,
+      "T2T500": 0.24489795918367346
+    },
+    "method_mean_cost": {
+      "DIFUSCO": 8.26451085544117,
+      "DIFUSCO500": 8.247271213333331,
+      "ELG": 8.384216045846744,
+      "OMNI": 8.578037719337308,
+      "T2T": 8.240435337935194,
+      "T2T500": 8.233445162660358
+    },
+    "best_top1": 0.24489795918367346,
+    "best_top2": 0.3673469387755102,
+    "best_top3": 0.5510204081632653,
+    "top1_exceeds_methods": [
+      "DIFUSCO",
+      "DIFUSCO500",
+      "OMNI",
+      "T2T"
+    ],
+    "top1_not_exceeds_methods": [
+      "ELG",
+      "T2T500"
+    ],
+    "cost_exceeds_methods": [
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "cost_not_exceeds_methods": [],
+    "native_correct": 11,
+    "posthoc_split_sbs_cost": 8.233445162660358,
+    "posthoc_split_sbs_name": "T2T500",
+    "posthoc_split_vs_sbs_pct": -0.10837340578363497,
+    "train_sbs_mean_cost": 8.02395920723137,
+    "sbs_selection_split": "train"
+  },
+  "inference_reused": false,
+  "seconds": 1.1785629731602967,
+  "completed_utc": "2026-11-12T11:16:09.047551+00:00"
+}

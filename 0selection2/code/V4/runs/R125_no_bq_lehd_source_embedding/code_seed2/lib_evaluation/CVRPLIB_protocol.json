@@ -1,0 +1,56 @@
+{
+  "experiment": "R125",
+  "arm": "code_seed2",
+  "dataset": "CVRPLIB",
+  "problem": "CVRP",
+  "checkpoint_sha256": "38c4b4c540a9e352294d2bc1439ea74137fa140d3d44e913b5b6bb52f3264bf0",
+  "epoch": 28,
+  "selected_update": 40320,
+  "state_hash": "2d61e500aec967f9c8ac08e2e97c6f6b21ed6a6fcab1b53eb6683694f08e9eb7",
+  "model_state_sha256": "84faa10c7a9f08f67c68a7199aa8886350eb49a8f17ecd4b7515952d7b4398bc",
+  "candidate_pool": [
+    "ELG",
+    "ICAM",
+    "MVMOE",
+    "MoSES_CaDA",
+    "MoSES_RF",
+    "OMNI",
+    "RELD_CVRP",
+    "RouteFinder"
+  ],
+  "pool_ids": [
+    3,
+    5,
+    11,
+    12,
+    13,
+    14,
+    15,
+    18
+  ],
+  "model_factory": "code.V4.r125_experiment.load_checkpoint",
+  "winner_rule": "native FP64 costs, argmin after deleting BQ/LEHD; not FP32 argmin",
+  "removed_candidates": [
+    "BQ",
+    "LEHD"
+  ],
+  "data_version": "original native LIB; existing FP64 costs sliced to R125 pool",
+  "sources": {
+    "dataset.pkl": {
+      "path": "/public/home/shiys/0selection2/data/CVRPLIB/dataset.pkl",
+      "sha256": "aa3f0a01f61b99682b8de4e5f6b0c4017313087a3facdac1f4d1308557cc1a44"
+    },
+    "raw_label.pkl": {
+      "path": "/public/home/shiys/0selection2/data/CVRPLIB/raw_label.pkl",
+      "sha256": "a7812970fbaf857fd9d280bf1ebfa42d1a9113ac3c684dd0d326fc848d598802"
+    }
+  },
+  "inference_rule": "original utility score differences and maximin; reduced candidates; ascending-global-ID tie break",
+  "batch_size": 2,
+  "training": false,
+  "solver_execution": false,
+  "new_solver_answers": false,
+  "checkpoint_reselection": false,
+  "device": "cuda:0",
+  "created_utc": "2026-11-12T11:16:09.050883+00:00"
+}

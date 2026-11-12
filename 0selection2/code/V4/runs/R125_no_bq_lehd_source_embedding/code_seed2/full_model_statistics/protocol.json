@@ -1,0 +1,533 @@
+{
+  "experiment": "R125",
+  "arm": "code_seed2",
+  "complete": true,
+  "checkpoint_lock": {
+    "experiment": "R125",
+    "arm": "code_seed2",
+    "checkpoint": "/public/home/shiys/0selection2/code/V4/runs/R125_no_bq_lehd_source_embedding/code_seed2/best.pt",
+    "checkpoint_sha256": "38c4b4c540a9e352294d2bc1439ea74137fa140d3d44e913b5b6bb52f3264bf0",
+    "state_hash": "2d61e500aec967f9c8ac08e2e97c6f6b21ed6a6fcab1b53eb6683694f08e9eb7",
+    "epoch": 28,
+    "selected_update": 40320,
+    "rule": "strict minimum full18 VAL macro_vs_sbs_pct; reduced-pool full TRAIN SBS; first wins ties",
+    "selected_without_test": true,
+    "per_problem_assembly": false,
+    "val": {
+      "macro_ce": 0.6570151729716195,
+      "macro_top1": 0.7310617283950617,
+      "macro_top2": 0.923604938271605,
+      "macro_top3": 0.9728641975308641,
+      "macro_top1_tie_aware": 0.7324074074074074,
+      "macro_mean_cost": 11.417482907673747,
+      "macro_vs_sbs_pct": -0.18127294788492324,
+      "macro_vs_oracle_pct": 0.36442971104255023,
+      "macro_actual_regret_pct": 0.3688738424142606,
+      "macro_vbs_gap_closed_pct": 12.574662287690659,
+      "macro_sbs_cost": 11.427978473494235,
+      "macro_oracle_cost": 11.376373527438794
+    },
+    "inference_rule": "original utility score differences and maximin; reduced candidates; ascending-global-ID tie break",
+    "winner_rule": "native int64 ind from locked source cache, verified against original FP64 argmin; never FP32 argmin",
+    "locked_utc": "2026-11-12T11:13:09.455760+00:00"
+  },
+  "selected_val_binding": {
+    "checkpoint_sha256": "38c4b4c540a9e352294d2bc1439ea74137fa140d3d44e913b5b6bb52f3264bf0",
+    "state_hash": "2d61e500aec967f9c8ac08e2e97c6f6b21ed6a6fcab1b53eb6683694f08e9eb7",
+    "selected_update": 40320,
+    "model_state_sha256": "84faa10c7a9f08f67c68a7199aa8886350eb49a8f17ecd4b7515952d7b4398bc",
+    "archive_identity_unchanged": true
+  },
+  "model_factory": "code.V4.r125_experiment.load_checkpoint",
+  "data_root": "/public/home/shiys/selection_data_new90k_no_bq_lehd_seed2_20261112",
+  "source_dataset_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "rows_per_problem": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "candidate_pools": {
+    "TSP": [
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "CVRP": [
+      "ELG",
+      "ICAM",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "OMNI",
+      "RELD_CVRP",
+      "RouteFinder"
+    ],
+    "ATSP": [
+      "GLOP",
+      "ICAM_ATSP",
+      "MATNET",
+      "MATPOENET",
+      "UNICO_MatPOENet"
+    ],
+    "OVRP": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPB": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPL": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "VRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "OVRPBL": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "MoSES_CaDA",
+      "MoSES_RF",
+      "reld_mt",
+      "RouteFinder"
+    ],
+    "VRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ],
+    "OVRPBLTW": [
+      "MTPOMO",
+      "MVMOE",
+      "reld_mt"
+    ]
+  },
+  "candidate_pool_ids": {
+    "TSP": [
+      1,
+      2,
+      3,
+      14,
+      19,
+      20
+    ],
+    "CVRP": [
+      3,
+      5,
+      11,
+      12,
+      13,
+      14,
+      15,
+      18
+    ],
+    "ATSP": [
+      4,
+      6,
+      8,
+      9,
+      21
+    ],
+    "OVRP": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "VRPB": [
+      10,
+      11,
+      16
+    ],
+    "VRPL": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "VRPTW": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "OVRPTW": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "OVRPB": [
+      10,
+      11,
+      16
+    ],
+    "OVRPL": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "VRPBL": [
+      10,
+      11,
+      16
+    ],
+    "VRPBTW": [
+      10,
+      11,
+      16
+    ],
+    "VRPLTW": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "OVRPBL": [
+      10,
+      11,
+      16
+    ],
+    "OVRPBTW": [
+      10,
+      11,
+      16
+    ],
+    "OVRPLTW": [
+      10,
+      11,
+      12,
+      13,
+      16,
+      18
+    ],
+    "VRPBLTW": [
+      10,
+      11,
+      16
+    ],
+    "OVRPBLTW": [
+      10,
+      11,
+      16
+    ]
+  },
+  "winner_rule": "native FP64 costs, argmin after deleting BQ/LEHD; not FP32 argmin",
+  "removed_candidates": [
+    "BQ",
+    "LEHD"
+  ],
+  "sbs_selection_split": "full81000 TRAIN, reduced pool",
+  "all_aggregation": "equal-problem macro; raw cost means descriptive only",
+  "metric_formulas": {
+    "vs_sbs_pct": "100*(mean_cost/SBS_cost-1)",
+    "vs_oracle_pct": "100*(mean_cost/Oracle_cost-1)",
+    "actual_regret_pct": "mean_i[100*(selected_i-oracle_i)/oracle_i]"
+  },
+  "nss_reference": "Fixed historical NSS logits, reduced-pool diagnostic only; NOT trained on the R125 reduced pool; no retraining or new inference",
+  "nss_alignment": {
+    "TSP TEST": {
+      "checked_rows": 4500,
+      "all_FP64_cost_columns_equal": true,
+      "original_candidate_pool": [
+        "BQ",
+        "DIFUSCO",
+        "DIFUSCO500",
+        "ELG",
+        "LEHD",
+        "OMNI",
+        "T2T",
+        "T2T500"
+      ],
+      "reduced_candidate_pool": [
+        "DIFUSCO",
+        "DIFUSCO500",
+        "ELG",
+        "OMNI",
+        "T2T",
+        "T2T500"
+      ],
+      "source_prediction_sha256": "d42250eea9547dbeed1afdda9411ae6e691d9ce2ae0a14f50e7da6adb28068d3",
+      "same_release_source_ids": true
+    },
+    "CVRP TEST": {
+      "checked_rows": 4500,
+      "all_FP64_cost_columns_equal": true,
+      "original_candidate_pool": [
+        "BQ",
+        "ELG",
+        "ICAM",
+        "LEHD",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "OMNI",
+        "RELD_CVRP",
+        "RouteFinder"
+      ],
+      "reduced_candidate_pool": [
+        "ELG",
+        "ICAM",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "OMNI",
+        "RELD_CVRP",
+        "RouteFinder"
+      ],
+      "source_prediction_sha256": "13fbedae686c2af03d44d62115bbd9fcbf15950f6b111942f90786faba66603c",
+      "same_release_source_ids": true
+    },
+    "TSPLIB": {
+      "checked_rows": 49,
+      "all_FP64_cost_columns_equal": true,
+      "original_candidate_pool": [
+        "BQ",
+        "DIFUSCO",
+        "DIFUSCO500",
+        "ELG",
+        "LEHD",
+        "OMNI",
+        "T2T",
+        "T2T500"
+      ],
+      "reduced_candidate_pool": [
+        "DIFUSCO",
+        "DIFUSCO500",
+        "ELG",
+        "OMNI",
+        "T2T",
+        "T2T500"
+      ],
+      "source_prediction_sha256": "87f25d2489327a04a6972e243ea3ff856016fc083383a4d72558d75c3465b206",
+      "same_release_source_ids": false
+    },
+    "CVRPLIB": {
+      "checked_rows": 100,
+      "all_FP64_cost_columns_equal": true,
+      "original_candidate_pool": [
+        "BQ",
+        "ELG",
+        "ICAM",
+        "LEHD",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "OMNI",
+        "RELD_CVRP",
+        "RouteFinder"
+      ],
+      "reduced_candidate_pool": [
+        "ELG",
+        "ICAM",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "OMNI",
+        "RELD_CVRP",
+        "RouteFinder"
+      ],
+      "source_prediction_sha256": "78c850e64cc744bcedd7408a44c551587e28f6684d5130a647fb49c55332bf9e",
+      "same_release_source_ids": false
+    }
+  },
+  "nss_comparisons": [
+    {
+      "dataset": "TSP TEST",
+      "problem": "TSP",
+      "n": 4500,
+      "data_version": "selection_data_new90k_no_bq_lehd_seed2_20261112",
+      "source_data_version": "selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "candidate_pool": "[\"DIFUSCO\", \"DIFUSCO500\", \"ELG\", \"OMNI\", \"T2T\", \"T2T500\"]",
+      "nss_model": "Fixed historical NSS logits, reduced-pool diagnostic only; NOT trained on the R125 reduced pool; no retraining or new inference",
+      "current_model": "R125/code_seed2",
+      "nss_top1_native_pct": 68.31111111111112,
+      "nss_mean_cost": 7.988778578966022,
+      "current_top1_native_pct": 68.46666666666667,
+      "current_mean_cost": 7.988722253927844,
+      "current_checkpoint_sha256": "38c4b4c540a9e352294d2bc1439ea74137fa140d3d44e913b5b6bb52f3264bf0",
+      "nss_checkpoint_sha256": "c677a8cd4ee473ee47bdedff871050827f75717c321ae9d551a3edc7bc78994b",
+      "winner_rule": "native FP64 costs, argmin after deleting BQ/LEHD; not FP32 argmin",
+      "nss_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/TSP/test_predictions.npz",
+      "current_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R125_no_bq_lehd_source_embedding/code_seed2/evaluation/test/selected_best/rank000.npz",
+      "status": "fixed_NSS_reduced_pool_diagnostic",
+      "missing_reason": "",
+      "nss_retrained": false,
+      "nss_reduced_pool_training": false,
+      "nss_new_inference": false,
+      "score_tie_rule": "ascending global solver ID after pool reduction (diagnostic, not original NSS topk)",
+      "alignment_checked_rows": 4500
+    },
+    {
+      "dataset": "CVRP TEST",
+      "problem": "CVRP",
+      "n": 4500,
+      "data_version": "selection_data_new90k_no_bq_lehd_seed2_20261112",
+      "source_data_version": "selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "candidate_pool": "[\"ELG\", \"ICAM\", \"MVMOE\", \"MoSES_CaDA\", \"MoSES_RF\", \"OMNI\", \"RELD_CVRP\", \"RouteFinder\"]",
+      "nss_model": "Fixed historical NSS logits, reduced-pool diagnostic only; NOT trained on the R125 reduced pool; no retraining or new inference",
+      "current_model": "R125/code_seed2",
+      "nss_top1_native_pct": 61.51111111111112,
+      "nss_mean_cost": 18.00658479234929,
+      "current_top1_native_pct": 62.17777777777778,
+      "current_mean_cost": 18.00611219353196,
+      "current_checkpoint_sha256": "38c4b4c540a9e352294d2bc1439ea74137fa140d3d44e913b5b6bb52f3264bf0",
+      "nss_checkpoint_sha256": "b1e7595eb16a89e3bdf526c3c4d8b05ce3d7d4dc39ab1241667657924e3fc574",
+      "winner_rule": "native FP64 costs, argmin after deleting BQ/LEHD; not FP32 argmin",
+      "nss_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/CVRP/test_predictions.npz",
+      "current_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R125_no_bq_lehd_source_embedding/code_seed2/evaluation/test/selected_best/rank000.npz",
+      "status": "fixed_NSS_reduced_pool_diagnostic",
+      "missing_reason": "",
+      "nss_retrained": false,
+      "nss_reduced_pool_training": false,
+      "nss_new_inference": false,
+      "score_tie_rule": "ascending global solver ID after pool reduction (diagnostic, not original NSS topk)",
+      "alignment_checked_rows": 4500
+    },
+    {
+      "dataset": "TSPLIB",
+      "problem": "TSP",
+      "n": 49,
+      "data_version": "original native LIB",
+      "source_data_version": "selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "candidate_pool": "[\"DIFUSCO\", \"DIFUSCO500\", \"ELG\", \"OMNI\", \"T2T\", \"T2T500\"]",
+      "nss_model": "Fixed historical NSS logits, reduced-pool diagnostic only; NOT trained on the R125 reduced pool; no retraining or new inference",
+      "current_model": "R125/code_seed2",
+      "nss_top1_native_pct": 14.285714285714285,
+      "nss_mean_cost": 8.239256498216763,
+      "current_top1_native_pct": 22.448979591836736,
+      "current_mean_cost": 8.224522297724254,
+      "current_checkpoint_sha256": "38c4b4c540a9e352294d2bc1439ea74137fa140d3d44e913b5b6bb52f3264bf0",
+      "nss_checkpoint_sha256": "c677a8cd4ee473ee47bdedff871050827f75717c321ae9d551a3edc7bc78994b",
+      "winner_rule": "native FP64 costs, argmin after deleting BQ/LEHD; not FP32 argmin",
+      "nss_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/TSP/TSPLIB_predictions.npz",
+      "current_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R125_no_bq_lehd_source_embedding/code_seed2/lib_evaluation/predictions/TSPLIB.npz",
+      "status": "fixed_NSS_reduced_pool_diagnostic",
+      "missing_reason": "",
+      "nss_retrained": false,
+      "nss_reduced_pool_training": false,
+      "nss_new_inference": false,
+      "score_tie_rule": "ascending global solver ID after pool reduction (diagnostic, not original NSS topk)",
+      "alignment_checked_rows": 49
+    },
+    {
+      "dataset": "CVRPLIB",
+      "problem": "CVRP",
+      "n": 100,
+      "data_version": "original native LIB",
+      "source_data_version": "selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+      "candidate_pool": "[\"ELG\", \"ICAM\", \"MVMOE\", \"MoSES_CaDA\", \"MoSES_RF\", \"OMNI\", \"RELD_CVRP\", \"RouteFinder\"]",
+      "nss_model": "Fixed historical NSS logits, reduced-pool diagnostic only; NOT trained on the R125 reduced pool; no retraining or new inference",
+      "current_model": "R125/code_seed2",
+      "nss_top1_native_pct": 71.0,
+      "nss_mean_cost": 67.10111171722467,
+      "current_top1_native_pct": 63.0,
+      "current_mean_cost": 67.29271498680163,
+      "current_checkpoint_sha256": "38c4b4c540a9e352294d2bc1439ea74137fa140d3d44e913b5b6bb52f3264bf0",
+      "nss_checkpoint_sha256": "b1e7595eb16a89e3bdf526c3c4d8b05ce3d7d4dc39ab1241667657924e3fc574",
+      "winner_rule": "native FP64 costs, argmin after deleting BQ/LEHD; not FP32 argmin",
+      "nss_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R84_new90k_attention/nss_reference/CVRP/CVRPLIB_predictions.npz",
+      "current_prediction_path": "/public/home/shiys/0selection2/code/V4/runs/R125_no_bq_lehd_source_embedding/code_seed2/lib_evaluation/predictions/CVRPLIB.npz",
+      "status": "fixed_NSS_reduced_pool_diagnostic",
+      "missing_reason": "",
+      "nss_retrained": false,
+      "nss_reduced_pool_training": false,
+      "nss_new_inference": false,
+      "score_tie_rule": "ascending global solver ID after pool reduction (diagnostic, not original NSS topk)",
+      "alignment_checked_rows": 100
+    }
+  ],
+  "training": false,
+  "inference": false,
+  "new_solver_answers": false,
+  "checkpoint_reselection": false,
+  "archive_identity_unchanged": true,
+  "distribution_pages": 18,
+  "main_pdf_pages": 23,
+  "diagnostics": {
+    "path": "/public/home/shiys/0selection2/code/V4/runs/R125_no_bq_lehd_source_embedding/code_seed2/full_model_statistics/training_and_method_diagnostics.pdf",
+    "pages": 19,
+    "history_status": "complete"
+  },
+  "created_utc": "2026-11-12T11:16:36.170765+00:00"
+}
