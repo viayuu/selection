@@ -1,0 +1,55 @@
+{
+  "experiment": "R127",
+  "arm": "model_only_seed2",
+  "dataset": "TSPLIB",
+  "problem": "TSP",
+  "checkpoint_sha256": "389dcc8b1817e6c9852dc7eee052c4caec5da49eedda019e34269dae24b3a641",
+  "epoch": 26,
+  "selected_update": 37440,
+  "state_hash": "88c1afbbc2c83ba5a2d94f3ae07bb0374212f79f8d6edf61a35d3b5bfac8d342",
+  "model_state_sha256": "c40e64b33063533ffca4cc5c9f9b84b1a8e5d289e7b8ef2f2db9db2a1ca5fcd9",
+  "candidate_pool": [
+    "BQ",
+    "DIFUSCO",
+    "DIFUSCO500",
+    "ELG",
+    "LEHD",
+    "OMNI",
+    "T2T",
+    "T2T500"
+  ],
+  "pool_ids": [
+    0,
+    1,
+    2,
+    3,
+    7,
+    14,
+    19,
+    20
+  ],
+  "model_factory": "code.V4.r127_experiment.load_checkpoint",
+  "winner_rule": "native FP64 argmin in the legal pool after removing MVMOE where present; exact ties use ascending global solver ID; not FP32 argmin",
+  "removed_candidates": [
+    "MVMOE"
+  ],
+  "data_version": "original native LIB; existing FP64 costs sliced to R127 pool",
+  "sources": {
+    "dataset.pkl": {
+      "path": "/public/home/shiys/0selection2/data/TSPLIB/dataset.pkl",
+      "sha256": "92f14d50c2474ca33b3432f16478e06f0cc687ad40009a363d5db31b8641e6f8"
+    },
+    "raw_label.pkl": {
+      "path": "/public/home/shiys/0selection2/data/TSPLIB/raw_label.pkl",
+      "sha256": "7d2cfffe64652728777e01607ca104c1b5ba8c156f6bc24bba366cec5a148a44"
+    }
+  },
+  "inference_rule": "original utility score differences and maximin; no MVMOE; ascending-global-ID tie break",
+  "batch_size": 2,
+  "training": false,
+  "solver_execution": false,
+  "new_solver_answers": false,
+  "checkpoint_reselection": false,
+  "device": "cuda:0",
+  "created_utc": "2026-11-12T15:10:56.491951+00:00"
+}

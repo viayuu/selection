@@ -1,0 +1,2575 @@
+{
+  "format_version": 1,
+  "scenario_id": "R127_new90k_seed2_B_filtered_single_reld_mt_no_mvmoe_v1",
+  "status": "complete",
+  "created_utc": "2026-11-12T09:06:38.976480+00:00",
+  "seed": 2,
+  "source_data": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07",
+  "previous_data": "/public/home/shiys/selection_data_new_only_B_filtered_single_reld_mt_seed2_20261014",
+  "previous_manifest_sha256": "01713f40b5844a81d3e396e38a07c79e354135e542bbcf75ca3df84876b9e25b",
+  "source_acceptance": {
+    "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/\u5b8c\u6574\u9a8c\u6536.json",
+    "bytes": 72640,
+    "sha256": "ae9096df210feb53ac477bf78ae154d776ba6904219317b8fc743dd65658d099"
+  },
+  "split_sizes_per_problem": {
+    "train": 81000,
+    "val": 4500,
+    "test": 4500
+  },
+  "total_instances": 1620000,
+  "global_solvers": [
+    "BQ",
+    "DIFUSCO",
+    "DIFUSCO500",
+    "ELG",
+    "GLOP",
+    "ICAM",
+    "ICAM_ATSP",
+    "LEHD",
+    "MATNET",
+    "MATPOENET",
+    "MTPOMO",
+    "MoSES_CaDA",
+    "MoSES_RF",
+    "OMNI",
+    "RELD_CVRP",
+    "reld_mt",
+    "RouteFinder",
+    "T2T",
+    "T2T500",
+    "UNICO_MatPOENet"
+  ],
+  "global_solver_ids": {
+    "BQ": 0,
+    "DIFUSCO": 1,
+    "DIFUSCO500": 2,
+    "ELG": 3,
+    "GLOP": 4,
+    "ICAM": 5,
+    "ICAM_ATSP": 6,
+    "LEHD": 7,
+    "MATNET": 8,
+    "MATPOENET": 9,
+    "MTPOMO": 10,
+    "MoSES_CaDA": 12,
+    "MoSES_RF": 13,
+    "OMNI": 14,
+    "RELD_CVRP": 15,
+    "reld_mt": 16,
+    "RouteFinder": 18,
+    "T2T": 19,
+    "T2T500": 20,
+    "UNICO_MatPOENet": 21
+  },
+  "model_global_solvers": [
+    "BQ",
+    "DIFUSCO",
+    "DIFUSCO500",
+    "ELG",
+    "GLOP",
+    "ICAM",
+    "ICAM_ATSP",
+    "LEHD",
+    "MATNET",
+    "MATPOENET",
+    "MTPOMO",
+    "MVMOE",
+    "MoSES_CaDA",
+    "MoSES_RF",
+    "OMNI",
+    "RELD_CVRP",
+    "RELD_MOEL",
+    "RELD_MTL",
+    "RouteFinder",
+    "T2T",
+    "T2T500",
+    "UNICO_MatPOENet"
+  ],
+  "solver_aliases": {
+    "reld_mt": "RELD_MOEL"
+  },
+  "filtered_problems": [
+    "OVRPB",
+    "OVRPBL",
+    "OVRPBLTW",
+    "OVRPBTW",
+    "VRPB",
+    "VRPBL",
+    "VRPBLTW",
+    "VRPBTW"
+  ],
+  "removed_methods": [
+    "MVMOE",
+    "MoSES_CaDA",
+    "MoSES_RF",
+    "RELD_MTL",
+    "RouteFinder"
+  ],
+  "retained_reld_deployment": "RELD_MOEL",
+  "reld_removed_from_all_problem_pools": "RELD_MTL",
+  "reserved_inactive_global_solver_ids": [
+    11,
+    17
+  ],
+  "cost_combination": "none; retain the chosen deployment's native FP64 costs",
+  "solver_runs": 0,
+  "original_files_modified": false,
+  "inputs_modified": false,
+  "fresh_training_required": true,
+  "heldout_history": "Old 3895-member VAL/TEST sets are development-exposed; not newly blind.",
+  "remaining_semantic_limits": "B filtering does not certify equivalent semantics of remaining deployments.",
+  "problems": {
+    "TSP": {
+      "methods": [
+        "BQ",
+        "DIFUSCO",
+        "DIFUSCO500",
+        "ELG",
+        "LEHD",
+        "OMNI",
+        "T2T",
+        "T2T500"
+      ],
+      "global_solver_ids": [
+        0,
+        1,
+        2,
+        3,
+        7,
+        14,
+        19,
+        20
+      ],
+      "source_methods": [
+        "BQ",
+        "DIFUSCO",
+        "DIFUSCO500",
+        "ELG",
+        "LEHD",
+        "OMNI",
+        "T2T",
+        "T2T500"
+      ],
+      "retained_source_slots": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "removed_methods": [],
+      "splits": {
+        "train": "TSPtrain",
+        "val": "TSPval",
+        "test": "TSPtest"
+      },
+      "train_sbs": {
+        "sbs_solver": "T2T",
+        "sbs_slot": 6,
+        "selection_split": "train",
+        "selection_rule": "minimum train mean raw cost, independently for each problem",
+        "mean_cost_by_solver": {
+          "BQ": 8.08465625490969,
+          "DIFUSCO": 8.112698749017296,
+          "DIFUSCO500": 8.323332693250757,
+          "ELG": 8.169148155954149,
+          "LEHD": 8.12654027205355,
+          "OMNI": 8.27843153338371,
+          "T2T": 8.02395920723137,
+          "T2T500": 8.206647854009757
+        },
+        "mean_relative_regret_by_solver": {
+          "BQ": 0.016589446883540037,
+          "DIFUSCO": 0.01685548366554651,
+          "DIFUSCO500": 0.041461887863121015,
+          "ELG": 0.021576870104712327,
+          "LEHD": 0.02228763789970777,
+          "OMNI": 0.035789430060820665,
+          "T2T": 0.006083078548769816,
+          "T2T500": 0.026987147942938015
+        },
+        "minimum_mean_relative_regret_solver": "T2T",
+        "majority_winner_solver": "T2T"
+      },
+      "source_dataset": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/TSPtrain/dataset.pkl",
+        "bytes": 249140023,
+        "sha256": "a0d184416e87dd183d07567ad8a966483d3ab85ade5528ba021b2425c1ac9686"
+      },
+      "source_costs": {
+        "raw_label": {
+          "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/TSPtrain/raw_label.pkl",
+          "bytes": 26072703,
+          "sha256": "11d66d79f8a51722f914cdc48bc9af9db966fd289435955dc56cba3a332c80c5"
+        },
+        "results": {
+          "BQ": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/TSPtrain/results/result_BQ.txt",
+            "bytes": 1955025,
+            "sha256": "b094701e0e8b9ad6c2b47975d78f7c1beb8b6880577681976532316a16babb50"
+          },
+          "DIFUSCO": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/TSPtrain/results/result_DIFUSCO.txt",
+            "bytes": 1956618,
+            "sha256": "3655237890df1b24e0ab53f9576c7f21aec77ef19d3539126bd2cb003a8c8871"
+          },
+          "DIFUSCO500": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/TSPtrain/results/result_DIFUSCO500.txt",
+            "bytes": 1960059,
+            "sha256": "e9405230af6da69f44287ccbcf8909eaa0fec88156ba4e8bac0c3456e32c1d6a"
+          },
+          "ELG": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/TSPtrain/results/result_ELG.txt",
+            "bytes": 1957981,
+            "sha256": "e935ec9d01f98318374ed97368c1575a541376cacb45980e779cb7b19793879c"
+          },
+          "LEHD": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/TSPtrain/results/result_LEHD.txt",
+            "bytes": 1955676,
+            "sha256": "b2463686f7c7824a12ad8d356bfffcbdaf4068d032dfef8b103625cae5b23dcd"
+          },
+          "OMNI": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/TSPtrain/results/result_OMNI.txt",
+            "bytes": 1959591,
+            "sha256": "009e9fbf2d30165bff9201e6215415f3960929566fa289b6aa1dabad5bf5318c"
+          },
+          "T2T": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/TSPtrain/results/result_T2T.txt",
+            "bytes": 1955195,
+            "sha256": "735c88c84427510c0b91154001d1775ec166fcd506c611fce76d7c1b9feaf105"
+          },
+          "T2T500": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/TSPtrain/results/result_T2T500.txt",
+            "bytes": 1958321,
+            "sha256": "33e25984132822dc4dbcaed46d0576421412b3f680fbc5ac869c534c79bee287"
+          }
+        },
+        "rows": 100000,
+        "finite_cost_values": 800000,
+        "cost_dtype": "float64"
+      },
+      "source_generation": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/TSPtrain/\u751f\u6210\u4fe1\u606f.json",
+        "bytes": 208467,
+        "sha256": "fc598621d56af18974e9538344c0eb8c8c1824f8a00dc8ee4152943501c63198"
+      },
+      "source_label_completion": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/TSPtrain/\u6807\u7b7e\u5b8c\u6210.json",
+        "bytes": 439,
+        "sha256": "2dc64f0059793cd14710bf9aebce21bd9fc9b10d01fe5c90bcfaa35963511a7e"
+      }
+    },
+    "CVRP": {
+      "methods": [
+        "BQ",
+        "ELG",
+        "ICAM",
+        "LEHD",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "OMNI",
+        "RELD_CVRP",
+        "RouteFinder"
+      ],
+      "global_solver_ids": [
+        0,
+        3,
+        5,
+        7,
+        12,
+        13,
+        14,
+        15,
+        18
+      ],
+      "source_methods": [
+        "BQ",
+        "ELG",
+        "ICAM",
+        "LEHD",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "OMNI",
+        "RELD_CVRP",
+        "RouteFinder"
+      ],
+      "retained_source_slots": [
+        0,
+        1,
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "removed_methods": [
+        "MVMOE"
+      ],
+      "splits": {
+        "train": "CVRPtrain",
+        "val": "CVRPval",
+        "test": "CVRPtest"
+      },
+      "train_sbs": {
+        "sbs_solver": "RELD_CVRP",
+        "sbs_slot": 7,
+        "selection_split": "train",
+        "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+        "mean_cost_by_solver": {
+          "BQ": 18.45937333402815,
+          "ELG": 18.49947892494554,
+          "ICAM": 18.21394879819729,
+          "LEHD": 18.521651502468007,
+          "MoSES_CaDA": 19.18050302504914,
+          "MoSES_RF": 20.21590446078334,
+          "OMNI": 18.272885336540398,
+          "RELD_CVRP": 18.15198730124656,
+          "RouteFinder": 18.773263861108614
+        },
+        "mean_relative_regret_by_solver": {
+          "BQ": 0.028680185445955342,
+          "ELG": 0.033206050074763134,
+          "ICAM": 0.018411305555278003,
+          "LEHD": 0.032379783022792645,
+          "MoSES_CaDA": 0.06840725729939,
+          "MoSES_RF": 0.14874723427466943,
+          "OMNI": 0.024215153787159917,
+          "RELD_CVRP": 0.011434402663965148,
+          "RouteFinder": 0.045873007968803475
+        },
+        "minimum_mean_relative_regret_solver": "RELD_CVRP",
+        "majority_winner_solver": "OMNI",
+        "train_rows": 81000
+      },
+      "source_dataset": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/CVRPtrain/dataset.pkl",
+        "bytes": 421236147,
+        "sha256": "b3ed1da43c2654645e77955e4e0856a960a5a8c0ed4c8d72ac2fcd02e48e130e"
+      },
+      "source_costs": {
+        "raw_label": {
+          "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/CVRPtrain/raw_label.pkl",
+          "bytes": 31473450,
+          "sha256": "d8cf25aa9f0a84a8e0e4ed3bd2f22b067d83eeb1acad4e18a6e721c56caa0cd1"
+        },
+        "results": {
+          "BQ": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/CVRPtrain/results/result_BQ.txt",
+            "bytes": 2023859,
+            "sha256": "6718643c4a581944ecca8999e3ea64a69898d2e146d4f399684cafddc378642e"
+          },
+          "ELG": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/CVRPtrain/results/result_ELG.txt",
+            "bytes": 2024479,
+            "sha256": "75c751e9309d55912e76e72da10a58cc28bbde01bc691f8c9102bb1725ea2710"
+          },
+          "ICAM": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/CVRPtrain/results/result_ICAM.txt",
+            "bytes": 2024113,
+            "sha256": "0bc71daa7f5932e615c44fe29ff9f05f2b17f0db5b73250299e5860e9f6dbf55"
+          },
+          "LEHD": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/CVRPtrain/results/result_LEHD.txt",
+            "bytes": 2024218,
+            "sha256": "b5d5d8de73f23d65196cf44982001ca0e7d871ae87508cf2e02e8e2894617c1f"
+          },
+          "MVMOE": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/CVRPtrain/results/result_MVMOE.txt",
+            "bytes": 2025229,
+            "sha256": "b0fdfa6d1e986aea29134745912d2085b2128e91921eede534330a8913daa4ce"
+          },
+          "MoSES_CaDA": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/CVRPtrain/results/result_MoSES_CaDA.txt",
+            "bytes": 2024729,
+            "sha256": "69ecdeea4ed4b73d3e387ecf1cca4f5a78004d1eb3e82becdb78a0d566bd5b39"
+          },
+          "MoSES_RF": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/CVRPtrain/results/result_MoSES_RF.txt",
+            "bytes": 2026567,
+            "sha256": "740eef30370eaf139e6c98758494f8adcd4a786e56e6000bdb6e4482d621258d"
+          },
+          "OMNI": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/CVRPtrain/results/result_OMNI.txt",
+            "bytes": 2024760,
+            "sha256": "d6fdbbc30ba2188da7d42bc7ffb75905077e0fce39198add29dc96b3dfd97e67"
+          },
+          "RELD_CVRP": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/CVRPtrain/results/result_RELD_CVRP.txt",
+            "bytes": 1976193,
+            "sha256": "5937ef5c52fcf6f69e889cdbe57a96565f8bd76200c4e0aa669471dd570312db"
+          },
+          "RouteFinder": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/CVRPtrain/results/result_RouteFinder.txt",
+            "bytes": 2024520,
+            "sha256": "3e6f67865f479ece2c6c35b4bb103c20757a7e934ebba6629325093bb6bd424d"
+          }
+        },
+        "rows": 100000,
+        "finite_cost_values": 1000000,
+        "cost_dtype": "float64"
+      },
+      "source_generation": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/CVRPtrain/\u751f\u6210\u4fe1\u606f.json",
+        "bytes": 403047,
+        "sha256": "66abba2c887f25a000c0d7f087df68c58cc136cdf70e30142f7e2b41d6e92928"
+      },
+      "source_label_completion": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/CVRPtrain/\u6807\u7b7e\u5b8c\u6210.json",
+        "bytes": 477,
+        "sha256": "b66eb830ec84be6362d6a5a46aea2250ffaccab792e99b1f96c12da254022813"
+      },
+      "parent_methods": [
+        "BQ",
+        "ELG",
+        "ICAM",
+        "LEHD",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "OMNI",
+        "RELD_CVRP",
+        "RouteFinder"
+      ],
+      "retained_parent_slots": [
+        0,
+        1,
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "ATSP": {
+      "methods": [
+        "GLOP",
+        "ICAM_ATSP",
+        "MATNET",
+        "MATPOENET",
+        "UNICO_MatPOENet"
+      ],
+      "global_solver_ids": [
+        4,
+        6,
+        8,
+        9,
+        21
+      ],
+      "source_methods": [
+        "GLOP",
+        "ICAM_ATSP",
+        "MATNET",
+        "MATPOENET",
+        "UNICO_MatPOENet"
+      ],
+      "retained_source_slots": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "removed_methods": [],
+      "splits": {
+        "train": "ATSPtrain",
+        "val": "ATSPval",
+        "test": "ATSPtest"
+      },
+      "train_sbs": {
+        "sbs_solver": "UNICO_MatPOENet",
+        "sbs_slot": 4,
+        "selection_split": "train",
+        "selection_rule": "minimum train mean raw cost, independently for each problem",
+        "mean_cost_by_solver": {
+          "GLOP": 1.9307272556952333,
+          "ICAM_ATSP": 1.7141856534487916,
+          "MATNET": 2.309711719979473,
+          "MATPOENET": 1.7256538097365097,
+          "UNICO_MatPOENet": 1.6786786495718553
+        },
+        "mean_relative_regret_by_solver": {
+          "GLOP": 0.18262328088375634,
+          "ICAM_ATSP": 0.04891120598004222,
+          "MATNET": 0.4211339451453425,
+          "MATPOENET": 0.056602264949619154,
+          "UNICO_MatPOENet": 0.027686149368779472
+        },
+        "minimum_mean_relative_regret_solver": "UNICO_MatPOENet",
+        "majority_winner_solver": "UNICO_MatPOENet"
+      },
+      "source_dataset": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/ATSPtrain/dataset.pkl",
+        "bytes": 1684635751,
+        "sha256": "963ae97b8d5a73383e7d00e4330c1f187876a6b9a7217e87046326fd80e6537d"
+      },
+      "source_costs": {
+        "raw_label": {
+          "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/ATSPtrain/raw_label.pkl",
+          "bytes": 17971596,
+          "sha256": "3209378c43d964d9268c9615ff357bc637d7fb148533ba93f1b244552cb84f73"
+        },
+        "results": {
+          "GLOP": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/ATSPtrain/results/result_GLOP.txt",
+            "bytes": 1945464,
+            "sha256": "695431c12583871b2c0fcaf2771888b9694d8d24acd7ec0b54396443060bed8a"
+          },
+          "ICAM_ATSP": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/ATSPtrain/results/result_ICAM_ATSP.txt",
+            "bytes": 1946159,
+            "sha256": "411eed91af3e9e389a42ac63f124c5669f37bbbce1741aef0a7cdd635e47b19d"
+          },
+          "MATNET": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/ATSPtrain/results/result_MATNET.txt",
+            "bytes": 1944935,
+            "sha256": "8240b99f4810e9500530117d9fd26fb6d18e34a3e0a0e9cabc7ae499c46dc181"
+          },
+          "MATPOENET": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/ATSPtrain/results/result_MATPOENET.txt",
+            "bytes": 1946210,
+            "sha256": "a92ad2b252895257ea9ba8855e76a0886982a25c39d1dae92fbffaced92b438c"
+          },
+          "UNICO_MatPOENet": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/ATSPtrain/results/result_UNICO_MatPOENet.txt",
+            "bytes": 1946235,
+            "sha256": "997beddffa8eb86be06ef5e9fd599bd0f87ebc6db676a9aa99a49ce12651c07a"
+          }
+        },
+        "rows": 100000,
+        "finite_cost_values": 500000,
+        "cost_dtype": "float64"
+      },
+      "source_generation": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/ATSPtrain/\u751f\u6210\u4fe1\u606f.json",
+        "bytes": 167236,
+        "sha256": "b6c462dcc8cf1905e10e99c3a6b4b0ad45d83c9b52ad908543ac2a992063331f"
+      },
+      "source_label_completion": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/ATSPtrain/\u6807\u7b7e\u5b8c\u6210.json",
+        "bytes": 420,
+        "sha256": "3acbe0573ad84647d367284ac86c524c47c8375f1864ee3a47013649fc247953"
+      }
+    },
+    "OVRP": {
+      "methods": [
+        "MTPOMO",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "global_solver_ids": [
+        10,
+        12,
+        13,
+        16,
+        18
+      ],
+      "source_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "retained_source_slots": [
+        0,
+        2,
+        3,
+        4,
+        6
+      ],
+      "removed_methods": [
+        "MVMOE",
+        "RELD_MTL"
+      ],
+      "splits": {
+        "train": "OVRPtrain",
+        "val": "OVRPval",
+        "test": "OVRPtest"
+      },
+      "train_sbs": {
+        "sbs_solver": "MoSES_RF",
+        "sbs_slot": 2,
+        "selection_split": "train",
+        "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+        "mean_cost_by_solver": {
+          "MTPOMO": 8.364081419688693,
+          "MoSES_CaDA": 7.459637796207699,
+          "MoSES_RF": 7.453530567248632,
+          "reld_mt": 7.630102955309023,
+          "RouteFinder": 7.471519006823137
+        },
+        "mean_relative_regret_by_solver": {
+          "MTPOMO": 0.13882088324449623,
+          "MoSES_CaDA": 0.008480373865337423,
+          "MoSES_RF": 0.007705345912195409,
+          "reld_mt": 0.033498169049276674,
+          "RouteFinder": 0.01016136858707469
+        },
+        "minimum_mean_relative_regret_solver": "MoSES_RF",
+        "majority_winner_solver": "MoSES_CaDA",
+        "train_rows": 81000
+      },
+      "source_dataset": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPtrain/dataset.pkl",
+        "bytes": 238983943,
+        "sha256": "d3023fc99ea1ec466e4e4677ae885745cda3101aead9c05611a41aae7005ef16"
+      },
+      "source_costs": {
+        "raw_label": {
+          "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPtrain/raw_label.pkl",
+          "bytes": 23372334,
+          "sha256": "1c3a7d53dd69a773dc592ee207e25127d0c02e9c1bb75c1fb8bdd2973e79a7c1"
+        },
+        "results": {
+          "MTPOMO": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPtrain/results/result_MTPOMO.txt",
+            "bytes": 1953268,
+            "sha256": "b88b8bfae58a4b30923750f33c852b1452b9a1cdaadb13f398a6e61d017cf997"
+          },
+          "MVMOE": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPtrain/results/result_MVMOE.txt",
+            "bytes": 1960642,
+            "sha256": "71e448cc2d2b2479dd22139fbcb6893670376ec9665a14aeb9aa21039566dfa6"
+          },
+          "MoSES_CaDA": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPtrain/results/result_MoSES_CaDA.txt",
+            "bytes": 1943521,
+            "sha256": "8eb6122a7cc58e32aada77bb6849de66526e64e23a5dffa51409a0aed7ae3897"
+          },
+          "MoSES_RF": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPtrain/results/result_MoSES_RF.txt",
+            "bytes": 1943470,
+            "sha256": "2793741b3b934e3cb706b6b365c3535f8996f18c3d74ccab4f4ff5c16257f1fc"
+          },
+          "RELD_MOEL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPtrain/results/result_RELD_MOEL.txt",
+            "bytes": 1895256,
+            "sha256": "98495658d52ea5c64681b5b7f3fa9998e15ef96221039ebfb19f3231412f5a3c"
+          },
+          "RELD_MTL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPtrain/results/result_RELD_MTL.txt",
+            "bytes": 1894969,
+            "sha256": "c0c392bbfc462bac68fdd6695ba7d7107e64fbf0329d41f147ab3cf16db6ba18"
+          },
+          "RouteFinder": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPtrain/results/result_RouteFinder.txt",
+            "bytes": 1943746,
+            "sha256": "cfb2c6ce5b857b841d14ee37721023f74dfd74f55b81bc88dc8928d0445327ec"
+          }
+        },
+        "rows": 100000,
+        "finite_cost_values": 700000,
+        "cost_dtype": "float64"
+      },
+      "source_generation": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPtrain/\u751f\u6210\u4fe1\u606f.json",
+        "bytes": 175659,
+        "sha256": "01e1d9d84deabd5fecc1ecf1125b5939e34cfdd6350102e39ab79d8bf1a2044a"
+      },
+      "source_label_completion": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPtrain/\u6807\u7b7e\u5b8c\u6210.json",
+        "bytes": 450,
+        "sha256": "d0e810bb8a57934a27439f23611ebb3519bc53ddc0b6d71df5eb9d0590276c4b"
+      },
+      "parent_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "retained_parent_slots": [
+        0,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "VRPB": {
+      "methods": [
+        "MTPOMO",
+        "reld_mt"
+      ],
+      "global_solver_ids": [
+        10,
+        16
+      ],
+      "source_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "retained_source_slots": [
+        0,
+        4
+      ],
+      "removed_methods": [
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "splits": {
+        "train": "VRPBtrain",
+        "val": "VRPBval",
+        "test": "VRPBtest"
+      },
+      "train_sbs": {
+        "sbs_solver": "reld_mt",
+        "sbs_slot": 1,
+        "selection_split": "train",
+        "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+        "mean_cost_by_solver": {
+          "MTPOMO": 10.728214068583513,
+          "reld_mt": 9.357263797206548
+        },
+        "mean_relative_regret_by_solver": {
+          "MTPOMO": 0.15123476957518991,
+          "reld_mt": 0.001995460707999445
+        },
+        "minimum_mean_relative_regret_solver": "reld_mt",
+        "majority_winner_solver": "reld_mt",
+        "train_rows": 81000
+      },
+      "source_dataset": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBtrain/dataset.pkl",
+        "bytes": 238983943,
+        "sha256": "11e22a018e0185836428bc54d53c03fd68e6d672e5c23de2f1368eb24dc6b9e4"
+      },
+      "source_costs": {
+        "raw_label": {
+          "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBtrain/raw_label.pkl",
+          "bytes": 23372334,
+          "sha256": "2ccbc265abd2de269287896981a9fdf247e8e9491e45f559e0eff441eb0cf9a3"
+        },
+        "results": {
+          "MTPOMO": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBtrain/results/result_MTPOMO.txt",
+            "bytes": 1988562,
+            "sha256": "d5b35db57f3431224e185f807fbbb2e5ac452a6b1860120a8f9e3f18c6af9e0e"
+          },
+          "MVMOE": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBtrain/results/result_MVMOE.txt",
+            "bytes": 1991345,
+            "sha256": "4b4b1fb97017e9d36ff35f3e3364e216ae22cc6b206cb6e474022f4e44cc51d5"
+          },
+          "MoSES_CaDA": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBtrain/results/result_MoSES_CaDA.txt",
+            "bytes": 1995503,
+            "sha256": "95a3bf95a1e5ec80f9e6786bfefe9a978f8b00af0b63027c297615693cb6aa48"
+          },
+          "MoSES_RF": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBtrain/results/result_MoSES_RF.txt",
+            "bytes": 1994060,
+            "sha256": "0169b40e51d9bf568e5b0d9a9345129dca4eac976893694a8a5de301181d1af9"
+          },
+          "RELD_MOEL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBtrain/results/result_RELD_MOEL.txt",
+            "bytes": 1923377,
+            "sha256": "c2d9be52a5b6bfeee489698e30ac0d78df1c290551c41bd88a8795f96497b36b"
+          },
+          "RELD_MTL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBtrain/results/result_RELD_MTL.txt",
+            "bytes": 1922585,
+            "sha256": "27053d884141bf420a28cffe2f63eefd5688311db3ab73e64a913d35be87dfbd"
+          },
+          "RouteFinder": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBtrain/results/result_RouteFinder.txt",
+            "bytes": 1993313,
+            "sha256": "742d0c5732b04fd9344dfa30be9bc858e72e50f461bffd71848882852e0f52d4"
+          }
+        },
+        "rows": 100000,
+        "finite_cost_values": 700000,
+        "cost_dtype": "float64"
+      },
+      "source_generation": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBtrain/\u751f\u6210\u4fe1\u606f.json",
+        "bytes": 175672,
+        "sha256": "04e76189e6feca489c4d354e587bd2a84acbde4ed71097ad43be312d1db1228d"
+      },
+      "source_label_completion": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBtrain/\u6807\u7b7e\u5b8c\u6210.json",
+        "bytes": 450,
+        "sha256": "9b202aee075797d851d563ac8a08f43899d2eaed44f47b8fde2bf0a39ac8b1b3"
+      },
+      "parent_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "reld_mt"
+      ],
+      "retained_parent_slots": [
+        0,
+        2
+      ]
+    },
+    "VRPL": {
+      "methods": [
+        "MTPOMO",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "global_solver_ids": [
+        10,
+        12,
+        13,
+        16,
+        18
+      ],
+      "source_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "retained_source_slots": [
+        0,
+        2,
+        3,
+        4,
+        6
+      ],
+      "removed_methods": [
+        "MVMOE",
+        "RELD_MTL"
+      ],
+      "splits": {
+        "train": "VRPLtrain",
+        "val": "VRPLval",
+        "test": "VRPLtest"
+      },
+      "train_sbs": {
+        "sbs_solver": "MoSES_RF",
+        "sbs_slot": 2,
+        "selection_split": "train",
+        "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+        "mean_cost_by_solver": {
+          "MTPOMO": 13.406389861889709,
+          "MoSES_CaDA": 12.402391799967868,
+          "MoSES_RF": 12.400882414505778,
+          "reld_mt": 12.535631861898507,
+          "RouteFinder": 12.423433225202075
+        },
+        "mean_relative_regret_by_solver": {
+          "MTPOMO": 0.0865835260980144,
+          "MoSES_CaDA": 0.004592193469029809,
+          "MoSES_RF": 0.004590622626381127,
+          "reld_mt": 0.01605529210361194,
+          "RouteFinder": 0.006426654250694685
+        },
+        "minimum_mean_relative_regret_solver": "MoSES_RF",
+        "majority_winner_solver": "MoSES_RF",
+        "train_rows": 81000
+      },
+      "source_dataset": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLtrain/dataset.pkl",
+        "bytes": 240354153,
+        "sha256": "baaf1d209fb2d9bac8ad4cde7ca0c894c823e4f8cabc9c9d549b0f3396e523da"
+      },
+      "source_costs": {
+        "raw_label": {
+          "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLtrain/raw_label.pkl",
+          "bytes": 23372334,
+          "sha256": "d1c1bda6d403db7292d3ec0cdbe9c91cffeaf344b2f4f3d366532a87408f89bd"
+        },
+        "results": {
+          "MTPOMO": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLtrain/results/result_MTPOMO.txt",
+            "bytes": 2023222,
+            "sha256": "98f3d8857e98fcba9a7067c54128cbd17c05ab27f3a5d09aedacb26f12c0c780"
+          },
+          "MVMOE": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLtrain/results/result_MVMOE.txt",
+            "bytes": 2028343,
+            "sha256": "8d39b91ea3d84dcca9f664c84c311cde4055c5269bc8b969e02474eed01ee4df"
+          },
+          "MoSES_CaDA": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLtrain/results/result_MoSES_CaDA.txt",
+            "bytes": 2019211,
+            "sha256": "c04cdb741417ac9781aa29a3e1a67cf0dde293e7522a849298248a7fa95994d4"
+          },
+          "MoSES_RF": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLtrain/results/result_MoSES_RF.txt",
+            "bytes": 2019287,
+            "sha256": "f704678ebecbc030de018b854c61fca5a6847c8566f74d43271969e133a6a9ce"
+          },
+          "RELD_MOEL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLtrain/results/result_RELD_MOEL.txt",
+            "bytes": 1972946,
+            "sha256": "0b6abe08dd7021e70328b61060d2199f1b4dff944e50a0ecae372d59bbf3df6b"
+          },
+          "RELD_MTL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLtrain/results/result_RELD_MTL.txt",
+            "bytes": 1972566,
+            "sha256": "6f36d8ed7629723bd03273ee12fd8ec5f94b9dfb6adacd59b78bc0bd44dd869b"
+          },
+          "RouteFinder": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLtrain/results/result_RouteFinder.txt",
+            "bytes": 2019461,
+            "sha256": "11e3fba3c1fe9a5ff4b7ae71501b7de46a67e8ad787b4c9fa8fc0a2b3caeee89"
+          }
+        },
+        "rows": 100000,
+        "finite_cost_values": 700000,
+        "cost_dtype": "float64"
+      },
+      "source_generation": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLtrain/\u751f\u6210\u4fe1\u606f.json",
+        "bytes": 175654,
+        "sha256": "610623f8644d8e7fa8c756aecc5420fa18cc85f99dd695698f149cda3cf07663"
+      },
+      "source_label_completion": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLtrain/\u6807\u7b7e\u5b8c\u6210.json",
+        "bytes": 450,
+        "sha256": "ac7162ca795acf5531c329a67fa4881e9317b155bef520ee1bcecafcef11bf18"
+      },
+      "parent_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "retained_parent_slots": [
+        0,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "VRPTW": {
+      "methods": [
+        "MTPOMO",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "global_solver_ids": [
+        10,
+        12,
+        13,
+        16,
+        18
+      ],
+      "source_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "retained_source_slots": [
+        0,
+        2,
+        3,
+        4,
+        6
+      ],
+      "removed_methods": [
+        "MVMOE",
+        "RELD_MTL"
+      ],
+      "splits": {
+        "train": "VRPTWtrain",
+        "val": "VRPTWval",
+        "test": "VRPTWtest"
+      },
+      "train_sbs": {
+        "sbs_solver": "reld_mt",
+        "sbs_slot": 3,
+        "selection_split": "train",
+        "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+        "mean_cost_by_solver": {
+          "MTPOMO": 23.49849686087494,
+          "MoSES_CaDA": 22.847769326674968,
+          "MoSES_RF": 21.7266483654917,
+          "reld_mt": 18.813703310006815,
+          "RouteFinder": 21.763708729749755
+        },
+        "mean_relative_regret_by_solver": {
+          "MTPOMO": 0.24941296338864427,
+          "MoSES_CaDA": 0.20592609947257007,
+          "MoSES_RF": 0.15626313897366076,
+          "reld_mt": 0.0006097535704545848,
+          "RouteFinder": 0.15384901761201603
+        },
+        "minimum_mean_relative_regret_solver": "reld_mt",
+        "majority_winner_solver": "reld_mt",
+        "train_rows": 81000
+      },
+      "source_dataset": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPTWtrain/dataset.pkl",
+        "bytes": 444096782,
+        "sha256": "f804ff02cd8192c55a427957f59e29645ae8c4048f32c941a6b28986ef60719e"
+      },
+      "source_costs": {
+        "raw_label": {
+          "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPTWtrain/raw_label.pkl",
+          "bytes": 23372334,
+          "sha256": "73c258d676cf7b4c50d6091a050a80411a1f74686fa6feb150f617a2b1ece05e"
+        },
+        "results": {
+          "MTPOMO": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPTWtrain/results/result_MTPOMO.txt",
+            "bytes": 2034568,
+            "sha256": "af99e423ed1e55739067de9402369f09c64e6740e86ae7584890a19e5ba5c4d3"
+          },
+          "MVMOE": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPTWtrain/results/result_MVMOE.txt",
+            "bytes": 2034794,
+            "sha256": "405fe8fc2b2766d74c438781a01a4c2addf2180dc3bd2dc70c1ad2ecc3a820c7"
+          },
+          "MoSES_CaDA": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPTWtrain/results/result_MoSES_CaDA.txt",
+            "bytes": 2034245,
+            "sha256": "37a14c38a7e09be97308bd4deb504311bedaa60372f2b58444ce5298d5c58793"
+          },
+          "MoSES_RF": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPTWtrain/results/result_MoSES_RF.txt",
+            "bytes": 2034797,
+            "sha256": "047bc045cee935f0b159eea446eb422d49d14acb9991c4f8212baf01817d5ad8"
+          },
+          "RELD_MOEL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPTWtrain/results/result_RELD_MOEL.txt",
+            "bytes": 1987101,
+            "sha256": "01c5a37dad6ee9a0560977d367bd1f609ff05cdc871a0aa8c62ef4a35c9d4b79"
+          },
+          "RELD_MTL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPTWtrain/results/result_RELD_MTL.txt",
+            "bytes": 1986933,
+            "sha256": "205e80a9cea8c2aeb554acea86abeac9a6e622bd56c58f33ada7f20d19f6e966"
+          },
+          "RouteFinder": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPTWtrain/results/result_RouteFinder.txt",
+            "bytes": 2034761,
+            "sha256": "afa199adcab907d4c56f8971086c25bf4ee996ebd1ba1d710cb1a96dd8830a0a"
+          }
+        },
+        "rows": 100000,
+        "finite_cost_values": 700000,
+        "cost_dtype": "float64"
+      },
+      "source_generation": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPTWtrain/\u751f\u6210\u4fe1\u606f.json",
+        "bytes": 176486,
+        "sha256": "38531b6d01fb27e18acbb7cf2508a376ea2d8f75adf1eb46460c192f1dbc36fb"
+      },
+      "source_label_completion": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPTWtrain/\u6807\u7b7e\u5b8c\u6210.json",
+        "bytes": 451,
+        "sha256": "9d392487fe445cf94886006167d5a0f467d2766b0eead0ba0373c14f426bfb14"
+      },
+      "parent_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "retained_parent_slots": [
+        0,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "OVRPTW": {
+      "methods": [
+        "MTPOMO",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "global_solver_ids": [
+        10,
+        12,
+        13,
+        16,
+        18
+      ],
+      "source_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "retained_source_slots": [
+        0,
+        2,
+        3,
+        4,
+        6
+      ],
+      "removed_methods": [
+        "MVMOE",
+        "RELD_MTL"
+      ],
+      "splits": {
+        "train": "OVRPTWtrain",
+        "val": "OVRPTWval",
+        "test": "OVRPTWtest"
+      },
+      "train_sbs": {
+        "sbs_solver": "reld_mt",
+        "sbs_slot": 3,
+        "selection_split": "train",
+        "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+        "mean_cost_by_solver": {
+          "MTPOMO": 14.46213650860616,
+          "MoSES_CaDA": 13.108913305992031,
+          "MoSES_RF": 12.088126960518823,
+          "reld_mt": 10.118639726050072,
+          "RouteFinder": 11.649121564261714
+        },
+        "mean_relative_regret_by_solver": {
+          "MTPOMO": 0.43394183307438455,
+          "MoSES_CaDA": 0.2756812762729585,
+          "MoSES_RF": 0.18894463193010722,
+          "reld_mt": 0.00030030021489550914,
+          "RouteFinder": 0.1469010776109264
+        },
+        "minimum_mean_relative_regret_solver": "reld_mt",
+        "majority_winner_solver": "reld_mt",
+        "train_rows": 81000
+      },
+      "source_dataset": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPTWtrain/dataset.pkl",
+        "bytes": 444096782,
+        "sha256": "ba7f6ef5376e8f0424c169ebdbcf727a6ff06401fcf2f6866ba9d4fa4e3fa3db"
+      },
+      "source_costs": {
+        "raw_label": {
+          "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPTWtrain/raw_label.pkl",
+          "bytes": 23372334,
+          "sha256": "1c21579634924c1ad38c9b84c5427bab79b6187754142410447249d66b031422"
+        },
+        "results": {
+          "MTPOMO": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPTWtrain/results/result_MTPOMO.txt",
+            "bytes": 2025467,
+            "sha256": "2b3d54cc1e761085b3ae4aa0ad06eb948856b14bf9ee832dc96c0b5684dc0dcc"
+          },
+          "MVMOE": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPTWtrain/results/result_MVMOE.txt",
+            "bytes": 2000300,
+            "sha256": "673d4b92a75506d8e3763cea1a151ab9427c023d36ba912a7447bc6e76464388"
+          },
+          "MoSES_CaDA": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPTWtrain/results/result_MoSES_CaDA.txt",
+            "bytes": 2008341,
+            "sha256": "aebe6a52e881646e3b8dc00a2e798096998611405b56fd8526c6cb742a76b4b5"
+          },
+          "MoSES_RF": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPTWtrain/results/result_MoSES_RF.txt",
+            "bytes": 2006958,
+            "sha256": "4233b04497b6a4cbdd646a92b5247c1a531b68ba9daef4244041bf96ced72fe1"
+          },
+          "RELD_MOEL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPTWtrain/results/result_RELD_MOEL.txt",
+            "bytes": 1936797,
+            "sha256": "a697d8b7eb7bd6f0d6cbe1aef86c5bda35743824c66892ad00062a330f49f1e7"
+          },
+          "RELD_MTL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPTWtrain/results/result_RELD_MTL.txt",
+            "bytes": 1936551,
+            "sha256": "59e6b46f4cc33e244ce1a5aaac925dfb35324672c78ecd20de2fd96ba8f95100"
+          },
+          "RouteFinder": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPTWtrain/results/result_RouteFinder.txt",
+            "bytes": 2003424,
+            "sha256": "a524390df8aa8aea347680f60a7577f8091c01f3cf3793279fe838a2527e62d7"
+          }
+        },
+        "rows": 100000,
+        "finite_cost_values": 700000,
+        "cost_dtype": "float64"
+      },
+      "source_generation": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPTWtrain/\u751f\u6210\u4fe1\u606f.json",
+        "bytes": 177282,
+        "sha256": "cd825cd1837b4bcede23bd291a16a898a45554bff2534fc36e6aeeaff1f8c648"
+      },
+      "source_label_completion": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPTWtrain/\u6807\u7b7e\u5b8c\u6210.json",
+        "bytes": 452,
+        "sha256": "1cac50623f9e4d7e2d0c3e1687f692e0a68896651d264a24ca536ef52af95a0c"
+      },
+      "parent_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "retained_parent_slots": [
+        0,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "OVRPB": {
+      "methods": [
+        "MTPOMO",
+        "reld_mt"
+      ],
+      "global_solver_ids": [
+        10,
+        16
+      ],
+      "source_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "retained_source_slots": [
+        0,
+        4
+      ],
+      "removed_methods": [
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "splits": {
+        "train": "OVRPBtrain",
+        "val": "OVRPBval",
+        "test": "OVRPBtest"
+      },
+      "train_sbs": {
+        "sbs_solver": "reld_mt",
+        "sbs_slot": 1,
+        "selection_split": "train",
+        "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+        "mean_cost_by_solver": {
+          "MTPOMO": 7.3109029222212065,
+          "reld_mt": 6.363229809475488
+        },
+        "mean_relative_regret_by_solver": {
+          "MTPOMO": 0.16759652390399699,
+          "reld_mt": 0.0015154323533755592
+        },
+        "minimum_mean_relative_regret_solver": "reld_mt",
+        "majority_winner_solver": "reld_mt",
+        "train_rows": 81000
+      },
+      "source_dataset": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBtrain/dataset.pkl",
+        "bytes": 238983943,
+        "sha256": "8093d43858b6cf43e1a0de7eaf7ff17df9147cf9780e42950a8b447f80da9e0a"
+      },
+      "source_costs": {
+        "raw_label": {
+          "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBtrain/raw_label.pkl",
+          "bytes": 23372334,
+          "sha256": "9aba53488c09f4cced0e4de577e18f47f83472b0068e50d85b4472be17564a57"
+        },
+        "results": {
+          "MTPOMO": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBtrain/results/result_MTPOMO.txt",
+            "bytes": 1944482,
+            "sha256": "62da0e79e813a95b06975019f081c1be6580d864c211e3d9405acf08e1679631"
+          },
+          "MVMOE": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBtrain/results/result_MVMOE.txt",
+            "bytes": 1951940,
+            "sha256": "f89c79a86d8bee211e315b56068c3397b4d2e5f994de70d201631f2da6d89be8"
+          },
+          "MoSES_CaDA": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBtrain/results/result_MoSES_CaDA.txt",
+            "bytes": 1944272,
+            "sha256": "dc225833267f6f908078902a99dfe27fded8039da20d8146189dbe04729a4f1d"
+          },
+          "MoSES_RF": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBtrain/results/result_MoSES_RF.txt",
+            "bytes": 1944395,
+            "sha256": "588e86fa2ceda87f77f965423606b354a4497bbe722f43b69d2e85199f0bdfdf"
+          },
+          "RELD_MOEL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBtrain/results/result_RELD_MOEL.txt",
+            "bytes": 1889045,
+            "sha256": "ba6f93c87c602008f6f40d618e6f11bc56c2c1d1ebcb5002655b3b7ff6f8724f"
+          },
+          "RELD_MTL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBtrain/results/result_RELD_MTL.txt",
+            "bytes": 1889038,
+            "sha256": "a6bf332933e0a7b31aca8f775440d23f8c411d95e3ac9cf6a1df957425bd7dcc"
+          },
+          "RouteFinder": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBtrain/results/result_RouteFinder.txt",
+            "bytes": 1944070,
+            "sha256": "62b7da1bf92278d04621ebe6a2049b1d2cd848e9c5e5e8b884d294e6473aa8d9"
+          }
+        },
+        "rows": 100000,
+        "finite_cost_values": 700000,
+        "cost_dtype": "float64"
+      },
+      "source_generation": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBtrain/\u751f\u6210\u4fe1\u606f.json",
+        "bytes": 176461,
+        "sha256": "fe24e7553fbab5f16f83a15860783f3a1fce401fcb5c500729efa73dbc780587"
+      },
+      "source_label_completion": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBtrain/\u6807\u7b7e\u5b8c\u6210.json",
+        "bytes": 451,
+        "sha256": "50fcd83193709811cb25aeb2026e4477bad01ecff780b7c1848bc0642c929dd7"
+      },
+      "parent_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "reld_mt"
+      ],
+      "retained_parent_slots": [
+        0,
+        2
+      ]
+    },
+    "OVRPL": {
+      "methods": [
+        "MTPOMO",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "global_solver_ids": [
+        10,
+        12,
+        13,
+        16,
+        18
+      ],
+      "source_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "retained_source_slots": [
+        0,
+        2,
+        3,
+        4,
+        6
+      ],
+      "removed_methods": [
+        "MVMOE",
+        "RELD_MTL"
+      ],
+      "splits": {
+        "train": "OVRPLtrain",
+        "val": "OVRPLval",
+        "test": "OVRPLtest"
+      },
+      "train_sbs": {
+        "sbs_solver": "MoSES_RF",
+        "sbs_slot": 2,
+        "selection_split": "train",
+        "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+        "mean_cost_by_solver": {
+          "MTPOMO": 8.310416814495266,
+          "MoSES_CaDA": 7.459575016248385,
+          "MoSES_RF": 7.453219449870516,
+          "reld_mt": 7.632744570470027,
+          "RouteFinder": 7.474810907605399
+        },
+        "mean_relative_regret_by_solver": {
+          "MTPOMO": 0.1312101385874638,
+          "MoSES_CaDA": 0.008310570722381812,
+          "MoSES_RF": 0.007581411800161423,
+          "reld_mt": 0.033745582208609286,
+          "RouteFinder": 0.01049917537781279
+        },
+        "minimum_mean_relative_regret_solver": "MoSES_RF",
+        "majority_winner_solver": "MoSES_CaDA",
+        "train_rows": 81000
+      },
+      "source_dataset": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLtrain/dataset.pkl",
+        "bytes": 240354153,
+        "sha256": "34670f59b9d9cda8b2eec166013eb70cd198fc9dc7d2bdb76c6feb176ae72f24"
+      },
+      "source_costs": {
+        "raw_label": {
+          "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLtrain/raw_label.pkl",
+          "bytes": 23372334,
+          "sha256": "2627e6280b7e6192dc42fef46bb5f42eb34be7eee62eabb307c2c977d5bf83be"
+        },
+        "results": {
+          "MTPOMO": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLtrain/results/result_MTPOMO.txt",
+            "bytes": 1953091,
+            "sha256": "02ae80b6bc83374f59781d3c986a55409a5645c2deb724cc58247c971993a7b8"
+          },
+          "MVMOE": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLtrain/results/result_MVMOE.txt",
+            "bytes": 1960651,
+            "sha256": "08178d0162080f14b001c9796fc5739ed5992518a031dc5b33ffd3c18f42b06e"
+          },
+          "MoSES_CaDA": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLtrain/results/result_MoSES_CaDA.txt",
+            "bytes": 1943522,
+            "sha256": "d13a808915292db39e7238bdbac9c1ac0404cb0381fa830d89dc5d6f1ab483de"
+          },
+          "MoSES_RF": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLtrain/results/result_MoSES_RF.txt",
+            "bytes": 1943529,
+            "sha256": "669842b75e5224d078a211306da5c2e2539fb033de34c7ce00526994b39d34b4"
+          },
+          "RELD_MOEL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLtrain/results/result_RELD_MOEL.txt",
+            "bytes": 1895291,
+            "sha256": "e625fb1194501fd4d01669cc6246d3bcf60a2abe87faf613e4a0a0485adab143"
+          },
+          "RELD_MTL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLtrain/results/result_RELD_MTL.txt",
+            "bytes": 1895051,
+            "sha256": "07c4ef13e1d39f3bce5ba341308b417d102082b073fbbcc5dee54d000900aa21"
+          },
+          "RouteFinder": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLtrain/results/result_RouteFinder.txt",
+            "bytes": 1943791,
+            "sha256": "7738d6244dc8aa213baffd92242d5f5ceeaa960aa0463d1cc99f3506be590193"
+          }
+        },
+        "rows": 100000,
+        "finite_cost_values": 700000,
+        "cost_dtype": "float64"
+      },
+      "source_generation": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLtrain/\u751f\u6210\u4fe1\u606f.json",
+        "bytes": 176483,
+        "sha256": "ec1aa3111b92956bd43358dbfaf7f0d7d0e39b09ae29fba399388f06d881b10e"
+      },
+      "source_label_completion": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLtrain/\u6807\u7b7e\u5b8c\u6210.json",
+        "bytes": 451,
+        "sha256": "92a147ae7248f03b335a3e208bb39d77e45f2ef68d872e38c256e756078505d8"
+      },
+      "parent_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "retained_parent_slots": [
+        0,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "VRPBL": {
+      "methods": [
+        "MTPOMO",
+        "reld_mt"
+      ],
+      "global_solver_ids": [
+        10,
+        16
+      ],
+      "source_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "retained_source_slots": [
+        0,
+        4
+      ],
+      "removed_methods": [
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "splits": {
+        "train": "VRPBLtrain",
+        "val": "VRPBLval",
+        "test": "VRPBLtest"
+      },
+      "train_sbs": {
+        "sbs_solver": "reld_mt",
+        "sbs_slot": 1,
+        "selection_split": "train",
+        "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+        "mean_cost_by_solver": {
+          "MTPOMO": 10.635488206627937,
+          "reld_mt": 9.403115061842346
+        },
+        "mean_relative_regret_by_solver": {
+          "MTPOMO": 0.13528644495659528,
+          "reld_mt": 0.0019082141688602297
+        },
+        "minimum_mean_relative_regret_solver": "reld_mt",
+        "majority_winner_solver": "reld_mt",
+        "train_rows": 81000
+      },
+      "source_dataset": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLtrain/dataset.pkl",
+        "bytes": 240354153,
+        "sha256": "0ae8cc3906db1c7533f88cb146cab14b404ddff4000aa114afadabf1606ee4b0"
+      },
+      "source_costs": {
+        "raw_label": {
+          "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLtrain/raw_label.pkl",
+          "bytes": 23372334,
+          "sha256": "046c25c4f0ffd7dac92e2224c50c36072fdfb6ee50f595152e9120269da96d4f"
+        },
+        "results": {
+          "MTPOMO": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLtrain/results/result_MTPOMO.txt",
+            "bytes": 1989551,
+            "sha256": "8c43911ae92c2d66ae28c7177cfca65e2f28d6ea5bf789505ecef30748f9b89b"
+          },
+          "MVMOE": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLtrain/results/result_MVMOE.txt",
+            "bytes": 1991929,
+            "sha256": "d288e44ff6fd2cb28eb53f63f4ed7c0b566a3c9f90a99b685b26de3df77ecfaa"
+          },
+          "MoSES_CaDA": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLtrain/results/result_MoSES_CaDA.txt",
+            "bytes": 1994035,
+            "sha256": "c1e5d0d9482036073d5f75fd3141814c84fbef83965169455be602386402a4d9"
+          },
+          "MoSES_RF": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLtrain/results/result_MoSES_RF.txt",
+            "bytes": 1993035,
+            "sha256": "52626759e639efdec372c3a4f45314770def9a87d96cf16b3173c9f78cb8266a"
+          },
+          "RELD_MOEL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLtrain/results/result_RELD_MOEL.txt",
+            "bytes": 1924228,
+            "sha256": "d4b7013fbf4cb8fef54870f7c861ef22a2145b998080b0516c7afd55f3a313d2"
+          },
+          "RELD_MTL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLtrain/results/result_RELD_MTL.txt",
+            "bytes": 1923244,
+            "sha256": "126fd747fd5382bf9716399bb69e4d3f2dd7e213f63ca2a547863c511044006d"
+          },
+          "RouteFinder": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLtrain/results/result_RouteFinder.txt",
+            "bytes": 1993179,
+            "sha256": "51d67b791600906411d449152359c95817bd6bd1f9ced3721cee3c9c4f293483"
+          }
+        },
+        "rows": 100000,
+        "finite_cost_values": 700000,
+        "cost_dtype": "float64"
+      },
+      "source_generation": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLtrain/\u751f\u6210\u4fe1\u606f.json",
+        "bytes": 176468,
+        "sha256": "14d473b0576dd5f5dfdedc07aeed664b527db80a09ba9454693e4a14d1308057"
+      },
+      "source_label_completion": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLtrain/\u6807\u7b7e\u5b8c\u6210.json",
+        "bytes": 451,
+        "sha256": "16c760ce42e68440749ea25045923c5ca1eb654ede0158f44668fb0ff63f7d40"
+      },
+      "parent_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "reld_mt"
+      ],
+      "retained_parent_slots": [
+        0,
+        2
+      ]
+    },
+    "VRPBTW": {
+      "methods": [
+        "MTPOMO",
+        "reld_mt"
+      ],
+      "global_solver_ids": [
+        10,
+        16
+      ],
+      "source_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "retained_source_slots": [
+        0,
+        4
+      ],
+      "removed_methods": [
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "splits": {
+        "train": "VRPBTWtrain",
+        "val": "VRPBTWval",
+        "test": "VRPBTWtest"
+      },
+      "train_sbs": {
+        "sbs_solver": "reld_mt",
+        "sbs_slot": 1,
+        "selection_split": "train",
+        "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+        "mean_cost_by_solver": {
+          "MTPOMO": 24.812297379670284,
+          "reld_mt": 19.73354933708689
+        },
+        "mean_relative_regret_by_solver": {
+          "MTPOMO": 0.2604935534156881,
+          "reld_mt": 4.367367036444455e-05
+        },
+        "minimum_mean_relative_regret_solver": "reld_mt",
+        "majority_winner_solver": "reld_mt",
+        "train_rows": 81000
+      },
+      "source_dataset": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBTWtrain/dataset.pkl",
+        "bytes": 444096782,
+        "sha256": "34b7356b10323c7fde84657cbc6fad1b0b52351e11673020fa99294679ce2d08"
+      },
+      "source_costs": {
+        "raw_label": {
+          "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBTWtrain/raw_label.pkl",
+          "bytes": 23372334,
+          "sha256": "7942b1606ac0d796ebcb88ef2ecd263030d712f5ca527fb8b3414b35cab82628"
+        },
+        "results": {
+          "MTPOMO": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBTWtrain/results/result_MTPOMO.txt",
+            "bytes": 2034429,
+            "sha256": "aedd144253bc805d3bfc38ebf707d9015b9299a2b09136d318b0fcdea9f51611"
+          },
+          "MVMOE": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBTWtrain/results/result_MVMOE.txt",
+            "bytes": 2034721,
+            "sha256": "a1f4a26d1892aee2fa224a99e6c13d65a8f28639fd49803bf143ec4c2aa4138c"
+          },
+          "MoSES_CaDA": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBTWtrain/results/result_MoSES_CaDA.txt",
+            "bytes": 2034131,
+            "sha256": "158c92f4896ef56f94317a0192478904245c1323cbb7ab9ac109d2fa7ab813ee"
+          },
+          "MoSES_RF": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBTWtrain/results/result_MoSES_RF.txt",
+            "bytes": 2034886,
+            "sha256": "fa14287d2c29606777d73456f463bed947f78584c6345e20cd5fad27a325d2fb"
+          },
+          "RELD_MOEL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBTWtrain/results/result_RELD_MOEL.txt",
+            "bytes": 1987443,
+            "sha256": "92e3e69693c5f82f8f048ec9d560e9979d5f677011e44efe049e04c50b976653"
+          },
+          "RELD_MTL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBTWtrain/results/result_RELD_MTL.txt",
+            "bytes": 1987322,
+            "sha256": "366803d437463eb723615a6d8163ec6f0f55baa561c92c0e3ce6898f6810c52e"
+          },
+          "RouteFinder": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBTWtrain/results/result_RouteFinder.txt",
+            "bytes": 2034810,
+            "sha256": "6d88cf043488756f94c38abe1957f8b5948956323601fcebf040e9e67005706c"
+          }
+        },
+        "rows": 100000,
+        "finite_cost_values": 700000,
+        "cost_dtype": "float64"
+      },
+      "source_generation": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBTWtrain/\u751f\u6210\u4fe1\u606f.json",
+        "bytes": 177308,
+        "sha256": "17652aa28ce4f97b65d7273b37059368a09ae3edb761aa8dedab03ba842f3ea4"
+      },
+      "source_label_completion": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBTWtrain/\u6807\u7b7e\u5b8c\u6210.json",
+        "bytes": 452,
+        "sha256": "bd7417054ebc569837ba9f62ac45ef3d40c4f9a0f6f2af4ba15bc633e0dd05d9"
+      },
+      "parent_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "reld_mt"
+      ],
+      "retained_parent_slots": [
+        0,
+        2
+      ]
+    },
+    "VRPLTW": {
+      "methods": [
+        "MTPOMO",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "global_solver_ids": [
+        10,
+        12,
+        13,
+        16,
+        18
+      ],
+      "source_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "retained_source_slots": [
+        0,
+        2,
+        3,
+        4,
+        6
+      ],
+      "removed_methods": [
+        "MVMOE",
+        "RELD_MTL"
+      ],
+      "splits": {
+        "train": "VRPLTWtrain",
+        "val": "VRPLTWval",
+        "test": "VRPLTWtest"
+      },
+      "train_sbs": {
+        "sbs_solver": "reld_mt",
+        "sbs_slot": 3,
+        "selection_split": "train",
+        "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+        "mean_cost_by_solver": {
+          "MTPOMO": 23.451151820901092,
+          "MoSES_CaDA": 22.958728604775864,
+          "MoSES_RF": 21.62779859691788,
+          "reld_mt": 18.76995857501926,
+          "RouteFinder": 21.70255258132215
+        },
+        "mean_relative_regret_by_solver": {
+          "MTPOMO": 0.2500802863715829,
+          "MoSES_CaDA": 0.2137847413466914,
+          "MoSES_RF": 0.15316144003424745,
+          "reld_mt": 0.0006730610066209483,
+          "RouteFinder": 0.15280522864389973
+        },
+        "minimum_mean_relative_regret_solver": "reld_mt",
+        "majority_winner_solver": "reld_mt",
+        "train_rows": 81000
+      },
+      "source_dataset": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLTWtrain/dataset.pkl",
+        "bytes": 445467038,
+        "sha256": "e6ca782065df1c308970b46df46426769d1409337ec4de29b34f8af1aa1a0ecb"
+      },
+      "source_costs": {
+        "raw_label": {
+          "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLTWtrain/raw_label.pkl",
+          "bytes": 23372334,
+          "sha256": "0377e6aede6e7caef52e30849427744731b02ab47597447f33dc3fe45313f63c"
+        },
+        "results": {
+          "MTPOMO": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLTWtrain/results/result_MTPOMO.txt",
+            "bytes": 2034426,
+            "sha256": "22014f3b6690d61c14903afaadee2a4bf0967c17c333b4e73022eade8afdf1e7"
+          },
+          "MVMOE": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLTWtrain/results/result_MVMOE.txt",
+            "bytes": 2034770,
+            "sha256": "09f27c2d265fde6641a7719a3157542c7b7bb6e2b0feca9b9e9bf2bf2f887476"
+          },
+          "MoSES_CaDA": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLTWtrain/results/result_MoSES_CaDA.txt",
+            "bytes": 2034298,
+            "sha256": "b018a45163145a553a75587c2c96be839894ee48e4a3b7b11663e7619368e569"
+          },
+          "MoSES_RF": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLTWtrain/results/result_MoSES_RF.txt",
+            "bytes": 2034741,
+            "sha256": "e54a545135fcda90cb62ee99d1d1c14eedc081ded11af01bc12b5923cadc9370"
+          },
+          "RELD_MOEL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLTWtrain/results/result_RELD_MOEL.txt",
+            "bytes": 1987075,
+            "sha256": "3b6188e8b83b414511eb0b3e3237481b8699fffc37c104137bbaa3a34c2c4fab"
+          },
+          "RELD_MTL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLTWtrain/results/result_RELD_MTL.txt",
+            "bytes": 1986908,
+            "sha256": "db643c118dfce3bc6e35eaf6922eda9390319b48d142e21c93c074aac1848f90"
+          },
+          "RouteFinder": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLTWtrain/results/result_RouteFinder.txt",
+            "bytes": 2034693,
+            "sha256": "f0bbf884403443c7c65d3efa36148170a7b06c59b31cceda2ebdc30d6ee780f7"
+          }
+        },
+        "rows": 100000,
+        "finite_cost_values": 700000,
+        "cost_dtype": "float64"
+      },
+      "source_generation": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLTWtrain/\u751f\u6210\u4fe1\u606f.json",
+        "bytes": 177544,
+        "sha256": "f0e05db0b25f4a84987f66b069e683c5bb6cc09a2bbe5e685de346187fff93a2"
+      },
+      "source_label_completion": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPLTWtrain/\u6807\u7b7e\u5b8c\u6210.json",
+        "bytes": 452,
+        "sha256": "af3f0986b9af539836f0c9913e67742ab82cdf3a963a47266d8eacf45bbe48a4"
+      },
+      "parent_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "retained_parent_slots": [
+        0,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "OVRPBL": {
+      "methods": [
+        "MTPOMO",
+        "reld_mt"
+      ],
+      "global_solver_ids": [
+        10,
+        16
+      ],
+      "source_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "retained_source_slots": [
+        0,
+        4
+      ],
+      "removed_methods": [
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "splits": {
+        "train": "OVRPBLtrain",
+        "val": "OVRPBLval",
+        "test": "OVRPBLtest"
+      },
+      "train_sbs": {
+        "sbs_solver": "reld_mt",
+        "sbs_slot": 1,
+        "selection_split": "train",
+        "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+        "mean_cost_by_solver": {
+          "MTPOMO": 7.220458667917147,
+          "reld_mt": 6.358857184183311
+        },
+        "mean_relative_regret_by_solver": {
+          "MTPOMO": 0.1516522457684898,
+          "reld_mt": 0.0014213258403202
+        },
+        "minimum_mean_relative_regret_solver": "reld_mt",
+        "majority_winner_solver": "reld_mt",
+        "train_rows": 81000
+      },
+      "source_dataset": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLtrain/dataset.pkl",
+        "bytes": 240354153,
+        "sha256": "7e2eeca2e0dbf020aba98cb04c7b65884370ac4a7792807eda11a85fc4cd45b4"
+      },
+      "source_costs": {
+        "raw_label": {
+          "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLtrain/raw_label.pkl",
+          "bytes": 23372334,
+          "sha256": "dfba1b77d6dcb87b07b5a4d0be1ffc85f2a2e33503020af23b82d319a8b76cb5"
+        },
+        "results": {
+          "MTPOMO": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLtrain/results/result_MTPOMO.txt",
+            "bytes": 1943845,
+            "sha256": "eb7911814cfef1893c924162fd3a4771843f953e95f46b089cdad026deb09319"
+          },
+          "MVMOE": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLtrain/results/result_MVMOE.txt",
+            "bytes": 1950404,
+            "sha256": "440c0de9085675c2379e42f925dcd9e7ec1a9bd4808a0f0844da71bd2ae02b62"
+          },
+          "MoSES_CaDA": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLtrain/results/result_MoSES_CaDA.txt",
+            "bytes": 1944335,
+            "sha256": "91f9bf8c98019388f4253ae8b0472f3441fbbeb542996e801cd9f0330fc1ac9a"
+          },
+          "MoSES_RF": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLtrain/results/result_MoSES_RF.txt",
+            "bytes": 1944493,
+            "sha256": "2bd0415110b55ebbdef977d36c255738fa2a5b38843da137471b7369baa3c191"
+          },
+          "RELD_MOEL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLtrain/results/result_RELD_MOEL.txt",
+            "bytes": 1889036,
+            "sha256": "4a767e2bf33f2489f93e4f132072603bcaadf69a749d470607d2261312032187"
+          },
+          "RELD_MTL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLtrain/results/result_RELD_MTL.txt",
+            "bytes": 1889026,
+            "sha256": "781666a48d8b47d79fbfbced1576f1842e06cd8df59226ec1bd260710543ac23"
+          },
+          "RouteFinder": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLtrain/results/result_RouteFinder.txt",
+            "bytes": 1944081,
+            "sha256": "51332f3502c61eafa6832dc95439a87bbcbd106866987dd387886dc224074765"
+          }
+        },
+        "rows": 100000,
+        "finite_cost_values": 700000,
+        "cost_dtype": "float64"
+      },
+      "source_generation": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLtrain/\u751f\u6210\u4fe1\u606f.json",
+        "bytes": 177286,
+        "sha256": "ecbbed86eace4b1446c437cb7392237a83b40af9c3a914e6f27d7733b559559f"
+      },
+      "source_label_completion": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLtrain/\u6807\u7b7e\u5b8c\u6210.json",
+        "bytes": 452,
+        "sha256": "4bd48602667448da66c587a8a10a0bf4eba97bfdfd52d330a88ba5fffb07b395"
+      },
+      "parent_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "reld_mt"
+      ],
+      "retained_parent_slots": [
+        0,
+        2
+      ]
+    },
+    "OVRPBTW": {
+      "methods": [
+        "MTPOMO",
+        "reld_mt"
+      ],
+      "global_solver_ids": [
+        10,
+        16
+      ],
+      "source_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "retained_source_slots": [
+        0,
+        4
+      ],
+      "removed_methods": [
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "splits": {
+        "train": "OVRPBTWtrain",
+        "val": "OVRPBTWval",
+        "test": "OVRPBTWtest"
+      },
+      "train_sbs": {
+        "sbs_solver": "reld_mt",
+        "sbs_slot": 1,
+        "selection_split": "train",
+        "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+        "mean_cost_by_solver": {
+          "MTPOMO": 15.226330125740962,
+          "reld_mt": 10.624446035461727
+        },
+        "mean_relative_regret_by_solver": {
+          "MTPOMO": 0.4421395426717636,
+          "reld_mt": 1.5872941727457749e-06
+        },
+        "minimum_mean_relative_regret_solver": "reld_mt",
+        "majority_winner_solver": "reld_mt",
+        "train_rows": 81000
+      },
+      "source_dataset": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBTWtrain/dataset.pkl",
+        "bytes": 444096782,
+        "sha256": "9de91a79586f441fffad4f68d4888684f4735d79f31a9603013a1590b7d402df"
+      },
+      "source_costs": {
+        "raw_label": {
+          "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBTWtrain/raw_label.pkl",
+          "bytes": 23372334,
+          "sha256": "9cf1d7f9b592d35ae3f7b09cc866f36169072465d8cc9fe3d0b8d8c3df0a4601"
+        },
+        "results": {
+          "MTPOMO": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBTWtrain/results/result_MTPOMO.txt",
+            "bytes": 2028136,
+            "sha256": "c1a3ecf92f1f07747a877c3b7ffb3d5e18509c3c52f762063c49a2ecea10a843"
+          },
+          "MVMOE": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBTWtrain/results/result_MVMOE.txt",
+            "bytes": 2007582,
+            "sha256": "1f12e119b72faf6f7038efd6e0dd215f7d3a677e7baa1d08dbc7c9710d81c2e5"
+          },
+          "MoSES_CaDA": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBTWtrain/results/result_MoSES_CaDA.txt",
+            "bytes": 2012490,
+            "sha256": "be0554b0b06c537e5c088716c1e20a873c066407882daae58cfb5d6027ab3531"
+          },
+          "MoSES_RF": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBTWtrain/results/result_MoSES_RF.txt",
+            "bytes": 2012229,
+            "sha256": "5cdd358f78cb222b256ba7cd2b44e0fe27ae430235d9b0ddbefe229e52131452"
+          },
+          "RELD_MOEL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBTWtrain/results/result_RELD_MOEL.txt",
+            "bytes": 1944199,
+            "sha256": "ca58078475760b119047059171abfd5722cb003127a4fbce9bdc3a9ea57c83d0"
+          },
+          "RELD_MTL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBTWtrain/results/result_RELD_MTL.txt",
+            "bytes": 1943679,
+            "sha256": "e6f4090b1f5d2a93f55f10d44364af847971f935416eb77630c22728a9d8d1fe"
+          },
+          "RouteFinder": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBTWtrain/results/result_RouteFinder.txt",
+            "bytes": 2010933,
+            "sha256": "610e9bbc58f96f218ad220c5d35b147ccefd92337320036c6748b71119faac9e"
+          }
+        },
+        "rows": 100000,
+        "finite_cost_values": 700000,
+        "cost_dtype": "float64"
+      },
+      "source_generation": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBTWtrain/\u751f\u6210\u4fe1\u606f.json",
+        "bytes": 178120,
+        "sha256": "49499389b78210acf3803d11c268a88ae7c262ec56ffa52a885721410fffb0e9"
+      },
+      "source_label_completion": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBTWtrain/\u6807\u7b7e\u5b8c\u6210.json",
+        "bytes": 453,
+        "sha256": "a7325b5d33f2265a860a6abb917e5ab0a7247dee723e1952245e6bb7646338ce"
+      },
+      "parent_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "reld_mt"
+      ],
+      "retained_parent_slots": [
+        0,
+        2
+      ]
+    },
+    "OVRPLTW": {
+      "methods": [
+        "MTPOMO",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "global_solver_ids": [
+        10,
+        12,
+        13,
+        16,
+        18
+      ],
+      "source_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "retained_source_slots": [
+        0,
+        2,
+        3,
+        4,
+        6
+      ],
+      "removed_methods": [
+        "MVMOE",
+        "RELD_MTL"
+      ],
+      "splits": {
+        "train": "OVRPLTWtrain",
+        "val": "OVRPLTWval",
+        "test": "OVRPLTWtest"
+      },
+      "train_sbs": {
+        "sbs_solver": "reld_mt",
+        "sbs_slot": 3,
+        "selection_split": "train",
+        "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+        "mean_cost_by_solver": {
+          "MTPOMO": 14.45420823267946,
+          "MoSES_CaDA": 13.199823503615042,
+          "MoSES_RF": 12.078147095315256,
+          "reld_mt": 10.111265148886892,
+          "RouteFinder": 11.619689210791536
+        },
+        "mean_relative_regret_by_solver": {
+          "MTPOMO": 0.43453372431427,
+          "MoSES_CaDA": 0.28572304520546027,
+          "MoSES_RF": 0.1885359584789796,
+          "reld_mt": 0.0003230260348687468,
+          "RouteFinder": 0.14514788301054982
+        },
+        "minimum_mean_relative_regret_solver": "reld_mt",
+        "majority_winner_solver": "reld_mt",
+        "train_rows": 81000
+      },
+      "source_dataset": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLTWtrain/dataset.pkl",
+        "bytes": 445466983,
+        "sha256": "d7456b57d1d248baf5ffd262f682324a17fe946fbe3cb48fcae61534f08d113e"
+      },
+      "source_costs": {
+        "raw_label": {
+          "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLTWtrain/raw_label.pkl",
+          "bytes": 23372334,
+          "sha256": "fdb7158642c04cd61bc7953b19fbd08ab34b22584a626b62caeabe7d5583faff"
+        },
+        "results": {
+          "MTPOMO": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLTWtrain/results/result_MTPOMO.txt",
+            "bytes": 2025301,
+            "sha256": "dc764b7f5acc7c7b4019fb0010490f857ff7d9a412e0bba1d56e33fae6b76753"
+          },
+          "MVMOE": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLTWtrain/results/result_MVMOE.txt",
+            "bytes": 2000267,
+            "sha256": "cb504ca6f47884274e7c4a923daa2a8515c21fb042f9eda0e49475227ca61f72"
+          },
+          "MoSES_CaDA": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLTWtrain/results/result_MoSES_CaDA.txt",
+            "bytes": 2008426,
+            "sha256": "57803b0c2a253436d37bd3cd1c22e0bc0bbb5b7a0c18e1315531d28f3d44c810"
+          },
+          "MoSES_RF": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLTWtrain/results/result_MoSES_RF.txt",
+            "bytes": 2006535,
+            "sha256": "2e786d5f47a71f0f39f644f7780f1282bd38ae6effb429b78b104a683fcc5dbb"
+          },
+          "RELD_MOEL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLTWtrain/results/result_RELD_MOEL.txt",
+            "bytes": 1937048,
+            "sha256": "0d9f3e09e2a1d2304324b0d7997a4c7c0347d43f7bcb08c59bd56baaad978023"
+          },
+          "RELD_MTL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLTWtrain/results/result_RELD_MTL.txt",
+            "bytes": 1936750,
+            "sha256": "114e4178bf91070eb4b6b9e4f824b1215f9b604bfae83cab1182d99472e91451"
+          },
+          "RouteFinder": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLTWtrain/results/result_RouteFinder.txt",
+            "bytes": 2003216,
+            "sha256": "77378deb93ee09d8dc05d9a0344b6072ea70b06b5ad984007d1aa17e660238a8"
+          }
+        },
+        "rows": 100000,
+        "finite_cost_values": 700000,
+        "cost_dtype": "float64"
+      },
+      "source_generation": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLTWtrain/\u751f\u6210\u4fe1\u606f.json",
+        "bytes": 178132,
+        "sha256": "4fa82ee7ce008365db53cf34310af2ceb0c3fbce67b550c35f2e64dab1f49179"
+      },
+      "source_label_completion": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPLTWtrain/\u6807\u7b7e\u5b8c\u6210.json",
+        "bytes": 453,
+        "sha256": "3672951474d8affb009317b5ab69ba65b61418cc9f2ec7d7fcc777b5cff18ac5"
+      },
+      "parent_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "reld_mt",
+        "RouteFinder"
+      ],
+      "retained_parent_slots": [
+        0,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "VRPBLTW": {
+      "methods": [
+        "MTPOMO",
+        "reld_mt"
+      ],
+      "global_solver_ids": [
+        10,
+        16
+      ],
+      "source_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "retained_source_slots": [
+        0,
+        4
+      ],
+      "removed_methods": [
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "splits": {
+        "train": "VRPBLTWtrain",
+        "val": "VRPBLTWval",
+        "test": "VRPBLTWtest"
+      },
+      "train_sbs": {
+        "sbs_solver": "reld_mt",
+        "sbs_slot": 1,
+        "selection_split": "train",
+        "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+        "mean_cost_by_solver": {
+          "MTPOMO": 24.861805060092387,
+          "reld_mt": 19.770813718301284
+        },
+        "mean_relative_regret_by_solver": {
+          "MTPOMO": 0.2606848144467217,
+          "reld_mt": 4.1158938319550004e-05
+        },
+        "minimum_mean_relative_regret_solver": "reld_mt",
+        "majority_winner_solver": "reld_mt",
+        "train_rows": 81000
+      },
+      "source_dataset": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLTWtrain/dataset.pkl",
+        "bytes": 445466983,
+        "sha256": "e259a4570c5bc2730d23e5af7f69f0949bb74b58e3cb1cd59a53d162fc5515e4"
+      },
+      "source_costs": {
+        "raw_label": {
+          "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLTWtrain/raw_label.pkl",
+          "bytes": 23372334,
+          "sha256": "74872759673d71f9bd335196ba1cb6690f197eca9ab795632dd5947226ee3cf9"
+        },
+        "results": {
+          "MTPOMO": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLTWtrain/results/result_MTPOMO.txt",
+            "bytes": 2034283,
+            "sha256": "452f09a3701a8ca221e9bb7195262faa580c8cf05fc6cd18ed3374d5d16d0670"
+          },
+          "MVMOE": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLTWtrain/results/result_MVMOE.txt",
+            "bytes": 2034733,
+            "sha256": "b0893f2aee2f2b6f6702cbdc15487ee09e3c602fb45185be87d34f584c2f46e8"
+          },
+          "MoSES_CaDA": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLTWtrain/results/result_MoSES_CaDA.txt",
+            "bytes": 2034235,
+            "sha256": "78364e2c9c568ca7206db7ae6f79fbedd6cb0fa4e3db463d2ba4ea07f5fdbc1f"
+          },
+          "MoSES_RF": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLTWtrain/results/result_MoSES_RF.txt",
+            "bytes": 2034844,
+            "sha256": "f5f379f7b8cc92ced97010296e1890d0ef435beb0ae6124da6897d333b4d444a"
+          },
+          "RELD_MOEL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLTWtrain/results/result_RELD_MOEL.txt",
+            "bytes": 1987450,
+            "sha256": "45e39d5aa863fed7afa832e2cdad043fe536d94e2edf77bc32f0cdc6294af3c9"
+          },
+          "RELD_MTL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLTWtrain/results/result_RELD_MTL.txt",
+            "bytes": 1987326,
+            "sha256": "4a403808e3943e5519817f1eb539ce1d5061aa0b4ce9c2cb843cddc932059df3"
+          },
+          "RouteFinder": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLTWtrain/results/result_RouteFinder.txt",
+            "bytes": 2034658,
+            "sha256": "144a42e05b68057dacaeadd6d2ec8ed57508913878bfd6046abb1dd436841d0c"
+          }
+        },
+        "rows": 100000,
+        "finite_cost_values": 700000,
+        "cost_dtype": "float64"
+      },
+      "source_generation": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLTWtrain/\u751f\u6210\u4fe1\u606f.json",
+        "bytes": 178096,
+        "sha256": "ee385cd086a4acc5f10d20bc2e81c50441d1a5e6898ba9f31dc85296cb948569"
+      },
+      "source_label_completion": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/VRPBLTWtrain/\u6807\u7b7e\u5b8c\u6210.json",
+        "bytes": 453,
+        "sha256": "ce6d4dd2fd37f21e2a982e52c7365f74ae451d6b437007c28bbd6683c42e4858"
+      },
+      "parent_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "reld_mt"
+      ],
+      "retained_parent_slots": [
+        0,
+        2
+      ]
+    },
+    "OVRPBLTW": {
+      "methods": [
+        "MTPOMO",
+        "reld_mt"
+      ],
+      "global_solver_ids": [
+        10,
+        16
+      ],
+      "source_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MOEL",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "retained_source_slots": [
+        0,
+        4
+      ],
+      "removed_methods": [
+        "MVMOE",
+        "MoSES_CaDA",
+        "MoSES_RF",
+        "RELD_MTL",
+        "RouteFinder"
+      ],
+      "splits": {
+        "train": "OVRPBLTWtrain",
+        "val": "OVRPBLTWval",
+        "test": "OVRPBLTWtest"
+      },
+      "train_sbs": {
+        "sbs_solver": "reld_mt",
+        "sbs_slot": 1,
+        "selection_split": "train",
+        "selection_rule": "minimum mean original FP64 cost on this arm's TRAIN rows",
+        "mean_cost_by_solver": {
+          "MTPOMO": 15.238377519578084,
+          "reld_mt": 10.625543749052763
+        },
+        "mean_relative_regret_by_solver": {
+          "MTPOMO": 0.4430673876308058,
+          "reld_mt": 2.711988785538859e-06
+        },
+        "minimum_mean_relative_regret_solver": "reld_mt",
+        "majority_winner_solver": "reld_mt",
+        "train_rows": 81000
+      },
+      "source_dataset": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLTWtrain/dataset.pkl",
+        "bytes": 445466983,
+        "sha256": "b6665630f9bd1df43696de7d6a7bdc3c5a3f1399328c4e0c6378f8e5898c7212"
+      },
+      "source_costs": {
+        "raw_label": {
+          "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLTWtrain/raw_label.pkl",
+          "bytes": 23372334,
+          "sha256": "0b5850345d86e6099d1a94e2ee82736631cf5788df8a8a0d883d1487bb9c8753"
+        },
+        "results": {
+          "MTPOMO": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLTWtrain/results/result_MTPOMO.txt",
+            "bytes": 2028008,
+            "sha256": "4edec4259249335e4f251cf0b93b8342cd2b0d3cb36de4826df35e434808545c"
+          },
+          "MVMOE": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLTWtrain/results/result_MVMOE.txt",
+            "bytes": 2007574,
+            "sha256": "a6fcb189d1fac354972f9fbebdfb11d27881bc1a4b105ecd02ef1429d0b703cc"
+          },
+          "MoSES_CaDA": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLTWtrain/results/result_MoSES_CaDA.txt",
+            "bytes": 2012337,
+            "sha256": "3e0c10c124f127b46673165a092e080428ecd3bbbd893341e15f33fc63a1de45"
+          },
+          "MoSES_RF": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLTWtrain/results/result_MoSES_RF.txt",
+            "bytes": 2012200,
+            "sha256": "add72a49f4a6975d78f136678455438690eeb4987928eb9057e64afb5b0ca1dc"
+          },
+          "RELD_MOEL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLTWtrain/results/result_RELD_MOEL.txt",
+            "bytes": 1944287,
+            "sha256": "be0bd50b6c68cc5068d279b8889d5f5272f569252edddd5f3ad5917c5b13c553"
+          },
+          "RELD_MTL": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLTWtrain/results/result_RELD_MTL.txt",
+            "bytes": 1943788,
+            "sha256": "199368a8bbc980b431129859db5341ea856cdcb002f51c08f412b46539aed1ea"
+          },
+          "RouteFinder": {
+            "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLTWtrain/results/result_RouteFinder.txt",
+            "bytes": 2011027,
+            "sha256": "10e03c92525d105aa70987b90456f56fca9e396bbc3bb63e0f8f2865ca161031"
+          }
+        },
+        "rows": 100000,
+        "finite_cost_values": 700000,
+        "cost_dtype": "float64"
+      },
+      "source_generation": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLTWtrain/\u751f\u6210\u4fe1\u606f.json",
+        "bytes": 178922,
+        "sha256": "e3e3d87c8345d649a537f7eca04a7ff7bfc7bd952f51615e889541777785b48b"
+      },
+      "source_label_completion": {
+        "path": "/public/home/shiys/\u8bad\u7ec3\u6570\u636e_\u6bcf\u7c7b10\u4e07/OVRPBLTWtrain/\u6807\u7b7e\u5b8c\u6210.json",
+        "bytes": 454,
+        "sha256": "5605f589b9aa03cc2787a3f28d9bb05c982f50092eac7aee0b1c7861be9bb916"
+      },
+      "parent_methods": [
+        "MTPOMO",
+        "MVMOE",
+        "reld_mt"
+      ],
+      "retained_parent_slots": [
+        0,
+        2
+      ]
+    }
+  },
+  "completed_utc": "2026-11-12T09:07:25.971787+00:00",
+  "total_split_directories": 54,
+  "total_problem_solver_combinations": 89,
+  "experiment": "R127",
+  "parent_data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "source_data_root": "/public/home/shiys/selection_data_new90k_B_filtered_single_reld_mt_seed2_20261018",
+  "parent_manifest_sha256": "e981358542d3f2b791129bee679d55f7b1b89bb632208c0b3670ea7c53ba1421",
+  "candidate_filter": {
+    "removed": [
+      "MVMOE"
+    ],
+    "problems": [
+      "CVRP",
+      "OVRP",
+      "VRPB",
+      "VRPL",
+      "VRPTW",
+      "OVRPTW",
+      "OVRPB",
+      "OVRPL",
+      "VRPBL",
+      "VRPBTW",
+      "VRPLTW",
+      "OVRPBL",
+      "OVRPBTW",
+      "OVRPLTW",
+      "VRPBLTW",
+      "OVRPBLTW"
+    ],
+    "protected_methods": [
+      "BQ",
+      "LEHD",
+      "MoSES_RF"
+    ],
+    "all_instances_retained": true,
+    "source_split_order_preserved": true,
+    "other_candidate_rules_unchanged": true
+  },
+  "winner_rule": "FP64 argmin in retained pool; exact ties use lowest stable global solver ID",
+  "test_label_conversion": "mechanical only; not used for fitting or model selection",
+  "data_preparation_sha256": "2a75eebb4ac2d2d3dcfbfd1bd5234ee99daa731850b541fec7e0de5d84e05bb8"
+}

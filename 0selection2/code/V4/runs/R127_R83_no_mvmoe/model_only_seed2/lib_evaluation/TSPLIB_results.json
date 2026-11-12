@@ -1,0 +1,160 @@
+{
+  "protocol": {
+    "experiment": "R127",
+    "arm": "model_only_seed2",
+    "dataset": "TSPLIB",
+    "problem": "TSP",
+    "checkpoint_sha256": "389dcc8b1817e6c9852dc7eee052c4caec5da49eedda019e34269dae24b3a641",
+    "epoch": 26,
+    "selected_update": 37440,
+    "state_hash": "88c1afbbc2c83ba5a2d94f3ae07bb0374212f79f8d6edf61a35d3b5bfac8d342",
+    "model_state_sha256": "c40e64b33063533ffca4cc5c9f9b84b1a8e5d289e7b8ef2f2db9db2a1ca5fcd9",
+    "candidate_pool": [
+      "BQ",
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "LEHD",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "pool_ids": [
+      0,
+      1,
+      2,
+      3,
+      7,
+      14,
+      19,
+      20
+    ],
+    "model_factory": "code.V4.r127_experiment.load_checkpoint",
+    "winner_rule": "native FP64 argmin in the legal pool after removing MVMOE where present; exact ties use ascending global solver ID; not FP32 argmin",
+    "removed_candidates": [
+      "MVMOE"
+    ],
+    "data_version": "original native LIB; existing FP64 costs sliced to R127 pool",
+    "sources": {
+      "dataset.pkl": {
+        "path": "/public/home/shiys/0selection2/data/TSPLIB/dataset.pkl",
+        "sha256": "92f14d50c2474ca33b3432f16478e06f0cc687ad40009a363d5db31b8641e6f8"
+      },
+      "raw_label.pkl": {
+        "path": "/public/home/shiys/0selection2/data/TSPLIB/raw_label.pkl",
+        "sha256": "7d2cfffe64652728777e01607ca104c1b5ba8c156f6bc24bba366cec5a148a44"
+      }
+    },
+    "inference_rule": "original utility score differences and maximin; no MVMOE; ascending-global-ID tie break",
+    "batch_size": 2,
+    "training": false,
+    "solver_execution": false,
+    "new_solver_answers": false,
+    "checkpoint_reselection": false,
+    "device": "cuda:0",
+    "created_utc": "2026-11-12T15:10:56.491951+00:00"
+  },
+  "train_sbs_reference": {
+    "n": 49,
+    "mean_cost": 8.211876323634707,
+    "sbs": 8.240435337935194,
+    "vbs": 8.142167115105343,
+    "oracle_cost": 8.142167115105343,
+    "sbs_cost": 8.240435337935194,
+    "sbs_name": "T2T",
+    "top1_tie_aware": 0.2653061224489796,
+    "vs_sbs_pct": -0.34657166920556426,
+    "vs_oracle_pct": 0.8561505498952515,
+    "actual_regret_pct": 0.9065666930964358,
+    "vbs_gap_closed_pct": 29.062308728159813,
+    "top1": 0.2653061224489796,
+    "top2": 0.4489795918367347,
+    "top3": 0.6530612244897959,
+    "pick_dist": [
+      0.24489795918367346,
+      0.0,
+      0.0,
+      0.10204081632653061,
+      0.0,
+      0.0,
+      0.6530612244897959,
+      0.0
+    ],
+    "arm_distribution": {
+      "BQ": 0.24489795918367346,
+      "DIFUSCO": 0.0,
+      "DIFUSCO500": 0.0,
+      "ELG": 0.10204081632653061,
+      "LEHD": 0.0,
+      "OMNI": 0.0,
+      "T2T": 0.6530612244897959,
+      "T2T500": 0.0
+    },
+    "ce": 1.9546983242034912,
+    "pool": [
+      "BQ",
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "LEHD",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "method_top1": {
+      "BQ": 0.4489795918367347,
+      "DIFUSCO": 0.061224489795918366,
+      "DIFUSCO500": 0.061224489795918366,
+      "ELG": 0.14285714285714285,
+      "LEHD": 0.08163265306122448,
+      "OMNI": 0.0,
+      "T2T": 0.10204081632653061,
+      "T2T500": 0.10204081632653061
+    },
+    "method_mean_cost": {
+      "BQ": 8.27312845113326,
+      "DIFUSCO": 8.26451085544117,
+      "DIFUSCO500": 8.247271213333331,
+      "ELG": 8.384216045846744,
+      "LEHD": 8.259872212701914,
+      "OMNI": 8.578037719337308,
+      "T2T": 8.240435337935194,
+      "T2T500": 8.233445162660358
+    },
+    "best_top1": 0.10204081632653061,
+    "best_top2": 0.20408163265306123,
+    "best_top3": 0.2653061224489796,
+    "top1_exceeds_methods": [
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "LEHD",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "top1_not_exceeds_methods": [
+      "BQ"
+    ],
+    "cost_exceeds_methods": [
+      "BQ",
+      "DIFUSCO",
+      "DIFUSCO500",
+      "ELG",
+      "LEHD",
+      "OMNI",
+      "T2T",
+      "T2T500"
+    ],
+    "cost_not_exceeds_methods": [],
+    "native_correct": 13,
+    "posthoc_split_sbs_cost": 8.233445162660358,
+    "posthoc_split_sbs_name": "T2T500",
+    "posthoc_split_vs_sbs_pct": -0.26196614660735085,
+    "train_sbs_mean_cost": 8.02395920723137,
+    "sbs_selection_split": "train"
+  },
+  "inference_reused": false,
+  "seconds": 2.8833451848477125,
+  "completed_utc": "2026-11-12T15:10:59.399875+00:00"
+}
